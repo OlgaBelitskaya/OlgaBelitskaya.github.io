@@ -24,7 +24,13 @@
 
 #### P4: Explore and Summarize Data  https://olgabelitskaya.github.io/P4Beta.html
 
+#### P5: Identify Fraud from Enron Email. Extraction https://olgabelitskaya.github.io/P5_Identify_Fraud_from_Enron_Email_Extraction.txt
+
 #### P5: Identify Fraud from Enron Email  https://olgabelitskaya.github.io/P5_Identify_Fraud_from_Enron_Email.html
+
+#### P5: Identify Fraud from Enron Email. Response Questions https://olgabelitskaya.github.io/P5_Enron_Submission_Free_Response_Questions.txt
+
+#### P6: Make Effective Data Visualization. Review  https://olgabelitskaya.github.io/P6_Readme.html
 
 #### P6: Make Effective Data Visualization  https://olgabelitskaya.github.io/P6_index_final.html
 
