@@ -1,8 +1,9 @@
 
 # &#x1F3D9; List of projects:
-##### click on the links to view
 
 ## Data Analyst Nanodegree (udacity.com)
+
+##### <span style="color:#338DD4">click on the links to view</span>
 
 #### P0: Chopsticks! https://olgabelitskaya.github.io/Data_Analyst_ND_Project0.html
 
@@ -34,10 +35,13 @@
 
 #### P6: Make Effective Data Visualization  https://olgabelitskaya.github.io/P6_index_final.html
 
-#### P7: Design an A/B Test (the project is not ready) https://olgabelitskaya.github.io/P7_Design_an_A_B_Test_Overview.html
+#### P7: Design an A/B Test  https://olgabelitskaya.github.io/P7_Design_an_A_B_Test_Overview.html
+
+#### P7: Design an A/B Test. Extraction https://olgabelitskaya.github.io/P7_Design_an_A_B_Test_Extraction.pdf
 
 # &#x1F4DA; List of notebooks:
-##### click on the links to load
+
+##### <span style="color:#338DD4">click on the links to load</span>
 
 #### Data_Analyst_ND_Project0.ipynb:  
 https://olgabelitskaya.github.io/Data_Analyst_ND_Project0.ipynb
@@ -75,11 +79,12 @@ https://olgabelitskaya.github.io/P4Beta.Rmd
 #### P5_Identify_Fraud_from_Enron_Email.ipynb: 
 https://olgabelitskaya.github.io/P5_Identify_Fraud_from_Enron_Email.ipynb
 
-#### P7_Design_an_A_B_Test_Overview.ipynb (the project is not ready): 
+#### P7_Design_an_A_B_Test_Overview.ipynb: 
 https://olgabelitskaya.github.io/P7_Design_an_A_B_Test_Overview.ipynb
 
 # &#x1F5C3; List of files:
-##### click on the links to load
+
+##### <span style="color:#338DD4">click on the links to load
 
 #### huge_cities.tsv: 
 https://olgabelitskaya.github.io/huge_cities.tsv
@@ -89,3 +94,14 @@ https://olgabelitskaya.github.io/c_bank.xlsx
 
 #### world_countries.json: 
 https://olgabelitskaya.github.io/world_countries.json
+
+#### enron.csv: 
+https://olgabelitskaya.github.io/enron.csv
+
+##### <span style="color:#338DD4">click on the links to view</span>
+
+#### moscow_region.osm.json:
+https://github.com/OlgaBelitskaya/large-repo/blob/master/moscow_region.osm.json
+
+#### dubai_abu-dhabi.osm.json:
+https://github.com/OlgaBelitskaya/large-repo/blob/master/dubai_abu-dhabi.osm.json
