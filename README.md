@@ -1,10 +1,15 @@
 
-# &#x1F4CB; Page on http://bl.ocks.org/ :
-Olga Belitskaya’s Block http://bl.ocks.org/OlgaBelitskaya/bcc84d52267612a32b2a5bf79ae11b94
+# &#x1F4CB; Pages on http://bl.ocks.org/ :
+Olga Belitskaya’s Block 
+- Visualization. Map I: http://bl.ocks.org/OlgaBelitskaya/bcc84d52267612a32b2a5bf79ae11b94
+- Visualization. Map II: http://bl.ocks.org/OlgaBelitskaya/de4685ce8630c2ea00229750097e1fb4
+- Visualization. Interpolation: http://bl.ocks.org/OlgaBelitskaya/aec204a67eec24cec8568258395ce62b
+
+# &#x1F4CB; GitHub gists: https://gist.github.com/OlgaBelitskaya
 
 # &#x1F3D9; List of projects:
 
-## Data Analyst Nanodegree (udacity.com)
+## Data Analyst Nanodegree (udacity.com)  https://olgabelitskaya.github.io/certificate.pdf
 ##### <span style="color:#338DD4">click on the links to view</span>
 
 #### P0: Chopsticks! https://olgabelitskaya.github.io/Data_Analyst_ND_Project0.html
