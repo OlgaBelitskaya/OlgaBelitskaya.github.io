@@ -7,6 +7,8 @@ Olga Belitskaya’s Block
 
 # &#x1F4CB; GitHub gists: https://gist.github.com/OlgaBelitskaya
 
+# &#x1F3D9; List of courses: https://github.com/OlgaBelitskaya/reflections/README.html
+
 # &#x1F3D9; List of projects:
 
 ## Data Analyst Nanodegree (udacity.com)  https://olgabelitskaya.github.io/certificate.pdf
