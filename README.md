@@ -11,7 +11,7 @@ Olga Belitskaya’s Block
 ### &#x1F4CB; &nbsp; GitHub gists: https://gist.github.com/OlgaBelitskaya
 
 ### &#x1F4CB; &nbsp; SageMath online notebooks: 
-https://cloud.sagemath.com/projects/a64be705-e96c-478c-a25d-bcc323134ef8/files/P0_01.ipynb
+https://cloud.sagemath.com/projects/a64be705-e96c-478c-a25d-bcc323134ef8/files/P0_01.html
 
 ### &#x1F4CB; &nbsp; Interview and Technical Interview Practice. Data Analyst (constantly upgradable):
 https://gist.github.com/OlgaBelitskaya/c302dd3875a0e05c4c4d39ce3796cb78
