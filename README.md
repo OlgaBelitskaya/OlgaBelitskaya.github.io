@@ -13,8 +13,9 @@ Olga Belitskaya’s Block
 ### &#x1F4CB; &nbsp; SageMath online notebooks: 
 https://cloud.sagemath.com/projects/a64be705-e96c-478c-a25d-bcc323134ef8/files/P0_01.html
 
-### &#x1F4CB; &nbsp; Interview and Technical Interview Practice. Data Analyst (constantly upgradable):
-https://gist.github.com/OlgaBelitskaya/c302dd3875a0e05c4c4d39ce3796cb78
+### &#x1F4CB; &nbsp; Interview and Technical Interview Practice. Data Analyst. (constantly upgradable):
+Udacity_Interview_Practice.ipynb  https://gist.github.com/OlgaBelitskaya/1ddb287592832cf581fc122d6bc2732e
+Udacity_Technical_Interview_Practice_Lessons.ipynb  https://gist.github.com/OlgaBelitskaya/a6cb19e1f3a041e6f6a56ccf58b4701c
 
 # &#x1F3D9; &nbsp; List of projects:
 
