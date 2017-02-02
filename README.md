@@ -14,12 +14,13 @@ Olga Belitskaya’s Block
 https://cloud.sagemath.com/projects/a64be705-e96c-478c-a25d-bcc323134ef8/files/
 
 ### &#x1F4CB; &nbsp; Interview and Technical Interview Practice. Data Analyst. (constantly upgradable):
-Udacity_Interview_Practice.ipynb  
+Udacity_Interview_Practice.ipynb 
 https://gist.github.com/OlgaBelitskaya/1ddb287592832cf581fc122d6bc2732e
 
 Udacity_Technical_Interview_Practice_Lessons.ipynb  https://gist.github.com/OlgaBelitskaya/a6cb19e1f3a041e6f6a56ccf58b4701c
 
-https://github.com/OlgaBelitskaya/resume-builder/blob/master/Udacity_Technical_Interview_Practice_Project.ipynb
+Udacity_Technical_Interview_Practice_Project.ipynb
+https://gist.github.com/OlgaBelitskaya/849e983dd6e90943d5760be4c4986501
 
 https://github.com/OlgaBelitskaya/resume-builder/blob/master/Exercises_Interview_Practice_Py.ipynb
 
