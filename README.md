@@ -1,5 +1,5 @@
 
-# &#x1F3D9; &nbsp; List of courses:  
+# &#x1F3D9; &nbsp; List of Courses and Programs: 
 https://olgabelitskaya.github.io/reflections/README.html
 
 ### &#x1F4CB; &nbsp; GitHub gists: https://gist.github.com/OlgaBelitskaya
@@ -10,7 +10,7 @@ Olga Belitskaya’s Block
 - Visualization. Map II: http://bl.ocks.org/OlgaBelitskaya/de4685ce8630c2ea00229750097e1fb4
 - Visualization. Interpolation: http://bl.ocks.org/OlgaBelitskaya/aec204a67eec24cec8568258395ce62b
 
-# &#x1F3D9; &nbsp; List of projects:
+# &#x1F3D9; &nbsp; List of Projects:
 
 ### Data Analyst Nanodegree (udacity.com)  https://olgabelitskaya.github.io/certificate.pdf
 ##### <span style="color:#338DD4">click on the links to view</span>
@@ -33,6 +33,12 @@ Olga Belitskaya’s Block
 #### P7: Design an A/B Test  https://olgabelitskaya.github.io/P7_Design_an_A_B_Test_Overview.html
 #### P7: Design an A/B Test. Extraction https://olgabelitskaya.github.io/P7_Design_an_A_B_Test_Extraction.pdf
 
+### Machine Learning Engineer Nanodegree (udacity.com) 
+##### <span style="color:#338DD4">click on the links to view</span>
+
+#### P0: Titanic Survival Exploration https://olgabelitskaya.github.io/MLE_ND_P0_V0.html
+#### P1: Predicting Boston Housing Prices https://olgabelitskaya.github.io/MLE_ND_P1_V0.html
+
 ### &#x1F4CB; &nbsp; Interview and Technical Interview Practice. Data Analyst. (constantly upgradable):
 Udacity_Interview_Practice.ipynb 
 https://gist.github.com/OlgaBelitskaya/1ddb287592832cf581fc122d6bc2732e
@@ -54,10 +60,7 @@ https://github.com/OlgaBelitskaya/resume-builder/blob/master/Exercises_Technical
 
 https://github.com/OlgaBelitskaya/resume-builder/blob/master/Exercises_Technical_Interview_Sort.ipynb
 
-### &#x1F4CB; &nbsp; SageMath online files: 
-https://cloud.sagemath.com/projects/a64be705-e96c-478c-a25d-bcc323134ef8/files/
-
-# &#x1F4DA; &nbsp; List of notebooks:
+# &#x1F4DA; &nbsp; List of Notebooks:
 ##### <span style="color:#338DD4">click on the links to load</span>
 
 #### Data_Analyst_ND_Project0.ipynb:  https://olgabelitskaya.github.io/Data_Analyst_ND_Project0.ipynb
@@ -69,7 +72,7 @@ https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_Dubai-AbuDhabi_Extract
 https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_Dubai-AbuDhabi_MongoDB.ipynb
 #### Data_Analyst_ND_Project3_Dubai-AbuDhabi_SQL.ipynb: 
 https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_Dubai-AbuDhabi_SQL.ipynb
-### Data_Analyst_ND_Project3_MoscowRegion.ipynb: 
+#### Data_Analyst_ND_Project3_MoscowRegion.ipynb: 
 https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_MoscowRegion.ipynb
 #### P3_postcodes.ipynb: https://olgabelitskaya.github.io/P3_postcodes.ipynb
 #### P3_R_SQL_MongoDB.ipynb: https://olgabelitskaya.github.io/P3_R_SQL_MongoDB.ipynb
@@ -78,7 +81,10 @@ https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_MoscowRegion.ipynb
 #### P5_Identify_Fraud_from_Enron_Email.ipynb: https://olgabelitskaya.github.io/P5_Identify_Fraud_from_Enron_Email.ipynb
 #### P7_Design_an_A_B_Test_Overview.ipynb: https://olgabelitskaya.github.io/P7_Design_an_A_B_Test_Overview.ipynb
 
-# &#x1F5C3; &nbsp; List of files:
+### &#x1F4CB; &nbsp; SageMath Online Files: 
+https://cloud.sagemath.com/projects/a64be705-e96c-478c-a25d-bcc323134ef8/files/
+
+# &#x1F5C3; &nbsp; List of Files:
 
 ##### <span style="color:#338DD4">click on the links to load
 
