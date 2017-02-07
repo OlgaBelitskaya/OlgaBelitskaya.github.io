@@ -11761,7 +11761,704 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.-References">1. References<a class="anchor-link" href="#1.-References">&#182;</a></h3><h4 id="Dataset:">Dataset:<a class="anchor-link" href="#Dataset:">&#182;</a></h4><h4 id="Resources:">Resources:<a class="anchor-link" href="#Resources:">&#182;</a></h4>
+<h3 id="1.-References">1. References<a class="anchor-link" href="#1.-References">&#182;</a></h3><h4 id="Dataset">Dataset<a class="anchor-link" href="#Dataset">&#182;</a></h4><p><em>Origin:</em> This dataset was taken from the StatLib library which is maintained at Carnegie Mellon University.</p>
+<p><em>Creators:</em> Harrison, D. and Rubinfeld, D.L.</p>
+<p><em>Data Set Information:</em> Concerns housing values in suburbs of Boston.</p>
+<p><em>Attribute Information:</em></p>
+<ul>
+<li>CRIM: per capita crime rate by town </li>
+<li>ZN: proportion of residential land zoned for lots over 25,000 sq.ft. </li>
+<li>INDUS: proportion of non-retail business acres per town </li>
+<li>CHAS: Charles River dummy variable (= 1 if tract bounds river; 0 otherwise) </li>
+<li>NOX: nitric oxides concentration (parts per 10 million) </li>
+<li>RM: average number of rooms per dwelling </li>
+<li>AGE: proportion of owner-occupied units built prior to 1940 </li>
+<li>DIS: weighted distances to five Boston employment centres </li>
+<li>RAD: index of accessibility to radial highways </li>
+<li>TAX: full-value property-tax rate per 10,000 USD</li>
+<li>PTRATIO: pupil-teacher ratio by town </li>
+<li>B: 1000(Bk - 0.63)^2 where Bk is the proportion of blacks by town </li>
+<li>LSTAT: % lower status of the population </li>
+<li>MEDV: Median value of owner-occupied homes in 1000 USD</li>
+</ul>
+<h4 id="Resources">Resources<a class="anchor-link" href="#Resources">&#182;</a></h4><p>Housing Data Set: <a href="https://archive.ics.uci.edu/ml/datasets/Housing">https://archive.ics.uci.edu/ml/datasets/Housing</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.-Code-Library">2. Code Library<a class="anchor-link" href="#2.-Code-Library">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="k">import</span> <span class="n">HTML</span>
+<span class="n">hide_code</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;&lt;script&gt;code_show = true; </span>
+<span class="s1">function code_display() {</span>
+<span class="s1">    if (code_show) {</span>
+<span class="s1">        $(&#39;div.input&#39;).each(function(id) {</span>
+<span class="s1">            if (id == 0 || $(this).html().indexOf(&#39;hide_code&#39;) &gt; -1) {$(this).hide();}</span>
+<span class="s1">        });</span>
+<span class="s1">        $(&#39;div.output_prompt&#39;).css(&#39;opacity&#39;, 0);</span>
+<span class="s1">    } else {</span>
+<span class="s1">        $(&#39;div.input&#39;).each(function(id) {$(this).show();});</span>
+<span class="s1">        $(&#39;div.output_prompt&#39;).css(&#39;opacity&#39;, 1);</span>
+<span class="s1">    }</span>
+<span class="s1">    code_show = !code_show;</span>
+<span class="s1">} </span>
+<span class="s1">$(document).ready(code_display);&lt;/script&gt;</span>
+<span class="s1">&lt;form action=&quot;javascript: code_display()&quot;&gt;&lt;input style=&quot;color: #338DD4; background: ghostwhite; opacity: 0.9; &quot; </span><span class="se">\</span>
+<span class="s1">type=&quot;submit&quot; value=&quot;Click to display or hide code&quot;&gt;&lt;/form&gt;&#39;&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[2]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<script>code_show = true; 
+function code_display() {
+    if (code_show) {
+        $('div.input').each(function(id) {
+            if (id == 0 || $(this).html().indexOf('hide_code') > -1) {$(this).hide();}
+        });
+        $('div.output_prompt').css('opacity', 0);
+    } else {
+        $('div.input').each(function(id) {$(this).show();});
+        $('div.output_prompt').css('opacity', 1);
+    }
+    code_show = !code_show;
+} 
+$(document).ready(code_display);</script>
+<form action="javascript: code_display()"><input style="color: #338DD4; background: ghostwhite; opacity: 0.9; " type="submit" value="Click to display or hide code"></form>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="c1"># Importing necessary libraries</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">pl</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="k">import</span> <span class="n">DecisionTreeRegressor</span>
+<span class="c1"># Make matplotlib show our plots inline </span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="3.-Statistical-Analysis-and-Data-Exploration">3. Statistical Analysis and Data Exploration<a class="anchor-link" href="#3.-Statistical-Analysis-and-Data-Exploration">&#182;</a></h3><h4 id="3.1-Data-Loading">3.1 Data Loading<a class="anchor-link" href="#3.1-Data-Loading">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="c1"># Create our client&#39;s feature set for which we will be predicting a selling price</span>
+<span class="n">client_features</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">11.95</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">,</span> <span class="mf">18.100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.6590</span><span class="p">,</span> <span class="mf">5.6090</span><span class="p">,</span> <span class="mf">90.00</span><span class="p">,</span> <span class="mf">1.385</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mf">680.0</span><span class="p">,</span> <span class="mf">20.20</span><span class="p">,</span> <span class="mf">332.09</span><span class="p">,</span> <span class="mf">12.13</span><span class="p">]]</span>
+
+<span class="c1"># Load the Boston Housing dataset into the city_data variable</span>
+<span class="n">boston_data</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_boston</span><span class="p">()</span>
+
+<span class="n">prices</span> <span class="o">=</span> <span class="n">city_data</span><span class="o">.</span><span class="n">target</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">city_data</span><span class="o">.</span><span class="n">data</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Boston Housing dataset loaded successfully!&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Boston Housing dataset loaded successfully!
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this section of the project, we quickly investigate a few basic statistics about the dataset we are working with. In addition, we will have look at the client's feature set in <strong><em>CLIENT_FEATURES</em></strong> and see how this particular sample relates to the features of the dataset.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="3.2-Requested-statistics">3.2 Requested statistics<a class="anchor-link" href="#3.2-Requested-statistics">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="c1"># Number of houses in the dataset</span>
+<span class="n">total_houses</span> <span class="o">=</span> <span class="n">housing_features</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Number of features in the dataset</span>
+<span class="n">total_features</span> <span class="o">=</span> <span class="n">housing_features</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Minimum housing value in the dataset</span>
+<span class="n">minimum_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">housing_prices</span><span class="p">)</span>
+
+<span class="c1"># Maximum housing value in the dataset</span>
+<span class="n">maximum_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">housing_prices</span><span class="p">)</span>
+
+<span class="c1"># Mean house value of the dataset</span>
+<span class="n">mean_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">housing_prices</span><span class="p">)</span>
+
+<span class="c1"># Median house value of the dataset</span>
+<span class="n">median_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">housing_prices</span><span class="p">)</span>
+
+<span class="c1"># Standard deviation of housing values of the dataset</span>
+<span class="n">std_dev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">housing_prices</span><span class="p">)</span>
+
+<span class="c1"># Show the calculated statistics</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Boston Housing dataset statistics (in $1000&#39;s):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Total number of houses:&quot;</span><span class="p">,</span> <span class="n">total_houses</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Total number of features:&quot;</span><span class="p">,</span> <span class="n">total_features</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Minimum house price:&quot;</span><span class="p">,</span> <span class="n">minimum_price</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Maximum house price:&quot;</span><span class="p">,</span> <span class="n">maximum_price</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Mean house price: </span><span class="si">{0:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mean_price</span><span class="p">))</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Median house price:&quot;</span><span class="p">,</span> <span class="n">median_price</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Standard deviation of house price: </span><span class="si">{0:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">std_dev</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Boston Housing dataset statistics (in $1000&#39;s):
+
+Total number of houses: 506
+Total number of features: 13
+Minimum house price: 5.0
+Maximum house price: 50.0
+Mean house price: 22.533
+Median house price: 21.2
+Standard deviation of house price: 9.188
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Question-1">Question 1<a class="anchor-link" href="#Question-1">&#182;</a></h4><p>Of the features available for each data point, choose three that you feel are significant and give a brief description for each of what they measure.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Answer-1">Answer 1<a class="anchor-link" href="#Answer-1">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Question-2">Question 2<a class="anchor-link" href="#Question-2">&#182;</a></h4><p>Using your client's feature set CLIENT_FEATURES, which values correspond with the features you've chosen above?
+Hint: Run the code block below to see the client's data.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Answer-2">Answer 2<a class="anchor-link" href="#Answer-2">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="4.-Evaluating-Model-Performance">4. Evaluating Model Performance<a class="anchor-link" href="#4.-Evaluating-Model-Performance">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this second section of the project, we will develop the tools necessary for a model to make a prediction.</p>
+<p>In the code block below, we will implement code so that the <strong><em>shuffle_split_data</em></strong> function does the following steps.</p>
+<ul>
+<li>Randomly shuffle the input data X and target labels (housing values) y.</li>
+<li>Split the data into training and testing subsets, holding 30% of the data for testing.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="c1"># Put any import statements you need for this code block here</span>
+<span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="k">import</span> <span class="n">train_test_split</span>
+
+<span class="k">def</span> <span class="nf">shuffle_split_data</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Shuffles and splits data into 70% training and 30% testing subsets,</span>
+<span class="sd">        then returns the training and testing subsets. &quot;&quot;&quot;</span>
+
+    <span class="c1"># Shuffle and split the data</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Return the training and testing data subsets</span>
+    <span class="k">return</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span>
+
+
+<span class="c1"># Test shuffle_split_data</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">shuffle_split_data</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">prices</span><span class="p">)</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Successfully shuffled and split the data!&quot;</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Something went wrong with shuffling and splitting the data.&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Successfully shuffled and split the data!
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Question-3">Question 3<a class="anchor-link" href="#Question-3">&#182;</a></h4><p>Why do we split the data into training and testing subsets for our model?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Question-4">Question 4<a class="anchor-link" href="#Question-4">&#182;</a></h4><p>Which performance metric below did you find was most appropriate for predicting housing prices and analyzing the total error. Why?</p>
+<ul>
+<li>Accuracy</li>
+<li>Precision</li>
+<li>Recall</li>
+<li>F1 Score</li>
+<li>Mean Squared Error (MSE)</li>
+<li>Mean Absolute Error (MAE)</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="5.-Fitting-the-Model">5. Fitting the Model<a class="anchor-link" href="#5.-Fitting-the-Model">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Question-5">Question 5<a class="anchor-link" href="#Question-5">&#182;</a></h4><p>What is the grid search algorithm and when is it applicable?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Question-6">Question 6<a class="anchor-link" href="#Question-6">&#182;</a></h4><p>What is cross-validation, and how is it performed on a model? Why would cross-validation be helpful when using grid search?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="6.-Checkpoint!">6. Checkpoint!<a class="anchor-link" href="#6.-Checkpoint!">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="7.-Analyzing-Model-Performance">7. Analyzing Model Performance<a class="anchor-link" href="#7.-Analyzing-Model-Performance">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Question-7">Question 7<a class="anchor-link" href="#Question-7">&#182;</a></h4><p>Choose one of the learning curve graphs that are created above. What is the max depth for the chosen model? As the size of the training set increases, what happens to the training error? What happens to the testing error?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Question-8">Question 8<a class="anchor-link" href="#Question-8">&#182;</a></h4><p>Look at the learning curve graphs for the model with a max depth of 1 and a max depth of 10. When the model is using the full training set, does it suffer from high bias or high variance when the max depth is 1? What about when the max depth is 10?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Question-9">Question 9<a class="anchor-link" href="#Question-9">&#182;</a></h4><p>From the model complexity graph above, describe the training and testing errors as the max depth increases. Based on your interpretation of the graph, which max depth results in a model that best generalizes the dataset? Why?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="8.-Model-Prediction">8. Model Prediction<a class="anchor-link" href="#8.-Model-Prediction">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Question-10">Question 10<a class="anchor-link" href="#Question-10">&#182;</a></h4><p>Using grid search on the entire dataset, what is the optimal max_depth parameter for your model? How does this result compare to your intial intuition?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Question-11">Question 11<a class="anchor-link" href="#Question-11">&#182;</a></h4><p>With your parameter-tuned model, what is the best selling price for your client's home? How does this selling price compare to the basic statistics you calculated on the dataset?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Question-12">Question 12<a class="anchor-link" href="#Question-12">&#182;</a></h4><p>In a few sentences, discuss whether you would use this model or not to predict the selling price of future clients' homes in the Greater Boston area.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="9.-Conclusion">9. Conclusion<a class="anchor-link" href="#9.-Conclusion">&#182;</a></h3>
 </div>
 </div>
 </div>
