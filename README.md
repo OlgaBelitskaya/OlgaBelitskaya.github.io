@@ -38,6 +38,7 @@ Olga Belitskaya’s Block
 
 #### P0: Titanic Survival Exploration https://olgabelitskaya.github.io/MLE_ND_P0_V0.html
 #### P1: Predicting Boston Housing Prices https://olgabelitskaya.github.io/MLE_ND_P1_V0.html
+#### P2: Finding Donors for CharityML https://olgabelitskaya.github.io/MLE_ND_P2_V0.html
 
 ### &#x1F4CB; &nbsp; Interview and Technical Interview Practice. Data Analyst. (constantly upgradable):
 Udacity_Interview_Practice.ipynb 
