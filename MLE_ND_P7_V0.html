@@ -11777,7 +11777,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="k">import</span> <span class="n">HTML</span>
@@ -11808,7 +11808,7 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[2]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[7]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <script>code_show = true; 
@@ -11836,7 +11836,7 @@ $(document).ready(code_display);</script>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -11844,11 +11844,20 @@ $(document).ready(code_display);</script>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">f1_score</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">display</span> 
+
+<span class="c1"># Import supplementary visualization code visuals.py</span>
+<span class="c1"># import visuals as vs</span>
+
+<span class="c1"># Pretty display for notebooks</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
 
 <span class="c1">################################</span>
 <span class="c1">### ADD EXTRA LIBRARIES HERE ###</span>
 <span class="c1">################################</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">f1_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">ShuffleSplit</span><span class="p">,</span> <span class="n">train_test_split</span>
 </pre></div>
 
 </div>
@@ -11868,14 +11877,14 @@ $(document).ready(code_display);</script>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
 <span class="c1"># Read student data</span>
 <span class="n">student_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;student-data.csv&quot;</span><span class="p">)</span>
 <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Student data read successfully!&quot;</span><span class="p">)</span>
-<span class="n">student_data</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">student_data</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
 </pre></div>
 
 </div>
@@ -11889,44 +11898,177 @@ $(document).ready(code_display);</script>
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Student data read successfully!
-&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-RangeIndex: 395 entries, 0 to 394
-Data columns (total 31 columns):
-school        395 non-null object
-sex           395 non-null object
-age           395 non-null int64
-address       395 non-null object
-famsize       395 non-null object
-Pstatus       395 non-null object
-Medu          395 non-null int64
-Fedu          395 non-null int64
-Mjob          395 non-null object
-Fjob          395 non-null object
-reason        395 non-null object
-guardian      395 non-null object
-traveltime    395 non-null int64
-studytime     395 non-null int64
-failures      395 non-null int64
-schoolsup     395 non-null object
-famsup        395 non-null object
-paid          395 non-null object
-activities    395 non-null object
-nursery       395 non-null object
-higher        395 non-null object
-internet      395 non-null object
-romantic      395 non-null object
-famrel        395 non-null int64
-freetime      395 non-null int64
-goout         395 non-null int64
-Dalc          395 non-null int64
-Walc          395 non-null int64
-health        395 non-null int64
-absences      395 non-null int64
-passed        395 non-null object
-dtypes: int64(13), object(18)
-memory usage: 95.7+ KB
 </pre>
 </div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[9]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>age</th>
+      <td>395.0</td>
+      <td>16.696203</td>
+      <td>1.276043</td>
+      <td>15.0</td>
+      <td>16.0</td>
+      <td>17.0</td>
+      <td>18.0</td>
+      <td>22.0</td>
+    </tr>
+    <tr>
+      <th>Medu</th>
+      <td>395.0</td>
+      <td>2.749367</td>
+      <td>1.094735</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>4.0</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>Fedu</th>
+      <td>395.0</td>
+      <td>2.521519</td>
+      <td>1.088201</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>traveltime</th>
+      <td>395.0</td>
+      <td>1.448101</td>
+      <td>0.697505</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>studytime</th>
+      <td>395.0</td>
+      <td>2.035443</td>
+      <td>0.839240</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>failures</th>
+      <td>395.0</td>
+      <td>0.334177</td>
+      <td>0.743651</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>famrel</th>
+      <td>395.0</td>
+      <td>3.944304</td>
+      <td>0.896659</td>
+      <td>1.0</td>
+      <td>4.0</td>
+      <td>4.0</td>
+      <td>5.0</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>freetime</th>
+      <td>395.0</td>
+      <td>3.235443</td>
+      <td>0.998862</td>
+      <td>1.0</td>
+      <td>3.0</td>
+      <td>3.0</td>
+      <td>4.0</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>goout</th>
+      <td>395.0</td>
+      <td>3.108861</td>
+      <td>1.113278</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>4.0</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>Dalc</th>
+      <td>395.0</td>
+      <td>1.481013</td>
+      <td>0.890741</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>Walc</th>
+      <td>395.0</td>
+      <td>2.291139</td>
+      <td>1.287897</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>health</th>
+      <td>395.0</td>
+      <td>3.554430</td>
+      <td>1.390303</td>
+      <td>1.0</td>
+      <td>3.0</td>
+      <td>4.0</td>
+      <td>5.0</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>absences</th>
+      <td>395.0</td>
+      <td>5.708861</td>
+      <td>8.003096</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>4.0</td>
+      <td>8.0</td>
+      <td>75.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
 </div>
 
 </div>
@@ -11952,7 +12094,7 @@ memory usage: 95.7+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -12015,7 +12157,7 @@ Graduation rate of the class: 67.09%
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -12092,6 +12234,513 @@ absences          6        4       10         2       4
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="4.2-Preprocess-Feature-Columns">4.2 Preprocess Feature Columns<a class="anchor-link" href="#4.2-Preprocess-Feature-Columns">&#182;</a></h3><p>As we can see, there are several non-numeric columns that need to be converted! Many of them are simply <code>yes</code>/<code>no</code>, e.g. <code>internet</code>. These can be reasonably converted into <code>1</code>/<code>0</code> (binary) values.</p>
+<p>Other columns, like <code>Mjob</code> and <code>Fjob</code>, have more than two values, and are known as <em>categorical variables</em>. The recommended way to handle such a column is to create as many columns as possible values (e.g. <code>Fjob_teacher</code>, <code>Fjob_other</code>, <code>Fjob_services</code>, etc.), and assign a <code>1</code> to one of them and <code>0</code> to all others.</p>
+<p>These generated columns are sometimes called <em>dummy variables</em>, and we will use the <a href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.get_dummies.html?highlight=get_dummies#pandas.get_dummies"><code>pandas.get_dummies()</code></a> function to perform this transformation.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="k">def</span> <span class="nf">preprocess_features</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Preprocesses the student data and converts non-numeric binary variables into</span>
+<span class="sd">        binary (0/1) variables. Converts categorical variables into dummy variables. &#39;&#39;&#39;</span>
+    
+    <span class="c1"># Initialize new output DataFrame</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+    <span class="c1"># Investigate each feature column for the data</span>
+    <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">col_data</span> <span class="ow">in</span> <span class="n">X</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+        
+        <span class="c1"># If data type is non-numeric, replace all yes/no values with 1/0</span>
+        <span class="k">if</span> <span class="n">col_data</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="nb">object</span><span class="p">:</span>
+            <span class="n">col_data</span> <span class="o">=</span> <span class="n">col_data</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="s1">&#39;yes&#39;</span><span class="p">,</span> <span class="s1">&#39;no&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+        <span class="c1"># If data type is categorical, convert to dummy variables</span>
+        <span class="k">if</span> <span class="n">col_data</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="nb">object</span><span class="p">:</span>
+            <span class="c1"># Example: &#39;school&#39; =&gt; &#39;school_GP&#39; and &#39;school_MS&#39;</span>
+            <span class="n">col_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">col_data</span><span class="p">,</span> <span class="n">prefix</span> <span class="o">=</span> <span class="n">col</span><span class="p">)</span>  
+        
+        <span class="c1"># Collect the revised columns</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">col_data</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">output</span>
+
+<span class="n">X_all</span> <span class="o">=</span> <span class="n">preprocess_features</span><span class="p">(</span><span class="n">X_all</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Processed feature columns (</span><span class="si">{}</span><span class="s2"> total features):</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X_all</span><span class="o">.</span><span class="n">columns</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="n">X_all</span><span class="o">.</span><span class="n">columns</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Processed feature columns (48 total features):
+[&#39;school_GP&#39;, &#39;school_MS&#39;, &#39;sex_F&#39;, &#39;sex_M&#39;, &#39;age&#39;, &#39;address_R&#39;, &#39;address_U&#39;, &#39;famsize_GT3&#39;, &#39;famsize_LE3&#39;, &#39;Pstatus_A&#39;, &#39;Pstatus_T&#39;, &#39;Medu&#39;, &#39;Fedu&#39;, &#39;Mjob_at_home&#39;, &#39;Mjob_health&#39;, &#39;Mjob_other&#39;, &#39;Mjob_services&#39;, &#39;Mjob_teacher&#39;, &#39;Fjob_at_home&#39;, &#39;Fjob_health&#39;, &#39;Fjob_other&#39;, &#39;Fjob_services&#39;, &#39;Fjob_teacher&#39;, &#39;reason_course&#39;, &#39;reason_home&#39;, &#39;reason_other&#39;, &#39;reason_reputation&#39;, &#39;guardian_father&#39;, &#39;guardian_mother&#39;, &#39;guardian_other&#39;, &#39;traveltime&#39;, &#39;studytime&#39;, &#39;failures&#39;, &#39;schoolsup&#39;, &#39;famsup&#39;, &#39;paid&#39;, &#39;activities&#39;, &#39;nursery&#39;, &#39;higher&#39;, &#39;internet&#39;, &#39;romantic&#39;, &#39;famrel&#39;, &#39;freetime&#39;, &#39;goout&#39;, &#39;Dalc&#39;, &#39;Walc&#39;, &#39;health&#39;, &#39;absences&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="4.3-Training-and-Testing-Data-Split">4.3 Training and Testing Data Split<a class="anchor-link" href="#4.3-Training-and-Testing-Data-Split">&#182;</a></h3><p>So far, we have converted all <em>categorical</em> features into numeric values.</p>
+<p>Next, we will randomly shuffle and split the data (<code>X_all</code>, <code>y_all</code>) into training and testing subsets by the following steps:</p>
+<ul>
+<li>Use 300 training points (approximately 75%) and 95 testing points (approximately 25%).</li>
+<li>Set a <code>random_state</code> for the function(s) we use, if provided.</li>
+<li>Store the results in <code>X_train</code>, <code>X_test</code>, <code>y_train</code>, and <code>y_test</code>.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="c1"># Set the number of training points</span>
+<span class="n">num_train</span> <span class="o">=</span> <span class="mi">300</span>
+
+<span class="c1"># Set the number of testing points</span>
+<span class="n">num_test</span> <span class="o">=</span> <span class="n">X_all</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">num_train</span>
+
+<span class="c1"># Shuffle and split the dataset into the number of training and testing points above</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_all</span><span class="p">,</span> <span class="n">y_all</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">num_test</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">X_all</span><span class="p">),</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Show the results of the split</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Training set has </span><span class="si">{}</span><span class="s2"> samples.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Testing set has </span><span class="si">{}</span><span class="s2"> samples.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Training set has 300 samples.
+Testing set has 95 samples.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="$\mathfrak-{\color{#348ABD}-{5.-\-Training-\-and-\-Evaluating-\-Models}}$">$\mathfrak {\color{#348ABD} {5. \ Training \ and \ Evaluating \ Models}}$<a class="anchor-link" href="#$\mathfrak-{\color{#348ABD}-{5.-\-Training-\-and-\-Evaluating-\-Models}}$">&#182;</a></h2><p>In this section, you will choose 3 supervised learning models that are appropriate for this problem and available in <code>scikit-learn</code>. You will first discuss the reasoning behind choosing these three models by considering what you know about the data and each model's strengths and weaknesses. You will then fit the model to varying sizes of training data (100 data points, 200 data points, and 300 data points) and measure the F<sub>1</sub> score. You will need to produce three tables (one for each model) that shows the training set size, training time, prediction time, F<sub>1</sub> score on the training set, and F<sub>1</sub> score on the testing set.</p>
+<p><strong>The following supervised learning models are currently available in</strong> <a href="http://scikit-learn.org/stable/supervised_learning.html"><code>scikit-learn</code></a> <strong>that you may choose from:</strong></p>
+<ul>
+<li>Gaussian Naive Bayes (GaussianNB)</li>
+<li>Decision Trees</li>
+<li>Ensemble Methods (Bagging, AdaBoost, Random Forest, Gradient Boosting)</li>
+<li>K-Nearest Neighbors (KNeighbors)</li>
+<li>Stochastic Gradient Descent (SGDC)</li>
+<li>Support Vector Machines (SVM)</li>
+<li>Logistic Regression</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Question-2---Model-Application">Question 2 - Model Application<a class="anchor-link" href="#Question-2---Model-Application">&#182;</a></h3><p><em>List three supervised learning models that are appropriate for this problem. For each model chosen: </em></p>
+<ul>
+<li>Describe one real-world application in industry where the model can be applied. <em>(You may need to do a small bit of research for this — give references!)</em> </li>
+<li>What are the strengths of the model; when does it perform well? </li>
+<li>What are the weaknesses of the model; when does it perform poorly?</li>
+<li>What makes this model a good candidate for the problem, given what you know about the data?</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="5.1-Setup">5.1 Setup<a class="anchor-link" href="#5.1-Setup">&#182;</a></h3><p>Let's initialize three helper functions which we can use for training and testing the three supervised learning models we've chosen above.</p>
+<p>The functions are as follows:</p>
+<ul>
+<li><code>train_classifier</code> - takes as input a classifier and training data and fits the classifier to the data.</li>
+<li><code>predict_labels</code> - takes as input a fit classifier, features, and a target labeling and makes predictions using the F<sub>1</sub> score.</li>
+<li><code>train_predict</code> - takes as input a classifier, and the training and testing data, and performs <code>train_clasifier</code> and <code>predict_labels</code>.<ul>
+<li>This function will report the F<sub>1</sub> score for both the training and testing data separately.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="k">def</span> <span class="nf">train_classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Fits a classifier to the training data. &#39;&#39;&#39;</span>
+    
+    <span class="c1"># Start the clock, train the classifier, then stop the clock</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+    <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+    
+    <span class="c1"># Print the results</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Trained model in </span><span class="si">{:.4f}</span><span class="s2"> seconds&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+    
+<span class="k">def</span> <span class="nf">predict_labels</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Makes predictions using a fit classifier based on F1 score. &#39;&#39;&#39;</span>
+    
+    <span class="c1"># Start the clock, make predictions, then stop the clock</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+    
+    <span class="c1"># Print and return results</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Made predictions in </span><span class="si">{:.4f}</span><span class="s2"> seconds.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="s1">&#39;yes&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">train_predict</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Train and predict using a classifer based on F1 score. &#39;&#39;&#39;</span>
+    
+    <span class="c1"># Indicate the classifier and the training set size</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Training a </span><span class="si">{}</span><span class="s2"> using a training set size of </span><span class="si">{}</span><span class="s2">. . .&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)))</span>
+    
+    <span class="c1"># Train the classifier</span>
+    <span class="n">train_classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    
+    <span class="c1"># Print the results of prediction for both training and testing</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;F1 score for training set: </span><span class="si">{:.4f}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">predict_labels</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)))</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;F1 score for test set: </span><span class="si">{:.4f}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">predict_labels</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="5.2-Model-Performance-Metrics">5.2 Model Performance Metrics<a class="anchor-link" href="#5.2-Model-Performance-Metrics">&#182;</a></h3><p>With the predefined functions above, we will now import the three supervised learning models of our choice and run the <code>train_predict</code> function for each one. We will need to train and predict on each classifier for three different training set sizes: 100, 200, and 300. Hence, we should expect to have 9 different outputs below — 3 for each model using the varying training set sizes.</p>
+<p>It's time to implement the following steps:</p>
+<ul>
+<li>Import the three supervised learning models you've discussed in the previous section.</li>
+<li>Initialize the three models and store them in <code>clf_A</code>, <code>clf_B</code>, and <code>clf_C</code>.<ul>
+<li>Use a <code>random_state</code> for each model we use, if provided.</li>
+<li><strong>Note:</strong> Use the default settings for each model — we will tune one specific model in a later section.</li>
+</ul>
+</li>
+<li>Create the different training set sizes to be used to train each model.<ul>
+<li><em>Do not reshuffle and resplit the data! The new training points should be drawn from <code>X_train</code> and <code>y_train</code>.</em></li>
+</ul>
+</li>
+<li>Fit each model with each training set size and make predictions on the test set (9 in total).  </li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TODO: Import the three supervised learning models from sklearn</span>
+<span class="c1"># from sklearn import model_A</span>
+<span class="c1"># from sklearn import model_B</span>
+<span class="c1"># from sklearn import model_C</span>
+
+<span class="c1"># TODO: Initialize the three models</span>
+<span class="n">clf_A</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">clf_B</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">clf_C</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># TODO: Set up the training set sizes</span>
+<span class="n">X_train_100</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">y_train_100</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">X_train_200</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">y_train_200</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">X_train_300</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">y_train_300</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># TODO: Execute the &#39;train_predict&#39; function for each classifier and each training set size</span>
+<span class="c1"># train_predict(clf, X_train, y_train, X_test, y_test)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="5.3-Tabular-Results">5.3 Tabular Results<a class="anchor-link" href="#5.3-Tabular-Results">&#182;</a></h3><hr>
+<p><strong> Classifer 1 - ?</strong></p>
+<table>
+<thead><tr>
+<th style="text-align:center">Training Set Size</th>
+<th style="text-align:center">Training Time</th>
+<th style="text-align:center">Prediction Time (test)</th>
+<th style="text-align:center">F1 Score (train)</th>
+<th style="text-align:center">F1 Score (test)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">100</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">200</td>
+<td style="text-align:center">EXAMPLE</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">300</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">EXAMPLE</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><strong> Classifer 2 - ?</strong></p>
+<table>
+<thead><tr>
+<th style="text-align:center">Training Set Size</th>
+<th style="text-align:center">Training Time</th>
+<th style="text-align:center">Prediction Time (test)</th>
+<th style="text-align:center">F1 Score (train)</th>
+<th style="text-align:center">F1 Score (test)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">100</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">200</td>
+<td style="text-align:center">EXAMPLE</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">300</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">EXAMPLE</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><strong> Classifer 3 - ?</strong></p>
+<table>
+<thead><tr>
+<th style="text-align:center">Training Set Size</th>
+<th style="text-align:center">Training Time</th>
+<th style="text-align:center">Prediction Time (test)</th>
+<th style="text-align:center">F1 Score (train)</th>
+<th style="text-align:center">F1 Score (test)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">100</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">200</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">300</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<hr>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="$\mathfrak-{\color{#348ABD}-{6.-\-Choosing-\-the-\-Best-\-Model}}$">$\mathfrak {\color{#348ABD} {6. \ Choosing \ the \ Best \ Model}}$<a class="anchor-link" href="#$\mathfrak-{\color{#348ABD}-{6.-\-Choosing-\-the-\-Best-\-Model}}$">&#182;</a></h2><p>In this final section, we will choose from the three supervised learning models the <em>best</em> model to use on the student data. We will then perform a grid search optimization for the model over the entire training set (<code>X_train</code> and <code>y_train</code>) by tuning at least one parameter to improve upon the untuned model's F<sub>1</sub> score.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Question-3---Choosing-the-Best-Model">Question 3 - Choosing the Best Model<a class="anchor-link" href="#Question-3---Choosing-the-Best-Model">&#182;</a></h3><p><em>Based on the experiments you performed earlier, in one to two paragraphs, explain to the board of supervisors what single model you chose as the best model. Which model is generally the most appropriate based on the available data, limited resources, cost, and performance?</em></p>
+<h3 id="Answer-3">Answer 3<a class="anchor-link" href="#Answer-3">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Question-4---Model-in-Layman's-Terms">Question 4 - Model in Layman's Terms<a class="anchor-link" href="#Question-4---Model-in-Layman's-Terms">&#182;</a></h3><p><em>In one to two paragraphs, explain to the board of directors in layman's terms how the final model chosen is supposed to work. Be sure that you are describing the major qualities of the model, such as how the model is trained and how the model makes a prediction. Avoid using advanced mathematical or technical jargon, such as describing equations or discussing the algorithm implementation.</em></p>
+<h3 id="Answer-4">Answer 4<a class="anchor-link" href="#Answer-4">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="6.1-Model-Tuning">6.1 Model Tuning<a class="anchor-link" href="#6.1-Model-Tuning">&#182;</a></h3><p>Finaly, we will tune the chosen model and use grid search (<code>GridSearchCV</code>) with at least one important parameter tuned with at least 3 different values. We will need to use the entire training set for this.</p>
+<p>Our steps in the tuning:</p>
+<ul>
+<li>Import <a href="http://scikit-learn.org/0.17/modules/generated/sklearn.grid_search.GridSearchCV.html"><code>sklearn.grid_search.GridSearchCV</code></a> and <a href="http://scikit-learn.org/stable/modules/generated/sklearn.metrics.make_scorer.html"><code>sklearn.metrics.make_scorer</code></a>.</li>
+<li>Create a dictionary of parameters you wish to tune for the chosen model.<ul>
+<li>Example: <code>parameters = {'parameter' : [list of values]}</code>.</li>
+</ul>
+</li>
+<li>Initialize the classifier you've chosen and store it in <code>clf</code>.</li>
+<li>Create the F<sub>1</sub> scoring function using <code>make_scorer</code> and store it in <code>f1_scorer</code>.<ul>
+<li>Set the <code>pos_label</code> parameter to the correct value!</li>
+</ul>
+</li>
+<li>Perform grid search on the classifier <code>clf</code> using <code>f1_scorer</code> as the scoring method, and store it in <code>grid_obj</code>.</li>
+<li>Fit the grid search object to the training data (<code>X_train</code>, <code>y_train</code>), and store it in <code>grid_obj</code>.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TODO: Import &#39;GridSearchCV&#39; and &#39;make_scorer&#39;</span>
+
+<span class="c1"># TODO: Create the parameters list you wish to tune</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># TODO: Initialize the classifier</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># TODO: Make an f1 scoring function using &#39;make_scorer&#39; </span>
+<span class="n">f1_scorer</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># TODO: Perform grid search on the classifier using the f1_scorer as the scoring method</span>
+<span class="n">grid_obj</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># TODO: Fit the grid search object to the training data and find the optimal parameters</span>
+<span class="n">grid_obj</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># Get the estimator</span>
+<span class="c1"># clf = grid_obj.best_estimator_</span>
+
+<span class="c1"># Report the final F1 score for training and testing after parameter tuning</span>
+<span class="c1"># print (&quot;Tuned model has a training F1 score of {:.4f}.&quot;.format(predict_labels(clf, X_train, y_train)))</span>
+<span class="c1"># print (&quot;Tuned model has a testing F1 score of {:.4f}.&quot;.format(predict_labels(clf, X_test, y_test)))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Question-5---Final-F1-Score">Question 5 - Final F<sub>1</sub> Score<a class="anchor-link" href="#Question-5---Final-F1-Score">&#182;</a></h3><p><em>What is the final model's F<sub>1</sub> score for training and testing? How does that score compare to the untuned model?</em></p>
+<h3 id="Answer-5">Answer 5<a class="anchor-link" href="#Answer-5">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="$\mathfrak-{\color{#348ABD}-{7.-\-Conclusion}}$">$\mathfrak {\color{#348ABD} {7. \ Conclusion}}$<a class="anchor-link" href="#$\mathfrak-{\color{#348ABD}-{7.-\-Conclusion}}$">&#182;</a></h2>
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
