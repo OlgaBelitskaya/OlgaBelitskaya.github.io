@@ -1,20 +1,14 @@
 
-# &#x1F3D9; &nbsp; List of Courses and Programs: 
+# &#x1F4DD; &nbsp; Courses and Programs: 
 https://olgabelitskaya.github.io/reflections/README.html
 
-### &#x1F4CB; &nbsp; GitHub gists: https://gist.github.com/OlgaBelitskaya
+# &#x1F4DA; &nbsp; Notebooks and Data Files:
+https://olgabelitskaya.github.io/notebooks/README.html
 
-### &#x1F4CB; &nbsp; Pages on http://bl.ocks.org/ :
-Olga Belitskaya’s Block 
-- Visualization. Map I: http://bl.ocks.org/OlgaBelitskaya/bcc84d52267612a32b2a5bf79ae11b94
-- Visualization. Map II: http://bl.ocks.org/OlgaBelitskaya/de4685ce8630c2ea00229750097e1fb4
-- Visualization. Interpolation: http://bl.ocks.org/OlgaBelitskaya/aec204a67eec24cec8568258395ce62b
-
-# &#x1F3D9; &nbsp; List of Projects:
+# &#x1F3D9; &nbsp; Projects:
 
 ### Data Analyst Nanodegree (udacity.com)  https://olgabelitskaya.github.io/certificate.pdf
 ##### <span style="color:#338DD4">click on the links to view</span>
-
 #### P0: Chopsticks! https://olgabelitskaya.github.io/Data_Analyst_ND_Project0.html
 #### P1: The Stroop Effect https://olgabelitskaya.github.io/Data_Analyst_ND_Project1.html
 #### P2: Titanic https://olgabelitskaya.github.io/Data_Analyst_ND_Project2.html
@@ -35,7 +29,6 @@ Olga Belitskaya’s Block
 
 ### Machine Learning Engineer Nanodegree (udacity.com) 
 ##### <span style="color:#338DD4">click on the links to view</span>
-
 #### P0: Titanic Survival Exploration https://olgabelitskaya.github.io/MLE_ND_P0_V0.html
 #### P1: Predicting Boston Housing Prices https://olgabelitskaya.github.io/MLE_ND_P1_V0.html
 #### P2: Finding Donors for CharityML https://olgabelitskaya.github.io/MLE_ND_P2_V0.html
@@ -66,40 +59,13 @@ https://github.com/OlgaBelitskaya/resume-builder/blob/master/Exercises_Technical
 
 https://github.com/OlgaBelitskaya/resume-builder/blob/master/Exercises_Technical_Interview_Sort.ipynb
 
-# &#x1F4DA; &nbsp; List of Notebooks:
-##### <span style="color:#338DD4">click on the links to load</span>
+### &#x1F4CB; &nbsp; GitHub gists: https://gist.github.com/OlgaBelitskaya
 
-#### Data_Analyst_ND_Project0.ipynb:  https://olgabelitskaya.github.io/Data_Analyst_ND_Project0.ipynb
-#### Data_Analyst_ND_Project1.ipynb:  https://olgabelitskaya.github.io/Data_Analyst_ND_Project1.ipynb
-#### Data_Analyst_ND_Project2.ipynb:  https://olgabelitskaya.github.io/Data_Analyst_ND_Project2.ipynb
-#### Data_Analyst_ND_Project3_Dubai-AbuDhabi_Extraction_MongoDB.ipynb:
-https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_Dubai-AbuDhabi_Extraction_MongoDB.ipynb
-#### Data_Analyst_ND_Project3_Dubai-AbuDhabi_MongoDB.ipynb: 
-https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_Dubai-AbuDhabi_MongoDB.ipynb
-#### Data_Analyst_ND_Project3_Dubai-AbuDhabi_SQL.ipynb: 
-https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_Dubai-AbuDhabi_SQL.ipynb
-#### Data_Analyst_ND_Project3_MoscowRegion.ipynb: 
-https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_MoscowRegion.ipynb
-#### P3_postcodes.ipynb: https://olgabelitskaya.github.io/P3_postcodes.ipynb
-#### P3_R_SQL_MongoDB.ipynb: https://olgabelitskaya.github.io/P3_R_SQL_MongoDB.ipynb
-#### P4.Rmd: https://olgabelitskaya.github.io/P4.Rmd
-#### P4Beta.Rmd: https://olgabelitskaya.github.io/P4Beta.Rmd
-#### P5_Identify_Fraud_from_Enron_Email.ipynb: https://olgabelitskaya.github.io/P5_Identify_Fraud_from_Enron_Email.ipynb
-#### P7_Design_an_A_B_Test_Overview.ipynb: https://olgabelitskaya.github.io/P7_Design_an_A_B_Test_Overview.ipynb
+### &#x1F4CB; &nbsp; Pages on http://bl.ocks.org/ :
+Olga Belitskaya’s Block 
+- Visualization. Map I: http://bl.ocks.org/OlgaBelitskaya/bcc84d52267612a32b2a5bf79ae11b94
+- Visualization. Map II: http://bl.ocks.org/OlgaBelitskaya/de4685ce8630c2ea00229750097e1fb4
+- Visualization. Interpolation: http://bl.ocks.org/OlgaBelitskaya/aec204a67eec24cec8568258395ce62b
 
 ### &#x1F4CB; &nbsp; SageMath Online Files: 
 https://cloud.sagemath.com/projects/a64be705-e96c-478c-a25d-bcc323134ef8/files/
-
-# &#x1F5C3; &nbsp; List of Files:
-
-##### <span style="color:#338DD4">click on the links to load
-
-#### huge_cities.tsv: https://olgabelitskaya.github.io/huge_cities.tsv
-#### c_bank.xlsx: https://olgabelitskaya.github.io/c_bank.xlsx
-#### world_countries.json: https://olgabelitskaya.github.io/world_countries.json
-#### enron.csv: https://olgabelitskaya.github.io/enron.csv
-
-##### <span style="color:#338DD4">click on the links to view</span>
-
-#### moscow_region.osm.json: https://github.com/OlgaBelitskaya/large-repo/blob/master/moscow_region.osm.json
-#### dubai_abu-dhabi.osm.json: https://github.com/OlgaBelitskaya/large-repo/blob/master/dubai_abu-dhabi.osm.json
