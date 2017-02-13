@@ -26,7 +26,7 @@
 
 ##  &#x1F916; &nbsp; UDACITY ud600 Introduction To Reinforcement Learning
 
-####  Lesson 1-2: https://github.com/OlgaBelitskaya/reflections/tree/master/ud600/reflections-ud600-1-2.html
+####  Lesson 1-2: https://olgabelitskaya.github.io/reflections/ud600/reflections-ud600-1-2.html
 ####  Lesson 3-4: https://github.com/OlgaBelitskaya/reflections/tree/master/ud600/reflections-ud600-3-4.ipynb
 
 ##  &#x1F916; &nbsp; UDACITY ud730 Deep Learning
