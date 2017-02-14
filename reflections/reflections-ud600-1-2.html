@@ -11790,40 +11790,6 @@ div#notebook {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
-<span class="c1"># Actions: U - Upper, R - right, L - left, D - down</span>
-<span class="c1"># U-U-R-R-R (5 times &quot;the right way&quot; with p=0.8) + </span>
-<span class="c1"># R-U-U-R-R(1 time &quot;the right way&quot; with p=0.8, 4 times &quot;the possible way&quot; with p=0.1)</span>
-<span class="n">p_r</span><span class="p">,</span> <span class="n">p_p</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.1</span>
-<span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">p_r</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">p_p</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="n">p_r</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[1]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>0.3277600000000001</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -11938,6 +11904,34 @@ Bellman's equation:</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Exact-Methods:">Exact Methods:<a class="anchor-link" href="#Exact-Methods:">&#182;</a></h4><ul>
+<li>Value Iteration</li>
+<li>Policy Iteration</li>
+<li>Linear Programming</li>
+</ul>
+<p><strong><em>Policy iteration</em></strong> consists of two steps: policy evaluation and policy improvement.</p>
+<p>Evaluate a given policy π by iterative application of Bellman expectation backup.</p>
+<h4 id="v1-&#8594;-v2-&#8594;-...-&#8594;-v&#960;">v1 &#8594; v2 &#8594; ... &#8594; v&#960;<a class="anchor-link" href="#v1-&#8594;-v2-&#8594;-...-&#8594;-v&#960;">&#182;</a></h4><p>Using synchronous backups:</p>
+<ul>
+<li>At each iteration k + 1</li>
+<li>For all states s ∈ S</li>
+<li>Update vk+1(s) from vk(s') where s' is a successor state of s</li>
+</ul>
+<p>Improve the policy by acting greedily with respect to vπ: π' = greedy(vπ).</p>
+<p>Any optimal policy can be subdivided into two components:</p>
+<ul>
+<li>An optimal first action A∗</li>
+<li>Followed by an optimal policy from successor state S'</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>Dynamic Programming is a very general solution method for problems which have two properties:</p>
 <ul>
 <li>Optimal substructure<ul>
@@ -11974,6 +11968,69 @@ Bellman's equation:</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Canonical-Example:-Grid-World">Canonical Example: Grid World<a class="anchor-link" href="#Canonical-Example:-Grid-World">&#182;</a></h4><ul>
+<li>The agent lives in a grid</li>
+<li>Walls block the agent’s path</li>
+<li>The agent’s actions do not always go as planned:<ul>
+<li>80% of the time, the action North takes the agent North (if there is no wall there)</li>
+<li>10% of the time, North takes the agent West; 10% East</li>
+<li>If there is a wall in the direction the agent would have been taken, the agent stays put</li>
+</ul>
+</li>
+<li>Big rewards come at the end </li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Quizes">Quizes<a class="anchor-link" href="#Quizes">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="c1"># Actions: U - Upper, R - right, L - left, D - down</span>
+<span class="c1"># U-U-R-R-R (5 times &quot;the right way&quot; with p=0.8) + </span>
+<span class="c1"># R-U-U-R-R(1 time &quot;the right way&quot; with p=0.8, 4 times &quot;the possible way&quot; with p=0.1)</span>
+<span class="n">p_r</span><span class="p">,</span> <span class="n">p_p</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.1</span>
+<span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">p_r</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">p_p</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="n">p_r</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[1]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0.3277600000000001</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -12016,28 +12073,6 @@ Bellman's equation:</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Problem: evaluate a given policy π</p>
-<p>Solution: iterative application of Bellman expectation backup</p>
-<h4 id="v1-&#8594;-v2-&#8594;-...-&#8594;-v&#960;">v1 &#8594; v2 &#8594; ... &#8594; v&#960;<a class="anchor-link" href="#v1-&#8594;-v2-&#8594;-...-&#8594;-v&#960;">&#182;</a></h4><p>Using synchronous backups:</p>
-<ul>
-<li>At each iteration k + 1</li>
-<li>For all states s ∈ S</li>
-<li>Update vk+1(s) from vk(s') where s' is a successor state of s</li>
-</ul>
-<p>Any optimal policy can be subdivided into two components:</p>
-<ul>
-<li>An optimal first action A∗</li>
-<li>Followed by an optimal policy from successor state S'</li>
-</ul>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <p><img src="01.png" alt=""></p>
 
 </div>
@@ -12049,6 +12084,16 @@ Bellman's equation:</p>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2>&#x1F916; &nbsp;  <span style="color:red"> Lesson 1.T Introduction To BURLAP</h2>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A <strong><em>transition graph</em></strong> with state and action nodes is a useful way to summarize the dynamics of a finite MDP. There is a state node for each possible state (usually a circle labeled by the name of the state), and an action node for each state-action pair (usually a circle labeled by the name of the action and connected by a line to the state node).</p>
 
 </div>
 </div>
@@ -12721,41 +12766,84 @@ START QUIZ</p>
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong><em>Reinforcement learning</em></strong> is an area of machine learning inspired by behaviorist psychology, concerned with how software agents ought to take actions in an environment so as to maximize some notion of cumulative reward.</p>
+<p>In <strong><em>apprenticeship learning</em></strong>, one assumes that an expert demonstrating the ideal behavior, and tries to recover the policy directly using the observations from the expert.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Reinforcement-learning:-http://www.cis.upenn.edu/~cis519/fall2015/lectures/14_ReinforcementLearning.pdf">Reinforcement learning: <a href="http://www.cis.upenn.edu/~cis519/fall2015/lectures/14_ReinforcementLearning.pdf">http://www.cis.upenn.edu/~cis519/fall2015/lectures/14_ReinforcementLearning.pdf</a><a class="anchor-link" href="#Reinforcement-learning:-http://www.cis.upenn.edu/~cis519/fall2015/lectures/14_ReinforcementLearning.pdf">&#182;</a></h4><ul>
+<li>Still assume an MDP:<ul>
+<li>A set of states s ∈ S</li>
+<li>A set of actions (per state) A</li>
+<li>A model T(s,a,s’)</li>
+<li>A reward function R(s,a,s’)</li>
+</ul>
+</li>
+<li><p>Still looking for a policy π(s)</p>
+</li>
+<li><p>New twist: don’t know T or R</p>
+<ul>
+<li>i.e. don’t know which states are good or what the actions do</li>
+<li>Must actually try actions and states out to learn </li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="passive-learner:-watches-world-go-by">passive learner: watches world go by<a class="anchor-link" href="#passive-learner:-watches-world-go-by">&#182;</a></h4><h4 id="active-learner:-act-using-information-learned-so-far,-use-problem-generator-to-explore-environment">active learner: act using information learned so far, use problem generator to explore environment<a class="anchor-link" href="#active-learner:-act-using-information-learned-so-far,-use-problem-generator-to-explore-environment">&#182;</a></h4>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Quiz: Evaluating A Policy</span>
+<span class="c1">######################################</span>
+<span class="c1"># p(o)=0.8</span>
+<span class="c1"># 0.6 | o -&gt; o+1 -&gt; o -&gt; o -&gt; o</span>
+<span class="c1"># 0.1 | o -&gt; o -&gt; o -&gt; o+1 -&gt; o</span>
+<span class="c1"># 0.3 | o -&gt; o+1 -&gt; o -&gt; o -&gt; o-0.2</span>
+<span class="c1">######################################</span>
+<span class="mf">0.6</span><span class="o">*</span><span class="mf">0.8</span> <span class="o">+</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.3</span><span class="o">*</span><span class="p">(</span><span class="mf">0.8</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">))</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[22]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0.746624</pre>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
 
 </div>
-</div>
-</div>
 
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-</div>
 </div>
 </div>
 
