@@ -11761,7 +11761,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2>&#x1F578; &nbsp; <span style="color:red">Links</span></h2>
+<h2>&#x1F916; &nbsp; <span style="color:red">Links</span></h2>
 
 </div>
 </div>
@@ -11775,6 +11775,7 @@ div#notebook {
 <h4 id="Reinforcement-Learning">Reinforcement Learning<a class="anchor-link" href="#Reinforcement-Learning">&#182;</a></h4><p><a href="http://reinforcementlearning.ai-depot.com/">http://reinforcementlearning.ai-depot.com/</a></p>
 <h4 id="Markov-Decision-Processes">Markov Decision Processes<a class="anchor-link" href="#Markov-Decision-Processes">&#182;</a></h4><p><a href="http://www.cs.rice.edu/~vardi/dag01/givan1.pdf">http://www.cs.rice.edu/~vardi/dag01/givan1.pdf</a></p>
 <h4 id="Tools-for-Decision-Analysis:">Tools for Decision Analysis:<a class="anchor-link" href="#Tools-for-Decision-Analysis:">&#182;</a></h4><p><a href="https://home.ubalt.edu/ntsbarsh/opre640a/PartIX.htm#rFromDaKno">https://home.ubalt.edu/ntsbarsh/opre640a/PartIX.htm#rFromDaKno</a></p>
+<h4 id="Burlab:">Burlab:<a class="anchor-link" href="#Burlab:">&#182;</a></h4><p><a href="http://burlap.cs.brown.edu/doc/">http://burlap.cs.brown.edu/doc/</a></p>
 
 </div>
 </div>
@@ -11784,20 +11785,20 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2>&#x1F578; &nbsp;  <span style="color:red"> Lesson 1.  Smoov & Curly's Bogus Journey</span></h2>
+<h2>&#x1F916; &nbsp;  <span style="color:red"> Lesson 1.  Smoov & Curly's Bogus Journey</span></h2>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
 <span class="c1"># Actions: U - Upper, R - right, L - left, D - down</span>
 <span class="c1"># U-U-R-R-R (5 times &quot;the right way&quot; with p=0.8) + </span>
-<span class="c1"># R-U-U-R-R(1 time &quot;the right way&quot; with p=0.8, 4 time &quot;the possible way&quot; with p=0.1)</span>
+<span class="c1"># R-U-U-R-R(1 time &quot;the right way&quot; with p=0.8, 4 times &quot;the possible way&quot; with p=0.1)</span>
 <span class="n">p_r</span><span class="p">,</span> <span class="n">p_p</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.1</span>
 <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">p_r</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">p_p</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="n">p_r</span>
 </pre></div>
@@ -11810,7 +11811,7 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[13]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[1]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -11914,11 +11915,11 @@ Bellman's equation:</p>
 <li>Water resources: keep the correct water level at reservoirs.</li>
 <li>Inspection, maintenance and repair: when to replace/inspect based on age, condition, etc.</li>
 <li>Purchase and production: how much to produce based on demand.</li>
-<li><p>Queues: reduce waiting time.
-...</p>
-</li>
-<li><p>Finance: deciding how much to invest in stock.</p>
-</li>
+<li>Queues: reduce waiting time.
+...</li>
+</ul>
+<ul>
+<li>Finance: deciding how much to invest in stock.</li>
 <li><p>Robotics:</p>
 <ul>
 <li>A dialogue system to interact with people.</li>
@@ -11973,6 +11974,778 @@ Bellman's equation:</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Finding Policies</span>
+<span class="c1"># Three possible steps in this point : R, L, D with probabilities = 0.8, 0.1, 0.1</span>
+<span class="n">gamma</span><span class="p">,</span> <span class="n">r_s</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">p_r</span><span class="p">,</span> <span class="n">p_p</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.04</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.1</span>
+<span class="n">u1</span> <span class="o">=</span> <span class="n">r_s</span> <span class="o">+</span> <span class="n">gamma</span><span class="o">*</span><span class="p">(</span><span class="n">u</span><span class="o">*</span><span class="n">p_p</span> <span class="o">+</span> <span class="n">u</span><span class="o">*</span><span class="n">p_p</span> <span class="o">+</span> <span class="n">end</span><span class="o">*</span><span class="n">p_r</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">r_s</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">p_r</span><span class="p">,</span> <span class="n">p_p</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">u1</span><span class="p">)</span>
+<span class="n">u2</span> <span class="o">=</span> <span class="n">r_s</span> <span class="o">+</span> <span class="n">gamma</span><span class="o">*</span><span class="p">(</span><span class="n">u1</span><span class="o">*</span><span class="n">p_p</span> <span class="o">+</span> <span class="n">r_s</span><span class="o">*</span><span class="n">p_p</span> <span class="o">+</span> <span class="n">end</span><span class="o">*</span><span class="n">p_r</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">u2</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.5 -0.04 0 1 0.8 0.1
+0.36000000000000004
+0.37600000000000006
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Problem: evaluate a given policy π</p>
+<p>Solution: iterative application of Bellman expectation backup</p>
+<h4 id="v1-&#8594;-v2-&#8594;-...-&#8594;-v&#960;">v1 &#8594; v2 &#8594; ... &#8594; v&#960;<a class="anchor-link" href="#v1-&#8594;-v2-&#8594;-...-&#8594;-v&#960;">&#182;</a></h4><p>Using synchronous backups:</p>
+<ul>
+<li>At each iteration k + 1</li>
+<li>For all states s ∈ S</li>
+<li>Update vk+1(s) from vk(s') where s' is a successor state of s</li>
+</ul>
+<p>Any optimal policy can be subdivided into two components:</p>
+<ul>
+<li>An optimal first action A∗</li>
+<li>Followed by an optimal policy from successor state S'</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="01.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2>&#x1F916; &nbsp;  <span style="color:red"> Lesson 1.T Introduction To BURLAP</h2>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="02.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 1 Generating A Domain Object</span>
+<span class="kn">import</span> <span class="nn">burlap.domain.singleagent.graphdefined.GraphDefinedDomain</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">burlap.oomdp.auxiliary.DomainGenerator</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">burlap.oomdp.core.</span><span class="o">*</span><span class="p">;</span>
+
+<span class="n">public</span> <span class="k">class</span> <span class="nc">FirstMDP</span> <span class="p">{</span>
+
+    <span class="n">DomainGenerator</span> <span class="n">gd</span><span class="p">;</span>
+    <span class="n">Domain</span> <span class="n">domain</span><span class="p">;</span>
+
+    <span class="n">public</span> <span class="n">FirstMDP</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">numStates</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+        
+        <span class="n">this</span><span class="o">.</span><span class="n">gd</span> <span class="o">=</span> <span class="n">new</span> <span class="n">GraphDefinedDomain</span><span class="p">(</span><span class="n">numStates</span><span class="p">);</span>
+
+        <span class="n">this</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">gd</span><span class="o">.</span><span class="n">generateDomain</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 2 Defining The Initial State</span>
+<span class="kn">import</span> <span class="nn">burlap.domain.singleagent.graphdefined.GraphDefinedDomain</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">burlap.oomdp.auxiliary.DomainGenerator</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">burlap.oomdp.core.</span><span class="o">*</span><span class="p">;</span>
+
+<span class="n">public</span> <span class="k">class</span> <span class="nc">FirstMDP</span> <span class="p">{</span>
+
+    <span class="n">DomainGenerator</span> <span class="n">gd</span><span class="p">;</span>
+    <span class="n">Domain</span> <span class="n">domain</span><span class="p">;</span>
+    <span class="n">State</span> <span class="n">initialState</span><span class="p">;</span>
+    
+    <span class="n">public</span> <span class="n">FirstMDP</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">numStates</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+        
+        <span class="n">this</span><span class="o">.</span><span class="n">gd</span> <span class="o">=</span> <span class="n">new</span> <span class="n">GraphDefinedDomain</span><span class="p">(</span><span class="n">numStates</span><span class="p">);</span>
+
+        <span class="n">this</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">gd</span><span class="o">.</span><span class="n">generateDomain</span><span class="p">();</span>
+        
+        <span class="n">this</span><span class="o">.</span><span class="n">initialState</span> <span class="o">=</span> <span class="n">GraphDefinedDomain</span><span class="o">.</span><span class="n">getState</span><span class="p">(</span><span class="n">this</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 3 Adding Transitions</span>
+<span class="kn">import</span> <span class="nn">burlap.domain.singleagent.graphdefined.GraphDefinedDomain</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">burlap.oomdp.auxiliary.DomainGenerator</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">burlap.oomdp.core.</span><span class="o">*</span><span class="p">;</span>
+
+<span class="n">public</span> <span class="k">class</span> <span class="nc">FirstMDP</span> <span class="p">{</span>
+
+    <span class="n">DomainGenerator</span> <span class="n">dg</span><span class="p">;</span>
+    <span class="n">Domain</span> <span class="n">domain</span><span class="p">;</span>
+    <span class="n">State</span> <span class="n">initialState</span><span class="p">;</span>
+
+    <span class="n">public</span> <span class="n">FirstMDP</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nb">int</span> <span class="n">numStates</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">dg</span> <span class="o">=</span> <span class="n">new</span> <span class="n">GraphDefinedDomain</span><span class="p">(</span><span class="n">numStates</span><span class="p">);</span>
+        
+        <span class="o">//</span><span class="n">actions</span> <span class="kn">from</span> <span class="nn">initial</span> <span class="n">state</span> <span class="mi">0</span>
+        <span class="p">((</span><span class="n">GraphDefinedDomain</span><span class="p">)</span> <span class="n">this</span><span class="o">.</span><span class="n">dg</span><span class="p">)</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+        <span class="p">((</span><span class="n">GraphDefinedDomain</span><span class="p">)</span> <span class="n">this</span><span class="o">.</span><span class="n">dg</span><span class="p">)</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+        <span class="p">((</span><span class="n">GraphDefinedDomain</span><span class="p">)</span> <span class="n">this</span><span class="o">.</span><span class="n">dg</span><span class="p">)</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+        
+        <span class="o">//</span> <span class="n">Please</span> <span class="n">enter</span> <span class="n">transitions</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">space</span> <span class="n">below</span> <span class="n">to</span> <span class="n">correspond</span> <span class="n">to</span> <span class="n">the</span> 
+        <span class="o">//</span> <span class="n">state</span> <span class="n">diagram</span> <span class="n">earlier</span><span class="o">.</span> <span class="n">Make</span> <span class="n">sure</span> <span class="n">to</span> <span class="n">use</span> <span class="n">action</span> <span class="n">ID</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">each</span> <span class="n">transition</span> 
+        <span class="o">//</span> <span class="ow">in</span> <span class="n">order</span> <span class="k">for</span> <span class="n">the</span> <span class="n">grader</span> <span class="n">to</span> <span class="n">check</span> <span class="n">them</span> <span class="n">correctly</span><span class="o">.</span>
+        
+        <span class="p">((</span><span class="n">GraphDefinedDomain</span><span class="p">)</span> <span class="n">this</span><span class="o">.</span><span class="n">dg</span><span class="p">)</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+
+        <span class="p">((</span><span class="n">GraphDefinedDomain</span><span class="p">)</span> <span class="n">this</span><span class="o">.</span><span class="n">dg</span><span class="p">)</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+        <span class="p">((</span><span class="n">GraphDefinedDomain</span><span class="p">)</span> <span class="n">this</span><span class="o">.</span><span class="n">dg</span><span class="p">)</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+
+        <span class="p">((</span><span class="n">GraphDefinedDomain</span><span class="p">)</span> <span class="n">this</span><span class="o">.</span><span class="n">dg</span><span class="p">)</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+        <span class="p">((</span><span class="n">GraphDefinedDomain</span><span class="p">)</span> <span class="n">this</span><span class="o">.</span><span class="n">dg</span><span class="p">)</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+
+        <span class="o">//</span> <span class="n">Please</span> <span class="n">add</span> <span class="n">your</span> <span class="n">transitions</span> <span class="n">above</span> <span class="n">this</span> <span class="n">line</span><span class="o">.</span>
+        
+        <span class="n">this</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">dg</span><span class="o">.</span><span class="n">generateDomain</span><span class="p">();</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">initialState</span> <span class="o">=</span> <span class="n">GraphDefinedDomain</span><span class="o">.</span><span class="n">getState</span><span class="p">(</span><span class="n">this</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="o">//</span> <span class="n">This</span> <span class="n">method</span> <span class="n">has</span> <span class="n">only</span> <span class="n">been</span> <span class="n">added</span> <span class="k">for</span> <span class="n">the</span> <span class="n">purpose</span> <span class="n">of</span> <span class="n">grading</span> <span class="n">this</span> <span class="n">quiz</span><span class="o">.</span> <span class="n">DO</span> <span class="n">NOT</span> <span class="n">include</span> 
+    <span class="o">//</span> <span class="n">it</span> <span class="ow">in</span> <span class="n">an</span> <span class="n">actual</span> <span class="n">project</span><span class="p">,</span> <span class="n">since</span> <span class="n">it</span> <span class="n">violates</span> <span class="n">the</span> <span class="n">principle</span> <span class="n">of</span> <span class="n">encapsulation</span> <span class="n">by</span> <span class="n">exposing</span>
+    <span class="o">//</span> <span class="n">the</span> <span class="n">private</span> <span class="n">member</span> <span class="n">domain</span><span class="o">.</span>
+    <span class="n">public</span> <span class="n">Domain</span> <span class="n">getDomain</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">this</span><span class="o">.</span><span class="n">domain</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="n">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="o">//</span> <span class="n">You</span> <span class="n">can</span> <span class="n">add</span> <span class="n">test</span> <span class="n">code</span> <span class="n">here</span> <span class="n">that</span> <span class="n">will</span> <span class="n">be</span> <span class="n">executed</span> <span class="n">when</span> <span class="n">you</span> <span class="n">click</span> <span class="s2">&quot;Test Run&quot;</span><span class="o">.</span>
+        <span class="n">FirstMDP</span> <span class="n">fmdp</span> <span class="o">=</span> <span class="n">new</span> <span class="n">FirstMDP</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 4 Adding The Reward Function</span>
+<span class="kn">import</span> <span class="nn">burlap.domain.singleagent.graphdefined.GraphDefinedDomain</span><span class="p">;</span> 
+<span class="kn">import</span> <span class="nn">burlap.oomdp.core.</span><span class="o">*</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">burlap.oomdp.singleagent.GroundedAction</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">burlap.oomdp.singleagent.RewardFunction</span><span class="p">;</span>
+
+<span class="n">public</span> <span class="k">class</span> <span class="nc">FirstMDP</span> <span class="p">{</span>
+
+    <span class="n">GraphDefinedDomain</span> <span class="n">gdd</span><span class="p">;</span>
+    <span class="n">Domain</span> <span class="n">domain</span><span class="p">;</span>
+    <span class="n">State</span> <span class="n">initialState</span><span class="p">;</span>
+    <span class="n">RewardFunction</span> <span class="n">rf</span><span class="p">;</span>
+
+    <span class="n">public</span> <span class="n">FirstMDP</span><span class="p">(</span><span class="n">double</span> <span class="n">p1</span><span class="p">,</span> <span class="n">double</span> <span class="n">p2</span><span class="p">,</span> <span class="n">double</span> <span class="n">p3</span><span class="p">,</span> <span class="n">double</span> <span class="n">p4</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nb">int</span> <span class="n">numStates</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">gdd</span> <span class="o">=</span> <span class="n">new</span> <span class="n">GraphDefinedDomain</span><span class="p">(</span><span class="n">numStates</span><span class="p">);</span>
+        
+        <span class="o">//</span><span class="n">actions</span> <span class="kn">from</span> <span class="nn">initial</span> <span class="n">state</span> <span class="mi">0</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">gdd</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">gdd</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">gdd</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+        
+        <span class="o">//</span><span class="n">transitions</span> <span class="kn">from</span> <span class="nn">action</span> <span class="s2">&quot;a&quot;</span> <span class="n">outcome</span> <span class="n">state</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">gdd</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+
+        <span class="o">//</span><span class="n">transitions</span> <span class="kn">from</span> <span class="nn">action</span> <span class="s2">&quot;b&quot;</span> <span class="n">outcome</span> <span class="n">state</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">gdd</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">gdd</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+
+        <span class="o">//</span><span class="n">transitions</span> <span class="kn">from</span> <span class="nn">action</span> <span class="s2">&quot;c&quot;</span> <span class="n">outcome</span> <span class="n">state</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">gdd</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">gdd</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+        
+        <span class="n">this</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">gdd</span><span class="o">.</span><span class="n">generateDomain</span><span class="p">();</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">initialState</span> <span class="o">=</span> <span class="n">GraphDefinedDomain</span><span class="o">.</span><span class="n">getState</span><span class="p">(</span><span class="n">this</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">rf</span> <span class="o">=</span> <span class="n">new</span> <span class="n">FourParamRF</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="n">p2</span><span class="p">,</span><span class="n">p3</span><span class="p">,</span><span class="n">p4</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="n">public</span> <span class="n">static</span> <span class="k">class</span> <span class="nc">FourParamRF</span> <span class="n">implements</span> <span class="n">RewardFunction</span> <span class="p">{</span>
+        <span class="n">double</span> <span class="n">p1</span><span class="p">;</span>
+        <span class="n">double</span> <span class="n">p2</span><span class="p">;</span>
+        <span class="n">double</span> <span class="n">p3</span><span class="p">;</span>
+        <span class="n">double</span> <span class="n">p4</span><span class="p">;</span>
+ 
+        <span class="n">public</span> <span class="n">FourParamRF</span><span class="p">(</span><span class="n">double</span> <span class="n">p1</span><span class="p">,</span> <span class="n">double</span> <span class="n">p2</span><span class="p">,</span> <span class="n">double</span> <span class="n">p3</span><span class="p">,</span> <span class="n">double</span> <span class="n">p4</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">this</span><span class="o">.</span><span class="n">p1</span> <span class="o">=</span> <span class="n">p1</span><span class="p">;</span>
+            <span class="n">this</span><span class="o">.</span><span class="n">p2</span> <span class="o">=</span> <span class="n">p2</span><span class="p">;</span>
+            <span class="n">this</span><span class="o">.</span><span class="n">p3</span> <span class="o">=</span> <span class="n">p3</span><span class="p">;</span>
+            <span class="n">this</span><span class="o">.</span><span class="n">p4</span> <span class="o">=</span> <span class="n">p4</span><span class="p">;</span>
+        <span class="p">}</span>
+ 
+        <span class="nd">@Override</span>
+        <span class="o">//</span> <span class="n">TODO</span><span class="p">:</span>
+        <span class="o">//</span> <span class="n">Override</span> <span class="n">the</span> <span class="n">reward</span> <span class="n">method</span> <span class="n">to</span> <span class="n">match</span> <span class="n">the</span> <span class="n">reward</span> <span class="n">scheme</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">state</span> <span class="n">diagram</span><span class="o">.</span>
+        <span class="o">//</span> <span class="n">See</span> <span class="n">the</span> <span class="n">documentation</span> <span class="k">for</span> <span class="n">the</span> <span class="n">RewardFunction</span> <span class="n">interface</span> <span class="k">for</span> <span class="n">the</span> <span class="n">proper</span> <span class="n">signature</span><span class="o">.</span>
+        <span class="o">//</span> <span class="n">You</span> <span class="n">may</span> <span class="n">find</span> <span class="n">the</span> <span class="n">getNodeId</span> <span class="n">method</span> <span class="kn">from</span> <span class="nn">GraphDefinedDomain</span> <span class="k">class</span> <span class="nc">helpful</span><span class="o">.</span>
+        
+        <span class="n">public</span> <span class="n">double</span> <span class="n">reward</span><span class="p">(</span><span class="n">State</span> <span class="n">s</span><span class="p">,</span> <span class="n">GroundedAction</span> <span class="n">a</span><span class="p">,</span> <span class="n">State</span> <span class="n">sprime</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nb">int</span> <span class="n">sid</span> <span class="o">=</span> <span class="n">GraphDefinedDomain</span><span class="o">.</span><span class="n">getNodeId</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+            <span class="n">double</span> <span class="n">r</span><span class="p">;</span>
+
+            <span class="k">if</span><span class="p">(</span><span class="n">sid</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">sid</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span> 
+            <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">sid</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="n">r</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">p1</span><span class="p">;</span> <span class="p">}</span> 
+            <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">sid</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span> <span class="n">r</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">p2</span><span class="p">;</span> <span class="p">}</span> 
+            <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">sid</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span> <span class="n">r</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">p3</span><span class="p">;</span> <span class="p">}</span> 
+            <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">sid</span> <span class="o">==</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span> <span class="n">r</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">p4</span><span class="p">;</span> <span class="p">}</span> 
+            <span class="k">else</span> <span class="p">{</span> <span class="n">throw</span> <span class="n">new</span> <span class="n">RuntimeException</span><span class="p">(</span><span class="s2">&quot;State error: &quot;</span> <span class="o">+</span> <span class="n">sid</span><span class="p">);}</span>
+
+            <span class="k">return</span> <span class="n">r</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="o">//</span> <span class="n">This</span> <span class="n">method</span> <span class="n">has</span> <span class="n">only</span> <span class="n">been</span> <span class="n">added</span> <span class="k">for</span> <span class="n">the</span> <span class="n">purpose</span> <span class="n">of</span> <span class="n">grading</span> <span class="n">this</span> <span class="n">quiz</span><span class="o">.</span> <span class="n">DO</span> <span class="n">NOT</span> <span class="n">include</span> 
+    <span class="o">//</span> <span class="n">it</span> <span class="ow">in</span> <span class="n">an</span> <span class="n">actual</span> <span class="n">project</span><span class="p">,</span> <span class="n">since</span> <span class="n">it</span> <span class="n">violates</span> <span class="n">the</span> <span class="n">principle</span> <span class="n">of</span> <span class="n">encapsulation</span> <span class="n">by</span> <span class="n">exposing</span>
+    <span class="o">//</span> <span class="n">the</span> <span class="n">private</span> <span class="n">member</span> <span class="n">domain</span><span class="o">.</span>
+    <span class="n">public</span> <span class="n">Domain</span> <span class="n">getDomain</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">this</span><span class="o">.</span><span class="n">domain</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="n">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="o">//</span> <span class="n">You</span> <span class="n">can</span> <span class="n">add</span> <span class="n">test</span> <span class="n">code</span> <span class="n">here</span> <span class="n">that</span> <span class="n">will</span> <span class="n">be</span> <span class="n">executed</span> <span class="n">when</span> <span class="n">you</span> <span class="n">click</span> <span class="s2">&quot;Test Run&quot;</span><span class="o">.</span>
+        <span class="n">FirstMDP</span> <span class="n">fmdp</span> <span class="o">=</span> <span class="n">new</span> <span class="n">FirstMDP</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 5 Adding The Terminal Function</span>
+<span class="kn">import</span> <span class="nn">burlap.domain.singleagent.graphdefined.GraphDefinedDomain</span><span class="p">;</span> 
+<span class="kn">import</span> <span class="nn">burlap.oomdp.core.</span><span class="o">*</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">burlap.oomdp.singleagent.GroundedAction</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">burlap.oomdp.singleagent.RewardFunction</span><span class="p">;</span>
+
+<span class="n">public</span> <span class="k">class</span> <span class="nc">FirstMDP</span> <span class="p">{</span>
+
+    <span class="n">GraphDefinedDomain</span> <span class="n">gdd</span><span class="p">;</span>
+    <span class="n">Domain</span> <span class="n">domain</span><span class="p">;</span>
+    <span class="n">State</span> <span class="n">initialState</span><span class="p">;</span>
+    <span class="n">RewardFunction</span> <span class="n">rf</span><span class="p">;</span>
+    <span class="n">TerminalFunction</span> <span class="n">tf</span><span class="p">;</span>
+
+    <span class="n">public</span> <span class="n">FirstMDP</span><span class="p">(</span><span class="n">double</span> <span class="n">p1</span><span class="p">,</span> <span class="n">double</span> <span class="n">p2</span><span class="p">,</span> <span class="n">double</span> <span class="n">p3</span><span class="p">,</span> <span class="n">double</span> <span class="n">p4</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nb">int</span> <span class="n">numStates</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">gdd</span> <span class="o">=</span> <span class="n">new</span> <span class="n">GraphDefinedDomain</span><span class="p">(</span><span class="n">numStates</span><span class="p">);</span>
+        
+        <span class="o">//</span><span class="n">actions</span> <span class="kn">from</span> <span class="nn">initial</span> <span class="n">state</span> <span class="mi">0</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">gdd</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">gdd</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">gdd</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+        
+        <span class="o">//</span><span class="n">transitions</span> <span class="kn">from</span> <span class="nn">action</span> <span class="s2">&quot;a&quot;</span> <span class="n">outcome</span> <span class="n">state</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">gdd</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+
+        <span class="o">//</span><span class="n">transitions</span> <span class="kn">from</span> <span class="nn">action</span> <span class="s2">&quot;b&quot;</span> <span class="n">outcome</span> <span class="n">state</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">gdd</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">gdd</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+
+        <span class="o">//</span><span class="n">transitions</span> <span class="kn">from</span> <span class="nn">action</span> <span class="s2">&quot;c&quot;</span> <span class="n">outcome</span> <span class="n">state</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">gdd</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">gdd</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+        
+        <span class="n">this</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">gdd</span><span class="o">.</span><span class="n">generateDomain</span><span class="p">();</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">initialState</span> <span class="o">=</span> <span class="n">GraphDefinedDomain</span><span class="o">.</span><span class="n">getState</span><span class="p">(</span><span class="n">this</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">rf</span> <span class="o">=</span> <span class="n">new</span> <span class="n">FourParamRF</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="n">p2</span><span class="p">,</span><span class="n">p3</span><span class="p">,</span><span class="n">p4</span><span class="p">);</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">tf</span> <span class="o">=</span> <span class="n">new</span> <span class="n">NullTermination</span><span class="p">();</span>
+    <span class="p">}</span>
+    
+    <span class="n">public</span> <span class="n">static</span> <span class="k">class</span> <span class="nc">FourParamRF</span> <span class="n">implements</span> <span class="n">RewardFunction</span> <span class="p">{</span>
+        <span class="n">double</span> <span class="n">p1</span><span class="p">;</span>
+        <span class="n">double</span> <span class="n">p2</span><span class="p">;</span>
+        <span class="n">double</span> <span class="n">p3</span><span class="p">;</span>
+        <span class="n">double</span> <span class="n">p4</span><span class="p">;</span>
+ 
+        <span class="n">public</span> <span class="n">FourParamRF</span><span class="p">(</span><span class="n">double</span> <span class="n">p1</span><span class="p">,</span> <span class="n">double</span> <span class="n">p2</span><span class="p">,</span> <span class="n">double</span> <span class="n">p3</span><span class="p">,</span> <span class="n">double</span> <span class="n">p4</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">this</span><span class="o">.</span><span class="n">p1</span> <span class="o">=</span> <span class="n">p1</span><span class="p">;</span>
+            <span class="n">this</span><span class="o">.</span><span class="n">p2</span> <span class="o">=</span> <span class="n">p2</span><span class="p">;</span>
+            <span class="n">this</span><span class="o">.</span><span class="n">p3</span> <span class="o">=</span> <span class="n">p3</span><span class="p">;</span>
+            <span class="n">this</span><span class="o">.</span><span class="n">p4</span> <span class="o">=</span> <span class="n">p4</span><span class="p">;</span>
+        <span class="p">}</span>
+ 
+        <span class="nd">@Override</span>
+        <span class="o">//</span> <span class="n">TODO</span><span class="p">:</span>
+        <span class="o">//</span> <span class="n">Override</span> <span class="n">the</span> <span class="n">reward</span> <span class="n">method</span> <span class="n">to</span> <span class="n">match</span> <span class="n">the</span> <span class="n">reward</span> <span class="n">scheme</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">state</span> <span class="n">diagram</span><span class="o">.</span>
+        <span class="o">//</span> <span class="n">See</span> <span class="n">the</span> <span class="n">documentation</span> <span class="k">for</span> <span class="n">the</span> <span class="n">RewardFunction</span> <span class="n">interface</span> <span class="k">for</span> <span class="n">the</span> <span class="n">proper</span> <span class="n">signature</span><span class="o">.</span>
+        <span class="o">//</span> <span class="n">You</span> <span class="n">may</span> <span class="n">find</span> <span class="n">the</span> <span class="n">getNodeId</span> <span class="n">method</span> <span class="kn">from</span> <span class="nn">GraphDefinedDomain</span> <span class="k">class</span> <span class="nc">helpful</span><span class="o">.</span>
+        
+        <span class="n">public</span> <span class="n">double</span> <span class="n">reward</span><span class="p">(</span><span class="n">State</span> <span class="n">s</span><span class="p">,</span> <span class="n">GroundedAction</span> <span class="n">a</span><span class="p">,</span> <span class="n">State</span> <span class="n">sprime</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nb">int</span> <span class="n">sid</span> <span class="o">=</span> <span class="n">GraphDefinedDomain</span><span class="o">.</span><span class="n">getNodeId</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+            <span class="n">double</span> <span class="n">r</span><span class="p">;</span>
+
+            <span class="k">if</span><span class="p">(</span><span class="n">sid</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">sid</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span> 
+            <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">sid</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="n">r</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">p1</span><span class="p">;</span> <span class="p">}</span> 
+            <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">sid</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span> <span class="n">r</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">p2</span><span class="p">;</span> <span class="p">}</span> 
+            <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">sid</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span> <span class="n">r</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">p3</span><span class="p">;</span> <span class="p">}</span> 
+            <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">sid</span> <span class="o">==</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span> <span class="n">r</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">p4</span><span class="p">;</span> <span class="p">}</span> 
+            <span class="k">else</span> <span class="p">{</span> <span class="n">throw</span> <span class="n">new</span> <span class="n">RuntimeException</span><span class="p">(</span><span class="s2">&quot;State error: &quot;</span> <span class="o">+</span> <span class="n">sid</span><span class="p">);}</span>
+
+            <span class="k">return</span> <span class="n">r</span><span class="p">;</span>
+        <span class="p">}</span>        
+    <span class="p">}</span>
+    
+    <span class="o">//</span> <span class="n">This</span> <span class="n">method</span> <span class="n">has</span> <span class="n">only</span> <span class="n">been</span> <span class="n">added</span> <span class="k">for</span> <span class="n">the</span> <span class="n">purpose</span> <span class="n">of</span> <span class="n">grading</span> <span class="n">this</span> <span class="n">quiz</span><span class="o">.</span> <span class="n">DO</span> <span class="n">NOT</span> <span class="n">include</span> 
+    <span class="o">//</span> <span class="n">it</span> <span class="ow">in</span> <span class="n">an</span> <span class="n">actual</span> <span class="n">project</span><span class="p">,</span> <span class="n">since</span> <span class="n">it</span> <span class="n">violates</span> <span class="n">the</span> <span class="n">principle</span> <span class="n">of</span> <span class="n">encapsulation</span> <span class="n">by</span> <span class="n">exposing</span>
+    <span class="o">//</span> <span class="n">the</span> <span class="n">private</span> <span class="n">member</span> <span class="n">domain</span><span class="o">.</span>
+    <span class="n">public</span> <span class="n">Domain</span> <span class="n">getDomain</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">this</span><span class="o">.</span><span class="n">domain</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="n">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="o">//</span> <span class="n">You</span> <span class="n">can</span> <span class="n">add</span> <span class="n">test</span> <span class="n">code</span> <span class="n">here</span> <span class="n">that</span> <span class="n">will</span> <span class="n">be</span> <span class="n">executed</span> <span class="n">when</span> <span class="n">you</span> <span class="n">click</span> <span class="s2">&quot;Test Run&quot;</span><span class="o">.</span>
+        <span class="n">FirstMDP</span> <span class="n">fmdp</span> <span class="o">=</span> <span class="n">new</span> <span class="n">FirstMDP</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 6 Performing Value Iteration</span>
+
+<span class="n">vi</span><span class="o">.</span><span class="n">planFromState</span><span class="p">(</span><span class="n">this</span><span class="o">.</span><span class="n">initialState</span><span class="p">);</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 7 Finding The Optimal Action</span>
+
+<span class="kn">import</span> <span class="nn">burlap.behavior.singleagent.planning.stochastic.valueiteration.ValueIteration</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">burlap.behavior.statehashing.DiscreteStateHashFactory</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">burlap.domain.singleagent.graphdefined.GraphDefinedDomain</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">burlap.oomdp.auxiliary.DomainGenerator</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">burlap.oomdp.auxiliary.common.NullTermination</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">burlap.oomdp.core.</span><span class="o">*</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">burlap.oomdp.singleagent.GroundedAction</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">burlap.oomdp.singleagent.RewardFunction</span><span class="p">;</span>
+
+<span class="n">public</span> <span class="k">class</span> <span class="nc">FirstMDP</span> <span class="p">{</span>
+
+    <span class="n">DomainGenerator</span> <span class="n">dg</span><span class="p">;</span>
+    <span class="n">Domain</span> <span class="n">domain</span><span class="p">;</span>
+    <span class="n">State</span> <span class="n">initState</span><span class="p">;</span>
+    <span class="n">RewardFunction</span> <span class="n">rf</span><span class="p">;</span>
+    <span class="n">TerminalFunction</span> <span class="n">tf</span><span class="p">;</span>
+    <span class="n">DiscreteStateHashFactory</span> <span class="n">hashFactory</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">numStates</span><span class="p">;</span>
+
+    <span class="n">public</span> <span class="n">FirstMDP</span><span class="p">(</span><span class="n">double</span> <span class="n">p1</span><span class="p">,</span> <span class="n">double</span> <span class="n">p2</span><span class="p">,</span> <span class="n">double</span> <span class="n">p3</span><span class="p">,</span> <span class="n">double</span> <span class="n">p4</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">numStates</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">dg</span> <span class="o">=</span> <span class="n">new</span> <span class="n">GraphDefinedDomain</span><span class="p">(</span><span class="n">numStates</span><span class="p">);</span>
+        
+        <span class="o">//</span><span class="n">actions</span> <span class="kn">from</span> <span class="nn">initial</span> <span class="n">state</span> <span class="mi">0</span>
+        <span class="p">((</span><span class="n">GraphDefinedDomain</span><span class="p">)</span> <span class="n">this</span><span class="o">.</span><span class="n">dg</span><span class="p">)</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+        <span class="p">((</span><span class="n">GraphDefinedDomain</span><span class="p">)</span> <span class="n">this</span><span class="o">.</span><span class="n">dg</span><span class="p">)</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+        <span class="p">((</span><span class="n">GraphDefinedDomain</span><span class="p">)</span> <span class="n">this</span><span class="o">.</span><span class="n">dg</span><span class="p">)</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+        
+        <span class="o">//</span><span class="n">transitions</span> <span class="kn">from</span> <span class="nn">action</span> <span class="s2">&quot;a&quot;</span> <span class="n">outcome</span> <span class="n">state</span>
+        <span class="p">((</span><span class="n">GraphDefinedDomain</span><span class="p">)</span> <span class="n">this</span><span class="o">.</span><span class="n">dg</span><span class="p">)</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+
+        <span class="o">//</span><span class="n">transitions</span> <span class="kn">from</span> <span class="nn">action</span> <span class="s2">&quot;b&quot;</span> <span class="n">outcome</span> <span class="n">state</span>
+        <span class="p">((</span><span class="n">GraphDefinedDomain</span><span class="p">)</span> <span class="n">this</span><span class="o">.</span><span class="n">dg</span><span class="p">)</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+        <span class="p">((</span><span class="n">GraphDefinedDomain</span><span class="p">)</span> <span class="n">this</span><span class="o">.</span><span class="n">dg</span><span class="p">)</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+
+        <span class="o">//</span><span class="n">transitions</span> <span class="kn">from</span> <span class="nn">action</span> <span class="s2">&quot;c&quot;</span> <span class="n">outcome</span> <span class="n">state</span>
+        <span class="p">((</span><span class="n">GraphDefinedDomain</span><span class="p">)</span> <span class="n">this</span><span class="o">.</span><span class="n">dg</span><span class="p">)</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+        <span class="p">((</span><span class="n">GraphDefinedDomain</span><span class="p">)</span> <span class="n">this</span><span class="o">.</span><span class="n">dg</span><span class="p">)</span><span class="o">.</span><span class="n">setTransition</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">1.</span><span class="p">);</span>
+        
+        <span class="n">this</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">dg</span><span class="o">.</span><span class="n">generateDomain</span><span class="p">();</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">initState</span> <span class="o">=</span> <span class="n">GraphDefinedDomain</span><span class="o">.</span><span class="n">getState</span><span class="p">(</span><span class="n">this</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">rf</span> <span class="o">=</span> <span class="n">new</span> <span class="n">FourParamRF</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="n">p2</span><span class="p">,</span><span class="n">p3</span><span class="p">,</span><span class="n">p4</span><span class="p">);</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">tf</span> <span class="o">=</span> <span class="n">new</span> <span class="n">NullTermination</span><span class="p">();</span>
+        <span class="n">this</span><span class="o">.</span><span class="n">hashFactory</span> <span class="o">=</span> <span class="n">new</span> <span class="n">DiscreteStateHashFactory</span><span class="p">();</span>
+    <span class="p">}</span>
+    
+    <span class="n">public</span> <span class="n">static</span> <span class="k">class</span> <span class="nc">FourParamRF</span> <span class="n">implements</span> <span class="n">RewardFunction</span> <span class="p">{</span>
+        <span class="n">double</span> <span class="n">p1</span><span class="p">;</span>
+        <span class="n">double</span> <span class="n">p2</span><span class="p">;</span>
+        <span class="n">double</span> <span class="n">p3</span><span class="p">;</span>
+        <span class="n">double</span> <span class="n">p4</span><span class="p">;</span>
+ 
+        <span class="n">public</span> <span class="n">FourParamRF</span><span class="p">(</span><span class="n">double</span> <span class="n">p1</span><span class="p">,</span> <span class="n">double</span> <span class="n">p2</span><span class="p">,</span> <span class="n">double</span> <span class="n">p3</span><span class="p">,</span> <span class="n">double</span> <span class="n">p4</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">this</span><span class="o">.</span><span class="n">p1</span> <span class="o">=</span> <span class="n">p1</span><span class="p">;</span>
+            <span class="n">this</span><span class="o">.</span><span class="n">p2</span> <span class="o">=</span> <span class="n">p2</span><span class="p">;</span>
+            <span class="n">this</span><span class="o">.</span><span class="n">p3</span> <span class="o">=</span> <span class="n">p3</span><span class="p">;</span>
+            <span class="n">this</span><span class="o">.</span><span class="n">p4</span> <span class="o">=</span> <span class="n">p4</span><span class="p">;</span>
+        <span class="p">}</span>
+ 
+        <span class="nd">@Override</span>
+        <span class="n">public</span> <span class="n">double</span> <span class="n">reward</span><span class="p">(</span><span class="n">State</span> <span class="n">s</span><span class="p">,</span> <span class="n">GroundedAction</span> <span class="n">a</span><span class="p">,</span> <span class="n">State</span> <span class="n">sprime</span><span class="p">)</span> <span class="p">{</span> 
+            <span class="nb">int</span> <span class="n">sid</span> <span class="o">=</span> <span class="n">GraphDefinedDomain</span><span class="o">.</span><span class="n">getNodeId</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+            <span class="n">double</span> <span class="n">r</span><span class="p">;</span>
+   
+            <span class="k">if</span><span class="p">(</span> <span class="n">sid</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">sid</span> <span class="o">==</span> <span class="mi">3</span> <span class="p">)</span> <span class="p">{</span> <span class="o">//</span> <span class="n">initial</span> <span class="n">state</span> <span class="ow">or</span> <span class="n">c1</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="k">if</span><span class="p">(</span> <span class="n">sid</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">)</span> <span class="p">{</span> <span class="o">//</span> <span class="n">a</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">p1</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="k">if</span><span class="p">(</span> <span class="n">sid</span> <span class="o">==</span> <span class="mi">2</span> <span class="p">)</span> <span class="p">{</span> <span class="o">//</span> <span class="n">b1</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">p2</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="k">if</span><span class="p">(</span> <span class="n">sid</span> <span class="o">==</span> <span class="mi">4</span> <span class="p">)</span> <span class="p">{</span> <span class="o">//</span> <span class="n">b2</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">p3</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="k">if</span><span class="p">(</span> <span class="n">sid</span> <span class="o">==</span> <span class="mi">5</span> <span class="p">)</span> <span class="p">{</span> <span class="o">//</span> <span class="n">c2</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">p4</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="p">{</span>
+                <span class="n">throw</span> <span class="n">new</span> <span class="n">RuntimeException</span><span class="p">(</span><span class="s2">&quot;Unknown state: &quot;</span> <span class="o">+</span> <span class="n">sid</span><span class="p">);</span>
+            <span class="p">}</span>
+
+            <span class="k">return</span> <span class="n">r</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="n">private</span> <span class="n">ValueIteration</span> <span class="n">computeValue</span><span class="p">(</span><span class="n">double</span> <span class="n">gamma</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">double</span> <span class="n">maxDelta</span> <span class="o">=</span> <span class="mf">0.0001</span><span class="p">;</span>
+        <span class="nb">int</span> <span class="n">maxIterations</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
+        <span class="n">ValueIteration</span> <span class="n">vi</span> <span class="o">=</span> <span class="n">new</span> <span class="n">ValueIteration</span><span class="p">(</span><span class="n">this</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">this</span><span class="o">.</span><span class="n">rf</span><span class="p">,</span> <span class="n">this</span><span class="o">.</span><span class="n">tf</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> 
+                                               <span class="n">this</span><span class="o">.</span><span class="n">hashFactory</span><span class="p">,</span> <span class="n">maxDelta</span><span class="p">,</span> <span class="n">maxIterations</span><span class="p">);</span>
+        <span class="n">vi</span><span class="o">.</span><span class="n">planFromState</span><span class="p">(</span><span class="n">this</span><span class="o">.</span><span class="n">initState</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">vi</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="n">public</span> <span class="n">String</span> <span class="n">bestFirstAction</span><span class="p">(</span><span class="n">double</span> <span class="n">gamma</span><span class="p">)</span> <span class="p">{</span>
+        <span class="o">//</span> <span class="n">Return</span> <span class="s2">&quot;action a&quot;</span> <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">best</span> <span class="n">action</span> <span class="n">based</span> <span class="n">on</span> <span class="n">the</span> <span class="n">discount</span> <span class="n">factor</span> <span class="n">given</span><span class="o">.</span>
+        <span class="o">//</span> <span class="n">Return</span> <span class="s2">&quot;action b&quot;</span> <span class="k">if</span> <span class="n">b</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">best</span> <span class="n">action</span> <span class="n">based</span> <span class="n">on</span> <span class="n">the</span> <span class="n">discount</span> <span class="n">factor</span> <span class="n">given</span><span class="o">.</span>
+        <span class="o">//</span> <span class="n">Return</span> <span class="s2">&quot;action c&quot;</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">best</span> <span class="n">action</span> <span class="n">based</span> <span class="n">on</span> <span class="n">the</span> <span class="n">discount</span> <span class="n">factor</span> <span class="n">given</span><span class="o">.</span>
+        <span class="o">//</span> <span class="n">If</span> <span class="n">there</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">tie</span> <span class="n">between</span> <span class="n">actions</span><span class="p">,</span> <span class="n">give</span> <span class="n">preference</span> <span class="n">to</span> <span class="n">the</span> <span class="n">earlier</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">alphabet</span><span class="p">:</span>
+        <span class="o">//</span>   <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span> <span class="k">if</span> <span class="n">action</span> <span class="n">a</span> <span class="ow">and</span> <span class="n">action</span> <span class="n">c</span> <span class="n">are</span> <span class="n">equally</span> <span class="n">good</span><span class="p">,</span> <span class="k">return</span> <span class="s2">&quot;action a&quot;</span><span class="o">.</span>
+        <span class="n">ValueIteration</span> <span class="n">vi</span> <span class="o">=</span> <span class="n">computeValue</span><span class="p">(</span><span class="n">gamma</span><span class="p">);</span>
+
+        <span class="n">double</span><span class="p">[]</span> <span class="n">V</span> <span class="o">=</span> <span class="n">new</span> <span class="n">double</span><span class="p">[</span><span class="n">this</span><span class="o">.</span><span class="n">numStates</span><span class="p">];</span>
+        <span class="k">for</span><span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">this</span><span class="o">.</span><span class="n">numStates</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">State</span> <span class="n">s</span> <span class="o">=</span> <span class="n">GraphDefinedDomain</span><span class="o">.</span><span class="n">getState</span><span class="p">(</span><span class="n">this</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+            <span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">vi</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="n">String</span> <span class="n">actionName</span> <span class="o">=</span> <span class="n">null</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">V</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">V</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="n">actionName</span> <span class="o">=</span> <span class="s2">&quot;action a&quot;</span><span class="p">;</span>
+        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">V</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">V</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">V</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="n">actionName</span> <span class="o">=</span> <span class="s2">&quot;action b&quot;</span><span class="p">;</span>
+        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">V</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">V</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">V</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="n">actionName</span> <span class="o">=</span> <span class="s2">&quot;action c&quot;</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">actionName</span><span class="p">;</span>
+        
+    <span class="p">}</span>
+ 
+    <span class="n">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">double</span> <span class="n">p1</span> <span class="o">=</span> <span class="mf">5.</span><span class="p">;</span>
+        <span class="n">double</span> <span class="n">p2</span> <span class="o">=</span> <span class="mf">6.</span><span class="p">;</span>
+        <span class="n">double</span> <span class="n">p3</span> <span class="o">=</span> <span class="mf">3.</span><span class="p">;</span>
+        <span class="n">double</span> <span class="n">p4</span> <span class="o">=</span> <span class="mf">7.</span><span class="p">;</span>
+        <span class="n">FirstMDP</span> <span class="n">mdp</span> <span class="o">=</span> <span class="n">new</span> <span class="n">FirstMDP</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="n">p2</span><span class="p">,</span><span class="n">p3</span><span class="p">,</span><span class="n">p4</span><span class="p">);</span>
+ 
+        <span class="n">double</span> <span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">;</span>
+        <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;Best initial action: &quot;</span> <span class="o">+</span> <span class="n">mdp</span><span class="o">.</span><span class="n">bestFirstAction</span><span class="p">(</span><span class="n">gamma</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 8 TODO: Second MDP Problem</span>
+<span class="n">public</span> <span class="k">class</span> <span class="nc">SecondMDP</span> <span class="p">{</span>
+
+    <span class="n">public</span> <span class="n">SecondMDP</span><span class="p">(</span><span class="n">double</span> <span class="n">p1</span><span class="p">,</span> <span class="n">double</span> <span class="n">p2</span><span class="p">)</span> <span class="p">{</span>
+        
+    <span class="p">}</span>
+    
+    <span class="n">public</span> <span class="n">String</span> <span class="n">bestActions</span><span class="p">(</span><span class="n">double</span> <span class="n">gamma</span><span class="p">)</span> <span class="p">{</span>
+        <span class="o">//</span> <span class="n">Return</span> <span class="n">one</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">Strings</span>
+        <span class="o">//</span> <span class="s2">&quot;a,c&quot;</span>
+        <span class="o">//</span> <span class="s2">&quot;a,d&quot;</span>
+        <span class="o">//</span> <span class="s2">&quot;b,c&quot;</span> 
+        <span class="o">//</span> <span class="s2">&quot;b,d&quot;</span>
+        <span class="o">//</span> <span class="n">based</span> <span class="n">on</span> <span class="n">the</span> <span class="n">optimal</span> <span class="n">actions</span> <span class="n">at</span> <span class="n">states</span> <span class="n">S0</span> <span class="ow">and</span> <span class="n">S1</span><span class="o">.</span> <span class="n">If</span> 
+        <span class="o">//</span> <span class="n">there</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">tie</span><span class="p">,</span> <span class="k">break</span> <span class="n">it</span> <span class="ow">in</span> <span class="n">favor</span> <span class="n">of</span> <span class="n">the</span> <span class="n">letter</span> <span class="n">earlier</span> <span class="ow">in</span>
+        <span class="o">//</span> <span class="n">the</span> <span class="n">alphabet</span> <span class="p">(</span><span class="n">so</span> <span class="k">if</span> <span class="s2">&quot;a,c&quot;</span> <span class="ow">and</span> <span class="s2">&quot;a,d&quot;</span> <span class="n">would</span> <span class="n">both</span> <span class="n">be</span> <span class="n">optimal</span><span class="p">,</span> 
+        <span class="o">//</span> <span class="k">return</span> <span class="s2">&quot;a,c&quot;</span><span class="p">)</span><span class="o">.</span>
+    <span class="p">}</span>
+   
+    <span class="n">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">double</span> <span class="n">p1</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
+        <span class="n">double</span> <span class="n">p2</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
+        <span class="n">SecondMDP</span> <span class="n">mdp</span> <span class="o">=</span> <span class="n">new</span> <span class="n">SecondMDP</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="n">p2</span><span class="p">);</span>
+ 
+        <span class="n">double</span> <span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
+        <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;Best actions: &quot;</span> <span class="o">+</span> <span class="n">mdp</span><span class="o">.</span><span class="n">bestActions</span><span class="p">(</span><span class="n">gamma</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="#9-TODO:-Self-Assessment:-MDPSolver">#9 TODO: Self-Assessment: MDPSolver<a class="anchor-link" href="##9-TODO:-Self-Assessment:-MDPSolver">&#182;</a></h4><p>Self-Assessment: MDPSolver
+Before working on this assessment, first watch the Introduction to BURLAP tutorial lesson to learn how to build and solve an MDP using the Java BURLAP framework.</p>
+<p>For this assessment, you will write a Java class called MDPSolver. The constructor for the MDPSolver class should accept the following arguments:</p>
+<p>An int numStates. The states in the MDP are identified by an int from 0 to numStates-1, inclusive.
+An int numActions. The actions in the MDP are identified by an int from 0 to numActions-1, inclusive.
+A double[][][] probabilitiesOfTransitions. probabilitiesOfTransitions[i][j][k] is the probability of ending in state k by taking action j in state i. For all i and j, summing probabilitiesOfTransitions[i][j][k] over the index k will equal 1.
+A double[][][] rewards. rewards[i][j][k] is the reward obtained by ending in state k by taking action j in state i.
+These all represent elements of an MDP. Note that there will be no explicitly defined terminal states.</p>
+<p>MDPSolver should also contain a method called valueOfState that accepts two arguments, an int state that represents a state in the MDP, and a double gamma that represents the discount factor to apply. It should output a double giving the value of the appropriate state using the given discount factor. The value given should be accurate within a tolerance of 0.001, inclusive.</p>
+<p>We recommend that you use the BURLAP framework to build an MDP object out of the information in the arguments and then use value iteration to compute the value of the states in the MDP.
+START QUIZ</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">###########################</span>
+<span class="c1"># FirstMDPGraderEx4.java #</span>
+<span class="c1">##########################</span>
+<span class="kn">import</span> <span class="nn">burlap.behavior.statehashing.DiscreteStateHashFactory</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">burlap.domain.singleagent.graphdefined.GraphDefinedDomain</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">burlap.oomdp.core.</span><span class="o">*</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">burlap.oomdp.singleagent.Action</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="n">public</span> <span class="k">class</span> <span class="nc">FirstMDPGraderEx4</span> <span class="p">{</span>
+
+	<span class="n">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="o">//</span> <span class="n">get</span> <span class="n">the</span> <span class="n">domain</span>
+        <span class="n">FirstMDP</span> <span class="n">fmdp</span> <span class="o">=</span> <span class="n">new</span> <span class="n">FirstMDP</span><span class="p">();</span>
+        <span class="n">Domain</span> <span class="n">d</span> <span class="o">=</span> <span class="n">fmdp</span><span class="o">.</span><span class="n">getDomain</span><span class="p">();</span>
+        <span class="n">boolean</span> <span class="n">isCorrect</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
+        
+        <span class="n">Attribute</span> <span class="n">attNode</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">getAttribute</span><span class="p">(</span><span class="s2">&quot;node&quot;</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span> <span class="n">attNode</span><span class="o">.</span><span class="n">lowerLim</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">attNode</span><span class="o">.</span><span class="n">upperLim</span> <span class="o">!=</span> <span class="mi">5</span> <span class="p">)</span> <span class="p">{</span>
+        	<span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;There do not appear to be 6 states in the Domain object. Note that further problems may be</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> 
+                              <span class="s2">&quot;present, but you will need to correct this error before we can check further.&quot;</span><span class="p">);</span>
+        	<span class="n">isCorrect</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+		<span class="n">String</span><span class="p">[]</span> <span class="n">correctActions</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;action0 from state 0 to state 1 with probability 1.0&quot;</span><span class="p">,</span>
+				<span class="s2">&quot;action0 from state 1 to state 1 with probability 1.0&quot;</span><span class="p">,</span>
+				<span class="s2">&quot;action0 from state 2 to state 4 with probability 1.0&quot;</span><span class="p">,</span>
+				<span class="s2">&quot;action0 from state 3 to state 5 with probability 1.0&quot;</span><span class="p">,</span>
+				<span class="s2">&quot;action0 from state 4 to state 2 with probability 1.0&quot;</span><span class="p">,</span>
+				<span class="s2">&quot;action0 from state 5 to state 5 with probability 1.0&quot;</span><span class="p">,</span>
+				<span class="s2">&quot;action1 from state 0 to state 2 with probability 1.0&quot;</span><span class="p">,</span>
+				<span class="s2">&quot;action2 from state 0 to state 3 with probability 1.0&quot;</span><span class="p">};</span>
+		<span class="n">boolean</span><span class="p">[]</span> <span class="n">actionFound</span> <span class="o">=</span> <span class="p">{</span> <span class="n">false</span><span class="p">,</span> <span class="n">false</span><span class="p">,</span> <span class="n">false</span><span class="p">,</span> <span class="n">false</span><span class="p">,</span> <span class="n">false</span><span class="p">,</span> <span class="n">false</span><span class="p">,</span> <span class="n">false</span><span class="p">,</span> <span class="n">false</span> <span class="p">};</span> 
+
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Action</span><span class="o">&gt;</span> <span class="n">actions</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">getActions</span><span class="p">();</span>
+    	<span class="k">for</span><span class="p">(</span> <span class="n">Action</span> <span class="n">a</span> <span class="p">:</span> <span class="n">actions</span> <span class="p">)</span> <span class="p">{</span>
+    		<span class="nb">int</span> <span class="n">maxSid</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    		<span class="n">String</span> <span class="n">actionName</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">getName</span><span class="p">();</span>
+    		
+    		<span class="o">//</span> <span class="n">only</span> <span class="n">state0</span> <span class="n">will</span> <span class="n">have</span> <span class="n">action1</span> <span class="ow">or</span> <span class="n">action2</span><span class="p">;</span> <span class="nb">all</span> <span class="n">other</span> <span class="n">states</span> <span class="n">have</span> <span class="n">just</span> <span class="n">action0</span>
+    		<span class="k">if</span><span class="p">(</span> <span class="n">actionName</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="s2">&quot;action1&quot;</span><span class="p">)</span> <span class="o">||</span> <span class="n">actionName</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="s2">&quot;action2&quot;</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+    			<span class="n">maxSid</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    		<span class="p">}</span>
+    		<span class="k">else</span> <span class="p">{</span>
+    			<span class="n">maxSid</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="n">attNode</span><span class="o">.</span><span class="n">upperLim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    		<span class="p">}</span>
+    		
+    		<span class="o">//</span> <span class="n">check</span> <span class="n">the</span> <span class="n">applicable</span> <span class="n">states</span> <span class="k">for</span> <span class="n">the</span> <span class="n">action</span>
+    		<span class="k">for</span><span class="p">(</span> <span class="nb">int</span> <span class="n">sid</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">sid</span> <span class="o">&lt;</span> <span class="n">maxSid</span><span class="p">;</span> <span class="n">sid</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+    			<span class="k">try</span> <span class="p">{</span>
+	    			<span class="n">State</span> <span class="n">s</span> <span class="o">=</span> <span class="n">GraphDefinedDomain</span><span class="o">.</span><span class="n">getState</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">sid</span><span class="p">);</span>
+	        		<span class="n">List</span><span class="o">&lt;</span><span class="n">TransitionProbability</span><span class="o">&gt;</span> <span class="n">tpr</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">getTransitions</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">);</span>
+	        		<span class="k">for</span><span class="p">(</span> <span class="n">TransitionProbability</span> <span class="n">pr</span> <span class="p">:</span> <span class="n">tpr</span> <span class="p">)</span> <span class="p">{</span>
+	        			<span class="n">State</span> <span class="n">t</span> <span class="o">=</span> <span class="n">pr</span><span class="o">.</span><span class="n">s</span><span class="p">;</span>
+	    				<span class="nb">int</span> <span class="n">tid</span> <span class="o">=</span> <span class="n">GraphDefinedDomain</span><span class="o">.</span><span class="n">getNodeId</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+	    				<span class="n">String</span> <span class="n">actionStr</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot; from state &quot;</span> <span class="o">+</span> <span class="n">sid</span> <span class="o">+</span> <span class="s2">&quot; to state &quot;</span> <span class="o">+</span> <span class="n">tid</span> <span class="o">+</span> 
+							<span class="s2">&quot; with probability &quot;</span> <span class="o">+</span> <span class="n">pr</span><span class="o">.</span><span class="n">p</span><span class="p">;</span>
+	    			
+	        			<span class="o">//</span> <span class="n">check</span> <span class="n">that</span> <span class="n">actionStr</span> <span class="ow">is</span> <span class="ow">in</span> <span class="n">correctActions</span>
+	        			<span class="n">boolean</span> <span class="n">isValidAction</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+	        			<span class="k">for</span><span class="p">(</span> <span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">correctActions</span><span class="o">.</span><span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+	        				<span class="k">if</span><span class="p">(</span> <span class="n">correctActions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">actionStr</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+	        					<span class="n">actionFound</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
+	        					<span class="n">isValidAction</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
+	        				<span class="p">}</span>
+	        			<span class="p">}</span>
+	        			<span class="k">if</span><span class="p">(</span> <span class="o">!</span>isValidAction <span class="o">)</span> <span class="o">{</span>
+	        				<span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="n">actionStr</span> <span class="o">+</span> <span class="s2">&quot; was found in your domain, but it is not</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+	        						<span class="s2">&quot;one of the actions in the state diagram.&quot;</span><span class="p">);</span>
+	        				<span class="n">isCorrect</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+	        			<span class="p">}</span>
+	        		<span class="p">}</span>
+    			<span class="p">}</span>
+	        	<span class="n">catch</span> <span class="p">(</span><span class="n">NullPointerException</span> <span class="n">npe</span><span class="p">)</span> <span class="p">{</span>
+	        		<span class="o">//</span> <span class="n">do</span> <span class="n">nothing</span>
+	        	<span class="p">}</span>
+
+    		<span class="p">}</span>
+    	<span class="p">}</span>
+        
+    	<span class="o">//</span> <span class="n">check</span> <span class="n">that</span> <span class="nb">all</span> <span class="n">actions</span> <span class="n">have</span> <span class="n">been</span> <span class="n">found</span>
+    	<span class="k">for</span><span class="p">(</span> <span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">correctActions</span><span class="o">.</span><span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+    		<span class="k">if</span><span class="p">(</span> <span class="o">!</span>actionFound<span class="o">[</span>i<span class="o">]</span> <span class="o">)</span> <span class="o">{</span>
+    			<span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="n">correctActions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; was not found in your domain, but it is</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> 
+    					<span class="s2">&quot;one of the actions in the state diagram.&quot;</span><span class="p">);</span>
+    			<span class="n">isCorrect</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+    		<span class="p">}</span>
+    	<span class="p">}</span>
+        
+    	<span class="k">if</span><span class="p">(</span> <span class="n">isCorrect</span> <span class="p">)</span> <span class="p">{</span>
+    		<span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;Good job! Your code generates a domain with six states, all &quot;</span> <span class="o">+</span>
+                               <span class="s2">&quot;the deterministic actions given in the state diagram are present, &quot;</span> <span class="o">+</span>
+                               <span class="s2">&quot;and no additional actions are present.&quot;</span><span class="p">);</span>
+    	<span class="p">}</span>
+    	
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2>&#x1F916; &nbsp;  <span style="color:red"> Lesson 2. Reinforcement Learning</span></h2>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
