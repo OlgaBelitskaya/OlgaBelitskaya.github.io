@@ -90,6 +90,7 @@ from sklearn.metrics import silhouette_score
 
 
 ```python
+hide_code
 # visuals.py - Udacity.com source
 ###########################################
 # Suppress matplotlib user warnings
@@ -173,7 +174,8 @@ def cluster_results(reduced_data, preds, centers, pca_samples):
                    s = 150, linewidth = 4, color = 'black', marker = 'x');
 
     # Set plot title
-    ax.set_title("Cluster Learning on PCA-Reduced Data - Centroids Marked by Number\nTransformed Sample Data Marked by Black Cross");
+    ax.set_title("Cluster Learning on PCA-Reduced Data - Centroids Marked by Number\nTransformed \
+                 Sample Data Marked by Black Cross");
 
 
 def biplot(good_data, reduced_data, pca):
@@ -562,7 +564,7 @@ plt.title("Customers' Annual Spending")
 
 
 
-    <matplotlib.text.Text at 0x10c832ad0>
+    <matplotlib.text.Text at 0x10ae428d0>
 
 
 
@@ -636,7 +638,7 @@ plt.title("Customers' Annual Spending")
 
 
 
-    <matplotlib.text.Text at 0x10cf8b810>
+    <matplotlib.text.Text at 0x10b51c690>
 
 
 
@@ -1871,7 +1873,7 @@ biplot(good_data, reduced_data, pca)
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x10e145590>
+    <matplotlib.axes._subplots.AxesSubplot at 0x10c7c0c90>
 
 
 
@@ -1939,15 +1941,15 @@ for n in list(range(2,12)):
 ```
 
     For number of clusters = 2, the silhouette_score is : 0.426281015469
-    For number of clusters = 3, the silhouette_score is : 0.394187354045
-    For number of clusters = 4, the silhouette_score is : 0.331781276998
-    For number of clusters = 5, the silhouette_score is : 0.349997797526
-    For number of clusters = 6, the silhouette_score is : 0.362244862665
-    For number of clusters = 7, the silhouette_score is : 0.364801207979
-    For number of clusters = 8, the silhouette_score is : 0.35377145371
-    For number of clusters = 9, the silhouette_score is : 0.358914946403
-    For number of clusters = 10, the silhouette_score is : 0.352263391296
-    For number of clusters = 11, the silhouette_score is : 0.361483060129
+    For number of clusters = 3, the silhouette_score is : 0.397423420008
+    For number of clusters = 4, the silhouette_score is : 0.331660645925
+    For number of clusters = 5, the silhouette_score is : 0.344309266124
+    For number of clusters = 6, the silhouette_score is : 0.370466251292
+    For number of clusters = 7, the silhouette_score is : 0.359599681414
+    For number of clusters = 8, the silhouette_score is : 0.353043407248
+    For number of clusters = 9, the silhouette_score is : 0.359935162742
+    For number of clusters = 10, the silhouette_score is : 0.346864359479
+    For number of clusters = 11, the silhouette_score is : 0.358902509025
 
 
 
@@ -1972,15 +1974,15 @@ for n in list(range(2,12)):
 ```
 
     For number of clusters = 2, the silhouette_score is : 0.370634141991
-    For number of clusters = 3, the silhouette_score is : 0.362055714663
-    For number of clusters = 4, the silhouette_score is : 0.257831854731
+    For number of clusters = 3, the silhouette_score is : 0.362416483322
+    For number of clusters = 4, the silhouette_score is : 0.265585957916
     For number of clusters = 5, the silhouette_score is : 0.148148852999
-    For number of clusters = 6, the silhouette_score is : 0.281017372126
-    For number of clusters = 7, the silhouette_score is : 0.304206301852
-    For number of clusters = 8, the silhouette_score is : 0.206104332175
-    For number of clusters = 9, the silhouette_score is : 0.163306648785
-    For number of clusters = 10, the silhouette_score is : 0.179787588325
-    For number of clusters = 11, the silhouette_score is : 0.0742604301244
+    For number of clusters = 6, the silhouette_score is : 0.284358858493
+    For number of clusters = 7, the silhouette_score is : 0.298704307191
+    For number of clusters = 8, the silhouette_score is : 0.279495732385
+    For number of clusters = 9, the silhouette_score is : 0.196636412232
+    For number of clusters = 10, the silhouette_score is : 0.220692132998
+    For number of clusters = 11, the silhouette_score is : 0.0697762487467
 
 
 ### 7.2 Cluster Visualization
@@ -2140,21 +2142,21 @@ display(true_centers2)
   <tbody>
     <tr>
       <th>Segment 0</th>
-      <td>3812.0</td>
-      <td>6414.0</td>
-      <td>9838.0</td>
-      <td>942.0</td>
-      <td>3242.0</td>
-      <td>886.0</td>
-    </tr>
-    <tr>
-      <th>Segment 1</th>
       <td>9606.0</td>
       <td>2068.0</td>
       <td>2675.0</td>
       <td>2195.0</td>
       <td>331.0</td>
       <td>752.0</td>
+    </tr>
+    <tr>
+      <th>Segment 1</th>
+      <td>3812.0</td>
+      <td>6414.0</td>
+      <td>9838.0</td>
+      <td>942.0</td>
+      <td>3242.0</td>
+      <td>886.0</td>
     </tr>
   </tbody>
 </table>
@@ -2198,8 +2200,8 @@ K-means:
 
 Gaussian Mixture Model:
 
-- Segment 1: HoReCa (Hotel/Restaurant/Cafe)
-- Segment 0: Retail
+- Segment 0: HoReCa (Hotel/Restaurant/Cafe)
+- Segment 1: Retail
 
 ### Question 9
 *For each sample point, which customer segment from* ***Question 8*** *best represents it? Are the predictions for each sample point consistent with this?*
@@ -2233,9 +2235,9 @@ for i, pred in enumerate(sample_preds2):
 ```
 
     Gaussian Mixture Model
-    Sample point C0 predicted to be in Cluster 0
-    Sample point C1 predicted to be in Cluster 0
-    Sample point C2 predicted to be in Cluster 1
+    Sample point C0 predicted to be in Cluster 1
+    Sample point C1 predicted to be in Cluster 1
+    Sample point C2 predicted to be in Cluster 0
 
 
 ## $\mathfrak {\color{slategrey} { 8. \ Conclusion}}$
