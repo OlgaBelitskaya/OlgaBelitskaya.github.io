@@ -11768,7 +11768,7 @@ div#notebook {
 <h4 id="Answer-1">Answer 1<a class="anchor-link" href="#Answer-1">&#182;</a></h4><p>For simplicity, the border between regression and classification can be described in this way:</p>
 <ul>
 <li>classification: predict the values of discrete or categorical targets;</li>
-<li>regression: predict the values of continuous target.</li>
+<li>regression: predict the values of continuous targets.</li>
 </ul>
 <p>This supervised learning problem is in the classification field. We should predict the labels for the students: 'yes' or 'no' for the feature 'passed'.</p>
 
@@ -12787,7 +12787,20 @@ F1 score for test set: 0.7259.
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Question-4---Model-in-Layman's-Terms">Question 4 - Model in Layman's Terms<a class="anchor-link" href="#Question-4---Model-in-Layman's-Terms">&#182;</a></h4><p><em>In one to two paragraphs, explain to the board of directors in layman's terms how the final model chosen is supposed to work. Be sure that you are describing the major qualities of the model, such as how the model is trained and how the model makes a prediction. Avoid using advanced mathematical or technical jargon, such as describing equations or discussing the algorithm implementation.</em></p>
-<h4 id="Answer-4">Answer 4<a class="anchor-link" href="#Answer-4">&#182;</a></h4>
+<h4 id="Answer-4">Answer 4<a class="anchor-link" href="#Answer-4">&#182;</a></h4><p>In general, boosting in the machine learning is the construction a highly accurate prediction rule by combining many relatively weak and inaccurate rules. It based on the assumption: each of the weak hypotheses has accuracy a little bit better than a random guess. The AdaBoost algorithm unites weak classifiers in this way: the predictions from all of them are then combined through a weighted majority vote (or sum) to produce the final prediction. As many learning methods, AdaBoost uses minimizing a loss function that measures how well a model fits the observed data (more accurately - minimizing the exponential loss).</p>
+<p>So what happens during an iteration process:</p>
+<p>1) any underlying classifier can be chosen as a weak learner,
+2) this classifier is trained on a random subset of the total training set,
+3) the AdaBoost algorithm assigns (at the first step) or modifies (at the next steps) the weight to each training example,
+4) the weights of training examples with incorrect predictions by the boosted model increases, whereas the weights are decreased for examples predicted correctly, so a weak learner is forced to concentrate on the "difficult" examples of wrong predictions,
+5) each iteration should modify the underlying classifier to minimize the loss function.</p>
+<p>References:</p>
+<ul>
+<li>AdaBoostClassifier: 
+<a href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html#sklearn.ensemble.AdaBoostClassifier">http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html#sklearn.ensemble.AdaBoostClassifier</a></li>
+<li>AdaBoost: <a href="https://cseweb.ucsd.edu/classes/fa01/cse291/AdaBoost.pdf">https://cseweb.ucsd.edu/classes/fa01/cse291/AdaBoost.pdf</a></li>
+</ul>
+
 </div>
 </div>
 </div>
@@ -12880,7 +12893,7 @@ Tuned model has the parameters:
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Question-5---Final-F1-Score">Question 5 - Final F<sub>1</sub> Score<a class="anchor-link" href="#Question-5---Final-F1-Score">&#182;</a></h4><p><em>What is the final model's F<sub>1</sub> score for training and testing? How does that score compare to the untuned model?</em></p>
-<h4 id="Answer-5">Answer 5<a class="anchor-link" href="#Answer-5">&#182;</a></h4><p>The final model's F-score was improved significantly. It becomes 0.8649 instead of 0.8116 for the testing set. This confirms the effectiveness of the algorithm GridSearchCV for tuning.</p>
+<h4 id="Answer-5">Answer 5<a class="anchor-link" href="#Answer-5">&#182;</a></h4><p>The final model's F-score was improved significantly. It becomes 0.8649 instead of 0.8116 for the testing set. It means we escape the overfitting problem. This result confirms the effectiveness of the algorithm GridSearchCV for tuning.</p>
 
 </div>
 </div>
@@ -12894,18 +12907,15 @@ Tuned model has the parameters:
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this project, some classifiers and their application to predict categorical variables were discussed in detail. We studied the methods of data preparing and model optimizing as well. The final model has an F1 score of 0.8649 for the training set, and it's an enough high result for the small dataset.</p>
 
 </div>
 </div>
-</div>
-
 </div>
     </div>
   </div>
