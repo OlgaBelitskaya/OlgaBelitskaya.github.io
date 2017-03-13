@@ -27,7 +27,7 @@ https://github.com/OlgaBelitskaya/machine_learning_engineer_nd009/blob/master/Ma
 
 #### Lesson 1: https://github.com/OlgaBelitskaya/reflection2/blob/master/reflections-ud501-1.ipynb
 #### Lesson 2: https://github.com/OlgaBelitskaya/reflection2/blob/master/reflections-ud501-2.ipynb
-#### Lesson 3: https://github.com/OlgaBelitskaya/reflection2/blob/master/reflections-ud501-1.ipynb
+#### Lesson 3: https://github.com/OlgaBelitskaya/reflection2/blob/master/reflections-ud501-3.ipynb
 
 ##  &#x1F916; &nbsp; UDACITY ud600 Introduction To Reinforcement Learning
 
