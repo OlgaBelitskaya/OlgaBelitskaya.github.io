@@ -5,6 +5,9 @@ https://olgabelitskaya.github.io/reflections/README.html
 # &#x1F4DA; &nbsp; Notebooks and Data Files:
 https://olgabelitskaya.github.io/notebooks/README.html
 
+# &#x1F4DA; &nbsp; Additional Exercises:
+https://olgabelitskaya.github.io/README_EXERCISES.html
+
 # &#x1F3D9; &nbsp; Projects:
 
 ### Data Analyst Nanodegree (udacity.com)  https://olgabelitskaya.github.io/certificate.pdf

@@ -25,10 +25,15 @@ https://github.com/OlgaBelitskaya/machine_learning_engineer_nd009/blob/master/Ma
 
 ##  &#x1F4CA; &nbsp; UDACITY ud501 Machine Learning for Trading
 
+#### Lesson 1: https://github.com/OlgaBelitskaya/reflection2/blob/master/reflections-ud501-1.ipynb
+#### Lesson 2: https://github.com/OlgaBelitskaya/reflection2/blob/master/reflections-ud501-2.ipynb
+#### Lesson 3: https://github.com/OlgaBelitskaya/reflection2/blob/master/reflections-ud501-1.ipynb
+
 ##  &#x1F916; &nbsp; UDACITY ud600 Introduction To Reinforcement Learning
 
 ####  Lesson 1-2: https://olgabelitskaya.github.io/reflections/reflections-ud600-1-2.html
 ####  Lesson 3-4: https://github.com/OlgaBelitskaya/reflections/tree/master/ud600/reflections-ud600-3-4.ipynb
+####  Lesson 5-6: https://github.com/OlgaBelitskaya/reflections/tree/master/ud600/reflections-ud600-5-6.ipynb
 
 ##  &#x1F916; &nbsp; UDACITY ud730 Deep Learning
 
