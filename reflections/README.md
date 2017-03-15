@@ -34,6 +34,10 @@ https://github.com/OlgaBelitskaya/machine_learning_engineer_nd009/blob/master/Ma
 ####  Lesson 1-2: https://olgabelitskaya.github.io/reflections/reflections-ud600-1-2.html
 ####  Lesson 3-4: https://github.com/OlgaBelitskaya/reflections/tree/master/ud600/reflections-ud600-3-4.ipynb
 ####  Lesson 5-6: https://github.com/OlgaBelitskaya/reflections/tree/master/ud600/reflections-ud600-5-6.ipynb
+####  Lesson 7-8: https://github.com/OlgaBelitskaya/reflections/tree/master/ud600/reflections-ud600-7-8.ipynb
+####  Lesson 9-10: https://github.com/OlgaBelitskaya/reflections/tree/master/ud600/reflections-ud600-9-10.ipynb
+####  Lesson 11-12: https://github.com/OlgaBelitskaya/reflections/tree/master/ud600/reflections-ud600-11-12-C.ipynb
+####  Lesson HW: https://github.com/OlgaBelitskaya/reflections/tree/master/ud600/reflections-ud600-HW.ipynb
 
 ##  &#x1F916; &nbsp; UDACITY ud730 Deep Learning
 
