@@ -41,4 +41,21 @@ https://github.com/OlgaBelitskaya/machine_learning_engineer_nd009/blob/master/Ma
 
 ##  &#x1F916; &nbsp; UDACITY ud730 Deep Learning
 
+#### Lesson 1: https://github.com/OlgaBelitskaya/reflection2/blob/master/reflections-ud730-1.ipynb
+        
+#### Lesson 2: https://github.com/OlgaBelitskaya/reflection2/blob/master/reflections-ud730-2.ipynb
+        
+#### Lesson 3: https://github.com/OlgaBelitskaya/reflection2/blob/master/reflections-ud730-3.ipynb
+        
+#### Lesson 4: https://github.com/OlgaBelitskaya/reflection2/blob/master/reflections-ud730-4.ipynb 
+
+#### Lesson 5: https://github.com/OlgaBelitskaya/reflection2/blob/master/reflections-ud730-5.ipynb
+
+#### Project: https://github.com/OlgaBelitskaya/reflection2/blob/master/reflections-ud730-P.ipynb
+
 ##  &#x1F916; &nbsp; UDACITY cs373 Artificial Intelligence for Robotics
+
+
+```python
+
+```
