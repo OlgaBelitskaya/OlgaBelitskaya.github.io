@@ -55,6 +55,20 @@ https://github.com/OlgaBelitskaya/machine_learning_engineer_nd009/blob/master/Ma
 
 ##  &#x1F916; &nbsp; UDACITY cs373 Artificial Intelligence for Robotics
 
+#### Sections 1-3: https://github.com/OlgaBelitskaya/reflections/blob/master/cs373/reflections-cs373-1-3.ipynb
+
+#### Sections 4-7: https://github.com/OlgaBelitskaya/reflections/blob/master/cs373/reflections-cs373-4-7.ipynb
+
+#### Sections 8-11: https://github.com/OlgaBelitskaya/reflections/blob/master/cs373/reflections-cs373-8-11.ipynb
+
+#### Sections 12-14: https://github.com/OlgaBelitskaya/reflections/blob/master/cs373/reflections-cs373-12-14.ipynb
+
+#### Sections 15-18: https://github.com/OlgaBelitskaya/reflections/blob/master/cs373/reflections-cs373-15-18.ipynb
+
+#### Sections 19-22: https://github.com/OlgaBelitskaya/reflections/blob/master/cs373/reflections-cs373-19-22.ipynb
+
+#### Section 23P: https://github.com/OlgaBelitskaya/reflections/blob/master/cs373/reflections-cs373-23P.ipynb
+
 
 ```python
 
