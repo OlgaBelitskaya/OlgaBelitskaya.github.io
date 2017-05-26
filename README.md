@@ -37,11 +37,16 @@ https://olgabelitskaya.github.io/README_EXERCISES.html
 #### P2: Finding Donors for CharityML https://olgabelitskaya.github.io/MLE_ND_P2_V0.html
 #### P3: Creating Customer Segments https://olgabelitskaya.github.io/MLE_ND_P3_V0.html
 #### P4: Train a Smartcab to Drive https://olgabelitskaya.github.io/MLE_ND_P4_V0.html
-#### P5: Build a Digit Recognition Program https://olgabelitskaya.github.io/MLE_ND_P5_V0.html
+#### P5: Build a Digit Recognition Program 
+- https://olgabelitskaya.github.io/MLE_ND_P5_V0_S1.html
+- https://olgabelitskaya.github.io/MLE_ND_P5_V0_S2.html
+- https://olgabelitskaya.github.io/MLE_ND_P5_V0_S3.html
 #### P6: Capstone Project https://olgabelitskaya.github.io/MLE_ND_P6_V0.html
 #### P7: Building a Student Intervention System https://olgabelitskaya.github.io/MLE_ND_P7_V0.html
 #### P8: Analyzing the NYC Subway Dataset https://olgabelitskaya.github.io/MLE_ND_P8_V0.html
-#### P9: Image Classification https://olgabelitskaya.github.io/MLE_ND_P9_V0.html
+#### P9: Image Classification 
+- https://olgabelitskaya.github.io/MLE_ND_P9_V0.html
+- https://olgabelitskaya.github.io/MLE_ND_P9_V3.html
 
 ### &#x1F4CB; &nbsp; Interview and Technical Interview Practice. Data Analyst. (constantly upgradable):
 Udacity_Interview_Practice.ipynb 
@@ -72,5 +77,8 @@ Olga Belitskaya’s Block
 - Visualization. Map II: http://bl.ocks.org/OlgaBelitskaya/de4685ce8630c2ea00229750097e1fb4
 - Visualization. Interpolation: http://bl.ocks.org/OlgaBelitskaya/aec204a67eec24cec8568258395ce62b
 
-### &#x1F4CB; &nbsp; SageMath Online Files: 
-https://cloud.sagemath.com/projects/a64be705-e96c-478c-a25d-bcc323134ef8/files/
+### &#x1F4CB; &nbsp; Cocal.com Projects: 
+https://cocalc.com/projects
+
+### &#x1F4CB; &nbsp; Microsoft AML Studio: 
+https://studio.azureml.net/Home/
