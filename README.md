@@ -70,6 +70,10 @@ https://github.com/OlgaBelitskaya/resume-builder/blob/master/Exercises_Technical
 
 https://github.com/OlgaBelitskaya/resume-builder/blob/master/Exercises_Technical_Interview_Sort.ipynb
 
+### &#x1F4CB; &nbsp; Kaggle:
+- Build a Digit Recognition Models https://www.kaggle.com/olgabelitskaya/build-a-digit-recognition-models
+- Titanic_Survival_Exploration https://www.kaggle.com/olgabelitskaya/titanic-survival-exploration
+
 ### &#x1F4CB; &nbsp; GitHub gists: https://gist.github.com/OlgaBelitskaya
 
 ### &#x1F4CB; &nbsp; Pages on http://bl.ocks.org/ :
