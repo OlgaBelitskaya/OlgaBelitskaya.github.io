@@ -11853,6 +11853,7 @@ $(document).ready(code_display);</script>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">import</span> <span class="nn">scipy.ndimage</span>
 <span class="kn">from</span> <span class="nn">scipy.special</span> <span class="k">import</span> <span class="n">expit</span>
 <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
@@ -11956,6 +11957,22 @@ $(document).ready(code_display);</script>
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
 
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+
 <span class="k">def</span> <span class="nf">download_progress_hook</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">blockSize</span><span class="p">,</span> <span class="n">totalSize</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A hook to report the progress of a download. This is mostly intended for users with</span>
 <span class="sd">    slow internet connections. Reports every 5% change in download progress.</span>
@@ -12011,7 +12028,7 @@ $(document).ready(code_display);</script>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -12155,7 +12172,7 @@ $(document).ready(code_display);</script>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -12183,7 +12200,7 @@ $(document).ready(code_display);</script>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -12211,7 +12228,7 @@ $(document).ready(code_display);</script>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -12250,7 +12267,7 @@ $(document).ready(code_display);</script>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -12294,7 +12311,7 @@ $(document).ready(code_display);</script>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -12317,6 +12334,109 @@ $(document).ready(code_display);</script>
 </div>
 
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+
+<span class="k">def</span> <span class="nf">grouped_by_filename</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>    
+    <span class="n">filename_set</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;filename&#39;</span><span class="p">])))</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">filename_set</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">boxes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">data_gr</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;filename&#39;</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">filename_set</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_gr</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="s1">&#39;label&#39;</span><span class="p">]))</span>
+        <span class="n">boxes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_gr</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="s1">&#39;box&#39;</span><span class="p">]))</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+    <span class="n">boxes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">boxes</span><span class="p">)</span>
+    <span class="n">data_g</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;filename&#39;</span><span class="p">:</span> <span class="n">filename_set</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">labels</span><span class="p">,</span> <span class="s1">&#39;box&#39;</span><span class="p">:</span> <span class="n">boxes</span><span class="p">}</span>
+    <span class="n">new_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data_g</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_data</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+
+<span class="k">def</span> <span class="nf">fivedigit_label</span><span class="p">(</span><span class="n">label</span><span class="p">):</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">size</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">label</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">num_zeros</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="mi">5</span><span class="o">-</span><span class="n">size</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">num_zeros</span><span class="p">,</span> <span class="n">label</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">))</span>
+    
+<span class="k">def</span> <span class="nf">get_labels</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">string</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">()])</span>
+    <span class="k">return</span> <span class="n">labels</span>
+
+<span class="k">def</span> <span class="nf">image_box</span><span class="p">(</span><span class="n">box</span><span class="p">):</span>
+        <span class="n">left</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">box</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">box</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">box</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">box</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span>
+        
+        <span class="n">image_left</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">left</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">image_top</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">top</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">image_bottom</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">top</span><span class="p">)</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="n">height</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">image_right</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">left</span><span class="p">)</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="n">width</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">image_left</span><span class="p">,</span> <span class="n">image_right</span><span class="p">,</span> <span class="n">image_top</span><span class="p">,</span> <span class="n">image_bottom</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">get_box</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">string</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">numbers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">()])</span>        
+    <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span>
+    <span class="n">numbers</span> <span class="o">=</span> <span class="n">numbers</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>       
+    <span class="k">return</span> <span class="n">numbers</span>
+
+<span class="k">def</span> <span class="nf">get_image</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">image_file</span><span class="p">):</span>
+    <span class="n">filename</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">image_file</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">ndimage</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;RGB&#39;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">folder</span> <span class="o">==</span> <span class="s1">&#39;train&#39;</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">train_filenames</span> <span class="o">==</span> <span class="n">image_file</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">box</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">get_box</span><span class="p">(</span><span class="n">train_b</span><span class="p">[</span><span class="s1">&#39;box&#39;</span><span class="p">][</span><span class="n">n</span><span class="p">]))</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">train_labels</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+        
+    <span class="k">elif</span> <span class="n">folder</span> <span class="o">==</span> <span class="s1">&#39;test&#39;</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">test_filenames</span> <span class="o">==</span> <span class="n">image_file</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">box</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">get_box</span><span class="p">(</span><span class="n">test_b</span><span class="p">[</span><span class="s1">&#39;box&#39;</span><span class="p">][</span><span class="n">n</span><span class="p">]))</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">test_labels</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+        
+    <span class="k">elif</span> <span class="n">folder</span> <span class="o">==</span> <span class="s1">&#39;extra&#39;</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">extra_filenames</span> <span class="o">==</span> <span class="n">image_file</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">box</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">get_box</span><span class="p">(</span><span class="n">extra_b</span><span class="p">[</span><span class="s1">&#39;box&#39;</span><span class="p">][</span><span class="n">n</span><span class="p">]))</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">extra_labels</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+        
+    <span class="n">nbox</span> <span class="o">=</span> <span class="n">image_box</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
+    <span class="n">image_left</span><span class="p">,</span> <span class="n">image_right</span><span class="p">,</span> <span class="n">image_top</span><span class="p">,</span> <span class="n">image_bottom</span> <span class="o">=</span> <span class="n">nbox</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nbox</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">nbox</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">nbox</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+    
+    <span class="n">image_bottom</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">image_bottom</span><span class="p">)</span>
+    <span class="n">image_right</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">image_right</span><span class="p">)</span>
+                   
+    <span class="n">nimage</span> <span class="o">=</span> <span class="n">image</span><span class="p">[</span><span class="n">image_top</span><span class="p">:</span><span class="n">image_bottom</span><span class="p">,</span> <span class="n">image_left</span><span class="p">:</span><span class="n">image_right</span><span class="p">]</span>
+    
+    <span class="n">image64_1</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">imresize</span><span class="p">(</span><span class="n">nimage</span><span class="p">,</span> <span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="o">/</span> <span class="mi">255</span>
+    <span class="n">image64_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">image64_1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">),</span> <span class="p">[</span><span class="mf">0.299</span><span class="p">,</span> <span class="mf">0.587</span><span class="p">,</span> <span class="mf">0.114</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">image64_1</span><span class="p">,</span> <span class="n">image64_2</span><span class="p">,</span> <span class="n">label</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12332,14 +12452,14 @@ $(document).ready(code_display);</script>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Dataset-#3.-Stanford.edu.-Housenumbers">Dataset #3. Stanford.edu. Housenumbers<a class="anchor-link" href="#Dataset-#3.-Stanford.edu.-Housenumbers">&#182;</a></h4><p><a href="http://ufldl.stanford.edu/housenumbers/">http://ufldl.stanford.edu/housenumbers/</a></p>
+<h4 id="Dataset-#5.-Stanford.edu.-Housenumbers">Dataset #5. Stanford.edu. Housenumbers<a class="anchor-link" href="#Dataset-#5.-Stanford.edu.-Housenumbers">&#182;</a></h4><p><a href="http://ufldl.stanford.edu/housenumbers/">http://ufldl.stanford.edu/housenumbers/</a></p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -12376,7 +12496,7 @@ Found and verified ./extra.tar.gz
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -12409,7 +12529,7 @@ Found and verified ./extra.tar.gz
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -13634,7 +13754,7 @@ cRs3wySXFtkk1VHb/vg/K5A8djtsJqYAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -13814,13 +13934,22 @@ cRs3wySXFtkk1VHb/vg/K5A8djtsJqYAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
 
+<span class="n">train_box</span> <span class="o">=</span> <span class="p">[[</span><span class="n">train_set</span><span class="p">[</span><span class="s1">&#39;Left&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">train_set</span><span class="p">[</span><span class="s1">&#39;Top&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> 
+              <span class="n">train_set</span><span class="p">[</span><span class="s1">&#39;Width&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">train_set</span><span class="p">[</span><span class="s1">&#39;Height&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]]</span> 
+             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train_set</span><span class="p">))]</span>
 
-<span class="c1">#</span>
+<span class="n">test_box</span> <span class="o">=</span> <span class="p">[[</span><span class="n">test_set</span><span class="p">[</span><span class="s1">&#39;Left&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">test_set</span><span class="p">[</span><span class="s1">&#39;Top&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> 
+             <span class="n">test_set</span><span class="p">[</span><span class="s1">&#39;Width&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">test_set</span><span class="p">[</span><span class="s1">&#39;Height&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]]</span> 
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test_set</span><span class="p">))]</span>
+
+<span class="n">extra_box</span> <span class="o">=</span> <span class="p">[[</span><span class="n">extra_set</span><span class="p">[</span><span class="s1">&#39;Left&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">extra_set</span><span class="p">[</span><span class="s1">&#39;Top&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> 
+              <span class="n">extra_set</span><span class="p">[</span><span class="s1">&#39;Width&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">extra_set</span><span class="p">[</span><span class="s1">&#39;Height&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]]</span> 
+             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">extra_set</span><span class="p">))]</span>
 </pre></div>
 
 </div>
@@ -13830,13 +13959,491 @@ cRs3wySXFtkk1VHb/vg/K5A8djtsJqYAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
 
+<span class="n">train_d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;filename&#39;</span><span class="p">:</span> <span class="n">train_set</span><span class="p">[</span><span class="s1">&#39;FileName&#39;</span><span class="p">],</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">train_set</span><span class="p">[</span><span class="s1">&#39;DigitLabel&#39;</span><span class="p">],</span> <span class="s1">&#39;box&#39;</span><span class="p">:</span> <span class="n">train_box</span><span class="p">}</span>
+<span class="n">train_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">train_d</span><span class="p">)</span>
 
-<span class="c1">#</span>
+<span class="n">test_d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;filename&#39;</span><span class="p">:</span> <span class="n">test_set</span><span class="p">[</span><span class="s1">&#39;FileName&#39;</span><span class="p">],</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">test_set</span><span class="p">[</span><span class="s1">&#39;DigitLabel&#39;</span><span class="p">],</span> <span class="s1">&#39;box&#39;</span><span class="p">:</span> <span class="n">test_box</span><span class="p">}</span>
+<span class="n">test_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">test_d</span><span class="p">)</span>
+
+<span class="n">extra_d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;filename&#39;</span><span class="p">:</span> <span class="n">extra_set</span><span class="p">[</span><span class="s1">&#39;FileName&#39;</span><span class="p">],</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">extra_set</span><span class="p">[</span><span class="s1">&#39;DigitLabel&#39;</span><span class="p">],</span> <span class="s1">&#39;box&#39;</span><span class="p">:</span> <span class="n">extra_box</span><span class="p">}</span>
+<span class="n">extra_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">extra_d</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">train_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">test_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">extra_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>box</th>
+      <th>filename</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>[246, 77, 81, 219]</td>
+      <td>1.png</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>[323, 81, 96, 219]</td>
+      <td>1.png</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>[77, 29, 23, 32]</td>
+      <td>2.png</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>box</th>
+      <th>filename</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>[43, 7, 19, 30]</td>
+      <td>1.png</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>[99, 5, 14, 23]</td>
+      <td>2.png</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>[114, 8, 8, 23]</td>
+      <td>2.png</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>box</th>
+      <th>filename</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>[24, 70, 38, 56]</td>
+      <td>1.png</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>[55, 41, 36, 56]</td>
+      <td>1.png</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>[79, 23, 47, 56]</td>
+      <td>1.png</td>
+      <td>8</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+
+<span class="c1"># train_g = grouped_by_filename(train_df)</span>
+<span class="c1"># test_g = grouped_by_filename(test_df)</span>
+<span class="c1"># extra_g = grouped_by_filename(extra_df)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[23]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[543]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+
+<span class="c1"># train_g.to_csv(&#39;train_group.csv&#39;, index=False)</span>
+<span class="c1"># test_g.to_csv(&#39;test_group.csv&#39;, index=False)</span>
+<span class="c1"># extra_g.to_csv(&#39;extra_group.csv&#39;, index=False)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">train_g</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">test_g</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">extra_g</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>box</th>
+      <th>filename</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>[[33, 10, 12, 24], [45, 10, 11, 24]]</td>
+      <td>5502.png</td>
+      <td>[3, 5]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>[[35, 7, 11, 37], [44, 3, 11, 37]]</td>
+      <td>6876.png</td>
+      <td>[1, 5]</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>[[99, 32, 35, 51], [125, 29, 31, 51]]</td>
+      <td>12741.png</td>
+      <td>[2, 9]</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>box</th>
+      <th>filename</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>[[35, 10, 15, 22], [51, 9, 12, 22], [63, 10, 1...</td>
+      <td>5502.png</td>
+      <td>[1, 7, 1]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>[[135, 40, 10, 22], [146, 38, 16, 22]]</td>
+      <td>1166.png</td>
+      <td>[1, 7]</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>[[125, 37, 17, 25], [141, 41, 16, 25]]</td>
+      <td>506.png</td>
+      <td>[2, 8]</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>box</th>
+      <th>filename</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>[[21, 16, 34, 56], [55, 6, 26, 56], [80, 1, 42...</td>
+      <td>1380.png</td>
+      <td>[5, 10, 10]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>[[5, 4, 11, 22], [15, 2, 14, 22]]</td>
+      <td>1781.png</td>
+      <td>[5, 3]</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>[[9, 16, 24, 48], [36, 17, 25, 48], [63, 14, 2...</td>
+      <td>1166.png</td>
+      <td>[4, 9, 10]</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+
+<span class="n">train_b</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;train_group.csv&quot;</span><span class="p">)</span>
+<span class="n">test_b</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;test_group.csv&quot;</span><span class="p">)</span>
+<span class="n">extra_b</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;extra_group.csv&quot;</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">train_b</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">test_b</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">extra_b</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>box</th>
+      <th>filename</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>[[33, 10, 12, 24] [45, 10, 11, 24]]</td>
+      <td>5502.png</td>
+      <td>[3 5]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>[[35, 7, 11, 37] [44, 3, 11, 37]]</td>
+      <td>6876.png</td>
+      <td>[1 5]</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>[[99, 32, 35, 51] [125, 29, 31, 51]]</td>
+      <td>12741.png</td>
+      <td>[2 9]</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>box</th>
+      <th>filename</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>[[35, 10, 15, 22] [51, 9, 12, 22] [63, 10, 12,...</td>
+      <td>5502.png</td>
+      <td>[1 7 1]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>[[135, 40, 10, 22] [146, 38, 16, 22]]</td>
+      <td>1166.png</td>
+      <td>[1 7]</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>[[125, 37, 17, 25] [141, 41, 16, 25]]</td>
+      <td>506.png</td>
+      <td>[2 8]</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>box</th>
+      <th>filename</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>[[21, 16, 34, 56] [55, 6, 26, 56] [80, 1, 42, ...</td>
+      <td>1380.png</td>
+      <td>[ 5 10 10]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>[[5, 4, 11, 22] [15, 2, 14, 22]]</td>
+      <td>1781.png</td>
+      <td>[5 3]</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>[[9, 16, 24, 48] [36, 17, 25, 48] [63, 14, 29,...</td>
+      <td>1166.png</td>
+      <td>[ 4  9 10]</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+
+<span class="n">train_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">get_labels</span><span class="p">(</span><span class="n">train_b</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train_b</span><span class="p">))])</span>
+<span class="n">train_filenames</span> <span class="o">=</span> <span class="n">train_b</span><span class="p">[</span><span class="s1">&#39;filename&#39;</span><span class="p">]</span>
+
+<span class="n">test_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">get_labels</span><span class="p">(</span><span class="n">test_b</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test_b</span><span class="p">))])</span>
+<span class="n">test_filenames</span> <span class="o">=</span> <span class="n">test_b</span><span class="p">[</span><span class="s1">&#39;filename&#39;</span><span class="p">]</span>
+
+<span class="n">extra_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">get_labels</span><span class="p">(</span><span class="n">extra_b</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">extra_b</span><span class="p">))])</span>
+<span class="n">extra_filenames</span> <span class="o">=</span> <span class="n">extra_b</span><span class="p">[</span><span class="s1">&#39;filename&#39;</span><span class="p">]</span>
 </pre></div>
 
 </div>
@@ -13846,13 +14453,831 @@ cRs3wySXFtkk1VHb/vg/K5A8djtsJqYAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">train_labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">&gt;</span><span class="mi">5</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train_b</span><span class="p">))])[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[19]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([29190])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">test_labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">&gt;</span><span class="mi">5</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test_b</span><span class="p">))])[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[21]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([], dtype=int64)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">extra_labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">&gt;</span><span class="mi">5</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">extra_b</span><span class="p">))])[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[22]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([], dtype=int64)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+
+<span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">train_labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">==</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train_b</span><span class="p">))]))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[23]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+
+<span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">test_labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">==</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test_b</span><span class="p">))]))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[24]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+
+<span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">extra_labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">==</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">extra_b</span><span class="p">))]))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[25]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train_labels</span><span class="p">)):</span>
+    <span class="n">train_labels</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">train_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">9</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test_labels</span><span class="p">)):</span>
+    <span class="n">test_labels</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">test_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">9</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">extra_labels</span><span class="p">)):</span>
+    <span class="n">extra_labels</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">extra_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">9</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+
+<span class="n">train_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">train_labels</span><span class="p">,</span> <span class="mi">29190</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">train_filenames</span> <span class="o">=</span> <span class="n">train_filenames</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="mi">29190</span><span class="p">])</span>
+
+<span class="n">train_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">fivedigit_label</span><span class="p">(</span><span class="n">train_labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train_labels</span><span class="p">))])</span>
+<span class="n">test_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">fivedigit_label</span><span class="p">(</span><span class="n">test_labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test_labels</span><span class="p">))])</span>
+<span class="n">extra_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">fivedigit_label</span><span class="p">(</span><span class="n">extra_labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">extra_labels</span><span class="p">))])</span>
+
+<span class="n">train_labels_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">train_labels</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">train_filenames</span><span class="p">)</span>
+<span class="c1"># train_labels_df.to_csv(&#39;train_labels.csv&#39;)</span>
+
+<span class="n">test_labels_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">test_labels</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">test_filenames</span><span class="p">)</span>
+<span class="c1"># test_labels_df.to_csv(&#39;test_labels.csv&#39;)</span>
+
+<span class="n">extra_labels_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">extra_labels</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">extra_filenames</span><span class="p">)</span>
+<span class="c1"># extra_labels_df.to_csv(&#39;extra_labels.csv&#39;)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+
+<span class="n">image1</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">ndimage</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;train/30065.png&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initial image size:&quot;</span><span class="p">,</span> <span class="n">image1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">n1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">train_filenames</span> <span class="o">==</span> <span class="s1">&#39;30065.png&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">label1</span> <span class="o">=</span> <span class="n">train_labels</span><span class="p">[</span><span class="n">n1</span><span class="p">]</span>
+
+<span class="n">box1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">get_box</span><span class="p">(</span><span class="n">train_b</span><span class="p">[</span><span class="s1">&#39;box&#39;</span><span class="p">][</span><span class="n">n1</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Digit boxes:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">box1</span><span class="p">)</span>
+<span class="n">box_n1</span> <span class="o">=</span> <span class="n">image_box</span><span class="p">(</span><span class="n">box1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Digits&#39; box: &quot;</span><span class="p">,</span> <span class="n">box_n1</span><span class="p">)</span>
+
+<span class="n">image_n1</span> <span class="o">=</span> <span class="n">image1</span><span class="p">[</span><span class="n">box_n1</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span><span class="n">box_n1</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">box_n1</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">box_n1</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+<span class="n">image64_1</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">imresize</span><span class="p">(</span><span class="n">image_n1</span><span class="p">,</span> <span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">))</span><span class="o">/</span><span class="mi">255</span>
+<span class="n">image64_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">image64_1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">),</span> <span class="p">[</span><span class="mf">0.299</span><span class="p">,</span> <span class="mf">0.587</span><span class="p">,</span> <span class="mf">0.114</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final image size: &quot;</span><span class="p">,</span> <span class="n">image64_2</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final image label: &quot;</span><span class="p">,</span> <span class="n">label1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Example of image preprocessing&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image64_1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Blues</span><span class="p">);</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Initial image size: (81, 120, 3)
+Digit boxes:
+ [[12  9 30 55]
+ [36 11 31 55]]
+Digits&#39; box:  [13 66 10 65]
+Final image size:  (64, 64)
+Final image label:  [[ 10.  10.  10.   4.   1.]]
+
+Example of image preprocessing
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+
+<span class="n">image_example</span> <span class="o">=</span> <span class="n">get_image</span><span class="p">(</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="s1">&#39;178.png&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Image size: &quot;</span><span class="p">,</span> <span class="n">image_example</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Image label: &quot;</span><span class="p">,</span> <span class="n">image_example</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Example of image preprocessing with the function&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image_example</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Blues</span><span class="p">);</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Image size:  (64, 64)
+Image label:  [[ 10.  10.  10.   2.   1.]]
+
+Example of image preprocessing with the function
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong><em>Image preprocessing. Variant #1</em></strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
 
+<span class="c1"># train_images1 = np.array([get_image(&#39;train&#39;, x)[0] for x in train_filenames])</span>
+<span class="c1"># train_images2 = np.array([get_image(&#39;train&#39;, x)[1] for x in train_filenames])</span>
 
-<span class="c1">#</span>
+<span class="c1"># test_images1 = np.array([get_image(&#39;test&#39;, x)[0] for x in test_filenames])</span>
+<span class="c1"># test_images2 = np.array([get_image(&#39;test&#39;, x)[1] for x in test_filenames])</span>
+
+<span class="c1"># extra_images1 = np.array([get_image(&#39;extra&#39;, x)[0] for x in extra_filenames])</span>
+<span class="c1"># extra_images2 = np.array([get_image(&#39;extra&#39;, x)[1] for x in extra_filenames])</span>
 </pre></div>
 
 </div>
@@ -13865,27 +15290,8 @@ cRs3wySXFtkk1VHb/vg/K5A8djtsJqYAAAAASUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Dataset-#4.-Newly-Captured-Images">Dataset #4. Newly-Captured Images<a class="anchor-link" href="#Dataset-#4.-Newly-Captured-Images">&#182;</a></h4>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Image-examples:">Image examples:<a class="anchor-link" href="#Image-examples:">&#182;</a></h4><div style="width: 960px; height: 50px; overflow:auto;">
-    <img src="00.png" width="30" height="30"/>
-    <img src="01.png" width="30" height="30"/>
-    <img src="02.png" width="30" height="30"/>
-    <img src="03.png" width="30" height="30"/>
-    <img src="04.png" width="30" height="30"/>
-    <img src="05.png" width="30" height="30"/>
-    <img src="06.png" width="30" height="30"/>
-    <img src="07.png" width="30" height="30"/>
-    <img src="08.png" width="30" height="30"/>
-    <img src="09.png" width="30" height="30"/>
-</div>
+<p><strong><em>Image preprocessing. Variant #2</em></strong></p>
+
 </div>
 </div>
 </div>
@@ -13896,8 +15302,73 @@ cRs3wySXFtkk1VHb/vg/K5A8djtsJqYAAAAASUVORK5CYII=
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
 
+<span class="n">image01</span> <span class="o">=</span> <span class="n">get_image</span><span class="p">(</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="n">train_filenames</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">image02</span> <span class="o">=</span> <span class="n">get_image</span><span class="p">(</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="n">train_filenames</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span>  
 
-<span class="c1">#</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_filenames</span><span class="p">)):</span> 
+    <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">29190</span><span class="p">]:</span>
+        <span class="n">image11</span> <span class="o">=</span> <span class="n">get_image</span><span class="p">(</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="n">train_filenames</span><span class="p">[</span><span class="n">i</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">image12</span> <span class="o">=</span> <span class="n">get_image</span><span class="p">(</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="n">train_filenames</span><span class="p">[</span><span class="n">i</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span>
+        
+        <span class="n">train_images1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">image01</span><span class="p">,</span> <span class="n">image11</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">train_images2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">image02</span><span class="p">,</span> <span class="n">image12</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        
+        <span class="n">image01</span> <span class="o">=</span> <span class="n">image11</span>
+        <span class="n">image02</span> <span class="o">=</span> <span class="n">image12</span>
+    
+<span class="nb">type</span><span class="p">(</span><span class="n">train_images2</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">train_labels</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">train_filenames</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">train_images1</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">train_images2</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -13912,8 +15383,251 @@ cRs3wySXFtkk1VHb/vg/K5A8djtsJqYAAAAASUVORK5CYII=
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
 
+<span class="n">image01</span> <span class="o">=</span> <span class="n">get_image</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="n">test_filenames</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">image02</span> <span class="o">=</span> <span class="n">get_image</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="n">test_filenames</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span>  
 
-<span class="c1">#</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_filenames</span><span class="p">)):</span> 
+    <span class="n">image11</span> <span class="o">=</span> <span class="n">get_image</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="n">test_filenames</span><span class="p">[</span><span class="n">i</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">image12</span> <span class="o">=</span> <span class="n">get_image</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="n">test_filenames</span><span class="p">[</span><span class="n">i</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="n">test_images1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">image01</span><span class="p">,</span> <span class="n">image11</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">test_images2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">image02</span><span class="p">,</span> <span class="n">image12</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="n">image01</span> <span class="o">=</span> <span class="n">image11</span>
+    <span class="n">image02</span> <span class="o">=</span> <span class="n">image12</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">test_labels</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">test_filenames</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">test_images1</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">test_images2</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+
+<span class="n">image01</span> <span class="o">=</span> <span class="n">get_image</span><span class="p">(</span><span class="s1">&#39;extra&#39;</span><span class="p">,</span> <span class="n">extra_filenames</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">image02</span> <span class="o">=</span> <span class="n">get_image</span><span class="p">(</span><span class="s1">&#39;extra&#39;</span><span class="p">,</span> <span class="n">extra_filenames</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span>  
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">extra_filenames</span><span class="p">)):</span> 
+    <span class="n">image11</span> <span class="o">=</span> <span class="n">get_image</span><span class="p">(</span><span class="s1">&#39;extra&#39;</span><span class="p">,</span> <span class="n">extra_filenames</span><span class="p">[</span><span class="n">i</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">image12</span> <span class="o">=</span> <span class="n">get_image</span><span class="p">(</span><span class="s1">&#39;extra&#39;</span><span class="p">,</span> <span class="n">extra_filenames</span><span class="p">[</span><span class="n">i</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="n">extra_images1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">image01</span><span class="p">,</span> <span class="n">image11</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">extra_images2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">image02</span><span class="p">,</span> <span class="n">image12</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="n">image01</span> <span class="o">=</span> <span class="n">image11</span>
+    <span class="n">image02</span> <span class="o">=</span> <span class="n">image12</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">extra_labels</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">extra_filenames</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">extra_images1</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">extra_images2</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+
+<span class="n">train</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;train_filenames&#39;</span><span class="p">:</span> <span class="n">train_filenames</span><span class="p">,</span> <span class="s1">&#39;train_labels&#39;</span><span class="p">:</span> <span class="n">train_labels</span><span class="p">,</span> 
+         <span class="s1">&#39;train_images1&#39;</span><span class="p">:</span> <span class="n">train_images1</span><span class="p">,</span> <span class="s1">&#39;train_images2&#39;</span><span class="p">:</span> <span class="n">train_images2</span><span class="p">}</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">train</span><span class="p">)</span>
+<span class="n">train</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;train.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">test</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;test_filenames&#39;</span><span class="p">:</span> <span class="n">test_filenames</span><span class="p">,</span> <span class="s1">&#39;test_labels&#39;</span><span class="p">:</span> <span class="n">test_labels</span><span class="p">,</span> 
+        <span class="s1">&#39;test_images1&#39;</span><span class="p">:</span> <span class="n">test_images1</span><span class="p">,</span> <span class="s1">&#39;test_images2&#39;</span><span class="p">:</span> <span class="n">test_images2</span><span class="p">}</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">test</span><span class="p">)</span>
+<span class="n">test</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;test.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">extra</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;extra_filenames&#39;</span><span class="p">:</span> <span class="n">extra_filenames</span><span class="p">,</span> <span class="s1">&#39;extra_labels&#39;</span><span class="p">:</span> <span class="n">extra_labels</span><span class="p">,</span> 
+        <span class="s1">&#39;extra_images1&#39;</span><span class="p">:</span> <span class="n">extra_images1</span><span class="p">,</span> <span class="s1">&#39;extra_images2&#39;</span><span class="p">:</span> <span class="n">extra_images2</span><span class="p">}</span>
+<span class="n">extra</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">extra</span><span class="p">)</span>
+<span class="n">extra</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;extra.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+
+<span class="n">pickle_file</span> <span class="o">=</span> <span class="s1">&#39;svhn_digits.pickle&#39;</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">pickle_file</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+    <span class="n">save</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;train_images1&#39;</span><span class="p">:</span> <span class="n">train_images1</span><span class="p">,</span> <span class="s1">&#39;train_images2&#39;</span><span class="p">:</span> <span class="n">train_images2</span><span class="p">,</span>
+            <span class="s1">&#39;train_labels&#39;</span><span class="p">:</span> <span class="n">train_labels</span><span class="p">,</span> <span class="s1">&#39;train_filenames&#39;</span><span class="p">:</span> <span class="n">train_filenames</span><span class="p">,</span>
+            <span class="s1">&#39;test_images1&#39;</span><span class="p">:</span> <span class="n">test_images1</span><span class="p">,</span> <span class="s1">&#39;test_images2&#39;</span><span class="p">:</span> <span class="n">test_images2</span><span class="p">,</span>
+            <span class="s1">&#39;test_labels&#39;</span><span class="p">:</span> <span class="n">test_labels</span><span class="p">,</span> <span class="s1">&#39;test_filenames&#39;</span><span class="p">:</span> <span class="n">test_filenames</span><span class="p">}</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">save</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">pickle</span><span class="o">.</span><span class="n">HIGHEST_PROTOCOL</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Unable to save data to&#39;</span><span class="p">,</span> <span class="n">pickle_file</span><span class="p">,</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">raise</span>
+    
+<span class="n">statinfo</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">pickle_file</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Compressed pickle size:&#39;</span><span class="p">,</span> <span class="n">statinfo</span><span class="o">.</span><span class="n">st_size</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+
+<span class="n">pickle_file</span> <span class="o">=</span> <span class="s1">&#39;svhn_digits_add_extra.pickle&#39;</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">pickle_file</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+    <span class="n">save</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;train_images1&#39;</span><span class="p">:</span> <span class="n">train_images1</span><span class="p">,</span> <span class="s1">&#39;train_images2&#39;</span><span class="p">:</span> <span class="n">train_images2</span><span class="p">,</span>
+            <span class="s1">&#39;train_labels&#39;</span><span class="p">:</span> <span class="n">train_labels</span><span class="p">,</span> <span class="s1">&#39;train_filenames&#39;</span><span class="p">:</span> <span class="n">train_filenames</span><span class="p">,</span>
+            <span class="s1">&#39;test_images1&#39;</span><span class="p">:</span> <span class="n">test_images1</span><span class="p">,</span> <span class="s1">&#39;test_images2&#39;</span><span class="p">:</span> <span class="n">test_images2</span><span class="p">,</span>
+            <span class="s1">&#39;test_labels&#39;</span><span class="p">:</span> <span class="n">test_labels</span><span class="p">,</span> <span class="s1">&#39;test_filenames&#39;</span><span class="p">:</span> <span class="n">test_filenames</span><span class="p">,</span>
+            <span class="s1">&#39;extra_images1&#39;</span><span class="p">:</span> <span class="n">extra_images1</span><span class="p">,</span> <span class="s1">&#39;extra_images2&#39;</span><span class="p">:</span> <span class="n">extra_images2</span><span class="p">,</span>
+            <span class="s1">&#39;extra_labels&#39;</span><span class="p">:</span> <span class="n">extra_labels</span><span class="p">,</span> <span class="s1">&#39;extra_filenames&#39;</span><span class="p">:</span> <span class="n">extra_filenames</span><span class="p">}</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">save</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">pickle</span><span class="o">.</span><span class="n">HIGHEST_PROTOCOL</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Unable to save data to&#39;</span><span class="p">,</span> <span class="n">pickle_file</span><span class="p">,</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">raise</span>
+    
+<span class="n">statinfo</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">pickle_file</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Compressed pickle size:&#39;</span><span class="p">,</span> <span class="n">statinfo</span><span class="o">.</span><span class="n">st_size</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 
 </div>
@@ -14016,273 +15730,47 @@ cRs3wySXFtkk1VHb/vg/K5A8djtsJqYAAAAASUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+<h2 id="$\mathfrak-{\color{#348ABD}-{Questions-\-and-\-Answers}}$">$\mathfrak {\color{#348ABD} {Questions \ and \ Answers}}$<a class="anchor-link" href="#$\mathfrak-{\color{#348ABD}-{Questions-\-and-\-Answers}}$">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Question-4">Question 4<a class="anchor-link" href="#Question-4">&#182;</a></h3><p><em>Describe how you set up the training and testing data for your model. How does the model perform on a realistic dataset?</em></p>
-<h3 id="Answer-4">Answer 4<a class="anchor-link" href="#Answer-4">&#182;</a></h3><h3 id="Question-5">Question 5<a class="anchor-link" href="#Question-5">&#182;</a></h3><p><em>What changes did you have to make, if any, to achieve "good" results? Were there any options you explored that made the results worse?</em></p>
-<h3 id="Answer-5">Answer 5<a class="anchor-link" href="#Answer-5">&#182;</a></h3><h3 id="Question-6">Question 6<a class="anchor-link" href="#Question-6">&#182;</a></h3><p><em>What were your initial and final results with testing on a realistic dataset? Do you believe your model is doing a good enough job at classifying numbers correctly?</em></p>
+<h3 id="Answer-4">Answer 4<a class="anchor-link" href="#Answer-4">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Question-5">Question 5<a class="anchor-link" href="#Question-5">&#182;</a></h3><p><em>What changes did you have to make, if any, to achieve "good" results? Were there any options you explored that made the results worse?</em></p>
+<h3 id="Answer-5">Answer 5<a class="anchor-link" href="#Answer-5">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Question-6">Question 6<a class="anchor-link" href="#Question-6">&#182;</a></h3><p><em>What were your initial and final results with testing on a realistic dataset? Do you believe your model is doing a good enough job at classifying numbers correctly?</em></p>
 <h3 id="Answer-6">Answer 6<a class="anchor-link" href="#Answer-6">&#182;</a></h3>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-<h2 id="$\mathfrak-{\color{#348ABD}-{Step-\-3:-\-Test-\-a-\-Model-\-on-\-Newly-Captured-\-Images}}$">$\mathfrak {\color{#348ABD} {Step \ 3: \ Test \ a \ Model \ on \ Newly-Captured \ Images}}$<a class="anchor-link" href="#$\mathfrak-{\color{#348ABD}-{Step-\-3:-\-Test-\-a-\-Model-\-on-\-Newly-Captured-\-Images}}$">&#182;</a></h2><p>Take several pictures of numbers that you find around you (at least five), and run them through your classifier on your computer to produce example results. Alternatively (optionally), you can try using OpenCV / SimpleCV / Pygame to capture live images from a webcam and run those through your classifier.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
-
-
-<span class="c1">#</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[27]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
-
-
-<span class="c1">#</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
-
-
-<span class="c1">#</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Question-7">Question 7<a class="anchor-link" href="#Question-7">&#182;</a></h3><p><em>Choose five candidate images of numbers you took from around you and provide them in the report. Are there any particular qualities of the image(s) that might make classification difficult?</em></p>
-<h3 id="Answer-7">Answer 7<a class="anchor-link" href="#Answer-7">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Question-8">Question 8<a class="anchor-link" href="#Question-8">&#182;</a></h3><p><em>Is your model able to perform equally well on captured pictures or a live camera stream when compared to testing on the realistic dataset?</em></p>
-<h3 id="Answer-8">Answer 8<a class="anchor-link" href="#Answer-8">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Optional:-Question-9">Optional: Question 9<a class="anchor-link" href="#Optional:-Question-9">&#182;</a></h3><p><em>If necessary, provide documentation for how an interface was built for your model to load and classify newly-acquired images.</em></p>
-<h3 id="Answer-9">Answer 9<a class="anchor-link" href="#Answer-9">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-<h2 id="$\mathfrak-{\color{#348ABD}-{Step-\-4:-\-Explore-\-an-\-Improvement-\-for-\-a-\-Model}}$">$\mathfrak {\color{#348ABD} {Step \ 4: \ Explore \ an \ Improvement \ for \ a \ Model}}$<a class="anchor-link" href="#$\mathfrak-{\color{#348ABD}-{Step-\-4:-\-Explore-\-an-\-Improvement-\-for-\-a-\-Model}}$">&#182;</a></h2><p>There are many things you can do once you have the basic classifier in place. One example would be to also localize where the numbers are on the image. The SVHN dataset provides bounding boxes that you can tune to train a localizer. Train a regression loss to the coordinates of the bounding box, and then test it.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
-
-<span class="c1">#</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
-
-<span class="c1">#</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
-
-<span class="c1">#</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Question-10">Question 10<a class="anchor-link" href="#Question-10">&#182;</a></h3><p><em>How well does your model localize numbers on the testing set from the realistic dataset? Do your classification results change at all with localization included?</em></p>
-<h3 id="Answer-10">Answer 10<a class="anchor-link" href="#Answer-10">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Question-11">Question 11<a class="anchor-link" href="#Question-11">&#182;</a></h3><p><em>Test the localization function on the images you captured in <strong>Step 3</strong>. Does the model accurately calculate a bounding box for the numbers in the images you found? If you did not use a graphical interface, you may need to investigate the bounding boxes by hand.</em> Provide an example of the localization created on a captured image.</p>
-<h3 id="Answer-11">Answer 11<a class="anchor-link" href="#Answer-11">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-<h2 id="$\mathfrak-{\color{#348ABD}-{Optional-\-Step-\-5:-\-Build-\-an-\-Application-\-or-\-Program-\-for-\-a-\-Model}}$">$\mathfrak {\color{#348ABD} {Optional \ Step \ 5: \ Build \ an \ Application \ or \ Program \ for \ a \ Model}}$<a class="anchor-link" href="#$\mathfrak-{\color{#348ABD}-{Optional-\-Step-\-5:-\-Build-\-an-\-Application-\-or-\-Program-\-for-\-a-\-Model}}$">&#182;</a></h2><p>Take your project one step further. If you're interested, look to build an Android application or even a more robust Python program that can interface with input images and display the classified numbers and even the bounding boxes. You can for example try to build an augmented reality app by overlaying your answer on the image like the <a href="https://en.wikipedia.org/wiki/Word_Lens">Word Lens</a> app does.</p>
-<p>Loading a TensorFlow model into a camera app on Android is demonstrated in the <a href="https://github.com/tensorflow/tensorflow/tree/master/tensorflow/examples/android">TensorFlow Android demo app</a>, which you can simply modify.</p>
-<p>If you decide to explore this optional route, be sure to document your interface and implementation, along with significant results you find. You can see the additional rubric items that you could be evaluated on by <a href="https://review.udacity.com/#!/rubrics/413/view">following this link</a>.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
-
-<span class="c1">#</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
-
-
-<span class="c1">#</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
-
-
-<span class="c1">#</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Documentation">Documentation<a class="anchor-link" href="#Documentation">&#182;</a></h3><p>Provide additional documentation sufficient for detailing the implementation of the Android application or Python program for visualizing the classification of numbers in images. It should be clear how the program or application works. Demonstrations should be provided.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
-
-
-<span class="c1">#</span>
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 
 </div>
