@@ -73,6 +73,7 @@ https://github.com/OlgaBelitskaya/resume-builder/blob/master/Exercises_Technical
 ### &#x1F4CB; &nbsp; Kaggle:
 - Build a Digit Recognition Models https://www.kaggle.com/olgabelitskaya/build-a-digit-recognition-models
 - Titanic_Survival_Exploration https://www.kaggle.com/olgabelitskaya/titanic-survival-exploration
+- Sberbank Russian Housing Market https://www.kaggle.com/olgabelitskaya/sberbank-russian-housing-market
 
 ### &#x1F4CB; &nbsp; GitHub gists: https://gist.github.com/OlgaBelitskaya
 
