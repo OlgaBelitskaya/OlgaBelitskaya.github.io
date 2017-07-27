@@ -36,7 +36,9 @@ https://olgabelitskaya.github.io/README_EXERCISES.html
 #### P1: Predicting Boston Housing Prices https://olgabelitskaya.github.io/MLE_ND_P1_V0.html
 #### P2: Finding Donors for CharityML https://olgabelitskaya.github.io/MLE_ND_P2_V0.html
 #### P3: Creating Customer Segments https://olgabelitskaya.github.io/MLE_ND_P3_V0.html
-#### P4: Train a Smartcab to Drive https://olgabelitskaya.github.io/MLE_ND_P4_V0.html
+#### P4: Train a Smartcab to Drive 
+- https://olgabelitskaya.github.io/MLE_ND_P4_V0.html
+- https://olgabelitskaya.github.io/MLE_ND_P4_V1.html
 #### P5: Build a Digit Recognition Program 
 - https://olgabelitskaya.github.io/MLE_ND_P5_V0_S1.html
 - https://olgabelitskaya.github.io/MLE_ND_P5_V0_S2.html

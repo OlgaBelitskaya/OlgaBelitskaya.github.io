@@ -17202,7 +17202,7 @@ RK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The output of this code cell is in the file '5-3.txt'</p>
+<p>The output of this code cell is in the file '5-1.txt'</p>
 
 </div>
 </div>
@@ -19312,7 +19312,7 @@ YII=
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">hide_code</span>
-<span class="c1"># Load the &#39;sim_default-learning&#39; file from the default Q-Learning simulation</span>
+<span class="c1"># Load the &#39;sim_no-learning&#39; file for the informed agent</span>
 <span class="n">vs</span><span class="o">.</span><span class="n">plot_trials</span><span class="p">(</span><span class="s1">&#39;sim_no-learning.csv&#39;</span><span class="p">)</span>
 </pre></div>
 
@@ -25424,16 +25424,6 @@ ZlYQJ1hmZmZmZmYFcYJlZmZmZmZWkP8HiFH3YEuKEQoAAAAASUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="7.2-Define-an-Optimal-Policy">7.2 Define an Optimal Policy<a class="anchor-link" href="#7.2-Define-an-Optimal-Policy">&#182;</a></h3><p>Sometimes, the answer to the important question <em>"what am I trying to get my agent to learn?"</em> only has a theoretical answer and cannot be concretely described. Here, however, you can concretely define what it is the agent is trying to learn, and that is the U.S. right-of-way traffic laws. Since these laws are known information, you can further define, for each state the <em>Smartcab</em> is occupying, the optimal action for the driving agent based on these laws. In that case, we call the set of optimal state-action pairs an <strong>optimal policy</strong>. Hence, unlike some theoretical answers, it is clear whether the agent is acting "incorrectly" not only by the reward (penalty) it receives, but also by pure observation. If the agent drives through a red light, we both see it receive a negative reward but also know that it is not the correct behavior. This can be used to your advantage for verifying whether the <strong>policy</strong> your driving agent has learned is the correct one, or if it is a <strong>suboptimal policy</strong>.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Question-7">Question 7<a class="anchor-link" href="#Question-7">&#182;</a></h3><p>Using the visualization above that was produced from your improved Q-Learning simulation, provide a final analysis and make observations about the improved driving agent like in <strong>Question 6</strong>. Questions you should answer:</p>
 <ul>
 <li><em>What decaying function was used for epsilon (the exploration factor)?</em></li>
@@ -25444,29 +25434,25 @@ ZlYQJ1hmZmZmZmYFcYJlZmZmZmZWkP8HiFH3YEuKEQoAAAAASUVORK5CYII=
 <li><em>Are you satisfied with the safety and reliability ratings of the </em>Smartcab<em>?</em></li>
 </ul>
 <hr>
-<h3 id="Answer-7">Answer 7<a class="anchor-link" href="#Answer-7">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Question-8">Question 8<a class="anchor-link" href="#Question-8">&#182;</a></h3><p>Provide a few examples (using the states you've defined) of what an optimal policy for this problem would look like. Afterwards, investigate the <code>'sim_improved-learning.txt'</code> text file to see the results of your improved Q-Learning algorithm. <em>For each state that has been recorded from the simulation, is the <strong>policy</strong> (the action with the highest value) correct for the given state? Are there any states where the policy is different than what would be expected from an optimal policy?</em> Provide an example of a state and all state-action rewards recorded, and explain why it is the correct policy.</p>
-<hr>
-<h3 id="Answer-8">Answer 8<a class="anchor-link" href="#Answer-8">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-<hr>
-<h2 id="$\mathfrak-{\color{#348ABD}-{8.-\-Optional:-\-Future-\-Rewards-\---\-Discount-\-Factor,-\-`gamma`}}$">$\mathfrak {\color{#348ABD} {8. \ Optional: \ Future \ Rewards \ - \ Discount \ Factor, \ `gamma`}}$<a class="anchor-link" href="#$\mathfrak-{\color{#348ABD}-{8.-\-Optional:-\-Future-\-Rewards-\---\-Discount-\-Factor,-\-`gamma`}}$">&#182;</a></h2><p>Curiously, as part of the Q-Learning algorithm, you were asked to <strong>not</strong> use the discount factor, <code>'gamma'</code> in the implementation. Including future rewards in the algorithm is used to aid in propogating positive rewards backwards from a future state to the current state. Essentially, if the driving agent is given the option to make several actions to arrive at different states, including future rewards will bias the agent towards states that could provide even more rewards. An example of this would be the driving agent moving towards a goal: With all actions and rewards equal, moving towards the goal would theoretically yield better rewards if there is an additional reward for reaching the goal. However, even though in this project, the driving agent is trying to reach a destination in the allotted time, including future rewards will not benefit the agent. In fact, if the agent were given many trials to learn, it could negatively affect Q-values!</p>
+<h3 id="Answer-7">Answer 7<a class="anchor-link" href="#Answer-7">&#182;</a></h3><ul>
+<li><p>I have used the linear decay function for epsilon.</p>
+</li>
+<li><p>The agent completed 100 training trials before testing, they became successful at the end of the training.</p>
+</li>
+<li><p>I have used alpha=0.1 and epsilon-tolerance=0.05. The chosen epsilon-tolerance needs to have enough quantity of trials for training (at least not less than 96). The alpha-value was chosen not so small to give the agent more freedom in actions.</p>
+</li>
+<li><p>The agent has a great progress in all spheres as a result of improvement was made with this Q-Learner when compared to the default Q-Learner.</p>
+<ul>
+<li>The reward became positive.</li>
+<li>A significant reduction in bad actions of the agent was achieved.</li>
+<li>The reliability had really improved till the grade of "A+"; the safety rating became equal to "A+"as well. Both indicators had reached their maximum values.</li>
+</ul>
+</li>
+<li><p>The driving agent has successfully learned an appropriate policy: all testing trial had the positive results.</p>
+</li>
+<li><p>I have completely satisfied with the safety and reliability ratings of the <em>Smartcab</em>: they have the highest possible level.</p>
+</li>
+</ul>
 
 </div>
 </div>
@@ -25476,7 +25462,73 @@ ZlYQJ1hmZmZmZmYFcYJlZmZmZmZWkP8HiFH3YEuKEQoAAAAASUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Optional-Question-9">Optional Question 9<a class="anchor-link" href="#Optional-Question-9">&#182;</a></h3><p><em>There are two characteristics about the project that invalidate the use of future rewards in the Q-Learning algorithm. One characteristic has to do with the </em>Smartcab<em> itself, and the other has to do with the environment. Can you figure out what they are and why future rewards won't work for this project?</em></p>
+<h3 id="7.2-Define-an-Optimal-Policy">7.2 Define an Optimal Policy<a class="anchor-link" href="#7.2-Define-an-Optimal-Policy">&#182;</a></h3><p>Sometimes, the answer to the important question <em>"what am I trying to get my agent to learn?"</em> only has a theoretical answer and cannot be concretely described. Here, however, you can concretely define what it is the agent is trying to learn, and that is the U.S. right-of-way traffic laws. Since these laws are known information, you can further define, for each state the <em>Smartcab</em> is occupying, the optimal action for the driving agent based on these laws. In that case, we call the set of optimal state-action pairs an <strong>optimal policy</strong>. Hence, unlike some theoretical answers, it is clear whether the agent is acting "incorrectly" not only by the reward (penalty) it receives, but also by pure observation. If the agent drives through a red light, we both see it receive a negative reward but also know that it is not the correct behavior. This can be used to your advantage for verifying whether the <strong>policy</strong> your driving agent has learned is the correct one, or if it is a <strong>suboptimal policy</strong>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Question-8">Question 8<a class="anchor-link" href="#Question-8">&#182;</a></h3><p>Provide a few examples (using the states you've defined) of what an optimal policy for this problem would look like. Afterward, investigate the <code>'sim_improved-learning.txt'</code> text file to see the results of your improved Q-Learning algorithm. <em>For each state that has been recorded from the simulation, is the <strong>policy</strong> (the action with the highest value) correct for the given state? Are there any states where the policy is different than what would be expected from an optimal policy?</em> Provide an example of a state and all state-action rewards recorded, and explain why it is the correct policy.</p>
+<hr>
+<h3 id="Answer-8">Answer 8<a class="anchor-link" href="#Answer-8">&#182;</a></h3><p>The most of the steps in the simulation correspond to the optimal policy and they are correct for the given state. In this case, the optimality can be described in the following way: the agent moving should be within the borders of the traffic rules, match the current situation on the road, reach the destination, and have a positive reward as a result.</p>
+<p>Let's have a look at the concrete examples:</p>
+<ul>
+<li>&#x1F695; &nbsp; <em><code>('right', 'red', None, None)</code></em><ul>
+<li>forward : -10.68</li>
+<li>None : 0.61</li>
+<li>right : 1.75</li>
+<li>left : -10.39</li>
+</ul>
+</li>
+<li><p>&#x1F58C; &nbsp; The waypoint is 'right', the light is 'red', and there are no cars near the Smartcab. In this case, the ideal action is 'right' has the highest positive weight (the agent can move to the goal), and the two most disruptive actions are severely penalized: any movement would be a violation.</p>
+</li>
+<li><p>&#x1F695; &nbsp; <em><code>('forward', 'green', 'forward', None)</code></em></p>
+<ul>
+<li>forward : 1.02</li>
+<li>None : -2.52</li>
+<li>right : 0.17</li>
+<li>left : 0.33</li>
+</ul>
+</li>
+<li>&#x1F58C; &nbsp; The waypoint is 'forward', the light is 'green', there is a car from the oncoming direction, there are no cars from the left side. In this case, the ideal action is 'forward' has the highest positive weight (the agent can move to the goal), and the action 'None' is severely penalized: no move is a bad action.</li>
+</ul>
+<p>Some actions do not look correct for the given state.</p>
+<ul>
+<li>&#x1F695; &nbsp; <em><code>('forward', 'red', None, 'forward')</code></em><ul>
+<li>forward : -16.17</li>
+<li>None : 0.51</li>
+<li>right : -6.76</li>
+<li>left : -16.46</li>
+</ul>
+</li>
+<li>&#x1F58C; &nbsp; The waypoint is 'forward', the light is 'red', there are no cars from the oncoming direction, there is a car from the left side (moving forward). The action 'forward' could be classified as 'bad' and could be a reason for the accident.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+<hr>
+<h2 id="$\mathfrak-{\color{#348ABD}-{8.-\-Optional:-\-Future-\-Rewards-\---\-Discount-\-Factor,-\-`gamma`}}$">$\mathfrak {\color{#348ABD} {8. \ Optional: \ Future \ Rewards \ - \ Discount \ Factor, \ `gamma`}}$<a class="anchor-link" href="#$\mathfrak-{\color{#348ABD}-{8.-\-Optional:-\-Future-\-Rewards-\---\-Discount-\-Factor,-\-`gamma`}}$">&#182;</a></h2><p>Curiously, as part of the Q-Learning algorithm, you were asked to <strong>not</strong> use the discount factor, <code>'gamma'</code> in the implementation. Including future rewards in the algorithm is used to aid in propagating positive rewards backward from a future state to the current state. Essentially, if the driving agent is given the option to make several actions to arrive at different states, including future rewards will bias the agent towards states that could provide even more rewards. An example of this would be the driving agent moving towards a goal: with all actions and rewards equal, moving towards the goal would theoretically yield better rewards if there is an additional reward for reaching the goal. However, even though in this project, the driving agent is trying to reach a destination in the allotted time, including future rewards will not benefit the agent. In fact, if the agent were given many trials to learn, it could negatively affect Q-values!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Optional-Question-9">Optional Question 9<a class="anchor-link" href="#Optional-Question-9">&#182;</a></h3><p><em>There are two characteristics of the project that invalidate the use of future rewards in the Q-Learning algorithm. One characteristic has to do with the </em>Smartcab<em> itself, and the other has to do with the environment. Can you figure out what they are and why future rewards won't work for this project?</em></p>
 <hr>
 <h3 id="Answer-9">Answer 9<a class="anchor-link" href="#Answer-9">&#182;</a></h3>
 </div>
