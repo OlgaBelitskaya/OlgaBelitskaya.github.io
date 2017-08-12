@@ -1,16 +1,7 @@
 
-# &#x1F4DD; &nbsp; Courses and Programs: 
-https://olgabelitskaya.github.io/reflections/README.html
-
-# &#x1F4DA; &nbsp; Notebooks and Data Files:
-https://olgabelitskaya.github.io/notebooks/README.html
-
-# &#x1F4DA; &nbsp; Additional Exercises:
-https://olgabelitskaya.github.io/README_EXERCISES.html
-
 # &#x1F3D9; &nbsp; Projects:
 
-### Data Analyst Nanodegree (udacity.com)  https://olgabelitskaya.github.io/certificate.pdf
+### &#x1F4CB; &nbsp; Data Analyst Nanodegree (udacity.com)  https://olgabelitskaya.github.io/certificate.pdf
 ##### <span style="color:#338DD4">click on the links to view</span>
 #### P0: Chopsticks! https://olgabelitskaya.github.io/Data_Analyst_ND_Project0.html
 #### P1: The Stroop Effect https://olgabelitskaya.github.io/Data_Analyst_ND_Project1.html
@@ -30,10 +21,28 @@ https://olgabelitskaya.github.io/README_EXERCISES.html
 #### P7: Design an A/B Test  https://olgabelitskaya.github.io/P7_Design_an_A_B_Test_Overview.html
 #### P7: Design an A/B Test. Extraction https://olgabelitskaya.github.io/P7_Design_an_A_B_Test_Extraction.pdf
 
----
+### &#x1F4CB; &nbsp; Interview and Technical Interview Practice. Data Analyst. (constantly upgradable):
+Udacity_Interview_Practice.ipynb 
+https://gist.github.com/OlgaBelitskaya/1ddb287592832cf581fc122d6bc2732e
 
----
-### Machine Learning Engineer Nanodegree (udacity.com) 
+Udacity_Technical_Interview_Practice_Lessons.ipynb  https://gist.github.com/OlgaBelitskaya/a6cb19e1f3a041e6f6a56ccf58b4701c
+
+Udacity_Technical_Interview_Practice_Project.ipynb
+https://gist.github.com/OlgaBelitskaya/849e983dd6e90943d5760be4c4986501
+
+https://github.com/OlgaBelitskaya/resume-builder/blob/master/Exercises_Interview_Practice_Py.ipynb
+
+https://github.com/OlgaBelitskaya/resume-builder/blob/master/Exercises_Technical_Interview_Graph.ipynb
+
+https://github.com/OlgaBelitskaya/resume-builder/blob/master/Exercises_Technical_Interview_Map1.ipynb
+
+https://github.com/OlgaBelitskaya/resume-builder/blob/master/Exercises_Technical_Interview_Map2.ipynb
+
+https://github.com/OlgaBelitskaya/resume-builder/blob/master/Exercises_Technical_Interview_MathsStats.ipynb
+
+https://github.com/OlgaBelitskaya/resume-builder/blob/master/Exercises_Technical_Interview_Sort.ipynb
+
+### &#x1F4CB; &nbsp; Machine Learning Engineer Nanodegree (udacity.com) 
 ##### <span style="color:#338DD4">click on the links to view</span>
 #### P0: Titanic Survival Exploration https://olgabelitskaya.github.io/MLE_ND_P0_V0.html
 #### P1: Predicting Boston Housing Prices https://olgabelitskaya.github.io/MLE_ND_P1_V0.html
@@ -56,30 +65,23 @@ https://olgabelitskaya.github.io/README_EXERCISES.html
 - https://olgabelitskaya.github.io/MLE_ND_P9_V3.html
 
 ---
+# &#x1F4DD; &nbsp; Courses and Programs: 
+https://olgabelitskaya.github.io/reflections/README.html
+
+# &#x1F4DA; &nbsp; Notebooks and Data Files:
+https://olgabelitskaya.github.io/notebooks/README.html
+
+# &#x1F4DA; &nbsp; Additional Exercises:
+https://olgabelitskaya.github.io/README_EXERCISES.html
+
+# &#x1F4DA; &nbsp; Cookbooks:
+#### Keras Python https://olgabelitskaya.github.io/keras_cookbook.html
+#### Keras R https://olgabelitskaya.github.io/keras_cookbook_r.html
+#### Sklearn Python https://olgabelitskaya.github.io/sklearn_cookbook.html
 
 ---
-### &#x1F4CB; &nbsp; Interview and Technical Interview Practice. Data Analyst. (constantly upgradable):
-Udacity_Interview_Practice.ipynb 
-https://gist.github.com/OlgaBelitskaya/1ddb287592832cf581fc122d6bc2732e
-
-Udacity_Technical_Interview_Practice_Lessons.ipynb  https://gist.github.com/OlgaBelitskaya/a6cb19e1f3a041e6f6a56ccf58b4701c
-
-Udacity_Technical_Interview_Practice_Project.ipynb
-https://gist.github.com/OlgaBelitskaya/849e983dd6e90943d5760be4c4986501
-
-https://github.com/OlgaBelitskaya/resume-builder/blob/master/Exercises_Interview_Practice_Py.ipynb
-
-https://github.com/OlgaBelitskaya/resume-builder/blob/master/Exercises_Technical_Interview_Graph.ipynb
-
-https://github.com/OlgaBelitskaya/resume-builder/blob/master/Exercises_Technical_Interview_Map1.ipynb
-
-https://github.com/OlgaBelitskaya/resume-builder/blob/master/Exercises_Technical_Interview_Map2.ipynb
-
-https://github.com/OlgaBelitskaya/resume-builder/blob/master/Exercises_Technical_Interview_MathsStats.ipynb
-
-https://github.com/OlgaBelitskaya/resume-builder/blob/master/Exercises_Technical_Interview_Sort.ipynb
-
-## &#x1F4CB; &nbsp; Kaggle:
+# &#x1F4DD; &nbsp;  Other Web Links:
+## &#x1F4CB; &nbsp; Kaggle
 - Build a Digit Recognition Models https://www.kaggle.com/olgabelitskaya/build-a-digit-recognition-models
 - Titanic_Survival_Exploration https://www.kaggle.com/olgabelitskaya/titanic-survival-exploration
 - Sberbank Russian Housing Market https://www.kaggle.com/olgabelitskaya/sberbank-russian-housing-market
