@@ -82,7 +82,7 @@ https://olgabelitskaya.github.io/README_EXERCISES.html
 ---
 # &#x1F4DD; &nbsp;  Other Web Links:
 ## &#x1F4CB; &nbsp; Kaggle
-- Build a Digit Recognition Models https://www.kaggle.com/olgabelitskaya/build-a-digit-recognition-models
+- Build a Digit Recognition Models https://www.kaggle.com/olgabelitskaya/build-a-digit-recognition-models-2
 - Titanic_Survival_Exploration https://www.kaggle.com/olgabelitskaya/titanic-survival-exploration
 - Sberbank Russian Housing Market https://www.kaggle.com/olgabelitskaya/sberbank-russian-housing-market
 
