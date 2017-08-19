@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<style> 
+    
+html {
+    background: url('background01.jpeg');
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-size: cover;
+}
+    
+body {
+    width: 100%;
+    min-height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    background: rgba(255,255,255,.9);
+}
+   
+.line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 2px;
+}    
+</style>
+    
+<svg width="1370" height="670">
+    <text x="10" y="30" font-family="sans-serif" font-size="25px" fill="black" text-anchor="right">
+        Russian Central Bank. Precious Metal Prices
+    </text>
+    
+    <a xlink:href="https://bl.ocks.org/mbostock/3884955">
+      <text x="10" y="60" font-family="sans-serif" font-size="15px" fill="darkblue" 
+            text-decoration="underline" text-anchor="right">
+          Based on the Example "Multi-Series Line Chart"
+      </text>
+    </a>
+</svg>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<script>
+var svg = d3.select("svg"),  
+margin = {top: 80, right: 80, bottom: 40, left: 80},
+width = svg.attr("width") - margin.left - margin.right,
+height = svg.attr("height") - margin.top - margin.bottom,
+g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")"); 
+    
+var parseTime = d3.timeParse("%Y-%m-%d");
+
+var x = d3.scaleTime().range([0, width]),
+    y = d3.scaleLinear().range([height, 0]),
+    z = d3.scaleOrdinal(d3.schemeCategory10);
+
+var line = d3.line()
+    .curve(d3.curveBasis)
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.price); });  
+
+d3.tsv("data2.tsv", type, function(error, data) {
+  if (error) throw error;
+
+  var metals = data.columns.slice(1).map(function(id) {
+    return {
+      id: id,
+      values: data.map(function(d) {
+        return {date: d.date, price: d[id]};
+      })
+    };
+  });
+
+  x.domain(d3.extent(data, function(d) { return d.date; }));
+
+  y.domain([
+    d3.min(metals, function(c) { return d3.min(c.values, function(d) { return d.price; }); }),
+    d3.max(metals, function(c) { return d3.max(c.values, function(d) { return d.price; }); })
+  ]);
+
+  z.domain(metals.map(function(c) { return c.id; }));
+
+  g.append("g")
+      .attr("class", "axis axis--x")
+      .attr("transform", "translate(0," + height + ")")
+      .style("font", "15px sans-serif")
+      .call(d3.axisBottom(x));
+
+  g.append("g")
+      .attr("class", "axis axis--y")
+      .style("font", "15px sans-serif")
+      .call(d3.axisLeft(y))
+      .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 7)
+      .attr("dy", "0.75em")
+      .attr("fill", "#000")
+      .style("font", "15px sans-serif")
+      .text("Prices, ₽");
+
+  var metal = g.selectAll(".metal")
+      .data(metals)
+      .enter().append("g")
+      .attr("class", "metal");
+
+  metal.append("path")
+      .attr("class", "line")
+      .attr("d", function(d) { return line(d.values); })
+      .style("stroke", function(d) { return z(d.id); });
+
+  metal.append("text")
+      .datum(function(d) { return {id: d.id, value: d.values[d.values.length - 1]}; })
+      .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.price) + ")"; })
+      .attr("x", 3)
+      .attr("dy", "0.75em")
+      .style("font", "15px sans-serif")
+      .style("stroke", function(d) { return z(d.id); })
+      .text(function(d) { return d.id; });
+});
+
+function type(d, _, columns) {
+  d.date = parseTime(d.date);
+  for (var i = 1, n = columns.length, c; i < n; ++i) d[c = columns[i]] = +d[c];
+  return d;
+}
+</script>
