@@ -64,6 +64,8 @@ https://github.com/OlgaBelitskaya/resume-builder/blob/master/Exercises_Technical
 - https://olgabelitskaya.github.io/MLE_ND_P9_V0.html
 - https://olgabelitskaya.github.io/MLE_ND_P9_V3.html
 
+#### P10: Write an Algorithm for a Dog Identification App: https://olgabelitskaya.github.io/MLE_ND_P10_V0.html
+
 ---
 # &#x1F4DD; &nbsp; Courses and Programs: 
 https://olgabelitskaya.github.io/reflections/README.html
