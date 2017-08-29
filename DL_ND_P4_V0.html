@@ -11754,27 +11754,746 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Language-Translation">Language Translation<a class="anchor-link" href="#Language-Translation">&#182;</a></h1><p>In this project, you’re going to take a peek into the realm of neural network machine translation.  You’ll be training a sequence to sequence model on a dataset of English and French sentences that can translate new sentences from English to French.</p>
-<h2 id="Get-the-Data">Get the Data<a class="anchor-link" href="#Get-the-Data">&#182;</a></h2><p>Since translating the whole language of English to French will take lots of time to train, we have provided you with a small portion of the English corpus.</p>
-
+<h1>&#x1F4D1; &nbsp; $\mathfrak {\color{#348ABD} {P4: \ Language \ Translation}}$</h1>
+<p>In this project, you’re going to take a peek into the realm of neural network machine translation.  You’ll be training a sequence to sequence model on a dataset of English and French sentences that can translate new sentences from English to French.</p>
+<h2 id="$\mathfrak-{\color{#348ABD}-{Code-\-Tools-\-and-\-Links}}$">$\mathfrak {\color{#348ABD} {Code \ Tools \ and \ Links}}$<a class="anchor-link" href="#$\mathfrak-{\color{#348ABD}-{Code-\-Tools-\-and-\-Links}}$">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">DON&#39;T MODIFY ANYTHING IN THIS CELL</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">helper</span>
-<span class="kn">import</span> <span class="nn">problem_unittests</span> <span class="k">as</span> <span class="nn">tests</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="k">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">display</span>
+<span class="n">hide_code</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">&lt;style&gt;</span>
+<span class="s1">body {background-color: aliceblue;}</span>
+<span class="s1">a {color: steelblue;}</span>
+<span class="s1">&lt;/style&gt;</span>
+<span class="s1">&lt;script&gt;</span>
+<span class="s1">code_show = true; </span>
+<span class="s1">function code_display() {</span>
+<span class="s1">    if (code_show) {</span>
+<span class="s1">        $(&#39;div.input&#39;).each(function(id) {</span>
+<span class="s1">            if (id == 0 || $(this).html().indexOf(&#39;hide_code&#39;) &gt; -1) {$(this).hide();}</span>
+<span class="s1">        });</span>
+<span class="s1">        $(&#39;div.output_prompt&#39;).css(&#39;opacity&#39;, 0);</span>
+<span class="s1">    } else {</span>
+<span class="s1">        $(&#39;div.input&#39;).each(function(id) {$(this).show();});</span>
+<span class="s1">        $(&#39;div.output_prompt&#39;).css(&#39;opacity&#39;, 1);</span>
+<span class="s1">    };</span>
+<span class="s1">    code_show = !code_show;</span>
+<span class="s1">} </span>
+<span class="s1">$(document).ready(code_display);</span>
+<span class="s1">&lt;/script&gt;</span>
+<span class="s1">&lt;form action=&quot;javascript: code_display()&quot;&gt;</span>
+<span class="s1">&lt;input style=&quot;color: #338DD4; background: ghostwhite; opacity: 0.9;&quot; \ </span>
+<span class="s1">type=&quot;submit&quot; value=&quot;Click to display or hide code cells&quot;&gt;</span>
+<span class="s1">&lt;/form&gt;</span>
+<span class="s1">&#39;&#39;&#39;</span><span class="p">)</span>
+</pre></div>
 
-<span class="n">source_path</span> <span class="o">=</span> <span class="s1">&#39;data/small_vocab_en&#39;</span>
-<span class="n">target_path</span> <span class="o">=</span> <span class="s1">&#39;data/small_vocab_fr&#39;</span>
-<span class="n">source_text</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span><span class="n">source_path</span><span class="p">)</span>
-<span class="n">target_text</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span><span class="n">target_path</span><span class="p">)</span>
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[1]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+<style>
+body {background-color: aliceblue;}
+a {color: steelblue;}
+</style>
+<script>
+code_show = true; 
+function code_display() {
+    if (code_show) {
+        $('div.input').each(function(id) {
+            if (id == 0 || $(this).html().indexOf('hide_code') > -1) {$(this).hide();}
+        });
+        $('div.output_prompt').css('opacity', 0);
+    } else {
+        $('div.input').each(function(id) {$(this).show();});
+        $('div.output_prompt').css('opacity', 1);
+    };
+    code_show = !code_show;
+} 
+$(document).ready(code_display);
+</script>
+<form action="javascript: code_display()">
+<input style="color: #338DD4; background: ghostwhite; opacity: 0.9;" \ 
+type="submit" value="Click to display or hide code cells">
+</form>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">tensorflow.python.layers.core</span> <span class="k">import</span> <span class="n">Dense</span>
+
+<span class="kn">from</span> <span class="nn">distutils.version</span> <span class="k">import</span> <span class="n">LooseVersion</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="c1"># https://github.com/udacity/deep-learning/blob/master/language-translation/helper.py</span>
+<span class="n">CODES</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;&lt;PAD&gt;&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;&lt;EOS&gt;&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;&lt;UNK&gt;&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;&lt;GO&gt;&#39;</span><span class="p">:</span> <span class="mi">3</span> <span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load Dataset from File</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">input_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">preprocess_and_save_data</span><span class="p">(</span><span class="n">source_path</span><span class="p">,</span> <span class="n">target_path</span><span class="p">,</span> <span class="n">text_to_ids</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Preprocess Text Data.  Save to to file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Preprocess</span>
+    <span class="n">source_text</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">source_path</span><span class="p">)</span>
+    <span class="n">target_text</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">target_path</span><span class="p">)</span>
+
+    <span class="n">source_text</span> <span class="o">=</span> <span class="n">source_text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">target_text</span> <span class="o">=</span> <span class="n">target_text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+    <span class="n">source_vocab_to_int</span><span class="p">,</span> <span class="n">source_int_to_vocab</span> <span class="o">=</span> <span class="n">create_lookup_tables</span><span class="p">(</span><span class="n">source_text</span><span class="p">)</span>
+    <span class="n">target_vocab_to_int</span><span class="p">,</span> <span class="n">target_int_to_vocab</span> <span class="o">=</span> <span class="n">create_lookup_tables</span><span class="p">(</span><span class="n">target_text</span><span class="p">)</span>
+
+    <span class="n">source_text</span><span class="p">,</span> <span class="n">target_text</span> <span class="o">=</span> <span class="n">text_to_ids</span><span class="p">(</span><span class="n">source_text</span><span class="p">,</span> <span class="n">target_text</span><span class="p">,</span> <span class="n">source_vocab_to_int</span><span class="p">,</span> <span class="n">target_vocab_to_int</span><span class="p">)</span>
+
+    <span class="c1"># Save Data</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;preprocess.p&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out_file</span><span class="p">:</span>
+        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">((</span>
+            <span class="p">(</span><span class="n">source_text</span><span class="p">,</span> <span class="n">target_text</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">source_vocab_to_int</span><span class="p">,</span> <span class="n">target_vocab_to_int</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">source_int_to_vocab</span><span class="p">,</span> <span class="n">target_int_to_vocab</span><span class="p">)),</span> <span class="n">out_file</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="c1"># https://github.com/udacity/deep-learning/blob/master/language-translation/helper.py</span>
+<span class="k">def</span> <span class="nf">load_preprocess</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load the Preprocessed Training data and return them in batches of &lt;batch_size&gt; or less</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;preprocess.p&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">in_file</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">in_file</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">create_lookup_tables</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create lookup tables for vocabulary</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">vocab</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+    <span class="n">vocab_to_int</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">CODES</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">v_i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vocab</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">CODES</span><span class="p">)):</span>
+        <span class="n">vocab_to_int</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">v_i</span>
+
+    <span class="n">int_to_vocab</span> <span class="o">=</span> <span class="p">{</span><span class="n">v_i</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">v_i</span> <span class="ow">in</span> <span class="n">vocab_to_int</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+    <span class="k">return</span> <span class="n">vocab_to_int</span><span class="p">,</span> <span class="n">int_to_vocab</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="c1"># https://github.com/udacity/deep-learning/blob/master/language-translation/helper.py</span>
+<span class="k">def</span> <span class="nf">save_params</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Save parameters to file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;params.p&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out_file</span><span class="p">:</span>
+        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">out_file</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">load_params</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load parameters from file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;params.p&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">in_file</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">in_file</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">batch_data</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Batch source and target together</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">batch_i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">source</span><span class="p">)</span><span class="o">//</span><span class="n">batch_size</span><span class="p">):</span>
+        <span class="n">start_i</span> <span class="o">=</span> <span class="n">batch_i</span> <span class="o">*</span> <span class="n">batch_size</span>
+        <span class="n">source_batch</span> <span class="o">=</span> <span class="n">source</span><span class="p">[</span><span class="n">start_i</span><span class="p">:</span><span class="n">start_i</span> <span class="o">+</span> <span class="n">batch_size</span><span class="p">]</span>
+        <span class="n">target_batch</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="n">start_i</span><span class="p">:</span><span class="n">start_i</span> <span class="o">+</span> <span class="n">batch_size</span><span class="p">]</span>
+        <span class="k">yield</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pad_sentence_batch</span><span class="p">(</span><span class="n">source_batch</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pad_sentence_batch</span><span class="p">(</span><span class="n">target_batch</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">pad_sentence_batch</span><span class="p">(</span><span class="n">sentence_batch</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Pad sentence with &lt;PAD&gt; id</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">max_sentence</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span> <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentence_batch</span><span class="p">])</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">sentence</span> <span class="o">+</span> <span class="p">[</span><span class="n">CODES</span><span class="p">[</span><span class="s1">&#39;&lt;PAD&gt;&#39;</span><span class="p">]]</span> <span class="o">*</span> <span class="p">(</span><span class="n">max_sentence</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">sentence</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentence_batch</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="c1"># https://github.com/udacity/deep-learning/blob/master/language-translation/problem_unittests.py</span>
+<span class="k">def</span> <span class="nf">_print_success_message</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Tests Passed&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">test_text_to_ids</span><span class="p">(</span><span class="n">text_to_ids</span><span class="p">):</span>
+    <span class="n">test_source_text</span> <span class="o">=</span> <span class="s1">&#39;new jersey is sometimes quiet during autumn , and it is snowy in april .</span><span class="se">\n</span><span class="s1">the united states is usually chilly during july , and it is usually freezing in november .</span><span class="se">\n</span><span class="s1">california is usually quiet during march , and it is usually hot in june .</span><span class="se">\n</span><span class="s1">the united states is sometimes mild during june , and it is cold in september .&#39;</span>
+    <span class="n">test_target_text</span> <span class="o">=</span> <span class="s1">&#39;new jersey est parfois calme pendant l</span><span class="se">\&#39;</span><span class="s1"> automne , et il est neigeux en avril .</span><span class="se">\n</span><span class="s1">les états-unis est généralement froid en juillet , et il gèle habituellement en novembre .</span><span class="se">\n</span><span class="s1">california est généralement calme en mars , et il est généralement chaud en juin .</span><span class="se">\n</span><span class="s1">les états-unis est parfois légère en juin , et il fait froid en septembre .&#39;</span>
+
+    <span class="n">test_source_text</span> <span class="o">=</span> <span class="n">test_source_text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">test_target_text</span> <span class="o">=</span> <span class="n">test_target_text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+    <span class="n">source_vocab_to_int</span><span class="p">,</span> <span class="n">source_int_to_vocab</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">create_lookup_tables</span><span class="p">(</span><span class="n">test_source_text</span><span class="p">)</span>
+    <span class="n">target_vocab_to_int</span><span class="p">,</span> <span class="n">target_int_to_vocab</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">create_lookup_tables</span><span class="p">(</span><span class="n">test_target_text</span><span class="p">)</span>
+
+    <span class="n">test_source_id_seq</span><span class="p">,</span> <span class="n">test_target_id_seq</span> <span class="o">=</span> <span class="n">text_to_ids</span><span class="p">(</span><span class="n">test_source_text</span><span class="p">,</span> <span class="n">test_target_text</span><span class="p">,</span> <span class="n">source_vocab_to_int</span><span class="p">,</span> <span class="n">target_vocab_to_int</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_source_id_seq</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_source_text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)),</span>\
+        <span class="s1">&#39;source_id_text has wrong length, it should be </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test_source_text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)))</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_target_id_seq</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_target_text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)),</span> \
+        <span class="s1">&#39;target_id_text has wrong length, it should be </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test_target_text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)))</span>
+
+    <span class="n">target_not_iter</span> <span class="o">=</span> <span class="p">[</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">test_source_id_seq</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">)]</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="n">target_not_iter</span><span class="p">,</span>\
+        <span class="s1">&#39;Element in source_id_text is not iteratable.  Found type </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target_not_iter</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">target_not_iter</span> <span class="o">=</span> <span class="p">[</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">test_target_id_seq</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">)]</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="n">target_not_iter</span><span class="p">,</span> \
+        <span class="s1">&#39;Element in target_id_text is not iteratable.  Found type </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target_not_iter</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">source_changed_length</span> <span class="o">=</span> <span class="p">[(</span><span class="n">words</span><span class="p">,</span> <span class="n">word_ids</span><span class="p">)</span>
+                             <span class="k">for</span> <span class="n">words</span><span class="p">,</span> <span class="n">word_ids</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">test_source_text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">),</span> <span class="n">test_source_id_seq</span><span class="p">)</span>
+                             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">split</span><span class="p">())</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_ids</span><span class="p">)]</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="n">source_changed_length</span><span class="p">,</span>\
+        <span class="s1">&#39;Source text changed in size from </span><span class="si">{}</span><span class="s1"> word(s) to </span><span class="si">{}</span><span class="s1"> id(s): </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="nb">len</span><span class="p">(</span><span class="n">source_changed_length</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()),</span> <span class="nb">len</span><span class="p">(</span><span class="n">source_changed_length</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]),</span> <span class="n">source_changed_length</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">target_missing_end</span> <span class="o">=</span> <span class="p">[</span><span class="n">word_ids</span> <span class="k">for</span> <span class="n">word_ids</span> <span class="ow">in</span> <span class="n">test_target_id_seq</span> <span class="k">if</span> <span class="n">word_ids</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">target_vocab_to_int</span><span class="p">[</span><span class="s1">&#39;&lt;EOS&gt;&#39;</span><span class="p">]]</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="n">target_missing_end</span><span class="p">,</span>\
+        <span class="s1">&#39;Missing &lt;EOS&gt; id at the end of </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target_missing_end</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">target_bad_size</span> <span class="o">=</span> <span class="p">[(</span><span class="n">words</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="n">word_ids</span><span class="p">)</span>
+                       <span class="k">for</span> <span class="n">words</span><span class="p">,</span> <span class="n">word_ids</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">test_target_text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">),</span> <span class="n">test_target_id_seq</span><span class="p">)</span>
+                       <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_ids</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">split</span><span class="p">())</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="n">target_bad_size</span><span class="p">,</span>\
+        <span class="s1">&#39;Target text incorrect size.  </span><span class="si">{}</span><span class="s1"> should be length </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">target_bad_size</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">target_bad_size</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">source_bad_id</span> <span class="o">=</span> <span class="p">[(</span><span class="n">word</span><span class="p">,</span> <span class="n">word_id</span><span class="p">)</span>
+                     <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">word_id</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+                        <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">test_source_text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">()],</span>
+                        <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span><span class="n">test_source_id_seq</span><span class="p">))</span>
+                     <span class="k">if</span> <span class="n">source_vocab_to_int</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">!=</span> <span class="n">word_id</span><span class="p">]</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="n">source_bad_id</span><span class="p">,</span>\
+        <span class="s1">&#39;Source word incorrectly converted from </span><span class="si">{}</span><span class="s1"> to id </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">source_bad_id</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">source_bad_id</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">target_bad_id</span> <span class="o">=</span> <span class="p">[(</span><span class="n">word</span><span class="p">,</span> <span class="n">word_id</span><span class="p">)</span>
+                     <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">word_id</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+                        <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">test_target_text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">()],</span>
+                        <span class="p">[</span><span class="n">word_id</span> <span class="k">for</span> <span class="n">word_ids</span> <span class="ow">in</span> <span class="n">test_target_id_seq</span> <span class="k">for</span> <span class="n">word_id</span> <span class="ow">in</span> <span class="n">word_ids</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+                     <span class="k">if</span> <span class="n">target_vocab_to_int</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">!=</span> <span class="n">word_id</span><span class="p">]</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="n">target_bad_id</span><span class="p">,</span>\
+        <span class="s1">&#39;Target word incorrectly converted from </span><span class="si">{}</span><span class="s1"> to id </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target_bad_id</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">target_bad_id</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">_print_success_message</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="c1"># https://github.com/udacity/deep-learning/blob/master/language-translation/problem_unittests.py</span>
+<span class="k">def</span> <span class="nf">test_model_inputs</span><span class="p">(</span><span class="n">model_inputs</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span><span class="o">.</span><span class="n">as_default</span><span class="p">():</span>
+        <span class="n">input_data</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">keep_prob</span><span class="p">,</span> <span class="n">target_sequence_length</span><span class="p">,</span> <span class="n">max_target_sequence_length</span><span class="p">,</span> \
+        <span class="n">source_sequence_length</span> <span class="o">=</span> <span class="n">model_inputs</span><span class="p">()</span>
+
+        <span class="c1"># Check type</span>
+        <span class="k">assert</span> <span class="n">input_data</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;Placeholder&#39;</span><span class="p">,</span>\
+            <span class="s1">&#39;Input is not a Placeholder.&#39;</span>
+        <span class="k">assert</span> <span class="n">targets</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;Placeholder&#39;</span><span class="p">,</span>\
+            <span class="s1">&#39;Targets is not a Placeholder.&#39;</span>
+        <span class="k">assert</span> <span class="n">lr</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;Placeholder&#39;</span><span class="p">,</span>\
+            <span class="s1">&#39;Learning Rate is not a Placeholder.&#39;</span>
+        <span class="k">assert</span> <span class="n">keep_prob</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;Placeholder&#39;</span><span class="p">,</span> \
+            <span class="s1">&#39;Keep Probability is not a Placeholder.&#39;</span>
+        <span class="k">assert</span> <span class="n">target_sequence_length</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;Placeholder&#39;</span><span class="p">,</span> \
+            <span class="s1">&#39;Target Sequence Length is not a Placeholder.&#39;</span>
+        <span class="k">assert</span> <span class="n">max_target_sequence_length</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;Max&#39;</span><span class="p">,</span> \
+            <span class="s1">&#39;Max Target Sequence Length is not a Placeholder.&#39;</span>
+        <span class="k">assert</span> <span class="n">source_sequence_length</span><span class="o">.</span><span class="n">op</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;Placeholder&#39;</span><span class="p">,</span> \
+            <span class="s1">&#39;Source Sequence Length is not a Placeholder.&#39;</span>
+
+        <span class="c1"># Check name</span>
+        <span class="k">assert</span> <span class="n">input_data</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;input:0&#39;</span><span class="p">,</span>\
+            <span class="s1">&#39;Input has bad name.  Found name </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">input_data</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">target_sequence_length</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;target_sequence_length:0&#39;</span><span class="p">,</span>\
+            <span class="s1">&#39;Target Sequence Length has bad name.  Found name </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target_sequence_length</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">source_sequence_length</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;source_sequence_length:0&#39;</span><span class="p">,</span>\
+            <span class="s1">&#39;Source Sequence Length has bad name.  Found name </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">source_sequence_length</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">keep_prob</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;keep_prob:0&#39;</span><span class="p">,</span> \
+            <span class="s1">&#39;Keep Probability has bad name.  Found name </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">keep_prob</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="n">tf</span><span class="o">.</span><span class="n">assert_rank</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s1">&#39;Input data has wrong rank&#39;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">tf</span><span class="o">.</span><span class="n">assert_rank</span><span class="p">(</span><span class="n">targets</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s1">&#39;Targets has wrong rank&#39;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">tf</span><span class="o">.</span><span class="n">assert_rank</span><span class="p">(</span><span class="n">lr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s1">&#39;Learning Rate has wrong rank&#39;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">tf</span><span class="o">.</span><span class="n">assert_rank</span><span class="p">(</span><span class="n">keep_prob</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s1">&#39;Keep Probability has wrong rank&#39;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">tf</span><span class="o">.</span><span class="n">assert_rank</span><span class="p">(</span><span class="n">target_sequence_length</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s1">&#39;Target Sequence Length has wrong rank&#39;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">tf</span><span class="o">.</span><span class="n">assert_rank</span><span class="p">(</span><span class="n">max_target_sequence_length</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s1">&#39;Max Target Sequence Length has wrong rank&#39;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">tf</span><span class="o">.</span><span class="n">assert_rank</span><span class="p">(</span><span class="n">source_sequence_length</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s1">&#39;Source Sequence Lengthhas wrong rank&#39;</span><span class="p">)</span>
+
+    <span class="n">_print_success_message</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="c1"># https://github.com/udacity/deep-learning/blob/master/language-translation/problem_unittests.py</span>
+<span class="k">def</span> <span class="nf">test_encoding_layer</span><span class="p">(</span><span class="n">encoding_layer</span><span class="p">):</span>
+    <span class="n">rnn_size</span> <span class="o">=</span> <span class="mi">512</span>
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">64</span>
+    <span class="n">num_layers</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">source_sequence_len</span> <span class="o">=</span> <span class="mi">22</span>
+    <span class="n">source_vocab_size</span> <span class="o">=</span> <span class="mi">20</span>
+    <span class="n">encoding_embedding_size</span> <span class="o">=</span> <span class="mi">30</span>
+
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span><span class="o">.</span><span class="n">as_default</span><span class="p">():</span>
+        <span class="n">rnn_inputs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="p">[</span><span class="n">batch_size</span><span class="p">,</span>
+                                                 <span class="n">source_sequence_len</span><span class="p">])</span>
+        <span class="n">source_sequence_length</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span>
+                                                <span class="p">(</span><span class="kc">None</span><span class="p">,),</span>
+                                                <span class="n">name</span><span class="o">=</span><span class="s1">&#39;source_sequence_length&#39;</span><span class="p">)</span>
+        <span class="n">keep_prob</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+        <span class="n">enc_output</span><span class="p">,</span> <span class="n">states</span> <span class="o">=</span> <span class="n">encoding_layer</span><span class="p">(</span><span class="n">rnn_inputs</span><span class="p">,</span> <span class="n">rnn_size</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">,</span> <span class="n">keep_prob</span><span class="p">,</span>
+                   <span class="n">source_sequence_length</span><span class="p">,</span> <span class="n">source_vocab_size</span><span class="p">,</span>
+                   <span class="n">encoding_embedding_size</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">)</span> <span class="o">==</span> <span class="n">num_layers</span><span class="p">,</span>\
+            <span class="s1">&#39;Found </span><span class="si">{}</span><span class="s1"> state(s). It should be </span><span class="si">{}</span><span class="s1"> states.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">),</span> <span class="n">num_layers</span><span class="p">)</span>
+
+        <span class="n">bad_types</span> <span class="o">=</span> <span class="p">[</span><span class="nb">type</span><span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">states</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">rnn</span><span class="o">.</span><span class="n">LSTMStateTuple</span><span class="p">)]</span>
+        <span class="k">assert</span> <span class="ow">not</span> <span class="n">bad_types</span><span class="p">,</span>\
+            <span class="s1">&#39;Found wrong type: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bad_types</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="n">bad_shapes</span> <span class="o">=</span> <span class="p">[</span><span class="n">state_tensor</span><span class="o">.</span><span class="n">get_shape</span><span class="p">()</span>
+                      <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">states</span>
+                      <span class="k">for</span> <span class="n">state_tensor</span> <span class="ow">in</span> <span class="n">state</span>
+                      <span class="k">if</span> <span class="n">state_tensor</span><span class="o">.</span><span class="n">get_shape</span><span class="p">()</span><span class="o">.</span><span class="n">as_list</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[[</span><span class="kc">None</span><span class="p">,</span> <span class="n">rnn_size</span><span class="p">],</span> <span class="p">[</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">rnn_size</span><span class="p">]]]</span>
+        <span class="k">assert</span> <span class="ow">not</span> <span class="n">bad_shapes</span><span class="p">,</span>\
+            <span class="s1">&#39;Found wrong shape: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bad_shapes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">_print_success_message</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="c1"># https://github.com/udacity/deep-learning/blob/master/language-translation/problem_unittests.py</span>
+<span class="k">def</span> <span class="nf">test_decoding_layer</span><span class="p">(</span><span class="n">decoding_layer</span><span class="p">):</span>
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">64</span>
+    <span class="n">vocab_size</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="n">embedding_size</span> <span class="o">=</span> <span class="mi">200</span>
+    <span class="n">sequence_length</span> <span class="o">=</span> <span class="mi">22</span>
+    <span class="n">rnn_size</span> <span class="o">=</span> <span class="mi">512</span>
+    <span class="n">num_layers</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">target_vocab_to_int</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;&lt;EOS&gt;&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;&lt;GO&gt;&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span><span class="o">.</span><span class="n">as_default</span><span class="p">():</span>
+
+        <span class="n">target_sequence_length_p</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="p">(</span><span class="kc">None</span><span class="p">,),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;target_sequence_length&#39;</span><span class="p">)</span>
+        <span class="n">max_target_sequence_length</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_max</span><span class="p">(</span><span class="n">target_sequence_length_p</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;max_target_len&#39;</span><span class="p">)</span>
+
+        <span class="n">dec_input</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="p">[</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">sequence_length</span><span class="p">])</span>
+        <span class="n">dec_embed_input</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="p">[</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">sequence_length</span><span class="p">,</span> <span class="n">embedding_size</span><span class="p">])</span>
+        <span class="n">dec_embeddings</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="p">[</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_size</span><span class="p">])</span>
+        <span class="n">keep_prob</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">rnn</span><span class="o">.</span><span class="n">LSTMStateTuple</span><span class="p">(</span>
+            <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">rnn_size</span><span class="p">]),</span>
+            <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">rnn_size</span><span class="p">]))</span>
+        <span class="n">encoder_state</span> <span class="o">=</span> <span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+
+        <span class="n">train_decoder_output</span><span class="p">,</span> <span class="n">infer_logits_output</span> <span class="o">=</span> <span class="n">decoding_layer</span><span class="p">(</span> <span class="n">dec_input</span><span class="p">,</span>
+                                                   <span class="n">encoder_state</span><span class="p">,</span>
+                                                   <span class="n">target_sequence_length_p</span><span class="p">,</span>
+                                                   <span class="n">max_target_sequence_length</span><span class="p">,</span>
+                                                   <span class="n">rnn_size</span><span class="p">,</span>
+                                                   <span class="n">num_layers</span><span class="p">,</span>
+                                                   <span class="n">target_vocab_to_int</span><span class="p">,</span>
+                                                   <span class="n">vocab_size</span><span class="p">,</span>
+                                                   <span class="n">batch_size</span><span class="p">,</span>
+                                                   <span class="n">keep_prob</span><span class="p">,</span>
+                                                   <span class="n">embedding_size</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">train_decoder_output</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">seq2seq</span><span class="o">.</span><span class="n">BasicDecoderOutput</span><span class="p">),</span>\
+            <span class="s1">&#39;Found wrong type: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">train_decoder_output</span><span class="p">))</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">infer_logits_output</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">seq2seq</span><span class="o">.</span><span class="n">BasicDecoderOutput</span><span class="p">),</span>\
+            <span class="s1">&#39;Found wrong type: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">infer_logits_output</span><span class="p">))</span>
+
+        <span class="k">assert</span> <span class="n">train_decoder_output</span><span class="o">.</span><span class="n">rnn_output</span><span class="o">.</span><span class="n">get_shape</span><span class="p">()</span><span class="o">.</span><span class="n">as_list</span><span class="p">()</span> <span class="o">==</span> <span class="p">[</span><span class="n">batch_size</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">],</span> \
+            <span class="s1">&#39;Wrong shape returned.  Found </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">train_decoder_output</span><span class="o">.</span><span class="n">rnn_output</span><span class="o">.</span><span class="n">get_shape</span><span class="p">())</span>
+        <span class="k">assert</span> <span class="n">infer_logits_output</span><span class="o">.</span><span class="n">sample_id</span><span class="o">.</span><span class="n">get_shape</span><span class="p">()</span><span class="o">.</span><span class="n">as_list</span><span class="p">()</span> <span class="o">==</span> <span class="p">[</span><span class="n">batch_size</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> \
+             <span class="s1">&#39;Wrong shape returned.  Found </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">infer_logits_output</span><span class="o">.</span><span class="n">sample_id</span><span class="o">.</span><span class="n">get_shape</span><span class="p">())</span>
+
+    <span class="n">_print_success_message</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="c1"># https://github.com/udacity/deep-learning/blob/master/language-translation/problem_unittests.py</span>
+<span class="k">def</span> <span class="nf">test_seq2seq_model</span><span class="p">(</span><span class="n">seq2seq_model</span><span class="p">):</span>
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">64</span>
+    <span class="n">vocab_size</span> <span class="o">=</span> <span class="mi">300</span>
+    <span class="n">embedding_size</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="n">sequence_length</span> <span class="o">=</span> <span class="mi">22</span>
+    <span class="n">rnn_size</span> <span class="o">=</span> <span class="mi">512</span>
+    <span class="n">num_layers</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">target_vocab_to_int</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;&lt;EOS&gt;&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;&lt;GO&gt;&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span><span class="o">.</span><span class="n">as_default</span><span class="p">():</span>
+
+        <span class="n">dec_input</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="p">[</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">sequence_length</span><span class="p">])</span>
+        <span class="n">dec_embed_input</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="p">[</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">sequence_length</span><span class="p">,</span> <span class="n">embedding_size</span><span class="p">])</span>
+        <span class="n">dec_embeddings</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="p">[</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_size</span><span class="p">])</span>
+        <span class="n">keep_prob</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="n">enc_state</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">rnn</span><span class="o">.</span><span class="n">LSTMStateTuple</span><span class="p">(</span>
+            <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">rnn_size</span><span class="p">]),</span>
+            <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">rnn_size</span><span class="p">]))</span>
+
+        <span class="n">input_data</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="p">[</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">sequence_length</span><span class="p">])</span>
+        <span class="n">target_data</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="p">[</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">sequence_length</span><span class="p">])</span>
+        <span class="n">keep_prob</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="n">source_sequence_length</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="p">(</span><span class="kc">None</span><span class="p">,),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;source_sequence_length&#39;</span><span class="p">)</span>
+        <span class="n">target_sequence_length_p</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="p">(</span><span class="kc">None</span><span class="p">,),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;target_sequence_length&#39;</span><span class="p">)</span>
+        <span class="n">max_target_sequence_length</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_max</span><span class="p">(</span><span class="n">target_sequence_length_p</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;max_target_len&#39;</span><span class="p">)</span>
+
+        <span class="n">train_decoder_output</span><span class="p">,</span> <span class="n">infer_logits_output</span> <span class="o">=</span> <span class="n">seq2seq_model</span><span class="p">(</span>  <span class="n">input_data</span><span class="p">,</span>
+                                                   <span class="n">target_data</span><span class="p">,</span>
+                                                   <span class="n">keep_prob</span><span class="p">,</span>
+                                                   <span class="n">batch_size</span><span class="p">,</span>
+                                                   <span class="n">source_sequence_length</span><span class="p">,</span>
+                                                   <span class="n">target_sequence_length_p</span><span class="p">,</span>
+                                                   <span class="n">max_target_sequence_length</span><span class="p">,</span>
+                                                   <span class="n">vocab_size</span><span class="p">,</span>
+                                                   <span class="n">vocab_size</span><span class="p">,</span>
+                                                   <span class="n">embedding_size</span><span class="p">,</span>
+                                                   <span class="n">embedding_size</span><span class="p">,</span>
+                                                   <span class="n">rnn_size</span><span class="p">,</span>
+                                                   <span class="n">num_layers</span><span class="p">,</span>
+                                                   <span class="n">target_vocab_to_int</span><span class="p">)</span>
+
+        <span class="c1"># input_data, target_data, keep_prob, batch_size, sequence_length,</span>
+        <span class="c1"># 200, target_vocab_size, 64, 80, rnn_size, num_layers, target_vocab_to_int)</span>
+
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">train_decoder_output</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">seq2seq</span><span class="o">.</span><span class="n">BasicDecoderOutput</span><span class="p">),</span>\
+            <span class="s1">&#39;Found wrong type: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">train_decoder_output</span><span class="p">))</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">infer_logits_output</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">seq2seq</span><span class="o">.</span><span class="n">BasicDecoderOutput</span><span class="p">),</span>\
+            <span class="s1">&#39;Found wrong type: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">infer_logits_output</span><span class="p">))</span>
+
+        <span class="k">assert</span> <span class="n">train_decoder_output</span><span class="o">.</span><span class="n">rnn_output</span><span class="o">.</span><span class="n">get_shape</span><span class="p">()</span><span class="o">.</span><span class="n">as_list</span><span class="p">()</span> <span class="o">==</span> <span class="p">[</span><span class="n">batch_size</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">],</span> \
+            <span class="s1">&#39;Wrong shape returned.  Found </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">train_decoder_output</span><span class="o">.</span><span class="n">rnn_output</span><span class="o">.</span><span class="n">get_shape</span><span class="p">())</span>
+        <span class="k">assert</span> <span class="n">infer_logits_output</span><span class="o">.</span><span class="n">sample_id</span><span class="o">.</span><span class="n">get_shape</span><span class="p">()</span><span class="o">.</span><span class="n">as_list</span><span class="p">()</span> <span class="o">==</span> <span class="p">[</span><span class="n">batch_size</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> \
+             <span class="s1">&#39;Wrong shape returned.  Found </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">infer_logits_output</span><span class="o">.</span><span class="n">sample_id</span><span class="o">.</span><span class="n">get_shape</span><span class="p">())</span>
+
+    <span class="n">_print_success_message</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="c1"># https://github.com/udacity/deep-learning/blob/master/language-translation/problem_unittests.py</span>
+<span class="k">def</span> <span class="nf">test_sentence_to_seq</span><span class="p">(</span><span class="n">sentence_to_seq</span><span class="p">):</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="s1">&#39;this is a test sentence&#39;</span>
+    <span class="n">vocab_to_int</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;&lt;PAD&gt;&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;&lt;EOS&gt;&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;&lt;UNK&gt;&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;this&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;is&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;sentence&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+
+    <span class="n">output</span> <span class="o">=</span> <span class="n">sentence_to_seq</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="n">vocab_to_int</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span><span class="p">,</span>\
+        <span class="s1">&#39;Wrong length. Found a length of </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">))</span>
+
+    <span class="k">assert</span> <span class="n">output</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span>\
+        <span class="s1">&#39;Missing &lt;UNK&gt; id.&#39;</span>
+
+    <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span>\
+        <span class="s1">&#39;Incorrect ouput. Found </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+
+    <span class="n">_print_success_message</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="c1"># https://github.com/udacity/deep-learning/blob/master/language-translation/problem_unittests.py</span>
+<span class="k">def</span> <span class="nf">test_process_encoding_input</span><span class="p">(</span><span class="n">process_encoding_input</span><span class="p">):</span>
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">seq_length</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">target_vocab_to_int</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;&lt;GO&gt;&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span><span class="o">.</span><span class="n">as_default</span><span class="p">():</span>
+        <span class="n">target_data</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="p">[</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">seq_length</span><span class="p">])</span>
+        <span class="n">dec_input</span> <span class="o">=</span> <span class="n">process_encoding_input</span><span class="p">(</span><span class="n">target_data</span><span class="p">,</span> <span class="n">target_vocab_to_int</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="n">dec_input</span><span class="o">.</span><span class="n">get_shape</span><span class="p">()</span> <span class="o">==</span> <span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">seq_length</span><span class="p">),</span>\
+            <span class="s1">&#39;Wrong shape returned.  Found </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dec_input</span><span class="o">.</span><span class="n">get_shape</span><span class="p">())</span>
+
+        <span class="n">test_target_data</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="mi">40</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">23</span><span class="p">]]</span>
+        <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
+            <span class="n">test_dec_input</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">dec_input</span><span class="p">,</span> <span class="p">{</span><span class="n">target_data</span><span class="p">:</span> <span class="n">test_target_data</span><span class="p">})</span>
+
+        <span class="k">assert</span> <span class="n">test_dec_input</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">target_vocab_to_int</span><span class="p">[</span><span class="s1">&#39;&lt;GO&gt;&#39;</span><span class="p">]</span> <span class="ow">and</span>\
+               <span class="n">test_dec_input</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">target_vocab_to_int</span><span class="p">[</span><span class="s1">&#39;&lt;GO&gt;&#39;</span><span class="p">],</span>\
+            <span class="s1">&#39;Missing GO Id.&#39;</span>
+
+    <span class="n">_print_success_message</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="c1"># https://github.com/udacity/deep-learning/blob/master/language-translation/problem_unittests.py</span>
+<span class="k">def</span> <span class="nf">test_decoding_layer_train</span><span class="p">(</span><span class="n">decoding_layer_train</span><span class="p">):</span>
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">64</span>
+    <span class="n">vocab_size</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="n">embedding_size</span> <span class="o">=</span> <span class="mi">200</span>
+    <span class="n">sequence_length</span> <span class="o">=</span> <span class="mi">22</span>
+    <span class="n">rnn_size</span> <span class="o">=</span> <span class="mi">512</span>
+    <span class="n">num_layers</span> <span class="o">=</span> <span class="mi">3</span>
+
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span><span class="o">.</span><span class="n">as_default</span><span class="p">():</span>
+        <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">variable_scope</span><span class="p">(</span><span class="s2">&quot;decoding&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">decoding_scope</span><span class="p">:</span>
+            <span class="c1"># dec_cell = tf.contrib.rnn.MultiRNNCell([tf.contrib.rnn.BasicLSTMCell(rnn_size)] * num_layers)</span>
+
+            <span class="n">dec_embed_input</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="p">[</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">sequence_length</span><span class="p">,</span> <span class="n">embedding_size</span><span class="p">])</span>
+            <span class="n">keep_prob</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+            <span class="n">target_sequence_length_p</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="p">(</span><span class="kc">None</span><span class="p">,),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;target_sequence_length&#39;</span><span class="p">)</span>
+            <span class="n">max_target_sequence_length</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_max</span><span class="p">(</span><span class="n">target_sequence_length_p</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;max_target_len&#39;</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_layers</span><span class="p">):</span>
+                <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">variable_scope</span><span class="p">(</span><span class="s1">&#39;decoder_</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">layer</span><span class="p">)):</span>
+                    <span class="n">lstm</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">rnn</span><span class="o">.</span><span class="n">LSTMCell</span><span class="p">(</span><span class="n">rnn_size</span><span class="p">,</span>
+                                                   <span class="n">initializer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">random_uniform_initializer</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+                    <span class="n">dec_cell</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">rnn</span><span class="o">.</span><span class="n">DropoutWrapper</span><span class="p">(</span><span class="n">lstm</span><span class="p">,</span>
+                                                             <span class="n">input_keep_prob</span><span class="o">=</span><span class="n">keep_prob</span><span class="p">)</span>
+
+            <span class="n">output_layer</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span>
+                                 <span class="n">kernel_initializer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">truncated_normal_initializer</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span>
+                                 <span class="n">name</span><span class="o">=</span><span class="s1">&#39;output_layer&#39;</span><span class="p">)</span>
+            <span class="c1"># output_fn = lambda x: tf.contrib.layers.fully_connected(x, vocab_size, None, scope=decoding_scope)</span>
+
+
+            <span class="n">encoder_state</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">rnn</span><span class="o">.</span><span class="n">LSTMStateTuple</span><span class="p">(</span>
+                <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">rnn_size</span><span class="p">]),</span>
+                <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">rnn_size</span><span class="p">]))</span>
+
+            <span class="n">train_decoder_output</span> <span class="o">=</span> <span class="n">decoding_layer_train</span><span class="p">(</span><span class="n">encoder_state</span><span class="p">,</span> <span class="n">dec_cell</span><span class="p">,</span>
+                                        <span class="n">dec_embed_input</span><span class="p">,</span>
+                                        <span class="n">target_sequence_length_p</span><span class="p">,</span>
+                                        <span class="n">max_target_sequence_length</span><span class="p">,</span>
+                                        <span class="n">output_layer</span><span class="p">,</span>
+                                        <span class="n">keep_prob</span><span class="p">)</span>
+
+            <span class="c1"># encoder_state, dec_cell, dec_embed_input, sequence_length,</span>
+            <span class="c1">#                      decoding_scope, output_fn, keep_prob)</span>
+
+
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">train_decoder_output</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">seq2seq</span><span class="o">.</span><span class="n">BasicDecoderOutput</span><span class="p">),</span>\
+                <span class="s1">&#39;Found wrong type: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">train_decoder_output</span><span class="p">))</span>
+
+            <span class="k">assert</span> <span class="n">train_decoder_output</span><span class="o">.</span><span class="n">rnn_output</span><span class="o">.</span><span class="n">get_shape</span><span class="p">()</span><span class="o">.</span><span class="n">as_list</span><span class="p">()</span> <span class="o">==</span> <span class="p">[</span><span class="n">batch_size</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">],</span> \
+                <span class="s1">&#39;Wrong shape returned.  Found </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">train_decoder_output</span><span class="o">.</span><span class="n">rnn_output</span><span class="o">.</span><span class="n">get_shape</span><span class="p">())</span>
+
+    <span class="n">_print_success_message</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="c1"># https://github.com/udacity/deep-learning/blob/master/language-translation/problem_unittests.py</span>
+<span class="k">def</span> <span class="nf">test_decoding_layer_infer</span><span class="p">(</span><span class="n">decoding_layer_infer</span><span class="p">):</span>
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">64</span>
+    <span class="n">vocab_size</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="n">sequence_length</span> <span class="o">=</span> <span class="mi">22</span>
+    <span class="n">embedding_size</span> <span class="o">=</span> <span class="mi">200</span>
+    <span class="n">rnn_size</span> <span class="o">=</span> <span class="mi">512</span>
+    <span class="n">num_layers</span> <span class="o">=</span> <span class="mi">3</span>
+
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span><span class="o">.</span><span class="n">as_default</span><span class="p">():</span>
+        <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">variable_scope</span><span class="p">(</span><span class="s2">&quot;decoding&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">decoding_scope</span><span class="p">:</span>
+            <span class="n">dec_embeddings</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">random_uniform</span><span class="p">([</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_size</span><span class="p">]))</span>
+
+            <span class="n">dec_embed_input</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="p">[</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">sequence_length</span><span class="p">,</span> <span class="n">embedding_size</span><span class="p">])</span>
+            <span class="n">keep_prob</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+            <span class="n">target_sequence_length_p</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="p">(</span><span class="kc">None</span><span class="p">,),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;target_sequence_length&#39;</span><span class="p">)</span>
+            <span class="n">max_target_sequence_length</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_max</span><span class="p">(</span><span class="n">target_sequence_length_p</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;max_target_len&#39;</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_layers</span><span class="p">):</span>
+                <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">variable_scope</span><span class="p">(</span><span class="s1">&#39;decoder_</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">layer</span><span class="p">)):</span>
+                    <span class="n">lstm</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">rnn</span><span class="o">.</span><span class="n">LSTMCell</span><span class="p">(</span><span class="n">rnn_size</span><span class="p">,</span>
+                                                   <span class="n">initializer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">random_uniform_initializer</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+                    <span class="n">dec_cell</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">rnn</span><span class="o">.</span><span class="n">DropoutWrapper</span><span class="p">(</span><span class="n">lstm</span><span class="p">,</span>
+                                                             <span class="n">input_keep_prob</span><span class="o">=</span><span class="n">keep_prob</span><span class="p">)</span>
+
+            <span class="n">output_layer</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span>
+                                 <span class="n">kernel_initializer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">truncated_normal_initializer</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span>
+                                 <span class="n">name</span><span class="o">=</span><span class="s1">&#39;output_layer&#39;</span><span class="p">)</span>
+            <span class="c1"># output_fn = lambda x: tf.contrib.layers.fully_connected(x, vocab_size, None, scope=decoding_scope)</span>
+
+            <span class="n">encoder_state</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">rnn</span><span class="o">.</span><span class="n">LSTMStateTuple</span><span class="p">(</span>
+                <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">rnn_size</span><span class="p">]),</span>
+                <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">rnn_size</span><span class="p">]))</span>
+
+            <span class="n">infer_logits_output</span> <span class="o">=</span> <span class="n">decoding_layer_infer</span><span class="p">(</span> <span class="n">encoder_state</span><span class="p">,</span>
+                                                        <span class="n">dec_cell</span><span class="p">,</span>
+                                                        <span class="n">dec_embeddings</span><span class="p">,</span>
+                                                        <span class="mi">1</span><span class="p">,</span>
+                                                        <span class="mi">2</span><span class="p">,</span>
+                                                        <span class="n">max_target_sequence_length</span><span class="p">,</span>
+                                                        <span class="n">vocab_size</span><span class="p">,</span>
+                                                        <span class="n">output_layer</span><span class="p">,</span>
+                                                        <span class="n">batch_size</span><span class="p">,</span>
+                                                        <span class="n">keep_prob</span><span class="p">)</span>
+
+            <span class="c1"># encoder_state, dec_cell, dec_embeddings, 10, 20,</span>
+            <span class="c1">#                     sequence_length, vocab_size, decoding_scope, output_fn, keep_prob)</span>
+
+
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">infer_logits_output</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">seq2seq</span><span class="o">.</span><span class="n">BasicDecoderOutput</span><span class="p">),</span>\
+                <span class="s1">&#39;Found wrong type: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">infer_logits_output</span><span class="p">))</span>
+
+            <span class="k">assert</span> <span class="n">infer_logits_output</span><span class="o">.</span><span class="n">sample_id</span><span class="o">.</span><span class="n">get_shape</span><span class="p">()</span><span class="o">.</span><span class="n">as_list</span><span class="p">()</span> <span class="o">==</span> <span class="p">[</span><span class="n">batch_size</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> \
+                 <span class="s1">&#39;Wrong shape returned.  Found </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">infer_logits_output</span><span class="o">.</span><span class="n">sample_id</span><span class="o">.</span><span class="n">get_shape</span><span class="p">())</span>
+
+    <span class="n">_print_success_message</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -11787,22 +12506,53 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Explore-the-Data">Explore the Data<a class="anchor-link" href="#Explore-the-Data">&#182;</a></h2><p>Play around with view_sentence_range to view different parts of the data.</p>
+<h2 id="$\mathfrak-{\color{#348ABD}-{Get-\-the-\-Data}}$">$\mathfrak {\color{#348ABD} {Get \ the \ Data}}$<a class="anchor-link" href="#$\mathfrak-{\color{#348ABD}-{Get-\-the-\-Data}}$">&#182;</a></h2><p>Since translating the whole language of English to French will take lots of time to train, we have provided you with a small portion of the English corpus.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">view_sentence_range</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">DON&#39;T MODIFY ANYTHING IN THIS CELL</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">source_path</span> <span class="o">=</span> <span class="s1">&#39;data/small_vocab_en&#39;</span>
+<span class="n">target_path</span> <span class="o">=</span> <span class="s1">&#39;data/small_vocab_fr&#39;</span>
+<span class="n">source_text</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">source_path</span><span class="p">)</span>
+<span class="n">target_text</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">target_path</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="$\mathfrak-{\color{#348ABD}-{Explore-\-the-\-Data}}$">$\mathfrak {\color{#348ABD} {Explore \ the \ Data}}$<a class="anchor-link" href="#$\mathfrak-{\color{#348ABD}-{Explore-\-the-\-Data}}$">&#182;</a></h2><p>Play around with view_sentence_range to view different parts of the data.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="n">view_sentence_range</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">DON&#39;T MODIFY ANYTHING IN THIS CELL</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dataset Stats&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Roughly the number of unique words: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">({</span><span class="n">word</span><span class="p">:</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">source_text</span><span class="o">.</span><span class="n">split</span><span class="p">()})))</span>
@@ -11824,13 +12574,54 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Dataset Stats
+Roughly the number of unique words: 227
+Number of sentences: 137860
+Average number of words in a sentence: 13.225373567387205
+
+English sentences 0 to 10:
+new jersey is sometimes quiet during autumn , and it is snowy in april .
+the united states is usually chilly during july , and it is usually freezing in november .
+california is usually quiet during march , and it is usually hot in june .
+the united states is sometimes mild during june , and it is cold in september .
+your least liked fruit is the grape , but my least liked is the apple .
+his favorite fruit is the orange , but my favorite is the grape .
+paris is relaxing during december , but it is usually chilly in july .
+new jersey is busy during spring , and it is never hot in march .
+our least liked fruit is the lemon , but my least liked is the grape .
+the united states is sometimes busy during january , and it is sometimes warm in november .
+
+French sentences 0 to 10:
+new jersey est parfois calme pendant l&#39; automne , et il est neigeux en avril .
+les états-unis est généralement froid en juillet , et il gèle habituellement en novembre .
+california est généralement calme en mars , et il est généralement chaud en juin .
+les états-unis est parfois légère en juin , et il fait froid en septembre .
+votre moins aimé fruit est le raisin , mais mon moins aimé est la pomme .
+son fruit préféré est l&#39;orange , mais mon préféré est le raisin .
+paris est relaxant en décembre , mais il est généralement froid en juillet .
+new jersey est occupé au printemps , et il est jamais chaude en mars .
+notre fruit est moins aimé le citron , mais mon moins aimé est le raisin .
+les états-unis est parfois occupé en janvier , et il est parfois chaud en novembre .
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Implement-Preprocessing-Function">Implement Preprocessing Function<a class="anchor-link" href="#Implement-Preprocessing-Function">&#182;</a></h2><h3 id="Text-to-Word-Ids">Text to Word Ids<a class="anchor-link" href="#Text-to-Word-Ids">&#182;</a></h3><p>As you did with other RNNs, you must turn the text into a number so the computer can understand it. In the function <code>text_to_ids()</code>, you'll turn <code>source_text</code> and <code>target_text</code> from words to ids.  However, you need to add the <code>&lt;EOS&gt;</code> word id at the end of <code>target_text</code>.  This will help the neural network predict when the sentence should end.</p>
+<h2 id="$\mathfrak-{\color{#348ABD}-{Implement-\-Preprocessing-\-Function}}$">$\mathfrak {\color{#348ABD} {Implement \ Preprocessing \ Function}}$<a class="anchor-link" href="#$\mathfrak-{\color{#348ABD}-{Implement-\-Preprocessing-\-Function}}$">&#182;</a></h2><h3 id="Text-to-Word-Ids">Text to Word Ids<a class="anchor-link" href="#Text-to-Word-Ids">&#182;</a></h3><p>As you did with other RNNs, you must turn the text into a number so the computer can understand it. In the function <code>text_to_ids()</code>, you'll turn <code>source_text</code> and <code>target_text</code> from words to ids.  However, you need to add the <code>&lt;EOS&gt;</code> word id at the end of <code>target_text</code>.  This will help the neural network predict when the sentence should end.</p>
 <p>You can get the <code>&lt;EOS&gt;</code> word id by doing:</p>
 <div class="highlight"><pre><span></span><span class="n">target_vocab_to_int</span><span class="p">[</span><span class="s1">&#39;&lt;EOS&gt;&#39;</span><span class="p">]</span>
 </pre></div>
@@ -11844,7 +12635,8 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">text_to_ids</span><span class="p">(</span><span class="n">source_text</span><span class="p">,</span> <span class="n">target_text</span><span class="p">,</span> <span class="n">source_vocab_to_int</span><span class="p">,</span> <span class="n">target_vocab_to_int</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="k">def</span> <span class="nf">text_to_ids</span><span class="p">(</span><span class="n">source_text</span><span class="p">,</span> <span class="n">target_text</span><span class="p">,</span> <span class="n">source_vocab_to_int</span><span class="p">,</span> <span class="n">target_vocab_to_int</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert source and target text to proper word ids</span>
 <span class="sd">    :param source_text: String that contains all the source text.</span>
@@ -11860,7 +12652,7 @@ div#notebook {
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">DON&#39;T MODIFY ANYTHING IN THIS CELL THAT IS BELOW THIS LINE</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="n">tests</span><span class="o">.</span><span class="n">test_text_to_ids</span><span class="p">(</span><span class="n">text_to_ids</span><span class="p">)</span>
+<span class="n">test_text_to_ids</span><span class="p">(</span><span class="n">text_to_ids</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -11873,7 +12665,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Preprocess-all-the-data-and-save-it">Preprocess all the data and save it<a class="anchor-link" href="#Preprocess-all-the-data-and-save-it">&#182;</a></h3><p>Running the code cell below will preprocess all the data and save it to file.</p>
+<h3 id="Preprocess-All-the-Data-and-Save-It">Preprocess All the Data and Save It<a class="anchor-link" href="#Preprocess-All-the-Data-and-Save-It">&#182;</a></h3><p>Running the code cell below will preprocess all the data and save it to file.</p>
 
 </div>
 </div>
@@ -11883,10 +12675,11 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">DON&#39;T MODIFY ANYTHING IN THIS CELL</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="n">helper</span><span class="o">.</span><span class="n">preprocess_and_save_data</span><span class="p">(</span><span class="n">source_path</span><span class="p">,</span> <span class="n">target_path</span><span class="p">,</span> <span class="n">text_to_ids</span><span class="p">)</span>
+<span class="n">preprocess_and_save_data</span><span class="p">(</span><span class="n">source_path</span><span class="p">,</span> <span class="n">target_path</span><span class="p">,</span> <span class="n">text_to_ids</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -11899,7 +12692,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Check-Point">Check Point<a class="anchor-link" href="#Check-Point">&#182;</a></h1><p>This is your first checkpoint. If you ever decide to come back to this notebook or have to restart the notebook, you can start from here. The preprocessed data has been saved to disk.</p>
+<h2 id="$\mathfrak-{\color{#348ABD}-{Checkpoint-\-1}}$">$\mathfrak {\color{#348ABD} {Checkpoint \ 1}}$<a class="anchor-link" href="#$\mathfrak-{\color{#348ABD}-{Checkpoint-\-1}}$">&#182;</a></h2><p>This is your first checkpoint. If you ever decide to come back to this notebook or have to restart the notebook, you can start from here. The preprocessed data has been saved to disk.</p>
 
 </div>
 </div>
@@ -11909,14 +12702,11 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">DON&#39;T MODIFY ANYTHING IN THIS CELL</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">helper</span>
-<span class="kn">import</span> <span class="nn">problem_unittests</span> <span class="k">as</span> <span class="nn">tests</span>
-
-<span class="p">(</span><span class="n">source_int_text</span><span class="p">,</span> <span class="n">target_int_text</span><span class="p">),</span> <span class="p">(</span><span class="n">source_vocab_to_int</span><span class="p">,</span> <span class="n">target_vocab_to_int</span><span class="p">),</span> <span class="n">_</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">load_preprocess</span><span class="p">()</span>
+<span class="p">(</span><span class="n">source_int_text</span><span class="p">,</span> <span class="n">target_int_text</span><span class="p">),</span> <span class="p">(</span><span class="n">source_vocab_to_int</span><span class="p">,</span> <span class="n">target_vocab_to_int</span><span class="p">),</span> <span class="n">_</span> <span class="o">=</span> <span class="n">load_preprocess</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -11939,13 +12729,10 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">DON&#39;T MODIFY ANYTHING IN THIS CELL</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">distutils.version</span> <span class="k">import</span> <span class="n">LooseVersion</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
-<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-<span class="kn">from</span> <span class="nn">tensorflow.python.layers.core</span> <span class="k">import</span> <span class="n">Dense</span>
 
 <span class="c1"># Check TensorFlow Version</span>
 <span class="k">assert</span> <span class="n">LooseVersion</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">LooseVersion</span><span class="p">(</span><span class="s1">&#39;1.1&#39;</span><span class="p">),</span> <span class="s1">&#39;Please use TensorFlow version 1.1 or newer&#39;</span>
@@ -11968,7 +12755,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Build-the-Neural-Network">Build the Neural Network<a class="anchor-link" href="#Build-the-Neural-Network">&#182;</a></h2><p>You'll build the components necessary to build a Sequence-to-Sequence model by implementing the following functions below:</p>
+<h2 id="$\mathfrak-{\color{#348ABD}-{Build-\-the-\-Neural-\-Network}}$">$\mathfrak {\color{#348ABD} {Build \ the \ Neural \ Network}}$<a class="anchor-link" href="#$\mathfrak-{\color{#348ABD}-{Build-\-the-\-Neural-\-Network}}$">&#182;</a></h2><p>You'll build the components necessary to build a Sequence-to-Sequence model by implementing the following functions below:</p>
 <ul>
 <li><code>model_inputs</code></li>
 <li><code>process_decoder_input</code></li>
@@ -11998,7 +12785,8 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">model_inputs</span><span class="p">():</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="k">def</span> <span class="nf">model_inputs</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create TF Placeholders for input, targets, learning rate, and lengths of source and target sequences.</span>
 <span class="sd">    :return: Tuple (input, targets, learning rate, keep probability, target sequence length,</span>
@@ -12007,11 +12795,10 @@ div#notebook {
     <span class="c1"># TODO: Implement Function</span>
     <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
 
-
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">DON&#39;T MODIFY ANYTHING IN THIS CELL THAT IS BELOW THIS LINE</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="n">tests</span><span class="o">.</span><span class="n">test_model_inputs</span><span class="p">(</span><span class="n">model_inputs</span><span class="p">)</span>
+<span class="n">test_model_inputs</span><span class="p">(</span><span class="n">model_inputs</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12034,7 +12821,8 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">process_decoder_input</span><span class="p">(</span><span class="n">target_data</span><span class="p">,</span> <span class="n">target_vocab_to_int</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="k">def</span> <span class="nf">process_decoder_input</span><span class="p">(</span><span class="n">target_data</span><span class="p">,</span> <span class="n">target_vocab_to_int</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Preprocess target data for encoding</span>
 <span class="sd">    :param target_data: Target Placehoder</span>
@@ -12048,7 +12836,7 @@ div#notebook {
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">DON&#39;T MODIFY ANYTHING IN THIS CELL THAT IS BELOW THIS LINE</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="n">tests</span><span class="o">.</span><span class="n">test_process_encoding_input</span><span class="p">(</span><span class="n">process_decoder_input</span><span class="p">)</span>
+<span class="n">test_process_encoding_input</span><span class="p">(</span><span class="n">process_decoder_input</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12076,9 +12864,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">imp</span> <span class="k">import</span> <span class="n">reload</span>
-<span class="n">reload</span><span class="p">(</span><span class="n">tests</span><span class="p">)</span>
-
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
 <span class="k">def</span> <span class="nf">encoding_layer</span><span class="p">(</span><span class="n">rnn_inputs</span><span class="p">,</span> <span class="n">rnn_size</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">,</span> <span class="n">keep_prob</span><span class="p">,</span> 
                    <span class="n">source_sequence_length</span><span class="p">,</span> <span class="n">source_vocab_size</span><span class="p">,</span> 
                    <span class="n">encoding_embedding_size</span><span class="p">):</span>
@@ -12099,7 +12885,7 @@ div#notebook {
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">DON&#39;T MODIFY ANYTHING IN THIS CELL THAT IS BELOW THIS LINE</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="n">tests</span><span class="o">.</span><span class="n">test_encoding_layer</span><span class="p">(</span><span class="n">encoding_layer</span><span class="p">)</span>
+<span class="n">test_encoding_layer</span><span class="p">(</span><span class="n">encoding_layer</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12127,7 +12913,8 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">decoding_layer_train</span><span class="p">(</span><span class="n">encoder_state</span><span class="p">,</span> <span class="n">dec_cell</span><span class="p">,</span> <span class="n">dec_embed_input</span><span class="p">,</span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="k">def</span> <span class="nf">decoding_layer_train</span><span class="p">(</span><span class="n">encoder_state</span><span class="p">,</span> <span class="n">dec_cell</span><span class="p">,</span> <span class="n">dec_embed_input</span><span class="p">,</span> 
                          <span class="n">target_sequence_length</span><span class="p">,</span> <span class="n">max_summary_length</span><span class="p">,</span> 
                          <span class="n">output_layer</span><span class="p">,</span> <span class="n">keep_prob</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -12144,12 +12931,10 @@ div#notebook {
     <span class="c1"># TODO: Implement Function</span>
     <span class="k">return</span> <span class="kc">None</span>
 
-
-
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">DON&#39;T MODIFY ANYTHING IN THIS CELL THAT IS BELOW THIS LINE</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="n">tests</span><span class="o">.</span><span class="n">test_decoding_layer_train</span><span class="p">(</span><span class="n">decoding_layer_train</span><span class="p">)</span>
+<span class="n">test_decoding_layer_train</span><span class="p">(</span><span class="n">decoding_layer_train</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12177,7 +12962,8 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">decoding_layer_infer</span><span class="p">(</span><span class="n">encoder_state</span><span class="p">,</span> <span class="n">dec_cell</span><span class="p">,</span> <span class="n">dec_embeddings</span><span class="p">,</span> <span class="n">start_of_sequence_id</span><span class="p">,</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="k">def</span> <span class="nf">decoding_layer_infer</span><span class="p">(</span><span class="n">encoder_state</span><span class="p">,</span> <span class="n">dec_cell</span><span class="p">,</span> <span class="n">dec_embeddings</span><span class="p">,</span> <span class="n">start_of_sequence_id</span><span class="p">,</span>
                          <span class="n">end_of_sequence_id</span><span class="p">,</span> <span class="n">max_target_sequence_length</span><span class="p">,</span>
                          <span class="n">vocab_size</span><span class="p">,</span> <span class="n">output_layer</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">keep_prob</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -12198,12 +12984,10 @@ div#notebook {
     <span class="c1"># TODO: Implement Function</span>
     <span class="k">return</span> <span class="kc">None</span>
 
-
-
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">DON&#39;T MODIFY ANYTHING IN THIS CELL THAT IS BELOW THIS LINE</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="n">tests</span><span class="o">.</span><span class="n">test_decoding_layer_infer</span><span class="p">(</span><span class="n">decoding_layer_infer</span><span class="p">)</span>
+<span class="n">test_decoding_layer_infer</span><span class="p">(</span><span class="n">decoding_layer_infer</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12234,7 +13018,8 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">decoding_layer</span><span class="p">(</span><span class="n">dec_input</span><span class="p">,</span> <span class="n">encoder_state</span><span class="p">,</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="k">def</span> <span class="nf">decoding_layer</span><span class="p">(</span><span class="n">dec_input</span><span class="p">,</span> <span class="n">encoder_state</span><span class="p">,</span>
                    <span class="n">target_sequence_length</span><span class="p">,</span> <span class="n">max_target_sequence_length</span><span class="p">,</span>
                    <span class="n">rnn_size</span><span class="p">,</span>
                    <span class="n">num_layers</span><span class="p">,</span> <span class="n">target_vocab_to_int</span><span class="p">,</span> <span class="n">target_vocab_size</span><span class="p">,</span>
@@ -12257,12 +13042,10 @@ div#notebook {
     <span class="c1"># TODO: Implement Function</span>
     <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
 
-
-
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">DON&#39;T MODIFY ANYTHING IN THIS CELL THAT IS BELOW THIS LINE</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="n">tests</span><span class="o">.</span><span class="n">test_decoding_layer</span><span class="p">(</span><span class="n">decoding_layer</span><span class="p">)</span>
+<span class="n">test_decoding_layer</span><span class="p">(</span><span class="n">decoding_layer</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12290,7 +13073,8 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">seq2seq_model</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">target_data</span><span class="p">,</span> <span class="n">keep_prob</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="k">def</span> <span class="nf">seq2seq_model</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">target_data</span><span class="p">,</span> <span class="n">keep_prob</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span>
                   <span class="n">source_sequence_length</span><span class="p">,</span> <span class="n">target_sequence_length</span><span class="p">,</span>
                   <span class="n">max_target_sentence_length</span><span class="p">,</span>
                   <span class="n">source_vocab_size</span><span class="p">,</span> <span class="n">target_vocab_size</span><span class="p">,</span>
@@ -12316,11 +13100,10 @@ div#notebook {
     <span class="c1"># TODO: Implement Function</span>
     <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
 
-
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">DON&#39;T MODIFY ANYTHING IN THIS CELL THAT IS BELOW THIS LINE</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="n">tests</span><span class="o">.</span><span class="n">test_seq2seq_model</span><span class="p">(</span><span class="n">seq2seq_model</span><span class="p">)</span>
+<span class="n">test_seq2seq_model</span><span class="p">(</span><span class="n">seq2seq_model</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12333,7 +13116,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Neural-Network-Training">Neural Network Training<a class="anchor-link" href="#Neural-Network-Training">&#182;</a></h2><h3 id="Hyperparameters">Hyperparameters<a class="anchor-link" href="#Hyperparameters">&#182;</a></h3><p>Tune the following parameters:</p>
+<h2 id="$\mathfrak-{\color{#348ABD}-{Neural-\-Network-\-Training}}$">$\mathfrak {\color{#348ABD} {Neural \ Network \ Training}}$<a class="anchor-link" href="#$\mathfrak-{\color{#348ABD}-{Neural-\-Network-\-Training}}$">&#182;</a></h2><h3 id="Hyperparameters">Hyperparameters<a class="anchor-link" href="#Hyperparameters">&#182;</a></h3><p>Tune the following parameters:</p>
 <ul>
 <li>Set <code>epochs</code> to the number of epochs.</li>
 <li>Set <code>batch_size</code> to the batch size.</li>
@@ -12354,20 +13137,14 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Number of Epochs</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
 <span class="n">epochs</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="c1"># Batch Size</span>
 <span class="n">batch_size</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="c1"># RNN Size</span>
 <span class="n">rnn_size</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="c1"># Number of Layers</span>
 <span class="n">num_layers</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="c1"># Embedding Size</span>
 <span class="n">encoding_embedding_size</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="n">decoding_embedding_size</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="c1"># Learning Rate</span>
 <span class="n">learning_rate</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="c1"># Dropout Keep Probability</span>
 <span class="n">keep_probability</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="n">display_step</span> <span class="o">=</span> <span class="kc">None</span>
 </pre></div>
@@ -12392,7 +13169,8 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">DON&#39;T MODIFY ANYTHING IN THIS CELL</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="n">save_path</span> <span class="o">=</span> <span class="s1">&#39;checkpoints/dev&#39;</span>
@@ -12463,14 +13241,14 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">DON&#39;T MODIFY ANYTHING IN THIS CELL</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="k">def</span> <span class="nf">pad_sentence_batch</span><span class="p">(</span><span class="n">sentence_batch</span><span class="p">,</span> <span class="n">pad_int</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Pad sentences with &lt;PAD&gt; so that each sentence of a batch has the same length&quot;&quot;&quot;</span>
     <span class="n">max_sentence</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span> <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentence_batch</span><span class="p">])</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">sentence</span> <span class="o">+</span> <span class="p">[</span><span class="n">pad_int</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">max_sentence</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">sentence</span><span class="p">))</span> <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentence_batch</span><span class="p">]</span>
-
 
 <span class="k">def</span> <span class="nf">get_batches</span><span class="p">(</span><span class="n">sources</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">source_pad_int</span><span class="p">,</span> <span class="n">target_pad_int</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Batch targets, sources, and the lengths of their sentences together&quot;&quot;&quot;</span>
@@ -12517,7 +13295,8 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">DON&#39;T MODIFY ANYTHING IN THIS CELL</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="k">def</span> <span class="nf">get_accuracy</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">logits</span><span class="p">):</span>
@@ -12543,11 +13322,10 @@ div#notebook {
 <span class="n">train_target</span> <span class="o">=</span> <span class="n">target_int_text</span><span class="p">[</span><span class="n">batch_size</span><span class="p">:]</span>
 <span class="n">valid_source</span> <span class="o">=</span> <span class="n">source_int_text</span><span class="p">[:</span><span class="n">batch_size</span><span class="p">]</span>
 <span class="n">valid_target</span> <span class="o">=</span> <span class="n">target_int_text</span><span class="p">[:</span><span class="n">batch_size</span><span class="p">]</span>
-<span class="p">(</span><span class="n">valid_sources_batch</span><span class="p">,</span> <span class="n">valid_targets_batch</span><span class="p">,</span> <span class="n">valid_sources_lengths</span><span class="p">,</span> <span class="n">valid_targets_lengths</span> <span class="p">)</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">get_batches</span><span class="p">(</span><span class="n">valid_source</span><span class="p">,</span>
-                                                                                                             <span class="n">valid_target</span><span class="p">,</span>
-                                                                                                             <span class="n">batch_size</span><span class="p">,</span>
-                                                                                                             <span class="n">source_vocab_to_int</span><span class="p">[</span><span class="s1">&#39;&lt;PAD&gt;&#39;</span><span class="p">],</span>
-                                                                                                             <span class="n">target_vocab_to_int</span><span class="p">[</span><span class="s1">&#39;&lt;PAD&gt;&#39;</span><span class="p">]))</span>                                                                                                  
+
+<span class="p">(</span><span class="n">valid_sources_batch</span><span class="p">,</span> <span class="n">valid_targets_batch</span><span class="p">,</span> <span class="n">valid_sources_lengths</span><span class="p">,</span> <span class="n">valid_targets_lengths</span> <span class="p">)</span> <span class="o">=</span> \ 
+<span class="nb">next</span><span class="p">(</span><span class="n">get_batches</span><span class="p">(</span><span class="n">valid_source</span><span class="p">,</span> <span class="n">valid_target</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">source_vocab_to_int</span><span class="p">[</span><span class="s1">&#39;&lt;PAD&gt;&#39;</span><span class="p">],</span> <span class="n">target_vocab_to_int</span><span class="p">[</span><span class="s1">&#39;&lt;PAD&gt;&#39;</span><span class="p">]))</span>
+
 <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">train_graph</span><span class="p">)</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
     <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">global_variables_initializer</span><span class="p">())</span>
 
@@ -12566,9 +13344,7 @@ div#notebook {
                  <span class="n">source_sequence_length</span><span class="p">:</span> <span class="n">sources_lengths</span><span class="p">,</span>
                  <span class="n">keep_prob</span><span class="p">:</span> <span class="n">keep_probability</span><span class="p">})</span>
 
-
             <span class="k">if</span> <span class="n">batch_i</span> <span class="o">%</span> <span class="n">display_step</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">batch_i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-
 
                 <span class="n">batch_train_logits</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
                     <span class="n">inference_logits</span><span class="p">,</span>
@@ -12576,7 +13352,6 @@ div#notebook {
                      <span class="n">source_sequence_length</span><span class="p">:</span> <span class="n">sources_lengths</span><span class="p">,</span>
                      <span class="n">target_sequence_length</span><span class="p">:</span> <span class="n">targets_lengths</span><span class="p">,</span>
                      <span class="n">keep_prob</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">})</span>
-
 
                 <span class="n">batch_valid_logits</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
                     <span class="n">inference_logits</span><span class="p">,</span>
@@ -12618,11 +13393,12 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">DON&#39;T MODIFY ANYTHING IN THIS CELL</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="c1"># Save parameters for checkpoint</span>
-<span class="n">helper</span><span class="o">.</span><span class="n">save_params</span><span class="p">(</span><span class="n">save_path</span><span class="p">)</span>
+<span class="n">save_params</span><span class="p">(</span><span class="n">save_path</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12635,7 +13411,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Checkpoint">Checkpoint<a class="anchor-link" href="#Checkpoint">&#182;</a></h1>
+<h2 id="$\mathfrak-{\color{#348ABD}-{Checkpoint-\-2}}$">$\mathfrak {\color{#348ABD} {Checkpoint \ 2}}$<a class="anchor-link" href="#$\mathfrak-{\color{#348ABD}-{Checkpoint-\-2}}$">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -12644,16 +13420,12 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">DON&#39;T MODIFY ANYTHING IN THIS CELL</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">helper</span>
-<span class="kn">import</span> <span class="nn">problem_unittests</span> <span class="k">as</span> <span class="nn">tests</span>
-
-<span class="n">_</span><span class="p">,</span> <span class="p">(</span><span class="n">source_vocab_to_int</span><span class="p">,</span> <span class="n">target_vocab_to_int</span><span class="p">),</span> <span class="p">(</span><span class="n">source_int_to_vocab</span><span class="p">,</span> <span class="n">target_int_to_vocab</span><span class="p">)</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">load_preprocess</span><span class="p">()</span>
-<span class="n">load_path</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">load_params</span><span class="p">()</span>
+<span class="n">_</span><span class="p">,</span> <span class="p">(</span><span class="n">source_vocab_to_int</span><span class="p">,</span> <span class="n">target_vocab_to_int</span><span class="p">),</span> <span class="p">(</span><span class="n">source_int_to_vocab</span><span class="p">,</span> <span class="n">target_int_to_vocab</span><span class="p">)</span> <span class="o">=</span> <span class="n">load_preprocess</span><span class="p">()</span>
+<span class="n">load_path</span> <span class="o">=</span> <span class="n">load_params</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -12666,7 +13438,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Sentence-to-Sequence">Sentence to Sequence<a class="anchor-link" href="#Sentence-to-Sequence">&#182;</a></h2><p>To feed a sentence into the model for translation, you first need to preprocess it.  Implement the function <code>sentence_to_seq()</code> to preprocess new sentences.</p>
+<h2 id="$\mathfrak-{\color{#348ABD}-{-Sentence-\-to-\-Sequence}}$">$\mathfrak {\color{#348ABD} { Sentence \ to \ Sequence}}$<a class="anchor-link" href="#$\mathfrak-{\color{#348ABD}-{-Sentence-\-to-\-Sequence}}$">&#182;</a></h2><p>To feed a sentence into the model for translation, you first need to preprocess it.  Implement the function <code>sentence_to_seq()</code> to preprocess new sentences.</p>
 <ul>
 <li>Convert the sentence to lowercase</li>
 <li>Convert words into ids using <code>vocab_to_int</code><ul>
@@ -12683,7 +13455,8 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">sentence_to_seq</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="n">vocab_to_int</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="k">def</span> <span class="nf">sentence_to_seq</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="n">vocab_to_int</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert a sentence to a sequence of ids</span>
 <span class="sd">    :param sentence: String</span>
@@ -12693,11 +13466,10 @@ div#notebook {
     <span class="c1"># TODO: Implement Function</span>
     <span class="k">return</span> <span class="kc">None</span>
 
-
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">DON&#39;T MODIFY ANYTHING IN THIS CELL THAT IS BELOW THIS LINE</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="n">tests</span><span class="o">.</span><span class="n">test_sentence_to_seq</span><span class="p">(</span><span class="n">sentence_to_seq</span><span class="p">)</span>
+<span class="n">test_sentence_to_seq</span><span class="p">(</span><span class="n">sentence_to_seq</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12710,7 +13482,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Translate">Translate<a class="anchor-link" href="#Translate">&#182;</a></h2><p>This will translate <code>translate_sentence</code> from English to French.</p>
+<h2 id="$\mathfrak-{\color{#348ABD}-{Translate}}$">$\mathfrak {\color{#348ABD} {Translate}}$<a class="anchor-link" href="#$\mathfrak-{\color{#348ABD}-{Translate}}$">&#182;</a></h2><p>This will translate <code>translate_sentence</code> from English to French.</p>
 
 </div>
 </div>
@@ -12720,8 +13492,8 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">translate_sentence</span> <span class="o">=</span> <span class="s1">&#39;he saw a old yellow truck .&#39;</span>
-
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="n">translate_sentence</span> <span class="o">=</span> <span class="s1">&#39;he saw a old yellow truck .&#39;</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">DON&#39;T MODIFY ANYTHING IN THIS CELL</span>
@@ -12764,9 +13536,18 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Imperfect-Translation">Imperfect Translation<a class="anchor-link" href="#Imperfect-Translation">&#182;</a></h2><p>You might notice that some sentences translate better than others.  Since the dataset you're using only has a vocabulary of 227 English words of the thousands that you use, you're only going to see good results using these words.  For this project, you don't need a perfect translation. However, if you want to create a better translation model, you'll need better data.</p>
+<h2 id="$\mathfrak-{\color{#348ABD}-{Imperfect-\-Translation}}$">$\mathfrak {\color{#348ABD} {Imperfect \ Translation}}$<a class="anchor-link" href="#$\mathfrak-{\color{#348ABD}-{Imperfect-\-Translation}}$">&#182;</a></h2><p>You might notice that some sentences translate better than others.  Since the dataset you're using only has a vocabulary of 227 English words of the thousands that you use, you're only going to see good results using these words.  For this project, you don't need a perfect translation. However, if you want to create a better translation model, you'll need better data.</p>
 <p>You can train on the <a href="http://www.statmt.org/wmt10/training-giga-fren.tar">WMT10 French-English corpus</a>.  This dataset has more vocabulary and richer in topics discussed.  However, this will take you days to train, so make sure you've a GPU and the neural network is performing well on dataset we provided.  Just make sure you play with the WMT10 corpus after you've submitted this project.</p>
-<h2 id="Submitting-This-Project">Submitting This Project<a class="anchor-link" href="#Submitting-This-Project">&#182;</a></h2><p>When submitting this project, make sure to run all the cells before saving the notebook. Save the notebook file as "dlnd_language_translation.ipynb" and save it as a HTML file under "File" -&gt; "Download as". Include the "helper.py" and "problem_unittests.py" files in your submission.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="$\mathfrak-{\color{#348ABD}-{Submitting-\-This-\-Project}}$">$\mathfrak {\color{#348ABD} {Submitting \ This \ Project}}$<a class="anchor-link" href="#$\mathfrak-{\color{#348ABD}-{Submitting-\-This-\-Project}}$">&#182;</a></h2><p>When submitting this project, make sure to run all the cells before saving the notebook. Save the notebook file as "dlnd_language_translation.ipynb" and save it as a HTML file under "File" -&gt; "Download as". Include the "helper.py" and "problem_unittests.py" files in your submission.</p>
 
 </div>
 </div>
