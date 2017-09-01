@@ -57,7 +57,10 @@ https://github.com/OlgaBelitskaya/resume-builder/blob/master/Exercises_Technical
 - https://olgabelitskaya.github.io/MLE_ND_P5_V0_S2.html
 - https://olgabelitskaya.github.io/MLE_ND_P5_V0_S3.html
 
-#### P6: Capstone Project https://olgabelitskaya.github.io/MLE_ND_P6_V0.html
+#### P6: Capstone Project 
+- https://olgabelitskaya.github.io/MLE_ND_P6_V0.html
+- https://olgabelitskaya.github.io/MLE_ND_P6_V1.html
+
 #### P7: Building a Student Intervention System https://olgabelitskaya.github.io/MLE_ND_P7_V0.html
 #### P8: Analyzing the NYC Subway Dataset https://olgabelitskaya.github.io/MLE_ND_P8_V0.html
 #### P9: Image Classification 
