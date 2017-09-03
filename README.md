@@ -91,6 +91,7 @@ https://olgabelitskaya.github.io/README_EXERCISES.html
 #### Keras Python https://olgabelitskaya.github.io/keras_cookbook.html
 #### Keras R https://olgabelitskaya.github.io/keras_cookbook_r.html
 #### Sklearn Python https://olgabelitskaya.github.io/sklearn_cookbook.html
+#### OpenCV Python https://olgabelitskaya.github.io/opencv_cookbook.html
 
 ---
 # &#x1F4DD; &nbsp;  Other Web Links:
@@ -114,10 +115,14 @@ https://olgabelitskaya.github.io/README_EXERCISES.html
 ## &#x1F4CB; &nbsp; GitHub gists: https://gist.github.com/OlgaBelitskaya
 
 ## &#x1F4CB; &nbsp; Pages on http://bl.ocks.org/ :
-Olga Belitskaya’s Block 
+Olga Belitskaya’s Block
+
 - Visualization. Map I: http://bl.ocks.org/OlgaBelitskaya/bcc84d52267612a32b2a5bf79ae11b94
 - Visualization. Map II: http://bl.ocks.org/OlgaBelitskaya/de4685ce8630c2ea00229750097e1fb4
 - Visualization. Interpolation: http://bl.ocks.org/OlgaBelitskaya/aec204a67eec24cec8568258395ce62b
+- Visualization. Multiline Chart: 
+  - https://bl.ocks.org/OlgaBelitskaya/2ec3804fd98d4cbd86e28eed38cddbdb
+  - https://olgabelitskaya.github.io/multiline.html
 
 ## &#x1F4CB; &nbsp; Cocal.com Projects: 
 https://cocalc.com/projects
