@@ -11787,8 +11787,9 @@ div#notebook {
 <li><a href="#step7">Step 7</a>: Test Your Algorithm</li>
 </ul>
 <h3 id="Code-Tools-and-Links">Code Tools and Links<a class="anchor-link" href="#Code-Tools-and-Links">&#182;</a></h3><ul>
-<li><a href="https://machinelearningmastery.com/save-load-keras-deep-learning-models/">https://machinelearningmastery.com/save-load-keras-deep-learning-models/</a></li>
-<li><a href="https://flyyufelix.github.io/2016/10/08/fine-tuning-in-keras-part2.html">https://flyyufelix.github.io/2016/10/08/fine-tuning-in-keras-part2.html</a></li>
+<li><a href="https://machinelearningmastery.com/save-load-keras-deep-learning-models/">Save and Load Your Keras Deep Learning Models</a></li>
+<li><a href="https://machinelearningmastery.com/check-point-deep-learning-models-keras/">How to Check-Point Deep Learning Models in Keras</a></li>
+<li><a href="https://medium.com/towards-data-science/https-medium-com-manishchablani-useful-keras-features-4bac0724734c">Useful Keras Features</a></li>
 </ul>
 
 </div>
@@ -11868,15 +11869,17 @@ type="submit" value="Click to display or hide code cells">
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
 <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">load_files</span>       
 <span class="kn">from</span> <span class="nn">keras.utils</span> <span class="k">import</span> <span class="n">np_utils</span>
 <span class="kn">from</span> <span class="nn">keras.preprocessing</span> <span class="k">import</span> <span class="n">image</span> <span class="k">as</span> <span class="n">ks_img</span>
+
 <span class="kn">from</span> <span class="nn">keras.applications.resnet50</span> <span class="k">import</span> <span class="n">ResNet50</span>
 <span class="kn">from</span> <span class="nn">keras.applications.resnet50</span> <span class="k">import</span> <span class="n">preprocess_input</span><span class="p">,</span> <span class="n">decode_predictions</span>
+
 <span class="kn">from</span> <span class="nn">keras.layers</span> <span class="k">import</span> <span class="n">Conv2D</span><span class="p">,</span> <span class="n">MaxPooling2D</span><span class="p">,</span> <span class="n">GlobalAveragePooling2D</span>
 <span class="kn">from</span> <span class="nn">keras.layers</span> <span class="k">import</span> <span class="n">Dropout</span><span class="p">,</span> <span class="n">Flatten</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Activation</span>
 <span class="kn">from</span> <span class="nn">keras.models</span> <span class="k">import</span> <span class="n">Sequential</span><span class="p">,</span> <span class="n">load_model</span>
@@ -11907,6 +11910,20 @@ type="submit" value="Click to display or hide code cells">
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Using TensorFlow backend.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -11920,23 +11937,23 @@ type="submit" value="Click to display or hide code cells">
 <span class="c1"># vgg16.py, vgg19.py, resnet50.py, xception.py, inception_v3.py</span>
 
 <span class="k">def</span> <span class="nf">extract_VGG16</span><span class="p">(</span><span class="n">tensor</span><span class="p">):</span>
-    <span class="kn">from</span> <span class="nn">vgg16</span> <span class="k">import</span> <span class="n">VGG16</span><span class="p">,</span> <span class="n">preprocess_input</span>
+    <span class="kn">from</span> <span class="nn">keras.applications.vgg16</span> <span class="k">import</span> <span class="n">VGG16</span><span class="p">,</span> <span class="n">preprocess_input</span>
     <span class="k">return</span> <span class="n">VGG16</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="s1">&#39;imagenet&#39;</span><span class="p">,</span> <span class="n">include_top</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">preprocess_input</span><span class="p">(</span><span class="n">tensor</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">extract_VGG19</span><span class="p">(</span><span class="n">tensor</span><span class="p">):</span>
-    <span class="kn">from</span> <span class="nn">vgg19</span> <span class="k">import</span> <span class="n">VGG19</span><span class="p">,</span> <span class="n">preprocess_input</span>
+    <span class="kn">from</span> <span class="nn">keras.applications.vgg19</span> <span class="k">import</span> <span class="n">VGG19</span><span class="p">,</span> <span class="n">preprocess_input</span>
     <span class="k">return</span> <span class="n">VGG19</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="s1">&#39;imagenet&#39;</span><span class="p">,</span> <span class="n">include_top</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">preprocess_input</span><span class="p">(</span><span class="n">tensor</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">extract_Resnet50</span><span class="p">(</span><span class="n">tensor</span><span class="p">):</span>
-    <span class="kn">from</span> <span class="nn">resnet50</span> <span class="k">import</span> <span class="n">ResNet50</span><span class="p">,</span> <span class="n">preprocess_input</span>
+    <span class="kn">from</span> <span class="nn">keras.applications.resnet50</span> <span class="k">import</span> <span class="n">ResNet50</span><span class="p">,</span> <span class="n">preprocess_input</span>
     <span class="k">return</span> <span class="n">ResNet50</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="s1">&#39;imagenet&#39;</span><span class="p">,</span> <span class="n">include_top</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">preprocess_input</span><span class="p">(</span><span class="n">tensor</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">extract_Xception</span><span class="p">(</span><span class="n">tensor</span><span class="p">):</span>
-    <span class="kn">from</span> <span class="nn">xception</span> <span class="k">import</span> <span class="n">Xception</span><span class="p">,</span> <span class="n">preprocess_input</span>
+    <span class="kn">from</span> <span class="nn">keras.applications.xception</span> <span class="k">import</span> <span class="n">Xception</span><span class="p">,</span> <span class="n">preprocess_input</span>
     <span class="k">return</span> <span class="n">Xception</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="s1">&#39;imagenet&#39;</span><span class="p">,</span> <span class="n">include_top</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">preprocess_input</span><span class="p">(</span><span class="n">tensor</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">extract_InceptionV3</span><span class="p">(</span><span class="n">tensor</span><span class="p">):</span>
-    <span class="kn">from</span> <span class="nn">inception_v3</span> <span class="k">import</span> <span class="n">InceptionV3</span><span class="p">,</span> <span class="n">preprocess_input</span>
+    <span class="kn">from</span> <span class="nn">keras.applications.inception_v3</span> <span class="k">import</span> <span class="n">InceptionV3</span><span class="p">,</span> <span class="n">preprocess_input</span>
     <span class="k">return</span> <span class="n">InceptionV3</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="s1">&#39;imagenet&#39;</span><span class="p">,</span> <span class="n">include_top</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">preprocess_input</span><span class="p">(</span><span class="n">tensor</span><span class="p">))</span>
 </pre></div>
 
@@ -13535,7 +13552,7 @@ A4j/A4pEvZhiYYQHAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -13596,7 +13613,7 @@ A4j/A4pEvZhiYYQHAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -13605,22 +13622,6 @@ A4j/A4pEvZhiYYQHAAAAAElFTkSuQmCC
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[50]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;&#39;</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -13635,11 +13636,11 @@ A4j/A4pEvZhiYYQHAAAAAElFTkSuQmCC
 <span class="c1"># with open(&quot;resnet50.json&quot;, &quot;w&quot;) as json_file:</span>
 <span class="c1">#     json_file.write(ResNet50_model_json)</span>
 
-<span class="n">json_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;resnet50.json&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
-<span class="n">ResNet50_model_json</span> <span class="o">=</span> <span class="n">json_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-<span class="n">json_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="c1"># json_file = open(&#39;resnet50.json&#39;, &#39;r&#39;)</span>
+<span class="c1"># ResNet50_model_json = json_file.read()</span>
+<span class="c1"># json_file.close()</span>
 
-<span class="n">ResNet50_model</span> <span class="o">=</span> <span class="n">model_from_json</span><span class="p">(</span><span class="n">ResNet50_model_json</span><span class="p">)</span>
+<span class="c1"># ResNet50_model = model_from_json(ResNet50_model_json)</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">https://github.com/fchollet/deep-learning-models/releases/download/v0.2/\</span>
@@ -13674,16 +13675,16 @@ $$<p>Here, <code>nb_samples</code> is the number of samples, or number of images
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
-<span class="k">def</span> <span class="nf">resized_image</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">resized_image64</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
     <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
     <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">imresize</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">))</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">resized_image</span><span class="p">(</span><span class="n">train_files</span><span class="p">[</span><span class="mi">300</span><span class="p">]));</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">resized_image64</span><span class="p">(</span><span class="n">train_files</span><span class="p">[</span><span class="mi">300</span><span class="p">]));</span>
 </pre></div>
 
 </div>
@@ -14029,19 +14030,30 @@ AXOVologGv1wAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">path_to_tensor</span><span class="p">(</span><span class="n">img_path</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="k">def</span> <span class="nf">path_to_tensor</span><span class="p">(</span><span class="n">img_path</span><span class="p">):</span>
+    <span class="c1"># loads RGB image as PIL.Image.Image type</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">ks_img</span><span class="o">.</span><span class="n">load_img</span><span class="p">(</span><span class="n">img_path</span><span class="p">,</span> <span class="n">target_size</span><span class="o">=</span><span class="p">(</span><span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">))</span>
+    <span class="c1"># convert PIL.Image.Image type to 3D tensor with shape (224, 224, 3)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">ks_img</span><span class="o">.</span><span class="n">img_to_array</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="c1"># convert 3D tensor to 4D tensor with shape (1, 224, 224, 3) and return 4D tensor</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">paths_to_tensor</span><span class="p">(</span><span class="n">img_paths</span><span class="p">):</span>
+    <span class="n">list_of_tensors</span> <span class="o">=</span> <span class="p">[</span><span class="n">path_to_tensor</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span> <span class="k">for</span> <span class="n">img_path</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">img_paths</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">list_of_tensors</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">path_to_tensor2</span><span class="p">(</span><span class="n">img_path</span><span class="p">):</span>
     <span class="c1"># loads RGB image as PIL.Image.Image type</span>
     <span class="n">img</span> <span class="o">=</span> <span class="n">ks_img</span><span class="o">.</span><span class="n">load_img</span><span class="p">(</span><span class="n">img_path</span><span class="p">,</span> <span class="n">target_size</span><span class="o">=</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">))</span>
     <span class="c1"># convert PIL.Image.Image type to 3D tensor with shape (64, 64, 3)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">ks_img</span><span class="o">.</span><span class="n">img_to_array</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
     <span class="c1"># convert 3D tensor to 4D tensor with shape (1, 64, 64, 3) and return 4D tensor</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">paths_to_tensor</span><span class="p">(</span><span class="n">img_paths</span><span class="p">):</span>
-    <span class="n">list_of_tensors</span> <span class="o">=</span> <span class="p">[</span><span class="n">path_to_tensor</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span> <span class="k">for</span> <span class="n">img_path</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">img_paths</span><span class="p">)]</span>
+<span class="k">def</span> <span class="nf">paths_to_tensor2</span><span class="p">(</span><span class="n">img_paths</span><span class="p">):</span>
+    <span class="n">list_of_tensors</span> <span class="o">=</span> <span class="p">[</span><span class="n">path_to_tensor2</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span> <span class="k">for</span> <span class="n">img_path</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">img_paths</span><span class="p">)]</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">list_of_tensors</span><span class="p">)</span>
 </pre></div>
 
@@ -14064,13 +14076,17 @@ AXOVologGv1wAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
 <span class="k">def</span> <span class="nf">ResNet50_predict_labels</span><span class="p">(</span><span class="n">img_path</span><span class="p">):</span>
     <span class="c1"># returns prediction vector for image located at img_path</span>
     <span class="n">img</span> <span class="o">=</span> <span class="n">preprocess_input</span><span class="p">(</span><span class="n">path_to_tensor</span><span class="p">(</span><span class="n">img_path</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">ResNet50_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">img</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">ResNet50_predict_labels2</span><span class="p">(</span><span class="n">img_path</span><span class="p">):</span>
+    <span class="c1"># returns prediction vector for image located at img_path</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">preprocess_input</span><span class="p">(</span><span class="n">path_to_tensor2</span><span class="p">(</span><span class="n">img_path</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">ResNet50_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">img</span><span class="p">))</span>
 </pre></div>
 
@@ -14092,13 +14108,16 @@ AXOVologGv1wAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[73]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
 <span class="c1">### returns &quot;True&quot; if a dog is detected in the image stored at img_path</span>
 <span class="k">def</span> <span class="nf">dog_detector</span><span class="p">(</span><span class="n">img_path</span><span class="p">):</span>
     <span class="n">prediction</span> <span class="o">=</span> <span class="n">ResNet50_predict_labels</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">((</span><span class="n">prediction</span> <span class="o">&lt;=</span> <span class="mi">268</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">prediction</span> <span class="o">&gt;=</span> <span class="mi">151</span><span class="p">))</span> 
+<span class="k">def</span> <span class="nf">dog_detector2</span><span class="p">(</span><span class="n">img_path</span><span class="p">):</span>
+    <span class="n">prediction</span> <span class="o">=</span> <span class="n">ResNet50_predict_labels2</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">((</span><span class="n">prediction</span> <span class="o">&lt;=</span> <span class="mi">268</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">prediction</span> <span class="o">&gt;=</span> <span class="mi">151</span><span class="p">))</span> 
 </pre></div>
 
@@ -14124,7 +14143,7 @@ AXOVologGv1wAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[74]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -14233,9 +14252,9 @@ AXOVologGv1wAAAAAElFTkSuQmCC
 <span class="n">ImageFile</span><span class="o">.</span><span class="n">LOAD_TRUNCATED_IMAGES</span> <span class="o">=</span> <span class="kc">True</span>                 
 
 <span class="c1"># pre-process the data for Keras</span>
-<span class="n">train_tensors</span> <span class="o">=</span> <span class="n">paths_to_tensor</span><span class="p">(</span><span class="n">train_files</span><span class="p">)</span>
-<span class="n">valid_tensors</span> <span class="o">=</span> <span class="n">paths_to_tensor</span><span class="p">(</span><span class="n">valid_files</span><span class="p">)</span>
-<span class="n">test_tensors</span> <span class="o">=</span> <span class="n">paths_to_tensor</span><span class="p">(</span><span class="n">test_files</span><span class="p">)</span>
+<span class="n">train_tensors</span> <span class="o">=</span> <span class="n">paths_to_tensor2</span><span class="p">(</span><span class="n">train_files</span><span class="p">)</span>
+<span class="n">valid_tensors</span> <span class="o">=</span> <span class="n">paths_to_tensor2</span><span class="p">(</span><span class="n">valid_files</span><span class="p">)</span>
+<span class="n">test_tensors</span> <span class="o">=</span> <span class="n">paths_to_tensor2</span><span class="p">(</span><span class="n">test_files</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -14284,16 +14303,16 @@ AXOVologGv1wAAAAAElFTkSuQmCC
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
-<span class="n">trains</span> <span class="o">=</span> <span class="n">train_tensors</span><span class="o">.</span><span class="n">shape</span>
-<span class="n">valids</span> <span class="o">=</span> <span class="n">valid_tensors</span><span class="o">.</span><span class="n">shape</span>
-<span class="n">tests</span> <span class="o">=</span> <span class="n">test_tensors</span><span class="o">.</span><span class="n">shape</span>
+<span class="c1"># trains = train_tensors.shape</span>
+<span class="c1"># valids = valid_tensors.shape</span>
+<span class="c1"># tests = test_tensors.shape</span>
 
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;train_tensors.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">train_tensors</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">trains</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">trains</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">trains</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">trains</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;valid_tensors.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">valid_tensors</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">valids</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">valids</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">valids</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">valids</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test_tensors.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">test_tensors</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">tests</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tests</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">tests</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">tests</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="c1"># with open(&#39;train_tensors.csv&#39;, &#39;w&#39;) as f:</span>
+<span class="c1">#     pd.DataFrame(data=train_tensors.reshape(trains[0], trains[1]*trains[2]*trains[3])).to_csv(f)</span>
+<span class="c1"># with open(&#39;valid_tensors.csv&#39;, &#39;w&#39;) as f:</span>
+<span class="c1">#     pd.DataFrame(data=valid_tensors.reshape(valids[0], valids[1]*valids[2]*valids[3])).to_csv(f)</span>
+<span class="c1"># with open(&#39;test_tensors.csv&#39;, &#39;w&#39;) as f:</span>
+<span class="c1">#     pd.DataFrame(data=test_tensors.reshape(tests[0], tests[1]*tests[2]*tests[3])).to_csv(f)</span>
 
 <span class="c1"># with open(&#39;train_targets.csv&#39;, &#39;w&#39;) as f:</span>
 <span class="c1">#     pd.DataFrame(data=train_targets).to_csv(f)</span>
@@ -14382,19 +14401,6 @@ Shape of test target:  (836, 133)
 </div>
 </div>
 
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-</div>
 </div>
 </div>
 
@@ -14698,7 +14704,7 @@ Epoch 00009: val_loss improved from 4.69953 to 4.68549, saving model to saved_mo
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -14725,12 +14731,19 @@ Epoch 00009: val_loss improved from 4.69953 to 4.68549, saving model to saved_mo
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[60]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
 <span class="n">VGG16_model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
 <span class="n">VGG16_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">GlobalAveragePooling2D</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="n">train_VGG16</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
+
+<span class="n">VGG16_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+<span class="n">VGG16_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+
+<span class="n">VGG16_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+<span class="n">VGG16_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+    
 <span class="n">VGG16_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">133</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">))</span>
 
 <span class="n">VGG16_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
@@ -14749,12 +14762,20 @@ Epoch 00009: val_loss improved from 4.69953 to 4.68549, saving model to saved_mo
 <pre>_________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-global_average_pooling2d_2 ( (None, 512)               0         
+global_average_pooling2d_9 ( (None, 512)               0         
 _________________________________________________________________
-dense_3 (Dense)              (None, 133)               68229     
+dense_17 (Dense)             (None, 1024)              525312    
+_________________________________________________________________
+dropout_1 (Dropout)          (None, 1024)              0         
+_________________________________________________________________
+dense_18 (Dense)             (None, 512)               524800    
+_________________________________________________________________
+dropout_2 (Dropout)          (None, 512)               0         
+_________________________________________________________________
+dense_19 (Dense)             (None, 133)               68229     
 =================================================================
-Total params: 68,229
-Trainable params: 68,229
+Total params: 1,118,341
+Trainable params: 1,118,341
 Non-trainable params: 0
 _________________________________________________________________
 </pre>
@@ -14776,11 +14797,11 @@ _________________________________________________________________
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[61]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
-<span class="n">VGG16_model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;rmsprop&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+<span class="n">VGG16_model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
 </pre></div>
 
 </div>
@@ -14799,7 +14820,7 @@ _________________________________________________________________
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -14808,7 +14829,7 @@ _________________________________________________________________
 
 <span class="n">VGG16_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_VGG16</span><span class="p">,</span> <span class="n">train_targets</span><span class="p">,</span> 
           <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">valid_VGG16</span><span class="p">,</span> <span class="n">valid_targets</span><span class="p">),</span>
-          <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">checkpointer</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+          <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">checkpointer</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">);</span>
 </pre></div>
 
 </div>
@@ -14823,76 +14844,67 @@ _________________________________________________________________
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Train on 6680 samples, validate on 835 samples
 Epoch 1/20
-6600/6680 [============================&gt;.] - ETA: 0s - loss: 11.9580 - acc: 0.1395       Epoch 00000: val_loss improved from inf to 10.50455, saving model to saved_models/weights.best.VGG16.hdf5
-6680/6680 [==============================] - 9s - loss: 11.9393 - acc: 0.1406 - val_loss: 10.5045 - val_acc: 0.2216
+Epoch 00000: val_loss improved from inf to 3.94739, saving model to saved_models/weights.best.VGG16.hdf5
+9s - loss: 7.8429 - acc: 0.0512 - val_loss: 3.9474 - val_acc: 0.2683
 Epoch 2/20
-6520/6680 [============================&gt;.] - ETA: 0s - loss: 9.8074 - acc: 0.3009 Epoch 00001: val_loss improved from 10.50455 to 9.88421, saving model to saved_models/weights.best.VGG16.hdf5
-6680/6680 [==============================] - 3s - loss: 9.8165 - acc: 0.3006 - val_loss: 9.8842 - val_acc: 0.2862
+Epoch 00001: val_loss improved from 3.94739 to 2.09553, saving model to saved_models/weights.best.VGG16.hdf5
+5s - loss: 3.4496 - acc: 0.2304 - val_loss: 2.0955 - val_acc: 0.5425
 Epoch 3/20
-6520/6680 [============================&gt;.] - ETA: 0s - loss: 9.3327 - acc: 0.3543Epoch 00002: val_loss improved from 9.88421 to 9.71855, saving model to saved_models/weights.best.VGG16.hdf5
-6680/6680 [==============================] - 2s - loss: 9.3205 - acc: 0.3549 - val_loss: 9.7186 - val_acc: 0.3078
+Epoch 00002: val_loss improved from 2.09553 to 1.43595, saving model to saved_models/weights.best.VGG16.hdf5
+5s - loss: 2.3991 - acc: 0.4096 - val_loss: 1.4360 - val_acc: 0.6443
 Epoch 4/20
-6580/6680 [============================&gt;.] - ETA: 0s - loss: 9.1032 - acc: 0.3874 Epoch 00003: val_loss improved from 9.71855 to 9.51736, saving model to saved_models/weights.best.VGG16.hdf5
-6680/6680 [==============================] - 2s - loss: 9.1099 - acc: 0.3871 - val_loss: 9.5174 - val_acc: 0.3413
+Epoch 00003: val_loss improved from 1.43595 to 1.20504, saving model to saved_models/weights.best.VGG16.hdf5
+5s - loss: 1.8702 - acc: 0.5039 - val_loss: 1.2050 - val_acc: 0.6838
 Epoch 5/20
-6600/6680 [============================&gt;.] - ETA: 0s - loss: 8.9952 - acc: 0.4094Epoch 00004: val_loss did not improve
-6680/6680 [==============================] - 2s - loss: 9.0105 - acc: 0.4082 - val_loss: 9.5411 - val_acc: 0.3437
+Epoch 00004: val_loss improved from 1.20504 to 1.02062, saving model to saved_models/weights.best.VGG16.hdf5
+5s - loss: 1.5921 - acc: 0.5636 - val_loss: 1.0206 - val_acc: 0.7281
 Epoch 6/20
-6580/6680 [============================&gt;.] - ETA: 0s - loss: 8.8359 - acc: 0.4202Epoch 00005: val_loss improved from 9.51736 to 9.31315, saving model to saved_models/weights.best.VGG16.hdf5
-6680/6680 [==============================] - 3s - loss: 8.8355 - acc: 0.4205 - val_loss: 9.3132 - val_acc: 0.3545
+Epoch 00005: val_loss improved from 1.02062 to 0.94116, saving model to saved_models/weights.best.VGG16.hdf5
+6s - loss: 1.3541 - acc: 0.6247 - val_loss: 0.9412 - val_acc: 0.7437
 Epoch 7/20
-6620/6680 [============================&gt;.] - ETA: 0s - loss: 8.7350 - acc: 0.4353Epoch 00006: val_loss improved from 9.31315 to 9.26738, saving model to saved_models/weights.best.VGG16.hdf5
-6680/6680 [==============================] - 3s - loss: 8.7252 - acc: 0.4358 - val_loss: 9.2674 - val_acc: 0.3653
+Epoch 00006: val_loss improved from 0.94116 to 0.86804, saving model to saved_models/weights.best.VGG16.hdf5
+4s - loss: 1.2128 - acc: 0.6572 - val_loss: 0.8680 - val_acc: 0.7497
 Epoch 8/20
-6600/6680 [============================&gt;.] - ETA: 0s - loss: 8.6734 - acc: 0.4409Epoch 00007: val_loss improved from 9.26738 to 9.22382, saving model to saved_models/weights.best.VGG16.hdf5
-6680/6680 [==============================] - 2s - loss: 8.6665 - acc: 0.4415 - val_loss: 9.2238 - val_acc: 0.3725
+Epoch 00007: val_loss improved from 0.86804 to 0.86396, saving model to saved_models/weights.best.VGG16.hdf5
+4s - loss: 1.1100 - acc: 0.6771 - val_loss: 0.8640 - val_acc: 0.7437
 Epoch 9/20
-6600/6680 [============================&gt;.] - ETA: 0s - loss: 8.3890 - acc: 0.4488Epoch 00008: val_loss improved from 9.22382 to 8.90219, saving model to saved_models/weights.best.VGG16.hdf5
-6680/6680 [==============================] - 2s - loss: 8.3915 - acc: 0.4485 - val_loss: 8.9022 - val_acc: 0.3760
+Epoch 00008: val_loss improved from 0.86396 to 0.84645, saving model to saved_models/weights.best.VGG16.hdf5
+11s - loss: 0.9908 - acc: 0.7028 - val_loss: 0.8464 - val_acc: 0.7449
 Epoch 10/20
-6640/6680 [============================&gt;.] - ETA: 0s - loss: 8.1036 - acc: 0.4703Epoch 00009: val_loss improved from 8.90219 to 8.78588, saving model to saved_models/weights.best.VGG16.hdf5
-6680/6680 [==============================] - 2s - loss: 8.1028 - acc: 0.4702 - val_loss: 8.7859 - val_acc: 0.3904
+Epoch 00009: val_loss improved from 0.84645 to 0.80273, saving model to saved_models/weights.best.VGG16.hdf5
+10s - loss: 0.9560 - acc: 0.7163 - val_loss: 0.8027 - val_acc: 0.7533
 Epoch 11/20
-6580/6680 [============================&gt;.] - ETA: 0s - loss: 7.9618 - acc: 0.4856Epoch 00010: val_loss improved from 8.78588 to 8.76746, saving model to saved_models/weights.best.VGG16.hdf5
-6680/6680 [==============================] - 2s - loss: 7.9602 - acc: 0.4853 - val_loss: 8.7675 - val_acc: 0.3868
+Epoch 00010: val_loss improved from 0.80273 to 0.79350, saving model to saved_models/weights.best.VGG16.hdf5
+7s - loss: 0.8591 - acc: 0.7388 - val_loss: 0.7935 - val_acc: 0.7653
 Epoch 12/20
-6560/6680 [============================&gt;.] - ETA: 0s - loss: 7.9022 - acc: 0.4957Epoch 00011: val_loss improved from 8.76746 to 8.71019, saving model to saved_models/weights.best.VGG16.hdf5
-6680/6680 [==============================] - 2s - loss: 7.9085 - acc: 0.4954 - val_loss: 8.7102 - val_acc: 0.3928
+Epoch 00011: val_loss improved from 0.79350 to 0.76898, saving model to saved_models/weights.best.VGG16.hdf5
+13s - loss: 0.8034 - acc: 0.7611 - val_loss: 0.7690 - val_acc: 0.7557
 Epoch 13/20
-6660/6680 [============================&gt;.] - ETA: 0s - loss: 7.8894 - acc: 0.4986Epoch 00012: val_loss did not improve
-6680/6680 [==============================] - 2s - loss: 7.8851 - acc: 0.4990 - val_loss: 8.7412 - val_acc: 0.3868
+Epoch 00012: val_loss did not improve
+4s - loss: 0.7848 - acc: 0.7656 - val_loss: 0.8065 - val_acc: 0.7581
 Epoch 14/20
-6580/6680 [============================&gt;.] - ETA: 0s - loss: 7.8658 - acc: 0.5024Epoch 00013: val_loss did not improve
-6680/6680 [==============================] - 3s - loss: 7.8641 - acc: 0.5025 - val_loss: 8.7333 - val_acc: 0.4060
+Epoch 00013: val_loss did not improve
+4s - loss: 0.7036 - acc: 0.7859 - val_loss: 0.7846 - val_acc: 0.7760
 Epoch 15/20
-6560/6680 [============================&gt;.] - ETA: 0s - loss: 7.7645 - acc: 0.5061Epoch 00014: val_loss improved from 8.71019 to 8.57138, saving model to saved_models/weights.best.VGG16.hdf5
-6680/6680 [==============================] - 3s - loss: 7.7726 - acc: 0.5057 - val_loss: 8.5714 - val_acc: 0.4072
+Epoch 00014: val_loss improved from 0.76898 to 0.73640, saving model to saved_models/weights.best.VGG16.hdf5
+9s - loss: 0.6988 - acc: 0.7847 - val_loss: 0.7364 - val_acc: 0.7617
 Epoch 16/20
-6620/6680 [============================&gt;.] - ETA: 0s - loss: 7.6575 - acc: 0.5113Epoch 00015: val_loss improved from 8.57138 to 8.55641, saving model to saved_models/weights.best.VGG16.hdf5
-6680/6680 [==============================] - 2s - loss: 7.6602 - acc: 0.5109 - val_loss: 8.5564 - val_acc: 0.3892
+Epoch 00015: val_loss did not improve
+4s - loss: 0.6512 - acc: 0.8037 - val_loss: 0.7460 - val_acc: 0.7737
 Epoch 17/20
-6620/6680 [============================&gt;.] - ETA: 0s - loss: 7.5989 - acc: 0.5187Epoch 00016: val_loss did not improve
-6680/6680 [==============================] - 2s - loss: 7.5858 - acc: 0.5193 - val_loss: 8.5867 - val_acc: 0.4024
+Epoch 00016: val_loss improved from 0.73640 to 0.72943, saving model to saved_models/weights.best.VGG16.hdf5
+8s - loss: 0.5986 - acc: 0.8145 - val_loss: 0.7294 - val_acc: 0.7832
 Epoch 18/20
-6580/6680 [============================&gt;.] - ETA: 0s - loss: 7.4941 - acc: 0.5260 Epoch 00017: val_loss improved from 8.55641 to 8.40529, saving model to saved_models/weights.best.VGG16.hdf5
-6680/6680 [==============================] - 2s - loss: 7.4837 - acc: 0.5265 - val_loss: 8.4053 - val_acc: 0.4060
+Epoch 00017: val_loss improved from 0.72943 to 0.69909, saving model to saved_models/weights.best.VGG16.hdf5
+9s - loss: 0.5600 - acc: 0.8265 - val_loss: 0.6991 - val_acc: 0.7868
 Epoch 19/20
-6480/6680 [============================&gt;.] - ETA: 0s - loss: 7.4228 - acc: 0.5319Epoch 00018: val_loss improved from 8.40529 to 8.33252, saving model to saved_models/weights.best.VGG16.hdf5
-6680/6680 [==============================] - 2s - loss: 7.4349 - acc: 0.5313 - val_loss: 8.3325 - val_acc: 0.4275
+Epoch 00018: val_loss did not improve
+4s - loss: 0.5880 - acc: 0.8207 - val_loss: 0.7185 - val_acc: 0.8000
 Epoch 20/20
-6500/6680 [============================&gt;.] - ETA: 0s - loss: 7.4410 - acc: 0.5328Epoch 00019: val_loss improved from 8.33252 to 8.28818, saving model to saved_models/weights.best.VGG16.hdf5
-6680/6680 [==============================] - 2s - loss: 7.4293 - acc: 0.5335 - val_loss: 8.2882 - val_acc: 0.4299
+Epoch 00019: val_loss did not improve
+4s - loss: 0.5796 - acc: 0.8213 - val_loss: 0.7274 - val_acc: 0.7988
 </pre>
 </div>
-</div>
-
-<div class="output_area"><div class="prompt output_prompt">Out[20]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&lt;keras.callbacks.History at 0x1189be4e0&gt;</pre>
-</div>
-
 </div>
 
 </div>
@@ -14910,7 +14922,7 @@ Epoch 20/20
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[63]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -14934,7 +14946,7 @@ Epoch 20/20
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[64]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -14956,7 +14968,7 @@ Epoch 20/20
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Test accuracy: 41.3876%
+<pre>Test accuracy: 79.1866%
 </pre>
 </div>
 </div>
@@ -14976,7 +14988,7 @@ Epoch 20/20
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[54]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -14987,19 +14999,6 @@ Epoch 20/20
     <span class="n">predicted_vector</span> <span class="o">=</span> <span class="n">VGG16_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">bottleneck_feature</span><span class="p">)</span>
     <span class="c1"># return dog breed that is predicted by the model</span>
     <span class="k">return</span> <span class="n">dog_names</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">predicted_vector</span><span class="p">)]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 
 </div>
@@ -15040,11 +15039,15 @@ test_{network} = bottleneck_features['test']</code></pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
 <span class="c1">### TODO: Obtain bottleneck features from another pre-trained CNN.</span>
+<span class="n">iv3_bottleneck_features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;bottleneck_features/DogInceptionV3Data.npz&#39;</span><span class="p">)</span>
+<span class="n">train_InceptionV3</span> <span class="o">=</span> <span class="n">iv3_bottleneck_features</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">]</span>
+<span class="n">valid_InceptionV3</span> <span class="o">=</span> <span class="n">iv3_bottleneck_features</span><span class="p">[</span><span class="s1">&#39;valid&#39;</span><span class="p">]</span>
+<span class="n">test_InceptionV3</span> <span class="o">=</span> <span class="n">iv3_bottleneck_features</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">]</span>
 </pre></div>
 
 </div>
@@ -15070,14 +15073,65 @@ test_{network} = bottleneck_features['test']</code></pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
 <span class="c1">### TODO: Define your architecture.</span>
+<span class="n">InceptionV3_model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<span class="n">InceptionV3_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">GlobalAveragePooling2D</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="n">train_InceptionV3</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
+
+<span class="n">InceptionV3_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+<span class="n">InceptionV3_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.25</span><span class="p">))</span>
+
+<span class="n">InceptionV3_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+<span class="n">InceptionV3_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.25</span><span class="p">))</span>
+
+<span class="n">InceptionV3_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+<span class="n">InceptionV3_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.25</span><span class="p">))</span>
+
+<span class="n">InceptionV3_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">133</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">))</span>
+
+<span class="n">InceptionV3_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+global_average_pooling2d_1 ( (None, 2048)              0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 1024)              2098176   
+_________________________________________________________________
+dropout_1 (Dropout)          (None, 1024)              0         
+_________________________________________________________________
+dense_2 (Dense)              (None, 512)               524800    
+_________________________________________________________________
+dropout_2 (Dropout)          (None, 512)               0         
+_________________________________________________________________
+dense_3 (Dense)              (None, 256)               131328    
+_________________________________________________________________
+dropout_3 (Dropout)          (None, 256)               0         
+_________________________________________________________________
+dense_4 (Dense)              (None, 133)               34181     
+=================================================================
+Total params: 2,788,485
+Trainable params: 2,788,485
+Non-trainable params: 0
+_________________________________________________________________
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -15093,30 +15147,15 @@ test_{network} = bottleneck_features['test']</code></pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
 <span class="c1">### TODO: Compile the model.</span>
+<span class="n">InceptionV3_model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[26]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;&#39;</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -15134,11 +15173,17 @@ test_{network} = bottleneck_features['test']</code></pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
 <span class="c1">### TODO: Train the model.</span>
+<span class="n">checkpointer</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">filepath</span><span class="o">=</span><span class="s1">&#39;saved_models/weights.best.InceptionV3.hdf5&#39;</span><span class="p">,</span> 
+                               <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">save_best_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">InceptionV3_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_InceptionV3</span><span class="p">,</span> <span class="n">train_targets</span><span class="p">,</span> 
+                      <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">valid_InceptionV3</span><span class="p">,</span> <span class="n">valid_targets</span><span class="p">),</span>
+                      <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">checkpointer</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">);</span>
 </pre></div>
 
 </div>
@@ -15149,13 +15194,71 @@ test_{network} = bottleneck_features['test']</code></pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[27]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;&#39;</pre>
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Train on 6680 samples, validate on 835 samples
+Epoch 1/20
+Epoch 00000: val_loss improved from inf to 0.87121, saving model to saved_models/weights.best.InceptionV3.hdf5
+65s - loss: 2.8935 - acc: 0.3686 - val_loss: 0.8712 - val_acc: 0.7329
+Epoch 2/20
+Epoch 00001: val_loss improved from 0.87121 to 0.65815, saving model to saved_models/weights.best.InceptionV3.hdf5
+16s - loss: 1.1213 - acc: 0.6877 - val_loss: 0.6581 - val_acc: 0.8096
+Epoch 3/20
+Epoch 00002: val_loss improved from 0.65815 to 0.59346, saving model to saved_models/weights.best.InceptionV3.hdf5
+16s - loss: 0.8183 - acc: 0.7618 - val_loss: 0.5935 - val_acc: 0.8204
+Epoch 4/20
+Epoch 00003: val_loss did not improve
+11s - loss: 0.6892 - acc: 0.7949 - val_loss: 0.6074 - val_acc: 0.8287
+Epoch 5/20
+Epoch 00004: val_loss improved from 0.59346 to 0.56230, saving model to saved_models/weights.best.InceptionV3.hdf5
+14s - loss: 0.6053 - acc: 0.8169 - val_loss: 0.5623 - val_acc: 0.8311
+Epoch 6/20
+Epoch 00005: val_loss did not improve
+11s - loss: 0.5582 - acc: 0.8289 - val_loss: 0.5777 - val_acc: 0.8251
+Epoch 7/20
+Epoch 00006: val_loss improved from 0.56230 to 0.55214, saving model to saved_models/weights.best.InceptionV3.hdf5
+15s - loss: 0.4721 - acc: 0.8487 - val_loss: 0.5521 - val_acc: 0.8527
+Epoch 8/20
+Epoch 00007: val_loss improved from 0.55214 to 0.54745, saving model to saved_models/weights.best.InceptionV3.hdf5
+22s - loss: 0.4184 - acc: 0.8627 - val_loss: 0.5475 - val_acc: 0.8335
+Epoch 9/20
+Epoch 00008: val_loss did not improve
+11s - loss: 0.3850 - acc: 0.8716 - val_loss: 0.5679 - val_acc: 0.8371
+Epoch 10/20
+Epoch 00009: val_loss did not improve
+13s - loss: 0.3433 - acc: 0.8897 - val_loss: 0.5515 - val_acc: 0.8431
+Epoch 11/20
+Epoch 00010: val_loss did not improve
+13s - loss: 0.3089 - acc: 0.8975 - val_loss: 0.5874 - val_acc: 0.8359
+Epoch 12/20
+Epoch 00011: val_loss did not improve
+11s - loss: 0.2817 - acc: 0.9072 - val_loss: 0.6050 - val_acc: 0.8359
+Epoch 13/20
+Epoch 00012: val_loss did not improve
+12s - loss: 0.2731 - acc: 0.9081 - val_loss: 0.5923 - val_acc: 0.8407
+Epoch 14/20
+Epoch 00013: val_loss did not improve
+12s - loss: 0.2592 - acc: 0.9165 - val_loss: 0.6331 - val_acc: 0.8431
+Epoch 15/20
+Epoch 00014: val_loss did not improve
+12s - loss: 0.2309 - acc: 0.9196 - val_loss: 0.5946 - val_acc: 0.8503
+Epoch 16/20
+Epoch 00015: val_loss did not improve
+12s - loss: 0.1987 - acc: 0.9344 - val_loss: 0.6529 - val_acc: 0.8455
+Epoch 17/20
+Epoch 00016: val_loss did not improve
+12s - loss: 0.2148 - acc: 0.9301 - val_loss: 0.5931 - val_acc: 0.8419
+Epoch 18/20
+Epoch 00017: val_loss did not improve
+11s - loss: 0.1825 - acc: 0.9382 - val_loss: 0.6869 - val_acc: 0.8443
+Epoch 19/20
+Epoch 00018: val_loss did not improve
+11s - loss: 0.1872 - acc: 0.9397 - val_loss: 0.6639 - val_acc: 0.8515
+Epoch 20/20
+Epoch 00019: val_loss did not improve
+11s - loss: 0.1821 - acc: 0.9404 - val_loss: 0.7241 - val_acc: 0.8335
+</pre>
 </div>
-
 </div>
 
 </div>
@@ -15173,30 +15276,15 @@ test_{network} = bottleneck_features['test']</code></pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
 <span class="c1">### TODO: Load the model weights with the best validation loss.</span>
+<span class="n">InceptionV3_model</span><span class="o">.</span><span class="n">load_weights</span><span class="p">(</span><span class="s1">&#39;saved_models/weights.best.InceptionV3.hdf5&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[28]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;&#39;</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -15213,11 +15301,19 @@ test_{network} = bottleneck_features['test']</code></pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
 <span class="c1">### TODO: Calculate classification accuracy on the test dataset.</span>
+<span class="c1"># get index of predicted dog breed for each image in test set</span>
+<span class="n">InceptionV3_predictions</span> <span class="o">=</span> \
+<span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">InceptionV3_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)))</span> <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">test_InceptionV3</span><span class="p">]</span>
+
+<span class="c1"># report test accuracy</span>
+<span class="n">InceptionV3_test_accuracy</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">InceptionV3_predictions</span><span class="p">)</span><span class="o">==</span>\
+                                       <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">InceptionV3_predictions</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test accuracy: </span><span class="si">%.4f%%</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">InceptionV3_test_accuracy</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -15228,15 +15324,27 @@ test_{network} = bottleneck_features['test']</code></pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[29]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;&#39;</pre>
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Test accuracy: 79.6651%
+</pre>
+</div>
 </div>
 
 </div>
+</div>
 
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">InceptionV3_model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;InceptionV3__model_file.h5&#39;</span><span class="p">)</span>
+<span class="c1"># InceptionV3__model = load_model(&#39;InceptionV3__model_file.h5&#39;)</span>
+</pre></div>
+
+</div>
 </div>
 </div>
 
@@ -15265,31 +15373,22 @@ test_{network} = bottleneck_features['test']</code></pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
 <span class="c1">### TODO: Write a function that takes a path to an image as input</span>
 <span class="c1">### and returns the dog breed that is predicted by the model.</span>
+<span class="k">def</span> <span class="nf">InceptionV3_predict_breed</span><span class="p">(</span><span class="n">img_path</span><span class="p">):</span>
+    <span class="c1"># extract bottleneck features</span>
+    <span class="n">bottleneck_feature</span> <span class="o">=</span> <span class="n">extract_InceptionV3</span><span class="p">(</span><span class="n">path_to_tensor</span><span class="p">(</span><span class="n">img_path</span><span class="p">))</span>
+    <span class="c1"># obtain predicted vector</span>
+    <span class="n">predicted_vector</span> <span class="o">=</span> <span class="n">InceptionV3_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">bottleneck_feature</span><span class="p">)</span>
+    <span class="c1"># return dog breed that is predicted by the model</span>
+    <span class="k">return</span> <span class="n">dog_names</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">predicted_vector</span><span class="p">)]</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[30]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;&#39;</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -15316,31 +15415,32 @@ test_{network} = bottleneck_features['test']</code></pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
 <span class="c1">### TODO: Write your algorithm.</span>
 <span class="c1">### Feel free to use as many code cells as needed.</span>
+<span class="k">def</span> <span class="nf">predict_breed_or_detect_human</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
+    <span class="n">species</span><span class="p">,</span> <span class="n">greatings</span><span class="p">,</span> <span class="n">breed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="n">dog_detector</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
+        <span class="n">species</span> <span class="o">=</span> <span class="s2">&quot;dog&quot;</span>
+        <span class="n">greatings</span> <span class="o">=</span> <span class="s2">&quot;Your breed is probably&quot;</span>
+    
+    <span class="k">elif</span> <span class="n">face_detector</span><span class="p">(</span><span class="n">img</span><span class="p">)[</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">species</span> <span class="o">=</span> <span class="s2">&quot;human&quot;</span>
+        <span class="n">greatings</span> <span class="o">=</span> <span class="s2">&quot;You look like a&quot;</span>
+    
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">species</span> <span class="o">=</span> <span class="s2">&quot;neither a dog nor a human&quot;</span>
+        <span class="n">greatings</span> <span class="o">=</span> <span class="s2">&quot;You look like a&quot;</span>
+    
+    <span class="n">breed</span> <span class="o">=</span> <span class="n">InceptionV3_predict_breed</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;Hello, </span><span class="si">{}</span><span class="s2">! </span><span class="si">{}</span><span class="s2"> ... </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">species</span><span class="p">,</span> <span class="n">greatings</span><span class="p">,</span> <span class="n">breed</span><span class="p">)</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[31]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;&#39;</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -15369,6 +15469,9 @@ test_{network} = bottleneck_features['test']</code></pre>
 <span class="c1">## TODO: Execute your algorithm from Step 6 on</span>
 <span class="c1">## at least 6 images on your computer.</span>
 <span class="c1">## Feel free to use as many code cells as needed.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">predict_breed_or_detect_human</span><span class="p">(</span><span class="s2">&quot;./images/cat.png&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">predict_breed_or_detect_human</span><span class="p">(</span><span class="s2">&quot;./images/me.png&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">predict_breed_or_detect_human</span><span class="p">(</span><span class="s2">&quot;./images/flower.png&quot;</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -15379,13 +15482,45 @@ test_{network} = bottleneck_features['test']</code></pre>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[32]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;&#39;</pre>
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Hello, neither a dog nor a human! You look like a ... Basenji
+Hello, human! You look like a ... Borzoi
+Hello, neither a dog nor a human! You look like a ... Boxer
+</pre>
+</div>
 </div>
 
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">predict_breed_or_detect_human</span><span class="p">(</span><span class="s2">&quot;./images/Brittany_02625.jpg&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">predict_breed_or_detect_human</span><span class="p">(</span><span class="s2">&quot;./images/Curly-coated_retriever_03896.jpg&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">predict_breed_or_detect_human</span><span class="p">(</span><span class="s2">&quot;./images/Labrador_retriever_06449.jpg&quot;</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Hello, dog! Your breed is probably ... Brittany
+Hello, dog! Your breed is probably ... Curly-coated_retriever
+Hello, dog! Your breed is probably ... Labrador_retriever
+</pre>
+</div>
 </div>
 
 </div>
