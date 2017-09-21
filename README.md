@@ -1,7 +1,7 @@
 
-# &#x1F3D9; &nbsp; Projects:
+# &#x1F3D9; &nbsp; Projects
 
-## &#x1F4CB; &nbsp; Data Analyst Nanodegree 
+## &#x1F4D1; &nbsp; Data Analyst Nanodegree 
 ### [Built with Udacity](https://www.udacity.com) &nbsp; [Certificate](https://olgabelitskaya.github.io/certificate.pdf)
 
 ### &#x1F310; &nbsp; [click to view the github repository](https://github.com/OlgaBelitskaya/data-analyst-nd002)
@@ -13,7 +13,7 @@
 #### [P6: Make Effective Data Visualization. Review](https://olgabelitskaya.github.io/P6_Readme.html) &nbsp;  [P6: Make Effective Data Visualization](https://olgabelitskaya.github.io/P6_index_final.html)
 #### [P7: Design an A/B Test](https://olgabelitskaya.github.io/P7_Design_an_A_B_Test_Overview.html) &nbsp;  [P7: Design an A/B Test. Extraction](https://olgabelitskaya.github.io/P7_Design_an_A_B_Test_Extraction.pdf)
 
-## &#x1F4CB; &nbsp; Machine Learning Engineer Nanodegree
+## &#x1F4D1; &nbsp; Machine Learning Engineer Nanodegree
 ### [Built with Udacity](https://www.udacity.com) 
 
 ### &#x1F310; &nbsp; [click to view the github repository](https://github.com/OlgaBelitskaya/machine_learning_engineer_nd009)
@@ -39,38 +39,38 @@
 
 #### [P10: Write an Algorithm for a Dog Identification App](https://olgabelitskaya.github.io/MLE_ND_P10_V0.html)
 
-## &#x1F4CB; &nbsp; Deep Learning Nanodegree 
+## &#x1F4D1; &nbsp; Deep Learning Nanodegree 
 ### [Built with Udacity](https://www.udacity.com) 
 
 ### &#x1F310; &nbsp; [click to view the github repository](https://github.com/OlgaBelitskaya/deep_learning_nanodegree_nd101)
 
 #### [P1: Your first neural network](https://olgabelitskaya.github.io/DL_ND_P1_V0.html)  &nbsp;  [P2:  Image Classification](https://olgabelitskaya.github.io/DL_ND_P2_V0.html) &nbsp;  [P3  Generate TV scripts](https://olgabelitskaya.github.io/DL_ND_P3_V0.html) &nbsp;  [P4:  Translate a Language](https://olgabelitskaya.github.io/DL_ND_P4_V0.html) &nbsp;  [P5: Generate Faces ](https://olgabelitskaya.github.io/DL_ND_P5_V0.html)
 
-## &#x1F4CB; &nbsp; Interview and Technical Interview Practice.
-#### Udacity_Interview_Practice.ipynb &nbsp; [click: &#x1F300;](https://gist.github.com/OlgaBelitskaya/1ddb287592832cf581fc122d6bc2732e)
-#### Udacity_Technical_Interview_Practice_Lessons.ipynb &nbsp; [click: &#x1F300;](https://gist.github.com/OlgaBelitskaya/a6cb19e1f3a041e6f6a56ccf58b4701c)
-#### Udacity_Technical_Interview_Practice_Project.ipynb &nbsp; [click: &#x1F300;](https://gist.github.com/OlgaBelitskaya/849e983dd6e90943d5760be4c4986501)
+## &#x1F4D1; &nbsp; Interview and Technical Interview Practice.
+#### Udacity_Interview_Practice.ipynb &nbsp; [&#x1F310;](https://gist.github.com/OlgaBelitskaya/1ddb287592832cf581fc122d6bc2732e)
+#### Udacity_Technical_Interview_Practice_Lessons.ipynb &nbsp; [&#x1F310;](https://gist.github.com/OlgaBelitskaya/a6cb19e1f3a041e6f6a56ccf58b4701c)
+#### Udacity_Technical_Interview_Practice_Project.ipynb &nbsp; [&#x1F310;](https://gist.github.com/OlgaBelitskaya/849e983dd6e90943d5760be4c4986501)
 
 ---
-# &#x1F4DD; &nbsp; Courses and Programs: 
+# &#x1F4D8; &nbsp; Courses and Programs 
 https://olgabelitskaya.github.io/reflections/README.html
 
-# &#x1F4DA; &nbsp; Notebooks and Data Files:
+# &#x1F4D8; &nbsp; Notebooks and Data Files
 https://olgabelitskaya.github.io/notebooks/README.html
 
-# &#x1F4DA; &nbsp; Additional Exercises:
+# &#x1F4D8; &nbsp; Additional Exercises
 https://olgabelitskaya.github.io/README_EXERCISES.html
 
-# &#x1F4DA; &nbsp; Cookbooks:
-### Keras Python &nbsp; [click: &#x1F300;](https://olgabelitskaya.github.io/keras_cookbook.html)
-### Keras R &nbsp; [click: &#x1F300;](https://olgabelitskaya.github.io/keras_cookbook_r.html)
-### Sklearn Python&nbsp; [click: &#x1F300;](https://olgabelitskaya.github.io/sklearn_cookbook.html)
-### TensorFlow Python &nbsp; [click: &#x1F300;](https://olgabelitskaya.github.io/tensorflow_cookbook.html)
-### OpenCV Python &nbsp; [click: &#x1F300;](https://olgabelitskaya.github.io/opencv_cookbook.html)
+# &#x1F4D8; &nbsp;  Cookbooks
+### Keras Python &nbsp; [&#x1F310;](https://olgabelitskaya.github.io/keras_cookbook.html)
+### Keras R &nbsp; [&#x1F310;](https://olgabelitskaya.github.io/keras_cookbook_r.html)
+### Sklearn Python&nbsp; [&#x1F310;](https://olgabelitskaya.github.io/sklearn_cookbook.html)
+### TensorFlow Python &nbsp; [&#x1F310;](https://olgabelitskaya.github.io/tensorflow_cookbook.html)
+### OpenCV Python &nbsp; [&#x1F310;](https://olgabelitskaya.github.io/opencv_cookbook.html)
 
 ---
-# &#x1F4DD; &nbsp;  Other Web Links:
-## &#x1F4CB; &nbsp; Kaggle
+# &#x1F3D9; &nbsp;  Other Web Links:
+## &#x1F4D1; &nbsp; Kaggle
 - Build a Digit Recognition Models 
   - https://www.kaggle.com/olgabelitskaya/build-a-digit-recognition-models-2
   - https://olgabelitskaya.github.io/kaggle_digits.html
@@ -87,9 +87,9 @@ https://olgabelitskaya.github.io/README_EXERCISES.html
   - https://www.kaggle.com/olgabelitskaya/regressors
   - https://olgabelitskaya.github.io/kaggle_house.html
 
-## &#x1F4CB; &nbsp; GitHub gists https://gist.github.com/OlgaBelitskaya
+## &#x1F4D1; &nbsp; GitHub gists https://gist.github.com/OlgaBelitskaya
 
-## &#x1F4CB; &nbsp; Pages on http://bl.ocks.org/
+## &#x1F4D1; &nbsp; Pages on http://bl.ocks.org/
 
 - [Visualization. Map I](http://bl.ocks.org/OlgaBelitskaya/bcc84d52267612a32b2a5bf79ae11b94)
 - [Visualization. Map II](http://bl.ocks.org/OlgaBelitskaya/de4685ce8630c2ea00229750097e1fb4)
@@ -98,10 +98,10 @@ https://olgabelitskaya.github.io/README_EXERCISES.html
 
 #### [Block's Example](https://olgabelitskaya.github.io/multiline.html)
 
-## &#x1F4CB; &nbsp; Cocal.com Projects 
+## &#x1F4D1; &nbsp; Cocal.com Projects 
 https://cocalc.com/projects
 
-## &#x1F4CB; &nbsp; Microsoft AML Studio
+## &#x1F4D1; &nbsp; Microsoft AML Studio
 https://studio.azureml.net/Home/
 
 
