@@ -7,7 +7,7 @@
 ### &#x1F310; &nbsp; [click to view the github repository](https://github.com/OlgaBelitskaya/data-analyst-nd002)
 
 #### [P0: Chopsticks!](https://olgabelitskaya.github.io/Data_Analyst_ND_Project0.html) &nbsp;  [P1: The Stroop Effect](https://olgabelitskaya.github.io/Data_Analyst_ND_Project1.html) &nbsp;  [P2: Titanic](https://olgabelitskaya.github.io/Data_Analyst_ND_Project2.html)  &nbsp; 
-#### [P3 Extraction MongoDB](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_Dubai-AbuDhabi_Extraction_MongoDB.html) &nbsp;  [P3 MongoDB](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_Dubai-AbuDhabi_MongoDB.html) &nbsp; [P3 Postcodes](https://olgabelitskaya.github.io/P3_postcodes.html) &nbsp; [P3 Additional SQL](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_Dubai-AbuDhabi_SQL.html) &nbsp;  [P3 Additional R SQL MongoDB](https://olgabelitskaya.github.io/P3_R_SQL_MongoDB.html) &nbsp; [P3 Additional Moscow Region](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_MoscowRegion.html)
+#### [P3: Extraction MongoDB](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_Dubai-AbuDhabi_Extraction_MongoDB.html) &nbsp;  [P3: MongoDB](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_Dubai-AbuDhabi_MongoDB.html) &nbsp; [P3: Postcodes](https://olgabelitskaya.github.io/P3_postcodes.html) &nbsp; [P3: Additional SQL](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_Dubai-AbuDhabi_SQL.html) &nbsp;  [P3: Additional R SQL MongoDB](https://olgabelitskaya.github.io/P3_R_SQL_MongoDB.html) &nbsp; [P3: Additional Moscow Region](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_MoscowRegion.html)
 #### [P4: Explore and Summarize Data](https://olgabelitskaya.github.io/P4Beta.html)
 #### [P5: Identify Fraud from Enron Email. Extraction](https://olgabelitskaya.github.io/P5_Identify_Fraud_from_Enron_Email_Extraction.txt) &nbsp;  [P5: Identify Fraud from Enron Email](https://olgabelitskaya.github.io/P5_Identify_Fraud_from_Enron_Email.html) &nbsp;  [P5: Identify Fraud from Enron Email. Response Questions](https://olgabelitskaya.github.io/P5_Enron_Submission_Free_Response_Questions.txt)
 #### [P6: Make Effective Data Visualization. Review](https://olgabelitskaya.github.io/P6_Readme.html) &nbsp;  [P6: Make Effective Data Visualization](https://olgabelitskaya.github.io/P6_index_final.html)
@@ -19,24 +19,11 @@
 ### &#x1F310; &nbsp; [click to view the github repository](https://github.com/OlgaBelitskaya/machine_learning_engineer_nd009)
 
 #### [P0: Titanic Survival Exploration](https://olgabelitskaya.github.io/MLE_ND_P0_V0.html) &nbsp;  [P1: Predicting Boston Housing Prices](https://olgabelitskaya.github.io/MLE_ND_P1_V0.html) &nbsp;  [P2: Finding Donors for CharityML](https://olgabelitskaya.github.io/MLE_ND_P2_V0.html) &nbsp; [P3: Creating Customer Segments](https://olgabelitskaya.github.io/MLE_ND_P3_V0.html)
-#### P4: Train a Smartcab to Drive 
-* [Version 0](https://olgabelitskaya.github.io/MLE_ND_P4_V0.html)
-* [Version 1](https://olgabelitskaya.github.io/MLE_ND_P4_V1.html)
-
-#### P5: Build a Digit Recognition Program 
-* [Step 1](https://olgabelitskaya.github.io/MLE_ND_P5_V0_S1.html)
-* [Step 2](https://olgabelitskaya.github.io/MLE_ND_P5_V0_S2.html)
-* [Step 3](https://olgabelitskaya.github.io/MLE_ND_P5_V0_S3.html)
-
-#### P6: Capstone Project 
-* [Version 0](https://olgabelitskaya.github.io/MLE_ND_P6_V0.html)
-* [Version 1](https://olgabelitskaya.github.io/MLE_ND_P6_V1.html)
-
+#### P4: Train a Smartcab to Drive &nbsp; [Version 0](https://olgabelitskaya.github.io/MLE_ND_P4_V0.html) &nbsp; [Version 1](https://olgabelitskaya.github.io/MLE_ND_P4_V1.html)
+#### P5: Build a Digit Recognition Program &nbsp; [Step 1](https://olgabelitskaya.github.io/MLE_ND_P5_V0_S1.html) &nbsp; [Step 2](https://olgabelitskaya.github.io/MLE_ND_P5_V0_S2.html) &nbsp; [Step 3](https://olgabelitskaya.github.io/MLE_ND_P5_V0_S3.html)
+#### P6: Capstone Project &nbsp; [Version 0](https://olgabelitskaya.github.io/MLE_ND_P6_V0.html) &nbsp; [Version 1](https://olgabelitskaya.github.io/MLE_ND_P6_V1.html)
 #### [P7: Building a Student Intervention System](https://olgabelitskaya.github.io/MLE_ND_P7_V0.html) &nbsp; [P8: Analyzing the NYC Subway Dataset](https://olgabelitskaya.github.io/MLE_ND_P8_V0.html)
-#### P9: Image Classification 
-* [Version 0](https://olgabelitskaya.github.io/MLE_ND_P9_V0.html)
-* [Version 3](https://olgabelitskaya.github.io/MLE_ND_P9_V3.html)
-
+#### P9: Image Classification &nbsp; [Version 0](https://olgabelitskaya.github.io/MLE_ND_P9_V0.html) &nbsp; [Version 3](https://olgabelitskaya.github.io/MLE_ND_P9_V3.html)
 #### [P10: Write an Algorithm for a Dog Identification App](https://olgabelitskaya.github.io/MLE_ND_P10_V0.html)
 
 ## &#x1F4D1; &nbsp; Deep Learning Nanodegree 
