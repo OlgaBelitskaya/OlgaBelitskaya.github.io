@@ -77,6 +77,10 @@ https://olgabelitskaya.github.io/README_EXERCISES.html
 - House Prices: Advanced Regression Techniques
   - https://www.kaggle.com/olgabelitskaya/regressors
   - https://olgabelitskaya.github.io/kaggle_house.html
+  
+- The Dataset of Flower Images
+  - https://www.kaggle.com/olgabelitskaya/the-dataset-of-flower-images/
+  - https://olgabelitskaya.github.io/kaggle_flowers.html
 
 ## &#x1F4D1; &nbsp; GitHub gists https://gist.github.com/OlgaBelitskaya
 
