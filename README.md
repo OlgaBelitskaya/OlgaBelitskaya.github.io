@@ -7,9 +7,11 @@
 ### &#x1F310; &nbsp; [click to view the github repository](https://github.com/OlgaBelitskaya/data-analyst-nd002)
 
 #### [P0: Chopsticks!](https://olgabelitskaya.github.io/Data_Analyst_ND_Project0.html) &nbsp;  [P1: The Stroop Effect](https://olgabelitskaya.github.io/Data_Analyst_ND_Project1.html) &nbsp;  [P2: Titanic](https://olgabelitskaya.github.io/Data_Analyst_ND_Project2.html)  &nbsp; 
-#### [P3: Extraction MongoDB](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_Dubai-AbuDhabi_Extraction_MongoDB.html) &nbsp;  [P3: MongoDB](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_Dubai-AbuDhabi_MongoDB.html) &nbsp; [P3: Postcodes](https://olgabelitskaya.github.io/P3_postcodes.html) &nbsp; [P3: Additional SQL](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_Dubai-AbuDhabi_SQL.html) &nbsp;  [P3: Additional R SQL MongoDB](https://olgabelitskaya.github.io/P3_R_SQL_MongoDB.html) &nbsp; [P3: Additional Moscow Region](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_MoscowRegion.html)
+#### [P3: Extraction MongoDB](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_Dubai-AbuDhabi_Extraction_MongoDB.html) &nbsp;  [P3: MongoDB](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_Dubai-AbuDhabi_MongoDB.html) &nbsp; [P3: Postcodes](https://olgabelitskaya.github.io/P3_postcodes.html) 
+#### [P3: Additional SQL](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_Dubai-AbuDhabi_SQL.html) &nbsp;  [P3: Additional R SQL MongoDB](https://olgabelitskaya.github.io/P3_R_SQL_MongoDB.html) &nbsp; [P3: Additional Moscow Region](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_MoscowRegion.html)
 #### [P4: Explore and Summarize Data](https://olgabelitskaya.github.io/P4Beta.html)
-#### [P5: Identify Fraud from Enron Email. Extraction](https://olgabelitskaya.github.io/P5_Identify_Fraud_from_Enron_Email_Extraction.txt) &nbsp;  [P5: Identify Fraud from Enron Email](https://olgabelitskaya.github.io/P5_Identify_Fraud_from_Enron_Email.html) &nbsp;  [P5: Identify Fraud from Enron Email. Response Questions](https://olgabelitskaya.github.io/P5_Enron_Submission_Free_Response_Questions.txt)
+#### [P5: Identify Fraud from Enron Email. Extraction](https://olgabelitskaya.github.io/P5_Identify_Fraud_from_Enron_Email_Extraction.txt) &nbsp;  [P5: Identify Fraud from Enron Email](https://olgabelitskaya.github.io/P5_Identify_Fraud_from_Enron_Email.html) 
+#### [P5: Identify Fraud from Enron Email. Response Questions](https://olgabelitskaya.github.io/P5_Enron_Submission_Free_Response_Questions.txt)
 #### [P6: Make Effective Data Visualization. Review](https://olgabelitskaya.github.io/P6_Readme.html) &nbsp;  [P6: Make Effective Data Visualization](https://olgabelitskaya.github.io/P6_index_final.html)
 #### [P7: Design an A/B Test](https://olgabelitskaya.github.io/P7_Design_an_A_B_Test_Overview.html) &nbsp;  [P7: Design an A/B Test. Extraction](https://olgabelitskaya.github.io/P7_Design_an_A_B_Test_Extraction.pdf)
 
@@ -18,7 +20,8 @@
 
 ### &#x1F310; &nbsp; [click to view the github repository](https://github.com/OlgaBelitskaya/machine_learning_engineer_nd009)
 
-#### [P0: Titanic Survival Exploration](https://olgabelitskaya.github.io/MLE_ND_P0_V0.html) &nbsp;  [P1: Predicting Boston Housing Prices](https://olgabelitskaya.github.io/MLE_ND_P1_V0.html) &nbsp;  [P2: Finding Donors for CharityML](https://olgabelitskaya.github.io/MLE_ND_P2_V0.html) &nbsp; [P3: Creating Customer Segments](https://olgabelitskaya.github.io/MLE_ND_P3_V0.html)
+#### [P0: Titanic Survival Exploration](https://olgabelitskaya.github.io/MLE_ND_P0_V0.html) &nbsp;  [P1: Predicting Boston Housing Prices](https://olgabelitskaya.github.io/MLE_ND_P1_V0.html) 
+#### [P2: Finding Donors for CharityML](https://olgabelitskaya.github.io/MLE_ND_P2_V0.html) &nbsp; [P3: Creating Customer Segments](https://olgabelitskaya.github.io/MLE_ND_P3_V0.html)
 #### P4: Train a Smartcab to Drive &nbsp; [Version 0](https://olgabelitskaya.github.io/MLE_ND_P4_V0.html) &nbsp; [Version 1](https://olgabelitskaya.github.io/MLE_ND_P4_V1.html)
 #### P5: Build a Digit Recognition Program &nbsp; [Step 1](https://olgabelitskaya.github.io/MLE_ND_P5_V0_S1.html) &nbsp; [Step 2](https://olgabelitskaya.github.io/MLE_ND_P5_V0_S2.html) &nbsp; [Step 3](https://olgabelitskaya.github.io/MLE_ND_P5_V0_S3.html)
 #### P6: Capstone Project &nbsp; [Version 0](https://olgabelitskaya.github.io/MLE_ND_P6_V0.html) &nbsp; [Version 1](https://olgabelitskaya.github.io/MLE_ND_P6_V1.html)
@@ -31,7 +34,8 @@
 
 ### &#x1F310; &nbsp; [click to view the github repository](https://github.com/OlgaBelitskaya/deep_learning_nanodegree_nd101)
 
-#### [P1: Your first neural network](https://olgabelitskaya.github.io/DL_ND_P1_V0.html)  &nbsp;  [P2:  Image Classification](https://olgabelitskaya.github.io/DL_ND_P2_V0.html) &nbsp;  [P3  Generate TV scripts](https://olgabelitskaya.github.io/DL_ND_P3_V0.html) &nbsp;  [P4:  Translate a Language](https://olgabelitskaya.github.io/DL_ND_P4_V0.html) &nbsp;  [P5: Generate Faces ](https://olgabelitskaya.github.io/DL_ND_P5_V0.html)
+#### [P1: Your first neural network](https://olgabelitskaya.github.io/DL_ND_P1_V0.html)  &nbsp;  [P2:  Image Classification](https://olgabelitskaya.github.io/DL_ND_P2_V0.html) &nbsp;  [P3  Generate TV scripts](https://olgabelitskaya.github.io/DL_ND_P3_V0.html) 
+#### [P4:  Translate a Language](https://olgabelitskaya.github.io/DL_ND_P4_V0.html) &nbsp;  [P5: Generate Faces ](https://olgabelitskaya.github.io/DL_ND_P5_V0.html)
 
 ## &#x1F4D1; &nbsp; Interview and Technical Interview Practice.
 #### Udacity_Interview_Practice.ipynb &nbsp; [&#x1F310;](https://gist.github.com/OlgaBelitskaya/1ddb287592832cf581fc122d6bc2732e)
@@ -98,31 +102,14 @@ https://studio.azureml.net/Home/
 @import url('https://fonts.googleapis.com/css?family=Orbitron');
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 body {background-color: #CBE5FA;}
-a {color: #7d7d7d; font-family: Roboto;}
+a {color: slategray; font-family: Roboto;}
 h1, h2 {color: #3883c2; font-family: Orbitron; text-shadow: 4px 4px 4px #aaa;}
 h3 {color: #346187; font-family: Orbitron; text-shadow: 4px 4px 4px #aaa;}
-h4 {color: #7d7d7d; font-family: Roboto;}
+h4 {color: #slategray; font-family: Roboto;}
+div.input_prompt {color: white;} 
+div.text_cell_render {color: slategray}
+span {text-shadow: 4px 4px 4px #ccc;}   
 </style>
-<script>
-code_show = true; 
-function code_display() {
-    if (code_show) {
-        $('div.input').each(function(id) {
-            if (id == 0 || $(this).html().indexOf('hide_code') > -1) {$(this).hide();}
-        });
-        $('div.output_prompt').css('opacity', 0);
-    } else {
-        $('div.input').each(function(id) {$(this).show();});
-        $('div.output_prompt').css('opacity', 1);
-    };
-    code_show = !code_show;
-} 
-$(document).ready(code_display);
-</script>
-<form action="javascript: code_display()">
-<input style="color: #346187; background: #CBE5FA; opacity: 0.8;" \ 
-type="submit" value="Click to display or hide code cells">
-</form>
 ```
 
 
@@ -130,29 +117,12 @@ type="submit" value="Click to display or hide code cells">
 @import url('https://fonts.googleapis.com/css?family=Orbitron');
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 body {background-color: #CBE5FA;}
-a {color: #7d7d7d; font-family: Roboto;}
+a {color: slategray; font-family: Roboto;}
 h1, h2 {color: #3883c2; font-family: Orbitron; text-shadow: 4px 4px 4px #aaa;}
 h3 {color: #346187; font-family: Orbitron; text-shadow: 4px 4px 4px #aaa;}
-h4 {color: #7d7d7d; font-family: Roboto;}
+h4 {color: #slategray; font-family: Roboto;}
+div.input_prompt {color: white;} 
+div.text_cell_render {color: slategray}
+span {text-shadow: 4px 4px 4px #ccc;}   
 </style>
-<script>
-code_show = true; 
-function code_display() {
-    if (code_show) {
-        $('div.input').each(function(id) {
-            if (id == 0 || $(this).html().indexOf('hide_code') > -1) {$(this).hide();}
-        });
-        $('div.output_prompt').css('opacity', 0);
-    } else {
-        $('div.input').each(function(id) {$(this).show();});
-        $('div.output_prompt').css('opacity', 1);
-    };
-    code_show = !code_show;
-} 
-$(document).ready(code_display);
-</script>
-<form action="javascript: code_display()">
-<input style="color: #346187; background: #CBE5FA; opacity: 0.8;" \ 
-type="submit" value="Click to display or hide code cells">
-</form>
 
