@@ -19112,12 +19112,12 @@ test_{network} = bottleneck_features['test']</code></pre>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="(IMPLEMENTATION)-Model-Architecture">(IMPLEMENTATION) Model Architecture<a class="anchor-link" href="#(IMPLEMENTATION)-Model-Architecture">&#182;</a></h3><p>Create a CNN to classify dog breed.  At the end of your code cell block, summarize the layers of your model by executing the line:</p>
 
-<pre><code>    &lt;your model's name&gt;.summary()
+<pre><code>&lt;your model's name&gt;.summary()
 
 </code></pre>
 <p><strong>Question 5:</strong> Outline the steps you took to get to your final CNN architecture and your reasoning at each step.  Describe why you think the architecture is suitable for the current problem.</p>
 <p><strong>Answer 5:</strong></p>
-<p style="font-family:'Roboto'; color:#778899;">In this case</p>
+<p style="font-family:'Roboto'; color:#778899;">In this case, we leverage a network pre-trained on a large dataset. Complex deep networks are expensive to train, they try to detect edges in the earlier layers, shapes in the middle layers and some high-level specific features in the final layers. But this work is already done for [Inception](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/DogInceptionV3Data.npz) model and we have prepared bottleneck features. The task is just to apply the training results. <br /> After loading the bottleneck features into [GlobalAveragePooling2D](https://keras.io/layers/pooling/), we only need to connect the results of the last pooling layer with output variables. I've done it with a series of dense layers and tested them with different numbers of units (2048, 1024 for the first, 128, 256, 512 for the second). Then I've chosen the set with the best results (2048=>256). The final dense layer corresponds to the classification task with 133 outputs. <br /> The success of this model is quite predictable in comparison with the first simple model, since a much more complex structure that captures not only the boundaries and shapes of objects is used, besides the network is pre-trained on a large number of similar images and adapted to this data.</p>
 </div>
 </div>
 </div>
@@ -19511,6 +19511,7 @@ Epoch 00019: val_loss did not improve
 <h3 id="(IMPLEMENTATION)-Test-Your-Algorithm-on-Sample-Images!">(IMPLEMENTATION) Test Your Algorithm on Sample Images!<a class="anchor-link" href="#(IMPLEMENTATION)-Test-Your-Algorithm-on-Sample-Images!">&#182;</a></h3><p>Test your algorithm at least six images on your computer.  Feel free to use any images you like.  Use at least two human and two dog images.</p>
 <p><strong>Question 6:</strong> Is the output better than you expected :) ?  Or worse :( ?  Provide at least three possible points of improvement for your algorithm.</p>
 <p><strong>Answer 6:</strong> As we can see it works efficiently and really funny.</p>
+<p><p style="font-family:'Roboto'; color:#778899;">I think there are several ways to improve the decision. <br /> The <b style="color:crimson;">first way</b> is simply to build the own complex structure, adapted to a specific task. This type of specification would be able to achieve accuracy close to human consciousness. <br /> The <b style="color:crimson;">second way</b> is to further study the parameters of fully connected layers and their combinations. For example, an increase in the number of layers with a more gradual decrease in the number of units in each. <br /> The <b style="color:crimson;">third way</b> is to try to add one more convolution and pooling layers after loading the bottleneck features in order to improve the high-level recognition features, which are related to exactly this set of images.<p/></p>
 
 </div>
 </div>
