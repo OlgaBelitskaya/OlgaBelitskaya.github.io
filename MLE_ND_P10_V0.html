@@ -11925,6 +11925,8 @@ type="submit" value="Click to display or hide code cells">
 
 <span class="kn">from</span> <span class="nn">keras.applications.resnet50</span> <span class="kn">import</span> <span class="n">ResNet50</span>
 <span class="kn">from</span> <span class="nn">keras.applications.resnet50</span> <span class="kn">import</span> <span class="n">preprocess_input</span><span class="p">,</span> <span class="n">decode_predictions</span>
+<span class="kn">from</span> <span class="nn">keras.applications.vgg16</span> <span class="kn">import</span> <span class="n">VGG16</span>
+<span class="kn">from</span> <span class="nn">keras.applications.inception_v3</span> <span class="kn">import</span> <span class="n">InceptionV3</span>
 
 <span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Conv2D</span><span class="p">,</span> <span class="n">MaxPooling2D</span><span class="p">,</span> <span class="n">GlobalAveragePooling2D</span><span class="p">,</span> <span class="n">GlobalAveragePooling1D</span>
 <span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Dropout</span><span class="p">,</span> <span class="n">Flatten</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Activation</span><span class="p">,</span> <span class="n">LSTM</span>
@@ -18845,8 +18847,9 @@ _________________________________________________________________
                                <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">save_best_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 <span class="n">VGG16_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_VGG16</span><span class="p">,</span> <span class="n">train_targets</span><span class="p">,</span> 
-          <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">valid_VGG16</span><span class="p">,</span> <span class="n">valid_targets</span><span class="p">),</span>
-          <span class="n">epochs</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">checkpointer</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">);</span>
+                <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">valid_VGG16</span><span class="p">,</span> <span class="n">valid_targets</span><span class="p">),</span>
+                <span class="n">epochs</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> 
+                <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">checkpointer</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">);</span>
 </pre></div>
 
 </div>
@@ -19044,6 +19047,10 @@ Epoch 00029: val_loss improved from 0.69594 to 0.69449, saving model to saved_mo
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">hide_code</span>
+<span class="k">def</span> <span class="nf">extract_VGG16</span><span class="p">(</span><span class="n">tensor</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">keras.applications.vgg16</span> <span class="kn">import</span> <span class="n">preprocess_input</span>
+    <span class="k">return</span> <span class="n">VGG16</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="s1">&#39;imagenet&#39;</span><span class="p">,</span> <span class="n">include_top</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">preprocess_input</span><span class="p">(</span><span class="n">tensor</span><span class="p">))</span>
+
 <span class="k">def</span> <span class="nf">VGG16_predict_breed</span><span class="p">(</span><span class="n">img_path</span><span class="p">):</span>
     <span class="c1"># extract bottleneck features</span>
     <span class="n">bottleneck_feature</span> <span class="o">=</span> <span class="n">extract_VGG16</span><span class="p">(</span><span class="n">path_to_tensor</span><span class="p">(</span><span class="n">img_path</span><span class="p">))</span>
@@ -19428,6 +19435,10 @@ Epoch 00019: val_loss did not improve
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">hide_code</span>
+<span class="k">def</span> <span class="nf">extract_InceptionV3</span><span class="p">(</span><span class="n">tensor</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">keras.applications.inception_v3</span> <span class="kn">import</span> <span class="n">preprocess_input</span>
+    <span class="k">return</span> <span class="n">InceptionV3</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="s1">&#39;imagenet&#39;</span><span class="p">,</span> <span class="n">include_top</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">preprocess_input</span><span class="p">(</span><span class="n">tensor</span><span class="p">))</span>
+
 <span class="c1">### TODO: Write a function that takes a path to an image as input</span>
 <span class="c1">### and returns the dog breed that is predicted by the model.</span>
 <span class="k">def</span> <span class="nf">InceptionV3_predict_breed</span><span class="p">(</span><span class="n">img_path</span><span class="p">):</span>
