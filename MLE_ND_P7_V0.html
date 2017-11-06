@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>MLE_ND_P7_V0</title>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>MLE_ND_P7_V0</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <style type="text/css">
@@ -13,8 +11,8 @@
 *
 */
 /*!
- * Bootstrap v3.3.6 (http://getbootstrap.com)
- * Copyright 2011-2015 Twitter, Inc.
+ * Bootstrap v3.3.7 (http://getbootstrap.com)
+ * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
@@ -1109,7 +1107,6 @@ a:focus {
   text-decoration: underline;
 }
 a:focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -2538,7 +2535,6 @@ select[size] {
 input[type="file"]:focus,
 input[type="radio"]:focus,
 input[type="checkbox"]:focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -3029,7 +3025,6 @@ select[multiple].input-lg {
 .btn.focus,
 .btn:active.focus,
 .btn.active.focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -8760,6 +8755,9 @@ body > #header .header-bar {
     margin-left: 10px;
   }
 }
+[dir="rtl"] #ipython_notebook {
+  float: right !important;
+}
 #noscript {
   width: auto;
   padding-top: 16px;
@@ -8962,8 +8960,14 @@ span#login_widget > .button .badge,
  *
  * Author: Jupyter Development Team
  */
+[dir="rtl"] #tabs li {
+  float: right;
+}
 ul#tabs {
   margin-bottom: 4px;
+}
+[dir="rtl"] ul#tabs {
+  margin-right: 0px;
 }
 ul#tabs a {
   padding-top: 6px;
@@ -8986,6 +8990,16 @@ ul.breadcrumb span {
 }
 .list_toolbar .tree-buttons {
   padding-top: 1px;
+}
+[dir="rtl"] .list_toolbar .tree-buttons {
+  float: left !important;
+}
+[dir="rtl"] .list_toolbar .pull-right {
+  padding-top: 1px;
+  float: left !important;
+}
+[dir="rtl"] .list_toolbar .pull-left {
+  float: right !important;
 }
 .dynamic-buttons {
   padding-top: 3px;
@@ -9122,6 +9136,9 @@ ul.breadcrumb span {
 #tree-selector {
   padding-right: 0px;
 }
+[dir="rtl"] #tree-selector a {
+  float: right;
+}
 #button-select-all {
   min-width: 50px;
 }
@@ -9211,6 +9228,9 @@ ul#new-menu {
   left: auto;
   right: 0;
 }
+[dir="rtl"] #new-menu {
+  text-align: right;
+}
 .kernel-menu-icon {
   padding-right: 12px;
   width: 24px;
@@ -9255,6 +9275,9 @@ ul#new-menu {
 }
 #running .panel-group .panel .panel-body .list_container .list_item:last-child {
   border-bottom: 0px;
+}
+[dir="rtl"] #running .col-sm-8 {
+  float: right !important;
 }
 .delete-button {
   display: none;
@@ -9551,6 +9574,7 @@ div.cell.selected.jupyter-soft-selected {
   }
 }
 div.inner_cell {
+  min-width: 0;
   /* Old browsers */
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -9571,11 +9595,6 @@ div.inner_cell {
   box-flex: 1;
   /* Modern browsers */
   flex: 1;
-}
-@-moz-document url-prefix() {
-  div.inner_cell {
-    overflow-x: hidden;
-  }
 }
 /* input_area and input_prompt must match in top border and margin for alignment */
 div.input_area {
@@ -11246,7 +11265,7 @@ div#pager .ui-resizable-handle::after {
 }
 .shortcut_key {
   display: inline-block;
-  width: 20ex;
+  width: 21ex;
   text-align: right;
   font-family: monospace;
 }
@@ -11558,6 +11577,7 @@ ul.typeahead-list > li > a {
   box-shadow: 0px 0px 12px 1px rgba(87, 87, 87, 0.2);
 }
 .terminal-app .terminal {
+  width: 100%;
   float: left;
   font-family: monospace;
   color: white;
@@ -11571,6 +11591,9 @@ ul.typeahead-list > li > a {
 .terminal-app .terminal dummy-screen {
   line-height: 1em;
   font-size: 14px;
+}
+.terminal-app .terminal .xterm-rows {
+  padding: 10px;
 }
 .terminal-app .terminal-cursor {
   color: black;
@@ -11631,8 +11654,10 @@ ul.typeahead-list > li > a {
 .highlight .mh { color: #666666 } /* Literal.Number.Hex */
 .highlight .mi { color: #666666 } /* Literal.Number.Integer */
 .highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
 .highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
 .highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
 .highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
 .highlight .s2 { color: #BA2121 } /* Literal.String.Double */
 .highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
@@ -11643,9 +11668,11 @@ ul.typeahead-list > li > a {
 .highlight .s1 { color: #BA2121 } /* Literal.String.Single */
 .highlight .ss { color: #19177C } /* Literal.String.Symbol */
 .highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
 .highlight .vc { color: #19177C } /* Name.Variable.Class */
 .highlight .vg { color: #19177C } /* Name.Variable.Global */
 .highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
     </style>
 <style type="text/css">
@@ -11687,9 +11714,6 @@ ul.typeahead-list > li > a {
 .ansi-bold { font-weight: bold; }
 
     </style>
-<style type="text/css">
-    
-    </style>
 
 
 <style type="text/css">
@@ -11702,9 +11726,7 @@ body {
 div#notebook {
   overflow: visible;
   border-top: none;
-}
-
-@media print {
+}@media print {
   div.cell {
     display: block;
     page-break-inside: avoid;
@@ -11725,7 +11747,7 @@ div#notebook {
 
 <!-- Loading mathjax macro -->
 <!-- Load mathjax -->
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML"></script>
     <!-- MathJax configuration -->
     <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
@@ -11749,23 +11771,21 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1>&#x1F4D1; &nbsp; $\mathfrak {P7: \ Building \ a \ Student \ Intervention \ System}$</h1>
+<h1 id="Machine-Learning-Engineer-Nanodegree">Machine Learning Engineer Nanodegree<a class="anchor-link" href="#Machine-Learning-Engineer-Nanodegree">&#182;</a></h1><h2 id="Deep-Learning">Deep Learning<a class="anchor-link" href="#Deep-Learning">&#182;</a></h2><h1>&#x1F4D1; &nbsp; P7: Building a Student Intervention System</h1>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="$\mathfrak-{1.-\-Introduction}$">$\mathfrak {1. \ Introduction}$<a class="anchor-link" href="#$\mathfrak-{1.-\-Introduction}$">&#182;</a></h3><h4 id="Question-1---Classification-vs.-Regression">Question 1 - Classification vs. Regression<a class="anchor-link" href="#Question-1---Classification-vs.-Regression">&#182;</a></h4><p><em>The goal for this project is to identify students who might need early intervention before they fail to graduate. Which type of supervised learning problem is this, classification or regression? Why?</em></p>
-<h4 id="Answer-1">Answer 1<a class="anchor-link" href="#Answer-1">&#182;</a></h4><p>For simplicity, the border between regression and classification can be described in this way:</p>
+<h2 id="1.-Introduction">1. Introduction<a class="anchor-link" href="#1.-Introduction">&#182;</a></h2><h3 id="Question-1---Classification-vs.-Regression">Question 1 - Classification vs. Regression<a class="anchor-link" href="#Question-1---Classification-vs.-Regression">&#182;</a></h3><p><em>The goal for this project is to identify students who might need early intervention before they fail to graduate. Which type of supervised learning problem is this, classification or regression? Why?</em></p>
+<h3 id="Answer-1">Answer 1<a class="anchor-link" href="#Answer-1">&#182;</a></h3><p>For simplicity, the border between regression and classification can be described in this way:</p>
 <ul>
 <li>classification: predict the values of discrete or categorical targets;</li>
 <li>regression: predict the values of continuous targets.</li>
@@ -11775,45 +11795,53 @@ div#notebook {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="$\mathfrak-{2.-\-Code-\-Library}$">$\mathfrak {2. \ Code \ Library}$<a class="anchor-link" href="#$\mathfrak-{2.-\-Code-\-Library}$">&#182;</a></h3>
+<h2 id="2.-Code-Library">2. Code Library<a class="anchor-link" href="#2.-Code-Library">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="k">import</span> <span class="n">HTML</span>
-<span class="n">hide_code</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-<span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">&lt;style&gt;</span>
-<span class="s1">body {background-color: aliceblue;}</span>
-<span class="s1">a {color: steelblue;}</span>
-<span class="s1">h1, h2, h3 { color: #CD5C5C;}</span>
-<span class="s1">&lt;/style&gt;</span>
-<span class="s1">&lt;script&gt;code_show = true; </span>
-<span class="s1">function code_display() {</span>
-<span class="s1">    if (code_show) {</span>
-<span class="s1">        $(&#39;div.input&#39;).each(function(id) {</span>
-<span class="s1">            if (id == 0 || $(this).html().indexOf(&#39;hide_code&#39;) &gt; -1) {$(this).hide();}</span>
-<span class="s1">        });</span>
-<span class="s1">        $(&#39;div.output_prompt&#39;).css(&#39;opacity&#39;, 0);</span>
-<span class="s1">    } else {</span>
-<span class="s1">        $(&#39;div.input&#39;).each(function(id) {$(this).show();});</span>
-<span class="s1">        $(&#39;div.output_prompt&#39;).css(&#39;opacity&#39;, 1);</span>
-<span class="s1">    }</span>
-<span class="s1">    code_show = !code_show;</span>
-<span class="s1">} </span>
-<span class="s1">$(document).ready(code_display);&lt;/script&gt;</span>
-<span class="s1">&lt;form action=&quot;javascript: code_display()&quot;&gt;&lt;input </span><span class="se">\</span>
-<span class="s1">style=&quot;color: #CD5C5C; background: ghostwhite; opacity: 0.9; &quot; </span><span class="se">\</span>
-<span class="s1">type=&quot;submit&quot; value=&quot;Click to display or hide code&quot;&gt;&lt;/form&gt;&#39;&#39;&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">html</span>
+&lt;style&gt;
+@import url(&#39;https://fonts.googleapis.com/css?family=Orbitron|Roboto&#39;);
+body {background-color: #f6e4e4;} 
+a {color: #a44a4a; font-family: &#39;Roboto&#39;;} 
+h1 {color: #cd5c5c; font-family: &#39;Orbitron&#39;; text-shadow: 4px 4px 4px #ccc;} 
+h2, h3 {color: slategray; font-family: &#39;Orbitron&#39;; text-shadow: 4px 4px 4px #ccc;}
+h4 {color: #cd5c5c; font-family: &#39;Roboto&#39;;}
+span {text-shadow: 4px 4px 4px #ccc;}
+div.output_prompt, div.output_area pre {color: slategray;}
+div.input_prompt, div.output_subarea {color: #a44a4a;}      
+div.output_stderr pre {background-color: ghostwhite;}  
+div.output_stderr {background-color: slategrey;}                        
+&lt;/style&gt;
+&lt;script&gt;
+code_show = true; 
+function code_display() {
+    if (code_show) {
+        $(&#39;div.input&#39;).each(function(id) {
+            if (id == 0 || $(this).html().indexOf(&#39;hide_code&#39;) &gt; -1) {$(this).hide();}
+        });
+        $(&#39;div.output_prompt&#39;).css(&#39;opacity&#39;, 0);
+    } else {
+        $(&#39;div.input&#39;).each(function(id) {$(this).show();});
+        $(&#39;div.output_prompt&#39;).css(&#39;opacity&#39;, 1);
+    };
+    code_show = !code_show;
+} 
+$(document).ready(code_display);
+&lt;/script&gt;
+&lt;form action=&quot;javascript: code_display()&quot;&gt;
+&lt;input style=&quot;color: #cd5c5c; background: #f6e4e4; opacity: 0.8;&quot; \ 
+type=&quot;submit&quot; value=&quot;Click to display or hide code cells&quot;&gt;
+&lt;/form&gt;               
 </pre></div>
 
 </div>
@@ -11824,16 +11852,28 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[1]:</div>
+<div class="output_area">
 
-<div class="output_html rendered_html output_subarea output_execute_result">
+<div class="prompt"></div>
 
+
+
+<div class="output_html rendered_html output_subarea ">
 <style>
-body {background-color: aliceblue;}
-a {color: steelblue;}
-h1, h2, h3 { color: #CD5C5C;}
+@import url('https://fonts.googleapis.com/css?family=Orbitron|Roboto');
+body {background-color: #f6e4e4;} 
+a {color: #a44a4a; font-family: 'Roboto';} 
+h1 {color: #cd5c5c; font-family: 'Orbitron'; text-shadow: 4px 4px 4px #ccc;} 
+h2, h3 {color: slategray; font-family: 'Orbitron'; text-shadow: 4px 4px 4px #ccc;}
+h4 {color: #cd5c5c; font-family: 'Roboto';}
+span {text-shadow: 4px 4px 4px #ccc;}
+div.output_prompt, div.output_area pre {color: slategray;}
+div.input_prompt, div.output_subarea {color: #a44a4a;}      
+div.output_stderr pre {background-color: ghostwhite;}  
+div.output_stderr {background-color: slategrey;}                        
 </style>
-<script>code_show = true; 
+<script>
+code_show = true; 
 function code_display() {
     if (code_show) {
         $('div.input').each(function(id) {
@@ -11843,11 +11883,15 @@ function code_display() {
     } else {
         $('div.input').each(function(id) {$(this).show();});
         $('div.output_prompt').css('opacity', 1);
-    }
+    };
     code_show = !code_show;
 } 
-$(document).ready(code_display);</script>
-<form action="javascript: code_display()"><input style="color: #CD5C5C; background: ghostwhite; opacity: 0.9; " type="submit" value="Click to display or hide code"></form>
+$(document).ready(code_display);
+</script>
+<form action="javascript: code_display()">
+<input style="color: #cd5c5c; background: #f6e4e4; opacity: 0.8;" \ 
+type="submit" value="Click to display or hide code cells">
+</form>               
 </div>
 
 </div>
@@ -11861,7 +11905,7 @@ $(document).ready(code_display);</script>
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
 <span class="c1"># Import libraries</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -11888,12 +11932,11 @@ $(document).ready(code_display);</script>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="$\mathfrak-{3.-\-Exploring-\-the-\-Data}$">$\mathfrak {3. \ Exploring \ the \ Data}$<a class="anchor-link" href="#$\mathfrak-{3.-\-Exploring-\-the-\-Data}$">&#182;</a></h3><p>We will start from loading the student data. Note that the last column from this dataset  <code>'passed'</code> will be our target label (whether the student graduated or didn't graduate). All other columns are features about each student.</p>
+<h2 id="3.-Exploring-the-Data">3. Exploring the Data<a class="anchor-link" href="#3.-Exploring-the-Data">&#182;</a></h2><p>We will start from loading the student data. Note that the last column from this dataset  <code>'passed'</code> will be our target label (whether the student graduated or didn't graduate). All other columns are features about each student.</p>
 
 </div>
 </div>
@@ -11918,14 +11961,22 @@ $(document).ready(code_display);</script>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Student data read successfully!
 </pre>
 </div>
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[3]:</div>
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[3]:</div>
+
+
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -12111,8 +12162,7 @@ $(document).ready(code_display);</script>
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12130,7 +12180,7 @@ $(document).ready(code_display);</script>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -12165,7 +12215,11 @@ $(document).ready(code_display);</script>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Total number of students: 395
 Number of features: 31
@@ -12180,20 +12234,19 @@ Graduation rate of the class: 67.09%
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="$\mathfrak-{4.-\-Preparing-\-the-\-Data}$">$\mathfrak {4. \ Preparing \ the \ Data}$<a class="anchor-link" href="#$\mathfrak-{4.-\-Preparing-\-the-\-Data}$">&#182;</a></h3><p>In this section, we will prepare the data for modeling, training and testing.</p>
-<h4 id="4.1-Identify-feature-and-target-columns">4.1 Identify feature and target columns<a class="anchor-link" href="#4.1-Identify-feature-and-target-columns">&#182;</a></h4><p>It is often the case that the data you obtain contains non-numeric features. This can be a problem, as most machine learning algorithms expect numeric data to perform computations with.</p>
+<h2 id="4.-Preparing-the-Data">4. Preparing the Data<a class="anchor-link" href="#4.-Preparing-the-Data">&#182;</a></h2><p>In this section, we will prepare the data for modeling, training and testing.</p>
+<h3 id="4.1-Identify-feature-and-target-columns">4.1 Identify feature and target columns<a class="anchor-link" href="#4.1-Identify-feature-and-target-columns">&#182;</a></h3><p>It is often the case that the data you obtain contains non-numeric features. This can be a problem, as most machine learning algorithms expect numeric data to perform computations with.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -12224,7 +12277,11 @@ Graduation rate of the class: 67.09%
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Feature columns:
 [&#39;school&#39;, &#39;sex&#39;, &#39;age&#39;, &#39;address&#39;, &#39;famsize&#39;, &#39;Pstatus&#39;, &#39;Medu&#39;, &#39;Fedu&#39;, &#39;Mjob&#39;, &#39;Fjob&#39;, &#39;reason&#39;, &#39;guardian&#39;, &#39;traveltime&#39;, &#39;studytime&#39;, &#39;failures&#39;, &#39;schoolsup&#39;, &#39;famsup&#39;, &#39;paid&#39;, &#39;activities&#39;, &#39;nursery&#39;, &#39;higher&#39;, &#39;internet&#39;, &#39;romantic&#39;, &#39;famrel&#39;, &#39;freetime&#39;, &#39;goout&#39;, &#39;Dalc&#39;, &#39;Walc&#39;, &#39;health&#39;, &#39;absences&#39;]
@@ -12271,12 +12328,11 @@ absences          6        4       10         2       4          10       0
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="4.2-Preprocess-Feature-Columns">4.2 Preprocess Feature Columns<a class="anchor-link" href="#4.2-Preprocess-Feature-Columns">&#182;</a></h4><p>As we can see, there are several non-numeric columns that need to be converted! Many of them are simply <code>yes</code>/<code>no</code>, e.g. <code>internet</code>. These can be reasonably converted into <code>1</code>/<code>0</code> (binary) values.</p>
+<h3 id="4.2-Preprocess-Feature-Columns">4.2 Preprocess Feature Columns<a class="anchor-link" href="#4.2-Preprocess-Feature-Columns">&#182;</a></h3><p>As we can see, there are several non-numeric columns that need to be converted! Many of them are simply <code>yes</code>/<code>no</code>, e.g. <code>internet</code>. These can be reasonably converted into <code>1</code>/<code>0</code> (binary) values.</p>
 <p>Other columns, like <code>Mjob</code> and <code>Fjob</code>, have more than two values, and are known as <em>categorical variables</em>. The recommended way to handle such a column is to create as many columns as possible values (e.g. <code>Fjob_teacher</code>, <code>Fjob_other</code>, <code>Fjob_services</code>, etc.), and assign a <code>1</code> to one of them and <code>0</code> to all others.</p>
 <p>These generated columns are sometimes called <em>dummy variables</em>, and we will use the <a href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.get_dummies.html?highlight=get_dummies#pandas.get_dummies"><code>pandas.get_dummies()</code></a> function to perform this transformation.</p>
 
@@ -12285,7 +12341,7 @@ absences          6        4       10         2       4          10       0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -12326,7 +12382,11 @@ absences          6        4       10         2       4          10       0
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Processed feature columns (48 total features):
 [&#39;school_GP&#39;, &#39;school_MS&#39;, &#39;sex_F&#39;, &#39;sex_M&#39;, &#39;age&#39;, &#39;address_R&#39;, &#39;address_U&#39;, &#39;famsize_GT3&#39;, &#39;famsize_LE3&#39;, &#39;Pstatus_A&#39;, &#39;Pstatus_T&#39;, &#39;Medu&#39;, &#39;Fedu&#39;, &#39;Mjob_at_home&#39;, &#39;Mjob_health&#39;, &#39;Mjob_other&#39;, &#39;Mjob_services&#39;, &#39;Mjob_teacher&#39;, &#39;Fjob_at_home&#39;, &#39;Fjob_health&#39;, &#39;Fjob_other&#39;, &#39;Fjob_services&#39;, &#39;Fjob_teacher&#39;, &#39;reason_course&#39;, &#39;reason_home&#39;, &#39;reason_other&#39;, &#39;reason_reputation&#39;, &#39;guardian_father&#39;, &#39;guardian_mother&#39;, &#39;guardian_other&#39;, &#39;traveltime&#39;, &#39;studytime&#39;, &#39;failures&#39;, &#39;schoolsup&#39;, &#39;famsup&#39;, &#39;paid&#39;, &#39;activities&#39;, &#39;nursery&#39;, &#39;higher&#39;, &#39;internet&#39;, &#39;romantic&#39;, &#39;famrel&#39;, &#39;freetime&#39;, &#39;goout&#39;, &#39;Dalc&#39;, &#39;Walc&#39;, &#39;health&#39;, &#39;absences&#39;]
@@ -12338,12 +12398,11 @@ absences          6        4       10         2       4          10       0
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="4.3-Training-and-Testing-Data-Split">4.3 Training and Testing Data Split<a class="anchor-link" href="#4.3-Training-and-Testing-Data-Split">&#182;</a></h4><p>So far, we have converted all <em>categorical</em> features into numeric values.</p>
+<h3 id="4.3-Training-and-Testing-Data-Split">4.3 Training and Testing Data Split<a class="anchor-link" href="#4.3-Training-and-Testing-Data-Split">&#182;</a></h3><p>So far, we have converted all <em>categorical</em> features into numeric values.</p>
 <p>Next, we will randomly shuffle and split the data (<code>X_all</code>, <code>y_all</code>) into training and testing subsets by the following steps:</p>
 <ul>
 <li>Use 300 training points (approximately 75%) and 95 testing points (approximately 25%).</li>
@@ -12356,7 +12415,7 @@ absences          6        4       10         2       4          10       0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -12383,7 +12442,11 @@ absences          6        4       10         2       4          10       0
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Training set has 300 samples.
 Testing set has 95 samples.
@@ -12395,12 +12458,11 @@ Testing set has 95 samples.
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="$\mathfrak-{5.-\-Training-\-and-\-Evaluating-\-Models}$">$\mathfrak {5. \ Training \ and \ Evaluating \ Models}$<a class="anchor-link" href="#$\mathfrak-{5.-\-Training-\-and-\-Evaluating-\-Models}$">&#182;</a></h3><p>In this section, you will choose 3 supervised learning models that are appropriate for this problem and available in <code>scikit-learn</code>. You will first discuss the reasoning behind choosing these three models by considering what you know about the data and each model's strengths and weaknesses. You will then fit the model to varying sizes of training data (100 data points, 200 data points, and 300 data points) and measure the F<sub>1</sub> score. You will need to produce three tables (one for each model) that shows the training set size, training time, prediction time, F<sub>1</sub> score on the training set, and F<sub>1</sub> score on the testing set.</p>
+<h2 id="5.-Training-and-Evaluating-Models">5. Training and Evaluating Models<a class="anchor-link" href="#5.-Training-and-Evaluating-Models">&#182;</a></h2><p>In this section, you will choose 3 supervised learning models that are appropriate for this problem and available in <code>scikit-learn</code>. You will first discuss the reasoning behind choosing these three models by considering what you know about the data and each model's strengths and weaknesses. You will then fit the model to varying sizes of training data (100 data points, 200 data points, and 300 data points) and measure the F<sub>1</sub> score. You will need to produce three tables (one for each model) that shows the training set size, training time, prediction time, F<sub>1</sub> score on the training set, and F<sub>1</sub> score on the testing set.</p>
 <p><strong>The following supervised learning models are currently available in</strong> <a href="http://scikit-learn.org/stable/supervised_learning.html"><code>scikit-learn</code></a> <strong>that you may choose from:</strong></p>
 <ul>
 <li>Gaussian Naive Bayes (GaussianNB)</li>
@@ -12415,19 +12477,18 @@ Testing set has 95 samples.
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Question-2---Model-Application">Question 2 - Model Application<a class="anchor-link" href="#Question-2---Model-Application">&#182;</a></h4><p><em>List three supervised learning models that are appropriate for this problem. For each model chosen: </em></p>
+<h3 id="Question-2---Model-Application">Question 2 - Model Application<a class="anchor-link" href="#Question-2---Model-Application">&#182;</a></h3><p><em>List three supervised learning models that are appropriate for this problem. For each model chosen: </em></p>
 <ul>
 <li>Describe one real-world application in industry where the model can be applied. <em>(You may need to do a small bit of research for this — give references!)</em> </li>
 <li>What are the strengths of the model; when does it perform well? </li>
 <li>What are the weaknesses of the model; when does it perform poorly?</li>
 <li>What makes this model a good candidate for the problem, given what you know about the data?</li>
 </ul>
-<h4 id="Answer-2">Answer 2<a class="anchor-link" href="#Answer-2">&#182;</a></h4><p>I have chosen the following models:</p>
+<h3 id="Answer-2">Answer 2<a class="anchor-link" href="#Answer-2">&#182;</a></h3><p>I have chosen the following models:</p>
 <ul>
 <li>GradientBoostingClassifier();</li>
 <li>RandomForestClassifier();</li>
@@ -12469,12 +12530,11 @@ Testing set has 95 samples.
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="5.1-Setup">5.1 Setup<a class="anchor-link" href="#5.1-Setup">&#182;</a></h4><p>Let's initialize three helper functions which we can use for training and testing the three supervised learning models we've chosen above.</p>
+<h3 id="5.1-Setup">5.1 Setup<a class="anchor-link" href="#5.1-Setup">&#182;</a></h3><p>Let's initialize three helper functions which we can use for training and testing the three supervised learning models we've chosen above.</p>
 <p>The functions are as follows:</p>
 <ul>
 <li><code>train_classifier</code> - takes as input a classifier and training data and fits the classifier to the data.</li>
@@ -12490,7 +12550,7 @@ Testing set has 95 samples.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -12523,7 +12583,7 @@ Testing set has 95 samples.
     
     <span class="c1"># Indicate the classifier and the training set size</span>
     <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Training a </span><span class="si">{}</span><span class="s2"> using a training set size of </span><span class="si">{}</span><span class="s2">. . .&quot;</span><span class="o">.</span>\
-           <span class="nb">format</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)))</span>
+           <span class="nb">format</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)))</span>
     
     <span class="c1"># Train the classifier</span>
     <span class="n">train_classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
@@ -12538,12 +12598,11 @@ Testing set has 95 samples.
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="5.2-Model-Performance-Metrics">5.2 Model Performance Metrics<a class="anchor-link" href="#5.2-Model-Performance-Metrics">&#182;</a></h4><p>With the predefined functions above, we will now import the three supervised learning models of our choice and run the <code>train_predict</code> function for each one. We will need to train and predict on each classifier for three different training set sizes: 100, 200, and 300. Hence, we should expect to have 9 different outputs below — 3 for each model using the varying training set sizes.</p>
+<h3 id="5.2-Model-Performance-Metrics">5.2 Model Performance Metrics<a class="anchor-link" href="#5.2-Model-Performance-Metrics">&#182;</a></h3><p>With the predefined functions above, we will now import the three supervised learning models of our choice and run the <code>train_predict</code> function for each one. We will need to train and predict on each classifier for three different training set sizes: 100, 200, and 300. Hence, we should expect to have 9 different outputs below — 3 for each model using the varying training set sizes.</p>
 <p>It's time to implement the following steps:</p>
 <ul>
 <li>Import the three supervised learning models you've discussed in the previous section.</li>
@@ -12564,7 +12623,7 @@ Testing set has 95 samples.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -12596,62 +12655,66 @@ Testing set has 95 samples.
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Training a AdaBoostClassifier using a training set size of 100. . .
-Trained model in 0.1174 seconds
-Made predictions in 0.0067 seconds.
+Trained model in 0.1898 seconds
+Made predictions in 0.0136 seconds.
 F1 score for training set: 0.9624.
-Made predictions in 0.0094 seconds.
+Made predictions in 0.0149 seconds.
 F1 score for test set: 0.6949.
 Training a AdaBoostClassifier using a training set size of 200. . .
-Trained model in 0.1097 seconds
-Made predictions in 0.0071 seconds.
+Trained model in 0.2855 seconds
+Made predictions in 0.0534 seconds.
 F1 score for training set: 0.8633.
-Made predictions in 0.0065 seconds.
+Made predictions in 0.0125 seconds.
 F1 score for test set: 0.7647.
 Training a AdaBoostClassifier using a training set size of 300. . .
-Trained model in 0.1033 seconds
-Made predictions in 0.0102 seconds.
+Trained model in 0.3138 seconds
+Made predictions in 0.0206 seconds.
 F1 score for training set: 0.8578.
-Made predictions in 0.0075 seconds.
+Made predictions in 0.0170 seconds.
 F1 score for test set: 0.8116.
 Training a GradientBoostingClassifier using a training set size of 100. . .
-Trained model in 0.0830 seconds
-Made predictions in 0.0012 seconds.
+Trained model in 0.2313 seconds
+Made predictions in 0.0011 seconds.
 F1 score for training set: 1.0000.
-Made predictions in 0.0008 seconds.
-F1 score for test set: 0.7669.
+Made predictions in 0.0011 seconds.
+F1 score for test set: 0.7538.
 Training a GradientBoostingClassifier using a training set size of 200. . .
-Trained model in 0.0983 seconds
-Made predictions in 0.0013 seconds.
+Trained model in 0.2811 seconds
+Made predictions in 0.0014 seconds.
 F1 score for training set: 1.0000.
-Made predictions in 0.0009 seconds.
+Made predictions in 0.0014 seconds.
 F1 score for test set: 0.7761.
 Training a GradientBoostingClassifier using a training set size of 300. . .
-Trained model in 0.1199 seconds
-Made predictions in 0.0020 seconds.
+Trained model in 0.3538 seconds
+Made predictions in 0.0021 seconds.
 F1 score for training set: 0.9706.
-Made predictions in 0.0013 seconds.
+Made predictions in 0.0010 seconds.
 F1 score for test set: 0.8088.
 Training a RandomForestClassifier using a training set size of 100. . .
-Trained model in 0.0209 seconds
-Made predictions in 0.0021 seconds.
-F1 score for training set: 0.9846.
-Made predictions in 0.0017 seconds.
-F1 score for test set: 0.6977.
+Trained model in 0.0496 seconds
+Made predictions in 0.0035 seconds.
+F1 score for training set: 0.9924.
+Made predictions in 0.0028 seconds.
+F1 score for test set: 0.6400.
 Training a RandomForestClassifier using a training set size of 200. . .
-Trained model in 0.0171 seconds
-Made predictions in 0.0023 seconds.
-F1 score for training set: 0.9925.
-Made predictions in 0.0025 seconds.
-F1 score for test set: 0.7692.
+Trained model in 0.0700 seconds
+Made predictions in 0.0076 seconds.
+F1 score for training set: 0.9848.
+Made predictions in 0.0027 seconds.
+F1 score for test set: 0.7299.
 Training a RandomForestClassifier using a training set size of 300. . .
-Trained model in 0.0233 seconds
-Made predictions in 0.0025 seconds.
-F1 score for training set: 0.9950.
-Made predictions in 0.0030 seconds.
-F1 score for test set: 0.7536.
+Trained model in 0.0513 seconds
+Made predictions in 0.0033 seconds.
+F1 score for training set: 0.9949.
+Made predictions in 0.0070 seconds.
+F1 score for test set: 0.7353.
 </pre>
 </div>
 </div>
@@ -12660,12 +12723,11 @@ F1 score for test set: 0.7536.
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="5.3-Tabular-Results">5.3 Tabular Results<a class="anchor-link" href="#5.3-Tabular-Results">&#182;</a></h4><hr>
+<h3 id="5.3-Tabular-Results">5.3 Tabular Results<a class="anchor-link" href="#5.3-Tabular-Results">&#182;</a></h3><hr>
 <p><strong> Classifer 1 - AdaBoostClassifier</strong></p>
 <table>
 <thead><tr>
@@ -12679,22 +12741,22 @@ F1 score for test set: 0.7536.
 <tbody>
 <tr>
 <td style="text-align:center">100</td>
-<td style="text-align:center">0.1174</td>
-<td style="text-align:center">0.0094</td>
+<td style="text-align:center">0.1898</td>
+<td style="text-align:center">0.0149</td>
 <td style="text-align:center">0.9624</td>
 <td style="text-align:center">0.6949</td>
 </tr>
 <tr>
 <td style="text-align:center">200</td>
-<td style="text-align:center">0.1097</td>
-<td style="text-align:center">0.0065</td>
+<td style="text-align:center">0.2855</td>
+<td style="text-align:center">0.0125</td>
 <td style="text-align:center">0.8633</td>
 <td style="text-align:center">0.7647</td>
 </tr>
 <tr>
 <td style="text-align:center">300</td>
-<td style="text-align:center">0.1033</td>
-<td style="text-align:center">0.0075</td>
+<td style="text-align:center">0.3138</td>
+<td style="text-align:center">0.0170</td>
 <td style="text-align:center">0.8578</td>
 <td style="text-align:center">0.8116</td>
 </tr>
@@ -12714,22 +12776,22 @@ F1 score for test set: 0.7536.
 <tbody>
 <tr>
 <td style="text-align:center">100</td>
-<td style="text-align:center">0.0830</td>
-<td style="text-align:center">0.0008</td>
+<td style="text-align:center">0.2313</td>
+<td style="text-align:center">0.0011</td>
 <td style="text-align:center">1.0000</td>
-<td style="text-align:center">0.7669</td>
+<td style="text-align:center">0.7538</td>
 </tr>
 <tr>
 <td style="text-align:center">200</td>
-<td style="text-align:center">0.0983</td>
-<td style="text-align:center">0.0009</td>
+<td style="text-align:center">0.2811</td>
+<td style="text-align:center">0.0014</td>
 <td style="text-align:center">1.0000</td>
 <td style="text-align:center">0.7761</td>
 </tr>
 <tr>
 <td style="text-align:center">300</td>
-<td style="text-align:center">0.1199</td>
-<td style="text-align:center">0.0013</td>
+<td style="text-align:center">0.3538</td>
+<td style="text-align:center">0.0010</td>
 <td style="text-align:center">0.9706</td>
 <td style="text-align:center">0.8088</td>
 </tr>
@@ -12749,24 +12811,24 @@ F1 score for test set: 0.7536.
 <tbody>
 <tr>
 <td style="text-align:center">100</td>
-<td style="text-align:center">0.0209</td>
-<td style="text-align:center">0.0017</td>
-<td style="text-align:center">0.9846</td>
-<td style="text-align:center">0.6977</td>
+<td style="text-align:center">0.0496</td>
+<td style="text-align:center">0.0027</td>
+<td style="text-align:center">0.9924</td>
+<td style="text-align:center">0.6400</td>
 </tr>
 <tr>
 <td style="text-align:center">200</td>
-<td style="text-align:center">0.0171</td>
-<td style="text-align:center">0.0025</td>
-<td style="text-align:center">0.9925</td>
-<td style="text-align:center">0.7692</td>
+<td style="text-align:center">0.0700</td>
+<td style="text-align:center">0.0033</td>
+<td style="text-align:center">0.9848</td>
+<td style="text-align:center">0.7299</td>
 </tr>
 <tr>
 <td style="text-align:center">300</td>
-<td style="text-align:center">0.0233</td>
-<td style="text-align:center">0.0030</td>
-<td style="text-align:center">0.9950</td>
-<td style="text-align:center">0.7536</td>
+<td style="text-align:center">0.0513</td>
+<td style="text-align:center">0.0070</td>
+<td style="text-align:center">0.9949</td>
+<td style="text-align:center">0.7353</td>
 </tr>
 </tbody>
 </table>
@@ -12775,34 +12837,31 @@ F1 score for test set: 0.7536.
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="$\mathfrak-{6.-\-Choosing-\-the-\-Best-\-Model}$">$\mathfrak {6. \ Choosing \ the \ Best \ Model}$<a class="anchor-link" href="#$\mathfrak-{6.-\-Choosing-\-the-\-Best-\-Model}$">&#182;</a></h3><p>In this final section, we will choose from the three supervised learning models the <em>best</em> model to use on the student data. We will then perform a grid search optimization for the model over the entire training set (<code>X_train</code> and <code>y_train</code>) by tuning at least one parameter to improve upon the untuned model's F<sub>1</sub> score.</p>
+<h2 id="6.-Choosing-the-Best-Model">6. Choosing the Best Model<a class="anchor-link" href="#6.-Choosing-the-Best-Model">&#182;</a></h2><p>In this final section, we will choose from the three supervised learning models the <em>best</em> model to use on the student data. We will then perform a grid search optimization for the model over the entire training set (<code>X_train</code> and <code>y_train</code>) by tuning at least one parameter to improve upon the untuned model's F<sub>1</sub> score.</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Question-3---Choosing-the-Best-Model">Question 3 - Choosing the Best Model<a class="anchor-link" href="#Question-3---Choosing-the-Best-Model">&#182;</a></h4><p><em>Based on the experiments you performed earlier, in one to two paragraphs, explain to the board of supervisors what single model you chose as the best model. Which model is generally the most appropriate based on the available data, limited resources, cost, and performance?</em></p>
-<h4 id="Answer-3">Answer 3<a class="anchor-link" href="#Answer-3">&#182;</a></h4><p>I have chosen the AdaBoostClassifier algorithm as it showed the highest accuracy and f-score for the testing set and escaped overfitting. The algorithm is proved to be very time-consuming in the training and predicting processes, but it can be ignored since the number of datapoints is quite small.</p>
+<h3 id="Question-3---Choosing-the-Best-Model">Question 3 - Choosing the Best Model<a class="anchor-link" href="#Question-3---Choosing-the-Best-Model">&#182;</a></h3><p><em>Based on the experiments you performed earlier, in one to two paragraphs, explain to the board of supervisors what single model you chose as the best model. Which model is generally the most appropriate based on the available data, limited resources, cost, and performance?</em></p>
+<h3 id="Answer-3">Answer 3<a class="anchor-link" href="#Answer-3">&#182;</a></h3><p>I have chosen the AdaBoostClassifier algorithm as it showed the highest accuracy and f-score for the testing set and escaped overfitting. The algorithm is proved to be very time-consuming in the training and predicting processes, but it can be ignored since the number of datapoints is quite small.</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Question-4---Model-in-Layman's-Terms">Question 4 - Model in Layman's Terms<a class="anchor-link" href="#Question-4---Model-in-Layman's-Terms">&#182;</a></h4><p><em>In one to two paragraphs, explain to the board of directors in layman's terms how the final model chosen is supposed to work. Be sure that you are describing the major qualities of the model, such as how the model is trained and how the model makes a prediction. Avoid using advanced mathematical or technical jargon, such as describing equations or discussing the algorithm implementation.</em></p>
-<h4 id="Answer-4">Answer 4<a class="anchor-link" href="#Answer-4">&#182;</a></h4><p>In general, boosting in the machine learning is the construction a highly accurate prediction rule by combining many relatively weak and inaccurate rules. It based on the assumption: each of the weak hypotheses has accuracy a little bit better than a random guess. The AdaBoost algorithm unites weak classifiers in this way: the predictions from all of them are then combined through a weighted majority vote (or sum) to produce the final prediction. As many learning methods, AdaBoost uses minimizing a loss function that measures how well a model fits the observed data (more accurately - minimizing the exponential loss).</p>
+<h3 id="Question-4---Model-in-Layman's-Terms">Question 4 - Model in Layman's Terms<a class="anchor-link" href="#Question-4---Model-in-Layman's-Terms">&#182;</a></h3><p><em>In one to two paragraphs, explain to the board of directors in layman's terms how the final model chosen is supposed to work. Be sure that you are describing the major qualities of the model, such as how the model is trained and how the model makes a prediction. Avoid using advanced mathematical or technical jargon, such as describing equations or discussing the algorithm implementation.</em></p>
+<h3 id="Answer-4">Answer 4<a class="anchor-link" href="#Answer-4">&#182;</a></h3><p>In general, boosting in the machine learning is the construction a highly accurate prediction rule by combining many relatively weak and inaccurate rules. It based on the assumption: each of the weak hypotheses has accuracy a little bit better than a random guess. The AdaBoost algorithm unites weak classifiers in this way: the predictions from all of them are then combined through a weighted majority vote (or sum) to produce the final prediction. As many learning methods, AdaBoost uses minimizing a loss function that measures how well a model fits the observed data (more accurately - minimizing the exponential loss).</p>
 <p>So what happens during an iteration process:</p>
 <p>1) any underlying classifier can be chosen as a weak learner,
 2) this classifier is trained on a random subset of the total training set,
@@ -12819,12 +12878,11 @@ F1 score for test set: 0.7536.
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="6.1-Model-Tuning">6.1 Model Tuning<a class="anchor-link" href="#6.1-Model-Tuning">&#182;</a></h4><p>Finaly, we will tune the chosen model and use grid search (<code>GridSearchCV</code>) with at least one important parameter tuned with at least 3 different values. We will need to use the entire training set for this.</p>
+<h3 id="6.1-Model-Tuning">6.1 Model Tuning<a class="anchor-link" href="#6.1-Model-Tuning">&#182;</a></h3><p>Finaly, we will tune the chosen model and use grid search (<code>GridSearchCV</code>) with at least one important parameter tuned with at least 3 different values. We will need to use the entire training set for this.</p>
 <p>Our steps in the tuning:</p>
 <ul>
 <li>Import <a href="http://scikit-learn.org/0.17/modules/generated/sklearn.grid_search.GridSearchCV.html"><code>sklearn.grid_search.GridSearchCV</code></a> and <a href="http://scikit-learn.org/stable/modules/generated/sklearn.metrics.make_scorer.html"><code>sklearn.metrics.make_scorer</code></a>.</li>
@@ -12846,7 +12904,7 @@ F1 score for test set: 0.7536.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -12887,11 +12945,15 @@ F1 score for test set: 0.7536.
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Made predictions in 0.0166 seconds.
+<pre>Made predictions in 0.0137 seconds.
 Tuned model has a training F1 score of 0.8268.
-Made predictions in 0.0089 seconds.
+Made predictions in 0.0140 seconds.
 Tuned model has a testing F1 score of 0.8725.
 Tuned model has the parameters: 
 {&#39;algorithm&#39;: &#39;SAMME.R&#39;, &#39;base_estimator&#39;: None, &#39;learning_rate&#39;: 0.1, &#39;n_estimators&#39;: 48, &#39;random_state&#39;: None}
@@ -12903,30 +12965,27 @@ Tuned model has the parameters:
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Question-5---Final-F1-Score">Question 5 - Final F<sub>1</sub> Score<a class="anchor-link" href="#Question-5---Final-F1-Score">&#182;</a></h4><p><em>What is the final model's F<sub>1</sub> score for training and testing? How does that score compare to the untuned model?</em></p>
-<h4 id="Answer-5">Answer 5<a class="anchor-link" href="#Answer-5">&#182;</a></h4><p>The final model's F-score was improved significantly for the test data.</p>
+<h3 id="Question-5---Final-F1-Score">Question 5 - Final F<sub>1</sub> Score<a class="anchor-link" href="#Question-5---Final-F1-Score">&#182;</a></h3><p><em>What is the final model's F<sub>1</sub> score for training and testing? How does that score compare to the untuned model?</em></p>
+<h3 id="Answer-5">Answer 5<a class="anchor-link" href="#Answer-5">&#182;</a></h3><p>The final model's F-score was improved significantly for the test data.</p>
 <p>It becomes 0.8268 instead of 0.8578 for the training set and 0.8725 instead of 0.8116 for the testing set.</p>
 <p>It means we escape the overfitting problem. This result confirms the effectiveness of the algorithm GridSearchCV for tuning.</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="$\mathfrak-{7.-\-Conclusion}$">$\mathfrak {7. \ Conclusion}$<a class="anchor-link" href="#$\mathfrak-{7.-\-Conclusion}$">&#182;</a></h3>
+<h2 id="7.-Conclusion">7. Conclusion<a class="anchor-link" href="#7.-Conclusion">&#182;</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -12938,4 +12997,8 @@ Tuned model has the parameters:
     </div>
   </div>
 </body>
+
+ 
+
+
 </html>
