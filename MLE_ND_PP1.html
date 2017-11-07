@@ -11861,7 +11861,13 @@ div.output_stderr {background-color: #483d8b;}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Supervised-Learning:-Neural-Nets">Supervised Learning: Neural Nets<a class="anchor-link" href="#Supervised-Learning:-Neural-Nets">&#182;</a></h2><h3 id="Build-A-Perceptron">Build A Perceptron<a class="anchor-link" href="#Build-A-Perceptron">&#182;</a></h3>
+<h2 id="Supervised-Learning:-Neural-Nets">Supervised Learning: Neural Nets<a class="anchor-link" href="#Supervised-Learning:-Neural-Nets">&#182;</a></h2><h3 id="Build-A-Perceptron">Build A Perceptron<a class="anchor-link" href="#Build-A-Perceptron">&#182;</a></h3><ul>
+<li><a href="http://hagan.okstate.edu/4_Perceptron.pdf">Perceptron Learning Rule</a></li>
+<li><a href="http://sebastianraschka.com/Articles/2015_singlelayer_neurons.html">Single-Layer Neural Networks and Gradient Descent</a></li>
+<li><a href="http://cs229.stanford.edu/syllabus.html">CS229 Stanford</a></li>
+<li><a href="https://github.com/rasbt/deep-learning-book">GitHub. deep-learning-book</a></li>
+</ul>
+
 </div>
 </div>
 </div>
@@ -11925,9 +11931,10 @@ div.output_stderr {background-color: #483d8b;}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Threshold-Meditation">Threshold Meditation<a class="anchor-link" href="#Threshold-Meditation">&#182;</a></h2><p>The main advantage of having a threshold be set to a perceptron is being able to control when a perceptron should fire and when it shouldn't. This gives us control on the sensitivity of our neurons thereby helping us influence the desired output.</p>
+<h3 id="Threshold-Meditation">Threshold Meditation<a class="anchor-link" href="#Threshold-Meditation">&#182;</a></h3><p>The main advantage of having a threshold be set to a perceptron is being able to control when a perceptron should fire and when it shouldn't. This gives us control on the sensitivity of our neurons thereby helping us influence the desired output.</p>
 <h3 id="Question-1">Question 1<a class="anchor-link" href="#Question-1">&#182;</a></h3><p><em>What do you think the advantage of a perceptron is, compared with simply returning the dot product without a threshold?</em></p>
-<h3 id="Answer-1">Answer 1<a class="anchor-link" href="#Answer-1">&#182;</a></h3>
+<h3 id="Answer-1">Answer 1<a class="anchor-link" href="#Answer-1">&#182;</a></h3><p>Combining dot products with thresholds makes possible classification (more or less than the certain value) and regression (how close targets to the needed points).</p>
+
 </div>
 </div>
 </div>
@@ -11935,15 +11942,191 @@ div.output_stderr {background-color: #483d8b;}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Where-To-Train-Perceptrons">Where To Train Perceptrons<a class="anchor-link" href="#Where-To-Train-Perceptrons">&#182;</a></h2><h3 id="Question-2">Question 2<a class="anchor-link" href="#Question-2">&#182;</a></h3><h3 id="Answer-2">Answer 2<a class="anchor-link" href="#Answer-2">&#182;</a></h3>
+<h3 id="Quiz:-Perceptron-Update-Rule">Quiz: Perceptron Update Rule<a class="anchor-link" href="#Quiz:-Perceptron-Update-Rule">&#182;</a></h3>
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># ----------</span>
+<span class="c1">#</span>
+<span class="c1"># In this exercise, you will update the perceptron class so that it can update</span>
+<span class="c1"># its weights.</span>
+<span class="c1">#</span>
+<span class="c1"># Finish writing the update() method so that it updates the weights according</span>
+<span class="c1"># to the perceptron update rule. Updates should be performed online, revising</span>
+<span class="c1"># the weights after each data point.</span>
+<span class="c1">#</span>
+<span class="c1"># YOUR CODE WILL GO IN LINES 51 AND 59.</span>
+<span class="c1"># ----------</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">class</span> <span class="nc">Perceptron</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class models an artificial neuron with step activation function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">]),</span> <span class="n">threshold</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize weights and threshold based on input arguments. Note that no</span>
+<span class="sd">        type-checking is being performed here for simplicity.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="n">weights</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">=</span> <span class="n">threshold</span>
+
+
+    <span class="k">def</span> <span class="nf">activate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Takes in @param values, a list of numbers equal to length of weights.</span>
+<span class="sd">        @return the output of a threshold perceptron with given inputs based on</span>
+<span class="sd">        perceptron weights and threshold.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># First calculate the strength with which the perceptron fires</span>
+        <span class="n">strength</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">values</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">)</span>
+        <span class="c1"># Then return 0 or 1 depending on strength compared to threshold  </span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">strength</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">train</span><span class="p">,</span> <span class="n">eta</span><span class="o">=.</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Takes in a 2D array @param values consisting of a LIST of inputs and a</span>
+<span class="sd">        1D array @param train, consisting of a corresponding list of expected</span>
+<span class="sd">        outputs. Updates internal weights according to the perceptron training</span>
+<span class="sd">        rule using these values and an optional learning rate, @param eta.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># For each data point:</span>
+        <span class="k">for</span> <span class="n">data_point</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)):</span>
+            <span class="c1"># TODO: Obtain the neuron&#39;s prediction for the data_point --&gt; values[data_point]</span>
+            <span class="n">prediction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="n">data_point</span><span class="p">])</span> <span class="c1"># TODO</span>
+            <span class="c1"># Get the prediction accuracy calculated as (expected value - predicted value)</span>
+            <span class="c1"># expected value = train[data_point], predicted value = prediction</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">data_point</span><span class="p">]</span> <span class="o">-</span> <span class="n">prediction</span>
+            <span class="c1"># TODO: update self.weights based on the multiplication of:</span>
+            <span class="c1"># - prediction accuracy(error)</span>
+            <span class="c1"># - learning rate(eta)</span>
+            <span class="c1"># - input value(values[data_point])</span>
+            <span class="n">weight_update</span> <span class="o">=</span> <span class="n">error</span><span class="o">*</span><span class="n">values</span><span class="p">[</span><span class="n">data_point</span><span class="p">]</span><span class="o">*</span><span class="n">eta</span><span class="c1"># TODO</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">+=</span> <span class="n">weight_update</span>
+
+<span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A few tests to make sure that the perceptron class performs as expected.</span>
+<span class="sd">    Nothing should show up in the output if all the assertions pass.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">sum_almost_equal</span><span class="p">(</span><span class="n">array1</span><span class="p">,</span> <span class="n">array2</span><span class="p">,</span> <span class="n">tol</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">array1</span> <span class="o">-</span> <span class="n">array2</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">tol</span>
+
+    <span class="n">p1</span> <span class="o">=</span> <span class="n">Perceptron</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">p1</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">]]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">assert</span> <span class="n">sum_almost_equal</span><span class="p">(</span><span class="n">p1</span><span class="o">.</span><span class="n">weights</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]))</span>
+
+    <span class="n">p2</span> <span class="o">=</span> <span class="n">Perceptron</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]),</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">p2</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]]),</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="k">assert</span> <span class="n">sum_almost_equal</span><span class="p">(</span><span class="n">p2</span><span class="o">.</span><span class="n">weights</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mf">2.9</span><span class="p">]))</span>
+
+    <span class="n">p3</span> <span class="o">=</span> <span class="n">Perceptron</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]),</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">p3</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]]),</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="k">assert</span> <span class="n">sum_almost_equal</span><span class="p">(</span><span class="n">p3</span><span class="o">.</span><span class="n">weights</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.7</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">1.7</span><span class="p">]))</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">test</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[52]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Quiz: Layered Network Example</span>
+<span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="mi">5</span><span class="p">))</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[52]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>-25</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Quiz: Linear Representational Power</span>
+<span class="mi">3</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="mi">4</span><span class="o">+</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[2]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(-2, 15)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Deep-Neural-Networks">Deep Neural Networks<a class="anchor-link" href="#Deep-Neural-Networks">&#182;</a></h1>
+<h2 id="Deep-Neural-Networks">Deep Neural Networks<a class="anchor-link" href="#Deep-Neural-Networks">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -12350,7 +12533,73 @@ Input 1    Input 2    Linear Combination    Activation Output   Is Correct
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sigmoid</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="n">sigmoid</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[48]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0.23840584404423523</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sigmoid</span><span class="p">(</span><span class="mi">10</span> <span class="o">+</span> <span class="mi">10</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="n">sigmoid</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span> <span class="o">-</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[49]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>4.1223073103579531e-09</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Using TensorFlow 1.0.0; use tf.python_io in later versions</span>
@@ -12381,7 +12630,7 @@ Input 1    Input 2    Linear Combination    Activation Output   Is Correct
 <span class="n">xor</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 
 <span class="c1"># Fitting the model</span>
-<span class="n">history</span> <span class="o">=</span> <span class="n">xor</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">nb_epoch</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">xor</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="c1"># Scoring the model</span>
 <span class="n">score</span> <span class="o">=</span> <span class="n">xor</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
@@ -12405,61 +12654,28 @@ Input 1    Input 2    Linear Combination    Activation Output   Is Correct
 <div class="prompt"></div>
 
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>Using TensorFlow backend.
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>_________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-dense_1 (Dense)              (None, 64)                192       
+dense_3 (Dense)              (None, 64)                192       
 _________________________________________________________________
-dense_2 (Dense)              (None, 1)                 65        
+dense_4 (Dense)              (None, 1)                 65        
 =================================================================
 Total params: 257
 Trainable params: 257
 Non-trainable params: 0
 _________________________________________________________________
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/keras/models.py:837: UserWarning: The `nb_epoch` argument in `fit` has been renamed `epochs`.
-  warnings.warn(&#39;The `nb_epoch` argument in `fit` &#39;
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>4/4 [==============================] - 0s
+4/4 [==============================] - 0s
 
 Accuracy:  1.0
 
 Predictions:
 4/4 [==============================] - 0s
-[[ 0.49409777]
- [ 0.52948004]
- [ 0.53262025]
- [ 0.46807715]]
+[[ 0.4941037 ]
+ [ 0.52951396]
+ [ 0.53265125]
+ [ 0.46820125]]
 </pre>
 </div>
 </div>
