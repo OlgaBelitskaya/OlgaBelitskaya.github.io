@@ -20,6 +20,7 @@
 
 ### &#x1F310; &nbsp; [click to view the github repository](https://github.com/OlgaBelitskaya/machine_learning_engineer_nd009)
 
+### Program Projects
 #### [P0: Titanic Survival Exploration](https://olgabelitskaya.github.io/MLE_ND_P0_V0.html) &nbsp;  [P1: Predicting Boston Housing Prices](https://olgabelitskaya.github.io/MLE_ND_P1_V0.html) 
 #### [P2: Finding Donors for CharityML](https://olgabelitskaya.github.io/MLE_ND_P2_V0.html) &nbsp; [P3: Creating Customer Segments](https://olgabelitskaya.github.io/MLE_ND_P3_V0.html)
 #### P4: Train a Smartcab to Drive &nbsp; [Version 0](https://olgabelitskaya.github.io/MLE_ND_P4_V0.html) &nbsp; [Version 1](https://olgabelitskaya.github.io/MLE_ND_P4_V1.html)
@@ -28,6 +29,10 @@
 #### [P7: Building a Student Intervention System](https://olgabelitskaya.github.io/MLE_ND_P7_V0.html) &nbsp; [P8: Analyzing the NYC Subway Dataset](https://olgabelitskaya.github.io/MLE_ND_P8_V0.html)
 #### P9: Image Classification &nbsp; [Version 0](https://olgabelitskaya.github.io/MLE_ND_P9_V0.html) &nbsp; [Version 3](https://olgabelitskaya.github.io/MLE_ND_P9_V3.html)
 #### [P10: Write an Algorithm for a Dog Identification App](https://olgabelitskaya.github.io/MLE_ND_P10_V0.html)
+
+### Practice Projects
+#### [PP0](https://olgabelitskaya.github.io/MLE_ND_PP0.html) &nbsp; [PP1](https://olgabelitskaya.github.io/MLE_ND_PP1.html) &nbsp; [PP2](https://olgabelitskaya.github.io/MLE_ND_PP2.html) &nbsp; [PP3](https://olgabelitskaya.github.io/MLE_ND_PP3.html)
+#### PP4: [Part 1](https://olgabelitskaya.github.io/MLE_ND_PP4_1.html) &nbsp; [Part 2](https://olgabelitskaya.github.io/MLE_ND_PP4_2.html) &nbsp; [Part 3](https://olgabelitskaya.github.io/MLE_ND_PP4_3.html) &nbsp; [Part 4](https://olgabelitskaya.github.io/MLE_ND_PP4_4.html) &nbsp; [Part 5](https://olgabelitskaya.github.io/MLE_ND_PP4_5.html) &nbsp; [Part 6](https://olgabelitskaya.github.io/MLE_ND_PP4_6.html)
 
 ## &#x1F4D1; &nbsp; Deep Learning Nanodegree 
 ### [Built with Udacity](https://www.udacity.com) 
