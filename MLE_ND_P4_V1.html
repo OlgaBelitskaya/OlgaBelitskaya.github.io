@@ -20657,7 +20657,74 @@ REREREQkDyhBFxEREREREckDStBFRERERERE8sD/Adv0XoYxr5UVAAAAAElFTkSuQmCC
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Question-8">Question 8<a class="anchor-link" href="#Question-8">&#182;</a></h3><p>Provide a few examples (using the states you've defined) of what an optimal policy for this problem would look like. Afterward, investigate the <code>'sim_improved-learning.txt'</code> text file to see the results of your improved Q-Learning algorithm. <em>For each state that has been recorded from the simulation, is the <strong>policy</strong> (the action with the highest value) correct for the given state? Are there any states where the policy is different than what would be expected from an optimal policy?</em> Provide an example of a state and all state-action rewards recorded, and explain why it is the correct policy.</p>
 <hr>
-<h3 id="Answer-8">Answer 8<a class="anchor-link" href="#Answer-8">&#182;</a></h3><p>The most of the steps in the simulation correspond to the optimal policy and they are correct for the given state. In this case, the optimality can be described in the following way: the agent moving should be within the borders of the traffic rules, match the current situation on the road, reach the destination, and have a positive reward as a result.</p>
+<h3 id="Answer-8">Answer 8<a class="anchor-link" href="#Answer-8">&#182;</a></h3><p>The most of the steps in the simulation correspond to the optimal policy and they are correct for the given state.</p>
+<p>In this case, the optimality can be described in the following way: the agent moving should be within the borders of the traffic rules, match the current situation on the road, reach the destination, and have a positive reward as a result.</p>
+<p>More formally:</p>
+<table>
+<thead><tr>
+<th style="text-align:center">&#x1F6A5; &nbsp; <strong>the traffic light is red</strong></th>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+<th style="text-align:center">&#x1F6A5; &nbsp; <strong>the traffic light is green</strong></th>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">moving forward or turning left</td>
+<td style="text-align:center">turning right</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">moving forward or turning right</td>
+<td style="text-align:center">turning left</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">no car on the left</td>
+<td style="text-align:center">car on the left</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">oncoming car</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">no oncoming car</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">which is not moving forward</td>
+<td style="text-align:center">which is moving forward</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">which is not moving forward</td>
+<td style="text-align:center">which is moving forward</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>stop</strong></td>
+<td style="text-align:center"><strong>move</strong></td>
+<td style="text-align:center"><strong>move</strong></td>
+<td style="text-align:center"><strong>stop</strong></td>
+<td style="text-align:center"><strong>move</strong></td>
+<td style="text-align:center"><strong>move</strong></td>
+<td style="text-align:center"><strong>stop</strong></td>
+<td style="text-align:center"><strong>move</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">&#x26D4;</td>
+<td style="text-align:center">&#x2705;</td>
+<td style="text-align:center">&#x2705;</td>
+<td style="text-align:center">&#x26D4;</td>
+<td style="text-align:center">&#x2705;</td>
+<td style="text-align:center">&#x2705;</td>
+<td style="text-align:center">&#x26D4;</td>
+<td style="text-align:center">&#x2705;</td>
+</tr>
+</tbody>
+</table>
 <p>Let's have a look at the concrete examples:</p>
 <ul>
 <li>&#x1F695; &nbsp; <em><code>('right', 'red', 'forward', None)</code></em><ul>
