@@ -25552,25 +25552,24 @@ ZlYQJ1hmZmZmZmYFcYJlZmZmZmZWkP8HiFH3YEuKEQoAAAAASUVORK5CYII=
 <p>More formally:</p>
 <table>
 <thead><tr>
+<th style="text-align:center"></th>
 <th style="text-align:center">&#x1F6A5; &nbsp; <strong>the traffic light is red</strong></th>
 <th style="text-align:center"></th>
 <th style="text-align:center"></th>
 <th style="text-align:center"></th>
 <th style="text-align:center">&#x1F6A5; &nbsp; <strong>the traffic light is green</strong></th>
 <th style="text-align:center"></th>
-<th style="text-align:center"></th>
-<th style="text-align:center"></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:center">moving forward or turning left</td>
+<td style="text-align:center"></td>
 <td style="text-align:center">turning right</td>
 <td style="text-align:center"></td>
-<td style="text-align:center"></td>
 <td style="text-align:center">moving forward or turning right</td>
-<td style="text-align:center">turning left</td>
 <td style="text-align:center"></td>
+<td style="text-align:center">turning left</td>
 <td style="text-align:center"></td>
 </tr>
 <tr>
@@ -25624,10 +25623,10 @@ ZlYQJ1hmZmZmZmYFcYJlZmZmZmZWkP8HiFH3YEuKEQoAAAAASUVORK5CYII=
 <li>left : -10.39</li>
 </ul>
 </li>
-<li><p>&#x1F58C; &nbsp; The waypoint is 'right', the light is 'red', and there are no cars near the Smartcab. In this case, the ideal action is 'right' has the highest positive weight (the agent can move to the goal), and the two most disruptive actions are severely penalized: any movement would be a violation.</p>
-</li>
-<li><p>&#x1F695; &nbsp; <em><code>('forward', 'green', 'forward', None)</code></em></p>
+<li>&#x1F58C; &nbsp; The waypoint is 'right', the light is 'red', and there are no cars near the Smartcab. In this case, the ideal action is 'right' has the highest positive weight (the agent can move to the goal), and the two most disruptive actions are severely penalized: any movement would be a violation.</li>
+</ul>
 <ul>
+<li>&#x1F695; &nbsp; <em><code>('forward', 'green', 'forward', None)</code></em><ul>
 <li>forward : 1.02</li>
 <li>None : -2.52</li>
 <li>right : 0.17</li>
@@ -25636,7 +25635,6 @@ ZlYQJ1hmZmZmZmYFcYJlZmZmZmZWkP8HiFH3YEuKEQoAAAAASUVORK5CYII=
 </li>
 <li>&#x1F58C; &nbsp; The waypoint is 'forward', the light is 'green', there is a car from the oncoming direction, there are no cars from the left side. In this case, the ideal action is 'forward' has the highest positive weight (the agent can move to the goal), and the action 'None' is severely penalized: no move is a bad action.</li>
 </ul>
-<p>Some actions do not look correct for the given state.</p>
 <ul>
 <li>&#x1F695; &nbsp; <em><code>('forward', 'red', None, 'forward')</code></em><ul>
 <li>forward : -16.17</li>
@@ -25645,7 +25643,18 @@ ZlYQJ1hmZmZmZmYFcYJlZmZmZmZWkP8HiFH3YEuKEQoAAAAASUVORK5CYII=
 <li>left : -16.46</li>
 </ul>
 </li>
-<li>&#x1F58C; &nbsp; The waypoint is 'forward', the light is 'red', there are no cars from the oncoming direction, there is a car from the left side (moving forward). The action 'forward' could be classified as 'bad' and could be a reason for the accident.</li>
+<li>&#x1F58C; &nbsp; The waypoint is 'forward', the light is 'red', there are no cars from the oncoming direction, there is a car from the left side (moving forward). The actions 'forward' and 'left' could be classified as 'bad' and could be a reason for the accident. The actions 'right' is also not great because of the moving car on the left. It's better to choose 'None'.</li>
+</ul>
+<p>Some actions do not look correct for the given state.</p>
+<ul>
+<li>&#x1F695; &nbsp; <em><code>('left', 'green', 'right', 'right')</code></em><ul>
+<li>forward : -0.01</li>
+<li>None : -1.32</li>
+<li>right : 0.03</li>
+<li>left : 0.00 </li>
+</ul>
+</li>
+<li>&#x1F58C; &nbsp; The waypoint is 'left', the light is 'green', the oncoming car is going to turn right, the car from the left is going to turn right. Other cars have no privileges over the agent, so the best choice is to move left, but surprisingly there are no positive rewards associated with turning left and moving to the goal.</li>
 </ul>
 
 </div>
