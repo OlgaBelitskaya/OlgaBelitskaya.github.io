@@ -16,7 +16,7 @@
 #### [P7: Design an A/B Test](https://olgabelitskaya.github.io/P7_Design_an_A_B_Test_Overview.html) &nbsp;  [P7: Design an A/B Test. Extraction](https://olgabelitskaya.github.io/P7_Design_an_A_B_Test_Extraction.pdf)
 
 ## &#x1F4D1; &nbsp; Machine Learning Engineer Nanodegree
-### [Built with Udacity](https://www.udacity.com) 
+### [Built with Udacity](https://www.udacity.com) &nbsp; [Certificate](https://olgabelitskaya.github.io/certificate_nd009.pdf)
 
 ### &#x1F310; &nbsp; [click to view the github repository](https://github.com/OlgaBelitskaya/machine_learning_engineer_nd009)
 
