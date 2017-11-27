@@ -42,6 +42,15 @@
 #### [P1: Your first neural network](https://olgabelitskaya.github.io/DL_ND_P1_V0.html)  &nbsp;  [P2:  Image Classification](https://olgabelitskaya.github.io/DL_ND_P2_V0.html) &nbsp;  [P3  Generate TV scripts](https://olgabelitskaya.github.io/DL_ND_P3_V0.html) 
 #### [P4:  Translate a Language](https://olgabelitskaya.github.io/DL_ND_P4_V0.html) &nbsp;  [P5: Generate Faces ](https://olgabelitskaya.github.io/DL_ND_P5_V0.html)
 
+## &#x1F4D1; &nbsp; Deep Learning Practice
+### Experimental Program of My Own Projects 
+
+### &#x1F310; &nbsp; [click to view the github repository](https://github.com/OlgaBelitskaya/deep_learning_projects)
+
+#### P0: Image Classification &nbsp; [Project](https://olgabelitskaya.github.io/DL_PP0.html)  &nbsp;  [Solutions](https://olgabelitskaya.github.io/DL_PP0_Solutions.html)
+#### P1: Neural Networks for Regression &nbsp; [Project](https://olgabelitskaya.github.io/DL_PP1.html) &nbsp;  [Solutions](https://olgabelitskaya.github.io/DL_PP1_Solutions.html)
+#### P2: Multi-Label Classification &nbsp; [Project](https://olgabelitskaya.github.io/DL_PP2.html) &nbsp;  [Solutions](https://olgabelitskaya.github.io/DL_PP2_Solutions.html)
+
 ## &#x1F4D1; &nbsp; Interview and Technical Interview Practice.
 #### Udacity_Interview_Practice.ipynb &nbsp; [&#x1F310;](https://gist.github.com/OlgaBelitskaya/1ddb287592832cf581fc122d6bc2732e)
 #### Udacity_Technical_Interview_Practice_Lessons.ipynb &nbsp; [&#x1F310;](https://gist.github.com/OlgaBelitskaya/a6cb19e1f3a041e6f6a56ccf58b4701c)
