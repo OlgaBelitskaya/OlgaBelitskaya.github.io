@@ -76,25 +76,25 @@ https://olgabelitskaya.github.io/README_EXERCISES.html
 ---
 # &#x1F3D9; &nbsp;  Other Web Links:
 ## &#x1F4D1; &nbsp; Kaggle
-- Build a Digit Recognition Models 
-  - https://www.kaggle.com/olgabelitskaya/build-a-digit-recognition-models-2
-  - https://olgabelitskaya.github.io/kaggle_digits.html
+### Kernels
+- Build a Digit Recognition Models &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/build-a-digit-recognition-models-2) &nbsp; [Web Page &#x1F310;](https://olgabelitskaya.github.io/kaggle_digits.html)
  
-- Titanic_Survival_Exploration 
-  - https://www.kaggle.com/olgabelitskaya/titanic-survival-exploration
-  - https://olgabelitskaya.github.io/kaggle_titanic.html
+- Titanic_Survival_Exploration &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/titanic-survival-exploration) &nbsp; [Web Page &#x1F310;](https://olgabelitskaya.github.io/kaggle_titanic.html)
 
-- Sberbank Russian Housing Market 
-  - https://www.kaggle.com/olgabelitskaya/sberbank-russian-housing-market
-  - https://olgabelitskaya.github.io/kaggle_sberbank.html
+- Sberbank Russian Housing Market &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/sberbank-russian-housing-market) &nbsp; [Web Page &#x1F310;](https://olgabelitskaya.github.io/kaggle_sberbank.html)
   
-- House Prices: Advanced Regression Techniques
-  - https://www.kaggle.com/olgabelitskaya/regressors
-  - https://olgabelitskaya.github.io/kaggle_house.html
-  
-- The Dataset of Flower Images
-  - https://www.kaggle.com/olgabelitskaya/the-dataset-of-flower-images/
-  - https://olgabelitskaya.github.io/kaggle_flowers.html
+- House Prices: Advanced Regression Techniques &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/regressors) &nbsp; [Web Page &#x1F310;](https://olgabelitskaya.github.io/kaggle_house.html)
+
+- The Dataset of Flower Images &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/the-dataset-of-flower-images) &nbsp; [Web Page &#x1F310;](https://olgabelitskaya.github.io/kaggle_flowers.html)
+
+- Handwritten Letters &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/handwritten-letters)
+
+
+### Datasets
+- Flower Color Images &nbsp; [Kaggle Dataset &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/flower-color-images)
+
+- Classification of Handwritten Letters &nbsp; [Kaggle Dataset &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/classification-of-handwritten-letters)
+
 
 ## &#x1F4D1; &nbsp; GitHub gists https://gist.github.com/OlgaBelitskaya
 
