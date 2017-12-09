@@ -87,7 +87,7 @@ https://olgabelitskaya.github.io/README_EXERCISES.html
 
 - The Dataset of Flower Images &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/the-dataset-of-flower-images) &nbsp; [Web Page &#x1F310;](https://olgabelitskaya.github.io/kaggle_flowers.html)
 
-- Handwritten Letters &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/handwritten-letters)
+- Handwritten Letters &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/handwritten-letters) &nbsp; [Web Page &#x1F310;](https://olgabelitskaya.github.io/kaggle_letters.html)
 
 
 ### Datasets
