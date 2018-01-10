@@ -47,9 +47,12 @@
 
 ### &#x1F310; &nbsp; [click to view the github repository](https://github.com/OlgaBelitskaya/deep_learning_projects)
 
-#### P0: Image Classification &nbsp; [Project](https://olgabelitskaya.github.io/DL_PP0.html)  &nbsp;  [Solutions](https://olgabelitskaya.github.io/DL_PP0_Solutions.html)
-#### P1: Neural Networks for Regression &nbsp; [Project](https://olgabelitskaya.github.io/DL_PP1.html) &nbsp;  [Solutions](https://olgabelitskaya.github.io/DL_PP1_Solutions.html)
-#### P2: Multi-Label Classification &nbsp; [Project](https://olgabelitskaya.github.io/DL_PP2.html) &nbsp;  [Solutions](https://olgabelitskaya.github.io/DL_PP2_Solutions.html)
+#### P0: Image Classification &nbsp; [Project](https://olgabelitskaya.github.io/DL_PP0.html)  &nbsp; [Solutions](https://olgabelitskaya.github.io/DL_PP0_Solutions.html)
+#### P1: Neural Networks for Regression &nbsp; [Project](https://olgabelitskaya.github.io/DL_PP1.html) &nbsp; [Solutions](https://olgabelitskaya.github.io/DL_PP1_Solutions.html)
+#### P2: Multi-Label Classification &nbsp; [Project](https://olgabelitskaya.github.io/DL_PP2.html) &nbsp; [Solutions](https://olgabelitskaya.github.io/DL_PP2_Solutions.html) &nbsp; [Solutions Variant 2](https://olgabelitskaya.github.io/DL_PP2_Solutions_V2.html) &nbsp; [Addition](https://olgabelitskaya.github.io/DL_PP2_Additional.html)
+#### P3: Parts of Speech &nbsp; 
+#### P4: Style Recognition &nbsp; [Project](https://olgabelitskaya.github.io/DL_PP4.html) &nbsp;  [Solutions](https://olgabelitskaya.github.io/DL_PP4_Solutions.html)
+#### P5: Decor Colorization &nbsp; [Addition](https://olgabelitskaya.github.io/DL_PP5_Additional.html) &nbsp; [Addition Variant 2](https://olgabelitskaya.github.io/DL_PP5_Additional_V2.html) 
 
 ## &#x1F4D1; &nbsp; Interview and Technical Interview Practice.
 #### Udacity_Interview_Practice.ipynb &nbsp; [&#x1F310;](https://gist.github.com/OlgaBelitskaya/1ddb287592832cf581fc122d6bc2732e)
@@ -95,6 +98,9 @@ https://olgabelitskaya.github.io/README_EXERCISES.html
 
 - Classification of Handwritten Letters &nbsp; [Kaggle Dataset &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/classification-of-handwritten-letters)
 
+- Handwritten Letters 2 &nbsp; [Kaggle Dataset &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/handwritten-letters-2)
+
+- Style Color Images &nbsp; [Kaggle Dataset &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/style-color-images)
 
 ## &#x1F4D1; &nbsp; GitHub gists https://gist.github.com/OlgaBelitskaya
 
