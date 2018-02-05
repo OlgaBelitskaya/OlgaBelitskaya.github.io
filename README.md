@@ -85,9 +85,9 @@ https://olgabelitskaya.github.io/README_EXERCISES.html
 # &#x1F3D9; &nbsp;  Other Web Links:
 ## &#x1F4D1; &nbsp; Kaggle
 ### Kernels
-- Build a Digit Recognition Models &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/build-a-digit-recognition-models-2) &nbsp; [Web Page &#x1F310;](https://olgabelitskaya.github.io/kaggle_digits.html)
+- Digit Recognition Models &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/digit-recognition-models-2) &nbsp; [Web Page &#x1F310;](https://olgabelitskaya.github.io/kaggle_digits.html)
  
-- Titanic_Survival_Exploration &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/titanic-survival-exploration) &nbsp; [Web Page &#x1F310;](https://olgabelitskaya.github.io/kaggle_titanic.html)
+- Titanic Survival Exploration &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/titanic-survival-exploration) &nbsp; [Web Page &#x1F310;](https://olgabelitskaya.github.io/kaggle_titanic.html)
 
 - Sberbank Russian Housing Market &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/sberbank-russian-housing-market) &nbsp; [Web Page &#x1F310;](https://olgabelitskaya.github.io/kaggle_sberbank.html)
   
@@ -97,9 +97,14 @@ https://olgabelitskaya.github.io/README_EXERCISES.html
 
 - Handwritten Letters &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/handwritten-letters) &nbsp; [Web Page &#x1F310;](https://olgabelitskaya.github.io/kaggle_letters.html)
 
+- SVHN Digit Recognition &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/svhn-digit-recognition)
+
+- Mixed Styles &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/mixed-styles)
 
 ### Datasets
 - Flower Color Images &nbsp; [Kaggle Dataset &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/flower-color-images)
+
+- SVHN Preprocessed Fragments &nbsp; [Kaggle Dataset &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/svhn-preproccessed-fragments)
 
 - Classification of Handwritten Letters &nbsp; [Kaggle Dataset &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/classification-of-handwritten-letters)
 
