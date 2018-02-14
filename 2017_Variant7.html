@@ -17214,8 +17214,8 @@ Enter the number 0
 </ul>
 <p>В качестве ответа вам необходимо привести фрагмент программы (или описание алгоритма на естественном языке), который должен находиться на месте многоточия. Вы можете записать решение также на другом языке программирования (укажите название и используемую версию языка программирования, например Borland Pascal 7.0) или в виде блок-схемы. В этом случае вы должны использовать те же самые исходные данные и переменные, какие были предложены в условии (например, в образце, записанном на естественном языке).</p>
 <hr>
-<p>An integer array of 40 elements is given. Elements of the array can take values ​​from -10000 to 10000. Describe in Russian or in one of the programming languages ​​an algorithm that finds and outputs the pair with the smallest sum among disjoint pairs of neighboring elements. That is, the first pair is the 1 st and 2 nd elements, the second pair is the 3rd and 4th elements, etc. In C, respectively, the first pair is the 0th and 1 st elements, the 2nd pair is the 2nd and 3rd elements, and so on.
-The original data is declared as shown below. It is forbidden to use variables not described below, but it is allowed not to use part of them.</p>
+<p>An integer array of 40 elements is given. Elements of the array can take values from -10000 to 10000. Describe in Russian or in one of the programming languages an algorithm that finds and outputs the pair with the smallest sum among disjoint pairs of neighboring elements. That is, the first pair is the <strong>1st</strong> and <strong>2nd</strong> elements, the second pair is the <strong>3rd</strong> and <strong>4th</strong> elements, etc. In C, respectively, the first pair is the <strong>0th</strong> and <strong>1st</strong> elements, the second pair is the <strong>2nd</strong> and <strong>3rd</strong> elements, and so on.</p>
+<p>The original data is declared as shown below. It is forbidden to use variables not described below, but it is allowed not to use part of them.</p>
 <ul>
 <li><p>Declare an array A of 40 elements.</p>
 </li>
@@ -17230,6 +17230,178 @@ The original data is declared as shown below. It is forbidden to use variables n
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[288]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># The test variant of the program (40 elements)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Create an array of 40 integer numbers from [-10000, 10000].&quot;</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+<span class="n">MIN</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">I</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">40</span><span class="p">):</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">I</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">))</span>
+    
+<span class="n">A</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int32&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Create an array of 40 integer numbers from [-10000, 10000].
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ -1
+ -2
+ -3
+ -4
+ -5
+ -100
+ -200
+ -300
+ -400
+ -500
+ 100
+ 200
+ 300
+ 400
+ 500
+ 600
+ 700
+ 2000
+ 2000
+ 3000
+ -4005
+ -5
+ -100
+ -400
+ -404
+ -369
+ -19
+ 220
+ 726
+ 578
+ 374
+ 389
+ -10
+ -2220
+[    1     2     3     4     5     6    -1    -2    -3    -4    -5  -100
+  -200  -300  -400  -500   100   200   300   400   500   600   700  2000
+  2000  3000 -4005    -5  -100  -400  -404  -369   -19   220   726   578
+   374   389   -10 -2220]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[296]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># The fragment instead of the ellipsis</span>
+
+<span class="k">for</span> <span class="n">I</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">I</span><span class="p">]</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="n">I</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">MIN</span><span class="p">:</span> <span class="n">MIN</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">I</span><span class="p">]</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="n">I</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="n">MIN</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>-4010
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[304]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">version</span> <span class="o">=</span> <span class="s1">&#39;python &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;.&#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">program_fragment</span> <span class="o">=</span> \
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">for I in range(0,40,2):</span>
+<span class="sd">    if A[I] + A[I+1] &lt; MIN: MIN = A[I] + A[I+1]</span>
+<span class="sd">print (MIN)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[305]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="n">version</span><span class="p">,</span> <span class="n">program_fragment</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span> <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">25</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Answer: [&#39;python 3.6&#39;, &#39;\nfor I in range(0,40,2):\n    if A[I] + A[I+1] &lt; MIN: MIN = A[I] + A[I+1]\nprint (MIN)\n&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -17281,13 +17453,14 @@ The original data is declared as shown below. It is forbidden to use variables n
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Answers">Answers<a class="anchor-link" href="#Answers">&#182;</a></h2>
+<h2>Ответы &nbsp; &nbsp; &nbsp; Answers</h2>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[262]:</div>
+<div class="prompt input_prompt">In&nbsp;[306]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span>
@@ -17303,7 +17476,7 @@ The original data is declared as shown below. It is forbidden to use variables n
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[262]:</div>
+<div class="prompt output_prompt">Out[306]:</div>
 
 
 
@@ -17332,7 +17505,9 @@ The original data is declared as shown below. It is forbidden to use variables n
  21: &#39;64&#39;,
  22: &#39;276&#39;,
  23: &#39;127&#39;,
- 24: [&#39;16&#39;, &#39;[1, 2, 3, 4, 0]&#39;, &#39;&#34;s = 0&#34; -&gt; &#34;s = a if (a % 2 == 0) else 0&#34;&#39;]}</pre>
+ 24: [&#39;16&#39;, &#39;[1, 2, 3, 4, 0]&#39;, &#39;&#34;s = 0&#34; -&gt; &#34;s = a if (a % 2 == 0) else 0&#34;&#39;],
+ 25: [&#39;python 3.6&#39;,
+  &#39;\nfor I in range(0,40,2):\n    if A[I] + A[I+1] &lt; MIN: MIN = A[I] + A[I+1]\nprint (MIN)\n&#39;]}</pre>
 </div>
 
 </div>
