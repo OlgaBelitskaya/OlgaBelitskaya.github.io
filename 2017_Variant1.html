@@ -12268,7 +12268,7 @@ div.output_stderr {background-color: gray;}
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">fnmatch</span>
@@ -12294,7 +12294,7 @@ div.output_stderr {background-color: gray;}
         <span class="n">answer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
         
 <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>       
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">answer</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
 </pre></div>
 
 </div>
@@ -12345,23 +12345,63 @@ div.output_stderr {background-color: gray;}
 <p>Каждую букву кодируют двоичной последовательностью. При выборе кода учитывались два требования:</p>
 <p>а) ни одно кодовое слово не является началом другого (это нужно, чтобы код допускал однозначное декодирование);</p>
 <p>б) общая длина закодированного сообщения должна быть как можно меньше.</p>
-<p>Какова суммарная длина всех четырёх кодовых слов?</p>
+<p>Какова суммарная длина всех четырёх кодовых букв?</p>
 <hr>
 <p>Messages are sent on the communication channel, each of which contains: 8 letters А, 8 letters Б, 16 letters В and 32 letters Г (in messages there are no other letters).</p>
 <p>Each letter is encoded in a binary sequence. When choosing a code, two requirements were taken into account:</p>
 <p>a) no codeword is the beginning of the other (this is necessary for the code to allow unambiguous decoding);</p>
 <p>b) the total length of the encoded message should be as small as possible.</p>
-<p>What is the total length of all four code words ?</p>
+<p>What is the total length of all four code letters ?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>В решении использован <a href="https://ru.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC_%D0%A8%D0%B5%D0%BD%D0%BD%D0%BE%D0%BD%D0%B0_%E2%80%94_%D0%A4%D0%B0%D0%BD%D0%BE">Алгоритм Шеннона — Фано</a>.</p>
+<p>1) В сообщениях используются 4 символа с вероятностями:</p>
+<ul>
+<li>Г: 32/(8+8+16+32)=0.5</li>
+<li>В: 16/(8+8+16+32)=0.25</li>
+<li>А и Б: 8/(8+8+16+32)=0.125</li>
+</ul>
+<p>2) Присвоим коды, используя принцип: чем чаще встречается символ, тем короче код.</p>
+<ul>
+<li>Г:0, В:11, А:100, Б:101 или</li>
+<li>Г:0, В:10, А:110, Б:111 или</li>
+<li>Г:1, В:00, А:010, Б:011 или</li>
+<li>Г:1, В:01, А:110, Б:111 </li>
+</ul>
+<p>3) Вычислим длину одного сообщения, состоящего из всех четырех символов:</p>
+<hr>
+<p>The solution uses the Shannon-Fano Algorithm.</p>
+<p>1) Messages use 4 symbols with probabilities:</p>
+<ul>
+<li>Г: 32 / (8 + 8 + 16 + 32) = 0.5</li>
+<li>В: 16 / (8 + 8 + 16 + 32) = 0.25</li>
+<li>А and Б: 8 / (8 + 8 + 16 + 32) = 0.125</li>
+</ul>
+<p>2) Assign codes using the principle: the more common the symbol, the shorter its code.</p>
+<ul>
+<li>Г:0, В:11, А:100, Б:101 or</li>
+<li>Г:0, В:10, А:110, Б:111 or</li>
+<li>Г:1, В:00, А:010, Б:011 or</li>
+<li>Г:1, В:01, А:110, Б:111</li>
+</ul>
+<p>3) Let's calculate the length of one message consisting of all four symbols:</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>     
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
 </pre></div>
 
 </div>
@@ -12374,15 +12414,14 @@ div.output_stderr {background-color: gray;}
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[18]:</div>
+<div class="prompt"></div>
 
 
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>{1: &#39;64&#39;, 2: &#39;4&#39;, 3: &#39;20&#39;, 4: &#39;234&#39;}</pre>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+ Answer: 9
+</pre>
 </div>
-
 </div>
 
 </div>
@@ -12406,6 +12445,39 @@ div.output_stderr {background-color: gray;}
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[23]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{1: &#39;64&#39;, 2: &#39;4&#39;, 3: &#39;20&#39;, 4: &#39;234&#39;, 5: &#39;9&#39;}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
