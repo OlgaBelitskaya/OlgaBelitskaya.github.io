@@ -13663,6 +13663,7 @@ binary: 11110100, integer: 244
     <img src="it_images/2017_01_21.png" width="1000" height="1000"/>
 </div><p>Ниже на четырёх языках представлен алгоритм. Напишите в ответе число различных значений входной переменной $k$, при которых алгоритм выдаёт тот же ответ, что и при входном значении $k = 40$. Значение $k = 40$ также включается в подсчёт различных значений $k$.</p>
 <hr>
+<p>An algorithm is presented in four languages below. Write in the answer the number of different values of the input variable $k$, under which the algorithm produces the same response as the input value $k = 40$. The value $k = 40$ is also included in the calculation of the different values of $k$.</p>
 
 </div>
 </div>
@@ -13767,9 +13768,144 @@ binary: 11110100, integer: 244
 <hr>
 <p>How many different sets of Boolean values $x_1, х_2, ... x_9, х_{10}$ exist that satisfy all of the following conditions?</p>
 <p>The answer does not need to list all the different sets of values $x_1, х_2, ... x_9, х_{10}$ under which this system of equations is executed. As an answer, you need to specify the number of such sets.</p>
+<hr>
+<h4 id="The-first-decision-method">The first decision method<a class="anchor-link" href="#The-first-decision-method">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[134]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">itertools</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">binary_combinations</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="n">n</span><span class="p">)))</span>
+<span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">binary_combinations</span><span class="p">:</span>
+    
+    <span class="n">e1</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span> <span class="p">(</span><span class="n">el</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">el</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="ow">or</span> <span class="p">(</span> <span class="p">(</span><span class="n">el</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">and</span> <span class="n">el</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="ow">or</span> <span class="p">((</span><span class="ow">not</span> <span class="n">el</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">el</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="p">)</span> <span class="p">)</span> <span class="p">)</span> 
+    
+    <span class="n">e2</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span> <span class="p">(</span><span class="n">el</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">el</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="ow">and</span> <span class="p">(</span> <span class="p">(</span><span class="n">el</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="ow">and</span> <span class="n">el</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span> <span class="ow">or</span> <span class="p">((</span><span class="ow">not</span> <span class="n">el</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">el</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span> <span class="p">)</span> <span class="p">)</span> <span class="p">)</span> 
+    
+    <span class="n">e3</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span> <span class="p">(</span><span class="n">el</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="n">el</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span> <span class="ow">or</span> <span class="p">(</span> <span class="p">(</span><span class="n">el</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="ow">and</span> <span class="n">el</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span> <span class="ow">or</span> <span class="p">((</span><span class="ow">not</span> <span class="n">el</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">el</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span> <span class="p">)</span> <span class="p">)</span> <span class="p">)</span>
+    
+    <span class="n">e4</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span> <span class="p">(</span><span class="n">el</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">==</span> <span class="n">el</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span> <span class="ow">and</span> <span class="p">(</span> <span class="p">(</span><span class="n">el</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="ow">and</span> <span class="n">el</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span> <span class="ow">or</span> <span class="p">((</span><span class="ow">not</span> <span class="n">el</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">el</span><span class="p">[</span><span class="mi">9</span><span class="p">])</span> <span class="p">)</span> <span class="p">)</span> <span class="p">)</span>
+
+    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">e1</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">)</span><span class="ow">and</span> <span class="p">(</span><span class="n">e2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">e3</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">e4</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
+
+
+<span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">23</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span> <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">23</span><span class="p">])</span>
+</pre></div>
 
 </div>
 </div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Answer: 128
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-second-decision-method">The second decision method<a class="anchor-link" href="#The-second-decision-method">&#182;</a></h4><p>1) Let's simplify the logical equations.</p>
+<p>$ (x_1 \equiv x_2) \lor ((x_3 \land x_4) \lor (\neg x_3 \land \neg x_4)) \iff (x_1 \equiv x_2) \lor ((x_3 \land x_4) \lor \neg (x_3 \lor x_4)) \iff (x_1 \equiv x_2) \lor ( \neg \neg (x_3 \land x_4) \lor \neg (x_3 \lor x_4)) \iff$</p>
+<p>$ \iff (x_1 \equiv x_2) \lor (\neg (x_3 \land x_4) \to \neg (x_3 \lor x_4)) \iff (x_1 \equiv x_2) \lor ((x_3 \lor x_4) \to (x_3 \land x_4)) \iff (x_1 \equiv x_2) \lor (x_3 \equiv x_4) $</p>
+<p>2) The system of equations will be:</p>
+<ul>
+<li>$(x_1 \equiv x_2) \lor (x_3 \equiv x_4) = 1$ <strong><em>(1)</em></strong></li>
+<li>$(x_3 \equiv x_4) \land (x_5 \equiv x_6) = 0$ <strong><em>(2)</em></strong></li>
+<li>$(x_5 \equiv x_6) \lor (x_7 \equiv x_8) = 1$ <strong><em>(3)</em></strong></li>
+<li>$(x_7 \equiv x_8) \land (x_9 \equiv x_{10}) = 0$ <strong><em>(4)</em></strong></li>
+</ul>
+<p>3) The number of binary combinations from 10 digits: $2^{10} = 1024$.</p>
+<p>4) Let's exclude cases:</p>
+<ul>
+<li>$(x_1 \equiv x_2) \lor (x_3 \equiv x_4) = 0$ <ul>
+<li>$(x_1, x_2, x_3, x_4): (0,1,0,1), (0,1,1,0), (1,0,0,1), (1,0,1,0)$</li>
+<li>other 6 variables can have any possible value: $2^6$ combinations</li>
+<li>so $4 * 2^6$ variable sets</li>
+</ul>
+</li>
+<li>$(x_5 \equiv x_6) \lor (x_7 \equiv x_8) = 0$ <ul>
+<li>$(x_5, x_6, x_7, x_8): (0,1,0,1), (0,1,1,0), (1,0,0,1), (1,0,1,0)$</li>
+<li>other 6 variables can have any possible value: $2^6$ combinations</li>
+<li>so $4 * 2^6$ variable sets   </li>
+</ul>
+</li>
+</ul>
+<p>5) Sets $(x_1, x_2, x_3, x_4, x_5, x_6, x_7, x_8)$ like (0,1,0,1,0,1,0,1) were excluded twice. So we should add them again: $4 * 4 * 2^2$ variants.</p>
+<p>6) Let's exclude cases:</p>
+<ul>
+<li>$(x_3 \equiv x_4) \land (x_5 \equiv x_6) = 1$ <ul>
+<li>$(x_3, x_4, x_5, x_6): (0,0,0,0), (0,0,1,1), (1,1,0,0), (1,1,1,1)$</li>
+<li>other 6 variables can have any possible value: $2^6$ combinations</li>
+<li>so $4 * 2^6$ variable sets</li>
+</ul>
+</li>
+<li>$(x_7 \equiv x_8) \land (x_9 \equiv x_{10}) = 1$ <ul>
+<li>$(x_7, x_8, x_9, x_{10}): (0,0,0,0), (0,0,1,1), (1,1,0,0), (1,1,1,1)$</li>
+<li>other 6 variables can have any possible value: $2^6$ combinations</li>
+<li>so $4 * 2^6$ variable sets </li>
+</ul>
+</li>
+</ul>
+<p>7) Sets $(x_3, x_4, x_5, x_6, x_7, x_8, x_9, x_{10})$ like (0,0,1,1,0,0,1,1) were excluded twice. So we should add them again: $4 * 4 * 2^2$ variants.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[135]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="mi">2</span><span class="o">**</span><span class="mi">10</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">6</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">6</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">6</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">6</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span><span class="o">**</span><span class="mi">2</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[135]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>128</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -13892,7 +14028,7 @@ binary: 11110100, integer: 244
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[123]:</div>
+<div class="prompt input_prompt">In&nbsp;[136]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span>
@@ -13908,7 +14044,7 @@ binary: 11110100, integer: 244
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[123]:</div>
+<div class="prompt output_prompt">Out[136]:</div>
 
 
 
@@ -13930,7 +14066,8 @@ binary: 11110100, integer: 244
  15: &#39;78&#39;,
  16: &#39;46&#39;,
  17: &#39;3&#39;,
- 19: &#39;9&#39;}</pre>
+ 19: &#39;9&#39;,
+ 23: &#39;128&#39;}</pre>
 </div>
 
 </div>
