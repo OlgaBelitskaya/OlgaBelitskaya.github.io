@@ -12446,6 +12446,79 @@ div.output_stderr {background-color: gray;}
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[80]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">itertools</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">binary_combinations</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="n">n</span><span class="p">)))</span>
+<span class="n">min_number</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">binary_combinations</span><span class="p">:</span>
+    <span class="n">unique</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">element</span> <span class="o">==</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">element</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="k">elif</span> <span class="n">unique</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="k">elif</span> <span class="n">unique</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+        
+    <span class="n">element</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">el</span><span class="p">)</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">element</span><span class="p">])</span>
+    <span class="n">number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;binary: </span><span class="si">{}</span><span class="s1">, integer: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">number</span><span class="p">))</span>
+    
+    <span class="k">if</span> <span class="n">number</span> <span class="o">&gt;</span> <span class="mi">50</span> <span class="ow">and</span> <span class="n">min_number</span> <span class="o">&gt;</span> <span class="n">number</span><span class="p">:</span> 
+        <span class="n">min_number</span> <span class="o">=</span> <span class="n">number</span>
+
+<span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">min_number</span><span class="p">)</span>     
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>binary: 000000, integer: 0
+binary: 0001110, integer: 14
+binary: 0010110, integer: 22
+binary: 0011010, integer: 26
+binary: 0100110, integer: 38
+binary: 0101010, integer: 42
+binary: 0110010, integer: 50
+binary: 01111100, integer: 124
+binary: 1000110, integer: 70
+binary: 1001010, integer: 74
+binary: 1010010, integer: 82
+binary: 10111100, integer: 188
+binary: 1100010, integer: 98
+binary: 11011100, integer: 220
+binary: 11101100, integer: 236
+binary: 11110100, integer: 244
+
+ Answer: 70
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -13469,7 +13542,18 @@ div.output_stderr {background-color: gray;}
 <div style="width: 1000px; height: 1500px; overflow:auto;">
     <img src="it_images/2017_01_24_1.png" width="1000" height="700"/>
     <img src="it_images/2017_01_24_2.png" width="1000" height="800"/>
-</div>
+</div><p>Требовалось написать программу, которая вводит с клавиатуры последовательность из n целых чисел (n = 4), и выводит на экран минимальное положительное число этой последовательности. Если в последовательности нет положительных чисел, программа должна вывести на экран «NO». Известно, что вводимые числа не превышают по модулю 1000. Программист торопился и написал программу неправильно.</p>
+<p>Выполните следующие действия:</p>
+<ol>
+<li><p>Напишите, что выведет программа при вводе чисел -1 -2 -3 -4.</p>
+</li>
+<li><p>Приведите пример такой входной последовательности, при которой программа работает верно.</p>
+</li>
+<li><p>Укажите все ошибки в программе и исправьте их. Для этого для каждой ошибки: выпишите строку, которая написана неправильно и приведите правильный вариант строки.</p>
+</li>
+</ol>
+<hr>
+
 </div>
 </div>
 </div>
@@ -13480,7 +13564,21 @@ div.output_stderr {background-color: gray;}
 <div style="width: 1000px; height: 1300px; overflow:auto;">
     <img src="it_images/2017_01_25_1.png" width="1000" height="500"/>
     <img src="it_images/2017_01_25_2.png" width="1000" height="700"/>
-</div>
+</div><p>Дан целочисленный массив из 40 элементов. Элементы массива могут принимать значения от -10000 до 10000. Опишите на русском языке или на одном из языков программирования алгоритм, который проверяет, каких значений элементов в массиве больше — положительных (в этом случае вывести «+»), отрицательных (в этом случае вывести «-»), или их поровну (в этом случае вывести «=»).</p>
+<p>Исходные данные объявлены так, как показано ниже. Запрещается использовать переменные, не описанные ниже, но разрешается не использовать часть из них.</p>
+<ul>
+<li><p>Объявляем массив А из 40 элементов.</p>
+</li>
+<li><p>Объявляем целочисленные переменные I, J, К.</p>
+</li>
+<li><p>В цикле от 1 до 40 вводим элементы массива А с 1-го по 40-й.</p>
+</li>
+<li><p>...</p>
+</li>
+</ul>
+<p>В качестве ответа вам необходимо привести фрагмент программы (или описание алгоритма на естественном языке), который должен находиться на месте многоточия. Вы можете записать решение также на другом языке программирования (укажите название и используемую версию языка программирования, например Borland Pascal 7.0) или в виде блок-схемы. В этом случае вы должны использовать те же самые исходные данные и переменные, какие были предложены в условии (например, в образце, записанном на естественном языке).</p>
+<hr>
+
 </div>
 </div>
 </div>
@@ -13490,7 +13588,20 @@ div.output_stderr {background-color: gray;}
 <div class="text_cell_render border-box-sizing rendered_html">
 <div style="width: 1000px; height: 700px; overflow:auto;">
     <img src="it_images/2017_01_26.png" width="1000" height="700"/>
-</div>
+</div><p>Два игрока, Петя и Ваня, играют в следующую игру. Перед игроками лежит две кучи камней. Игроки ходят по очереди, первый ход делает Петя. Назовём позицией игры указание количества камней в обеих кучах. Например, позиция (15,20) означает, что в первой куче 15 камней, а во второй — 20. За один ход игрок может добавить в одну из куч один камень или увеличить количество камней в одной из куч в два раза. Например, имея количество камней в кучах (15,20), за один ход можно получить положение (16,20), (30,20), (15,21) и (15,30). У каждого игрока, чтобы делать ходы, есть неограниченное количество камней.</p>
+<p>Игра завершается в тот момент, когда количество камней в обеих кучах (сумма) становится не менее 65. Победителем считается игрок, сделавший последний ход, то есть первым получивший положение, в котором сумма камней в кучах будет 65 или больше камней.</p>
+<p>Говорят, что игрок имеет выигрышную стратегию, если он может выиграть при любых ходах противника. Описать стратегию игрока — значит описать, какой ход он должен сделать в любой ситуации, которая ему может встретиться при различной игре противника. Например, при начальных позициях (4,31), (5,30), (7,29) выигрышная стратегия есть у Пети. Чтобы выиграть, ему достаточно удвоить количество камней во второй куче.</p>
+<p>Выполните следующие задания. Во всех случаях обосновывайте свой ответ.</p>
+<ol>
+<li><p>Для исходных позиций (4,30) и (6,29) укажите, кто из игроков выигрывает. Сколько ходов необходимо для выигрыша? Опишите выигрышную стратегию. Обоснуйте ответ.</p>
+</li>
+<li><p>Для исходных позиций (4,29), (6,28) и (5,29) укажите, кто из игроков выигрывает. Сколько ходов необходимо для выигрыша? Опишите выигрышную стратегию. Обоснуйте ответ.</p>
+</li>
+<li><p>Для исходной позиции (5,28) укажите, кто из игроков выигрывает. Сколько ходов необходимо для выигрыша? Опишите выигрышную стратегию. Приведите дерево игры. Обоснуйте ответ. На рёбрах дерева указывайте, кто делает ход, в узлах — позицию игры.</p>
+</li>
+</ol>
+<hr>
+
 </div>
 </div>
 </div>
@@ -13498,15 +13609,45 @@ div.output_stderr {background-color: gray;}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div style="width: 1000px; height: 500px; overflow:auto;">
+<p><div style="width: 1000px; height: 500px; overflow:auto;">
     <img src="it_images/2017_01_27.png" width="1000" height="500"/>
 </div>
+На вход программе подаётся: в первой строке — число N (1 &lt; N &lt; 109).</p>
+<p>В каждой из последующих N строк — по одному элементу последовательности — целые числа, не превышающее по модулю 10 000.</p>
+<p>Напишите эффективную, в том числе и по используемой памяти, программу (укажите используемую версию языка программирования, например, Borland Pascal 7.0), которая выводит на экран минимальное произведение двух элементов этой последовательности.</p>
+<p>Пример входных данных:</p>
+<ul>
+<li><p>8</p>
+</li>
+<li><p>3</p>
+</li>
+<li><p>4</p>
+</li>
+<li><p>5</p>
+</li>
+<li><p>-7</p>
+</li>
+<li><p>-8</p>
+</li>
+<li><p>3</p>
+</li>
+<li><p>2</p>
+</li>
+<li><p>9</p>
+</li>
+</ul>
+<p>Пример выходных данных:</p>
+<ul>
+<li>-72</li>
+</ul>
+<hr>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[109]:</div>
+<div class="prompt input_prompt">In&nbsp;[81]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span>
@@ -13522,7 +13663,7 @@ div.output_stderr {background-color: gray;}
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[109]:</div>
+<div class="prompt output_prompt">Out[81]:</div>
 
 
 
@@ -13533,6 +13674,7 @@ div.output_stderr {background-color: gray;}
  3: &#39;20&#39;,
  4: &#39;234&#39;,
  5: &#39;9&#39;,
+ 6: &#39;70&#39;,
  7: &#39;4&#39;,
  8: &#39;32&#39;,
  9: &#39;90&#39;,
