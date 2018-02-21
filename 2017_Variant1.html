@@ -12903,9 +12903,93 @@ binary: 11110100, integer: 244
 <ul>
 <li>$255.255.255.192$?</li>
 </ul>
+<p><a href="https://help.keenetic.net/hc/ru/articles/213965829-%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80-%D1%80%D0%B0%D1%81%D1%87%D0%B5%D1%82%D0%B0-%D0%BA%D0%BE%D0%BB%D0%B8%D1%87%D0%B5%D1%81%D1%82%D0%B2%D0%B0-%D1%85%D0%BE%D1%81%D1%82%D0%BE%D0%B2-%D0%B8-%D0%BF%D0%BE%D0%B4%D1%81%D0%B5%D1%82%D0%B5%D0%B9-%D0%BD%D0%B0-%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D0%B5-IP-%D0%B0%D0%B4%D1%80%D0%B5%D1%81%D0%B0-%D0%B8-%D0%BC%D0%B0%D1%81%D0%BA%D0%B8">Пример расчета количества хостов и подсетей на основе IP-адреса и маски</a></p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[116]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mask</span><span class="o">=</span><span class="s1">&#39;255.255.255.192&#39;</span>
+<span class="n">mask_bin</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">bin</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mi">256</span><span class="p">)[</span><span class="mi">3</span><span class="p">:]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">mask</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mask_bin</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>11111111.11111111.11111111.11000000
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Замечание: два адреса не используются (адрес сети и <a href="https://ru.wikipedia.org/wiki/%D0%A8%D0%B8%D1%80%D0%BE%D0%BA%D0%BE%D0%B2%D0%B5%D1%89%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%B0%D0%B4%D1%80%D0%B5%D1%81">широковещательный адрес</a>).</strong></p>
+<p>1) Первые три десятичных числа маски равны $255$, из запись состоит из $24$ единиц в двоичной системе счисления. Они определяют адрес сети.</p>
+<p>2) Число $192$ в двоичной системе счисления равно <code>11000000</code>. В записи есть шесть разрядов со значением $0$. Они могут быть использованы для записи адресов компьютеров. Количество возможных бинарных комбинаций для записи адреса при этом равно $2^6$.</p>
+<p>3) Два адреса не используются, поэтому количество компьютеров равно: $2^6 - 2$.</p>
+<hr>
+<p><strong> Note: two addresses are not used (the network address and the <a href="https://en.wikipedia.org/wiki/Broadcast_address">broadcast address</a>).</strong></p>
+<p>1) The first three decimal numbers of the mask are $255$, their record consists of $24$ units in the binary number system. They determine the network address.</p>
+<p>2) The number $192$ in the binary system is equal to <code>11000000</code>. There are six digits in the record with a value of $0$. They can be used to record computer addresses. The number of possible binary combinations for writing an address is $2^6$.</p>
+<p>3) Two addresses are not used, therefore the number of computers is equal to: $2^6-2$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[117]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">6</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>     
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">12</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+ Answer: 62
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -13690,7 +13774,7 @@ binary: 11110100, integer: 244
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[110]:</div>
+<div class="prompt input_prompt">In&nbsp;[118]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span>
@@ -13706,7 +13790,7 @@ binary: 11110100, integer: 244
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[110]:</div>
+<div class="prompt output_prompt">Out[118]:</div>
 
 
 
@@ -13723,6 +13807,7 @@ binary: 11110100, integer: 244
  9: &#39;90&#39;,
  10: &#39;256&#39;,
  11: &#39;35&#39;,
+ 12: &#39;62&#39;,
  15: &#39;78&#39;,
  16: &#39;46&#39;,
  17: &#39;3&#39;}</pre>
