@@ -13668,6 +13668,96 @@ By the task conditions, n &gt; 1, a and b are integers =&gt; n = 2 is not suitab
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[56]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">bin</span><span class="p">(</span><span class="mi">58</span><span class="p">)[</span><span class="mi">2</span><span class="p">:],</span> <span class="nb">bin</span><span class="p">(</span><span class="mi">34</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[56]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(&#39;111010&#39;, &#39;100010&#39;)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Обозначим:</p>
+<ul>
+<li>"И" - истинное значение выражений, </li>
+<li>"Л" - ложное, </li>
+<li>$"*"$ - последовательность цифр 0 или 1 (в том числе пустая), </li>
+<li>$"?"$ - одна цифра 1 или 0.</li>
+</ul>
+<p>$(x \ \&amp; \ A = 0 \land x \ \&amp; \ 58 \neq 0) \to x \ \&amp; \ 34 \neq 0 \ \equiv И \ при \ \forall x$ в двух случаях:</p>
+<p>1) $x \ \&amp; \ A = 0 \land x \ \&amp; \ 58 \neq 0 \equiv Л \ при \ \forall x$</p>
+<p>Для выполнения этого тождества достаточно взять число А = 58 (в бинарной системе: $111010_2$): $x \ \&amp; \ 58 = 0$ и $x \ \&amp; \ 58 \neq 0$ противоречат друг другу. Значит,  $x \ \&amp; \ 58 = 0 \land x \ \&amp; \ 58 \neq 0 \equiv Л \ при \ \forall x$.</p>
+<p>Тождество будет верным для всех чисел вида $*111010_2$ в бинарной системе: $1111010_2$ (58+64=122), $10111010_2$ (58+128=186) и т.д.</p>
+<p>2) $(x \ \&amp; \ A = 0 \land x \ \&amp; \ 58 \neq 0 \equiv И) \land \ (x \ \&amp; \ 34 \neq 0 \ \equiv И) \ при \ \forall x$</p>
+<p>$x \ \&amp; \ 58 \neq 0 \equiv И$ для тех чисел, которые в бинарной системе имеют вид: $1?????_2$; $?1????_2$; $??1???_2$; $????1?_2$ <strong><em>(1)</em></strong>.</p>
+<p>$x \ \&amp; \ 34 \neq 0 \equiv И$ для тех чисел, которые в бинарной системе имеют вид: $1?????_2$; $????1?_2$ <strong><em>(2)</em></strong>.</p>
+<p>Для того, чтобы <strong><em>(1)</em></strong> и <strong><em>(2)</em></strong> совпали, достаточно из первого множества исключить числа вида $?1????_2$; $??1???_2$, а значит это должны быть числа вида $?0????_2$; $??0???_2$.</p>
+<p>Осталось подобрать А из $x \ \&amp; \ A = 0 \equiv И$ так, чтобы ему удовлетворяли числа вида $?0????_2$; $??0???_2$ при $ \forall x$.</p>
+<p>Для этого А в бинарной системе должно принимать значения $*11???_2$. А значит, минимально возможное А в бинарной системе равно $11000_2$ (или 24 - в десятичной системе).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">18</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="s1">&#39;11000&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span> <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">18</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Answer: 24
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -13737,6 +13827,83 @@ By the task conditions, n &gt; 1, a and b are integers =&gt; n = 2 is not suitab
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[71]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> 
+    <span class="n">x0</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="n">K</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span> <span class="o">%</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="n">K</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="n">y</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="n">L</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="n">y</span> <span class="o">&lt;=</span> <span class="mi">8</span><span class="p">:</span>
+            <span class="n">M</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="n">x</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">K</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">M</span><span class="p">)</span><span class="o">==</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;(K,L,M)==(3,2,2) for x=&#39;</span><span class="p">,</span><span class="n">x0</span><span class="p">)</span>
+        <span class="k">break</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(K,L,M)==(3,2,2) for x= 159
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span> <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">20</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Answer: 159
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -14001,7 +14168,7 @@ k = 59 ; i-1 = 7
 <p>How many different sets of Boolean values $x_1, х_2, ... x_9, х_{10}$ exist that satisfy all of the following conditions?</p>
 <p>The answer does not need to list all the different sets of values $x_1, х_2, ... x_9, х_{10}$ under which this system of equations is executed. As an answer, you need to specify the number of such sets.</p>
 <hr>
-<h4 id="The-first-decision-method">The first decision method<a class="anchor-link" href="#The-first-decision-method">&#182;</a></h4>
+<h4 id="The-first-decision-method">The first decision method<a class="anchor-link" href="#The-first-decision-method">&#182;</a></h4><h4 id="&#1055;&#1077;&#1088;&#1074;&#1099;&#1081;-&#1084;&#1077;&#1090;&#1086;&#1076;-&#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1103;">&#1055;&#1077;&#1088;&#1074;&#1099;&#1081; &#1084;&#1077;&#1090;&#1086;&#1076; &#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1103;<a class="anchor-link" href="#&#1055;&#1077;&#1088;&#1074;&#1099;&#1081;-&#1084;&#1077;&#1090;&#1086;&#1076;-&#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1103;">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -14059,18 +14226,25 @@ k = 59 ; i-1 = 7
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="The-second-decision-method">The second decision method<a class="anchor-link" href="#The-second-decision-method">&#182;</a></h4><p>1) Let's simplify the logical equations.</p>
+<h4 id="The-second-decision-method">The second decision method<a class="anchor-link" href="#The-second-decision-method">&#182;</a></h4><h4 id="&#1042;&#1090;&#1086;&#1088;&#1086;&#1081;-&#1084;&#1077;&#1090;&#1086;&#1076;-&#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1103;">&#1042;&#1090;&#1086;&#1088;&#1086;&#1081; &#1084;&#1077;&#1090;&#1086;&#1076; &#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1103;<a class="anchor-link" href="#&#1042;&#1090;&#1086;&#1088;&#1086;&#1081;-&#1084;&#1077;&#1090;&#1086;&#1076;-&#1088;&#1077;&#1096;&#1077;&#1085;&#1080;&#1103;">&#182;</a></h4><p>1) Let's simplify the logical equations.</p>
+<p>Упростим систему логических уравнений.</p>
 <p>$ (x_1 \equiv x_2) \lor ((x_3 \land x_4) \lor (\neg x_3 \land \neg x_4)) \iff (x_1 \equiv x_2) \lor ((x_3 \land x_4) \lor \neg (x_3 \lor x_4)) \iff (x_1 \equiv x_2) \lor ( \neg \neg (x_3 \land x_4) \lor \neg (x_3 \lor x_4)) \iff$</p>
 <p>$ \iff (x_1 \equiv x_2) \lor (\neg (x_3 \land x_4) \to \neg (x_3 \lor x_4)) \iff (x_1 \equiv x_2) \lor ((x_3 \lor x_4) \to (x_3 \land x_4)) \iff (x_1 \equiv x_2) \lor (x_3 \equiv x_4) $</p>
 <p>2) The system of equations will be:</p>
+<p>Система будет иметь вид:</p>
 <ul>
 <li>$(x_1 \equiv x_2) \lor (x_3 \equiv x_4) = 1$ <strong><em>(1)</em></strong></li>
 <li>$(x_3 \equiv x_4) \land (x_5 \equiv x_6) = 0$ <strong><em>(2)</em></strong></li>
 <li>$(x_5 \equiv x_6) \lor (x_7 \equiv x_8) = 1$ <strong><em>(3)</em></strong></li>
 <li>$(x_7 \equiv x_8) \land (x_9 \equiv x_{10}) = 0$ <strong><em>(4)</em></strong></li>
 </ul>
-<p>3) The number of binary combinations from 10 digits: $2^{10} = 1024$.</p>
+<p>3) The number of binary combinations from 10 digits:</p>
+<p>Количество бинарных комбинаций из 10 цифр:</p>
+<ul>
+<li>$2^{10} = 1024$.</li>
+</ul>
 <p>4) Let's exclude cases:</p>
+<p>Исключаем случаи:</p>
 <ul>
 <li>$(x_1 \equiv x_2) \lor (x_3 \equiv x_4) = 0$ <ul>
 <li>$(x_1, x_2, x_3, x_4): (0,1,0,1), (0,1,1,0), (1,0,0,1), (1,0,1,0)$</li>
@@ -14086,7 +14260,9 @@ k = 59 ; i-1 = 7
 </li>
 </ul>
 <p>5) Sets $(x_1, x_2, x_3, x_4, x_5, x_6, x_7, x_8)$ like (0,1,0,1,0,1,0,1) were excluded twice. So we should add them again: $4 * 4 * 2^2$ variants.</p>
+<p>Указанные множества были исключены дважды, значит мы должны добавить их количество снова.</p>
 <p>6) Let's exclude cases:</p>
+<p>Исключаем случаи:</p>
 <ul>
 <li>$(x_3 \equiv x_4) \land (x_5 \equiv x_6) = 1$ <ul>
 <li>$(x_3, x_4, x_5, x_6): (0,0,0,0), (0,0,1,1), (1,1,0,0), (1,1,1,1)$</li>
@@ -14102,6 +14278,7 @@ k = 59 ; i-1 = 7
 </li>
 </ul>
 <p>7) Sets $(x_3, x_4, x_5, x_6, x_7, x_8, x_9, x_{10})$ like (0,0,1,1,0,0,1,1) were excluded twice. So we should add them again: $4 * 4 * 2^2$ variants.</p>
+<p>Указанные множества были исключены дважды, значит мы должны добавить их количество снова.</p>
 
 </div>
 </div>
@@ -14298,7 +14475,7 @@ In each of the following N lines - one element of the sequence - integers not ex
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="prompt input_prompt">In&nbsp;[73]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span>
@@ -14314,7 +14491,7 @@ In each of the following N lines - one element of the sequence - integers not ex
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[46]:</div>
+<div class="prompt output_prompt">Out[73]:</div>
 
 
 
@@ -14337,7 +14514,9 @@ In each of the following N lines - one element of the sequence - integers not ex
  15: &#39;78&#39;,
  16: &#39;46&#39;,
  17: &#39;3&#39;,
+ 18: &#39;24&#39;,
  19: &#39;9&#39;,
+ 20: &#39;159&#39;,
  22: &#39;70&#39;,
  23: &#39;128&#39;}</pre>
 </div>
