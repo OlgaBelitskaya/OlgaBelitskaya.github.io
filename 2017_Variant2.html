@@ -12588,7 +12588,7 @@ Answer: 34
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">k</span><span class="p">,</span><span class="n">s</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
@@ -12633,9 +12633,63 @@ Answer: 34
 </div><p>Какой объём на диске (в Мбайт) будет занимать неупакованное 16-цветное изображение, содержащее изображение размером $2048*1024$ пикселей? В ответе запишите только целое число, единицу измерения писать не нужно.</p>
 <hr>
 <p>What volume on the disk (in Mbytes) will be occupied by the unpacked 16-color image with the size of 2048 * 1024 pixels? In the answer, write down only an integer, you do not need to write a unit of measurement.</p>
+<hr>
+<h4 id="&#1056;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077;">&#1056;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077;<a class="anchor-link" href="#&#1056;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077;">&#182;</a></h4><ul>
+<li>$\large {\log_{2}{16} = 4}$ (бита) - необходимо для кодирования одного пикселя 16-цветного изображения.</li>
+<li>$\large {2048 * 1024 * 4 = 2^{11} * 2^{10} * 2^2 = 2^{23}}$ (бита) - необходимо для кодирования изображения размером 2048 * 1024 пикселей.</li>
+<li>$\large {2^{23} \ / \ 2^{3} = 2^{20}}$ (байта) - необходимо для кодирования изображения размером 2048 * 1024 пикселей.</li>
+<li>$\large {2^{20} \ / \ 2^{20} = 1}$ (Mбайт) - необходимо для кодирования изображения размером 2048 * 1024 пикселей.</li>
+</ul>
+<hr>
+<h4 id="Decision">Decision<a class="anchor-link" href="#Decision">&#182;</a></h4><ul>
+<li>$\large {\log_{2} {16} = 4}$ (bit) - necessary to encode one pixel of the 16-color image.</li>
+<li>$\large {2048 * 1024 * 4 = 2^{11} * 2^{10} * 2^2 = 2^{23}}$ (bit) - needed to encode an image with the size of 2048 * 1024 pixels.</li>
+<li>$\large {2^{23} \ / \ 2^{3} = 2^{20}}$ (byte) - needed to encode an image with the size of 2048 * 1024 pixels.</li>
+<li>$\large {2^{20} \ / \ 2^{20} = 1}$ (Mbytes) - needed to encode an image with the size of 2048 * 1024 pixels.</li>
+</ul>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="n">bits_for_one_pixel_16_colors</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">bits_for_image_2048_1024</span> <span class="o">=</span> <span class="mi">2048</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="n">bits_for_one_pixel_16_colors</span>
+<span class="n">bytes_for_image_2048_1024</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">bits_for_image_2048_1024</span> <span class="o">/</span> <span class="mi">2</span><span class="o">**</span><span class="mi">3</span> <span class="p">)</span>
+<span class="n">Mbytes_for_image_2048_1024</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">bytes_for_image_2048_1024</span> <span class="o">/</span> <span class="mi">2</span><span class="o">**</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">Mbytes_for_image_2048_1024</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">9</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+ Answer: 1
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -13129,7 +13183,34 @@ Answer: 34
 <div class="text_cell_render border-box-sizing rendered_html">
 <div style="width: 1000px; height: 1100px; overflow:auto;">
     <img src="it_images/2017_02_25.png" width="1000" height="1100"/>
-</div>
+</div><p>Дан вещественный массив из 40 элементов. Элементы массива могут принимать произвольные значения. Опишите на русском языке или на одном из языков программирования алгоритм, который находит и выводит минимальный положительный элемент массива или сообщение, что такого элемента нет.</p>
+<p>Исходные данные объявлены так, как показано ниже. Запрещается использовать переменные, не описанные ниже, но разрешается не использовать часть из них.</p>
+<ul>
+<li><p>Объявляем массив А из 40 элементов.</p>
+</li>
+<li><p>Объявляем целочисленные переменные I, J, и вещественную переменную MIN.</p>
+</li>
+<li><p>В цикле от 1 до 40 вводим элементы массива А с 1-го по 40-й.</p>
+</li>
+<li><p>...</p>
+</li>
+</ul>
+<p>В качестве ответа вам необходимо привести фрагмент программы (или описание алгоритма на естественном языке), который должен находиться на месте многоточия. Вы можете записать решение также на другом языке программирования (укажите название и используемую версию языка программирования, например Borland Pascal 7.0) или в виде блок-схемы. В этом случае вы должны использовать те же самые исходные данные и переменные, какие были предложены в условии (например, в образце, записанном на естественном языке).</p>
+<hr>
+<p>A real array of 40 elements is given. Array elements can take arbitrary values. Describe in the Russian language or in one of the programming languages an algorithm that finds and displays the minimum positive element of the array or a message that there is no such element.</p>
+<p>The original data is declared as shown below. It is forbidden to use variables not described below, but it is allowed not to use part of them.</p>
+<ul>
+<li><p>Declare an array A of 40 elements.</p>
+</li>
+<li><p>Declare the integer variables I, J, and the real variable MIN.</p>
+</li>
+<li><p>In the cycle from 1 to 40, we introduce the elements of array A from the 1st to the 40th.</p>
+</li>
+<li><p>...</p>
+</li>
+</ul>
+<p>As an answer, you need to bring the program fragment (or description of the algorithm in natural language), which should be in place of the ellipsis. You can also write the solution in another programming language (specify the name and the version of the programming language used: for example, Borland Pascal 7.0) or as a flowchart. In this case, you must use the same source data and variables that were proposed in the condition (for example, in a sample written in the natural language).</p>
+
 </div>
 </div>
 </div>
@@ -13137,9 +13218,12 @@ Answer: 34
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div style="width: 1000px; height: 250px; overflow:auto;">
+<p><div style="width: 1000px; height: 250px; overflow:auto;">
     <img src="it_images/2017_02_26.png" width="1000" height="250"/>
 </div>
+Два игрока играют в следующую игру. На координатной плоскости в точке (1,0) стоит фишка. Игроки ходят по очереди. Ход состоит в том, что игрок перемещает фишку из точки с координатами (x, у) в одну из трёх точек: в точку с координатами (х + 3, у), в точку (х, у + 3) или в точку (x + 3, у + 3). Выигрывает игрок, после хода которого, расстояние по прямой от фишки до точки с координатами (0, 0) не меньше 13 единиц. Кто выигрывает при безошибочной игре обоих игроков — игрок, делающий первый ход, или игрок, делающий второй ход? Какими должны быть ходы выигрывающего игрока? Ответ обоснуйте.</p>
+<hr>
+
 </div>
 </div>
 </div>
@@ -13149,13 +13233,39 @@ Answer: 34
 <div class="text_cell_render border-box-sizing rendered_html">
 <div style="width: 1000px; height: 700px; overflow:auto;">
     <img src="it_images/2017_02_27.png" width="1000" height="700"/>
-</div>
+</div><p>После единых выпускных экзаменов по информатике в район пришла информация о том, какой ученик какой школы сколько баллов набрал.</p>
+<p>Районный методист решила выяснить номера школ, ученики которых набрали средний балл по школе, больший, чем районный средний балл (все средние баллы вычисляются с точностью до целых).</p>
+<p>Программа должна вывести на экран номера таких школ, в любом порядке.</p>
+<p>Если такая школа окажется только одна — вывести также средний балл по этой школе, с указанием, что это средний балл.</p>
+<p>Напишите эффективную, в том числе и по используемой памяти, программу (укажите используемую версию языка программирования, например, <code>Borland Pascal 7.0</code>), которая должна вывести на экран требуемую информацию. Известно, что информатику сдавало больше 5-ти учеников района. Также известно, что в районе школы с некоторыми номерами не существуют.</p>
+<p>На вход программе сначала подается число учеников, сдававших экзамен. В каждой из следующих N строк находится информация об учениках в формате:</p>
+<ul>
+<li><code>&lt;Фамилия&gt; &lt;Имя&gt; &lt;Номер школы&gt; &lt;Количество баллов&gt;</code>,</li>
+</ul>
+<p>где <code>&lt;Фамилия&gt;</code> — строка, состоящая не более, чем из 30 символов без пробелов, <code>&lt;Имя&gt;</code> — строка, состоящая не более, чем из 20 символов без пробелов, <code>&lt;Номер школы&gt;</code> — целое число в диапазоне от 1 до 99, <code>&lt;Количество баллов&gt;</code> — целое число диапазоне от 1 до 100. Эти данные записаны через пробел, причём ровно один между каждой парой (то есть, всего по три пробела в каждой строке).</p>
+<p>Пример входной строки:</p>
+<ul>
+<li><code>Иванов Иван 50 87</code></li>
+</ul>
+<p>Пример выходных данных:</p>
+<ul>
+<li><code>5 50 74 87</code></li>
+</ul>
+<p>Другой вариант выходных данных:</p>
+<ul>
+<li><p><code>7</code></p>
+</li>
+<li><p><code>Средний балл = 74</code></p>
+</li>
+</ul>
+<hr>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span> 
@@ -13171,7 +13281,7 @@ Answer: 34
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[28]:</div>
+<div class="prompt output_prompt">Out[39]:</div>
 
 
 
@@ -13185,6 +13295,7 @@ Answer: 34
  6: &#39;BC&#39;,
  7: &#39;=$B2+D$2&#39;,
  8: &#39;127&#39;,
+ 9: &#39;1&#39;,
  15: &#39;30&#39;}</pre>
 </div>
 
