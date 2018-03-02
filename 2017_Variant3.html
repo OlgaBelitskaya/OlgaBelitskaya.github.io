@@ -12746,17 +12746,17 @@ Answer: 45
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="&#1056;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077;">&#1056;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077;<a class="anchor-link" href="#&#1056;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077;">&#182;</a></h4><ul>
-<li>$\large {\log_{2}{4} = 2}$ (бита) - необходимо для кодирования одного пикселя 4-цветного изображения.</li>
-<li>$\large {64 * 256 * 2 = 2^{6} * 2^{8} * 2 = 2^{15}}$ (бита) - необходимо для кодирования изображения размером 64 * 256 пикселей.</li>
-<li>$\large {2^{15} \ / \ 2^{3} = 2^{12}}$ (байта) - необходимо для кодирования изображения размером 64 * 256 пикселей.</li>
-<li>$\large {2^{12} \ / \ 2^{10} = 4}$ (Кбайт) - необходимо для кодирования изображения размером 64 * 256 пикселей.</li>
+<li>$\log_{2}{4} = 2$ (бита) - необходимо для кодирования одного пикселя 4-цветного изображения.</li>
+<li>$64 * 256 * 2 = 2^{6} * 2^{8} * 2 = 2^{15}$ (бита) - необходимо для кодирования изображения размером 64 * 256 пикселей.</li>
+<li>$2^{15} \ / \ 2^{3} = 2^{12}$ (байта) - необходимо для кодирования изображения размером 64 * 256 пикселей.</li>
+<li>$2^{12} \ / \ 2^{10} = 4$ (Кбайт) - необходимо для кодирования изображения размером 64 * 256 пикселей.</li>
 </ul>
 <hr>
 <h4 id="Decision">Decision<a class="anchor-link" href="#Decision">&#182;</a></h4><ul>
-<li>$\large {\log_{2}{4} = 2}$ (bit) - necessary to encode one pixel of the 4-color image.</li>
-<li>$\large {64 * 256 * 2 = 2^{6} * 2^{8} * 2 = 2^{15}}$ (bit) - needed to encode an image with the size of 64 * 256 pixels.</li>
-<li>$\large {2^{15} \ / \ 2^{3} = 2^{12}}$ (byte) - needed to encode an image with the size of 64 * 256 pixels.</li>
-<li>$\large {2^{12} \ / \ 2^{10} = 4}$ (Kbytes) - needed to encode an image with the size of 64 * 256 pixels.</li>
+<li>$\log_{2}{4} = 2$ (bit) - necessary to encode one pixel of the 4-color image.</li>
+<li>$64 * 256 * 2 = 2^{6} * 2^{8} * 2 = 2^{15}$ (bit) - needed to encode an image with the size of 64 * 256 pixels.</li>
+<li>$2^{15} \ / \ 2^{3} = 2^{12}$ (byte) - needed to encode an image with the size of 64 * 256 pixels.</li>
+<li>$2^{12} \ / \ 2^{10} = 4$ (Kbytes) - needed to encode an image with the size of 64 * 256 pixels.</li>
 </ul>
 
 </div>
@@ -13025,6 +13025,58 @@ Answer: 45
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>1) $3 &lt; \log_{2}{10} &lt; 4$ =&gt; 4 (бит) - необходимо для кодирования номера одного из 10 символов.</p>
+<p>Количество возможных вариантов кодировки ($2^4$) не должно быть меньше количества имеющейся информации ($10$ символов), округление в данном случае - всегда в большую сторону.</p>
+<p>2) $4 * 200 = 800$ (бит) - необходимо для кодирования номеров 200 символов.</p>
+<p>3) $800 / 8 = 100$ (байт) - необходимо для кодирования номеров 200 символов.</p>
+<hr>
+<p>1) $3 &lt; \log_{2}{10} &lt; 4$ =&gt; 4 (bit) - necessary to encode the number of one of 10 characters.</p>
+<p>The number of possible encoding options ($2^4$) should not be less than the amount of information available ($10$ characters), rounding, in this case, is always on the larger side.</p>
+<p>2) $4 * 200 = 800$  (bits) - necessary for encoding the numbers of 200 characters.</p>
+<p>3) $800 / 8 = 100$  (bytes) - necessary for encoding the numbers of 200 characters.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[120]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bits_for_one_symbol_from_10</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">bits_for_200_symbol_from_10</span> <span class="o">=</span> <span class="mi">200</span> <span class="o">*</span> <span class="n">bits_for_one_symbol_from_10</span>
+<span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">bits_for_200_symbol_from_10</span><span class="o">/</span><span class="mi">2</span><span class="o">**</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">13</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+ Answer: 100
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -13593,11 +13645,141 @@ $ X \in \{1, 2, 7, 8, 9\} \ (X \in \mathbb{Z})$
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>Программа, используя остаток от деления на 10 и целочисленное деление на 10, определяет наибольшую цифру (L) в числе x и сумму всех цифр (M).</p>
+<p>(L, M) = (8,13) для всех x из множества {58, 85, 148, 184, ...}</p>
+<p>Число 58 будет наименьшим в этом ряду.</p>
+<hr>
+<p>The program, using the remainder of dividing by 10 and the integer division by 10, determines the largest digit (L) in the number x and the sum of all the digits (M).</p>
+<p>(L, M) = (8,13) for all x from the set {58, 85, 148, 184, ...}</p>
+<p>The number 58 will be the smallest in this series.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[181]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">MIN</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">90</span><span class="p">):</span>  
+    <span class="n">L</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="k">while</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="n">M</span> <span class="o">+</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">10</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">&gt;</span> <span class="n">L</span><span class="p">:</span>
+            <span class="n">L</span> <span class="o">=</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">10</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">L</span><span class="o">==</span><span class="mi">8</span> <span class="ow">and</span> <span class="n">M</span><span class="o">==</span><span class="mi">13</span> <span class="ow">and</span> <span class="n">MIN</span><span class="o">&gt;</span><span class="n">t</span><span class="p">):</span>
+            <span class="n">MIN</span> <span class="o">=</span> <span class="n">t</span>
+            <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">MIN</span><span class="p">)</span>
+        
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>50 5 5
+51 5 6
+52 5 7
+53 5 8
+54 5 9
+55 5 10
+56 6 11
+57 7 12
+58 8 13
+59 9 14
+60 6 6
+61 6 7
+62 6 8
+63 6 9
+64 6 10
+65 6 11
+66 6 12
+67 7 13
+68 8 14
+69 9 15
+70 7 7
+71 7 8
+72 7 9
+73 7 10
+74 7 11
+75 7 12
+76 7 13
+77 7 14
+78 8 15
+79 9 16
+80 8 8
+81 8 9
+82 8 10
+83 8 11
+84 8 12
+85 8 13
+86 8 14
+87 8 15
+88 8 16
+89 9 17
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[182]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span> <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">20</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Answer: 58
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p><div style="width: 800px; height: 880px; overflow:auto;">
     <img src="it_images/2017_03_21.png" width="800" height="880"/>
 </div>
 Определите, при каком наибольшем значении b в результате выполнения следующего алгоритма будет напечатано число 50 (для Вашего удобства алгоритм представлен на четырёх языках).</p>
 <hr>
+<p>Determine with what the largest value of b as a result of the following algorithm will be printed for the number 50 (for your convenience, the algorithm is presented in four languages).</p>
 
 </div>
 </div>
@@ -13609,16 +13791,25 @@ $ X \in \{1, 2, 7, 8, 9\} \ (X \in \mathbb{Z})$
 <p><div style="width: 800px; height: 200px; overflow:auto;">
     <img src="it_images/2017_03_22.png" width="800" height="200"/>
 </div>
-У исполнителя Удвоитель две команды, которым присвоены номера:</p>
+У исполнителя <code>Удвоитель</code> две команды, которым присвоены номера:</p>
 <ol>
-<li><p>прибавь 3,</p>
+<li><p><code>прибавь 3</code>,</p>
 </li>
-<li><p>умножь на 2.</p>
+<li><p><code>умножь на 2</code>.</p>
 </li>
 </ol>
-<p>Первая из них увеличивает число на экране на 3, вторая удваивает его. Программа для Удвоителя — это последовательность команд.</p>
+<p>Первая из них увеличивает число на экране на 3, вторая удваивает его. Программа для <code>Удвоителя</code> — это последовательность команд.</p>
 <p>Сколько есть программ, которые число 1 преобразуют в число 25?</p>
 <hr>
+<p>The performer <code>Doubler</code> can execute two commands, which are assigned numbers:</p>
+<ol>
+<li><p><code>add 3</code>,</p>
+</li>
+<li><p><code>multiply by 2</code>.</p>
+</li>
+</ol>
+<p>The first of them increases the number on the screen by 3, the second doubles it. The program for <code>Doubler</code> is a sequence of commands.</p>
+<p>How many programs are there that the number 1 is converted to the number 25?</p>
 
 </div>
 </div>
@@ -13652,11 +13843,26 @@ $ X \in \{1, 2, 7, 8, 9\} \ (X \in \mathbb{Z})$
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div style="width: 800px; height: 1700px; overflow:auto;">
+<p><div style="width: 800px; height: 1700px; overflow:auto;">
     <img src="it_images/2017_03_24_1.png" width="800" height="600"/>
     <img src="it_images/2017_03_24_2.png" width="800" height="600"/>
     <img src="it_images/2017_03_24_3.png" width="800" height="500"/>
 </div>
+Требовалось написать программу, при выполнении которой с клавиатуры считываются координаты точки на плоскости (х, у — действительные числа) и определяется принадлежность этой точки заданной закрашенной области (включая границы). Программист торопился и написал программу неправильно.</p>
+<p>Последовательно выполните следующее.</p>
+<ol>
+<li><p>Перерисуйте и заполните таблицу, которая показывает, как работает программа при аргументах, принадлежащих различным областям (А, В, С, D, Е, F, G, Н и I).</p>
+<ul>
+<li><p>Точки, лежащие на границах областей, отдельно не рассматривать.</p>
+</li>
+<li><p>В столбцах условий укажите «да», если условие выполнится, «нет» если условие не выполнится, «—» (прочерк), если условие не будет проверяться, «не изв.», если программа ведёт себя по-разному для разных значений, принадлежащих данной области. В столбце «Программа выведет» укажите, что программа выведет на экран. Если программа ничего не выводит, напишите «—» (прочерк). Если для разных значений, принадлежащих области, будут выведены разные тексты, напишите «не изв». В последнем столбце укажите «да» или «нет».</p>
+</li>
+</ul>
+</li>
+<li><p>Укажите, как нужно доработать программу, чтобы не было случаев её неправильной работы. (Это можно сделать несколькими способами, достаточно указать любой способ доработки исходной программы.)</p>
+</li>
+</ol>
+
 </div>
 </div>
 </div>
@@ -13664,9 +13870,24 @@ $ X \in \{1, 2, 7, 8, 9\} \ (X \in \mathbb{Z})$
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div style="width: 800px; height: 800px; overflow:auto;">
+<p><div style="width: 800px; height: 800px; overflow:auto;">
     <img src="it_images/2017_03_25.png" width="800" height="800"/>
 </div>
+Дан целочисленный массив из 40 элементов. Элементы массива могут принимать произвольные значения. Опишите на русском языке или на одном из языков программирования алгоритм, который находит и выводит значение второго максимума (элемента, который в отсортированном по невозрастанию массиве стоял бы вторым).</p>
+<p>Исходные данные объявлены так, как показано ниже. Запрещается использовать переменные, не описанные ниже, но разрешается не использовать часть из них.</p>
+<ul>
+<li><p>Объявляем массив А из 40 элементов.</p>
+</li>
+<li><p>Объявляем целочисленные переменные I, К, MAX, МАХ2.</p>
+</li>
+<li><p>В цикле от 1 до 40 вводим элементы массива А с 1-го по 40-й.</p>
+</li>
+<li><p>...</p>
+</li>
+</ul>
+<p>В качестве ответа вам необходимо привести фрагмент программы (или описание алгоритма на естественном языке), который должен находиться на месте многоточия. Вы можете записать решение также на другом языке программирования (укажите название и используемую версию языка программирования, например, Borland Pascal 7.0) или в виде блок-схемы. В этом случае вы должны использовать те же самые исходные данные и переменные, какие были предложены в условии (например, в образце, записанном на естественном языке).</p>
+<hr>
+
 </div>
 </div>
 </div>
@@ -13692,7 +13913,7 @@ $ X \in \{1, 2, 7, 8, 9\} \ (X \in \mathbb{Z})$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[116]:</div>
+<div class="prompt input_prompt">In&nbsp;[183]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span>
@@ -13708,7 +13929,7 @@ $ X \in \{1, 2, 7, 8, 9\} \ (X \in \mathbb{Z})$
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[116]:</div>
+<div class="prompt output_prompt">Out[183]:</div>
 
 
 
@@ -13725,10 +13946,12 @@ $ X \in \{1, 2, 7, 8, 9\} \ (X \in \mathbb{Z})$
  9: &#39;4&#39;,
  10: &#39;ДДБД&#39;,
  11: &#39;17&#39;,
+ 13: &#39;100&#39;,
  15: &#39;36&#39;,
  17: &#39;11600&#39;,
  18: &#39;5&#39;,
- 19: &#39;4&#39;}</pre>
+ 19: &#39;4&#39;,
+ 20: &#39;58&#39;}</pre>
 </div>
 
 </div>
