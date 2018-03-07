@@ -14119,6 +14119,96 @@ $\neg ((X^2 < 100) \land (X \geq 6)) \land \neg (X \geq 15)) \iff
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[70]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">F</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span> 
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span> 
+        <span class="k">return</span> <span class="mi">0</span>
+<span class="n">A</span> <span class="o">=</span> <span class="p">[]</span> 
+
+<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">201</span><span class="p">):</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">k</span><span class="o">+=</span><span class="n">F</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        
+    <span class="n">A</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">b</span><span class="p">,</span><span class="n">k</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Pairs [b,k]: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Pairs [b,k]: 
+ [[100, 1], [101, 2], [102, 3], [103, 4], [104, 5], [105, 5], [106, 5], [107, 5], [108, 5], [109, 5], [110, 6], [111, 7], [112, 8], [113, 9], [114, 10], [115, 10], [116, 10], [117, 10], [118, 10], [119, 10], [120, 11], [121, 12], [122, 13], [123, 14], [124, 15], [125, 15], [126, 15], [127, 15], [128, 15], [129, 15], [130, 16], [131, 17], [132, 18], [133, 19], [134, 20], [135, 20], [136, 20], [137, 20], [138, 20], [139, 20], [140, 21], [141, 22], [142, 23], [143, 24], [144, 25], [145, 25], [146, 25], [147, 25], [148, 25], [149, 25], [150, 26], [151, 27], [152, 28], [153, 29], [154, 30], [155, 30], [156, 30], [157, 30], [158, 30], [159, 30], [160, 31], [161, 32], [162, 33], [163, 34], [164, 35], [165, 35], [166, 35], [167, 35], [168, 35], [169, 35], [170, 36], [171, 37], [172, 38], [173, 39], [174, 40], [175, 40], [176, 40], [177, 40], [178, 40], [179, 40], [180, 41], [181, 42], [182, 43], [183, 44], [184, 45], [185, 45], [186, 45], [187, 45], [188, 45], [189, 45], [190, 46], [191, 47], [192, 48], [193, 49], [194, 50], [195, 50], [196, 50], [197, 50], [198, 50], [199, 50], [200, 51]]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[74]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">21</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span><span class="mi">0</span><span class="p">][</span><span class="n">A</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="mi">50</span><span class="p">])))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span> <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">21</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Answer: 199
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Алгоритм вычисляет количество натуральных чисел <code>x</code> с последней цифрой, равной <code>0,1,2,3,4</code>, и находящихся в интервале $100 \leq  x \leq b$ для разных значений параметра $b$. При анализе натурального ряда легко видеть, что на каждый десяток приходится <code>5</code> таких чисел, следовательно для $b=50$ программе нужно последовательно оценить <code>50*2=100</code> натуральных чисел, причем подсчет начинается со <code>100</code> и первые <code>99</code> - игнорируются: $99 + 2*50 = 199$.</p>
+<hr>
+<p>The algorithm calculates the number of natural <code>x</code> with the last digit equal to <code>0,1,2,3,4</code>, and they are in the interval $100 \leq x \leq b$ for different values of the parameter $b$. When analyzing the natural numbers, it is easy to see that for each ten of them there are <code>5</code> such numbers, hence for $b = 50$ the program needs to consistently evaluate <code>50 * 2 = 100</code> natural numbers, with the calculation starting at <code>100</code> and the first <code>99</code> - being ignored: $99 + 2 * 50 = 199$.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -14506,49 +14596,163 @@ Answer: 7
 </tr>
 <tr>
 <td style="text-align:right">A</td>
+<td style="text-align:right">Нет / no</td>
 <td style="text-align:right">-</td>
 <td style="text-align:right">-</td>
 <td style="text-align:right">-</td>
-<td style="text-align:right">-</td>
-<td style="text-align:right">-</td>
+<td style="text-align:right">Нет / no</td>
 </tr>
 <tr>
 <td style="text-align:right">B</td>
-<td style="text-align:right">-</td>
-<td style="text-align:right">-</td>
-<td style="text-align:right">-</td>
-<td style="text-align:right">-</td>
-<td style="text-align:right">-</td>
+<td style="text-align:right">Да / yes</td>
+<td style="text-align:right">Да / yes</td>
+<td style="text-align:right">Да / yes</td>
+<td style="text-align:right">не принадлежит / does not belong</td>
+<td style="text-align:right">Нет / no</td>
 </tr>
 <tr>
 <td style="text-align:right">C</td>
-<td style="text-align:right">-</td>
-<td style="text-align:right">-</td>
-<td style="text-align:right">-</td>
-<td style="text-align:right">-</td>
-<td style="text-align:right">-</td>
+<td style="text-align:right">Да / yes</td>
+<td style="text-align:right">Да / yes</td>
+<td style="text-align:right">Да / yes</td>
+<td style="text-align:right">не принадлежит/ does not belong</td>
+<td style="text-align:right">Да / yes</td>
 </tr>
 <tr>
 <td style="text-align:right">D</td>
-<td style="text-align:right">-</td>
-<td style="text-align:right">-</td>
-<td style="text-align:right">-</td>
-<td style="text-align:right">-</td>
-<td style="text-align:right">-</td>
+<td style="text-align:right">Да / yes</td>
+<td style="text-align:right">Да / yes</td>
+<td style="text-align:right">Нет / no</td>
+<td style="text-align:right">принадлежит/ belongs</td>
+<td style="text-align:right">Да / yes</td>
 </tr>
 <tr>
 <td style="text-align:right">E</td>
+<td style="text-align:right">Да / yes</td>
+<td style="text-align:right">Нет / no</td>
 <td style="text-align:right">-</td>
 <td style="text-align:right">-</td>
-<td style="text-align:right">-</td>
-<td style="text-align:right">-</td>
-<td style="text-align:right">-</td>
+<td style="text-align:right">Нет / no</td>
 </tr>
 </tbody>
 </table>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[76]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">table</span> <span class="o">=</span> \
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">1.</span>
+<span class="sd">| Область | Условие 1 | Условие 2 | Условие 3 | Программа выведет | Область обрабатывается верно |</span>
+<span class="sd">|-:|-:|-:|-:|-:|-:|</span>
+<span class="sd">| Area | Condition 1 | Condition 2 | Condition 3 | Program Results | The Area Is Processed Correctly |</span>
+<span class="sd">|   | `x  ≥ -2` | `x ≤ 7` | `x &lt; 4` |  |  |</span>
+<span class="sd">| A | Нет / no | - | - | - | Нет / no |</span>
+<span class="sd">| B | Да / yes | Да / yes | Да / yes | не принадлежит / does not belong | Нет / no |</span>
+<span class="sd">| C | Да / yes | Да / yes | Да / yes | не принадлежит/ does not belong | Да / yes |</span>
+<span class="sd">| D | Да / yes | Да / yes | Нет / no | принадлежит/ belongs | Да / yes |</span>
+<span class="sd">| E | Да / yes | Нет / no | - | - | Нет / no |</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[77]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;x &quot;</span><span class="p">))</span>
+<span class="k">if</span> <span class="p">((</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">))</span> <span class="ow">or</span> <span class="p">((</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">7</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;принадлежит&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;не принадлежит&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>x 2.3
+не принадлежит
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[78]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">program_correction</span> <span class="o">=</span> \
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">2.</span>
+<span class="sd">x = float(input(&quot;x &quot;))</span>
+<span class="sd">if ((x &gt;= -2) and (x &lt;= 1)) or ((x &gt;= 4) and (x &lt;= 7)):</span>
+<span class="sd">    print(&#39;принадлежит&#39;)</span>
+<span class="sd">else:</span>
+<span class="sd">    print(&#39;не принадлежит&#39;)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[79]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">24</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="n">table</span><span class="p">,</span> <span class="n">program_correction</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span> <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">24</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Answer: [&#39;\n1.\n| Область | Условие 1 | Условие 2 | Условие 3 | Программа выведет | Область обрабатывается верно |\n|-:|-:|-:|-:|-:|-:|\n| Area | Condition 1 | Condition 2 | Condition 3 | Program Results | The Area Is Processed Correctly |\n|   | `x  ≥ -2` | `x ≤ 7` | `x &lt; 4` |  |  |\n| A | Нет / no | - | - | - | Нет / no |\n| B | Да / yes | Да / yes | Да / yes | не принадлежит / does not belong | Нет / no |\n| C | Да / yes | Да / yes | Да / yes | не принадлежит/ does not belong | Да / yes |\n| D | Да / yes | Да / yes | Нет / no | принадлежит/ belongs | Да / yes |\n| E | Да / yes | Нет / no | - | - | Нет / no |\n&#39;, &#39;\n2.\nx = float(input(&#34;x &#34;))\nif ((x &gt;= -2) and (x &lt;= 1)) or ((x &gt;= 4) and (x &lt;= 7)):\n    print(\&#39;принадлежит\&#39;)\nelse:\n    print(\&#39;не принадлежит\&#39;)\n&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -15186,7 +15390,7 @@ b) Vanya does not have a strategy that will allow him to win by the first step w
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="prompt input_prompt">In&nbsp;[80]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span>
@@ -15202,7 +15406,7 @@ b) Vanya does not have a strategy that will allow him to win by the first step w
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[67]:</div>
+<div class="prompt output_prompt">Out[80]:</div>
 
 
 
@@ -15227,8 +15431,11 @@ b) Vanya does not have a strategy that will allow him to win by the first step w
  18: &#39;14&#39;,
  19: &#39;2&#39;,
  20: &#39;337&#39;,
+ 21: &#39;199&#39;,
  22: &#39;7&#39;,
  23: &#39;97&#39;,
+ 24: [&#39;\n1.\n| Область | Условие 1 | Условие 2 | Условие 3 | Программа выведет | Область обрабатывается верно |\n|-:|-:|-:|-:|-:|-:|\n| Area | Condition 1 | Condition 2 | Condition 3 | Program Results | The Area Is Processed Correctly |\n|   | `x  ≥ -2` | `x ≤ 7` | `x &lt; 4` |  |  |\n| A | Нет / no | - | - | - | Нет / no |\n| B | Да / yes | Да / yes | Да / yes | не принадлежит / does not belong | Нет / no |\n| C | Да / yes | Да / yes | Да / yes | не принадлежит/ does not belong | Да / yes |\n| D | Да / yes | Да / yes | Нет / no | принадлежит/ belongs | Да / yes |\n| E | Да / yes | Нет / no | - | - | Нет / no |\n&#39;,
+  &#39;\n2.\nx = float(input(&#34;x &#34;))\nif ((x &gt;= -2) and (x &lt;= 1)) or ((x &gt;= 4) and (x &lt;= 7)):\n    print(\&#39;принадлежит\&#39;)\nelse:\n    print(\&#39;не принадлежит\&#39;)\n&#39;],
  26: [&#39;\na. 11≤S≤30, S∈{11,...,30}. \nPetya wins by one step - tripling the number of stones: \n33≤3*S≤90, 3∗S∈{33,...,90}. \nAt 1≤S≤10, S∈{1,...,10} it is not possible to win by one move: \n2≤S+1≤11, S+1∈{2,...,11}; 3≤S+2≤12, S+2∈{3,...,12}; 3≤3*S≤30, 3*S∈{3,...,30}.\n\nb. S=10. \nIn this case, at any next step, \n10 -&gt; 11 (P +1), 10 -&gt; 12 (P +2) or 10 -&gt; 30 (P *3) \nPetya will not be able to win, \nand Vanya will win by tripling the result in the next stage: \n11 -&gt; 33 (V *3), 12 -&gt; 36 (V *3) or 30 -&gt; 90 (V *3).\n&#39;,
   &#39;\nS=8 or S=9. \nPetya should choose the step 8 -&gt; 10 (P +2) or 9 -&gt; 10 (P +1). \nAt any next step, 10 -&gt; 11 (V +1), 10 -&gt; 12 (V +2) or 15 -&gt; 30 (V *3) \nVanya cannot win, but Petya wins by tripling the result in the next stage \n11 -&gt; 33 (P *3), 12 -&gt; 36 (P *3) or 30 -&gt; 90 (P *3).\n&#39;,
   &#34;\nS=7. Vanya&#39;s winning strategy:\n\nIf the first move of Petya 7 -&gt; 8 (P +1) or 7 -&gt; 9 (P +2), \nthen Vanya should choose the course 8 -&gt; 10 (V +2) or 9 -&gt; 10 (V +1). \nIn this case, at any next step, \n10 -&gt; 11 (P +1), 10 -&gt; 12 (P +2) or 10 -&gt; 30 (P *3) \nPetya will not be able to win, \nand Vanya will win by tripling the result in the next stage: \n11 -&gt; 33 (V *2), 12 -&gt; 36 (V *3) or 30 -&gt; 90 (V *3).\n\nIf the first move of Petya 7 -&gt; 21 (P *3), \nthen Vanya wins by his first move, tripling the number of stones: 21 -&gt; 63 (V *3).\nIt is not possible for Vanya to win by the first move with a guarantee with this start position.\n&#34;]}</pre>
