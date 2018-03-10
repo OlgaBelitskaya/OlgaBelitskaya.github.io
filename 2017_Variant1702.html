@@ -13345,10 +13345,55 @@ i =  5 F: 625 G: 701
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="&#1047;&#1072;&#1076;&#1072;&#1085;&#1080;&#1077;-13">&#1047;&#1072;&#1076;&#1072;&#1085;&#1080;&#1077; 13<a class="anchor-link" href="#&#1047;&#1072;&#1076;&#1072;&#1085;&#1080;&#1077;-13">&#182;</a></h4><p>Для хранения длинных чисел можно использовать алгоритм кодирования повторов (RLE), который заменяет повторяющиеся цифры (серии) на число повторов цифры и саму цифру. Например, число 5999 после сжатия станет числом 1539. Если длина серии превосходит 9, она разбивается на несколько серий длиной 9 и, возможно, ещё одну длиной меньше 9. После сжатия производится поразрядное кодирование, все цифры кодируются одинаковым и минимально возможным количеством бит. Сколько байт потребуется для сжатия и кодирования указанным способом числа 12 300 000 000 000 555?</p>
+<h4 id="&#1047;&#1072;&#1076;&#1072;&#1085;&#1080;&#1077;-13">&#1047;&#1072;&#1076;&#1072;&#1085;&#1080;&#1077; 13<a class="anchor-link" href="#&#1047;&#1072;&#1076;&#1072;&#1085;&#1080;&#1077;-13">&#182;</a></h4><p>Для хранения длинных чисел можно использовать алгоритм кодирования повторов <code>(RLE)</code>, который заменяет повторяющиеся цифры (серии) на число повторов цифры и саму цифру. Например, число <code>5999</code> после сжатия станет числом <code>1539</code>. Если длина серии превосходит 9, она разбивается на несколько серий длиной 9 и, возможно, ещё одну длиной меньше 9. После сжатия производится поразрядное кодирование, все цифры кодируются одинаковым и минимально возможным количеством бит.</p>
+<p>Сколько байт потребуется для сжатия и кодирования указанным способом числа <code>12 300 000 000 000 555</code>?</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Закодируем исходное число указанным способом: $12300000000000555 \to 111213902035$ - одна единица, одна двойка, одна тройка, девять нулей, оставшиеся два нуля, три пятерки.</p>
+<p>Для кодирования каждой из 10 цифр требуется $ \log_2{10} \approx 3.32 \approx 4$ бита. Округление в данном случае всегда происходит в большую сторону: вариантов должно быть достаточно для однозначного кодирования всех символов.</p>
+<p>Для поразрядного кодирования 12 получившихся цифр требуется $12 * 4 = 48$ (бит) или $48 / 2^3 = 6$ (байт).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[121]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span><span class="mi">12</span><span class="o">/</span><span class="mi">2</span><span class="o">**</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span> <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">13</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Answer: 6
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -13619,12 +13664,29 @@ i =  5 F: 625 G: 701
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>1) Рассмотрим случай 𝑛 = 3: 'v1', 'v2', 'v3'.</p>
+<p>Подсчитаем возможные варианты дорог: ('v1', 'v2', 'v3'), ('v1', 'v3') - 2 штуки ($2=2^1=2^{n-2}$).</p>
+<p>2) 𝑛 = 4: 'v1', 'v2', 'v3', 'v4'.</p>
+<p>Возможные варианты дорог: ('v1', 'v2', 'v3', 'v4'), ('v1', 'v3', 'v4'), ('v1', 'v2', 'v4'), ('v1', 'v4') - 4 штуки ($4=2^2=2^{n-2}$).</p>
+<p>3) 𝑛 = 5: 'v1', 'v2', 'v3', 'v4', 'v5'.</p>
+<p>Возможные варианты дорог: 
+('v1', 'v2', 'v3', 'v4', 'v5'), ('v1', 'v2', 'v3', 'v5'), ('v1', 'v3', 'v4', 'v5'), ('v1', 'v2', 'v4', 'v5'), 
+('v1', 'v2', 'v5'), ('v1', 'v3', 'v5'), ('v1', 'v4', 'v5'), ('v1', 'v5') - 8 штук ($8=2^3=2^{n-2}$).</p>
+<p>4) 𝑛 = 10: $2^{n-2}=2^8=256$ штук.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[95]:</div>
+<div class="prompt input_prompt">In&nbsp;[123]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">8</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span> <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">15</span><span class="p">])</span>
 </pre></div>
 
@@ -13851,7 +13913,7 @@ i =  5 F: 625 G: 701
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[116]:</div>
+<div class="prompt input_prompt">In&nbsp;[124]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span>
@@ -13867,7 +13929,7 @@ i =  5 F: 625 G: 701
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[116]:</div>
+<div class="prompt output_prompt">Out[124]:</div>
 
 
 
@@ -13884,6 +13946,7 @@ i =  5 F: 625 G: 701
  9: &#39;192&#39;,
  10: &#39;1280&#39;,
  11: &#39;5&#39;,
+ 13: &#39;6&#39;,
  14: &#39;28&#39;,
  15: &#39;256&#39;,
  17: &#39;33&#39;}</pre>
