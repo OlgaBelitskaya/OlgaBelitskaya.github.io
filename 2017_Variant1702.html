@@ -15208,7 +15208,7 @@ for i in range(N) :
 <div class="prompt input_prompt">In&nbsp;[124]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># check the decision method</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Проверка решения</span>
 <span class="kn">import</span> <span class="nn">pandas</span>
 <span class="n">unique</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">pandas</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
 <span class="n">unique</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">unique</span><span class="o">.</span><span class="n">values</span> <span class="o">==</span> <span class="n">unique</span><span class="o">.</span><span class="n">max</span><span class="p">())</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -15345,6 +15345,162 @@ for i in range(N) :
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p><strong><em>Замечание</em></strong>:</p>
+<p>$\mathit{(x+y) \mod 12 \equiv 0 \iff (x \mod 12) + (y \mod 12) \equiv 0}$</p>
+<p>Сумма двух чисел кратна 12, если сумма остатков от деления на 12 этих чисел также кратна 12. Это утверждение легко доказать, представив каждое из слагаемых в виде $12*a + b$, где a - результат целочисленного деления на 12, b - остаток.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[173]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Для тестирования случайным образом генерируется массив целых чисел</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">A</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[173]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([974, 401, 414, 172, 387, 811, 420, 480, 467,  52, 120, 216, 964,
+       332, 586, 509, 535,  17, 992, 884, 257,  34, 995, 569, 440, 862,
+       805, 936, 212, 128, 669, 366, 741, 474, 583, 460, 248, 774, 921,
+       667,  24, 406, 596, 874,  12, 116, 602, 688, 448, 454, 596, 156,
+       705, 638,   6, 511, 566, 120,  27, 357, 815, 659, 277,  22, 513,
+       662, 420, 375, 399, 276, 806, 810, 416, 741, 391, 698, 751, 217,
+       589, 940,  71, 296, 217, 517, 157, 632, 340, 242, 336, 996, 939,
+        92, 985, 231, 411, 154, 493, 381, 218, 772])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[174]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">A</span> <span class="o">%</span> <span class="mi">12</span>
+<span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">s</span><span class="o">+=</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">12</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+            <span class="n">s</span><span class="o">+=</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span> <span class="o">==</span> <span class="mi">12</span><span class="o">-</span><span class="n">j</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+            
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of pairs:&#39;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Number of pairs: 427
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[170]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">program</span><span class="o">=</span>\
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">N = int(input(&quot;Количество натуральных чисел: &quot;))</span>
+<span class="sd">A = numpy.zeros(N)</span>
+<span class="sd">for i in range(N) :</span>
+<span class="sd">    A[i] = int(input())</span>
+
+
+<span class="sd">M = A % 12</span>
+<span class="sd">s = 0</span>
+<span class="sd">for i in range(len(M)):</span>
+<span class="sd">    if M[i] == 0:</span>
+<span class="sd">        s+=(M[i+1:] == 0).sum()</span>
+<span class="sd">    for j in range(1,12):</span>
+<span class="sd">        if M[i] == j:</span>
+<span class="sd">            s+=(M[i+1:] == 12-j).sum()</span>
+<span class="sd">            </span>
+<span class="sd">print(&#39;Number of pairs:&#39;, s)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[171]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">27</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="n">version</span><span class="p">,</span> <span class="n">program</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span> <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">27</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Answer: [&#39;python 3.6&#39;, &#39;\nN = int(input(&#34;Количество натуральных чисел: &#34;))\nA = numpy.zeros(N)\nfor i in range(N) :\n    A[i] = int(input())\n\n\nM = A % 12\ns = 0\nfor i in range(len(M)):\n    if M[i] == 0:\n        s+=(M[i+1:] == 0).sum()\n    for j in range(1,12):\n        if M[i] == j:\n            s+=(M[i+1:] == 12-j).sum()\n            \nprint(\&#39;Number of pairs:\&#39;, s)\n&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2>Ответы &nbsp; Answers</h2>
 
 </div>
@@ -15352,7 +15508,7 @@ for i in range(N) :
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[127]:</div>
+<div class="prompt input_prompt">In&nbsp;[172]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span>
@@ -15368,7 +15524,7 @@ for i in range(N) :
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[127]:</div>
+<div class="prompt output_prompt">Out[172]:</div>
 
 
 
@@ -15400,7 +15556,9 @@ for i in range(N) :
   &#39;2. 𝑛 = 4,9 =&gt; k=3 (правильный результат)&#39;,
   &#34;3. Python: &#39;j = 2&#39; -&gt; &#39;j = 1&#39;; &#39;k += 3&#39; -&gt; &#39;k += 1&#39;&#34;],
  25: [&#39;python 3.6&#39;,
-  &#39;\np = 1\nfor i in range(N) :\n    s = 1\n    for j in range(N) :\n        if a[j] == a[i] :\n            s += 1\n        if s &gt; p :\n            m = a[i]\n            p = s\n        else :\n            if p == s and m &gt; a[i]:\n                m = a[i]\nprint(m)\n&#39;]}</pre>
+  &#39;\np = 1\nfor i in range(N) :\n    s = 1\n    for j in range(N) :\n        if a[j] == a[i] :\n            s += 1\n        if s &gt; p :\n            m = a[i]\n            p = s\n        else :\n            if p == s and m &gt; a[i]:\n                m = a[i]\nprint(m)\n&#39;],
+ 27: [&#39;python 3.6&#39;,
+  &#39;\nN = int(input(&#34;Количество натуральных чисел: &#34;))\nA = numpy.zeros(N)\nfor i in range(N) :\n    A[i] = int(input())\n\n\nM = A % 12\ns = 0\nfor i in range(len(M)):\n    if M[i] == 0:\n        s+=(M[i+1:] == 0).sum()\n    for j in range(1,12):\n        if M[i] == j:\n            s+=(M[i+1:] == 12-j).sum()\n            \nprint(\&#39;Number of pairs:\&#39;, s)\n&#39;]}</pre>
 </div>
 
 </div>
