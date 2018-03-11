@@ -13755,13 +13755,12 @@ i =  5 F: 625 G: 701
 <td style="text-align:center">33</td>
 </tr>
 <tr>
-<td style="text-align:center">$C \ \&amp; \ (C++ \ \mathbf{</td>
-<td style="text-align:center">} \ Java)$</td>
-<td>13</td>
+<td style="text-align:center">$C \ \&amp; \ (C++ \ \mid \ Java)$</td>
+<td style="text-align:center">13</td>
 </tr>
 </tbody>
 </table>
-<p>Какое количество страниц будет найдено по запросу $C \ {|} \ (C++ \ \&amp; \ Java)$?</p>
+<p>Какое количество страниц будет найдено по запросу $C \ \mid \ (C++ \ \&amp; \ Java)$?</p>
 
 </div>
 </div>
@@ -14054,6 +14053,98 @@ $ (𝑥, 𝑦) \in \{(0,1); (0,2); (0,3); (0,4); (0,5); (0,6); (0,7); (0,8); \\
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="&#1047;&#1072;&#1076;&#1072;&#1085;&#1080;&#1077;-19">&#1047;&#1072;&#1076;&#1072;&#1085;&#1080;&#1077; 19<a class="anchor-link" href="#&#1047;&#1072;&#1076;&#1072;&#1085;&#1080;&#1077;-19">&#182;</a></h4><p>В программе используется одномерный целочисленный массив 𝐴 с индексами от 0 до 9. Значения элементов равны <code>15; 3; 54; 13; 2; 13; 65; 93; 21; 81</code> соответственно, т.е. <code>𝐴[0] = 15</code>; <code>𝐴[1] = 3</code> и т. д. Определите значение переменной 𝑘 после выполнения следующего фрагмента программы, записанного ниже на разных языках программирования.</p>
+<pre><code class='bash' style='font-weight: bold;'>
+#### Паскаль
+k := 0;
+for i := 0 to 9 do begin
+    m := A[i] div 10 mod 10;
+    if i > m then begin
+        k := k + 1;
+        A[i] := A[9 - m]
+    end
+end;
+</code></pre>
+<pre><code class='bash' style='font-weight: bold;'>
+####  Си
+k = 0;
+for (i = 0; i < 10; i++) {
+    m = A[i] / 10 % 10;
+    if (i > m) {
+        k++;
+        A[i] = A[9 - m];
+    }
+}
+
+</code></pre>
+<pre><code class='bash' style='font-weight: bold;'>
+####  Бейсик
+K = 0
+FOR I = 0 TO 9
+    M = A(I) \ 10 MOD 10
+    IF I > M THEN
+        K = K + 1
+        A(I) = A(9 - M)
+    END IF
+NEXT I
+</code></pre>
+<pre><code class='bash' style='font-weight: bold;'>
+#### Python
+k = 0
+for i in range(10) :
+    m = A[i] // 10 % 10
+    if i > m :
+        k += 1
+        A[i] = A[9 - m]
+</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[156]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">15</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">93</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">81</span><span class="p">])</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">//</span> <span class="mi">10</span> <span class="o">%</span> <span class="mi">10</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">m</span> <span class="p">:</span>
+        <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="mi">9</span> <span class="o">-</span> <span class="n">m</span><span class="p">]</span>
+        
+<span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">19</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span> <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">19</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Answer: 6
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2>Часть 2 &nbsp; &nbsp; &nbsp; Part 2</h2>
 
 </div>
@@ -14070,7 +14161,7 @@ $ (𝑥, 𝑦) \in \{(0,1); (0,2); (0,3); (0,4); (0,5); (0,6); (0,7); (0,8); \\
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[155]:</div>
+<div class="prompt input_prompt">In&nbsp;[157]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span>
@@ -14086,7 +14177,7 @@ $ (𝑥, 𝑦) \in \{(0,1); (0,2); (0,3); (0,4); (0,5); (0,6); (0,7); (0,8); \\
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[155]:</div>
+<div class="prompt output_prompt">Out[157]:</div>
 
 
 
@@ -14107,7 +14198,8 @@ $ (𝑥, 𝑦) \in \{(0,1); (0,2); (0,3); (0,4); (0,5); (0,6); (0,7); (0,8); \\
  14: &#39;28&#39;,
  15: &#39;256&#39;,
  17: &#39;33&#39;,
- 18: &#39;30&#39;}</pre>
+ 18: &#39;30&#39;,
+ 19: &#39;6&#39;}</pre>
 </div>
 
 </div>
