@@ -15530,7 +15530,7 @@ for i in range(N) :
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[173]:</div>
+<div class="prompt input_prompt">In&nbsp;[202]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Для тестирования случайным образом генерируется массив целых чисел</span>
@@ -15548,20 +15548,20 @@ for i in range(N) :
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[173]:</div>
+<div class="prompt output_prompt">Out[202]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([974, 401, 414, 172, 387, 811, 420, 480, 467,  52, 120, 216, 964,
-       332, 586, 509, 535,  17, 992, 884, 257,  34, 995, 569, 440, 862,
-       805, 936, 212, 128, 669, 366, 741, 474, 583, 460, 248, 774, 921,
-       667,  24, 406, 596, 874,  12, 116, 602, 688, 448, 454, 596, 156,
-       705, 638,   6, 511, 566, 120,  27, 357, 815, 659, 277,  22, 513,
-       662, 420, 375, 399, 276, 806, 810, 416, 741, 391, 698, 751, 217,
-       589, 940,  71, 296, 217, 517, 157, 632, 340, 242, 336, 996, 939,
-        92, 985, 231, 411, 154, 493, 381, 218, 772])</pre>
+<pre>array([829, 838,  98, 288, 684, 499, 809,  22, 957, 252, 490, 988, 513,
+       112, 539,  41, 344, 709, 325, 745, 891, 767, 969, 345,  95, 486,
+       115, 207, 320, 280, 893, 693, 821, 421, 451, 264, 541, 514, 503,
+       307, 364, 154, 248, 249, 767, 383, 394, 106,  25, 730, 512,  96,
+        34, 365, 623, 419, 542,  10, 658, 882, 257, 661, 927, 186, 533,
+       308, 804, 368, 652, 103, 943, 129, 526,  34, 810, 947, 689, 845,
+        98,  78,   9, 543, 942, 210, 938, 537, 733, 302, 721, 610, 178,
+       765, 780,   2, 128, 976, 459, 394, 440,  93])</pre>
 </div>
 
 </div>
@@ -15572,7 +15572,7 @@ for i in range(N) :
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[174]:</div>
+<div class="prompt input_prompt">In&nbsp;[203]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Variant 1</span>
@@ -15602,7 +15602,7 @@ for i in range(N) :
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Number of pairs: 427
+<pre>Number of pairs: 385
 </pre>
 </div>
 </div>
@@ -15613,7 +15613,47 @@ for i in range(N) :
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[170]:</div>
+<div class="prompt input_prompt">In&nbsp;[204]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Variant 2</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">A</span> <span class="o">%</span> <span class="mi">12</span>
+<span class="n">M</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+<span class="n">unique_values</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">counts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">counts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">counts</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">counts</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="n">counts</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">counts</span><span class="p">[</span><span class="mi">12</span><span class="o">-</span><span class="n">j</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of pairs:&#39;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>    
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Number of pairs: 385
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[205]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">program</span><span class="o">=</span>\
@@ -15623,17 +15663,15 @@ for i in range(N) :
 <span class="sd">for i in range(N) :</span>
 <span class="sd">    A[i] = int(input())</span>
 
-
 <span class="sd">M = A % 12</span>
-<span class="sd">s = 0</span>
-<span class="sd">for i in range(len(M)):</span>
-<span class="sd">    if M[i] == 0:</span>
-<span class="sd">        s+=(M[i+1:] == 0).sum()</span>
-<span class="sd">    for j in range(1,12):</span>
-<span class="sd">        if M[i] == j:</span>
-<span class="sd">            s+=(M[i+1:] == 12-j).sum()</span>
-<span class="sd">            </span>
-<span class="sd">print(&#39;Number of pairs:&#39;, s)</span>
+<span class="sd">M.sort()</span>
+
+<span class="sd">unique_values, counts = numpy.unique(M, return_counts=True)</span>
+<span class="sd">s = int((counts[0] * (counts[0] - 1) + counts[6] * (counts[6] - 1))/2)</span>
+<span class="sd">for j in range(1,6):</span>
+<span class="sd">    s += counts[j]*counts[12-j]</span>
+
+<span class="sd">print(&#39;Number of pairs:&#39;, s) </span>
 <span class="sd">&quot;&quot;&quot;</span>
 </pre></div>
 
@@ -15644,7 +15682,7 @@ for i in range(N) :
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[171]:</div>
+<div class="prompt input_prompt">In&nbsp;[206]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">27</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="n">version</span><span class="p">,</span> <span class="n">program</span><span class="p">]</span>
@@ -15665,7 +15703,7 @@ for i in range(N) :
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Answer: [&#39;python 3.6&#39;, &#39;\nN = int(input(&#34;Количество натуральных чисел: &#34;))\nA = numpy.zeros(N)\nfor i in range(N) :\n    A[i] = int(input())\n\n\nM = A % 12\ns = 0\nfor i in range(len(M)):\n    if M[i] == 0:\n        s+=(M[i+1:] == 0).sum()\n    for j in range(1,12):\n        if M[i] == j:\n            s+=(M[i+1:] == 12-j).sum()\n            \nprint(\&#39;Number of pairs:\&#39;, s)\n&#39;]
+<pre>Answer: [&#39;python 3.6&#39;, &#39;\nN = int(input(&#34;Количество натуральных чисел: &#34;))\nA = numpy.zeros(N)\nfor i in range(N) :\n    A[i] = int(input())\n\nM = A % 12\nM.sort()\n\nunique_values, counts = numpy.unique(M, return_counts=True)\ns = int((counts[0] * (counts[0] - 1) + counts[6] * (counts[6] - 1))/2)\nfor j in range(1,6):\n    s += counts[j]*counts[12-j]\n\nprint(\&#39;Number of pairs:\&#39;, s) \n&#39;]
 </pre>
 </div>
 </div>
@@ -15685,7 +15723,7 @@ for i in range(N) :
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[180]:</div>
+<div class="prompt input_prompt">In&nbsp;[207]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span>
@@ -15701,7 +15739,7 @@ for i in range(N) :
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[180]:</div>
+<div class="prompt output_prompt">Out[207]:</div>
 
 
 
@@ -15736,7 +15774,7 @@ for i in range(N) :
   &#39;\np = 1\nfor i in range(N) :\n    s = 1\n    for j in range(N) :\n        if a[j] == a[i] :\n            s += 1\n        if s &gt; p :\n            m = a[i]\n            p = s\n        else :\n            if p == s and m &gt; a[i]:\n                m = a[i]\nprint(m)\n&#39;],
  26: [&#39;\n$1$. Вероятность выигрыша и стратегии Блэка (третий ход).\n\n| Номер | Возможная позиция | Стратегия Блэка | Вероятность выигрыша Блэка |\n|-|-|-|-|\n|  |  | 1.1 выстрел Блэка в Грея (Грей стреляет лучше, но он сразу убит)  | |\n| 1 | Грей и Уайт живы | 1.2 выстрел Уайта с вероятностью успеха 1/3 | 2/3 |\n|  |  | 1.3 выстрел Блэка (Уайт убит)  |  |\n| 2 | Грей убит, Уайт жив | выстрел Блэка (Уайт убит) | 1 |\n| 3 | Уайт убит, Грей жив | выстрел Блэка (Грей убит) | 1 |\n\n$2$. Вероятность выигрыша и стратегии Грея (второй ход).\n\n| Номер | Возможная позиция | Стратегия Грея | Вероятность выигрыша Грея |\n|-|-|-|-|\n|  |  | 1.1 выстрел Грея в Блэка с вероятностью попадания 2/3  | |\n| 1 | Блэк и Уайт живы | 1.2 выстрел Уайта с вероятностью промаха 1 - 1/3 | $(\x0crac{2}{3})^3 = \x0crac{8}{27}$ |\n|  |  | 1.3 выстрел Грея в случае промаха Уайта с вероятностью попадания 2/3 ...  |  |\n| 2 | Блэк убит, Уайт жив | выстрел Грея в Уайта с вероятностью попадания 2/3 | 2/3 |\n\n$3$. Вероятность выигрыша и стратегия Уайта (первый ход).\n\n- 3.1. Выстрел Уайта в воздух: у более опасных противников выше вероятность попасть друг в друга.\n\n- 3.2. Стреляет Грей в более опасного противника Блэка и попадает с вероятностью 2/3.\n\n- 3.3. Стреляет Блэк (если остался в живых с вероятностью 1/3) в более опасного противника Грея и попадает с вероятностью 1.\n\n- 3.4. Уайт стреляет в оставшегося в живых соперника и попадает с вероятностью 1/3. \n\nЕго выигрыш в данной ситуации не зависит от результатов предыдущих выстрелов Грея и Блэка. \n\nПри промахе с вероятностью 2/3 шансы Уайта выиграть резко снизятся.\n&#39;],
  27: [&#39;python 3.6&#39;,
-  &#39;\nN = int(input(&#34;Количество натуральных чисел: &#34;))\nA = numpy.zeros(N)\nfor i in range(N) :\n    A[i] = int(input())\n\n\nM = A % 12\ns = 0\nfor i in range(len(M)):\n    if M[i] == 0:\n        s+=(M[i+1:] == 0).sum()\n    for j in range(1,12):\n        if M[i] == j:\n            s+=(M[i+1:] == 12-j).sum()\n            \nprint(\&#39;Number of pairs:\&#39;, s)\n&#39;]}</pre>
+  &#39;\nN = int(input(&#34;Количество натуральных чисел: &#34;))\nA = numpy.zeros(N)\nfor i in range(N) :\n    A[i] = int(input())\n\nM = A % 12\nM.sort()\n\nunique_values, counts = numpy.unique(M, return_counts=True)\ns = int((counts[0] * (counts[0] - 1) + counts[6] * (counts[6] - 1))/2)\nfor j in range(1,6):\n    s += counts[j]*counts[12-j]\n\nprint(\&#39;Number of pairs:\&#39;, s) \n&#39;]}</pre>
 </div>
 
 </div>
