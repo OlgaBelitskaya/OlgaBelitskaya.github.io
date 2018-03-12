@@ -11858,7 +11858,9 @@ div.output_stderr {background-color: gray;}
 <p><div style="width: 800px; height: 100px; overflow:auto;">
     <img src="it_images/2017_05_01.png" width="800" height="100"/>
 </div>
-Даны 4 целых числа, записанных в шестнадцатеричной системе счисления: $A5_{16}, 9F_{16}, AC_{16}, C1_{16}$. Сколько среди них чисел, которые меньше чем $265_8$?</p>
+Даны 4 целых числа, записанных в шестнадцатеричной системе счисления: $A5_{16}, 9F_{16}, AC_{16}, C1_{16}$.</p>
+<p>Сколько среди них чисел, которые меньше чем $265_8$?</p>
+<hr>
 
 </div>
 </div>
@@ -12189,9 +12191,86 @@ True
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div style="width: 800px; height: 450px; overflow:auto;">
+<p><div style="width: 800px; height: 450px; overflow:auto;">
     <img src="it_images/2017_05_03.png" width="800" height="100"/>
 </div>
+Между четырьмя местными аэропортами: ЛЕСНОЙ, КРАЙ, ЗИМА и ПОЛЯНА ежедневно выполняются авиарейсы.</p>
+<p>Приведён фрагмент расписания перелётов между ними.</p>
+<table>
+<thead><tr>
+<th>Аэропорт вылета</th>
+<th>Аэропорт прилёта</th>
+<th>Время вылета</th>
+<th>Время прилёта</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ЛЕСНОЙ</td>
+<td>ПОЛЯНА</td>
+<td>13:10</td>
+<td>17:15</td>
+</tr>
+<tr>
+<td>ЗИМА</td>
+<td>КРАЙ</td>
+<td>13:00</td>
+<td>14:30</td>
+</tr>
+<tr>
+<td>ЗИМА</td>
+<td>ЛЕСНОЙ</td>
+<td>12:10</td>
+<td>14:20</td>
+</tr>
+<tr>
+<td>ПОЛЯНА</td>
+<td>ЗИМА</td>
+<td>11:15</td>
+<td>15:30</td>
+</tr>
+<tr>
+<td>ЛЕСНОЙ</td>
+<td>ЗИМА</td>
+<td>12:35</td>
+<td>14:50</td>
+</tr>
+<tr>
+<td>КРАЙ</td>
+<td>ЗИМА</td>
+<td>12:30</td>
+<td>14:20</td>
+</tr>
+<tr>
+<td>ЛЕСНОЙ</td>
+<td>КРАЙ</td>
+<td>10:30</td>
+<td>12:15</td>
+</tr>
+<tr>
+<td>КРАЙ</td>
+<td>ПОЛЯНА</td>
+<td>14:40</td>
+<td>16:45</td>
+</tr>
+<tr>
+<td>ПОЛЯНА</td>
+<td>КРАЙ</td>
+<td>15:15</td>
+<td>17:20</td>
+</tr>
+<tr>
+<td>ЗИМА</td>
+<td>ПОЛЯНА</td>
+<td>14:30</td>
+<td>16:20</td>
+</tr>
+</tbody>
+</table>
+<p>Путешественник оказался в аэропорту ЛЕСНОЙ в полночь (0:00).</p>
+<p>Определите самое раннее время, когда он может попасть в аэропорт ПОЛЯНА.</p>
+<hr>
+
 </div>
 </div>
 </div>
@@ -12480,17 +12559,72 @@ True
 <div class="text_cell_render border-box-sizing rendered_html">
 <div style="width: 800px; height: 220px; overflow:auto;">
     <img src="it_images/2017_05_04.png" width="800" height="220"/>
+</div><p>В папке <code>С: \Documents\May</code> находятся следующие файлы и только они:</p>
+<ul>
+<li><code>taram.doc, panam.docx, am.dat, gam.doc, gram.docx</code>.</li>
+</ul>
+<p>К этим файлам применили следующую операцию: файлы, имена которых удовлетворяют маске <code>?*am.do?</code> переместили в папку <code>« . . »</code> относительно текущей.</p>
+<p>Сколько файлов останется в исходной папке?</p>
+<hr>
+
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">fnmatch</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="s1">&#39;?*am.do?&#39;</span>
+<span class="n">file_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;taram.doc&#39;</span><span class="p">,</span> <span class="s1">&#39;panam.docx&#39;</span><span class="p">,</span> <span class="s1">&#39;am.dat&#39;</span><span class="p">,</span> <span class="s1">&#39;gam.doc&#39;</span><span class="p">,</span> <span class="s1">&#39;gram.docx&#39;</span><span class="p">]</span>
+<span class="n">count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">file_list</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">file_list</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">fnmatch</span><span class="o">.</span><span class="n">fnmatch</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span> 
+        <span class="n">count</span><span class="o">-=</span><span class="mi">1</span>
+
+<span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>       
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+ Answer: 3
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div style="width: 800px; height: 220px; overflow:auto;">
+<p><div style="width: 800px; height: 220px; overflow:auto;">
     <img src="it_images/2017_05_05.png" width="800" height="220"/>
 </div>
+Для кодирования некоторой последовательности, состоящей из букв <code>A</code>, <code>B</code>, <code>C</code>, <code>D</code>, и <code>E</code>, используется неравномерный двоичный код, позволяющий однозначно декодировать полученную двоичную последовательность. Вот этот код:</p>
+<p><code>A-110</code>, <code>B-10</code>, <code>C-01</code>, <code>D-00</code>, <code>E-111</code>. Можно ли сократить для одной из букв длину кодового слова так, чтобы код по-прежнему можно было декодировать однозначно? Коды остальных букв меняться не должны.</p>
+<p>Запишите ответ в виде: буква, кодовое слово. Например, если бы ответ был «Для буквы <code>F</code> новый код будет <code>110</code>», ответ нужно записать как: <code>F110</code>. Если невозможно ничего сократить, запишите в ответе просто цифру <code>0</code>.</p>
+<hr>
+
 </div>
 </div>
 </div>
@@ -12498,10 +12632,53 @@ True
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div style="width: 800px; height: 600px; overflow:auto;">
+<p><div style="width: 800px; height: 600px; overflow:auto;">
     <img src="it_images/2017_05_06_1.png" width="800" height="200"/>
     <img src="it_images/2017_05_06_2.png" width="800" height="400"/>
 </div>
+В некоторой информационной системе информация кодируется двоичными шестиразрядными словами. При передаче данных возможны их искажения, поэтому в конец каждого слова добавляется седьмой (контрольный) разряд таким образом, чтобы сумма разрядов нового слова, считая контрольный, была чётной. Например, к слову <code>101101</code> справа будет добавлен <code>0</code>, а к слову <code>010110</code> — <code>1</code>.</p>
+<p>После приёма слова производится его обработка. При этом проверяется сумма его разрядов, включая контрольный. Если она нечётна, это означает, что при передаче этого слова произошёл сбой, и оно автоматически заменяется на зарезервированное слово <code>0000000</code>. Если она чётна, это означает, что сбоя не было или сбоёв было больше одного. В этом случае принятое слово не изменяется.</p>
+<p>Приведём фрагмент кодовой таблицы, используемый в данной задаче:</p>
+<table>
+<thead><tr>
+<th>Буква</th>
+<th>Кодовое слово</th>
+<th>Примечание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>000000</td>
+<td>сбой</td>
+</tr>
+<tr>
+<td>A</td>
+<td>101011</td>
+<td>-</td>
+</tr>
+<tr>
+<td>B</td>
+<td>011001</td>
+<td>-</td>
+</tr>
+<tr>
+<td>C</td>
+<td>110111</td>
+<td>-</td>
+</tr>
+<tr>
+<td>D</td>
+<td>110110</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>Исходное сообщение АВС было передано в виде: <code>1010110 0110011 1101111</code>.</p>
+<p>И затем было принято в виде: <code>1110110 0110001 1101100</code>.</p>
+<p>Как будет выглядеть принятое сообщение после обработки? В ответе запишите последовательность букв без пробелов и знаков препинания.</p>
+<hr>
+
 </div>
 </div>
 </div>
@@ -12509,9 +12686,53 @@ True
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div style="width: 800px; height: 230px; overflow:auto;">
+<p><div style="width: 800px; height: 230px; overflow:auto;">
     <img src="it_images/2017_05_07.png" width="800" height="200"/>
 </div>
+Дан фрагмент электронной таблицы.</p>
+<table>
+<thead><tr>
+<th></th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>4</td>
+<td>5</td>
+<td><code>=$А2+В$1</code></td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td><code>=А1+В2</code></td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>7</td>
+<td>6</td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Чему станет равным значение ячейки <code>D2</code>, если в неё скопировать формулу из ячейки <code>C1</code>?</p>
+<p>Примечание: знак <code>$</code> обозначает абсолютную адресацию.</p>
+<hr>
+
 </div>
 </div>
 </div>
@@ -12519,12 +12740,142 @@ True
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div style="width: 800px; height: 650px; overflow:auto;">
+<p><div style="width: 800px; height: 650px; overflow:auto;">
     <img src="it_images/2017_05_08_1.png" width="800" height="300"/>
     <img src="it_images/2017_05_08_2.png" width="800" height="300"/>
 </div>
+Определите, что будет напечатано в результате выполнения следующего фрагмента программы:</p>
+
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<pre><code class='bash' style='font-weight: bold;'>
+####  Бейсик
+
+DIM k, s AS INTEGER
+k = 0
+s = 1
+WHILE s < 1000
+    s = s * 2
+    k = k + 5
+WEND
+PRINT k
+</code></pre><pre><code class='bash' style='font-weight: bold;'>
+#### Паскаль
+
+var k, s : integer;
+begin
+    k := 0;
+    s := 1;
+    while s < 1000 do
+        s := s * 2;
+        k := k + 5;
+    end;
+    write(k);
+end.
+</code></pre><pre><code class='bash' style='font-weight: bold;'>
+####  Си
+
+{
+    int k, s;
+    k = 0;
+    s = 1;
+    while (s < 1000)
+    {
+        s = s * 2;
+        k = k + 5;
+    } 
+    printf("%d", k);
+}
+</code></pre><pre><code class='bash' style='font-weight: bold;'>
+#### Алгоритмический язык
+
+нач
+    цел k, s
+    k := 0
+    s := 1
+    нц пока s < 1000
+        s := s * 2
+        k := k + 5
+    кц
+    вывод k
+кон
+</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">k</span><span class="p">,</span><span class="n">s</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
+<span class="k">while</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">:</span>
+    <span class="n">s</span><span class="o">*=</span><span class="mi">2</span>
+    <span class="n">k</span><span class="o">+=</span><span class="mi">5</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="n">k</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>50
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>       
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+ Answer: 50
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -12742,7 +13093,7 @@ True
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span>
@@ -12758,13 +13109,13 @@ True
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[34]:</div>
+<div class="prompt output_prompt">Out[40]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>{1: &#39;3&#39;, 2: &#39;yxz&#39;, 3: &#39;16:20&#39;}</pre>
+<pre>{1: &#39;3&#39;, 2: &#39;yxz&#39;, 3: &#39;16:20&#39;, 4: &#39;3&#39;, 8: &#39;50&#39;}</pre>
 </div>
 
 </div>
