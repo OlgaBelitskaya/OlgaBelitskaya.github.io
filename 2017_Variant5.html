@@ -13568,9 +13568,75 @@ end.
 При регистрации в компьютерной системе каждому пользователю выдаётся пароль, состоящий из 10 символов и содержащий только символы из 17-символьного набора: A, B, C, D, E, F, G, H, K, L, M, N, P, Q, R, S, T. В базе данных для хранения сведений о каждом пользователе отведено одинаковое и минимально возможное целое число байт. При этом используют посимвольное кодирование паролей, все символы кодируют одинаковым и минимально возможным количеством бит. Кроме собственно пароля, для каждого пользователя в системе хранятся дополнительные сведения, для чего отведено целое число байт, одинаковое для всех пользователей.</p>
 <p>Для хранения сведений о 40 пользователях потребовалось 600 байт. Сколько байт выделено для хранения дополнительных сведений об одном пользователе? В ответе запишите только целое число — количество байт.</p>
 <hr>
+<p>With registering in a computer system, for each user it is given a password consisting of 10 characters and containing only characters from the 17-character set: A, B, C, D, E, F, G, H, K, L, M, N, P, Q, R, S, T. The database for storing information about each user has the same and minimum possible integer number of bytes. In this case, the character-by-symbol encoding of passwords is used, all symbols are encoded with the same and the minimum possible number of bits. In addition to the password itself, another information is stored for each user in the system. For this information, an entire number of bytes is assigned and it is the same for all users.</p>
+<p>To store information about 40 users it took 600 bytes. How many bytes are allocated for storing additional information about one user? In the answer write down only the whole number - the number of bytes.</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>1) $4 &lt; \log_{2}{17} &lt; 5$ =&gt; 5 (бит) - необходимо для кодирования одной из 17 букв латинского алфавита.</p>
+<p>Количество возможных вариантов кодировки ($2^5$) не должно быть меньше количества имеющейся информации ($17$ символов), округление в данном случае - всегда в большую сторону.</p>
+<p>2) $5 * 10 = 50$ (бит) - необходимо для кодирования 10 символов пароля.</p>
+<p>3) $50 \ / \ 8 = 6.25 \approx 7$ (байт) - необходимо для кодирования 10 символов пароля.</p>
+<p>Количество байт - целое число, и округление опять должно быть только в большую сторону.</p>
+<p>4) $40 * 7 = 280$ (байт) - необходимо для кодирования паролей 40 пользователей.</p>
+<p>5) $(600 - 280)\ / \ 40 = 8$ (байт) - выделено для хранения дополнительных сведений об одном пользователе.</p>
+<hr>
+<p>1) $4 &lt; \log_{2}{17} &lt; 5$ =&gt; 5 (bits) - necessary for encoding one of the 17 Latin letters.</p>
+<p>The number of possible encoding options ($2^5$) should not be less than the amount of information available ($17$  symbols), rounding in this case - always in the larger side.</p>
+<p>2) $5 * 10 = 50$ (bits) - necessary for encoding 10 password symbols.</p>
+<p>3) $50 \ / \ 8 = 6.25 \approx 7$ (bytes) - necessary to encode 10 characters of the password.</p>
+<p>The number of bytes is an integer, and rounding should only be in the larger side again.</p>
+<p>4) $40 * 7 = 280$ (bytes) - necessary to encode passwords of 40 users.</p>
+<p>5) $(600 - 280)\ / \ 40 = 8$ (bytes) - allocated to store additional information about a single user.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[154]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bits_for_one_symbol_from_17</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">bits_for_10_symbol_from_17</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">bits_for_one_symbol_from_17</span>
+
+<span class="n">bytes_for_10_symbol_from_17</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">bits_for_10_symbol_from_17</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">bytes_for_40_passwords</span> <span class="o">=</span> <span class="mi">40</span> <span class="o">*</span> <span class="n">bytes_for_10_symbol_from_17</span>
+
+<span class="n">bytes_for_add_information</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="mi">600</span> <span class="o">-</span> <span class="n">bytes_for_40_passwords</span><span class="p">)</span> <span class="o">/</span> <span class="mi">40</span><span class="p">)</span>
+
+<span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">bytes_for_add_information</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">13</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+ Answer: 8
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -14037,6 +14103,7 @@ $\mathbf{9^{200} + 3^{100} - 7 = 3^{400} + 3^{100} - (2 * 3^1 + 1 * 3^0)} \\
 На числовой прямой даны отрезки $P = [5, 13]$ и $Q = [8, 19]$. Укажите наименьшую возможную длину такого отрезка $A$, что формула
 $(\neg (x \in P) \to (x \in Q)) \to (x \in A)$ верна при любых значениях х.</p>
 <hr>
+<p>On the number line, the segments $P = [5, 13]$ and $Q = [8, 19]$ are given. Indicate the smallest possible length of such a segment $A$, that the formula $(\neg (x \in P) \to (x \in Q)) \to (x \in A)$ is true for any values of x.</p>
 
 </div>
 </div>
@@ -14082,9 +14149,13 @@ $(\neg (x \in P) \to (x \in Q)) \to (x \in A) \iff$
 <p><div style="width: 800px; height: 600px; overflow:auto;">
     <img src="it_images/2017_05_19.png" width="800" height="600"/>
 </div>
-В программе используется целочисленный массив <code>A</code> с индексами от <code>0</code> до <code>9</code>. Значения элементов массива равны <code>4; 5; 4; 7; 10; 8; 9; 11; 7; 8</code> соответственно, т.е. <code>A[0] = 4</code>; <code>A[1] = 5</code> и т.д.</p>
-<p>Определите значение переменной k после выполнения следующего фрагмента программы, записанной ниже на разных языках программирования.</p>
+В программе используется целочисленный массив <code>A</code> с индексами от <code>0</code> до <code>9</code>.</p>
+<p>Значения элементов массива равны <code>4; 5; 4; 7; 10; 8; 9; 11; 7; 8</code> соответственно, т.е. <code>A[0] = 4</code>; <code>A[1] = 5</code> и т.д.</p>
+<p>Определите значение переменной <code>k</code> после выполнения следующего фрагмента программы, записанной ниже на разных языках программирования.</p>
 <hr>
+<p>The program uses an integer array <code>A</code> with indices from <code>0</code> to <code>9</code>.</p>
+<p>Values of array elements are equal to <code>4; 5; 4; 7; 10; 8; 9; 11; 7; 8</code> respectively, i.e. <code>A [0] = 4</code>; <code>A [1] = 5</code>, etc.</p>
+<p>Determine the value of the variable <code>k</code> after the execution of the next program fragment, recorded below in different programming languages.</p>
 
 </div>
 </div>
@@ -14251,7 +14322,7 @@ $(\neg (x \in P) \to (x \in Q)) \to (x \in A) \iff$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[149]:</div>
+<div class="prompt input_prompt">In&nbsp;[155]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span>
@@ -14267,7 +14338,7 @@ $(\neg (x \in P) \to (x \in Q)) \to (x \in A) \iff$
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[149]:</div>
+<div class="prompt output_prompt">Out[155]:</div>
 
 
 
@@ -14285,6 +14356,7 @@ $(\neg (x \in P) \to (x \in Q)) \to (x \in A) \iff$
  10: &#39;5&#39;,
  11: &#39;2133&#39;,
  12: &#39;CGDA&#39;,
+ 13: &#39;8&#39;,
  15: &#39;16&#39;,
  16: &#39;99&#39;,
  17: &#39;16500&#39;}</pre>
