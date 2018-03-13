@@ -12726,6 +12726,10 @@ True
 В некоторой информационной системе информация кодируется двоичными шестиразрядными словами. При передаче данных возможны их искажения, поэтому в конец каждого слова добавляется седьмой (контрольный) разряд таким образом, чтобы сумма разрядов нового слова, считая контрольный, была чётной. Например, к слову <code>101101</code> справа будет добавлен <code>0</code>, а к слову <code>010110</code> — <code>1</code>.</p>
 <p>После приёма слова производится его обработка. При этом проверяется сумма его разрядов, включая контрольный. Если она нечётна, это означает, что при передаче этого слова произошёл сбой, и оно автоматически заменяется на зарезервированное слово <code>0000000</code>. Если она чётна, это означает, что сбоя не было или сбоёв было больше одного. В этом случае принятое слово не изменяется.</p>
 <p>Приведём фрагмент кодовой таблицы, используемый в данной задаче:</p>
+<hr>
+<p>In some information system, information is encoded in binary six-digit words. During transmitting the data, their distortions are possible, so at the end of each word the seventh (control) symbol is added so that the sum of the digits of the new word, assuming the control symbol, is even. For example, to the word <code>101101</code> on the right will be added <code>0</code>, and to the word <code>010110</code> - <code>1</code>.</p>
+<p>After receiving the word, it is processed. This checks the sum of its digits, including the control ones. If it is odd, this means that when the word was transmitted, a failure occurred, and it is automatically replaced by the word <code>0000000</code>. If it is even, it means there was no malfunction or there was more than one malfunction. In this case, the received word does not change.</p>
+<p>Here is the fragment of the code table used in this task:</p>
 <table>
 <thead><tr>
 <th>Буква</th>
@@ -12735,9 +12739,14 @@ True
 </thead>
 <tbody>
 <tr>
+<td>Letter</td>
+<td>Code Word</td>
+<td>Note</td>
+</tr>
+<tr>
 <td>x</td>
 <td>000000</td>
-<td>сбой</td>
+<td>сбой / fail</td>
 </tr>
 <tr>
 <td>A</td>
@@ -12765,9 +12774,58 @@ True
 <p>И затем было принято в виде: <code>1110110 0110001 1101100</code>.</p>
 <p>Как будет выглядеть принятое сообщение после обработки? В ответе запишите последовательность букв без пробелов и знаков препинания.</p>
 <hr>
+<p>The original ABC message was sent as: <code>1010110 0110011 1101111</code>.</p>
+<p>And then it was accepted in the form: <code>1110110 0110001 1101100</code>.</p>
+<p>How will the received message look after processing? In the answer, write down the sequence of letters without spaces or punctuation.</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[105]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;1110110 0110001 1101100&#39;</span>
+<span class="n">replace</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="s1">&#39;101011&#39;</span><span class="p">,</span> <span class="s1">&#39;011001&#39;</span><span class="p">,</span> <span class="s1">&#39;110111&#39;</span><span class="p">,</span> <span class="s1">&#39;110110&#39;</span><span class="p">],</span>
+                       <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">]])</span>
+<span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">el</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span><span class="o">%</span><span class="k">2</span>==1:
+        <span class="n">result</span><span class="o">+=</span><span class="s1">&#39;x&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">el</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span> <span class="o">==</span> <span class="n">replace</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]:</span>
+                <span class="n">result</span><span class="o">+=</span><span class="n">replace</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+                
+<span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">=</span><span class="n">result</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+ Answer: xxD
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -12777,6 +12835,8 @@ True
     <img src="it_images/2017_05_07.png" width="800" height="200"/>
 </div>
 Дан фрагмент электронной таблицы.</p>
+<hr>
+<p>The fragment of the spreadsheet is given.</p>
 <table>
 <thead><tr>
 <th></th>
@@ -12813,9 +12873,58 @@ True
 <p>Чему станет равным значение ячейки <code>D2</code>, если в неё скопировать формулу из ячейки <code>C1</code>?</p>
 <p>Примечание: знак <code>$</code> обозначает абсолютную адресацию.</p>
 <hr>
+<p>What will the value of the cell <code>D2</code> become equal if you copy the formula from the cell <code>C1</code> into it?</p>
+<p>Note: The <code>$</code> sign denotes absolute addressing.</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div style="width: 800px; height: 620px; overflow:auto;">
+Скопирована формула. The formula has been copied.
+    <img src="it_images/2017_05_07a.png" width="800" height="300"/>
+Скопирована ячейка. The cell has been copied.
+    <img src="it_images/2017_05_07b.png" width="800" height="300"/>
+</div><p><a href="https://drive.google.com/open?id=1PGGsrGCN9T_qA0_gitS1iEDdCNSSej0OqPs1unxIBS4">Googel Sheet</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[110]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+ Answer: 7
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -12969,6 +13078,7 @@ end.
 </div>
 Производится двухканальная (стерео) звукозапись с частотой дискретизации 16 кГц и 4-битным разрешением. Запись длится одну минуту, её результаты записываются в файл, сжатие данных не производится. Укажите размер полученного файла (в Мбайт) с точностью 1 Мбайт. В ответе запишите только целое число, единицу измерения писать не нужно.</p>
 <hr>
+<p>A two-channel (stereo) sound recording with a sampling frequency of 16 kHz and a 4-bit resolution is produced. The recording lasts one minute, its results are written to a file, data compression is not performed. Specify the size of the received file (in MB) with an accuracy of 1 MB. In the answer, write down only an integer, you do not need to write a unit of measurement.</p>
 
 </div>
 </div>
@@ -12982,9 +13092,77 @@ end.
 </div>
 Для кодирования 500 различных сообщений используют 4 последовательных цветовых вспышки. Лампочки скольких различных цветов должны использоваться при передаче?</p>
 <hr>
+<p>Four consecutive color flashes are used to encode 500 different messages. Lamps of how many different colors should be used for encoding?</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[107]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[107]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>4.4828921423310435</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[109]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="mi">4</span><span class="o">**</span><span class="mi">4</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[109]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>256</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -13973,7 +14151,7 @@ $\mathbf{9^{200} + 3^{100} - 7 = 3^{400} + 3^{100} - (2 * 3^1 + 1 * 3^0)} \\
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[103]:</div>
+<div class="prompt input_prompt">In&nbsp;[111]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span>
@@ -13989,7 +14167,7 @@ $\mathbf{9^{200} + 3^{100} - 7 = 3^{400} + 3^{100} - (2 * 3^1 + 1 * 3^0)} \\
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[103]:</div>
+<div class="prompt output_prompt">Out[111]:</div>
 
 
 
@@ -14000,6 +14178,8 @@ $\mathbf{9^{200} + 3^{100} - 7 = 3^{400} + 3^{100} - (2 * 3^1 + 1 * 3^0)} \\
  3: &#39;16:20&#39;,
  4: &#39;3&#39;,
  5: &#39;0&#39;,
+ 6: &#39;xxD&#39;,
+ 7: &#39;7&#39;,
  8: &#39;50&#39;,
  11: &#39;2133&#39;,
  12: &#39;CGDA&#39;,
