@@ -12650,17 +12650,66 @@ True
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Для кодирования некоторой последовательности, состоящей из букв <code>A</code>, <code>B</code>, <code>C</code>, <code>D</code> и<code>E</code>, используется неравномерный двоичный код, позволяющий однозначно декодировать полученную двоичную последовательность.</p>
-<p>Вот этот код: <i style="font-size: 200%;" class="font-effect-brick-sign">`A-110, B-01, C-001, D-111, E-100`</i>.</p>
+<p>Вот этот код: <i style="font-size: 150%;" class="font-effect-brick-sign">`A-110, B-01, C-001, D-111, E-100`</i>.</p>
 <p>Можно ли сократить для одной или нескольких букв длину кодового слова, удалив в нём один или несколько последних символов, чтобы код по-прежнему можно было декодировать однозначно?</p>
-<p>Запишите ответ в виде: буква, кодовое слово. Если таких букв несколько, то далее через запятую перечислите буквы и их коды. Буквы перечислять в алфавитном порядке. Например, если бы ответ был «Для буквы <code>F</code> новый код будет <code>110</code>, а для буквы <code>G</code> новый код будет <code>101</code>», ответ нужно записать как: <i style="font-size: 200%;" class="font-effect-brick-sign">`F110, G101`</i>. Если невозможно ничего сократить, запишите в ответе просто цифру <code>0</code>.</p>
+<p>Запишите ответ в виде: буква, кодовое слово. Если таких букв несколько, то далее через запятую перечислите буквы и их коды. Буквы перечислять в алфавитном порядке. Например, если бы ответ был «Для буквы <code>F</code> новый код будет <code>110</code>, а для буквы <code>G</code> новый код будет <code>101</code>», ответ нужно записать как: <i style="font-size: 150%;" class="font-effect-brick-sign">`F110, G101`</i>. Если невозможно ничего сократить, запишите в ответе просто цифру <code>0</code>.</p>
 <hr>
 <p>To encode some sequence consisting of the letters <code>A</code>, <code>B</code>,  <code>C</code>, <code>D</code> and <code>E</code>, an unequal binary code is used, which uniquely decodes the resulting binary sequence.</p>
-<p>Here is the code:  <i style="font-size: 200%;" class="font-effect-brick-sign">`A-110, B-01, C-001, D-111, E-100`</i>.</p>
+<p>Here is the code:  <i style="font-size: 150%;" class="font-effect-brick-sign">`A-110, B-01, C-001, D-111, E-100`</i>.</p>
 <p>Is it possible to shorten the length of a codeword for one or more letters by deleting one or more of the last characters in it so that the code can still be decoded uniquely?</p>
-<p>Write down the answer in the form: a letter, a code word. If there are several such letters, then through the comma, list the letters and their codes. Letters should be in the alphabetical order. For example, if the answer was "For the letter <code>F</code> the new code will be <code>110</code>, and for the letter <code>G</code> the new code will be <code>101</code>, the answer needs to be written as: <i style="font-size: 200%;" class="font-effect-brick-sign">`F110, G101`</i>. If it is impossible to shorten anything, write down the answer in the answer to the number <code>0</code>.</p>
+<p>Write down the answer in the form: a letter, a code word. If there are several such letters, then through the comma, list the letters and their codes. Letters should be in the alphabetical order. For example, if the answer was "For the letter <code>F</code> the new code will be <code>110</code>, and for the letter <code>G</code> the new code will be <code>101</code>, the answer needs to be written as: <i style="font-size: 150%;" class="font-effect-brick-sign">`F110, G101`</i>. If it is impossible to shorten anything, write down the answer in the answer to the number <code>0</code>.</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>В решении использован Алгоритм Шеннона — Фано.</p>
+<p>Самые короткие коды 0 и 1 не могут быть использованы - с них уже начинается не одно кодовое слово.</p>
+<p>Следующая бинарная комбинация - из двух цифр. В начале кодовых слов встречаются все возможные варианты 01, 10 и 11, 00. Однако используется как слово из двух символов только 01, а повторяется в начале слов из трех символов - только 11.</p>
+<p>Значит, коды <i style="font-size: 150%;" class="font-effect-brick-sign">`C-001, E-100`</i> можно сократить до <i style="font-size: 150%;" class="font-effect-brick-sign">`C-00, E-10`</i>.</p>
+<hr>
+<p>The solution uses the Shannon-Fano Algorithm.</p>
+<p>The shortest codes 0 and 1 cannot be used - they have already situated at the beginning of more than one codeword.</p>
+<p>The next binary combination is two-digit. At the beginning of the code words, all possible variants 01, 10, 11, 00 are encountered. However, only 01 is used as a word of two characters and only 11 is repeated at the beginning of words of three characters.</p>
+<p>Hence, the codes <i style="font-size: 150%;" class="font-effect-brick-sign">`C-001, E-100`</i> can be shortened to <i style="font-size: 150%;" class="font-effect-brick-sign">`C-00, E-10`</i>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;C-00, E-10&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span> <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Answer: C-00, E-10
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -13366,6 +13415,12 @@ end.
 <p>Программа для <code>Прибавлятеля</code> — это последовательность команд.</p>
 <p>Сколько есть программ, которые число 1 преобразуют в число 24?</p>
 <hr>
+<p>The performer <code>Additioner</code> has two enumerated commands:</p>
+<p>$1$. <code>add 1</code>,</p>
+<p>$2$. <code>add 10</code>.</p>
+<p>The first of them increases the number on the screen by 1, the second one - by 10.</p>
+<p>The program for <code>Additioner</code> is a sequence of commands.</p>
+<p>How many programs convert the number 1 to the number 24?</p>
 
 </div>
 </div>
@@ -13377,6 +13432,26 @@ end.
 <div style="width: 800px; height: 250px; overflow:auto;">
     <img src="it_images/2017_08_23.png" width="800" height="250"/>
 </div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Сколько существует различных наборов значений логических переменных $x_1, х_2, ... х_{11}, x_{12}$, которые удовлетворяют всем перечисленным ниже условиям?</p>
+<p>В ответе не нужно перечислять все различные наборы значений $x_1, х_2, ... х_{11}, x_{12}$, при которых выполнена данная система равенств. В качестве ответа вам нужно указать количество таких наборов.</p>
+<hr>
+<p>How many different sets of values of logical variables $x_1, х_2, ... х_{11}, x_{12}$ exist that satisfy all the conditions listed below?</p>
+<p>In the answer it is not necessary to list all the different sets of values $x_1, х_2, ... х_{11}, x_{12}$ for which the given system of equations is satisfied. As an answer, you need to specify only the number of such sets.</p>
+<ul>
+<li>$ (x_1 \to x_2) \land (x_2 \to x_1) \land (x_3 \to x_4) = 1 $  <strong><em>(1)</em></strong></li>
+<li>$ (x_3 \to x_4) \land (x_4 \to x_3) \land (x_5 \to x_6) = 1 $  <strong><em>(2)</em></strong></li>
+<li>$ (x_5 \to x_6) \land (x_6 \to x_5) \land (x_7 \to x_8) = 1 $  <strong><em>(3)</em></strong></li>
+<li>$ (x_7 \to x_8) \land (x_8 \to x_7) \land (x_9 \to x_{10}) = 1 $  <strong><em>(4)</em></strong></li>
+<li>$ (x_9 \to x_{10}) \land (x_{10} \to x_9) \land (x_{11} \to x_{12}) = 1 $  <strong><em>(5)</em></strong></li>
+</ul>
+
 </div>
 </div>
 </div>
@@ -13442,7 +13517,7 @@ end.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span>
@@ -13458,13 +13533,13 @@ end.
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[43]:</div>
+<div class="prompt output_prompt">Out[45]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>{1: &#39;6&#39;, 2: &#39;xzy&#39;, 3: &#39;9&#39;, 4: &#39;134&#39;, 15: &#39;32&#39;}</pre>
+<pre>{1: &#39;6&#39;, 2: &#39;xzy&#39;, 3: &#39;9&#39;, 4: &#39;134&#39;, 5: &#39;C-00, E-10&#39;, 15: &#39;32&#39;}</pre>
 </div>
 
 </div>
