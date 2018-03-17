@@ -13625,12 +13625,78 @@ void F(int n)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>При регистрации в компьютерной системе каждому пользователю выдается пароль, состоящий из 15 символов и содержащий только символы из 12-символьного набора: А, В, С, D, Е, F, G, Н, К, L, М, N. В базе данных для хранения сведений о каждом пользователе отведено одинаковое и минимально возможное целое число байт. При этом используют посимвольное кодирование паролей, все символы кодируют одинаковым и минимально возможным количеством бит. Кроме собственно пароля, для каждого пользователя в системе хранятся дополнительные сведения, для чего отведено 12 байт на одного пользователя.</p>
+<p>При регистрации в компьютерной системе каждому пользователю выдается пароль, состоящий из 15 символов и содержащий только символы из 12-символьного набора: A, B, C, D, E, F, G, H, K, L, M, N. В базе данных для хранения сведений о каждом пользователе отведено одинаковое и минимально возможное целое число байт. При этом используют посимвольное кодирование паролей, все символы кодируют одинаковым и минимально возможным количеством бит. Кроме собственно пароля, для каждого пользователя в системе хранятся дополнительные сведения, для чего отведено 12 байт на одного пользователя.</p>
 <p>Определите объём памяти (в байтах), необходимый для хранения сведений о 30 пользователях. В ответе запишите только целое число — количество байт.</p>
 <hr>
+<p>With registering in a computer system, each user is given a password consisting of 15 characters and containing only the characters from the 12-character set: A, B, C, D, E, F, G, H, K, L, M, N. In the database for storing information about each user it is allocated the same and the minimum possible integer number of bytes. In this case, the character-by-symbol encoding of passwords is used, all symbols are encoded with the same and the minimum possible number of bits. In addition to the password itself, another information is stored for each user in the system, and for that 12 bytes per user are allocated.</p>
+<p>Determine the amount of memory (in bytes) required to store information about 30 users. In the answer write down only the whole number - the number of bytes.</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>1) $3 &lt; log_2{12} &lt; 4  =&gt; 4$ (бит) - необходимо для кодирования одной из 12 букв латинского алфавита.</p>
+<p>Количество возможных вариантов кодировки ($2^4$) не должно быть меньше количества имеющейся информации (12  символов), округление в данном случае - всегда в большую сторону.</p>
+<p>2) $4 ∗ 15 = 60$ (бит) - необходимо для кодирования 15 символов пароля.</p>
+<p>3) $60 / 8 = 7.5 \approx 8$  (байт) - необходимо для кодирования 15 символов пароля.</p>
+<p>Количество байт - целое число, и округление опять должно быть только в большую сторону.</p>
+<p>4)  $8 + 12 = 20$ (байт) - выделено на одного пользователя для пароля и дополнительной информации.</p>
+<p>5)  $20 * 30 = 600$ (байт) - выделено для хранения сведений о 30 пользователях.</p>
+<hr>
+<p>1) $3 &lt; log_2{12} &lt; 4  =&gt; 4$ (bits) - necessary for encoding one of the 12 Latin letters..</p>
+<p>The number of possible encoding options ($2^4$) should not be less than the amount of information available (12  сymbols), rounding in this case - always in the larger side.</p>
+<p>2) $4 ∗ 15 = 60$ (bits) - necessary for encoding 15 password symbols.</p>
+<p>3) $60 / 8 = 7.5 \approx 8$  (bytes) - necessary for encoding 15 password symbols.</p>
+<p>The number of bytes is an integer, and rounding should only be in the larger side again.</p>
+<p>4)  $8 + 12 = 20$ (bytes) - allocated per user for password and additional information.</p>
+<p>5)  $20 * 30 = 600$ (bytes) - allocated for 30 users.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[98]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bits_for_one_symbol_from_12</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">bits_for_15_symbol_from_12</span> <span class="o">=</span> <span class="mi">15</span> <span class="o">*</span> <span class="n">bits_for_one_symbol_from_12</span>
+
+<span class="n">bytes_for_15_symbol_from_12</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">bits_for_15_symbol_from_12</span> <span class="o">/</span> <span class="mi">8</span><span class="p">)</span>
+<span class="n">bytes_per_user</span> <span class="o">=</span> <span class="n">bytes_for_15_symbol_from_12</span> <span class="o">+</span> <span class="mi">12</span>
+
+<span class="n">bytes_for_30_users</span> <span class="o">=</span> <span class="n">bytes_per_user</span> <span class="o">*</span> <span class="mi">30</span>
+
+<span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">bytes_for_30_users</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">13</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+ Answer: 600
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -13642,6 +13708,187 @@ void F(int n)
 </div>
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Исполнитель $Редактор$ получает на вход строку цифр и преобразовывает её.</p>
+<p>Редактор может выполнять две команды, в обеих командах <code>v</code> и <code>w</code> обозначают цепочки цифр.</p>
+<p>А) <code>заменить (v, w)</code>.</p>
+<p>Эта команда заменяет в строке первое слева вхождение цепочки <code>v</code> на цепочку<code>w</code>. Например, выполнение команды <code>заменить (222, 34)</code> преобразует строку <code>77222277</code> в строку <code>7734277</code>. Если в строке нет вхождений цепочки <code>v</code>, то выполнение команды <code>заменить (v, w)</code> не меняет эту строку.</p>
+<p>Б) <code>нашлось (v)</code>.</p>
+<p>Эта команда проверяет, встречается ли цепочка <code>v</code> в строке исполнителя $Редактор$. Если она встречается, то команда возвращает логическое значение <code>«истина»</code>, в противном случае возвращает значение <code>«ложь»</code>. Строка при этом не изменяется исполнителем.</p>
+<p>Цикл</p>
+<p><code>ПОКА</code> $&lt;условие&gt;$</p>
+<ul>
+<li>$ последовательность \ команд $</li>
+</ul>
+<p><code>КОНЕЦ ПОКА</code></p>
+<p>выполняется, пока условие истинно.</p>
+<p>В конструкции</p>
+<p><code>ЕСЛИ</code> $&lt;условие&gt;$</p>
+<ul>
+<li><p><code>ТО</code> $команда \ 1$</p>
+</li>
+<li><p><code>ИНАЧЕ</code> $команда \ 2$</p>
+</li>
+</ul>
+<p><code>КОНЕЦ ЕСЛИ</code></p>
+<p>выполняется <code>команда 1</code> (если условие истинно) или <code>команда 2</code> (если условие ложно).</p>
+<p>Какая строка получится в результате применения приведённой ниже программы к строке, состоящей из 50 идущих подряд цифр 2? В ответе запишите полученную строку.</p>
+<ul>
+<li><p>НАЧАЛО</p>
+</li>
+<li><p>ПОКА <code>&lt; нашлось (222) &gt;</code> ИЛИ <code>&lt; нашлось (333) &gt;</code></p>
+<ul>
+<li><p>ЕСЛИ <code>&lt; нашлось (222) &gt;</code></p>
+<ul>
+<li><p>ТО <code>заменить (222, 3)</code></p>
+</li>
+<li><p>ИНАЧЕ <code>заменить (333, 2)</code></p>
+</li>
+</ul>
+</li>
+<li><p>КОНЕЦ ЕСЛИ</p>
+</li>
+</ul>
+</li>
+<li><p>КОНЕЦ ПОКА</p>
+</li>
+<li><p>КОНЕЦ</p>
+</li>
+</ul>
+<hr>
+<p>The performer $Editor$ receives a string of numbers and converts it.</p>
+<p>It can execute two commands, in both commands, <code>v</code> and <code>w</code> denote a chain of numbers.</p>
+<p>$A)$ <code>replace (v, w)</code>.</p>
+<p>This command replaces the first from the left with the occurrence of the chain <code>v</code> on the chain <code>w</code>. For example, executing the command to <code>replace (222, 34)</code> converts line <code>77222277</code> to line <code>7734277</code>. If there are no occurrences of a chain <code>v</code> in the string, then the execution of the command to <code>replace (v, w)</code> does not change this line.</p>
+<p>$B)$ <code>found (v)</code>.</p>
+<p>This command checks if the string <code>v</code> is found in the line. If it occurs, the command returns a logical value of <code>"true"</code>, otherwise it returns <code>"false"</code>. The string is not changed by the performer in this case.</p>
+<p>The cycle</p>
+<p><code>WHILE</code> $&lt;condition&gt;$</p>
+<ul>
+<li>$command \ sequence$</li>
+</ul>
+<p><code>END while</code></p>
+<p>is executed until the condition is true.</p>
+<p>In the construction</p>
+<p><code>IF</code> $&lt;condition&gt;$</p>
+<ul>
+<li><p><code>THEN</code> $command \ 1$</p>
+</li>
+<li><p><code>ELSE</code> $command \ 2$</p>
+</li>
+</ul>
+<p><code>END IF</code></p>
+<p>the command 1 is executed (if the condition is true) or command 2 is executed (if the condition is false).</p>
+<p>Which line will result from applying for the program below to the line consisting of 50 consecutive digits 2? In the answer write down the received line.</p>
+<ul>
+<li><p>START</p>
+</li>
+<li><p>WHILE <code>&lt; found (222) &gt;</code> OR <code>&lt; found (333) &gt;</code></p>
+<ul>
+<li><p>IF <code>&lt; found (222) &gt;</code></p>
+<ul>
+<li><p>THEN <code>replace (222, 3)</code></p>
+</li>
+<li><p>ELSE <code>replace (333, 2)</code></p>
+</li>
+</ul>
+</li>
+<li><p>END IF</p>
+</li>
+</ul>
+</li>
+<li><p>END WHILE</p>
+</li>
+<li><p>END</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[100]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">string</span> <span class="o">=</span> <span class="mi">50</span><span class="o">*</span><span class="s1">&#39;2&#39;</span>
+<span class="n">string</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[100]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;22222222222222222222222222222222222222222222222222&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[101]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">string_function</span><span class="p">(</span><span class="n">w</span><span class="p">):</span>
+    <span class="k">while</span> <span class="p">(</span><span class="s1">&#39;222&#39;</span><span class="ow">in</span> <span class="n">w</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="s1">&#39;333&#39;</span><span class="ow">in</span> <span class="n">w</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;222&#39;</span><span class="ow">in</span> <span class="n">w</span><span class="p">):</span> 
+            <span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;222&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;333&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">w</span>
+
+<span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">14</span><span class="p">]</span><span class="o">=</span><span class="n">string_function</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span> <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">14</span><span class="p">])</span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>333333333333333322
+22222322
+322322
+
+ Answer: 322322
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -13663,30 +13910,30 @@ void F(int n)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[94]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">G2</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">MultiDiGraph</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">G3</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">MultiDiGraph</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">9</span><span class="p">))</span>
 
-<span class="n">G2</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s1">&#39;А&#39;</span><span class="p">,</span> <span class="s1">&#39;Б&#39;</span><span class="p">),(</span><span class="s1">&#39;А&#39;</span><span class="p">,</span><span class="s1">&#39;В&#39;</span><span class="p">),(</span><span class="s1">&#39;А&#39;</span><span class="p">,</span><span class="s1">&#39;Г&#39;</span><span class="p">)])</span>
-<span class="n">G2</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s1">&#39;Б&#39;</span><span class="p">,</span><span class="s1">&#39;Ж&#39;</span><span class="p">),(</span><span class="s1">&#39;Б&#39;</span><span class="p">,</span><span class="s1">&#39;Д&#39;</span><span class="p">)])</span>
-<span class="n">G2</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s1">&#39;В&#39;</span><span class="p">,</span><span class="s1">&#39;Е&#39;</span><span class="p">),(</span><span class="s1">&#39;В&#39;</span><span class="p">,</span><span class="s1">&#39;Ж&#39;</span><span class="p">)])</span>
-<span class="n">G2</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s1">&#39;Г&#39;</span><span class="p">,</span><span class="s1">&#39;В&#39;</span><span class="p">),(</span><span class="s1">&#39;Г&#39;</span><span class="p">,</span><span class="s1">&#39;Е&#39;</span><span class="p">)])</span>
-<span class="n">G2</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s1">&#39;Д&#39;</span><span class="p">,</span><span class="s1">&#39;И&#39;</span><span class="p">),(</span><span class="s1">&#39;Д&#39;</span><span class="p">,</span><span class="s1">&#39;Ж&#39;</span><span class="p">)])</span>
-<span class="n">G2</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s1">&#39;Е&#39;</span><span class="p">,</span><span class="s1">&#39;З&#39;</span><span class="p">),(</span><span class="s1">&#39;Е&#39;</span><span class="p">,</span><span class="s1">&#39;Ж&#39;</span><span class="p">)])</span>
-<span class="n">G2</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s1">&#39;Ж&#39;</span><span class="p">,</span><span class="s1">&#39;И&#39;</span><span class="p">),(</span><span class="s1">&#39;Ж&#39;</span><span class="p">,</span><span class="s1">&#39;К&#39;</span><span class="p">),(</span><span class="s1">&#39;Ж&#39;</span><span class="p">,</span><span class="s1">&#39;З&#39;</span><span class="p">)])</span>
-<span class="n">G2</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s1">&#39;З&#39;</span><span class="p">,</span><span class="s1">&#39;К&#39;</span><span class="p">)])</span>
-<span class="n">G2</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s1">&#39;И&#39;</span><span class="p">,</span><span class="s1">&#39;К&#39;</span><span class="p">)])</span>
+<span class="n">G3</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s1">&#39;А&#39;</span><span class="p">,</span> <span class="s1">&#39;Б&#39;</span><span class="p">),(</span><span class="s1">&#39;А&#39;</span><span class="p">,</span><span class="s1">&#39;В&#39;</span><span class="p">),(</span><span class="s1">&#39;А&#39;</span><span class="p">,</span><span class="s1">&#39;Г&#39;</span><span class="p">)])</span>
+<span class="n">G3</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s1">&#39;Б&#39;</span><span class="p">,</span><span class="s1">&#39;Ж&#39;</span><span class="p">),(</span><span class="s1">&#39;Б&#39;</span><span class="p">,</span><span class="s1">&#39;Д&#39;</span><span class="p">)])</span>
+<span class="n">G3</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s1">&#39;В&#39;</span><span class="p">,</span><span class="s1">&#39;Е&#39;</span><span class="p">),(</span><span class="s1">&#39;В&#39;</span><span class="p">,</span><span class="s1">&#39;Ж&#39;</span><span class="p">)])</span>
+<span class="n">G3</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s1">&#39;Г&#39;</span><span class="p">,</span><span class="s1">&#39;В&#39;</span><span class="p">),(</span><span class="s1">&#39;Г&#39;</span><span class="p">,</span><span class="s1">&#39;Е&#39;</span><span class="p">)])</span>
+<span class="n">G3</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s1">&#39;Д&#39;</span><span class="p">,</span><span class="s1">&#39;И&#39;</span><span class="p">),(</span><span class="s1">&#39;Д&#39;</span><span class="p">,</span><span class="s1">&#39;Ж&#39;</span><span class="p">)])</span>
+<span class="n">G3</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s1">&#39;Е&#39;</span><span class="p">,</span><span class="s1">&#39;З&#39;</span><span class="p">),(</span><span class="s1">&#39;Е&#39;</span><span class="p">,</span><span class="s1">&#39;Ж&#39;</span><span class="p">)])</span>
+<span class="n">G3</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s1">&#39;Ж&#39;</span><span class="p">,</span><span class="s1">&#39;И&#39;</span><span class="p">),(</span><span class="s1">&#39;Ж&#39;</span><span class="p">,</span><span class="s1">&#39;К&#39;</span><span class="p">),(</span><span class="s1">&#39;Ж&#39;</span><span class="p">,</span><span class="s1">&#39;З&#39;</span><span class="p">)])</span>
+<span class="n">G3</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s1">&#39;З&#39;</span><span class="p">,</span><span class="s1">&#39;К&#39;</span><span class="p">)])</span>
+<span class="n">G3</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s1">&#39;И&#39;</span><span class="p">,</span><span class="s1">&#39;К&#39;</span><span class="p">)])</span>
 
-<span class="n">pos</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">shell_layout</span><span class="p">(</span><span class="n">G2</span><span class="p">)</span>
+<span class="n">pos</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">shell_layout</span><span class="p">(</span><span class="n">G3</span><span class="p">)</span>
 
-<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G2</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> 
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G3</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> 
                        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;slategray&#39;</span><span class="p">,</span>
                        <span class="n">arrowsize</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">arrowstyle</span><span class="o">=</span><span class="s1">&#39;-|&gt;&#39;</span><span class="p">)</span>
-<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">G2</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">1500</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">G3</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">1500</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
                        <span class="n">node_shape</span><span class="o">=</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">)</span>
-<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">G2</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">G3</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -13721,10 +13968,10 @@ void F(int n)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[95]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">nx</span><span class="o">.</span><span class="n">all_simple_paths</span><span class="p">(</span><span class="n">G2</span><span class="p">,</span> <span class="s1">&#39;А&#39;</span><span class="p">,</span> <span class="s1">&#39;К&#39;</span><span class="p">):</span> <span class="nb">print</span> <span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">nx</span><span class="o">.</span><span class="n">all_simple_paths</span><span class="p">(</span><span class="n">G3</span><span class="p">,</span> <span class="s1">&#39;А&#39;</span><span class="p">,</span> <span class="s1">&#39;К&#39;</span><span class="p">):</span> <span class="nb">print</span> <span class="p">(</span><span class="n">path</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -13776,10 +14023,10 @@ void F(int n)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[96]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">all_simple_paths</span><span class="p">(</span><span class="n">G2</span><span class="p">,</span> <span class="s1">&#39;А&#39;</span><span class="p">,</span> <span class="s1">&#39;К&#39;</span><span class="p">))))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">all_simple_paths</span><span class="p">(</span><span class="n">G3</span><span class="p">,</span> <span class="s1">&#39;А&#39;</span><span class="p">,</span> <span class="s1">&#39;К&#39;</span><span class="p">))))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span> <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">15</span><span class="p">])</span>
 </pre></div>
 
@@ -14351,7 +14598,7 @@ $ (*) \iff (((5 \leq \ x \ \leq 13) \land (8 \leq \ x \ \leq 19)) \lor \neg (x \
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[93]:</div>
+<div class="prompt input_prompt">In&nbsp;[102]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span>
@@ -14367,7 +14614,7 @@ $ (*) \iff (((5 \leq \ x \ \leq 13) \land (8 \leq \ x \ \leq 19)) \lor \neg (x \
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[93]:</div>
+<div class="prompt output_prompt">Out[102]:</div>
 
 
 
@@ -14385,6 +14632,8 @@ $ (*) \iff (((5 \leq \ x \ \leq 13) \land (8 \leq \ x \ \leq 19)) \lor \neg (x \
  10: 720,
  11: &#39;13&#39;,
  12: &#39;GCDA&#39;,
+ 13: &#39;600&#39;,
+ 14: &#39;322322&#39;,
  15: &#39;25&#39;,
  16: &#39;28&#39;,
  18: &#39;5&#39;}</pre>
