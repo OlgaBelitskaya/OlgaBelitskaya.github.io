@@ -15051,6 +15051,63 @@ $ (*) \iff (((5 \leq \ x \ \leq 13) \land (8 \leq \ x \ \leq 19)) \lor \neg (x \
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<table>
+<thead><tr>
+<th style="text-align:center">$x_1$</th>
+<th style="text-align:center">$x_3$</th>
+<th style="text-align:center">$(x_1 \land \neg x_3) \lor (\neg x_1 \land x_3)$</th>
+<th style="text-align:center">$x_1 \equiv \neg x_3$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+<p>Согласно приведенной таблице истинности:</p>
+<hr>
+<p>According to the truth table:</p>
+<p>$((x_1 \land \neg x_3) \lor (\neg x_1 \land x_3)) \equiv (x_1 \equiv \neg x_3)$</p>
+<p>Исходная система уравнений будет равносильна:</p>
+<hr>
+<p>The initial system of equations is equivalent to:</p>
+<ul>
+<li>$ (x_1 \equiv \neg x_2) \lor (x_1 \equiv \neg x_3) = 1 \ (1*)$  </li>
+<li>$ (x_2 \equiv \neg x_3) \lor (x_2 \equiv \neg x_4) = 1 \ (2*)$  </li>
+<li>$ (x_3 \equiv \neg x_4) \lor (x_3 \equiv \neg x_5) = 1 \ (3*)$  </li>
+<li>$ (x_4 \equiv \neg x_5) \lor (x_4 \equiv \neg x_6) = 1 \ (4*)$  </li>
+<li>$ (x_5 \equiv \neg x_6) \lor (x_5 \equiv \neg x_7) = 1 \ (5*)$ </li>
+</ul>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[79]:</div>
@@ -15344,6 +15401,89 @@ $ (*) \iff (((5 \leq \ x \ \leq 13) \land (8 \leq \ x \ \leq 19)) \lor \neg (x \
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
+<div class="prompt input_prompt">In&nbsp;[102]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Create an array of 40 integer numbers from [-10000, 10000].&quot;</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+<span class="n">MAX</span> <span class="o">=</span> <span class="o">-</span><span class="mi">20001</span>
+<span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">I</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">40</span><span class="p">):</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">I</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">A</span><span class="p">[</span><span class="n">I</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="n">I</span><span class="p">])</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">I</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="n">I</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">MAX</span><span class="p">):</span> 
+        <span class="n">MAX</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">I</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="n">I</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">MAX</span> <span class="o">==-</span><span class="mi">20001</span><span class="p">:</span>
+        <span class="n">MAX</span> <span class="o">=</span> <span class="mi">0</span>
+        
+<span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">MAX</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Create an array of 40 integer numbers from [-10000, 10000].
+ 3
+ 6
+ 9
+ 12
+ 15
+ 18
+ 21
+ 24
+ 27
+ 30
+ 3000
+ 33
+ 36
+ 11
+ 22
+ 33
+ 44
+ 55
+ 66
+ 77
+ 88
+ 99
+ 100
+ -11
+ -22
+ -33
+ -44
+ -55
+ -66
+ -77
+ -88
+ -99
+ -100
+ -3
+ -6
+ -9
+ -12
+ -15
+ -18
+ -21
+199
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">In&nbsp;[81]:</div>
 <div class="inner_cell">
     <div class="input_area">
@@ -15352,6 +15492,65 @@ $ (*) \iff (((5 \leq \ x \ \leq 13) \land (8 \leq \ x \ \leq 19)) \lor \neg (x \
 </pre></div>
 
 </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[103]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">program_fragment</span> <span class="o">=</span> \
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">print(&quot;Create an array of 40 integer numbers from [-10000, 10000].&quot;)</span>
+<span class="sd">A = numpy.zeros(40)</span>
+<span class="sd">MAX = -20001</span>
+<span class="sd">A[0] = int(input(&quot; &quot;))</span>
+<span class="sd">for I in range(1,40):</span>
+<span class="sd">    A[I] = int(input(&quot; &quot;))</span>
+<span class="sd">    if ((A[I-1] + A[I]) % 3 != 0) and (A[I-1] + A[I] &gt; MAX): </span>
+<span class="sd">        MAX = A[I-1] + A[I]</span>
+<span class="sd">    if MAX ==-20001:</span>
+<span class="sd">        MAX = 0</span>
+<span class="sd">        </span>
+<span class="sd">print(int(MAX))</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[104]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">25</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="n">version</span><span class="p">,</span> <span class="n">program_fragment</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span> <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">25</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Answer: [&#39;python 3.6&#39;, &#39;\nprint(&#34;Create an array of 40 integer numbers from [-10000, 10000].&#34;)\nA = numpy.zeros(40)\nMAX = -20001\nA[0] = int(input(&#34; &#34;))\nfor I in range(1,40):\n    A[I] = int(input(&#34; &#34;))\n    if ((A[I-1] + A[I]) % 3 != 0) and (A[I-1] + A[I] &gt; MAX): \n        MAX = A[I-1] + A[I]\n    if MAX ==-20001:\n        MAX = 0\n        \nprint(int(MAX))\n&#39;]
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -15814,7 +16013,7 @@ $ (*) \iff (((5 \leq \ x \ \leq 13) \land (8 \leq \ x \ \leq 19)) \lor \neg (x \
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[92]:</div>
+<div class="prompt input_prompt">In&nbsp;[105]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span>
@@ -15830,7 +16029,7 @@ $ (*) \iff (((5 \leq \ x \ \leq 13) \land (8 \leq \ x \ \leq 19)) \lor \neg (x \
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[92]:</div>
+<div class="prompt output_prompt">Out[105]:</div>
 
 
 
@@ -15862,6 +16061,8 @@ $ (*) \iff (((5 \leq \ x \ \leq 13) \land (8 \leq \ x \ \leq 19)) \lor \neg (x \
  24: [&#39;1. 2&#39;,
   &#39;2. 111&#39;,
   &#39;3. &#34;k = 10&#34; -&gt; &#34;k = 0&#34;; &#34;if N % 10 &lt; k&#34; -&gt; &#34;if N % 10 &gt; k&#34;&#39;],
+ 25: [&#39;python 3.6&#39;,
+  &#39;\nprint(&#34;Create an array of 40 integer numbers from [-10000, 10000].&#34;)\nA = numpy.zeros(40)\nMAX = -20001\nA[0] = int(input(&#34; &#34;))\nfor I in range(1,40):\n    A[I] = int(input(&#34; &#34;))\n    if ((A[I-1] + A[I]) % 3 != 0) and (A[I-1] + A[I] &gt; MAX): \n        MAX = A[I-1] + A[I]\n    if MAX ==-20001:\n        MAX = 0\n        \nprint(int(MAX))\n&#39;],
  26: [&#39;\na. 10≤S≤29, S∈{10,...,29}. \nPetya wins by one step - tripling the number of stones: \n30≤3*S≤87, 3∗S∈{30,...,87}. \nAt 1≤S≤9, S∈{1,...,9} it is not possible to win by one move: \n2≤S+1≤10, S+1∈{2,...,10}; 3≤S+2≤11, S+2∈{3,...,11}; 3≤3*S≤27, 3*S∈{3,...,27}.\n\nb. S=9. \nIn this case, at any next step, \n9 -&gt; 10 (P +1), 9 -&gt; 11 (P +2) or 9 -&gt; 27 (P *3) \nPetya will not be able to win, \nand Vanya will win by tripling the result in the next stage: \n10 -&gt; 30 (V *3), 11 -&gt; 33 (V *3) or 27 -&gt; 81 (V *3).\n&#39;,
   &#39;\nS=3, S=7, S=8. \nPetya should choose the step 3 -&gt; 9 (P *3), 7 -&gt; 9 (P +2), 8 -&gt; 9 (P +1). \nAt any next step, 9 -&gt; 10 (V +1), 9 -&gt; 11 (V +2), 9 -&gt; 27 (V *3) \nVanya cannot win, but Petya wins by tripling the result in the next stage \n10 -&gt; 30 (P *3), 11 -&gt; 33 (P *3), 27 -&gt; 81 (P *3).\n&#39;,
   &#34;\nS=6. Vanya&#39;s winning strategy:\n\nIf the first move of Petya 6 -&gt; 7 (P +1) or 6 -&gt; 8 (P +2), \nthen Vanya should choose the course 7 -&gt; 9 (V +2) or 8 -&gt; 9 (V +1).\nIn this case, at any next step, \n9 -&gt; 10 (P +1), 9 -&gt; 11 (P +2) or 9 -&gt; 27 (P *3)\nPetya will not be able to win, \nand Vanya will win by tripling the result in the next stage: \n10 -&gt; 30 (V *3), 11 -&gt; 33 (V *3) or 27 -&gt; 81 (V *3).\n\nIf the first move of Petya 6 -&gt; 18 (P *3), \nthen Vanya wins by his first move, tripling the number of stones: 18 -&gt; 54 (V *3).\n\nIt is not possible for Vanya to win by the first move with a guarantee for this start position.\n&#34;],
