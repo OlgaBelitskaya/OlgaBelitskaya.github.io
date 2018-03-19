@@ -12380,9 +12380,79 @@ div.output_stderr {background-color: gray;}
 <p>1) <code>astorm.aa</code>, 2) <code>anastom.bra</code>, 3) <code>apostorm.mka</code>, 4) <code>abrasto2m.abc</code>.</p>
 <p>В ответе перечислите номера файлов в порядке возрастания без пробелов и знаков препинания.</p>
 <hr>
+<p>For group operations with files, masks of file names are used. A mask is a sequence of letters, numbers and other permissible characters in file names, in which the following characters can also occur.</p>
+<p>The symbol <code>«?»</code> (question mark) means exactly one arbitrary symbol.</p>
+<p>The symbol <code>«*»</code> (asterisk) means any character sequence of an arbitrary length, including the case when <code>«*»</code> can specify an empty sequence.</p>
+<p>There is a list of several masks:</p>
+<p><code>*to*.?*a*</code>, <code>*sto??.*</code>, <code>?*to*.???</code>, <code>a*to*m.*?a</code>.</p>
+<p>Determine which of the specified files will be selected on exactly three of the given masks:</p>
+<p>1) <code>astorm.aa</code>, 2) <code>anastom.bra</code>, 3) <code>apostorm.mka</code>, 4) <code>abrasto2m.abc</code>.</p>
+<p>In the answer, list file numbers in ascending order without spaces and punctuation marks.</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">fnmatch</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">mask_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;*to*.?*a*&#39;</span><span class="p">,</span><span class="s1">&#39;*sto??.*&#39;</span><span class="p">,</span><span class="s1">&#39;?*to*.???&#39;</span><span class="p">,</span> <span class="s1">&#39;a*to*m.*?a&#39;</span><span class="p">]</span>
+<span class="n">file_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;astorm.aa&#39;</span><span class="p">,</span> <span class="s1">&#39;anastom.bra&#39;</span><span class="p">,</span> <span class="s1">&#39;apostorm.mka&#39;</span><span class="p">,</span> <span class="s1">&#39;abrasto2m.abc&#39;</span><span class="p">]</span>
+<span class="n">answer_list</span> <span class="o">=</span> <span class="p">[[],[],[],[],[],[],[],[]]</span>
+<span class="n">c</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">file</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">file_list</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">mask</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mask_list</span><span class="p">):</span>   
+        <span class="k">if</span> <span class="n">fnmatch</span><span class="o">.</span><span class="n">fnmatch</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">file</span><span class="p">,</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">mask</span><span class="p">)</span>
+            <span class="n">answer_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">answer_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span> 
+        <span class="n">c</span><span class="o">+=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">answer_list</span><span class="p">)</span>
+<span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">=</span><span class="n">c</span>      
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1 astorm.aa 1 *to*.?*a*
+1 astorm.aa 2 *sto??.*
+1 astorm.aa 4 a*to*m.*?a
+2 anastom.bra 1 *to*.?*a*
+2 anastom.bra 3 ?*to*.???
+2 anastom.bra 4 a*to*m.*?a
+3 apostorm.mka 1 *to*.?*a*
+3 apostorm.mka 2 *sto??.*
+3 apostorm.mka 3 ?*to*.???
+3 apostorm.mka 4 a*to*m.*?a
+4 abrasto2m.abc 2 *sto??.*
+4 abrasto2m.abc 3 ?*to*.???
+[[&#39;1&#39;, &#39;2&#39;, &#39;4&#39;], [&#39;1&#39;, &#39;3&#39;, &#39;4&#39;], [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;], [&#39;2&#39;, &#39;3&#39;], [], [], [], []]
+
+ Answer: 12
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -12399,11 +12469,16 @@ div.output_stderr {background-color: gray;}
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Для передачи информации по каналу связи с помехами используется 5-битовый код. Сообщение содержит только буквы A, B и C, которые кодируются следующими кодовыми словами:</p>
-<p>A-10101, B-10010, C-01110.</p>
+<p><i style="font-size: 170%; color: royalblue;" class="font-effect-3d">A-10101, B-10010, C-01110</i>.</p>
 <p>Любые два из этих трёх кодовых слов отличаются не менее чем в трёх позициях. Поэтому, если принятое кодовое слово отличается от допустимого не более чем в одной позиции, можно однозначно определить, какая буква передавалась (говорят, что «код исправляет одну ошибку»). Так, получив кодовое слово 10000, можно догадаться, что передавалась буква B (отличие от кодового слова для B только в одной позиции, для остальных кодовых слов отличий больше). Если принятое кодовое слово отличается от всех допустимых кодовых слов более, чем в одной позиции, считается, что произошла ошибка (она обозначается «х»).</p>
-<p>Получено сообщение 00101 11010 11110 10111.</p>
+<p>Получено сообщение: <i style="font-size: 170%; color: royalblue;" class="font-effect-3d">00101 11010 11110 10111</i>.</p>
 <p>Декодируйте это сообщение. В ответе укажите четыре символа без пробелов и запятых.</p>
 <hr>
+<p>To transmit information over a communication channel with interference, a 5-bit code is used. The message contains only the letters A, B and C, which are encoded by the following code words:</p>
+<p><i style="font-size: 170%; color: royalblue;" class="font-effect-3d">A-10101, B-10010, C-01110</i>.</p>
+<p>Any two of these three codewords differ in at least three positions. Therefore, if the received codeword differs from permissible in not more than one position, it is possible to unambiguously determine which letter was transmitted (say that "decoding corrects one error"). So, having received the code word 10000, you can guess that the letter B was transmitted (unlike the codeword for B in only one position, for the other codewords there are more differences). If the received codeword differs from all valid codewords in more than one position, it is considered that an error has occurred (it is denoted by "x").</p>
+<p>The received message: <i style="font-size: 170%; color: royalblue;" class="font-effect-3d">00101 11010 11110 10111</i>.</p>
+<p>Decode this message. In the answer, specify four characters without spaces or commas.</p>
 
 </div>
 </div>
@@ -12422,10 +12497,13 @@ div.output_stderr {background-color: gray;}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>В некоторой информационной системе информация кодируется двоичными четырёхразрядными словами. При передаче данных возможны их искажения, поэтому в конец каждого слова добавляется еще один (контрольный) разряд таким образом, чтобы сумма разрядов нового слова, считая контрольный, была чётной. Например, к слову 1011 справа будет добавлена 1, а к слову 1010 — 0.</p>
-<p>После этого, для увеличения надежности кодирования, к полученному слову добавляется сумма его разрядов в двоичном виде. Например, исходное слово 1000 превратится в 1000110.</p>
+<p>В некоторой информационной системе информация кодируется двоичными четырёхразрядными словами. При передаче данных возможны их искажения, поэтому в конец каждого слова добавляется еще один (контрольный) разряд таким образом, чтобы сумма разрядов нового слова, считая контрольный, была чётной. Например, к слову <code>1011</code> справа будет добавлена <code>1</code>, а к слову <code>1010</code> — <code>0</code>.</p>
+<p>После этого, для увеличения надежности кодирования, к полученному слову добавляется сумма его разрядов в двоичном виде. Например, исходное слово <code>1000</code> превратится в <code>1000110</code>.</p>
 <p>Какое наименьшее число, большее 30 число может быть получено в результате этого алгоритма? Ответ запишите в десятичном виде.</p>
 <hr>
+<p>In some information system, information is encoded in binary four-digit words. With transmitting data, their distortions are possible, so at the end of each word one more (control) symbol is added so that the sum of the bits of the new word, assuming the control word, is even. For example, to the word <code>1011</code> will be added <code>1</code> from the right, and to the word <code>1010</code> - <code>0</code>.</p>
+<p>After that, for increasing the reliability of encoding, to the resulting word the sum of its digit bits in binary form is added. For example, the original word <code>1000</code> will turn into <code>1000110</code>.</p>
+<p>What is the smallest number, greater than 30, can be obtained as a result of this algorithm? Write the answer in decimal form.</p>
 
 </div>
 </div>
@@ -12980,7 +13058,7 @@ div.output_stderr {background-color: gray;}
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[70]:</div>
+<div class="prompt input_prompt">In&nbsp;[73]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span>
@@ -12996,13 +13074,13 @@ div.output_stderr {background-color: gray;}
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[70]:</div>
+<div class="prompt output_prompt">Out[73]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>{1: &#39;900&#39;, 2: &#39;13&#39;, 3: &#39;13&#39;, 15: &#39;18&#39;, 16: &#39;333&#39;}</pre>
+<pre>{1: &#39;900&#39;, 2: &#39;13&#39;, 3: &#39;13&#39;, 4: &#39;12&#39;, 15: &#39;18&#39;, 16: &#39;333&#39;}</pre>
 </div>
 
 </div>
