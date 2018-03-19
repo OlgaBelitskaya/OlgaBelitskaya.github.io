@@ -12377,8 +12377,123 @@ Answer: 4
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div style="width: 800px; height: 150px; overflow:auto;">
-    <img src="it_images/2017_10_05.png" width="800" height="150"/>
+<p>Для групповых операций с файлами используются маски имён файлов.</p>
+<p>Маска представляет собой последовательность букв, цифр и прочих допустимых в именах файлов символов, в которой также могут встречаться следующие символы.</p>
+<p>Символ <code>«?»</code> (вопросительный знак) означает ровно один произвольный символ.</p>
+<p>Символ <code>«*»</code> (звёздочка) означает любую последовательность символов произвольной длины, в том числе <code>«*»</code> может задавать и пустую последовательность.</p>
+<p>В каталоге находятся шесть файлов:</p>
+<p><code>boom.pas</code>, <code>bloom.ppt</code>, <code>loom.pas</code>, <code>bottom.pdf</code>, <code>bom.pps</code>, <code>boom.ppt</code>.</p>
+<p>Ниже представлено восемь масок. Сколько из них таких, которым соответствует ровно четыре файла из данного каталога?</p>
+<p><code>?oo*m.p*</code>, <code>b*o*om.p??</code>, <code>*o*om.p*?</code>, <code>b*om.p?*</code>, <code>*.*p*</code>, <code>bo*m.???</code>, <code>*om.*p*</code>, <code>*o*o*.p*?</code>.</p>
+<hr>
+<p>For group operations with files, file name masks are used.</p>
+<p>A mask is a sequence of letters, numbers and other permissible characters in file names, in which the following characters can also occur.</p>
+<p>The symbol <code>«?»</code> (question mark) means exactly one arbitrary character.</p>
+<p>The symbol <code>«*»</code> (asterisk) stands for any sequence of characters of arbitrary length, including <code>«*»</code>, which can also specify an empty sequence.</p>
+<p>There are six files in the directory:</p>
+<p><code>boom.pas</code>, <code>bloom.ppt</code>, <code>loom.pas</code>, <code>bottom.pdf</code>, <code>bom.pps</code>, <code>boom.ppt</code>.</p>
+<p>Here are eight masks. How many of them are those to which exactly four files from this catalog correspond?</p>
+<p><code>?oo*m.p*</code>, <code>b*o*om.p??</code>, <code>*o*om.p*?</code>, <code>b*om.p?*</code>, <code>*.*p*</code>, <code>bo*m.???</code>, <code>*om.*p*</code>, <code>*o*o*.p*?</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">fnmatch</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">mask_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;?oo*m.p*&#39;</span><span class="p">,</span><span class="s1">&#39;b*o*om.p??&#39;</span><span class="p">,</span><span class="s1">&#39;*o*om.p*?&#39;</span><span class="p">,</span> <span class="s1">&#39;b*om.p?*&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;*.*p*&#39;</span><span class="p">,</span><span class="s1">&#39;bo*m.???&#39;</span><span class="p">,</span><span class="s1">&#39;*om.*p*&#39;</span><span class="p">,</span> <span class="s1">&#39;*o*o*.p*?&#39;</span><span class="p">]</span>
+<span class="n">file_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;boom.pas&#39;</span><span class="p">,</span> <span class="s1">&#39;bloom.ppt&#39;</span><span class="p">,</span> <span class="s1">&#39;loom.pas&#39;</span><span class="p">,</span> 
+             <span class="s1">&#39;bottom.pdf&#39;</span><span class="p">,</span> <span class="s1">&#39;bom.pps&#39;</span><span class="p">,</span> <span class="s1">&#39;boom.ppt&#39;</span><span class="p">]</span>
+<span class="n">answer_list</span> <span class="o">=</span> <span class="p">[[],[],[],[],[],[],[],[]]</span>
+<span class="n">c</span><span class="o">=</span><span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">mask</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mask_list</span><span class="p">):</span>   
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">file</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">file_list</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">fnmatch</span><span class="o">.</span><span class="n">fnmatch</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
+            <span class="nb">print</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">mask</span><span class="p">,</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">file</span><span class="p">)</span>
+            <span class="n">answer_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">answer_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">==</span><span class="mi">4</span><span class="p">:</span> 
+        <span class="n">c</span><span class="o">+=</span><span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">answer_list</span><span class="p">)</span>
+<span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>       
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1 ?oo*m.p* 1 boom.pas
+1 ?oo*m.p* 3 loom.pas
+1 ?oo*m.p* 6 boom.ppt
+2 b*o*om.p?? 1 boom.pas
+2 b*o*om.p?? 2 bloom.ppt
+2 b*o*om.p?? 4 bottom.pdf
+2 b*o*om.p?? 6 boom.ppt
+3 *o*om.p*? 1 boom.pas
+3 *o*om.p*? 2 bloom.ppt
+3 *o*om.p*? 3 loom.pas
+3 *o*om.p*? 4 bottom.pdf
+3 *o*om.p*? 6 boom.ppt
+4 b*om.p?* 1 boom.pas
+4 b*om.p?* 2 bloom.ppt
+4 b*om.p?* 4 bottom.pdf
+4 b*om.p?* 5 bom.pps
+4 b*om.p?* 6 boom.ppt
+5 *.*p* 1 boom.pas
+5 *.*p* 2 bloom.ppt
+5 *.*p* 3 loom.pas
+5 *.*p* 4 bottom.pdf
+5 *.*p* 5 bom.pps
+5 *.*p* 6 boom.ppt
+6 bo*m.??? 1 boom.pas
+6 bo*m.??? 4 bottom.pdf
+6 bo*m.??? 5 bom.pps
+6 bo*m.??? 6 boom.ppt
+7 *om.*p* 1 boom.pas
+7 *om.*p* 2 bloom.ppt
+7 *om.*p* 3 loom.pas
+7 *om.*p* 4 bottom.pdf
+7 *om.*p* 5 bom.pps
+7 *om.*p* 6 boom.ppt
+8 *o*o*.p*? 1 boom.pas
+8 *o*o*.p*? 2 bloom.ppt
+8 *o*o*.p*? 3 loom.pas
+8 *o*o*.p*? 4 bottom.pdf
+8 *o*o*.p*? 6 boom.ppt
+[[&#39;1&#39;, &#39;3&#39;, &#39;6&#39;], [&#39;1&#39;, &#39;2&#39;, &#39;4&#39;, &#39;6&#39;], [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;6&#39;], [&#39;1&#39;, &#39;2&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;], [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;], [&#39;1&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;], [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;], [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;6&#39;]]
+
+ Answer: 2
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div style="width: 800px; height: 140px; overflow:auto;">
+    <img src="it_images/2017_10_05.png" width="800" height="140"/>
 </div>
 </div>
 </div>
@@ -12387,8 +12502,126 @@ Answer: 4
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div style="width: 800px; height: 400px; overflow:auto;">
-    <img src="it_images/2017_10_06.png" width="800" height="400"/>
+<p>Через канал связи передаётся сообщение, состоящее только из символов А, Б, В и Г.</p>
+<p>Эти символы кодируются неравномерным (по длине) кодом: <i style="font-size: 170%; color: royalblue;" class="font-effect-3d">A-0, Б-10, В-110, Г-111</i>.</p>
+<p>Исходное сообщение: <i style="font-size: 170%; color: royalblue;" class="font-effect-3d">ВГВБАВА</i>.</p>
+<p>Закодируйте сообщение приведенным кодом. Полученную последовательность переведите в шестнадцатеричный вид. В ответе запишите последовательность шестнадцатеричных цифр без запятых.</p>
+<hr>
+<p>A message is sent through the communication channel, it consists only of symbols А, Б, В and Г.</p>
+<p>These symbols are encoded unevenly (along with the length) by code: <i style="font-size: 170%; color: royalblue;" class="font-effect-3d">A-0, Б-10, В-110, Г-111</i>.</p>
+<p>The initial message: <i style="font-size: 170%; color: royalblue;" class="font-effect-3d">ВГВБАВА</i>.</p>
+<p>Encode the message with the code. Obtain the resulting sequence in a hexadecimal form. In the answer, write down the sequence of hexadecimal digits without commas.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;ВГВБАВА&#39;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;А&#39;</span><span class="p">,</span><span class="s1">&#39;0&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Б&#39;</span><span class="p">,</span><span class="s1">&#39;10&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;В&#39;</span><span class="p">,</span><span class="s1">&#39;110&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Г&#39;</span><span class="p">,</span><span class="s1">&#39;111&#39;</span><span class="p">)</span>
+<span class="n">string</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[35]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;1101111101001100&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">number</span> <span class="o">=</span> <span class="nb">hex</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">string</span><span class="p">,</span><span class="mi">2</span><span class="p">))[</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="n">number</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[41]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;DF4C&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">=</span><span class="n">number</span>       
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+ Answer: DF4C
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div style="width: 800px; height: 360px; overflow:auto;">
+    <img src="it_images/2017_10_06.png" width="800" height="360"/>
 </div>
 </div>
 </div>
@@ -12626,7 +12859,7 @@ Answer: 4
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span>
@@ -12642,13 +12875,13 @@ Answer: 4
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[27]:</div>
+<div class="prompt output_prompt">Out[43]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>{1: &#39;4&#39;, 2: &#39;135&#39;, 3: &#39;4&#39;}</pre>
+<pre>{1: &#39;4&#39;, 2: &#39;135&#39;, 3: &#39;4&#39;, 4: &#39;2&#39;, 5: &#39;DF4C&#39;}</pre>
 </div>
 
 </div>
