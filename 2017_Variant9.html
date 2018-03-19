@@ -11860,6 +11860,7 @@ div.output_stderr {background-color: gray;}
 </div>
 Сколько существует различных 3-значных чисел в десятичной системе счисления?</p>
 <hr>
+<p>How many different 3-digit numbers exist in the decimal system?</p>
 
 </div>
 </div>
@@ -11911,8 +11912,11 @@ div.output_stderr {background-color: gray;}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Дан фрагмент таблицы истинности выражения $F$, зависящего от трёх логических переменных $х_1, х_2, х_3$.</p>
+<p>Дан фрагмент таблицы истинности выражения $F$, зависящего от трёх логических переменных $x_1, x_2, x_3$.</p>
 <p>Значения в пустых клетках таблицы неизвестны и могут быть любыми из возможных.</p>
+<hr>
+<p>A fragment of the truth table of the expression $F$, depending on three logical variables $x_1, x_2, x_3$, is given.</p>
+<p>Values in blank cells are unknown and can be any of the possible ones.</p>
 <table>
 <thead><tr>
 <th style="text-align:center">$x_1$</th>
@@ -11937,6 +11941,8 @@ div.output_stderr {background-color: gray;}
 </tbody>
 </table>
 <p>Перечислите в порядке возрастания без запятых и пробелов номера логических выражений, которые могут соответствовать F:</p>
+<hr>
+<p>List in ascending order without commas and spaces the numbers of logical expressions that can correspond to F:</p>
 <p>1) $\neg x_1 \land \neg x_2 \land x_3$</p>
 <p>2) $x_1 \lor \neg x_2 \lor x_3$</p>
 <p>3) $\neg x_1 \land x_2 \land x_3$</p>
@@ -11945,6 +11951,66 @@ div.output_stderr {background-color: gray;}
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">f1</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span><span class="n">x3</span><span class="p">):</span> <span class="k">return</span> <span class="p">((</span><span class="ow">not</span> <span class="n">x1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">x2</span><span class="p">)</span> <span class="ow">and</span> <span class="n">x3</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">f2</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span><span class="n">x3</span><span class="p">):</span> <span class="k">return</span> <span class="p">(</span><span class="n">x1</span> <span class="ow">or</span> <span class="p">(</span><span class="ow">not</span> <span class="n">x2</span><span class="p">)</span> <span class="ow">or</span> <span class="n">x3</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">f3</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span><span class="n">x3</span><span class="p">):</span> <span class="k">return</span> <span class="p">((</span><span class="ow">not</span> <span class="n">x1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">x2</span> <span class="ow">and</span> <span class="n">x3</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">f4</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span><span class="n">x3</span><span class="p">):</span> <span class="k">return</span> <span class="p">((</span><span class="ow">not</span> <span class="n">x1</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="ow">not</span> <span class="n">x2</span><span class="p">)</span> <span class="ow">or</span> <span class="n">x3</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">f5</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span><span class="n">x3</span><span class="p">):</span> <span class="k">return</span> <span class="p">(</span><span class="n">x1</span> <span class="ow">and</span> <span class="n">x2</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">x3</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">find_logic_exp</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="p">((</span><span class="n">function</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">function</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> \
+    <span class="p">(</span><span class="n">function</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">function</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">))</span> <span class="ow">and</span> <span class="n">function</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span>
+    <span class="k">return</span> <span class="n">c</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">function</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">,</span> <span class="n">f3</span><span class="p">,</span> <span class="n">f4</span><span class="p">,</span> <span class="n">f5</span><span class="p">]):</span>
+    <span class="k">if</span> <span class="n">find_logic_exp</span><span class="p">(</span><span class="n">function</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">+=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="n">result</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+ Answer: 13
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -11960,13 +12026,13 @@ div.output_stderr {background-color: gray;}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Между населёнными пунктами А, В, С, D, Е, F построены дороги, протяжённость которых приведена в таблице.</p>
+<p>Между населёнными пунктами $A, B, C, D, E, F$ построены дороги, протяжённость которых приведена в таблице.</p>
 <p>(Отсутствие числа в таблице означает, что прямой дороги между пунктами нет.)</p>
-<p>Определите длину кратчайшего пути между пунктами А и F (при условии, что передвигаться можно только по построенным дорогам).</p>
+<p>Определите длину кратчайшего пути между пунктами $A$ и $F$ (при условии, что передвигаться можно только по построенным дорогам).</p>
 <hr>
-<p>Between the settlements A, B, C, D, E, F roads are constructed, the lengths of which are given in the table.</p>
+<p>Between the settlements $A, B, C, D, E, F$ roads are constructed, the lengths of which are given in the table.</p>
 <p>(The absence of a number in the table means that there is no direct road between points.)</p>
-<p>Determine the length of the shortest path between points A and F (provided that you can only move along the constructed roads).</p>
+<p>Determine the length of the shortest path between points $A$ and $F$ (provided that you can only move along the constructed roads).</p>
 <table>
 <thead><tr>
 <th style="text-align:center">&#x123CF;</th>
@@ -12822,7 +12888,7 @@ div.output_stderr {background-color: gray;}
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span>
@@ -12838,13 +12904,13 @@ div.output_stderr {background-color: gray;}
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[30]:</div>
+<div class="prompt output_prompt">Out[62]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>{1: &#39;900&#39;, 3: &#39;13&#39;, 15: &#39;18&#39;}</pre>
+<pre>{1: &#39;900&#39;, 2: &#39;13&#39;, 3: &#39;13&#39;, 15: &#39;18&#39;}</pre>
 </div>
 
 </div>
