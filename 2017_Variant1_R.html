@@ -17178,9 +17178,475 @@ k
 <p>Below, in several languages, an algorithm is written.</p>
 <p>Having received the number x on the input, this algorithm prints the three numbers K, M and L.</p>
 <p>Indicate the smallest number of x, at the input of which the algorithm prints at first 3, then 2, then 2 more.</p>
+<table style="width:95%;">
+  <tr style="color:slategray;font-size:120%;font-family:'Roboto';">
+    <th style="text-align:center;">Python</th> 
+    <th style="text-align:center;">R</th>          
+  </tr>
+  <tr>
+    <td style="font-weight:bold;text-align:left;"><pre><code class='python'>
+K, L, M = 0, 0, 0
+x = int(input())
+
+while x > 0:
+    y = int(x % 10)
+    K += 1  
+
+    if y >= 5:
+        L+=1
+    if y <= 8:
+        M+=1 
+
+    x=int(x/10)
+
+print(K,L,M)
+    </code></pre></td> 
+    <td style="font-weight:bold;text-align:left;"><pre><code class='r'> 
+K = 0; L = 0; M = 0
+x <- as.integer(readline())
+
+while (x > 0) {
+    y <- x %% 10
+    K <- K + 1
+
+    if (y >= 5) {L <- L + 1}
+    if (y <= 8) {M <- M + 1}
+
+    x <- as.integer(x / 10)
+}
+
+sprintf("%i %i %i",K,L,M) 
+    </code></pre></td>     
+  </tr>    
+</table>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[135]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="kr">for</span> <span class="p">(</span>x <span class="kr">in</span> <span class="kp">seq</span><span class="p">(</span>from<span class="o">=</span><span class="m">50</span><span class="p">,</span> to<span class="o">=</span><span class="m">200</span><span class="p">,</span> by<span class="o">=</span><span class="m">1</span><span class="p">))</span> <span class="p">{</span>
+    t <span class="o">&lt;-</span> <span class="kp">as.integer</span><span class="p">(</span>x<span class="p">)</span>
+    K <span class="o">=</span> <span class="m">0</span><span class="p">;</span> L <span class="o">=</span> <span class="m">0</span><span class="p">;</span> M <span class="o">=</span> <span class="m">0</span>
+    
+    <span class="kr">while</span> <span class="p">(</span>x <span class="o">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+        y <span class="o">&lt;-</span> x <span class="o">%%</span> <span class="m">10</span>
+        K <span class="o">&lt;-</span> K <span class="o">+</span> <span class="m">1</span>
+        
+        <span class="kr">if</span> <span class="p">(</span>y <span class="o">&gt;=</span> <span class="m">5</span><span class="p">)</span> <span class="p">{</span>L <span class="o">&lt;-</span> L <span class="o">+</span> <span class="m">1</span><span class="p">}</span>
+        <span class="kr">if</span> <span class="p">(</span>y <span class="o">&lt;=</span> <span class="m">8</span><span class="p">)</span> <span class="p">{</span>M <span class="o">&lt;-</span> M <span class="o">+</span> <span class="m">1</span><span class="p">}</span>
+
+        x <span class="o">&lt;-</span> <span class="kp">as.integer</span><span class="p">(</span>x <span class="o">/</span> <span class="m">10</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="kr">if</span> <span class="p">(</span>K <span class="o">==</span> <span class="m">3</span> <span class="o">&amp;</span> L <span class="o">==</span> <span class="m">2</span> <span class="o">&amp;</span> M <span class="o">==</span> <span class="m">2</span><span class="p">){</span>
+        <span class="kp">print</span><span class="p">(</span><span class="kp">sprintf</span><span class="p">(</span><span class="s">&quot;(K,L,M) == (3,2,2) for x = %i&quot;</span><span class="p">,</span><span class="kp">t</span><span class="p">))</span>
+        <span class="kr">break</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
 
 </div>
 </div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1] &#34;(K,L,M) == (3,2,2) for x = 159&#34;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Числа, для которых будет напечатано 3 2 2:</p>
+<ul>
+<li>трехзначные (K = 3);</li>
+<li>две цифры меньше или равны 8 (M = 2): третья цифра должна быть больше 8 (равна 9);</li>
+<li>две цифры больше или равны 5 (L = 2): одна из них уже определена - 9, минимально возможная другая - 5;</li>
+<li>первая цифра - 1: число будет наименьшим. </li>
+</ul>
+<p>Искомое число - 159.</p>
+<hr>
+<p>The numbers for which will be printed 3 2 2:</p>
+<ul>
+<li>three-digit (K = 3);</li>
+<li>two digits less than or equal to 8 (M = 2): the third digit must be greater than 8 (equal to 9);</li>
+<li>two digits greater than or equal to 5 (L = 2): one of them is already defined - 9, the lowest possible another - 5;</li>
+<li>the first digit is 1: the number will be the smallest.</li>
+</ul>
+<p>The required number is 159.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[142]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>K <span class="o">=</span> <span class="m">0</span><span class="p">;</span> L <span class="o">=</span> <span class="m">0</span><span class="p">;</span> M <span class="o">=</span> <span class="m">0</span>
+x <span class="o">&lt;-</span> <span class="kp">as.integer</span><span class="p">(</span><span class="kp">readline</span><span class="p">())</span>
+
+<span class="kr">while</span> <span class="p">(</span>x <span class="o">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+    y <span class="o">&lt;-</span> x <span class="o">%%</span> <span class="m">10</span>
+    K <span class="o">&lt;-</span> K <span class="o">+</span> <span class="m">1</span>
+        
+    <span class="kr">if</span> <span class="p">(</span>y <span class="o">&gt;=</span> <span class="m">5</span><span class="p">)</span> <span class="p">{</span>L <span class="o">&lt;-</span> L <span class="o">+</span> <span class="m">1</span><span class="p">}</span>
+    <span class="kr">if</span> <span class="p">(</span>y <span class="o">&lt;=</span> <span class="m">8</span><span class="p">)</span> <span class="p">{</span>M <span class="o">&lt;-</span> M <span class="o">+</span> <span class="m">1</span><span class="p">}</span>
+
+    x <span class="o">&lt;-</span> <span class="kp">as.integer</span><span class="p">(</span>x <span class="o">/</span> <span class="m">10</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kp">sprintf</span><span class="p">(</span><span class="s">&quot;%i %i %i&quot;</span><span class="p">,</span>K<span class="p">,</span>L<span class="p">,</span>M<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>159
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+'3 2 2'
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[143]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">20</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&#39;159&#39;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="21.">21.<a class="anchor-link" href="#21.">&#182;</a></h2><p>Ниже на нескольких языках представлен алгоритм.</p>
+<p>Напишите в ответе число различных значений входной переменной $k$,</p>
+<p>при которых алгоритм выдаёт тот же ответ, что и при входном значении $k = 40$.</p>
+<p>Значение $k = 40$ также включается в подсчёт различных значений $k$.</p>
+<hr>
+<p>The algorithm is presented in several languages below.</p>
+<p>Write in the answer the number of different values of the input variable $k$,</p>
+<p>under which the algorithm produces the same response as the input value $k = 40$.</p>
+<p>The value $k = 40$ is also included in the calculation of the different values of $k$.</p>
+<table style="width:95%;">
+  <tr style="color:slategray;font-size:120%;font-family:'Roboto';">
+    <th style="text-align:center;">Python</th> 
+    <th style="text-align:center;">R</th>          
+  </tr>
+  <tr>
+    <td style="font-weight:bold;text-align:left;"><pre><code class='python'>
+def F(n): return int(n**2+8)
+k = int(input())
+i = 0
+
+while F(i) < k:
+    i += 1
+if F(i) + F(i-1) < 2 * k:
+    print(i)
+else:
+    print(i-1)
+    </code></pre></td> 
+    <td style="font-weight:bold;text-align:left;"><pre><code class='r'> 
+
+F <- function(n) {
+    return (n ** 2 + 8)
+}
+
+k <- as.integer(readline())
+i <- 0
+
+while (F(i) < k) {
+    i <- i + 1
+}
+
+if (F(i) + F(i-1) < 2 * k) {
+    print(i)
+} else {
+    print(i-1)
+}
+    </code></pre></td>     
+  </tr>    
+</table>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[156]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="bp">F</span> <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>n<span class="p">)</span> <span class="p">{</span><span class="kr">return</span> <span class="p">(</span>n <span class="o">**</span> <span class="m">2</span> <span class="o">+</span> <span class="m">8</span><span class="p">)}</span>
+
+<span class="kr">for</span> <span class="p">(</span>k <span class="kr">in</span> <span class="kp">seq</span><span class="p">(</span>from<span class="o">=</span><span class="m">30</span><span class="p">,</span> to<span class="o">=</span><span class="m">60</span><span class="p">,</span> by<span class="o">=</span><span class="m">1</span><span class="p">))</span> <span class="p">{</span>
+    i <span class="o">&lt;-</span> <span class="m">0</span>
+
+    <span class="kr">while</span> <span class="p">(</span><span class="bp">F</span><span class="p">(</span>i<span class="p">)</span> <span class="o">&lt;</span> k<span class="p">)</span> <span class="p">{</span>i <span class="o">&lt;-</span> i <span class="o">+</span> <span class="m">1</span><span class="p">}</span>
+
+    <span class="kr">if</span> <span class="p">(</span><span class="bp">F</span><span class="p">(</span>i<span class="p">)</span> <span class="o">+</span> <span class="bp">F</span><span class="p">(</span>i<span class="m">-1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="m">2</span> <span class="o">*</span> k<span class="p">)</span> <span class="p">{</span>
+        <span class="kp">print</span><span class="p">(</span><span class="kp">sprintf</span><span class="p">(</span><span class="s">&quot;k = %i, i = %i&quot;</span><span class="p">,</span>k<span class="p">,</span>i<span class="p">))</span>
+    <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
+        <span class="kp">print</span><span class="p">(</span><span class="kp">sprintf</span><span class="p">(</span><span class="s">&quot;k = %i, i - 1 = %i&quot;</span><span class="p">,</span>k<span class="p">,</span>i<span class="m">-1</span><span class="p">))</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1] &#34;k = 30, i = 5&#34;
+[1] &#34;k = 31, i = 5&#34;
+[1] &#34;k = 32, i = 5&#34;
+[1] &#34;k = 33, i = 5&#34;
+[1] &#34;k = 34, i - 1 = 5&#34;
+[1] &#34;k = 35, i - 1 = 5&#34;
+[1] &#34;k = 36, i - 1 = 5&#34;
+[1] &#34;k = 37, i - 1 = 5&#34;
+[1] &#34;k = 38, i - 1 = 5&#34;
+[1] &#34;k = 39, i = 6&#34;
+[1] &#34;k = 40, i = 6&#34;
+[1] &#34;k = 41, i = 6&#34;
+[1] &#34;k = 42, i = 6&#34;
+[1] &#34;k = 43, i = 6&#34;
+[1] &#34;k = 44, i = 6&#34;
+[1] &#34;k = 45, i - 1 = 6&#34;
+[1] &#34;k = 46, i - 1 = 6&#34;
+[1] &#34;k = 47, i - 1 = 6&#34;
+[1] &#34;k = 48, i - 1 = 6&#34;
+[1] &#34;k = 49, i - 1 = 6&#34;
+[1] &#34;k = 50, i - 1 = 6&#34;
+[1] &#34;k = 51, i = 7&#34;
+[1] &#34;k = 52, i = 7&#34;
+[1] &#34;k = 53, i = 7&#34;
+[1] &#34;k = 54, i = 7&#34;
+[1] &#34;k = 55, i = 7&#34;
+[1] &#34;k = 56, i = 7&#34;
+[1] &#34;k = 57, i = 7&#34;
+[1] &#34;k = 58, i - 1 = 7&#34;
+[1] &#34;k = 59, i - 1 = 7&#34;
+[1] &#34;k = 60, i - 1 = 7&#34;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>1)</p>
+<p>Рассмотрим, какое число будет выведено при $k=40$.</p>
+<p>Программа последовательно перебирает все целые неотрицательные числа $i$ пока они удовлетворяют неравенству:</p>
+<p>$i*i + 8 &lt; 40 \iff i^2 &lt; 32$.</p>
+<p>Последним в этом ряду является число $5$.</p>
+<p>Далее проверяется выполнение неравенства $(i+1)*(i+1) + 8 + i*i + 8 &lt; 2 * 40 \iff (i+1)^2 + i^2 &lt; 64$.</p>
+<p>Для $5$ оно выполняется, значит итоговое значение $i$, которое программа выдаст в качестве результата, становится равным $6$.</p>
+<p>2)</p>
+<p>Осталось определить, для скольких чисел $k$ в результате выполнения программы также будет напечатано $6$.</p>
+<ul>
+<li><p>1-й случай: максимальное i до выполнения команд цикла равно 5.</p>
+<ul>
+<li><p>Тогда $i*i + 8 &lt; k$, $(i+1)*(i+1) + 8 + i*i + 8 &lt; 2*k$ &lt;=&gt; $i*i &lt; k - 8$, $(i+1)*(i+1) + i*i &lt; 2*k - 16$</p>
+<p>должны выполняться для $i=5$ и не выполняться для $i=6$.</p>
+</li>
+<li><p>$5*5 &lt; k - 8$, $(5+1)*(5+1) + 5*5 &lt; 2*k - 16$ &lt;=&gt; $k &gt; 31$, $ k &gt; 38$</p>
+</li>
+<li><p>$6*6 &gt;= k - 8$, $(6+1)*(6+1) + 6*6 &gt;= 2*k - 16$ &lt;=&gt; $k &lt;= 44$, $ k &lt;= 50.5$</p>
+</li>
+<li><p>Учитывая все ограничения для $k$, получим: $38 &lt; k &lt;= 44$.</p>
+</li>
+<li><p>В указанном промежутке всего 6 целых чисел: 39, 40, 41, 42, 43, 44.</p>
+</li>
+</ul>
+</li>
+<li><p>2-й случай: максимальное i до выполнения команд цикла равно 6.</p>
+<ul>
+<li><p>Тогда $i*i + 8 &lt; k$, $(i+1)*(i+1) + 8 + i*i + 8 &gt;= 2*k$ &lt;=&gt; $i*i &lt; k - 8$, $(i+1)*(i+1) + i*i &gt;= 2*k - 16$</p>
+<p>должны выполняться для $i=6$ и не выполняться для $i=7$.</p>
+</li>
+<li><p>$6*6 &lt; k - 8$, $(6+1)*(6+1) + 6*6 &gt;= 2*k - 16$ &lt;=&gt; $k &gt; 44$, $k &lt;= 50.5$</p>
+</li>
+<li><p>$7*7 &gt;= k - 8$, $(7+1)*(7+1) + 7*7 &lt; 2*k - 16$ &lt;=&gt; $k &lt;= 57$, $k &gt; 64.5$</p>
+</li>
+<li><p>Учитывая все ограничения для $k$, получим: $44 &lt; k &lt;= 50.5$.</p>
+</li>
+<li><p>В указанном промежутке всего 6 целых чисел: 45, 46, 47, 48, 49, 50.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>3)</p>
+<p>Общее количество чисел $k$ равно 12: 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50.</p>
+<hr>
+<p>1)</p>
+<p>Let's consider, what number will be deduced at $k = 40$.</p>
+<p>The program sequentially searches for all nonnegative integers $i$ as long as they satisfy the inequality:</p>
+<p>$i*i + 8 &lt; 40 \iff i^2 &lt; 32$.</p>
+<p>The last in this series is the number $5$.</p>
+<p>Then it verifies the validity of inequality: $(i+1)*(i+1) + 8 + i*i + 8 &lt; 2 * 40 \iff (i+1)^2 + i^2 &lt; 64$.</p>
+<p>For $5$ it is true, then the total value $i$, which the program will return, as a result, becomes $6$.</p>
+<p>2)</p>
+<p>It remains to determine for how many $k$ numbers the program will also print $6$.</p>
+<ul>
+<li><p>1st case: the maximum i before executing the cycle commands is 5.</p>
+<ul>
+<li><p>Then $i*i + 8 &lt; k$, $(i+1)*(i+1) + 8 + i*i + 8 &lt; 2*k$ &lt;=&gt; $i*i &lt; k - 8$, $(i+1)*(i+1) + i*i &lt; 2*k - 16$</p>
+<p>should be true for $i=5$ and should not be true for $i=6$.</p>
+</li>
+<li><p>$5*5 &lt; k - 8$, $(5+1)*(5+1) + 5*5 &lt; 2*k - 16$ &lt;=&gt; $k &gt; 31$, $ k &gt; 38$</p>
+</li>
+<li><p>$6*6 &gt;= k - 8$, $(6+1)*(6+1) + 6*6 &gt;= 2*k - 16$ &lt;=&gt; $k &lt;= 44$, $ k &lt;= 50.5$</p>
+</li>
+<li><p>Taking into account all the constraints for $k$: $38 &lt; k &lt;= 44$.</p>
+</li>
+<li><p>In this case, we have 6 values: 39, 40, 41, 42, 43, 44.</p>
+</li>
+</ul>
+</li>
+<li><p>2nd case: the maximum i before executing the cycle commands is 6.</p>
+<ul>
+<li><p>Then $i*i + 8 &lt; k$, $(i+1)*(i+1) + 8 + i*i + 8 &gt;= 2*k$ =&gt; $i*i &lt; k - 8$, $(i+1)*(i+1) + i*i &gt;= 2*k - 16$</p>
+<p>should be true for $i=6$ and should not be true for $i=7$.</p>
+</li>
+<li><p>$6*6 &lt; k - 8$, $(6+1)*(6+1) + 6*6 &gt;= 2*k - 16$ =&gt; $k &gt; 44$, $k &lt;= 50.5$</p>
+</li>
+<li><p>$7*7 &gt;= k - 8$, $(7+1)*(7+1) + 7*7 &lt; 2*k - 16$ =&gt; $k &lt;= 57$, $k &gt; 64.5$</p>
+</li>
+<li><p>Taking into account all the constraints for $k$: $44 &lt; k &lt;= 50.5$.</p>
+</li>
+<li><p>In this case, we have 6 values: 45, 46, 47, 48, 49, 50.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>3)</p>
+<p>In general, there are 12 $k$ values: 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[151]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="bp">F</span> <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>n<span class="p">)</span> <span class="p">{</span>
+    <span class="kr">return</span> <span class="p">(</span>n <span class="o">**</span> <span class="m">2</span> <span class="o">+</span> <span class="m">8</span><span class="p">)</span>
+<span class="p">}</span>
+
+k <span class="o">&lt;-</span> <span class="kp">as.integer</span><span class="p">(</span><span class="kp">readline</span><span class="p">())</span>
+i <span class="o">&lt;-</span> <span class="m">0</span>
+
+<span class="kr">while</span> <span class="p">(</span><span class="bp">F</span><span class="p">(</span>i<span class="p">)</span> <span class="o">&lt;</span> k<span class="p">)</span> <span class="p">{</span>
+    i <span class="o">&lt;-</span> i <span class="o">+</span> <span class="m">1</span>
+<span class="p">}</span>
+
+<span class="kr">if</span> <span class="p">(</span><span class="bp">F</span><span class="p">(</span>i<span class="p">)</span> <span class="o">+</span> <span class="bp">F</span><span class="p">(</span>i<span class="m">-1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="m">2</span> <span class="o">*</span> k<span class="p">)</span> <span class="p">{</span>
+    <span class="kp">print</span><span class="p">(</span>i<span class="p">)</span>
+<span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
+    <span class="kp">print</span><span class="p">(</span>i<span class="m">-1</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>50
+[1] 6
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[144]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">21</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&#39;12&#39;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -17193,7 +17659,7 @@ k
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[90]:</div>
+<div class="prompt input_prompt">In&nbsp;[157]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>answer_dictionary
@@ -17215,7 +17681,7 @@ k
 
 
 <div class="output_text output_subarea ">
-<pre>&lt;hash&gt; containing 19 key-value pair(s).
+<pre>&lt;hash&gt; containing 21 key-value pair(s).
   1 : 64
   10 : 256
   11 : 35
@@ -17228,6 +17694,8 @@ k
   18 : 24
   19 : 9
   2 : 34
+  20 : 159
+  21 : 12
   3 : 20
   4 : 234
   5 : 9
