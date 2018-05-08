@@ -12695,7 +12695,7 @@ div.output_stderr {background-color: gray;}
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">itertools</span>
@@ -12703,21 +12703,15 @@ div.output_stderr {background-color: gray;}
 <span class="n">binary_combinations</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="n">n</span><span class="p">)))</span>
 <span class="n">min_number</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">binary_combinations</span><span class="p">:</span>
-    <span class="n">unique</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">element</span> <span class="o">==</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
-        <span class="n">element</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-    <span class="k">elif</span> <span class="p">(</span><span class="n">element</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
-        <span class="n">element</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-    <span class="k">elif</span> <span class="n">unique</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">element</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-    <span class="k">elif</span> <span class="n">unique</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="n">element</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">element</span><span class="p">)</span><span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">])</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">element</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-        
-    <span class="n">element</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">el</span><span class="p">)</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">element</span><span class="p">])</span>
-    <span class="n">number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;binary: </span><span class="si">{}</span><span class="s1">, integer: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">number</span><span class="p">))</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">element_ext</span><span class="o">=</span><span class="nb">bin</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">element</span><span class="p">))</span>     
+    <span class="n">element_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">el</span><span class="p">)</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">element</span><span class="p">])</span> <span class="o">+</span> <span class="n">element_ext</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+    <span class="n">number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">element_str</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;binary: </span><span class="si">{}</span><span class="s1">, integer: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">element_str</span><span class="p">,</span> <span class="n">number</span><span class="p">))</span>
     
     <span class="k">if</span> <span class="n">number</span> <span class="o">&gt;</span> <span class="mi">50</span> <span class="ow">and</span> <span class="n">min_number</span> <span class="o">&gt;</span> <span class="n">number</span><span class="p">:</span> 
         <span class="n">min_number</span> <span class="o">=</span> <span class="n">number</span>
@@ -12773,13 +12767,17 @@ binary: 11110100, integer: 244
 <p><div style="width: 800px; height: 220px; overflow:auto;">
     <img src="it_images/2017_01_07.png" width="800" height="220"/>
 </div>
-В электронной таблице в ячейке С5 записана формула, которая вычисляет результат сложения значения ячейки Е4 со значением ячейки D3. Формулу из ячейки С5 скопировали в ячейку В6. Какое количество следующих утверждений не противоречит условию?</p>
+В электронной таблице в ячейке С5 записана формула, которая вычисляет результат сложения значения ячейки Е4 со значением ячейки D3.</p>
+<p>Формулу из ячейки С5 скопировали в ячейку В6.</p>
+<p>Какое количество следующих утверждений не противоречит условию?</p>
 <p>1) В ячейке В6 вычисляется результат сложения значения ячейки D5 со значением ячейки С4.</p>
 <p>2) В ячейке В6 вычисляется результат сложения значения ячейки D5 со значением ячейки D3.</p>
 <p>3) В ячейке В6 вычисляется результат удвоения значения ячейки D4.</p>
 <p>4) В ячейке В6 вычисляется результат сложения значения ячейки Е4 со значением ячейки D3.</p>
 <hr>
-<p>In the spreadsheet, a formula is written in cell C5, which calculates the result of adding the value of cell E4 with the value of cell D3. The formula from cell C5 was copied into cell B6. How many of the following statements do not contradict the condition?</p>
+<p>In the spreadsheet, a formula is written in cell C5, which calculates the result of adding the value of cell E4 with the value of cell D3.</p>
+<p>The formula from cell C5 was copied into cell B6.</p>
+<p>How many of the following statements do not contradict the condition?</p>
 <p>1) In cell B6, the result of adding the value of cell D5 with cell value C4 is calculated.</p>
 <p>2) Cell B6 calculates the result of adding the value of cell D5 with the value of cell D3.</p>
 <p>3) Cell B6 calculates the result of doubling the value of cell D4.</p>
@@ -12924,10 +12922,20 @@ binary: 11110100, integer: 244
 <p><div style="width: 800px; height: 200px; overflow:auto;">
     <img src="it_images/2017_01_09.png" width="800" height="200"/>
 </div>
-Музыкальный фрагмент был оцифрован и записан в виде файла без использования сжатия данных. Получившийся файл был передан в город А по каналу связи за 90 секунд. Затем тот же музыкальный фрагмент был оцифрован повторно с разрешением в 2 раза меньше и частотой дискретизации в 1,5 раза меньше, чем в первый раз. Сжатие данных не производилось. Полученный файл был передан в город Б; пропускная способность канала связи с городом Б в 3 раза ниже, чем канала связи с городом А. Сколько секунд длилась передача файла в город Б?</p>
+Музыкальный фрагмент был оцифрован и записан в виде файла без использования сжатия данных.</p>
+<p>Получившийся файл был передан в город А по каналу связи за 90 секунд.</p>
+<p>Затем тот же музыкальный фрагмент был оцифрован повторно с разрешением в 2 раза меньше и частотой дискретизации в 1,5 раза меньше, чем в первый раз.</p>
+<p>Сжатие данных не производилось.</p>
+<p>Полученный файл был передан в город Б; пропускная способность канала связи с городом Б в 3 раза ниже, чем канала связи с городом А.</p>
+<p>Сколько секунд длилась передача файла в город Б?</p>
 <p>В ответе запишите только целое число, единицу измерения писать не нужно.</p>
 <hr>
-<p>The musical fragment was digitized and recorded as a file without using data compression. The resulting file was transferred to city A via the communication channel in 90 seconds. Then the same musical fragment was digitized again with a resolution of 2 times smaller and a sampling rate of 1.5 times smaller than the first time. Data compression was not performed. The resulting file was transferred to City B; the capacity of the communication channel with the city of B is 3 times lower than the communication channel with the city of A. How many seconds did the file transfer to city B last?</p>
+<p>The musical fragment was digitized and recorded as a file without using data compression.</p>
+<p>The resulting file was transferred to the city A via the communication channel in 90 seconds.</p>
+<p>Then the same musical fragment was digitized again with a resolution of 2 times smaller and a sampling rate of 1.5 times smaller than the first time.</p>
+<p>Data compression was not performed.</p>
+<p>The resulting file was transferred to the city B; the capacity of the communication channel with the city of B is 3 times lower than the communication channel with the city of A.</p>
+<p>How many seconds did the file transfer to the city B last?</p>
 <p>In the answer, write down only an integer, you do not need to write a unit of measurement.</p>
 
 </div>
@@ -12941,9 +12949,9 @@ binary: 11110100, integer: 244
 <p>2) Пропускная способность канала связи с городом Б в 3 раза ниже, а значит время передачи файлов возрастает в 3 раза по сравнению с каналом с городом А.</p>
 <p>3) Учитывая пункты 1) и 2), меньший файл по каналу с меньшей пропускной способностью будет передан за: $90 \ / \ 3 * 3 = 90$ секунд.</p>
 <hr>
-<p>1) The second musical fragment is 3 times smaller than the first one ( $2 * 1.5 = 3$: the resolution is 2 times smaller and the sampling rate is 1.5 times smaller). Therefore, on the communication channel with city А, the second file would be transmitted 3 times faster.</p>
+<p>1) The second musical fragment is 3 times smaller than the first one ( $2 * 1.5 = 3$: the resolution is 2 times smaller and the sampling rate is 1.5 times smaller). Therefore, on the communication channel with the city А, the second file would be transmitted 3 times faster.</p>
 <p>2) The capacity of the communication channel with the city Б is 3 times lower, which means that the file transfer time is 3 times higher than the channel with the city А.</p>
-<p>3) Given points 1) and 2), a smaller file on a channel with a lower communication capacity will be transmitted for: $90 \ / \ 3 * 3 = 90$ seconds.</p>
+<p>3) Given points 1) and 2), the smaller file on the channel with the lower communication capacity will be transmitted for: $90 \ / \ 3 * 3 = 90$ seconds.</p>
 
 </div>
 </div>
