@@ -17902,10 +17902,10 @@ n <span class="o">&lt;-</span> <span class="kp">length</span><span class="p">(</
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[248]:</div>
+<div class="prompt input_prompt">In&nbsp;[258]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">23</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&#39;128&#39;</span>
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">23</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&#39;192&#39;</span>
 </pre></div>
 
 </div>
@@ -17926,6 +17926,249 @@ n <span class="o">&lt;-</span> <span class="kp">length</span><span class="p">(</
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="24.">24.<a class="anchor-link" href="#24.">&#182;</a></h2><p>Требовалось написать программу, которая вводит с клавиатуры последовательность из n целых чисел (n = 4),</p>
+<p>и выводит на экран минимальное положительное число этой последовательности.</p>
+<p>Если в последовательности нет положительных чисел, программа должна вывести на экран «NO».</p>
+<p>Известно, что вводимые числа не превышают по модулю 1000. Программист торопился и написал программу неправильно.</p>
+<p>Выполните следующие действия:</p>
+<ol>
+<li><p>Напишите, что выведет программа при вводе чисел -1 -2 -3 -4.</p>
+</li>
+<li><p>Приведите пример такой входной последовательности, при которой программа работает верно.</p>
+</li>
+<li><p>Укажите все ошибки в программе и исправьте их.</p>
+<p>Для этого для каждой ошибки: выпишите строку, которая написана неправильно и приведите правильный вариант строки.</p>
+</li>
+</ol>
+<table style="width:95%;">
+  <tr style="color:slategray;font-size:120%;font-family:'Roboto';">
+    <th style="text-align:center;">Python</th> 
+    <th style="text-align:center;">R</th>          
+  </tr>
+  <tr>
+    <td style="font-weight:bold;text-align:left;"><pre><code class='python'>
+N, MIN = 4, 2000
+
+for I in range(N):    
+    A = int(input())
+
+    if A > 0:
+        if A < MIN:
+            MIN = A
+if MIN > 0:
+    print(MIN)
+else:
+    print(0)
+    </code></pre></td> 
+    <td style="font-weight:bold;text-align:left;"><pre><code class='r'> 
+
+N <- 4; MIN <- 2000
+
+for (I in 1:N) {    
+    A = as.integer(readline())
+
+    if (A > 0) {
+        if (A < MIN){
+            MIN = A
+        }
+    }
+}
+if (MIN > 0){
+    print(MIN)
+} else {
+    print(0)
+}
+    </code></pre></td>     
+  </tr>    
+</table><p>It was required to write a program that enters from the keyboard a sequence of n integers (n = 4)</p>
+<p>and displays the minimal positive number of this sequence.</p>
+<p>If there are no positive numbers in the sequence, the program should display "NO".</p>
+<p>It is known that the input numbers do not exceed 1000  by the modulus.</p>
+<p>The programmer was in a hurry and wrote the program incorrectly.</p>
+<p>Do the following:</p>
+<ol>
+<li><p>Write what the program will output when you enter numbers -1 -2 -3 -4.</p>
+</li>
+<li><p>Give an example of such an input sequence, for which the program works correctly.</p>
+</li>
+<li><p>Specify all errors in the program and correct them.</p>
+<p>To do this, for each error: write out the line that was written incorrectly and give the correct version of the line.</p>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[251]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># The wrong variant - the wrong answer</span>
+N <span class="o">&lt;-</span> <span class="m">4</span><span class="p">;</span> MIN <span class="o">&lt;-</span> <span class="m">2000</span>
+
+<span class="kr">for</span> <span class="p">(</span>I <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>N<span class="p">)</span> <span class="p">{</span>    
+    A <span class="o">=</span> <span class="kp">as.integer</span><span class="p">(</span><span class="kp">readline</span><span class="p">())</span>
+ 
+    <span class="kr">if</span> <span class="p">(</span>A <span class="o">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">if</span> <span class="p">(</span>A <span class="o">&lt;</span> MIN<span class="p">){</span>
+            MIN <span class="o">=</span> A
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kr">if</span> <span class="p">(</span>MIN <span class="o">&gt;</span> <span class="m">0</span><span class="p">){</span>
+    <span class="kp">print</span><span class="p">(</span>MIN<span class="p">)</span>
+<span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
+    <span class="kp">print</span><span class="p">(</span><span class="m">0</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>-1
+-2
+-3
+-4
+[1] 2000
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[252]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># The wrong variant - the right answer</span>
+N <span class="o">&lt;-</span> <span class="m">4</span><span class="p">;</span> MIN <span class="o">&lt;-</span> <span class="m">2000</span>
+
+<span class="kr">for</span> <span class="p">(</span>I <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>N<span class="p">)</span> <span class="p">{</span>    
+    A <span class="o">=</span> <span class="kp">as.integer</span><span class="p">(</span><span class="kp">readline</span><span class="p">())</span>
+ 
+    <span class="kr">if</span> <span class="p">(</span>A <span class="o">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">if</span> <span class="p">(</span>A <span class="o">&lt;</span> MIN<span class="p">){</span>
+            MIN <span class="o">=</span> A
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kr">if</span> <span class="p">(</span>MIN <span class="o">&gt;</span> <span class="m">0</span><span class="p">){</span>
+    <span class="kp">print</span><span class="p">(</span>MIN<span class="p">)</span>
+<span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
+    <span class="kp">print</span><span class="p">(</span><span class="m">0</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1
+2
+3
+4
+[1] 1
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[255]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># The right variant - the right answer</span>
+N <span class="o">&lt;-</span> <span class="m">4</span><span class="p">;</span> MIN <span class="o">&lt;-</span> <span class="m">2000</span>
+
+<span class="kr">for</span> <span class="p">(</span>I <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>N<span class="p">)</span> <span class="p">{</span>    
+    A <span class="o">=</span> <span class="kp">as.integer</span><span class="p">(</span><span class="kp">readline</span><span class="p">())</span>
+ 
+    <span class="kr">if</span> <span class="p">(</span>A <span class="o">&gt;</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">if</span> <span class="p">(</span>A <span class="o">&lt;</span> MIN<span class="p">){</span>
+            MIN <span class="o">=</span> A
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kr">if</span> <span class="p">(</span>MIN <span class="o">!=</span> <span class="m">2000</span><span class="p">){</span>
+    <span class="kp">print</span><span class="p">(</span>MIN<span class="p">)</span>
+<span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
+    <span class="kp">print</span><span class="p">(</span><span class="s">&#39;NO&#39;</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>-1
+-2
+-3
+-4
+[1] &#34;NO&#34;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[256]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">24</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&quot;1. 2000; 2. 1,2,3,4; 3. &#39;if (MIN &gt; 0){&#39; -&gt; &#39;if (MIN != 2000){&#39;, &#39;print(0) -&gt; print(&#39;NO&#39;)&#39;&quot;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2>Ответы &nbsp; &nbsp; &nbsp; Answers</h2>
 
 </div>
@@ -17933,7 +18176,7 @@ n <span class="o">&lt;-</span> <span class="kp">length</span><span class="p">(</
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[163]:</div>
+<div class="prompt input_prompt">In&nbsp;[259]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>answer_dictionary
@@ -17955,7 +18198,7 @@ n <span class="o">&lt;-</span> <span class="kp">length</span><span class="p">(</
 
 
 <div class="output_text output_subarea ">
-<pre>&lt;hash&gt; containing 23 key-value pair(s).
+<pre>&lt;hash&gt; containing 24 key-value pair(s).
   1 : 64
   10 : 256
   11 : 35
@@ -17971,7 +18214,8 @@ n <span class="o">&lt;-</span> <span class="kp">length</span><span class="p">(</
   20 : 159
   21 : 12
   22 : 70
-  23 : 128
+  23 : 192
+  24 : 1. 2000; 2. 1,2,3,4; 3. &#39;if (MIN &gt; 0){&#39; -&gt; &#39;if (MIN != 2000){&#39;, &#39;print(0) -&gt; print(&#39;NO&#39;)&#39;
   3 : 20
   4 : 234
   5 : 9
