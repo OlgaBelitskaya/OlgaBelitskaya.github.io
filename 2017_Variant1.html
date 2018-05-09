@@ -15710,7 +15710,7 @@ V:{(7,29)-&gt;(7,58),(12,29)-&gt;(12,58),(6,30)-&gt;(6,60),(6,58)-&gt;(6,116)}
 </div>
 На вход программе подаётся: в первой строке — число N (1 &lt; N &lt; 109).</p>
 <p>В каждой из последующих N строк — по одному элементу последовательности — целые числа, не превышающее по модулю 10 000.</p>
-<p>Напишите эффективную, в том числе и по используемой памяти, программу (укажите используемую версию языка программирования, например, Borland Pascal 7.0), которая выводит на экран минимальное произведение двух элементов этой последовательности.</p>
+<p>Напишите эффективную, в том числе и по используемой памяти, программу (укажите используемую версию языка программирования, например, <code>Borland Pascal 7.0</code>), которая выводит на экран минимальное произведение двух элементов этой последовательности.</p>
 <p>Пример входных данных:</p>
 <ul>
 <li><p>8</p>
@@ -15737,9 +15737,9 @@ V:{(7,29)-&gt;(7,58),(12,29)-&gt;(12,58),(6,30)-&gt;(6,60),(6,58)-&gt;(6,116)}
 <li>-72</li>
 </ul>
 <hr>
-<p>The input is given to the program: the first line contains the number N (1 &lt;N &lt;109).
-In each of the following N lines - one element of the sequence - integers not exceeding 10,000 in modulus.</p>
-<p>Write an effective program, including the memory used (specify the version of the programming language used, for example, Borland Pascal 7.0), which displays the minimal product of two elements of this sequence.</p>
+<p>The input is given to the program: the first line contains the number N (1 &lt;N &lt;109).</p>
+<p>In each of the following N lines - one element of the sequence - integers not exceeding 10,000 in modulus.</p>
+<p>Write an effective program, including the used memory (specify the version of the applied programming language, for example, <code>Borland Pascal 7.0</code>), which displays the minimal product of two elements of this sequence.</p>
 <p>Example input:</p>
 <ul>
 <li><p>8</p>
@@ -15776,43 +15776,49 @@ In each of the following N lines - one element of the sequence - integers not ex
 <p>Минимальное произведение целых чисел будет равно:</p>
 <p>1) произведению двух минимальных по модулю отрицательных чисел, если все элементы последовательности отрицательные;</p>
 <p>2) произведению двух минимальных положительных чисел, если все элементы последовательности положительные;</p>
-<p>3) произведению максимального по модулю отрицательного числа и максимального положительного числа, если встречаются и положительные, и отрицательные элеиенты последовательности;</p>
-<p>4) если среди элементов есть 0, то в первом и во втором случае миниальное произведение будет равно 0.</p>
-<p>Значит, при вводе каждого из чисел последовательности должны обновляться данные о количестве отрицательных и положительных чисел, о двух минимальных по модулю и о двух максимальных по модулю числах последовательности.</p>
+<p>3) произведению максимального по модулю отрицательного числа и максимального положительного числа, если встречаются и положительные, и отрицательные элементы последовательности;</p>
+<p>4) если среди элементов есть 0, то в первом и во втором случае минимальное произведение будет равно 0.</p>
+<p>Значит, при вводе каждого из чисел последовательности должны обновляться данные</p>
+<ul>
+<li>о количестве отрицательных и положительных чисел, </li>
+<li>о двух минимальных по модулю и о двух максимальных по модулю числах последовательности.</li>
+</ul>
 <hr>
 <p>The minimum product of integers will be:</p>
 <p>1) the product of two minimal by the absolute value negative numbers, if all elements of the sequence are negative;</p>
 <p>2) the product of two minimal positive numbers if all elements of the sequence are positive;</p>
 <p>3) the product of the maximal by the absolute value negative number and the maximal positive number, if both positive and negative elements of the sequence are encountered;</p>
 <p>4) if there are 0 among the elements, then in the first and in the second cases the minimal product will be 0.</p>
-<p>Therefore, with entering each of the sequence elements, the program should update the data about the number of negative and positive numbers, and about two minimal and two maximal by the absolute value sequence elements.</p>
+<p>Therefore, with entering each of the sequence elements, the program should update</p>
+<ul>
+<li>the data about the number of negative and positive numbers, </li>
+<li>and about two minimal and two maximal by the absolute value sequence elements.</li>
+</ul>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[142]:</div>
+<div class="prompt input_prompt">In&nbsp;[106]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Define the number N (1 &lt; N &lt;109) of array elements.&quot;</span><span class="p">)</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+<span class="n">n_pos</span><span class="p">,</span> <span class="n">n_neg</span><span class="p">,</span> <span class="n">abs_min1</span><span class="p">,</span> <span class="n">abs_min2</span><span class="p">,</span> <span class="n">abs_max_neg</span><span class="p">,</span> <span class="n">abs_max_pos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10001</span><span class="p">,</span> <span class="mi">10001</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">A</span> <span class="o">=</span> <span class="p">[]</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Define the number N (1 &lt; N &lt;109) of array elements.&quot;</span><span class="p">)</span>
-<span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Create an array of N integer numbers from [-10000, 10000].&quot;</span><span class="p">)</span>
-<span class="n">A</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int32&#39;</span><span class="p">)</span>
-
-<span class="n">n_pos</span><span class="p">,</span> <span class="n">n_neg</span><span class="p">,</span> <span class="n">abs_min1</span><span class="p">,</span> <span class="n">abs_min2</span><span class="p">,</span> <span class="n">abs_max_neg</span><span class="p">,</span> <span class="n">abs_max_pos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">10001</span><span class="p">,</span><span class="mi">10001</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span>
 <span class="k">for</span> <span class="n">K</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-    <span class="n">A</span><span class="p">[</span><span class="n">K</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">))</span>
+    <span class="n">A</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">()))</span>
     
     <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">K</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">n_pos</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="n">n_pos</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">K</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">abs_max_pos</span><span class="p">:</span>
             <span class="n">abs_max_pos</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">K</span><span class="p">]</span>
         
     <span class="k">elif</span> <span class="n">A</span><span class="p">[</span><span class="n">K</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">n_neg</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="n">n_neg</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">K</span><span class="p">])</span> <span class="o">&gt;</span> <span class="n">abs_max_neg</span><span class="p">:</span>
             <span class="n">abs_max_neg</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">K</span><span class="p">])</span>
         
@@ -15827,13 +15833,7 @@ In each of the following N lines - one element of the sequence - integers not ex
     <span class="k">else</span><span class="p">:</span>
         <span class="n">MIN_P</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">abs_max_pos</span> <span class="o">*</span> <span class="n">abs_max_neg</span>
         
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Array:&#39;</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;Minimum Product of 2 Array Elements:&#39;</span><span class="p">,</span> <span class="n">MIN_P</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;Number of Positive Array Elements:&#39;</span><span class="p">,</span> <span class="n">n_pos</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;Number of Negative Array Elements:&#39;</span><span class="p">,</span> <span class="n">n_neg</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> 
-      <span class="s1">&#39;2 Minimum Absolute Values among Array Elements:&#39;</span><span class="p">,</span> <span class="n">abs_min1</span><span class="p">,</span> <span class="n">abs_min2</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;Maximum Absolute Values among Positive Array Elements:&#39;</span><span class="p">,</span> <span class="n">abs_max_pos</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> 
-      <span class="s1">&#39;Maximum Absolute Values among Negative Array Elements:&#39;</span><span class="p">,</span> <span class="n">abs_max_neg</span><span class="p">)</span>        
+<span class="nb">print</span><span class="p">(</span><span class="n">MIN_P</span><span class="p">)</span>        
 </pre></div>
 
 </div>
@@ -15851,26 +15851,19 @@ In each of the following N lines - one element of the sequence - integers not ex
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Define the number N (1 &lt; N &lt;109) of array elements.
- 10
+10
 Create an array of N integer numbers from [-10000, 10000].
--1
--1
--3
--5
--6
--8
-1
-2
-3
-4
-
-Array: [-1 -1 -3 -5 -6 -8  1  2  3  4] 
- Minimum Product of 2 Array Elements: -32 
- Number of Positive Array Elements: 4 
- Number of Negative Array Elements: 6 
- 2 Minimum Absolute Values among Array Elements: 1 1 
- Maximum Absolute Values among Positive Array Elements: 4 
- Maximum Absolute Values among Negative Array Elements: 8
+-10
+-20
+-30
+-40
+10
+20
+30
+40
+-50
+-60
+-2400
 </pre>
 </div>
 </div>
@@ -15881,29 +15874,71 @@ Array: [-1 -1 -3 -5 -6 -8  1  2  3  4]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[143]:</div>
+<div class="prompt input_prompt">In&nbsp;[111]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Array:&#39;</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;Minimum Product of 2 Array Elements:&#39;</span><span class="p">,</span> <span class="n">MIN_P</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;Number of Positive Array Elements:&#39;</span><span class="p">,</span> <span class="n">n_pos</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;Number of Negative Array Elements:&#39;</span><span class="p">,</span> <span class="n">n_neg</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> 
+      <span class="s1">&#39;Two Minimum Absolute Values for Array Elements:&#39;</span><span class="p">,</span> <span class="n">abs_min1</span><span class="p">,</span> <span class="n">abs_min2</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;Maximum Absolute Values for Positive Array Elements:&#39;</span><span class="p">,</span> <span class="n">abs_max_pos</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> 
+      <span class="s1">&#39;Maximum Absolute Values for Negative Array Elements:&#39;</span><span class="p">,</span> <span class="n">abs_max_neg</span><span class="p">)</span>        
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+Array: [-10, -20, -30, -40, 10, 20, 30, 40, -50, -60] 
+ Minimum Product of 2 Array Elements: -2400 
+ Number of Positive Array Elements: 4 
+ Number of Negative Array Elements: 6 
+ Two Minimum Absolute Values for Array Elements: 10 10 
+ Maximum Absolute Values for Positive Array Elements: 40 
+ Maximum Absolute Values for Negative Array Elements: 60
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[112]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">program</span> <span class="o">=</span> \
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">import numpy</span>
+<span class="sd">print(&quot;Define the number N (1 &lt; N &lt;109) of array elements.&quot;)</span>
+<span class="sd">N = int(input())</span>
+<span class="sd">n_pos, n_neg, abs_min1, abs_min2, abs_max_neg, abs_max_pos = 0, 0, 10001, 10001, 0, 0</span>
+<span class="sd">A = []</span>
 
-<span class="sd">print(&quot;Define the number N (1 &lt;N &lt;109) of array elements.&quot;)</span>
-<span class="sd">N = int(input(&quot; &quot;))</span>
 <span class="sd">print(&quot;Create an array of N integer numbers from [-10000, 10000].&quot;)</span>
-<span class="sd">A = numpy.zeros(N).astype(&#39;int32&#39;)</span>
-
-<span class="sd">n_pos, n_neg, abs_min1, abs_min2, abs_max_neg, abs_max_pos = 0,0,10001,10001,0,0</span>
 <span class="sd">for K in range(N):</span>
-<span class="sd">    A[K] = int(input(&quot;&quot;))</span>
+<span class="sd">    A.append(int(input()))</span>
 <span class="sd">    </span>
 <span class="sd">    if A[K] &gt; 0:</span>
-<span class="sd">        n_pos+=1</span>
+<span class="sd">        n_pos += 1</span>
 <span class="sd">        if A[K] &gt; abs_max_pos:</span>
 <span class="sd">            abs_max_pos = A[K]</span>
 <span class="sd">        </span>
 <span class="sd">    elif A[K] &lt; 0:</span>
-<span class="sd">        n_neg+=1</span>
+<span class="sd">        n_neg += 1</span>
 <span class="sd">        if abs(A[K]) &gt; abs_max_neg:</span>
 <span class="sd">            abs_max_neg = abs(A[K])</span>
 <span class="sd">        </span>
@@ -15918,13 +15953,7 @@ Array: [-1 -1 -3 -5 -6 -8  1  2  3  4]
 <span class="sd">    else:</span>
 <span class="sd">        MIN_P = -1 * abs_max_pos * abs_max_neg</span>
 <span class="sd">        </span>
-<span class="sd">print(&#39;\nArray:&#39;, A, &#39;\n&#39;,</span>
-<span class="sd">      &#39;Minimum Product of 2 Array Elements:&#39;, MIN_P, &#39;\n&#39;,</span>
-<span class="sd">      &#39;Number of Positive Array Elements:&#39;, n_pos, &#39;\n&#39;,</span>
-<span class="sd">      &#39;Number of Negative Array Elements:&#39;, n_neg, &#39;\n&#39;, </span>
-<span class="sd">      &#39;2 Minimum Absolute Values among Array Elements:&#39;, abs_min1, abs_min2, &#39;\n&#39;,</span>
-<span class="sd">      &#39;Maximum Absolute Values among Positive Array Elements:&#39;, abs_max_pos, &#39;\n&#39;, </span>
-<span class="sd">      &#39;Maximum Absolute Values among Negative Array Elements:&#39;, abs_max_neg)</span>
+<span class="sd">print(MIN_P)        </span>
 <span class="sd">&quot;&quot;&quot;</span>
 </pre></div>
 
@@ -15935,7 +15964,7 @@ Array: [-1 -1 -3 -5 -6 -8  1  2  3  4]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[144]:</div>
+<div class="prompt input_prompt">In&nbsp;[113]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">27</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="n">version</span><span class="p">,</span> <span class="n">program</span><span class="p">]</span>
@@ -15956,7 +15985,7 @@ Array: [-1 -1 -3 -5 -6 -8  1  2  3  4]
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Answer: [&#39;python 3.6&#39;, &#39;\nimport numpy\n\nprint(&#34;Define the number N (1 &lt;N &lt;109) of array elements.&#34;)\nN = int(input(&#34; &#34;))\nprint(&#34;Create an array of N integer numbers from [-10000, 10000].&#34;)\nA = numpy.zeros(N).astype(\&#39;int32\&#39;)\n\nn_pos, n_neg, abs_min1, abs_min2, abs_max_neg, abs_max_pos = 0,0,10001,10001,0,0\nfor K in range(N):\n    A[K] = int(input(&#34;&#34;))\n    \n    if A[K] &gt; 0:\n        n_pos+=1\n        if A[K] &gt; abs_max_pos:\n            abs_max_pos = A[K]\n        \n    elif A[K] &lt; 0:\n        n_neg+=1\n        if abs(A[K]) &gt; abs_max_neg:\n            abs_max_neg = abs(A[K])\n        \n    if abs(A[K]) &lt; abs_min1:\n        abs_min2 = abs_min1\n        abs_min1 = abs(A[K])\n    elif abs(A[K]) &lt; abs_min2: \n        abs_min2 = abs(A[K])\n    \n    if n_neg == 0 or n_pos == 0:\n        MIN_P = abs_min1 * abs_min2\n    else:\n        MIN_P = -1 * abs_max_pos * abs_max_neg\n        \nprint(\&#39;\nArray:\&#39;, A, \&#39;\n\&#39;,\n      \&#39;Minimum Product of 2 Array Elements:\&#39;, MIN_P, \&#39;\n\&#39;,\n      \&#39;Number of Positive Array Elements:\&#39;, n_pos, \&#39;\n\&#39;,\n      \&#39;Number of Negative Array Elements:\&#39;, n_neg, \&#39;\n\&#39;, \n      \&#39;2 Minimum Absolute Values among Array Elements:\&#39;, abs_min1, abs_min2, \&#39;\n\&#39;,\n      \&#39;Maximum Absolute Values among Positive Array Elements:\&#39;, abs_max_pos, \&#39;\n\&#39;, \n      \&#39;Maximum Absolute Values among Negative Array Elements:\&#39;, abs_max_neg)\n&#39;]
+<pre>Answer: [&#39;python 3.6&#39;, &#39;\nprint(&#34;Define the number N (1 &lt; N &lt;109) of array elements.&#34;)\nN = int(input())\nn_pos, n_neg, abs_min1, abs_min2, abs_max_neg, abs_max_pos = 0, 0, 10001, 10001, 0, 0\nA = []\n\nprint(&#34;Create an array of N integer numbers from [-10000, 10000].&#34;)\nfor K in range(N):\n    A.append(int(input()))\n    \n    if A[K] &gt; 0:\n        n_pos += 1\n        if A[K] &gt; abs_max_pos:\n            abs_max_pos = A[K]\n        \n    elif A[K] &lt; 0:\n        n_neg += 1\n        if abs(A[K]) &gt; abs_max_neg:\n            abs_max_neg = abs(A[K])\n        \n    if abs(A[K]) &lt; abs_min1:\n        abs_min2 = abs_min1\n        abs_min1 = abs(A[K])\n    elif abs(A[K]) &lt; abs_min2: \n        abs_min2 = abs(A[K])\n    \n    if n_neg == 0 or n_pos == 0:\n        MIN_P = abs_min1 * abs_min2\n    else:\n        MIN_P = -1 * abs_max_pos * abs_max_neg\n        \nprint(MIN_P)        \n&#39;]
 </pre>
 </div>
 </div>
@@ -15976,7 +16005,7 @@ Array: [-1 -1 -3 -5 -6 -8  1  2  3  4]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[101]:</div>
+<div class="prompt input_prompt">In&nbsp;[114]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span>
@@ -15992,7 +16021,7 @@ Array: [-1 -1 -3 -5 -6 -8  1  2  3  4]
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[101]:</div>
+<div class="prompt output_prompt">Out[114]:</div>
 
 
 
@@ -16026,7 +16055,9 @@ Array: [-1 -1 -3 -5 -6 -8  1  2  3  4]
   &#39;&#34;if MIN &gt; 0&#34; -&gt; &#34;if MIN &lt; 2000&#34; | &#34;if MIN &lt;&gt; 2000&#34; | &#34;if MIN != 2000&#34;; &#34;print(0)&#34; -&gt; &#34;print(&#34;NO&#34;)&#34;&#39;],
  25: [&#39;python 3.6&#39;,
   &#34;\nN = 40\nA = []\nJ,K = 0,0\n       \nfor I in range(N):\n    A.append(int(input())) \n# The fragment instead of the ellipsis\n    if A[I] &gt; 0: J+=1\n    elif A[I] &lt; 0: K+=1   \n\nif J &gt; K: print(&#39;+&#39;)\nelif J &lt; K: print(&#39;-&#39;)\nelse: print(&#39;=&#39;)\n&#34;],
- 26: &#39;\n1. \nP:(4,30)-&gt;{(5,30),(8,30),(4,31),(4,60)} ∨ \nP:(6,29)-&gt;{(7,29),(12,29),(6,30),(6,58)}\nV:{(5,30)-&gt;(5,60),(8,30)-&gt;(8,60),(4,31)-&gt;(4,62),(4,60)-&gt;(4,120)} ∨\nV:{(7,29)-&gt;(7,58),(12,29)-&gt;(12,58),(6,30)-&gt;(6,60),(6,58)-&gt;(6,116)}\n2. \nP:(4,29)-&gt;(4,30),(6,28)-&gt;(6,29),(5,29)-&gt;(6,29)\nV:(4,30)-&gt;{(5,30),(8,30),(4,31),(4,60)} ∨ {(6,29)-&gt;{(7,29),(12,29),(6,30),(6,58)}\nP:{(5,30)-&gt;(5,60),(8,30)-&gt;(8,60),(4,31)-&gt;(4,62),(4,60)-&gt;(4,120)} ∨ \nP:{(7,29)-&gt;(7,58),(12,29)-&gt;(12,58),(6,30)-&gt;(6,60),(6,58)-&gt;(6,116)}.\n3. \nP:(5,28)-&gt;{(6,28),(10,28),(5,29),(5,56)}\nV:(6,28)-&gt;(6,29),(10,28)-&gt;(10,56),(5,29)-&gt;(6,29),(5,56)-&gt;(10,56)\nP:(6,29)-&gt;{(7,29),(12,29),(6,30),(6,58)} \nV:{(7,29)-&gt;(7,58),(12,29)-&gt;(12,58),(6,30)-&gt;(6,60),(6,58)-&gt;(6,116)}\n&#39;}</pre>
+ 26: &#39;\n1. \nP:(4,30)-&gt;{(5,30),(8,30),(4,31),(4,60)} ∨ \nP:(6,29)-&gt;{(7,29),(12,29),(6,30),(6,58)}\nV:{(5,30)-&gt;(5,60),(8,30)-&gt;(8,60),(4,31)-&gt;(4,62),(4,60)-&gt;(4,120)} ∨\nV:{(7,29)-&gt;(7,58),(12,29)-&gt;(12,58),(6,30)-&gt;(6,60),(6,58)-&gt;(6,116)}\n2. \nP:(4,29)-&gt;(4,30),(6,28)-&gt;(6,29),(5,29)-&gt;(6,29)\nV:(4,30)-&gt;{(5,30),(8,30),(4,31),(4,60)} ∨ {(6,29)-&gt;{(7,29),(12,29),(6,30),(6,58)}\nP:{(5,30)-&gt;(5,60),(8,30)-&gt;(8,60),(4,31)-&gt;(4,62),(4,60)-&gt;(4,120)} ∨ \nP:{(7,29)-&gt;(7,58),(12,29)-&gt;(12,58),(6,30)-&gt;(6,60),(6,58)-&gt;(6,116)}.\n3. \nP:(5,28)-&gt;{(6,28),(10,28),(5,29),(5,56)}\nV:(6,28)-&gt;(6,29),(10,28)-&gt;(10,56),(5,29)-&gt;(6,29),(5,56)-&gt;(10,56)\nP:(6,29)-&gt;{(7,29),(12,29),(6,30),(6,58)} \nV:{(7,29)-&gt;(7,58),(12,29)-&gt;(12,58),(6,30)-&gt;(6,60),(6,58)-&gt;(6,116)}\n&#39;,
+ 27: [&#39;python 3.6&#39;,
+  &#39;\nprint(&#34;Define the number N (1 &lt; N &lt;109) of array elements.&#34;)\nN = int(input())\nn_pos, n_neg, abs_min1, abs_min2, abs_max_neg, abs_max_pos = 0, 0, 10001, 10001, 0, 0\nA = []\n\nprint(&#34;Create an array of N integer numbers from [-10000, 10000].&#34;)\nfor K in range(N):\n    A.append(int(input()))\n    \n    if A[K] &gt; 0:\n        n_pos += 1\n        if A[K] &gt; abs_max_pos:\n            abs_max_pos = A[K]\n        \n    elif A[K] &lt; 0:\n        n_neg += 1\n        if abs(A[K]) &gt; abs_max_neg:\n            abs_max_neg = abs(A[K])\n        \n    if abs(A[K]) &lt; abs_min1:\n        abs_min2 = abs_min1\n        abs_min1 = abs(A[K])\n    elif abs(A[K]) &lt; abs_min2: \n        abs_min2 = abs(A[K])\n    \n    if n_neg == 0 or n_pos == 0:\n        MIN_P = abs_min1 * abs_min2\n    else:\n        MIN_P = -1 * abs_max_pos * abs_max_neg\n        \nprint(MIN_P)        \n&#39;]}</pre>
 </div>
 
 </div>
