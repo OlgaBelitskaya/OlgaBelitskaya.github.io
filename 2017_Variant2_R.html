@@ -12907,9 +12907,97 @@ adjm<span class="p">[</span><span class="kp">sort</span><span class="p">(</span>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="5.">5.<a class="anchor-link" href="#5.">&#182;</a></h2>
+<h2 id="5.">5.<a class="anchor-link" href="#5.">&#182;</a></h2><p>Для 5 букв латинского алфавита заданы их двоичные коды. Эти коды представлены в таблице.</p>
+<p>For 5 letters of the Latin alphabet their binary codes are given. These codes are presented in the table.</p>
+<table>
+<thead><tr>
+<th style="text-align:center">A</th>
+<th style="text-align:center">B</th>
+<th style="text-align:center">C</th>
+<th style="text-align:center">D</th>
+<th style="text-align:center">E</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>00</code></td>
+<td style="text-align:center"><code>100</code></td>
+<td style="text-align:center"><code>110</code></td>
+<td style="text-align:center"><code>01</code></td>
+<td style="text-align:center"><code>101</code></td>
+</tr>
+</tbody>
+</table>
+<p>Определите, какой набор букв закодирован двоичной последовательностью <code>110011000011010101</code>.</p>
+<p>В ответе запишите последовательность букв без запятых.</p>
+<p>Determine which set of letters is encoded with the binary sequence <code>110011000011010101</code>.</p>
+<p>In the answer, write down the sequence of letters without commas.</p>
+
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[106]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>string <span class="o">&lt;-</span> <span class="s">&#39;110011000011010101&#39;</span>
+fragments <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;00&#39;</span><span class="p">,</span><span class="s">&#39;100&#39;</span><span class="p">,</span><span class="s">&#39;110&#39;</span><span class="p">,</span><span class="s">&#39;01&#39;</span><span class="p">,</span><span class="s">&#39;101&#39;</span><span class="p">)</span>
+<span class="kc">letters</span> <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;A&#39;</span><span class="p">,</span><span class="s">&#39;B&#39;</span><span class="p">,</span><span class="s">&#39;C&#39;</span><span class="p">,</span><span class="s">&#39;D&#39;</span><span class="p">,</span><span class="s">&#39;E&#39;</span><span class="p">)</span>
+result <span class="o">&lt;-</span> <span class="s">&#39;&#39;</span>
+
+<span class="kr">while</span> <span class="p">(</span>string <span class="o">!=</span><span class="s">&#39;&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">){</span>
+        <span class="kr">if</span> <span class="p">(</span><span class="kp">substr</span><span class="p">(</span>string<span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">)</span> <span class="o">==</span> fragments<span class="p">[</span>i<span class="p">])</span> <span class="p">{</span>
+            result <span class="o">&lt;-</span> <span class="kp">paste</span><span class="p">(</span>result<span class="p">,</span><span class="kc">letters</span><span class="p">[</span>i<span class="p">],</span>sep<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+            string <span class="o">&lt;-</span> <span class="kp">substring</span><span class="p">(</span>string<span class="p">,</span>first<span class="o">=</span><span class="m">3</span><span class="p">,</span>last<span class="o">=</span><span class="kp">nchar</span><span class="p">(</span>string<span class="p">))</span>
+        <span class="p">}</span>
+        <span class="kr">if</span> <span class="p">(</span><span class="kp">substr</span><span class="p">(</span>string<span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">)</span> <span class="o">==</span> fragments<span class="p">[</span>i<span class="p">])</span> <span class="p">{</span>
+            result <span class="o">&lt;-</span> <span class="kp">paste</span><span class="p">(</span>result<span class="p">,</span><span class="kc">letters</span><span class="p">[</span>i<span class="p">],</span>sep<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+            string <span class="o">&lt;-</span> <span class="kp">substring</span><span class="p">(</span>string<span class="p">,</span>first<span class="o">=</span><span class="m">4</span><span class="p">,</span>last<span class="o">=</span><span class="kp">nchar</span><span class="p">(</span>string<span class="p">))</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+result
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+'CDBACED'
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[107]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">5</span><span class="p">]</span> <span class="o">&lt;-</span> result
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -13099,7 +13187,7 @@ adjm<span class="p">[</span><span class="kp">sort</span><span class="p">(</span>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[95]:</div>
+<div class="prompt input_prompt">In&nbsp;[108]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>answer_dictionary
@@ -13121,10 +13209,11 @@ adjm<span class="p">[</span><span class="kp">sort</span><span class="p">(</span>
 
 
 <div class="output_text output_subarea ">
-<pre>&lt;hash&gt; containing 3 key-value pair(s).
+<pre>&lt;hash&gt; containing 4 key-value pair(s).
   1 : 11010110
   2 : 34
-  3 : 2</pre>
+  3 : 2
+  5 : CDBACED</pre>
 </div>
 
 </div>
