@@ -14402,35 +14402,71 @@ $\iff ((X > 1) \equiv TRUE) \land ((X < 3) \equiv TRUE) \iff (X = 2) \equiv TRUE
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><div style="width: 800px; height: 600px; overflow:auto;">
-    <img src="it_images/2017_02_19.png" width="800" height="600"/>
+<p><div style="width: 800px; height: 580px; overflow:auto;">
+    <img src="it_images/2017_02_19.png" width="800" height="580"/>
 </div>
-В программе используется целочисленный массив А с индексами от 0 до 9. Значения элементов массива равны $4; 5; 4; 7; 6; 3; 9; 11; 7; 8$ соответственно, т.е. $А [0] = 4; А [1] = 5$ и т.д.</p>
-<p>Определите значение переменной k после выполнения следующего фрагмента программы, записанной ниже на разных языках программирования.</p>
+В программе используется целочисленный массив А с индексами от 0 до 9.</p>
+<p>Значения элементов массива равны $4; 5; 4; 7; 6; 3; 9; 11; 7; 8$ соответственно, т.е. $А [0] = 4; А [1] = 5$ и т.д.</p>
+<p>Определите значение переменной k после выполнения следующего фрагмента программы,</p>
+<p>записанной ниже на разных языках программирования.</p>
 <hr>
-<p>The program uses an integer array A with indices from 0 to 9. The values of the array elements are $4; 5; 4; 7; 6; 3; 9; 11; 7; 8$ respectively; $A [0] = 4; A [1] = 5$, and so on.</p>
-<p>Determine the value of the variable k after the execution of the next program fragment, recorded below in different programming languages.</p>
+<p>The program uses an integer array A with indices from 0 to 9.</p>
+<p>The values of the array elements are $4; 5; 4; 7; 6; 3; 9; 11; 7; 8$ respectively; $A [0] = 4; A [1] = 5$, and so on.</p>
+<p>Determine the value of the variable $k$ after the execution of the next program fragment,</p>
+<p>recorded below in different programming languages.</p>
+<table style="width:95%;">
+  <tr style="color:slategray;font-size:120%;font-family:'Roboto';">
+    <th style="text-align:center;">Python</th> 
+    <th style="text-align:center;">R</th>          
+  </tr>
+  <tr>
+    <td style="font-weight:bold;text-align:left;"><pre><code class='python'>
+A = [4,5,4,7,6,3,9,11,7,8]
+k = 0
 
+for i in range(10): 
+    if A[0] < A[i]:
+        k += 1
+        t = A[i]
+        A[i] = A[0]
+        A[0] = t   
+
+    </code></pre></td> 
+    <td style="font-weight:bold;text-align:left;"><pre><code class='r'>
+
+A <- c(4,5,4,7,6,3,9,11,7,8)
+k <- 0
+
+for (i in 0:9) {
+    if (A[1] < A[i+1]){
+        k <- k + 1
+        t <- A[i+1]
+        A[i+1] <- A[1]
+        A[1] <- t
+    }
+}
+    </code></pre></td>     
+  </tr>    
+</table>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
-<span class="n">A</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">]</span>
 <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span> 
     <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-        <span class="n">k</span><span class="o">+=</span><span class="mi">1</span>
-        <span class="n">t</span><span class="o">=</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">t</span>
+        <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
         
-<span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">19</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">19</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span> <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">19</span><span class="p">])</span>
 </pre></div>
 
@@ -14461,29 +14497,114 @@ $\iff ((X > 1) \equiv TRUE) \land ((X < 3) \equiv TRUE) \iff (X = 2) \equiv TRUE
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><div style="width: 800px; height: 700px; overflow:auto;">
-    <img src="it_images/2017_02_20.png" width="800" height="700"/>
+<p><div style="width: 800px; height: 650px; overflow:auto;">
+    <img src="it_images/2017_02_20.png" width="800" height="650"/>
 </div>
-Ниже на четырёх языках записан алгоритм. Получив на вход число х, этот алгоритм печатает число М. Укажите число х, при вводе которого алгоритм печатает 126.</p>
+Ниже на четырёх языках записан алгоритм.</p>
+<p>Получив на вход число х, этот алгоритм печатает число М.</p>
+<p>Укажите число х, при вводе которого алгоритм печатает 126.</p>
 <hr>
-<p>Below, in four languages, an algorithm is written. After receiving the number x on the input, this algorithm prints the number M. Specify the number of x, at input of which the algorithm prints 126.</p>
+<p>Below, in four languages, an algorithm is written.</p>
+<p>After receiving the number x on the input, this algorithm prints the number M.</p>
+<p>Specify the number of x, at input of which the algorithm prints 126.</p>
+<table style="width:95%;">
+  <tr style="color:slategray;font-size:120%;font-family:'Roboto';">
+    <th style="text-align:center;">Python</th> 
+    <th style="text-align:center;">R</th>          
+  </tr>
+  <tr>
+    <td style="font-weight:bold;text-align:left;"><pre><code class='python'>
+x = int(input())
+L, M, y = 0, 0, 7
 
+if x % 2 == 0: 
+    y = 9
+
+while L < x:
+    M += y
+    L += 1
+
+print(M)     
+    </code></pre></td> 
+    <td style="font-weight:bold;text-align:left;"><pre><code class='r'>
+
+x <- as.integer(readline())
+L <- 0; M <- 0; y <- 7
+
+if (x %% 2 == 0){
+    y <- 9
+}
+
+while (L < x){
+    M <- M + y
+    L <- L + 1
+}
+
+print(M)    
+    </code></pre></td>     
+  </tr>    
+</table>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">L</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">7</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+<span class="n">L</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">7</span>
+
+<span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> 
+    <span class="n">y</span> <span class="o">=</span> <span class="mi">9</span>
+    
+<span class="k">while</span> <span class="n">L</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">:</span>
+    <span class="n">M</span> <span class="o">+=</span> <span class="n">y</span>
+    <span class="n">L</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>14
+126
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># расширенная версия программы</span>
 
 <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">9</span>
+    <span class="n">L</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">7</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> 
+        <span class="n">y</span> <span class="o">=</span> <span class="mi">9</span>
     <span class="k">while</span> <span class="n">L</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">:</span>
-        <span class="n">M</span><span class="o">+=</span><span class="n">y</span>
-        <span class="n">L</span><span class="o">+=</span><span class="mi">1</span>
-    <span class="k">if</span> <span class="n">M</span><span class="o">==</span><span class="mi">126</span><span class="p">:</span> <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">M</span> <span class="o">+=</span> <span class="n">y</span>
+        <span class="n">L</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">M</span> <span class="o">==</span> <span class="mi">126</span><span class="p">:</span> 
+        <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
 </pre></div>
 
@@ -14502,25 +14623,25 @@ $\iff ((X > 1) \equiv TRUE) \land ((X < 3) \equiv TRUE) \iff (X = 2) \equiv TRUE
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>0 0
-1 9
+1 7
 2 18
-3 27
+3 21
 4 36
-5 45
+5 35
 6 54
-7 63
+7 49
 8 72
-9 81
+9 63
 10 90
-11 99
+11 77
 12 108
-13 117
+13 91
 14 126
-15 135
+15 105
 16 144
-17 153
+17 119
 18 162
-19 171
+19 133
 </pre>
 </div>
 </div>
@@ -14531,7 +14652,7 @@ $\iff ((X > 1) \equiv TRUE) \land ((X < 3) \equiv TRUE) \iff (X = 2) \equiv TRUE
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span> <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">20</span><span class="p">])</span>
