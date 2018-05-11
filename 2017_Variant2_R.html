@@ -13303,7 +13303,7 @@ s <- 8
 
 while (s < 500) {
     s <- s + 20 
-    k <- k +5 
+    k <- k + 5 
 }
 
 print(k)
@@ -13324,7 +13324,7 @@ s <span class="o">&lt;-</span> <span class="m">8</span>
 
 <span class="kr">while</span> <span class="p">(</span>s <span class="o">&lt;</span> <span class="m">500</span><span class="p">)</span> <span class="p">{</span>
     s <span class="o">&lt;-</span> s <span class="o">+</span> <span class="m">20</span> 
-    k <span class="o">&lt;-</span> k <span class="m">+5</span> 
+    k <span class="o">&lt;-</span> k <span class="o">+</span> <span class="m">5</span> 
 <span class="p">}</span>
 
 <span class="kp">print</span><span class="p">(</span>k<span class="p">)</span>
@@ -16531,7 +16531,19 @@ YyAlgpDaAQAAAABJRU5ErkJggg=="
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="23.">23.<a class="anchor-link" href="#23.">&#182;</a></h2>
+<h2 id="23.">23.<a class="anchor-link" href="#23.">&#182;</a></h2><p>Сколько существует различных наборов значений логических переменных $x_1, х_2, ... x_9, х_{10}$,</p>
+<p>которые удовлетворяют всем перечисленным ниже условиям?</p>
+<p>How many different sets of Boolean variables $x_1, х_2, ... x_9, х_{10}$ exist</p>
+<p>that satisfy all of the following conditions?</p>
+<p>$(\neg x_1 \equiv \neg x_2) \lor (\neg x_3 \equiv \neg x_4) = 1$</p>
+<p>$(\neg x_3 \equiv \neg x_4) \lor (\neg x_5 \equiv \neg x_6) = 1$</p>
+<p>$(\neg x_5 \equiv \neg x_6) \lor (\neg x_7 \equiv \neg x_8) = 1$</p>
+<p>$(\neg x_7 \equiv \neg x_8) \lor (\neg x_9 \equiv \neg x_{10}) = 1$</p>
+<p>В ответе <strong>не нужно</strong> перечислять все различные наборы значений $x_1, х_2, ... x_9, х_{10}$, при которых выполнена данная система равенств.</p>
+<p>В качестве ответа вам нужно указать количество таких наборов.</p>
+<p>The answer <strong>does not need</strong> to list all the different sets of values $x_1, х_2, ... x_9, х_{10}$ under which this system of equations is satisfied.</p>
+<p>As an answer, you need to specify only the number of such sets.</p>
+
 </div>
 </div>
 </div>
@@ -16539,10 +16551,351 @@ YyAlgpDaAQAAAABJRU5ErkJggg=="
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>1)</p>
+<p>Упростим систему логических уравнений. / Let's simplify the logical equations.</p>
+<p>$( \ (\neg x_1 \equiv \neg x_2) \lor (\neg x_3 \equiv \neg x_4) = 1 \ )  \iff
+( \ (x_1 \equiv x_2) \lor (x_3 \equiv x_4) = 1 \ \iff
+\neg ( x_1 \equiv x_2) \land \neg (x_3 \equiv x_4) = 0$</p>
+<p>2)</p>
+<p>Система будет иметь вид: / The system of equations will be:</p>
+<p>$ \neg ( x_1 \equiv x_2) \land \neg (x_3 \equiv x_4) = 0$  <strong>(1)</strong></p>
+<p>$ \neg ( x_3 \equiv x_4) \land \neg (x_5 \equiv x_6) = 0$  <strong>(2)</strong></p>
+<p>$ \neg ( x_5 \equiv x_6) \land \neg (x_7 \equiv x_8) = 0$  <strong>(3)</strong></p>
+<p>$ \neg ( x_7 \equiv x_8) \land \neg (x_8 \equiv x_{10}) = 0$  <strong>(4)</strong></p>
+<p>3) Количество бинарных комбинаций из 10 цифр: / The number of binary combinations from 10 digits:</p>
+<p>$2^{10}=1024$</p>
+<p>4)</p>
+<p>Тождество $(1)$ нарушается, только если $x_1 \neq x_2$ и $x_3 \neq x_4$ одновременно,</p>
+<p>то есть необходимо исключить 4 набора переменных, в которых $(x_1, x_2, x_3, x_4)$ имеют вид (0,1,0,1), (0,1,1,0), (1,0,0,1), (1,0,1,0).</p>
+<p>Таких наборов (с учетом комбинаций остальных 6 переменных) будет: $4*2^{6}$.</p>
+<p>При этом возможных наборов сочетаний $(x_1, x_2, x_3, x_4)$ остается только 16 - 4 = 12: (0,0,0,1), (1,1,0,1), и т.д.</p>
+<p>The identity $(1)$ is violated only if $x_1 \neq x_2$ and $x_3 \neq x_4$ simultaneously,</p>
+<p>so it is necessary to exclude 4 sets of variables in which $(x_1, x_2, x_3, x_4)$ have the form (0,1,0,1), (0,1,1,0), (1,0,0,1), (1,0,1,0).</p>
+<p>This kind of sets (taking into account combinations of the remaining 6 variables) will be $4 * 2 ^ {6}$.</p>
+<p>In this case, we have less possible combinations $(x_1, x_2, x_3, x_4)$ - only 16 - 4 = 12: (0,0,0,1), (1,1,0,1), etc.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>5)</p>
+<p>Тождество $(2)$ нарушается, только если $x_3 \neq x_4$ и $x_5 \neq x_6$ одновременно,</p>
+<p>то есть необходимо исключить 4 набора переменных, в которых $(x_3, x_4, x_5, x_6)$ имеют вид (0,1,0,1), (0,1,1,0), (1,0,0,1), (1,0,1,0).</p>
+<p>$(x_7, x_8, x_9, x_{10})$ принимают любые значения (количество их комбинаций равно $2^4$),</p>
+<p>а $(x_1, x_2)$ может иметь только 2 варианта (0,0) и (1,1), учитывая пункт 4).</p>
+<p>Всего тождество $(2)$ могут нарушить: $2 * 4 * 2^{4}$ набора.</p>
+<p>The identity $(2)$ is violated only if $x_3 \neq x_4$ and $x_5 \neq x_6$ simultaneously,</p>
+<p>so it is necessary to exclude 4 sets of variables in which $(x_3, x_4, x_5, x_6)$ have the form (0,1,0,1), (0,1,1,0), (1,0,0,1), (1,0,1,0).</p>
+<p>$(x_7, x_8, x_9, x_{10})$ takes any values (the number of their combinations is $2 ^ 4$),</p>
+<p>and $(x_1, x_2)$ can have only 2 combinations (0,0) and (1,1), taking into account point 4).</p>
+<p>In total, the identity $ (2) $ can be violated by: $2 * 4 * 2^{4}$ sets.</p>
+<p>6)</p>
+<p>Тождество $(3)$ нарушается, только если $x_5 \neq x_6$ и $x_7 \neq x_8$ одновременно,</p>
+<p>то есть необходимо исключить 4 набора переменных, в которых $(x_5, x_6, x_7, x_8)$ имеют вид (0,1,0,1), (0,1,1,0), (1,0,0,1), (1,0,1,0).</p>
+<p>$(x_3, x_4)$ может иметь только 2 варианта (0,0) и (1,1), учитывая пункт 5).</p>
+<p>При этом переменные $(x_1, x_2)$ могут иметь все 4 возможных варианта сочетаний и переменные $(x_9, x_{10})$ аналогично.</p>
+<p>Всего тождество $(3)$ могут нарушить: $4 * 2 * 4 * 4$ набора.</p>
+<p>The identity $(3)$ is violated only if $ x_5 \neq x_6 $ and $ x_7 \neq x_8 $ simultaneously,</p>
+<p>so it is necessary to exclude 4 sets of variables in which $(x_5, x_6, x_7, x_8)$ have the form (0,1,0,1), (0,1,1,0), (1,0,0,1), (1,0,1,0).</p>
+<p>$(x_3, x_4)$ can have only 2 variants (0,0) and (1,1), taking into account point 5).</p>
+<p>In this case, the variables $(x_1, x_2)$ can have all 4 possible variants of combinations and the variables $(x_9, x_{10})$ are similar.</p>
+<p>In total, the identity $(3)$ can be violated by: $4 * 2 * 4 * 4$ sets.</p>
+<p>7)</p>
+<p>Тождество $(4)$ нарушается, только если $x_7 \neq x_8$ и $x_9 \neq x_{10}$ одновременно,</p>
+<p>то есть необходимо исключить 4 набора переменных, в которых $(x_7, x_8, x_9, x_{10})$ имеют вид (0,1,0,1), (0,1,1,0), (1,0,0,1), (1,0,1,0).</p>
+<p>$(x_5, x_6)$ = (0,0) или (1,1), учитывая пункт 6).</p>
+<p>При этом переменные $(x_1, x_2, x_3, x_4)$ имеют только 12 вариантов изменений, учитывая пункт 4).</p>
+<p>Всего тождество $(4)$ могут нарушить: $12 * 2 * 4$ набора.</p>
+<p>The identity $(4)$ is violated only if $x_7 \neq x_8 $ and $ x_9 \neq x_{10}$ simultaneously,</p>
+<p>so you need to exclude 4 sets of variables in which $(x_7, x_8, x_9, x_{10})$ have the form (0,1,0,1), (0,1,1,0), (1,0,0,1), (1,0,1,0).</p>
+<p>$(x_5, x_6)$ = (0,0) or (1,1), taking into account point 6).</p>
+<p>In this case, the variables $(x_1, x_2, x_3, x_4)$ have only 12 variants of changes, taking into account point 4).</p>
+<p>In total, the identity $(4)$ can be violated by $12 * 2 * 4$ sets.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[122]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="m">2</span> <span class="o">**</span> <span class="m">10</span> <span class="o">-</span> <span class="m">4</span> <span class="o">*</span> <span class="m">2</span> <span class="o">**</span> <span class="m">6</span> <span class="o">-</span> <span class="m">2</span> <span class="o">*</span> <span class="m">4</span> <span class="o">*</span> <span class="m">2</span> <span class="o">**</span> <span class="m">4</span> <span class="o">-</span> <span class="m">4</span> <span class="o">*</span> <span class="m">2</span> <span class="o">*</span> <span class="m">4</span> <span class="o">*</span> <span class="m">4</span> <span class="o">-</span> <span class="m">12</span> <span class="o">*</span> <span class="m">2</span> <span class="o">*</span> <span class="m">4</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+416
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[121]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># check the decision method</span>
+bc <span class="o">&lt;-</span> bincombinations<span class="p">(</span><span class="m">10</span><span class="p">)</span>
+<span class="kt">c</span> <span class="o">&lt;-</span> <span class="m">0</span>
+n <span class="o">&lt;-</span> <span class="kp">length</span><span class="p">(</span>bc<span class="p">)</span><span class="o">/</span><span class="m">10</span>
+<span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>n<span class="p">){</span>
+    el <span class="o">&lt;-</span> bc<span class="p">[</span>i<span class="p">,]</span>
+    e1 <span class="o">&lt;-</span> <span class="p">(</span><span class="o">!</span>el<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">==</span> <span class="o">!</span>el<span class="p">[</span><span class="m">2</span><span class="p">])</span> <span class="o">|</span> <span class="p">(</span> <span class="o">!</span>el<span class="p">[</span><span class="m">3</span><span class="p">]</span> <span class="o">==</span> <span class="o">!</span>el<span class="p">[</span><span class="m">4</span><span class="p">])</span>
+    e2 <span class="o">&lt;-</span> <span class="p">(</span><span class="o">!</span>el<span class="p">[</span><span class="m">3</span><span class="p">]</span> <span class="o">==</span> <span class="o">!</span>el<span class="p">[</span><span class="m">4</span><span class="p">])</span> <span class="o">|</span> <span class="p">(</span> <span class="o">!</span>el<span class="p">[</span><span class="m">5</span><span class="p">]</span> <span class="o">==</span> <span class="o">!</span>el<span class="p">[</span><span class="m">6</span><span class="p">])</span>
+    e3 <span class="o">&lt;-</span> <span class="p">(</span><span class="o">!</span>el<span class="p">[</span><span class="m">5</span><span class="p">]</span> <span class="o">==</span> <span class="o">!</span>el<span class="p">[</span><span class="m">6</span><span class="p">])</span> <span class="o">|</span> <span class="p">(</span> <span class="o">!</span>el<span class="p">[</span><span class="m">7</span><span class="p">]</span> <span class="o">==</span> <span class="o">!</span>el<span class="p">[</span><span class="m">8</span><span class="p">])</span>
+    e4 <span class="o">&lt;-</span> <span class="p">(</span><span class="o">!</span>el<span class="p">[</span><span class="m">7</span><span class="p">]</span> <span class="o">==</span> <span class="o">!</span>el<span class="p">[</span><span class="m">8</span><span class="p">])</span> <span class="o">|</span> <span class="p">(</span> <span class="o">!</span>el<span class="p">[</span><span class="m">9</span><span class="p">]</span> <span class="o">==</span> <span class="o">!</span>el<span class="p">[</span><span class="m">10</span><span class="p">])</span>
+    result <span class="o">&lt;-</span> <span class="p">(</span>e1 <span class="o">==</span> <span class="m">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span>e2 <span class="o">==</span> <span class="m">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span>e3 <span class="o">==</span> <span class="m">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span>e4 <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="p">(</span>result <span class="o">==</span> <span class="m">1</span><span class="p">)</span> <span class="p">{</span><span class="kt">c</span> <span class="o">=</span> <span class="kt">c</span> <span class="o">+</span> <span class="m">1</span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">c</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+416
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[119]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">23</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">toString</span><span class="p">(</span><span class="kt">c</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2>Часть 2 &nbsp; &nbsp; &nbsp; Part 2</h2>
-<h2 id="24.">24.<a class="anchor-link" href="#24.">&#182;</a></h2>
+<h2 id="24.">24.<a class="anchor-link" href="#24.">&#182;</a></h2><p><div style="width: 800px; height: 920px; overflow:auto;">
+    <img src="it_images/2017_02_24.png" width="800" height="920"/>
+</div>
+Требовалось написать программу, которая вводит с клавиатуры координаты точки на плоскости (х, у — действительные числа)</p>
+<p>и определяет принадлежность точки заштрихованной области.</p>
+<p>Программист торопился и написал программу неправильно.</p>
+<p>Последовательно выполните следующее:</p>
+<ol>
+<li><p>Приведите пример таких чисел х, у при которых программа работает неправильно.</p>
+</li>
+<li><p>Укажите, как нужно доработать программу, чтобы не было случаев её неправильной работы.</p>
+</li>
+</ol>
+<p>(Это можно сделать несколькими способами, поэтому можно указать любой способ доработки исходной программы).</p>
+<hr>
+<p>It was required to write a program that enters from the keyboard the coordinates of the point on the plane (x, y are real numbers)</p>
+<p>and determines the belonging of the point to the shaded region.</p>
+<p>The programmer was in a hurry and wrote the program incorrectly.</p>
+<p>Do the following sequentially:</p>
+<ol>
+<li><p>Give an example of such numbers x, y for which the program does not work correctly.</p>
+</li>
+<li><p>Indicate how you need to refine the program so that there are no cases of its improper operation.</p>
+</li>
+</ol>
+<p>(This can be done in several ways, so you can specify any way to refine the source program).</p>
+<p><strong>Note</strong>: <code>принадлежит</code>=<code>belongs</code>; <code>не принадлежит</code>=<code>does not belong</code>.</p>
+
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<table style="width:95%;">
+  <tr style="color:slategray;font-size:120%;font-family:'Roboto';">
+    <th style="text-align:center;">Python</th> 
+    <th style="text-align:center;">R</th>          
+  </tr>
+  <tr>
+    <td style="font-weight:bold;text-align:left;"><pre><code class='python'>
+
+x = float(input("x "))
+y = float(input("y "))
+
+if y <= -x &#42; x:
+    if y <= 0:
+        if y >= -x - 2:
+            print('принадлежит')
+        else:
+            print('не принадлежит')
+
+    </code></pre></td> 
+    <td style="font-weight:bold;text-align:left;"><pre><code class='r'>
+
+x <- as.numeric(readline("x "))
+y <- as.numeric(readline("y "))
+
+if (y <= -x &#42; x) {
+    if (y <= 0) {
+        if (y >= -x - 2){
+            print('принадлежит')
+        } else {
+            print('не принадлежит')
+        }
+    }
+}
+    </code></pre></td>     
+  </tr>    
+</table>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Работает некорректно, если не выполнены условия $y \leq -x*x$ или $y \leq 0$.</p>
+<p>&#9881; Например, для (-2,-3).</p>
+<p>It works incorrectly if the conditions $y \leq -x * x$ or $y \leq 0$ are not satisfied.</p>
+<p>&#9881; For example, for (-2, -3).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[124]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># the wrong variant, the wrong answer</span>
+x <span class="o">&lt;-</span> <span class="kp">as.numeric</span><span class="p">(</span><span class="kp">readline</span><span class="p">(</span><span class="s">&quot;x &quot;</span><span class="p">))</span>
+y <span class="o">&lt;-</span> <span class="kp">as.numeric</span><span class="p">(</span><span class="kp">readline</span><span class="p">(</span><span class="s">&quot;y &quot;</span><span class="p">))</span>
+
+<span class="kr">if</span> <span class="p">(</span>y <span class="o">&lt;=</span> <span class="o">-</span>x <span class="o">*</span> x<span class="p">)</span> <span class="p">{</span>
+    <span class="kr">if</span> <span class="p">(</span>y <span class="o">&lt;=</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">if</span> <span class="p">(</span>y <span class="o">&gt;=</span> <span class="o">-</span>x <span class="o">-</span> <span class="m">2</span><span class="p">){</span>
+            <span class="kp">print</span><span class="p">(</span><span class="s">&#39;принадлежит&#39;</span><span class="p">)</span>
+        <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
+            <span class="kp">print</span><span class="p">(</span><span class="s">&#39;не принадлежит&#39;</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>x -2
+y -3
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[125]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># the right variant, the right answer</span>
+x <span class="o">&lt;-</span> <span class="kp">as.numeric</span><span class="p">(</span><span class="kp">readline</span><span class="p">(</span><span class="s">&quot;x &quot;</span><span class="p">))</span>
+y <span class="o">&lt;-</span> <span class="kp">as.numeric</span><span class="p">(</span><span class="kp">readline</span><span class="p">(</span><span class="s">&quot;y &quot;</span><span class="p">))</span>
+
+<span class="kr">if</span> <span class="p">(((</span>y <span class="o">&lt;=</span> <span class="o">-</span>x <span class="o">*</span> x<span class="p">)</span> <span class="o">|</span> <span class="p">((</span>y <span class="o">&lt;=</span> <span class="m">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span>y <span class="o">&gt;</span> <span class="o">-</span>x <span class="o">*</span> x<span class="p">)))</span> <span class="o">&amp;</span> <span class="p">(</span>y <span class="o">&gt;=</span> <span class="o">-</span>x <span class="o">-</span> <span class="m">2</span><span class="p">))</span> <span class="p">{</span>
+    <span class="kp">print</span><span class="p">(</span><span class="s">&#39;принадлежит&#39;</span><span class="p">)</span>
+<span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
+    <span class="kp">print</span><span class="p">(</span><span class="s">&#39;не принадлежит&#39;</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>x -2
+y -3
+[1] &#34;не принадлежит&#34;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[126]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">24</span><span class="p">]</span> <span class="o">&lt;-</span><span class="s">&#39;1.(-2,-3); 2. if (((y &lt;= -x * x) | ((y &lt;= 0) &amp; (y &gt; -x * x))) &amp; (y &gt;= -x - 2))&#39;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -16579,7 +16932,7 @@ YyAlgpDaAQAAAABJRU5ErkJggg=="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[114]:</div>
+<div class="prompt input_prompt">In&nbsp;[127]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>answer_dictionary
@@ -16601,7 +16954,7 @@ YyAlgpDaAQAAAABJRU5ErkJggg=="
 
 
 <div class="output_text output_subarea ">
-<pre>&lt;hash&gt; containing 21 key-value pair(s).
+<pre>&lt;hash&gt; containing 23 key-value pair(s).
   1 : 11010110
   10 : 243
   11 : 21
@@ -16616,6 +16969,8 @@ YyAlgpDaAQAAAABJRU5ErkJggg=="
   20 : 14
   21 : 298
   22 : 17
+  23 : 416
+  24 : 1.(-2,-3); 2. if (((y &lt;= -x * x) | ((y &lt;= 0) &amp; (y &gt; -x * x))) &amp; (y &gt;= -x - 2))
   3 : 2
   4 : 5
   5 : CDBACED
