@@ -18984,6 +18984,182 @@ answer2 <span class="o">&lt;-</span> <span class="s">&#39;The winning strategy: 
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[227]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>N <span class="o">&lt;-</span> <span class="kp">as.integer</span><span class="p">(</span><span class="kp">readline</span><span class="p">(</span><span class="s">&quot;Число учеников, сдававших экзамен: &quot;</span><span class="p">))</span>
+school_numbers <span class="o">&lt;-</span> <span class="m">1</span><span class="o">:</span><span class="m">99</span>
+average_scores <span class="o">&lt;-</span> <span class="kt">integer</span><span class="p">(</span><span class="m">99</span><span class="p">)</span>
+numbers_of_students <span class="o">&lt;-</span> <span class="kt">integer</span><span class="p">(</span><span class="m">99</span><span class="p">)</span>
+district_average_score <span class="o">&lt;-</span> <span class="m">0</span>
+
+<span class="kp">cat</span><span class="p">(</span><span class="s">&quot;Персональные данные в формате: \n&quot;</span><span class="p">)</span>
+<span class="kp">cat</span><span class="p">(</span><span class="s">&quot;&lt;Фамилия&gt;&lt;пробел&gt;&lt;Имя&gt;&lt;пробел&gt;&lt;Номер школы&gt;&lt;пробел&gt;&lt;Количество баллов&gt;\n&quot;</span><span class="p">)</span>
+<span class="kp">cat</span><span class="p">(</span><span class="kp">replicate</span><span class="p">(</span><span class="m">18</span><span class="p">,</span><span class="s">&#39;=-=&#39;</span><span class="p">))</span>
+<span class="kp">cat</span><span class="p">(</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+
+<span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>N<span class="p">){</span>
+    string <span class="o">&lt;-</span> <span class="kp">unlist</span><span class="p">(</span><span class="kp">strsplit</span><span class="p">(</span><span class="kp">readline</span><span class="p">(</span><span class="kp">paste</span><span class="p">(</span><span class="kp">toString</span><span class="p">(</span>i<span class="p">),</span><span class="s">&quot;ученик &quot;</span><span class="p">,</span>sep<span class="o">=</span><span class="s">&quot; &quot;</span><span class="p">)),</span><span class="s">&quot;[ ]&quot;</span><span class="p">))</span>
+    school_number <span class="o">&lt;-</span> <span class="kp">as.integer</span><span class="p">(</span>string<span class="p">[</span><span class="m">3</span><span class="p">])</span>
+    score <span class="o">&lt;-</span> <span class="kp">as.integer</span><span class="p">(</span>string<span class="p">[</span><span class="m">4</span><span class="p">])</span>
+    
+    numbers_of_students<span class="p">[</span>school_number<span class="p">]</span> <span class="o">&lt;-</span> numbers_of_students<span class="p">[</span>school_number<span class="p">]</span> <span class="o">+</span> <span class="m">1</span>
+    
+    average_scores<span class="p">[</span>school_number<span class="p">]</span> <span class="o">&lt;-</span> average_scores<span class="p">[</span>school_number<span class="p">]</span> <span class="o">*</span> 
+    <span class="p">(</span><span class="m">1</span> <span class="o">-</span> <span class="m">1</span> <span class="o">/</span> numbers_of_students<span class="p">[</span>school_number<span class="p">])</span> <span class="o">+</span> 
+    score <span class="o">/</span> numbers_of_students<span class="p">[</span>school_number<span class="p">]</span>
+    
+    district_average_score <span class="o">&lt;-</span> district_average_score <span class="o">+</span> score <span class="o">/</span> N
+<span class="p">}</span>
+
+h_school_numbers <span class="o">&lt;-</span> <span class="s">&#39;&#39;</span>
+h_average_scores <span class="o">&lt;-</span> <span class="s">&#39;&#39;</span>
+district_average_score <span class="o">&lt;-</span> <span class="kp">round</span><span class="p">(</span>district_average_score<span class="p">)</span>
+
+<span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">99</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">if</span> <span class="p">(</span>numbers_of_students<span class="p">[</span>i<span class="p">]</span> <span class="o">!=</span> <span class="m">0</span><span class="p">){</span>
+        <span class="kr">if</span> <span class="p">(</span><span class="kp">round</span><span class="p">(</span>average_scores<span class="p">[</span>i<span class="p">])</span> <span class="o">&gt;</span> district_average_score<span class="p">)</span> <span class="p">{</span>
+            h_school_numbers <span class="o">&lt;-</span> <span class="kp">paste</span><span class="p">(</span>h_school_numbers<span class="p">,</span><span class="kp">toString</span><span class="p">(</span>i<span class="p">),</span>sep<span class="o">=</span><span class="s">&quot; &quot;</span><span class="p">)</span>
+            h_average_scores <span class="o">&lt;-</span> <span class="kp">paste</span><span class="p">(</span>h_average_scores<span class="p">,</span><span class="kp">round</span><span class="p">(</span>average_scores<span class="p">[</span>i<span class="p">]),</span>sep<span class="o">=</span><span class="s">&quot; &quot;</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kp">cat</span><span class="p">(</span><span class="kp">replicate</span><span class="p">(</span><span class="m">18</span><span class="p">,</span><span class="s">&#39;=-=&#39;</span><span class="p">))</span>
+<span class="kp">cat</span><span class="p">(</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+l <span class="o">&lt;-</span> <span class="kp">length</span><span class="p">(</span><span class="kp">unlist</span><span class="p">(</span><span class="kp">strsplit</span><span class="p">(</span>h_school_numbers<span class="p">,</span><span class="s">&quot;[ ]&quot;</span><span class="p">)))</span>
+
+<span class="kr">if</span> <span class="p">(</span>l <span class="o">==</span> <span class="m">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kp">cat</span><span class="p">(</span><span class="kp">substring</span><span class="p">(</span>h_school_numbers<span class="p">,</span><span class="m">2</span><span class="p">))</span>
+    <span class="kp">cat</span><span class="p">(</span><span class="kp">paste</span><span class="p">(</span><span class="s">&#39;\nAverage Score =&#39;</span><span class="p">,</span>h_average_scores<span class="p">,</span>sep<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">))</span>
+<span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
+    <span class="kp">cat</span><span class="p">(</span><span class="kp">substring</span><span class="p">(</span>h_school_numbers<span class="p">,</span><span class="m">2</span><span class="p">))</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Число учеников, сдававших экзамен: 20
+Персональные данные в формате: 
+&lt;Фамилия&gt;&lt;пробел&gt;&lt;Имя&gt;&lt;пробел&gt;&lt;Номер школы&gt;&lt;пробел&gt;&lt;Количество баллов&gt;
+=-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-=
+1 ученик Аверин Алексей 7 78
+2 ученик Бодрова Екатерина 38 81
+3 ученик Бондарев Максим 53 65
+4 ученик Вершинин Денис 7 87
+5 ученик Воронова Галина 7 76
+6 ученик Газиев Марат 38 83
+7 ученик Грачев Иван 38 67
+8 ученик Есин Руслан 53 88
+9 ученик Колесникова Мария 38 74
+10 ученик Лескова Анна 53 83
+11 ученик Мельников Роман 38 77
+12 ученик Морозова Жанна 53 88
+13 ученик Нестерова Роза 38 81
+14 ученик Нигматулин Ринат 7 72
+15 ученик Носиков Илья 53 88
+16 ученик Ольховский Дмитрий 7 79
+17 ученик Петренко Дарья 7 82
+18 ученик Робертсон Артур 38 73
+19 ученик Стариков Кирилл 53 70
+20 ученик Терехов Леонид 7 84
+=-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-=
+7 53</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[228]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>program <span class="o">&lt;-</span><span class="s">&#39;</span>
+<span class="s">N &lt;- as.integer(readline(&quot;Число учеников, сдававших экзамен: &quot;))</span>
+<span class="s">school_numbers &lt;- 1:99</span>
+<span class="s">average_scores &lt;- integer(99)</span>
+<span class="s">numbers_of_students &lt;- integer(99)</span>
+<span class="s">district_average_score &lt;- 0</span>
+
+<span class="s">cat(&quot;Персональные данные в формате: \n&quot;)</span>
+<span class="s">cat(&quot;&lt;Фамилия&gt;&lt;пробел&gt;&lt;Имя&gt;&lt;пробел&gt;&lt;Номер школы&gt;&lt;пробел&gt;&lt;Количество баллов&gt;\n&quot;)</span>
+<span class="s">cat(replicate(18,&quot;=-=&quot;))</span>
+<span class="s">cat(&quot;\n&quot;)</span>
+
+<span class="s">for (i in 1:N){</span>
+<span class="s">    string &lt;- unlist(strsplit(readline(paste(toString(i),&quot;ученик &quot;,sep=&quot; &quot;)),&quot;[ ]&quot;))</span>
+<span class="s">    school_number &lt;- as.integer(string[3])</span>
+<span class="s">    score &lt;- as.integer(string[4])</span>
+<span class="s">    </span>
+<span class="s">    numbers_of_students[school_number] &lt;- numbers_of_students[school_number] + 1</span>
+<span class="s">    </span>
+<span class="s">    average_scores[school_number] &lt;- average_scores[school_number] * </span>
+<span class="s">    (1 - 1 / numbers_of_students[school_number]) + </span>
+<span class="s">    score / numbers_of_students[school_number]</span>
+<span class="s">    </span>
+<span class="s">    district_average_score &lt;- district_average_score + score / N</span>
+<span class="s">}</span>
+
+<span class="s">h_school_numbers &lt;- &quot;&quot;</span>
+<span class="s">h_average_scores &lt;- &quot;&quot;</span>
+<span class="s">district_average_score &lt;- round(district_average_score)</span>
+
+<span class="s">for (i in 1:99) {</span>
+<span class="s">    if (numbers_of_students[i] != 0){</span>
+<span class="s">        if (round(average_scores[i]) &gt; district_average_score) {</span>
+<span class="s">            h_school_numbers &lt;- paste(h_school_numbers,toString(i),sep=&quot; &quot;)</span>
+<span class="s">            h_average_scores &lt;- paste(h_average_scores,round(average_scores[i]),sep=&quot; &quot;)</span>
+<span class="s">        }</span>
+<span class="s">    }</span>
+<span class="s">}</span>
+
+<span class="s">cat(replicate(18,&quot;=-=&quot;))</span>
+<span class="s">cat(&quot;\n&quot;)</span>
+<span class="s">l &lt;- length(unlist(strsplit(h_school_numbers,&quot;[ ]&quot;)))</span>
+
+<span class="s">if (l == 2) {</span>
+<span class="s">    cat(substring(h_school_numbers,2))</span>
+<span class="s">    cat(paste(&quot;\nAverage Score =&quot;,h_average_scores,sep=&quot;&quot;))</span>
+<span class="s">} else {</span>
+<span class="s">    cat(substring(h_school_numbers,2))</span>
+<span class="s">}&#39;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[229]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">27</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">paste</span><span class="p">(</span><span class="kp">version</span><span class="p">,</span> program<span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -18995,7 +19171,7 @@ answer2 <span class="o">&lt;-</span> <span class="s">&#39;The winning strategy: 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[171]:</div>
+<div class="prompt input_prompt">In&nbsp;[230]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>answer_dictionary
@@ -19017,7 +19193,7 @@ answer2 <span class="o">&lt;-</span> <span class="s">&#39;The winning strategy: 
 
 
 <div class="output_text output_subarea ">
-<pre>&lt;hash&gt; containing 25 key-value pair(s).
+<pre>&lt;hash&gt; containing 26 key-value pair(s).
   1 : 11010110
   10 : 243
   11 : 21
@@ -19055,6 +19231,54 @@ if (MIN == 10**100){
 if the first step of the first player is (x+3, y+3) =&gt; 
 the second player moves (x+3, y) after that 
 and moves (x+3, y+3) in other cases.
+  27 : R version 3.4.1 Patched (2017-06-30 r72871)
+N &lt;- as.integer(readline(&#34;Число учеников, сдававших экзамен: &#34;))
+school_numbers &lt;- 1:99
+average_scores &lt;- integer(99)
+numbers_of_students &lt;- integer(99)
+district_average_score &lt;- 0
+cat(&#34;Персональные данные в формате: 
+&#34;)
+cat(&#34;&lt;Фамилия&gt;&lt;пробел&gt;&lt;Имя&gt;&lt;пробел&gt;&lt;Номер школы&gt;&lt;пробел&gt;&lt;Количество баллов&gt;
+&#34;)
+cat(replicate(18,&#34;=-=&#34;))
+cat(&#34;
+&#34;)
+for (i in 1:N){
+    string &lt;- unlist(strsplit(readline(paste(toString(i),&#34;ученик &#34;,sep=&#34; &#34;)),&#34;[ ]&#34;))
+    school_number &lt;- as.integer(string[3])
+    score &lt;- as.integer(string[4])
+    
+    numbers_of_students[school_number] &lt;- numbers_of_students[school_number] + 1
+    
+    average_scores[school_number] &lt;- average_scores[school_number] * 
+    (1 - 1 / numbers_of_students[school_number]) + 
+    score / numbers_of_students[school_number]
+    
+    district_average_score &lt;- district_average_score + score / N
+}
+h_school_numbers &lt;- &#34;&#34;
+h_average_scores &lt;- &#34;&#34;
+district_average_score &lt;- round(district_average_score)
+for (i in 1:99) {
+    if (numbers_of_students[i] != 0){
+        if (round(average_scores[i]) &gt; district_average_score) {
+            h_school_numbers &lt;- paste(h_school_numbers,toString(i),sep=&#34; &#34;)
+            h_average_scores &lt;- paste(h_average_scores,round(average_scores[i]),sep=&#34; &#34;)
+        }
+    }
+}
+cat(replicate(18,&#34;=-=&#34;))
+cat(&#34;
+&#34;)
+l &lt;- length(unlist(strsplit(h_school_numbers,&#34;[ ]&#34;)))
+if (l == 2) {
+    cat(substring(h_school_numbers,2))
+    cat(paste(&#34;
+Average Score =&#34;,h_average_scores,sep=&#34;&#34;))
+} else {
+    cat(substring(h_school_numbers,2))
+}
   3 : 2
   4 : 5
   5 : CDBACED
