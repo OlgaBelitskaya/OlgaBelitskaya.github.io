@@ -19369,12 +19369,12 @@ vAEAACAiwRsAAAAiErwBAAAgIsEbAAAAIvr/69o/9h725UwAAAAASUVORK5CYII="
 <p>Третий вариант выходных данных:</p>
 <p><code>Нет таких школ</code></p>
 <hr>
-<p>After a final examination in informatics, information was received in the district administration about which pupil of which school scored how many points. In the district, it is considered suspicious that when in school more than two students gain the same highest score for the school. The District Methodist decided to find out such school numbers.</p>
-<p>The program should display the numbers of these schools, in any order. If such a school turns out to be one, it needs to deduce the highest score in this school, indicating that this is the highest score. If there are no such schools, you need to bring a message about this.</p>
-<p>Write an effective program, including the memory used (specify the version of the programming language used, for example, Borland Pascal 7.0), which should display the required information. It is known that more than 5 pupils of the district handed in computer science. It is also known that in the school district some numbers do not exist.</p>
+<p>After a final examination in informatics, information was received in the district administration about which pupil of which school scored how many points. In the district, it is considered suspicious when in the school more than two students gain the same highest score for the school. The District Methodist decided to find out such school numbers.</p>
+<p>The program should display the numbers of these schools, in any order. If such a school is only one, it needs to deduce the highest score in this school, indicating that this is the highest score. If there are no such schools, the program should print a message about this.</p>
+<p>Write an effective program, including the memory used (specify the version of the programming language used, for example, <code>Borland Pascal 7.0</code>), which should display the required information. It is known that more than 5 pupils of the district passed the exam in Computer Science. It is also known that in the school district some numbers do not exist.</p>
 <p>The input for the program is, at first, the number of students (N) who passed the exam. Then each of the following N lines contains information about students in the format:</p>
 <p><code>&lt;Surname&gt; &lt;Name&gt; &lt;School number&gt; &lt;Score&gt;</code>,</p>
-<p>where <code>&lt;Surname&gt;</code> is a string consisting of not more than 30 characters without spaces, <code>&lt;Name&gt;</code> - a string consisting of not more than 20 characters without spaces, <code>&lt;School number&gt;</code> - an integer in the range from 1 to 99, <code>&lt;Score&gt;</code> - an integer between 1 and 100. These data are written with a white space, with exactly one between each pair (that is, only three spaces per line).</p>
+<p>where <code>&lt;Surname&gt;</code> is a string consisting of not more than 30 characters without spaces, <code>&lt;Name&gt;</code> - a string consisting of not more than 20 characters without spaces, <code>&lt;School number&gt;</code> - an integer in the range from 1 to 99, <code>&lt;Score&gt;</code> - an integer between 1 and 100. These data are written with white spaces, with exactly one between each pair (that is, only three spaces per line).</p>
 <p>Example of an input line:</p>
 <p><code>Ivanov Ivan 50 87</code></p>
 <p>Example of an output line:</p>
@@ -19392,6 +19392,208 @@ vAEAACAiwRsAAAAiErwBAAAgIsEbAAAAIvr/69o/9h725UwAAAAASUVORK5CYII="
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>Пример персональных данных.</p>
+<ol>
+<li>Аверин Алексей 7 78</li>
+<li>Бодрова Екатерина 38 81</li>
+<li>Бондарев Максим 53 65</li>
+<li>Вершинин Денис 7 87</li>
+<li>Воронова Галина 7 76</li>
+<li>Газиев Марат 38 83</li>
+<li>Грачев Иван 38 67</li>
+<li>Есин Руслан 53 88</li>
+<li>Колесникова Мария 38 74</li>
+<li>Лескова Анна 53 83</li>
+<li>Мельников Роман 38 77</li>
+<li>Морозова Жанна 53 88</li>
+<li>Нестерова Роза 38 81</li>
+<li>Нигматулин Ринат 7 72</li>
+<li>Носиков Илья 53 88</li>
+<li>Ольховский Дмитрий 7 79</li>
+<li>Петренко Дарья 7 82</li>
+<li>Робертсон Артур 38 73</li>
+<li>Стариков Кирилл 53 70</li>
+<li>Терехов Леонид 7 84</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[86]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>N <span class="o">&lt;-</span> <span class="kp">as.integer</span><span class="p">(</span><span class="kp">readline</span><span class="p">(</span><span class="s">&quot;Число учеников, сдававших экзамен: &quot;</span><span class="p">))</span>
+school_numbers <span class="o">&lt;-</span> <span class="m">1</span><span class="o">:</span><span class="m">99</span>
+max_school_scores <span class="o">&lt;-</span> <span class="kt">integer</span><span class="p">(</span><span class="m">99</span><span class="p">)</span>
+students_with_max_scores <span class="o">&lt;-</span> <span class="kt">integer</span><span class="p">(</span><span class="m">99</span><span class="p">)</span>
+
+<span class="kp">cat</span><span class="p">(</span><span class="s">&quot;Персональные данные в формате: \n&quot;</span><span class="p">)</span>
+<span class="kp">cat</span><span class="p">(</span><span class="s">&quot;&lt;Фамилия&gt;&lt;пробел&gt;&lt;Имя&gt;&lt;пробел&gt;&lt;Номер школы&gt;&lt;пробел&gt;&lt;Количество баллов&gt;\n&quot;</span><span class="p">)</span>
+<span class="kp">cat</span><span class="p">(</span><span class="kp">replicate</span><span class="p">(</span><span class="m">18</span><span class="p">,</span><span class="s">&quot;=-=&quot;</span><span class="p">))</span>
+<span class="kp">cat</span><span class="p">(</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+
+<span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>N<span class="p">){</span>
+    string <span class="o">&lt;-</span> <span class="kp">unlist</span><span class="p">(</span><span class="kp">strsplit</span><span class="p">(</span><span class="kp">readline</span><span class="p">(</span><span class="kp">paste</span><span class="p">(</span><span class="kp">toString</span><span class="p">(</span>i<span class="p">),</span><span class="s">&quot;ученик &quot;</span><span class="p">,</span>sep<span class="o">=</span><span class="s">&quot; &quot;</span><span class="p">)),</span><span class="s">&quot;[ ]&quot;</span><span class="p">))</span>
+    school_number <span class="o">&lt;-</span> <span class="kp">as.integer</span><span class="p">(</span>string<span class="p">[</span><span class="m">3</span><span class="p">])</span>
+    score <span class="o">&lt;-</span> <span class="kp">as.integer</span><span class="p">(</span>string<span class="p">[</span><span class="m">4</span><span class="p">])</span>
+    
+    <span class="kr">if</span> <span class="p">(</span>max_school_scores<span class="p">[</span>school_number<span class="p">]</span> <span class="o">&lt;</span> score<span class="p">)</span> <span class="p">{</span>
+        max_school_scores<span class="p">[</span>school_number<span class="p">]</span> <span class="o">&lt;-</span> score
+        students_with_max_scores<span class="p">[</span>school_number<span class="p">]</span> <span class="o">&lt;-</span> <span class="m">1</span>        
+    <span class="p">}</span> <span class="kr">else</span> <span class="kr">if</span> <span class="p">(</span>max_school_scores<span class="p">[</span>school_number<span class="p">]</span> <span class="o">==</span> score<span class="p">)</span> <span class="p">{</span>
+        students_with_max_scores<span class="p">[</span>school_number<span class="p">]</span> <span class="o">&lt;-</span> students_with_max_scores<span class="p">[</span>school_number<span class="p">]</span> <span class="o">+</span> <span class="m">1</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+max_school_numbers <span class="o">&lt;-</span> <span class="s">&quot;&quot;</span>
+max_scores <span class="o">&lt;-</span> <span class="s">&quot;&quot;</span>
+
+<span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">99</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">if</span> <span class="p">(</span>students_with_max_scores<span class="p">[</span>i<span class="p">]</span> <span class="o">&gt;</span> <span class="m">2</span><span class="p">)</span> <span class="p">{</span>
+        max_school_numbers <span class="o">&lt;-</span> <span class="kp">paste</span><span class="p">(</span>max_school_numbers<span class="p">,</span><span class="kp">toString</span><span class="p">(</span>i<span class="p">),</span>sep<span class="o">=</span><span class="s">&quot; &quot;</span><span class="p">)</span>
+        max_scores <span class="o">&lt;-</span> <span class="kp">paste</span><span class="p">(</span>max_scores<span class="p">,</span>max_school_scores<span class="p">[</span>i<span class="p">],</span>sep<span class="o">=</span><span class="s">&quot; &quot;</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kp">cat</span><span class="p">(</span><span class="kp">replicate</span><span class="p">(</span><span class="m">18</span><span class="p">,</span><span class="s">&quot;=-=&quot;</span><span class="p">))</span>
+<span class="kp">cat</span><span class="p">(</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+l <span class="o">&lt;-</span> <span class="kp">length</span><span class="p">(</span><span class="kp">unlist</span><span class="p">(</span><span class="kp">strsplit</span><span class="p">(</span>max_school_numbers<span class="p">,</span><span class="s">&quot;[ ]&quot;</span><span class="p">)))</span>
+
+<span class="kr">if</span> <span class="p">(</span>l <span class="o">==</span> <span class="m">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kp">cat</span><span class="p">(</span><span class="kp">substring</span><span class="p">(</span>max_school_numbers<span class="p">,</span><span class="m">2</span><span class="p">))</span>
+    <span class="kp">cat</span><span class="p">(</span><span class="kp">paste</span><span class="p">(</span><span class="s">&quot;\nНаибольший балл =&quot;</span><span class="p">,</span>max_scores<span class="p">,</span>sep<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">))</span>
+<span class="p">}</span> <span class="kr">else</span> <span class="kr">if</span> <span class="p">(</span>l <span class="o">==</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kp">cat</span><span class="p">(</span><span class="s">&quot;Нет таких школ&quot;</span><span class="p">)</span>
+<span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
+    <span class="kp">cat</span><span class="p">(</span><span class="kp">substring</span><span class="p">(</span>max_school_numbers<span class="p">,</span><span class="m">2</span><span class="p">))</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Число учеников, сдававших экзамен: 20
+Персональные данные в формате: 
+&lt;Фамилия&gt;&lt;пробел&gt;&lt;Имя&gt;&lt;пробел&gt;&lt;Номер школы&gt;&lt;пробел&gt;&lt;Количество баллов&gt;
+=-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-=
+1 ученик Аверин Алексей 7 78
+2 ученик Бодрова Екатерина 38 81
+3 ученик Бондарев Максим 53 65
+4 ученик Вершинин Денис 7 87
+5 ученик Воронова Галина 7 76
+6 ученик Газиев Марат 38 83
+7 ученик Грачев Иван 38 67
+8 ученик Есин Руслан 53 88
+9 ученик Колесникова Мария 38 74
+10 ученик Лескова Анна 53 83
+11 ученик Мельников Роман 38 77
+12 ученик Морозова Жанна 53 88
+13 ученик Нестерова Роза 38 81
+14 ученик Нигматулин Ринат 7 72
+15 ученик Носиков Илья 53 88
+16 ученик Ольховский Дмитрий 7 79
+17 ученик Петренко Дарья 7 82
+18 ученик Робертсон Артур 38 73
+19 ученик Стариков Кирилл 53 70
+20 ученик Терехов Леонид 7 84
+=-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-=
+53
+Наибольший балл = 88</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[87]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>program <span class="o">&lt;-</span><span class="s">&#39;</span>
+<span class="s">N &lt;- as.integer(readline(&quot;Число учеников, сдававших экзамен: &quot;))</span>
+<span class="s">school_numbers &lt;- 1:99</span>
+<span class="s">max_school_scores &lt;- integer(99)</span>
+<span class="s">students_with_max_scores &lt;- integer(99)</span>
+
+<span class="s">cat(&quot;Персональные данные в формате: \n&quot;)</span>
+<span class="s">cat(&quot;&lt;Фамилия&gt;&lt;пробел&gt;&lt;Имя&gt;&lt;пробел&gt;&lt;Номер школы&gt;&lt;пробел&gt;&lt;Количество баллов&gt;\n&quot;)</span>
+<span class="s">cat(replicate(18,&quot;=-=&quot;))</span>
+<span class="s">cat(&quot;\n&quot;)</span>
+
+<span class="s">for (i in 1:N){</span>
+<span class="s">    string &lt;- unlist(strsplit(readline(paste(toString(i),&quot;ученик &quot;,sep=&quot; &quot;)),&quot;[ ]&quot;))</span>
+<span class="s">    school_number &lt;- as.integer(string[3])</span>
+<span class="s">    score &lt;- as.integer(string[4])</span>
+<span class="s">    </span>
+<span class="s">    if (max_school_scores[school_number] &lt; score) {</span>
+<span class="s">        max_school_scores[school_number] &lt;- score</span>
+<span class="s">        students_with_max_scores[school_number] &lt;- 1        </span>
+<span class="s">    } else if (max_school_scores[school_number] == score) {</span>
+<span class="s">        students_with_max_scores[school_number] &lt;- students_with_max_scores[school_number] + 1</span>
+<span class="s">    }</span>
+<span class="s">}</span>
+
+<span class="s">max_school_numbers &lt;- &quot;&quot;</span>
+<span class="s">max_scores &lt;- &quot;&quot;</span>
+
+<span class="s">for (i in 1:99) {</span>
+<span class="s">    if (students_with_max_scores[i] &gt; 2) {</span>
+<span class="s">        max_school_numbers &lt;- paste(max_school_numbers,toString(i),sep=&quot; &quot;)</span>
+<span class="s">        max_scores &lt;- paste(max_scores,max_school_scores[i],sep=&quot; &quot;)</span>
+<span class="s">    }</span>
+<span class="s">}</span>
+
+<span class="s">cat(replicate(18,&quot;=-=&quot;))</span>
+<span class="s">cat(&quot;\n&quot;)</span>
+<span class="s">l &lt;- length(unlist(strsplit(max_school_numbers,&quot;[ ]&quot;)))</span>
+
+<span class="s">if (l == 2) {</span>
+<span class="s">    cat(substring(max_school_numbers,2))</span>
+<span class="s">    cat(paste(&quot;\nНаибольший балл =&quot;,max_scores,sep=&quot;&quot;))</span>
+<span class="s">} else if (l == 0) {</span>
+<span class="s">    cat(&quot;Нет таких школ&quot;)</span>
+<span class="s">} else {</span>
+<span class="s">    cat(substring(max_school_numbers,2))</span>
+<span class="s">}&#39;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[88]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">27</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">paste</span><span class="p">(</span><span class="kp">version</span><span class="p">,</span> program<span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2>Ответы &nbsp; &nbsp; &nbsp; Answers</h2>
 
 </div>
@@ -19399,7 +19601,7 @@ vAEAACAiwRsAAAAiErwBAAAgIsEbAAAAIvr/69o/9h725UwAAAAASUVORK5CYII="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[82]:</div>
+<div class="prompt input_prompt">In&nbsp;[89]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>answer_dictionary
@@ -19421,7 +19623,7 @@ vAEAACAiwRsAAAAiErwBAAAgIsEbAAAAIvr/69o/9h725UwAAAAASUVORK5CYII="
 
 
 <div class="output_text output_subarea ">
-<pre>&lt;hash&gt; containing 26 key-value pair(s).
+<pre>&lt;hash&gt; containing 27 key-value pair(s).
   1 : 6
   10 : ДДБД
   11 : 17
@@ -19495,6 +19697,51 @@ P+1:12→13 ∨ P+2:12→14 ∨ P*2:12→24
 V+2:13→15 ∨ V+1:14→15 ∨ V*2:24→48
 P+1:15→16 ∨ P+2:15→17 ∨ P*2:15→30
 V*2:16→32 ∨ V*2:17→34 ∨ V*2:30→60
+  27 : R version 3.4.1 Patched (2017-06-30 r72871)
+N &lt;- as.integer(readline(&#34;Число учеников, сдававших экзамен: &#34;))
+school_numbers &lt;- 1:99
+max_school_scores &lt;- integer(99)
+students_with_max_scores &lt;- integer(99)
+cat(&#34;Персональные данные в формате: 
+&#34;)
+cat(&#34;&lt;Фамилия&gt;&lt;пробел&gt;&lt;Имя&gt;&lt;пробел&gt;&lt;Номер школы&gt;&lt;пробел&gt;&lt;Количество баллов&gt;
+&#34;)
+cat(replicate(18,&#34;=-=&#34;))
+cat(&#34;
+&#34;)
+for (i in 1:N){
+    string &lt;- unlist(strsplit(readline(paste(toString(i),&#34;ученик &#34;,sep=&#34; &#34;)),&#34;[ ]&#34;))
+    school_number &lt;- as.integer(string[3])
+    score &lt;- as.integer(string[4])
+    
+    if (max_school_scores[school_number] &lt; score) {
+        max_school_scores[school_number] &lt;- score
+        students_with_max_scores[school_number] &lt;- 1        
+    } else if (max_school_scores[school_number] == score) {
+        students_with_max_scores[school_number] &lt;- students_with_max_scores[school_number] + 1
+    }
+}
+max_school_numbers &lt;- &#34;&#34;
+max_scores &lt;- &#34;&#34;
+for (i in 1:99) {
+    if (students_with_max_scores[i] &gt; 2) {
+        max_school_numbers &lt;- paste(max_school_numbers,toString(i),sep=&#34; &#34;)
+        max_scores &lt;- paste(max_scores,max_school_scores[i],sep=&#34; &#34;)
+    }
+}
+cat(replicate(18,&#34;=-=&#34;))
+cat(&#34;
+&#34;)
+l &lt;- length(unlist(strsplit(max_school_numbers,&#34;[ ]&#34;)))
+if (l == 2) {
+    cat(substring(max_school_numbers,2))
+    cat(paste(&#34;
+Наибольший балл =&#34;,max_scores,sep=&#34;&#34;))
+} else if (l == 0) {
+    cat(&#34;Нет таких школ&#34;)
+} else {
+    cat(substring(max_school_numbers,2))
+}
   3 : 30
   4 : 3
   5 : 00

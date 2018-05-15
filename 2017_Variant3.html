@@ -16112,12 +16112,12 @@ V*2:16→32 ∨ V*2:17→34 ∨ V*2:30→60
 <p>Третий вариант выходных данных:</p>
 <p><code>Нет таких школ</code></p>
 <hr>
-<p>After a final examination in informatics, information was received in the district administration about which pupil of which school scored how many points. In the district, it is considered suspicious that when in school more than two students gain the same highest score for the school. The District Methodist decided to find out such school numbers.</p>
-<p>The program should display the numbers of these schools, in any order. If such a school turns out to be one, it needs to deduce the highest score in this school, indicating that this is the highest score. If there are no such schools, you need to bring a message about this.</p>
-<p>Write an effective program, including the memory used (specify the version of the programming language used, for example, Borland Pascal 7.0), which should display the required information. It is known that more than 5 pupils of the district handed in computer science. It is also known that in the school district some numbers do not exist.</p>
+<p>After a final examination in informatics, information was received in the district administration about which pupil of which school scored how many points. In the district, it is considered suspicious when in the school more than two students gain the same highest score for the school. The District Methodist decided to find out such school numbers.</p>
+<p>The program should display the numbers of these schools, in any order. If such a school is only one, it needs to deduce the highest score in this school, indicating that this is the highest score. If there are no such schools, the program should print a message about this.</p>
+<p>Write an effective program, including the memory used (specify the version of the programming language used, for example, <code>Borland Pascal 7.0</code>), which should display the required information. It is known that more than 5 pupils of the district passed the exam in Computer Science. It is also known that in the school district some numbers do not exist.</p>
 <p>The input for the program is, at first, the number of students (N) who passed the exam. Then each of the following N lines contains information about students in the format:</p>
 <p><code>&lt;Surname&gt; &lt;Name&gt; &lt;School number&gt; &lt;Score&gt;</code>,</p>
-<p>where <code>&lt;Surname&gt;</code> is a string consisting of not more than 30 characters without spaces, <code>&lt;Name&gt;</code> - a string consisting of not more than 20 characters without spaces, <code>&lt;School number&gt;</code> - an integer in the range from 1 to 99, <code>&lt;Score&gt;</code> - an integer between 1 and 100. These data are written with a white space, with exactly one between each pair (that is, only three spaces per line).</p>
+<p>where <code>&lt;Surname&gt;</code> is a string consisting of not more than 30 characters without spaces, <code>&lt;Name&gt;</code> - a string consisting of not more than 20 characters without spaces, <code>&lt;School number&gt;</code> - an integer in the range from 1 to 99, <code>&lt;Score&gt;</code> - an integer between 1 and 100. These data are written with white spaces, with exactly one between each pair (that is, only three spaces per line).</p>
 <p>Example of an input line:</p>
 <p><code>Ivanov Ivan 50 87</code></p>
 <p>Example of an output line:</p>
@@ -16164,10 +16164,207 @@ V*2:16→32 ∨ V*2:17→34 ∨ V*2:30→60
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
+<div class="prompt input_prompt">In&nbsp;[89]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># без использования импортируемых модулей </span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Число учеников, сдававших экзамен: &#39;</span><span class="p">))</span>
+<span class="n">school_numbers</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">))</span>
+<span class="n">max_school_scores</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">students_with_max_scores</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Персональные данные в формате: &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&lt;Фамилия&gt;&lt;пробел&gt;&lt;Имя&gt;&lt;пробел&gt;&lt;Номер школы&gt;&lt;пробел&gt;&lt;Количество баллов&gt;&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">18</span><span class="o">*</span><span class="s1">&#39;=-=&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">((</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> ученик&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="n">string</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">school_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">string</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">score</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">string</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+    
+    <span class="k">if</span> <span class="n">max_school_scores</span><span class="p">[</span><span class="n">school_number</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">score</span><span class="p">:</span>
+        <span class="n">max_school_scores</span><span class="p">[</span><span class="n">school_number</span><span class="p">]</span> <span class="o">=</span> <span class="n">score</span>
+        <span class="n">students_with_max_scores</span><span class="p">[</span><span class="n">school_number</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">max_school_scores</span><span class="p">[</span><span class="n">school_number</span><span class="p">]</span> <span class="o">==</span> <span class="n">score</span><span class="p">:</span>
+        <span class="n">students_with_max_scores</span><span class="p">[</span><span class="n">school_number</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+<span class="n">max_school_numbers</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">max_scores</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">students_with_max_scores</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">max_school_numbers</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>
+        <span class="n">max_scores</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">max_school_scores</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="mi">18</span><span class="o">*</span><span class="s1">&#39;=-=&#39;</span><span class="p">)</span>        
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">max_school_numbers</span><span class="o">.</span><span class="n">split</span><span class="p">())</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">max_school_numbers</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Наибольший балл = &#39;</span> <span class="o">+</span> <span class="n">max_scores</span><span class="p">)</span>
+<span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">max_school_numbers</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Нет таких школ&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">max_school_numbers</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Число учеников, сдававших экзамен: 20
+Персональные данные в формате: 
+&lt;Фамилия&gt;&lt;пробел&gt;&lt;Имя&gt;&lt;пробел&gt;&lt;Номер школы&gt;&lt;пробел&gt;&lt;Количество баллов&gt;
+=-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-=
+1 ученик
+Аверин Алексей 7 78
+2 ученик
+Бодрова Екатерина 38 81
+3 ученик
+Бондарев Максим 53 65
+4 ученик
+Вершинин Денис 7 87
+5 ученик
+Воронова Галина 7 76
+6 ученик
+Газиев Марат 38 83
+7 ученик
+Грачев Иван 38 67
+8 ученик
+Есин Руслан 53 88
+9 ученик
+Колесникова Мария 38 74
+10 ученик
+Лескова Анна 53 83
+11 ученик
+Мельников Роман 38 77
+12 ученик
+Морозова Жанна 53 88
+13 ученик
+Нестерова Роза 38 81
+14 ученик
+Нигматулин Ринат 7 72
+15 ученик
+Носиков Илья 53 88
+16 ученик
+Ольховский Дмитрий 7 79
+17 ученик
+Петренко Дарья 7 82
+18 ученик
+Робертсон Артур 38 73
+19 ученик
+Стариков Кирилл 53 70
+20 ученик
+Терехов Леонид 7 84
+=-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-=
+53 
+Наибольший балл = 88 
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[91]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">program</span><span class="o">=</span>\
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">N = int(input(&#39;Число учеников, сдававших экзамен: &#39;))</span>
+<span class="sd">school_numbers = list(range(1,100))</span>
+<span class="sd">max_school_scores = 100 * [0]</span>
+<span class="sd">students_with_max_scores = 100 * [0]</span>
+
+<span class="sd">print(&#39;Персональные данные в формате: &#39;)</span>
+<span class="sd">print(&#39;&lt;Фамилия&gt;&lt;пробел&gt;&lt;Имя&gt;&lt;пробел&gt;&lt;Номер школы&gt;&lt;пробел&gt;&lt;Количество баллов&gt;&#39;)</span>
+<span class="sd">print(18*&#39;=-=&#39;)</span>
+
+<span class="sd">for i in range(1,N+1):</span>
+<span class="sd">    print((&quot;{} ученик&quot;).format(i))</span>
+<span class="sd">    string = input().split()</span>
+<span class="sd">    school_number = int(string[2])</span>
+<span class="sd">    score = int(string[3])</span>
+<span class="sd">    </span>
+<span class="sd">    if max_school_scores[school_number] &lt; score:</span>
+<span class="sd">        max_school_scores[school_number] = score</span>
+<span class="sd">        students_with_max_scores[school_number] = 1</span>
+<span class="sd">    elif max_school_scores[school_number] == score:</span>
+<span class="sd">        students_with_max_scores[school_number] += 1</span>
+<span class="sd">        </span>
+<span class="sd">max_school_numbers = &#39;&#39;</span>
+<span class="sd">max_scores = &#39;&#39;</span>
+
+<span class="sd">for i in range(1,100):</span>
+<span class="sd">    if students_with_max_scores[i] &gt; 2:</span>
+<span class="sd">        max_school_numbers += str(i) + &#39; &#39;</span>
+<span class="sd">        max_scores += str(max_school_scores[i]) + &#39; &#39;</span>
+
+<span class="sd">print(18*&#39;=-=&#39;)        </span>
+<span class="sd">if len(max_school_numbers.split()) == 1:</span>
+<span class="sd">    print(max_school_numbers + &#39;\nНаибольший балл = &#39; + max_scores)</span>
+<span class="sd">elif len(max_school_numbers) == 0:</span>
+<span class="sd">    print(&#39;Нет таких школ&#39;)</span>
+<span class="sd">else:</span>
+<span class="sd">    print(max_school_numbers)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[92]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">27</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="n">version</span><span class="p">,</span> <span class="n">program</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span> <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">27</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Answer: [&#39;python 3.6&#39;, &#39;\nN = int(input(\&#39;Число учеников, сдававших экзамен: \&#39;))\nschool_numbers = list(range(1,100))\nmax_school_scores = 100 * [0]\nstudents_with_max_scores = 100 * [0]\n\nprint(\&#39;Персональные данные в формате: \&#39;)\nprint(\&#39;&lt;Фамилия&gt;&lt;пробел&gt;&lt;Имя&gt;&lt;пробел&gt;&lt;Номер школы&gt;&lt;пробел&gt;&lt;Количество баллов&gt;\&#39;)\nprint(18*\&#39;=-=\&#39;)\n\nfor i in range(1,N+1):\n    print((&#34;{} ученик&#34;).format(i))\n    string = input().split()\n    school_number = int(string[2])\n    score = int(string[3])\n    \n    if max_school_scores[school_number] &lt; score:\n        max_school_scores[school_number] = score\n        students_with_max_scores[school_number] = 1\n    elif max_school_scores[school_number] == score:\n        students_with_max_scores[school_number] += 1\n        \nmax_school_numbers = \&#39;\&#39;\nmax_scores = \&#39;\&#39;\n\nfor i in range(1,100):\n    if students_with_max_scores[i] &gt; 2:\n        max_school_numbers += str(i) + \&#39; \&#39;\n        max_scores += str(max_school_scores[i]) + \&#39; \&#39;\n\nprint(18*\&#39;=-=\&#39;)        \nif len(max_school_numbers.split()) == 1:\n    print(max_school_numbers + \&#39;\nНаибольший балл = \&#39; + max_scores)\nelif len(max_school_numbers) == 0:\n    print(\&#39;Нет таких школ\&#39;)\nelse:\n    print(max_school_numbers)\n&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">In&nbsp;[70]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Число учеников, сдававших экзамен: &quot;</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># с использованием импортируемых модулей </span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Число учеников, сдававших экзамен: &quot;</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Персональные данные в формате: &quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&lt;Фамилия&gt;&lt;пробел&gt;&lt;Имя&gt;&lt;пробел&gt;&lt;Номер школы&gt;&lt;пробел&gt;&lt;Количество баллов&gt;&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="mi">18</span><span class="o">*</span><span class="s2">&quot;=-= &quot;</span><span class="p">)</span>
@@ -16302,88 +16499,6 @@ V*2:16→32 ∨ V*2:17→34 ∨ V*2:30→60
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[53]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">program</span><span class="o">=</span>\
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">N = int(input(&quot;Число учеников, сдававших экзамен: &quot;))</span>
-<span class="sd">print(&quot;Персональные данные в формате: &quot;)</span>
-<span class="sd">print(&quot;&lt;Фамилия&gt;&lt;пробел&gt;&lt;Имя&gt;&lt;пробел&gt;&lt;Номер школы&gt;&lt;пробел&gt;&lt;Количество баллов&gt;&quot;)</span>
-<span class="sd">print(18*&quot;=-= &quot;)</span>
-<span class="sd">      </span>
-<span class="sd">df = pandas.DataFrame(index=range(1,N+1,1), </span>
-<span class="sd">                      columns=[&#39;Фамилия&#39;, &#39;Имя&#39;, &#39;Номер школы&#39;, &#39;Количество баллов&#39;])</span>
-<span class="sd">df = df.fillna(0)</span>
-
-<span class="sd">for i in range(1,N+1,1):</span>
-<span class="sd">    print((&quot;{} ученик&quot;).format(i))</span>
-<span class="sd">    df.loc[i] = input(&quot;&quot;).split()</span>
-<span class="sd">    </span>
-<span class="sd">df[&#39;Количество баллов&#39;]=df[&#39;Количество баллов&#39;].astype(&#39;int32&#39;)</span>
-<span class="sd">df[&#39;Номер школы&#39;]=df[&#39;Номер школы&#39;].astype(&#39;int32&#39;)</span>
-<span class="sd">max_score = df[&#39;Количество баллов&#39;].max()</span>
-
-<span class="sd">schools, max_school_scores = &#39;&#39;, []</span>
-<span class="sd">for school in df[&#39;Номер школы&#39;].unique():</span>
-<span class="sd">    school_scores = df[df[&#39;Номер школы&#39;]==school][&#39;Количество баллов&#39;]</span>
-<span class="sd">    max_school_score = school_scores.max()</span>
-<span class="sd">    if school_scores.value_counts().iloc[0] &gt; 2:</span>
-<span class="sd">        schools+=&#39; &#39;</span>
-<span class="sd">        schools+=str(school)</span>
-<span class="sd">        max_school_scores.append(max_school_score)</span>
-
-<span class="sd">num_school_list = [int(el) for el in schools[1:].split()]</span>
-<span class="sd">if len(num_school_list) == 1:</span>
-<span class="sd">    print(num_school_list[0], </span>
-<span class="sd">          &quot;\nНаибольший балл = &quot;, </span>
-<span class="sd">          int(max_school_scores[0]))</span>
-<span class="sd">elif len(num_school_list) == 0:</span>
-<span class="sd">    print(&quot;\nНет таких школ&quot;)</span>
-<span class="sd">else:</span>
-<span class="sd">    print(schools)</span>
-<span class="sd">&quot;&quot;&quot;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[54]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">27</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="n">version</span><span class="p">,</span> <span class="n">program</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span> <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">27</span><span class="p">])</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Answer: [&#39;python 3.6&#39;, &#39;\nN = int(input(&#34;Число учеников, сдававших экзамен: &#34;))\nprint(&#34;Персональные данные в формате: &#34;)\nprint(&#34;&lt;Фамилия&gt;&lt;пробел&gt;&lt;Имя&gt;&lt;пробел&gt;&lt;Номер школы&gt;&lt;пробел&gt;&lt;Количество баллов&gt;&#34;)\nprint(18*&#34;=-= &#34;)\n      \ndf = pandas.DataFrame(index=range(1,N+1,1), \n                      columns=[\&#39;Фамилия\&#39;, \&#39;Имя\&#39;, \&#39;Номер школы\&#39;, \&#39;Количество баллов\&#39;])\ndf = df.fillna(0)\n\nfor i in range(1,N+1,1):\n    print((&#34;{} ученик&#34;).format(i))\n    df.loc[i] = input(&#34;&#34;).split()\n    \ndf[\&#39;Количество баллов\&#39;]=df[\&#39;Количество баллов\&#39;].astype(\&#39;int32\&#39;)\ndf[\&#39;Номер школы\&#39;]=df[\&#39;Номер школы\&#39;].astype(\&#39;int32\&#39;)\nmax_score = df[\&#39;Количество баллов\&#39;].max()\n\nschools, max_school_scores = \&#39;\&#39;, []\nfor school in df[\&#39;Номер школы\&#39;].unique():\n    school_scores = df[df[\&#39;Номер школы\&#39;]==school][\&#39;Количество баллов\&#39;]\n    max_school_score = school_scores.max()\n    if school_scores.value_counts().iloc[0] &gt; 2:\n        schools+=\&#39; \&#39;\n        schools+=str(school)\n        max_school_scores.append(max_school_score)\n\nnum_school_list = [int(el) for el in schools[1:].split()]\nif len(num_school_list) == 1:\n    print(num_school_list[0], \n          &#34;\nНаибольший балл = &#34;, \n          int(max_school_scores[0]))\nelif len(num_school_list) == 0:\n    print(&#34;\nНет таких школ&#34;)\nelse:\n    print(schools)\n&#39;]
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 <div class="prompt input_prompt">In&nbsp;[74]:</div>
 <div class="inner_cell">
     <div class="input_area">
@@ -16445,7 +16560,7 @@ V*2:16→32 ∨ V*2:17→34 ∨ V*2:30→60
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[80]:</div>
+<div class="prompt input_prompt">In&nbsp;[93]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span>
@@ -16461,7 +16576,7 @@ V*2:16→32 ∨ V*2:17→34 ∨ V*2:30→60
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[80]:</div>
+<div class="prompt output_prompt">Out[93]:</div>
 
 
 
@@ -16494,7 +16609,9 @@ V*2:16→32 ∨ V*2:17→34 ∨ V*2:30→60
   &#39;\n2.\nif y &lt;= -x:\n    if y &lt;= x:\n        if y &gt;= x * x - 2:\n⟹\nif ((y &gt;= x*x-2)  and ((y &lt;= -x) or (y &lt;= x))):\n&#39;],
  25: [&#39;python 3.6&#39;,
   &#34;\nN = 40\nA = []\nK, MAX, MAX2 = 0, -10 ** 100, -10 ** 100\n\nfor K in range(N):\n    A.append(int(input()))\n# The fragment instead of the ellipsis    \n    if A[K] &gt;= MAX:\n        MAX2 = MAX\n        MAX = A[K]\n    elif A[K] &gt;= MAX2:\n        MAX2 = A[K]\n        \nprint(&#39;\n&#39;+str(MAX2))      \n&#34;],
- 26: &#39;\n1.\na.\nP*2:16≤S≤30→32≤2*S≤60\nb.\nS=15\nP+1:15→16 ∨ P+2:15→17 ∨ P*2:15→30\nV*2:16→32 ∨ V*2:17→34 ∨ V*2:30→60\n2.\nS=13 ∨ S=14\nP+2:13→15 ∨ P+1:14→15\nV+1:15→16 ∨ V+2:15→17 ∨ V*2:15→30\nP*2:16→32 ∨ P*2:17→34 ∨ P*2:30→60\n3.\nS=12\nP+1:12→13 ∨ P+2:12→14 ∨ P*2:12→24\nV+2:13→15 ∨ V+1:14→15 ∨ V*2:24→48\nP+1:15→16 ∨ P+2:15→17 ∨ P*2:15→30\nV*2:16→32 ∨ V*2:17→34 ∨ V*2:30→60\n&#39;}</pre>
+ 26: &#39;\n1.\na.\nP*2:16≤S≤30→32≤2*S≤60\nb.\nS=15\nP+1:15→16 ∨ P+2:15→17 ∨ P*2:15→30\nV*2:16→32 ∨ V*2:17→34 ∨ V*2:30→60\n2.\nS=13 ∨ S=14\nP+2:13→15 ∨ P+1:14→15\nV+1:15→16 ∨ V+2:15→17 ∨ V*2:15→30\nP*2:16→32 ∨ P*2:17→34 ∨ P*2:30→60\n3.\nS=12\nP+1:12→13 ∨ P+2:12→14 ∨ P*2:12→24\nV+2:13→15 ∨ V+1:14→15 ∨ V*2:24→48\nP+1:15→16 ∨ P+2:15→17 ∨ P*2:15→30\nV*2:16→32 ∨ V*2:17→34 ∨ V*2:30→60\n&#39;,
+ 27: [&#39;python 3.6&#39;,
+  &#39;\nN = int(input(\&#39;Число учеников, сдававших экзамен: \&#39;))\nschool_numbers = list(range(1,100))\nmax_school_scores = 100 * [0]\nstudents_with_max_scores = 100 * [0]\n\nprint(\&#39;Персональные данные в формате: \&#39;)\nprint(\&#39;&lt;Фамилия&gt;&lt;пробел&gt;&lt;Имя&gt;&lt;пробел&gt;&lt;Номер школы&gt;&lt;пробел&gt;&lt;Количество баллов&gt;\&#39;)\nprint(18*\&#39;=-=\&#39;)\n\nfor i in range(1,N+1):\n    print((&#34;{} ученик&#34;).format(i))\n    string = input().split()\n    school_number = int(string[2])\n    score = int(string[3])\n    \n    if max_school_scores[school_number] &lt; score:\n        max_school_scores[school_number] = score\n        students_with_max_scores[school_number] = 1\n    elif max_school_scores[school_number] == score:\n        students_with_max_scores[school_number] += 1\n        \nmax_school_numbers = \&#39;\&#39;\nmax_scores = \&#39;\&#39;\n\nfor i in range(1,100):\n    if students_with_max_scores[i] &gt; 2:\n        max_school_numbers += str(i) + \&#39; \&#39;\n        max_scores += str(max_school_scores[i]) + \&#39; \&#39;\n\nprint(18*\&#39;=-=\&#39;)        \nif len(max_school_numbers.split()) == 1:\n    print(max_school_numbers + \&#39;\nНаибольший балл = \&#39; + max_scores)\nelif len(max_school_numbers) == 0:\n    print(\&#39;Нет таких школ\&#39;)\nelse:\n    print(max_school_numbers)\n&#39;]}</pre>
 </div>
 
 </div>
