@@ -15290,7 +15290,39 @@ Answer: 9
 </ul>
 <p>   - In the condition columns, specify "yes" if the condition is fulfilled, "no" if the condition fails, "-" (dash), if the condition is not checked, "unknown" if the program behaves differently for different values, belonging to the given area. In the "Program Output" column, specify what the program will display. If the program does not print anything, write "-" (dash). If different texts are output for different values belonging to the region, write "unknown". In the last column, indicate "yes" or "no".</p>
 <p>$2.$ Specify, how it is necessary to finish the program, that there were no cases of its wrong work. (You can do this in several ways, just specify any way to modify the source program.)</p>
+<table style="width:95%;">
+  <tr style="color:slategray;font-size:120%;font-family:'Roboto';">
+    <th style="text-align:center;">Python</th> 
+    <th style="text-align:center;">R</th>          
+  </tr>
+  <tr>
+    <td style="font-weight:bold;text-align:left;"><pre><code class='python'>
 
+x,y = float(input("x ")), float(input("y "))
+if y <= -x:
+    if y <= x:
+        if y >= x &#42; x - 2:
+            print('принадлежит')
+        else:
+            print('не принадлежит')  
+    </code></pre></td> 
+    <td style="font-weight:bold;text-align:left;"><pre><code class='r'>
+
+x <- as.numeric(readline("x "))
+y <- as.numeric(readline("y "))
+
+if (y <= -x) {
+    if (y <= x) {
+        if (y >= x &#42; x - 2) {
+            print('принадлежит')
+        } else {
+            print('не принадлежит')
+        }
+    }
+}
+    </code></pre></td>     
+  </tr>    
+</table>
 </div>
 </div>
 </div>
@@ -15298,7 +15330,8 @@ Answer: 9
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="1.">1.<a class="anchor-link" href="#1.">&#182;</a></h4><table>
+<p>1.</p>
+<table>
 <thead><tr>
 <th style="text-align:right">Область</th>
 <th style="text-align:right">Условие 1</th>
@@ -15405,12 +15438,13 @@ Answer: 9
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="prompt input_prompt">In&nbsp;[52]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">table</span> <span class="o">=</span> \
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">1.</span>
+
 <span class="sd">| Область | Условие 1 | Условие 2 | Условие 3 | Программа выведет | Область обрабатывается верно |</span>
 <span class="sd">|-:|-:|-:|-:|-:|-:|</span>
 <span class="sd">| Area | Condition 1 | Condition 2 | Condition 3 | Program Results | The Area Is Processed Correctly |</span>
@@ -15445,7 +15479,47 @@ Answer: 9
 <div class="prompt input_prompt">In&nbsp;[47]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;x &quot;</span><span class="p">)),</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;y &quot;</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># the wrong variant</span>
+<span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;x &quot;</span><span class="p">)),</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;y &quot;</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">y</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="n">x</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">y</span> <span class="o">&lt;=</span> <span class="n">x</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">y</span> <span class="o">&gt;=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;принадлежит&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;не принадлежит&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>x -1
+y 4
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># the right variant</span>
+<span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;x &quot;</span><span class="p">)),</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;y &quot;</span><span class="p">))</span>
 <span class="k">if</span> <span class="p">((</span><span class="n">y</span> <span class="o">&gt;=</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>  <span class="ow">and</span> <span class="p">((</span><span class="n">y</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="n">x</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">y</span> <span class="o">&lt;=</span> <span class="n">x</span><span class="p">))):</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;принадлежит&#39;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
@@ -15479,17 +15553,17 @@ y 4
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="prompt input_prompt">In&nbsp;[55]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">program_correction</span> <span class="o">=</span> \
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">2.</span>
-<span class="sd">x,y = float(input(&quot;x &quot;)), float(input(&quot;y &quot;))</span>
+<span class="sd">if y &lt;= -x:</span>
+<span class="sd">    if y &lt;= x:</span>
+<span class="sd">        if y &gt;= x * x - 2:</span>
+<span class="sd">⟹</span>
 <span class="sd">if ((y &gt;= x*x-2)  and ((y &lt;= -x) or (y &lt;= x))):</span>
-<span class="sd">    print(&#39;принадлежит&#39;)</span>
-<span class="sd">else:</span>
-<span class="sd">    print(&#39;не принадлежит&#39;)</span>
 <span class="sd">&quot;&quot;&quot;</span>
 </pre></div>
 
@@ -15500,7 +15574,7 @@ y 4
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In&nbsp;[56]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">24</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="n">table</span><span class="p">,</span> <span class="n">program_correction</span><span class="p">]</span>
@@ -15521,7 +15595,7 @@ y 4
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Answer: [&#39;\n1.\n| Область | Условие 1 | Условие 2 | Условие 3 | Программа выведет | Область обрабатывается верно |\n|-:|-:|-:|-:|-:|-:|\n| Area | Condition 1 | Condition 2 | Condition 3 | Program Results | The Area Is Processed Correctly |\n|   | `y ≤ x` | `y ≤ -x` | `y ≥ x * x - 2` |  |  |\n| A | нет / no | - | - | - | нет / no |\n| B | нет / no | - | - | -| нет / no |\n| C | нет / no | - | - | - | нет / no |\n| D | нет / no | - | - | -| нет / no |\n| E | да / yes | нет / no | - | - | нет / no |\n| F | да / yes | да / yes | нет / no | принадлежит / belongs | да / yes |\n| G | да / yes | да / yes | да / yes | не принадлежит / does not belong | да / yes |\n| H | нет / no | - | - | - | нет / no |\n| I | да / yes | нет / no | - | - | нет / no |\n&#39;, &#39;\n2.\nx,y = float(input(&#34;x &#34;)), float(input(&#34;y &#34;))\nif ((y &gt;= x*x-2)  and ((y &lt;= -x) or (y &lt;= x))):\n    print(\&#39;принадлежит\&#39;)\nelse:\n    print(\&#39;не принадлежит\&#39;)\n&#39;]
+<pre>Answer: [&#39;\n1.\n| Область | Условие 1 | Условие 2 | Условие 3 | Программа выведет | Область обрабатывается верно |\n|-:|-:|-:|-:|-:|-:|\n| Area | Condition 1 | Condition 2 | Condition 3 | Program Results | The Area Is Processed Correctly |\n|   | `y ≤ x` | `y ≤ -x` | `y ≥ x * x - 2` |  |  |\n| A | нет / no | - | - | - | нет / no |\n| B | нет / no | - | - | -| нет / no |\n| C | нет / no | - | - | - | нет / no |\n| D | нет / no | - | - | -| нет / no |\n| E | да / yes | нет / no | - | - | нет / no |\n| F | да / yes | да / yes | нет / no | принадлежит / belongs | да / yes |\n| G | да / yes | да / yes | да / yes | не принадлежит / does not belong | да / yes |\n| H | нет / no | - | - | - | нет / no |\n| I | да / yes | нет / no | - | - | нет / no |\n&#39;, &#39;\n2.\nif y &lt;= -x:\n    if y &lt;= x:\n        if y &gt;= x * x - 2:\n⟹\nif ((y &gt;= x*x-2)  and ((y &lt;= -x) or (y &lt;= x))):\n&#39;]
 </pre>
 </div>
 </div>
@@ -16315,7 +16389,7 @@ MAX2: 20003
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="prompt input_prompt">In&nbsp;[57]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span>
@@ -16331,7 +16405,7 @@ MAX2: 20003
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[55]:</div>
+<div class="prompt output_prompt">Out[57]:</div>
 
 
 
@@ -16340,9 +16414,9 @@ MAX2: 20003
 <pre>{1: &#39;6&#39;,
  2: &#39;45&#39;,
  3: &#39;30&#39;,
- 4: &#39;4&#39;,
+ 4: &#39;3&#39;,
  5: &#39;00&#39;,
- 6: &#39;ADE&#39;,
+ 6: &#39;AD&#39;,
  7: &#39;-6&#39;,
  8: &#39;1024&#39;,
  9: &#39;4&#39;,
@@ -16350,7 +16424,7 @@ MAX2: 20003
  11: &#39;17&#39;,
  12: &#39;CADB&#39;,
  13: &#39;100&#39;,
- 14: &#39;88778877&#39;,
+ 14: &#39;8877&#39;,
  15: &#39;36&#39;,
  16: &#39;5&#39;,
  17: &#39;11600&#39;,
@@ -16361,14 +16435,7 @@ MAX2: 20003
  22: &#39;9&#39;,
  23: &#39;72&#39;,
  24: [&#39;\n1.\n| Область | Условие 1 | Условие 2 | Условие 3 | Программа выведет | Область обрабатывается верно |\n|-:|-:|-:|-:|-:|-:|\n| Area | Condition 1 | Condition 2 | Condition 3 | Program Results | The Area Is Processed Correctly |\n|   | `y ≤ x` | `y ≤ -x` | `y ≥ x * x - 2` |  |  |\n| A | нет / no | - | - | - | нет / no |\n| B | нет / no | - | - | -| нет / no |\n| C | нет / no | - | - | - | нет / no |\n| D | нет / no | - | - | -| нет / no |\n| E | да / yes | нет / no | - | - | нет / no |\n| F | да / yes | да / yes | нет / no | принадлежит / belongs | да / yes |\n| G | да / yes | да / yes | да / yes | не принадлежит / does not belong | да / yes |\n| H | нет / no | - | - | - | нет / no |\n| I | да / yes | нет / no | - | - | нет / no |\n&#39;,
-  &#39;\n2.\nx,y = float(input(&#34;x &#34;)), float(input(&#34;y &#34;))\nif ((y &gt;= x*x-2)  and ((y &lt;= -x) or (y &lt;= x))):\n    print(\&#39;принадлежит\&#39;)\nelse:\n    print(\&#39;не принадлежит\&#39;)\n&#39;],
- 25: [&#39;python 3.6&#39;,
-  &#39;\nprint(&#34;Create an array of 40 integer numbers.&#34;)\nA = numpy.zeros(40)\nK, MAX, MAX2 = 0, 0, 0\nfor K in range(40):\n    A[K] = int(input(&#34; &#34;))\n    if A[K] &gt;= MAX:\n        MAX2 = MAX\n        MAX = A[K]\n    elif A[K] &gt;= MAX2:\n        MAX2 = A[K]\nprint(\&#39;MAX2:\&#39;, int(MAX2))\n&#39;],
- 26: [&#39;\na. 16≤S≤30, S∈{16,...,30}. \nPetya wins by one step - doubling the number of stones: \n32≤2*S≤60, 2∗S∈{32,...,60}. \nAt 1≤S≤15, S∈{1,...,15} it is not possible to win by one move: \n2≤S+1≤16, S+1∈{2,...,16}; 3≤S+2≤17, S+2∈{3,...,17}; 2≤2*S≤30, 2*S∈{2,...,30}.\n\nb. S=15. \nIn this case, at any next step, \n15 -&gt; 16 (P +1), 15 -&gt; 17 (P +2) or 15 -&gt; 30 (P *2) \nPetya will not be able to win, \nand Vanya will win by doubling the result in the next stage: \n16 -&gt; 32 (V *2), 17 -&gt; 34 (V *2) or 30 -&gt; 60 (V *2).\n&#39;,
-  &#39;\nS=13 or S=14. \nPetya should choose the step 13 -&gt; 15 (P +2) or 14 -&gt; 15 (P +1). \nAt any next step, 15 -&gt; 16 (V +1), 15 -&gt; 17 (V +2) or 15 -&gt; 30 (V *2) \nVanya cannot win, \nbut Petya wins by doubling the result in the next stage \n16 -&gt; 32 (P *2), 17 -&gt; 34 (P *2) or 30 -&gt; 60 (P *2).\n&#39;,
-  &#34;\nS=12. Vanya&#39;s winning strategy:\n\nIf the first move of Petya 12 -&gt; 13 (P +1) or 12 -&gt; 14 (P +2), \nthen Vanya should choose the course 13 -&gt; 15 (V +2) or 14 -&gt; 15 (V +1). \nIn this case, at any next step, \n15 -&gt; 16 (P +1), 15 -&gt; 17 (P +2) or 15 -&gt; 30 (P *2) \nPetya will not be able to win, \nand Vanya will win by doubling the result in the next stage: \n16 -&gt; 32 (V *2), 17 -&gt; 34 (V *2) or 30 -&gt; 60 (V *2).\n\nIf the first move of Petya 12 -&gt; 24 (P *2), \nthen Vanya wins by his first move, doubling the number of stones: 24 -&gt; 48 (V *2).\nIt is not possible for Vanya to win by the first move with a guarantee with this start position.\n&#34;],
- 27: [&#39;python 3.6&#39;,
-  &#39;\nN = int(input(&#34;Число учеников, сдававших экзамен: &#34;))\nprint(&#34;Персональные данные в формате: &#34;)\nprint(&#34;&lt;Фамилия&gt;&lt;пробел&gt;&lt;Имя&gt;&lt;пробел&gt;&lt;Номер школы&gt;&lt;пробел&gt;&lt;Количество баллов&gt;&#34;)\nprint(18*&#34;=-= &#34;)\n      \ndf = pandas.DataFrame(index=range(1,N+1,1), \n                      columns=[\&#39;Фамилия\&#39;, \&#39;Имя\&#39;, \&#39;Номер школы\&#39;, \&#39;Количество баллов\&#39;])\ndf = df.fillna(0)\n\nfor i in range(1,N+1,1):\n    print((&#34;{} ученик&#34;).format(i))\n    df.loc[i] = input(&#34;&#34;).split()\n    \ndf[\&#39;Количество баллов\&#39;]=df[\&#39;Количество баллов\&#39;].astype(\&#39;int32\&#39;)\ndf[\&#39;Номер школы\&#39;]=df[\&#39;Номер школы\&#39;].astype(\&#39;int32\&#39;)\nmax_score = df[\&#39;Количество баллов\&#39;].max()\n\nschools, max_school_scores = \&#39;\&#39;, []\nfor school in df[\&#39;Номер школы\&#39;].unique():\n    school_scores = df[df[\&#39;Номер школы\&#39;]==school][\&#39;Количество баллов\&#39;]\n    max_school_score = school_scores.max()\n    if school_scores.value_counts().iloc[0] &gt; 2:\n        schools+=\&#39; \&#39;\n        schools+=str(school)\n        max_school_scores.append(max_school_score)\n\nnum_school_list = [int(el) for el in schools[1:].split()]\nif len(num_school_list) == 1:\n    print(num_school_list[0], \n          &#34;\nНаибольший балл = &#34;, \n          int(max_school_scores[0]))\nelif len(num_school_list) == 0:\n    print(&#34;\nНет таких школ&#34;)\nelse:\n    print(schools)\n&#39;]}</pre>
+  &#39;\n2.\nif y &lt;= -x:\n    if y &lt;= x:\n        if y &gt;= x * x - 2:\n⟹\nif ((y &gt;= x*x-2)  and ((y &lt;= -x) or (y &lt;= x))):\n&#39;]}</pre>
 </div>
 
 </div>
