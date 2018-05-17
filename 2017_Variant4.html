@@ -12574,13 +12574,17 @@ div.output_stderr {background-color: gray;}
 <p><div style="width: 800px; height: 150px; overflow:auto;">
     <img src="it_images/2017_04_05.png" width="800" height="150"/>
 </div>
-Для кодирования некоторой последовательности, состоящей из букв А, Б, В, Г и Д, используется неравномерный двоичный код, позволяющий однозначно декодировать полученную двоичную последовательность.</p>
+Для кодирования некоторой последовательности, состоящей из букв А, Б, В, Г и Д, используется неравномерный двоичный код,</p>
+<p>позволяющий однозначно декодировать полученную двоичную последовательность.</p>
 <p>Вот этот код: <code>А-110</code>, <code>Б-0</code>, <code>В-111</code>, <code>Г-100</code>.</p>
-<p>Каким кодовым словом должна кодироваться буква Д? Если таких вариантов несколько, укажите самый короткий.</p>
+<p>Каким кодовым словом должна кодироваться буква Д?</p>
+<p>Если таких вариантов несколько, укажите самый короткий.</p>
 <hr>
-<p>To encode a sequence consisting of the letters А, Б, В, Г and Д, an unequal binary code is used, which uniquely decodes the resulting binary sequence.</p>
+<p>To encode a sequence consisting of the letters А, Б, В, Г and Д, an unequal binary code is used,</p>
+<p>which uniquely decodes the resulting binary sequence.</p>
 <p>Here is the code: <code>А-110</code>, <code>Б-0</code>, <code>В-111</code>, <code>Г-100</code>.</p>
-<p>What code word should be used for encoding the letter Д? If there are several such variants, specify the shortest one.</p>
+<p>What code word should be used for encoding the letter Д?</p>
+<p>If there are several such variants, specify the shortest one.</p>
 
 </div>
 </div>
@@ -12591,20 +12595,26 @@ div.output_stderr {background-color: gray;}
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>В решении использован Алгоритм Шеннона — Фано.</p>
 <p>1) Самые короткие коды 0 и 1 не могут быть использованы: 0 уже является одним из кодовых слов, с 1 начинаются другие слова.</p>
-<p>2) Следующая бинарная комбинация - из двух цифр. В начале кодовых слов уже есть сочетания 10 и 11. Сочетания 00 и 01 использовать нельзя: уже существует код, равный 0, и он не должен встречаться в начале других кодовых слов.</p>
-<p>3) Трехзначные сочетания могут начинаться только с 1 и среди них уже есть 100, 110, 111. Остается только один вариант самого короткого кодирования для Д - 101.</p>
+<p>2) Следующая бинарная комбинация - из двух цифр.</p>
+<p>В начале кодовых слов уже есть сочетания 10 и 11.</p>
+<p>Сочетания 00 и 01 использовать нельзя: уже существует код, равный 0, и он не должен встречаться в начале других кодовых слов.</p>
+<p>3) Трехзначные сочетания могут начинаться только с 1 и среди них уже есть 100, 110, 111.</p>
+<p>Остается только один вариант самого короткого кодирования: <code>Д - 101</code>.</p>
 <hr>
 <p>The solution uses the Shannon-Fano Algorithm.</p>
 <p>1) The shortest codes 0 and 1 can not be used: 0 is already one of the code words, with 1 other words begin.</p>
-<p>2) The next binary combination is two-digit. At the beginning of the code words, there are already used combinations of 10 and 11. The combinations 00 and 01 can not be used: there is a code equal to 0, and it should not occur at the beginning of other codewords.</p>
-<p>3) Three-digit combinations can start only with 1 and there are already used 100, 110, 111 among them. The remaining variant for the shortest coding is only one: 101.</p>
+<p>2) The next binary combination is two-digit.</p>
+<p>At the beginning of the code words, there are already used combinations of 10 and 11.</p>
+<p>The combinations 00 and 01 cannot be used: there is one code equal to 0, and it should not occur at the beginning of other codewords.</p>
+<p>3) Three-digit combinations can start only with 1 and there are already used 100, 110, 111 among them.</p>
+<p>The remaining variant for the shortest coding is only one: <code>Д - 101</code>.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="mi">101</span><span class="p">)</span>       
@@ -12646,7 +12656,7 @@ div.output_stderr {background-color: gray;}
 <p>После приёма слова производится его обработка. При этом проверяется сумма его разрядов, включая контрольный. Если она нечётна, это означает, что при передаче этого слова произошёл сбой, и оно автоматически заменяется на зарезервированное слово <code>0000000</code>. Если она чётна, это означает, что сбоя не было или сбоёв было больше одного. В этом случае принятое слово не изменяется.</p>
 <p>Приведём фрагмент кодовой таблицы, используемый в данной задаче:</p>
 <hr>
-<p>In some information system, information is encoded in binary six-digit words. When transmitting data, their distortions are possible, so at the end of each word the seventh (control) symbol is added so that the sum of the bits of the new word, assuming the control word, becomes even. For example, to the word <code>101101</code> on the right will be added <code>0</code>, and to the word <code>010110</code> - <code>1</code>.</p>
+<p>In some information system, information is encoded in binary six-digit words. When transmitting data, their distortions are possible, so at the end of each word the seventh (control) symbol is added so that the sum of the bits of the new word, assuming the control digit, becomes even. For example, to the word <code>101101</code> on the right will be added <code>0</code>, and to the word <code>010110</code> - <code>1</code>.</p>
 <p>After receiving the word, it is processed. This program checks the sum of code digits, including the control ones. If it is odd, it means that when this word was transmitted, it crashed and it is automatically replaced with the reserved word <code>0000000</code>. If it is even, it means that there was no malfunction or there were more than one malfunction. In this case, the received word does not change.</p>
 <p>Here is the fragment of the code table used in this task:</p>
 <table>
@@ -12693,20 +12703,22 @@ div.output_stderr {background-color: gray;}
 <p><code>1000010 0110101 1100101</code>.</p>
 <p>И затем было принято в виде:</p>
 <p><code>1100110 0110101 1100100</code>.</p>
-<p>Как будет выглядеть принятое сообщение после обработки? В ответе запишите последовательность букв без пробелов и знаков препинания.</p>
+<p>Как будет выглядеть принятое сообщение после обработки?</p>
+<p>В ответе запишите последовательность букв без пробелов и знаков препинания.</p>
 <hr>
 <p>The original ABC message was sent as:</p>
 <p><code>1000010 0110101 1100101</code></p>
 <p>And then it was taken in the form:</p>
 <p><code>1100110 0110101 1100100</code>.</p>
-<p>How will the received message look after processing? In the answer, write down the sequence of letters without spaces or punctuation.</p>
+<p>How will the received message look after processing?</p>
+<p>In the answer, write down a sequence of letters without spaces or punctuation.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
@@ -12715,14 +12727,14 @@ div.output_stderr {background-color: gray;}
                        <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">]])</span>
 <span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
-    <span class="k">if</span> <span class="n">el</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span><span class="o">%</span><span class="k">2</span>==1:
-        <span class="n">result</span><span class="o">+=</span><span class="s1">&#39;x&#39;</span>
+    <span class="k">if</span> <span class="n">el</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="s1">&#39;x&#39;</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">el</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span> <span class="o">==</span> <span class="n">replace</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]:</span>
-                <span class="n">result</span><span class="o">+=</span><span class="n">replace</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">result</span> <span class="o">+=</span> <span class="n">replace</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
                 
-<span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">=</span><span class="n">result</span> 
+<span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span> 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
 </pre></div>
 
