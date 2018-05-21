@@ -17335,30 +17335,6 @@ result
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>Keyboard_and_Joystick <span class="o">=</span> <span class="m">7300</span>
-Mouse_and_Joystick <span class="o">=</span> <span class="m">5900</span>
-Keyboard_or_Mouse_and_Joystick <span class="o">=</span> <span class="m">11700</span>
-Keyboard_and_Mouse_and_Joystick <span class="o">=</span> \
-Keyboard_and_Joystick <span class="o">+</span> Mouse_and_Joystick <span class="o">-</span> Keyboard_or_Mouse_and_Joystick
-
-search_sets <span class="o">=</span> <span class="p">[</span>Keyboard_and_Joystick <span class="o">-</span> Keyboard_and_Mouse_and_Joystick<span class="p">,</span> 
-               Mouse_and_Joystick <span class="o">-</span> Keyboard_and_Mouse_and_Joystick<span class="p">,</span> 
-               Keyboard_and_Mouse_and_Joystick<span class="p">]</span>
-
-plt.figure<span class="p">(</span>figsize<span class="o">=</span><span class="p">(</span><span class="m">9</span><span class="p">,</span><span class="m">9</span><span class="p">))</span>
-v<span class="o">=</span>venn2<span class="p">(</span>subsets<span class="o">=</span>search_sets<span class="p">,</span> set_labels<span class="o">=</span><span class="p">(</span><span class="s">&#39;Keyboard &amp; Joystick&#39;</span><span class="p">,</span> <span class="s">&#39;Mouse &amp; Joystick&#39;</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 <div class="prompt input_prompt">In&nbsp;[60]:</div>
 <div class="inner_cell">
     <div class="input_area">
@@ -18062,7 +18038,10 @@ AAAAAElFTkSuQmCC"
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="18.">18.<a class="anchor-link" href="#18.">&#182;</a></h2>
+<h2 id="18.">18.<a class="anchor-link" href="#18.">&#182;</a></h2><p>Какое наибольшее целое число удовлетворяет логическому условию:</p>
+<p>What is the largest integer that satisfies the logical condition:</p>
+<p>$\neg ((X^2 &lt; 100) \land (X \geq 6)) \land \neg (X \geq 15))$?</p>
+
 </div>
 </div>
 </div>
@@ -18070,9 +18049,126 @@ AAAAAElFTkSuQmCC"
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="19.">19.<a class="anchor-link" href="#19.">&#182;</a></h2>
+<p>$\neg ((X^2 &lt; 100) \land (X \geq 6)) \land \neg (X \geq 15)) \iff \\ 
+\neg (6 \leq X &lt; 10) \land \neg (X \geq 15) \iff \\
+((X &lt; 6) \lor (X \geq 10)) \land (X &lt; 15) \iff \\
+(X &lt; 6) \lor (10 \leq X &lt; 15)$</p>
+
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[69]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">18</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">toString</span><span class="p">(</span><span class="m">14</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="19.">19.<a class="anchor-link" href="#19.">&#182;</a></h2><p>В программе используется целочисленный массив <code>А</code> с индексами от <code>0</code> до <code>9</code>.</p>
+<p>Значения элементов массива равны $4; 5; 4; 7; 10; 8; 9; 11; 7; 8$ соответственно, т.е. $А[0] = 4; \; А[1] = 5$ и т.д.</p>
+<p>Определите значение переменной <code>k</code> после выполнения следующего фрагмента программы,</p>
+<p>записанной ниже на разных языках программирования.</p>
+<hr>
+<p>The program uses an integer array <code>A</code> with indices from <code>0</code> to <code>9</code>.</p>
+<p>Values of array elements are equal to $4; 5; 4; 7; 10; 8; 9; 11; 7; 8$ respectively, i.e. $А[0] = 4; \; А[1] = 5$, etc.</p>
+<p>Determine the value of the variable <code>k</code> after the execution of the next program fragment,</p>
+<p>recorded below in different programming languages.</p>
+<table style="width:95%;">
+  <tr style="color:slategray;font-size:120%;font-family:'Roboto';">
+    <th style="text-align:center;">Python</th> 
+    <th style="text-align:center;">R</th>          
+  </tr>
+  <tr>
+    <td style="font-weight:bold;text-align:left;"><pre><code class='python'>
+A = [4,5,4,7,10,8,9,11,7,8]
+k = 10
+
+for i in range(9): 
+    if (A[9-i] > A[8-i]):
+        A[8-i] = A[9-i]
+        k -= 1    
+    </code></pre></td> 
+    <td style="font-weight:bold;text-align:left;"><pre><code class='r'>
+
+A <- c(4,5,4,7,10,8,9,11,7,8)
+k <- 10
+
+for (i in 0:8) { 
+    if (A[10-i] > A[9-i]) {
+        A[9-i] <- A[10-i]
+        k <- k - 1
+    }
+}
+    </code></pre></td>     
+  </tr>    
+</table>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[71]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>A <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">7</span><span class="p">,</span><span class="m">10</span><span class="p">,</span><span class="m">8</span><span class="p">,</span><span class="m">9</span><span class="p">,</span><span class="m">11</span><span class="p">,</span><span class="m">7</span><span class="p">,</span><span class="m">8</span><span class="p">)</span>
+k <span class="o">&lt;-</span> <span class="m">10</span>
+
+<span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">0</span><span class="o">:</span><span class="m">8</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="kr">if</span> <span class="p">(</span>A<span class="p">[</span><span class="m">10</span><span class="o">-</span>i<span class="p">]</span> <span class="o">&gt;</span> A<span class="p">[</span><span class="m">9</span><span class="o">-</span>i<span class="p">])</span> <span class="p">{</span>
+        A<span class="p">[</span><span class="m">9</span><span class="o">-</span>i<span class="p">]</span> <span class="o">&lt;-</span> A<span class="p">[</span><span class="m">10</span><span class="o">-</span>i<span class="p">]</span>
+        k <span class="o">&lt;-</span> k <span class="o">-</span> <span class="m">1</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+k
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+2
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">19</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">toString</span><span class="p">(</span>k<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -18150,7 +18246,7 @@ AAAAAElFTkSuQmCC"
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[68]:</div>
+<div class="prompt input_prompt">In&nbsp;[75]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>answer_dictionary
@@ -18172,7 +18268,7 @@ AAAAAElFTkSuQmCC"
 
 
 <div class="output_text output_subarea ">
-<pre>&lt;hash&gt; containing 16 key-value pair(s).
+<pre>&lt;hash&gt; containing 18 key-value pair(s).
   1 : 3
   10 : 62
   11 : 15
@@ -18181,6 +18277,8 @@ AAAAAElFTkSuQmCC"
   15 : 41
   16 : 5, 13, 21
   17 : 1500
+  18 : 14
+  19 : 2
   2 : 34
   3 : 17:25
   4 : 3
