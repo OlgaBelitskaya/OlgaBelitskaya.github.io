@@ -14645,22 +14645,100 @@ $\forall x: \ (x < 5 \lor x > 19 \lor (x \in A)) \equiv True \iff \\
     <img src="it_images/2017_05_19.png" width="800" height="600"/>
 </div>
 В программе используется целочисленный массив <code>A</code> с индексами от <code>0</code> до <code>9</code>.</p>
-<p>Значения элементов массива равны <code>4; 5; 4; 7; 10; 8; 9; 11; 7; 8</code> соответственно, т.е. <code>A[0] = 4</code>; <code>A[1] = 5</code> и т.д.</p>
-<p>Определите значение переменной <code>k</code> после выполнения следующего фрагмента программы, записанной ниже на разных языках программирования.</p>
+<p>Значения элементов массива равны $4; 5; 4; 7; 10; 8; 9; 11; 7; 8$ соответственно, т.е. $A[0] = 4$; $A[1] = 5$ и т.д.</p>
+<p>Определите значение переменной <code>k</code> после выполнения следующего фрагмента программы,</p>
+<p>записанной ниже на разных языках программирования.</p>
 <hr>
 <p>The program uses an integer array <code>A</code> with indices from <code>0</code> to <code>9</code>.</p>
-<p>Values of array elements are equal to <code>4; 5; 4; 7; 10; 8; 9; 11; 7; 8</code> respectively, i.e. <code>A [0] = 4</code>; <code>A [1] = 5</code>, etc.</p>
-<p>Determine the value of the variable <code>k</code> after the execution of the next program fragment, recorded below in different programming languages.</p>
+<p>Values of array elements are equal to $4; 5; 4; 7; 10; 8; 9; 11; 7; 8$ respectively, i.e. $A[0] = 4$; $A[1] = 5$, etc.</p>
+<p>Determine the value of the variable <code>k</code> after the execution of the next program fragment,</p>
+<p>recorded below in different programming languages.</p>
+<table style="width:95%;">
+  <tr style="color:slategray;font-size:120%;font-family:'Roboto';">
+    <th style="text-align:center;">Python</th> 
+    <th style="text-align:center;">R</th>          
+  </tr>
+  <tr>
+    <td style="font-weight:bold;text-align:left;"><pre><code class='python'>
+A = [4,5,4,7,10,8,9,11,7,8]
+k = 0
+
+for i in range(8): 
+    if A[i] < A[i+2]:
+        k += 1
+        t = A[i]
+        A[i] = A[i+2]
+        A[i+2] = t   
+    </code></pre></td> 
+    <td style="font-weight:bold;text-align:left;"><pre><code class='r'>
+
+A <- c(4,5,4,7,10,8,9,11,7,8)
+k <- 0
+
+for (i in 0:7) { 
+    if (A[i+1] < A[i+3]) {
+        k <- k + 1
+        t <- A[i+1]
+        A[i+1] <- A[i+3]
+        A[i+3] <- t
+    }
+}
+    </code></pre></td>     
+  </tr>    
+</table>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[65]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">]</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span> 
+    <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]:</span>
+        <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span> 
+        
+<span class="n">k</span>
+</pre></div>
 
 </div>
 </div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[65]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>7</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[231]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># расширенная версия программы</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
 <span class="n">A</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
 <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
 
@@ -14715,28 +14793,108 @@ $\forall x: \ (x < 5 \lor x > 19 \lor (x \in A)) \equiv True \iff \\
     <img src="it_images/2017_05_20_1.png" width="800" height="450"/>
     <img src="it_images/2017_05_20_2.png" width="800" height="450"/>
 </div>
-Ниже на четырёх языках записан алгоритм. Получив на вход число <code>х</code>, этот алгоритм печатает два числа: <code>L</code> и <code>М</code>. Укажите наименьшее из таких чисел <code>х</code>, при вводе которых алгоритм печатает сначала <code>0</code>, а потом <code>24</code>.</p>
+Ниже на нескольких языках записан алгоритм.</p>
+<p>Получив на вход число <code>х</code>, этот алгоритм печатает два числа: <code>L</code> и <code>М</code>.</p>
+<p>Укажите наименьшее из таких чисел <code>х</code>, при вводе которых алгоритм печатает сначала <code>0</code>, а потом <code>24</code>.</p>
 <hr>
-<p>Below, in four languages, the algorithm has been written. Having received the input variable <code>x</code>, this algorithm prints two numbers: <code>L</code> and <code>M</code>. Specify the smallest number <code>x</code> for which the program prints first <code>0</code>, and then <code>24</code>.</p>
+<p>Below, in several languages, the algorithm has been written.</p>
+<p>Having received the input variable <code>x</code>, this algorithm prints two numbers: <code>L</code> and <code>M</code>.</p>
+<p>Specify the smallest number <code>x</code> for which the program prints first <code>0</code>, and then <code>24</code>.</p>
+<table style="width:95%;">
+  <tr style="color:slategray;font-size:120%;font-family:'Roboto';">
+    <th style="text-align:center;">Python</th> 
+    <th style="text-align:center;">R</th>          
+  </tr>
+  <tr>
+    <td style="font-weight:bold;text-align:left;"><pre><code class='python'>
+x = int(input())
+L, M = 0, 1
 
+while x > 0:
+    M = M &#42; (x % 10)
+    if x % 10 > 5:
+        L += 1
+    x = int(x / 10)
+
+print(L, M)  
+    </code></pre></td> 
+    <td style="font-weight:bold;text-align:left;"><pre><code class='r'>
+
+x <- as.integer(readline())
+L <- 0; M <- 1
+
+while (x > 0) {
+    M <- M &#42; (x %% 10)
+    if (x %% 10 > 5) {
+        L <- L + 1
+    }
+    x <- as.integer(x / 10)
+}
+
+print(paste(L, M, sep=" "))
+    </code></pre></td>     
+  </tr>    
+</table>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[161]:</div>
+<div class="prompt input_prompt">In&nbsp;[66]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">230</span><span class="p">,</span> <span class="mi">240</span><span class="p">):</span>  
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+<span class="n">L</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+
+<span class="k">while</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">M</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">%</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="n">L</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>234
+0 24
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># расширенная версия программы</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">230</span><span class="p">,</span> <span class="mi">240</span><span class="p">):</span>  
     <span class="n">L</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">x</span>
     <span class="k">while</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">M</span> <span class="o">=</span> <span class="n">M</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">%</span> <span class="mi">10</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
-            <span class="n">L</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="n">L</span> <span class="o">+=</span> <span class="mi">1</span>
             
-        <span class="k">if</span> <span class="p">(</span><span class="n">L</span><span class="o">==</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">M</span><span class="o">==</span><span class="mi">24</span><span class="p">):</span>
-            <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">L</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">M</span> <span class="o">==</span> <span class="mi">24</span><span class="p">):</span>
+            <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
         
         <span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
@@ -14776,7 +14934,7 @@ $\forall x: \ (x < 5 \lor x > 19 \lor (x \in A)) \equiv True \iff \\
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[230]:</div>
+<div class="prompt input_prompt">In&nbsp;[68]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span> <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">20</span><span class="p">])</span>
