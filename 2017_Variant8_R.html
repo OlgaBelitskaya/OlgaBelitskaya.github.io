@@ -14004,7 +14004,7 @@ result
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="4.">4.<a class="anchor-link" href="#4.">&#182;</a></h2><p>Для кодирования некоторой последовательности, состоящей из букв <code>A</code>, <code>B</code>, <code>C</code>, <code>D</code> и<code>E</code>, используется неравномерный двоичный код,</p>
+<h2 id="5.">5.<a class="anchor-link" href="#5.">&#182;</a></h2><p>Для кодирования некоторой последовательности, состоящей из букв <code>A</code>, <code>B</code>, <code>C</code>, <code>D</code> и<code>E</code>, используется неравномерный двоичный код,</p>
 <p>позволяющий однозначно декодировать полученную двоичную последовательность.</p>
 <p>Вот этот код: <i style="font-size:130%;" class="font-effect-canvas-print">`A-110, B-01, C-001, D-111, E-100`</i>.</p>
 <p>Можно ли сократить для одной или нескольких букв длину кодового слова, удалив в нём один или несколько последних символов,</p>
@@ -14064,6 +14064,463 @@ result
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="6.">6.<a class="anchor-link" href="#6.">&#182;</a></h2><p>Автомат получает на вход два однозначных восьмеричных числа.</p>
+<p>Каждое из этих чисел не превосходит 6 (если число больше 6, автомат отказывается работать).</p>
+<p>По этим двум числам вычисляется новое восьмеричное число как произведение полученных чисел.</p>
+<p>Ученик проанализировал алгоритм и выписал все восьмеричные числа, которые могут быть получены в результате работы алгоритма:</p>
+<p>$1_8,2_8,3_8,4_8,5_8,6_8,10_8,11_8,12_8,14_8,20_8,22_8,24_8,30_8,36_8,44_8$.</p>
+<p>Определите, сколько чисел он пропустил.</p>
+<hr>
+<p>The automatic system receives two single-digit octal numbers.</p>
+<p>Each of these numbers does not exceed 6 (if the number is greater than 6, the system refuses to work).</p>
+<p>For these two numbers, a new octal number is calculated as the product of the numbers obtained.</p>
+<p>The student analyzed the algorithm and wrote out all octal numbers that can be obtained as a result of the algorithm:</p>
+<p>$1_8,2_8,3_8,4_8,5_8,6_8,10_8,11_8,12_8,14_8,20_8,22_8,24_8,30_8,36_8,44_8$.</p>
+<p>Determine how many numbers he missed.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>written_list <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="s">&#39;2&#39;</span><span class="p">,</span> <span class="s">&#39;3&#39;</span><span class="p">,</span> <span class="s">&#39;4&#39;</span><span class="p">,</span> <span class="s">&#39;5&#39;</span><span class="p">,</span> <span class="s">&#39;6&#39;</span><span class="p">,</span> <span class="s">&#39;10&#39;</span><span class="p">,</span> <span class="s">&#39;11&#39;</span> <span class="p">,</span> 
+                  <span class="s">&#39;12&#39;</span><span class="p">,</span> <span class="s">&#39;14&#39;</span><span class="p">,</span> <span class="s">&#39;20&#39;</span><span class="p">,</span> <span class="s">&#39;22&#39;</span><span class="p">,</span> <span class="s">&#39;24&#39;</span><span class="p">,</span> <span class="s">&#39;30&#39;</span><span class="p">,</span> <span class="s">&#39;36&#39;</span><span class="p">,</span> <span class="s">&#39;44&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>dec_written_list <span class="o">&lt;-</span> <span class="kp">as.vector</span><span class="p">(</span><span class="kp">sapply</span><span class="p">(</span>written_list<span class="p">,</span> oct2dec<span class="p">))</span>
+dec_written_list
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<ol class=list-inline>
+	<li>1</li>
+	<li>2</li>
+	<li>3</li>
+	<li>4</li>
+	<li>5</li>
+	<li>6</li>
+	<li>8</li>
+	<li>9</li>
+	<li>10</li>
+	<li>12</li>
+	<li>16</li>
+	<li>18</li>
+	<li>20</li>
+	<li>24</li>
+	<li>30</li>
+	<li>36</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>right_list <span class="o">&lt;-</span> <span class="kp">sort</span><span class="p">(</span><span class="kp">unique</span><span class="p">(</span><span class="kp">as.vector</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">6</span><span class="p">)</span> <span class="o">%o%</span> <span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">6</span><span class="p">))))</span>
+right_list
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<ol class=list-inline>
+	<li>1</li>
+	<li>2</li>
+	<li>3</li>
+	<li>4</li>
+	<li>5</li>
+	<li>6</li>
+	<li>8</li>
+	<li>9</li>
+	<li>10</li>
+	<li>12</li>
+	<li>15</li>
+	<li>16</li>
+	<li>18</li>
+	<li>20</li>
+	<li>24</li>
+	<li>25</li>
+	<li>30</li>
+	<li>36</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="kp">match</span><span class="p">(</span>right_list<span class="p">,</span> dec_written_list<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<ol class=list-inline>
+	<li>1</li>
+	<li>2</li>
+	<li>3</li>
+	<li>4</li>
+	<li>5</li>
+	<li>6</li>
+	<li>7</li>
+	<li>8</li>
+	<li>9</li>
+	<li>10</li>
+	<li>&lt;NA&gt;</li>
+	<li>11</li>
+	<li>12</li>
+	<li>13</li>
+	<li>14</li>
+	<li>&lt;NA&gt;</li>
+	<li>15</li>
+	<li>16</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>n <span class="o">&lt;-</span> <span class="kp">sum</span><span class="p">(</span><span class="kp">is.na</span><span class="p">(</span><span class="kp">match</span><span class="p">(</span>right_list<span class="p">,</span> dec_written_list<span class="p">)))</span>
+n
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+2
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[52]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">6</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">toString</span><span class="p">(</span>n<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="7.">7.<a class="anchor-link" href="#7.">&#182;</a></h2><p>Дан фрагмент электронной таблицы.</p>
+<hr>
+<p>The fragment of the spreadsheet is given.</p>
+<table>
+<thead><tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">A</th>
+<th style="text-align:center">B</th>
+<th style="text-align:center">C</th>
+<th style="text-align:center">D</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">4</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center"><code>=C$3+B3</code></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center"><code>=C$2+$C3</code></td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">7</td>
+</tr>
+</tbody>
+</table>
+<p>Чему станет равным значение ячейки <code>A1</code>, если в неё скопировать формулу из ячейки <code>B2</code>?</p>
+<p>Примечание: знак <code>$</code> обозначает абсолютную адресацию.</p>
+<hr>
+<p>What will the value of the cell <code>A1</code> become equal if you copy the formula from the cell <code>B2</code> into it?</p>
+<p>Note: The <code>$</code> sign denotes absolute addressing.</p>
+<p><a href="https://drive.google.com/open?id=13XTW3PWXUoUeYK9AZfjlrCcFXbmRNPoJazwd1azoAq8">Google Sheet</a></p>
+<p>Результат копирования ячейки.</p>
+<hr>
+<p>The result of copying the cell.</p>
+<div style="width:700px; height:260px; overflow:auto;">
+    <img src="it_images/2017_08_07a.png" width="700" height="260"/>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[54]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">7</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">toString</span><span class="p">(</span><span class="m">7</span> <span class="o">+</span> <span class="m">10</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="8.">8.<a class="anchor-link" href="#8.">&#182;</a></h2><p>Определите, что будет напечатано в результате выполнения следующего фрагмента программы:</p>
+<p>Determine what will be printed as a result of execution of the following program fragment:</p>
+<table style="width:95%;">
+  <tr style="color:slategray;font-size:120%;font-family:'Roboto';">
+    <th style="text-align:center;">Python</th> 
+    <th style="text-align:center;">R</th>          
+  </tr>
+  <tr>
+    <td style="font-weight:bold;text-align:left;"><pre><code class='python'>
+
+k,s = 50,2
+while s < 1000:
+    s &#42;= 2
+    k -= 3
+
+print (k)
+    </code></pre></td> 
+    <td style="font-weight:bold;text-align:left;"><pre><code class='r'> 
+
+k <- 50; s <- 2
+
+while (s < 1000) {
+    s <- s &#42; 2
+    k <- k - 3
+}
+
+print(k)
+    </code></pre></td>     
+  </tr> 
+  <tr style="color:slategray;font-size:120%;font-family:'Roboto';">
+    <th style="text-align:center;">BASIC</th> 
+    <th style="text-align:center;">Pascal</th>          
+  </tr>
+  <tr>
+    <td style="font-weight:bold;text-align:left;"><pre><code class='basic'>
+
+DIM k, s AS INTEGER
+k = 50
+s = 2
+WHILE s < 1000
+    s = s &#42; 2
+    k = k - 3
+WEND
+PRINT k
+    </code></pre></td> 
+    <td style="font-weight:bold;text-align:left;"><pre><code class='pascal'> 
+
+var k, s : integer;
+begin
+    k := 50;
+    s := 2;
+    while s < 1000 do
+        s := s &#42; 2;
+        k := k - 3;
+    end;
+    write(k);
+end.
+    </code></pre></td>     
+  </tr>    
+  <tr style="color:slategray;font-size:120%;font-family:'Roboto';">
+    <th style="text-align:center;">C</th> 
+    <th style="text-align:center;">Natural Language Programming</th>          
+  </tr>
+  <tr>
+    <td style="font-weight:bold;text-align:left;"><pre><code class='c'>
+
+{
+    int k, s;
+    k = 50;
+    s = 2;
+    while (s < 1000)
+    {
+        s = s &#42; 2;
+        k = k - 3;
+    } 
+    printf("%d", k);
+}
+    </code></pre></td> 
+    <td style="font-weight:bold;text-align:left;"><pre><code class='nlp'> 
+
+
+нач
+    цел k, s
+    k := 50
+    s := 2
+    нц пока s < 1000
+        s := s &#42; 2
+        k := k - 3
+    кц
+    вывод k
+кон
+    </code></pre></td>     
+  </tr>      
+</table>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[56]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>k <span class="o">&lt;-</span> <span class="m">50</span><span class="p">;</span> s <span class="o">&lt;-</span> <span class="m">2</span>
+
+<span class="kr">while</span> <span class="p">(</span>s <span class="o">&lt;</span> <span class="m">1000</span><span class="p">)</span> <span class="p">{</span>
+    s <span class="o">&lt;-</span> s <span class="o">*</span> <span class="m">2</span>
+    k <span class="o">&lt;-</span> k <span class="o">-</span> <span class="m">3</span>
+<span class="p">}</span>
+
+<span class="kp">print</span><span class="p">(</span>k<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1] 23
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">8</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">toString</span><span class="p">(</span>k<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2>Ответы &nbsp; &nbsp; &nbsp; Answers</h2>
 
 </div>
@@ -14071,7 +14528,7 @@ result
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="prompt input_prompt">In&nbsp;[58]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>answer_dictionary
@@ -14093,12 +14550,15 @@ result
 
 
 <div class="output_text output_subarea ">
-<pre>&lt;hash&gt; containing 5 key-value pair(s).
+<pre>&lt;hash&gt; containing 8 key-value pair(s).
   1 : 6
   2 : xzy
   3 : 9
   4 : 134
-  5 : C00,E10</pre>
+  5 : C00,E10
+  6 : 2
+  7 : 17
+  8 : 23</pre>
 </div>
 
 </div>
