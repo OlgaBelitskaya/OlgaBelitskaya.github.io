@@ -12173,6 +12173,379 @@ oct2dec<span class="p">(</span><span class="s">&#39;231&#39;</span><span class="
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>bc <span class="o">&lt;-</span> bincombinations<span class="p">(</span><span class="m">3</span><span class="p">)</span>
+bc
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<tbody>
+	<tr><td>0</td><td>0</td><td>0</td></tr>
+	<tr><td>0</td><td>0</td><td>1</td></tr>
+	<tr><td>0</td><td>1</td><td>0</td></tr>
+	<tr><td>0</td><td>1</td><td>1</td></tr>
+	<tr><td>1</td><td>0</td><td>0</td></tr>
+	<tr><td>1</td><td>0</td><td>1</td></tr>
+	<tr><td>1</td><td>1</td><td>0</td></tr>
+	<tr><td>1</td><td>1</td><td>1</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>F_values <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">)</span>
+<span class="bp">F</span> <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">,</span> y<span class="p">,</span> z<span class="p">)</span> <span class="p">{</span>
+    <span class="kr">return</span><span class="p">((</span>z <span class="o">&amp;</span> x<span class="p">)</span> <span class="o">|</span> <span class="p">((</span><span class="o">!</span>x<span class="p">)</span> <span class="o">&amp;</span> <span class="o">!</span>y<span class="p">))</span> 
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># xyz</span>
+result_xyz <span class="o">&lt;-</span> <span class="kt">vector</span><span class="p">(</span>length<span class="o">=</span><span class="m">8</span><span class="p">)</span>
+<span class="kr">for</span> <span class="p">(</span>j <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">8</span><span class="p">)</span> <span class="p">{</span>
+    result_xyz<span class="p">[</span>j<span class="p">]</span> <span class="o">&lt;-</span> <span class="bp">F</span><span class="p">(</span>bc<span class="p">[</span>j<span class="p">,</span><span class="m">1</span><span class="p">],</span>bc<span class="p">[</span>j<span class="p">,</span><span class="m">2</span><span class="p">],</span>bc<span class="p">[</span>j<span class="p">,</span><span class="m">3</span><span class="p">])</span>
+<span class="p">}</span>
+result_xyz <span class="o">==</span> F_values
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<ol class=list-inline>
+	<li>TRUE</li>
+	<li>FALSE</li>
+	<li>TRUE</li>
+	<li>TRUE</li>
+	<li>FALSE</li>
+	<li>FALSE</li>
+	<li>FALSE</li>
+	<li>TRUE</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[63]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># xzy</span>
+result_xzy <span class="o">&lt;-</span> <span class="kt">vector</span><span class="p">(</span>length<span class="o">=</span><span class="m">8</span><span class="p">)</span>
+<span class="kr">for</span> <span class="p">(</span>j <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">8</span><span class="p">)</span> <span class="p">{</span>
+    result_xzy<span class="p">[</span>j<span class="p">]</span> <span class="o">&lt;-</span> <span class="bp">F</span><span class="p">(</span>bc<span class="p">[</span>j<span class="p">,</span><span class="m">1</span><span class="p">],</span>bc<span class="p">[</span>j<span class="p">,</span><span class="m">3</span><span class="p">],</span>bc<span class="p">[</span>j<span class="p">,</span><span class="m">2</span><span class="p">])</span>
+<span class="p">}</span>
+result_xzy <span class="o">==</span> F_values
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<ol class=list-inline>
+	<li>TRUE</li>
+	<li>TRUE</li>
+	<li>FALSE</li>
+	<li>TRUE</li>
+	<li>FALSE</li>
+	<li>TRUE</li>
+	<li>TRUE</li>
+	<li>TRUE</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[64]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># yxz</span>
+result_yxz <span class="o">&lt;-</span> <span class="kt">vector</span><span class="p">(</span>length<span class="o">=</span><span class="m">8</span><span class="p">)</span>
+<span class="kr">for</span> <span class="p">(</span>j <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">8</span><span class="p">)</span> <span class="p">{</span>
+    result_yxz<span class="p">[</span>j<span class="p">]</span> <span class="o">&lt;-</span> <span class="bp">F</span><span class="p">(</span>bc<span class="p">[</span>j<span class="p">,</span><span class="m">2</span><span class="p">],</span>bc<span class="p">[</span>j<span class="p">,</span><span class="m">1</span><span class="p">],</span>bc<span class="p">[</span>j<span class="p">,</span><span class="m">3</span><span class="p">])</span>
+<span class="p">}</span>
+result_yxz <span class="o">==</span> F_values
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<ol class=list-inline>
+	<li>TRUE</li>
+	<li>FALSE</li>
+	<li>TRUE</li>
+	<li>FALSE</li>
+	<li>FALSE</li>
+	<li>TRUE</li>
+	<li>FALSE</li>
+	<li>TRUE</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[65]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># yzx</span>
+result_yzx <span class="o">&lt;-</span> <span class="kt">vector</span><span class="p">(</span>length<span class="o">=</span><span class="m">8</span><span class="p">)</span>
+<span class="kr">for</span> <span class="p">(</span>j <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">8</span><span class="p">)</span> <span class="p">{</span>
+    result_yzx<span class="p">[</span>j<span class="p">]</span> <span class="o">&lt;-</span> <span class="bp">F</span><span class="p">(</span>bc<span class="p">[</span>j<span class="p">,</span><span class="m">3</span><span class="p">],</span>bc<span class="p">[</span>j<span class="p">,</span><span class="m">1</span><span class="p">],</span>bc<span class="p">[</span>j<span class="p">,</span><span class="m">2</span><span class="p">])</span>
+<span class="p">}</span>
+result_yzx <span class="o">==</span> F_values
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<ol class=list-inline>
+	<li>TRUE</li>
+	<li>TRUE</li>
+	<li>FALSE</li>
+	<li>FALSE</li>
+	<li>FALSE</li>
+	<li>TRUE</li>
+	<li>FALSE</li>
+	<li>TRUE</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[66]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># zxy</span>
+result_zxy <span class="o">&lt;-</span> <span class="kt">vector</span><span class="p">(</span>length<span class="o">=</span><span class="m">8</span><span class="p">)</span>
+<span class="kr">for</span> <span class="p">(</span>j <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">8</span><span class="p">)</span> <span class="p">{</span>
+    result_zxy<span class="p">[</span>j<span class="p">]</span> <span class="o">&lt;-</span> <span class="bp">F</span><span class="p">(</span>bc<span class="p">[</span>j<span class="p">,</span><span class="m">2</span><span class="p">],</span>bc<span class="p">[</span>j<span class="p">,</span><span class="m">3</span><span class="p">],</span>bc<span class="p">[</span>j<span class="p">,</span><span class="m">1</span><span class="p">])</span>
+<span class="p">}</span>
+result_zxy <span class="o">==</span> F_values
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<ol class=list-inline>
+	<li>TRUE</li>
+	<li>TRUE</li>
+	<li>TRUE</li>
+	<li>TRUE</li>
+	<li>TRUE</li>
+	<li>TRUE</li>
+	<li>TRUE</li>
+	<li>TRUE</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># zyx</span>
+result_zyx <span class="o">&lt;-</span> <span class="kt">vector</span><span class="p">(</span>length<span class="o">=</span><span class="m">8</span><span class="p">)</span>
+<span class="kr">for</span> <span class="p">(</span>j <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">8</span><span class="p">)</span> <span class="p">{</span>
+    result_zyx<span class="p">[</span>j<span class="p">]</span> <span class="o">&lt;-</span> <span class="bp">F</span><span class="p">(</span>bc<span class="p">[</span>j<span class="p">,</span><span class="m">3</span><span class="p">],</span>bc<span class="p">[</span>j<span class="p">,</span><span class="m">2</span><span class="p">],</span>bc<span class="p">[</span>j<span class="p">,</span><span class="m">1</span><span class="p">])</span>
+<span class="p">}</span>
+result_zyx <span class="o">==</span> F_values
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<ol class=list-inline>
+	<li>TRUE</li>
+	<li>TRUE</li>
+	<li>TRUE</li>
+	<li>TRUE</li>
+	<li>TRUE</li>
+	<li>FALSE</li>
+	<li>FALSE</li>
+	<li>TRUE</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[68]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">2</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&#39;zxy&#39;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="3.">3.<a class="anchor-link" href="#3.">&#182;</a></h2><p>Между населенными пунктами A,B,C,D,E,F построены дороги, протяженность которых приведена в таблице.</p>
+<p>(Отсутствие числа в таблице означает, что прямой дороги между пунктами нет.)</p>
+<p>Определите длину кратчайшего пути между пунктами A и F</p>
+<p>(при условии, что передвигаться можно только по построенным дорогам).</p>
+<hr>
+<p>Between the settlements A, B, C, D, E, F roads are constructed, the lengths of which are given in the table.</p>
+<p>(The absence of a number in the table means that there is no direct road between the points.)</p>
+<p>Determine the length of the shortest path between points A and F</p>
+<p>(assuming that you can only move along the constructed roads).</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
