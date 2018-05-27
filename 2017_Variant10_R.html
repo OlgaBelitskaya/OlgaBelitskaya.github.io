@@ -13437,6 +13437,195 @@ end.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<table>
+<thead><tr>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Размер изображения в битах / Image Size in Bits</td>
+<td style="text-align:center">$160 * 2^3 * 2^{10}$</td>
+</tr>
+<tr>
+<td style="text-align:center">Бит на один пиксель / Bits per Pixel</td>
+<td style="text-align:center">$160 * 2^3 * 2^{10} / (1024 * 256)$</td>
+</tr>
+<tr>
+<td style="text-align:center">Количество цветов / Number of Colors</td>
+<td style="text-align:center">$\large{2^{(160 * 2^3 * 2^{10} / (1024 * 256))}}$</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[114]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>image_size_in_bits <span class="o">&lt;-</span> <span class="m">160</span> <span class="o">*</span> <span class="m">2</span> <span class="o">**</span> <span class="m">3</span> <span class="o">*</span> <span class="m">2</span> <span class="o">**</span> <span class="m">10</span>
+bits_per_pixel <span class="o">&lt;-</span> <span class="kp">as.integer</span><span class="p">(</span>image_size_in_bits <span class="o">/</span> <span class="p">(</span><span class="m">1024</span> <span class="o">*</span> <span class="m">256</span><span class="p">))</span>
+number_of_colors <span class="o">&lt;-</span> <span class="m">2</span> <span class="o">**</span> <span class="p">(</span>bits_per_pixel<span class="p">)</span>
+number_of_colors
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+32
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[115]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">9</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">toString</span><span class="p">(</span>number_of_colors<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="10.">10.<a class="anchor-link" href="#10.">&#182;</a></h2><p>Азбука Морзе позволяет кодировать символы для сообщений по радиосвязи, задавая комбинацию точек и тире.</p>
+<p>Сколько различных символов (цифр, букв, знаков пунктуации и т. д.) можно закодировать,</p>
+<p>используя код Морзе длиной не менее трёх и не более четырёх сигналов (точек и тире)?</p>
+<hr>
+<p>The Morse code allows you to encode characters for messages on the radio by specifying a combination of dots and dashes.</p>
+<p>How many different characters (numbers, letters, punctuation marks, etc.) can be encoded</p>
+<p>using Morse code of at least three and not more than four signals (dots and dashes)?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Сигнальная система Морзе - бинарная, состоит из двух символов: точка и тире.</p>
+<p>Сообщений длиной 3 символа будет $2^3$, а длиной 4 символа - $2^4$.</p>
+<hr>
+<p>The Morse signal system is binary, consists of two symbols: a dot and a dash.
+    
+Messages of 3 characters in length will be $2^3$, and 4 characters in length - $2^4$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[117]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">10</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">toString</span><span class="p">(</span><span class="m">2</span> <span class="o">**</span> <span class="m">3</span> <span class="o">+</span> <span class="m">2</span> <span class="o">**</span> <span class="m">4</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="11.">11.<a class="anchor-link" href="#11.">&#182;</a></h2><p>Алгоритм вычисления значения функции $F(n)$, где $n$ — натуральное число, задан следующими соотношениями:</p>
+<p>$F(n) = F(n - 1) * n$, при $n &gt; 1$</p>
+<p>$F(1) = 1$</p>
+<p>Чему равно значение функции $F(6)$?</p>
+<hr>
+<p>The algorithm for calculating the value of the function $F(n)$, where $n$ is a natural number, is given by the following relations:</p>
+<p>$F(n) = F(n - 1) * n$, при $n &gt; 1$</p>
+<p>$F(1) = 1$</p>
+<p>What is the value of the function $F(6)$?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[119]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="bp">F</span> <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>n<span class="p">)</span> <span class="p">{</span>
+    <span class="kr">if</span> <span class="p">(</span>n <span class="o">==</span> <span class="m">1</span><span class="p">)</span> <span class="p">{</span> 
+        <span class="kr">return</span> <span class="p">(</span><span class="m">1</span><span class="p">)</span>
+    <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span> 
+        <span class="kr">return</span> <span class="p">(</span><span class="bp">F</span><span class="p">(</span>n <span class="o">-</span> <span class="m">1</span><span class="p">)</span> <span class="o">*</span> n<span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="bp">F</span><span class="p">(</span><span class="m">6</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+720
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[120]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">11</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">toString</span><span class="p">(</span><span class="bp">F</span><span class="p">(</span><span class="m">6</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2>Ответы &nbsp; &nbsp; &nbsp; Answers</h2>
 
 </div>
@@ -13444,7 +13633,7 @@ end.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[112]:</div>
+<div class="prompt input_prompt">In&nbsp;[121]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>answer_dictionary
@@ -13466,15 +13655,18 @@ end.
 
 
 <div class="output_text output_subarea ">
-<pre>&lt;hash&gt; containing 8 key-value pair(s).
+<pre>&lt;hash&gt; containing 11 key-value pair(s).
   1 : 4
+  10 : 24
+  11 : 720
   2 : 135
   3 : 4
   4 : 2
   5 : DF4C
   6 : C
   7 : 6
-  8 : 20</pre>
+  8 : 20
+  9 : 32</pre>
 </div>
 
 </div>
