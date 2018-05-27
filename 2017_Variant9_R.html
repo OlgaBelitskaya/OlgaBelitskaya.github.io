@@ -13744,6 +13744,182 @@ d<span class="p">[</span><span class="kp">sort</span><span class="p">(</span><sp
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>file_list <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;astorm.aa&#39;</span><span class="p">,</span> <span class="s">&#39;anastom.bra&#39;</span><span class="p">,</span> <span class="s">&#39;apostorm.mka&#39;</span><span class="p">,</span> <span class="s">&#39;abrasto2m.abc&#39;</span><span class="p">)</span>
+mask_list <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;*to*.?*a*&#39;</span><span class="p">,</span> <span class="s">&#39;*sto??.*&#39;</span><span class="p">,</span> <span class="s">&#39;?*to*.???&#39;</span><span class="p">,</span> <span class="s">&#39;a*to*m.*?a&#39;</span><span class="p">)</span>
+
+df <span class="o">&lt;-</span> <span class="kt">data.frame</span><span class="p">(</span>file_list<span class="o">=</span>file_list<span class="p">,</span>
+                 mask_1<span class="o">=</span><span class="kp">grepl</span><span class="p">(</span><span class="s">&quot;^.*to.*\\...*a.*$&quot;</span><span class="p">,</span> file_list<span class="p">),</span> 
+                 mask_2<span class="o">=</span><span class="kp">grepl</span><span class="p">(</span><span class="s">&quot;^.*sto..\\..*$&quot;</span><span class="p">,</span> file_list<span class="p">),</span> 
+                 mask_3<span class="o">=</span><span class="kp">grepl</span><span class="p">(</span><span class="s">&quot;^..*to.*\\....$&quot;</span><span class="p">,</span> file_list<span class="p">),</span> 
+                 mask_4<span class="o">=</span><span class="kp">grepl</span><span class="p">(</span><span class="s">&quot;^a.*to.*m\\..*.a$&quot;</span><span class="p">,</span> file_list<span class="p">))</span>
+df
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<thead><tr><th scope=col>file_list</th><th scope=col>mask_1</th><th scope=col>mask_2</th><th scope=col>mask_3</th><th scope=col>mask_4</th></tr></thead>
+<tbody>
+	<tr><td>astorm.aa    </td><td> TRUE        </td><td> TRUE        </td><td>FALSE        </td><td> TRUE        </td></tr>
+	<tr><td>anastom.bra  </td><td> TRUE        </td><td>FALSE        </td><td> TRUE        </td><td> TRUE        </td></tr>
+	<tr><td>apostorm.mka </td><td> TRUE        </td><td> TRUE        </td><td> TRUE        </td><td> TRUE        </td></tr>
+	<tr><td>abrasto2m.abc</td><td>FALSE        </td><td> TRUE        </td><td> TRUE        </td><td>FALSE        </td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="kt">c</span> <span class="o">&lt;-</span> <span class="s">&#39;&#39;</span>
+<span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kp">print</span><span class="p">(</span>file_list<span class="p">[</span>i<span class="p">]);</span> 
+    <span class="kp">print</span><span class="p">(</span><span class="kp">length</span><span class="p">(</span>df<span class="p">[</span>i<span class="p">,</span><span class="m">2</span><span class="o">:</span><span class="m">5</span><span class="p">][</span>df<span class="p">[</span>i<span class="p">,</span><span class="m">2</span><span class="o">:</span><span class="m">5</span><span class="p">]</span><span class="o">==</span><span class="kc">TRUE</span><span class="p">]))</span>
+    
+    <span class="kr">if</span> <span class="p">(</span><span class="kp">length</span><span class="p">(</span>df<span class="p">[</span>i<span class="p">,</span><span class="m">2</span><span class="o">:</span><span class="m">5</span><span class="p">][</span>df<span class="p">[</span>i<span class="p">,</span><span class="m">2</span><span class="o">:</span><span class="m">5</span><span class="p">]</span><span class="o">==</span><span class="kc">TRUE</span><span class="p">])</span> <span class="o">==</span> <span class="m">3</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">c</span> <span class="o">&lt;-</span> <span class="kp">paste</span><span class="p">(</span><span class="kt">c</span><span class="p">,</span><span class="kp">toString</span><span class="p">(</span>i<span class="p">),</span>sep<span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">c</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1] &#34;astorm.aa&#34;
+[1] 3
+[1] &#34;anastom.bra&#34;
+[1] 3
+[1] &#34;apostorm.mka&#34;
+[1] 4
+[1] &#34;abrasto2m.abc&#34;
+[1] 2
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+'12'
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">4</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kt">c</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="5.">5.<a class="anchor-link" href="#5.">&#182;</a></h2><p>Для передачи информации по каналу связи с помехами используется 5-битовый код.</p>
+<p>Сообщение содержит только буквы A, B и C, которые кодируются следующими кодовыми словами:</p>
+<p><i style="font-size:150%;color:#348ABD;" class="font-effect-3d">A-10101, B-10010, C-01110</i>.</p>
+<p>Любые два из этих трёх кодовых слов отличаются не менее чем в трёх позициях. Поэтому, если принятое кодовое слово отличается от допустимого не более чем в одной позиции, можно однозначно определить, какая буква передавалась (говорят, что «код исправляет одну ошибку»). Так, получив кодовое слово 10000, можно догадаться, что передавалась буква B (отличие от кодового слова для B только в одной позиции, для остальных кодовых слов отличий больше). Если принятое кодовое слово отличается от всех допустимых кодовых слов более, чем в одной позиции, считается, что произошла ошибка (она обозначается «х»).</p>
+<p>Получено сообщение: <i style="font-size:150%;color:#348ABD;" class="font-effect-3d">00101 11010 11110 10111</i>.</p>
+<p>Декодируйте это сообщение. В ответе укажите четыре символа без пробелов и запятых.</p>
+<hr>
+<p>To transmit information over a communication channel with interference, a 5-bit code is used.</p>
+<p>The message contains only the letters A, B and C, which are encoded by the following code words:</p>
+<p><i style="font-size:150%;color:#348ABD;" class="font-effect-3d">A-10101, B-10010, C-01110</i>.</p>
+<p>Any two of these three codewords differ in at least three positions. Therefore, if the received codeword differs from permissible in not more than one position, it is possible to unambiguously determine which letter was transmitted (say that "decoding corrects one error"). So, having received the code word 10000, you can guess that the letter B was transmitted (unlike the codeword for B in only one position, for the other codewords there are more differences). If the received codeword differs from all valid codewords in more than one position, it is considered that an error has occurred (it is denoted by "x").</p>
+<p>The received message: <i style="font-size:150%;color:#348ABD;" class="font-effect-3d">00101 11010 11110 10111</i>.</p>
+<p>Decode this message. In the answer, specify four characters without spaces or commas.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="6.">6.<a class="anchor-link" href="#6.">&#182;</a></h2><p>В некоторой информационной системе информация кодируется двоичными четырёхразрядными словами.</p>
+<p>При передаче данных возможны их искажения, поэтому в конец каждого слова добавляется еще один (контрольный) разряд таким образом,</p>
+<p>чтобы сумма разрядов нового слова, считая контрольный, была чётной.</p>
+<p>Например, к слову <code>1011</code> справа будет добавлена <code>1</code>, а к слову <code>1010</code> — <code>0</code>.</p>
+<p>После этого, для увеличения надежности кодирования, к полученному слову добавляется сумма его разрядов в двоичном виде.</p>
+<p>Например, исходное слово <code>1000</code> превратится в <code>1000110</code>.</p>
+<p>Какое наименьшее число, большее 30 число может быть получено в результате этого алгоритма?</p>
+<p>Ответ запишите в десятичном виде.</p>
+<hr>
+<p>In some information system, information is encoded in binary four-digit words.</p>
+<p>With transmitting data, their distortions are possible, so at the end of each word one more (control) symbol is added</p>
+<p>so that the sum of the bits of the new word, assuming the control word, is even.</p>
+<p>For example, to the word <code>1011</code> will be added <code>1</code> from the right, and to the word <code>1010</code> - <code>0</code>.</p>
+<p>After that, for increasing the reliability of encoding, to the resulting word the sum of its digit bits in the binary form is added.</p>
+<p>For example, the original word <code>1000</code> will turn into <code>1000110</code>.</p>
+<p>What is the smallest number, greater than 30, can be obtained as a result of this algorithm?</p>
+<p>Write the answer in decimal form.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="7.">7.<a class="anchor-link" href="#7.">&#182;</a></h2>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -13755,7 +13931,7 @@ d<span class="p">[</span><span class="kp">sort</span><span class="p">(</span><sp
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="prompt input_prompt">In&nbsp;[52]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>answer_dictionary
@@ -13777,10 +13953,11 @@ d<span class="p">[</span><span class="kp">sort</span><span class="p">(</span><sp
 
 
 <div class="output_text output_subarea ">
-<pre>&lt;hash&gt; containing 3 key-value pair(s).
+<pre>&lt;hash&gt; containing 4 key-value pair(s).
   1 : 900
   2 : 13
-  3 : 13</pre>
+  3 : 13
+  4 : 12</pre>
 </div>
 
 </div>
