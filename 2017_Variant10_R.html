@@ -12797,7 +12797,8 @@ RK5CYII="
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="4.">4.<a class="anchor-link" href="#4.">&#182;</a></h2><p>Для групповых операций с файлами используются маски имён файлов.</p>
-<p>Маска представляет собой последовательность букв, цифр и прочих допустимых в именах файлов символов, в которой также могут встречаться следующие символы.</p>
+<p>Маска представляет собой последовательность букв, цифр и прочих допустимых в именах файлов символов,</p>
+<p>в которой также могут встречаться следующие символы.</p>
 <p>Символ <code>«?»</code> (вопросительный знак) означает ровно один произвольный символ.</p>
 <p>Символ <code>«*»</code> (звёздочка) означает любую последовательность символов произвольной длины, в том числе <code>«*»</code> может задавать и пустую последовательность.</p>
 <p>В каталоге находятся шесть файлов:</p>
@@ -12806,7 +12807,8 @@ RK5CYII="
 <p><code>?oo*m.p*</code>, <code>b*o*om.p??</code>, <code>*o*om.p*?</code>, <code>b*om.p?*</code>, <code>*.*p*</code>, <code>bo*m.???</code>, <code>*om.*p*</code>, <code>*o*o*.p*?</code>.</p>
 <hr>
 <p>For group operations with files, masks of file names are used.</p>
-<p>A mask is a sequence of letters, numbers and other permissible characters in file names, in which the following characters can also occur.</p>
+<p>A mask is a sequence of letters, numbers and other permissible characters in file names,</p>
+<p>in which the following characters can also occur.</p>
 <p>The symbol <code>«?»</code> (question mark) means exactly one arbitrary character.</p>
 <p>The symbol <code>«*»</code> (asterisk) stands for any sequence of characters of arbitrary length, including <code>«*»</code>, which can also specify an empty sequence.</p>
 <p>There are six files in the directory:</p>
@@ -12814,6 +12816,401 @@ RK5CYII="
 <p>Here are eight masks. How many of them are those to which exactly four files from this catalog correspond?</p>
 <p><code>?oo*m.p*</code>, <code>b*o*om.p??</code>, <code>*o*om.p*?</code>, <code>b*om.p?*</code>, <code>*.*p*</code>, <code>bo*m.???</code>, <code>*om.*p*</code>, <code>*o*o*.p*?</code>.</p>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[78]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>file_list <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;boom.pas&#39;</span><span class="p">,</span> <span class="s">&#39;bloom.ppt&#39;</span><span class="p">,</span> <span class="s">&#39;loom.pas&#39;</span><span class="p">,</span> 
+               <span class="s">&#39;bottom.pdf&#39;</span><span class="p">,</span> <span class="s">&#39;bom.pps&#39;</span><span class="p">,</span> <span class="s">&#39;boom.ppt&#39;</span><span class="p">)</span>
+mask_list <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;?oo*m.p*&#39;</span><span class="p">,</span> <span class="s">&#39;b*o*om.p??&#39;</span><span class="p">,</span> <span class="s">&#39;*o*om.p*?&#39;</span><span class="p">,</span> <span class="s">&#39;b*om.p?*&#39;</span><span class="p">,</span>
+               <span class="s">&#39;*.*p*&#39;</span><span class="p">,</span> <span class="s">&#39;bo*m.???&#39;</span><span class="p">,</span> <span class="s">&#39;*om.*p*&#39;</span><span class="p">,</span> <span class="s">&#39;*o*o*.p*?&#39;</span><span class="p">)</span>
+
+df <span class="o">&lt;-</span> <span class="kt">data.frame</span><span class="p">(</span>file_list<span class="o">=</span>file_list<span class="p">,</span>
+                 mask_1<span class="o">=</span><span class="kp">grepl</span><span class="p">(</span><span class="s">&quot;^.oo.*m\\.p.*$&quot;</span><span class="p">,</span> file_list<span class="p">),</span> 
+                 mask_2<span class="o">=</span><span class="kp">grepl</span><span class="p">(</span><span class="s">&quot;^b.*o.*om\\.p..$&quot;</span><span class="p">,</span> file_list<span class="p">),</span> 
+                 mask_3<span class="o">=</span><span class="kp">grepl</span><span class="p">(</span><span class="s">&quot;^.*o.*om\\.p.*.$&quot;</span><span class="p">,</span> file_list<span class="p">),</span> 
+                 mask_4<span class="o">=</span><span class="kp">grepl</span><span class="p">(</span><span class="s">&quot;^b.*om\\.p..*$&quot;</span><span class="p">,</span> file_list<span class="p">),</span>
+                 mask_5<span class="o">=</span><span class="kp">grepl</span><span class="p">(</span><span class="s">&quot;^.*\\..*p.*$&quot;</span><span class="p">,</span> file_list<span class="p">),</span> 
+                 mask_6<span class="o">=</span><span class="kp">grepl</span><span class="p">(</span><span class="s">&quot;^bo.*m\\....$&quot;</span><span class="p">,</span> file_list<span class="p">),</span> 
+                 mask_7<span class="o">=</span><span class="kp">grepl</span><span class="p">(</span><span class="s">&quot;^.*om\\..*p.*$&quot;</span><span class="p">,</span> file_list<span class="p">),</span> 
+                 mask_8<span class="o">=</span><span class="kp">grepl</span><span class="p">(</span><span class="s">&quot;^.*o.*o.*\\.p.*.$&quot;</span><span class="p">,</span> file_list<span class="p">))</span>
+df
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<thead><tr><th scope=col>file_list</th><th scope=col>mask_1</th><th scope=col>mask_2</th><th scope=col>mask_3</th><th scope=col>mask_4</th><th scope=col>mask_5</th><th scope=col>mask_6</th><th scope=col>mask_7</th><th scope=col>mask_8</th></tr></thead>
+<tbody>
+	<tr><td>boom.pas  </td><td> TRUE     </td><td> TRUE     </td><td> TRUE     </td><td> TRUE     </td><td>TRUE      </td><td> TRUE     </td><td>TRUE      </td><td> TRUE     </td></tr>
+	<tr><td>bloom.ppt </td><td>FALSE     </td><td> TRUE     </td><td> TRUE     </td><td> TRUE     </td><td>TRUE      </td><td>FALSE     </td><td>TRUE      </td><td> TRUE     </td></tr>
+	<tr><td>loom.pas  </td><td> TRUE     </td><td>FALSE     </td><td> TRUE     </td><td>FALSE     </td><td>TRUE      </td><td>FALSE     </td><td>TRUE      </td><td> TRUE     </td></tr>
+	<tr><td>bottom.pdf</td><td>FALSE     </td><td> TRUE     </td><td> TRUE     </td><td> TRUE     </td><td>TRUE      </td><td> TRUE     </td><td>TRUE      </td><td> TRUE     </td></tr>
+	<tr><td>bom.pps   </td><td>FALSE     </td><td>FALSE     </td><td>FALSE     </td><td> TRUE     </td><td>TRUE      </td><td> TRUE     </td><td>TRUE      </td><td>FALSE     </td></tr>
+	<tr><td>boom.ppt  </td><td> TRUE     </td><td> TRUE     </td><td> TRUE     </td><td> TRUE     </td><td>TRUE      </td><td> TRUE     </td><td>TRUE      </td><td> TRUE     </td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[79]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="kt">c</span> <span class="o">&lt;-</span> <span class="m">0</span>
+<span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">2</span><span class="o">:</span><span class="m">9</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kp">print</span><span class="p">(</span>mask_list<span class="p">[</span>i<span class="m">-1</span><span class="p">]);</span> 
+    <span class="kp">print</span><span class="p">(</span><span class="kp">length</span><span class="p">(</span>df<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">6</span><span class="p">,</span>i<span class="p">][</span>df<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">6</span><span class="p">,</span>i<span class="p">]</span><span class="o">==</span><span class="kc">TRUE</span><span class="p">]))</span>
+    
+    <span class="kr">if</span> <span class="p">(</span><span class="kp">length</span><span class="p">(</span>df<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">6</span><span class="p">,</span>i<span class="p">][</span>df<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">6</span><span class="p">,</span>i<span class="p">]</span><span class="o">==</span><span class="kc">TRUE</span><span class="p">])</span> <span class="o">==</span> <span class="m">4</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">c</span> <span class="o">&lt;-</span> <span class="kt">c</span> <span class="o">+</span> <span class="m">1</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">c</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1] &#34;?oo*m.p*&#34;
+[1] 3
+[1] &#34;b*o*om.p??&#34;
+[1] 4
+[1] &#34;*o*om.p*?&#34;
+[1] 5
+[1] &#34;b*om.p?*&#34;
+[1] 5
+[1] &#34;*.*p*&#34;
+[1] 6
+[1] &#34;bo*m.???&#34;
+[1] 4
+[1] &#34;*om.*p*&#34;
+[1] 6
+[1] &#34;*o*o*.p*?&#34;
+[1] 5
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+2
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[80]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">4</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">toString</span><span class="p">(</span><span class="kt">c</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="5.">5.<a class="anchor-link" href="#5.">&#182;</a></h2><p>Через канал связи передаётся сообщение, состоящее только из символов А, Б, В и Г.</p>
+<p>Эти символы кодируются неравномерным (по длине) кодом: <i style="font-size:150%;color:#348ABD;" class="font-effect-3d">A-0, Б-10, В-110, Г-111</i>.</p>
+<p>Исходное сообщение: <i style="font-size:150%;color:#348ABD;" class="font-effect-3d">ВГВБАВА</i>.</p>
+<p>Закодируйте сообщение приведенным кодом.</p>
+<p>Полученную последовательность переведите в шестнадцатеричный вид.</p>
+<p>В ответе запишите последовательность шестнадцатеричных цифр без запятых.</p>
+<hr>
+<p>A message is sent through the communication channel, it consists only of symbols А, Б, В and Г.</p>
+<p>These symbols are encoded unequally (along with the length) by code: <i style="font-size:150%;color:#348ABD;" class="font-effect-3d">A-0, Б-10, В-110, Г-111</i>.</p>
+<p>The initial message: <i style="font-size:150%;color:#348ABD;" class="font-effect-3d">ВГВБАВА</i>.</p>
+<p>Encode the message with this code.</p>
+<p>Obtain the resulting sequence in a hexadecimal form.</p>
+<p>In the answer, write down the sequence of hexadecimal digits without commas.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[83]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>string <span class="o">&lt;-</span> <span class="kp">unlist</span><span class="p">(</span><span class="kp">strsplit</span><span class="p">(</span><span class="s">&#39;ВГВБАВА&#39;</span><span class="p">,</span><span class="kc">NULL</span><span class="p">))</span>
+string
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<ol class=list-inline>
+	<li>'В'</li>
+	<li>'Г'</li>
+	<li>'В'</li>
+	<li>'Б'</li>
+	<li>'А'</li>
+	<li>'В'</li>
+	<li>'А'</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[100]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>string <span class="o">&lt;-</span> <span class="kp">unlist</span><span class="p">(</span><span class="kp">strsplit</span><span class="p">(</span><span class="s">&#39;ВГВБАВА&#39;</span><span class="p">,</span><span class="kc">NULL</span><span class="p">))</span>
+codes <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;0&#39;</span><span class="p">,</span> <span class="s">&#39;10&#39;</span><span class="p">,</span> <span class="s">&#39;110&#39;</span><span class="p">,</span> <span class="s">&#39;111&#39;</span><span class="p">)</span>
+symbols <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;А&#39;</span><span class="p">,</span> <span class="s">&#39;Б&#39;</span><span class="p">,</span> <span class="s">&#39;В&#39;</span><span class="p">,</span> <span class="s">&#39;Г&#39;</span><span class="p">)</span>
+result <span class="o">&lt;-</span> <span class="s">&#39;&#39;</span>
+
+<span class="kr">for</span> <span class="p">(</span>el <span class="kr">in</span> string<span class="p">)</span> <span class="p">{</span>
+    <span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">){</span>
+        <span class="kr">if</span> <span class="p">(</span>el <span class="o">==</span> symbols<span class="p">[</span>i<span class="p">])</span> <span class="p">{</span>
+            result <span class="o">&lt;-</span> <span class="kp">paste</span><span class="p">(</span>result<span class="p">,</span>codes<span class="p">[</span>i<span class="p">],</span>sep<span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+result
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+'1101111101001100'
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Четыре цифры в бинарной системе соответствуют одной цифре в шестнадцатеричной системе.</p>
+<p>The four digits in the binary system correspond to one digit in the hexadecimal system.</p>
+<p>$1101_2 = 2^3 + 2^2 + 2^0 = 13_{10} = D_{16}$</p>
+<p>$1111_2 = 2^3 + 2^2 + 2^1 + 2^0 = 15_{10} = F_{16}$</p>
+<p>$0100_2 = 2^2 = 4_{10} = 4_{16}$</p>
+<p>$1100_2 = 2^3 + 2^2 = 12_{10} = C_{16}$</p>
+<p>$1101111101001100_2 = DF4C_{16}$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[101]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>bin2dec <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>n<span class="p">)</span> <span class="p">{</span>
+  <span class="kr">return</span><span class="p">(</span><span class="kp">sapply</span><span class="p">(</span><span class="kp">strsplit</span><span class="p">(</span><span class="kp">as.character</span><span class="p">(</span>n<span class="p">),</span>split<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">),</span> 
+                <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="kp">sum</span><span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>x<span class="p">)</span> <span class="o">*</span> <span class="m">2</span> <span class="o">**</span> <span class="p">(</span><span class="kp">rev</span><span class="p">(</span><span class="kp">seq_along</span><span class="p">(</span>x<span class="p">)</span> <span class="o">-</span> <span class="m">1</span><span class="p">)))))</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[102]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>dec_result <span class="o">&lt;-</span> bin2dec<span class="p">(</span>result<span class="p">)</span>
+dec_result
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+57164
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[103]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">5</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">toupper</span><span class="p">(</span><span class="kp">as.hexmode</span><span class="p">(</span>dec_result<span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="6.">6.<a class="anchor-link" href="#6.">&#182;</a></h2><p>Предлагается некоторая операция над двумя произвольными трёхзначными десятичными числами:</p>
+<p>$1.$ Записывается результат сложения значений старших разрядов заданных чисел.</p>
+<p>$2.$ К нему дописывается результат сложения значений средних разрядов этих чисел по такому правилу: если он меньше первой суммы, то второе полученное число приписывается к первому слева, иначе — справа.</p>
+<p>$3.$ Итоговое число получают приписыванием справа к полученному после второго шага числу суммы значений младших разрядов исходных чисел.</p>
+<p>Какие из предложенных чисел могут быть результатом такой операции?</p>
+<p>Перечислите в алфавитном порядке буквы, соответствующие этим числам, без пробелов и знаков препинания.</p>
+<hr>
+<p>The operation on two arbitrary three-digit decimal numbers is sopposed by this way:</p>
+<p>$1.$ The result of the addition of the highest digits in the given numbers is written down.</p>
+<p>$2.$ The result of the addition of the mean digits is written near to it by this rule: if it is less than the first sum, then the second obtained number is joined to the first from the left, otherwise - from the right.</p>
+<p>$3.$ The final number is obtained by joining from the right the sum of the lowest digits of the original numbers to the number written after the second step.</p>
+<p>Which of the suggested numbers can be the result of this operation?</p>
+<p>List in alphabetical order the letters corresponding to these numbers, without spaces and punctuation marks.</p>
+<p>$A) \ 171412$</p>
+<p>$B) \ 121419$</p>
+<p>$C) \ 81714$</p>
+<p>$D) \ 15117$</p>
+<p>$E) \ 4809$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>$A) \ 171412$</p>
+<p>Содержит 6 символов, значит результатом сложения каждой пары цифр было двузначное число (17, 14, 12). Но 17 больше 14, а первые две суммы должны быть в возрастающем порядке.</p>
+<hr>
+<p>Contains 6 symbols, therefore the result of addition of each pair of digits was a two-digit number (17, 14, 12). But 17 is more than 14, and the first two sums should be in ascending order.</p>
+<p>$B) \ 121419$</p>
+<p>Содержит 6 символов, значит результатом сложения каждой пары цифр было двузначное число (12, 14, 19). Но 19 не может быть получено путем сложения двух цифр.</p>
+<hr>
+<p>Contains 6 symbols, therefore the result of addition of each pair of digits was a two-digit number (12, 14, 19). But 19 can not be obtained by adding two digits.</p>
+<p>$C) \ 81714 \to 8, 17, 14 \to 497, 487$</p>
+<p>$D) \ 15117$</p>
+<p>Содержит 5 символов, значит результатом сложения одной пары цифр было однозначное число 7 или 1 в середине. Но 15 больше 11 или 1, а первые две суммы должны быть в возрастающем порядке.</p>
+<hr>
+<p>Contains 5 characters, so the result of adding one pair of digits was a single digit: 7 or 1 in the middle. But 15 is more than 11 or 1, and the first two sums should be in ascending order.</p>
+<p>$E) \ 4809$</p>
+<p>Невозможно разбить на три суммы пар цифр: 4,8,09; 48,0,9; 4,80,9.</p>
+<hr>
+<p>It is impossible to break down into sums of digit pairs: 4,8,09; 48,0,9; 4,80,9.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[104]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">6</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&#39;C&#39;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="7.">7.<a class="anchor-link" href="#7.">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -12828,7 +13225,7 @@ RK5CYII="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[105]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>answer_dictionary
@@ -12850,9 +13247,13 @@ RK5CYII="
 
 
 <div class="output_text output_subarea ">
-<pre>&lt;hash&gt; containing 2 key-value pair(s).
+<pre>&lt;hash&gt; containing 6 key-value pair(s).
   1 : 4
-  2 : 135</pre>
+  2 : 135
+  3 : 4
+  4 : 2
+  5 : DF4C
+  6 : C</pre>
 </div>
 
 </div>
