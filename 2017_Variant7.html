@@ -14581,17 +14581,20 @@ void F(int n)
 <p>$(x \in P) \to \neg ( \neg (x \in A) \land \neg (x \in Q)) \iff$ <em>(De Morgan's laws)</em></p>
 <p>$\iff (x \in P) \to \neg \neg ((x \in A) \lor (x \in Q)) \iff$ <em>(double negation)</em></p>
 <p>$\iff (x \in P) \to ((x \in A) \lor (x \in Q))$</p>
+<p>Геометрический смысл данной импликации:</p>
+<p>любая точка интервала P должна принадлежать объединению интервалов A и Q.</p>
+<p>Это верно только в случае, если A не меньше отрезка [5, 8].</p>
 <hr>
-<p>$ ((x \in P) \to ((x \in A) \lor (x \in Q))) \equiv True \iff$ <em>(the truth table)</em></p>
-<p>$\iff (x \in P) \equiv True  \to ((x \in A) \lor (x \in Q)) \equiv True $</p>
-<p>$ ([5, 13] \subset (A \cup [8, 19] )) \equiv True $ when A = at least [5,8]</p>
+<p>The geometric meaning of this implication is:</p>
+<p>any point of the interval P must belong to the union of the intervals A and Q.</p>
+<p>This is true only if A is not smaller than the interval [5, 8].</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[116]:</div>
+<div class="prompt input_prompt">In&nbsp;[54]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">segments</span><span class="o">=</span><span class="p">[(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> 
@@ -14637,10 +14640,10 @@ void F(int n)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[117]:</div>
+<div class="prompt input_prompt">In&nbsp;[55]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">18</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="mi">8</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">18</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="mi">8</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span> <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">18</span><span class="p">])</span>
 </pre></div>
 
@@ -14674,28 +14677,59 @@ void F(int n)
 <p><div style="width: 800px; height: 500px; overflow:auto;">
     <img src="it_images/2017_07_19.png" width="800" height="500"/>
 </div>
-В программе используется целочисленный массив А с индексами от 0 до 9. Значения элементов массива равны 6; 5; 4; 7; 10; 6; 9; 11; 7; 8 соответственно, т.е. А[0] = 6; А[1] = 5 и т.д.</p>
-<p>Определите значение переменной k после выполнения следующего фрагмента программы, записанной ниже на разных языках программирования.</p>
+В программе используется целочисленный массив А с индексами от 0 до 9.</p>
+<p>Значения элементов массива равны $6; 5; 4; 7; 10; 6; 9; 11; 7; 8$ соответственно, т.е. $А[0] = 6; А[1] = 5$ и т.д.</p>
+<p>Определите значение переменной $k$ после выполнения следующего фрагмента программы,</p>
+<p>записанной ниже на разных языках программирования.</p>
 <hr>
-<p>The program uses an integer array A with indices from 0 to 9. The values of the elements of the array are 6; 5; 4; 7; 10; 6; 9; 11; 7; 8, respectively, i.e. A [0] = 6; A [1] = 5, and so on.</p>
-<p>Determine the value of the variable k after the execution of the next program fragment, recorded below in different programming languages.</p>
+<p>The program uses an integer array A with indices from 0 to 9.</p>
+<p>The values of the elements of the array are $6; 5; 4; 7; 10; 6; 9; 11; 7; 8$ respectively, i.e. $A [0] = 6; A [1] = 5$, and so on.</p>
+<p>Determine the value of the variable $k$ after the execution of the next program fragment,</p>
+<p>recorded below in different programming languages.</p>
+<table style="width:95%;">
+  <tr style="color:slategray;font-size:120%;font-family:'Roboto';">
+    <th style="text-align:center;">Python</th> 
+    <th style="text-align:center;">R</th>          
+  </tr>
+  <tr>
+    <td style="font-weight:bold;text-align:left;"><pre><code class='python'>
 
+A = [6,5,4,7,10,6,9,11,7,8]
+k = 0
+m = A[0]
+for i in range(1,10): 
+    if A[i] > m:
+        k = i
+    </code></pre></td> 
+    <td style="font-weight:bold;text-align:left;"><pre><code class='r'> 
+
+A <- c(6,5,4,7,10,6,9,11,7,8)
+k <- 1
+m <- A[1]
+for (i in 2:10) {
+    if (A[i] > m){
+        k <- i-1
+    }
+}      
+    </code></pre></td>     
+  </tr> 
+</table>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[118]:</div>
+<div class="prompt input_prompt">In&nbsp;[57]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">]</span>
 <span class="n">k</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span> 
-    <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span><span class="n">m</span><span class="p">:</span>
-        <span class="n">k</span><span class="o">=</span><span class="n">i</span>
+    <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">m</span><span class="p">:</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">i</span>
         
-<span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">19</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">19</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Answer:&quot;</span><span class="p">,</span> <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">19</span><span class="p">])</span>
 </pre></div>
 
