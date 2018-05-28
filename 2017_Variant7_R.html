@@ -15014,6 +15014,293 @@ net_bin <span class="o">&lt;-</span> <span class="kp">substr</span><span class="
 </div>
 
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[99]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>bc8 <span class="o">&lt;-</span> bincombinations<span class="p">(</span><span class="m">8</span><span class="p">)</span>
+mask3 <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">()</span>
+ip_bin3 <span class="o">&lt;-</span> <span class="kp">substr</span><span class="p">(</span>ip_bin<span class="p">,</span><span class="m">19</span><span class="p">,</span><span class="m">26</span><span class="p">)</span>
+net_bin3 <span class="o">&lt;-</span> <span class="kp">substr</span><span class="p">(</span>net_bin<span class="p">,</span><span class="m">19</span><span class="p">,</span><span class="m">26</span><span class="p">)</span>
+ip_bin3<span class="p">;</span> net_bin3 
+
+ip_bin3 <span class="o">&lt;-</span> <span class="kp">unlist</span><span class="p">(</span><span class="kp">strsplit</span><span class="p">(</span>ip_bin3<span class="p">,</span><span class="kc">NULL</span><span class="p">))</span>
+net_bin3 <span class="o">&lt;-</span> <span class="kp">unlist</span><span class="p">(</span><span class="kp">strsplit</span><span class="p">(</span>net_bin3<span class="p">,</span><span class="kc">NULL</span><span class="p">))</span>
+
+<span class="kr">for</span> <span class="p">(</span>j <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">256</span><span class="p">){</span>
+    <span class="kt">c</span> <span class="o">&lt;-</span> <span class="m">0</span>
+    <span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">8</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">if</span> <span class="p">(</span><span class="kp">as.integer</span><span class="p">(</span><span class="kp">as.integer</span><span class="p">(</span>ip_bin3<span class="p">[</span>i<span class="p">])</span> <span class="o">&amp;</span> bc8<span class="p">[</span>j<span class="p">,</span>i<span class="p">])</span><span class="o">==</span> <span class="kp">as.integer</span><span class="p">(</span>net_bin3<span class="p">[</span>i<span class="p">]))</span> <span class="p">{</span>
+            <span class="kt">c</span> <span class="o">&lt;-</span> <span class="kt">c</span> <span class="o">+</span> <span class="m">1</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kr">if</span> <span class="p">(</span><span class="kt">c</span> <span class="o">==</span> <span class="m">8</span><span class="p">)</span> <span class="p">{</span>
+        mask3 <span class="o">&lt;-</span> <span class="kp">append</span><span class="p">(</span>mask3<span class="p">,</span>j<span class="m">-1</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span> 
+
+mask3
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+'01100110'
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+'01100000'
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<ol class=list-inline>
+	<li>96</li>
+	<li>97</li>
+	<li>104</li>
+	<li>105</li>
+	<li>112</li>
+	<li>113</li>
+	<li>120</li>
+	<li>121</li>
+	<li>224</li>
+	<li>225</li>
+	<li>232</li>
+	<li>233</li>
+	<li>240</li>
+	<li>241</li>
+	<li>248</li>
+	<li>249</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[110]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>mask_list <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;240.0.0.0&#39;</span><span class="p">,</span><span class="s">&#39;248.0.0.0&#39;</span><span class="p">,</span><span class="s">&#39;252.0.0.0&#39;</span><span class="p">,</span><span class="s">&#39;254.0.0.0&#39;</span><span class="p">,</span><span class="s">&#39;255.0.0.0&#39;</span><span class="p">,</span>
+               <span class="s">&#39;255.128.0.0&#39;</span><span class="p">,</span><span class="s">&#39;255.192.0.0&#39;</span><span class="p">,</span><span class="s">&#39;255.224.0.0&#39;</span><span class="p">,</span><span class="s">&#39;255.240.0.0&#39;</span><span class="p">,</span><span class="s">&#39;255.248.0.0&#39;</span><span class="p">,</span> 
+               <span class="s">&#39;255.252.0.0&#39;</span><span class="p">,</span><span class="s">&#39;255.254.0.0&#39;</span><span class="p">,</span><span class="s">&#39;255.255.0.0&#39;</span><span class="p">,</span><span class="s">&#39;255.255.128.0&#39;</span><span class="p">,</span><span class="s">&#39;255.255.192.0&#39;</span><span class="p">,</span>
+               <span class="s">&#39;255.255.224.0&#39;</span><span class="p">,</span><span class="s">&#39;255.255.240.0&#39;</span><span class="p">,</span><span class="s">&#39;255.255.248.0&#39;</span><span class="p">,</span><span class="s">&#39;255.255.252.0&#39;</span><span class="p">,</span><span class="s">&#39;255.255.254.0&#39;</span><span class="p">,</span>
+               <span class="s">&#39;255.255.255.0&#39;</span><span class="p">,</span><span class="s">&#39;255.255.255.128&#39;</span><span class="p">,</span><span class="s">&#39;255.255.255.192&#39;</span><span class="p">,</span><span class="s">&#39;255.255.255.224&#39;</span><span class="p">,</span><span class="s">&#39;255.255.255.240&#39;</span><span class="p">,</span>
+               <span class="s">&#39;255.255.255.248&#39;</span><span class="p">,</span><span class="s">&#39;255.255.255.252&#39;</span><span class="p">)</span>
+mask3_list <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">()</span>
+
+<span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>mask_list<span class="p">))</span> <span class="p">{</span>
+    <span class="kr">if</span> <span class="p">(</span><span class="kp">substr</span><span class="p">(</span>mask_list<span class="p">[</span>i<span class="p">],</span><span class="m">1</span><span class="p">,</span><span class="m">8</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#39;255.255.&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">c</span> <span class="o">&lt;-</span> <span class="kp">substr</span><span class="p">(</span>mask_list<span class="p">[</span>i<span class="p">],</span><span class="m">9</span><span class="p">,</span><span class="kp">nchar</span><span class="p">(</span>mask_list<span class="p">[</span>i<span class="p">]))</span>        
+        <span class="kt">c</span> <span class="o">&lt;-</span> <span class="kp">as.integer</span><span class="p">(</span><span class="kp">sub</span><span class="p">(</span><span class="s">&#39;\\..*&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="kt">c</span><span class="p">))</span>
+        mask3_list <span class="o">&lt;-</span> <span class="kp">append</span><span class="p">(</span>mask3_list<span class="p">,</span><span class="kt">c</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+mask3_list
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<ol class=list-inline>
+	<li>0</li>
+	<li>128</li>
+	<li>192</li>
+	<li>224</li>
+	<li>240</li>
+	<li>248</li>
+	<li>252</li>
+	<li>254</li>
+	<li>255</li>
+	<li>255</li>
+	<li>255</li>
+	<li>255</li>
+	<li>255</li>
+	<li>255</li>
+	<li>255</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[113]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="kp">intersect</span><span class="p">(</span>mask3<span class="p">,</span>mask3_list<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<ol class=list-inline>
+	<li>224</li>
+	<li>240</li>
+	<li>248</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[115]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">12</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">min</span><span class="p">(</span><span class="kp">intersect</span><span class="p">(</span>mask3<span class="p">,</span>mask3_list<span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="13.">13.<a class="anchor-link" href="#13.">&#182;</a></h2><p>В некоторой стране автомобильный номер состоит из 7 символов: сначала 2 буквы, затем 3 цифры, затем ещё 2 буквы.</p>
+<p>При этом буквы могут быть выбраны только из 12 строчных букв местного алфавита.</p>
+<p>Среди цифр не используются цифры 6 и 9.</p>
+<p>Автоматизированная система хранит номера автомобилей следующим образом.</p>
+<p>Используется посимвольное кодирование и в памяти системы для кодирования каждого символа используется минимально возможное и одинаково целое количество бит.</p>
+<p>А для хранения всего номера используется минимально возможное целое количество байт.</p>
+<p>Какое количество информации (в байтах) требуется для хранения номеров 160 автомобилей?</p>
+<hr>
+<p>In some country, the car number consists of 7 symbols: first 2 letters, then 3 digits, then 2 more letters.</p>
+<p>Letters can be chosen only from 12 lowercase letters of the local alphabet.</p>
+<p>Among the digits, figures 6 and 9 are not used.</p>
+<p>The automated system stores car numbers by following rules.</p>
+<p>Symbol encoding is used and in the system memory, the minimum possible and equally integer number of bits is used to encode each character.</p>
+<p>And to store the entire car number, it is used the minimum possible integer number of bytes.</p>
+<p>How much information (in bytes) is required to store 160 cars?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[117]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># for example, a -&#39;0000&#39;, b - &#39;0001&#39;, etc.</span>
+bits_for_letter <span class="o">&lt;-</span> <span class="kp">ceiling</span><span class="p">(</span><span class="kp">log2</span><span class="p">(</span><span class="m">12</span><span class="p">))</span>
+<span class="c1"># for example, 1 -&#39;000&#39;, 1 - &#39;001&#39;, etc.</span>
+bits_for_digit <span class="o">&lt;-</span> <span class="kp">ceiling</span><span class="p">(</span><span class="kp">log2</span><span class="p">(</span><span class="m">8</span><span class="p">))</span>
+<span class="c1"># for one car number: 4 * letter bis + 3 * digit bits</span>
+bits_for_number <span class="o">&lt;-</span> <span class="m">4</span> <span class="o">*</span> bits_for_letter <span class="o">+</span> <span class="m">3</span> <span class="o">*</span> bits_for_digit
+<span class="c1"># 1 byte = 8 bits</span>
+bytes_for_number <span class="o">&lt;-</span> <span class="kp">ceiling</span><span class="p">(</span>bits_for_number <span class="o">/</span> <span class="m">8</span><span class="p">)</span>
+<span class="c1"># 160 cars</span>
+bytes_for_160cars <span class="o">&lt;-</span> <span class="m">160</span> <span class="o">*</span> bytes_for_number
+bytes_for_160cars
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+640
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[118]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">13</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">toString</span><span class="p">(</span>bytes_for_160cars<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -15025,7 +15312,7 @@ net_bin <span class="o">&lt;-</span> <span class="kp">substr</span><span class="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="prompt input_prompt">In&nbsp;[119]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>answer_dictionary
@@ -15047,10 +15334,12 @@ net_bin <span class="o">&lt;-</span> <span class="kp">substr</span><span class="
 
 
 <div class="output_text output_subarea ">
-<pre>&lt;hash&gt; containing 11 key-value pair(s).
+<pre>&lt;hash&gt; containing 13 key-value pair(s).
   1 : 153
   10 : 400
   11 : 12
+  12 : 224
+  13 : 640
   2 : zxy
   3 : 14
   4 : 13

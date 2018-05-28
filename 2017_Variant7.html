@@ -13846,29 +13846,43 @@ void F(int n)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div style="width: 800px; height: 200px; overflow:auto;">
+<p><div style="width: 800px; height: 200px; overflow:auto;">
     <img src="it_images/2017_07_13.png" width="800" height="200"/>
-</div><p>В некоторой стране автомобильный номер состоит из 7 символов: сначала 2 буквы, затем 3 цифры, затем ещё 2 буквы. При этом буквы могут быть выбраны только из 12 строчных букв местного алфавита. Среди цифр не используются цифры 6 и 9. Автоматизированная система хранит номера автомобилей следующим образом. Используется посимвольное кодирование и в памяти системы для кодирования каждого символа используется минимально возможное и одинаково целое количество бит. А для хранения всего номера используется минимально возможное целое количество байт. Какое количество информации (в байтах) требуется для хранения номеров 160 автомобилей?</p>
+</div>
+В некоторой стране автомобильный номер состоит из 7 символов: сначала 2 буквы, затем 3 цифры, затем ещё 2 буквы.</p>
+<p>При этом буквы могут быть выбраны только из 12 строчных букв местного алфавита.</p>
+<p>Среди цифр не используются цифры 6 и 9.</p>
+<p>Автоматизированная система хранит номера автомобилей следующим образом.</p>
+<p>Используется посимвольное кодирование и в памяти системы для кодирования каждого символа используется минимально возможное и одинаково целое количество бит.</p>
+<p>А для хранения всего номера используется минимально возможное целое количество байт.</p>
+<p>Какое количество информации (в байтах) требуется для хранения номеров 160 автомобилей?</p>
 <hr>
-<p>In some country, the car number consists of 7 symbols: first 2 letters, then 3 digits, then 2 more letters. Letters can be chosen only from 12 lowercase letters of the local alphabet. Among the digits, figures 6 and 9 are not used. The automated system stores vehicle numbers as follows. Symbol encoding is used and in the system memory, the minimum possible and equally integer number of bits is used to encode each character. And to store the entire car number, use the minimum possible integer number of bytes. How much information (in bytes) is required to store 160 cars?</p>
+<p>In some country, the car number consists of 7 symbols: first 2 letters, then 3 digits, then 2 more letters.</p>
+<p>Letters can be chosen only from 12 lowercase letters of the local alphabet.</p>
+<p>Among the digits, figures 6 and 9 are not used.</p>
+<p>The automated system stores car numbers by following rules.</p>
+<p>Symbol encoding is used and in the system memory, the minimum possible and equally integer number of bits is used to encode each character.</p>
+<p>And to store the entire car number, it is used the minimum possible integer number of bytes.</p>
+<p>How much information (in bytes) is required to store 160 cars?</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[105]:</div>
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># for example, a -&#39;0000&#39;, b - &#39;0001&#39;, etc.</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;- bits for each letter&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">2</span><span class="p">)),</span> <span class="s1">&#39;- bits for each letter&#39;</span><span class="p">)</span>
 <span class="c1"># for example, 1 -&#39;000&#39;, 1 - &#39;001&#39;, etc.</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="mi">8</span><span class="p">)),</span> <span class="s1">&#39;- bits for each digit&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">)),</span> <span class="s1">&#39;- bits for each digit&#39;</span><span class="p">)</span>
 <span class="c1"># for one car number: 4 * letter bis + 3 * digit bits</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">numpy</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="mi">8</span><span class="p">)),</span> <span class="s1">&#39;- bits for one car number&#39;</span><span class="p">)</span>
+<span class="n">bits_for_number</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bits_for_number</span><span class="p">,</span> <span class="s1">&#39;- bits for one car number&#39;</span><span class="p">)</span>
 <span class="c1"># 1 byte = 8 bits</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">((</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">numpy</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span><span class="o">/</span><span class="mi">8</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;- bytes for one car number&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">((</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">numpy</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span><span class="o">/</span><span class="mi">8</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">160</span><span class="p">,</span> <span class="s1">&#39;- bytes for 160 car number&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">bits_for_number</span> <span class="o">/</span> <span class="mi">8</span><span class="p">),</span> <span class="s1">&#39;- bytes for one car number&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">bits_for_number</span> <span class="o">/</span> <span class="mi">8</span><span class="p">)</span> <span class="o">*</span> <span class="mi">160</span><span class="p">,</span> <span class="s1">&#39;- bytes for 160 car number&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -13887,7 +13901,7 @@ void F(int n)
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>4 - bits for each letter
 3 - bits for each digit
-27 - bits for one car number
+25 - bits for one car number
 4 - bytes for one car number
 640 - bytes for 160 car number
 </pre>
@@ -13900,10 +13914,10 @@ void F(int n)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[106]:</div>
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">((</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">numpy</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span><span class="o">/</span><span class="mi">8</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">160</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">bits_for_number</span> <span class="o">/</span> <span class="mi">8</span><span class="p">)</span> <span class="o">*</span> <span class="mi">160</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Answer:&#39;</span><span class="p">,</span> <span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">13</span><span class="p">])</span>
 </pre></div>
 
