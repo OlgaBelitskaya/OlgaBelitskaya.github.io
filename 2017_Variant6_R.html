@@ -18100,17 +18100,394 @@ max_
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="20.">20.<a class="anchor-link" href="#20.">&#182;</a></h2>
+<h2 id="20.">20.<a class="anchor-link" href="#20.">&#182;</a></h2><p>Ниже на нескольких языках записан алгоритм. Получив на вход число $х$, этот алгоритм печатает два числа $L$ и $М$.</p>
+<p>Укажите наибольшее из таких чисел $х$, при вводе которых алгоритм печатает сначала 3, а потом 7.</p>
+<p>Below, in several languages, the algorithm is written. Having received the input number $х$, this algorithm prints two numbers $L$ and $М$.</p>
+<p>Specify the largest numbers $х$, for which the algorithm prints at first 3, and then 7.</p>
+<table style="width:95%;">
+  <tr style="color:slategray;font-size:120%;font-family:'Roboto';">
+    <th style="text-align:center;">Python</th> 
+    <th style="text-align:center;">R</th>          
+  </tr>
+  <tr>
+    <td style="font-weight:bold;text-align:left;"><pre><code class='python'>
+
+x = int(input())
+L, M = 0, 9
+
+while x > 0:
+    L += 1
+    if M > x % 10:
+        M = x % 10
+    x = int(x / 10)
+
+print(L, M)
+    </code></pre></td> 
+    <td style="font-weight:bold;text-align:left;"><pre><code class='r'> 
+
+x <- as.integer(readline())
+L <- 0; M <- 9
+
+while (x > 0){
+    L <- L + 1
+    if (M > x %% 10) {
+        M <- x %% 10
+    }
+    x <- as.integer(x / 10)
+}
+
+print(paste(L, M, sep=" "))   
+    </code></pre></td>     
+  </tr> 
+</table>
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[84]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>x <span class="o">&lt;-</span> <span class="kp">as.integer</span><span class="p">(</span><span class="kp">readline</span><span class="p">())</span>
+L <span class="o">&lt;-</span> <span class="m">0</span><span class="p">;</span> M <span class="o">&lt;-</span> <span class="m">9</span>
+
+<span class="kr">while</span> <span class="p">(</span>x <span class="o">&gt;</span> <span class="m">0</span><span class="p">){</span>
+    L <span class="o">&lt;-</span> L <span class="o">+</span> <span class="m">1</span>
+    <span class="kr">if</span> <span class="p">(</span>M <span class="o">&gt;</span> x <span class="o">%%</span> <span class="m">10</span><span class="p">)</span> <span class="p">{</span>
+        M <span class="o">&lt;-</span> x <span class="o">%%</span> <span class="m">10</span>
+    <span class="p">}</span>
+    x <span class="o">&lt;-</span> <span class="kp">as.integer</span><span class="p">(</span>x <span class="o">/</span> <span class="m">10</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kp">print</span><span class="p">(</span><span class="kp">paste</span><span class="p">(</span>L<span class="p">,</span> M<span class="p">,</span> sep<span class="o">=</span><span class="s">&quot; &quot;</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>997
+[1] &#34;3 7&#34;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[86]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># расширенная версия программы</span>
+MAX <span class="o">&lt;-</span> <span class="m">0</span>
+<span class="kr">for</span> <span class="p">(</span>x <span class="kr">in</span> <span class="m">981</span><span class="o">:</span><span class="m">1000</span><span class="p">)</span> <span class="p">{</span>  
+    L <span class="o">&lt;-</span> <span class="m">0</span><span class="p">;</span> M <span class="o">&lt;-</span> <span class="m">9</span>
+    t <span class="o">&lt;-</span> x
+    
+    <span class="kr">while</span> <span class="p">(</span>x <span class="o">&gt;</span> <span class="m">0</span><span class="p">){</span>
+        L <span class="o">&lt;-</span> L <span class="o">+</span> <span class="m">1</span>
+        <span class="kr">if</span> <span class="p">(</span>M <span class="o">&gt;</span> x <span class="o">%%</span> <span class="m">10</span><span class="p">)</span> <span class="p">{</span>
+            M <span class="o">&lt;-</span> x <span class="o">%%</span> <span class="m">10</span>
+        <span class="p">}</span>
+        <span class="kr">if</span> <span class="p">(</span>L <span class="o">==</span> <span class="m">3</span> <span class="o">&amp;</span> M <span class="o">==</span> <span class="m">7</span> <span class="o">&amp;</span> MAX <span class="o">&lt;</span> <span class="kp">t</span><span class="p">)</span> <span class="p">{</span>
+            MAX <span class="o">&lt;-</span> <span class="kp">t</span>
+        <span class="p">}</span>
+        x <span class="o">&lt;-</span> <span class="kp">as.integer</span><span class="p">(</span>x <span class="o">/</span> <span class="m">10</span><span class="p">)</span>
+    <span class="p">}</span>    
+    <span class="kp">print</span><span class="p">(</span><span class="kp">sprintf</span><span class="p">(</span><span class="s">&quot;%i %i %i&quot;</span><span class="p">,</span> <span class="kp">t</span><span class="p">,</span> L<span class="p">,</span> M<span class="p">))</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1] &#34;981 3 1&#34;
+[1] &#34;982 3 2&#34;
+[1] &#34;983 3 3&#34;
+[1] &#34;984 3 4&#34;
+[1] &#34;985 3 5&#34;
+[1] &#34;986 3 6&#34;
+[1] &#34;987 3 7&#34;
+[1] &#34;988 3 8&#34;
+[1] &#34;989 3 8&#34;
+[1] &#34;990 3 0&#34;
+[1] &#34;991 3 1&#34;
+[1] &#34;992 3 2&#34;
+[1] &#34;993 3 3&#34;
+[1] &#34;994 3 4&#34;
+[1] &#34;995 3 5&#34;
+[1] &#34;996 3 6&#34;
+[1] &#34;997 3 7&#34;
+[1] &#34;998 3 8&#34;
+[1] &#34;999 3 9&#34;
+[1] &#34;1000 4 0&#34;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="21.">21.<a class="anchor-link" href="#21.">&#182;</a></h2>
+<p>Алгоритм вычисляет количество цифр в исходном числе (L) и определяет минимальную цифру среди них (M).</p>
+<p>L=3, M=7 печатается для трехзначного числа с минимальной цифрой 7.</p>
+<p>Максимальным среди чисел такого вида будет 997.</p>
+<hr>
+<p>The algorithm calculates the number of digits in the original number (L) and determines the minimum digit among them (M).</p>
+<p>L = 3, M = 7 is printed for a three-digit number with a minimum digit 7.</p>
+<p>The maximum among the numbers of this kind will be 997.</p>
+
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[87]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">20</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">toString</span><span class="p">(</span>MAX<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="21.">21.<a class="anchor-link" href="#21.">&#182;</a></h2><p>Определите, при каком наименьшем значении $b$ в результате выполнения следующего алгоритма будет напечатано число 20</p>
+<p>(для Вашего удобства алгоритм представлен на нескольких языках):</p>
+<hr>
+<p>Determine at what the smallest value of $b$ as a result of the following algorithm will be printed the number 20</p>
+<p>(for your convenience, the algorithm is presented in several languages):</p>
+<table style="width:95%;">
+  <tr style="color:slategray;font-size:120%;font-family:'Roboto';">
+    <th style="text-align:center;">Python</th> 
+    <th style="text-align:center;">R</th>          
+  </tr>
+  <tr>
+    <td style="font-weight:bold;text-align:left;"><pre><code class='python'>
+
+def F(x):
+    if x == 0: 
+        return 0
+    else: 
+        return 7 + F(x - 1)
+
+b = int(input())
+a = 0
+
+while F(a) < b:
+    a += 1
+
+print(a)
+    </code></pre></td> 
+    <td style="font-weight:bold;text-align:left;"><pre><code class='r'> 
+
+F <- function(x) {
+    if (x == 0) {
+        return (0)
+    } else {
+        return(7 + F(x - 1))
+    }
+} 
+
+b <- as.integer(readline())
+a <- 0
+
+while (F(a) < b) {
+    a <- a + 1
+}
+
+print(a)
+    </code></pre></td>     
+  </tr> 
+</table>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[90]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="bp">F</span> <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="p">{</span>
+    <span class="kr">if</span> <span class="p">(</span>x <span class="o">==</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">return</span> <span class="p">(</span><span class="m">0</span><span class="p">)</span>
+    <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
+        <span class="kr">return</span><span class="p">(</span><span class="m">7</span> <span class="o">+</span> <span class="bp">F</span><span class="p">(</span>x <span class="o">-</span> <span class="m">1</span><span class="p">))</span>
+    <span class="p">}</span>
+<span class="p">}</span> 
+
+b <span class="o">&lt;-</span> <span class="kp">as.integer</span><span class="p">(</span><span class="kp">readline</span><span class="p">())</span>
+a <span class="o">&lt;-</span> <span class="m">0</span>
+
+<span class="kr">while</span> <span class="p">(</span><span class="bp">F</span><span class="p">(</span>a<span class="p">)</span> <span class="o">&lt;</span> b<span class="p">)</span> <span class="p">{</span>
+    a <span class="o">&lt;-</span> a <span class="o">+</span> <span class="m">1</span>
+<span class="p">}</span>
+
+<span class="kp">print</span><span class="p">(</span>a<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>134
+[1] 20
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[91]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># расширенная версия программы</span>
+<span class="bp">F</span> <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="p">{</span>
+    <span class="kr">if</span> <span class="p">(</span>x <span class="o">==</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">return</span> <span class="p">(</span><span class="m">0</span><span class="p">)</span>
+    <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
+        <span class="kr">return</span><span class="p">(</span><span class="m">7</span> <span class="o">+</span> <span class="bp">F</span><span class="p">(</span>x <span class="o">-</span> <span class="m">1</span><span class="p">))</span>
+    <span class="p">}</span>
+<span class="p">}</span> 
+
+A <span class="o">&lt;-</span> <span class="kt">matrix</span><span class="p">(</span>nrow<span class="o">=</span><span class="m">2</span><span class="p">,</span> ncol<span class="o">=</span><span class="m">200-99</span><span class="p">)</span>
+
+<span class="kr">for</span> <span class="p">(</span>b <span class="kr">in</span> <span class="m">100</span><span class="o">:</span><span class="m">200</span><span class="p">)</span> <span class="p">{</span>
+    a <span class="o">&lt;-</span> <span class="m">0</span>
+    
+    <span class="kr">while</span> <span class="p">(</span><span class="bp">F</span><span class="p">(</span>a<span class="p">)</span> <span class="o">&lt;</span> b<span class="p">)</span> <span class="p">{</span>
+        a <span class="o">&lt;-</span> a <span class="o">+</span> <span class="m">1</span>
+    <span class="p">}</span>
+    
+    A<span class="p">[</span><span class="m">1</span><span class="p">,</span>b<span class="m">-99</span><span class="p">]</span> <span class="o">&lt;-</span> b
+    A<span class="p">[</span><span class="m">2</span><span class="p">,</span>b<span class="m">-99</span><span class="p">]</span> <span class="o">&lt;-</span> a    
+<span class="p">}</span>
+
+<span class="kp">print</span><span class="p">(</span><span class="s">&quot;Pairs [b,a]:&quot;</span><span class="p">)</span>
+<span class="kp">print</span><span class="p">(</span>A<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1] &#34;Pairs [b,a]:&#34;
+     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12] [,13] [,14]
+[1,]  100  101  102  103  104  105  106  107  108   109   110   111   112   113
+[2,]   15   15   15   15   15   15   16   16   16    16    16    16    16    17
+     [,15] [,16] [,17] [,18] [,19] [,20] [,21] [,22] [,23] [,24] [,25] [,26]
+[1,]   114   115   116   117   118   119   120   121   122   123   124   125
+[2,]    17    17    17    17    17    17    18    18    18    18    18    18
+     [,27] [,28] [,29] [,30] [,31] [,32] [,33] [,34] [,35] [,36] [,37] [,38]
+[1,]   126   127   128   129   130   131   132   133   134   135   136   137
+[2,]    18    19    19    19    19    19    19    19    20    20    20    20
+     [,39] [,40] [,41] [,42] [,43] [,44] [,45] [,46] [,47] [,48] [,49] [,50]
+[1,]   138   139   140   141   142   143   144   145   146   147   148   149
+[2,]    20    20    20    21    21    21    21    21    21    21    22    22
+     [,51] [,52] [,53] [,54] [,55] [,56] [,57] [,58] [,59] [,60] [,61] [,62]
+[1,]   150   151   152   153   154   155   156   157   158   159   160   161
+[2,]    22    22    22    22    22    23    23    23    23    23    23    23
+     [,63] [,64] [,65] [,66] [,67] [,68] [,69] [,70] [,71] [,72] [,73] [,74]
+[1,]   162   163   164   165   166   167   168   169   170   171   172   173
+[2,]    24    24    24    24    24    24    24    25    25    25    25    25
+     [,75] [,76] [,77] [,78] [,79] [,80] [,81] [,82] [,83] [,84] [,85] [,86]
+[1,]   174   175   176   177   178   179   180   181   182   183   184   185
+[2,]    25    25    26    26    26    26    26    26    26    27    27    27
+     [,87] [,88] [,89] [,90] [,91] [,92] [,93] [,94] [,95] [,96] [,97] [,98]
+[1,]   186   187   188   189   190   191   192   193   194   195   196   197
+[2,]    27    27    27    27    28    28    28    28    28    28    28    29
+     [,99] [,100] [,101]
+[1,]   198    199    200
+[2,]    29     29     29
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Алгоритм вычисляет количество целых неотрицательных чисел, кратных 7 и меньших параметра $b$.</p>
+<p>При $b \leq 133$ таких чисел будет меньше 20. При $b = 134$ их станет 20: $\{0, 7, 14, ..., 133\}$.</p>
+<p>The algorithm calculates the number of non-negative integers that are multiples of 7 and smaller than the parameter $b$.</p>
+<p>For $b \leq 133$ the quantity of these numbers will be less than 20. For $b = 134$, it will be 20: $\{0, 7, 14, ..., 133 \}$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[92]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">21</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&#39;134&#39;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -18172,7 +18549,7 @@ max_
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[83]:</div>
+<div class="prompt input_prompt">In&nbsp;[93]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>answer_dictionary
@@ -18194,7 +18571,7 @@ max_
 
 
 <div class="output_text output_subarea ">
-<pre>&lt;hash&gt; containing 19 key-value pair(s).
+<pre>&lt;hash&gt; containing 21 key-value pair(s).
   1 : 2
   10 : 1956
   11 : 13
@@ -18207,6 +18584,8 @@ max_
   18 : 5
   19 : 6
   2 : 245
+  20 : 997
+  21 : 134
   3 : 9
   4 : 1
   5 : D0
