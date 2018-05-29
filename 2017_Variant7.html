@@ -15320,12 +15320,12 @@ print(a)
 <p>How many different sets of values of logical variables $x_1, x_2, ... x_{11}, x_{12}$ exist</p>
 <p>that satisfy all the conditions listed below?</p>
 <ul>
-<li>$(x_1 \lor x_2) \land ((\neg x_1 \lor \neg x_2) \to (\neg x_3 \lor \neg x_4)) = 1$ </li>
-<li>$(x_3 \lor x_4) \land ((\neg x_3 \lor \neg x_4) \to (\neg x_5 \lor \neg x_6)) = 1$ </li>
-<li>$(x_5 \lor x_6) \land ((\neg x_5 \lor \neg x_6) \to (\neg x_7 \lor \neg x_8)) = 1$ </li>
-<li>$(x_7 \lor x_8) \land ((\neg x_7 \lor \neg x_8) \to (\neg x_9 \lor \neg x_{10})) = 1$ </li>
-<li>$(x_9 \lor x_{10}) \land ((\neg x_9 \lor \neg x_{10}) \to (\neg x_{11} \lor \neg x_{12})) = 1$ </li>
-<li>$(x_{11} \lor x_{12} = 1$</li>
+<li>$(x_1 \lor x_2) \land ((\neg x_1 \lor \neg x_2) \to (\neg x_3 \lor \neg x_4)) = 1 \; (1)$ </li>
+<li>$(x_3 \lor x_4) \land ((\neg x_3 \lor \neg x_4) \to (\neg x_5 \lor \neg x_6)) = 1 \; (2)$ </li>
+<li>$(x_5 \lor x_6) \land ((\neg x_5 \lor \neg x_6) \to (\neg x_7 \lor \neg x_8)) = 1 \; (3)$ </li>
+<li>$(x_7 \lor x_8) \land ((\neg x_7 \lor \neg x_8) \to (\neg x_9 \lor \neg x_{10})) = 1 \; (4)$ </li>
+<li>$(x_9 \lor x_{10}) \land ((\neg x_9 \lor \neg x_{10}) \to (\neg x_{11} \lor \neg x_{12})) = 1 \; (5)$ </li>
+<li>$(x_{11} \lor x_{12}) = 1 \; (6)$</li>
 </ul>
 <p>В ответе не нужно перечислять все различные наборы значений $x_1, х_2, ... x_{11}, х_{12}$,</p>
 <p>при которых выполнена данная система равенств.</p>
@@ -15395,192 +15395,71 @@ print(a)
 <p>1)</p>
 <p>Упростим систему логических уравнений / Let's simplify the logical equations.</p>
 <p>$(x_1 \lor x_2) \land ((\neg x_1 \lor \neg x_2) \to (\neg x_3 \lor \neg x_4)) \iff$ (De Morgan's laws)</p>
-<p>$ (x_1 \lor x_2) \land (\neg (x_1 \land x_2) \to \neg (x_3 \land x_4)) \iff $  (conditional disjunction)</p>
-<p>$ (x_1 \lor x_2) \land (\neg \neg (x_1 \land x_2) \lor \neg (x_3 \land x_4)) \iff $ (double negation)</p>
-<p>$ (x_1 \lor x_2) \land ((x_1 \land x_2) \lor \neg (x_3 \land x_4)) $</p>
+<p>$(x_1 \lor x_2) \land (\neg (x_1 \land x_2) \to \neg (x_3 \land x_4)) \iff $  (conditional disjunction)</p>
+<p>$(x_1 \lor x_2) \land (\neg \neg (x_1 \land x_2) \lor \neg (x_3 \land x_4)) \iff $ (double negation)</p>
+<p>$(x_1 \lor x_2) \land ((x_1 \land x_2) \lor \neg (x_3 \land x_4))$</p>
+<p>Аналогичные преобразования можно выполнить для равенств (2)-(5).</p>
+<p>Similar transformations can be made for the equalities (2) - (5).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>2)</p>
-<p>The pairs $(x_1, x_2) = (0, 0), (x_3, x_4) = (0, 0), ...$ should be excluded.</p>
-<p>3)</p>
-<p>The follow cases should be excluded:</p>
+<p>Из 1) $\implies$ равенство (1) не выполняется</p>
 <ul>
-<li>(x1,x2,x3,x4)=(0,1,1,1), (x1,x2,x3,x4)=(1,0,1,1)</li>
-<li>(x3,x4,x5,x6)=(0,1,1,1), (x3,x4,x5,x6)=(1,0,1,1)</li>
-<li>(x5,x6,x7,x8)=(0,1,1,1), (x5,x6,x7,x8)=(1,0,1,1)</li>
-<li>(x7,x8,x9,x10)=(0,1,1,1), (x7,x8,x9,x10)=(1,0,1,1)</li>
-<li>(x9,x10,x11,x12)=(0,1,1,1), (x9,x10,x11,x12)=(1,0,1,1)</li>
+<li>при $(x_1,x_2) = (0,0); \; (x_3,x_4) = (0,0),(0,1),(1,0),(1,1)$; </li>
+<li>при $(x_1,x_2) = (0,1),(1,0); \; (x_3,x_4) = (1,1)$.</li>
 </ul>
+<p>(1) выполняется только для <code>16 - 6 = 10</code> наборов переменных $(x_1,x_2,x_3,x_4)$.</p>
+<p>From 1) $\implies$, the equality (1) is not satisfied</p>
+<ul>
+<li>for $(x_1, x_2) = (0,0); \; (x_3, x_4) = (0,0), (0,1), (1,0), (1,1)$; </li>
+<li>for $(x_1, x_2) = (0,1), (1,0); \; (x_3, x_4) = (1,1)$.</li>
+</ul>
+<p>(1) is satisfied only for <code>16 - 6 = 10</code> sets of variables $(x_1, x_2, x_3, x_4)$.</p>
+<p>3)</p>
+<p>Из 10 наборов пункта 2) равенство (2) не выполняется для $(x_1,x_2,x_3,x_4) = (0,1,0,0),(1,0,0,0),(1,1,0,0)$.</p>
+<p>При $(x_1,x_2,x_3,x_4) = (1,1,1,1)$ равенство (2) выполняется для любых $(x_5,x_6) = (0,0),(0,1),(1,0),(1,1)$.</p>
+<p>Остальные 6 наборов $(x_1,x_2,x_3,x_4)$ не нарушают равенство (2) только для $(x_5,x_6) = (0,0),(0,1),(1,0)$.</p>
+<p>Всего (1),(2) имеют <code>1 * 4 + (10 - 3 - 1) * 3 = 22</code> решения $(x_1,x_2,x_3,x_4,x_5,x_6)$.</p>
+<p>For 10 sets from the point 2), the equality (2) is not satisfied for $(x_1, x_2, x_3, x_4) = (0,1,0,0), (1,0,0,0), (1,1,0,0)$.</p>
+<p>For $(x_1, x_2, x_3, x_4) = (1,1,1,1)$, the equality (2) is true for any $(x_5, x_6) = (0,0), (0,1), (1,0), (1,1)$.</p>
+<p>The remaining 6 sets $(x_1, x_2, x_3, x_4)$ do not violate the equality (2) only for $(x_5, x_6) = (0,0), (0,1), (1,0)$.</p>
+<p>In total, (1), (2) have <code>1 * 4 + (10 - 3 - 1) * 3 = 22</code> solutions $(x_1, x_2, x_3, x_4, x_5, x_6)$.</p>
+<p>4)</p>
+<p>Из 22 наборов пункта 3) равенство (3) не выполняется для 7 наборов $(x_1,x_2,x_3,x_4,x_5,x_6)$, где $(x_5,x_6) = (0,0)$.</p>
+<p>При $(x_1,x_2,x_3,x_4,x_5,x_6) = (1,1,1,1,1,1)$ равенство (3) выполняется для любых $(x_7,x_8) = (0,0),(0,1),(1,0),(1,1)$.</p>
+<p>Остальные 14 наборов $(x_1,x_2,x_3,x_4,x_5,x_6)$ не нарушают равенство (3) только для $(x_7,x_8) = (0,0),(0,1),(1,0)$.</p>
+<p>Всего (1),(2),(3) имеют <code>1 * 4 + (22 - 7 - 1) * 3 = 46</code> решений $(x_1,x_2,x_3,x_4,x_5,x_6,x_7,x_8)$.</p>
+<p>For 22 sets from the point 3), the equality (3) is not satisfied for 7 sets $(x_1, x_2, x_3, x_4, x_5, x_6)$, where $(x_5, x_6) = (0,0)$.</p>
+<p>For $(x_1, x_2, x_3, x_4, x_5, x_6) = (1,1,1,1,1,1)$, the equality (3) is true for any $(x_7, x_8) = (0,0), (0,1), (1,0), (1,1)$.</p>
+<p>The remaining 14 sets $(x_1, x_2, x_3, x_4, x_5, x_6)$ do not violate the equality (3) only for $(x_7, x_8) = (0,0), (0,1), (1,0)$.</p>
+<p>In total, (1),(2),(3) have <code>1 * 4 + (22 - 7 - 1) * 3 = 46</code> solutions of $(x_1, x_2, x_3, x_4, x_5, x_6, x_7, x_8)$.</p>
+<p>5)</p>
+<p>Аналогично,</p>
+<ul>
+<li><p>(1),(2),(3),(4) имеют <code>1 * 4 + (46 - 15 - 1) * 3 = 94</code> решения $(x_1,x_2,x_3,x_4,x_5,x_6,x_7,x_8,x_9,x_{10})$.</p>
+</li>
+<li><p>(1),(2),(3),(4),(5) имеют <code>1 * 4 + (94 - 31 - 1) * 3 = 190</code> решений $(x_1,x_2,x_3,x_4,x_5,x_6,x_7,x_8,x_9,x_{10},x_{11},x_{12})$.</p>
+</li>
+</ul>
+<p>Similarly,</p>
+<ul>
+<li><p>(1), (2), (3), (4) have <code>1 * 4 + (46 - 15 - 1) * 3 = 94</code> solutions $(x_1,x_2,x_3,x_4,x_5,x_6,x_7 x_8,x_9,x_{10})$.</p>
+</li>
+<li><p>(1), (2), (3), (4), (5) have <code>1 * 4 + (94 - 31 - 1) * 3 = 190</code> solutions $(x_1,x_2,x_3,x_4,x_5,x_6,x_7,x_8,x_9,x_{10},x_{11},x_{12})$.</p>
+</li>
+</ul>
+<p>6)</p>
+<p>Для выполнения равенства (6) из полученного множества решений (1),(2),(3),(4),(5) необходимо исключить наборы, где $x_{11},x_{12}) = (0,0)$: <code>190 - 63 = 127</code>.</p>
+<p>To satisfy the equality (6) from the set of solutions (1),(2),(3),(4),(5) it needs to exclude the sets where $x_{11},x_{12}) = (0,0)$: <code>190 - 63 = 127</code>.</p>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[128]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="mi">3</span><span class="o">**</span><span class="mi">6</span> <span class="c1"># combine 6 pairs of variables {(0,1), (1,0), (1,1)}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[128]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>729</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[129]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># exclude (x1,x2,x3,x4)=(0,1,1,1), (x1,x2,x3,x4)=(1,0,1,1), (x3,x4,x5,x6)=(0,1,1,1), (x3,x4,x5,x6)=(1,0,1,1)</span>
-<span class="mi">3</span><span class="o">**</span><span class="mi">6</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="mi">3</span><span class="o">**</span><span class="mi">4</span> 
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[129]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>405</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[130]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># exclude (x5,x6,x7,x8)=(0,1,1,1), (x5,x6,x7,x8)=(1,0,1,1)</span>
-<span class="mi">3</span><span class="o">**</span><span class="mi">6</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="mi">3</span><span class="o">**</span><span class="mi">4</span> <span class="o">-</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">3</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="mi">3</span><span class="o">**</span><span class="mi">2</span> 
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[130]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>279</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[131]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># exclude(x7,x8,x9,x10)=(0,1,1,1), (x7,x8,x9,x10)=(1,0,1,1)</span>
-<span class="mi">3</span><span class="o">**</span><span class="mi">6</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="mi">3</span><span class="o">**</span><span class="mi">4</span> <span class="o">-</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">3</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="mi">3</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">4</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="mi">3</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[131]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>189</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[132]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># exclude (x9,x10,x11,x12)=(0,1,1,1), (x9,x10,x11,x12)=(1,0,1,1)</span>
-<span class="mi">3</span><span class="o">**</span><span class="mi">6</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="mi">3</span><span class="o">**</span><span class="mi">4</span> <span class="o">-</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">3</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="mi">3</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">4</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="mi">3</span> <span class="o">-</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">5</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[132]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>127</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
