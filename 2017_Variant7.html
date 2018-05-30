@@ -11783,7 +11783,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[78]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">html</span>
@@ -16310,42 +16310,226 @@ V*2:20→40 ∨ V*2:21→42 ∨ V*2:22→44 ∨ V*2:36→72 ∨ V*2:38→76
 <p><div style="width: 800px; height: 300px; overflow:auto;">
     <img src="it_images/2017_07_27.png" width="800" height="300"/>
 </div>
-На вход программе подаются сведения о работе железнодорожной сортировочной станции, за каждый год в отдельности. В первой строке сообщается количество строк (N), которые будут поданы на вход программы.</p>
-<p>В каждой из последующих N строк: информация о тоннаже и количестве железнодорожных вагонов, обработанных сортировочной станцией в течение нескольких лет (не раньше 1980 года).</p>
+На вход программе подаются сведения о работе железнодорожной сортировочной станции, за каждый год в отдельности.</p>
+<p>В первой строке сообщается количество строк (<code>N</code>), которые будут поданы на вход программы.</p>
+<p>В каждой из последующих <code>N</code> строк:</p>
+<p>информация о тоннаже и количестве железнодорожных вагонов,</p>
+<p>обработанных сортировочной станцией в течение нескольких лет (не раньше 1980 года).</p>
 <p>В формате:</p>
-<p>mm.уууу tttt kkk</p>
-<p>mm — номер месяца, уууу — год, tttt — тоннаж, kkk — количество обработанных вагонов (число положительное, если вагоны прибывающие, отрицательное — если убывающие).</p>
-<p>Пример: 11.2001 45322 -8657</p>
-<p>Необходимо вывести на экран номера лет, в которые наибольший тоннаж одного прибывшего вагона превышает наименьший тоннаж одного убывшего.</p>
+<p><code>mm.уууу tttt kkk</code></p>
+<p><code>mm</code> — номер месяца, <code>уууу</code> — год,</p>
+<p><code>tttt</code> — тоннаж,</p>
+<p><code>kkk</code> — количество обработанных вагонов (число положительное, если вагоны прибывающие, отрицательное — если убывающие).</p>
+<p>Пример: <code>11.2001 45322 -8657</code></p>
+<p>Необходимо вывести на экран номера лет, в которые</p>
+<p><strong>наибольший тоннаж одного прибывшего вагона</strong> превышает <strong>наименьший тоннаж одного убывшего</strong>.</p>
 <hr>
-<p>The entrance to the program is given information about the work of the railway marshalling yard, for each year separately. The first line reports the number of lines (N) that will be submitted to the program's input.
-In each of the following N lines: information about the tonnage and the number of railway wagons handled by the marshalling yard for several years (not earlier than 1980).</p>
+<p>The entrance to the program is given information about the work of the railway marshalling yard, for each year separately.</p>
+<p>The first line reports the number of lines (<code>N</code>) that will be submitted to the program's input.</p>
+<p>In each of the following <code>N</code> lines:</p>
+<p>information about the tonnage and the number of railway wagons</p>
+<p>handled by the marshalling yard for several years (not earlier than 1980).</p>
 <p>In the format:</p>
-<p>mm.уууу tttt kkk</p>
-<p>mm is the number of the month, uuuu is the year, tttt is tonnage, kkk is the number of wagons processed (the number is positive if the wagons are arriving, negative is if the wagons are departing).</p>
-<p>Example: 11.2001 45322 -8657</p>
-<p>It is necessary to display the numbers of the years in which the largest tonnage of one arrived wagon exceeds the smallest tonnage of one departed wagon.</p>
+<p><code>mm.yyyy tttt kkk</code></p>
+<p><code>mm</code> is the number of the month, <code>yyyy</code> is the year,</p>
+<p><code>tttt</code> is tonnage, <code>kkk</code> is the number of wagons processed (the number is positive if the wagons are arriving, negative is if the wagons are departing).</p>
+<p>Example: <code>11.2001 45322 -8657</code></p>
+<p>It is necessary to display the numbers of the years in which</p>
+<p>the <strong>largest tonnage of one arrived wagon</strong> exceeds the <strong>smallest tonnage of one departed wagon</strong>.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[143]:</div>
+<div class="prompt input_prompt">In&nbsp;[79]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># пример данных для тестирования</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="n">R</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;09.1981 55322 -9657&#39;</span><span class="p">,</span> 
+     <span class="s1">&#39;10.1989 41247 8356&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;11.1997 45322 -8657&#39;</span><span class="p">,</span> 
+     <span class="s1">&#39;12.1998 55227 9356&#39;</span><span class="p">,</span> 
+     <span class="s1">&#39;01.2002 38742 -7891&#39;</span><span class="p">,</span> 
+     <span class="s1">&#39;02.2002 54742 9482&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;09.2001 55322 -9657&#39;</span><span class="p">,</span> 
+     <span class="s1">&#39;10.2001 41247 8356&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;11.2001 45322 -8657&#39;</span><span class="p">,</span> 
+     <span class="s1">&#39;12.2001 55227 9356&#39;</span><span class="p">,</span> 
+     <span class="s1">&#39;01.2002 38742 -7891&#39;</span><span class="p">,</span> 
+     <span class="s1">&#39;02.2002 54742 9482&#39;</span><span class="p">]</span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[117]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># без использования импортируемых модулей</span>
+<span class="n">I</span> <span class="o">=</span> <span class="mi">2017</span> <span class="o">-</span> <span class="mi">1979</span>
+<span class="n">arrived_max</span><span class="p">,</span> <span class="n">departed_min</span> <span class="o">=</span> <span class="n">I</span> <span class="o">*</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">I</span> <span class="o">*</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Количество строк: &#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&lt;месяц(mm)&gt;&lt;.&gt;&lt;год(yyyy)&gt;&lt;пробел&gt;&lt;тоннаж&gt;&lt;пробел&gt;&lt;количество вагонов&gt;&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">18</span><span class="o">*</span><span class="s1">&#39;=-=&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">((</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> строка&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">string</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">year</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">string</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">avg</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">string</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="nb">int</span><span class="p">(</span><span class="n">string</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+    
+    <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">string</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">arrived_max</span><span class="p">[</span><span class="n">year</span><span class="o">-</span><span class="mi">1980</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">avg</span><span class="p">:</span>
+            <span class="n">arrived_max</span><span class="p">[</span><span class="n">year</span><span class="o">-</span><span class="mi">1980</span><span class="p">]</span> <span class="o">=</span> <span class="n">avg</span> 
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">departed_min</span><span class="p">[</span><span class="n">year</span><span class="o">-</span><span class="mi">1980</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">avg</span><span class="p">:</span> 
+            <span class="n">departed_min</span><span class="p">[</span><span class="n">year</span><span class="o">-</span><span class="mi">1980</span><span class="p">]</span> <span class="o">=</span> <span class="n">avg</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Количество строк: 12
+&lt;месяц(mm)&gt;&lt;.&gt;&lt;год(yyyy)&gt;&lt;пробел&gt;&lt;тоннаж&gt;&lt;пробел&gt;&lt;количество вагонов&gt;
+=-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-=
+1 строка
+09.1981 55322 -9657
+2 строка
+10.1989 41247 8356
+3 строка
+11.1997 45322 -8657
+4 строка
+12.1998 55227 9356
+5 строка
+01.2002 38742 -7891
+6 строка
+02.2002 54742 9482
+7 строка
+09.2001 55322 -9657
+8 строка
+10.2001 41247 8356
+9 строка
+11.2001 45322 -8657
+10 строка
+12.2001 55227 9356
+11 строка
+01.2002 38742 -7891
+12 строка
+02.2002 54742 9482
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[122]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">arrived_max</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">departed_min</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[0, 0, 0, 0, 0, 0, 0, 0, 0, 4.936213499281953, 0, 0, 0, 0, 0, 0, 0, 0, 5.902843095339889, 0, 0, 5.902843095339889, 5.773254587639738, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[0, 5.728694211452832, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5.235300912556313, 0, 0, 0, 5.728694211452832, 4.9096438981117725, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[128]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mi">18</span><span class="o">*</span><span class="s1">&#39;=-=&#39;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">I</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">arrived_max</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">departed_min</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1980</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>=-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-=
+1989 1998 2001 2002 
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[80]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># с использованием импортируемых модулей </span>
+<span class="kn">import</span> <span class="nn">pandas</span>
 
 <span class="k">def</span> <span class="nf">find_years</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">array</span><span class="p">):</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">1980</span><span class="p">,</span><span class="mi">2018</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> 
                           <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;max_inc_tonnage_per_vagon&#39;</span><span class="p">,</span> 
                                    <span class="s1">&#39;min_out_tonnage_per_vagon&#39;</span><span class="p">])</span>
-    <span class="n">df</span><span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
     
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
         
-        <span class="n">year</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="n">tonnage_per_vagon</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="nb">int</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">year</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">tonnage_per_vagon</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="nb">int</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">2</span><span class="p">])</span>
         
         <span class="k">if</span> <span class="n">tonnage_per_vagon</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">tonnage_per_vagon</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;min_out_tonnage_per_vagon&#39;</span><span class="p">][</span><span class="n">year</span><span class="p">]</span>\
@@ -16371,19 +16555,10 @@ In each of the following N lines: information about the tonnage and the number o
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[144]:</div>
+<div class="prompt input_prompt">In&nbsp;[81]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create an example</span>
-<span class="n">N</span> <span class="o">=</span> <span class="mi">12</span>
-<span class="n">R</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;09.1981 55322 -9657&#39;</span><span class="p">,</span> <span class="s1">&#39;10.1989 41247 8356&#39;</span><span class="p">,</span>
-     <span class="s1">&#39;11.1997 45322 -8657&#39;</span><span class="p">,</span> <span class="s1">&#39;12.1998 55227 9356&#39;</span><span class="p">,</span> 
-     <span class="s1">&#39;01.2002 38742 -7891&#39;</span><span class="p">,</span> <span class="s1">&#39;02.2002 54742 9482&#39;</span><span class="p">,</span>
-     <span class="s1">&#39;09.2001 55322 -9657&#39;</span><span class="p">,</span> <span class="s1">&#39;10.2001 41247 8356&#39;</span><span class="p">,</span>
-     <span class="s1">&#39;11.2001 45322 -8657&#39;</span><span class="p">,</span> <span class="s1">&#39;12.2001 55227 9356&#39;</span><span class="p">,</span> 
-     <span class="s1">&#39;01.2002 38742 -7891&#39;</span><span class="p">,</span> <span class="s1">&#39;02.2002 54742 9482&#39;</span><span class="p">]</span> 
-
-<span class="n">find_years</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">R</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">find_years</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">R</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -16396,7 +16571,7 @@ In each of the following N lines: information about the tonnage and the number o
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[144]:</div>
+<div class="prompt output_prompt">Out[81]:</div>
 
 
 
@@ -16413,39 +16588,37 @@ In each of the following N lines: information about the tonnage and the number o
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[75]:</div>
+<div class="prompt input_prompt">In&nbsp;[132]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">program</span> <span class="o">=</span> \
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">import pandas</span>
+<span class="sd">I = 2017 - 1979</span>
+<span class="sd">arrived_max, departed_min = I * [0], I * [0]</span>
 
-<span class="sd">def find_years(number, array):</span>
-<span class="sd">    df = pandas.DataFrame(index=range(1980,2018,1), </span>
-<span class="sd">                          columns=[&#39;max_inc_tonnage_per_vagon&#39;, </span>
-<span class="sd">                                   &#39;min_out_tonnage_per_vagon&#39;])</span>
-<span class="sd">    df= df.fillna(0).astype(&#39;float32&#39;)</span>
+<span class="sd">N = int(input(&#39;Количество строк: &#39;))</span>
+<span class="sd">print(&#39;&lt;месяц(mm)&gt;&lt;.&gt;&lt;год(yyyy)&gt;&lt;пробел&gt;&lt;тоннаж&gt;&lt;пробел&gt;&lt;количество вагонов&gt;&#39;)</span>
+<span class="sd">print(18*&#39;=-=&#39;)</span>
+
+<span class="sd">for i in range(N):</span>
+<span class="sd">    print((&#39;{} строка&#39;).format(i+1))</span>
+<span class="sd">    string = input().split()</span>
+<span class="sd">    year = int(string[0].split(&#39;.&#39;)[1])</span>
+<span class="sd">    avg = abs(int(string[1])/int(string[2]))</span>
 <span class="sd">    </span>
-<span class="sd">    for i in range(number):</span>
-<span class="sd">        </span>
-<span class="sd">        year=int(array[i].split()[0].split(&#39;.&#39;)[1])</span>
-<span class="sd">        tonnage_per_vagon=int(array[i].split()[1])/int(array[i].split()[2])</span>
-<span class="sd">        </span>
-<span class="sd">        if tonnage_per_vagon &lt; 0:</span>
-<span class="sd">            if abs(tonnage_per_vagon) &lt; df[&#39;min_out_tonnage_per_vagon&#39;][year]\</span>
-<span class="sd">            or df[&#39;min_out_tonnage_per_vagon&#39;][year] == 0:</span>
-<span class="sd">                df[&#39;min_out_tonnage_per_vagon&#39;][year] = abs(tonnage_per_vagon)</span>
-<span class="sd"> </span>
-<span class="sd">        else:</span>
-<span class="sd">            if abs(tonnage_per_vagon) &gt; df[&#39;max_inc_tonnage_per_vagon&#39;][year]:</span>
-<span class="sd">                df[&#39;max_inc_tonnage_per_vagon&#39;][year] = abs(tonnage_per_vagon)</span>
+<span class="sd">    if int(string[2]) &gt;= 0:</span>
+<span class="sd">        if arrived_max[year-1980] &lt; avg:</span>
+<span class="sd">            arrived_max[year-1980] = avg </span>
+<span class="sd">    else:</span>
+<span class="sd">        if departed_min[year-1980] &lt; avg: </span>
+<span class="sd">            departed_min[year-1980] = avg</span>
 <span class="sd">            </span>
-<span class="sd">    years = []</span>
-<span class="sd">    for year in range(1980,2018,1):</span>
-<span class="sd">        if df[&#39;max_inc_tonnage_per_vagon&#39;][year] &gt; \</span>
-<span class="sd">        df[&#39;min_out_tonnage_per_vagon&#39;][year]:</span>
-<span class="sd">            years.append(year)</span>
-<span class="sd">    return years</span>
+<span class="sd">print(18*&#39;=-=&#39;)</span>
+<span class="sd">result = &#39;&#39;</span>
+<span class="sd">for i in range(I):</span>
+<span class="sd">    if arrived_max[i] &gt; departed_min[i]:</span>
+<span class="sd">        result += str(i + 1980) + &#39; &#39;</span>
+<span class="sd">print(result)</span>
 <span class="sd">&quot;&quot;&quot;</span>
 </pre></div>
 
@@ -16456,7 +16629,7 @@ In each of the following N lines: information about the tonnage and the number o
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[76]:</div>
+<div class="prompt input_prompt">In&nbsp;[133]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">27</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">version</span><span class="p">,</span> <span class="n">program</span><span class="p">]</span>
@@ -16477,7 +16650,7 @@ In each of the following N lines: information about the tonnage and the number o
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Answer: [&#39;python 3.6&#39;, &#34;\nimport pandas\n\ndef find_years(number, array):\n    df = pandas.DataFrame(index=range(1980,2018,1), \n                          columns=[&#39;max_inc_tonnage_per_vagon&#39;, \n                                   &#39;min_out_tonnage_per_vagon&#39;])\n    df= df.fillna(0).astype(&#39;float32&#39;)\n    \n    for i in range(number):\n        \n        year=int(array[i].split()[0].split(&#39;.&#39;)[1])\n        tonnage_per_vagon=int(array[i].split()[1])/int(array[i].split()[2])\n        \n        if tonnage_per_vagon &lt; 0:\n            if abs(tonnage_per_vagon) &lt; df[&#39;min_out_tonnage_per_vagon&#39;][year]            or df[&#39;min_out_tonnage_per_vagon&#39;][year] == 0:\n                df[&#39;min_out_tonnage_per_vagon&#39;][year] = abs(tonnage_per_vagon)\n \n        else:\n            if abs(tonnage_per_vagon) &gt; df[&#39;max_inc_tonnage_per_vagon&#39;][year]:\n                df[&#39;max_inc_tonnage_per_vagon&#39;][year] = abs(tonnage_per_vagon)\n            \n    years = []\n    for year in range(1980,2018,1):\n        if df[&#39;max_inc_tonnage_per_vagon&#39;][year] &gt;         df[&#39;min_out_tonnage_per_vagon&#39;][year]:\n            years.append(year)\n    return years\n&#34;]
+<pre>Answer: [&#39;python 3.6&#39;, &#34;\nI = 2017 - 1979\narrived_max, departed_min = I * [0], I * [0]\n\nN = int(input(&#39;Количество строк: &#39;))\nprint(&#39;&lt;месяц(mm)&gt;&lt;.&gt;&lt;год(yyyy)&gt;&lt;пробел&gt;&lt;тоннаж&gt;&lt;пробел&gt;&lt;количество вагонов&gt;&#39;)\nprint(18*&#39;=-=&#39;)\n\nfor i in range(N):\n    print((&#39;{} строка&#39;).format(i+1))\n    string = input().split()\n    year = int(string[0].split(&#39;.&#39;)[1])\n    avg = abs(int(string[1])/int(string[2]))\n    \n    if int(string[2]) &gt;= 0:\n        if arrived_max[year-1980] &lt; avg:\n            arrived_max[year-1980] = avg \n    else:\n        if departed_min[year-1980] &lt; avg: \n            departed_min[year-1980] = avg\n            \nprint(18*&#39;=-=&#39;)\nresult = &#39;&#39;\nfor i in range(I):\n    if arrived_max[i] &gt; departed_min[i]:\n        result += str(i + 1980) + &#39; &#39;\nprint(result)\n&#34;]
 </pre>
 </div>
 </div>
@@ -16497,7 +16670,7 @@ In each of the following N lines: information about the tonnage and the number o
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[77]:</div>
+<div class="prompt input_prompt">In&nbsp;[134]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span>
@@ -16513,7 +16686,7 @@ In each of the following N lines: information about the tonnage and the number o
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[77]:</div>
+<div class="prompt output_prompt">Out[134]:</div>
 
 
 
@@ -16547,7 +16720,7 @@ In each of the following N lines: information about the tonnage and the number o
   &#39;\nN = 40\nA = []\nMIN = 20001\n\nfor I in range(N):\n    A.append(int(input()))\n    # The fragment instead of the ellipsis\n    if I % 2 != 0:\n        if A[I-1] + A[I] &lt; MIN: \n            MIN = A[I-1] + A[I]\n            J = I\n\nprint(A[J-1],A[J])\n&#39;],
  26: &#39;\n1.\na.\nP*2:20≤S≤39→20≤2*S≤78\nb.\nS=18 ∨ S=19\nP+2:18→20 ∨ P+3:18→21 ∨ P*2:18→36 ∨ P+2:19→21 ∨ P+3:19→22 ∨ P*2:19→38\nV*2:20→40 ∨ V*2:21→42 ∨ V*2:22→44 ∨ V*2:36→72 ∨ V*2:38→76\n2.\nS=9 ∨ S=15 ∨ S=16 ∨ S=17\nP*2:9→18 ∨ P+3:15→18 ∨ P+3:16→19 ∨ P+2:17→19\nV+2:18→20 ∨ V+3:18→21 ∨ V*2:18→36 ∨ V+2:19→21 ∨ V+3:19→22 ∨ V*2:19→38\nP*2:20→40 ∨ P*2:21→42 ∨ P*2:22→44 ∨ P*2:36→72 ∨ P*2:38→76\n3.\nS=13 ∨ S=14\nP+2:13→15 ∨ P+3:13→16 ∨ P*2:13→26 ∨ P+2:14→16 ∨ P+3:14→17 ∨ P*2:14→28\nV+3:15→18 ∨ V+2:16→18 ∨ V*2:26→52 ∨ V+3:16→19 ∨ V+2:17→19 ∨ V*2:28→56\nP+2:18→20 ∨ P+3:18→21 ∨ P*2:18→36 ∨ P+2:19→21 ∨ P+3:19→22 ∨ P*2:19→38\nV*2:20→40 ∨ V*2:21→42 ∨ V*2:22→44 ∨ V*2:36→72 ∨ V*2:38→76\n&#39;,
  27: [&#39;python 3.6&#39;,
-  &#34;\nimport pandas\n\ndef find_years(number, array):\n    df = pandas.DataFrame(index=range(1980,2018,1), \n                          columns=[&#39;max_inc_tonnage_per_vagon&#39;, \n                                   &#39;min_out_tonnage_per_vagon&#39;])\n    df= df.fillna(0).astype(&#39;float32&#39;)\n    \n    for i in range(number):\n        \n        year=int(array[i].split()[0].split(&#39;.&#39;)[1])\n        tonnage_per_vagon=int(array[i].split()[1])/int(array[i].split()[2])\n        \n        if tonnage_per_vagon &lt; 0:\n            if abs(tonnage_per_vagon) &lt; df[&#39;min_out_tonnage_per_vagon&#39;][year]            or df[&#39;min_out_tonnage_per_vagon&#39;][year] == 0:\n                df[&#39;min_out_tonnage_per_vagon&#39;][year] = abs(tonnage_per_vagon)\n \n        else:\n            if abs(tonnage_per_vagon) &gt; df[&#39;max_inc_tonnage_per_vagon&#39;][year]:\n                df[&#39;max_inc_tonnage_per_vagon&#39;][year] = abs(tonnage_per_vagon)\n            \n    years = []\n    for year in range(1980,2018,1):\n        if df[&#39;max_inc_tonnage_per_vagon&#39;][year] &gt;         df[&#39;min_out_tonnage_per_vagon&#39;][year]:\n            years.append(year)\n    return years\n&#34;]}</pre>
+  &#34;\nI = 2017 - 1979\narrived_max, departed_min = I * [0], I * [0]\n\nN = int(input(&#39;Количество строк: &#39;))\nprint(&#39;&lt;месяц(mm)&gt;&lt;.&gt;&lt;год(yyyy)&gt;&lt;пробел&gt;&lt;тоннаж&gt;&lt;пробел&gt;&lt;количество вагонов&gt;&#39;)\nprint(18*&#39;=-=&#39;)\n\nfor i in range(N):\n    print((&#39;{} строка&#39;).format(i+1))\n    string = input().split()\n    year = int(string[0].split(&#39;.&#39;)[1])\n    avg = abs(int(string[1])/int(string[2]))\n    \n    if int(string[2]) &gt;= 0:\n        if arrived_max[year-1980] &lt; avg:\n            arrived_max[year-1980] = avg \n    else:\n        if departed_min[year-1980] &lt; avg: \n            departed_min[year-1980] = avg\n            \nprint(18*&#39;=-=&#39;)\nresult = &#39;&#39;\nfor i in range(I):\n    if arrived_max[i] &gt; departed_min[i]:\n        result += str(i + 1980) + &#39; &#39;\nprint(result)\n&#34;]}</pre>
 </div>
 
 </div>
