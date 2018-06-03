@@ -19684,7 +19684,22 @@ RK5CYII="
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="23.">23.<a class="anchor-link" href="#23.">&#182;</a></h2>
+<h2 id="23.">23.<a class="anchor-link" href="#23.">&#182;</a></h2><p>Сколько существует различных наборов значений логических переменных $x_1, х_2, ... х_9, x_{10}$,</p>
+<p>которые удовлетворяют всем перечисленным ниже условиям?</p>
+<p>В ответе не нужно перечислять все различные наборы значений $x_1, х_2, ... х_9, x_{10}$,</p>
+<p>при которых выполнена данная система равенств. В качестве ответа вам нужно указать количество таких наборов.</p>
+<hr>
+<p>How many different sets of values of logical variables $x_1, х_2, ... х_9, x_{10}$</p>
+<p>exist that satisfy all the conditions listed below?</p>
+<p>In the answer it is not necessary to list all the different sets of values $x_1, х_2, ... х_9, x_{10}$</p>
+<p>for which the given system of equations is satisfied. As an answer, you need to specify only the number of such sets.</p>
+<ul>
+<li>$(x_1 \lor \neg x_2) \land (x_3 \lor \neg x_4) = 1$  <strong>(1)</strong></li>
+<li>$(x_3 \lor \neg x_4) \land (x_5 \lor \neg x_6) = 1$  <strong>(2)</strong></li>
+<li>$(x_5 \lor \neg x_6) \land (x_7 \lor \neg x_8) = 1$  <strong>(3)</strong></li>
+<li>$(x_7 \lor \neg x_8) \land (x_9 \lor \neg x_{10}) = 1$  <strong>(4)</strong></li>
+</ul>
+
 </div>
 </div>
 </div>
@@ -19692,10 +19707,259 @@ RK5CYII="
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>1) Тождество $(1)$ выполняется только в случае, если пары переменных $(x_1,x_2), (x_3, x_4)$ равны $(0,0),(1,0)$ или $(1,1)$.</p>
+<p>Если хотя бы одна из пар $(x_1,x_2), (x_3, x_4)$ равна $(0,1)$ - тождество $(1)$ не выполняется.</p>
+<p>Всего получается $9$ наборов переменных $(x_1,x_2,x_3,x_4)$, удовлетворяющих $(1)$: каждой из $3$ пар $(x_1,x_2)$ могут соответствовать $3$ пары $(x_3,x_4)$.</p>
+<p>2) Тождество $(2)$ не нарушает ни один из 9 наборов переменных первого пункта, при этом $(x_5,x_6)$ должны быть равны $(0,0),(1,0)$ или $(1,1)$.</p>
+<p>Получится $9 * 3 = 27$ вариантов $(x_1,x_2,x_3,x_4,x_5,x_6)$.</p>
+<p>3) Рассуждая аналогично, легко видеть закономерность: добавление каждой пары переменных увеличивает количество вариантов в $3$ раза.</p>
+<p>$10$ переменных образуют $5$ пар. Значит, общее количество вариантов равно $3 * 3 * 3 * 3 * 3 = 3^5 = 243$.</p>
+<hr>
+<p>1) The identity $(1)$ is satisfied only if the pairs of variables $(x_1,x_2), (x_3,x_4)$ are equal to $(0,0), (1,0)$ or $(1,1)$.</p>
+<p>If at least one of the pairs $(x_1,x_2), (x_3,x_4)$ is $(0,1)$ - the identity $(1)$ is not satisfied.</p>
+<p>In total, $9$ sets of variables $(x_1,x_2,x_3,x_4)$ satisfying $(1)$ are obtained: $3$ pairs $(x_3, x_4)$ can correspond to each of the $3$ pairs $(x_1,x_2)$.</p>
+<p>2) The identity $(2)$ does not violate any of $9$ sets of variables from the first step, with $(x_5,x_6)$ being equal to $(0,0), (1,0)$ or $(1,1)$.</p>
+<p>So we get $9 * 3 = 27$ variants of $(x_1,x_2,x_3,x_4,x_5,x_6)$.</p>
+<p>3) Arguing similarly, it is easy to see the regularity: adding each pair of variables increases the number of variants by $3$ times.</p>
+<p>$10$ variables form $5$ pairs. Hence, the total number of variants is $3 * 3 * 3 * 3 * 3 = 3 ^ 5 = 243$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[226]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># check the decision method</span>
+bc <span class="o">&lt;-</span> bincombinations<span class="p">(</span><span class="m">10</span><span class="p">)</span>
+<span class="kt">c</span> <span class="o">&lt;-</span> <span class="m">0</span>
+n <span class="o">&lt;-</span> <span class="kp">length</span><span class="p">(</span>bc<span class="p">)</span><span class="o">/</span><span class="m">10</span>
+
+logical_function <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>k<span class="p">,</span>l<span class="p">,</span>m<span class="p">,</span>n<span class="p">)</span> <span class="p">{</span>
+    <span class="p">(</span>k <span class="o">|</span> <span class="o">!</span>l<span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span>m <span class="o">|</span> <span class="o">!</span>n<span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>n<span class="p">){</span>
+    el <span class="o">&lt;-</span> bc<span class="p">[</span>i<span class="p">,]</span>
+    e1 <span class="o">&lt;-</span> logical_function<span class="p">(</span>el<span class="p">[</span><span class="m">1</span><span class="p">],</span>el<span class="p">[</span><span class="m">2</span><span class="p">],</span>el<span class="p">[</span><span class="m">3</span><span class="p">],</span>el<span class="p">[</span><span class="m">4</span><span class="p">])</span>
+    e2 <span class="o">&lt;-</span> logical_function<span class="p">(</span>el<span class="p">[</span><span class="m">3</span><span class="p">],</span>el<span class="p">[</span><span class="m">4</span><span class="p">],</span>el<span class="p">[</span><span class="m">5</span><span class="p">],</span>el<span class="p">[</span><span class="m">6</span><span class="p">])</span>
+    e3 <span class="o">&lt;-</span> logical_function<span class="p">(</span>el<span class="p">[</span><span class="m">5</span><span class="p">],</span>el<span class="p">[</span><span class="m">6</span><span class="p">],</span>el<span class="p">[</span><span class="m">7</span><span class="p">],</span>el<span class="p">[</span><span class="m">8</span><span class="p">])</span>
+    e4 <span class="o">&lt;-</span> logical_function<span class="p">(</span>el<span class="p">[</span><span class="m">7</span><span class="p">],</span>el<span class="p">[</span><span class="m">8</span><span class="p">],</span>el<span class="p">[</span><span class="m">9</span><span class="p">],</span>el<span class="p">[</span><span class="m">10</span><span class="p">])</span>
+    
+    result <span class="o">&lt;-</span> <span class="p">(</span>e1 <span class="o">==</span> <span class="m">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span>e2 <span class="o">==</span> <span class="m">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span>e3 <span class="o">==</span> <span class="m">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span>e4 <span class="o">==</span> <span class="m">1</span><span class="p">)</span>
+    
+    <span class="kr">if</span> <span class="p">(</span>result <span class="o">==</span> <span class="m">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">c</span> <span class="o">&lt;-</span> <span class="kt">c</span> <span class="o">+</span> <span class="m">1</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">c</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+243
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[227]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">23</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">toString</span><span class="p">(</span><span class="kt">c</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2>Часть 2 &nbsp; &nbsp; &nbsp; Part 2</h2>
-<h2 id="24.">24.<a class="anchor-link" href="#24.">&#182;</a></h2>
+<h2 id="24.">24.<a class="anchor-link" href="#24.">&#182;</a></h2><p>Требовалось написать программу, которая</p>
+<ul>
+<li>вводит с клавиатуры координаты точки на плоскости (x, у — действительные числа) </li>
+<li>и определяет принадлежность точки заштрихованной области. </li>
+</ul>
+<p>Программист торопился и написал программу неправильно.</p>
+<p>Последовательно выполните следующее:</p>
+<p>1) Приведите пример таких чисел х, у при которых программа работает неправильно.</p>
+<p>2) Укажите, как нужно доработать программу, чтобы не было случаев её неправильной работы.</p>
+<p>(Это можно сделать несколькими способами, поэтому можно указать любой способ доработки исходной программы).</p>
+<hr>
+<p>It was required to write a program that</p>
+<ul>
+<li>enters from the keyboard the coordinates of the point on the plane (x, y are real numbers) </li>
+<li>and determines the belonging of the point to the shaded area. </li>
+</ul>
+<p>The programmer was in a hurry and wrote the program incorrectly.</p>
+<p>Do the following sequentially:</p>
+<p>1) Give an example of such numbers x, y for which the program does not work correctly.</p>
+<p>2) Indicate how you need to refine the program so that there are no cases of its improper operation.</p>
+<p>(This can be done in several ways, so you can specify any way to refine the source program).</p>
+<table style="width:95%;">
+  <tr style="color:slategray;font-size:120%;font-family:'Roboto';">
+    <th style="text-align:center;">Python</th> 
+    <th style="text-align:center;">R</th>          
+  </tr>
+  <tr>
+    <td style="font-weight:bold;text-align:left;"><pre><code class='python'>
+
+import math
+x,y = float(input("x = ")), float(input("y = "))
+if y <= math.sin(x):
+    if y >= 1 - x:
+        if y >= 0:
+            print('принадлежит')
+        else:
+            print('не принадлежит')
+    </code></pre></td> 
+    <td style="font-weight:bold;text-align:left;"><pre><code class='r'> 
+
+x <- as.numeric(readline("x = ")); y <- as.numeric(readline("y = "))
+
+if (y <= sin(x)) {
+    if (y >= 1 - x) {
+        if (y >= 0) {
+            print('принадлежит')
+        } else {
+            print('не принадлежит')
+        }
+    }
+}
+    </code></pre></td>     
+  </tr> 
+</table>
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[229]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># the wrong variant</span>
+x <span class="o">&lt;-</span> <span class="kp">as.numeric</span><span class="p">(</span><span class="kp">readline</span><span class="p">(</span><span class="s">&quot;x = &quot;</span><span class="p">));</span> y <span class="o">&lt;-</span> <span class="kp">as.numeric</span><span class="p">(</span><span class="kp">readline</span><span class="p">(</span><span class="s">&quot;y = &quot;</span><span class="p">))</span>
+
+<span class="kr">if</span> <span class="p">(</span>y <span class="o">&lt;=</span> <span class="kp">sin</span><span class="p">(</span>x<span class="p">))</span> <span class="p">{</span>
+    <span class="kr">if</span> <span class="p">(</span>y <span class="o">&gt;=</span> <span class="m">1</span> <span class="o">-</span> x<span class="p">)</span> <span class="p">{</span>
+        <span class="kr">if</span> <span class="p">(</span>y <span class="o">&gt;=</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kp">print</span><span class="p">(</span><span class="s">&#39;принадлежит&#39;</span><span class="p">)</span>
+        <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
+            <span class="kp">print</span><span class="p">(</span><span class="s">&#39;не принадлежит&#39;</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>x = -6
+y = 0
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[230]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># the right variant</span>
+x <span class="o">&lt;-</span> <span class="kp">as.numeric</span><span class="p">(</span><span class="kp">readline</span><span class="p">(</span><span class="s">&quot;x = &quot;</span><span class="p">));</span> y <span class="o">&lt;-</span> <span class="kp">as.numeric</span><span class="p">(</span><span class="kp">readline</span><span class="p">(</span><span class="s">&quot;y = &quot;</span><span class="p">))</span>
+
+<span class="kr">if</span> <span class="p">((</span>y <span class="o">&lt;=</span> <span class="kp">sin</span><span class="p">(</span>x<span class="p">))</span> <span class="o">&amp;</span> <span class="p">(</span>y <span class="o">&gt;=</span> <span class="m">1</span> <span class="o">-</span> x<span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span>y <span class="o">&gt;=</span> <span class="m">0</span><span class="p">))</span> <span class="p">{</span>
+    <span class="kp">print</span><span class="p">(</span><span class="s">&#39;принадлежит&#39;</span><span class="p">)</span>
+<span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>
+    <span class="kp">print</span><span class="p">(</span><span class="s">&#39;не принадлежит&#39;</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>x = -6
+y = 0
+[1] &#34;не принадлежит&#34;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[231]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">24</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&quot;</span>
+<span class="s">1.</span>
+<span class="s">(-6,0)</span>
+<span class="s">2.</span>
+<span class="s">if (y &lt;= sin(x)) {</span>
+<span class="s">    if (y &gt;= 1 - x) {</span>
+<span class="s">        if (y &gt;= 0) {</span>
+<span class="s">⟹</span>
+<span class="s">if ((y &lt;= sin(x)) &amp; (y &gt;= 1 - x) &amp; (y &gt;= 0)) {</span>
+<span class="s">&quot;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -19732,7 +19996,7 @@ RK5CYII="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[225]:</div>
+<div class="prompt input_prompt">In&nbsp;[232]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>answer_dictionary
@@ -19754,7 +20018,7 @@ RK5CYII="
 
 
 <div class="output_text output_subarea ">
-<pre>&lt;hash&gt; containing 22 key-value pair(s).
+<pre>&lt;hash&gt; containing 24 key-value pair(s).
   1 : 4
   10 : 24
   11 : 720
@@ -19770,6 +20034,16 @@ RK5CYII="
   20 : 82
   21 : 6
   22 : 28
+  23 : 243
+  24 : 
+1.
+(-6,0)
+2.
+if (y &lt;= sin(x)) {
+    if (y &gt;= 1 - x) {
+        if (y &gt;= 0) {
+⟹
+if ((y &lt;= sin(x)) &amp; (y &gt;= 1 - x) &amp; (y &gt;= 0)) {
   3 : 4
   4 : 2
   5 : DF4C
