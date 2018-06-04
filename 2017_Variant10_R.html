@@ -24089,6 +24089,474 @@ MIN <span class="o">&lt;-</span> <span class="m">100</span>
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[339]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>N <span class="o">&lt;-</span> <span class="kp">as.integer</span><span class="p">(</span><span class="kp">readline</span><span class="p">(</span><span class="s">&quot;Число учеников, сдававших экзамен: &quot;</span><span class="p">))</span>
+S <span class="o">&lt;-</span> <span class="kp">as.integer</span><span class="p">(</span><span class="kp">readline</span><span class="p">(</span><span class="s">&quot;Номер школы: &quot;</span><span class="p">))</span>
+scores <span class="o">&lt;-</span> <span class="kt">integer</span><span class="p">(</span><span class="m">101</span><span class="p">)</span>
+students <span class="o">&lt;-</span> <span class="kt">vector</span><span class="p">(</span>mode<span class="o">=</span><span class="s">&quot;character&quot;</span><span class="p">,</span>length<span class="o">=</span><span class="m">101</span><span class="p">)</span>
+MAX <span class="o">&lt;-</span> <span class="m">0</span>
+
+<span class="kp">cat</span><span class="p">(</span><span class="s">&quot;Персональные данные в формате: \n&quot;</span><span class="p">)</span>
+<span class="kp">cat</span><span class="p">(</span><span class="s">&quot;&lt;Фамилия&gt;&lt;пробел&gt;&lt;Имя&gt;&lt;пробел&gt;&lt;Номер школы&gt;&lt;пробел&gt;&lt;Количество баллов&gt;\n&quot;</span><span class="p">)</span>
+<span class="kp">cat</span><span class="p">(</span><span class="kp">replicate</span><span class="p">(</span><span class="m">18</span><span class="p">,</span><span class="s">&quot;=-=&quot;</span><span class="p">))</span>
+<span class="kp">cat</span><span class="p">(</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+
+<span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>N<span class="p">){</span>
+    string <span class="o">&lt;-</span> <span class="kp">unlist</span><span class="p">(</span><span class="kp">strsplit</span><span class="p">(</span><span class="kp">readline</span><span class="p">(</span><span class="kp">paste</span><span class="p">(</span><span class="kp">toString</span><span class="p">(</span>i<span class="p">),</span><span class="s">&quot;ученик &quot;</span><span class="p">,</span>sep<span class="o">=</span><span class="s">&quot; &quot;</span><span class="p">)),</span><span class="s">&quot;[ ]&quot;</span><span class="p">))</span>
+    <span class="kr">if</span> <span class="p">(</span><span class="kp">as.integer</span><span class="p">(</span>string<span class="p">[</span><span class="m">3</span><span class="p">])</span> <span class="o">==</span> S<span class="p">)</span> <span class="p">{</span>
+        score <span class="o">&lt;-</span> <span class="kp">as.integer</span><span class="p">(</span>string<span class="p">[</span><span class="m">4</span><span class="p">])</span> 
+        student <span class="o">&lt;-</span> <span class="kp">paste</span><span class="p">(</span>string<span class="p">[</span><span class="m">0</span><span class="p">],</span>string<span class="p">[</span><span class="m">1</span><span class="p">],</span>sep<span class="o">=</span><span class="s">&quot; &quot;</span><span class="p">)</span>
+        scores<span class="p">[</span>score<span class="m">+1</span><span class="p">]</span> <span class="o">&lt;-</span> scores<span class="p">[</span>score<span class="m">+1</span><span class="p">]</span> <span class="o">+</span> <span class="m">1</span>
+        students<span class="p">[</span>score<span class="m">+1</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">paste</span><span class="p">(</span>students<span class="p">[</span>score<span class="m">+1</span><span class="p">],</span>student<span class="p">,</span>sep<span class="o">=</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+        <span class="kr">if</span> <span class="p">(</span>MAX <span class="o">&lt;</span> score<span class="p">)</span> <span class="p">{</span>
+            MAX <span class="o">&lt;-</span> score
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span> 
+
+j <span class="o">&lt;-</span> <span class="m">1</span>    
+<span class="kr">while</span> <span class="p">(</span>scores<span class="p">[</span>MAX<span class="o">-</span>j<span class="m">+1</span><span class="p">]</span> <span class="o">==</span> <span class="m">0</span><span class="p">)</span> <span class="p">{</span>
+    j <span class="o">&lt;-</span> j <span class="o">+</span> <span class="m">1</span>
+<span class="p">}</span>
+    
+<span class="kr">if</span> <span class="p">(</span>scores<span class="p">[</span>MAX<span class="m">+1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="m">1</span> <span class="o">|</span> <span class="p">(</span>scores<span class="p">[</span>MAX<span class="m">+1</span><span class="p">]</span> <span class="o">==</span> <span class="m">1</span> <span class="o">&amp;</span> scores<span class="p">[</span>MAX<span class="o">-</span>j<span class="m">+1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="m">1</span><span class="p">))</span> <span class="p">{</span>
+    <span class="kp">cat</span><span class="p">(</span>students<span class="p">[</span>MAX<span class="m">+1</span><span class="p">])</span>
+<span class="p">}</span> <span class="kr">else</span> <span class="kr">if</span> <span class="p">(</span>scores<span class="p">[</span>MAX<span class="m">+1</span><span class="p">]</span> <span class="o">==</span> <span class="m">1</span> <span class="o">&amp;</span> scores<span class="p">[</span>MAX<span class="o">-</span>j<span class="m">+1</span><span class="p">]</span> <span class="o">==</span> <span class="m">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kp">cat</span><span class="p">(</span>students<span class="p">[</span>MAX<span class="p">])</span>
+    <span class="kp">cat</span><span class="p">(</span>students<span class="p">[</span>MAX<span class="o">-</span>j<span class="p">])</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Число учеников, сдававших экзамен: 20
+Номер школы: 50
+Персональные данные в формате: 
+&lt;Фамилия&gt;&lt;пробел&gt;&lt;Имя&gt;&lt;пробел&gt;&lt;Номер школы&gt;&lt;пробел&gt;&lt;Количество баллов&gt;
+=-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-=
+1 ученик Аверин Алексей 7 78
+2 ученик Бодрова Екатерина 38 81
+3 ученик Бондарев Максим 50 65
+4 ученик Вершинин Денис 7 87
+5 ученик Воронова Галина 7 76
+6 ученик Газиев Марат 38 83
+7 ученик Грачев Иван 38 67
+8 ученик Есин Руслан 50 88
+9 ученик Колесникова Мария 38 74
+10 ученик Лескова Анна 50 83
+11 ученик Мельников Роман 38 77
+12 ученик Морозова Жанна 50 88
+13 ученик Нестерова Роза 38 81
+14 ученик Нигматулин Ринат 7 72
+15 ученик Носиков Илья 50 88
+16 ученик Ольховский Дмитрий 7 79
+17 ученик Петренко Дарья 7 82
+18 ученик Робертсон Артур 38 73
+19 ученик Стариков Кирилл 50 70
+20 ученик Терехов Леонид 7 84
+
+ Есин
+ Морозова
+ Носиков</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[340]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>students
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<ol class=list-inline>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>'\n Бондарев'</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>'\n Стариков'</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>'\n Лескова'</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>'\n Есин\n Морозова\n Носиков'</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+	<li>''</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[341]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>scores
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<ol class=list-inline>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>1</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>1</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>1</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>3</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+	<li>0</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[342]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>MAX<span class="p">;</span> j
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+88
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+5
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[343]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>program <span class="o">&lt;-</span><span class="s">&#39;</span>
+<span class="s">N &lt;- as.integer(readline(&quot;Число учеников, сдававших экзамен: &quot;))</span>
+<span class="s">S &lt;- as.integer(readline(&quot;Номер школы: &quot;))</span>
+<span class="s">scores &lt;- integer(101)</span>
+<span class="s">students &lt;- vector(mode=&quot;character&quot;,length=101)</span>
+<span class="s">MAX &lt;- 0</span>
+
+<span class="s">cat(&quot;Персональные данные в формате: \n&quot;)</span>
+<span class="s">cat(&quot;&lt;Фамилия&gt;&lt;пробел&gt;&lt;Имя&gt;&lt;пробел&gt;&lt;Номер школы&gt;&lt;пробел&gt;&lt;Количество баллов&gt;\n&quot;)</span>
+<span class="s">cat(replicate(18,&quot;=-=&quot;))</span>
+<span class="s">cat(&quot;\n&quot;)</span>
+
+<span class="s">for (i in 1:N){</span>
+<span class="s">    string &lt;- unlist(strsplit(readline(paste(toString(i),&quot;ученик &quot;,sep=&quot; &quot;)),&quot;[ ]&quot;))</span>
+<span class="s">    if (as.integer(string[3]) == S) {</span>
+<span class="s">        score &lt;- as.integer(string[4]) </span>
+<span class="s">        student &lt;- paste(string[0],string[1],sep=&quot; &quot;)</span>
+<span class="s">        scores[score+1] &lt;- scores[score+1] + 1</span>
+<span class="s">        students[score+1] &lt;- paste(students[score+1],student,sep=&quot;\n&quot;)</span>
+<span class="s">        if (MAX &lt; score) {</span>
+<span class="s">            MAX &lt;- score</span>
+<span class="s">        }</span>
+<span class="s">    }</span>
+<span class="s">} </span>
+
+<span class="s">j &lt;- 1    </span>
+<span class="s">while (scores[MAX-j+1] == 0) {</span>
+<span class="s">    j &lt;- j + 1</span>
+<span class="s">}</span>
+<span class="s">    </span>
+<span class="s">if (scores[MAX+1] &gt; 1 | (scores[MAX+1] == 1 &amp; scores[MAX-j+1] &gt; 1)) {</span>
+<span class="s">    cat(students[MAX+1])</span>
+<span class="s">} else if (scores[MAX+1] == 1 &amp; scores[MAX-j+1] == 1) {</span>
+<span class="s">    cat(students[MAX])</span>
+<span class="s">    cat(students[MAX-j])</span>
+<span class="s">}</span>
+<span class="s">&#39;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[344]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">27</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">paste</span><span class="p">(</span><span class="kp">version</span><span class="p">,</span> program<span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -24100,7 +24568,7 @@ MIN <span class="o">&lt;-</span> <span class="m">100</span>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[328]:</div>
+<div class="prompt input_prompt">In&nbsp;[345]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>answer_dictionary
@@ -24122,7 +24590,7 @@ MIN <span class="o">&lt;-</span> <span class="m">100</span>
 
 
 <div class="output_text output_subarea ">
-<pre>&lt;hash&gt; containing 26 key-value pair(s).
+<pre>&lt;hash&gt; containing 27 key-value pair(s).
   1 : 4
   10 : 24
   11 : 720
@@ -24168,6 +24636,43 @@ cat(&#34;
 &#34;)    
 cat(toString(MIN))
   26 : 28
+  27 : R version 3.5.0 (2018-04-23)
+N &lt;- as.integer(readline(&#34;Число учеников, сдававших экзамен: &#34;))
+S &lt;- as.integer(readline(&#34;Номер школы: &#34;))
+scores &lt;- integer(101)
+students &lt;- vector(mode=&#34;character&#34;,length=101)
+MAX &lt;- 0
+cat(&#34;Персональные данные в формате: 
+&#34;)
+cat(&#34;&lt;Фамилия&gt;&lt;пробел&gt;&lt;Имя&gt;&lt;пробел&gt;&lt;Номер школы&gt;&lt;пробел&gt;&lt;Количество баллов&gt;
+&#34;)
+cat(replicate(18,&#34;=-=&#34;))
+cat(&#34;
+&#34;)
+for (i in 1:N){
+    string &lt;- unlist(strsplit(readline(paste(toString(i),&#34;ученик &#34;,sep=&#34; &#34;)),&#34;[ ]&#34;))
+    if (as.integer(string[3]) == S) {
+        score &lt;- as.integer(string[4]) 
+        student &lt;- paste(string[0],string[1],sep=&#34; &#34;)
+        scores[score+1] &lt;- scores[score+1] + 1
+        students[score+1] &lt;- paste(students[score+1],student,sep=&#34;
+&#34;)
+        if (MAX &lt; score) {
+            MAX &lt;- score
+        }
+    }
+} 
+j &lt;- 1    
+while (scores[MAX-j+1] == 0) {
+    j &lt;- j + 1
+}
+    
+if (scores[MAX+1] &gt; 1 | (scores[MAX+1] == 1 &amp; scores[MAX-j+1] &gt; 1)) {
+    cat(students[MAX+1])
+} else if (scores[MAX+1] == 1 &amp; scores[MAX-j+1] == 1) {
+    cat(students[MAX])
+    cat(students[MAX-j])
+}
   3 : 4
   4 : 2
   5 : DF4C
