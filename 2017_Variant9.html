@@ -16315,7 +16315,8 @@ V:{(8,19)-&gt;(8,38),(14,19)-&gt;(14,38),(7,20)-&gt;(7,40),(7,38)-&gt;(7,76)}
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>На вход программе подаётся: в первой строке — число $N \ (5 &lt; N &lt; 10^9)$.</p>
 <p>В каждой из последующих N строк — по одному элементу последовательности — натуральные числа, не превышающее $10^9$.</p>
-<p>Напишите эффективную, в том числе и по используемой памяти, программу (укажите используемую версию языка программирования, например, <code>Borland Pascal 7.0</code>), которая выводит на экран максимальную сумму двух элементов этой последовательности, номера которых различаются не меньше чем на 5.</p>
+<p>Напишите эффективную, в том числе и по используемой памяти, программу (укажите используемую версию языка программирования, например, <code>Borland Pascal 7.0</code>),</p>
+<p>которая выводит на экран максимальную сумму двух элементов этой последовательности, номера которых различаются <strong>не меньше чем на 5</strong>.</p>
 <p>Пример входных данных:</p>
 <p>8</p>
 <p>3</p>
@@ -16327,11 +16328,12 @@ V:{(8,19)-&gt;(8,38),(14,19)-&gt;(14,38),(7,20)-&gt;(7,40),(7,38)-&gt;(7,76)}
 <p>2</p>
 <p>9</p>
 <p>Пример выходных данных:</p>
-<p>14</p>
+<p>17</p>
 <hr>
 <p>The input is given to the program: the first line contains the number $N \ (5 &lt;N &lt;10^9)$.</p>
 <p>In each of the next N lines - one element of the sequence - natural numbers not exceeding $10^9$.</p>
-<p>Write an effective program (including the version of the programming language used, for example, <code>Borland Pascal 7.0</code>), which displays the maximum sum of two elements of this sequence, the numbers of which differ by no less than 5.</p>
+<p>Write an effective program (including the version of the programming language used, for example, <code>Borland Pascal 7.0</code>),</p>
+<p>which displays the maximum sum of two elements of this sequence, the numbers of which differ by <strong>no less than 5</strong>.</p>
 <p>Example of an input:</p>
 <p>8</p>
 <p>3</p>
@@ -16343,14 +16345,14 @@ V:{(8,19)-&gt;(8,38),(14,19)-&gt;(14,38),(7,20)-&gt;(7,40),(7,38)-&gt;(7,76)}
 <p>2</p>
 <p>9</p>
 <p>Example of an output:</p>
-<p>14</p>
+<p>17</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[258]:</div>
+<div class="prompt input_prompt">In&nbsp;[74]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">line</span> <span class="o">=</span> <span class="mi">45</span> <span class="o">*</span> <span class="s1">&#39;-=&#39;</span>
@@ -16359,19 +16361,22 @@ V:{(8,19)-&gt;(8,38),(14,19)-&gt;(14,38),(7,20)-&gt;(7,40),(7,38)-&gt;(7,76)}
 <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Последовательность натуральных чисел:&#39;</span><span class="p">)</span>
 
-<span class="n">A</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">N</span> <span class="o">*</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">MAX</span> <span class="o">=</span> <span class="mi">0</span>
 
 <span class="k">for</span> <span class="n">I</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
-    <span class="n">A</span><span class="p">[</span><span class="n">I</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">))</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">I</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
     
-<span class="k">for</span> <span class="n">K</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
-    <span class="n">A</span><span class="p">[</span><span class="n">K</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">))</span>
-    <span class="k">if</span> <span class="n">MAX</span> <span class="o">&lt;</span> <span class="n">A</span><span class="p">[</span><span class="n">K</span><span class="p">]</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="n">K</span><span class="o">-</span><span class="mi">5</span><span class="p">]:</span>
-        <span class="n">MAX</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">K</span><span class="p">]</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="n">K</span><span class="o">-</span><span class="mi">5</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">I</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">I</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+    
+    <span class="k">for</span> <span class="n">J</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">I</span> <span class="o">-</span> <span class="mi">4</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">MAX</span> <span class="o">&lt;</span> <span class="n">A</span><span class="p">[</span><span class="n">I</span><span class="p">]</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="n">I</span> <span class="o">-</span> <span class="mi">5</span> <span class="o">-</span> <span class="n">J</span><span class="p">]:</span>
+            <span class="n">MAX</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">I</span><span class="p">]</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="n">I</span> <span class="o">-</span> <span class="mi">5</span> <span class="o">-</span> <span class="n">J</span><span class="p">]</span>
+                
         
 <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Максимальная сумма двух элементов, номера которых различаются не меньше чем на 5: </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">MAX</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Максимальная сумма двух элементов, номера которых различаются не меньше чем на 5: </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">MAX</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -16395,30 +16400,30 @@ V:{(8,19)-&gt;(8,38),(14,19)-&gt;(14,38),(7,20)-&gt;(7,40),(7,38)-&gt;(7,76)}
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= 
 
 Последовательность натуральных чисел:
- 2
- 4
- 6
- 8
- 10
- 20
- 30
- 40
- 50
- 60
- 70
- 80
- 90
- 3
- 5
- 7
- 9
- 11
- 13
- 15
+10
+20
+30
+40
+50
+11
+12
+13
+14
+15
+100
+200
+1
+2
+3
+4
+5
+300
+6
+7
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= 
 
 Максимальная сумма двух элементов, номера которых различаются не меньше чем на 5: 
-130
+500
 </pre>
 </div>
 </div>
@@ -16429,7 +16434,7 @@ V:{(8,19)-&gt;(8,38),(14,19)-&gt;(14,38),(7,20)-&gt;(7,40),(7,38)-&gt;(7,76)}
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="prompt input_prompt">In&nbsp;[75]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">program</span> <span class="o">=</span> \
@@ -16440,19 +16445,22 @@ V:{(8,19)-&gt;(8,38),(14,19)-&gt;(14,38),(7,20)-&gt;(7,40),(7,38)-&gt;(7,76)}
 <span class="sd">print(line,&#39;\n&#39;)</span>
 <span class="sd">print(&#39;Последовательность натуральных чисел:&#39;)</span>
 
-<span class="sd">A = numpy.zeros(N)</span>
+<span class="sd">A = N * [0]</span>
 <span class="sd">MAX = 0</span>
 
 <span class="sd">for I in range(5):</span>
-<span class="sd">    A[I] = int(input(&quot; &quot;))</span>
+<span class="sd">    A[I] = int(input())</span>
 <span class="sd">    </span>
-<span class="sd">for K in range(5, N):</span>
-<span class="sd">    A[K] = int(input(&quot; &quot;))</span>
-<span class="sd">    if MAX &lt; A[K] + A[K-5]:</span>
-<span class="sd">        MAX = A[K] + A[K-5]</span>
+<span class="sd">for I in range(5, N):</span>
+<span class="sd">    A[I] = int(input())</span>
+<span class="sd">    </span>
+<span class="sd">    for J in range(I - 4):</span>
+<span class="sd">        if MAX &lt; A[I] + A[I - 5 - J]:</span>
+<span class="sd">            MAX = A[I] + A[I - 5 - J]</span>
+<span class="sd">                </span>
 <span class="sd">        </span>
 <span class="sd">print(line,&#39;\n&#39;)</span>
-<span class="sd">print(&#39;Максимальная сумма двух элементов, номера которых различаются не меньше чем на 5: \n&#39; + str(int(MAX)))</span>
+<span class="sd">print(&#39;Максимальная сумма двух элементов, номера которых различаются не меньше чем на 5: \n&#39; + str(MAX))</span>
 <span class="sd">&quot;&quot;&quot;</span>
 </pre></div>
 
@@ -16463,7 +16471,7 @@ V:{(8,19)-&gt;(8,38),(14,19)-&gt;(14,38),(7,20)-&gt;(7,40),(7,38)-&gt;(7,76)}
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[63]:</div>
+<div class="prompt input_prompt">In&nbsp;[76]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span><span class="p">[</span><span class="mi">27</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">version</span><span class="p">,</span> <span class="n">program</span><span class="p">]</span>
@@ -16484,7 +16492,7 @@ V:{(8,19)-&gt;(8,38),(14,19)-&gt;(14,38),(7,20)-&gt;(7,40),(7,38)-&gt;(7,76)}
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Answer: [&#39;python 3.6&#39;, &#39;\nline = 45*\&#39;-=\&#39;\nprint(line,\&#39;\n\&#39;)\nN = int(input(\&#39;Количество чисел последовательности: \n\&#39;))\nprint(line,\&#39;\n\&#39;)\nprint(\&#39;Последовательность натуральных чисел:\&#39;)\n\nA = numpy.zeros(N)\nMAX = 0\n\nfor I in range(5):\n    A[I] = int(input(&#34; &#34;))\n    \nfor K in range(5, N):\n    A[K] = int(input(&#34; &#34;))\n    if MAX &lt; A[K] + A[K-5]:\n        MAX = A[K] + A[K-5]\n        \nprint(line,\&#39;\n\&#39;)\nprint(\&#39;Максимальная сумма двух элементов, номера которых различаются не меньше чем на 5: \n\&#39;+str(int(MAX)))\n&#39;]
+<pre>Answer: [&#39;python 3.6&#39;, &#34;\nline = 45 * &#39;-=&#39;\nprint(line,&#39;\n&#39;)\nN = int(input(&#39;Количество чисел последовательности: \n&#39;))\nprint(line,&#39;\n&#39;)\nprint(&#39;Последовательность натуральных чисел:&#39;)\n\nA = N * [0]\nMAX = 0\n\nfor I in range(5):\n    A[I] = int(input())\n    \nfor I in range(5, N):\n    A[I] = int(input())\n    \n    for J in range(I - 4):\n        if MAX &lt; A[I] + A[I - 5 - J]:\n            MAX = A[I] + A[I - 5 - J]\n                \n        \nprint(line,&#39;\n&#39;)\nprint(&#39;Максимальная сумма двух элементов, номера которых различаются не меньше чем на 5: \n&#39; + str(MAX))\n&#34;]
 </pre>
 </div>
 </div>
@@ -16504,7 +16512,7 @@ V:{(8,19)-&gt;(8,38),(14,19)-&gt;(14,38),(7,20)-&gt;(7,40),(7,38)-&gt;(7,76)}
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[69]:</div>
+<div class="prompt input_prompt">In&nbsp;[77]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">answer_dictionary</span>
@@ -16520,7 +16528,7 @@ V:{(8,19)-&gt;(8,38),(14,19)-&gt;(14,38),(7,20)-&gt;(7,40),(7,38)-&gt;(7,76)}
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[69]:</div>
+<div class="prompt output_prompt">Out[77]:</div>
 
 
 
@@ -16556,7 +16564,7 @@ V:{(8,19)-&gt;(8,38),(14,19)-&gt;(14,38),(7,20)-&gt;(7,40),(7,38)-&gt;(7,76)}
   &#39;\nprint(&#34;Create an integer array of numbers from the interval [-10000, 10000].\n&#34;)\nN = 40\nA = []\nK = 0\n\nfor I in range(N):\n    A.append(int(input()))\n    # The fragment instead of the ellipsis\n    if (A[I] % 2 != 0) or (A[I] &lt;= 0): \n        K += 1\n        \nif K == 0:\n    print(&#34;YES&#34;)\nelse:\n    print(&#34;NO&#34;)\n&#39;],
  26: &#39;\n1. \na) P:(5,20)-&gt;{(6,20), (10,20), (5,21), (5,40)} \n   V:{(6,20)-&gt;(6,40), (10,20)-&gt;(10,40), (5,21)-&gt;(5,42), (5,40)-&gt;(5,80)}\nb) P:(7,19)-&gt;{(8,19), (14,19), (7,20), (7,38)}\n   V:{(8,19)-&gt;(8,38), (14,19)-&gt;(14,38), (7,20)-&gt;(7,40), (7,38)-&gt;(7,76)}\n2. \nP:(5,19)-&gt;(5,20), (6,19)-&gt;(7,19), (7,18)-&gt;(7,19)\nV:(5,20)-&gt;{(6,20), (10,20), (5,21), (5,40)} ∨ (7,19)-&gt;{(8,19), (14,19), (7,20), (7,38)}\nP:{(6,20)-&gt;(6,40), (10,20)-&gt;(10,40), (5,21)-&gt;(5,42), (5,40)-&gt;(5,80)} ∨ \nP:{(8,19)-&gt;(8,38), (14,19)-&gt;(14,38), (7,20)-&gt;(7,40), (7,38)-&gt;(7,76)}.\n3. \nP:(6,18)-&gt;{(7,18),(12,18),(6,19),(6,36)}\nV:(7,18)-&gt;(7,19),(12,18)-&gt;(12,36),(6,19)-&gt;(7,19),(6,36)-&gt;(6,72)\nP:(7,19)-&gt;{(8,19), (14,19), (7,20), (7,38)} \nV:{(8,19)-&gt;(8,38),(14,19)-&gt;(14,38),(7,20)-&gt;(7,40),(7,38)-&gt;(7,76)}&#39;,
  27: [&#39;python 3.6&#39;,
-  &#39;\nline = 45*\&#39;-=\&#39;\nprint(line,\&#39;\n\&#39;)\nN = int(input(\&#39;Количество чисел последовательности: \n\&#39;))\nprint(line,\&#39;\n\&#39;)\nprint(\&#39;Последовательность натуральных чисел:\&#39;)\n\nA = numpy.zeros(N)\nMAX = 0\n\nfor I in range(5):\n    A[I] = int(input(&#34; &#34;))\n    \nfor K in range(5, N):\n    A[K] = int(input(&#34; &#34;))\n    if MAX &lt; A[K] + A[K-5]:\n        MAX = A[K] + A[K-5]\n        \nprint(line,\&#39;\n\&#39;)\nprint(\&#39;Максимальная сумма двух элементов, номера которых различаются не меньше чем на 5: \n\&#39;+str(int(MAX)))\n&#39;]}</pre>
+  &#34;\nline = 45 * &#39;-=&#39;\nprint(line,&#39;\n&#39;)\nN = int(input(&#39;Количество чисел последовательности: \n&#39;))\nprint(line,&#39;\n&#39;)\nprint(&#39;Последовательность натуральных чисел:&#39;)\n\nA = N * [0]\nMAX = 0\n\nfor I in range(5):\n    A[I] = int(input())\n    \nfor I in range(5, N):\n    A[I] = int(input())\n    \n    for J in range(I - 4):\n        if MAX &lt; A[I] + A[I - 5 - J]:\n            MAX = A[I] + A[I - 5 - J]\n                \n        \nprint(line,&#39;\n&#39;)\nprint(&#39;Максимальная сумма двух элементов, номера которых различаются не меньше чем на 5: \n&#39; + str(MAX))\n&#34;]}</pre>
 </div>
 
 </div>

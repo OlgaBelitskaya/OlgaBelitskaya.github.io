@@ -21329,9 +21329,172 @@ gg=="
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="27.">27.<a class="anchor-link" href="#27.">&#182;</a></h2>
+<h2 id="27.">27.<a class="anchor-link" href="#27.">&#182;</a></h2><p>На вход программе подаётся: в первой строке — число $N \ (5 &lt; N &lt; 10^9)$.</p>
+<p>В каждой из последующих N строк — по одному элементу последовательности — натуральные числа, не превышающее $10^9$.</p>
+<p>Напишите эффективную, в том числе и по используемой памяти, программу (укажите используемую версию языка программирования, например, <code>Borland Pascal 7.0</code>),</p>
+<p>которая выводит на экран максимальную сумму двух элементов этой последовательности, номера которых различаются <strong>не меньше чем на 5</strong>.</p>
+<p>Пример входных данных:</p>
+<p>8</p>
+<p>3</p>
+<p>4</p>
+<p>5</p>
+<p>7</p>
+<p>8</p>
+<p>3</p>
+<p>2</p>
+<p>9</p>
+<p>Пример выходных данных:</p>
+<p>17</p>
+<hr>
+<p>The input is given to the program: the first line contains the number $N \ (5 &lt;N &lt;10^9)$.</p>
+<p>In each of the next N lines - one element of the sequence - natural numbers not exceeding $10^9$.</p>
+<p>Write an effective program (including the version of the programming language used, for example, <code>Borland Pascal 7.0</code>),</p>
+<p>which displays the maximum sum of two elements of this sequence, the numbers of which differ by <strong>no less than 5</strong>.</p>
+<p>Example of an input:</p>
+<p>8</p>
+<p>3</p>
+<p>4</p>
+<p>5</p>
+<p>7</p>
+<p>8</p>
+<p>3</p>
+<p>2</p>
+<p>9</p>
+<p>Example of an output:</p>
+<p>17</p>
+
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[99]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>N <span class="o">&lt;-</span> <span class="kp">as.integer</span><span class="p">(</span><span class="kp">readline</span><span class="p">(</span><span class="s">&quot;Количество чисел последовательности: \n&quot;</span><span class="p">))</span>
+A <span class="o">&lt;-</span> <span class="kt">integer</span><span class="p">(</span>N<span class="p">)</span>
+MAX <span class="o">&lt;-</span> <span class="m">0</span>
+
+<span class="kp">cat</span><span class="p">(</span><span class="s">&quot;Последовательность натуральных чисел: \n&quot;</span><span class="p">)</span>
+<span class="kp">cat</span><span class="p">(</span><span class="kp">replicate</span><span class="p">(</span><span class="m">18</span><span class="p">,</span><span class="s">&quot;=-=&quot;</span><span class="p">))</span>
+<span class="kp">cat</span><span class="p">(</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+
+<span class="kr">for</span> <span class="p">(</span>I <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>N<span class="p">){</span>
+    A<span class="p">[</span><span class="kp">I</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">as.integer</span><span class="p">(</span><span class="kp">readline</span><span class="p">())</span>
+    
+    <span class="kr">if</span> <span class="p">(</span>I <span class="o">&gt;</span> <span class="m">5</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">for</span> <span class="p">(</span>J <span class="kr">in</span> <span class="m">0</span><span class="o">:</span><span class="p">(</span><span class="kp">I</span><span class="m">-6</span><span class="p">))</span> <span class="p">{</span>
+            <span class="kr">if</span> <span class="p">(</span>MAX <span class="o">&lt;</span> A<span class="p">[</span><span class="kp">I</span><span class="p">]</span> <span class="o">+</span> A<span class="p">[</span>I <span class="o">-</span> <span class="m">5</span> <span class="o">-</span> J<span class="p">])</span> <span class="p">{</span>
+                MAX <span class="o">&lt;-</span> A<span class="p">[</span><span class="kp">I</span><span class="p">]</span> <span class="o">+</span> A<span class="p">[</span>I <span class="o">-</span> <span class="m">5</span> <span class="o">-</span> J<span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kp">cat</span><span class="p">(</span><span class="kp">replicate</span><span class="p">(</span><span class="m">18</span><span class="p">,</span><span class="s">&quot;=-=&quot;</span><span class="p">))</span>
+<span class="kp">cat</span><span class="p">(</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="kp">cat</span><span class="p">(</span><span class="s">&quot;Максимальная сумма двух элементов, номера которых различаются не меньше чем на 5: \n&quot;</span><span class="p">)</span>
+<span class="kp">cat</span><span class="p">(</span><span class="kp">toString</span><span class="p">(</span>MAX<span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Количество чисел последовательности: 
+20
+Последовательность натуральных чисел: 
+=-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-=
+10
+20
+30
+40
+50
+600
+70
+80
+90
+11
+12
+13
+14
+15
+16
+17
+18
+19
+200
+100
+=-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-= =-=
+Максимальная сумма двух элементов, номера которых различаются не меньше чем на 5: 
+800</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[100]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>program <span class="o">&lt;-</span><span class="s">&#39;</span>
+<span class="s">N &lt;- as.integer(readline(&quot;Количество чисел последовательности: \n&quot;))</span>
+<span class="s">A &lt;- integer(N)</span>
+<span class="s">MAX &lt;- 0</span>
+
+<span class="s">cat(&quot;Последовательность натуральных чисел: \n&quot;)</span>
+<span class="s">cat(replicate(18,&quot;=-=&quot;))</span>
+<span class="s">cat(&quot;\n&quot;)</span>
+
+<span class="s">for (I in 1:N){</span>
+<span class="s">    A[I] &lt;- as.integer(readline())</span>
+<span class="s">    </span>
+<span class="s">    if (I &gt; 5) {</span>
+<span class="s">        for (J in 0:(I-6)) {</span>
+<span class="s">            if (MAX &lt; A[I] + A[I - 5 - J]) {</span>
+<span class="s">                MAX &lt;- A[I] + A[I - 5 - J]</span>
+<span class="s">            }</span>
+<span class="s">        }</span>
+<span class="s">    }</span>
+<span class="s">}</span>
+
+<span class="s">cat(replicate(18,&quot;=-=&quot;))</span>
+<span class="s">cat(&quot;\n&quot;)</span>
+<span class="s">cat(&quot;Максимальная сумма двух элементов, номера которых различаются не меньше чем на 5: \n&quot;)</span>
+<span class="s">cat(toString(MAX))</span>
+<span class="s">&#39;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[101]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>answer_dictionary<span class="p">[</span><span class="m">27</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">paste</span><span class="p">(</span><span class="kp">version</span><span class="p">,</span> program<span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -21344,7 +21507,7 @@ gg=="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[85]:</div>
+<div class="prompt input_prompt">In&nbsp;[102]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>answer_dictionary
@@ -21366,7 +21529,7 @@ gg=="
 
 
 <div class="output_text output_subarea ">
-<pre>&lt;hash&gt; containing 26 key-value pair(s).
+<pre>&lt;hash&gt; containing 27 key-value pair(s).
   1 : 900
   10 : 1200
   11 : 25
@@ -21421,6 +21584,33 @@ P:(6,18)-&gt;{(7,18),(12,18),(6,19),(6,36)}
 V:(7,18)-&gt;(7,19),(12,18)-&gt;(12,36),(6,19)-&gt;(7,19),(6,36)-&gt;(6,72)
 P:(7,19)-&gt;{(8,19), (14,19), (7,20), (7,38)} 
 V:{(8,19)-&gt;(8,38),(14,19)-&gt;(14,38),(7,20)-&gt;(7,40),(7,38)-&gt;(7,76)}
+  27 : R version 3.5.0 (2018-04-23)
+N &lt;- as.integer(readline(&#34;Количество чисел последовательности: 
+&#34;))
+A &lt;- integer(N)
+MAX &lt;- 0
+cat(&#34;Последовательность натуральных чисел: 
+&#34;)
+cat(replicate(18,&#34;=-=&#34;))
+cat(&#34;
+&#34;)
+for (I in 1:N){
+    A[I] &lt;- as.integer(readline())
+    
+    if (I &gt; 5) {
+        for (J in 0:(I-6)) {
+            if (MAX &lt; A[I] + A[I - 5 - J]) {
+                MAX &lt;- A[I] + A[I - 5 - J]
+            }
+        }
+    }
+}
+cat(replicate(18,&#34;=-=&#34;))
+cat(&#34;
+&#34;)
+cat(&#34;Максимальная сумма двух элементов, номера которых различаются не меньше чем на 5: 
+&#34;)
+cat(toString(MAX))
   3 : 13
   4 : 12
   5 : ABCA
