@@ -11872,12 +11872,13 @@ type=&quot;submit&quot; value=&quot;Click to display or hide code cells&quot;&gt
 
 <span class="kn">from</span> <span class="nn">keras.utils</span> <span class="k">import</span> <span class="n">to_categorical</span>
 <span class="kn">from</span> <span class="nn">keras.preprocessing</span> <span class="k">import</span> <span class="n">image</span> <span class="k">as</span> <span class="n">keras_image</span>
-<span class="kn">from</span> <span class="nn">keras.callbacks</span> <span class="k">import</span> <span class="n">ModelCheckpoint</span>
 
 <span class="kn">from</span> <span class="nn">keras.models</span> <span class="k">import</span> <span class="n">Sequential</span><span class="p">,</span> <span class="n">load_model</span>
 <span class="kn">from</span> <span class="nn">keras.layers</span> <span class="k">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">LSTM</span><span class="p">,</span> <span class="n">GlobalAveragePooling1D</span><span class="p">,</span> <span class="n">GlobalAveragePooling2D</span>
 <span class="kn">from</span> <span class="nn">keras.layers</span> <span class="k">import</span> <span class="n">Activation</span><span class="p">,</span> <span class="n">Flatten</span><span class="p">,</span> <span class="n">Dropout</span><span class="p">,</span> <span class="n">BatchNormalization</span>
 <span class="kn">from</span> <span class="nn">keras.layers</span> <span class="k">import</span> <span class="n">Conv2D</span><span class="p">,</span> <span class="n">MaxPooling2D</span><span class="p">,</span> <span class="n">GlobalMaxPooling2D</span>
+<span class="kn">from</span> <span class="nn">keras.callbacks</span> <span class="k">import</span> <span class="n">EarlyStopping</span><span class="p">,</span> <span class="n">ReduceLROnPlateau</span><span class="p">,</span> <span class="n">ModelCheckpoint</span>
+<span class="kn">from</span> <span class="nn">keras.layers.advanced_activations</span> <span class="k">import</span> <span class="n">PReLU</span><span class="p">,</span> <span class="n">LeakyReLU</span>
 </pre></div>
 
 </div>
@@ -11914,7 +11915,7 @@ type=&quot;submit&quot; value=&quot;Click to display or hide code cells&quot;&gt
 <span class="c1"># Load the data</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/flower_images/flower_labels.csv&quot;</span><span class="p">)</span>
 <span class="n">files</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">]</span>
-<span class="n">targets</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">as_matrix</span><span class="p">()</span>
+<span class="n">targets</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 <span class="n">tensors</span> <span class="o">=</span> <span class="n">data_to_tensor</span><span class="p">(</span><span class="n">files</span><span class="p">);</span>
 </pre></div>
 
@@ -12126,7 +12127,8 @@ type=&quot;submit&quot; value=&quot;Click to display or hide code cells&quot;&gt
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Split">Split<a class="anchor-link" href="#Split">&#182;</a></h3><p>Apply the function <a href="http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html"><code>train_test_split</code></a> and split the data into training and testing sets. Set up the size of the testing set - 10%.</p>
+<h3 id="Split">Split<a class="anchor-link" href="#Split">&#182;</a></h3><p>Apply the function <a href="http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html"><code>train_test_split</code></a> and split the data into training and testing sets.</p>
+<p>Set up the size for the testing set - 10% and for the validation set - 10%.</p>
 
 </div>
 </div>
@@ -12161,10 +12163,7 @@ type=&quot;submit&quot; value=&quot;Click to display or hide code cells&quot;&gt
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
 <span class="c1"># Print the shape</span>
-<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Training tensor&#39;s shape:&quot;</span><span class="p">,</span> <span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Training target&#39;s shape&quot;</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Testing tensor&#39;s shape:&quot;</span><span class="p">,</span> <span class="n">x_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Testing target&#39;s shape&quot;</span><span class="p">,</span> <span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">x_test</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">x_valid</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_valid</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 
 </div>
@@ -12246,17 +12245,48 @@ type=&quot;submit&quot; value=&quot;Click to display or hide code cells&quot;&gt
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="c1"># Create callbacks</span>
+<span class="n">checkpointer</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">filepath</span><span class="o">=</span><span class="s1">&#39;weights.best.model.hdf5&#39;</span><span class="p">,</span> 
+                               <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">save_best_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">lr_reduction</span> <span class="o">=</span> <span class="n">ReduceLROnPlateau</span><span class="p">(</span><span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> 
+                                 <span class="n">patience</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
 <span class="c1"># TODO: Set up parameters</span>
 <span class="c1"># epochs = </span>
 <span class="c1"># batch_size =</span>
 
 <span class="c1"># Train the model</span>
-<span class="n">checkpointer</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">filepath</span><span class="o">=</span><span class="s1">&#39;weights.best.model.hdf5&#39;</span><span class="p">,</span> 
-                               <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">save_best_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
 <span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> 
                     <span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-                    <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">),</span>
-                    <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">checkpointer</span><span class="p">])</span>
+                    <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_valid</span><span class="p">,</span> <span class="n">y_valid</span><span class="p">),</span>
+                    <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">checkpointer</span><span class="p">,</span><span class="n">lr_reduction</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="c1"># TODO: Try to apply ImageDataGenerator (keras)</span>
 </pre></div>
 
 </div>
@@ -12268,7 +12298,7 @@ type=&quot;submit&quot; value=&quot;Click to display or hide code cells&quot;&gt
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Step-6.-Evaluate-and-Save-the-Model">Step 6. Evaluate and Save the Model<a class="anchor-link" href="#Step-6.-Evaluate-and-Save-the-Model">&#182;</a></h2><p>We should have an accuracy greater than 50%</p>
+<h2 id="Step-6.-Evaluate-and-Save-the-Model">Step 6. Evaluate and Save the Model<a class="anchor-link" href="#Step-6.-Evaluate-and-Save-the-Model">&#182;</a></h2><p>We should have an accuracy greater than 10%. Let's try to reach the level 60-70%.</p>
 
 </div>
 </div>
@@ -12311,7 +12341,7 @@ type=&quot;submit&quot; value=&quot;Click to display or hide code cells&quot;&gt
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The model has been saved to disk.</p>
+<p>Trained model has been saved to the current folder.</p>
 
 </div>
 </div>
