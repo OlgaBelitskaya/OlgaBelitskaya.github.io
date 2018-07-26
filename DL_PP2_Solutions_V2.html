@@ -15100,7 +15100,7 @@ Epoch 00020: val_loss did not improve from 0.26388
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[71]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -15147,7 +15147,7 @@ Epoch 00020: val_loss did not improve from 0.26388
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[72]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -15159,10 +15159,70 @@ Epoch 00020: val_loss did not improve from 0.26388
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_2 (InputLayer)            (None, 32, 32, 3)    0                                            
+__________________________________________________________________________________________________
+conv2d_11 (Conv2D)              (None, 32, 32, 32)   896         input_2[0][0]                    
+__________________________________________________________________________________________________
+leaky_re_lu_18 (LeakyReLU)      (None, 32, 32, 32)   0           conv2d_11[0][0]                  
+__________________________________________________________________________________________________
+max_pooling2d_11 (MaxPooling2D) (None, 16, 16, 32)   0           leaky_re_lu_18[0][0]             
+__________________________________________________________________________________________________
+dropout_18 (Dropout)            (None, 16, 16, 32)   0           max_pooling2d_11[0][0]           
+__________________________________________________________________________________________________
+conv2d_12 (Conv2D)              (None, 16, 16, 128)  36992       dropout_18[0][0]                 
+__________________________________________________________________________________________________
+leaky_re_lu_19 (LeakyReLU)      (None, 16, 16, 128)  0           conv2d_12[0][0]                  
+__________________________________________________________________________________________________
+max_pooling2d_12 (MaxPooling2D) (None, 8, 8, 128)    0           leaky_re_lu_19[0][0]             
+__________________________________________________________________________________________________
+dropout_19 (Dropout)            (None, 8, 8, 128)    0           max_pooling2d_12[0][0]           
+__________________________________________________________________________________________________
+global_max_pooling2d_6 (GlobalM (None, 128)          0           dropout_19[0][0]                 
+__________________________________________________________________________________________________
+dense_14 (Dense)                (None, 1024)         132096      global_max_pooling2d_6[0][0]     
+__________________________________________________________________________________________________
+leaky_re_lu_20 (LeakyReLU)      (None, 1024)         0           dense_14[0][0]                   
+__________________________________________________________________________________________________
+dropout_20 (Dropout)            (None, 1024)         0           leaky_re_lu_20[0][0]             
+__________________________________________________________________________________________________
+dense_15 (Dense)                (None, 128)          131200      dropout_20[0][0]                 
+__________________________________________________________________________________________________
+leaky_re_lu_21 (LeakyReLU)      (None, 128)          0           dense_15[0][0]                   
+__________________________________________________________________________________________________
+dropout_21 (Dropout)            (None, 128)          0           leaky_re_lu_21[0][0]             
+__________________________________________________________________________________________________
+dense_16 (Dense)                (None, 33)           4257        dropout_21[0][0]                 
+__________________________________________________________________________________________________
+dense_17 (Dense)                (None, 4)            516         dropout_21[0][0]                 
+==================================================================================================
+Total params: 305,957
+Trainable params: 305,957
+Non-trainable params: 0
+__________________________________________________________________________________________________
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[74]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -15180,17 +15240,15 @@ Epoch 00020: val_loss did not improve from 0.26388
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[105]:</div>
+<div class="prompt input_prompt">In&nbsp;[75]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
 <span class="c1"># Train the model</span>
-<span class="n">multi_checkpointer</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">filepath</span><span class="o">=</span><span class="s1">&#39;weights.best.multi.hdf5&#39;</span><span class="p">,</span> 
-                                     <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">save_best_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">multi_history</span> <span class="o">=</span> <span class="n">multi_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train3</span><span class="p">,</span> <span class="n">y_train3_list</span><span class="p">,</span> 
-                                <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_test3</span><span class="p">,</span> <span class="n">y_test3_list</span><span class="p">),</span> 
-                                <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
-                                <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">multi_checkpointer</span><span class="p">])</span>
+                                <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_valid3</span><span class="p">,</span> <span class="n">y_valid3_list</span><span class="p">),</span> 
+                                <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
+                                <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">multi_checkpointer</span><span class="p">,</span> <span class="n">multi_lr_reduction</span><span class="p">])</span>
 </pre></div>
 
 </div>
@@ -15208,25 +15266,231 @@ Epoch 00020: val_loss did not improve from 0.26388
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
-Epoch 00001: val_loss improved from inf to 4.55754, saving model to weights.best.multi.hdf5
+Epoch 00001: val_loss improved from inf to 4.40898, saving model to weights.best.multi.hdf5
 
-Epoch 00002: val_loss improved from 4.55754 to 4.52434, saving model to weights.best.multi.hdf5
+Epoch 00002: val_loss improved from 4.40898 to 4.20733, saving model to weights.best.multi.hdf5
 
-Epoch 00003: val_loss did not improve
+Epoch 00003: val_loss improved from 4.20733 to 4.01372, saving model to weights.best.multi.hdf5
 
-Epoch 00004: val_loss did not improve
+Epoch 00004: val_loss improved from 4.01372 to 3.91702, saving model to weights.best.multi.hdf5
 
-Epoch 00005: val_loss did not improve
+Epoch 00005: val_loss improved from 3.91702 to 3.79861, saving model to weights.best.multi.hdf5
 
-Epoch 00006: val_loss did not improve
+Epoch 00006: val_loss did not improve from 3.79861
 
-Epoch 00007: val_loss did not improve
+Epoch 00007: val_loss did not improve from 3.79861
 
-Epoch 00008: val_loss did not improve
+Epoch 00008: val_loss did not improve from 3.79861
 
-Epoch 00009: val_loss did not improve
+Epoch 00009: val_loss improved from 3.79861 to 3.65847, saving model to weights.best.multi.hdf5
 
-Epoch 00010: val_loss did not improve
+Epoch 00010: val_loss did not improve from 3.65847
+
+Epoch 00011: val_loss did not improve from 3.65847
+
+Epoch 00012: val_loss did not improve from 3.65847
+
+Epoch 00013: val_loss improved from 3.65847 to 3.53820, saving model to weights.best.multi.hdf5
+
+Epoch 00014: val_loss did not improve from 3.53820
+
+Epoch 00015: val_loss improved from 3.53820 to 3.41594, saving model to weights.best.multi.hdf5
+
+Epoch 00016: val_loss did not improve from 3.41594
+
+Epoch 00017: val_loss improved from 3.41594 to 3.40702, saving model to weights.best.multi.hdf5
+
+Epoch 00018: val_loss did not improve from 3.40702
+
+Epoch 00019: val_loss did not improve from 3.40702
+
+Epoch 00020: val_loss did not improve from 3.40702
+
+Epoch 00021: val_loss improved from 3.40702 to 3.16133, saving model to weights.best.multi.hdf5
+
+Epoch 00022: val_loss did not improve from 3.16133
+
+Epoch 00023: val_loss did not improve from 3.16133
+
+Epoch 00024: val_loss did not improve from 3.16133
+
+Epoch 00025: val_loss improved from 3.16133 to 3.15801, saving model to weights.best.multi.hdf5
+
+Epoch 00026: val_loss did not improve from 3.15801
+
+Epoch 00027: val_loss did not improve from 3.15801
+
+Epoch 00028: val_loss did not improve from 3.15801
+
+Epoch 00029: val_loss did not improve from 3.15801
+
+Epoch 00030: val_loss did not improve from 3.15801
+
+Epoch 00030: ReduceLROnPlateau reducing learning rate to 0.001600000075995922.
+
+Epoch 00031: val_loss did not improve from 3.15801
+
+Epoch 00032: val_loss did not improve from 3.15801
+
+Epoch 00033: val_loss improved from 3.15801 to 3.12298, saving model to weights.best.multi.hdf5
+
+Epoch 00034: val_loss did not improve from 3.12298
+
+Epoch 00035: val_loss did not improve from 3.12298
+
+Epoch 00036: val_loss did not improve from 3.12298
+
+Epoch 00037: val_loss improved from 3.12298 to 2.96928, saving model to weights.best.multi.hdf5
+
+Epoch 00038: val_loss did not improve from 2.96928
+
+Epoch 00039: val_loss did not improve from 2.96928
+
+Epoch 00040: val_loss did not improve from 2.96928
+
+Epoch 00041: val_loss did not improve from 2.96928
+
+Epoch 00042: val_loss did not improve from 2.96928
+
+Epoch 00042: ReduceLROnPlateau reducing learning rate to 0.0012800000607967378.
+
+Epoch 00043: val_loss did not improve from 2.96928
+
+Epoch 00044: val_loss did not improve from 2.96928
+
+Epoch 00045: val_loss did not improve from 2.96928
+
+Epoch 00046: val_loss did not improve from 2.96928
+
+Epoch 00047: val_loss did not improve from 2.96928
+
+Epoch 00047: ReduceLROnPlateau reducing learning rate to 0.0010240000672638416.
+
+Epoch 00048: val_loss did not improve from 2.96928
+
+Epoch 00049: val_loss did not improve from 2.96928
+
+Epoch 00050: val_loss did not improve from 2.96928
+
+Epoch 00051: val_loss did not improve from 2.96928
+
+Epoch 00052: val_loss did not improve from 2.96928
+
+Epoch 00052: ReduceLROnPlateau reducing learning rate to 0.0008192000910639763.
+
+Epoch 00053: val_loss did not improve from 2.96928
+
+Epoch 00054: val_loss did not improve from 2.96928
+
+Epoch 00055: val_loss did not improve from 2.96928
+
+Epoch 00056: val_loss did not improve from 2.96928
+
+Epoch 00057: val_loss did not improve from 2.96928
+
+Epoch 00057: ReduceLROnPlateau reducing learning rate to 0.0006553600542247295.
+
+Epoch 00058: val_loss did not improve from 2.96928
+
+Epoch 00059: val_loss did not improve from 2.96928
+
+Epoch 00060: val_loss did not improve from 2.96928
+
+Epoch 00061: val_loss did not improve from 2.96928
+
+Epoch 00062: val_loss did not improve from 2.96928
+
+Epoch 00062: ReduceLROnPlateau reducing learning rate to 0.0005242880433797836.
+
+Epoch 00063: val_loss did not improve from 2.96928
+
+Epoch 00064: val_loss did not improve from 2.96928
+
+Epoch 00065: val_loss did not improve from 2.96928
+
+Epoch 00066: val_loss did not improve from 2.96928
+
+Epoch 00067: val_loss did not improve from 2.96928
+
+Epoch 00067: ReduceLROnPlateau reducing learning rate to 0.0004194304347038269.
+
+Epoch 00068: val_loss did not improve from 2.96928
+
+Epoch 00069: val_loss did not improve from 2.96928
+
+Epoch 00070: val_loss did not improve from 2.96928
+
+Epoch 00071: val_loss did not improve from 2.96928
+
+Epoch 00072: val_loss did not improve from 2.96928
+
+Epoch 00072: ReduceLROnPlateau reducing learning rate to 0.0003355443477630615.
+
+Epoch 00073: val_loss did not improve from 2.96928
+
+Epoch 00074: val_loss did not improve from 2.96928
+
+Epoch 00075: val_loss did not improve from 2.96928
+
+Epoch 00076: val_loss did not improve from 2.96928
+
+Epoch 00077: val_loss did not improve from 2.96928
+
+Epoch 00077: ReduceLROnPlateau reducing learning rate to 0.00026843547821044924.
+
+Epoch 00078: val_loss did not improve from 2.96928
+
+Epoch 00079: val_loss did not improve from 2.96928
+
+Epoch 00080: val_loss did not improve from 2.96928
+
+Epoch 00081: val_loss did not improve from 2.96928
+
+Epoch 00082: val_loss did not improve from 2.96928
+
+Epoch 00082: ReduceLROnPlateau reducing learning rate to 0.00021474838722497226.
+
+Epoch 00083: val_loss did not improve from 2.96928
+
+Epoch 00084: val_loss did not improve from 2.96928
+
+Epoch 00085: val_loss did not improve from 2.96928
+
+Epoch 00086: val_loss did not improve from 2.96928
+
+Epoch 00087: val_loss did not improve from 2.96928
+
+Epoch 00087: ReduceLROnPlateau reducing learning rate to 0.00017179871210828426.
+
+Epoch 00088: val_loss did not improve from 2.96928
+
+Epoch 00089: val_loss did not improve from 2.96928
+
+Epoch 00090: val_loss did not improve from 2.96928
+
+Epoch 00091: val_loss did not improve from 2.96928
+
+Epoch 00092: val_loss did not improve from 2.96928
+
+Epoch 00092: ReduceLROnPlateau reducing learning rate to 0.00013743897434324027.
+
+Epoch 00093: val_loss did not improve from 2.96928
+
+Epoch 00094: val_loss did not improve from 2.96928
+
+Epoch 00095: val_loss did not improve from 2.96928
+
+Epoch 00096: val_loss did not improve from 2.96928
+
+Epoch 00097: val_loss did not improve from 2.96928
+
+Epoch 00097: ReduceLROnPlateau reducing learning rate to 0.00010995117481797934.
+
+Epoch 00098: val_loss did not improve from 2.96928
+
+Epoch 00099: val_loss did not improve from 2.96928
+
+Epoch 00100: val_loss did not improve from 2.96928
 </pre>
 </div>
 </div>
@@ -15239,14 +15503,14 @@ Epoch 00010: val_loss did not improve
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We should have an accuracy greater than 3% for the first target (letter) and greater than 50% for the second target (background).</p>
+<p>We should have an accuracy greater than 3% for the first target (letter) and greater than 25% for the second target (background).</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[106]:</div>
+<div class="prompt input_prompt">In&nbsp;[76]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -15275,9 +15539,9 @@ Epoch 00010: val_loss did not improve
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Scores: 
- [4.5243446075891089, 3.4702539126414327, 1.0540906626460753, 0.047921071176885127, 0.45806906284623955]
-First label. Accuracy: 4.79%
-Second label. Accuracy: 45.81%
+ [8.749844092731328, 2.8440989943941855, 5.905745039194549, 0.18252290353714537, 0.3883016209647721]
+First label. Accuracy: 18.25%
+Second label. Accuracy: 38.83%
 </pre>
 </div>
 </div>
@@ -15296,37 +15560,43 @@ Second label. Accuracy: 45.81%
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[76]:</div>
+<div class="prompt input_prompt">In&nbsp;[78]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
 <span class="k">def</span> <span class="nf">gray_multi_model</span><span class="p">():</span>    
     <span class="n">model_input</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">model_input</span><span class="p">)</span>
+    
     <span class="c1"># TODO: Define a model architecture</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)(</span><span class="n">model_input</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)(</span><span class="n">model_input</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))(</span><span class="n">x</span><span class="p">)</span>    
     <span class="n">x</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     
-    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>       
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span> 
+    <span class="n">x</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))(</span><span class="n">x</span><span class="p">)</span>    
     <span class="n">x</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
               
     <span class="n">x</span> <span class="o">=</span> <span class="n">GlobalMaxPooling2D</span><span class="p">()(</span><span class="n">x</span><span class="p">)</span>
     
-    <span class="n">x</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>    
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">1024</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span> 
+    <span class="n">x</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     
-    <span class="n">x</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>    
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">256</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span> 
+    <span class="n">x</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     
     <span class="n">y1</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">33</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">y2</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
        
     <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">model_input</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">])</span>
+    
     <span class="c1"># TODO: Compile the model</span>
-
-    <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;rmsprop&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>   
+    <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;rmsprop&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>  
+    
     <span class="k">return</span> <span class="n">model</span>
 
 <span class="n">gray_multi_model</span> <span class="o">=</span> <span class="n">gray_multi_model</span><span class="p">()</span>
@@ -15339,17 +15609,35 @@ Second label. Accuracy: 45.81%
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[77]:</div>
+<div class="prompt input_prompt">In&nbsp;[79]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
+<span class="c1"># Create callbacks</span>
+<span class="n">gray_multi_checkpointer</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">filepath</span><span class="o">=</span><span class="s1">&#39;weights.best.gray_multi.hdf5&#39;</span><span class="p">,</span> 
+                                          <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">save_best_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">hide_code</span>
+<span class="c1"># Display the model architecture</span>
+<span class="n">gray_multi_lr_reduction</span> <span class="o">=</span> <span class="n">ReduceLROnPlateau</span><span class="p">(</span><span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> 
+                                            <span class="n">patience</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[80]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
 <span class="c1"># Train the model</span>
-<span class="n">gray_multi_checkpointer</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">filepath</span><span class="o">=</span><span class="s1">&#39;weights.best.gray_multi.hdf5&#39;</span><span class="p">,</span> 
-                                          <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">save_best_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">gray_multi_history</span> <span class="o">=</span> <span class="n">gray_multi_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train4</span><span class="p">,</span> <span class="n">y_train4_list</span><span class="p">,</span> 
-                                          <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_test4</span><span class="p">,</span> <span class="n">y_test4_list</span><span class="p">),</span> 
-                                          <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
-                                          <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">gray_multi_checkpointer</span><span class="p">])</span>
+                                          <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_valid4</span><span class="p">,</span> <span class="n">y_valid4_list</span><span class="p">),</span> 
+                                          <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
+                                          <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">gray_multi_checkpointer</span><span class="p">,</span> <span class="n">gray_multi_lr_reduction</span><span class="p">])</span>
 </pre></div>
 
 </div>
@@ -15367,205 +15655,209 @@ Second label. Accuracy: 45.81%
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
-Epoch 00001: val_loss improved from inf to 4.59080, saving model to weights.best.gray_multi.hdf5
+Epoch 00001: val_loss improved from inf to 4.56719, saving model to weights.best.gray_multi.hdf5
 
-Epoch 00002: val_loss improved from 4.59080 to 4.48156, saving model to weights.best.gray_multi.hdf5
+Epoch 00002: val_loss improved from 4.56719 to 4.10845, saving model to weights.best.gray_multi.hdf5
 
-Epoch 00003: val_loss did not improve
+Epoch 00003: val_loss improved from 4.10845 to 3.82228, saving model to weights.best.gray_multi.hdf5
 
-Epoch 00004: val_loss improved from 4.48156 to 4.09494, saving model to weights.best.gray_multi.hdf5
+Epoch 00004: val_loss did not improve from 3.82228
 
-Epoch 00005: val_loss improved from 4.09494 to 3.81356, saving model to weights.best.gray_multi.hdf5
+Epoch 00005: val_loss improved from 3.82228 to 3.57119, saving model to weights.best.gray_multi.hdf5
 
-Epoch 00006: val_loss did not improve
+Epoch 00006: val_loss improved from 3.57119 to 3.50969, saving model to weights.best.gray_multi.hdf5
 
-Epoch 00007: val_loss improved from 3.81356 to 3.66999, saving model to weights.best.gray_multi.hdf5
+Epoch 00007: val_loss did not improve from 3.50969
 
-Epoch 00008: val_loss improved from 3.66999 to 3.46014, saving model to weights.best.gray_multi.hdf5
+Epoch 00008: val_loss improved from 3.50969 to 3.41744, saving model to weights.best.gray_multi.hdf5
 
-Epoch 00009: val_loss improved from 3.46014 to 3.36177, saving model to weights.best.gray_multi.hdf5
+Epoch 00009: val_loss improved from 3.41744 to 3.38803, saving model to weights.best.gray_multi.hdf5
 
-Epoch 00010: val_loss did not improve
+Epoch 00010: val_loss improved from 3.38803 to 3.01899, saving model to weights.best.gray_multi.hdf5
 
-Epoch 00011: val_loss improved from 3.36177 to 3.21495, saving model to weights.best.gray_multi.hdf5
+Epoch 00011: val_loss improved from 3.01899 to 2.74828, saving model to weights.best.gray_multi.hdf5
 
-Epoch 00012: val_loss improved from 3.21495 to 3.09212, saving model to weights.best.gray_multi.hdf5
+Epoch 00012: val_loss improved from 2.74828 to 2.63922, saving model to weights.best.gray_multi.hdf5
 
-Epoch 00013: val_loss did not improve
+Epoch 00013: val_loss did not improve from 2.63922
 
-Epoch 00014: val_loss improved from 3.09212 to 2.72814, saving model to weights.best.gray_multi.hdf5
+Epoch 00014: val_loss improved from 2.63922 to 2.56891, saving model to weights.best.gray_multi.hdf5
 
-Epoch 00015: val_loss improved from 2.72814 to 2.52495, saving model to weights.best.gray_multi.hdf5
+Epoch 00015: val_loss improved from 2.56891 to 2.19898, saving model to weights.best.gray_multi.hdf5
 
-Epoch 00016: val_loss improved from 2.52495 to 2.40752, saving model to weights.best.gray_multi.hdf5
+Epoch 00016: val_loss did not improve from 2.19898
 
-Epoch 00017: val_loss improved from 2.40752 to 2.30448, saving model to weights.best.gray_multi.hdf5
+Epoch 00017: val_loss did not improve from 2.19898
 
-Epoch 00018: val_loss did not improve
+Epoch 00018: val_loss did not improve from 2.19898
 
-Epoch 00019: val_loss improved from 2.30448 to 2.23482, saving model to weights.best.gray_multi.hdf5
+Epoch 00019: val_loss improved from 2.19898 to 2.15843, saving model to weights.best.gray_multi.hdf5
 
-Epoch 00020: val_loss improved from 2.23482 to 1.97120, saving model to weights.best.gray_multi.hdf5
+Epoch 00020: val_loss did not improve from 2.15843
 
-Epoch 00021: val_loss improved from 1.97120 to 1.73347, saving model to weights.best.gray_multi.hdf5
+Epoch 00021: val_loss improved from 2.15843 to 1.88533, saving model to weights.best.gray_multi.hdf5
 
-Epoch 00022: val_loss did not improve
+Epoch 00022: val_loss improved from 1.88533 to 1.59052, saving model to weights.best.gray_multi.hdf5
 
-Epoch 00023: val_loss did not improve
+Epoch 00023: val_loss did not improve from 1.59052
 
-Epoch 00024: val_loss did not improve
+Epoch 00024: val_loss improved from 1.59052 to 1.50788, saving model to weights.best.gray_multi.hdf5
 
-Epoch 00025: val_loss did not improve
+Epoch 00025: val_loss improved from 1.50788 to 1.39603, saving model to weights.best.gray_multi.hdf5
 
-Epoch 00026: val_loss improved from 1.73347 to 1.47820, saving model to weights.best.gray_multi.hdf5
+Epoch 00026: val_loss did not improve from 1.39603
 
-Epoch 00027: val_loss did not improve
+Epoch 00027: val_loss improved from 1.39603 to 1.21846, saving model to weights.best.gray_multi.hdf5
 
-Epoch 00028: val_loss improved from 1.47820 to 1.46933, saving model to weights.best.gray_multi.hdf5
+Epoch 00028: val_loss did not improve from 1.21846
 
-Epoch 00029: val_loss improved from 1.46933 to 1.33195, saving model to weights.best.gray_multi.hdf5
+Epoch 00029: val_loss did not improve from 1.21846
 
-Epoch 00030: val_loss did not improve
+Epoch 00030: val_loss improved from 1.21846 to 1.14028, saving model to weights.best.gray_multi.hdf5
 
-Epoch 00031: val_loss did not improve
+Epoch 00031: val_loss did not improve from 1.14028
 
-Epoch 00032: val_loss improved from 1.33195 to 1.15460, saving model to weights.best.gray_multi.hdf5
+Epoch 00032: val_loss did not improve from 1.14028
 
-Epoch 00033: val_loss improved from 1.15460 to 1.07438, saving model to weights.best.gray_multi.hdf5
+Epoch 00033: val_loss did not improve from 1.14028
 
-Epoch 00034: val_loss improved from 1.07438 to 1.04936, saving model to weights.best.gray_multi.hdf5
+Epoch 00034: val_loss improved from 1.14028 to 0.97151, saving model to weights.best.gray_multi.hdf5
 
-Epoch 00035: val_loss did not improve
+Epoch 00035: val_loss did not improve from 0.97151
 
-Epoch 00036: val_loss improved from 1.04936 to 0.92944, saving model to weights.best.gray_multi.hdf5
+Epoch 00036: val_loss did not improve from 0.97151
 
-Epoch 00037: val_loss did not improve
+Epoch 00037: val_loss did not improve from 0.97151
 
-Epoch 00038: val_loss did not improve
+Epoch 00038: val_loss did not improve from 0.97151
 
-Epoch 00039: val_loss did not improve
+Epoch 00039: val_loss did not improve from 0.97151
 
-Epoch 00040: val_loss did not improve
+Epoch 00040: val_loss improved from 0.97151 to 0.91962, saving model to weights.best.gray_multi.hdf5
 
-Epoch 00041: val_loss improved from 0.92944 to 0.91745, saving model to weights.best.gray_multi.hdf5
+Epoch 00041: val_loss did not improve from 0.91962
 
-Epoch 00042: val_loss did not improve
+Epoch 00042: val_loss did not improve from 0.91962
 
-Epoch 00043: val_loss improved from 0.91745 to 0.83704, saving model to weights.best.gray_multi.hdf5
+Epoch 00043: val_loss did not improve from 0.91962
 
-Epoch 00044: val_loss improved from 0.83704 to 0.83302, saving model to weights.best.gray_multi.hdf5
+Epoch 00044: val_loss improved from 0.91962 to 0.82838, saving model to weights.best.gray_multi.hdf5
 
-Epoch 00045: val_loss improved from 0.83302 to 0.78066, saving model to weights.best.gray_multi.hdf5
+Epoch 00045: val_loss did not improve from 0.82838
 
-Epoch 00046: val_loss did not improve
+Epoch 00046: val_loss improved from 0.82838 to 0.79367, saving model to weights.best.gray_multi.hdf5
 
-Epoch 00047: val_loss did not improve
+Epoch 00047: val_loss did not improve from 0.79367
 
-Epoch 00048: val_loss did not improve
+Epoch 00048: val_loss did not improve from 0.79367
 
-Epoch 00049: val_loss did not improve
+Epoch 00049: val_loss did not improve from 0.79367
 
-Epoch 00050: val_loss improved from 0.78066 to 0.74053, saving model to weights.best.gray_multi.hdf5
+Epoch 00050: val_loss did not improve from 0.79367
 
-Epoch 00051: val_loss did not improve
+Epoch 00051: val_loss did not improve from 0.79367
 
-Epoch 00052: val_loss improved from 0.74053 to 0.64824, saving model to weights.best.gray_multi.hdf5
+Epoch 00052: val_loss improved from 0.79367 to 0.68909, saving model to weights.best.gray_multi.hdf5
 
-Epoch 00053: val_loss did not improve
+Epoch 00053: val_loss did not improve from 0.68909
 
-Epoch 00054: val_loss improved from 0.64824 to 0.63057, saving model to weights.best.gray_multi.hdf5
+Epoch 00054: val_loss did not improve from 0.68909
 
-Epoch 00055: val_loss did not improve
+Epoch 00055: val_loss did not improve from 0.68909
 
-Epoch 00056: val_loss did not improve
+Epoch 00056: val_loss did not improve from 0.68909
 
-Epoch 00057: val_loss improved from 0.63057 to 0.61849, saving model to weights.best.gray_multi.hdf5
+Epoch 00057: val_loss did not improve from 0.68909
 
-Epoch 00058: val_loss did not improve
+Epoch 00058: val_loss did not improve from 0.68909
 
-Epoch 00059: val_loss did not improve
+Epoch 00059: val_loss did not improve from 0.68909
 
-Epoch 00060: val_loss improved from 0.61849 to 0.59070, saving model to weights.best.gray_multi.hdf5
+Epoch 00060: val_loss improved from 0.68909 to 0.65689, saving model to weights.best.gray_multi.hdf5
 
-Epoch 00061: val_loss did not improve
+Epoch 00061: val_loss did not improve from 0.65689
 
-Epoch 00062: val_loss did not improve
+Epoch 00062: val_loss did not improve from 0.65689
 
-Epoch 00063: val_loss improved from 0.59070 to 0.58503, saving model to weights.best.gray_multi.hdf5
+Epoch 00063: val_loss did not improve from 0.65689
 
-Epoch 00064: val_loss improved from 0.58503 to 0.56096, saving model to weights.best.gray_multi.hdf5
+Epoch 00064: val_loss did not improve from 0.65689
 
-Epoch 00065: val_loss did not improve
+Epoch 00065: val_loss did not improve from 0.65689
 
-Epoch 00066: val_loss did not improve
+Epoch 00066: val_loss did not improve from 0.65689
 
-Epoch 00067: val_loss did not improve
+Epoch 00067: val_loss did not improve from 0.65689
 
-Epoch 00068: val_loss did not improve
+Epoch 00068: val_loss did not improve from 0.65689
 
-Epoch 00069: val_loss did not improve
+Epoch 00069: val_loss did not improve from 0.65689
 
-Epoch 00070: val_loss improved from 0.56096 to 0.50192, saving model to weights.best.gray_multi.hdf5
+Epoch 00070: val_loss improved from 0.65689 to 0.56727, saving model to weights.best.gray_multi.hdf5
 
-Epoch 00071: val_loss did not improve
+Epoch 00071: val_loss did not improve from 0.56727
 
-Epoch 00072: val_loss did not improve
+Epoch 00072: val_loss did not improve from 0.56727
 
-Epoch 00073: val_loss did not improve
+Epoch 00073: val_loss did not improve from 0.56727
 
-Epoch 00074: val_loss did not improve
+Epoch 00074: val_loss did not improve from 0.56727
 
-Epoch 00075: val_loss did not improve
+Epoch 00075: val_loss did not improve from 0.56727
 
-Epoch 00076: val_loss improved from 0.50192 to 0.48907, saving model to weights.best.gray_multi.hdf5
+Epoch 00076: val_loss did not improve from 0.56727
 
-Epoch 00077: val_loss did not improve
+Epoch 00077: val_loss did not improve from 0.56727
 
-Epoch 00078: val_loss improved from 0.48907 to 0.45794, saving model to weights.best.gray_multi.hdf5
+Epoch 00078: val_loss did not improve from 0.56727
 
-Epoch 00079: val_loss did not improve
+Epoch 00079: val_loss did not improve from 0.56727
 
-Epoch 00080: val_loss did not improve
+Epoch 00080: val_loss did not improve from 0.56727
 
-Epoch 00081: val_loss did not improve
+Epoch 00080: ReduceLROnPlateau reducing learning rate to 0.000800000037997961.
 
-Epoch 00082: val_loss did not improve
+Epoch 00081: val_loss did not improve from 0.56727
 
-Epoch 00083: val_loss did not improve
+Epoch 00082: val_loss did not improve from 0.56727
 
-Epoch 00084: val_loss did not improve
+Epoch 00083: val_loss did not improve from 0.56727
 
-Epoch 00085: val_loss did not improve
+Epoch 00084: val_loss did not improve from 0.56727
 
-Epoch 00086: val_loss did not improve
+Epoch 00085: val_loss did not improve from 0.56727
 
-Epoch 00087: val_loss did not improve
+Epoch 00086: val_loss did not improve from 0.56727
 
-Epoch 00088: val_loss did not improve
+Epoch 00087: val_loss did not improve from 0.56727
 
-Epoch 00089: val_loss did not improve
+Epoch 00088: val_loss did not improve from 0.56727
 
-Epoch 00090: val_loss did not improve
+Epoch 00089: val_loss did not improve from 0.56727
 
-Epoch 00091: val_loss did not improve
+Epoch 00090: val_loss improved from 0.56727 to 0.53355, saving model to weights.best.gray_multi.hdf5
 
-Epoch 00092: val_loss did not improve
+Epoch 00091: val_loss did not improve from 0.53355
 
-Epoch 00093: val_loss did not improve
+Epoch 00092: val_loss did not improve from 0.53355
 
-Epoch 00094: val_loss did not improve
+Epoch 00093: val_loss did not improve from 0.53355
 
-Epoch 00095: val_loss did not improve
+Epoch 00094: val_loss did not improve from 0.53355
 
-Epoch 00096: val_loss did not improve
+Epoch 00095: val_loss did not improve from 0.53355
 
-Epoch 00097: val_loss did not improve
+Epoch 00096: val_loss did not improve from 0.53355
 
-Epoch 00098: val_loss improved from 0.45794 to 0.44682, saving model to weights.best.gray_multi.hdf5
+Epoch 00097: val_loss did not improve from 0.53355
 
-Epoch 00099: val_loss did not improve
+Epoch 00098: val_loss did not improve from 0.53355
 
-Epoch 00100: val_loss did not improve
+Epoch 00099: val_loss did not improve from 0.53355
+
+Epoch 00100: val_loss did not improve from 0.53355
+
+Epoch 00100: ReduceLROnPlateau reducing learning rate to 0.0006400000303983689.
 </pre>
 </div>
 </div>
@@ -15578,14 +15870,14 @@ Epoch 00100: val_loss did not improve
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We should have an accuracy greater than 3% for the first target (letter) and greater than 50% for the second target (background).</p>
+<p>We should have an accuracy greater than 3% for the first target (letter) and greater than 25% for the second target (background).</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[78]:</div>
+<div class="prompt input_prompt">In&nbsp;[81]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hide_code</span>
@@ -15614,9 +15906,9 @@ Epoch 00100: val_loss did not improve
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Scores: 
- [0.44682457501238043, 0.4157445699375561, 0.031080002318923324, 0.87315010591826869, 0.99295278365045803]
-First label. Accuracy: 87.32%
-Second label. Accuracy: 99.30%
+ [0.585417575624898, 0.5349602406927193, 0.05045733699766877, 0.8308668076109936, 0.9901338971106413]
+First label. Accuracy: 83.09%
+Second label. Accuracy: 99.01%
 </pre>
 </div>
 </div>
