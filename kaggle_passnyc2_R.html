@@ -11777,7 +11777,7 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1>&#x1F310; &nbsp; Code Library, Style, and Links</h1>
 <p>Version in <code>PYTHON</code>:</p>
-<p>&#x1F4D8; &nbsp; <a href="https://github.com/OlgaBelitskaya/kaggle_notebooks/blob/master/kaggle_passnyc.ipynb">kaggle_passnyc2.ipynb</a></p>
+<p>&#x1F4D8; &nbsp; <a href="https://github.com/OlgaBelitskaya/kaggle_notebooks/blob/master/kaggle_passnyc2.ipynb">kaggle_passnyc2.ipynb</a></p>
 <p>The previous notebook:</p>
 <p>&#x1F4D8; &nbsp; <a href="https://github.com/OlgaBelitskaya/kaggle_notebooks/blob/master/kaggle_passnyc_R.ipynb">kaggle_passnyc_R.ipynb</a></p>
 <p>Useful <code>LINKS</code>:</p>
@@ -43312,6 +43312,149 @@ QghFCAzsEEIIIYQiBAZ2CCGEEEIRAgM7hBBCCKEIgYEdQgghhFCEwMAOIYQQQihCYGCHEEII
 IRQhMLBDCCGEEIoQGNghhBBCCEUIDOwQQgghhCIEBnYIIYQQQhHi/wBo7j+IwkuXdAAAAABJ
 RU5ErkJggg=="
 >
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Education results (ELA &amp; Math) are correlated really strongly so they can be combined into one indicator.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1281]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>corr_matrix <span class="o">&lt;-</span> cor<span class="p">(</span>school_explorer<span class="p">[,</span><span class="kt">c</span><span class="p">(</span>target_list<span class="p">,</span>numeric_list<span class="p">,</span>category_list<span class="p">)],</span> 
+                   use<span class="o">=</span><span class="s">&quot;complete.obs&quot;</span><span class="p">,</span>method<span class="o">=</span><span class="s">&quot;pearson&quot;</span><span class="p">)</span>
+
+corr_ela <span class="o">&lt;-</span> corr_matrix<span class="p">[,</span><span class="m">1</span><span class="p">]</span>
+corr_ela <span class="o">&lt;-</span> <span class="kt">data.frame</span><span class="p">(</span>corr_ela<span class="p">[</span><span class="kp">order</span><span class="p">(</span><span class="o">-</span><span class="kp">abs</span><span class="p">(</span>corr_ela<span class="p">))][</span><span class="m">2</span><span class="o">:</span><span class="m">21</span><span class="p">])</span>
+
+corr_math <span class="o">&lt;-</span> corr_matrix<span class="p">[,</span><span class="m">2</span><span class="p">]</span>
+corr_math <span class="o">&lt;-</span> <span class="kt">data.frame</span><span class="p">(</span>corr_math<span class="p">[</span><span class="kp">order</span><span class="p">(</span><span class="o">-</span><span class="kp">abs</span><span class="p">(</span>corr_math<span class="p">))][</span><span class="m">2</span><span class="o">:</span><span class="m">21</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1282]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>formattable<span class="p">(</span>corr_ela<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<thead><tr><th></th><th scope=col>corr_ela.order..abs.corr_ela....2.21.</th></tr></thead>
+<tbody>
+	<tr><th scope=row>Average.Math.Proficiency</th><td> 0.9352526</td></tr>
+	<tr><th scope=row>Economic.Need.Index</th><td>-0.7948646</td></tr>
+	<tr><th scope=row>Percent.Black...Hispanic</th><td>-0.7327818</td></tr>
+	<tr><th scope=row>Percent.White</th><td> 0.6373410</td></tr>
+	<tr><th scope=row>School.Income.Estimate</th><td> 0.6014640</td></tr>
+	<tr><th scope=row>Grade.5.ELA.4s...All.Students</th><td> 0.5744089</td></tr>
+	<tr><th scope=row>Grade.4.ELA.4s...All.Students</th><td> 0.5428655</td></tr>
+	<tr><th scope=row>Grade.5.Math.4s...All.Students</th><td> 0.5404693</td></tr>
+	<tr><th scope=row>Grade.3.ELA.4s...All.Students</th><td> 0.5344980</td></tr>
+	<tr><th scope=row>Grade.4.Math.4s...All.Students</th><td> 0.5140230</td></tr>
+	<tr><th scope=row>Grade.3.Math.4s...All.Students</th><td> 0.5098917</td></tr>
+	<tr><th scope=row>Percent.of.Students.Chronically.Absent</th><td>-0.5027417</td></tr>
+	<tr><th scope=row>Grade.5.ELA.4s...White</th><td> 0.4954683</td></tr>
+	<tr><th scope=row>Grade.4.ELA.4s...White</th><td> 0.4933317</td></tr>
+	<tr><th scope=row>Grade.5.Math.4s...White</th><td> 0.4919157</td></tr>
+	<tr><th scope=row>Grade.4.Math.4s...White</th><td> 0.4834466</td></tr>
+	<tr><th scope=row>Grade.3.Math.4s...White</th><td> 0.4807953</td></tr>
+	<tr><th scope=row>Grade.3.ELA.4s...White</th><td> 0.4614958</td></tr>
+	<tr><th scope=row>Percent.Asian</th><td> 0.4527198</td></tr>
+	<tr><th scope=row>Percent.Hispanic</th><td>-0.4274528</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1283]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>formattable<span class="p">(</span>corr_math<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<thead><tr><th></th><th scope=col>corr_math.order..abs.corr_math....2.21.</th></tr></thead>
+<tbody>
+	<tr><th scope=row>Average.ELA.Proficiency</th><td> 0.9352526</td></tr>
+	<tr><th scope=row>Percent.Black...Hispanic</th><td>-0.7181555</td></tr>
+	<tr><th scope=row>Economic.Need.Index</th><td>-0.7042218</td></tr>
+	<tr><th scope=row>Grade.5.Math.4s...All.Students</th><td> 0.6251051</td></tr>
+	<tr><th scope=row>Grade.3.Math.4s...All.Students</th><td> 0.6237294</td></tr>
+	<tr><th scope=row>Grade.4.Math.4s...All.Students</th><td> 0.6179292</td></tr>
+	<tr><th scope=row>Grade.5.ELA.4s...All.Students</th><td> 0.6086593</td></tr>
+	<tr><th scope=row>Grade.4.ELA.4s...All.Students</th><td> 0.5996167</td></tr>
+	<tr><th scope=row>Grade.3.ELA.4s...All.Students</th><td> 0.5768744</td></tr>
+	<tr><th scope=row>Percent.White</th><td> 0.5656733</td></tr>
+	<tr><th scope=row>School.Income.Estimate</th><td> 0.5204336</td></tr>
+	<tr><th scope=row>Percent.Asian</th><td> 0.5164408</td></tr>
+	<tr><th scope=row>Percent.of.Students.Chronically.Absent</th><td>-0.4885405</td></tr>
+	<tr><th scope=row>Grade.3.Math.4s...White</th><td> 0.4662348</td></tr>
+	<tr><th scope=row>Grade.4.ELA.4s...White</th><td> 0.4659708</td></tr>
+	<tr><th scope=row>Grade.5.Math.4s...White</th><td> 0.4654008</td></tr>
+	<tr><th scope=row>Grade.4.Math.4s...White</th><td> 0.4624082</td></tr>
+	<tr><th scope=row>Grade.5.ELA.4s...White</th><td> 0.4587987</td></tr>
+	<tr><th scope=row>Grade.5.Math.4s...Economically.Disadvantaged</th><td> 0.4514402</td></tr>
+	<tr><th scope=row>Grade.4.Math.4s...Economically.Disadvantaged</th><td> 0.4470777</td></tr>
+</tbody>
+</table>
+
 </div>
 
 </div>
