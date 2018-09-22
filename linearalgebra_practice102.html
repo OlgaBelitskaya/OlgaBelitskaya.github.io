@@ -16378,14 +16378,15 @@ $$\left[\begin{matrix}1 & 1 & 1\\1 & 2 & 3\\2 & 3 & 1\end{matrix}\right]$$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[217]:</div>
+<div class="prompt input_prompt">In&nbsp;[257]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 867</span>
 <span class="c1"># A867 * X867 = B867</span>
 <span class="n">A867</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">6</span><span class="p">]])</span>
 <span class="n">B867</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">]])</span>
-<span class="n">A867</span><span class="p">,</span>  <span class="n">B867</span>
+<span class="n">X867</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">MatrixSymbol</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">A867</span> <span class="o">*</span> <span class="n">X867</span><span class="o">.</span><span class="n">as_explicit</span><span class="p">(),</span>  <span class="n">B867</span>
 </pre></div>
 
 </div>
@@ -16398,13 +16399,13 @@ $$\left[\begin{matrix}1 & 1 & 1\\1 & 2 & 3\\2 & 3 & 1\end{matrix}\right]$$
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[217]:</div>
+<div class="prompt output_prompt">Out[257]:</div>
 
 
 
 
 <div class="output_latex output_subarea output_execute_result">
-$$\left ( \left[\begin{matrix}2 & -3\\4 & -6\end{matrix}\right], \quad \left[\begin{matrix}2 & 3\\4 & 6\end{matrix}\right]\right )$$
+$$\left ( \left[\begin{matrix}2 X_{0, 0} - 3 X_{1, 0} & 2 X_{0, 1} - 3 X_{1, 1}\\4 X_{0, 0} - 6 X_{1, 0} & 4 X_{0, 1} - 6 X_{1, 1}\end{matrix}\right], \quad \left[\begin{matrix}2 & 3\\4 & 6\end{matrix}\right]\right )$$
 </div>
 
 </div>
@@ -16415,10 +16416,10 @@ $$\left ( \left[\begin{matrix}2 & -3\\4 & -6\end{matrix}\right], \quad \left[\be
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[218]:</div>
+<div class="prompt input_prompt">In&nbsp;[258]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">A867</span><span class="o">.</span><span class="n">transpose</span><span class="p">(),</span>  <span class="n">A867</span><span class="o">.</span><span class="n">adjugate</span><span class="p">(),</span> <span class="n">A867</span><span class="o">.</span><span class="n">det</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">A867</span><span class="o">.</span><span class="n">det</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -16431,13 +16432,13 @@ $$\left ( \left[\begin{matrix}2 & -3\\4 & -6\end{matrix}\right], \quad \left[\be
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[218]:</div>
+<div class="prompt output_prompt">Out[258]:</div>
 
 
 
 
 <div class="output_latex output_subarea output_execute_result">
-$$\left ( \left[\begin{matrix}2 & 4\\-3 & -6\end{matrix}\right], \quad \left[\begin{matrix}-6 & 3\\-4 & 2\end{matrix}\right], \quad 0\right )$$
+$$0$$
 </div>
 
 </div>
@@ -16448,39 +16449,358 @@ $$\left ( \left[\begin{matrix}2 & 4\\-3 & -6\end{matrix}\right], \quad \left[\be
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[267]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c">%%latex</span>
+<span class="s">$</span><span class="nb"></span>
+<span class="nv">\begin</span><span class="nb">{cases}</span>
+<span class="m">2</span><span class="nb"> </span><span class="o">*</span><span class="nb"> X_{</span><span class="m">0</span><span class="nb">,</span><span class="m">0</span><span class="nb">} </span><span class="o">-</span><span class="nb"> </span><span class="m">3</span><span class="nb"> </span><span class="o">*</span><span class="nb"> X_{</span><span class="m">1</span><span class="nb">,</span><span class="m">0</span><span class="nb">} </span><span class="o">=</span><span class="nb"> </span><span class="m">2</span><span class="nb"> </span><span class="nv">\\</span><span class="nb"></span>
+<span class="m">4</span><span class="nb"> </span><span class="o">*</span><span class="nb"> X_{</span><span class="m">0</span><span class="nb">,</span><span class="m">0</span><span class="nb">} </span><span class="o">-</span><span class="nb"> </span><span class="m">6</span><span class="nb"> </span><span class="o">*</span><span class="nb"> X_{</span><span class="m">1</span><span class="nb">,</span><span class="m">0</span><span class="nb">} </span><span class="o">=</span><span class="nb"> </span><span class="m">4</span><span class="nb"> </span><span class="nv">\\</span><span class="nb"></span>
+<span class="m">2</span><span class="nb"> </span><span class="o">*</span><span class="nb"> X_{</span><span class="m">0</span><span class="nb">,</span><span class="m">1</span><span class="nb">} </span><span class="o">-</span><span class="nb"> </span><span class="m">3</span><span class="nb"> </span><span class="o">*</span><span class="nb"> X_{</span><span class="m">1</span><span class="nb">,</span><span class="m">1</span><span class="nb">} </span><span class="o">=</span><span class="nb"> </span><span class="m">3</span><span class="nb"> </span><span class="nv">\\</span><span class="nb"></span>
+<span class="m">4</span><span class="nb"> </span><span class="o">*</span><span class="nb"> X_{</span><span class="m">0</span><span class="nb">,</span><span class="m">1</span><span class="nb">} </span><span class="o">-</span><span class="nb"> </span><span class="m">6</span><span class="nb"> </span><span class="o">*</span><span class="nb"> X_{</span><span class="m">1</span><span class="nb">,</span><span class="m">1</span><span class="nb">} </span><span class="o">=</span><span class="nb"> </span><span class="m">6</span><span class="nb"></span>
+<span class="nv">\end</span><span class="nb">{cases} </span><span class="nv">\implies</span><span class="nb"></span>
+<span class="nb"> </span><span class="nv">\begin</span><span class="nb">{pmatrix}</span>
+<span class="nb"> </span><span class="m">1</span><span class="nb">.</span><span class="m">5</span><span class="nb"> </span><span class="o">*</span><span class="nb"> X_{</span><span class="m">1</span><span class="nb">,</span><span class="m">0</span><span class="nb">} </span><span class="o">+</span><span class="nb"> </span><span class="m">1</span><span class="nb">&amp; </span><span class="m">1</span><span class="nb">.</span><span class="m">5</span><span class="o">*</span><span class="nb"> X_{</span><span class="m">1</span><span class="nb">,</span><span class="m">1</span><span class="nb">} </span><span class="o">+</span><span class="nb"> </span><span class="m">1</span><span class="nb">.</span><span class="m">5</span><span class="nb">  </span><span class="nv">\\</span><span class="nb"></span>
+<span class="nb">X_{</span><span class="m">1</span><span class="nb">,</span><span class="m">0</span><span class="nb">} &amp; X_{</span><span class="m">1</span><span class="nb">,</span><span class="m">1</span><span class="nb">}</span>
+<span class="nb"> </span><span class="nv">\end</span><span class="nb">{pmatrix}, </span><span class="nv">\forall</span><span class="nb"> X_{</span><span class="m">1</span><span class="nb">,</span><span class="m">0</span><span class="nb">}, X_{</span><span class="m">1</span><span class="nb">,</span><span class="m">1</span><span class="nb">}</span>
+<span class="s">$</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_latex output_subarea ">
+$
+\begin{cases}
+2 * X_{0,0} - 3 * X_{1,0} = 2 \\
+4 * X_{0,0} - 6 * X_{1,0} = 4 \\
+2 * X_{0,1} - 3 * X_{1,1} = 3 \\
+4 * X_{0,1} - 6 * X_{1,1} = 6
+\end{cases} \implies
+ \begin{pmatrix}
+ 1.5 * X_{1,0} + 1& 1.5* X_{1,1} + 1.5  \\
+X_{1,0} & X_{1,1}
+ \end{pmatrix}, \forall X_{1,0}, X_{1,1}
+$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[243]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sympy.abc</span> <span class="k">import</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">d</span>
+<span class="n">system</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span> <span class="p">])</span>
+<span class="n">sympy</span><span class="o">.</span><span class="n">solve_linear_system</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[243]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left \{ a : \frac{3 b}{2} - c + \frac{3}{2}\right \}$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[269]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 868</span>
+<span class="c1"># X868 * A868 = B868</span>
+<span class="n">A868</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">]])</span>
+<span class="n">B868</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mi">9</span><span class="p">,</span><span class="mi">18</span><span class="p">]])</span>
+<span class="n">X868</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">MatrixSymbol</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="p">(</span><span class="n">X868</span> <span class="o">*</span> <span class="n">A868</span><span class="p">)</span><span class="o">.</span><span class="n">as_explicit</span><span class="p">(),</span>  <span class="n">B868</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[269]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left ( \left[\begin{matrix}3 X_{0, 0} + 4 X_{0, 1} & 6 X_{0, 0} + 8 X_{0, 1}\\3 X_{1, 0} + 4 X_{1, 1} & 6 X_{1, 0} + 8 X_{1, 1}\end{matrix}\right], \quad \left[\begin{matrix}2 & 4\\9 & 18\end{matrix}\right]\right )$$
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[234]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">A868</span><span class="o">.</span><span class="n">det</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[234]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$0$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[272]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c">%%latex</span>
+<span class="s">$</span><span class="nb"></span>
+<span class="nv">\begin</span><span class="nb">{cases}</span>
+<span class="m">3</span><span class="nb"> </span><span class="o">*</span><span class="nb"> X_{</span><span class="m">0</span><span class="nb">,</span><span class="m">0</span><span class="nb">} </span><span class="o">+</span><span class="nb"> </span><span class="m">4</span><span class="nb"> </span><span class="o">*</span><span class="nb"> X_{</span><span class="m">1</span><span class="nb">,</span><span class="m">0</span><span class="nb">} </span><span class="o">=</span><span class="nb"> </span><span class="m">2</span><span class="nb"> </span><span class="nv">\\</span><span class="nb"></span>
+<span class="m">6</span><span class="nb"> </span><span class="o">*</span><span class="nb"> X_{</span><span class="m">0</span><span class="nb">,</span><span class="m">0</span><span class="nb">} </span><span class="o">+</span><span class="nb"> </span><span class="m">8</span><span class="nb"> </span><span class="o">*</span><span class="nb"> X_{</span><span class="m">1</span><span class="nb">,</span><span class="m">0</span><span class="nb">} </span><span class="o">=</span><span class="nb"> </span><span class="m">4</span><span class="nb"> </span><span class="nv">\\</span><span class="nb"></span>
+<span class="m">3</span><span class="nb"> </span><span class="o">*</span><span class="nb"> X_{</span><span class="m">0</span><span class="nb">,</span><span class="m">1</span><span class="nb">} </span><span class="o">+</span><span class="nb"> </span><span class="m">4</span><span class="nb"> </span><span class="o">*</span><span class="nb"> X_{</span><span class="m">1</span><span class="nb">,</span><span class="m">1</span><span class="nb">} </span><span class="o">=</span><span class="nb"> </span><span class="m">9</span><span class="nb"> </span><span class="nv">\\</span><span class="nb"></span>
+<span class="m">6</span><span class="nb"> </span><span class="o">*</span><span class="nb"> X_{</span><span class="m">0</span><span class="nb">,</span><span class="m">1</span><span class="nb">} </span><span class="o">+</span><span class="nb"> </span><span class="m">8</span><span class="nb"> </span><span class="o">*</span><span class="nb"> X_{</span><span class="m">1</span><span class="nb">,</span><span class="m">1</span><span class="nb">} </span><span class="o">=</span><span class="nb"> </span><span class="m">18</span><span class="nb"></span>
+<span class="nv">\end</span><span class="nb">{cases} </span><span class="nv">\implies</span><span class="nb"></span>
+<span class="nb"> </span><span class="nv">\begin</span><span class="nb">{pmatrix}</span>
+<span class="nb">X_{</span><span class="m">0</span><span class="nb">,</span><span class="m">0</span><span class="nb">} &amp; </span><span class="m">0</span><span class="nb">.</span><span class="m">5</span><span class="nb"> </span><span class="o">-</span><span class="nb"> </span><span class="m">0</span><span class="nb">.</span><span class="m">75</span><span class="nb"> </span><span class="o">*</span><span class="nb"> X_{</span><span class="m">0</span><span class="nb">,</span><span class="m">0</span><span class="nb">}  </span><span class="nv">\\</span><span class="nb"></span>
+<span class="nb">X_{</span><span class="m">0</span><span class="nb">,</span><span class="m">1</span><span class="nb">} &amp; </span><span class="m">2</span><span class="nb">.</span><span class="m">25</span><span class="nb"> </span><span class="o">-</span><span class="nb"> </span><span class="m">0</span><span class="nb">.</span><span class="m">75</span><span class="nb"> </span><span class="o">*</span><span class="nb"> X_{</span><span class="m">0</span><span class="nb">,</span><span class="m">1</span><span class="nb">}</span>
+<span class="nb"> </span><span class="nv">\end</span><span class="nb">{pmatrix}, </span><span class="nv">\forall</span><span class="nb"> X_{</span><span class="m">0</span><span class="nb">,</span><span class="m">0</span><span class="nb">}, X_{</span><span class="m">0</span><span class="nb">,</span><span class="m">1</span><span class="nb">}</span>
+<span class="s">$</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_latex output_subarea ">
+$
+\begin{cases}
+3 * X_{0,0} + 4 * X_{1,0} = 2 \\
+6 * X_{0,0} + 8 * X_{1,0} = 4 \\
+3 * X_{0,1} + 4 * X_{1,1} = 9 \\
+6 * X_{0,1} + 8 * X_{1,1} = 18
+\end{cases} \implies
+ \begin{pmatrix}
+X_{0,0} & 0.5 - 0.75 * X_{0,0}  \\
+X_{0,1} & 2.25 - 0.75 * X_{0,1}
+ \end{pmatrix}, \forall X_{0,0}, X_{0,1}
+$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[236]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 869</span>
+<span class="c1"># A869 * X869 = B869</span>
+<span class="n">A869</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">]])</span>
+<span class="n">B869</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">A869</span><span class="p">,</span>  <span class="n">B869</span>
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[236]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left ( \left[\begin{matrix}4 & 6\\6 & 9\end{matrix}\right], \quad \left[\begin{matrix}1 & 1\\1 & 1\end{matrix}\right]\right )$$
+</div>
+
+</div>
+
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[237]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 870</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">A869</span><span class="o">.</span><span class="n">det</span><span class="p">()</span>
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[237]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$0$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[238]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 870</span>
+<span class="c1"># A870 * X870 = B870</span>
+<span class="n">A870</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+<span class="n">B870</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">7</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">7</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">]])</span>
+<span class="n">A870</span><span class="p">,</span>  <span class="n">B870</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[238]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left ( \left[\begin{matrix}3 & -1 & 2\\4 & -3 & 3\\1 & 3 & 0\end{matrix}\right], \quad \left[\begin{matrix}3 & 9 & 7\\1 & 11 & 7\\7 & 5 & 7\end{matrix}\right]\right )$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[239]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">A870</span><span class="o">.</span><span class="n">det</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[239]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$0$$
+</div>
+
+</div>
+
 </div>
 </div>
 
