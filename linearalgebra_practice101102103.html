@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>linearalgebra_practice103</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>linearalgebra_practice101102103</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <style type="text/css">
@@ -11830,6 +11830,412 @@ div.output_subarea, div.output_area pre{font-family:Roboto; font_size:120%; colo
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="&#1058;&#1080;&#1087;&#1086;&#1074;&#1086;&#1081;-&#1088;&#1072;&#1089;&#1095;&#1077;&#1090;-1-/-Standard-Calculation-1">&#1058;&#1080;&#1087;&#1086;&#1074;&#1086;&#1081; &#1088;&#1072;&#1089;&#1095;&#1077;&#1090; 1 / Standard Calculation 1<a class="anchor-link" href="#&#1058;&#1080;&#1087;&#1086;&#1074;&#1086;&#1081;-&#1088;&#1072;&#1089;&#1095;&#1077;&#1090;-1-/-Standard-Calculation-1">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#1055;&#1086;&#1089;&#1090;&#1072;&#1085;&#1086;&#1074;&#1082;&#1072;--&#1079;&#1072;&#1076;&#1072;&#1095;&#1080;-/-Formulation-of-the-problem:">&#1055;&#1086;&#1089;&#1090;&#1072;&#1085;&#1086;&#1074;&#1082;&#1072;  &#1079;&#1072;&#1076;&#1072;&#1095;&#1080; / Formulation of the problem:<a class="anchor-link" href="#&#1055;&#1086;&#1089;&#1090;&#1072;&#1085;&#1086;&#1074;&#1082;&#1072;--&#1079;&#1072;&#1076;&#1072;&#1095;&#1080;-/-Formulation-of-the-problem:">&#182;</a></h2><p>По данным матрицам $A,B,C,D$ и числам $\alpha$ и $\beta$ вычислить матрицу $ G = \alpha * A * B \ + \ \beta * C^T * D$.</p>
+<p>$\alpha = 6, \ \beta = -7, \\ 
+A_{(2,4)} = 
+ \begin{pmatrix}
+-3 &amp; -3 &amp; -6 &amp; -3\\
+-4 &amp; -7 &amp; 8 &amp; -7\\
+ \end{pmatrix}, \ 
+B_{(4,3)} = 
+ \begin{pmatrix}
+2 &amp; 10 &amp; 7 \\
+-5 &amp; -6 &amp; -2 \\
+-8 &amp; 4 &amp; -8 \\
+7 &amp; 4 &amp; -6 \\
+ \end{pmatrix}, \ 
+C_{(2,2)} = 
+ \begin{pmatrix}
+-8 &amp; -4 \\
+3 &amp; -5 \\
+ \end{pmatrix}, \ 
+D_{(2,3)} = 
+ \begin{pmatrix}
+-2 &amp; -1 &amp; -5 \\
+-2 &amp; -10 &amp; 8 \\
+ \end{pmatrix}.
+$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">α</span><span class="p">,</span> <span class="n">β</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span><span class="o">-</span><span class="mi">7</span><span class="p">]])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">]])</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">]])</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">]])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#1056;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077;-/-Decisions:">&#1056;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077; / Decisions:<a class="anchor-link" href="#&#1056;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077;-/-Decisions:">&#182;</a></h2><p>1) Рассчитаем элементы матрицы $\alpha * A * B$:</p>
+<p>$\alpha * A * B|_{11} = 6 * (-3 * 2 - 3 * (-5)  - 6 * (-8) - 3 * 7) = 216 \ \| \ \alpha \ * $ сумму элементов 1-ой строки $A \ * $ на элементы 1-ого столбца $B$.</p>
+<p>$\alpha * A * B|_{12} = 6 * (-3 * 10 - 3 * (-6)  - 6 * 4 - 3 * 4) = -288$</p>
+<p>$\alpha * A * B|_{13} = 6 * (-3 * 7 - 3 * (-2)  - 6 * (-8) - 3 * (-6)) = 306$</p>
+<p>$\alpha * A * B|_{21} = 6 * (-4 * 2 - 7 * (-5)  + 8 * (-8) - 7 * 7) = -516$</p>
+<p>$\alpha * A * B|_{22} = 6 * (-4 * 10 - 7 * (-6)  + 8 * 4 - 7 * 4) = 36$</p>
+<p>$\alpha * A * B|_{23} = 6 * (-4 * 7 - 7 * (-2)  + 8 * (-8) - 7 * (-6)) = -216$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="mi">6</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">3</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span>  <span class="o">-</span> <span class="mi">6</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">7</span><span class="p">),</span> <span class="mi">6</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">3</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">)</span>  <span class="o">-</span> <span class="mi">6</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">4</span><span class="p">),</span> <span class="mi">6</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">3</span> <span class="o">*</span> <span class="mi">7</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>  <span class="o">-</span> <span class="mi">6</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">))</span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[6]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left ( 216, \quad -288, \quad 306\right )$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="mi">6</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">7</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span>  <span class="o">+</span> <span class="mi">8</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="p">)</span> <span class="o">-</span> <span class="mi">7</span> <span class="o">*</span> <span class="mi">7</span><span class="p">),</span> <span class="mi">6</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">4</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">-</span> <span class="mi">7</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">)</span>  <span class="o">+</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">-</span> <span class="mi">7</span> <span class="o">*</span> <span class="mi">4</span><span class="p">),</span> <span class="mi">6</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">4</span> <span class="o">*</span> <span class="mi">7</span> <span class="o">-</span> <span class="mi">7</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>  <span class="o">+</span> <span class="mi">8</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="p">)</span> <span class="o">-</span> <span class="mi">7</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[9]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left ( -516, \quad 36, \quad -216\right )$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>2) Запишем транспонированную матрицу $C^T$:</p>
+<p>$C_{(2,2)}^T = 
+ \begin{pmatrix}
+-8 &amp; 3 \\
+-4 &amp; -5 \\
+ \end{pmatrix}$</p>
+<p>Элементы 1-ой строки $C$ стали элементами 1-ого столбца $C^T$,</p>
+<p>элементы 2-ой строки $C$ - элементами 2-ого столбца $C^T$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">C</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[11]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left[\begin{matrix}-8 & 3\\-4 & -5\end{matrix}\right]$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>3) Рассчитаем элементы матрицы $\beta * C^T * D$:</p>
+<p>$\beta * C^T * D |_{11} = -7 * (-8 * (-2) + 3 * (-2)) = -70$</p>
+<p>$\beta * C^T * D |_{12} = -7 * (-8 * (-1) + 3 * (-10)) = 154$</p>
+<p>$\beta * C^T * D |_{13} = -7 * (-8 * (-5) + 3 * 8) = -448$</p>
+<p>$\beta * C^T * D |_{21} = -7 * (-4 * (-2) - 5 * (-2)) = -126$</p>
+<p>$\beta * C^T * D |_{22} = -7 * (-4 * (-1) - 5 * (-10)) = -378$</p>
+<p>$\beta * C^T * D |_{23} = -7 * (-4 * (-5) - 5 * 8) = 140$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">-</span><span class="mi">7</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">8</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)),</span> <span class="o">-</span><span class="mi">7</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">8</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">)),</span> <span class="o">-</span><span class="mi">7</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">8</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">8</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[15]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left ( -70, \quad 154, \quad -448\right )$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">-</span><span class="mi">7</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">5</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)),</span> <span class="o">-</span><span class="mi">7</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">5</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">)),</span> <span class="o">-</span><span class="mi">7</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span> <span class="o">-</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">8</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[16]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left ( -126, \quad -378, \quad 140\right )$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">α</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="n">B</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[10]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left[\begin{matrix}216 & -288 & 306\\-516 & 36 & -216\end{matrix}\right]$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">β</span> <span class="o">*</span> <span class="n">C</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span> <span class="o">*</span> <span class="n">D</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[13]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left[\begin{matrix}-70 & 154 & -448\\-126 & -378 & 140\end{matrix}\right]$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>4) Сложим полученные матрицы $α * A * B + β * C^T * D$:</p>
+<p>$G_{11} = 216 - 70 = 146; G_{12} = -288 + 154 = -134; G_{13} = 306 - 448 = -142$</p>
+<p>$G_{21} = -516 - 126 = -642; G_{22} = 36 - 378 = -342; G_{23} = -216 + 140 = -76$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">α</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="n">B</span> <span class="o">+</span> <span class="n">β</span> <span class="o">*</span> <span class="n">C</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span> <span class="o">*</span> <span class="n">D</span>
+<span class="n">G</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[17]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left[\begin{matrix}146 & -134 & -142\\-642 & -342 & -76\end{matrix}\right]$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="&#1058;&#1080;&#1087;&#1086;&#1074;&#1086;&#1081;-&#1088;&#1072;&#1089;&#1095;&#1077;&#1090;-2-/-Standard-Calculation-2">&#1058;&#1080;&#1087;&#1086;&#1074;&#1086;&#1081; &#1088;&#1072;&#1089;&#1095;&#1077;&#1090; 2 / Standard Calculation 2<a class="anchor-link" href="#&#1058;&#1080;&#1087;&#1086;&#1074;&#1086;&#1081;-&#1088;&#1072;&#1089;&#1095;&#1077;&#1090;-2-/-Standard-Calculation-2">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#1055;&#1086;&#1089;&#1090;&#1072;&#1085;&#1086;&#1074;&#1082;&#1072;--&#1079;&#1072;&#1076;&#1072;&#1095;&#1080;-/-Formulation-of-the-problem:">&#1055;&#1086;&#1089;&#1090;&#1072;&#1085;&#1086;&#1074;&#1082;&#1072;  &#1079;&#1072;&#1076;&#1072;&#1095;&#1080; / Formulation of the problem:<a class="anchor-link" href="#&#1055;&#1086;&#1089;&#1090;&#1072;&#1085;&#1086;&#1074;&#1082;&#1072;--&#1079;&#1072;&#1076;&#1072;&#1095;&#1080;-/-Formulation-of-the-problem:">&#182;</a></h2><p>Для данной матрицы А найти обратную $А^{-1}$ и выполнить проверку результата.</p>
+<p>For a given matrix A, find the inverse $A^{- 1}$ and perform a result check.</p>
+<p>$
+A = 
+ \begin{pmatrix}
+20 &amp; 19 &amp; 9 \\
+31 &amp; 30 &amp; 22 \\
+26 &amp; 25 &amp; 16 \\
+ \end{pmatrix}
+ $</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
