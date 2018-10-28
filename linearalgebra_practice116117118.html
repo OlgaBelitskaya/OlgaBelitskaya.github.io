@@ -11844,6 +11844,7 @@ div.output_subarea, div.output_area pre{font-family:Roboto; font_size:120%; colo
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><a href="http://hyperpolyglot.org/computer-algebra2">Computer Algebra I: Mathematica, SymPy, Sage, Maxima</a></p>
 <p><a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">LaTeX/Mathematics</a></p>
+<p><a href="https://docs.sympy.org/latest/tutorial/matrices.html#eigenvalues-eigenvectors-and-diagonalization">SymPy. Matrices</a></p>
 <p><a href="https://www.mccme.ru/free-books/">МЦНМО. Свободно распространяемые издания</a></p>
 
 </div>
@@ -11905,11 +11906,11 @@ f_3 = 3 e_1+ 5 e_2 + 8 e_3
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="&#1055;&#1086;&#1089;&#1090;&#1072;&#1085;&#1086;&#1074;&#1082;&#1072;--&#1079;&#1072;&#1076;&#1072;&#1095;&#1080;-/-Formulation-of-the-problem:">&#1055;&#1086;&#1089;&#1090;&#1072;&#1085;&#1086;&#1074;&#1082;&#1072;  &#1079;&#1072;&#1076;&#1072;&#1095;&#1080; / Formulation of the problem:<a class="anchor-link" href="#&#1055;&#1086;&#1089;&#1090;&#1072;&#1085;&#1086;&#1074;&#1082;&#1072;--&#1079;&#1072;&#1076;&#1072;&#1095;&#1080;-/-Formulation-of-the-problem:">&#182;</a></h2><p>Линейный оператор переводит векторы $\mathfrak{e_1, \ e_2, \ e_3}$ в векторы $\mathfrak{f_1, \ f_2, \ f_3}$.</p>
-<p>Найти в какой вектор $\mathfrak{f}$ оператор переводит данный вектор $\mathfrak{e}$.</p>
-<p>$\mathfrak{e_1} = (3; -2; 2) \to \mathfrak{f_1} = (4; -3; 3)\\ 
-\mathfrak{e_2} = (-2; -3; -3) \to \mathfrak{f_2} = (4; 3; -1)\\ 
-\mathfrak{e_3} = (2; 3; -3) \to \mathfrak{f_3} = (1; 1; 2)$</p>
-<p>$\mathfrak{e} = (-4; 7; 11)$</p>
+<p>Найти, в какой вектор $\mathfrak{f}$ оператор переводит данный вектор $\mathfrak{e}$.</p>
+<p>$\mathfrak{e_1} = (1; 3; 3) \to \mathfrak{f_1} = (1; 4; -2)\\ 
+\mathfrak{e_2} = (-3; -3; -2) \to \mathfrak{f_2} = (-2; -1; 2)\\ 
+\mathfrak{e_3} = (-2; 2; 3) \to \mathfrak{f_3} = (4; 1; -2)$</p>
+<p>$\mathfrak{e} = (-19; 7; 16)$</p>
 
 </div>
 </div>
@@ -11918,9 +11919,414 @@ f_3 = 3 e_1+ 5 e_2 + 8 e_3
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&#1056;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077;-/-Decision">&#1056;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077; / Decision<a class="anchor-link" href="#&#1056;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077;-/-Decision">&#182;</a></h2>
+<h2 id="&#1056;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077;-/-Decision">&#1056;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077; / Decision<a class="anchor-link" href="#&#1056;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077;-/-Decision">&#182;</a></h2><p>1) Обозначим $A$ - матрицу линейного оператора, и запишем систему уравнений:</p>
+<p>$\begin{cases}
+A \mathfrak{e_1} = \mathfrak{f_1} \\
+A \mathfrak{e_2} = \mathfrak{f_2} \\
+A \mathfrak{e_3} = \mathfrak{f_3} 
+\end{cases} \iff \begin{cases}
+A_{11} e_{11} + A_{12} e_{12} + A_{13} e_{13} = f_{11} \\
+A_{21} e_{11} + A_{22} e_{12} + A_{23} e_{13} = f_{12} \\
+A_{31} e_{11} + A_{32} e_{12} + A_{33} e_{13} = f_{13} \\
+A_{11} e_{21} + A_{12} e_{22} + A_{13} e_{23} = f_{21} \\
+A_{21} e_{21} + A_{22} e_{22} + A_{23} e_{23} = f_{22} \\
+A_{31} e_{21} + A_{32} e_{22} + A_{33} e_{23} = f_{23} \\
+A_{11} e_{31} + A_{12} e_{32} + A_{13} e_{33} = f_{31} \\
+A_{21} e_{31} + A_{22} e_{32} + A_{23} e_{33} = f_{32} \\
+A_{31} e_{31} + A_{32} e_{32} + A_{33} e_{33} = f_{33} \\
+\end{cases}$</p>
+
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">E</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]])</span>
+<span class="n">F</span> <span class="o">=</span>  <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">]])</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">MatrixSymbol</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">A</span><span class="o">.</span><span class="n">as_explicit</span><span class="p">(),</span> <span class="n">E</span><span class="p">,</span> <span class="n">F</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[42]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left ( \left[\begin{matrix}A_{0, 0} & A_{0, 1} & A_{0, 2}\\A_{1, 0} & A_{1, 1} & A_{1, 2}\\A_{2, 0} & A_{2, 1} & A_{2, 2}\end{matrix}\right], \quad \left[\begin{matrix}1 & -3 & -2\\3 & -3 & 2\\3 & -2 & 3\end{matrix}\right], \quad \left[\begin{matrix}1 & -2 & 4\\4 & -1 & 1\\-2 & 2 & -2\end{matrix}\right]\right )$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">e1</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+<span class="p">(</span><span class="n">A</span> <span class="o">*</span> <span class="n">e1</span><span class="p">)</span><span class="o">.</span><span class="n">as_explicit</span><span class="p">(),</span> <span class="n">f1</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[44]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left ( \left[\begin{matrix}A_{0, 0} + 3 A_{0, 1} + 3 A_{0, 2}\\A_{1, 0} + 3 A_{1, 1} + 3 A_{1, 2}\\A_{2, 0} + 3 A_{2, 1} + 3 A_{2, 2}\end{matrix}\right], \quad \left[\begin{matrix}1\\4\\-2\end{matrix}\right]\right )$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="n">A</span> <span class="o">*</span> <span class="n">E</span><span class="p">)</span><span class="o">.</span><span class="n">as_explicit</span><span class="p">(),</span> <span class="n">F</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[45]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left ( \left[\begin{matrix}A_{0, 0} + 3 A_{0, 1} + 3 A_{0, 2} & - 3 A_{0, 0} - 3 A_{0, 1} - 2 A_{0, 2} & - 2 A_{0, 0} + 2 A_{0, 1} + 3 A_{0, 2}\\A_{1, 0} + 3 A_{1, 1} + 3 A_{1, 2} & - 3 A_{1, 0} - 3 A_{1, 1} - 2 A_{1, 2} & - 2 A_{1, 0} + 2 A_{1, 1} + 3 A_{1, 2}\\A_{2, 0} + 3 A_{2, 1} + 3 A_{2, 2} & - 3 A_{2, 0} - 3 A_{2, 1} - 2 A_{2, 2} & - 2 A_{2, 0} + 2 A_{2, 1} + 3 A_{2, 2}\end{matrix}\right], \quad \left[\begin{matrix}1 & -2 & 4\\4 & -1 & 1\\-2 & 2 & -2\end{matrix}\right]\right )$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>2) Найдем элементы матрицы $A$ .</p>
+<p>Расширенная матрица для переменных 1-ой строки $A$ имеет вид:</p>
+<p>$\left ( \begin{array} {ccc | c} 
+1 &amp; 3 &amp; 3 &amp; 1 \\
+-3 &amp; -3 &amp; -2 &amp; -2 \\
+-2 &amp; 2 &amp; 3 &amp; 4
+\end{array} \right )$</p>
+<p>Выполним элементарные преобразования:</p>
+<p>$\left ( \begin{array} {ccc | c} 
+1 &amp; 3 &amp; 3 &amp; 1 \\
+0 &amp; 6 &amp; 7 &amp; 1 \\
+0 &amp; 8 &amp; 9 &amp; 6
+\end{array} \right ) \iff
+\left ( \begin{array} {ccc | c} 
+1 &amp; 3 &amp; 3 &amp; 1 \\
+0 &amp; 6 &amp; 7 &amp; 1 \\
+0 &amp; 2 &amp; 2 &amp; 5
+\end{array} \right ) \iff$</p>
+<p>$\iff \left ( \begin{array} {ccc | c} 
+-2 &amp; 0 &amp; 1 &amp; -1 \\
+0 &amp; 6 &amp; 7 &amp; 1 \\
+0 &amp; 0 &amp; 1 &amp; -14
+\end{array} \right ) \iff
+\left ( \begin{array} {ccc | c} 
+-2 &amp; 0 &amp; 0 &amp; 13 \\
+0 &amp; 6 &amp; 0 &amp; 99 \\
+0 &amp; 0 &amp; 1 &amp; -14
+\end{array} \right ) \iff$</p>
+<p>$\iff \left ( \begin{array} {ccc | c} 
+1 &amp; 0 &amp; 0 &amp;  -6.5 \\
+0 &amp; 1 &amp; 0 &amp; 16.5 \\
+0 &amp; 0 &amp; 1 &amp; -14
+\end{array} \right ) \iff
+(A_{11}; A_{12} ; A_{13}) = (-6.5; 16.5; -14)$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sympy.abc</span> <span class="k">import</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span>
+<span class="n">system</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span> <span class="p">])</span>
+<span class="n">sympy</span><span class="o">.</span><span class="n">solve_linear_system</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[35]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left \{ a : - \frac{13}{2}, \quad b : \frac{33}{2}, \quad c : -14\right \}$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Расширенная матрица для переменных 2-ой строки $A$ имеет вид:</p>
+<p>$\left ( \begin{array} {ccc | c} 
+1 &amp; 3 &amp; 3 &amp; 4 \\
+-3 &amp; -3 &amp; -2 &amp; -1 \\
+-2 &amp; 2 &amp; 3 &amp; 1
+\end{array} \right )$</p>
+<p>Выполним элементарные преобразования:</p>
+<p>$\left ( \begin{array} {ccc | c} 
+1 &amp; 3 &amp; 3 &amp; 4 \\
+0 &amp; 6 &amp; 7 &amp; 11 \\
+0 &amp; 8 &amp; 9 &amp; 9
+\end{array} \right ) \iff
+\left ( \begin{array} {ccc | c} 
+1 &amp; 3 &amp; 3 &amp; 4 \\
+0 &amp; 6 &amp; 7 &amp; 11 \\
+0 &amp; 2 &amp; 2 &amp; -2
+\end{array} \right ) \iff$</p>
+<p>$\iff \left ( \begin{array} {ccc | c} 
+-2 &amp; 0 &amp; 1 &amp; 3 \\
+0 &amp; 6 &amp; 7 &amp; 11 \\
+0 &amp; 0 &amp; 1 &amp; 17
+\end{array} \right ) \iff
+\left ( \begin{array} {ccc | c} 
+-2 &amp; 0 &amp; 0 &amp; -14 \\
+0 &amp; 6 &amp; 0 &amp; -108 \\
+0 &amp; 0 &amp; 1 &amp; 17
+\end{array} \right ) \iff$</p>
+<p>$\iff \left ( \begin{array} {ccc | c} 
+1 &amp; 0 &amp; 0 &amp;  7 \\
+0 &amp; 1 &amp; 0 &amp; -18\\
+0 &amp; 0 &amp; 1 &amp; 17
+\end{array} \right ) \iff
+(A_{21}; A_{22} ; A_{23}) = (7; -18; 17)$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sympy.abc</span> <span class="k">import</span> <span class="n">d</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">f</span>
+<span class="n">system</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="p">])</span>
+<span class="n">sympy</span><span class="o">.</span><span class="n">solve_linear_system</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[47]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left \{ d : 7, \quad e : -18, \quad f : 17\right \}$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Расширенная матрица для переменных 3-й строки $A$ имеет вид:</p>
+<p>$\left ( \begin{array} {ccc | c} 
+1 &amp; 3 &amp; 3 &amp; -2 \\
+-3 &amp; -3 &amp; -2 &amp; 2 \\
+-2 &amp; 2 &amp; 3 &amp; -2
+\end{array} \right )$</p>
+<p>Выполним элементарные преобразования:</p>
+<p>$\left ( \begin{array} {ccc | c} 
+1 &amp; 3 &amp; 3 &amp; -2 \\
+0 &amp; 6 &amp; 7 &amp; -4 \\
+0 &amp; 8 &amp; 9 &amp; -6
+\end{array} \right ) \iff
+\left ( \begin{array} {ccc | c} 
+1 &amp; 3 &amp; 3 &amp; -2 \\
+0 &amp; 6 &amp; 7 &amp; -4 \\
+0 &amp; 2 &amp; 2 &amp; -2
+\end{array} \right ) \iff$</p>
+<p>$\iff \left ( \begin{array} {ccc | c} 
+-2 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 6 &amp; 7 &amp; -4 \\
+0 &amp; 0 &amp; 1 &amp; 2
+\end{array} \right ) \iff
+\left ( \begin{array} {ccc | c} 
+-2 &amp; 0 &amp; 0 &amp; -2 \\
+0 &amp; 6 &amp; 0 &amp; -18 \\
+0 &amp; 0 &amp; 1 &amp; 2
+\end{array} \right ) \iff$</p>
+<p>$\iff \left ( \begin{array} {ccc | c} 
+1 &amp; 0 &amp; 0 &amp;  1 \\
+0 &amp; 1 &amp; 0 &amp; -3\\
+0 &amp; 0 &amp; 1 &amp; 2
+\end{array} \right ) \iff
+(A_{31}; A_{32} ; A_{33}) = (1; -3; 2)$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sympy.abc</span> <span class="k">import</span> <span class="n">g</span><span class="p">,</span><span class="n">h</span><span class="p">,</span><span class="n">i</span>
+<span class="n">system</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="p">])</span>
+<span class="n">sympy</span><span class="o">.</span><span class="n">solve_linear_system</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span><span class="n">h</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[48]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left \{ g : 1, \quad h : -3, \quad i : 2\right \}$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>3) Применим линейный оператор к вектору $\mathfrak{e}$.</p>
+<p>$A \mathfrak{e} = \mathfrak{f} \iff \begin{cases}
+A_{11} e_{1} + A_{12} e_{2} + A_{13} e_{3} = f_{1} \\
+A_{21} e_{1} + A_{22} e_{2} + A_{23} e_{3} = f_{2} \\
+A_{31} e_{1} + A_{32} e_{2} + A_{33} e_{3} = f_{3} \\
+\end{cases}$</p>
+<p>$\begin{cases}
+-6.5 * (-19) + 16.5 * 7 - 14 * 16 = 15 \\
+7 * (-19) - 18 * 7 + 17 * 16 = 13 \\
+1 * (-19) - 3 * 7 + 2 * 16 = -8 \\
+\end{cases}$</p>
+<p>$\mathfrak{f} = (15; 13; -8)$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[54]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">e</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([</span><span class="o">-</span><span class="mi">19</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">16</span><span class="p">])</span>
+<span class="n">A</span> <span class="o">=</span>  <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="o">-</span><span class="mf">6.5</span><span class="p">,</span><span class="mf">16.5</span><span class="p">,</span><span class="o">-</span><span class="mi">14</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="o">-</span><span class="mi">18</span><span class="p">,</span><span class="mi">17</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">]])</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="n">e</span>
+<span class="n">f</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[54]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left[\begin{matrix}15.0\\13\\-8\end{matrix}\right]$$
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
