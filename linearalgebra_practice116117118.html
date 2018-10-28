@@ -11845,6 +11845,7 @@ div.output_subarea, div.output_area pre{font-family:Roboto; font_size:120%; colo
 <p><a href="http://hyperpolyglot.org/computer-algebra2">Computer Algebra I: Mathematica, SymPy, Sage, Maxima</a></p>
 <p><a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">LaTeX/Mathematics</a></p>
 <p><a href="https://docs.sympy.org/latest/tutorial/matrices.html#eigenvalues-eigenvectors-and-diagonalization">SymPy. Matrices</a></p>
+<p><a href="http://mathworld.wolfram.com/LinearTransformation.html">Wolfram MathWorld. Linear Transformation</a></p>
 <p><a href="https://www.mccme.ru/free-books/">МЦНМО. Свободно распространяемые издания</a></p>
 
 </div>
@@ -11885,6 +11886,41 @@ f_3 = 3 e_1+ 5 e_2 + 8 e_3
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">],[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">6</span><span class="p">]])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">]])</span>
+<span class="n">A</span><span class="p">,</span> <span class="n">B</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[3]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left ( \left[\begin{matrix}-3 & -4 & -1\\4 & -3 & -3\\-3 & 2 & -6\end{matrix}\right], \quad \left[\begin{matrix}1 & 1 & 1\\2 & 3 & 4\\3 & 5 & 8\end{matrix}\right]\right )$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -11892,6 +11928,516 @@ f_3 = 3 e_1+ 5 e_2 + 8 e_3
 <h2 id="&#1056;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077;-/-Decision">&#1056;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077; / Decision<a class="anchor-link" href="#&#1056;&#1077;&#1096;&#1077;&#1085;&#1080;&#1077;-/-Decision">&#182;</a></h2>
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>1) Запишем матрицу $B$ перехода от базиса $\{e_1, \ e_2, \ e_3\}$ к базису $\{f_1, \ f_2, \ f_3\}$.</p>
+<p>$B = \begin{pmatrix}
+1 &amp; 1 &amp; 1 \\
+2 &amp; 3 &amp; 4 \\
+3 &amp; 5 &amp; 8
+\end{pmatrix}$</p>
+<p>Вычислим определитель матрицы $B$.</p>
+<p>Вычтем из 2-й строки 1-ую, умноженную на 2,</p>
+<p>вычтем из 3-й строки 1-ую, умноженную на 3:</p>
+<p>$B = \begin{pmatrix}
+1 &amp; 1 &amp; 1 \\
+0 &amp; 1 &amp; 2 \\
+0 &amp; 2 &amp; 5
+\end{pmatrix}$</p>
+<p>Разложим по 1-му столбцу:</p>
+<p>$\Delta_B = 1 * \begin{vmatrix} 1 &amp; 2 \\ 2 &amp; 5 \end{vmatrix} = 1 * 5 - 2 * 2 = 1$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">B</span><span class="o">.</span><span class="n">det</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[4]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$1$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Вычислим матрицу алгебраических дополнений:</p>
+<p>$B_S = \begin{pmatrix}
+3 * 8 - 5 * 4 &amp; -(2 * 8 - 3 * 4) &amp; 2 * 5 - 3 * 3\\
+-(1 * 8 - 5 * 1) &amp; 1 * 8 - 3 * 1 &amp; -(1 * 5 - 3 * 1) \\
+1 * 4 - 1 * 3 &amp; -(1 * 4 - 1 * 2) &amp; 1 * 3 - 1 * 2
+\end{pmatrix} = \begin{pmatrix}
+4 &amp; -4 &amp; 1 \\
+-3 &amp; 5 &amp; -2 \\
+1 &amp; -2 &amp; 1
+\end{pmatrix}$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">B</span><span class="o">.</span><span class="n">adjugate</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[8]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left[\begin{matrix}4 & -4 & 1\\-3 & 5 & -2\\1 & -2 & 1\end{matrix}\right]$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Запишем транспонированную матрицу алгебраических дополнений:</p>
+<p>$B_S^T = \begin{pmatrix}
+4 &amp; -3 &amp; 1 \\
+-4 &amp; 5 &amp; -2 \\
+1 &amp; -2 &amp; 1
+\end{pmatrix}$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">B</span><span class="o">.</span><span class="n">adjugate</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[9]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left[\begin{matrix}4 & -3 & 1\\-4 & 5 & -2\\1 & -2 & 1\end{matrix}\right]$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Вычислим обратную матрицу $B^{-1}$:</p>
+<p>$B^{-1} = \frac{B_S^T}{\Delta_B} = \begin{pmatrix}
+4 &amp; -3 &amp; 1 \\
+-4 &amp; 5 &amp; -2 \\
+1 &amp; -2 &amp; 1
+\end{pmatrix} / 1 = \begin{pmatrix}
+4 &amp; -3 &amp; 1 \\
+-4 &amp; 5 &amp; -2 \\
+1 &amp; -2 &amp; 1
+\end{pmatrix}$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">B</span><span class="o">.</span><span class="n">inv</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[12]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left[\begin{matrix}4 & -3 & 1\\-4 & 5 & -2\\1 & -2 & 1\end{matrix}\right]$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>2) Найдем матрицу линейного оператора в новом базисе по формуле:</p>
+<p>$\overline{A} = B^{-1} * A * B$.</p>
+<p>$B^{-1} * A = $</p>
+<p>$= \begin{pmatrix}
+4 * (-3)  - 3 * 4 + 1 * (-3) &amp; 4 * (-4)  - 3 * (-3) + 1 * 2 &amp; 4 * (-1)  - 3 * (-3) + 1 * (-6) \\
+-4 * (-3)  + 5 * 4 - 2 * (-3) &amp; -4 * (-4) + 5 * (-3) - 2 * 2 &amp; -4 * (-1)  + 5 * (-3) - 2 * (-6) \\ 
+1 * (-3)  -2 * 4 + 1 * (-3) &amp; 1 * (-4) - 2 * (-3) + 1 * 2 &amp; 1 * (-1)  - 2 * (-3) + 1 * (-6) \\
+\end{pmatrix} =  $</p>
+<p>$= \begin{pmatrix}
+-27 &amp; -5 &amp; -1 \\
+38 &amp; -3 &amp; 1 \\ 
+-14 &amp; 4 &amp; -1 \\
+\end{pmatrix} $</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>  <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">),</span> <span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span>  <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[14]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left ( -27, \quad -5, \quad -1\right )$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">-</span><span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>  <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">),</span> <span class="o">-</span><span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[16]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left ( 38, \quad -3, \quad 1\right )$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="mi">1</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>  <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">),</span> <span class="mi">1</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">)</span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[17]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left ( -14, \quad 4, \quad -1\right )$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">B</span><span class="o">.</span><span class="n">inv</span><span class="p">()</span> <span class="o">*</span> <span class="n">A</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[15]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left[\begin{matrix}-27 & -5 & -1\\38 & -3 & 1\\-14 & 4 & -1\end{matrix}\right]$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Теперь $B^{-1} * A$ умножим на матрицу $B$:</p>
+<p>$\overline{A} = \begin{pmatrix}
+-27 * 1 - 5 * 2 - 1 * 3 &amp; -27 * 1 - 5 * 3 - 1 * 5 &amp; -27 * 1 - 5 * 4 - 1 * 8 \\
+38 * 1 - 3 * 2 + 1 * 3 &amp; 38 * 1 - 3 * 3 + 1 * 5 &amp; 38 * 1 - 3 * 4  + 1 * 8 \\ 
+-14 * 1 + 4 * 2 - 1 * 3 &amp; -14 * 1 + 4 * 3 - 1 * 5 &amp; -14 * 1 + 4 * 4 - 1 * 8 \\
+\end{pmatrix} $</p>
+<p>$\overline{A} = \begin{pmatrix}
+-40 &amp; -47 &amp; -55 \\
+35 &amp; 34 &amp; 34 \\ 
+-9 &amp; -7 &amp; -6 \\
+\end{pmatrix} $</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">-</span><span class="mi">27</span> <span class="o">*</span> <span class="mi">1</span>  <span class="o">-</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">27</span> <span class="o">*</span> <span class="mi">1</span>  <span class="o">-</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">27</span> <span class="o">*</span> <span class="mi">1</span>  <span class="o">-</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">8</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[19]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left ( -40, \quad -47, \quad -55\right )$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="mi">38</span> <span class="o">*</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">3</span> <span class="p">,</span> <span class="mi">38</span> <span class="o">*</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">38</span> <span class="o">*</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">4</span>  <span class="o">+</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">8</span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[21]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left ( 35, \quad 34, \quad 34\right )$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">-</span><span class="mi">14</span> <span class="o">*</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">14</span> <span class="o">*</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">14</span> <span class="o">*</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">8</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[22]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left ( -9, \quad -7, \quad -6\right )$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">B</span><span class="o">.</span><span class="n">inv</span><span class="p">()</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="n">B</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[20]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left[\begin{matrix}-40 & -47 & -55\\35 & 34 & 34\\-9 & -7 & -6\end{matrix}\right]$$
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
