@@ -12290,6 +12290,14 @@ div#notebook {
 </tr>
 <tr>
 <td style="text-align:center">промежуточные данные</td>
+<td style="text-align:center">f</td>
+<td style="text-align:center">значение первого элемента массива</td>
+<td style="text-align:center">цел</td>
+<td style="text-align:center">простая переменная</td>
+<td style="text-align:center">---</td>
+</tr>
+<tr>
+<td style="text-align:center">промежуточные данные</td>
 <td style="text-align:center">MAX</td>
 <td style="text-align:center">максимальное значение среди выбранных элементов</td>
 <td style="text-align:center">цел</td>
@@ -12664,9 +12672,11 @@ div#notebook {
 </li>
 </ol>
 <p>Ввод-вывод тривиален и представляет собой чисто техническую задачу.</p>
-<p>Для осуществления процесса ввода-вывода массива потребуются промежуточные переменные:</p>
+<p>Для осуществления процесса ввода-вывода и обработки массива потребуются промежуточные переменные:</p>
 <ul>
 <li><p><code>i</code> – индекс текущего элемента массива,</p>
+</li>
+<li><p><code>f</code> - значение первого элемента массива,</p>
 </li>
 <li><p><code>k</code> - индекс последнего кратного 9 элемента в массиве,</p>
 </li>
@@ -12690,7 +12700,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[175]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">file</span> block_diagram
@@ -12751,7 +12761,7 @@ blockdiag {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[176]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>blockdiag block_diagram
@@ -12764,7 +12774,7 @@ blockdiag {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[177]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">Image</span>
@@ -12781,7 +12791,7 @@ blockdiag {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[177]:</div>
+<div class="prompt output_prompt">Out[6]:</div>
 
 
 
@@ -12810,6 +12820,603 @@ blockdiag {
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">program</span> <span class="n">Lab6</span><span class="p">;</span> <span class="o">//</span><span class="n">сохранить</span> <span class="n">как</span> <span class="n">lab6</span><span class="o">.</span><span class="n">dpr</span> <span class="p">(</span><span class="n">DPR</span> <span class="err">–</span> <span class="n">Delphi</span> <span class="n">PRoject</span><span class="p">)</span>  
+<span class="p">{</span><span class="err">$</span><span class="n">APPTYPE</span> <span class="n">CONSOLE</span><span class="p">}</span>
+<span class="n">Uses</span> <span class="n">Windows</span><span class="p">;</span> <span class="o">//</span> <span class="n">для</span> <span class="n">русификации</span> <span class="p">(</span><span class="n">сделать</span> <span class="n">комментарием</span> <span class="n">в</span> <span class="n">онлайн</span><span class="o">-</span><span class="n">компиляторе</span><span class="o">!)</span>
+
+    <span class="n">var</span>
+        <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">integer</span><span class="p">;</span>
+        <span class="n">MAX</span><span class="p">:</span> <span class="n">integer</span><span class="p">;</span>
+        <span class="n">fin</span><span class="p">,</span> <span class="n">fout</span><span class="p">:</span> <span class="n">string</span><span class="p">;</span>
+        <span class="n">tfin</span><span class="p">,</span> <span class="n">tfout</span><span class="p">:</span> <span class="n">TextFile</span><span class="p">;</span>
+        <span class="n">A</span><span class="p">:</span> <span class="n">array</span> <span class="n">of</span> <span class="n">integer</span><span class="p">;</span> 
+
+    <span class="n">begin</span>
+        <span class="n">setConsoleCP</span><span class="p">(</span><span class="mi">1251</span><span class="p">);</span> <span class="o">//</span> <span class="n">для</span> <span class="n">ввода</span>  <span class="n">русификация</span> <span class="n">и</span> <span class="p">(</span><span class="n">сделать</span> <span class="n">строку</span> <span class="n">комментарием</span> <span class="n">в</span> <span class="n">онлайн</span><span class="o">-</span><span class="n">компиляторе</span><span class="o">!)</span>
+        <span class="n">setConsoleOutputCP</span><span class="p">(</span><span class="mi">1251</span><span class="p">);</span> <span class="o">//</span> <span class="n">для</span> <span class="n">вывода</span> <span class="p">(</span><span class="n">сделать</span> <span class="n">строку</span> <span class="n">комментарием</span> <span class="n">в</span> <span class="n">онлайн</span><span class="o">-</span><span class="n">компиляторе</span><span class="o">!)</span>
+
+        <span class="p">{</span><span class="n">A0</span><span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="n">A0</span><span class="o">.</span><span class="mi">3</span> <span class="o">-</span> <span class="n">ввод</span><span class="o">-</span><span class="n">вывод</span> <span class="n">входных</span> <span class="n">данных</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Лаб.6&#39;</span> <span class="p">:</span><span class="mi">40</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">заголовка</span> <span class="n">c</span> <span class="n">переходом</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mi">3</span><span class="p">}</span>
+        
+        <span class="p">{</span><span class="n">ввод</span><span class="o">-</span><span class="n">вывод</span> <span class="n">строковой</span> <span class="n">переменной</span> <span class="o">-</span> <span class="n">имени</span> <span class="n">файла</span> <span class="n">с</span> <span class="n">входными</span> <span class="n">данными</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">4.1</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Текстовый файл с элементами массива A:  &#39;</span><span class="p">);</span> 
+        <span class="n">readln</span><span class="p">(</span><span class="n">fin</span><span class="p">);</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="n">fin</span><span class="p">);</span>
+
+        <span class="p">{</span><span class="n">ввод</span><span class="o">-</span><span class="n">вывод</span> <span class="n">строковой</span> <span class="n">переменной</span> <span class="o">-</span> <span class="n">имени</span> <span class="n">файла</span> <span class="n">с</span> <span class="n">входными</span> <span class="n">данными</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Текстовый файл с элементами массива A и индексом максимального значения: &#39;</span><span class="p">);</span> 
+        <span class="n">readln</span><span class="p">(</span><span class="n">fout</span><span class="p">);</span> 
+        <span class="n">writeln</span><span class="p">(</span><span class="n">fout</span><span class="p">);</span>
+        
+        <span class="p">{</span><span class="n">ввод</span><span class="o">-</span><span class="n">вывод</span> <span class="n">исходного</span> <span class="n">массивa</span> <span class="n">A</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mf">2.1</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">,</span> <span class="mf">5.1</span><span class="p">,</span> <span class="mf">5.2</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Массив A: &#39;</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">пояснения</span> <span class="n">с</span> <span class="n">переходом</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span><span class="p">}</span>
+        
+        <span class="n">AssignFile</span><span class="p">(</span><span class="n">tfin</span><span class="p">,</span> <span class="n">fin</span><span class="p">);</span> <span class="n">reset</span><span class="p">(</span><span class="n">tfin</span><span class="p">);</span> <span class="p">{</span><span class="n">открыть</span> <span class="n">файл</span> <span class="n">для</span> <span class="n">чтения</span><span class="p">}</span> 
+        <span class="n">AssignFile</span><span class="p">(</span><span class="n">tfout</span><span class="p">,</span> <span class="n">fout</span><span class="p">);</span> <span class="n">rewrite</span><span class="p">(</span><span class="n">tfout</span><span class="p">);</span> <span class="p">{</span><span class="n">открыть</span> <span class="n">файл</span> <span class="n">для</span> <span class="n">записи</span><span class="p">}</span>
+                
+        <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="p">:</span><span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">MAX</span> <span class="p">:</span><span class="o">=</span> <span class="o">-</span><span class="mi">10000</span><span class="p">;</span>
+            
+        <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+                
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">eof</span><span class="p">(</span><span class="n">tfin</span><span class="p">)</span> <span class="n">do</span> 
+
+        <span class="n">begin</span>
+            <span class="n">SetLength</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+            <span class="n">readln</span><span class="p">(</span><span class="n">tfin</span><span class="p">,</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span> <span class="p">{</span><span class="n">ввод</span> <span class="n">элемента</span> <span class="n">и</span> <span class="n">переход</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span><span class="p">}</span> 
+            <span class="n">writeln</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span><span class="mi">5</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">элемента</span> <span class="n">и</span> <span class="n">переход</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">на</span> <span class="n">экране</span><span class="p">}</span>
+            <span class="n">writeln</span><span class="p">(</span><span class="n">tfout</span><span class="p">,</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span><span class="mi">5</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">элемента</span> <span class="n">и</span> <span class="n">переход</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">в</span> <span class="n">файле</span><span class="p">}</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="n">then</span> <span class="n">f</span> <span class="p">:</span><span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+                
+            <span class="n">k</span> <span class="p">:</span><span class="o">=</span> <span class="mi">26</span><span class="p">;</span> <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="mi">37</span><span class="p">;</span> <span class="n">MAX</span> <span class="p">:</span><span class="o">=</span> <span class="mi">26</span><span class="p">;</span> <span class="p">{</span><span class="n">заглушка</span> <span class="n">для</span> <span class="n">теста</span> <span class="mi">1</span><span class="p">}</span>
+            <span class="o">//</span> <span class="n">k</span> <span class="p">:</span><span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">MAX</span> <span class="p">:</span><span class="o">=</span> <span class="o">-</span><span class="mi">10000</span><span class="p">;</span> 
+            <span class="o">//</span> <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Нет таких элементов&#39;</span><span class="p">);</span> <span class="p">{</span><span class="n">заглушка</span> <span class="n">для</span> <span class="n">теста</span> <span class="mi">2</span><span class="p">}</span>
+            <span class="o">//</span> <span class="n">k</span> <span class="p">:</span><span class="o">=</span> <span class="mi">44</span><span class="p">;</span> <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="mi">47</span><span class="p">;</span> <span class="n">MAX</span> <span class="p">:</span><span class="o">=</span> <span class="mi">7</span><span class="p">;</span> <span class="p">{</span><span class="n">заглушка</span> <span class="n">для</span> <span class="n">теста</span> <span class="mi">3</span><span class="p">}</span>
+            <span class="o">//</span> <span class="n">k</span> <span class="p">:</span><span class="o">=</span> <span class="mi">12</span><span class="p">;</span> <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="mi">13</span><span class="p">;</span> <span class="n">MAX</span> <span class="p">:</span><span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="p">{</span><span class="n">заглушка</span> <span class="n">для</span> <span class="n">теста</span> <span class="mi">4</span><span class="p">}</span>
+            <span class="o">//</span> <span class="n">k</span> <span class="p">:</span><span class="o">=</span> <span class="mi">14</span><span class="p">;</span> <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="mi">19</span><span class="p">;</span> <span class="n">MAX</span> <span class="p">:</span><span class="o">=</span> <span class="o">-</span><span class="mi">7</span><span class="p">;</span> <span class="p">{</span><span class="n">заглушка</span> <span class="n">для</span> <span class="n">теста</span> <span class="mi">5</span><span class="p">}</span>
+            
+            <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">end</span><span class="p">;</span>
+            
+        <span class="n">CloseFile</span><span class="p">(</span><span class="n">tfin</span><span class="p">);</span> <span class="p">{</span><span class="n">закрыть</span> <span class="n">файл</span> <span class="n">для</span> <span class="n">чтения</span><span class="p">}</span> 
+   
+        <span class="k">for</span> <span class="n">i</span><span class="p">:</span><span class="o">=</span><span class="mi">1</span> <span class="n">to</span> <span class="mi">80</span> <span class="n">do</span> 
+            <span class="n">write</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">);</span> <span class="p">{</span><span class="n">отделим</span> <span class="n">визуально</span> <span class="n">чертой</span> <span class="n">и</span> <span class="n">строкой</span> <span class="n">введенные</span> <span class="n">и</span> <span class="n">выводимые</span> <span class="n">значения</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">;</span> 
+                    
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Индекс максимального значения выбранных элементов массива A:&#39;</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span><span class="mi">2</span><span class="p">);</span>
+        <span class="p">{</span><span class="n">вывод</span> <span class="n">переменной</span> <span class="n">и</span> <span class="n">переход</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">на</span> <span class="n">экране</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mi">6</span><span class="p">}</span>             
+        <span class="n">writeln</span><span class="p">(</span><span class="n">tfout</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span><span class="mi">2</span><span class="p">);</span> 
+        <span class="p">{</span><span class="n">вывод</span> <span class="n">MIN</span> <span class="n">и</span> <span class="n">переход</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">в</span> <span class="n">файле</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mi">6</span><span class="p">}</span>
+        
+        <span class="n">CloseFile</span><span class="p">(</span><span class="n">tfout</span><span class="p">);</span> <span class="p">{</span><span class="n">закрыть</span> <span class="n">файл</span> <span class="n">для</span> <span class="n">записи</span><span class="p">}</span>
+        
+    <span class="n">end</span><span class="o">.</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#1056;&#1072;&#1089;&#1082;&#1088;&#1099;&#1090;&#1080;&#1077;-&#1072;&#1073;&#1089;&#1090;&#1088;&#1072;&#1082;&#1094;&#1080;&#1080;-&#1040;0.2">&#1056;&#1072;&#1089;&#1082;&#1088;&#1099;&#1090;&#1080;&#1077; &#1072;&#1073;&#1089;&#1090;&#1088;&#1072;&#1082;&#1094;&#1080;&#1080; &#1040;0.2<a class="anchor-link" href="#&#1056;&#1072;&#1089;&#1082;&#1088;&#1099;&#1090;&#1080;&#1077;-&#1072;&#1073;&#1089;&#1090;&#1088;&#1072;&#1082;&#1094;&#1080;&#1080;-&#1040;0.2">&#182;</a></h2><p><em>Поскольку условие всей задачи совпадает (за исключением необходимости ввода-вывода) с условием выделенной подзадачи,</em></p>
+<p><em>вместо полной спецификации с пунктами 1-11 выполнено просто дополнение к пунктам 9-11.</em></p>
+<h3 id="9.-&#1052;&#1077;&#1090;&#1086;&#1076;">9. &#1052;&#1077;&#1090;&#1086;&#1076;<a class="anchor-link" href="#9.-&#1052;&#1077;&#1090;&#1086;&#1076;">&#182;</a></h3><p>Пусть</p>
+<ul>
+<li><p>$i$ – номер текущий точки,</p>
+</li>
+<li><p>$A[i]$ – соответствующий элемент исходного массива A,</p>
+</li>
+<li><p>$k$ - индекс последнего кратного 9 элемента из A,</p>
+</li>
+<li><p>$f$ - значение первого элемента массива,</p>
+</li>
+<li><p>$MAX$ - первое максимальное значение среди элементов,</p>
+<ul>
+<li><p>меньших $f$ и</p>
+</li>
+<li><p>расположенных правее последнего элемента, кратного девяти.</p>
+</li>
+</ul>
+</li>
+<li><p>$j$ - номер этого первого максимального значения.</p>
+</li>
+</ul>
+<p>Присвоим переменным начальные значения: $MAX = -10000, j = 0, k = 0$.</p>
+<p>Поиск индекса последнего кратного 9 элемента из A осуществляется с помощью цикла.</p>
+<p>На каждом этапе определяется, делится элемент на 9 или нет.</p>
+<p>Если делится, то значение индекса $k$ обновляется, а $MAX = -10000$ возвращается к исходному значению.</p>
+<p>Для элементов с индексом $i: k &lt; i &lt; $ длины массива А, определяется</p>
+<ul>
+<li>индекс $j$-ого элемента, максимального в этом ряду, но меньше $f$.</li>
+</ul>
+<p>Если в цикле удается найти новый элемент, больше предыдущего максимального значения, но меньше $f$,</p>
+<p>то значения $j, MAX$ обновляются.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="10.-&#1040;&#1083;&#1075;&#1086;&#1088;&#1080;&#1090;&#1084;">10. &#1040;&#1083;&#1075;&#1086;&#1088;&#1080;&#1090;&#1084;<a class="anchor-link" href="#10.-&#1040;&#1083;&#1075;&#1086;&#1088;&#1080;&#1090;&#1084;">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[64]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">file</span> block_diagram2
+
+blockdiag {
+    orientation = portrait;
+    
+    class yes [thick, label = &quot;Да&quot;, color = blue, textcolor = blue];
+    class no [thick, label = &quot;Нет&quot;, color = red, textcolor = red];
+    class start_end [shape = ellipse, fontsize = 18, color = lightskyblue];
+    class input_out [shape = flowchart.input, fontsize = 18, 
+                     width = 400, color = lightcyan];
+    class loop_in [shape = flowchart.loopin, fontsize = 18, 
+                   width = 300, color = lightsteelblue];
+    class loop_out [shape = flowchart.loopout, fontsize = 18, 
+                    width = 300, color = lightsteelblue];
+    class condition [shape = flowchart.condition, fontsize = 18, 
+                     width = 400, height = 100, color = lightsteelblue];
+    class command_box [shape = roundedbox, fontsize = 18, width = 300];
+    
+    Начало -&gt; &quot;j :=0; k := 0; MAX := -10000;&quot; -&gt; &quot;i := 1; +1; n&quot; -&gt; 
+    &quot;i = 1&quot; -&gt; &quot;f := A[i];&quot; -&gt; &quot;A[i] MOD 9 = 0&quot;; 
+    
+    &quot;i = 1&quot; -&gt;  &quot;A[i] MOD 9 = 0&quot; ;
+    
+    &quot;A[i] MOD 9 = 0&quot;-&gt; &quot;k := i; MAX := -10000;&quot; -&gt; 
+    &quot;(i &gt; k) and (A[i] &lt; f) and (MAX &lt; A[i])&quot; -&gt; &quot;j := i; MAX := A[i];&quot; -&gt; &quot;i = n&quot;
+    
+    &quot;A[i] MOD 9 = 0&quot;-&gt; &quot;(i &gt; k) and (A[i] &lt; f) and (MAX &lt; A[i])&quot;;
+    
+    &quot;(i &gt; k) and (A[i] &lt; f) and (MAX &lt; A[i])&quot; -&gt; &quot;i = n&quot; -&gt; Конец;
+    
+    Начало, Конец [class = &quot;start_end&quot;];
+    &quot;i := 1; +1; n&quot; [class = &quot;loop_in&quot;];
+    &quot;i = n&quot; [class = &quot;loop_out&quot;];
+    &quot;i = 1&quot;, &quot;A[i] MOD 9 = 0&quot;, &quot;(i &gt; k) and (A[i] &lt; f) and (MAX &lt; A[i])&quot; [class = &quot;condition&quot;];
+    &quot;j :=0; k := 0; MAX := -10000;&quot;, &quot;j := i; MAX := A[i];&quot;  [class = &quot;command_box&quot;];
+    &quot;f := A[i];&quot;, &quot;k := i; MAX := -10000;&quot; [class = &quot;command_box&quot;];
+    
+    &quot;i = 1&quot; -&gt; &quot;f := A[i];&quot; [class = &#39;yes&#39;];
+    &quot;i = 1&quot; -&gt;  &quot;A[i] MOD 9 = 0&quot; [class = &#39;no&#39;];
+    &quot;A[i] MOD 9 = 0&quot;-&gt; &quot;k := i; MAX := -10000;&quot; [class = &#39;yes&#39;];
+    &quot;A[i] MOD 9 = 0&quot;-&gt; &quot;(i &gt; k) and (A[i] &lt; f) and (MAX &lt; A[i])&quot; [class = &#39;no&#39;];
+    &quot;(i &gt; k) and (A[i] &lt; f) and (MAX &lt; A[i])&quot; -&gt; &quot;j := i; MAX := A[i];&quot; [class = &#39;yes&#39;];
+    &quot;(i &gt; k) and (A[i] &lt; f) and (MAX &lt; A[i])&quot; -&gt; &quot;i = n&quot; [class = &#39;no&#39;];
+    
+}
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Overwriting block_diagram2
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[65]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>blockdiag block_diagram2
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[66]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;block_diagram2.png&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[66]:</div>
+
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAhAAAARMCAYAAADInKo/AACPQUlEQVR4nO39TYwsyX3f/UZEZmRmVXX3eRlyhjOkH1+NYEMQfA08BC5gWEN5YcCAybE1oAGtDcGGSRj2wwUX4u5uBOJZiOALfOFHK0EUyY2ekazFAy68MSBoY1wtHoArS2PawiU1JOfMOX26qvI14i5ORJ3oOtXdldX1ki/fD1A4fbrrJaurK/NX//hHpLTWSgEAANCCOvUGAACA/iFAAACA1ggQAACgNQIEAABojQABAABaI0AAAIDWCBAAAKA1AgQAAGiNAAEAAFojQAAAgNYIEAAAoDUCBAAAaI0AAQAAWiNAAACA1ggQAACgNQIEAABojQABAABaI0AAAIDWCBAAAKA1AgQAAGiNAAEAAFojQAAAgNYIEAAAoDUCBAAAaI0AAQAAWiNAAACA1ggQAACgNQIEAABojQABAABaI0AAAIDWCBAAAKA1AgQAAGiNAAEAAFojQAAAgNYIEAAAoDUCBAAAaI0AAQAAWiNAAACA1ggQAACgtfjUGwDgOKSU5liPZa2NhBD2WI8H4PgIEECPtQkFX/+L8pCbco2Ustn2uoQNoJ+ktVaeeiMA3O6moHDMUHAoX/tssvH7LlgIQbgAOokAAXTIkINCWwQLoNsIEMAJrQeGMQaFttaDhTEmEkIIKaUQhArgaAgQwBERGPaPQAGcBgECODBCw/EQJoDjIUAABxCGBgLD6YSBgjAB7BcBAtgjgkM3rQWJWLgAIaUkSAA7IkAAe0Bw6IcwSDRNE/sAQVUCaI8AAdyDDw6Ehv7xYYIgAeyGAAHsgOAwHEGQ0P51JUgAd+NkWkBLhIdh8a9jFEWVMSay1kprreDDFXA7KhDAluhzGLawP6Kuay2ltO4iBNUI4BUECGALVB3GwweJqqpSpZQJhjUIEUCAIQxgS4SHcfCvc9M0ummayBijBB+2gFcQIIA7tDllduimk0Hd9TN0Q5ZlV3VdJ03TxIQI4FUECGALVB/Gxb/eRVFMCRHAZgQI4BZSSkN4GKev/0UpHj169DcuRFwbznAXYNTiU28AAHTZYrE4F0LYYFaGdf8/9aYBJ0WAAG7QxVL11z6b3Gs4Zf32vhdj1/u87/aE2xDa5T7X72dflaOrq6uHSqkmiqJGKWWUUlZKaa21zMzAqBEggAPaV7NkeKC/70F/qNuz/vj7CDdCCHF5eflYa11orcsoiiqlVCOlNIQHjB09EMBmnRvn9gfDrvRk7HN7vv4X5erSNVdXVw8Xi8VFURSTuq61X61SdPBvBDgmKhDABm4pY1FVVaa1znc9sN10u7aVCX8/XZn+2bXtOYSvfTYRv/d7v/e/X11dPTw7O3s2nU6fZVmWGGNKa62y1obnzQBGhwAB3Gw1ZW9f5fBdrQ8T7HrgDoccurA9XeWfz3w+P18ul2d5nk+rqsr8dM6gAsEwBkaLAAHcwlorLi8vX7u4uPjoVNuw7x6DTU2Up9yervrqV7/6n6uqysqyzKqqSt1UTh8gTr15wMnRAwHcblWfPtWn7E3Ngae0z+3Z13PxlZXwcp+ZJUIIYYyJ3NoPkRuyUMHMHMYtMHpUIIDbWSGE+MlPfvLLb7311l+d8tP3ppkPp3Tf7TlkZWUX4XP4rd/6rf87mLrpZ12EMy8oQWD0WJYV2MBaK621qmmauCzLbD6fX3z88cdv/OxnP/tbv/7rv/5/CjH8Ev6Y+PDw3nvv/XwymVxdXFw8efz48d+8/vrr/+Ott9764M033/zvr7/++l8/evTow9lsdpkkSR5FUc10TowZQxjAzayU0iqlTBRFtdY6z7Js8ad/+qdfEuL0QwnYD/86/sZv/MYvkiRZZFk2z7LsajqdPp/NZs8nk8lVlmULrXUeRVHtTvFtBVUIjBxDGMAGfmqelNIopZo4jss0TfPJZHJ1dnZ2+f3vf/+3f/7zn/+t/+2zyb8VgmpEH/ng8IUvfOFSa12kabqYTCbz6XR6eX5+/vHFxcVHZ2dnH5+dnV1OJpOrNE3zOI7LYEiDKZwYNQIEsJkVQghXgWjiOK7SNF1Op9PLs7OzJw8fPpxUVZX+7u/+7v/x5MmTN7722eQ9f0PCRHeFVaPPf/7zl3Ec1z48ZFk2n81mlxcXF7949OjRhw8fPvzZw4cPf352dvZkOp1epmm6jOPYr0TpKxBUITBa9EAAN/Bz/Y0xUV3XuiiKyXw+v7i8vHztyZMnb3z00UdvffTRR29+/PHHrz99+vT158+fP/rGN77xj/3tCRLdsR4c3JBUpbXO0zRdTiaT+Ww2e3p+fv7xw4cPf/bo0aOfvfbaaz997bXXfvL48eMPLy4uPprNZtdChHBDXKd7VsBpESCAWwTNlFFd12me55PFYnFxeXn5+OnTp598+vTp6x9//PGnnj59+slnz569dnV19fjq6ur829/+9q/7+yBInE4YHL7whS9cKqVWwSFJkmWWZcvJZPL87Ozs+dnZ2ZMHDx589PDhw58/evTob3wF4uLi4sl0Or3MsmwZx3ERRRHnwgAEQxjArdwYt2+kLNM0FcKtAaCUMkEJfJ5l2Xw6nT6fTCaPf/u3f/v/WiwWF8vlcva1zyb/a3ifBIrDWW9sddUGo5Sq4ziukiTJ3eu19P0Os9ns8vz8/Mn5+fnHDx48+PmDBw9+8eDBg49cD8TT6XT6PE3TPIqi0jdQ0vsAUIEA7hQMZaimaeK6rnVZlpPlcjlbLBYXV1dXD58/f/7o+fPnjy4vLx8/f/788fPnzx/N5/OH8/n8YrFYnBVFMSuKYvL7v//7vxreN2Hi/tZDg6s0GKVUHUVR5UJerrWu0jRdpmk6n06nV7PZ7NIPW5yfnz+5uLh44r7+2AWHy8lkMk+SZBnHceVnYAiGLgAhBAEC2EoYInxPRFVVaVEUk+VyebZYLM7m8/lDHyaurq4eusuD+Xz+cLFYnOd5PvVBoqoqXde1/t73vvd3wschUNxtU5XBBQbjFn6q4zguXZ9DEQaHLMsWbnrmpZth8fTs7OypDw2z2ezpdDq9crMullrrIoqiyt0v4QEIECCALa2FCGWMiauqSnyQyPN85oLEA1+ZCAPEYrG4yPN85oLEtCiKSVmWaV3Xuq7rpK5r/YMf/OCXNj32GIPFTetsvPvuu0+llEIpVSulrKs01FEU1XEcV3Ecl264onDBYZFl2cINMV26APH07Ozsma80zGazZ9Pp9CrLsrkPDj6E+HAiCA/ANQQIoAX/frHW+hARBcMaWVmWWZ7ns+VyOVsul+eLxeLCDWOcLxaL8+Vy6c/uOMvzfFIUxbQsy0lZlok7YVPiA0XTNFHTNHHTNPEf/dEffXrT9gwhWNwUFHxlwa3FYZRSVkpZ+4W93KXxgSGO41JrXSRJUiZJ4oPDMsuy+WQyuZpMJs+n0+lzX4FwQxTPJ5PJPMuyeZIkeZIkeTBc0fjHF+LFlN6j/mKAjiNAAO1Ja62foSGttZHrj9BVVemqqtKyLLOiKKZ5nk/yPD/zgWK5XJ4tl8uZDxl+SMNVI7KyLCfu9knTNIkf6jDGxC5MRL76YYxRNwWLTY4ZNtqs0vnuu+8+FWK1aJcPCsZVGFb/RlHUuAN7HcdxpbWuoigqkyTxwWGZJEnuqg7LNE3nPhxMJpNViHDfu8qybJmm6cI3VroQUrnQ0LhmSd8wSXgA1hAggB0F1Qjpz9boDvCx65FIgjAxcZdpnudTV4GYFUWR5Xk+c5ULX42YuopE5u/D3Z92IUIHYSJ2p5iWPlT46ojfJreN6o//+I8/eazfTRgK3IqNRinlF+cywc/MWpWhVkpZHxR8aHB9CLXWunLhodBal246ZpkkycJNy1wkSZK7oYjcLUs9z7JskabpwocLHxq01qULDXUwPXM1RZOqA3AzAgRwP9LaF8cYf7pnfwD3ww9+SKKqqrSqqsSFhNT1QWS+8uACRBZUI9KqqjLXJ7Ea3qiqKqnrWjdNo32wcEEicmEiNsasQo2rlvhgIdcDRvC1EGvnx3n//fff+OIXv/jhVr+IIBj4ULAWEGxwgA4DRNjH0Pi1GtxQgg8MZdDfUCRJUrjwUPiqgwsOi6ASkbsKQ5EkydIFjsIPefhhkGBbbfAchKDqANyKdSCA+/ElbimEMFJKYa01UkrlTgddxXFcGmNyXz0IQkDiKwxBpSLzX/sAEVwnqes6dcMaif9/0Dexqk4YY6KgGrFaDMv9P3a9G8oYE4ehZ/Wk7OrY+cb5+flHt/0CwjURwoOxCwXG9RLUUkrjP+UHwxTG/Z5WUy7DoOCCQ+kCha86hNWHIljbIQ8qC+FtfWAIext8f4NdqzgIQXAAtkKAAPYjDBJWStlYa6VSylhrG2OMiuO4MsYUvvHSDXWsVymuBYswbIRVDD+NNLiddj0TiQ8QPjC4cBD577mhDx0MgUQuPKigmuJTwa9+4hOf+OltT3zt4HttOqX7t3JDEf7AvRoq8N9zwxNlFEU+LJR+qMJXIILqwSoUbAgKq+pCHMd+GORaQ2R4Nk2CA7A7AgSwX+urFFr5ghFuyNAd0Ku1mRz+AL8KFGG/g68uhFM+g0sSfi8YyoistdKHh7X7v1at8JUKEYQI5x+/+eabH9z1pIPw4CsL16oKwXBBGCJscL3GNzH6kBD8vwqCQXh/PiiEwxFhULk2hOJei2tNkfQ4ALsjQAAHsuHgZKWU0lprlFI+TIShIqwWqODAr4KqQrx2iXywcIHAh4fVfYU9GeG006ARM/JhI+yJ8g2Yn/70p//yludowufrQ4E/kIcHeB8WggO7H87w0zL9kI8fbvDhol4LCH52xioohPcV9DPYoNIgxMvQsPoawO4IEMDhbTp3gnX9ElK8qEw0URRdCxTh7I615scwWITVhSgMHUETZbj41WrmRl3X8fp1hbg2fCGEEOIzn/nMf7vrCQZDAeGMisZXC9zsCn+wD3sPTBgGwmEOv/qjCwdhRSFsxrRhYAh+19cWfSI0APtHgACOKwwTUrw4qK36J9zwgRRCNGvTRH3QuBYuNs2qCL4f3kYG4eNalSO8z7VtEEII8cYbb/zPLZ+TDQ/oYXXAr60QhIdVD8JaINg0ayNsdAwrC2GV55X1GggNwGERIIDTuemsjmGpfTVNVLiD+i3B4tr/g9uGC19dq2wEvQ+rasj6xjx69GiraZwi+NS/HgrWKgXhc7frweCuoBD8bq6FAwIDcFwECKA7NgYKN9QhxJbBYu1r/7PwNpvCxvp9rkyn08ttNn5Dc+LGPoTgOb7SyNgiKLzyfQDHRYAAui08kF5zQ7AQIqgirAWCa2EiuM6ti8klSZK33ei1BtJXQsPa9l77/oafExSADiJAAP10Y7AIBSHjpttsHkMJgodSqrnrMW7bxi1vQ0gAeoYAAQzPTSX/rYW38eewuO92ABgWAgQwbtsc5AkCAF6h7r4KAADAdQQIAADQGgECAAC0RoAAAACtESAAAEBrBAgAANAaAQIAALRGgAAAAK0RIAAAQGsECAAA0BoBAgAAtEaAAAAArREgAABAawQIAADQGgECAAC0RoAAAACtESAAAEBrBAgAANCatNbKU28EgG6QUpq7rmOt5YMHACoQAF66KxwQHgB47AwAAEBrBAgA19xUZaD6ACDEDgEAALRGgADwivVqA9UHAOvYKQAAgNYIEAA28lUHqg8ANmEdiAHbZk4/ABwaIXSYCBADFAYHa+0pNwXAyEn58hBjjImC77Fz6jkCxMD48EBwANAlPkg0TRNLKW3wPXZWPUVZaUAIDwC6yu+XoiiqjTGRtVZZawUfYvuLADEwhAcAXeX3T03TxMaYyA1p+Eo4QaJnCBADQcMkgL5I03RRVVXSNE1kjFHWWsmHn/4hQAwIb0AAXef3U0VRTKuqSpumid0sDXryeiY+9QZgL3jTAeiV5XJ5bozxH2KtEEIopRrxYn/Gp6EeIEAMAJUHAH1zeXn54OLiQiiljLtY+2JnZsKpn+guAkT/8U4D0Dvz+fxhHMdGKVVFUVRFUVRLKX14oArRAwSInmMaFIA+ms/nD7TWpdZ6qbUu4jiulFKN259ZqhDdRxPlMPBOA9Ari8XiPM/zs6qqJnVdJ35tCMH+rDcIEBgsPsHcTErZ6vfjr3/bbe66v20es+12ob/yPJ8WRTEpiiKr61rXdR0HTZXoAV6sAWjzpuvazpkDxs369Lvx23nb9vpm35uu478/tKbgNq/jrsGuK9dvo67rrCzLtKqqtKqqVQWCENEf9ED039bv7i4djNa3ZagHj10c83cjpdzb/Vpr7/wbu+k6Y3/9277mXbv+LoqiSMuyzKqqSo0x2hjj14MQgibKXiBA9Jx7Q2+VDLqyc75pZ+Q/7XRlO0/hmL+bbQ74/rFvu+6mg81d27npOkN63dt+yhdi+9e8a9ffVVEUUxcgEj984fdn2/5t4rQoFeEkNu2EjnEA6cOwwLF/N/v8fWyznetDGV1/PXbhZkdt/bq1fc27dv1d5HnuV6LU7rwYihll/UIFYgDavOnafoK46fptdvptdzy3PeZ9dmK7lmFP8TvYZVt2eYy7Pulte79tH9s/7j5K4116fQ5hX+/ZQ1+/7f2UZTmpqioNmielYDnrXiFA9Js/g93R93677nB3HSO/r0OM4e77oHOq341/7F2ez23DGvf59L0PXQ4FXtvXvGvXv4+6rrU7D4YMeh+EeLE/O9m+DdtjCKPnhlj+3bexN+jdZdtGum1vv0uFB+MThAfpVqBc/eHwN9EPVCD676BHxS4ddPf5CfnQj3ts+9jGXRsbd/kdh6Huvs15fXh9xmCHYSwphBBKqU2rTvKi9gABYgBI67ejo/tubUvZ4XVuGg+/qzfB/6wvr89N20iA2Y37G7HuYsSL5as5kVaPECCG4eh7sL40qK0fpPa5LX35HbQR/o7u0zx5Vyg4RJPspvvbVl9enyGRUhqlVCOlbHyQEPQ99AoBAju5T7n5rq7/Q9r3wkn7dOrfzfrMiNtsuy3rv+/bPsXve52BQ7w++9b2Ne/a9e/D3ZcPDuEFPUETJU6i7afTfVhff6CrTvG7Ocbj3NXM2pfX5xB2qdZ06fo7Mq7ycOdjopsIELjVId7Uu3b977Mhss19HXPHdsrfzW2Pv+mx7rpu+LtuOxOmq6/PIbR9zbt2/W1/fsv1OXV3TzGEgZO4qVR63ymF29xX18e7T/m7ue1nuy5Udcjr98G2vSRtXvOuXZ8AME4ECNzqkDv0Nvd9yk79UxzU+vK76YKhhI5Dh61DXn/sf4NjxRAGAODogoAihxICx4YKxAiEnwz6+kbd9xS/IeF3g1Pb8W9QuZUohRD93TeNGQFiBIbwxhzCczgUfjc4tXv0x/iTZ4UX9ARDGMPAmw5Ar1hrlTEmstZG/pwY4uWJtNADBIgB4BMogL6x1gofHNzZOKW1VrE/6w8CRP+R1gH0jj/7pjFmUxMl+7UeIED0HGkdQB9FUVT7c2C4ysPLlaXYr/UCAaLf/NrxUggWcwHQfX4/FcdxFYQIE15FcF6MXiBADICU0l5dXT089XYAwDa+/vWv/0GSJEutdRHHca2UMsKFBj+0ge4jQAyEf9NRhQDQVX7/lGXZPMuyhda6iKKoUko1SilDeOgXAkTPBafEFb/4xS8+E3wPADrD75e+8Y1v/McsyxZpmi6TJMm11qWvQoT7M3QfAaL/fOXBKKXqH//4x7/q/k+QAHBy4b7oW9/61n9I0zRPkmTp/s211oVSqlJK1UEvBJWIHmAlygFwyd0opRqtdfmjH/3oHz558uRTn/vc594nRAA4te985zvfEUIYKaWJ47hMkqSI4zhPkqTQWhda61Ip1bj9mLnzDtEJBIiBUEqZOI7rOI6rNE3zNE2XP/zhD//ls2fPPjmfz8+rqpo0TRNZa2XTNLqqqqQoiklRFNOyLNOqqhJjTGyMkeLFGvXX7p8gMk7f/OY3/9FXvvKV/3Lq7UB33LBvMEopq5SqtdZlkiRFmqaLNE2XLhzUUkobRVGjtS6SJMn9MEaapnkcx1XQTImeIEAMg/UViDiOS631Msuyq+l0Oi3LcmKMiaSUoq5r3TSNNsYoKaVVSlkppfFfW2uNUkpaa60rOzKVCkIpVZ16G9BJfvlp4ddzcPsUvz/yXzdRFDVRFFVxHFdZli0mk8nVdDp9nmXZldZ6GcfxqgIh2Of0BgGi54KmIxtFUa21LtM0XU6n03lVVc/quo6llEIpVVdVlVZVlSqlkmAVOKGUMlVVVcYYJYSQ/lNAECAoP4zY2dnZ5am3AZ1jRRAg3L7DKqWM1rqK47hIkmTpLrnWunSVh2Iymcxns9mT2Wz2bDqdXvkqRbiwFBXPfiBA9J8VQkiX/o0fwjDGPK/rWgkhRBzHjdZ6WRTFtKqqtCzLpKqqSVEUeZIky7qutTEmttYKpZQIGplWXdGnenI4vddee+0np94GdI5ffloJsToxlvAfVuI4rtwwxlJrvUySpPRhYjqdXs1ms6ez2ezpdDp97ocw1qZxss/pAQLEAPgxSCmljKKo0lrnxhh1cXEh4jg2Wusyy7JFWZZZURRpVVWZ63tI67pOfG+EcNUHpVTj7pc3McSbb77541NvA7opqEBEvgrhex3iOK601nmSJEWSJP7fZZZl8+l0euXCw1xrnUdRVLnhVEP1oT8IEMNgRTD0IIQohXjRWKmUqrTWy+l0elWWZVaWZVrXdVJVVeJ6ImJ/BrxwzDIoIxIiRu6tt976q1NvAzpJBmfUjKy10hgjXf+UiaKodiGi9DMv3HDG0jdPaq1zN3zRBPsv9jk9QYAYCHdCmtUbV7jxSFeRKOq6XtR1rd1sC13Xdew/NVhrlU/+vqlSvFxf4rRPDCf3+uuv//WptwHdE8zGWJ2S2wUK5adjusbu2n2QKd1si9J/HUVRFUXRqnmSqme/ECAGJGioNEIIoZSy/lOAMSYPQkNsjFGu5Ohu+nLs0QcIwgOEEOLRo0cfnnob0E0uRPhmSum+53cc1oUIo5SqgzDRRFHkV5706z6wv+khAsSwWCmlcMMRjZuOadzXKo5j5T4l+E8Kqze9J6U0L27GJwG8MJ1OmYWBG/n9hbV2fWXj1YwK39/gQ0Mw2yKc8YWeIUAMkHszSuFmUbigYKIoEmHVQYjVpwUb3FYIxiARSJIkP/U2oPOkvb7A1LWqphAverL8/9dO/sf+pqcIEMPlS4I+IFghhIiiyIjNb3Yhgjfy+mpzGC8/KwfYZG3owe9bbv1QQnAYBhmMV2G8+BvARlLKxlobnXo70DuEgxGgAgEheLPjdvx9AHgFp/MGAACtESAAAEBrBAgAANAaAQIAALRGgAAAAK0RIAAAQGsECAAA0BoBAgAAtEaAAAAArREgAABAawQIAADQGgECAAC0RoAAAACtESAAAEBrBAgAANAaAQIAALRGgAAAAK0RIAAAQGvSWitPvREAukFKae66jrWWDx4AqEAAeOmucEB4AOCxMwAAAK0RIABcc1OVgeoDgBA7BAAA0BoBAsAr1qsNVB8ArGOnAAAAWiNAANjIVx2oPgDYhHUgcG/brB0AoHustZEQwp56O9BP8ak3AP0UhoY/+bMPTrkpAHYkpWz818aYyH1PCEIFtkAFAltZrzIQGoBhee+dt1dfEyawDQIEbkSVARinMEwIQaDAZgQIXENoALCO6gQ2IUCA0ABga4QJeASIkSI0ALgvwsS4ESBGgiZIAIdEmBgfAsSAUWUAcAo0YY4DAWJgCA0AuobqxDARIAbCBwdCA4Au82GCINF/rHE/IIQHAF3n91PGmMhaq6y1gg+y/USAAAAcXdM0sTEmMsYo8bIaTpDoEc6FAQA4uqIoJnEcV1EUVUKIxg3DWjekgR6gAjEAlP8A9M1isTgvimJS13XaNE3sThtPX16PUIHoP95sAHrn+fPnrzVN88wFBiulXF3Ei/0ajZUdR4AYBkIEgF75+OOPP2mMUVJKG0VRo5RqpJQmiiIrCA+9QIDoOTqYAfTR06dPPxlFURPHcaG1LqMoqqIoaqy19EL0BD0QwD2sr7jXZe+983Znt7fL24bDePbs2Seurq4e5Hk+q6oqNcbEfBjqFwLEAPCmOw0OeDfjd4O7XF1dPXKNlNO6rnXTNH5dCPZnPcEQRr/J4IIj68PCXV0+kHd523B4eZ5Py7Kc1HWd+DUhgrUg/D6NXogOI0AMgLW8x7BZGHK6dsDu8rbh8KqqSoPwoKy10l1OvWnYEgECuIf33nm7VSXipuu3OYAeuvLR9jkd031+3+HvuKvPb0yapomapolcePDD6VRTe4QAAXQAB7TDWg8SPkzwez8dP2Th+h7ofeghAgSAe7mperLp+6c4YK9XLTZVJHASau38Fwxf9AwBAjiiPnzibbuNNw3JHOK57nKfffidj5EPC6xl019M4wQAnETQ+4AeogIBdECXmigBYBsECKADCAUYMYYveoryEQDgFDj+9BwvIHBEfej838c2Hqqi0offHzAWDGEAI7HNQf1UB+gubxuAzahAAPewjymPXdLl7dv3FM4uP1egDwgQAACgNQIEgJUhnQcDnWfcvyw/2VMECAArXT5Ad3nbgDEiQAAATkJKae6+FrqKAAEAODopr60fxTBGDxEgAACnYKSU1l1OvS3YAQECAHB0SikrpfSVCCuEIEj0DAtJDQgL7QDoC6VUJaVs3MVKKRnG6BkCxEAsFouL5XJ59vTp00/8/Oc//1t/8zd/8//4yU9+8vbPfvaz/+XJkydvXF1dPczzfFbXdWyMiY0xSlCBwh3ef//9N774xS9+eOrtQG8ZpZRRStVxHNdZls3Pzs6ePn78+EOtdam1LpVSqxAh6IXoFQLEALgyoJVSmiiKGq11mSRJPplM5rPZ7LIsy0wIIZIkKeq6Tpqmiay1SgghrOX9ilu9cX5+/tGpNwL944cj/H4pjuMySZLl2dnZs9lsdjmZTOZJkuRa6zKKokZKaeiH6BcCRL/5o7+VUhqlVBPHceXCw9VsNntWFIUPD3lRFFnTNNpaq3yAEEIIay3vWNzkVz/xiU/89NQbgX4JhyNcMDBRFFVpmuaz2ezy/Pz8o9ls9mwymVwlSZLHcVwppUxQhaAa0QMEiAHw44e++pBl2Xw2mz2rqioVQgj3pn1aVVVijNHGGBkGCOAW//jNN99kBSfszH24sUqpSmtdusros4cPH/58Nps9y7Js7qoQta9CnHqbsR0CxDBYpZQfvsgnk8m8ruuPhRBCa12cnZ09Lcsyq6oqsdZG1tpV1YEggbt8+tOf/stTbwP6xy8S5YclpJTh8OrVbDZ7dn5+/vFkMplrrYsoihqllBFUHnqDANFza+OMldZaZVl2JYQQcRxXk8lk7sODMSZaDxDAXT7zmc/8t1NvA/orDBBKqVWIyLJsPplM5lmWXSVJkkdRVLkKxPoiU+goAkT/WSFevEndm7MSQiyUUkZrXUwmk6u6rrVrnIxccJCueZJ3Ke70xhtv/M9TbwN6yzdF+gWjGtdQWblZGEXQA9Gs9UCg4wgQA+DeoEYpJYQQlatGGK110TRN5CoPylorfYA46QajVx49esQ0TtyXDxC+4dtEUVRHUdREUVQppRrXRGmoPvQHAWIYrBBCujemr0aYKIrUpuDA1E20MZ1OL0+9Dei3IBS8EiSC6Zuc3rtnCBAD4Up/UrxYX15aa41SSq4NWQCtJUmSn3obMBzhkIa4PsQhBOGhVwgQw7K+CIv//ys1QQIFtqWUak69DeivG4Yk7NrP2SH1EAFimO5czY1xRmxLKcXOHfvG39QAECDGgTcr7oO/HwCvYBEhAADQGgECAAC0RoAAAACtESAAAEBrBAgAANAaAQIAALRGgAAAAK0RIAAAQGsECAAA0BoBAgAAtObP1ggAIjil8o2stXzwAEAFAsBLd4UDwgMAj50BAABojQAB4JqbqgxUHwCE2CEAAIDWCBAAXrFebaD6AGAdOwUAANAaAQLARr7qQPUBwCbsGABs5NeE2GZtCADjE596AwB0w3pQ+JM/++DGnxljIimlEELYo2wcgM5hJUpgxMJgEAaGu7z3zturr40xkbsvIQgUwGgQIIARua3KsKswTAhBoADGggABDNghAsNdCBTAOBAggIHZdVjiUBjuAIaJAAH03CmqDLuiOgEMBwEC6KGuVRl2RXUC6C8CBNADfaoy7IrqBNAvBAigg8YQGO5CoAC6jQABdMRQhiUOheEOoFsIEMCJUGXYHdUJ4PQIEMARUWU4DKoTwPERIIADospwfFQngOMgQAB7RGDoHqoTwGEQIIB7YliiP6hOAPtDgABaosowHAQKYHcECGALVBnGgeEOYHsECGADqgygOgHcjgABOFQZcBuqE8B1BAiMFlUG7IrqBECAwIgQGHAoBAqMEQECg8awBE6B4Q6MAQECg0KVAV1DdQJDRYBA71FlQJ9QncBQECDQO1QZMBRUJ9BnBAh0HoEBY0GgQJ8QINBJDEsADHeg2wgQ6ASqDMDtqE6gawgQOBmqDMDuqE7g1AgQOBqqDMBhUJ3AKRAgcFBUGYDjozqBYyBAYK+oMgDdQnUCh0KAwL0QGIB+IVBgXwgQaI1hCWA4GO7ArggQuBNVBmAcqE6gDQIENqLKAIDqBG5DgIAQgioDgNtRncA6AsRIERgA3AeBAgSIEWFYAsChMNwxPgSIAaPKAOAUqE6MAwFiYKgyAOgaqhPDRIDoOaoMAPqE6sRwECB6hsAAYEioTvQXAaIHGJYAMAZUJ/qFANFBVBkAgEDRdQSIjqDKAAC3Y7ijWwgQJ0KVAQB2R3Xi9AgQR0SVAQAOg+rE8REgDogqAwAcH9WJ4yBA7BGBAQC6h0BxGASIe2JYAgD6heGO/SBAtESVAQCGg+rE7ggQW6DKgD557523O/F36nfMXdgWYFtUJ7YXn3oDuogqA/pq/dMUgHbC/b1Sqgl/RqC4jgqEIDAA+7IpwPB+wlAw3HHdaAMEwxLAYTGEgaEb+3DHaIYwqDJgLLbpgWgz1MF7BdjsruGOoYeJwQcIHxzYCQIv8X4A9mv9PeUDxZCDxOADhLVWCUEFAgBwOOtVvaqqUqWUcW0CVgghpZSDChGDDxCeH5+y1iprrYzjuPQ/I0wAANoKQ8OHH374t7XWZRzHVRRFVdM02lrbuEqElVIaa+2gQsRYAsSL+pG1yhijjDHRYrG4qOta13WdPH78+KfhlQkUAIB161WGP//zP/9nWZYt0jRdPn/+/HGapsskSXKtdRHHsQ8TUinVKKV8JdxXJHpvFAHCWiustdJaK40xqmmauKqqpKqqtCzLyQcffPD38zyf5nl+tlwuZ7/2a2//p/D2BAoMDU2UwN3W3yff/va3v5Nl2SLLsnmWZfOPPvrorclkcuUu8yzLrtzPF0mSqGCWo3WVB+m+PvZTOYgxBAj/Skk3fBE1TRM1TaOrqkqLopjkeT5dLpfni8XiYj6fn7///vv/brlcni0Wi/M8z8/ee+ftf+/vjJ0phoC/Y2CzMDR86Utf+q9a6yJN0zxN0/mzZ88+WRTFvCiKSVEUmfsgmtR1rY0xsQ8MUkorpTRKKeOqD8a+GL+wwvVDiAFUIcYQIK5x1Qg/lKF8mKjrWldVpeu6XlUm3L/p7/zO7/zhcrk8K4pi+t47b/+T8P7YEQNAf61XGX7zN3/zr6MoqrXWVVVVqRAvmvDdxSqlaqVUHUVRVZZlHcdxVdd14Y4fumka3TRN5I8x7oPrSZ7boY0uQEgpRZAMTRRFTRRFVRzHlda6iuO41FoXSZIs67qOm6bRxpjYp8uvfvWr/9klz7Qsy8l777z99/x9EyYAoPvC0PDuu+8+dYGgiaKojqKojuN4dSxwx4MySZJlmqZ5kiRFkiT++0vf7+COH1UURVUURY0/xrjgccJnezhjCBDhuJORUjZRFCljTKW19ulwVXZSStUuTJRa69KVrpZpmi6SJJmVZbnM83xSFMWkLMvll7/85f9aFEVa13Xy3jtv/0r4wAQKjBl//+iK9SrDF77whUsfGtw+v/ZNj3Ecl2maFlrrZZIkeZqmyyzLlkmSLFyfw6oHIuh/uNYDkabpUmtd+DAhpWxcA6UvRQyiJDGWpazl2tBF1DRN7GdhuGpC5sa1Jr4voiiKaVEUU9dgOc3zfOa+P3NfT/ztyrLMqqqauDExXVVV+v3vf/+Xw41ghwoAh7ceGD7/+c9fhlVnFxpKN1RRaK39h8ZVaEiSJM+ybJll2TxN03mWZYvJZDJP03ThQsIi+HrpLxtmYdS+DyKoRhAg+sQ9TxnMxohckAh7IJIwUJRlmZZlOSmKInP/TpbL5bUAURTFzP1/UhTF1AcK3z/hQ0pd1/oHP/jBL/ntIUwAwP6EocEHBimlCYcmwuGJOI4rPxThD/wuECzTNPWhYRUgJpPJwl3PD2Us3XBGHgxjlGvDGI1SqnFNlVa8nI0xCKMJEEKsQsQqTPgGl6AqERljfGVCBxWKa1WKsixXFQpfnfBf+zBRluXUB4+yLJOqqtKqqjLfrPm9733v74TbRqAAgO1tqjJEUWTWhiZ8lcH3ueUbehpWocFXFvxUTP+1u+6quuCCgh/yqOI4roLHXVUblFJGBKFhSOFBiJEFCEf6jti1qoQyxkhrre+e9RWKeG24I6xQZC4sbAoUvjrhh0Wmbtpo5sKEr1AkdV3rcLiDMAEAr7qpyhDHceMO4Nd6GXyFwU/FdP+GQw5z1+PwSmBwfQ/5ptDgqxm+wuC2o1FK+V67a9WGIQ1bhMYYIDwZTK3xX6+GOIJQsQoTLlDouq7jIEyspn0WRZG5volJUJGYuO9lPlC44DGtqmrjcMd3v/vdvxtuKIECwBhtW2XwM+jWhyW01rkLBHkQGHIfIoJehqX7N/czK3wjvbvfOoqiKggMYU+DXRuiEMKFhaEGB2/MASIUhomwMuF/pvwqli5U+N4JX51I1qoTr/ROBJdZURTZTcMdwRTRjdUJIQgUAIZr1yqDP/jfMCyR+2pD0Ox4rZdhrcpQBn0Tvo/BT8u0fkaFDwjh0MTQQ0OIAPGqa2FC3FGd8CtbbqpO1HWty7JMq6rK/JBHUJGY5nk+CYc78jz3Qx40YwIYhRumWG5dZfDNj66iMF8blvCVBd8AmYfDEn7K/nqVwU+93KbKIMS4QkOIAHG3uwLFrdUJP8PDNU+mPlCsVSVoxgQwCttMsdyxynCt+TGsNmitc38fvunRzZS4tcpAYLgdAaK9rXsnwkDhZnf4QEEzJoDR2NcUyxuqDFs1P7oVh+ugshEGhlH3MuyKAHE/2wx3rCoUNGMCGINjTbG8R/OjDUODoMqwEwLEfvWmGZMwAWCfOjLFkubHIyJAHE6nmzGpTgC4j/s2Px5iiiXNj8dFgDiezjRjMlUUQFsHbH7c+xRLAsNxECBO5yTNmEwVBbCtAzc/HnyKJYHhsAgQ3XC0ZkymigK4yZGbH5li2XMEiG7adzMmU0UBbNSF5kemWPYTAaL79taMyVRRAF1sfmSKZT8RIPrnXs2YnLcDGJc+NT8Kplj2CgGi/9o0Y3LeDmAE+t78KAShoQ8IEMPSmamiNGMCx0PzI06BADFsnLcDGCiaH3FqBIjx4LwdQI9tW2Wg+RHHQoAYL87bAXTcrlUGmh9xDAQICMF5O4BOuO8US5ofcUwECGzSmWZMpopiyA44xZLmRxwcAQLb4LwdwJ4ceIolzY84GgIE2uK8HUALR55iSfMjjoYAgfvivB3Ami5MsaT5EYdGgMA+cd4OjFIXzy9B8yMOjQCBQ+K8HRikPp1fgsCAQyFA4Jg4bwd6q+/nlyAwYN8IEDiVzkwVpRkTm3B+CeB2BAh0BeftwMl1ofmRKZboCwIEuojzduAoOL8EsDsCBPqgN+ftEIJA0XWcXwLYDwIE+qbT5+2gGbN7OL8EcBgECPQdzZi4hvNLAMdBgMDQ0Iw5QpxfAjg+AgSGjGbMgeL8EsDpESAwJr1pxiRMvKoLUyxpfgReIkBgrDrdjEl1gvNLAF1HgABe6Ewz5lininJ+CaBfCBDAZidpxhzbVFHOLwH0FwECuNvRmjGHPlWU80sAw0GAANrbdzPmoKeKdqH5kSmWwP4RIID72Vsz5lCminax+ZEplsD+ESCA/bpXM2Yfz9vRp+ZHwRRLYG8IEMBhtWnG7M15O/re/CgEoQG4LwIEcDydmSrathlzvcrw7rvvPvWf7ml+BMaJAAGcTmfP29E0TfSHQaD4F1/84ofWWn8Q9sHBh4aG5kdgfOJTbwAwYv6At+l7Jz9vhxBiFSDOzs4+9gHCN0S6KkNF8yMwTgQIoBs2hYnV912l0FhrRRRF+27GDMOFH+7IhBD/wG/Ea6+99lNjjPKf/H1wcMMM+fqwRDgUQfMjMEwECKCbwkAhxYuDZFidMEIIqZRaVSjiOL5PM2YYIqZFUUzCjXnjjTf+h7VWSimtG7Ko3JCDDwmv9DHQ/AgMGwEC6L5bqxNiQzNmHMc7NWMG1YksfKC33nrrA+GCjOtLqIKhijyoMtD8CIwEAQLon9sCxV3ViW2aMVM3hLHy6U9/+i+DCoTvfyjcLIt8fViC5kdg+AgQQP/tuxlT13WdhHf2qU996sc+QCilGj8EEa7zQPMjMC4ECGBY9tKMaYyJwhs/fvz4p8INYSilrA8IURTVvo+B5kdgXAgQwLDt0owprbUqvJOzs7Nnqztx4WBtOILmR2BkCBDAeLRqxgyvkKbpcsP1CQzAiBEggPG6K1CsRFFU33AdAgMwUixlDWCzFz0MALpsbbjxmE72wAAA4J5OGPQJEAA2koxGALgFPRAAbuRDhLV82AA6pQNDjAQIAOgw2YEDxU3Wp/tiXAgQANBxbnptp9wwgwcjQnoEAACtESAAAEBrDGEAwICsjyx0cPQDA0EFAgAGxlqCAw6PCgQAjFRYrSBwoC0qEAAwEFK2CwJUKnAfVCAAYISYhYn7IkAAWJFSbFy0KPw+q1ICEIIAASBgrVA3hQj/82NuDw6HoQvcFwECAAbA9z+sN0a27YsAtsWnCQDX3FRloPrQbT4k+MbI8P/AIbBDAAAArTGEAeAV670QVB9OixNXoYsIEADQYZwyG13FHyaAjXzVgeoDgE2oQAyYlPLG6XjAtm6b1glsgyrKMBEgBigMDpYWbAAnJKVc7ZOMMZH/nhCCnVPPkQoHxr9RrbWEBwAnF+6LlFKNtVa670khBN2hPUaAGJAwPABAl/j9UhRFtTEmstaqIEighwgQA0N4ANBVfv/UNE1sjInckIakGtFPBIiBoGESQF+kabqoqippmiYyxig/rIF+IUAMCG9AAF3n91NFUUyrqkqbpondLA3JcEa/MAtjGHjTAeiV5XJ5bozxH2KtEC+aLMWL/RmfhnqAADEAVB4A9M3l5eWDi4sLoZQy7mLti52ZYenufiBA9B/vNAC9M5/PH8ZxbJRSVRRFVRRFtZTShweqED1AgOg5pkEB6KP5fP5Aa11qrZda6yKO48qvEyGEsFQhuo8mymHgnQagVxaLxXme52dVVU3quk782hCC/VlvECCAE3LL/K4ufbDLdt51m748d+xPnufToigmRVFkdV3ruq7joKkSPcCLNQC86frNL/Xbh2ZYf6Bvc8CXUr7y3NZvb60lRIxMXddZWZZpVVVpVVWrCgT7s/7gheo/9ro4qjZBZ5vwEN4vIWI8iqJIy7LMqqpKjTHaGOPXgxCC/VovECB6zu2cebPh4NYP7rse7PtSbcFhFUUxdQEi8cMXfn/G30c/MAsDOIHw4Bt+3ZcdJ9UC3Fee534lSu3Oi6GYUdYvBIgB4E03PpuGBvz3t7VLWNlXwLlp+w99W3RHWZaTqqrSoHlSCpaz7hUCRL/5M9ixN+0ZfwDc98HwUAfWm4IJB3Psqq5r7c6DIYPeByFe7M/Yt/UAPRA9RxkZx7IeFAgOuI8gPEi3AuXqD4r9Wj9Qgeg/9uIjdIqDd1d26gSXYfBDFUqpTatO8iL3AAFiALqyY8cw+b+vm3ouGMbALtzfjnUXI14sX82JtHqEADEM7L0hhDhcE+VN12U2BnYlpTRKqUZK2fggIeh76BUCBDAg+64EbBsOqEKgLfe35YNDeEFP0EQJADgF4yoPQgiGYvuIAAH00DF2trf1PoTCKanHwIFmGILXkVN39xRDGMAJdbnsv48eiX3jQAN0BxUIoIe6HDxCvsly09k3Q9vO5ujL8wbGgAoEgIPa5qBPMBif4DXn5Fk9RQUCQG8w22NQlFuJUghBiOwjAgSA3uAgMxzBqbv9eS/8BT1BgBgG3nQAesVaq4wxkbU28ufEEC9PpIUeIEAMAJ/KAPSNtVb44ODOximttYr9WX8QIPqPtA6gd/zZN40xm5oo2a/1AAGi50jrAPooiqLanwPDVR5erizFfq0XCBD95teOl0KwyA6A7vP7qTiOqyBEmPAqgvNi9AIBYgCklPbq6urhqbcDALbx9a9//Q+SJFlqrYs4jmullBEuNPihDXQfAWIg/JuOKgSArvL7pyzL5lmWLbTWRRRFlVKqUUoZwkO/ECB6LjglrvjFL37xmeB7ANAZfr/0jW984z9mWbZI03SZJEmutS59FSLcn6H7CBD95ysPRilV//jHP/5V93+CBICTC/dF3/rWt/5DmqZ5kiRL92+utS6UUpVSqg56IahE9ADnwhgAl9yNUqrRWpc/+tGP/uGTJ08+9bnPfe59QgSAU/vOd77zHSGEkVKaOI7LJEmKOI7zJEkKrXWhtS6VUo3bj5k77xCdQIAYCKWUieO4juO4StM0T9N0+cMf/vBfPnv27JPz+fy8qqpJ0zSRtVY2TaOrqkqKopgURTEtyzKtqioxxsTGGClerFF/7f4JIuP0zW9+8x995Stf+S+n3g50xw37BqOUskqpWmtdJklSpGm6SNN06cJBLaW0URQ1WusiSZLcD2OkaZrHcVwFzZToCQLEMFhfgYjjuNRaL7Msu5pOp9OyLCfGmEhKKeq61k3TaGOMklJapZSVUhr/tbXWKKWktda6siNTqSCUUtWptwGd5JefFn49B7dP8fsj/3UTRVETRVEVx3GVZdliMplcTafT51mWXWmtl3EcryoQgn1ObxAgei5oOrJRFNVa6zJN0+V0Op1XVfWsrutYSimUUnVVVWlVValSKglWgRNKKVNVVWWMUUII6T8FBAGC8sOInZ2dXZ56G9A5VgQBwu07rFLKaK2rOI6LJEmW7pJrrUtXeSgmk8l8Nps9mc1mz6bT6ZWvUoQLS1Hx7AcCRP9ZIYR06d/4IQxjzPO6rpUQQsRx3Gitl0VRTKuqSsuyTKqqmhRFkSdJsqzrWhtjYmutUEqJoJFp1RV9qieH03vttdd+cuptQOf45aeVEKsTYwn/YSWO48oNYyy11sskSUofJqbT6dVsNns6m82eTqfT534IY20aJ/ucHiBADIAfg5RSyiiKKq11boxRFxcXIo5jo7UusyxblGWZFUWRVlWVub6HtK7rxPdGCFd9UEo17n55E0O8+eabPz71NqCbggpE5KsQvtchjuNKa50nSVIkSeL/XWZZNp9Op1cuPMy11nkURZUbTjVUH/qDADEMVgRDD0KIUogXjZVKqUprvZxOp1dlWWZlWaZ1XSdVVSWuJyL2Z8ALxyyDMiIhYuTeeuutvzr1NqCTZHBGzchaK40x0vVPmSiKahciSj/zwg1nLH3zpNY6d8MXTbD/Yp/TEwSIgXAnpFm9cYUbj3QViaKu60Vd19rNttB1Xcf+U4O1Vvnk75sqxcv1JU77xHByr7/++l+fehvQPcFsjNUpuV2gUH46pmvsrt0HmdLNtij911EUVVEUrZonqXr2CwFiQIKGSiOEEEop6z8FGGPyIDTExhjlSo7upi/HHn2AIDxACCEePXr04am3Ad3kQoRvppTue37HYV2IMEqpOggTTRRFfuVJv+4D+5seIkAMi5VSCjcc0bjpmMZ9reI4Vu5Tgv+ksHrTe1JK8+JmfBLAC9PplFkYuJHfX1hr11c2Xs2o8P0NPjQEsy3CGV/oGQLEALk3oxRuFoULCiaKIhFWHYRYfVqwwW2FYAwSgSRJ8lNvAzpP2usLTF2ragrxoifL/3/t5H/sb3qKADFcviToA4IVQogoiozY/GYXIngjr682h/Hys3KATdaGHvy+5dYPJQSHYSBADN+mscX1771yBcYj4Sml2NFjW8zeGhECBITgzY7b8fcB4BWczhsAALRGgAAAAK0RIAAAQGsECAAA0BoBAgAAtMYsDAC3e3l6dwBYoQIBYDOCA4BbECAAAOirV89BcjQMYQC42wl3UgC6iQABAB0hBzJstOHMnBggAgSAlU0HsBenZHv5fQ4Oh9X3E9lxHp3xYEcAYOWucEB4AOCxMwAAAK0RIABcc1OVgepDx6wPFTB0gCNjhwAAAFqjiRLAK6y1StI4OSxhheK2Rs1NlYyeN3biMAgQANBX2w5bSPkyBNx1m/B6BAfcgk8VADbyVQeqDx1m7cvLXaR8GQrol8AesGMAsJEfwhjK4kaj5gOGDw9UFrAHDGEAEEK8GhT+5M8+uPFnxpjILRjEkagv2oYHQgbuQIAARiwMBmFgWLf+M6VU4782xkTuvoQgUBzP+gF+mwM+oQB7RIAARuS2KkMb4e3CMCEEgQIYCwIEMGD7Cgy3ua06IQSBAhgqAgQwMNsOSxwKwx33w8mo0BfSWstfK9Bjx6gy7Mt777x97f8ECqC/CBBAD526yrAvYaAgTAD9QoAAeqBPVYZdUZ0A+oUAAXTQGALDXQgUQLcRIICOGMqwxKEw3AF0CwECOBGqDLujOgGcHgECOCKqDIdBdQI4PgIEcEBUGY6P6gRwHAQIYI8IDN1DdQI4DAIEcE8MS/QH1QlgfwgQQEtUGYaDQAHsjgABbIEqwzgw3AFsjwABbECVAVQngNsRIACHKgNuQ3UCuI4AgdGiyoBdUZ0ACBAYEQIDDoVAgTEiQGDQGJbAKTDcgTEgQGBQqDKga6hOYKgIEOg9qgzoE6oTGAoCBHqHKgOGguoE+owAgc4jMGAsCBToEwIEOolhCYDhDnQbAQKdQJUBuB3VCXQNAQInQ5UB2B3VCZwaAQJHQ5UBOAyqEzgFAgQOiioDcHxUJ3AMBAjsFVUGoFuoTuBQCBC4FwID0C8ECuwLAQKtMSwBDAfDHdgVAQJ3osoAjAPVCbRBgMBGVBkAUJ3AbQgQEEJQZQBwO6oTWEeAGCkCA4D7IFCAADEiDEsAOBSGO8aHADFgVBkAnALViXEgQAwMVQYAXUN1YpgIED1HlQFAn1CdGA4CRM8QGAAMCdWJ/iJA9ADDEgDGgOpEvxAgOogqAwAQKLqOANERVBkA4HYMd3QLAeJEqDIAwO6oTpweAeKIqDIAwGFQnTg+AsQBUWUAgOOjOnEcBIg9IjAAQPcQKA6DAHFPDEsAQL8w3LEfBIiWqDKMz3vvvN36db7rNrvcp7+dENv/3YU7yvXbrH8qu+l6t123zbYAXUR1YnfxqTegD6gyjJffubQ54G+67vr3/uTPPtg5ROzDTUHkvXfevnG7bgoW93kebQPRsXR1u7B/66+xUqrxXxMmbqdOvQFdJKU04eVP/uwD4S8Ynzav+03h4ab7ve2T/V2Ps6vbDo7+e9vef9vrh9sQ3mb9/6fS1e3C8YT7e6VUo5RqpJSNlNJYa33Vnsq9oAIhhGBYAputHzh2/aS977+nbYOH3971A+Jd2+Rvs+3zbXv927ahb1UZDNtt1QkhqFCMNkAwLIE27lMtOJQuHdTa/n4O0R+yDzdVZbr22uM0GO64bjQBgioDdrGvv5N9HxTvOqjd9nhtqgrH1qa60uY+96FLgQ3dEP49bKpODD1MDD5A+ODAGx9t3HSA6tpBpGvbsy93Pa99P+e7AglVCNzlpurEkIPE4AOEtVYJQQUC7a3/jXTtIHLT9nRpG29yU0Dow7YDm6z/7VZVlSqljGu6tEIIKaUcVIgYfIDw/PiUtVZZa2Ucx6X/GWECm/TlYLbpYNzlv+lNTZdhA2Nffu9A+Lf64Ycf/m2tdRnHcRVFUdU0jbbWNq4SYf0sjiGFiLEEiBf1I2uVMUYZY6LFYnFR17Wu6zp5/PjxT8Mrd3nni8O7a5ZAl4YNbpplcZtttn+XaZlthCEi/N6mr4GuWP87//M///N/lmXZIk3T5fPnzx+nabpMkiTXWhdxHPswId10UF8J9xWJ3htFgLDWCj9/1xijmqaJq6pKqqpKy7KcfPDBB38/z/Npnudny+Vy9mu/9vZ/Cm/Pzmx8bmtA7OIn5DAU9OXv9T7beYomSozP+t/Zt7/97e9kWbbIsmyeZdn8o48+emsymVy5yzzLsiv380WSJCpY6dm6yoN0Xx/7qRzEGAKEf6WkG76ImqaJmqbRVVWlRVFM8jyfLpfL88VicTGfz8/ff//9f7dcLs8Wi8V5nudn773z9r/3d8bOaNi2PTB1sQqxzbZvs2bDrstl7+P30XYBq33ZZlYLxiF8rb/0pS/9V611kaZpnqbp/NmzZ58simJeFMWkKIrMfRBN6rrWxpjYBwYppZVSGqWUcdUHY1+MX1jh+iHEAKoQYwgQ17hqhB/KUD5M1HWtq6rSdV2vKhPu3/R3fud3/nC5XJ4VRTF97523/0l4f105iABCtJuieduqmW0WhNr2+ts65XvqvtNf0T/r4fA3f/M3/zqKolprXVVVlQpxbXViq5SqlVJ1FEVVWZZ1HMdVXdeFO37opml00zSRP8a4D64neW6HNroAIaUUQTI0URQ1URRVcRxXWusqjuNSa10kSbKs6zpumkYbY2KfLr/61a/+Z5c807IsJ++98/bf8/fNDqbftj14tl158Rh2WcjppqrFXZWJba57lzZLfh9Ln2e1oJ3wNX333XefukDQRFFUR1FUx3G8Oha440GZJMkyTdM8SZIiSRL//aXvd3DHjyqKoiqKosYfY1zwOOGzPZxRnI3T9z9Ya1UwfLGqNLj+h1UPxHK5PPOXPM9n7jJdLpezsiyneZ5PiqKYlGWZVVU1KYoires6+YM/+INfCR+3KwcXHM9t0xO7tnTzKe0zjOxbl7cNu1l/Tb/whS9c+tCglKrjOK5902Mcx2WapoXWepkkSZ6m6TLLsmWSJAvX57DqgQj6Hzb1QCxdACl9qPBVjKHMxBhFgBAvnue1WRhN08R+FoYLEpkb15r4voiiKKZFUUyDgDFz3/ehYuJv58OECya6qqr0+9///i+HG8FOaBy2qWRwtkfgcNYDw+c///nLsOrsQkPphioKrXWltS7D0JAkSZ5l2TLLsnmapvMsyxaTyWSepunCzbxYBF8v/WXDLIza90EE1QgCRJ/4M6gFszEiFyTCHogkDBRlWaZlWU6Kosjcv5PlcnktQBRFMXP/nxRFMfWBwvdP+JBS17X+wQ9+8Et+ezhwAMD+hKHBBwYppQmHJsLhiTiOKz8U4Q/8LhAs0zT1oWEVICaTycJdzw9lLN1wRh4MY5Rrwxj+bJ6rBsqhVB+EGFGAEGIVIlZhwje4BFWJyBjjKxM6qFBcq1L4YY+wOuG/9mGiLMupDx5lWSZVVaVVVWW+WfN73/ve3wm3jUABANvbVGWIosisDU34KoPvc8s39DSsQoOvLPhhCP+1u+6quuCCgh/yqOI4roLHXVUblFJGBKFhSOFBiJEFCEf6jti1qoQyxkhrre+e9RWKeG24I6xQZC4sbAoUvjrhh0Wmbtpo5sKEr1AkdV3rcLiDMAEAr7qpyhDHceMO4Nd6GXyFwU/FdP+GQw5z1+PwSmBwfQ/5ptDgqxm+wuC2o1FKWd/nIK4HByEGMmwRGmOA8GQwtcZ/LYOGSxlWJ4JAoeu6joMwsWrGLIoic30Tk6AiMXHfy3ygcMFjWlXVxuGO7373u3833FACBYAx2rbK4GfQrQ9LaK1zFwjyIDDkPkQEvQxL928eNj8GoaGOoqgKAkPY02DXhiiEcGFhqMHBG3OACIVhIqxM+J8pv4qlCxW+d8JXJ5K16sQrvRPBZVYURXbTcEcwRXRjdUIIAgWA4dq1yuAP/jcMS+S+2hA0O17rZVirMpRB34TvY/DTMq1bknoVFsKhiaGHhhAB4lXXwoS4ozrhV7bcVJ2o61qXZZlWVZX5IY+gIjHN83wSDnfkee6HPGjGBDAKN0yx3LrK4JsfXUVhvjYs4SsLvgEyD4clXF/EK1UGN+VyqyqDEOMKDSECxN3uChS3Vif8DA/XPJn6QLFWlaAZE8AobDPFcscqw7Xmx7DaoLXO/X34pkc3U+LWKgOB4XYEiPa27p0IA4Wb3eEDBc2YAEZjX1Msb6gybNX86FYcroPKRhgYRt3LsCsCxP1sM9yxqlDQjAlgDI41xfIezY9WXl8VkirDDggQ+9WbZkzCBIB96sgUS5ofj4gAcTidbsakOgHgPu7b/HiIKZY0Px4XAeJ4OtOMyVRRAG0dsPlx71MsCQzHQYA4nZM0YzJVFMC2Dtz8ePAplgSGwyJAdMPRmjGZKgrgJkdufmSKZc8RILpp382YTBUFsFEXmh+ZYtlPBIju21szJlNFAXSx+ZEplv1EgOifezVjct4OYFz61PwomGLZKwSI/mvTjMl5O4AR6HvzoxCEhj4gQAxLZ6aK0owJHA/NjzgFAsSwcd4OYKBofsSpESDGg/N2AD22bZWB5kccCwFivDhvB9Bxu1YZaH7EMRAgIATn7QA64b5TLGl+xDERILBJZ5oxmSqKITvgFEuaH3FwBAhsg/N2AHty4CmWND/iaAgQaIvzdgAtHHmKJc2POBoCBO6L83YAa7owxZLmRxwaAQL7xHk7MEpdPL8EzY84NAIEDonzdmCQ+nR+CQIDDoUAgWPivB3orb6fX4LAgH0jQOBUOjNVlGZMbML5JYDbESDQFZy3AyfXheZHpliiLwgQ6CLO24Gj4PwSwO4IEOiD3py3QwgCRddxfglgPwgQ6JtOn7eDZszu4fwSwGEQINB3NGPiGs4vARwHAQJDQzPmCHF+CeD4CBAYMpoxB4rzSwCnR4DAmPSmGZMw8aouTLGk+RF4iQCBsep0MybVCc4vAXQdAQJ4oTPNmGOdKsr5JYB+IUAAm52kGXNsU0U5vwTQXwQI4G5Ha8Yc+lRRzi8BDAcBAmhv382Yg54q2oXmR6ZYAvtHgADuZ2/NmEOZKtrF5kemWAL7R4AA9utezZh9PG9Hn5ofBVMsgb0hQACH1aYZszfn7eh786MQhAbgvggQwPF0Zqpo22bM9SrDu++++9R/uqf5ERgnAgRwOp09b0fTNNEfBoHiX3zxix9aa/1B2AcHHxoamh+B8YlPvQHAiPkD3qbvnfy8HUKIVYA4Ozv72AcI3xDpqgwVzY/AOBEggG7YFCZW33eVQmOtFVEU7bsZMwwXfrgjE0L8A78Rr7322k+NMcp/8vfBwQ0z5OvDEuFQBM2PwDARIIBuCgOFFC8OkmF1wgghpFJqVaGI4/g+zZhhiJgWRTEJN+aNN974H9ZaKaW0bsiickMOPiS80sdA8yMwbAQIoPturU6IDc2YcRzv1IwZVCey8IHeeuutD4QLMq4voQqGKvKgykDzIzASBAigf24LFHdVJ7ZpxkzdEMbKpz/96b8MKhC+/6Fwsyzy9WEJmh+B4SNAAP2372ZMXdd1Et7Zpz71qR/7AKGUavwQRLjOA82PwLgQIIBh2UszpjEmCm/8+PHjnwo3hKGUsj4gRFFU+z4Gmh+BcSFAAMO2SzOmtNaq8E7Ozs6ere7EhYO14QiaH4GRIUAA49GqGTO8Qpqmyw3XJzAAI0aAAMbrrkCxEkVRfcN1CAzASLGUNYDNXvQwAOiyteHGYzrZAwMAgHs6YdAnQADYSDIaAeAW9EAAuJEPEdbyYQPolA4MMRIgAKDDZAcOFDdZn+6LcSFAAEDHuem1nXLDDB6MCOkRAAC0RoAAAACtMYQBAAOyPrLQwdEPDAQVCAAYGGsJDjg8KhAAMFJhtYLAgbaoQADAQEjZLghQqcB9UIEAgBFiFibuiwABYEVKsXHRovD7rEoJQAgCBICAtULdFCL8z4+5PTgchi5wXwQIABgA3/+w3hjZti8C2BafJgBcc1OVgepDt/mQ4Bsjw/8Dh8AOAQAAtMYQBoBXrPdCUH04LU5chS4iQABAh3HKbHQVf5gANvJVB6oPADahAjFgUsobp+MB27ptWiewDaoow0SAGKAwOFhasAGckJRytU8yxkT+e0IIdk49RyocGP9GtdYSHgCcXLgvUko11lrpvieFEHSH9hgBYkDC8AAAXeL3S1EU1caYyFqrgiCBHiJADAzhAUBX+f1T0zSxMSZyQxqSakQ/ESAGgoZJAH2RpumiqqqkaZrIGKP8sAb6hQAxILwBAXSd308VRTGtqiptmiZ2szQkwxn9wiyMYeBNB6BXlsvluTHGf4i1QrxoshQv9md8GuoBAsQAUHkA0DeXl5cPLi4uhFLKuIu1L3ZmhqW7+4EA0X+80wD0znw+fxjHsVFKVVEUVVEU1VJKHx6oQvQAAaLnmAYFoI/m8/kDrXWptV5qrYs4jiu/ToQQwlKF6D6aKIeBdxqAXlksFud5np9VVTWp6zrxa0MI9me9QYAAABxdnufToigmRVFkdV3ruq7joKkSPcCLNQB9e9P1rTS5r+115wRoff2bbnPXz7d53Lbb1Bdtnteur0tXrt9XdV1nZVmmVVWlVVWtKhB925+NGT0Q/Tf8Pc0JHWJHLqXc28wZa+2d23jTdfz3xjqLZ/13ctfvo2vX77uiKNKyLLOqqlJjjDbG+PUghKCJshcIED3ndi6EiAPZ9857mwO+EC9Dxm2Vg03X3+Y+17dnKNp+yhfi1efvP/1v+n6Xrj8ERVFMXYBI/PCF359t+z7BaVEqQieMpWzr7fO5bnNw8dfxjzvE37U/6+O2B9tN17vttl27ft/lee5XotTuvBiKGWX9QgViAPr+ptu1VHvTJ7M2B8dtHvO2x9llB3/Xp6tt77ftY/vH3Udp/Fi/+1Np+9qe6vp9rk6UZTmpqioNmielYDnrXiFA9Js/g10/9yDiMOO8fdmh7rrzv21Y4z6fvvehD7/7tj0jXbv+UNR1rd15MGTQ+yDEi/1Z7/dtY8AQRs/1eccy9Cax22zbSLft7Xep3gCnFIQH6VagXP0R8/fZD1Qg+q+XR9997CBOHTz28fi7Njbu8vsLA9t9m/NO/bvHC31+HfxQhVJq06qT/X1iI0KAGIC+pvWhlma31baUHV7npvHwu3oT/M/68ru/aRv7fODEC+7v1bqLES+Wr+ZEWj1CgBiG3u1N1w9k+zwg9K2RL3z+92mevCsUHKMJr2+/e5yOlNIopRopZeODhKDvoVcIEOiEfS+u1BfrMyNu02ZlxfB3cNun+H2vM3CIdTP2bZtZMF2+/lC45+WDQ3hBT9BEiZNbX6NgrA5xsLyrUXXMv/tdqjVduv4AGFd5EEKM82+w7wgQ6IRdDmSn3uHs6/HbNE3edd3w99h2lkuffvf31XYWTNeuv+3PuyzYdk7d3VMMYeDo7vo03Ae77PDarkJ41212eZx9PUbXbdtLsul1bNtjcqrrc9DFqREg0FvHOvDdtMTwmHfgQwkdhw5bh7z+2P8GcXoMYQAAji4IS3IogXRsCBDADvp8DgIMwwD+BpVbiVIIMZyq1pgQIIAdsLPDqfX9b9Btvz95VnhBTxAghoE3HYBesdYqY0xkrY38OTHEyxNpoQcIEAPQ908iAMbHWit8cHBn45TWWsX+rD8IEP1HWgfQO/7sm8aYTU2U7Nd6gADRc6R1AH0URVHtz4HhKg8vV5Ziv9YLBIh+82vHSyFYWAZA9/n9VBzHVRAiTHgVwXkxeoEAMQBSSnt1dfXw1NsBANv4+te//gdJkiy11kUcx7VSyggXGvzQBrqPADEQ/k1HFQJAV/n9U5Zl8yzLFlrrIoqiSinVKKUM4aFfCBA9F5wSV/ziF7/4TPA9AOgMv1/6xje+8R+zLFukabpMkiTXWpe+ChHuz9B9BIj+85UHo5Sqf/zjH/+q+z9BAsDJhfuib33rW/8hTdM8SZKl+zfXWhdKqUopVQe9EFQieoCTaQ2AS+5GKdVorcsf/ehH//DJkyef+tznPvc+IQLAqX3nO9/5jhDCSClNHMdlkiRFHMd5kiSF1rrQWpdKqcbtx8ydd4hOIEAMhFLKxHFcx3FcpWmap2m6/OEPf/gvnz179sn5fH5eVdWkaZrIWiubptFVVSVFUUyKopiWZZlWVZUYY2JjjBQv1qi/dv8EkXH65je/+Y++8pWv/JdTbwe644Z9g1FKWaVUrbUukyQp0jRdpGm6dOGgllLaKIoarXWRJEnuhzHSNM3jOK6CZkr0BAFiGKyvQMRxXGqtl1mWXU2n02lZlhNjTCSlFHVd66ZptDFGSSmtUspKKY3/2lprlFLSWmtd2ZGpVBBKqerU24BO8stPC7+eg9un+P2R/7qJoqiJoqiK47jKsmwxmUyuptPp8yzLrrTWyziOVxUIwT6nNwgQPRc0HdkoimqtdZmm6XI6nc6rqnpW13UspRRKqbqqqrSqqlQplQSrwAmllKmqqjLGKCGE9J8CggBB+WHEzs7OLk+9DegcK4IA4fYdVilltNZVHMdFkiRLd8m11qWrPBSTyWQ+m82ezGazZ9Pp9MpXKcKFpah49gMBov+sEEK69G/8EIYx5nld10oIIeI4brTWy6IoplVVpWVZJlVVTYqiyJMkWdZ1rY0xsbVWKKVE0Mi06oo+1ZPD6b322ms/OfU2oHP88tNKiNWJsYT/sBLHceWGMZZa62WSJKUPE9Pp9Go2mz2dzWZPp9Ppcz+EsTaNk31ODxAgBsCPQUopZRRFldY6N8aoi4sLEcex0VqXWZYtyrLMiqJIq6rKXN9DWtd14nsjhKs+KKUad7+8iSHefPPNH596G9BNQQUi8lUI3+sQx3Gltc6TJCmSJPH/LrMsm0+n0ysXHuZa6zyKosoNpxqqD/1BgBgGK4KhByFEKcSLxkqlVKW1Xk6n06uyLLOyLNO6rpOqqhLXExH7M+CFY5ZBGZEQMXJvvfXWX516G9BJMjijZmStlcYY6fqnTBRFtQsRpZ954YYzlr55Umudu+GLJth/sc/pCQLEQLgT0qzeuMKNR7qKRFHX9aKua+1mW+i6rmP/qcFaq3zy902V4uX6Eqd9Yji5119//a9PvQ3onmA2xuqU3C5QKD8d0zV21+6DTOlmW5T+6yiKqiiKVs2TVD37hQAxIEFDpRFCCKWU9Z8CjDF5EBpiY4xyJUd305djjz5AEB4ghBCPHj368NTbgG5yIcI3U0r3Pb/jsC5EGKVUHYSJJooiv/KkX/eB/U0PESCGxUophRuOaNx0TOO+VnEcK/cpwX9SWL3pPSmleXEzPgnghel0yiwM3MjvL6y16ysbr2ZU+P4GHxqC2RbhjC/0DAFigNybUQo3i8IFBRNFkQirDkKsPi3Y4LZCMAaJQJIk+am3AZ0n7fUFpq5VNYV40ZPl/7928j/2Nz1FgBguXxL0AcEKIUQURUZsfrMLEbyR11ebw3j5WTnAJmtDD37fcuuHEoLDMBAghm/T2OL69165AuOR8JRS7OixLWZvjQgBAkLwZsft+PsA8ApO5w0AAFojQAAAgNYIEAAAoDUCBAAAaI0AAQAAWmMWBoDbvTy9OwCsUIEAsBnBAcAtCBAAAPTVq+cgORqGMADc7YQ7KQDdRIAAgI6QAxk22nBmTgwQAQLAyqYD2ItTsr38PgeHw+r7iew4j854sCMAsHJXOCA8APDYGQAAgNYIEACuuanKQPWhY9aHChg6wJGxQwAAAK3RRAngFdZaJWmcHJawQnFbo+amSkbPGztxGAQIAOirbYctpHwZAu66TXg9ggNuwacKABv5qgPVhw6z9uXlLlK+DAX0S2AP2DEA2MgPYQxlcaNR8wHDhwcqC9gDhjAACCFeDQp/8mcf3PgzY0zkFgziSNQXbcMDIQN3IEAAIxYGgzAwrFv/mVKq8V8bYyJ3X0IQKI5n/QC/zQGfUIA9IkAAI3JblaGN8HZhmBCCQAGMBQECGLB9BYbb3FadEIJAAQwVAQIYmG2HJQ6F4Y774WRU6AtpreWvFeixY1QZ9uW9d96+9n8CBdBfBAigh05dZdiXMFAQJoB+IUAAPdCnKsOuqE4A/UKAADpoDIHhLgQKoNsIEEBHDGVY4lAY7gC6hQABnAhVht1RnQBOjwABHBFVhsOgOgEcHwECOCCqDMdHdQI4DgIEsEcEhu6hOgEcBgECuCeGJfqD6gSwPwQIoCWqDMNBoAB2R4AAtkCVYRwY7gC2R4AANqDKAKoTwO0IEIBDlQG3oToBXEeAwGhRZcCuqE4ABAiMCIEBh0KgwBgRIDBoDEvgFBjuwBgQIDAoVBnQNVQnMFQECPQeVQb0CdUJDAUBAr1DlQFDQXUCfUaAQOcRGDAWBAr0CQECncSwBMBwB7qNAIFOoMoA3I7qBLqGAIGTocoA7I7qBE6NAIGjocoAHAbVCZwCAQIHRZUBOD6qEzgGAgT2iioD0C1UJ3AoBAjcC4EB6BcCBfaFAIHWGJYAhoPhDuyKAIE7UWUAxoHqBNogQGAjqgwAqE7gNgQICCGoMgC4HdUJrCNAjBSBAcB9EChAgBgRhiUAHArDHeOjTr0BOBwppQkvf/JnHwh/6br1Tzddud2u939Mh/wd7HLfd91mn7/TNvf13jtvX7scYnsOpYvbGO5flFKNUqqRUjZSSmOt9R9W+cA6IPGpNwD7NYQqw6ad43vvvN2J5/Mnf/ZBZ7Zln9qEhzbPf9N11793yt/ppscc6mt8TOu/O6VU47+mOjEcVCB6rs9VhtuE29/m05bf+R9aFz8B3tc2fzNt/q5uCg833e99f6f7PugP8TU+FaoTw0QFomeG3vy4aafdted4rJByLLsMXex6sO7aa3mTob3GXUJ1YjgIED0whGGJNu77HPdVgvYHkJvupwtl7vAgd59taXPbLh5c2w6rbPp60+2H9Bp3VficwjAhBIGi6wgQHTT0KsNNbjsotd2R3zdE3BUedtXmgLXNdcOfHaLBMbSv38Uhhhq69B7p2mvcJ7dVJ4QgUHQNAaIjxlZl6LJtwkPbT+Gb7vO2x1k/yNx0INnUjLhvN91n1w7c2wp/h7zG3cZwR7fRRHkiQ21+7JJddraHqjxsus9th0bW/y5u28ZD/f1su+3H1rUQ0+fXuA9oxuwWKhBHRJXhNLY9yBzyk13b4Zeu6eKn3q5tU99f476hOnF6BIgDGmsvQ9d0rUGwawe+29xVgj9lBaDL5fyubteQ0Yx5fASIPSIwdMsujZf+30OuKbDrGhdtH2dfbvo9dOEA3qVFn/r8Gg8NzZjHQYC4J4Ylhuu2A9MuO/F9/X10bbGsrhzA920Mr/FYMNxxGDRRtkTz4+F0aWpfH6bNbVrcqa0h/N0O+WC7j9cYr6IZcz+oQGyBKkO/7OsTsT8w3XR/+1qoahfhtm36/n1tOxvlrt/RsRxqKGPIrzFeoDqxOwLEBvQynM6pxrRvG+dft+sn/ZsOBLtOHW2zzdts2/q0wvtuR9fdtt1De42xPZoxt+dLNaNGYOiW+64geejX79Sftg/hUM9pmwPnPtfe2NfzGOJrjPtbD4hjDxSjDRAMS3RbV3fgXd2ufRjyc2uD3wO2FQaKMYaJ0QQIqgwAgEPZVJ0YepgYfIDwwYHAAAA4Fh8ohhwkBh8gPCoQAIBDWa9AVFWVKqWMEMJKKa0QQvh/h2I0AcI/T2utstbKOI5L/zPCBACgrTA0fPjhh39ba13GcVxFUVRFUdQEa0xY/yF2SCFiLAFCWmuFtVYZY5QxJmqaJq7rWtd1nTx+/Pin4ZUJFNiX9Ya8tjMObloe+bbHuOk+DjUT4tizZrZ5vnfdJ42S2MV6leHP//zP/1mWZYs0TZf+kiRJrrUu4jj2YaJ2QcIvQCjEQIYzRrEOhAsP0lorjTGqaZq4qqqkqqq0LMvJBx988PfzPJ/meX62XC5nv/Zrb/+n8PbsaLCLYy43fdsB8a7Fng55CvPbbLPtm26zft1Na1jcdZ9dOocGumv9Pfztb3/7O1mWLbIsm2dZNv/oo4/emkwmV+4yz7Lsyv18kSSJCj6g+2EM6b4+9lM5iDEECP9KSTd8ETVNEzVNo6uqSouimOR5Pl0ul+eLxeJiPp+fv//++/9uuVyeLRaL8zzPz9575+1/7++MHQ7a2LVq0PYx7gorN13nvuFhH0uG3+ecGzfddtuAQIjAuvBv6ktf+tJ/1VoXaZrmaZrOnz179smiKOZFUUyKosjcB9GkrmttjIl9YPBDFkop46sP1lofIlZB4jTPcH/GECCuWRvKUD5M1HWtq6rSdV2vKhPu3/R3fud3/nC5XJ4VRTF97523/0l4f+x8sMltB8VtD5r+4HbTdTedJ2GXA+Yp/oZ32fZNjhVeMFzrfwO/+Zu/+ddRFNVa66qqqlSIa+dAskqpWilVR1FUlWVZx3Fc1XVduOOHbppGN00T+WOM++B6kud2aKMLEFJKESRDE0VRE0VRFcdxpbWu4jgutdZFkiTLuq7jpmm0MSb26fKrX/3qf3bJMy3LcvLeO2//PX/fhAmEjvnpt00V4q5gsq19n3PkVKhCjE/49/buu+8+dYGgiaKojqKojuN4dSxwx4MySZJlmqZ5kiRFkiT++0vf7+COH2EDpVnrexicMQSIcNzJSCmbKIqUMabSWvt0uCo7KaVqFyZKrXXpSlfLNE0XSZLMyrJc5nk+KYpiUpbl8stf/vJ/LYoires6ee+dt38lfGB2SuO0zcHwroPmtge1Xc97ceqhi/s89iG2BcO2/l77whe+cOlDg9vn177pMY7jMk3TQmu9TJIkT9N0mWXZMkmShetzWPVABP0P13og0jRdaq0LHyb8mT7Fy2GLQZQkxhAgwqVFrZuXW7vvW1eFqLXWZZIkRZqmi8lkcpXn+bQoimlRFFPXYDnN83zmvj9zX0/KssxcmMi+/OUvP3djYrqqqvS9d97+5XA72Mlh3a4Hv9uGNba9v1P9Pe5j2/fl1NUPHMb6a/r5z3/+Mqw6u9BQun1/obX2HxpXoSFJkjzLsmWWZfM0TedZli0mk8k8TdOFCwmL4Ou7ZmEY1xcxmAZKIUYSIISrQvjA4F9IHx5cxaFIkmQ5mUx8D0RWlmValuWkKIrM/TtZLpfXAkRRFDP3/0lRFFMfKKqqSv/1v/7Xl36qaF3X+r133v4lv0GECdzV2LjN7be5v5vcJ7zsu/rAgRz3Ff79+MAgpTTh0EQ4PBHHceWHIvyB3wWCZZqmPjSsAsRkMlm46/mhjKUbzsiDYYzb1oEYVPVBiPEECCGltNZav4iHjKLId8k27o+q1Frnxhi/PoS/JMGUT19tmPgKha9O+K99mCjLcuqDR1mWSVVV6b/6V//q0jdrvvfO238n3D4CxXjt2ti4ywE3HLq4bWrnPh/zkPeD8dpUZYiiyKwNTfgqg+9zyzf0NKxCg68s+KmY/mt33VV1wQUFP+RRxXFcBY+7WvNh6CtRjiZACLF68fz0GauUskIIo5SS1tomiiJprY201oUxJvILToWLToVhoizLzIWFTYHCVycm7jJ100azqqrSL33pS0/LskyD6sRquIMwMR7rn7y3nZ3hb7vpZ9uu97DLp/77Vgp23XZAiJurDHEcN+4Afq2XwVcY/FRM92845DB3PQ6vBAbX95BvCg2+muErDG47GqWU77Wz4npwEGJAlQdvVAHC8WNQqyAhX5QnVkHCLzoVrlwZBApd13UchInVtM+iKDLXNzEJKhIT973MBwoXPKZVVW0c7njvnbf/brjB7FCHLzxw3qd58q4D/E0H7jZ/Y/ddhGnXbcf4bFtl8DPo1ocltNa5CwR5EBhyHyKCXoal+zf3Myt8I7273zqKoioIDOHKkjYYorBhWBhqcPDGGCC8Tc0sVkrpz5sRViWUX8XShQq/GJWvTiRr1YlXeieCy6woiuym4Y6iKLIvfelLz26qTghBoBia9ZkRt9l10aW7Flw6xif/+ywYdSgElu7ZtcrgD/43DEvkvtoQNDte62VYqzKUQd+E72Pw0zL9eS1WYSEcmhh6aAiNOUCEwjARViaEeBEkjBBCugqFdCfj8ouERG7RkFeqE3Vd67Is06qqMj/kEVQkpnmeT8LhjjzP/ZAHzZg9dp9P0od4Pe+asrlLiGApaOzLDVMst64y+OZHV1GYrw1L+MqCb4DMw2EJP2V/vcrgp15uU2UQYlyhIUSAeNVN02zCQOH/ldZaFcfxjdUJv8qla55MfaBYq0rQjDly24SObddu2FTRuM+5Ju56nDYNn222/Vh/y7xnjmubKZY7VhmuNT+G1Qatde7vwzc9upkSt1YZCAy3G8vZOPdJBsuSroeJa70TYaBwszt8oNhbM6YPJb468f3vf59mzI4Ywyf0Yw83tOnhuGvb7ruYFra3rymWN1QZtmp+dCsO10FlIwwMo+5l2BUB4n7CMBH+/1qY8P0Tx2jGdGFC13WdfPe736UZ84TGECCEOE3Pwj6CwVhen1M41hTLezQ/2jA0CKoMOyFA7Ne1QBE0Y/qfHbUZk+rE6XGQ6iZel/3ryBRLmh+PiABxONtUJ8LhjoM3Y1KdALAv921+PMQUS5ofj4sAcTx3BYpbqxP7bMa8qzohBIECwHUHbH7c+xRLAsNxECBO5yTNmNtUJ+q61j/4wQ+YKgqM3IGbHw8+xZLAcFgEiG44WjPmtlNFq6rK/FTR733ve0wVBUbgyM2PTLHsOQJEN+27GZOpogA26kLzI1Ms+4kA0X17a8ZkqiiALjY/MsWynwgQ/XOvZsxjThUVgkABnFqfmh8FUyx7hQDRf22aMY86VZRmTOA0+t78KAShoQ8IEMPSmamiNGMCx0PzI06BADFsnLcDGCiaH3FqBIjx4LwdQI9tW2Wg+RHHQoAYL87bAXTcrlUGmh9xDAQICMF5O4BOuO8US5ofcUwECGzSmWZMpopiyA44xZLmRxwcAQLb4LwdwJ4ceIolzY84GgIE2uK8HUALR55iSfMjjoYAgfvivB3Ami5MsaT5EYdGgMA+cd4OjFIXzy9B8yMOjQCBQ+K8HRikPp1fgsCAQyFA4Jg4bwd6q+/nlyAwYN8IEDiVzkwVpRkTm3B+CeB2BAh0BeftwMl1ofmRKZboCwIEuojzduAoOL8EsDsCBPqgN+ftEIJA0XWcXwLYDwIE+qbT5+2gGbN7OL8EcBgECPQdzZi4hvNLAMdBgMDQ0Iw5QpxfAjg+AgSGjGbMgeL8EsDpESAwJr1pxiRMvKoLUyxpfgReIkBgrDrdjEl1gvNLAF1HgABe6Ewz5lininJ+CaBfCBDAZidpxhzbVFHOLwH0FwECuNvRmjGHPlWU80sAw0GAANrbdzPmoKeKdqH5kSmWwP4RIID72Vsz5lCminax+ZEplsD+ESCA/bpXM2Yfz9vRp+ZHwRRLYG8IEMBhtWnG7M15O/re/CgEoQG4LwIEcDydmSrathlzvcrw7rvvPvWf7ml+BMaJAAGcTmfP29E0TfSHQaD4F1/84ofWWn8Q9sHBh4aG5kdgfOJTbwAwYv6At+l7Jz9vhxBiFSDOzs4+9gHCN0S6KkNF8yMwTgQIoBs2hYnV912l0FhrRRRF+27GDMOFH+7IhBD/wG/Ea6+99lNjjPKf/H1wcMMM+fqwRDgUQfMjMEwECKCbwkAhxYuDZFidMEIIqZRaVSjiOL5PM2YYIqZFUUzCjXnjjTf+h7VWSimtG7Ko3JCDDwmv9DHQ/AgMGwEC6L5bqxNiQzNmHMc7NWMG1YksfKC33nrrA+GCjOtLqIKhijyoMtD8CIwEAQLon9sCxV3ViW2aMVM3hLHy6U9/+i+DCoTvfyjcLIt8fViC5kdg+AgQQP/tuxlT13WdhHf2qU996sc+QCilGj8EEa7zQPMjMC4ECGBY9tKMaYyJwhs/fvz4p8INYSilrA8IURTVvo+B5kdgXAgQwLDt0owprbUqvJOzs7Nnqztx4WBtOILmR2BkCBDAeLRqxgyvkKbpcsP1CQzAiBEggPG6K1CsRFFU33AdAgMwUixlDWCzFz0MALpsbbjxmE72wAAA4J5OGPQJEAA2koxGALgFPRAAbuRDhLV82AA6pQNDjAQIAOgw2YEDxU3Wp/tiXAgQANBxbnptp9wwgwcjQnoEAACtESAAAEBrDGEAwICsjyx0cPQDA0EFAgAGxlqCAw6PCgQAjFRYrSBwoC0qEAAwEFK2CwJUKnAfVCAAYISYhYn7IkAAWJFSbFy0KPw+q1ICEIIAASBgrVA3hQj/82NuDw6HoQvcFwECAAbA9z+sN0a27YsAtsWnCQDX3FRloPrQbT4k+MbI8P/AIbBDAAAArTGEAeAV670QVB9OixNXoYsIEADQYZwyG13FHyaAjXzVgeoDgE2oQAyYlPLG6XjAtm6b1glsgyrKMBEgBigMDpYWbAAnJKVc7ZOMMZH/nhCCnVPPkQoHxr9RrbWEBwAnF+6LlFKNtVa670khBN2hPUaAGJAwPABAl/j9UhRFtTEmstaqIEighwgQA0N4ANBVfv/UNE1sjInckIakGtFPBIiBoGESQF+kabqoqippmiYyxig/rIF+IUAMCG9AAF3n91NFUUyrqkqbpondLA3JcEa/MAtjGHjTAeiV5XJ5bozxH2KtEC+aLMWL/RmfhnqAADEAVB4A9M3l5eWDi4sLoZQy7mLti52ZYenufiBA9B/vNAC9M5/PH8ZxbJRSVRRFVRRFtZTShweqED1AgOg5pkEB6KP5fP5Aa11qrZda6yKO48qvEyGEsFQhuo8mymHgnQagVxaLxXme52dVVU3quk782hCC/VlvECAAAEeX5/m0KIpJURRZXde6rus4aKpED/BiDQBvuuFz5xNoff3bbnPX/W3zmG2369R22dZtfgdor67rrCzLtKqqtKqqVQWC/Vl/8EL1H3sv0d2deNe367bt87N7brqO/35fZgFt85w33Wb9+a3f3lrb2de5y4qiSMuyzKqqSo0x2hjj14MQgv1aLxAges7t3Eb9ZuvqzvsQ27XP+9zmwH/TdfoWHrw227tNeAjvt6t/h11VFMXUBYjED1/4/Vnf/q7GigCB3uvqmUf3vV3b3temA9/6z2/7/za3abM9XbDLc96kq39rfZTnuV+JUrvzYihmlPULAWIAeNONy6mqELsMAXQRAaAbyrKcVFWVBs2TUrCcda+wDkS/+TPYjX6PeNen7m2v3+bguM3j3fY4uxzI7iqVb3u/bR/bP+4+hi6O9bvfx2022fW1u+9th6aua+3OgyGD3gchXuzP2Lf1AAGi5/r+abBr+rJz3/VAdFtD5Lb3d6jf0aHudx/PGfsXhAfpVqBcvRjs1/qBIYz+Yw84Mnc1Nra9fduDaB937vd9ztg/P1ShlNq06iQvUA9QgRiAPu7QT+3UB5B9PP6mT9DbDqvs8lj+/v1Qxq7P4RS/+668R079d9cl7u/IuosRL5av5kRaPUKAGAb2SiOz3gvRZibFTf0Hd/Um+J/1acrirs8ZhyelNEqpRkrZ+CAh6HvoFQIEEDh0I9++hQfA+zRP3hUK9tkIepND/e53fc44LPe798EhvKAnCBBAoAuhYFvrMyNus+2Bcj0U3LVw0j5DxL5/97s+ZxyNcZUHIUR3hpmwPZoogQE4xAHwrimbdy11Ddwm+Lvh1N09RYDAKJ16h7Wvx2/TNHnXdcNA0Ha9h7bnlzi0XZ7zMZz67w7YJ4YwgCPb5SBy24HwrgrBvh5nX49xDPvokdg3wgOGhgoERulYB41Nj9PVg+6x9OX539RjsukEW9v0UfTleR9L8Pvg5Fk9RQUCAG5wiGXBsaLcSpRCCH6PfUSAQG+Fnwz7tPOh63+ceN2vC07d7c974S/oCQLEMIzyTdfXnXFftxv3w+t+nbVWGWMia23kz4khXp5ICz1AD8QAsGMC0DfWWuGDgzsbp7TWKvZn/UGA6D/SOoDe8WffNMZsaqJkv9YDBIieI60D6KMoimp/DgxXeXi5shT7tV4gQPSbXzteCsE8cwDd5/dTcRxXQYgw4VUE58XoBQLEAEgp7dXV1cNTbwcAbOPrX//6HyRJstRaF3Ec10opI1xo8EMb6D4CxED4Nx1VCABd5fdPWZbNsyxbaK2LKIoqpVSjlDKEh34hQPRccEpc8Ytf/OIzwfcAoDP8fukb3/jGf8yybJGm6TJJklxrXfoqRLg/Q/cRIPrPVx6MUqr+8Y9//Kvu/wQJACcX7ou+9a1v/Yc0TfMkSZbu31xrXSilKqVUHfRCUInoARaSGgCX3I1SqtFalz/60Y/+4ZMnTz71uc997n1CBIBT+853vvMdIYSRUpo4jsskSYo4jvMkSQqtdaG1LpVSjduPmTvvEJ1AgBgIpZSJ47iO47hK0zRP03T5wx/+8F8+e/bsk/P5/LyqqknTNJG1VjZNo6uqSoqimBRFMS3LMq2qKjHGxMYYKV6sUX/t/gki4/TNb37zH33lK1/5L6feDnTHDfsGo5SySqlaa10mSVKkabpI03TpwkEtpbRRFDVa6yJJktwPY6RpmsdxXAXNlOgJAsQwWF+BiOO41Fovsyy7mk6n07IsJ8aYSEop6rrWTdNoY4ySUlqllJVSGv+1tdYopaS11rqyI1OpIJRS1am3AZ3kl58Wfj0Ht0/x+yP/dRNFURNFURXHcZVl2WIymVxNp9PnWZZdaa2XcRyvKhCCfU5vECB6Lmg6slEU1VrrMk3T5XQ6nVdV9ayu61hKKZRSdVVVaVVVqVIqCVaBE0opU1VVZYxRQgjpPwUEAYLyw4idnZ1dnnob0DlWBAHC7TusUsporas4joskSZbukmutS1d5KCaTyXw2mz2ZzWbPptPpla9ShAtLUfHsBwJE/1khhHTp3/ghDGPM87qulRBCxHHcaK2XRVFMq6pKy7JMqqqaFEWRJ0myrOtaG2Nia61QSomgkWnVFX2qJ4fTe+21135y6m1A5/jlp5UQqxNjCf9hJY7jyg1jLLXWyyRJSh8mptPp1Ww2ezqbzZ5Op9PnfghjbRon+5weIEAMgB+DlFLKKIoqrXVujFEXFxcijmOjtS6zLFuUZZkVRZFWVZW5voe0ruvE90YIV31QSjXufnkTQ7z55ps/PvU2oJuCCkTkqxC+1yGO40prnSdJUiRJ4v9dZlk2n06nVy48zLXWeRRFlRtONVQf+oMAMQxWBEMPQohSiBeNlUqpSmu9nE6nV2VZZmVZpnVdJ1VVJa4nIvZnwAvHLIMyIiFi5N56662/OvU2oJNkcEbNyForjTHS9U+ZKIpqFyJKP/PCDWcsffOk1jp3wxdNsP9in9MTBIiBcCekWb1xhRuPdBWJoq7rRV3X2s220HVdx/5Tg7VW+eTvmyrFy/UlTvvEcHKvv/76X596G9A9wWyM1Sm5XaBQfjqma+yu3QeZ0s22KP3XURRVURStmiepevYLAWJAgoZKI4QQSinrPwUYY/IgNMTGGOVKju6mL8cefYAgPEAIIR49evThqbcB3eRChG+mlO57fsdhXYgwSqk6CBNNFEV+5Um/7gP7mx4iQAyLlVIKNxzRuOmYxn2t4jhW7lOC/6SwetN7Ukrz4mZ8EsAL0+mUWRi4kd9fWGvXVzZezajw/Q0+NASzLcIZX+gZAsQAuTejFG4WhQsKJooiEVYdhFh9WrDBbYVgDBKBJEnyU28DOk/a6wtMXatqCvGiJ8v/f+3kf+xveooAMVy+JOgDghVCiCiKjNj8ZhcieCOvrzaH8fKzcoBN1oYe/L7l1g8lBIdhIEAM36axxfXvvXIFxiPhKaXY0WNbzN4aEQIEhODNjtvx9wHgFZzOGwAAtEaAAAAArREgAABAawQIAADQGgECAAC0xiwMALd7eXp3AFihAgFgM4IDgFsQIAAA6KtXz0FyNAxhALjbCXdSALqJAAEAHSEHMmy04cycGCACBAB0SN9PZMd5dMaDlAgAAFojQAAAgNYIEADQR+tDBQwd4MgIEAAAoDWaKAFgDMIKxW2NmpsqGT1v7MRhECAAoK+2HbaQ8mUIuOs24fUIDrgFAQIA+io8wN8VDPzPrSUcYC8IEABWNi1kJF/8YPV9FgnqoTA0EB6wJ+wIAKzcFQ4IDz3WNjwQMnAHdgYA0EfrB/htDviEAuwRAQLANTdVGag+AAixQwAAAK3RRAngFdZaJWmcPAlORoW+IEAAQEcQ1NAn/LEC2MgfzDioAdhEWmuplw3Apvn7ANBVBNP+YwhjQP7kzz449SYAwJ3ee+dt4T+8up4P5pf2EAECAHB0rgKxCg4Eif4hQAAAjq6ua62UMlJKI6W0QggjhJDua/QAAWIY6GMB0CtlWWZRFDVRFFVKqUYp5Xu5pKAS0QsEiAGwLE8LoGcWi8WF1jpPkkTFcVwJISqllBBCGNbC6AcCRP9JQQUCQM9cXl4+nkwmc2PMVZZlCz+UIV+mBz4ZdRwBouestVQgAPTOxx9//Hpd1x8LIYRSyviLtdYIwYqcfUCAGAbeaQB65enTp68LIUQcx5XWutBaF1EUKaUUPRA9QYAYABYDA9A3T58+/aTWuphMJvPJZHLVNE1srVXWhqMY6DJWAus3KeiBwAbvvfP2qTcBuNV8Pn+wXC7PyrLM6rrWxhjlPgyxX+sJAsQA0AOBEOEBfbBcLmdlWWZVVSVN00S++sD+rD8YwgAGhiXN0QdVVSVVVSXGmMhaGwXVB/QEFQgAwNEZY7QLDpGrPBAeeoYKBDBA773z9p2ViDZDHdtUNcLHDO+bigg2McbIYBq6FC/ODn3irUIbBAhgpA51YF8PEj5MECSwxvc8EBx6iiEMAHuzXvn4kz/7gOCAjdZCA8MXPUSAALA3hAW04U7pjZ7ixQMAnBLVh56iBwIYqX03UQIt8QG25wgQwEgRCgDcBwkQAAC0RoAAAACtESAAAEBrBAhggE7R33DbY9JvgQ2M+5dVpHqKAAEAAFojQAAAgNYIEACAk5BSmruvha4iQAAAjk5KufpXSkkfRA8RIAAAp2BccPDhwfpQgX4gQAxIm6WJAeAU/H5KKWWllFZKadyFKkTPsJT1QCwWi4vFYnH+iU984v/nv8fUOQBdEH64+Tf/5t/8fx8/fvyTKIqqKIoapZQJeiEIET1CgBgAP4aolLL//b//9//nz3/+88/89Kc//aXfeOft/094PQIFgGMJQ8M//+f//EmapsvJZPI8SZJlkiSF1rqI47iMoqhWSpmgInHCrUYbBIh+C8cOrZSyiaKo1loXSZIsf//3f////eGHH/4vT548eevZs2evvffO2/8vf0PCBIB9Wh9Cfffdd59KKY3WutJal2maLqfT6fPJZHI1nU6vsixbJEmy9CFCStkEPRFhbwQ6igAxAH4cMYqiJo7jKkmS5XQ6fT6bzZ6dn59/XNd1Yq0V//bf/ts/L4piVhRF+t47b/+Kvz1hAsAuwtDwT//pP71yQcDEcdxEUVRGUVS7akM+mUwW0+n08uLi4sn5+flHZ2dnH0+n06s0TZdxHFdRFDX0QvQLAWIg3BBGrbUusiybn52dPSuKYlLXdSKltHEcl1mWXeV5fpbn+fRLX/rS87Is06qqEsIEgG2FoeHzn//8pRt+qOM4bty/pda6cv8WSZIUWZYtJpPJ5Ww2u7y4uPjo0aNHP3vw4MFHs9nsWZZlc611oZSqCQ/9QoAYgKACUSdJkk8mk3ld10+bpomUUjZJknw6nT6fz+cXy+XybLlcnhdFMS2KIivLcvLlL3/5WVVVWVmWVCYAvGJTaIiiqHZVzzKKojqO40JrXfr+hjRN8yRJlmmaLiaTyXw6nV7OZrPL8/PzJw8ePPjowYMHvzg/P/94MpnMtda5r14QIvpDWmvpWOk3aa0V1lrVNE1cVVVSluVksVicLRaLB1dXVw/m8/mD+Xx+vlwuz12AOMvzfJrn+cxfXKCYFEWR+TDxB3/wB78SPhCBAhiPu0KDu1R+iMIHhiRJ8izLFmmaLrMsm/vLdDp9Pp1OL8/Ozp7NZrNn/t/JZPI8TdOl1roMQoQQ9EB0HgFiANxrKI0xqmmauK5rXZZlVhTFxAWEaRgUlsvlrCiK2XK59N8/c1+f53k+yfN8WhTFrCzLtCzLSVVVuqqq9Pvf//4v+8ckTADDst4E+fnPf/4yiiKjlLo1NKRpukzTdBGGBRcgFlmWLdzwxTzLsqssy+aTyeTK/X+epukiSZJrszGEawo/zW8BbRAgBsJaK91FGWOiuq51Xde6qqrUX1wgyMqynLhwMfWBwlUlZuHXPnyUZTlxl9Tdb/Ld73737/rHJkwA/bSpyuCbIF1wKOM4rrXWhda68lMw0zSdu3CwzLLs+WQyWQQBYeF/nqbpwoWMRZIkubuE0zgrvx6EH74gPPQHAWI4pLVWiBeVCGmtjXxFwl/8wb+u68Q1UKZhkMjzfBoEibPlchkOcUyKopi68JH5QFJVVfLd7373V+7aOADd46da+gWd/MwJ3wTpqw3uoL90oWG+XknwX/uqQ5qmyyRJcq11rrUuXQAp4ziuXGiofWVDStkopax4uZQ1AaInCBAD419Pa60KKhI+UERN00RhhcKHCVdhyNxwx9QNcayGP/ywhw8TrjKRBYEiq6pKu7Cim6ZRxpjYbYffPJZO75n333//jS9+8Ysfnno7sDe+v0BIKY3va3CzJ6o4jit/wA+bIMN+hslkMp9MJqvhiHC4wvUyFH5Ywg9N+ItSqnGzNkxQcTBuewgOPcMsjIFxb0Ip3I7CWmuUUtJa21hrZRzHyhijtNarQNE0ja7rOnG9Dpnrn8hcVWLig0MQLqZrfRW+OpFWVbUa5jDGRD5AWGuVEEIEYQL98Mb5+flHp94I3F8YHNzqtUYp1URR5Kdd+iGKMgwNaZrOfaXB9zMEQxiLcFjCVy3iOK7cffsKw7XQIII+B6oO/UWAGCZfCpTCrejmwoQUQvhAUYc9Ey5IxC5M6KqqEtc7kfnpnkGo8BWKadiUmef5pCzLrKqqxN+PMSYWQqyqEFS8eudXP/GJT/z01BuB+1s7YIfNkYXWunZBwAeHa02QPkhkWeYrEnkwRFG5SoM/t4W/rCoMQWgQwoUFgkP/ESCGLVxX/lqYEG74ylUomiiKNoWJuGmaMEwkQYVi4isUvjrhqhCZa7ZMmqbRxpjIGCNFECLQK//4zTffpEt2IILwYN373i/4VLnhimUYIIKwsEzT1AeGVT+DCw21Dw5hIyShYfgIEOOx6SQ162GiWQ8T64HCN2G69SbCMLGa3eGuo10vRORniKwe1A1noB8+/elP/+WptwH3E5zt0i88Z6Mo8gGiiuO4DIcigibIImyCDALDjaEhOJ+FfzwhCA2DRIAYr/VAsfqkEIaJsG/CWnutCdNVJ7Tre0iCHojEBY7I387dMcMXPfSZz3zmv516G7AfwTCGn3XRuFUkq6Cy4P/1VYZrgWEtNPh+ilVoIDCMBwECQtweJoR4WaFQcRxLY4xKkkS5gOArE6v+iaZpYle9UH42iAimmR792eFe3njjjf956m3AXqze1/7g75obGxcQqjiOwxkTdRRFxocNQgPWESCw7qahDmmtNUII6ZowZTDUsRru8BUH968Mhi8IDj316NEjpnEOy7XhBhcO/EyJVVigCRJ3IUDgNlv1TfggEa6Gudb34KsP6KHpdHp56m3A/qyFABuGhLXmR0IDbkWAwLbuChNGuCpDsJgVVYcBSJIkP/U24DCCnggfCl5ZDZLQgJsQILCrjYFCiNUOZ2N4oBLRP0qp5tTbgPvb8H717Ibr8UbFnQgQ2IdNYWKjba+H7nDnKcBw8fpiJwQIHAo7peHgtQTwChb0AQAArREgAABAawQIAADQGgECAAC0RoAAAACtESAAAEBrBAgAANAaAQIAALRGgAAAAK0RIAAAQGsECAAA0BoBAgAAtEaAAAAArREgAABAawQIAADQGgECAAC0RoAAAACtESAAAEBr0lorT70RALpBSmnuuo61lg8eAKhAAHjprnBAeADgsTMAAACtESAAXHNTlYHqA4AQOwQAANAaAQLAK9arDVQfAKxjpwAAAFojQADYyFcdqD4A2IR1IICR2GaNh32x1kZCCHusxwNwfPGpNwDA7tqEgq//RXnITblGStlse13CBtBPVCCAHrgpKBwzFBzK1z6bbPy+CxZCEC6ATiJAAB0y5KDQFsEC6DYCBHBC64FhjEGhrfVgYYyJhBBCSikEoQI4GgIEcEQEhv0jUACnQYAADozQcDyECeB4CBDAAYShgcBwOmGgIEwA+0WAAPaI4NBNa0EiFi5ASCkJEsCOCBDAHhAc+iEMEk3TxD5AUJUA2iNAAPfggwOhoX98mCBIALshQAA7IDgMRxAktH9dCRLA3ThJDtAS4WFY/OsYRVFljImstdJaK/hwBdyOCgSwJfochi3sj6jrWksprbsIQTUCeAUBAtgCVYfx8EGiqqpUKWWCYQ1CBBBgCAPYEuFhHPzr3DSNbpomMsYowYct4BUECOAObU6Z3dZNJ4z62meTG3+G48iy7Kqu66RpmpgQAbyKAAFs4ZjVBx8cqHicjv/dF0UxJUQAmxEggFtIKQ3hYZy+/helePTo0d+4EHFtOMNdgFGLT70BAF742mcTgkMHLRaLcyGEDWZlWPf/U28acFJUIIAbHKtU7fsd9hEe/H3dp4di0+3u04+x72257/a0dXV19TDP81lVVakxJrbWMpQBCCoQQCfsKzys38+pqxrhgf7U27Kry8vLx1rrQmtdRlFUKaUaKaVhWifGjgABbHbUce6+Hlxv08VAs4urq6uHk8lknqbpUmudx3FcuxDh/z4IEhglAgSwgVvKWFRVlWmt80Me9L7+F+VehzH2YV9DBH2eivq1zybi937v9/73q6urh2dnZ8+m0+mzLMsSY0xprVXW2vC8GcDoECCAm63GuQ99cO9aiNhUOdjH/fSFf77z+fx8uVye5Xk+raoq89M53d+FFFQfMGI0UQK3sNaKy8vL147xWP5g2+dP7UPy1a9+9T9XVZWVZZlVVZW6qZw+QJx684CTI0AAt1vVp49xYL9PiAirGF2qZoT6EI78NhpjIrf2Q+SGLFQw84JxC4weQxjA7awQQvzkJz/55bfeeuuvjrHQ032GM7oUGPzzuK/bpnLu8/mGj/Nbv/Vb/7dSqomiqAlmXYQzLyhBYPSYywxsYK2V1lrVNE1clmU2n88vPv744zd+9rOf/a1f//Vf/z+F6NbBeoz2GSB8eHjvvfd+PplMri4uLp48fvz4b15//fX/8dZbb33w5ptv/vfXX3/9rx89evThbDa7TJIkj6KoZjonxowhDOBmVkpplVImiqJaa51nWbb40z/90y8J0Y9y/JDtOzz8xm/8xi+SJFlkWTbPsuxqOp0+n81mzyeTyVWWZQutdR5FUe1O8W0FVQiMHEMYwAZ+ap6U0iilmjiOyzRN88lkcnV2dnb5/e9//7d//vOf/63/7bPJvxWCakQf+eDwhS984VJrXaRpuphMJvPpdHp5fn7+8cXFxUdnZ2cfn52dXU4mk6s0TfM4jstgSIMpnBg1AgSwmRVCCFeBaOI4rtI0XU6n08uzs7MnDx8+nFRVlf7u7/7u//HkyZM3vvbZ5D1/Q8JEd4VVo89//vOXcRzXPjxkWTafzWaXFxcXv3j06NGHDx8+/NnDhw9/fnZ29mQ6nV6mabqM49ivROkrEFQhMFr0QAA38HP9jTFRXde6KIrJfD6/uLy8fO3JkydvfPTRR2999NFHb3788cevP3369PXnz58/+sY3vvGP/e0JEt2xHhzckFSltc7TNF1OJpP5bDZ7en5+/vHDhw9/9ujRo5+99tprP33ttdd+8vjx4w8vLi4+ms1m10KEcENcp3tWwGkRIIBbBM2UUV3XaZ7nk8VicXF5efn46dOnn3z69OnrH3/88aeePn36yWfPnr12dXX1+Orq6vzb3/72r/v7IEicThgcvvCFL1wqpVbBIUmSZZZly8lk8vzs7Oz52dnZkwcPHnz08OHDnz969OhvfAXi4uLiyXQ6vcyybBnHcRFFEefCAARDGMCt3Bi3b6Qs0zQVwq0BoJQyQQl8nmXZfDqdPp9MJo9/+7d/+/9aLBYXy+Vy9rXPJv9reJ8EisNZb2x11QajlKrjOK6SJMnd67X0/Q6z2ezy/Pz8yfn5+ccPHjz4+YMHD37x4MGDj1wPxNPpdPo8TdM8iqLSN1DS+wBQgQDuFAxlqKZp4rqudVmWk+VyOVssFhdXV1cPnz9//uj58+ePLi8vHz9//vzx8+fPH83n84fz+fxisVicFUUxK4pi8vu///u/Gt43YeL+1kODqzQYpVQdRVHlQl6uta7SNF2maTqfTqdXs9ns0g9bnJ+fP7m4uHjivv7YBYfLyWQyT5JkGcdx5WdgCIYuACEEAQLYShgifE9EVVVpURST5XJ5tlgszubz+UMfJq6urh66y4P5fP5wsVic53k+9UGiqipd17X+3ve+93fCxyFQ3G1TlcEFBuMWfqrjOC5dn0MRBocsyxZueualm2Hx9Ozs7KkPDbPZ7Ol0Or1ysy6WWusiiqLK3S/hAQgQIIAtrYUIZYyJq6pKfJDI83zmgsQDX5kIA8RisbjI83zmgsS0KIpJWZZpXde6ruukrmv9gx/84Jc2PfYYg8VN62y8++67T6WUQilVK6WsqzTUURTVcRxXcRyXbriicMFhkWXZwg0xXboA8fTs7OyZrzTMZrNn0+n0Kssyf9ruwocQH04E4QG4hgABtODfL9ZaHyKiYFgjK8syy/N8tlwuZ8vl8nyxWFy4YYzzxWJxvlwu/dkdZ3meT4qimJZlOSnLMnEnbEp8oGiaJmqaJm6aJv6jP/qjT2/aniEEi5uCgq8suLU4jFLKSilrv7CXuzQ+MMRxXGqtiyRJyiRJfHBYZlk2n0wmV5PJ5Pl0On3uKxBuiOL5ZDKZZ1k2T5IkT5IkD4YrGv/4QryY0nvUXwzQcQQIoD1prfUzNKS1NnL9EbqqKl1VVVqWZVYUxTTP80me52c+UCyXy7PlcjnzIcMPabhqRFaW5cTdPmmaJvFDHcaY2IWJyFc/jDHqpmCxyTHDRptVOt99992nQqwW7fJBwbgKw+rfKIoad2Cv4ziutNZVFEVlkiQ+OCyTJMld1WGZpunch4PJZLIKEe57V1mWLdM0XfjGShdCKhcaGtcs6RsmCQ/AGgIEsKOgGiH92RrdAT52PRJJECYm7jLN83zqKhCzoiiyPM9nrnLhqxFTV5HI/H24+9MuROggTMTuFNPShwpfHfHb5LZR/fEf//Enj/W7CUOBW7HRKKX84lwm+JlZqzLUSinrg4IPDa4PodZaVy48FFrr0k3HLJMkWbhpmYskSXI3FJG7ZannWZYt0jRd+HDhQ4PWunShoQ6mZ66maFJ1AG5GgADuR1r74hjjT/fsD+B++MEPSVRVlVZVlbiQkLo+iMxXHlyAyIJqRFpVVeb6JFbDG1VVJXVd66ZptA8WLkhELkzExphVqHHVEh8s5HrACL4W4h7nxwmDgQ8FawHBBgfoMECEfQyNX6vBDSX4wFAG/Q1FkiSFCw+Frzq44LAIKhG5qzAUSZIsXeAo/JCHHwYJttUGz0EIqg7ArQgQwH6EQcIfvFezNnyvRHDQT1yo8MHCVyoy/7UPEMF1krquUzeskfj/B30Tq+qEe8xroaFpmsj9P3bbo4wxcRh6/JPxz2WrJx6siRAejF0oMK6XoJZSGv8pPximMO602aspl2FQcMGhdIHCVx3C6kMRrO2QB5WF8LY+MIS9Db6/wa5VHIQgOABbIUAA+3UtSLj/y3BowYcJN9SxXqW4FizCsBFWMfw00uB22vVMJD5A+MDgHteHmMgNfehgCCRy4UGtbft2T/j6wffadEr3b+WGIvyBezVU4L/nhifKKIp8WCj9UIWvQATVg1Uo2BAUVtWFOI79MMi1hsjwbJoEB2B3BAjgQIL3lg8VMvy0vxYowipF7IYoVhUFX10Ip3wGlyT8XjCUEbnwEq1VQeL1aoWvVIggRLQRhAdfWbhWVQiGC8IQYYPrNb6J0YeE4P9VEAzC+/NBIRyOCIPKtSEU4QJDGBbocQB2R4AADk8GB+X1MLEpVETh0IfvpwgDQHCJfLBwgcCHh9V9hT0Z4bTToBEz8mEj3B/4Bsxbn5jrGXBfWx8K/IE8PMD7sBAc2P1whp+W2fieB794UzBds16/j3AoIryvoJ/BBpUGIV6GhtXXAHZHgACOKwwT4TCH/9kqUISzO9aaH8NgEVYXojB0BE2U4eJXq5kbdV3H69cNtqndk3o5FBDOqGh8tcDNrvAH+7D3wIRhIBzm8Ks/unAQVhTCZkwbBgYRhIWwukBoAPaPAAGczrUwEfx/NT3U/xv2U6zN9nhlVkXw/fA2Mggf16oc4X2ub8OWrh20gybKJggHJggB4cHergWCTbM2wkbHsLIQDkG8sl4DoQE4LAIE0B3rgWL9e3cFi2v/F9crG2I9fIRhI7jf++wPVgf29VCwVinw1w1vswoGdwUF9//V16tfDoEBOCoCBNBt/uD+yvdvChZrX4e3f2WoRFzfB2wKMNtv6KvNiRv7EIJpn680MrYICq98H8BxESCAfropWKx+tuHn18JEcJ297wPWZje8EhrcdcKbvJqQCApApxEggOG5fmS+vaqw8f2/60JS63fT4jaEBKBnCBDAuB3y/U8oAAYsPvUGADgpDvIAdrLziXMAAMB4ESAAAEBrBAgAANAaAQIAALRGgAAAAK0RIAAAQGsECAAA0BoBAgAAtEaAAAAArREgAABAawQIAADQGgECAAC0RoAAAACtESAAAEBrBAgAANAaAQIAALRGgAAAAK0RIAAAQGsECAAA0BoBAgAAtEaAAAAArREgAABAawQIAADQGgECAAC0RoAAAACtESAAAEBr/3+T0S0EJX9IuwAAAABJRU5ErkJggg==
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="11.-&#1055;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1072;-&#1085;&#1072;-Delphi.">11. &#1055;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1072; &#1085;&#1072; <i>Delphi</i>.<a class="anchor-link" href="#11.-&#1055;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1072;-&#1085;&#1072;-Delphi.">&#182;</a></h3><h4 id="&#1055;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1085;&#1099;&#1081;-&#1082;&#1086;&#1076;-&#1088;&#1072;&#1089;&#1082;&#1088;&#1099;&#1090;&#1080;&#1103;-&#1072;&#1073;&#1089;&#1090;&#1088;&#1072;&#1082;&#1094;&#1080;&#1080;.">&#1055;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1085;&#1099;&#1081; &#1082;&#1086;&#1076; &#1088;&#1072;&#1089;&#1082;&#1088;&#1099;&#1090;&#1080;&#1103; &#1072;&#1073;&#1089;&#1090;&#1088;&#1072;&#1082;&#1094;&#1080;&#1080;.<a class="anchor-link" href="#&#1055;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1085;&#1099;&#1081;-&#1082;&#1086;&#1076;-&#1088;&#1072;&#1089;&#1082;&#1088;&#1099;&#1090;&#1080;&#1103;-&#1072;&#1073;&#1089;&#1090;&#1088;&#1072;&#1082;&#1094;&#1080;&#1080;.">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="n">MOD</span> <span class="mi">9</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="n">then</span>
+<span class="n">begin</span>
+    <span class="n">k</span> <span class="p">:</span><span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="n">MAX</span> <span class="p">:</span><span class="o">=</span> <span class="o">-</span><span class="mi">10000</span><span class="p">;</span>
+<span class="n">end</span><span class="p">;</span>
+        
+<span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="n">k</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">f</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">MAX</span> <span class="o">&lt;</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="n">then</span>
+<span class="n">begin</span> 
+    <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="n">MAX</span> <span class="p">:</span><span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="n">end</span><span class="p">;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="&#1042;&#1072;&#1088;&#1080;&#1072;&#1085;&#1090;-&#1087;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1099;-&#1076;&#1083;&#1103;-&#1095;&#1090;&#1077;&#1085;&#1080;&#1103;-&#1080;-&#1079;&#1072;&#1087;&#1080;&#1089;&#1080;-&#1090;&#1077;&#1082;&#1089;&#1090;&#1086;&#1074;&#1099;&#1093;-&#1092;&#1072;&#1081;&#1083;&#1086;&#1074;.">&#1042;&#1072;&#1088;&#1080;&#1072;&#1085;&#1090; &#1087;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1099; &#1076;&#1083;&#1103; &#1095;&#1090;&#1077;&#1085;&#1080;&#1103; &#1080; &#1079;&#1072;&#1087;&#1080;&#1089;&#1080; &#1090;&#1077;&#1082;&#1089;&#1090;&#1086;&#1074;&#1099;&#1093; &#1092;&#1072;&#1081;&#1083;&#1086;&#1074;.<a class="anchor-link" href="#&#1042;&#1072;&#1088;&#1080;&#1072;&#1085;&#1090;-&#1087;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1099;-&#1076;&#1083;&#1103;-&#1095;&#1090;&#1077;&#1085;&#1080;&#1103;-&#1080;-&#1079;&#1072;&#1087;&#1080;&#1089;&#1080;-&#1090;&#1077;&#1082;&#1089;&#1090;&#1086;&#1074;&#1099;&#1093;-&#1092;&#1072;&#1081;&#1083;&#1086;&#1074;.">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">program</span> <span class="n">Lab6</span><span class="p">;</span> <span class="o">//</span><span class="n">сохранить</span> <span class="n">как</span> <span class="n">lab6</span><span class="o">.</span><span class="n">dpr</span> <span class="p">(</span><span class="n">DPR</span> <span class="err">–</span> <span class="n">Delphi</span> <span class="n">PRoject</span><span class="p">)</span>  
+<span class="p">{</span><span class="err">$</span><span class="n">APPTYPE</span> <span class="n">CONSOLE</span><span class="p">}</span>
+<span class="n">Uses</span> <span class="n">Windows</span><span class="p">;</span> <span class="o">//</span> <span class="n">для</span> <span class="n">русификации</span> <span class="p">(</span><span class="n">сделать</span> <span class="n">комментарием</span> <span class="n">в</span> <span class="n">онлайн</span><span class="o">-</span><span class="n">компиляторе</span><span class="o">!)</span>
+
+    <span class="n">var</span>
+        <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">integer</span><span class="p">;</span>
+        <span class="n">MAX</span><span class="p">:</span> <span class="n">integer</span><span class="p">;</span>
+        <span class="n">fin</span><span class="p">,</span> <span class="n">fout</span><span class="p">:</span> <span class="n">string</span><span class="p">;</span>
+        <span class="n">tfin</span><span class="p">,</span> <span class="n">tfout</span><span class="p">:</span> <span class="n">TextFile</span><span class="p">;</span>
+        <span class="n">A</span><span class="p">:</span> <span class="n">array</span> <span class="n">of</span> <span class="n">integer</span><span class="p">;</span> 
+
+    <span class="n">begin</span>
+        <span class="n">setConsoleCP</span><span class="p">(</span><span class="mi">1251</span><span class="p">);</span> <span class="o">//</span> <span class="n">для</span> <span class="n">ввода</span>  <span class="n">русификация</span> <span class="n">и</span> <span class="p">(</span><span class="n">сделать</span> <span class="n">строку</span> <span class="n">комментарием</span> <span class="n">в</span> <span class="n">онлайн</span><span class="o">-</span><span class="n">компиляторе</span><span class="o">!)</span>
+        <span class="n">setConsoleOutputCP</span><span class="p">(</span><span class="mi">1251</span><span class="p">);</span> <span class="o">//</span> <span class="n">для</span> <span class="n">вывода</span> <span class="p">(</span><span class="n">сделать</span> <span class="n">строку</span> <span class="n">комментарием</span> <span class="n">в</span> <span class="n">онлайн</span><span class="o">-</span><span class="n">компиляторе</span><span class="o">!)</span>
+
+        <span class="p">{</span><span class="n">A0</span><span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="n">A0</span><span class="o">.</span><span class="mi">3</span> <span class="o">-</span> <span class="n">ввод</span><span class="o">-</span><span class="n">вывод</span> <span class="n">входных</span> <span class="n">данных</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Лаб.6&#39;</span> <span class="p">:</span><span class="mi">40</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">заголовка</span> <span class="n">c</span> <span class="n">переходом</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mi">3</span><span class="p">}</span>
+        
+        <span class="p">{</span><span class="n">ввод</span><span class="o">-</span><span class="n">вывод</span> <span class="n">строковой</span> <span class="n">переменной</span> <span class="o">-</span> <span class="n">имени</span> <span class="n">файла</span> <span class="n">с</span> <span class="n">входными</span> <span class="n">данными</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">4.1</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Текстовый файл с элементами массива A:  &#39;</span><span class="p">);</span> 
+        <span class="n">readln</span><span class="p">(</span><span class="n">fin</span><span class="p">);</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="n">fin</span><span class="p">);</span>
+
+        <span class="p">{</span><span class="n">ввод</span><span class="o">-</span><span class="n">вывод</span> <span class="n">строковой</span> <span class="n">переменной</span> <span class="o">-</span> <span class="n">имени</span> <span class="n">файла</span> <span class="n">с</span> <span class="n">входными</span> <span class="n">данными</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Текстовый файл с элементами массива A и индексом максимального значения: &#39;</span><span class="p">);</span> 
+        <span class="n">readln</span><span class="p">(</span><span class="n">fout</span><span class="p">);</span> 
+        <span class="n">writeln</span><span class="p">(</span><span class="n">fout</span><span class="p">);</span>
+        
+        <span class="p">{</span><span class="n">ввод</span><span class="o">-</span><span class="n">вывод</span> <span class="n">исходного</span> <span class="n">массивa</span> <span class="n">A</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mf">2.1</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">,</span> <span class="mf">5.1</span><span class="p">,</span> <span class="mf">5.2</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Массив A: &#39;</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">пояснения</span> <span class="n">с</span> <span class="n">переходом</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span><span class="p">}</span>
+        
+        <span class="n">AssignFile</span><span class="p">(</span><span class="n">tfin</span><span class="p">,</span> <span class="n">fin</span><span class="p">);</span> <span class="n">reset</span><span class="p">(</span><span class="n">tfin</span><span class="p">);</span> <span class="p">{</span><span class="n">открыть</span> <span class="n">файл</span> <span class="n">для</span> <span class="n">чтения</span><span class="p">}</span> 
+        <span class="n">AssignFile</span><span class="p">(</span><span class="n">tfout</span><span class="p">,</span> <span class="n">fout</span><span class="p">);</span> <span class="n">rewrite</span><span class="p">(</span><span class="n">tfout</span><span class="p">);</span> <span class="p">{</span><span class="n">открыть</span> <span class="n">файл</span> <span class="n">для</span> <span class="n">записи</span><span class="p">}</span>
+                
+        <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="p">:</span><span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">MAX</span> <span class="p">:</span><span class="o">=</span> <span class="o">-</span><span class="mi">10000</span><span class="p">;</span>
+            
+        <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+                
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">eof</span><span class="p">(</span><span class="n">tfin</span><span class="p">)</span> <span class="n">do</span> 
+
+        <span class="n">begin</span>
+            <span class="n">SetLength</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+            <span class="n">readln</span><span class="p">(</span><span class="n">tfin</span><span class="p">,</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span> <span class="p">{</span><span class="n">ввод</span> <span class="n">элемента</span> <span class="n">и</span> <span class="n">переход</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span><span class="p">}</span> 
+            <span class="n">writeln</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span><span class="mi">5</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">элемента</span> <span class="n">и</span> <span class="n">переход</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">на</span> <span class="n">экране</span><span class="p">}</span>
+            <span class="n">writeln</span><span class="p">(</span><span class="n">tfout</span><span class="p">,</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span><span class="mi">5</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">элемента</span> <span class="n">и</span> <span class="n">переход</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">в</span> <span class="n">файле</span><span class="p">}</span>
+            
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="n">then</span> <span class="n">f</span> <span class="p">:</span><span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+                
+            <span class="k">if</span> <span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="n">MOD</span> <span class="mi">9</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="n">then</span>
+            <span class="n">begin</span>
+                <span class="n">k</span> <span class="p">:</span><span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="n">MAX</span> <span class="p">:</span><span class="o">=</span> <span class="o">-</span><span class="mi">10000</span><span class="p">;</span>
+            <span class="n">end</span><span class="p">;</span>
+        
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="n">k</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">f</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">MAX</span> <span class="o">&lt;</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="n">then</span>
+            <span class="n">begin</span> 
+                <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="n">MAX</span> <span class="p">:</span><span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="n">end</span><span class="p">;</span>
+            
+            <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">end</span><span class="p">;</span>
+            
+        <span class="n">CloseFile</span><span class="p">(</span><span class="n">tfin</span><span class="p">);</span> <span class="p">{</span><span class="n">закрыть</span> <span class="n">файл</span> <span class="n">для</span> <span class="n">чтения</span><span class="p">}</span> 
+   
+        <span class="k">for</span> <span class="n">i</span><span class="p">:</span><span class="o">=</span><span class="mi">1</span> <span class="n">to</span> <span class="mi">80</span> <span class="n">do</span> 
+            <span class="n">write</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">);</span> <span class="p">{</span><span class="n">отделим</span> <span class="n">визуально</span> <span class="n">чертой</span> <span class="n">и</span> <span class="n">строкой</span> <span class="n">введенные</span> <span class="n">и</span> <span class="n">выводимые</span> <span class="n">значения</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">;</span> 
+                    
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Индекс максимального значения выбранных элементов массива A:&#39;</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span><span class="mi">2</span><span class="p">);</span>
+        <span class="p">{</span><span class="n">вывод</span> <span class="n">переменной</span> <span class="n">и</span> <span class="n">переход</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">на</span> <span class="n">экране</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mi">6</span><span class="p">}</span>             
+        <span class="n">writeln</span><span class="p">(</span><span class="n">tfout</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span><span class="mi">2</span><span class="p">);</span> 
+        <span class="p">{</span><span class="n">вывод</span> <span class="n">MIN</span> <span class="n">и</span> <span class="n">переход</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">в</span> <span class="n">файле</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mi">6</span><span class="p">}</span>
+        
+        <span class="n">CloseFile</span><span class="p">(</span><span class="n">tfout</span><span class="p">);</span> <span class="p">{</span><span class="n">закрыть</span> <span class="n">файл</span> <span class="n">для</span> <span class="n">записи</span><span class="p">}</span>
+        
+    <span class="n">end</span><span class="o">.</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="&#1042;&#1072;&#1088;&#1080;&#1072;&#1085;&#1090;-&#1087;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1099;-&#1089;-&#1080;&#1084;&#1077;&#1085;&#1072;&#1084;&#1080;-&#1092;&#1072;&#1081;&#1083;&#1086;&#1074;,-&#1079;&#1072;&#1076;&#1072;&#1085;&#1085;&#1099;&#1084;&#1080;-&#1074;-&#1082;&#1072;&#1095;&#1077;&#1089;&#1090;&#1074;&#1077;-&#1087;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1086;&#1074;.">&#1042;&#1072;&#1088;&#1080;&#1072;&#1085;&#1090; &#1087;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1099; &#1089; &#1080;&#1084;&#1077;&#1085;&#1072;&#1084;&#1080; &#1092;&#1072;&#1081;&#1083;&#1086;&#1074;, &#1079;&#1072;&#1076;&#1072;&#1085;&#1085;&#1099;&#1084;&#1080; &#1074; &#1082;&#1072;&#1095;&#1077;&#1089;&#1090;&#1074;&#1077; &#1087;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1086;&#1074;.<a class="anchor-link" href="#&#1042;&#1072;&#1088;&#1080;&#1072;&#1085;&#1090;-&#1087;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1099;-&#1089;-&#1080;&#1084;&#1077;&#1085;&#1072;&#1084;&#1080;-&#1092;&#1072;&#1081;&#1083;&#1086;&#1074;,-&#1079;&#1072;&#1076;&#1072;&#1085;&#1085;&#1099;&#1084;&#1080;-&#1074;-&#1082;&#1072;&#1095;&#1077;&#1089;&#1090;&#1074;&#1077;-&#1087;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1086;&#1074;.">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">program</span> <span class="n">Lab6</span><span class="p">;</span> <span class="o">//</span><span class="n">сохранить</span> <span class="n">как</span> <span class="n">lab6</span><span class="o">.</span><span class="n">dpr</span> <span class="p">(</span><span class="n">DPR</span> <span class="err">–</span> <span class="n">Delphi</span> <span class="n">PRoject</span><span class="p">)</span>  
+<span class="p">{</span><span class="err">$</span><span class="n">APPTYPE</span> <span class="n">CONSOLE</span><span class="p">}</span>
+<span class="n">Uses</span> <span class="n">Windows</span><span class="p">;</span> <span class="o">//</span> <span class="n">для</span> <span class="n">русификации</span> <span class="p">(</span><span class="n">сделать</span> <span class="n">комментарием</span> <span class="n">в</span> <span class="n">онлайн</span><span class="o">-</span><span class="n">компиляторе</span><span class="o">!)</span>
+
+    <span class="n">var</span>
+        <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">integer</span><span class="p">;</span>
+        <span class="n">MAX</span><span class="p">:</span> <span class="n">integer</span><span class="p">;</span>
+        <span class="n">tfin</span><span class="p">,</span> <span class="n">tfout</span><span class="p">:</span> <span class="n">TextFile</span><span class="p">;</span>
+        <span class="n">A</span><span class="p">:</span> <span class="n">array</span> <span class="n">of</span> <span class="n">integer</span><span class="p">;</span> 
+
+    <span class="n">begin</span>
+        <span class="n">setConsoleCP</span><span class="p">(</span><span class="mi">1251</span><span class="p">);</span> <span class="o">//</span> <span class="n">для</span> <span class="n">ввода</span>  <span class="n">русификация</span> <span class="n">и</span> <span class="p">(</span><span class="n">сделать</span> <span class="n">строку</span> <span class="n">комментарием</span> <span class="n">в</span> <span class="n">онлайн</span><span class="o">-</span><span class="n">компиляторе</span><span class="o">!)</span>
+        <span class="n">setConsoleOutputCP</span><span class="p">(</span><span class="mi">1251</span><span class="p">);</span> <span class="o">//</span> <span class="n">для</span> <span class="n">вывода</span> <span class="p">(</span><span class="n">сделать</span> <span class="n">строку</span> <span class="n">комментарием</span> <span class="n">в</span> <span class="n">онлайн</span><span class="o">-</span><span class="n">компиляторе</span><span class="o">!)</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="n">ParamCount</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">)</span> <span class="n">then</span> 
+        <span class="n">begin</span> 
+        <span class="n">writeln</span><span class="p">(</span><span class="err">‘</span><span class="n">CritError</span><span class="p">:</span> <span class="n">Не</span> <span class="n">заданы</span> <span class="n">параметры</span> <span class="n">программы</span><span class="err">’</span><span class="p">);</span>
+        <span class="n">readln</span><span class="p">:</span> <span class="n">exit</span><span class="p">;</span>
+        <span class="n">end</span><span class="p">;</span>
+
+        <span class="p">{</span><span class="n">A0</span><span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="n">A0</span><span class="o">.</span><span class="mi">3</span> <span class="o">-</span> <span class="n">ввод</span><span class="o">-</span><span class="n">вывод</span> <span class="n">входных</span> <span class="n">данных</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Лаб.6&#39;</span> <span class="p">:</span><span class="mi">40</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">заголовка</span> <span class="n">c</span> <span class="n">переходом</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mi">3</span><span class="p">}</span>
+        
+        <span class="p">{</span><span class="n">ввод</span><span class="o">-</span><span class="n">вывод</span> <span class="n">исходного</span> <span class="n">массивa</span> <span class="n">A</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mf">2.1</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">,</span> <span class="mf">5.1</span><span class="p">,</span> <span class="mf">5.2</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Массив A: &#39;</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">пояснения</span> <span class="n">с</span> <span class="n">переходом</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span><span class="p">}</span>
+        
+        <span class="n">AssignFile</span><span class="p">(</span><span class="n">tfin</span><span class="p">,</span> <span class="n">ParamStr</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span> <span class="n">reset</span><span class="p">(</span><span class="n">tfin</span><span class="p">);</span> <span class="p">{</span><span class="n">открыть</span> <span class="n">файл</span> <span class="n">для</span> <span class="n">чтения</span><span class="p">}</span> 
+        <span class="n">AssignFile</span><span class="p">(</span><span class="n">tfout</span><span class="p">,</span> <span class="n">ParamStr</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span> <span class="n">rewrite</span><span class="p">(</span><span class="n">tfout</span><span class="p">);</span> <span class="p">{</span><span class="n">открыть</span> <span class="n">файл</span> <span class="n">для</span> <span class="n">записи</span><span class="p">}</span>
+                
+        <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="p">:</span><span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">MAX</span> <span class="p">:</span><span class="o">=</span> <span class="o">-</span><span class="mi">10000</span><span class="p">;</span>
+            
+        <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+                
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">eof</span><span class="p">(</span><span class="n">tfin</span><span class="p">)</span> <span class="n">do</span> 
+
+        <span class="n">begin</span>
+            <span class="n">SetLength</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+            <span class="n">readln</span><span class="p">(</span><span class="n">tfin</span><span class="p">,</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span> <span class="p">{</span><span class="n">ввод</span> <span class="n">элемента</span> <span class="n">и</span> <span class="n">переход</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span><span class="p">}</span> 
+            <span class="n">writeln</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span><span class="mi">5</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">элемента</span> <span class="n">и</span> <span class="n">переход</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">на</span> <span class="n">экране</span><span class="p">}</span>
+            <span class="n">writeln</span><span class="p">(</span><span class="n">tfout</span><span class="p">,</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span><span class="mi">5</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">элемента</span> <span class="n">и</span> <span class="n">переход</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">в</span> <span class="n">файле</span><span class="p">}</span>
+            
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="n">then</span> <span class="n">f</span> <span class="p">:</span><span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+                
+            <span class="k">if</span> <span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="n">MOD</span> <span class="mi">9</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="n">then</span>
+            <span class="n">begin</span>
+                <span class="n">k</span> <span class="p">:</span><span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="n">MAX</span> <span class="p">:</span><span class="o">=</span> <span class="o">-</span><span class="mi">10000</span><span class="p">;</span>
+            <span class="n">end</span><span class="p">;</span>
+        
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="n">k</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">f</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">MAX</span> <span class="o">&lt;</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="n">then</span>
+            <span class="n">begin</span> 
+                <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="n">MAX</span> <span class="p">:</span><span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="n">end</span><span class="p">;</span>
+            
+            <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">end</span><span class="p">;</span>
+            
+        <span class="n">CloseFile</span><span class="p">(</span><span class="n">tfin</span><span class="p">);</span> <span class="p">{</span><span class="n">закрыть</span> <span class="n">файл</span> <span class="n">для</span> <span class="n">чтения</span><span class="p">}</span> 
+   
+        <span class="k">for</span> <span class="n">i</span><span class="p">:</span><span class="o">=</span><span class="mi">1</span> <span class="n">to</span> <span class="mi">80</span> <span class="n">do</span> 
+            <span class="n">write</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">);</span> <span class="p">{</span><span class="n">отделим</span> <span class="n">визуально</span> <span class="n">чертой</span> <span class="n">и</span> <span class="n">строкой</span> <span class="n">введенные</span> <span class="n">и</span> <span class="n">выводимые</span> <span class="n">значения</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">;</span> 
+                    
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Индекс максимального значения выбранных элементов массива A:&#39;</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span><span class="mi">2</span><span class="p">);</span>
+        <span class="p">{</span><span class="n">вывод</span> <span class="n">переменной</span> <span class="n">и</span> <span class="n">переход</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">на</span> <span class="n">экране</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mi">6</span><span class="p">}</span>             
+        <span class="n">writeln</span><span class="p">(</span><span class="n">tfout</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span><span class="mi">2</span><span class="p">);</span> 
+        <span class="p">{</span><span class="n">вывод</span> <span class="n">MIN</span> <span class="n">и</span> <span class="n">переход</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">в</span> <span class="n">файле</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mi">6</span><span class="p">}</span>
+        
+        <span class="n">CloseFile</span><span class="p">(</span><span class="n">tfout</span><span class="p">);</span> <span class="p">{</span><span class="n">закрыть</span> <span class="n">файл</span> <span class="n">для</span> <span class="n">записи</span><span class="p">}</span>
+        
+    <span class="n">end</span><span class="o">.</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="&#1042;&#1072;&#1088;&#1080;&#1072;&#1085;&#1090;-&#1087;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1099;-&#1076;&#1083;&#1103;-&#1086;&#1085;&#1083;&#1072;&#1081;&#1085;-&#1082;&#1086;&#1084;&#1087;&#1080;&#1083;&#1103;&#1090;&#1086;&#1088;&#1072;.">&#1042;&#1072;&#1088;&#1080;&#1072;&#1085;&#1090; &#1087;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1099; &#1076;&#1083;&#1103; &#1086;&#1085;&#1083;&#1072;&#1081;&#1085;-&#1082;&#1086;&#1084;&#1087;&#1080;&#1083;&#1103;&#1090;&#1086;&#1088;&#1072;.<a class="anchor-link" href="#&#1042;&#1072;&#1088;&#1080;&#1072;&#1085;&#1090;-&#1087;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1099;-&#1076;&#1083;&#1103;-&#1086;&#1085;&#1083;&#1072;&#1081;&#1085;-&#1082;&#1086;&#1084;&#1087;&#1080;&#1083;&#1103;&#1090;&#1086;&#1088;&#1072;.">&#182;</a></h4><p><a href="http://www.compileonline.com/compile_pascal_online.php">Compile and Execute Pascal Online</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># main.pas</span>
+<span class="n">Program</span> <span class="n">Lab6</span><span class="p">;</span>
+
+<span class="n">var</span>
+    <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">integer</span><span class="p">;</span>
+    <span class="n">MAX</span><span class="p">:</span> <span class="n">integer</span><span class="p">;</span>
+    <span class="n">A</span><span class="p">:</span> <span class="n">array</span> <span class="n">of</span> <span class="n">integer</span><span class="p">;</span>
+    
+<span class="n">begin</span>
+    <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Лаб.6&#39;</span> <span class="p">:</span><span class="mi">40</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">заголовка</span> <span class="n">c</span> <span class="n">переходом</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mi">3</span><span class="p">}</span>
+    <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Элементы массива A:  &#39;</span><span class="p">);</span>
+    
+    <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="p">:</span><span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">MAX</span> <span class="p">:</span><span class="o">=</span> <span class="o">-</span><span class="mi">10000</span><span class="p">;</span>
+            
+    <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="mi">1</span><span class="p">;</span> 
+    
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">eoln</span> <span class="n">do</span>
+    <span class="n">begin</span>
+        <span class="n">SetLength</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+        <span class="n">readln</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span> <span class="p">{</span><span class="n">ввод</span> <span class="n">элемента</span> <span class="n">и</span> <span class="n">переход</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span><span class="p">}</span> 
+        <span class="n">writeln</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span><span class="mi">5</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">элемента</span> <span class="n">и</span> <span class="n">переход</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">на</span> <span class="n">экране</span><span class="p">}</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="n">then</span> <span class="n">f</span> <span class="p">:</span><span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="n">MOD</span> <span class="mi">9</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="n">then</span>
+        <span class="n">begin</span>
+            <span class="n">k</span> <span class="p">:</span><span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="n">MAX</span> <span class="p">:</span><span class="o">=</span> <span class="o">-</span><span class="mi">10000</span><span class="p">;</span>
+        <span class="n">end</span><span class="p">;</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="n">k</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">f</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">MAX</span> <span class="o">&lt;</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="n">then</span>
+        <span class="n">begin</span> 
+            <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="n">MAX</span> <span class="p">:</span><span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="n">end</span><span class="p">;</span>
+        
+        <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">end</span><span class="p">;</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">:</span><span class="o">=</span><span class="mi">1</span> <span class="n">to</span> <span class="mi">80</span> <span class="n">do</span> 
+        <span class="n">write</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">);</span> <span class="p">{</span><span class="n">отделим</span> <span class="n">визуально</span> <span class="n">чертой</span> <span class="n">и</span> <span class="n">строкой</span> <span class="n">введенные</span> <span class="n">и</span> <span class="n">выводимые</span> <span class="n">значения</span><span class="p">}</span>
+    <span class="n">writeln</span><span class="p">();</span>
+    
+    <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Индекс максимального значения выбранных элементов массива A:&#39;</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span><span class="mi">2</span><span class="p">);</span> 
+    <span class="n">writeln</span><span class="p">(</span><span class="n">MAX</span><span class="p">);</span>
+<span class="n">end</span><span class="o">.</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># STDIN</span>
+<span class="mi">30</span>
+  <span class="o">-</span><span class="mi">40</span>
+  <span class="o">-</span><span class="mi">22</span>
+   <span class="mi">68</span>
+   <span class="mi">46</span>
+   <span class="mi">12</span>
+  <span class="o">-</span><span class="mi">94</span>
+  <span class="o">-</span><span class="mi">14</span>
+  <span class="o">-</span><span class="mi">75</span>
+   <span class="mi">87</span>
+  <span class="o">-</span><span class="mi">47</span>
+   <span class="mi">83</span>
+   <span class="mi">51</span>
+   <span class="o">-</span><span class="mi">9</span>
+  <span class="o">-</span><span class="mi">30</span>
+   <span class="mi">19</span>
+   <span class="mi">21</span>
+   <span class="o">-</span><span class="mi">2</span>
+  <span class="o">-</span><span class="mi">35</span>
+   <span class="mi">37</span>
+   <span class="mi">71</span>
+   <span class="mi">77</span>
+   <span class="mi">62</span>
+   <span class="mi">70</span>
+  <span class="o">-</span><span class="mi">46</span>
+   <span class="mi">81</span>
+  <span class="o">-</span><span class="mi">65</span>
+  <span class="o">-</span><span class="mi">85</span>
+  <span class="o">-</span><span class="mi">79</span>
+   <span class="mi">49</span>
+   <span class="mi">82</span>
+   <span class="mi">92</span>
+   <span class="mi">53</span>
+   <span class="mi">13</span>
+  <span class="o">-</span><span class="mi">48</span>
+  <span class="o">-</span><span class="mi">80</span>
+   <span class="mi">26</span>
+  <span class="o">-</span><span class="mi">32</span>
+    <span class="mi">3</span>
+  <span class="o">-</span><span class="mi">69</span>
+   <span class="mi">16</span>
+  <span class="o">-</span><span class="mi">42</span>
+   <span class="mi">51</span>
+  <span class="o">-</span><span class="mi">51</span>
+  <span class="o">-</span><span class="mi">53</span>
+   <span class="mi">82</span>
+   <span class="mi">17</span>
+  <span class="o">-</span><span class="mi">55</span>
+   <span class="o">-</span><span class="mi">7</span>
+   <span class="mi">30</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div>
     </div>
   </div>
