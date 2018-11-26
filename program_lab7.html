@@ -12748,9 +12748,216 @@ blockdiag {
 <h3 id="11.-&#1055;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1072;-&#1085;&#1072;-Delphi.">11. &#1055;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1072; &#1085;&#1072; <i>Delphi</i>.<a class="anchor-link" href="#11.-&#1055;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1072;-&#1085;&#1072;-Delphi.">&#182;</a></h3><p><strong>Диалоговый вариант {ввод названий файлов и данных из текстового файла, вывод на экран и в текстовый файл}</strong></p>
 <p>Синтаксис:</p>
 <p><a href="https://www.tutorialspoint.com/pascal/index.htm">Pascal Tutorial</a></p>
-<p>Проверить программу онлайн без установки программной среды:</p>
-<p><a href="http://www.compileonline.com/compile_pascal_online.php">Compile and Execute Pascal Online</a></p>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">program</span> <span class="n">Lab7</span><span class="p">;</span> <span class="o">//</span><span class="n">сохранить</span> <span class="n">как</span> <span class="n">lab7</span><span class="o">.</span><span class="n">dpr</span> <span class="p">(</span><span class="n">DPR</span> <span class="err">–</span> <span class="n">Delphi</span> <span class="n">PRoject</span><span class="p">)</span>  
+<span class="p">{</span><span class="err">$</span><span class="n">APPTYPE</span> <span class="n">CONSOLE</span><span class="p">}</span>
+<span class="n">Uses</span> <span class="n">Windows</span><span class="p">;</span> <span class="o">//</span> <span class="n">для</span> <span class="n">русификации</span> <span class="p">(</span><span class="n">сделать</span> <span class="n">комментарием</span> <span class="n">в</span> <span class="n">онлайн</span><span class="o">-</span><span class="n">компиляторе</span><span class="o">!)</span>
+
+    <span class="n">var</span>
+        <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="n">integer</span><span class="p">;</span>
+        <span class="n">MIN</span><span class="p">:</span> <span class="n">integer</span><span class="p">;</span>
+        <span class="n">fin</span><span class="p">,</span> <span class="n">fout</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="n">string</span><span class="p">;</span>
+        <span class="n">tfin</span><span class="p">,</span> <span class="n">tfout</span><span class="p">:</span> <span class="n">TextFile</span><span class="p">;</span>
+        <span class="n">A</span><span class="p">:</span> <span class="n">array</span> <span class="n">of</span> <span class="n">integer</span><span class="p">;</span> 
+        <span class="p">{</span><span class="n">заглушка</span> <span class="n">для</span> <span class="n">теста</span> <span class="mi">1</span><span class="p">}</span>    
+        <span class="n">TA1</span><span class="p">:</span> <span class="n">array</span><span class="p">[</span><span class="mf">0.</span><span class="o">.</span><span class="mi">20</span><span class="p">]</span> <span class="n">of</span> <span class="n">integer</span> <span class="o">=</span> <span class="p">(</span><span class="mi">98</span><span class="p">,</span><span class="mi">91</span><span class="p">,</span><span class="mi">86</span><span class="p">,</span><span class="mi">82</span><span class="p">,</span><span class="mi">58</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">26</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">32</span><span class="p">,</span><span class="o">-</span><span class="mi">47</span><span class="p">,</span><span class="o">-</span><span class="mi">48</span><span class="p">,</span><span class="o">-</span><span class="mi">65</span><span class="p">,</span><span class="o">-</span><span class="mi">78</span><span class="p">,</span><span class="o">-</span><span class="mi">80</span><span class="p">,</span><span class="o">-</span><span class="mi">93</span><span class="p">,</span><span class="o">-</span><span class="mi">97</span><span class="p">);</span>
+        <span class="p">{</span><span class="n">заглушка</span> <span class="n">для</span> <span class="n">теста</span> <span class="mi">2</span><span class="p">}</span>    
+        <span class="n">TA2</span><span class="p">:</span> <span class="n">array</span><span class="p">[</span><span class="mf">0.</span><span class="o">.</span><span class="mi">20</span><span class="p">]</span> <span class="n">of</span> <span class="n">integer</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span> 
+        <span class="p">{</span><span class="n">заглушка</span> <span class="n">для</span> <span class="n">теста</span> <span class="mi">3</span><span class="p">}</span>    
+        <span class="n">TA3</span><span class="p">:</span> <span class="n">array</span><span class="p">[</span><span class="mf">0.</span><span class="o">.</span><span class="mi">5</span><span class="p">]</span> <span class="n">of</span> <span class="n">integer</span> <span class="o">=</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span> 
+        <span class="p">{</span><span class="n">заглушка</span> <span class="n">для</span> <span class="n">теста</span> <span class="mi">4</span><span class="p">}</span>    
+        <span class="n">TA4</span><span class="p">:</span> <span class="n">array</span><span class="p">[</span><span class="mf">0.</span><span class="o">.</span><span class="mi">10</span><span class="p">]</span> <span class="n">of</span> <span class="n">integer</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span><span class="o">-</span><span class="mi">11</span><span class="p">,</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span><span class="o">-</span><span class="mi">32</span><span class="p">,</span><span class="o">-</span><span class="mi">37</span><span class="p">,</span><span class="o">-</span><span class="mi">65</span><span class="p">,</span><span class="o">-</span><span class="mi">75</span><span class="p">,</span><span class="o">-</span><span class="mi">75</span><span class="p">,</span><span class="o">-</span><span class="mi">79</span><span class="p">,</span><span class="o">-</span><span class="mi">86</span><span class="p">);</span>   
+        <span class="p">{</span><span class="n">заглушка</span> <span class="n">для</span> <span class="n">теста</span> <span class="mi">5</span><span class="p">}</span>    
+        <span class="n">TA5</span><span class="p">:</span> <span class="n">array</span><span class="p">[</span><span class="mf">0.</span><span class="o">.</span><span class="mi">10</span><span class="p">]</span> <span class="n">of</span> <span class="n">integer</span> <span class="o">=</span> <span class="p">(</span><span class="mi">852</span><span class="p">,</span><span class="mi">727</span><span class="p">,</span><span class="mi">652</span><span class="p">,</span><span class="mi">412</span><span class="p">,</span><span class="mi">388</span><span class="p">,</span><span class="mi">324</span><span class="p">,</span><span class="mi">190</span><span class="p">,</span><span class="mi">186</span><span class="p">,</span><span class="mi">178</span><span class="p">,</span><span class="mi">87</span><span class="p">);</span>
+            
+    <span class="n">begin</span>
+        <span class="n">setConsoleCP</span><span class="p">(</span><span class="mi">1251</span><span class="p">);</span> <span class="o">//</span> <span class="n">для</span> <span class="n">ввода</span>  <span class="n">русификация</span> <span class="n">и</span> <span class="p">(</span><span class="n">сделать</span> <span class="n">строку</span> <span class="n">комментарием</span> <span class="n">в</span> <span class="n">онлайн</span><span class="o">-</span><span class="n">компиляторе</span><span class="o">!)</span>
+        <span class="n">setConsoleOutputCP</span><span class="p">(</span><span class="mi">1251</span><span class="p">);</span> <span class="o">//</span> <span class="n">для</span> <span class="n">вывода</span> <span class="p">(</span><span class="n">сделать</span> <span class="n">строку</span> <span class="n">комментарием</span> <span class="n">в</span> <span class="n">онлайн</span><span class="o">-</span><span class="n">компиляторе</span><span class="o">!)</span>
+
+        <span class="p">{</span><span class="n">A0</span><span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="n">A0</span><span class="o">.</span><span class="mi">3</span> <span class="o">-</span> <span class="n">ввод</span><span class="o">-</span><span class="n">вывод</span> <span class="n">входных</span> <span class="n">данных</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Лаб.7&#39;</span> <span class="p">:</span><span class="mi">40</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">заголовка</span> <span class="n">c</span> <span class="n">переходом</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mi">4</span><span class="p">}</span>
+        
+        <span class="p">{</span><span class="n">ввод</span><span class="o">-</span><span class="n">вывод</span> <span class="n">строковой</span> <span class="n">переменной</span> <span class="o">-</span> <span class="n">имени</span> <span class="n">файла</span> <span class="n">с</span> <span class="n">входными</span> <span class="n">данными</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">5.1</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Текстовый файл с элементами массива A:  &#39;</span><span class="p">);</span> 
+        <span class="n">readln</span><span class="p">(</span><span class="n">fin</span><span class="p">);</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="n">fin</span><span class="p">);</span>
+
+        <span class="p">{</span><span class="n">ввод</span><span class="o">-</span><span class="n">вывод</span> <span class="n">строковой</span> <span class="n">переменной</span> <span class="o">-</span> <span class="n">имени</span> <span class="n">файла</span> <span class="n">с</span> <span class="n">выходными</span> <span class="n">данными</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">5.2</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Текстовый файл с элементами массива A и элементами сортированного массива A: &#39;</span><span class="p">);</span> 
+        <span class="n">readln</span><span class="p">(</span><span class="n">fout</span><span class="p">);</span> 
+        <span class="n">writeln</span><span class="p">(</span><span class="n">fout</span><span class="p">);</span>
+        
+        <span class="p">{</span><span class="n">ввод</span><span class="o">-</span><span class="n">вывод</span> <span class="n">строковой</span> <span class="n">переменной</span> <span class="o">-</span> <span class="n">названия</span> <span class="n">метода</span> <span class="n">сортироки</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Выберете метод сортировки массива A (simple или bubble): &#39;</span><span class="p">);</span> 
+        <span class="n">readln</span><span class="p">(</span><span class="n">method</span><span class="p">);</span> 
+        <span class="n">writeln</span><span class="p">(</span><span class="n">method</span><span class="p">);</span>
+        
+        <span class="p">{</span><span class="n">ввод</span><span class="o">-</span><span class="n">вывод</span> <span class="n">исходного</span> <span class="n">массивa</span> <span class="n">A</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mf">3.1</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">,</span> <span class="mf">7.1</span><span class="p">,</span> <span class="mf">7.2</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Сортировка массива A: &#39;</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">пояснения</span> <span class="n">с</span> <span class="n">переходом</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span><span class="p">}</span>
+        
+        <span class="n">AssignFile</span><span class="p">(</span><span class="n">tfin</span><span class="p">,</span> <span class="n">fin</span><span class="p">);</span> <span class="n">reset</span><span class="p">(</span><span class="n">tfin</span><span class="p">);</span> <span class="p">{</span><span class="n">открыть</span> <span class="n">файл</span> <span class="n">для</span> <span class="n">чтения</span><span class="p">}</span> 
+        <span class="n">AssignFile</span><span class="p">(</span><span class="n">tfout</span><span class="p">,</span> <span class="n">fout</span><span class="p">);</span> <span class="n">rewrite</span><span class="p">(</span><span class="n">tfout</span><span class="p">);</span> <span class="p">{</span><span class="n">открыть</span> <span class="n">файл</span> <span class="n">для</span> <span class="n">записи</span><span class="p">}</span>
+            
+        <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+                
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">eof</span><span class="p">(</span><span class="n">tfin</span><span class="p">)</span> <span class="n">do</span> 
+        <span class="n">begin</span>
+            <span class="n">SetLength</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+            <span class="n">readln</span><span class="p">(</span><span class="n">tfin</span><span class="p">,</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span> <span class="p">{</span><span class="n">ввод</span> <span class="n">элемента</span> <span class="n">и</span> <span class="n">переход</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span><span class="p">}</span> 
+            <span class="n">writeln</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span><span class="mi">5</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">элемента</span> <span class="n">и</span> <span class="n">переход</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">на</span> <span class="n">экране</span><span class="p">}</span>
+            <span class="n">writeln</span><span class="p">(</span><span class="n">tfout</span><span class="p">,</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span><span class="mi">5</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">элемента</span> <span class="n">и</span> <span class="n">переход</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">в</span> <span class="n">файле</span><span class="p">}</span> 
+            <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">end</span><span class="p">;</span>
+            
+        <span class="n">CloseFile</span><span class="p">(</span><span class="n">tfin</span><span class="p">);</span> <span class="p">{</span><span class="n">закрыть</span> <span class="n">файл</span> <span class="n">для</span> <span class="n">чтения</span><span class="p">}</span> 
+           
+        <span class="k">for</span> <span class="n">i</span><span class="p">:</span><span class="o">=</span><span class="mi">1</span> <span class="n">to</span> <span class="mi">80</span> <span class="n">do</span> 
+            <span class="n">write</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">);</span> <span class="p">{</span><span class="n">отделим</span> <span class="n">визуально</span> <span class="n">чертой</span> <span class="n">и</span> <span class="n">строкой</span> <span class="n">введенные</span> <span class="n">и</span> <span class="n">выводимые</span> <span class="n">значения</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">;</span> 
+        
+        <span class="k">for</span> <span class="n">i</span><span class="p">:</span><span class="o">=</span><span class="mi">1</span> <span class="n">to</span> <span class="n">Length</span><span class="p">(</span><span class="n">TA1</span><span class="p">)</span> <span class="n">do</span>
+        <span class="n">begin</span> 
+            <span class="n">writeln</span><span class="p">(</span><span class="n">TA1</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span><span class="mi">5</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">элемента</span> <span class="n">и</span> <span class="n">переход</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">на</span> <span class="n">экране</span><span class="p">}</span>
+            <span class="n">writeln</span><span class="p">(</span><span class="n">tfout</span><span class="p">,</span> <span class="n">TA1</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span><span class="mi">5</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">элемента</span> <span class="n">и</span> <span class="n">переход</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">в</span> <span class="n">файле</span><span class="p">}</span>
+        <span class="n">end</span><span class="p">;</span>
+        
+        <span class="n">CloseFile</span><span class="p">(</span><span class="n">tfout</span><span class="p">);</span> <span class="p">{</span><span class="n">закрыть</span> <span class="n">файл</span> <span class="n">для</span> <span class="n">записи</span><span class="p">}</span>
+        
+    <span class="n">end</span><span class="o">.</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="&#1042;&#1072;&#1088;&#1080;&#1072;&#1085;&#1090;-&#1087;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1099;-&#1076;&#1083;&#1103;-&#1086;&#1085;&#1083;&#1072;&#1081;&#1085;-&#1082;&#1086;&#1084;&#1087;&#1080;&#1083;&#1103;&#1090;&#1086;&#1088;&#1072;.">&#1042;&#1072;&#1088;&#1080;&#1072;&#1085;&#1090; &#1087;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1099; &#1076;&#1083;&#1103; &#1086;&#1085;&#1083;&#1072;&#1081;&#1085;-&#1082;&#1086;&#1084;&#1087;&#1080;&#1083;&#1103;&#1090;&#1086;&#1088;&#1072;.<a class="anchor-link" href="#&#1042;&#1072;&#1088;&#1080;&#1072;&#1085;&#1090;-&#1087;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1099;-&#1076;&#1083;&#1103;-&#1086;&#1085;&#1083;&#1072;&#1081;&#1085;-&#1082;&#1086;&#1084;&#1087;&#1080;&#1083;&#1103;&#1090;&#1086;&#1088;&#1072;.">&#182;</a></h4><p><a href="http://www.compileonline.com/compile_pascal_online.php">Compile and Execute Pascal Online</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">//</span> <span class="n">main</span><span class="o">.</span><span class="n">pas</span>
+<span class="n">program</span> <span class="n">Lab7</span><span class="p">;</span> <span class="o">//</span> <span class="n">сохранить</span> <span class="n">как</span> <span class="n">lab7</span><span class="o">.</span><span class="n">dpr</span> <span class="p">(</span><span class="n">DPR</span> <span class="err">–</span> <span class="n">Delphi</span> <span class="n">PRoject</span><span class="p">)</span>  
+
+<span class="n">var</span>
+    <span class="n">i</span><span class="p">:</span> <span class="n">integer</span><span class="p">;</span>
+    <span class="n">A</span><span class="p">:</span> <span class="n">array</span> <span class="n">of</span> <span class="n">integer</span><span class="p">;</span> 
+    <span class="n">method</span><span class="p">:</span> <span class="n">string</span><span class="p">;</span>
+    <span class="p">{</span><span class="n">заглушка</span> <span class="n">для</span> <span class="n">теста</span> <span class="mi">1</span><span class="p">}</span>    
+    <span class="n">TA1</span><span class="p">:</span> <span class="n">array</span><span class="p">[</span><span class="mf">1.</span><span class="o">.</span><span class="mi">20</span><span class="p">]</span> <span class="n">of</span> <span class="n">integer</span> <span class="o">=</span> <span class="p">(</span><span class="mi">98</span><span class="p">,</span><span class="mi">91</span><span class="p">,</span><span class="mi">86</span><span class="p">,</span><span class="mi">82</span><span class="p">,</span><span class="mi">58</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">26</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">32</span><span class="p">,</span><span class="o">-</span><span class="mi">47</span><span class="p">,</span><span class="o">-</span><span class="mi">48</span><span class="p">,</span><span class="o">-</span><span class="mi">65</span><span class="p">,</span><span class="o">-</span><span class="mi">78</span><span class="p">,</span><span class="o">-</span><span class="mi">80</span><span class="p">,</span><span class="o">-</span><span class="mi">93</span><span class="p">,</span><span class="o">-</span><span class="mi">97</span><span class="p">);</span>
+<span class="n">begin</span>
+
+        <span class="p">{</span><span class="n">A0</span><span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="n">A0</span><span class="o">.</span><span class="mi">3</span> <span class="o">-</span> <span class="n">ввод</span><span class="o">-</span><span class="n">вывод</span> <span class="n">входных</span> <span class="n">данных</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Лаб.7&#39;</span> <span class="p">:</span><span class="mi">40</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">заголовка</span> <span class="n">c</span> <span class="n">переходом</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mi">4</span><span class="p">}</span>
+        
+        <span class="p">{</span><span class="n">ввод</span><span class="o">-</span><span class="n">вывод</span> <span class="n">строковой</span> <span class="n">переменной</span> <span class="o">-</span> <span class="n">названия</span> <span class="n">метода</span> <span class="n">сортироки</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Выберете метод сортировки массива A (simple или bubble): &#39;</span><span class="p">);</span> 
+        <span class="n">readln</span><span class="p">(</span><span class="n">method</span><span class="p">);</span> 
+        <span class="n">writeln</span><span class="p">(</span><span class="n">method</span><span class="p">);</span>     
+        
+        <span class="p">{</span><span class="n">ввод</span><span class="o">-</span><span class="n">вывод</span> <span class="n">исходного</span> <span class="n">массивa</span> <span class="n">A</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mf">3.1</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">,</span> <span class="mf">7.1</span><span class="p">,</span> <span class="mf">7.2</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Сортировка массива A: &#39;</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">пояснения</span> <span class="n">с</span> <span class="n">переходом</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span><span class="p">}</span>
+            
+        <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+                
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">eoln</span> <span class="n">do</span> 
+        <span class="n">begin</span>
+            <span class="n">SetLength</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+            <span class="n">readln</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span> <span class="p">{</span><span class="n">ввод</span> <span class="n">элемента</span> <span class="n">и</span> <span class="n">переход</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span><span class="p">}</span> 
+            <span class="n">writeln</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span><span class="mi">5</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">элемента</span> <span class="n">и</span> <span class="n">переход</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">на</span> <span class="n">экране</span><span class="p">}</span>
+            <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">end</span><span class="p">;</span>
+           
+        <span class="k">for</span> <span class="n">i</span><span class="p">:</span><span class="o">=</span><span class="mi">1</span> <span class="n">to</span> <span class="mi">80</span> <span class="n">do</span> 
+            <span class="n">write</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">);</span> <span class="p">{</span><span class="n">отделим</span> <span class="n">визуально</span> <span class="n">чертой</span> <span class="n">и</span> <span class="n">строкой</span> <span class="n">введенные</span> <span class="n">и</span> <span class="n">выводимые</span> <span class="n">значения</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">;</span>
+        
+        <span class="k">for</span> <span class="n">i</span><span class="p">:</span><span class="o">=</span><span class="mi">1</span> <span class="n">to</span> <span class="n">Length</span><span class="p">(</span><span class="n">TA1</span><span class="p">)</span> <span class="n">do</span>
+        <span class="n">begin</span> 
+            <span class="n">writeln</span><span class="p">(</span><span class="n">TA1</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span><span class="mi">5</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">элемента</span> <span class="n">и</span> <span class="n">переход</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">на</span> <span class="n">экране</span><span class="p">}</span>
+        <span class="n">end</span><span class="p">;</span>
+<span class="n">end</span><span class="o">.</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">//</span> <span class="n">STDIN</span>
+<span class="n">bubble</span>
+<span class="o">-</span><span class="mi">78</span>
+<span class="mi">26</span>
+<span class="o">-</span><span class="mi">3</span>
+<span class="mi">32</span>
+<span class="o">-</span><span class="mi">48</span>
+<span class="o">-</span><span class="mi">97</span>
+<span class="o">-</span><span class="mi">80</span>
+<span class="mi">49</span>
+<span class="mi">86</span>
+<span class="o">-</span><span class="mi">32</span>
+<span class="mi">91</span>
+<span class="mi">58</span>
+<span class="mi">82</span>
+<span class="mi">19</span>
+<span class="mi">98</span>
+<span class="o">-</span><span class="mi">65</span>
+<span class="o">-</span><span class="mi">93</span>
+<span class="mi">40</span>
+<span class="mi">6</span>
+<span class="o">-</span><span class="mi">47</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#1056;&#1072;&#1089;&#1082;&#1088;&#1099;&#1090;&#1080;&#1077;-&#1072;&#1073;&#1089;&#1090;&#1088;&#1072;&#1082;&#1094;&#1080;&#1080;-&#1040;0.2">&#1056;&#1072;&#1089;&#1082;&#1088;&#1099;&#1090;&#1080;&#1077; &#1072;&#1073;&#1089;&#1090;&#1088;&#1072;&#1082;&#1094;&#1080;&#1080; &#1040;0.2<a class="anchor-link" href="#&#1056;&#1072;&#1089;&#1082;&#1088;&#1099;&#1090;&#1080;&#1077;-&#1072;&#1073;&#1089;&#1090;&#1088;&#1072;&#1082;&#1094;&#1080;&#1080;-&#1040;0.2">&#182;</a></h2><p><em>Поскольку условие всей задачи совпадает (за исключением необходимости ввода-вывода) с условием выделенной подзадачи,</em></p>
+<p><em>вместо полной спецификации с пунктами 1-11 выполнено просто дополнение к пунктам 9-11.</em></p>
+<h3 id="9.-&#1052;&#1077;&#1090;&#1086;&#1076;">9. &#1052;&#1077;&#1090;&#1086;&#1076;<a class="anchor-link" href="#9.-&#1052;&#1077;&#1090;&#1086;&#1076;">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="10.-&#1040;&#1083;&#1075;&#1086;&#1088;&#1080;&#1090;&#1084;">10. &#1040;&#1083;&#1075;&#1086;&#1088;&#1080;&#1090;&#1084;<a class="anchor-link" href="#10.-&#1040;&#1083;&#1075;&#1086;&#1088;&#1080;&#1090;&#1084;">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="11.-&#1055;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1072;-&#1085;&#1072;-Delphi.">11. &#1055;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1072; &#1085;&#1072; <i>Delphi</i>.<a class="anchor-link" href="#11.-&#1055;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1072;-&#1085;&#1072;-Delphi.">&#182;</a></h3>
 </div>
 </div>
 </div>
