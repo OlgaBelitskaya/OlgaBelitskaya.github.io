@@ -12792,7 +12792,7 @@ div#notebook {
 <p>номер последнего неупорядоченного по неубыванию столбца.</p>
 </li>
 <li><p><em>Подзадача А 0.3.</em></p>
-<p>Ввести полученные результаты (<code>N</code>) на экран (обр.6.1,6.2) и</p>
+<p>Ввести полученные результаты (<code>N</code>) на экран (обр.6.1, 6.2) и</p>
 <p>записать в файл вывода исходный массив и полученный результат.</p>
 </li>
 </ol>
@@ -12928,6 +12928,139 @@ blockdiag {
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="11.-&#1055;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1072;-&#1085;&#1072;-Delphi.">11. &#1055;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1072; &#1085;&#1072; <i>Delphi</i>.<a class="anchor-link" href="#11.-&#1055;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1072;-&#1085;&#1072;-Delphi.">&#182;</a></h3><p><strong>Диалоговый вариант {ввод названий файлов и данных из текстового файла, вывод на экран и в текстовый файл}</strong></p>
+<p>Синтаксис:</p>
+<p><a href="https://www.tutorialspoint.com/pascal/index.htm">Pascal Tutorial</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">program</span> <span class="n">Lab9</span><span class="p">;</span> <span class="o">//</span><span class="n">сохранить</span> <span class="n">как</span> <span class="n">lab9</span><span class="o">.</span><span class="n">dpr</span> <span class="p">(</span><span class="n">DPR</span> <span class="err">–</span> <span class="n">Delphi</span> <span class="n">PRoject</span><span class="p">)</span>  
+<span class="p">{</span><span class="err">$</span><span class="n">APPTYPE</span> <span class="n">CONSOLE</span><span class="p">}</span>
+<span class="n">Uses</span> <span class="n">Windows</span><span class="p">;</span> <span class="o">//</span> 
+
+    <span class="n">var</span>
+        <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">N</span><span class="p">:</span> <span class="n">integer</span><span class="p">;</span>
+        <span class="n">fin</span><span class="p">,</span> <span class="n">fout</span><span class="p">:</span> <span class="n">string</span><span class="p">;</span>
+        <span class="n">tfin</span><span class="p">,</span> <span class="n">tfout</span><span class="p">:</span> <span class="n">TextFile</span><span class="p">;</span>
+        <span class="n">A</span><span class="p">:</span> <span class="n">array</span> <span class="p">[</span><span class="mf">0.</span><span class="o">.</span><span class="mi">1000</span><span class="p">,</span> <span class="mf">0.</span><span class="o">.</span><span class="mi">1000</span><span class="p">]</span> <span class="n">of</span> <span class="n">real</span><span class="p">;</span>
+
+    <span class="n">begin</span>
+        <span class="n">setConsoleCP</span><span class="p">(</span><span class="mi">1251</span><span class="p">);</span> <span class="o">//</span> 
+        <span class="n">setConsoleOutputCP</span><span class="p">(</span><span class="mi">1251</span><span class="p">);</span> <span class="o">//</span> 
+
+        <span class="p">{</span><span class="n">A0</span><span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="n">A0</span><span class="o">.</span><span class="mi">3</span> <span class="o">-</span> <span class="n">ввод</span><span class="o">-</span><span class="n">вывод</span> <span class="n">входных</span> <span class="n">данных</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Лаб.9&#39;</span> <span class="p">:</span><span class="mi">40</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">заголовка</span> <span class="n">c</span> <span class="n">переходом</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mi">3</span><span class="p">}</span>
+        
+        <span class="p">{</span><span class="n">ввод</span><span class="o">-</span><span class="n">вывод</span> <span class="n">строковой</span> <span class="n">переменной</span> <span class="o">-</span> <span class="n">имени</span> <span class="n">файла</span> <span class="n">с</span> <span class="n">входными</span> <span class="n">данными</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">4.1</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Текстовый файл с элементами матрицы A: &#39;</span><span class="p">);</span> 
+        <span class="n">readln</span><span class="p">(</span><span class="n">fin</span><span class="p">);</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="n">fin</span><span class="p">);</span>
+
+        <span class="p">{</span><span class="n">ввод</span><span class="o">-</span><span class="n">вывод</span> <span class="n">строковой</span> <span class="n">переменной</span> <span class="o">-</span> <span class="n">имени</span> <span class="n">файла</span> <span class="n">с</span> <span class="n">выходными</span> <span class="n">данными</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Текстовый файл с элементами матрицы A и номером столбца N: &#39;</span><span class="p">);</span> 
+        <span class="n">readln</span><span class="p">(</span><span class="n">fout</span><span class="p">);</span> 
+        <span class="n">writeln</span><span class="p">(</span><span class="n">fout</span><span class="p">);</span>
+        
+        <span class="p">{</span><span class="n">ввод</span><span class="o">-</span><span class="n">вывод</span> <span class="n">исходного</span> <span class="n">массивa</span> <span class="n">A</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mf">2.1</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">,</span> <span class="mf">5.1</span><span class="p">,</span> <span class="mf">5.2</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Исходная матрица A: &#39;</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">пояснения</span> <span class="n">с</span> <span class="n">переходом</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span><span class="p">}</span>
+        
+        <span class="n">AssignFile</span><span class="p">(</span><span class="n">tfin</span><span class="p">,</span> <span class="n">fin</span><span class="p">);</span> <span class="n">reset</span><span class="p">(</span><span class="n">tfin</span><span class="p">);</span> <span class="p">{</span><span class="n">открыть</span> <span class="n">файл</span> <span class="n">для</span> <span class="n">чтения</span><span class="p">}</span> 
+        <span class="n">AssignFile</span><span class="p">(</span><span class="n">tfout</span><span class="p">,</span> <span class="n">fout</span><span class="p">);</span> <span class="n">rewrite</span><span class="p">(</span><span class="n">tfout</span><span class="p">);</span> <span class="p">{</span><span class="n">открыть</span> <span class="n">файл</span> <span class="n">для</span> <span class="n">записи</span><span class="p">}</span>
+            
+        <span class="n">i</span> <span class="p">:</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">eoln</span> <span class="n">do</span>
+        <span class="n">begin</span>
+            <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="k">while</span> <span class="ow">not</span> <span class="n">eoln</span> <span class="n">do</span>
+            <span class="n">begin</span>
+                <span class="n">read</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]);</span>
+                <span class="n">write</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">],</span> <span class="s1">&#39; &#39;</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">элемента</span> <span class="n">на</span> <span class="n">экран</span><span class="p">}</span>
+                <span class="n">write</span><span class="p">(</span><span class="n">tfout</span><span class="p">,</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]:</span><span class="mi">5</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">элемента</span> <span class="n">в</span> <span class="n">файл</span><span class="p">}</span>
+                <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">end</span><span class="p">;</span>
+            <span class="n">readln</span><span class="p">;</span> <span class="n">writeln</span><span class="p">;</span>
+            <span class="n">writeln</span><span class="p">(</span><span class="n">tfout</span><span class="p">);</span>
+            <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">end</span><span class="p">;</span>
+            
+        <span class="n">CloseFile</span><span class="p">(</span><span class="n">tfin</span><span class="p">);</span> <span class="p">{</span><span class="n">закрыть</span> <span class="n">файл</span> <span class="n">для</span> <span class="n">чтения</span><span class="p">}</span> 
+   
+        <span class="k">for</span> <span class="n">i</span><span class="p">:</span><span class="o">=</span><span class="mi">1</span> <span class="n">to</span> <span class="mi">80</span> <span class="n">do</span> 
+            <span class="n">write</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">);</span> <span class="p">{</span><span class="n">отделим</span> <span class="n">визуально</span> <span class="n">чертой</span> <span class="n">и</span> <span class="n">строкой</span> <span class="n">введенные</span> <span class="n">и</span> <span class="n">выводимые</span> <span class="n">значения</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">;</span>
+        
+        <span class="n">N</span> <span class="p">:</span><span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="p">{</span><span class="n">заглушка</span> <span class="n">для</span> <span class="n">теста</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span>             
+        <span class="o">//</span> <span class="n">N</span> <span class="p">:</span><span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Все столбцы матрицы сортированы по неубыванию&#39;</span><span class="p">);</span> <span class="p">{</span><span class="n">заглушка</span> <span class="n">для</span> <span class="n">теста</span> <span class="mi">3</span><span class="p">}</span>
+        <span class="o">//</span> <span class="n">N</span> <span class="p">:</span><span class="o">=</span> <span class="mi">7</span><span class="p">;</span> <span class="p">{</span><span class="n">заглушка</span> <span class="n">для</span> <span class="n">теста</span> <span class="mi">4</span><span class="p">}</span>
+        <span class="o">//</span> <span class="n">N</span> <span class="p">:</span><span class="o">=</span> <span class="mi">10</span><span class="p">;</span> <span class="p">{</span><span class="n">заглушка</span> <span class="n">для</span> <span class="n">теста</span> <span class="mi">5</span><span class="p">}</span>    
+                    
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Наибольший номер неупорядоченного столбца по неубыванию N:&#39;</span><span class="p">,</span> <span class="n">N</span><span class="p">:</span><span class="mi">2</span><span class="p">);</span>
+        <span class="p">{</span><span class="n">вывод</span> <span class="n">переменной</span> <span class="n">и</span> <span class="n">переход</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">на</span> <span class="n">экране</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mf">6.1</span><span class="p">,</span><span class="mf">6.2</span><span class="p">}</span>             
+        <span class="n">writeln</span><span class="p">(</span><span class="n">tfout</span><span class="p">,</span> <span class="n">N</span><span class="p">:</span><span class="mi">2</span><span class="p">);</span> 
+        <span class="p">{</span><span class="n">вывод</span> <span class="n">переменной</span> <span class="n">и</span> <span class="n">переход</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">в</span> <span class="n">файле</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mf">6.1</span><span class="p">,</span><span class="mf">6.2</span><span class="p">}</span>
+        
+        <span class="n">CloseFile</span><span class="p">(</span><span class="n">tfout</span><span class="p">);</span> <span class="p">{</span><span class="n">закрыть</span> <span class="n">файл</span> <span class="n">для</span> <span class="n">записи</span><span class="p">}</span>
+        
+    <span class="n">end</span><span class="o">.</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#1056;&#1072;&#1089;&#1082;&#1088;&#1099;&#1090;&#1080;&#1077;-&#1072;&#1073;&#1089;&#1090;&#1088;&#1072;&#1082;&#1094;&#1080;&#1080;-&#1040;0.2">&#1056;&#1072;&#1089;&#1082;&#1088;&#1099;&#1090;&#1080;&#1077; &#1072;&#1073;&#1089;&#1090;&#1088;&#1072;&#1082;&#1094;&#1080;&#1080; &#1040;0.2<a class="anchor-link" href="#&#1056;&#1072;&#1089;&#1082;&#1088;&#1099;&#1090;&#1080;&#1077;-&#1072;&#1073;&#1089;&#1090;&#1088;&#1072;&#1082;&#1094;&#1080;&#1080;-&#1040;0.2">&#182;</a></h2><p><em>Поскольку условие всей задачи совпадает (за исключением необходимости ввода-вывода) с условием выделенной подзадачи,</em></p>
+<p><em>вместо полной спецификации с пунктами 1-11 выполнено просто дополнение к пунктам 9-11.</em></p>
+<h3 id="9.-&#1052;&#1077;&#1090;&#1086;&#1076;">9. &#1052;&#1077;&#1090;&#1086;&#1076;<a class="anchor-link" href="#9.-&#1052;&#1077;&#1090;&#1086;&#1076;">&#182;</a></h3><p>Пусть</p>
+<ul>
+<li><p>$i$ – номер текущей строки,</p>
+</li>
+<li><p>$j$ – номер текущего столбца,</p>
+</li>
+<li><p>$A[i][j]$ – соответствующий элемент исходной матрицы A,</p>
+</li>
+<li><p>$N$ - наибольший номер неупорядоченного по неубыванию столбца.</p>
+</li>
+</ul>
+<p>В циклах по каждой $i$-ой строке по каждому $j$-му столбцу выполняются следующие действия:</p>
+<ul>
+<li><p>проверяется выполнение условия: $\exists i: 0&lt;i&lt;n+1 \land A_{ij} &gt; A_{i+1j}$;</p>
+</li>
+<li><p>если выражение верно хотя бы для одного $i$, то</p>
+<ul>
+<li><p>столбец $j$ не упорядочен по неубыванию и</p>
+</li>
+<li><p>значение номера $N$ необходимо обновить.</p>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="10.-&#1040;&#1083;&#1075;&#1086;&#1088;&#1080;&#1090;&#1084;">10. &#1040;&#1083;&#1075;&#1086;&#1088;&#1080;&#1090;&#1084;<a class="anchor-link" href="#10.-&#1040;&#1083;&#1075;&#1086;&#1088;&#1080;&#1090;&#1084;">&#182;</a></h3>
+</div>
+</div>
 </div>
     </div>
   </div>
