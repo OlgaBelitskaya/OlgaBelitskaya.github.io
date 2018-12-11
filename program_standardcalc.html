@@ -12769,6 +12769,312 @@ blockdiag {
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">program</span> <span class="n">Lab12</span><span class="p">;</span> <span class="o">//</span> <span class="n">сохранить</span> <span class="n">как</span> <span class="n">lab12</span><span class="o">.</span><span class="n">dpr</span> <span class="p">(</span><span class="n">DPR</span> <span class="err">–</span> <span class="n">Delphi</span> <span class="n">PRoject</span><span class="p">)</span>  
+<span class="p">{</span><span class="err">$</span><span class="n">APPTYPE</span> <span class="n">CONSOLE</span><span class="p">}</span>
+<span class="n">Uses</span> <span class="n">Windows</span><span class="p">;</span> <span class="o">//</span>
+    <span class="nb">type</span> 
+        <span class="n">M1</span> <span class="o">=</span> <span class="n">array</span> <span class="p">[</span><span class="mf">1.</span><span class="o">.</span><span class="mi">20</span><span class="p">,</span><span class="mf">1.</span><span class="o">.</span><span class="mi">10</span><span class="p">]</span> <span class="n">of</span> <span class="n">integer</span><span class="p">;</span>
+        <span class="n">M2</span> <span class="o">=</span> <span class="n">array</span> <span class="p">[</span><span class="mf">1.</span><span class="o">.</span><span class="mi">10</span><span class="p">,</span><span class="mf">1.</span><span class="o">.</span><span class="mi">10</span><span class="p">]</span> <span class="n">of</span> <span class="n">integer</span><span class="p">;</span>
+        <span class="n">A1</span> <span class="o">=</span> <span class="n">array</span> <span class="p">[</span><span class="mf">1.</span><span class="o">.</span><span class="mi">10</span><span class="p">]</span> <span class="n">of</span> <span class="n">integer</span><span class="p">;</span>
+    
+    <span class="n">var</span> 
+        <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="n">integer</span><span class="p">;</span>
+        <span class="n">X</span><span class="p">:</span> <span class="n">M1</span><span class="p">;</span>
+        <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">:</span> <span class="n">M2</span><span class="p">;</span>
+        <span class="n">C</span><span class="p">:</span> <span class="n">A1</span><span class="p">;</span>
+    
+    <span class="n">procedure</span> <span class="n">read_in</span><span class="p">(</span><span class="n">var</span> <span class="n">X</span><span class="p">:</span> <span class="n">M1</span><span class="p">;</span> <span class="n">var</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="n">integer</span><span class="p">);</span>
+    <span class="n">begin</span>
+        <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">eof</span><span class="p">(</span><span class="n">tfin</span><span class="p">)</span> <span class="n">do</span>
+        <span class="n">begin</span>
+            <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="mi">1</span><span class="p">;</span>                         
+            <span class="k">while</span> <span class="ow">not</span> <span class="n">eof</span><span class="p">(</span><span class="n">tfin</span><span class="p">)</span> <span class="n">do</span>
+            <span class="n">begin</span>
+                <span class="n">read</span><span class="p">(</span><span class="n">tfin</span><span class="p">,</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]);</span>
+                <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">end</span><span class="p">;</span>
+            <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> 
+            <span class="n">readln</span><span class="p">(</span><span class="n">tfin</span><span class="p">);</span>
+        <span class="n">end</span><span class="p">;</span>
+        <span class="n">n</span> <span class="p">:</span><span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="n">end</span><span class="p">;</span>
+
+    <span class="n">procedure</span> <span class="n">write_in</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="n">integer</span><span class="p">;</span> <span class="n">X</span><span class="p">:</span> <span class="n">M1</span><span class="p">;</span> <span class="n">var</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">:</span> <span class="n">M2</span><span class="p">;</span> <span class="n">var</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">integer</span><span class="p">);</span>
+    <span class="n">begin</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Исходная матрица A&#39;</span><span class="p">);</span>
+        <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span> <span class="n">do</span>
+        <span class="n">begin</span> 
+            <span class="k">if</span> <span class="n">i</span> <span class="o">=</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span> <span class="n">then</span>
+                <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Исходная матрица B&#39;</span><span class="p">);</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span> <span class="n">then</span>
+            <span class="n">begin</span>
+                <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span> <span class="n">do</span>
+                <span class="n">begin</span>
+                    <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="p">:</span><span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">];</span>
+                    <span class="n">write</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]:</span><span class="mi">5</span><span class="p">);</span>
+                    <span class="n">write</span><span class="p">(</span><span class="n">tfout</span><span class="p">,</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]:</span><span class="mi">5</span><span class="p">);</span>
+                    <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="n">end</span><span class="p">;</span>
+            <span class="n">end</span>
+            <span class="k">else</span>
+            <span class="n">begin</span>
+                <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span> <span class="n">do</span>
+                <span class="n">begin</span>
+                    <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="n">n</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="p">:</span><span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">];</span>
+                    <span class="n">write</span><span class="p">(</span><span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="n">n</span><span class="p">,</span><span class="n">j</span><span class="p">]:</span><span class="mi">5</span><span class="p">);</span>
+                    <span class="n">write</span><span class="p">(</span><span class="n">tfout</span><span class="p">,</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]:</span><span class="mi">5</span><span class="p">);</span>
+                    <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="n">end</span><span class="p">;</span>
+            <span class="n">end</span><span class="p">;</span>
+            <span class="n">writeln</span><span class="p">;</span> <span class="n">writeln</span><span class="p">(</span><span class="n">tfout</span><span class="p">);</span>
+            <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">end</span><span class="p">;</span>
+    <span class="n">end</span><span class="p">;</span>
+
+    <span class="n">procedure</span> <span class="n">new_array</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="n">integer</span><span class="p">;</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">:</span> <span class="n">M2</span><span class="p">;</span> <span class="n">var</span> <span class="n">C</span><span class="p">:</span> <span class="n">A1</span><span class="p">;</span> <span class="n">var</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">integer</span><span class="p">);</span>
+    <span class="n">begin</span>
+        <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span> <span class="n">do</span>
+        <span class="n">begin</span>
+            <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">:</span><span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span> <span class="n">do</span>
+            <span class="n">begin</span>
+                <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="n">then</span>
+                    <span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">:</span><span class="o">=</span> <span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+                <span class="k">else</span>
+                <span class="n">begin</span>
+                    <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Не все элементы матрицы A больше соответствующих элементов матрицы B&#39;</span><span class="p">);</span>
+                    <span class="n">exit</span><span class="p">;</span>
+                <span class="n">end</span><span class="p">;</span>
+                <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">end</span><span class="p">;</span>
+            <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">end</span><span class="p">;</span>
+    <span class="n">end</span><span class="p">;</span>
+
+    <span class="n">procedure</span> <span class="n">write_out</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="n">integer</span><span class="p">;</span> <span class="n">C</span><span class="p">:</span> <span class="n">A1</span><span class="p">;</span> <span class="n">var</span> <span class="n">i</span><span class="p">:</span> <span class="n">integer</span><span class="p">);</span>
+    <span class="n">begin</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Сформированный массив C&#39;</span><span class="p">);</span>
+        <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span> <span class="n">do</span>
+        <span class="n">begin</span>
+            <span class="n">write</span><span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span><span class="mi">5</span><span class="p">);</span>
+            <span class="n">write</span><span class="p">(</span><span class="n">tfout</span><span class="p">,</span> <span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span><span class="mi">5</span><span class="p">);</span>
+            <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">end</span><span class="p">;</span>
+        <span class="n">writeln</span><span class="p">;</span> <span class="n">writeln</span><span class="p">(</span><span class="n">tfout</span><span class="p">);</span>
+    <span class="n">end</span><span class="p">;</span>
+ 
+    <span class="n">begin</span>
+        <span class="n">setConsoleCP</span><span class="p">(</span><span class="mi">1251</span><span class="p">);</span> <span class="o">//</span> 
+        <span class="n">setConsoleOutputCP</span><span class="p">(</span><span class="mi">1251</span><span class="p">);</span> <span class="o">//</span> 
+
+        <span class="p">{</span><span class="n">A0</span><span class="o">.</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ввод</span><span class="o">-</span><span class="n">вывод</span> <span class="n">входных</span> <span class="n">данных</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Лаб.12 Типовой Расчет&#39;</span> <span class="p">:</span><span class="mi">40</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">заголовка</span> <span class="n">c</span> <span class="n">переходом</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mi">4</span><span class="p">}</span>
+        
+        <span class="p">{</span><span class="n">ввод</span><span class="o">-</span><span class="n">вывод</span> <span class="n">строковой</span> <span class="n">переменной</span> <span class="o">-</span> <span class="n">имени</span> <span class="n">файла</span> <span class="n">с</span> <span class="n">входными</span> <span class="n">данными</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">5.1</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Текстовый файл с элементами исходных матриц: &#39;</span><span class="p">);</span> 
+        <span class="n">readln</span><span class="p">(</span><span class="n">fin</span><span class="p">);</span> <span class="n">writeln</span><span class="p">(</span><span class="n">fin</span><span class="p">);</span>
+
+        <span class="p">{</span><span class="n">ввод</span><span class="o">-</span><span class="n">вывод</span> <span class="n">строковой</span> <span class="n">переменной</span> <span class="o">-</span> <span class="n">имени</span> <span class="n">файла</span> <span class="n">с</span> <span class="n">выходными</span> <span class="n">данными</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">5.2</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Текстовый файл с элементами исходных матриц и результатами: &#39;</span><span class="p">);</span> 
+        <span class="n">readln</span><span class="p">(</span><span class="n">fout</span><span class="p">);</span> <span class="n">writeln</span><span class="p">(</span><span class="n">fout</span><span class="p">);</span>
+        
+        <span class="n">AssignFile</span><span class="p">(</span><span class="n">tfin</span><span class="p">,</span> <span class="n">fin</span><span class="p">);</span> <span class="n">reset</span><span class="p">(</span><span class="n">tfin</span><span class="p">);</span> <span class="p">{</span><span class="n">открыть</span> <span class="n">файл</span> <span class="n">для</span> <span class="n">чтения</span><span class="p">}</span> 
+        <span class="n">AssignFile</span><span class="p">(</span><span class="n">tfout</span><span class="p">,</span> <span class="n">fout</span><span class="p">);</span> <span class="n">rewrite</span><span class="p">(</span><span class="n">tfout</span><span class="p">);</span> <span class="p">{</span><span class="n">открыть</span> <span class="n">файл</span> <span class="n">для</span> <span class="n">записи</span><span class="p">}</span>
+        
+        <span class="n">read_in</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+        <span class="n">CloseFile</span><span class="p">(</span><span class="n">tfin</span><span class="p">);</span> <span class="p">{</span><span class="n">закрыть</span> <span class="n">файл</span> <span class="n">для</span> <span class="n">чтения</span><span class="p">}</span> 
+        
+        <span class="n">write_in</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+    
+        <span class="p">{</span><span class="n">A0</span><span class="o">.</span><span class="mi">2</span> <span class="o">-</span> <span class="n">формирование</span> <span class="n">нового</span> <span class="n">массива</span><span class="p">}</span>
+        <span class="n">new_array</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+        
+        <span class="k">for</span> <span class="n">i</span><span class="p">:</span><span class="o">=</span><span class="mi">1</span> <span class="n">to</span> <span class="mi">40</span> <span class="n">do</span> 
+            <span class="n">write</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">);</span> <span class="p">{</span><span class="n">отделим</span> <span class="n">визуально</span> <span class="n">чертой</span> <span class="n">и</span> <span class="n">строкой</span> <span class="n">введенные</span> <span class="n">и</span> <span class="n">выводимые</span> <span class="n">значения</span><span class="p">}</span>
+        <span class="n">writeln</span><span class="p">;</span>
+        
+        <span class="p">{</span><span class="n">A0</span><span class="o">.</span><span class="mi">3</span> <span class="o">-</span> <span class="n">вывод</span> <span class="n">выходных</span> <span class="n">данных</span><span class="p">}</span>
+        <span class="n">write_out</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span> 
+        
+        <span class="n">CloseFile</span><span class="p">(</span><span class="n">tfout</span><span class="p">);</span> <span class="p">{</span><span class="n">закрыть</span> <span class="n">файл</span> <span class="n">для</span> <span class="n">записи</span><span class="p">}</span>
+        
+    <span class="n">end</span><span class="o">.</span>            
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="&#1042;&#1072;&#1088;&#1080;&#1072;&#1085;&#1090;-&#1087;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1099;-&#1076;&#1083;&#1103;-&#1086;&#1085;&#1083;&#1072;&#1081;&#1085;-&#1082;&#1086;&#1084;&#1087;&#1080;&#1083;&#1103;&#1090;&#1086;&#1088;&#1072;.">&#1042;&#1072;&#1088;&#1080;&#1072;&#1085;&#1090; &#1087;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1099; &#1076;&#1083;&#1103; &#1086;&#1085;&#1083;&#1072;&#1081;&#1085;-&#1082;&#1086;&#1084;&#1087;&#1080;&#1083;&#1103;&#1090;&#1086;&#1088;&#1072;.<a class="anchor-link" href="#&#1042;&#1072;&#1088;&#1080;&#1072;&#1085;&#1090;-&#1087;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1099;-&#1076;&#1083;&#1103;-&#1086;&#1085;&#1083;&#1072;&#1081;&#1085;-&#1082;&#1086;&#1084;&#1087;&#1080;&#1083;&#1103;&#1090;&#1086;&#1088;&#1072;.">&#182;</a></h4><p><a href="http://www.compileonline.com/compile_pascal_online.php">Compile and Execute Pascal Online</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">//</span><span class="n">main</span><span class="o">.</span><span class="n">pas</span>
+<span class="n">program</span> <span class="n">Lab12</span><span class="p">;</span> 
+
+<span class="nb">type</span> 
+    <span class="n">M1</span> <span class="o">=</span> <span class="n">array</span> <span class="p">[</span><span class="mf">1.</span><span class="o">.</span><span class="mi">20</span><span class="p">,</span><span class="mf">1.</span><span class="o">.</span><span class="mi">10</span><span class="p">]</span> <span class="n">of</span> <span class="n">integer</span><span class="p">;</span>
+    <span class="n">M2</span> <span class="o">=</span> <span class="n">array</span> <span class="p">[</span><span class="mf">1.</span><span class="o">.</span><span class="mi">10</span><span class="p">,</span><span class="mf">1.</span><span class="o">.</span><span class="mi">10</span><span class="p">]</span> <span class="n">of</span> <span class="n">integer</span><span class="p">;</span>
+    <span class="n">A1</span> <span class="o">=</span> <span class="n">array</span> <span class="p">[</span><span class="mf">1.</span><span class="o">.</span><span class="mi">10</span><span class="p">]</span> <span class="n">of</span> <span class="n">integer</span><span class="p">;</span>
+    
+<span class="n">var</span> 
+    <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="n">integer</span><span class="p">;</span>
+    <span class="n">X</span><span class="p">:</span> <span class="n">M1</span><span class="p">;</span>
+    <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">:</span> <span class="n">M2</span><span class="p">;</span>
+    <span class="n">C</span><span class="p">:</span> <span class="n">A1</span><span class="p">;</span>
+    
+<span class="n">procedure</span> <span class="n">read_in</span><span class="p">(</span><span class="n">var</span> <span class="n">X</span><span class="p">:</span> <span class="n">M1</span><span class="p">;</span> <span class="n">var</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="n">integer</span><span class="p">);</span>
+
+<span class="n">begin</span>
+    <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">eoln</span> <span class="n">do</span>
+    <span class="n">begin</span>
+        <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="mi">1</span><span class="p">;</span>                         
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">eoln</span> <span class="n">do</span>
+        <span class="n">begin</span>
+            <span class="n">read</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]);</span>
+            <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">end</span><span class="p">;</span>
+        <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> 
+        <span class="n">readln</span><span class="p">;</span>
+    <span class="n">end</span><span class="p">;</span>
+    <span class="n">n</span> <span class="p">:</span><span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+<span class="n">end</span><span class="p">;</span>
+
+<span class="n">procedure</span> <span class="n">write_in</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="n">integer</span><span class="p">;</span> <span class="n">X</span><span class="p">:</span> <span class="n">M1</span><span class="p">;</span> <span class="n">var</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">:</span> <span class="n">M2</span><span class="p">;</span> <span class="n">var</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">integer</span><span class="p">);</span>
+
+<span class="n">begin</span>
+    <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Исходная матрица A&#39;</span><span class="p">);</span>
+    <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span> <span class="n">do</span>
+    <span class="n">begin</span> 
+        <span class="k">if</span> <span class="n">i</span> <span class="o">=</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span> <span class="n">then</span>
+            <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Исходная матрица B&#39;</span><span class="p">);</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span> <span class="n">then</span>
+        <span class="n">begin</span>
+            <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span> <span class="n">do</span>
+            <span class="n">begin</span>
+                <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="p">:</span><span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">];</span>
+                <span class="n">write</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]:</span><span class="mi">5</span><span class="p">);</span>
+                <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">end</span><span class="p">;</span>
+        <span class="n">end</span>
+        <span class="k">else</span>
+        <span class="n">begin</span>
+            <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span> <span class="n">do</span>
+            <span class="n">begin</span>
+                <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="n">n</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="p">:</span><span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">];</span>
+                <span class="n">write</span><span class="p">(</span><span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="n">n</span><span class="p">,</span><span class="n">j</span><span class="p">]:</span><span class="mi">5</span><span class="p">);</span>
+                <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">end</span><span class="p">;</span>
+        <span class="n">end</span><span class="p">;</span>
+        <span class="n">writeln</span><span class="p">;</span>
+        <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">end</span><span class="p">;</span>
+<span class="n">end</span><span class="p">;</span>
+
+<span class="n">procedure</span> <span class="n">new_array</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="n">integer</span><span class="p">;</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">:</span> <span class="n">M2</span><span class="p">;</span> <span class="n">var</span> <span class="n">C</span><span class="p">:</span> <span class="n">A1</span><span class="p">;</span> <span class="n">var</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">integer</span><span class="p">);</span>
+
+<span class="n">begin</span>
+    <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span> <span class="n">do</span>
+    <span class="n">begin</span>
+        <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">:</span><span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span> <span class="n">do</span>
+        <span class="n">begin</span>
+            <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="n">then</span>
+                <span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">:</span><span class="o">=</span> <span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+            <span class="k">else</span>
+            <span class="n">begin</span>
+                <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Не все элементы матрицы A больше соответствующих элементов матрицы B&#39;</span><span class="p">);</span>
+                <span class="n">exit</span><span class="p">;</span>
+            <span class="n">end</span><span class="p">;</span>
+            <span class="n">j</span> <span class="p">:</span><span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">end</span><span class="p">;</span>
+        <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">end</span><span class="p">;</span>
+<span class="n">end</span><span class="p">;</span>
+
+<span class="n">procedure</span> <span class="n">write_out</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="n">integer</span><span class="p">;</span> <span class="n">C</span><span class="p">:</span> <span class="n">A1</span><span class="p">;</span> <span class="n">var</span> <span class="n">i</span><span class="p">:</span> <span class="n">integer</span><span class="p">);</span>
+
+<span class="n">begin</span>
+    <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Сформированный массив C&#39;</span><span class="p">);</span>
+    <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span> <span class="n">do</span>
+    <span class="n">begin</span>
+        <span class="n">write</span><span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span><span class="mi">5</span><span class="p">);</span>
+        <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">end</span><span class="p">;</span>
+<span class="n">end</span><span class="p">;</span>
+
+<span class="n">begin</span>
+    <span class="p">{</span><span class="n">A0</span><span class="o">.</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ввод</span><span class="o">-</span><span class="n">вывод</span> <span class="n">входных</span> <span class="n">данных</span><span class="p">}</span>
+    <span class="n">writeln</span><span class="p">(</span><span class="s1">&#39;Лаб.12 Типовой Расчет&#39;</span> <span class="p">:</span><span class="mi">40</span><span class="p">);</span> <span class="p">{</span><span class="n">вывод</span> <span class="n">заголовка</span> <span class="n">c</span> <span class="n">переходом</span> <span class="n">на</span> <span class="n">следующую</span> <span class="n">строку</span> <span class="n">по</span> <span class="n">обр</span><span class="o">.</span><span class="mi">4</span><span class="p">}</span>
+    <span class="n">read_in</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+    <span class="n">write_in</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+    
+    <span class="p">{</span><span class="n">A0</span><span class="o">.</span><span class="mi">2</span> <span class="o">-</span> <span class="n">формирование</span> <span class="n">нового</span> <span class="n">массива</span><span class="p">}</span>
+    <span class="n">new_array</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">:</span><span class="o">=</span><span class="mi">1</span> <span class="n">to</span> <span class="mi">40</span> <span class="n">do</span> 
+        <span class="n">write</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">);</span> <span class="p">{</span><span class="n">отделим</span> <span class="n">визуально</span> <span class="n">чертой</span> <span class="n">и</span> <span class="n">строкой</span> <span class="n">введенные</span> <span class="n">и</span> <span class="n">выводимые</span> <span class="n">значения</span><span class="p">}</span>
+    <span class="n">writeln</span><span class="p">;</span>
+    <span class="p">{</span><span class="n">A0</span><span class="o">.</span><span class="mi">3</span> <span class="o">-</span> <span class="n">вывод</span> <span class="n">выходных</span> <span class="n">данных</span><span class="p">}</span>
+    <span class="n">write_out</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+<span class="n">end</span><span class="o">.</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">//</span> <span class="n">STDIN</span>
+<span class="mi">38</span> <span class="mi">74</span> <span class="mi">64</span> <span class="mi">76</span> <span class="mi">99</span>
+<span class="mi">53</span> <span class="mi">98</span> <span class="mi">15</span> <span class="mi">33</span> <span class="mi">45</span>
+<span class="mi">91</span> <span class="mi">49</span> <span class="mi">97</span> <span class="mi">84</span> <span class="mi">90</span>
+<span class="mi">22</span> <span class="mi">48</span> <span class="mi">83</span>  <span class="mi">0</span> <span class="mi">63</span>
+<span class="mi">99</span> <span class="mi">52</span> <span class="mi">33</span> <span class="mi">99</span> <span class="mi">48</span>
+<span class="o">-</span><span class="mi">76</span> <span class="o">-</span><span class="mi">98</span> <span class="o">-</span><span class="mi">99</span> <span class="o">-</span><span class="mi">98</span> <span class="o">-</span><span class="mi">82</span>
+<span class="o">-</span><span class="mi">16</span> <span class="o">-</span><span class="mi">22</span> <span class="o">-</span><span class="mi">65</span> <span class="o">-</span><span class="mi">83</span> <span class="o">-</span><span class="mi">75</span>
+<span class="o">-</span><span class="mi">25</span> <span class="o">-</span><span class="mi">76</span> <span class="o">-</span><span class="mi">66</span>  <span class="o">-</span><span class="mi">8</span>  <span class="o">-</span><span class="mi">2</span>
+<span class="o">-</span><span class="mi">70</span> <span class="o">-</span><span class="mi">45</span> <span class="o">-</span><span class="mi">74</span> <span class="o">-</span><span class="mi">70</span> <span class="o">-</span><span class="mi">43</span>
+<span class="o">-</span><span class="mi">37</span> <span class="o">-</span><span class="mi">84</span> <span class="o">-</span><span class="mi">64</span>  <span class="o">-</span><span class="mi">3</span> <span class="o">-</span><span class="mi">94</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
     </div>
   </div>
 </body>
