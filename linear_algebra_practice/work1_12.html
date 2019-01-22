@@ -15148,9 +15148,15 @@ C; solve(C); t(solve(C))
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Пример решения задачи с матрицей перехода</p>
 <p>$C: (\mathfrak{e_1},\mathfrak{e_2},\mathfrak{e_3}) \to (\mathfrak{f_1},\mathfrak{f_2},\mathfrak{f_3}) \\
-\mathfrak{e_1} \{1;3;3\} \to \mathfrak{f_1} \{1;4;-2\} \\ 
-\mathfrak{e_2} \{-3;-3;-2\} \to \mathfrak{f_2} \{-2;-1;2\} \\ 
-\mathfrak{e_3} \{-2;2;3\} \to \mathfrak{f_3} \{4;1;-2\}$</p>
+\begin{cases}
+\mathfrak{e_1} \{1;3;3\} \\ 
+\mathfrak{e_2} \{-3;-3;-2\} \\  
+\mathfrak{e_3} \{-2;2;3\} 
+\end {cases} \to \begin {cases}
+\mathfrak{f_1} \{1;4;-2\} \\
+\mathfrak{f_2} \{-2;-1;2\} \\
+\mathfrak{f_3} \{4;1;-2\}
+\end{cases}$</p>
 <p>$\mathfrak{e} \{-19;7;16\} \to \mathfrak{f} \{x;y;z\}?$</p>
 
 </div>
@@ -15158,7 +15164,86 @@ C; solve(C); t(solve(C))
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[112]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">cc</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;c_</span><span class="si">%d%d</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">1.</span><span class="o">.</span><span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">1.</span><span class="o">.</span><span class="mi">3</span><span class="p">)))</span>
+<span class="n">ee</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;e_</span><span class="si">%d%d</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">1.</span><span class="o">.</span><span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">1.</span><span class="o">.</span><span class="mi">3</span><span class="p">)))</span>
+<span class="n">ff</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;f_</span><span class="si">%d%d</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">1.</span><span class="o">.</span><span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">1.</span><span class="o">.</span><span class="mi">3</span><span class="p">)))</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="n">SR</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">var</span><span class="p">(</span><span class="n">cc</span><span class="p">))</span>
+<span class="n">E</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="n">SR</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">var</span><span class="p">(</span><span class="n">ee</span><span class="p">))</span>
+<span class="n">F</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="n">SR</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">var</span><span class="p">(</span><span class="n">ff</span><span class="p">))</span>
+<span class="n">C</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">F</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[112]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(
+[c_11 c_12 c_13]  [e_11 e_12 e_13]  [f_11 f_12 f_13]
+[c_21 c_22 c_23]  [e_21 e_22 e_23]  [f_21 f_22 f_23]
+[c_31 c_32 c_33], [e_31 e_32 e_33], [f_31 f_32 f_33]
+)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[113]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># f1 {f11;f12;f13} = c11 * e1 {e11;e12;e13} + c12 * e2 {e21;e22;e23} + c13 * e3 {e31;e32;e33}</span>
+<span class="p">(</span><span class="n">C</span><span class="o">*</span><span class="n">E</span> <span class="o">-</span> <span class="n">F</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="n">C</span><span class="o">*</span><span class="n">E</span> <span class="o">-</span> <span class="n">F</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="p">(</span><span class="n">C</span><span class="o">*</span><span class="n">E</span> <span class="o">-</span> <span class="n">F</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[113]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(c_11*e_11 + c_12*e_21 + c_13*e_31 - f_11,
+ c_11*e_12 + c_12*e_22 + c_13*e_32 - f_12,
+ c_11*e_13 + c_12*e_23 + c_13*e_33 - f_13)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[114]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># sage</span>
@@ -15178,7 +15263,7 @@ C; solve(C); t(solve(C))
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[16]:</div>
+<div class="prompt output_prompt">Out[114]:</div>
 
 
 
@@ -15199,11 +15284,11 @@ C; solve(C); t(solve(C))
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[115]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">C</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">solve_right</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>
-<span class="n">C</span><span class="p">,</span> <span class="n">E</span> <span class="o">*</span> <span class="n">C</span> <span class="o">==</span> <span class="n">F</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">C</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">solve_left</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>
+<span class="n">C</span><span class="p">,</span> <span class="n">C</span> <span class="o">*</span> <span class="n">E</span> <span class="o">==</span> <span class="n">F</span>
 </pre></div>
 
 </div>
@@ -15216,16 +15301,16 @@ C; solve(C); t(solve(C))
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[17]:</div>
+<div class="prompt output_prompt">Out[115]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
 <pre>(
-[-13/2     7     1]      
-[ 33/2   -18    -3]      
-[  -14    17     2], True
+[-71/2 -49/2  37/2]      
+[ 27/2  19/2 -13/2]      
+[-17/2 -13/2   7/2], True
 )</pre>
 </div>
 
@@ -15237,7 +15322,7 @@ C; solve(C); t(solve(C))
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[116]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="n">C</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span> <span class="o">*</span> <span class="n">e</span>
@@ -15254,15 +15339,15 @@ C; solve(C); t(solve(C))
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[18]:</div>
+<div class="prompt output_prompt">Out[116]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[-39]
-[-25]
-[-10]</pre>
+<pre>[ -115/6]
+[ -351/4]
+[-685/12]</pre>
 </div>
 
 </div>
@@ -15273,10 +15358,10 @@ C; solve(C); t(solve(C))
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[133]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># python sympy</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># python sympy </span>
 <span class="n">E</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
 <span class="n">F</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
 <span class="n">e</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">19</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">16</span><span class="p">])</span>
@@ -15293,7 +15378,7 @@ C; solve(C); t(solve(C))
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[19]:</div>
+<div class="prompt output_prompt">Out[133]:</div>
 
 
 
@@ -15310,11 +15395,11 @@ $$\left ( \left[\begin{matrix}1 & 3 & 3\\-3 & -3 & -2\\-2 & 2 & 3\end{matrix}\ri
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[134]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">C</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">(</span><span class="n">E</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">F</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="n">E</span> <span class="o">*</span> <span class="n">C</span> <span class="o">==</span> <span class="n">F</span><span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">C</span> <span class="o">=</span> <span class="n">F</span> <span class="o">*</span> <span class="n">E</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">C</span> <span class="o">*</span> <span class="n">E</span> <span class="o">==</span> <span class="n">F</span><span class="p">)</span>
 <span class="n">C</span>
 </pre></div>
 
@@ -15339,13 +15424,13 @@ $$\left ( \left[\begin{matrix}1 & 3 & 3\\-3 & -3 & -2\\-2 & 2 & 3\end{matrix}\ri
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[20]:</div>
+<div class="prompt output_prompt">Out[134]:</div>
 
 
 
 
 <div class="output_latex output_subarea output_execute_result">
-$$\left[\begin{matrix}- \frac{13}{2} & 7 & 1\\\frac{33}{2} & -18 & -3\\-14 & 17 & 2\end{matrix}\right]$$
+$$\left[\begin{matrix}- \frac{71}{2} & - \frac{49}{2} & \frac{37}{2}\\\frac{27}{2} & \frac{19}{2} & - \frac{13}{2}\\- \frac{17}{2} & - \frac{13}{2} & \frac{7}{2}\end{matrix}\right]$$
 </div>
 
 </div>
@@ -15356,7 +15441,7 @@ $$\left[\begin{matrix}- \frac{13}{2} & 7 & 1\\\frac{33}{2} & -18 & -3\\-14 & 17 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[135]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="n">C</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span> <span class="o">*</span> <span class="n">e</span>
@@ -15373,13 +15458,13 @@ $$\left[\begin{matrix}- \frac{13}{2} & 7 & 1\\\frac{33}{2} & -18 & -3\\-14 & 17 
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[21]:</div>
+<div class="prompt output_prompt">Out[135]:</div>
 
 
 
 
 <div class="output_latex output_subarea output_execute_result">
-$$\left[\begin{matrix}-39\\-25\\-10\end{matrix}\right]$$
+$$\left[\begin{matrix}- \frac{115}{6}\\- \frac{351}{4}\\- \frac{685}{12}\end{matrix}\right]$$
 </div>
 
 </div>
@@ -15390,14 +15475,14 @@ $$\left[\begin{matrix}-39\\-25\\-10\end{matrix}\right]$$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[131]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># python numpy</span>
 <span class="n">E</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">],[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]])</span>
 <span class="n">F</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">],[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">]])</span>
-<span class="n">C</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">E</span><span class="p">,</span><span class="n">F</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">E</span> <span class="o">*</span> <span class="n">C</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="n">F</span><span class="p">)</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">F</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">C</span> <span class="o">*</span> <span class="n">E</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="n">F</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
 </pre></div>
 
@@ -15418,9 +15503,9 @@ $$\left[\begin{matrix}-39\\-25\\-10\end{matrix}\right]$$
 <pre>[[ True  True  True]
  [ True  True  True]
  [ True  True  True]]
-[[ -6.5   7.    1. ]
- [ 16.5 -18.   -3. ]
- [-14.   17.    2. ]]
+[[-35.5 -24.5  18.5]
+ [ 13.5   9.5  -6.5]
+ [ -8.5  -6.5   3.5]]
 </pre>
 </div>
 </div>
@@ -15431,7 +15516,7 @@ $$\left[\begin{matrix}-39\\-25\\-10\end{matrix}\right]$$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[132]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">e</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="o">-</span><span class="mi">19</span><span class="p">],[</span><span class="mi">7</span><span class="p">],[</span><span class="mi">16</span><span class="p">]])</span>
@@ -15449,15 +15534,15 @@ $$\left[\begin{matrix}-39\\-25\\-10\end{matrix}\right]$$
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[23]:</div>
+<div class="prompt output_prompt">Out[132]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>matrix([[-39.],
-        [-25.],
-        [-10.]])</pre>
+<pre>matrix([[-19.16666667],
+        [-87.75      ],
+        [-57.08333333]])</pre>
 </div>
 
 </div>
@@ -15468,12 +15553,12 @@ $$\left[\begin{matrix}-39\\-25\\-10\end{matrix}\right]$$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[146]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">r</span>
-E &lt;- matrix(c(1,3,3,-3,-3,-2,-2,2,3),3,3, byrow=T)
-F &lt;- matrix(c(1,4,-2,-2,-1,2,4,1,-2),3,3, byrow=T)
+E &lt;- matrix(c(1,3,3,-3,-3,-2,-2,2,3),3,3,byrow=T)
+F &lt;- matrix(c(1,4,-2,-2,-1,2,4,1,-2),3,3,byrow=T)
 e &lt;- matrix(c(-19,7,16),3,1)
 E; F; e
 </pre></div>
@@ -15517,12 +15602,12 @@ E; F; e
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[148]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">r</span>
-C &lt;- matrix(solve(E, F),3,3)
-print(round(E %*% C) == F)
+C &lt;- F %*% solve(E)
+print(round(C %*% E) == F)
 C
 </pre></div>
 
@@ -15545,10 +15630,10 @@ C
 [1,] TRUE TRUE TRUE
 [2,] TRUE TRUE TRUE
 [3,] TRUE TRUE TRUE
-      [,1] [,2] [,3]
-[1,]  -6.5    7    1
-[2,]  16.5  -18   -3
-[3,] -14.0   17    2
+      [,1]  [,2] [,3]
+[1,] -35.5 -24.5 18.5
+[2,]  13.5   9.5 -6.5
+[3,]  -8.5  -6.5  3.5
 </pre>
 </div>
 </div>
@@ -15559,7 +15644,7 @@ C
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[149]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">r</span>
@@ -15582,10 +15667,10 @@ f
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
-     [,1]
-[1,]  -39
-[2,]  -25
-[3,]  -10
+          [,1]
+[1,] -19.16667
+[2,] -87.75000
+[3,] -57.08333
 </pre>
 </div>
 </div>
@@ -17079,6 +17164,27 @@ eigen(A)$values; round(eigen(A)$vectors)
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="5.-&#1047;&#1072;&#1076;&#1072;&#1085;&#1080;&#1077;.">5. &#1047;&#1072;&#1076;&#1072;&#1085;&#1080;&#1077;.<a class="anchor-link" href="#5.-&#1047;&#1072;&#1076;&#1072;&#1085;&#1080;&#1077;.">&#182;</a></h2><ol>
+<li>Линейный оператор преобразует векторы следующим образом:</li>
+</ol>
+<p>$A\mathfrak{e_1=f_1}: \mathfrak{e_1}\{-2;-2;-3\}; \mathfrak{f_1} \{-1;3;4\} \\ 
+A\mathfrak{e_2=f_2}: \mathfrak{e_2}\{-1;-1;1\}; \mathfrak{f_2} \{1;-1;-3\} \\ 
+A\mathfrak{e_3=f_3}: \mathfrak{e_3}\{2;3;-2\}; \mathfrak{f_3} \{1;4;-2\}$</p>
+<p>В какой вектор этот оператор переведет $\mathfrak{e}?$</p>
+<p>$A\mathfrak{e=f}: \mathfrak{e}\{-17;-20;-3\}; \mathfrak{f} \{x;y;z\}?$</p>
+<ol>
+<li>Инициировать случайную матрицу целых чисел, </li>
+</ol>
+<p>найти для нее собственные вектора и собственные значения,</p>
+<p>используя SageMath, Python, R.</p>
+
+</div>
+</div>
 </div>
     </div>
   </div>
