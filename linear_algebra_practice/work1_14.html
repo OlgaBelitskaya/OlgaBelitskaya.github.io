@@ -13722,13 +13722,412 @@ $$\left ( \left[\begin{matrix}\left[\begin{matrix}x & y\\z & t\end{matrix}\right
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[122]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">r</span>
+G &lt;- t(array(LETTERS[1:8],c(2,2)))
+H &lt;- t(array(c(1:4),c(2,2)))
+GH &lt;- outer(G, H, FUN=paste)
+G; H; GH; dim(GH)
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+
+
+     [,1] [,2]
+[1,] &#34;A&#34;  &#34;B&#34; 
+[2,] &#34;C&#34;  &#34;D&#34; 
+     [,1] [,2]
+[1,]    1    2
+[2,]    3    4
+, , 1, 1
+
+     [,1]  [,2] 
+[1,] &#34;A 1&#34; &#34;B 1&#34;
+[2,] &#34;C 1&#34; &#34;D 1&#34;
+
+, , 2, 1
+
+     [,1]  [,2] 
+[1,] &#34;A 3&#34; &#34;B 3&#34;
+[2,] &#34;C 3&#34; &#34;D 3&#34;
+
+, , 1, 2
+
+     [,1]  [,2] 
+[1,] &#34;A 2&#34; &#34;B 2&#34;
+[2,] &#34;C 2&#34; &#34;D 2&#34;
+
+, , 2, 2
+
+     [,1]  [,2] 
+[1,] &#34;A 4&#34; &#34;B 4&#34;
+[2,] &#34;C 4&#34; &#34;D 4&#34;
+
+[1] 2 2 2 2
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[129]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;D&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">GH</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">G</span><span class="p">);</span> <span class="k">print</span><span class="p">(</span><span class="n">H</span><span class="p">);</span> <span class="k">print</span><span class="p">(</span><span class="n">GH</span><span class="p">)</span> 
+<span class="n">GH</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[[&#39;A&#39; &#39;B&#39;]
+ [&#39;C&#39; &#39;D&#39;]]
+[[1 2]
+ [3 4]]
+[[[[&#39;A&#39; &#39;B&#39;]
+   [&#39;C&#39; &#39;D&#39;]]
+
+  [[&#39;AA&#39; &#39;BB&#39;]
+   [&#39;CC&#39; &#39;DD&#39;]]]
+
+
+ [[[&#39;AAA&#39; &#39;BBB&#39;]
+   [&#39;CCC&#39; &#39;DDD&#39;]]
+
+  [[&#39;AAAA&#39; &#39;BBBB&#39;]
+   [&#39;CCCC&#39; &#39;DDDD&#39;]]]]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[129]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left ( 2, \quad 2, \quad 2, \quad 2\right )$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[131]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">r</span>
+F &lt;- t(array(c(5,6,7,8),c(2,2)))
+FGH &lt;- kronecker(GH, F, FUN=paste)
+F; FGH; dim(FGH)
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+
+     [,1] [,2]
+[1,]    5    6
+[2,]    7    8
+, , 1, 1
+
+     [,1]    [,2]    [,3]    [,4]   
+[1,] &#34;A 1 5&#34; &#34;A 1 6&#34; &#34;B 1 5&#34; &#34;B 1 6&#34;
+[2,] &#34;A 1 7&#34; &#34;A 1 8&#34; &#34;B 1 7&#34; &#34;B 1 8&#34;
+[3,] &#34;C 1 5&#34; &#34;C 1 6&#34; &#34;D 1 5&#34; &#34;D 1 6&#34;
+[4,] &#34;C 1 7&#34; &#34;C 1 8&#34; &#34;D 1 7&#34; &#34;D 1 8&#34;
+
+, , 2, 1
+
+     [,1]    [,2]    [,3]    [,4]   
+[1,] &#34;A 3 5&#34; &#34;A 3 6&#34; &#34;B 3 5&#34; &#34;B 3 6&#34;
+[2,] &#34;A 3 7&#34; &#34;A 3 8&#34; &#34;B 3 7&#34; &#34;B 3 8&#34;
+[3,] &#34;C 3 5&#34; &#34;C 3 6&#34; &#34;D 3 5&#34; &#34;D 3 6&#34;
+[4,] &#34;C 3 7&#34; &#34;C 3 8&#34; &#34;D 3 7&#34; &#34;D 3 8&#34;
+
+, , 1, 2
+
+     [,1]    [,2]    [,3]    [,4]   
+[1,] &#34;A 2 5&#34; &#34;A 2 6&#34; &#34;B 2 5&#34; &#34;B 2 6&#34;
+[2,] &#34;A 2 7&#34; &#34;A 2 8&#34; &#34;B 2 7&#34; &#34;B 2 8&#34;
+[3,] &#34;C 2 5&#34; &#34;C 2 6&#34; &#34;D 2 5&#34; &#34;D 2 6&#34;
+[4,] &#34;C 2 7&#34; &#34;C 2 8&#34; &#34;D 2 7&#34; &#34;D 2 8&#34;
+
+, , 2, 2
+
+     [,1]    [,2]    [,3]    [,4]   
+[1,] &#34;A 4 5&#34; &#34;A 4 6&#34; &#34;B 4 5&#34; &#34;B 4 6&#34;
+[2,] &#34;A 4 7&#34; &#34;A 4 8&#34; &#34;B 4 7&#34; &#34;B 4 8&#34;
+[3,] &#34;C 4 5&#34; &#34;C 4 6&#34; &#34;D 4 5&#34; &#34;D 4 6&#34;
+[4,] &#34;C 4 7&#34; &#34;C 4 8&#34; &#34;D 4 7&#34; &#34;D 4 8&#34;
+
+[1] 4 4 2 2
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[132]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">F</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">FGH</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">GH</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">FGH</span><span class="p">)</span> 
+<span class="n">FGH</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[[[[&#39;AAAAA&#39; &#39;BBBBB&#39; &#39;AAAAAA&#39; &#39;BBBBBB&#39;]
+   [&#39;CCCCC&#39; &#39;DDDDD&#39; &#39;CCCCCC&#39; &#39;DDDDDD&#39;]
+   [&#39;AAAAAAA&#39; &#39;BBBBBBB&#39; &#39;AAAAAAAA&#39; &#39;BBBBBBBB&#39;]
+   [&#39;CCCCCCC&#39; &#39;DDDDDDD&#39; &#39;CCCCCCCC&#39; &#39;DDDDDDDD&#39;]]
+
+  [[&#39;AAAAAAAAAA&#39; &#39;BBBBBBBBBB&#39; &#39;AAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBB&#39;]
+   [&#39;CCCCCCCCCC&#39; &#39;DDDDDDDDDD&#39; &#39;CCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDD&#39;]
+   [&#39;AAAAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBBBB&#39; &#39;AAAAAAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBBBBBB&#39;]
+   [&#39;CCCCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDDDD&#39; &#39;CCCCCCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDDDDDD&#39;]]]
+
+
+ [[[&#39;AAAAAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBBBBB&#39; &#39;AAAAAAAAAAAAAAAAAA&#39;
+    &#39;BBBBBBBBBBBBBBBBBB&#39;]
+   [&#39;CCCCCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDDDDD&#39; &#39;CCCCCCCCCCCCCCCCCC&#39;
+    &#39;DDDDDDDDDDDDDDDDDD&#39;]
+   [&#39;AAAAAAAAAAAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBBBBBBBBBBB&#39;
+    &#39;AAAAAAAAAAAAAAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBBBBBBBBBBBBBB&#39;]
+   [&#39;CCCCCCCCCCCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDDDDDDDDDDD&#39;
+    &#39;CCCCCCCCCCCCCCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDDDDDDDDDDDDDD&#39;]]
+
+  [[&#39;AAAAAAAAAAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBBBBBBBBBB&#39;
+    &#39;AAAAAAAAAAAAAAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBBBBBBBBBBBBBB&#39;]
+   [&#39;CCCCCCCCCCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDDDDDDDDDD&#39;
+    &#39;CCCCCCCCCCCCCCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDDDDDDDDDDDDDD&#39;]
+   [&#39;AAAAAAAAAAAAAAAAAAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBBBBBBBBBBBBBBBBBB&#39;
+    &#39;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB&#39;]
+   [&#39;CCCCCCCCCCCCCCCCCCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDDDDDDDDDDDDDDDDDD&#39;
+    &#39;CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD&#39;]]]]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[132]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left ( 2, \quad 2, \quad 4, \quad 4\right )$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[155]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">r</span>
+library(tensor)
+G &lt;- matrix(c(1:4),2,2,byrow=T)
+H &lt;- matrix(c(5:8),2,2,byrow=T)
+G; H; tensor(G,H)
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+
+
+     [,1] [,2]
+[1,]    1    2
+[2,]    3    4
+     [,1] [,2]
+[1,]    5    6
+[2,]    7    8
+, , 1, 1
+
+     [,1] [,2]
+[1,]    5   10
+[2,]   15   20
+
+, , 2, 1
+
+     [,1] [,2]
+[1,]    7   14
+[2,]   21   28
+
+, , 1, 2
+
+     [,1] [,2]
+[1,]    6   12
+[2,]   18   24
+
+, , 2, 2
+
+     [,1] [,2]
+[1,]    8   16
+[2,]   24   32
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[163]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">r</span>
+G%*%H == tensor(G,H,2,1); G%*%t(H) == tensor(G,H,2,2); t(G)%*%t(H) == tensor(G,H,1,2); 
+cat(&#39;\n\n\n&#39;)
+G%o%H == tensor(G,H)
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>     [,1] [,2]
+[1,] TRUE TRUE
+[2,] TRUE TRUE
+     [,1] [,2]
+[1,] TRUE TRUE
+[2,] TRUE TRUE
+     [,1] [,2]
+[1,] TRUE TRUE
+[2,] TRUE TRUE
+
+
+
+, , 1, 1
+
+     [,1] [,2]
+[1,] TRUE TRUE
+[2,] TRUE TRUE
+
+, , 2, 1
+
+     [,1] [,2]
+[1,] TRUE TRUE
+[2,] TRUE TRUE
+
+, , 1, 2
+
+     [,1] [,2]
+[1,] TRUE TRUE
+[2,] TRUE TRUE
+
+, , 2, 2
+
+     [,1] [,2]
+[1,] TRUE TRUE
+[2,] TRUE TRUE
+
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
