@@ -58,6 +58,25 @@ def _(N=(10,50,1)):
 var('t'); d = {2*i+1:[2*i+2] for i in [0..6]}; c=[colormaps.ocean(24*k)[:3] for k in [0..10]]
 polar_plot([(t+k/5)*log(t/5) for k in [0..10]],0,2*pi,color=c,fill=d,fillcolor=c)\
 .show(title='$f=(t+k/5) \cdot \log(t/5), k \in \{0,1,...,10\}$',fontsize=15,figsize=(10,5))
+</script></div>      
+      <p>Try Python Modules</p>
+<div class="compute"><script type="text/x-sage">
+%matplotlib inline
+import pandas, pylab; pylab.style.use('dark_background'); pylab.figure(figsize=(6,6))
+from sklearn import datasets; wine = datasets.load_wine()
+from sklearn.ensemble import AdaBoostClassifier,GradientBoostingClassifier
+classifiers = [AdaBoostClassifier,GradientBoostingClassifier]
+X,y = wine.data,wine.target; df_importance = pandas.DataFrame(columns=range(13))
+for i in range(2):
+    df_importance.loc[i] = classifiers[i]().fit(X,y).feature_importances_
+    pylab.plot(df_importance.loc[i],'-v',label=str(classifiers[i]()),
+               markersize=7,markerfacecolor="None",markeredgewidth=2)
+pylab.grid(color='gray'); pylab.legend(loc=10,bbox_to_anchor=(1.9,0.5),fontsize=15);
+</script></div>
+      <p>Try R Code Cells</p>
+<div class="compute"><script type="text/x-sage">
+%%r
+
 </script></div>
   </body>
 </html>
