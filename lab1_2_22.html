@@ -38,7 +38,7 @@
 <p>- Указание 3. Изменить (упорядочить) заданную строку по указанному в каждом варианте правилу «на месте» без создания дополнительной строки (или массива, файла и т.д.).</p>
   <h2>1. Условие задачи</h2>            
 <p>Упорядочить строку, расположив символы в указанном в таблице порядке, убедившись, что строка не пустая и других символов (кроме указанных) нет.</p>
-<table style="width:100%; border:1">
+<table style="width:100%; border:1;">
   <tr>
     <th>Сначала идут символы</th>
     <th>Затем символы</th> 
@@ -74,15 +74,17 @@
 symbol_table = u'абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ0123456789'
 test_strings = [u'',u'iJщюкQ4',u'01234',u'Ау',u'ЁЖИКВТУМАНЕ',u'StartEnd',u'adressADRESS',
                 u'358морозИсолнцеДЕНЬчудестный123',u'123FirstSecondThirdОЮИ']
+c = 0
 for s in test_strings:
+    c += 1
     s1 = ''.join([s[i] for i in range(len(s)) if s[i] in symbol_table[:33]])
     s2 = ''.join(sorted([s[i] for i in range(len(s)) if s[i] in symbol_table[33:39]]))
     s3 = ''.join([s[i] for i in range(len(s)) if s[i] == symbol_table[39]])
     s4 = ''.join(sorted([s[i] for i in range(len(s)) if s[i] in symbol_table[40:66]]))
     s5 = ''.join([s[i] for i in range(len(s)) if s[i] in symbol_table[66:]])
-    if len(s)==0: print s,'->','Пустая строка'
-    elif len(s1+s2+s3+s4+s5)!=len(s): print s,'->','Некорректные символы'
-    else: print s,'->','"'+s1+s2+s3+s4+s5+'"'
+    if len(s)==0: print c,' ',s,'->','Пустая строка'
+    elif len(s1+s2+s3+s4+s5)!=len(s): print c,' ',s,'->','Некорректные символы'
+    else: print c,' ',s,'->','"'+s1+s2+s3+s4+s5+'"'
 </script></div>
   <h2>3. Пример</h2>
 <p>Для проверки результата нажмите кнопку «Evaluate».</p>
