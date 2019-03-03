@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>SageMathCell</title>
+    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <script>$(function () {
+    // Make the div with id 'mycell' a Sage cell
+    sagecell.makeSagecell({inputLocation:  '#mycell',
+                           template:       sagecell.templates.minimal,
+                           evalButtonText: 'Activate'});
+    // Make *any* div with class 'compute' a Sage cell
+    sagecell.makeSagecell({inputLocation: 'div.compute',
+                           evalButtonText: 'Evaluate'});
+    });
+    </script>
+  </head>
+  <style>
+  @import url('https://fonts.googleapis.com/css?family=Orbitron');
+  h1 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
+  h2 {color:darkblue; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
+  p {font-size:150%; text-shadow:5px 5px 5px #aaa;}
+  </style>  
+  <body>
+  <h1>&#x1F4D1; &nbsp; Лабораторная работа №1</h1>
+  <h1>Сортировка. Символы. Множества</h1>
+  <h2>Вариант 22</h2>   
+  <h2>Задание</h2>
+      <p>Упорядочить символы строки, расположив символы в указанном в нижеследующей таблице порядке (по вариантам) двумя способами:</p> 
+<p>- с созданием своей таблицы символов и </p>
+<p>- без ее создания (со сложным условием сравнения и множествами). </p>
+<p>Провести анализ аномалий: строка не пустая и других символов (кроме указанных) нет. </p>
+<p>При выводе результата в начало строки и в конец добавить символ " (двойная кавычка) для обозначения начала и конца строки, </p>
+<p>что особенно актуально для строк из пробелов и других непечатных символов (s:= +'нужный символ'+s+'нужный символ или строка'). </p>
+<p>- Указание 1. Для проверки и сортировки использовать процедуры, расположенные в отдельном модуле. </p>
+<p>- Указание 2. Для проверки принадлежности символа к одной из трёх групп использовать множества. </p>
+<p>- Указание 3. Изменить (упорядочить) заданную строку по указанному в каждом варианте правилу «на месте» без создания дополнительной строки (или массива, файла и т.д.).</p>
+      
+<div id="mycell"><script type="text/x-sage">
+@interact
+def f(n=(1,5,1)):
+    pretty_print(n,'-element Subsets of the 5-element Set')
+    S = Combinations(["🦅","🦁","🦀","🦋","🐋"],n).list()
+    for i in range(len(S)):
+        print([ascii_art(S[i][j]) for j in range(n)])
+</script></div>
+
+  <h2>Your Field for Experiments</h2>
+      <p>Type your own SageMath code lines below and click “Evaluate”.</p>
+      
+<div class="compute"><script type="text/x-sage">
+var('u'); R,r,n=12,6,24; x=r*cos(u); y=r*sin(u); 
+p1=sum([parametric_plot((x-R*cos(2*i*pi/n),y-R*sin(4*i*pi/n)),(u,0,2*pi),color='#3636ff') for i in [0..n]])
+p2=sum([parametric_plot((y-R*sin(4*i*pi/n),x-R*cos(2*i*pi/n)),(u,0,2*pi),fill=True,fillalpha=0.1,
+                        fillcolor=hue(i/n),color='#3636ff') for i in [0..n]])
+p3=sum([parametric_plot((1.5*x-R*cos(2*i*pi/n),1.5*y-R*sin(2*i*pi/n)),(u,0,2*pi),color='darkblue') for i in [0..n]])
+(p1+p2+p3).show(figsize=[5,5],axes=False)
+</script></div>
+      <p></p>
+<div class="compute"><script type="text/x-sage">
+@interact
+def _(N=(10,50,1)):
+    Poset(([1..N],lambda x,y:y%x==0)).show(color_by_label=True,figsize=[10,5],edge_style='dashed',
+                                           cover_labels=lambda a,b:b/a,vertex_shape='H',
+                                           vertex_color='lightgrey',vertex_size=800)
+</script></div>
+      <p></p>
+<div class="compute"><script type="text/x-sage">
+var('t'); d = {2*i+1:[2*i+2] for i in [0..6]}; c=[colormaps.ocean(24*k)[:3] for k in [0..10]]
+polar_plot([(t+k/5)*log(t/5) for k in [0..10]],0,2*pi,color=c,fill=d,fillcolor=c)\
+.show(title='$f=(t+k/5) \cdot \log(t/5), k \in \{0,1,...,10\}$',fontsize=15,figsize=(10,5))
+</script></div>      
+      <p>Try Python Modules</p>
+<div class="compute"><script type="text/x-sage">
+%matplotlib inline
+import pandas, pylab; pylab.style.use('dark_background'); pylab.figure(figsize=(6,6))
+from sklearn import datasets; wine = datasets.load_wine()
+from sklearn.ensemble import AdaBoostClassifier,GradientBoostingClassifier
+classifiers = [AdaBoostClassifier,GradientBoostingClassifier]
+X,y = wine.data,wine.target; df_importance = pandas.DataFrame(columns=range(13))
+for i in range(2):
+    df_importance.loc[i] = classifiers[i]().fit(X,y).feature_importances_
+    pylab.plot(df_importance.loc[i],'-v',label=str(classifiers[i]()),
+               markersize=7,markerfacecolor="None",markeredgewidth=2)
+pylab.grid(color='gray'); pylab.legend(loc=10,bbox_to_anchor=(1.9,0.5),fontsize=15);
+</script></div>
+      <p>Try R or HTML Code Cells</p>
+<div class="compute"><script type="text/x-sage">
+%%r
+model.lm <- lm(dist~speed, data=cars) 
+cor.test(cars$speed, model.lm$residuals)
+</script></div>
+            <p></p>
+<div class="compute"><script type="text/x-sage">
+%%html
+<style>@import url('https://fonts.googleapis.com/css?family=Ewert&effect=3d');</style>
+<svg width="400" height="80">
+<linearGradient id="b" x2="0" y2="100%">
+<stop offset="0" stop-color="#aaa" stop-opacity=".1"/>
+<stop offset="1" stop-opacity=".5"/>
+</linearGradient>
+<clipPath id="a"><rect width="400" height="80" rx="20"/></clipPath>
+<g clip-path="url(#a)">
+<path fill="#ff3636" d="M0 0h280v80H0z"/>
+<path fill="#3636ff" d="M280 0h120v80H280z"/>
+<path fill="url(#b)" d="M0 0h280v80H0z"/>
+</g>
+<g style="fill:#fff; font-family:Ewert; font-size:35" class="font-effect-3d">
+<text x="10" y="45">in progress</text><text x="320" y="45">%</text>
+</g>
+</svg>
+</script></div> 
+            <p></p>
+  </body>
+</html>
