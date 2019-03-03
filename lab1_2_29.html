@@ -106,7 +106,7 @@ for s in test_strings:
     s2 = ''.join(re.findall(figures,s,re.U))
     s3 = ''.join(re.findall(latin_letters,s,re.U))
     if len(s)==0: print s,'->','"Пустая строка"'
-    elif len(s1)!=len(s): print s,'->','"Некорректные символы"'
+    elif not set(s).issubset(s1+s2+s3): print s,'->','"Некорректные символы"'
     else:
         s31 = re.findall(blatin_letters,s,re.U)+re.findall(slatin_letters,s,re.U)
         s31 = ''.join(sorted(str(s31),key=str.lower))
