@@ -174,16 +174,16 @@ import re
 <div style="width:450px; height:650px; overflow:auto;"><img src="lab_images/Lab1_2_22_1.png" width="450" height="650"/></div>
 <h2>11. Программный код Pascal</h2>
 <table><tr><td style="font-weight:bold;text-align:left;"><pre><code class='pascal'> 
-program Lab1;
+Program Lab1;
 {$AppType CONSOLE}
  
 Uses Windows, UnLAB1;
  
-var 
+Var 
     S,S1,S2: ANSIString;
     N: Byte;
         
-begin
+Begin
     // сменим кодовые страницы  для консольного ввода и вывода
     setConsoleCP(1251); // для ввода 
     setConsoleOutputCP(1251); // для вывода 
@@ -221,8 +221,124 @@ begin
  
     writeln(#13#10'Press ENTER to exit');
     readln
-end.
-</code></pre></td></tr></table>      
+End.
+</code></pre></td></tr></table> 
+<h3>Исходный код модуля<h3>      
+ <table><tr><td style="font-weight:bold;text-align:left;"><pre><code class='pascal'> 
+Unit UnLAB1;      // имя модуля – меняется при сохранении File → Save As…
+Interface       // раздел описания межмодульного интерфейса
+ 
+Uses     
+    SysUtils;
+    
+Const
+    SymbTable = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ0123456789';
+
+Const
+    BukvKirS: set of char = ['а'..'я','ё'];
+    BukvKirB: set of char = ['А'..'Я','Ё'];    
+    Cifr : set of '0'..'9' = ['0'..'9'];
+    BukvKirB1: set of char = ['А'..'Е']; 
+    BukvKirB2: set of char = ['Ж'..'Я'];    
+
+Function Prov1(const s: ANSIString): Byte; // проверка без SymbTable
+Function Prov2(const s: ANSIString): Byte; // проверка с SymbTable
+Procedure Sort1(var s: ANSIString);  // сортировка без SymbTable
+Procedure Sort2(var s: ANSIString);  // сортировка с SymbTable
+ 
+Implementation  // раздел реализации и описания закрытых процедур
+
+Function Prov1; // проверка без SymbTable
+Var
+    N: byte; // номер аномалии
+    i,Len: word; // текущий символ и длина строки
+Begin
+    N:=0; Len:=Length(S);
+    if Len=0 then N:=1
+    else
+    begin
+        i:=1;
+        while (i<=Len) and (N=0) do
+        begin
+            if not ((S[i] in Cifr) or (S[i] in BukvKirS) or (S[i] in BukvKirB)) then N:=2;
+            Inc(i);
+        end;
+    end;
+    Prov1:=N; 
+End;
+
+Function Prov2; // проверка с SymbTable
+Var
+    N: byte; // номер аномалии
+    i,Len: word; // текущий символ и длина строки
+Begin
+    N:=0; Len:=Length(S);
+    if Len=0 then N:=1
+    else
+    begin
+        i:=1;
+        while (i<=Len) and (N=0) do
+        begin
+            if not (Pos(S[i],SymbTable)>0) then N:=2;
+            Inc(i);
+        end;
+    end;
+    Prov2:=N; 
+End;
+
+Procedure Sort1;  // сортировка без SymbTable
+Var 
+    i,z,Len: word; // номер текущего символа, номер итерации (шага), длина строки
+    flag: boolean; // упорядочено? (нет обменов?)
+    ch: char; // для обмена
+Begin
+    z:=1; Len:=length(s);
+    repeat // пузырёк
+        flag:=true;
+        for i:=1 to Len-z do
+            if ( (s[i] in Cifr) and ((s[i+1] in BukvKirS) or (s[i+1] in BukvKirB)) ) or // цифры «легче» всех
+               ( (s[i] in BukvKirB) and (s[i+1] in BukvKirS) ) or 
+                // кириллица заглавные «легче» строчных – всплывает
+               ( (s[i] in BukvKirB2) and (s[i+1] in BukvKirB1) ) or 
+                // кириллица заглавные 2 «легче» кириллицы заглавных 1 – всплывает
+               ( (s[i]='Ё') and (s[i+1] in BukvKirB1) ) or 
+                // кириллица Ё «легче» кириллицы заглавных 1 – всплывает
+               ( (s[i] in BukvKirB1) and (s[i+1] in BukvKirB1) and (s[i]>s[i+1]) ) or 
+                // кириллица заглавные 1 – по алфавиту
+               ( (s[i] in BukvKirB2) and (s[i+1] in BukvKirB2) and (s[i]>s[i+1]) ) or 
+                // кириллица заглавные 2 – по алфавиту
+            then
+            begin // обмен
+                ch:=s[i]; s[i]:=s[i+1]; s[i+1]:=ch; flag:= false;
+            end ;
+        inc(z);
+    until flag or (z=Len);
+End; 
+
+Procedure Sort2;  // сортировка с SymbTable
+Var 
+    i,z,Len,P1,P2: word; // номер текущего символа, номер итерации (шага), длина строки, позиции текущих символов
+    flag: boolean; // упорядочено? (нет обменов?)
+    ch: char; // для обмена
+Begin
+    z:=1;  Len:=length(s);
+    repeat // пузырёк
+        flag:=true;
+        for i:=1 to Len-z do
+            P1:=Pos(s[i],SymbTable); P2:=Pos(s[i+1],SymbTable);
+            // неправильный порядок по своей «таблице»
+            if (P1>66 and P2<67) or (P1>33 and P2<34)
+               or (P1>P2 and P1>33 and P2>33 and P1<67 and P2<67)
+            then
+            begin // обмен
+                ch:=s[i]; s[i]:=s[i+1]; s[i+1]:=ch; flag:=false;
+            end;
+        inc(z);
+    until flag or (z=Len);
+End; 
+ 
+End.
+</code></pre></td></tr></table> 
 <h2>12. Алгоритмы процедур</h2>
 <h3>A0.1. Проверка аномалий</h3>
 <div style="width:450px; height:650px; overflow:auto;"><img src="lab_images/Lab1_2_22_2.png" width="550" height="650"/></div>     <h3>А0.2. Сортировка «пузырьком»</h3>
