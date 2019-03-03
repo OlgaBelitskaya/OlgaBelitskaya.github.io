@@ -88,8 +88,21 @@ for s in test_strings:
 <p>Для проверки результата нажмите кнопку «Evaluate».</p>
 <p>Ячейки SageMath для экспериментов</p>     
 <div class="compute"><script type="text/x-sage">
+# сортировка с помощью множеств символов
 import re
-
+scyrillic_letters,bcyrillic_letters,figures = ur'[а-я,ё]',ur'[А-Я,Ё]',ur'[0-9]'
+bcyrillic_letters1,bcyrillic_letters2 = ur'[А-Е]',ur'[Ж-Я]'
+test_strings = [u'',u'iJщюкQ4',u'01234',u'Ау',u'ЁЖИКВТУМАНЕ',u'StartEnd',u'adressADRESS',
+                u'358морозИсолнцеДЕНЬчудестный123',u'123FirstSecondThirdОЮИ']
+for s in test_strings:
+    s1 = ''.join(re.findall(scyrillic_letters,s,re.U))+\
+         ''.join(sorted(re.findall(bcyrillic_letters1,s,re.U)))+\
+         ''.join(re.findall(ur'[Ё]',s,re.U))+\
+         ''.join(sorted(re.findall(bcyrillic_letters2,s,re.U)))+\
+          ''.join(re.findall(figures,s,re.U))
+    if len(s)==0: print s,'->','Пустая строка'
+    elif len(s1)!=len(s): print s,'->','Некорректные символы'
+    else: print s,'->','"'+s1+'"'
 </script></div>
 <p></p>
 <div class="compute"><script type="text/x-sage">
