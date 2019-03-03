@@ -71,30 +71,41 @@
   <tr><td>9</td><td>u'123FirstSecondThirdОЮИ'</td></tr>
 </table>      
 <div id="mycell"><script type="text/x-sage">
-@interact    
-def f(s=''):
-    pretty_print(s)
+symbol_table = u'абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ0123456789'
+test_strings = [u'',u'iJщюкQ4',u'01234',u'Ау',u'ЁЖИКВТУМАНЕ',u'StartEnd',u'adressADRESS',
+                u'358морозИсолнцеДЕНЬчудестный123',u'123FirstSecondThirdОЮИ']
+for s in test_strings:
+    s1 = ''.join([s[i] for i in range(len(s)) if s[i] in symbol_table[:33]])
+    s2 = ''.join(sorted([s[i] for i in range(len(s)) if s[i] in symbol_table[33:39]]))
+    s3 = ''.join([s[i] for i in range(len(s)) if s[i] == symbol_table[39]])
+    s4 = ''.join(sorted([s[i] for i in range(len(s)) if s[i] in symbol_table[40:66]]))
+    s5 = ''.join([s[i] for i in range(len(s)) if s[i] in symbol_table[66:]])
+    if len(s)==0: print s,'->','Пустая строка'
+    elif len(s1+s2+s3+s4+s5)!=len(s): print s,'->','Некорректные символы'
+    else: print s,'->','"'+s1+s2+s3+s4+s5+'"'
 </script></div>
   <h2>3. Пример</h2>
 <p>Для проверки результата нажмите кнопку «Evaluate».</p>
 <p>Ячейки SageMath для экспериментов</p>     
 <div class="compute"><script type="text/x-sage">
+import re
 
 </script></div>
 <p></p>
 <div class="compute"><script type="text/x-sage">
 # сортировка с помощью таблицы символов
-import re
 symbol_table = u'абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ0123456789'
-s = u'Ау'
-s1 = ''.join([s[i] for i in range(len(s)) if s[i] in symbol_table[:33]])
-s2 = ''.join(sorted([s[i] for i in range(len(s)) if s[i] in symbol_table[33:39]]))
-s3 = ''.join([s[i] for i in range(len(s)) if s[i] == symbol_table[39]])
-s4 = ''.join(sorted([s[i] for i in range(len(s)) if s[i] in symbol_table[40:66]]))
-s5 = ''.join([s[i] for i in range(len(s)) if s[i] in symbol_table[66:]])
-if len(s)==0: print 'Пустая строка'
-elif len(s1+s2+s3+s4+s5)!=len(s): print 'Некорректные символы'
-else: print '"'+s1+s2+s3+s4+s5+'"'
+test_strings = [u'',u'iJщюкQ4',u'01234',u'Ау',u'ЁЖИКВТУМАНЕ',u'StartEnd',u'adressADRESS',
+                u'358морозИсолнцеДЕНЬчудестный123',u'123FirstSecondThirdОЮИ']
+for s in test_strings:
+    s1 = ''.join([s[i] for i in range(len(s)) if s[i] in symbol_table[:33]])
+    s2 = ''.join(sorted([s[i] for i in range(len(s)) if s[i] in symbol_table[33:39]]))
+    s3 = ''.join([s[i] for i in range(len(s)) if s[i] == symbol_table[39]])
+    s4 = ''.join(sorted([s[i] for i in range(len(s)) if s[i] in symbol_table[40:66]]))
+    s5 = ''.join([s[i] for i in range(len(s)) if s[i] in symbol_table[66:]])
+    if len(s)==0: print s,'->','Пустая строка'
+    elif len(s1+s2+s3+s4+s5)!=len(s): print s,'->','Некорректные символы'
+    else: print s,'->','"'+s1+s2+s3+s4+s5+'"'
 </script></div>      
 <p>Дополнительная ячейка для экспериментов</p>
 <div class="compute"><script type="text/x-sage">
