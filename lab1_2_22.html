@@ -60,7 +60,7 @@ def f(s=''):
 
   <h2>3. Пример</h2>
 <p>Для проверки результата нажмите кнопку “Evaluate”.</p>
-      
+<p>Ячейка SageMath для экспериментов</p>     
 <div class="compute"><script type="text/x-sage">
 var('u'); R,r,n=12,6,24; x=r*cos(u); y=r*sin(u); 
 p1=sum([parametric_plot((x-R*cos(2*i*pi/n),y-R*sin(4*i*pi/n)),(u,0,2*pi),color='#3636ff') for i in [0..n]])
@@ -69,7 +69,7 @@ p2=sum([parametric_plot((y-R*sin(4*i*pi/n),x-R*cos(2*i*pi/n)),(u,0,2*pi),fill=Tr
 p3=sum([parametric_plot((1.5*x-R*cos(2*i*pi/n),1.5*y-R*sin(2*i*pi/n)),(u,0,2*pi),color='darkblue') for i in [0..n]])
 (p1+p2+p3).show(figsize=[5,5],axes=False)
 </script></div>
-      <p></p>
+<p></p>
 <div class="compute"><script type="text/x-sage">
 @interact
 def _(N=(10,50,1)):
@@ -77,25 +77,16 @@ def _(N=(10,50,1)):
                                            cover_labels=lambda a,b:b/a,vertex_shape='H',
                                            vertex_color='lightgrey',vertex_size=800)
 </script></div>
-      <p></p>
+<p></p>
 <div class="compute"><script type="text/x-sage">
 var('t'); d = {2*i+1:[2*i+2] for i in [0..6]}; c=[colormaps.ocean(24*k)[:3] for k in [0..10]]
 polar_plot([(t+k/5)*log(t/5) for k in [0..10]],0,2*pi,color=c,fill=d,fillcolor=c)\
 .show(title='$f=(t+k/5) \cdot \log(t/5), k \in \{0,1,...,10\}$',fontsize=15,figsize=(10,5))
 </script></div>      
-      <p>Try Python Modules</p>
+<p>Ячейка Python для экспериментов</p>
 <div class="compute"><script type="text/x-sage">
 %matplotlib inline
-import pandas, pylab; pylab.style.use('dark_background'); pylab.figure(figsize=(6,6))
-from sklearn import datasets; wine = datasets.load_wine()
-from sklearn.ensemble import AdaBoostClassifier,GradientBoostingClassifier
-classifiers = [AdaBoostClassifier,GradientBoostingClassifier]
-X,y = wine.data,wine.target; df_importance = pandas.DataFrame(columns=range(13))
-for i in range(2):
-    df_importance.loc[i] = classifiers[i]().fit(X,y).feature_importances_
-    pylab.plot(df_importance.loc[i],'-v',label=str(classifiers[i]()),
-               markersize=7,markerfacecolor="None",markeredgewidth=2)
-pylab.grid(color='gray'); pylab.legend(loc=10,bbox_to_anchor=(1.9,0.5),fontsize=15);
+import pandas, pylab # numpy, sympy, sklearn, etc.
 </script></div>
       <p>Ячейки для экспериментов на других языках: R, HTML</p>
 <div class="compute"><script type="text/x-sage">
