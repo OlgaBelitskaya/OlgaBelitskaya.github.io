@@ -267,14 +267,13 @@ Uses
     SysUtils;
     
 Const
-    SymbTable = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ0123456789';
+    SymbTable = 'АаЕеИиОоУуЫыЭэЮюЯяЁё0123456789AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz';
 
 Const
-    BukvKirS: set of char = ['а'..'я','ё'];
-    BukvKirB: set of char = ['А'..'Я','Ё'];    
-    Cifr : set of '0'..'9' = ['0'..'9'];
-    BukvKirB1: set of char = ['А'..'Е']; 
-    BukvKirB2: set of char = ['Ж'..'Я'];    
+    BukvKirVow: set of char = ['А','а','Е','е','И','и','О','о','У','у',
+                               'Ы','ы','Э','э','Ю','ю','Я','я','Ё','ё'];    
+    Cifr: set of '0'..'9' = ['0'..'9'];
+    BukvLat: set of char = ['A'..'z'];   
 
 Function Prov1(const s: ANSIString): Byte; // проверка без SymbTable
 Function Prov2(const s: ANSIString): Byte; // проверка с SymbTable
@@ -295,7 +294,7 @@ Begin
         i:=1;
         while (i&#60;=Len) and (N=0) do
         begin
-            if not ((S[i] in Cifr) or (S[i] in BukvKirS) or (S[i] in BukvKirB)) then N:=2;
+            if not ((S[i] in Cifr) or (S[i] in BukvKirVow) or (S[i] in BukvLat)) then N:=2;
             Inc(i);
         end;
     end;
@@ -314,7 +313,7 @@ Begin
         i:=1;
         while (i&#60;=Len) and (N=0) do
         begin
-            if not (Pos(S[i],SymbTable)&#62;0) then N:=2;
+            if not (Pos(S[i],SymbTable) &#62; 0) then N:=2;
             Inc(i);
         end;
     end;
@@ -331,17 +330,10 @@ Begin
     repeat // пузырёк
         flag:=true;
         for i:=1 to Len-z do
-            if ( (s[i] in Cifr) and ((s[i+1] in BukvKirS) or (s[i+1] in BukvKirB)) ) or // цифры «легче» всех
-               ( (s[i] in BukvKirB) and (s[i+1] in BukvKirS) ) or 
-                // кириллица заглавные «легче» строчных – всплывает
-               ( (s[i] in BukvKirB2) and (s[i+1] in BukvKirB1) ) or 
-                // кириллица заглавные 2 «легче» кириллицы заглавных 1 – всплывает
-               ( (s[i]='Ё') and (s[i+1] in BukvKirB1) ) or 
-                // кириллица Ё «легче» кириллицы заглавных 1 – всплывает
-               ( (s[i] in BukvKirB1) and (s[i+1] in BukvKirB1) and (s[i] &#62; s[i+1]) ) or 
-                // кириллица заглавные 1 – по алфавиту
-               ( (s[i] in BukvKirB2) and (s[i+1] in BukvKirB2) and (s[i] &#62; s[i+1]) ) or 
-                // кириллица заглавные 2 – по алфавиту
+            if ( (s[i] in BukvLat) and ((s[i+1] in BukvKirVow) or (s[i+1] in Cifr)) ) or // латиница «легче» всех
+               ( (s[i] in Cifr) and (s[i+1] in BukvKirVow) ) or // цифры «легче» кириллицы – всплывает
+               ( (s[i] in BukvLat) and (s[i+1] in BukvLat) and 
+                 not (LowCase(s[i])=s[i+1]) and (LowCase(s[i]) &#62; LowCase(s[i+1])) )
             then
             begin // обмен
                 ch:=s[i]; s[i]:=s[i+1]; s[i+1]:=ch; flag:=false;
@@ -362,8 +354,8 @@ Begin
         for i:=1 to Len-z do
             P1:=Pos(s[i],SymbTable); P2:=Pos(s[i+1],SymbTable);
             // неправильный порядок по своей «таблице»
-            if (P1 &#62; 66 and P2 &#60; 67) or (P1 &#62; 33 and P2 &#60; 34)
-               or (P1 &#62; P2 and P1 &#62; 33 and P2 &#62; 33 and P1 &#60; 67 and P2 &#60; 67)
+            if (P1 &#62; 30 and P2 &#60; 31) or (P1 &#62; 20 and P2 &#60; 21) 
+               or (P1 &#62; P2 and P1 &#62; 30 and P2 &#62; 30)
             then
             begin // обмен
                 ch:=s[i]; s[i]:=s[i+1]; s[i+1]:=ch; flag:=false;
@@ -380,7 +372,7 @@ End.
 <div style="width:460px; height:460px; overflow:auto;"><img src="lab_images/Lab1_2_22_2.png" width="450" height="450"/></div>
 <div class="compute"><script type="text/x-sage">
 %%html     
-<p>(&#8727;) &#8801; &#x00AC;((S1[i] &#8712; ['0'..'9']) &#8744; (S1[i] &#8712; ['А'..'Я','Ё']) &#8744; (S1[i] &#8712; ['а'..'я','ё']))</p>
+<p>(&#8727;) &#8801; &#x00AC;((S1[i] &#8712; ['0'..'9']) &#8744; (S1[i] &#8712; ['А','а','Е','е','И','и','О','о','У','у','Ы','ы','Э','э','Ю','ю','Я','я','Ё','ё']) &#8744; (S1[i] &#8712; ['A'..'z']))</p>
 </script></div> 
   <h3>А0.2. Сортировка «пузырьком»</h3>
 <div style="width:460px; height:460px; overflow:auto;"><img src="lab_images/Lab1_2_22_3.png" width="450" height="450"/></div>
