@@ -56,6 +56,7 @@
 <p>- если строка пустая - вывести сообщение «Пустая строка»,</p>
 <p>- если присутствуют иные символы - вывести сообщение «Некорректные символы»,</p> 
 <p>- в противном случае, расположить символы строки в указанном в таблице порядке и вывести результат на экран.</p>
+<p>Таблица допустимых символов: абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ0123456789</p>
 <p>Для ввода и упорядочивания строки нажмите кнопку «Activate».</p>
 <p>Примеры строк для тестирования:</p>
 <p>u'', u'iJщюкQ4', u'01234', u'Ау', u'ЁЖИКВТУМАНЕ', u'StartEnd',</p> 
@@ -64,8 +65,17 @@
 @interact
 import re
 symbol_table = u'абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ0123456789'
+def prov_sort2(s):
+    s1 = ''.join([s[i] for i in range(len(s)) if s[i] in symbol_table[:33]])
+    s2 = ''.join(sorted([s[i] for i in range(len(s)) if s[i] in symbol_table[33:39]]))
+    s3 = ''.join([s[i] for i in range(len(s)) if s[i] == symbol_table[39]])
+    s4 = ''.join(sorted([s[i] for i in range(len(s)) if s[i] in symbol_table[40:66]]))
+    s5 = ''.join([s[i] for i in range(len(s)) if s[i] in symbol_table[66:]])
+    if len(s)==0: return 'Пустая строка'
+    elif len(s1+s2+s3+s4+s5)!=len(s): return 'Некорректные символы'
+    else: return '"'+s1+s2+s3+s4+s5+'"'
 def f(s=''):
-    pretty_print(s)
+    pretty_print(prov_sort2(s))
 </script></div>
   <h2>3. Пример</h2>
 <p>Для проверки результата нажмите кнопку «Evaluate».</p>
