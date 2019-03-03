@@ -173,7 +173,56 @@ import re
 <h2>10. Основной алгоритм</h2>
 <div style="width:450px; height:650px; overflow:auto;"><img src="lab_images/Lab1_2_22_1.png" width="450" height="650"/></div>
 <h2>11. Программный код Pascal</h2>
-      
+<table><tr><td style="font-weight:bold;text-align:left;"><pre><code class='pascal'> 
+program Lab1;
+{$AppType CONSOLE}
+ 
+Uses Windows, UnLAB1;
+ 
+var 
+    S,S1,S2: ANSIString;
+    N: Byte;
+        
+begin
+    // сменим кодовые страницы  для консольного ввода и вывода
+    setConsoleCP(1251); // для ввода 
+    setConsoleOutputCP(1251); // для вывода 
+ 
+    writeln('Введите строку (смените шрифт на Lucida Console)');
+    readln(S); // ввод 
+ 
+    S1:=copy(S,1,length(S)); S2:=copy(S,1,length(S)); // создание копий дин.строки 
+            
+    // без своей таблицы символов (со сложным условием обмена)
+    writeln(#13#10, 'Строка до сортировки'#13#10,S1);
+    N:= Prov1(s1); // проверка
+    case N of
+        1: writeln('Пустая строка');
+        2: writeln('Некорректные символы');
+        else
+        begin // сортировка
+           Sort1(s1);
+           writeln('Отсортированная строка 1'#13#10,S1);  // вывод строки S1
+        end; {else}
+    end; {case}
+  
+    // со своей таблицей символов
+    writeln(#13#10'Строка до сортировки'#13#10,S2);
+    N:= Prov2(s2); // проверка
+    case N of
+        1: writeln('Пустая строка');
+        2: writeln('Некорректные символы');
+        else
+        begin // сортировка
+           Sort2(s2);
+           writeln('Отсортированная строка 2'#13#10, S2);  // вывод строки S2
+        end; {else}
+    end; {case}
+ 
+    writeln(#13#10'Press ENTER to exit');
+    readln
+end.
+</code></pre></td></tr></table>      
 <h2>12. Алгоритмы процедур</h2>
 <h3>A0.1. Проверка аномалий</h3>
 <div style="width:450px; height:650px; overflow:auto;"><img src="lab_images/Lab1_2_22_2.png" width="450" height="650"/></div>     <h3>А0.2. Сортировка «пузырьком»</h3>
