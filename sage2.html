@@ -62,10 +62,12 @@ XV.plot(chart=XR3,mapping=Delta2,number_values=50,color='#3636ff',label_axes=Fal
     <p></p>
 <div class="compute"><script type="text/x-sage">
 @interact
-def _(N=(10,50,1)):
-    Poset(([1..N],lambda x,y:y%x==0)).show(color_by_label=True,figsize=[10,5],edge_style='dashed',
-                                           cover_labels=lambda a,b:b/a,vertex_shape='H',
-                                           vertex_color='lightgrey',vertex_size=800)
+def _(a=(2,4,1),b=(4,8,1),c=(4,8,1),n=(2,8,1),m=(2,8,1)):
+    var('t'); r = cos(a*t)^n+sin(b*t)^m+1/c
+    pretty_print(html('<center><font color="#3636ff">$r = %s$</font></center>'%latex(r)))
+    p = parametric_plot((sin(t)*r,cos(t)*r),(0,2*pi),color='#3636ff',fill=True,fillcolor='#3636ff')+\
+    plot(r,(0,2*pi),linestyle='--',color='#3636ff')
+    show(p,figsize=(10,10),xmin=-2.2-1/c,xmax=6.3+1/c,ymin=-2-1/c,ymax=2+1/c)
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
