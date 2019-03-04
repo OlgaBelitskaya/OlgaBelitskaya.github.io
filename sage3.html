@@ -82,7 +82,12 @@ pylab.title('Samples of the Wholesale Customers Dataset'); pylab.subplots_adjust
   <h2>Try Other Languages (R, HTML, ...)</h2>
 <div class="compute"><script type="text/x-sage">
 %%r
-
+file_list <- c('boom.pas','bloom.ppt','loom.pas','bottom.pdf','bom.pps','boom.ppt')
+mask_list <- c('?oo*m.p*','b*o*om.p??','*o*om.p*?','b*om.p?*','*.*p*','bo*m.???','*om.*p*','*o*o*.p*?')
+mask_re_list <- c("^.oo.*m\\.p.*$","^b.*o.*om\\.p..$","^.*o.*om\\.p.*.$","^b.*om\\.p..*$",
+                  "^.*\\..*p.*$","^bo.*m\\....$","^.*om\\..*p.*$","^.*o.*o.*\\.p.*.$")
+df <- data.frame(sapply(mask_re_list,grepl,file_list),row.names=file_list)
+colnames(df) <- mask_list; t(df)
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
