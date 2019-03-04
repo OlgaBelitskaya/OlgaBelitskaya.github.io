@@ -59,11 +59,17 @@ def _(N=(16,4,-1)):
     sum([polar_plot(log(floor(x)),(x,k*pi/2,(k+1)*pi/2),color=colormaps.winter(N*k)[:3],
                     thickness=2,exclude=[1..int((k+1)*pi/2)]) for k in [1..N]]).show(figsize=(10,5))
     sum([polar_plot(log(floor(x)),(x,k*pi/2,(k+1)*pi/2),color=colormaps.summer(N*k)[:3],
-                    thickness=2,exclude=[1..int(k*pi/2)]) for k in [1..N]]).show(figsize=(10,5))
+                    thickness=2,exclude=[1..int(k*pi/2)]) for k in [1..N]]).show()
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
-
+A,B = 1.53,0.76 
+X=[0.1*i*random() for i in range(200)]; Y=[A*x+B+4*random()*(-1)^randint(0,1) for x in X]
+var('a,b,x'); F=a*x+b; ff=find_fit(zip(X,Y),F,variables=[x]); 
+a,b = float(str(ff[0])[5:]),float(str(ff[1])[5:]); F=[a*x+b for x in X]
+pf=points(zip(X,F),color='#ff3636',legend_label='fitted line')
+pr=points(zip(X,Y),color='#3636ff',legend_label='real data') 
+print(ff); (pf+pr).show(figsize=(10,5))
 </script></div> 
       
   <h2>Try Python Modules</h2>
