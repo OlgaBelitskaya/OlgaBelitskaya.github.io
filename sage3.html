@@ -41,26 +41,22 @@ def _(N=(11,0,-1)):
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>
       
 <div class="compute"><script type="text/x-sage">
-var('u'); R,r,n=12,6,24; x=r*cos(u); y=r*sin(u); 
-p1=sum([parametric_plot((x-R*cos(2*i*pi/n),y-R*sin(4*i*pi/n)),(u,0,2*pi),color='#3636ff') for i in [0..n]])
-p2=sum([parametric_plot((y-R*sin(4*i*pi/n),x-R*cos(2*i*pi/n)),(u,0,2*pi),fill=True,fillalpha=0.1,
-                        fillcolor=hue(i/n),color='#3636ff') for i in [0..n]])
-p3=sum([parametric_plot((1.5*x-R*cos(2*i*pi/n),1.5*y-R*sin(2*i*pi/n)),(u,0,2*pi),color='darkblue') for i in [0..n]])
-(p1+p2+p3).show(figsize=[5,5],axes=False)
+
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
 @interact
-def _(N=(10,50,1)):
-    Poset(([1..N],lambda x,y:y%x==0)).show(color_by_label=True,figsize=[10,5],edge_style='dashed',
-                                           cover_labels=lambda a,b:b/a,vertex_shape='H',
-                                           vertex_color='lightgrey',vertex_size=800)
+def _(N=(1,8,1)):
+    g = Graphics()
+    for i in [1..N]:
+        a1,a2,a3,a4,a6 = i-5,i+5,i-1,i+1,i+3; c=colormaps.jet(30*i)[:3]; 
+        E = EllipticCurve([a1,a2,a3,a4,a6]);
+        g = g+plot(E,gridlines=True,color=c,plot_points=50,legend_label='$%s$'%latex(E))
+    g.show(ymin=-30,ymax=30,figsize=(10,5))
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
-var('t'); d = {2*i+1:[2*i+2] for i in [0..6]}; c=[colormaps.ocean(24*k)[:3] for k in [0..10]]
-polar_plot([(t+k/5)*log(t/5) for k in [0..10]],0,2*pi,color=c,fill=d,fillcolor=c)\
-.show(title='$f=(t+k/5) \cdot \log(t/5), k \in \{0,1,...,10\}$',fontsize=15,figsize=(10,5))
+
 </script></div> 
       
   <h2>Try Python Modules</h2>
