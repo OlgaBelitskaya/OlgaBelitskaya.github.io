@@ -7,7 +7,7 @@
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
     <script>$(function () {
     // Make the div with id 'mycell' a Sage cell
-    sagecell.makeSagecell({inputLocation:  '#mycell',
+    sagecell.makeSagecell({inputLocation:  '#examplecell',
                            template:       sagecell.templates.minimal,
                            evalButtonText: 'Activate'});
     // Make *any* div with class 'compute' a Sage cell
@@ -20,17 +20,18 @@
   @import url('https://fonts.googleapis.com/css?family=Orbitron');
   h1 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
   h2 {color:darkblue; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
-  p {font-size:150%; text-shadow:5px 5px 5px #aaa;}
+  p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
   </style>  
   <body>
-  <h1>&#x1F4D1; &nbsp;SageMath Online Mini Сampus. Part1</h1>
+  <h1>&#x1F4D1; &nbsp;SageMath Online Mini Сampus. Part 1</h1>
 <a href="https://www.instagram.com/olga.belitskaya/">Instagram Posts</a>
 <a href="https://www.pinterest.ru/olga_belitskaya/code-style/">Pinterest Posts</a>
-  <h2>Example of Computations</h2>
-      <p>Click the “Activate” button below to display an interactive example.</p>
-
+    <p>This set of interactive pages with the following structure:</p>
+    <p>Example of Computations $\implies$ Your Field for Experiments $\implies$ Try Python Modules $\implies$ Try Other Languages</p>
       
-<div id="mycell"><script type="text/x-sage">
+  <h2>Example of Computations</h2>
+    <p>Click the “Activate” button below to display an interactive example.</p>      
+<div id="examplecell"><script type="text/x-sage">
 @interact
 def f(n=(1,5,1)):
     pretty_print(n,'-element Subsets of the 5-element Set')
@@ -40,7 +41,7 @@ def f(n=(1,5,1)):
 </script></div>
 
   <h2>Your Field for Experiments</h2>
-      <p>Type your own SageMath code lines below and click “Evaluate”.</p>
+    <p>Type your own SageMath code lines below and click “Evaluate”.</p>
       
 <div class="compute"><script type="text/x-sage">
 var('u'); R,r,n=12,6,24; x=r*cos(u); y=r*sin(u); 
@@ -50,7 +51,7 @@ p2=sum([parametric_plot((y-R*sin(4*i*pi/n),x-R*cos(2*i*pi/n)),(u,0,2*pi),fill=Tr
 p3=sum([parametric_plot((1.5*x-R*cos(2*i*pi/n),1.5*y-R*sin(2*i*pi/n)),(u,0,2*pi),color='darkblue') for i in [0..n]])
 (p1+p2+p3).show(figsize=[5,5],axes=False)
 </script></div>
-      <p></p>
+    <p></p>
 <div class="compute"><script type="text/x-sage">
 @interact
 def _(N=(10,50,1)):
@@ -58,13 +59,14 @@ def _(N=(10,50,1)):
                                            cover_labels=lambda a,b:b/a,vertex_shape='H',
                                            vertex_color='lightgrey',vertex_size=800)
 </script></div>
-      <p></p>
+    <p></p>
 <div class="compute"><script type="text/x-sage">
 var('t'); d = {2*i+1:[2*i+2] for i in [0..6]}; c=[colormaps.ocean(24*k)[:3] for k in [0..10]]
 polar_plot([(t+k/5)*log(t/5) for k in [0..10]],0,2*pi,color=c,fill=d,fillcolor=c)\
 .show(title='$f=(t+k/5) \cdot \log(t/5), k \in \{0,1,...,10\}$',fontsize=15,figsize=(10,5))
-</script></div>      
-      <p>Try Python Modules</p>
+</script></div> 
+      
+  <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
 %matplotlib inline
 import pandas, pylab; pylab.style.use('dark_background'); pylab.figure(figsize=(7,5))
@@ -78,13 +80,14 @@ for i in range(2):
                markersize=7,markerfacecolor="None",markeredgewidth=2)
 pylab.grid(color='gray'); pylab.legend(loc=10,bbox_to_anchor=(1.8,0.5),fontsize=15);
 </script></div>
-      <p>Try R or HTML Code Cells</p>
+      
+  <h2>Try Other Languages (R, HTML, ...)</h2>
 <div class="compute"><script type="text/x-sage">
 %%r
 model.lm <- lm(dist~speed, data=cars) 
 cor.test(cars$speed, model.lm$residuals)
 </script></div>
-            <p></p>
+    <p></p>
 <div class="compute"><script type="text/x-sage">
 %%html
 <style>@import url('https://fonts.googleapis.com/css?family=Ewert&effect=3d');</style>
@@ -104,6 +107,6 @@ cor.test(cars$speed, model.lm$residuals)
 </g>
 </svg>
 </script></div> 
-            <p></p>
+    <p></p>
   </body>
 </html>
