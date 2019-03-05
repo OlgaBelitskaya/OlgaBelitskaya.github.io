@@ -31,10 +31,9 @@
   <h2>Example of Computations</h2>
     <p>Click the “Activate” button below to display an interactive example.</p>      
 <div id="examplecell"><script type="text/x-sage">
-#@interact
-#def _(N=(8,1,-1)):
-#    pretty_print(html('<center><font color="#3636ff" size=5>Derivatives till the %s Order</font></center>'%str(N)))
-
+@interact
+def _(N=(23,1,-1)):
+    var('x'); sum([plot(sin(x),(pi*n/6,pi*(n+1)/6),thickness=10,color=colormaps.jet(12*n)[:3]) for n in [0..N]]).show()
 </script></div>
 
   <h2>Your Field for Experiments</h2>
@@ -63,7 +62,7 @@ bd = datasets.make_blobs(n_samples=1000,centers=[[1,1],[-1,-1],[1,-1],[-1,1]],cl
 X,y = bd[0],bd[1]; X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.2,random_state=1)
 usl = mixture.BayesianGaussianMixture(n_components=4,n_init=4)
 usl.fit(X_train,y_train); y_predict = usl.predict(X_test)
-pylab.figure(figsize=(10,5)); pylab.grid()
+pylab.figure(figsize=(10,10)); pylab.grid()
 pylab.scatter(X_test[:,0],X_test[:,1],c=y_test,s=50,cmap=pylab.cm.winter)
 pylab.scatter(X_test[:,0]+0.03,X_test[:,1]+0.03,c=y_predict,s=50,alpha=0.5,cmap=pylab.cm.winter)
 pylab.scatter([1,-1,1,-1],[1,-1,-1,1],c='#3636ff',marker='*',s=500);
