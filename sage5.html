@@ -45,9 +45,9 @@
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
-#@interact
-#def _(N=(16,4,-1)):
-
+@interact
+def _(N=(1,10,1)):
+    sum(plot(sin(x-2*k)-x^2,x,hue=sin(k/N)) for k in [-1.25,-1.2,..,1.25]).show(figsize=(10,5))
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
@@ -63,7 +63,7 @@ bd = datasets.make_blobs(n_samples=1000,centers=[[1,1],[-1,-1],[1,-1],[-1,1]],cl
 X,y = bd[0],bd[1]; X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.2,random_state=1)
 usl = mixture.BayesianGaussianMixture(n_components=4,n_init=4)
 usl.fit(X_train,y_train); y_predict = usl.predict(X_test)
-pylab.figure(figsize=(14,7)); pylab.grid()
+pylab.figure(figsize=(10,5)); pylab.grid()
 pylab.scatter(X_test[:,0],X_test[:,1],c=y_test,s=50,cmap=pylab.cm.winter)
 pylab.scatter(X_test[:,0]+0.03,X_test[:,1]+0.03,c=y_predict,s=50,alpha=0.5,cmap=pylab.cm.winter)
 pylab.scatter([1,-1,1,-1],[1,-1,-1,1],c='#3636ff',marker='*',s=500);
