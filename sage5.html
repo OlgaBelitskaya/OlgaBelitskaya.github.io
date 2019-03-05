@@ -57,7 +57,16 @@
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
 %matplotlib inline
-
+# 1000 data points, 4 clusters
+import pylab; from sklearn import datasets,mixture; from sklearn.model_selection import train_test_split
+bd = datasets.make_blobs(n_samples=1000,centers=[[1,1],[-1,-1],[1,-1],[-1,1]],cluster_std=0.5)
+X,y = bd[0],bd[1]; X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.2,random_state=1)
+usl = mixture.BayesianGaussianMixture(n_components=4,n_init=4)
+usl.fit(X_train,y_train); y_predict = usl.predict(X_test)
+pylab.figure(figsize=(14,7)); pylab.grid()
+pylab.scatter(X_test[:,0],X_test[:,1],c=y_test,s=50,cmap=pylab.cm.winter)
+pylab.scatter(X_test[:,0]+0.03,X_test[:,1]+0.03,c=y_predict,s=50,alpha=0.5,cmap=pylab.cm.winter)
+pylab.scatter([1,-1,1,-1],[1,-1,-1,1],c='#3636ff',marker='*',s=500);
 </script></div>
       
   <h2>Try Other Languages (R, HTML, ...)</h2>
@@ -68,7 +77,12 @@
     <p></p>
 <div class="compute"><script type="text/x-sage">
 %%html
-
+<style>
+@import url('https://fonts.googleapis.com/css?family=Ewert|Sancreek&effect=3d|ice');
+</style>
+<p style="color:#ff3636; font-family:Sancreek; font-size:300%;" class="font-effect-3d">
+Sancreek and 3D effect
+</p>
 </script></div> 
     <p></p>
   </body>
