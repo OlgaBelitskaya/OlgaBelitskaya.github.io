@@ -52,7 +52,16 @@ def _(N=(1,10,1)):
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
-
+binary_combinations = Words(alphabet=[0,1], length=10); c = 0
+def logical_function(x):
+    eq1 = (x[0] | (not x[1])) & (x[2] | (not x[3]))
+    eq2 = (x[2] | (not x[3])) & (x[4] | (not x[5]))
+    eq3 = (x[4] | (not x[5])) & (x[6] | (not x[7]))
+    eq4 = (x[6] | (not x[7])) & (x[8] | (not x[9]))    
+    return (eq1 & eq2 & eq3 & eq4)
+for el in binary_combinations: 
+    c += int (logical_function(el))
+c
 </script></div> 
       
   <h2>Try Python Modules</h2>
