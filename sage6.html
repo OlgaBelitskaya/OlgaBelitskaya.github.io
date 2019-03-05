@@ -55,8 +55,18 @@
       
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
-%matplotlib inline
-
+import pylab,numpy; from mpl_toolkits.mplot3d import Axes3D
+pylab.rcParams['grid.color']='steelblue'; pylab.rcParams['grid.linestyle']='--'
+f = pylab.figure(figsize=(10,10)); ax = f.add_subplot(111,projection='3d')
+X = numpy.linspace(-7,7,128); X,Y = numpy.meshgrid(X,X)
+Z1 = 1/2*X**2+1/8*Y**2; Z1[Z1>6] = numpy.nan;
+Z2 = 1/8*X**2-1/18*Y**2; Z2[Z2<-6] = numpy.nan; Z2[Z2>6] = numpy.nan;
+ax.plot_wireframe(X,Y,Z1,alpha=0.7,colors='#ff3636')
+ax.plot_wireframe(X,Y,Z2,alpha=0.4,colors='#3636ff')
+ax.text(2,7,7,'$x^2/1^2+y^2/2^2=2 \cdot z$',color='#ff3636',fontsize=20)
+ax.text(-12,-7,-7,'$x^2/2^2-y^2/3^2=2 \cdot z$',color='#3636ff',fontsize=20)
+ax.xaxis.pane.fill,ax.yaxis.pane.fill,ax.zaxis.pane.fill = False,False,False
+ax.set_xlim(-7,7); ax.set_ylim(-7,7); ax.set_zlim(-7,7); pylab.show();
 </script></div>
       
   <h2>Try Other Languages (R, HTML, ...)</h2>
