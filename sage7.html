@@ -57,7 +57,20 @@ plot3d(lambda x,y: 0.001*(x^2+y^2)-1,(-30,30),(-30,30),mesh=True,color="#ff3636"
       
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
-
+import numpy
+def sigmoid(x): return 1.0/(1+numpy.exp(-x))
+def sigmoid_derivation(x): return x*(1.0-x)
+X = numpy.array([[0.10,0.05,0.95],[0.09,0.03,0.08],[0.01,0.09,0.91],
+                 [0.04,0.92,0.07],[0.05,0.02,0.04],[0.07,0.97,0.05],
+                 [0.06,0.02,0.98],[0.02,0.06,0.03],[0.01,0.09,0.03],[0.02,0.94,0.01]])
+Y = numpy.array([[1,0,1,2,0,2,1,0,1,2]]).T
+synapse0 = numpy.random.randn(3,1)
+for iter in range(100):
+    layer0 = X; layer1 = sigmoid(numpy.dot(layer0,synapse0))
+    layer1_error = layer1-Y; layer1_delta = layer1_error*sigmoid_derivation(layer1)
+    synapse0_derivative = numpy.dot(layer0.T,layer1_delta)
+    synapse0 -= synapse0_derivative
+print (numpy.hstack((numpy.hstack((X,Y)),(layer1.round(3)))))
 </script></div>
       
   <h2>Try Other Languages (R, HTML, ...)</h2>
