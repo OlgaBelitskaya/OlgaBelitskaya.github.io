@@ -46,9 +46,14 @@ plot3d(lambda x,y: 0.001*(x^2+y^2)-1,(-30,30),(-30,30),mesh=True,color="#ff3636"
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
-#@interact
-#def _(N=()):
-
+@interact
+def _(a=(1,5,2),b=(-6,-2,2),c=(6,2,-2),d=(-1,-5,-2)):
+    var('a,b,c,d'); i = ComplexField(2).0; z1,z2 = a+b*i,c+d*i; g = Graphics()
+    z=[z1,z2,z1+z2,z1-z2]; l=['$z_1=a+b*i$','$z_2=c+d*i$','$z_1+z_2=(a+c)+(b+d)*i$','$z_1-z_2=(a-c)+(b-d)*i$']
+    for i in range(4):
+        g = g+arrow2d((0,0),(z[i].real(),z[i].imag()),width=1.5,arrowsize=2,legend_label=l[i],
+                      rgbcolor=colormaps.jet(cos(arg(z[i])))[:3],legend_color=colormaps.jet(cos(arg(z[i])))[:3])
+    g.set_legend_options(bbox_to_anchor=(1.0,0.1,0.1,0.7),font_size=15); g.show(figsize=(10,5),gridlines=True)
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
