@@ -61,7 +61,12 @@ def _(n=(30,75,5)):
       
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
-
+import pylab; from skimage import data,color,measure
+img = data.imread("https://olgabelitskaya.github.io/pattern03.jpg")
+gray_img = color.colorconv.rgb2grey(img); contours = measure.find_contours(gray_img,0.85)
+pylab.figure(figsize=(5,5)); pylab.gca().invert_yaxis()
+[pylab.plot(c[:,1], c[:,0],lw=1) for c in contours]
+pylab.xticks([]); pylab.yticks([]); pylab.show()
 </script></div>
       
   <h2>Try Other Languages (R, HTML, ...)</h2>
