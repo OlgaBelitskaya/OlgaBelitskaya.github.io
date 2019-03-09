@@ -55,7 +55,17 @@
       
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
-
+import networkx,pylab
+g=networkx.MultiDiGraph(); pylab.figure(figsize=(5,5))
+edge_list=[('♔','♕'),('♔','♖'),('♔','♗'),('♔','♘'),('♕','♘'),('♖','♘'),
+           ('♖','♚'),('♖','♛'),('♗','♖'),('♗','♚'),('♘','♛'),('♚','♛'),
+           ('♛','♜'),('♛','♝'),('♜','♝'),('♜','♞')]
+edge_list=[(n1.decode('utf-8'),n2.decode('utf-8')) for (n1,n2) in edge_list]
+g.add_edges_from(edge_list); pos=networkx.shell_layout(g)
+networkx.draw_networkx_edges(g,pos,width=3,alpha=0.5,edge_color='#ff3636',arrowsize=30,arrowstyle='-|>')
+networkx.draw_networkx_nodes(g,pos,node_size=1500,alpha=0.5,node_color='#3636ff',node_shape='h')
+networkx.draw_networkx_labels(g,pos,font_size=25,font_weight='bold')
+pylab.axis('off'); pylab.show()
 </script></div>
       
   <h2>Try Other Languages (R, HTML, ...)</h2>
