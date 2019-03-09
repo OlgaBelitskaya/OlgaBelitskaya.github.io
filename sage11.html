@@ -50,13 +50,16 @@
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
-
+A = matrix(SR,[[8,-5,-2,-2],[-2,4,-4,1],[-2,1,4,4],[4,1,3,10]])
+var('x1,x2,x3,x4'); x = vector(SR,[x1,x2,x3,x4]); b = vector(SR,[35,-8,-11,10])
+Ab = A.augment(b,subdivide=True); sAb = solve(list(A*x-b),x1,x2,x3,x4)
+[pretty_print(M) for M in [Ab,Ab.rref(),[sAb,A.solve_right(b),A.inverse()*b]]];
 </script></div> 
       
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
 import networkx,pylab
-g=networkx.MultiDiGraph(); pylab.figure(figsize=(5,5))
+g=networkx.MultiDiGraph(); pylab.figure(figsize=(7,5))
 edge_list=[('♔','♕'),('♔','♖'),('♔','♗'),('♔','♘'),('♕','♘'),('♖','♘'),
            ('♖','♚'),('♖','♛'),('♗','♖'),('♗','♚'),('♘','♛'),('♚','♛'),
            ('♛','♜'),('♛','♝'),('♜','♝'),('♜','♞')]
