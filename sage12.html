@@ -32,9 +32,13 @@
   <h2>Example of Computations</h2>
     <p>Click the “Activate” button below to display an interactive example.</p>      
 <div id="examplecell"><script type="text/x-sage">
-#@interact
-#def _(n=(9,3,-1)):
-
+@interact
+def _(graph=['Petersen','Moebius Kantor','Dodecahedral','Icosahedral','Flower Snark']):
+    graph_dict = {'Moebius Kantor':graphs.MoebiusKantorGraph(),'Flower Snark':graphs.FlowerSnark(),\
+                  'Dodecahedral':graphs.DodecahedralGraph(),'Icosahedral':graphs.IcosahedralGraph(),\
+                  'Petersen':graphs.PetersenGraph()}
+    g=graph_dict[graph]; [g.set_edge_label(u,v,u) for u,v,l in g.edges()]
+    g.graphplot(vertex_labels=False,vertex_size=0,color_by_label=True).show(figsize=(5,5))
 </script></div>
 
   <h2>Your Field for Experiments</h2>
