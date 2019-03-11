@@ -32,9 +32,12 @@
   <h2>Example of Computations</h2>
     <p>Click the “Activate” button below to display an interactive example.</p>      
 <div id="examplecell"><script type="text/x-sage">
-#@interact
-#def _(graph=['Petersen','Moebius Kantor','Dodecahedral','Icosahedral','Flower Snark']):
-
+@interact
+def _(N=(12,3,-1)):
+    var('t'); 
+    p=sum([polygon2d([(cos(t),sin(t)) for t in srange(0,2*pi,2*pi/n)],alpha=n/10,
+                   color=colormaps.jet(25*(n-3))[:3]).plot3d(z=-n) for n in [3..N]])
+    p.show()
 </script></div>
 
   <h2>Your Field for Experiments</h2>
