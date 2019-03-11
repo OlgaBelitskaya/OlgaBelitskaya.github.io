@@ -78,7 +78,11 @@ for el in [x,y,z,t,u,v,w]:
   <h2>Try Other Languages (R, HTML, ...)</h2>
 <div class="compute"><script type="text/x-sage">
 %%r
-
+library(datasets); library(nnet); data(longley)
+features <- longley[,1:6]; targets <- longley[,7]
+model <- nnet(Employed~.,longley,size=18,maxit=400,linout=T,decay=0.01)
+predictions <- predict(model,features,type="raw")
+mean((targets - predictions)^2)
 </script></div>
     <p>Click “Evaluate” twice.</p>
 <div class="compute"><script type="text/x-sage">
