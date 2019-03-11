@@ -80,6 +80,284 @@
   </tr>
 </table>     
   <h2>3. Пример</h2>
+<p>Задача. Найти первого Ивана c первого курса бакалавриата с хотя бы одной пятеркой из трёх оценок и изменить все его оценки на 3.</p>      
+<table><tr><td style="font-size:120%;font-weight:bold;text-align:left;"><pre><code class='pascal'>
+program PrjLAB2;  // два параметра – 1) имя типизир. файла, 2) имя текстового файла
+{$APPTYPE CONSOLE}
+ 
+uses
+  SysUtils,     // ANSIUpperCase и др. -  смена регистра
+  Windows,   // SetConsoleCP - смена кодировки
+  UnLab2;   // свой модуль с типом и процедурами для решения задачи
+ 
+//--------------------главная программа - меню -------------------------
+var
+  ch: char;
+begin
+  SetConsoleCP(1251);      // из модуля Windows
+  SetConsoleOutputCP(1251);
+ 
+  repeat
+    writeln('--------------------------------------');
+    writeln('D - создать новый тип.файл в диалоге; ');
+    writeln('N - создать из текстового файла; ');
+    writeln('F - поиск и изменение; ');
+    writeln('V - просмотр;');
+    writeln('E - конец.');
+    write('Ваш выбор?'); readln(ch);
+    writeln('--------------------------------------');
+ 
+    ch:= UpCase(ch);  // символ в верхний регистр (латиница)
+    case ch of
+//--------------------------------------------------------------
+//----------первая часть: создание типизированного в диалоге ---
+    'D': CreateTypedFile1;  // вызов соответствующей процедуры для выбора D
+//----------вторая часть: создание типизированного файла из текстового
+    'N': CreateTypedFile2;
+//----------третья часть: поиск и редактирование ---------------
+    'F': FindIVAN;
+//-----------просмотр----------------------------------------------
+    'V': ViewFile;
+//-----------выход----------------------------------------------
+    'E': exit;
+//--------------------------------------------------------------
+      else
+        begin
+          writeln('Нет такой команды');
+          write('Press ENTER'); readln;
+        end;
+    end;
+ 
+  until ch='E';
+end.
+
+Исходный код модуля:
+Unit  UnLab2;   // файл  UnLab2.pas
+Interface
+ 
+Uses
+  SysUtils;     // ANSIUpperCase и др. -  смена регистра и обработка исключений
+ 
+Type
+  TKurs = (Bacalavr1, Bac2, Bac3, Bac4, Magistr1, Mag2); // с 0 до 5 по умолчанию
+  TStud = record
+    FIO: record
+      F, I, O: string[30]; // Только статические строки можно сохранить в файл
+      end;
+    Kurs: TKurs;
+    o1,o2,o3: byte;
+  end;
+ 
+//----------первая часть: создание типизированного файла в диалоге
+Procedure CreateTypedFile1();
+ 
+//----------вторая часть: создание типизированного файла из текстового
+Procedure CreateTypedFile2();
+ 
+//-------------- третья часть: поиск в типизированном файле ----
+Procedure FindIVAN();
+ 
+//-------------- просмотр типизированного файла ----
+Procedure ViewFile();
+ 
+Implementation // -----------реализационная часть-----------------
+ 
+//----------первая часть: создание типизированного файла в диалоге
+Procedure CreateTypedFile1();
+var
+  Stud: TStud;
+  fr: file of TStud; // типизированный файл - файл записей
+  n, kol: integer;
+  ch: char;
+  FileName:string[80];
+begin
+  if ParamCount<1 then
+  begin
+    writeln('Мало параметров '#13#10'Press enter');
+    readln;  exit
+  end;
+  FileName := ParamStr(1);
+// или простой диалог или через параметры программы при её вызове ParamStr(1)
+// writeln('Введите имя типизированного файла');
+// readln(FileName);
+ 
+  AssignFile(fr, FileName);
+  Try  ReWrite(fr);    //  или  {$I-} ReWrite(fr); {$I+} и if IOResult<>0 then <ошибка>
+  Except
+    writeln('Error: не удалось создать типизированный файл ',FileName);
+    write('Press ENTER'); readln;  exit
+  end;
+ 
+  kol:=0;
+  repeat
+    write('Фамилия =?');   readln(Stud.FIO.F);
+    write('Имя =?');       readln(Stud.FIO.I);
+    write('Отчество =?');  readln(Stud.FIO.O);
+// ввод значения перечисляемого типа (TKurs) через доп.переменную n целого типа
+    write('Курс(1-6) =?'); readln(n); Stud.Kurs:=TKurs(n-1);  // 1-6 → 0-5
+    write('Три оценки: ');
+    readln(Stud.o1, Stud.o2, Stud.o3);
+ 
+    write(fr, Stud);   // запись записи целиком в файл
+    inc(kol);
+ 
+    write('Ещё? (y/n)');
+    readln(ch)
+  until UpCase(ch)='N';
+ 
+  CloseFile(fr);
+ 
+  writeln('Создан типизированный файл из ',kol,' записей');
+  write('Press ENTER');
+  readln;
+end;
+ 
+//---------------------------------------------------------------------------------------
+//----------вторая часть: создание типизированного файла из текстового
+Procedure CreateTypedFile2();
+var
+  Stud: TStud;
+  ft: TextFile; // текстовый файл
+  fr: file of TStud; // типизированный файл - файл записей
+  n, kol: integer;
+  ch: char;
+  FileName:string[80];
+begin
+  if ParamCount<2 then
+  begin
+    writeln('Мало параметров '#13#10'Press enter');
+    readln;  exit
+  end;
+ 
+FileName:= Paramstr(2);
+ // или простой диалог или через параметры программы при её вызове ParamStr(2)
+// writeln('Введите имя текстового файла');
+// readln(FileName); 
+ 
+ AssignFile(ft, FileName);
+  Try  Reset(ft);
+  Except
+    writeln('Error: не удалось открыть текстовый файл ',Paramstr(2));
+    write('Press ENTER'); readln;  exit
+  end;
+ 
+ 
+  //----------------- ЗАГЛУШКА --------------------
+  //------------ Напишите код сами, а пока в диалоге: ----------------
+              CreateTypedFile1; // заглушка - создание в диалоге –  заменить на свой код
+ 
+  CloseFile(ft);
+ 
+  write('Press ENTER');
+  readln;
+end;
+ 
+//--------------------------------------------------------------
+//-------------- третья часть: поиск в типизированном файле ----
+Procedure FindIVAN();
+var
+  Stud: TStud;
+  fr: file of TStud;
+  n, kol: integer;
+  FileName:string[80];
+begin
+  if ParamCount<1 then
+  begin
+    writeln('Мало параметров '#13#10'Press enter');
+    readln;  exit
+  end;
+ 
+  FileName := ParamStr(1);
+// или простой диалог или через параметры программы при её вызове ParamStr(1)
+// writeln('Введите имя типизированного файла');
+// readln(FileName); 
+ 
+  AssignFile(fr, FileName);
+  Try  ReSet(fr);    //  или  {$I-} ReSet(fr); {$I+} if IOResult<>0 then
+  Except
+    writeln('Error: не удалось открыть типизированный файл ',FileName);
+    write('Press ENTER'); readln;  exit
+  end;
+ 
+  kol:=0;
+  while not eof(fr) and (kol=0) do
+  begin
+    read(fr, Stud); // считывание
+       // Если Иван c первого курса бакалавриата с хотя бы одной пятеркой
+    if ((Stud.o1=5) or (Stud.o2=5) or (Stud.o3=5)) and
+      (Stud.Kurs = Bacalavr1) and
+      (ANSIUpperCase(Stud.FIO.I) = 'ИВАН') then  // сравнение в верхнем регистре
+    begin
+      writeln('Найден ', Stud.FIO.I,' ',Stud.FIO.O,' ',Stud.FIO.F,
+      ' оценки ', Stud.o1, ' ', Stud.o2,' ', Stud.o3 );
+      inc(kol);
+      // Изменение считанного
+      Stud.o1:=3; Stud.o2:=3; Stud.o3:=3;
+      n:=FilePos(fr)-1; // позиция найденной записи – перед текущей
+      // запись изменений "поверх" предыдущей версии
+      seek(fr, n); // изменить тек.позицию в файле
+      write(fr, Stud);       // запись в файле изменена
+      writeln('В файле изменена запись номер ', n+1)
+    end;
+  end;
+ 
+  if kol=0 then
+    writeln('Данные, соответствующие запросу, не найдены');
+ 
+  CloseFile(fr);
+ 
+  write('Press ENTER');  readln;
+end;
+//--------------------------------------------------------------
+//-------------- просмотр типизированного файла ----
+Procedure ViewFile();
+var
+  Stud: TStud;
+  fr: file of TStud;
+  n, kol: integer;
+  FileName:string[80];
+begin
+  if ParamCount<1 then
+  begin
+    writeln('Мало параметров '#13#10'Press enter');
+    readln;  exit
+  end;
+ 
+  FileName := ParamStr(1);
+// или простой диалог или через параметры программы при её вызове ParamStr(1)
+// writeln('Введите имя типизированного файла');
+// readln(FileName); 
+ 
+  AssignFile(fr, FileName);
+  Try  ReSet(fr);    //  или  {$I-} ReSet(fr); {$I+} if IOResult<>0 then
+  Except
+    writeln('Error: не удалось открыть типизированный файл ',FileName);
+    write('Press ENTER'); readln;  exit
+  end;
+ 
+  kol:=0;
+  while not eof(fr) do
+  begin
+    read(fr, Stud); // считывание
+ 
+      writeln('Найден ', Stud.FIO.I,' ',Stud.FIO.O,' ',Stud.FIO.F,
+      ' курс ', Ord(Stud.Kurs)+1,
+      ' оценки ', Stud.o1, ' ', Stud.o2,' ', Stud.o3 );
+      inc(kol);
+  end;
+ 
+  if kol=0 then
+    writeln('Данные не найдены')
+  else
+    writeln('Найдено ',kol, ' записей');
+ 
+  CloseFile(fr);
+ 
+  write('Press ENTER');  readln;
+end;
+ 
+End.
+</code></pre></td></tr></table> 
 <p>Примеры для тестирования.</p>
 <table border="1" style="width:50%;">
   <tr><th>Номер</th><th>Пример</th></tr>
