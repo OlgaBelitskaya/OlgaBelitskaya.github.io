@@ -67,12 +67,21 @@
     <p>Click “Evaluate” twice.</p>
 <div class="compute"><script type="text/x-sage">
 %%html
+%%html
 <style>
-div {width:5px; height:5px;margin:1px 0 0 1px; float:left; background:#f0f8ff; display:inline-block;}
+svg {width:60px; height:60px; background-color:lavender;} 
 </style>
-<svg width=400 height=200></svg>
 <script src="https://d3js.org/d3.v4.min.js"/>
-<script>
+<svg/><script>
+var svg = d3.select("svg")
+            .transition()
+            .duration(5000)
+            .styleTween("background-color", function() {return d3.interpolate("#ff3636", "#3636ff")});
+d3.select("svg").append("circle")
+            .attr("cx", 30)
+            .attr("cy", 30)
+            .attr("r", 20)
+            .attr("fill","#fff");
 var n = 100;
 var ice_red = d3.interpolateRgb("#E0FFFF", "#FF0000"),
     red_orange = d3.interpolateRgb("#FF0000", "#FF8C00"),
@@ -81,41 +90,7 @@ var ice_red = d3.interpolateRgb("#E0FFFF", "#FF0000"),
     green_lblue = d3.interpolateRgb("#32CD32", "#1E90FF"),
     lblue_blue = d3.interpolateRgb("#1E90FF", "#0000CD"),
     blue_violet = d3.interpolateRgb("#0000CD", "#9400D3"),
-    violet_ice = d3.interpolateRgb("#9400D3", "#E0FFFF");
-d3.select("svg").selectAll("div")
-    .data(d3.range(n))
-    .enter().append("div")
-    .transition()
-    .delay(function(d, i) { return i + Math.random() * n / 4; })
-    .ease(d3.easeLinear)
-    .on("start", function repeat() {
-        d3.active(this)
-            .styleTween("background-color", function() { return ice_red; })
-          .transition()
-            .delay(1000)
-            .styleTween("background-color", function() { return red_orange; })
-          .transition()
-            .delay(1000)
-            .styleTween("background-color", function() { return orange_yellow; })
-          .transition()
-            .delay(1000)
-            .styleTween("background-color", function() { return yellow_green; })
-          .transition()
-            .delay(1000)
-            .styleTween("background-color", function() { return green_lblue; })
-          .transition()
-            .delay(1000)
-            .styleTween("background-color", function() { return lblue_blue; })
-          .transition()
-            .delay(1000)
-            .styleTween("background-color", function() { return blue_violet; })
-          .transition()
-            .delay(1000)
-            .styleTween("background-color", function() { return violet_ice; })
-          .transition()
-            .delay(n)
-            .on("start", repeat);
-      });    
+    violet_ice = d3.interpolateRgb("#9400D3", "#E0FFFF");            
 </script></div>    
     <p></p>
   </body>
