@@ -27,15 +27,18 @@
 <h2>№1</h2>
 <div class="compute"><script type="text/x-sage">
 @interact
-def _(N=(22,29,1)):    
+def _(N=(20,29,1)):    
     from sage.symbolic.integration.integral import indefinite_integral
     c1,c2='#3636ff','#ff3636'; var('x'); 
     F = {20:cos(x)/(4+9*sin(x)^2),21:x*cos(4*x^2-7),22:x/sqrt(3*x^2-2)} 
     f = F[N]; int_latex=latex(indefinite_integral(f,x))
-    p1=plot(f,(x,-3,-sqrt(2/3)),fill='axis',color=c1,fillcolor=c1)
-    p2=plot(f,(x,sqrt(2/3),3),fill='axis',color=c2,fillcolor=c2) 
+    x11 = {20:-3,21:-1,22:-3}; x12 = {20:0,21:0,22:-sqrt(2/3)}
+    x21 = {20:0,21:0,22:sqrt(2/3)}; x22 = {20:3,21:1,22:3}
+    y1 = {20:-0.3,21:-1,22:-2}; y2={20:0.3,21:1,22:2}
+    p1=plot(f,(x,x11[N],x12[N]),fill='axis',color=c1,fillcolor=c1)
+    p2=plot(f,(x,x21[N],x22[N]),fill='axis',color=c2,fillcolor=c2) 
     pretty_print(html('<left><font>$\int f(x)\; \mathrm{d}x=%s$</font></left>'%int_latex))
-    (p1+p2).show(ymin=-3,ymax=3)
+    (p1+p2).show(ymin=y1[N],ymax=y2[N])
 </script></div>
 <h2>№2</h2>
 <div class="compute"><script type="text/x-sage">
