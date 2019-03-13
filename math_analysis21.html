@@ -26,13 +26,16 @@
       <h1>Variant 22</h1>
 <h2>№1</h2>
 <div class="compute"><script type="text/x-sage">
-from sage.symbolic.integration.integral import indefinite_integral
-var('x'); f = x/sqrt(3*x^2-2); c1,c2='#3636ff','#ff3636' 
-int_latex=latex(indefinite_integral(f,x))
-p1=plot(f,(x,-3,-sqrt(2/3)),fill='axis',color=c1,fillcolor=c1)
-p2=plot(f,(x,sqrt(2/3),3),fill='axis',color=c2,fillcolor=c2) 
-pretty_print(html('<left><font>$\int f(x)\; \mathrm{d}x=%s$</font></left>'%int_latex))
-(p1+p2).show(ymin=-3,ymax=3)
+@interact
+def _(N=(22,29,1)):    
+    from sage.symbolic.integration.integral import indefinite_integral
+    c1,c2='#3636ff','#ff3636'; var('x'); 
+    F = {20:cos(x)/(4+9*sin(x)^2),21:x*cos(4*x^2-7),22:x/sqrt(3*x^2-2)} 
+    f = F[N]; int_latex=latex(indefinite_integral(f,x))
+    p1=plot(f,(x,-3,-sqrt(2/3)),fill='axis',color=c1,fillcolor=c1)
+    p2=plot(f,(x,sqrt(2/3),3),fill='axis',color=c2,fillcolor=c2) 
+    pretty_print(html('<left><font>$\int f(x)\; \mathrm{d}x=%s$</font></left>'%int_latex))
+    (p1+p2).show(ymin=-3,ymax=3)
 </script></div>
 <h2>№2</h2>
 <div class="compute"><script type="text/x-sage">
