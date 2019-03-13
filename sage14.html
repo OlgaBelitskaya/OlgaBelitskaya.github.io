@@ -34,11 +34,12 @@
 <div id="examplecell"><script type="text/x-sage">
 @interact
 def _(x=(1,10,1),y=(1,10,1),z=(1,10,1)):
-    from sage.plot.plot3d.shapes import Sphere
-    c=colormaps.jet(8*(x+y+z))[:3]; p=point([(0,0,0),(11,11,11)]) 
-    s=Sphere(0.5,color=c,alpha=0.1).translate(x,y,z)
-    t=text3d("(%.1f,%.1f,%.1f)"%(x,y,z),(x,y,z+0.5),color=c)
-    (p+s+t).show();
+    from sage.plot.plot3d.plot3d import axes
+    var('u'); c=colormaps.jet(8*(x+y+z))[:3]; a=axes(11,.5); 
+    r=revolution_plot3d((0.5*cos(u),0.5*sin(u)),(u,0,2*pi),color=c,
+                        plot_points=10,mesh=True,opacity=0.1)
+    t=text3d("(%.1f,%.1f,%.1f)"%(x,y,z),(x,y,z+0.8),color=c)
+    (a+r.translate(x,y,z)+t).show();
 </script></div>
 
   <h2>Your Field for Experiments</h2>
@@ -88,7 +89,9 @@ result(AB1); result(AB01)
   <h2>Try Other Languages (R, HTML, ...)</h2>
 <div class="compute"><script type="text/x-sage">
 %%r
-
+A <- matrix(c(-4,-3,-5,5,4,5,-7,-7,-6),3,3,byrow=T)
+print(A); cat('\n'); 
+print(eigen(A)$values); cat('\n'); round(eigen(A)$vectors)
 </script></div>
     <p>Click “Evaluate” twice. Use in HTML documents with &#60;/script&#62; in the end.</p>
 <div class="compute"><script type="text/x-sage">
