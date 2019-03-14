@@ -47,10 +47,11 @@ def _(n=(len(c),1,-1)):
     <p></p>
 <div class="compute"><script type="text/x-sage">
 @interact
-def _(marker=['bigstar','star','ast','infty','Re','Im']):
-    m=r'$\%s$'%marker; mc,mec=Color('silver').rgb(),'#3636ff'
-    X = [cos(t)*ln(t+1) for t in srange(0,2*pi,0.1)]; Y = [sin(t)^3 for t in srange(0,2*pi,0.1)]
-    list_plot(list(zip(X,Y)),marker=m,size=300,rgbcolor=mc,markeredgecolor=mec)\
+def _(marker=('☕','⚖','☘','⚜','⚙')):
+    m,mc=marker.decode('utf-8'),Color('#3636ff').rgb()
+    X = [cos(t)*ln(t+1) for t in srange(0,2*pi,0.1)] 
+    Y = [sin(t)^3 for t in srange(0,2*pi,0.1)]
+    sum([text(m,(x,y),fontsize=20,rgbcolor=mc) for (x,y) in list(zip(X,Y))])\
     .show(figsize=(10,5),ymin=-1.1,ymax=1.1)
 </script></div>
     <p></p>
