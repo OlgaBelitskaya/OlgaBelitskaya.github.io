@@ -32,9 +32,12 @@
   <h2>Example of Computations</h2>
     <p>Click the “Activate” button below to display an interactive example.</p>      
 <div id="examplecell"><script type="text/x-sage">
-#@interact
-#def _(n=(len(c),1,-1)):
-
+@interact
+def _(N=[20,40,60]):
+    def f(i): return (ln(i)*cos(i),ln(i)*sin(i))
+    def c(i): return colormaps.hsv(i/(1.0*N))[:3]
+    sum([polygon([f(i),(0,f(i)[1]),(f(i)[0],0)],color=c(i),alpha=0.5)\
+    .plot3d(z=-0.01*i,frame=False) for i in [1..N]]).show()
 </script></div>
   <h2>Your Field for Experiments</h2>
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>
@@ -75,8 +78,8 @@ logistic = linear_model.LogisticRegression(max_iter=50,solver='liblinear',multi_
 logistic.C = 5000.0
 brbm = neural_network.BernoulliRBM(random_state=0,verbose=False)
 brbm.learning_rate,brbm.n_iter,brbm.n_components = 0.05,50,64
-nn_clf = pipeline.Pipeline(steps=[('brbm', brbm), ('logistic', logistic)])
-nn_clf.fit(X_train_scaled, y_train)
+nn_clf = pipeline.Pipeline(steps=[('brbm',brbm),('logistic',logistic)])
+nn_clf.fit(X_train_scaled,y_train)
 print("Logistic regression using BRBM features:\n%s\n"%\
      (metrics.classification_report(y_test,nn_clf.predict(X_test_scaled))))
 </script></div>
