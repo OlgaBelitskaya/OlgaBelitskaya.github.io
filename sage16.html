@@ -66,7 +66,19 @@ l.show(figsize=(7,7))
       
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
-
+import numpy; from sklearn import datasets,model_selection,linear_model,pipeline,neural_network,metrics
+digits = datasets.load_digits(); X,y = digits.data,digits.target
+X_train,X_test,y_train,y_test = model_selection.train_test_split(X,y,test_size=0.2,random_state=1)
+X_train_scaled = (X_train-numpy.min(X_train,0))/(numpy.max(X_train,0)+0.0001)
+X_test_scaled = (X_test-numpy.min(X_test,0))/(numpy.max(X_test,0)+0.0001)
+logistic = linear_model.LogisticRegression(max_iter=50)
+logistic.C = 5000.0
+brbm = neural_network.BernoulliRBM(random_state=0,verbose=False)
+brbm.learning_rate,brbm.n_iter,brbm.n_components = 0.05,50,64
+nn_clf = pipeline.Pipeline(steps=[('brbm', brbm), ('logistic', logistic)])
+nn_clf.fit(X_train_scaled, y_train)
+print("Logistic regression using BRBM features:\n%s\n"%\
+     (metrics.classification_report(y_test,nn_clf.predict(X_test_scaled))))
 </script></div>
       
   <h2>Try Other Languages (R, HTML, ...)</h2>
