@@ -55,9 +55,17 @@ t.show()
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
-#@interact
-#def _(N=(1,10,1)):
-
+@interact
+def _(season=['winter','spring','summer','autumn']):
+    var('x,y,z'); x0,y0,z0,s=.4,.15,.15,.1
+    hat=implicit_plot3d(4*x^2+4*y^2-(z-1.3)^2,(x,-1,1),(y,-1,1),(z,0.3,1.3),
+                        color=((z-0.3).function(x,y,z),colormaps[season]))
+    head=sphere(size=5*s,color='pink')
+    eyes=sum([sphere((x0,i*y0,z0),size=s,color=(1,1,1))+\
+              sphere((x0+0.06,i*y0,z0+.02),size=s/2,color=(0,0,0)) for i in [-1,1]])
+    nose=sphere((x0+.1,0,-z0+.05),size=s,color='pink')
+    mouth=sphere((x0-.1,0,-2*z0),size=s,color='red')
+    (hat+head+eyes+nose+mouth).show(frame=False)
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
@@ -95,14 +103,14 @@ t(huge_cities[which(jpn_chn),1:9])
 <div class="compute"><script type="text/x-sage">
 %%html
 <style>
-svg {margin:0; background:silver;}
+svg {background:silver;}
 rect {fill:none; pointer-events:all;}
 circle {fill:none; stroke-width:2px;}
 </style>
 <div id="d3viz"></div>
 <script src="https://d3js.org/d3.v5.min.js"/>
 <script>
-var width=300, height=200, i=0;
+var width=500, height=400, i=0;
 var svg=d3.select("#d3viz").append("svg").attr("width",width).attr("height",height);
 var rect=svg.append("rect").attr("width",width).attr("height",height)
             .on("ontouchstart" in document ? "touchmove":"mousemove",touch);
