@@ -32,9 +32,12 @@
   <h2>Example of Computations</h2>
     <p>Click the “Activate” button below to display an interactive example.</p>      
 <div id="examplecell"><script type="text/x-sage">
-#@interact
-#def _(N=[20,40,60]):
-
+@interact
+def _(axis=['x','y','z']):
+    var('u,phi'); curve_f=(1+u^2/4,1-u^3/8,u)
+    def color_f(u,phi): return cos(2*phi+u)^2
+    revolution_plot3d(curve_f,(u,-4,8),(phi,0,2*pi),parallel_axis=axis,
+                      color=(color_f,colormaps.bwr),frame=False).show()
 </script></div>
   <h2>Your Field for Experiments</h2>
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>
