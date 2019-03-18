@@ -86,15 +86,39 @@ def _(N=[20,21,22,23,24,25,26,27,28,29]):
 <div class="compute"><script type="text/x-sage">
 from sage.symbolic.integration.integral import definite_integral
 @interact
-def _(N=[20,21,22]):
+def _(N=[20,21,22,23,24,25,26,27,28,29]):
     var('phi');
     if N==20: 
         def rho(phi): return sqrt(2*cos(2*phi)) if 2*cos(2*phi)>=0 else 0
+        ffill(phi)=sqrt(2*cos(2*phi)) if 2*cos(2*phi)>=0 else 0
     if N==21:
         def rho(phi): return 4*cos(2*phi-pi/4)^2
+        ffill(phi)=0
     if N==22:
         def rho(phi): return 6*cos(2*phi) if 6*cos(2*phi)>=3 else 0
-    polar_plot(rho,(phi,0,2*pi),fill=True,fillcolor='#3636ff').show(figsize=(7,5))
+        ffill(phi)=0
+    if N==23:
+        def rho(phi): return 4+2*cos(phi)
+        ffill(phi)=0
+    if N==24:
+        def rho(phi): return 8*sin(phi) if 8*sin(phi)>=4 else 0
+        ffill(phi)=0
+    if N==25:
+        def rho(phi): return 1+cos(3*phi)
+        ffill(phi)=0
+    if N==26:
+        def rho(phi): return 4-3*cos(3*phi)
+        ffill(phi)=0
+    if N==27:
+        def rho(phi): return 1+2*sin(phi)
+        ffill(phi)=2*sin(phi)
+    if N==28:
+        def rho(phi): return 1+2*cos(phi)
+        ffill(phi)=2*cos(phi)
+    if N==29:
+        def rho(phi): return sin(2*phi) if sin(phi)>=sin(2*phi) else 0
+        ffill(phi)=sin(phi)-sin(2*phi) if sin(phi)>=sin(2*phi) else 0 
+    polar_plot(rho,(phi,0,2*pi),fill=ffill(phi),fillcolor='#3636ff').show(figsize=(7,5))
 </script></div> 
 <h2>№15</h2>
 <div class="compute"><script type="text/x-sage">
