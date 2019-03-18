@@ -85,11 +85,16 @@ def _(N=[20,21,22,23,24,25,26,27,28,29]):
 <h2>№14</h2>
 <div class="compute"><script type="text/x-sage">
 from sage.symbolic.integration.integral import definite_integral
-#@interact
-#def _(N=[20,21,22,23,24,25,26,27,28,29]): 
-var('phi'); N=22
-def rho(phi): return sqrt(2*cos(2*phi)) if 2*cos(2*phi)>=0 else 0
-polar_plot(rho,(phi,0,2*pi),fill=True,fillcolor='#3636ff').show(figsize=(7,5))
+@interact
+def _(N=[20,21,22]):
+    var('phi');
+    if N==20: 
+        def rho(phi): return sqrt(2*cos(2*phi)) if 2*cos(2*phi)>=0 else 0
+    if N==21:
+        def rho(phi): return 4*cos(2*phi-pi/4)^2
+    if N==22:
+        def rho(phi): return 6*cos(2*phi) if 6*cos(2*phi)>=3 else 0
+    polar_plot(rho,(phi,0,2*pi),fill=True,fillcolor='#3636ff').show(figsize=(7,5))
 </script></div> 
 <h2>№15</h2>
 <div class="compute"><script type="text/x-sage">
