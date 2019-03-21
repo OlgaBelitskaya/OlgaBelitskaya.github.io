@@ -32,9 +32,18 @@
   <h2>Example of Computations</h2>
     <p>Click the “Activate” button below to display an interactive example.</p>      
 <div id="examplecell"><script type="text/x-sage">
-#@interact
-#def _(axis=['x','y','z']):
-
+@interact
+def _(nodes=[2,3,4],blocks=[10,15,20]):
+    pretty_print(html('<left style="font-size:120;">Random Graph: %d Blocks with %d Nodes in a Block</left>'%(blocks,nodes)))
+    g = graphs.RandomBlockGraph(blocks,nodes); n=blocks*(nodes-1)+1
+    [g.set_edge_label(u,v,u) for u,v,l in g.edges()]
+    c = [colormaps.jet(int(255/n)*i)[:3] for i in xrange(n)]; ec = {};
+    for i in xrange(n):
+        ec[c[i]] = [] 
+    for u,v,l in g.edges():
+        [ec[c[i]].append((u,v,l)) for i in xrange(n) if (u!=v and l==i)] 
+    vc = dict(zip(c,[[i] for i in xrange(n)]))
+    g.graphplot(vertex_size=300,vertex_colors=vc,edge_colors=ec,layout='circular').show(figsize=(5,5))
 </script></div>
   <h2>Your Field for Experiments</h2>
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>
@@ -44,14 +53,11 @@
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
-#@interact
-#def _(a=[2,4,6,8],b=[4,8,12,16]):
 
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
-var('u'); 
-curves = [(cos(u),0,u^2),(2*sin(u/2),0,u^2),(3*cos(u/3),0,u^2)]
+var('u'); curves = [(cos(u),0,u^2),(2*sin(u/2),0,u^2),(3*cos(u/3),0,u^2)]
 sum([revolution_plot3d(c,(u,0,6*pi),parallel_axis='z',plot_points=30,opacity=0.4,
                        mesh=True,color='#3636ff',frame=False) for c in curves]).show()
 </script></div> 
