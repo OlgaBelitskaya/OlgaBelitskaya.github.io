@@ -56,7 +56,14 @@ complex_plot(f,(-1.3,1.3),(-1.3,1.3)).show(figsize=(5,5))
       
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
-
+import pandas,numpy; filepath='https://data.cityofnewyork.us/resource/cuae-wd7h.json'
+sd = pandas.read_json(filepath); g=Graphics()
+for i in range(sd.shape[0]):
+    coord = numpy.array(sd['the_geom'][i][u'coordinates']); c=colormaps.jet(8*i)[:3]
+    g+=sum([polygon2d(coord[j][0],rgbcolor=c,alpha=0.9) for j in range(coord.shape[0])])
+    p=points((-73.95,40.7),size=0,rgbcolor=c,legend_label='D '+str(i+1),legend_color=c)
+    p.set_legend_options(bbox_to_anchor=(1.25,1.05)); g+=p
+g.show(title='NYC School Districts',figsize=(8,7),gridlines=True)
 </script></div>
       
   <h2>Try Other Languages (R, HTML, ...)</h2>
