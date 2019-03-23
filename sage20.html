@@ -32,9 +32,12 @@
   <h2>Example of Computations</h2>
     <p>Click the “Activate” button below to display an interactive example.</p>      
 <div id="examplecell"><script type="text/x-sage">
-#@interact
-#def _(nodes=[2,3,4],blocks=[10,15,20]):
-
+@interact
+def _(a=[2,3,4],b=[3,4,5],c=[1,2,3]):
+    A = ([a,1],[1,a+1]); B = (b,b+1); C = (c,c+4)
+    P = InteractiveLPProblem(A,B,C,["x","y"],problem_type="max",constraint_type="<=",variable_type=">=")
+    pretty_print(('Interactive Linear Programming Problem',P.standard_form(),P.optimal_solution()),fontsize=15)
+    P.plot().show(figsize=(7,7),legend_font_size=12)
 </script></div>
   <h2>Your Field for Experiments</h2>
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>
@@ -45,7 +48,7 @@
     <p></p>
 <div class="compute"><script type="text/x-sage">
 #@interact
-#def _(a=[3,4,5,6],b=[3,4,5,6]):
+#def _(N=[2,3,4]):
 
 </script></div>
     <p></p>
