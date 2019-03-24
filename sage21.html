@@ -32,9 +32,15 @@
   <h2>Example of Computations</h2>
     <p>Click the “Activate” button below to display an interactive example.</p>      
 <div id="examplecell"><script type="text/x-sage">
-#@interact
-#def _(a=[2,3,4],b=[3,4,5],c=[1,2,3]):
-
+@interact
+def _(A='a,3,2,c,1,ф,⎈,D',B='ф,7,a,⎈,2,1,B,θ',C='8,N,a,θ,4,P,⎈,r'):
+    S = [sorted(list(el.encode('utf-8').split(','))) for el in [A,B,C]]
+    AB,AC,BC = list(set(S[0])&set(S[1])),list(set(S[0])&set(S[2])),list(set(S[1])&set(S[2])) 
+    ABC = list(set(AB)&set(S[2]))
+    pretty_print(html('<left style="color:#ff3636; font-size:18px;">$A \cap B = %s$</left>'%('{'+','.join(AB)+'}')))
+    pretty_print(html('<left style="color:#36ff36; font-size:18px;">$A \cap C = %s$</left>'%('{'+','.join(AC)+'}')))
+    pretty_print(html('<left style="color:#3636ff; font-size:18px;">$B \cap C = %s$</left>'%('{'+','.join(BC)+'}')))
+    pretty_print(html('<left style="font-size:20px;">$A \cap B \cap C = %s$</left>'%('{'+','.join(ABC)+'}')))
 </script></div>
   <h2>Your Field for Experiments</h2>
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>
@@ -45,14 +51,18 @@
     <p></p>
 <div class="compute"><script type="text/x-sage">
 @interact
-def _(A='a,3,2,c,1,ф,⎈,D',B='ф,7,a,⎈,2,1,B,θ',C='8,N,a,θ,4,P,⎈,r'):
-    S = [sorted(list(el.encode('utf-8').split(','))) for el in [A,B,C]]
-    AB,AC,BC = list(set(S[0])&set(S[1])),list(set(S[0])&set(S[2])),list(set(S[1])&set(S[2])) 
-    ABC = list(set(AB)&set(S[2]))
-    pretty_print(html('<left style="color:#ff3636; font-size:18px;">$A \cap B = %s$</left>'%('{'+','.join(AB)+'}')))
-    pretty_print(html('<left style="color:#36ff36; font-size:18px;">$A \cap C = %s$</left>'%('{'+','.join(AC)+'}')))
-    pretty_print(html('<left style="color:#3636ff; font-size:18px;">$B \cap C = %s$</left>'%('{'+','.join(BC)+'}')))
-    pretty_print(html('<left style="font-size:20px;">$A \cap B \cap C = %s$</left>'%('{'+','.join(ABC)+'}')))
+def _(multiplier=['1','cos(t)^2']):
+    n=10; var('t'); c=['#3636ff','#ff3636']; 
+    f = (2*t,t^2) if multiplier=='1' else (2*t*cos(t)^2,t^2*cos(t)^2)
+    df = (f[0].diff(),f[1].diff()); d2f = (df[0].diff(),df[1].diff())
+    def norm(g): return sqrt(sum(el^2 for el in g))
+    normdf,normd2f = norm(df),norm(d2f); fnormal=(df[1]/normdf,-df[0]/normdf) 
+    r=norm(df)^3/(df[1]*d2f[0]-df[0]*d2f[1]); centers=(f[0]+r*fnormal[0],f[1]+r*fnormal[1])
+    p=parametric_plot(f,(t,-n,n),color=c[0],thickness=2)
+    p+=parametric_plot(centers,(t,-n,n),color=c[1],thickness=3,linestyle='--')
+    p+=sum(line2d([(f[0](t=i),f[1](t=i)),(centers[0](t=i),centers[1](t=i))], 
+           thickness=1,rgbcolor=Color('silver').rgb()) for i in sxrange(-n,n,0.05))
+    p.show(xmin=-8,xmax=8,ymin=-2,ymax=14,figsize=(7,7))
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
