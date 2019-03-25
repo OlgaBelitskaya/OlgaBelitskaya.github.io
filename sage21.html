@@ -51,19 +51,24 @@ def _(A='a,3,2,c,1,ф,⎈,D',B='ф,7,a,⎈,2,1,B,θ',C='8,N,a,θ,4,P,⎈,r'):
     <p></p>
 <div class="compute"><script type="text/x-sage">
 @interact
-def _(multiplier=['$1$','$cos(t)^2$']):
+def _(function=['(2t, t^2)','(7sin(t), 4cos(t)+6)','(2t cos(t)^2, t^2 cos(t)^2)']):
     n=10; var('t'); c=['#3636ff','#ff3636']; 
-    f = (2*t,t^2) if multiplier=='$1$' else (2*t*cos(t)^2,t^2*cos(t)^2)
+    if function=='(2t, t^2)':
+        f = (2*t,t^2)
+    elif function=='(7sin(t), 4cos(t)+6)':
+        f = (7*sin(t),4*cos(t)+6)
+    else: 
+        f = (2*t*cos(t)^2,t^2*cos(t)^2)
     df = (f[0].diff(),f[1].diff()); d2f = (df[0].diff(),df[1].diff())
     def norm(g): return sqrt(sum(el^2 for el in g))
     normdf,normd2f = norm(df),norm(d2f); fnormal=(df[1]/normdf,-df[0]/normdf) 
     r=norm(df)^3/(df[1]*d2f[0]-df[0]*d2f[1]); centers=(f[0]+r*fnormal[0],f[1]+r*fnormal[1])
-    pretty_print(html('<left>$f: x(t)=%s; y(t)=%s$</left>'%(latex(f[0]),latex(f[1]))),fontsize=20)
+    print('f: x(t)=%s; y(t)=%s'%(f))
     p=parametric_plot(f,(t,-n,n),color=c[0],thickness=2)
     p+=parametric_plot(centers,(t,-n,n),color=c[1],thickness=3,linestyle='--')
     p+=sum(line2d([(f[0](t=i),f[1](t=i)),(centers[0](t=i),centers[1](t=i))], 
-           thickness=1,rgbcolor=Color('silver').rgb()) for i in sxrange(-n,n,0.05))
-    p.show(xmin=-8,xmax=8,ymin=-2,ymax=14,figsize=(7,7))
+           thickness=1,rgbcolor=Color('silver').rgb()) for i in sxrange(-n,n,0.1))
+    p.show(xmin=-8,xmax=8,ymin=-2,ymax=14,figsize=(5,5))
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
@@ -73,7 +78,23 @@ sum([implicit_plot(f[i],(-1.8,1.8),(-1.8,1.8),plot_points=400) for i in [0..1]])
       
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
-
+import pandas,pylab
+se = pandas.read_json('https://data.cityofnewyork.us/resource/h7rb-945c.json')
+feature_list = ['graduation_rate','city','council_district']
+se = se[feature_list].dropna(); se['graduation_rate_range']=se.shape[0]*['0']
+se['graduation_rate']=se['graduation_rate'].astype('string').str.replace("N/A","0").astype('float')
+se['council_district']=se['council_district'].astype('int').astype('string')
+se.loc[se['graduation_rate']<=0.5,'graduation_rate_range'] = 'gr <= 0.5'
+se.loc[(se['graduation_rate']>0.5)&(se['graduation_rate']<=0.75),'graduation_rate_range'] = '0.5 < gr <= 0.75'
+se.loc[(se['graduation_rate']>0.75)&(se['graduation_rate']<=0.9),'graduation_rate_range'] = '0.75 < gr <= 0.9'
+se.loc[se['graduation_rate']>0.90,'graduation_rate_range'] = 'gr > 0.9'
+gr_list=['gr <= 0.5','0.5 < gr <= 0.75','0.75 < gr <= 0.9','gr > 0.9']
+fig,ax = pylab.subplots(nrows=2,ncols=1,figsize=(10,10)); ax[0].tick_params('x',rotation=90)
+pandas.crosstab(se['council_district'],se['graduation_rate_range'])[gr_list].plot.bar(ax=ax[0],cmap=pylab.cm.bwr)
+city_list = ['New York','Bronx','Brooklyn','Staten Island','Jamaica','Flushing','Long Island City','Manhattan']
+data = se.loc[se['city'].isin(city_list)]
+pandas.crosstab(data['city'],se['graduation_rate_range'])[gr_list].plot.barh(ax=ax[1],cmap=pylab.cm.bwr)
+pylab.suptitle('Student Graduation Rate by Council Districts and Cities'); pylab.show();
 </script></div>
       
   <h2>Try Other Languages (R, HTML, ...)</h2>
