@@ -40,10 +40,10 @@
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>
       
 <div class="compute"><script type="text/x-sage">
-L = [CC(0,0)]; var('n'); c = [colormaps.cool(0.00045*i)[:3] for i in [1..5000]]
+N = 10000; L = [CC(0,0)]; var('n'); c = [colormaps.cool((N^(-1)).n()*i)[:3] for i in [1..N]]
 z = lambda n:exp(I*pi*n*ln(n/4)*2^0.5).n() 
-for n in [1..5000]: L.append(L[n-1]+CC(z(n))); 
-sum([line([L[i],L[i+1]],color=c[i]) for i in [200..4999]]).show(figsize=(5,5))
+for n in [1..N]: L.append(L[n-1]+CC(z(n))); 
+sum([line([L[i],L[i+1]],color=c[i]) for i in [200..N-1]]).show(figsize=(5,5))
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
@@ -54,11 +54,9 @@ sum([line([L[i],L[i+1]],color=c[i]) for i in [200..4999]]).show(figsize=(5,5))
     <p></p>
 <div class="compute"><script type="text/x-sage">
 var('x,y,z'); from sage.plot.plot3d.shapes import Sphere
-sphere1,sphere2=Sphere(1,opacity=0.1).translate(-3,-3,-3),Sphere(0.1,opacity=0.1).translate(3,3,3)
-sphere=Sphere(1,opacity=0.5).translate(0,0,0)
-spheres=[sphere+sphere1+sphere2+Sphere(0.2,color=(0.2*i,0,0.3*i))\
-         .translate(0,3*cos(pi*i/12),3*sin(pi*i/12)) for i in [0..24]]
-animate(spheres,xmin=-5,xmax=5,ymin=-5,ymax=5,zmin=-5,zmax=5)
+sphere123=sum([Sphere(0.1,opacity=0.1).translate(l,l,l) for l in [12,-12]])+Sphere(5,color='#3030ff').translate(0,0,0)
+spheres=[sphere123+Sphere(2,color=(0.2*i,0,0.3*i)).translate(0,10*cos(pi*i/12),10*sin(pi*i/12)) for i in [0..24]]
+animate(spheres,frame=False)
 </script></div> 
       
   <h2>Try Python Modules</h2>
