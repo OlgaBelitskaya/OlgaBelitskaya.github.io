@@ -68,13 +68,14 @@ animate([t+text(M,(x,y),fontsize=25,rgbcolor=c[2]) for (x,y) in list(zip(X,Y))])
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
 import numpy,pylab; from scipy.io import wavfile; import urllib
-fn = urllib.urlopen('https://olgabelitskaya.github.io/slideflute.wav')
-fn = fn.read();  fn[:50]
-#sr, wav = wavfile.read(fn);
-#wav = wav.astype('float')/numpy.iinfo(numpy.int16).max
-#f,ax = pylab.subplots(1,figsize=(10,7));
-#ax.plot(wav[:,1],c='#3636ff'); ax.plot(wav[:,0],c='#ff3636',alpha=0.5);
-#ax.set_ylabel('amplitude'); pylab.show()
+input_file = urllib.urlopen('https://olgabelitskaya.github.io/slideflute.wav')
+output_file = open('slideflute.wav','wb'); output_file.write(input_file.read())
+output_file.close(); input_file.close()
+sr, wav = wavfile.read('slideflute.wav');
+wav = wav.astype('float')/numpy.iinfo(numpy.int16).max
+f,ax = pylab.subplots(1,figsize=(7,5));
+ax.plot(wav[:,1],c='#3636ff'); ax.plot(wav[:,0],c='#ff3636',alpha=0.7);
+ax.set_ylabel('amplitude'); pylab.show()
 </script></div>
       
   <h2>Try Other Languages (R, HTML, ...)</h2>
