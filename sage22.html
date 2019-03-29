@@ -76,7 +76,7 @@ selected_features.loc['GradientBoostingClassifier'] = GradientBoostingClassifier
 selected_features.loc['AdaBoostClassifier'] = AdaBoostClassifier().fit(X,y).feature_importances_
 kbest = feature_selection.SelectKBest(score_func=feature_selection.chi2,k=3)
 selected_features.loc['SelectKBest'] = kbest.fit(X,y).pvalues_
-rfe=feature_selection.RFE(linear_model.LogisticRegression(solver='liblinear',multi_class='auto'),3)
+rfe=feature_selection.RFE(linear_model.LogisticRegression(solver='liblinear',multi_class='ovr'),3)
 selected_features.loc['RFE'] = 1/rfe.fit(X,y).ranking_
 f,ax = pylab.subplots(1,figsize=(10,5)); selected_features.T.plot(ax=ax); pylab.grid(); pylab.show()
 </script></div>
