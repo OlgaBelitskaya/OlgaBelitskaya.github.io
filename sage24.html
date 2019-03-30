@@ -33,7 +33,7 @@
     <p>Click the “Activate” button below to display an interactive example.</p>      
 <div id="examplecell"><script type="text/x-sage">
 #@interact
-#def _(a=[10,15,20],b=[2,4,6],c=[15,10,5]):
+#def _(t=slider(0.05,0.95,0.05,0.05)):
 
 </script></div>
   <h2>Your Field for Experiments</h2>
@@ -55,6 +55,7 @@
       
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
+import pandas,pylab
 
 </script></div>
       
@@ -71,12 +72,38 @@
     <p></p>
 <div class="compute"><script type="text/x-sage">
 %%html
-
-</script></div>
-    <p></p>
-<div class="compute"><script type="text/x-sage">
-%%javascript
-
+<style>
+svg {background-color:silver;}
+text {fill:#fff; font-size:135%;} 
+.line {fill:none; stroke:#3636ff; stroke-width:2;}             
+.grid line,.grid path {stroke:#fff; stroke-opacity:0.9; shape-rendering:crispEdges;}       
+</style>
+<script src="https://d3js.org/d3.v4.min.js"/>
+<svg/><script>
+var n = 630, m = 35, margin = {top:m,right:m,bottom:m,left:m},
+    width = 500-margin.left-margin.right, height = 500-margin.top-margin.bottom; 
+var xScale = d3.scaleLinear().domain([-2,2]).range([0,width]);
+var yScale = d3.scaleLinear().domain([-2,2]).range([height,0]);
+function make_x_gridlines() {return d3.axisBottom(xScale).ticks(11)};
+function make_y_gridlines() {return d3.axisLeft(yScale).ticks(11)};            
+var data = d3.range(0,n).map(function(i){return {
+    "x":Math.cos(0.01*i)+Math.cos(0.11*i)/2+Math.sin(0.3*i)/3,
+    "y":Math.sin(0.01*i)+Math.sin(0.11*i)/2+Math.cos(0.3*i)/3}
+    })
+var lineColor = d3.scaleSequential().domain([0,n]).interpolator(d3.interpolateCool);                       
+var svg = d3.select("svg")
+            .attr("width",width+margin.left+margin.right)
+            .attr("height",height+margin.top+margin.bottom)
+            .append("g").attr("transform","translate("+margin.left+","+margin.top+")");
+svg.append("g").attr("class","x axis").call(d3.axisBottom(xScale).tickSize(0.5))
+               .attr("transform","translate(0,"+height+")"); 
+svg.append("g").attr("class","y axis").call(d3.axisLeft(yScale).tickSize(0.5));    
+svg.append("g").attr("class","grid").attr("transform","translate(0,"+height+")")
+               .call(make_x_gridlines().tickSize(-height).tickFormat(""));
+svg.append("g").attr("class","grid").call(make_y_gridlines().tickSize(-width).tickFormat(""));
+var line = d3.line().curve(d3.curveMonotoneX)
+             .x(function(d) {return xScale(d.x);}).y(function(d) {return yScale(d.y);});
+svg.append("path").datum(data).attr("class","line").attr("d",line); 
 </script></div>
     <p></p>
 
