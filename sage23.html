@@ -32,9 +32,20 @@
   <h2>Example of Computations</h2>
     <p>Click the “Activate” button below to display an interactive example.</p>      
 <div id="examplecell"><script type="text/x-sage">
-#@interact
-#def _(a=[10,15,20],b=[2,4,6],c=[15,10,5]):
-
+@interact
+def _(t=slider(0.05,0.95,0.05,0.05)):
+    def f(x): return -ln(x) 
+    def g(x): return -ln(x)*x
+    var('x'); x_max=solve((-ln(x)*x).diff(),x)[0].rhs()
+    p=plot(f,(0,1),color='#3636ff',legend_label='y=-ln(x)')+\
+    plot(g,(0,1),color='#ff36ff',legend_label='y*x=-ln(x)*x')
+    pp=point((x_max,f(x_max)),color='#ff3636')+point((x_max,g(x_max)),color='#ff3636')
+    a=plot(f(x_max),(0,x_max),fill='axis',color='#ff3636',fillcolor='#ff3636')
+    an=text('-ln(x)*x='+str(g(x_max)),(x_max/2,f(x_max)+0.2),color='#ff3636')
+    pt=point((t,f(t)),color='#3636ff')+point((t,g(t)),color='#ff36ff')
+    at=plot(f(t),(0,t),fill='axis',color='#3636ff',fillcolor='#3636ff')
+    ant=text('-ln(x)*x='+str(g(t).n()),(t+0.01,f(t)+0.2))
+    (p+pp+a+an+pt+at+ant).show(figsize=(7,4))
 </script></div>
   <h2>Your Field for Experiments</h2>
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>
