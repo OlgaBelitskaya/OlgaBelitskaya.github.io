@@ -55,8 +55,14 @@
       
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
-import pandas,pylab
-
+import numpy,pylab; from sklearn import manifold,datasets
+X,y = datasets.load_digits(return_X_y=True);
+X_iso = manifold.Isomap(int(45),n_components=2).fit_transform(X)
+x_min,x_max = numpy.min(X_iso,0),numpy.max(X_iso,0); X_iso = (X_iso-x_min)/(x_max-x_min)
+f,ax = pylab.subplots(1,figsize=(7,7)); pylab.axis("off")
+for i in range(X_iso.shape[0]):
+    pylab.text(X_iso[i,0],X_iso[i,1],str(y[i]),color=pylab.cm.hsv(y[i]/10.),fontdict={'size':10})
+pylab.title("Isomap Embedding"); pylab.show()
 </script></div>
       
   <h2>Try Other Languages (R, HTML, ...)</h2>
