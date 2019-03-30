@@ -105,18 +105,19 @@ axis(1,at=1:8,labels=sprintf("%s",col.lst),col="white",cex.axis=0.9,padj=-18); d
 <style>
 svg {background-color:slategray;}
 text {fill:#fff; font-size:150%;} 
-.point {fill:#3636ff; stroke:#fff; stroke-width:1;} 
-.grid line {stroke:#fff; stroke-opacity:0.9; shape-rendering:crispEdges;}       
+.point {stroke:#fff; stroke-width:1;}             
+.grid line,.grid path {stroke:#fff; stroke-opacity:0.9; shape-rendering:crispEdges;}       
 </style>
 <script src="https://d3js.org/d3.v4.min.js"/>
 <svg/><script>
-var n = 100, m = 35, margin = {top:m,right:m,bottom:m,left:m},
+var n = 255, m = 35, margin = {top:m,right:m,bottom:m,left:m},
     width = 500-margin.left-margin.right, height = 500-margin.top-margin.bottom; 
 var xScale = d3.scaleLinear().domain([-1,1]).range([0,width]);
 var yScale = d3.scaleLinear().domain([-1,1]).range([height,0]);
-function make_x_gridlines() {return d3.axisBottom(xScale).ticks(10)};
-function make_y_gridlines() {return d3.axisLeft(yScale).ticks(10)}        
-var data = d3.range(0,256).map(function(i){return {"x":Math.sin(0.05*i),"y":Math.sin(0.125*i)}})
+function make_x_gridlines() {return d3.axisBottom(xScale).ticks(11)};
+function make_y_gridlines() {return d3.axisLeft(yScale).ticks(11)};
+var pointColor = d3.scaleSequential().domain([0,n]).interpolator(d3.interpolateCool);            
+var data = d3.range(0,n).map(function(i){return {"x":Math.sin(0.05*i),"y":Math.sin(0.125*i)}})
 var svg = d3.select("svg")
             .attr("width",width+margin.left+margin.right)
             .attr("height",height+margin.top+margin.bottom)
@@ -127,9 +128,9 @@ svg.append("g").attr("class","y axis").call(d3.axisLeft(yScale));
 svg.append("g").attr("class","grid").attr("transform","translate(0,"+height+")")
                .call(make_x_gridlines().tickSize(-height).tickFormat(""));
 svg.append("g").attr("class","grid").call(make_y_gridlines().tickSize(-width).tickFormat(""));
-svg.selectAll(".point").data(data).enter().append("circle").attr("class","point").attr("r",3)
-    .attr("cx",function(d) {return xScale(d.x)})
-    .attr("cy",function(d) {return yScale(d.y)});
+svg.selectAll(".point").data(data).enter().append("circle").attr("class","point")
+    .attr("fill",function(d,i){return pointColor(i)}).attr("r",4)
+    .attr("cx",function(d) {return xScale(d.x)}).attr("cy",function(d) {return yScale(d.y)});
 </script></div>
     <p></p>
   </body>
