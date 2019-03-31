@@ -75,7 +75,7 @@ pylab.title("t-SNE embedding %f s"%(time.time()-t0)); pylab.show()
 library('grDevices'); library('MASS'); library('nnet'); data(Boston); n <- dim(Boston)[1];
 svg(filename="Rplots.svg",width=10,height=5,pointsize=12,onefile=T,
       family="sans",bg="white",antialias=c("default","none","gray","subpixel"))
-model <- nnet(as.matrix(Boston[1:430,-14]),as.matrix(Boston[1:430,14]),size=64,maxit=1000,linout=T,decay=0.01)
+model <- nnet(as.matrix(Boston[1:430,-14]),as.matrix(Boston[1:430,14]),size=64,maxit=600,linout=T,decay=0.01)
 predictions <- predict(model,as.matrix(Boston[431:n,-14]),type="raw")
 plot(as.matrix(Boston[431:n,14]),col="#3636ff",type="o",ylab='targets & predictions',yaxt="n");  
 par(new=TRUE); plot(predictions,col="#ff3636",type="o",cex=1.3,ylab='targets & predictions'); dev.off()
