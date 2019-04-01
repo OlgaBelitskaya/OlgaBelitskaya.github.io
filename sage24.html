@@ -41,16 +41,16 @@
 <div class="compute"><script type="text/x-sage">
 @interact
 def _(proj=['perspective','fisheye','perspective_dof']):
-    k=1; e =[[[k,k,k],[-k,k,k]],[[-k,k,k],[-k,-k,k]],[[k,k,k],[k,-k,k]],[[k,k,k],[k,k,-k]],             
-             [[-k,k,k],[-k,k,-k]],[[k,-k,k],[-k,-k,k]],[[k,-k,k],[k,-k,-k]],[[-k,-k,k],[-k,-k,-k]],
-             [[k,k,-k],[-k,k,-k]],[[k,k,-k],[k,-k,-k]],[[-k,k,-k],[-k,-k,-k]],[[k,-k,-k],[-k,-k,-k]]]
+    k=1; e =[[[k,-k,k],[0,0,0]],[[0,0,0],[k,k,k]],[[k,k,k],[-k,k,k]],[[-k,k,k],[-k,-k,k]],[[-k,-k,k],[k,-k,k]],
+             [[k,-k,k],[k,k,k]],[[k,k,k],[k,k,-k]],[[k,k,-k],[-k,k,-k]],[[-k,k,-k],[-k,-k,-k]],[[-k,-k,-k],[k,-k,-k]],
+             [[k,-k,-k],[k,k,-k]],[[k,k,-k],[0,0,0]],[[0,0,0],[k,-k,-k]],[[k,-k,-k],[k,-k,k]]]
     if proj=='perspective_dof':
         t = Tachyon(xres=500,yres=500,camera_center=(-3.5,0.0,0.0),projection=proj,
                     antialiasing=3,raydepth=5,focallength='2.0',aperture='.003')
     else: t = Tachyon(xres=500,yres=500,camera_center=(-3.5,0.0,0.0),projection=proj)
-    for i in [0..11]:
-        t.texture('t%s'%str(i),color=colormaps.jet(0.09*i)[:3])
-        t.fcylinder(e[i][0],e[i][1],.05,'t%s'%str(i)) 
+    for i in [0..13]:
+        t.texture('t%s'%str(i),opacity=0.3,color=colormaps.jet(0.077*i)[:3])
+        t.fcylinder(e[i][0],e[i][1],.06,'t%s'%str(i)) 
     t.light((-5,-5,5),.1,(1,1,1)); t.show()
 </script></div>
     <p></p>
