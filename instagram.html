@@ -54,36 +54,26 @@ Jupyter Notebook &#38; SageMath Kernel
 <p>Click “Run” twice. Use in HTML documents with &#60;/script&#62; in the end.</p> 
 <div class="html_2"><script type="text/x-sage">
 %%html
-<style>
-.line {fill:none; stroke:#ff3636; stroke-width:2;}
-.xaxis2 text,.yaxis2 text {fill:#3636ff; font-size:135%;}       
-.grid2 line,.grid2 path {stroke:#3636ff; stroke-opacity:0.9; shape-rendering:crispEdges;}       
-</style>
-<script src="https://d3js.org/d3.v4.min.js"/>
+<style>.line {fill:none; stroke:#ff3636; stroke-width:2;} .xaxis2 text,.yaxis2 text {fill:#3636ff; font-size:135%;}       
+.grid2 line,.grid2 path {stroke:#3636ff; stroke-opacity:0.9; shape-rendering:crispEdges;} </style>
+<script src="https://d3js.org/d3.v4.min.js"/><script>
+var n=630, m=35, margin={top:m,right:m,bottom:m,left:m}, width=500-margin.left-margin.right, height=500-margin.top-margin.bottom; 
+var xScale = d3.scaleLinear().domain([-2,2]).range([0,width]); var yScale = d3.scaleLinear().domain([-2,2]).range([height,0]);
+function make_x_gridlines() {return d3.axisBottom(xScale).ticks(11)}; function make_y_gridlines() {return d3.axisLeft(yScale).ticks(11)};
+</script></div>
+<div class="html_2"><script type="text/x-sage">
+%%html
 <svg id="pp2" style="background-color:silver;"/><script>
-var n = 630, m = 35, margin = {top:m,right:m,bottom:m,left:m},
-    width = 500-margin.left-margin.right, height = 500-margin.top-margin.bottom; 
-var xScale = d3.scaleLinear().domain([-2,2]).range([0,width]);
-var yScale = d3.scaleLinear().domain([-2,2]).range([height,0]);
-function make_x_gridlines() {return d3.axisBottom(xScale).ticks(11)};
-function make_y_gridlines() {return d3.axisLeft(yScale).ticks(11)};            
-var data = d3.range(0,n).map(function(i){return {
-    "x":Math.cos(0.01*i)+Math.cos(0.11*i)/2+Math.sin(0.3*i)/3,
-    "y":Math.sin(0.01*i)+Math.sin(0.11*i)/2+Math.cos(0.3*i)/3}
-    })
+var data = d3.range(0,n).map(function(i){return {"x":Math.cos(0.01*i)+Math.cos(0.11*i)/2+Math.sin(0.3*i)/3,
+                                                 "y":Math.sin(0.01*i)+Math.sin(0.11*i)/2+Math.cos(0.3*i)/3}});
 var lineColor = d3.scaleSequential().domain([0,n]).interpolator(d3.interpolateCool);                       
-var svg = d3.select("#pp2")
-            .attr("width",width+margin.left+margin.right)
-            .attr("height",height+margin.top+margin.bottom)
+var svg = d3.select("#pp2").attr("width",width+margin.left+margin.right).attr("height",height+margin.top+margin.bottom)
             .append("g").attr("transform","translate("+margin.left+","+margin.top+")");
-svg.append("g").attr("class","xaxis2").call(d3.axisBottom(xScale).tickSize(0.5))
-               .attr("transform","translate(0,"+height+")"); 
+svg.append("g").attr("class","xaxis2").call(d3.axisBottom(xScale).tickSize(0.5)).attr("transform","translate(0,"+height+")"); 
 svg.append("g").attr("class","yaxis2").call(d3.axisLeft(yScale).tickSize(0.5));                       
-svg.append("g").attr("class","grid2").attr("transform","translate(0,"+height+")")
-               .call(make_x_gridlines().tickSize(-height).tickFormat(""));
+svg.append("g").attr("class","grid2").attr("transform","translate(0,"+height+")").call(make_x_gridlines().tickSize(-height).tickFormat(""));
 svg.append("g").attr("class","grid2").call(make_y_gridlines().tickSize(-width).tickFormat(""));
-var line = d3.line().curve(d3.curveMonotoneX)
-             .x(function(d) {return xScale(d.x);}).y(function(d) {return yScale(d.y);});
+var line = d3.line().curve(d3.curveMonotoneX).x(function(d) {return xScale(d.x);}).y(function(d) {return yScale(d.y);});
 svg.append("path").datum(data).attr("class","line").attr("d",line);
 </script></div>
     <p></p>
