@@ -6,7 +6,7 @@
     <title>Instagram_Posts</title>
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
     <script>$(function () {
-    sagecell.makeSagecell({inputLocation:'#cell_1',evalButtonText:'Run HTML'});
+    sagecell.makeSagecell({inputLocation:'.html_1',linked:true,evalButtonText:'Run'});
     sagecell.makeSagecell({inputLocation:'#cell_2',evalButtonText:'Run HTML'});  
     sagecell.makeSagecell({inputLocation:'#cell_3',languages:['r'],evalButtonText:'Run R'});  
     sagecell.makeSagecell({inputLocation:'#cell_4',languages:['html'],evalButtonText:'Run HTML'});
@@ -26,7 +26,7 @@
    <h1>If you need to create parametric plots with d3.js</h1>
 Jupyter Notebook &#38; SageMath Kernel 
 <p>Click “Run” twice. Use in HTML documents with &#60;/script&#62; in the end.</p>      
-<div id="cell_1"><script type="text/x-sage">
+<div class="html_1"><script type="text/x-sage">
 %%html
 <style>
 .xaxis1 text,.yaxis1 text {fill:#36ff36; font-size:150%;} 
@@ -34,28 +34,22 @@ Jupyter Notebook &#38; SageMath Kernel
 .grid1 line,.grid1 path {stroke:#fff; stroke-opacity:0.9; shape-rendering:crispEdges;}       
 </style>
 <script src="https://d3js.org/d3.v4.min.js"/>
+</script></div>
+<div class="html_1"><script type="text/x-sage">      
 <svg id="pp1" style="background-color:slategray;"/><script>
-var n = 255, m = 35, margin = {top:m,right:m,bottom:m,left:m},
-    width = 500-margin.left-margin.right, height = 500-margin.top-margin.bottom; 
-var xScale = d3.scaleLinear().domain([-1.2,1.2]).range([0,width]);
-var yScale = d3.scaleLinear().domain([-1.2,1.2]).range([height,0]);
-function make_x_gridlines() {return d3.axisBottom(xScale).ticks(11)};
-function make_y_gridlines() {return d3.axisLeft(yScale).ticks(11)};
+var n = 255, m = 35, margin = {top:m,right:m,bottom:m,left:m}, width = 500-margin.left-margin.right, height = 500-margin.top-margin.bottom; 
+var xScale = d3.scaleLinear().domain([-1.2,1.2]).range([0,width]); var yScale = d3.scaleLinear().domain([-1.2,1.2]).range([height,0]);
+function make_x_gridlines() {return d3.axisBottom(xScale).ticks(11)}; function make_y_gridlines() {return d3.axisLeft(yScale).ticks(11)};
 var pointColor = d3.scaleSequential().domain([0,n]).interpolator(d3.interpolateCool);            
 var data = d3.range(0,n).map(function(i){return {"x":Math.sin(0.05*i),"y":Math.sin(0.125*i)}})
-var svg = d3.select("#pp1")
-            .attr("width",width+margin.left+margin.right)
-            .attr("height",height+margin.top+margin.bottom)
+var svg = d3.select("#pp1").attr("width",width+margin.left+margin.right).attr("height",height+margin.top+margin.bottom)
             .append("g").attr("transform","translate("+margin.left+","+margin.top+")");
-svg.append("g").attr("class","xaxis1").call(d3.axisBottom(xScale).tickSize(0.5))
-               .attr("transform","translate(0,"+height+")"); 
+svg.append("g").attr("class","xaxis1").call(d3.axisBottom(xScale).tickSize(0.5)).attr("transform","translate(0,"+height+")"); 
 svg.append("g").attr("class","yaxis1").call(d3.axisLeft(yScale).tickSize(0.5));    
-svg.append("g").attr("class","grid1").attr("transform","translate(0,"+height+")")
-               .call(make_x_gridlines().tickSize(-height).tickFormat(""));
+svg.append("g").attr("class","grid1").attr("transform","translate(0,"+height+")").call(make_x_gridlines().tickSize(-height).tickFormat(""));
 svg.append("g").attr("class","grid1").call(make_y_gridlines().tickSize(-width).tickFormat(""));
-svg.selectAll(".point").data(data).enter().append("circle").attr("class","point")
-    .attr("fill",function(d,i){return pointColor(i)}).attr("r",4)
-    .attr("cx",function(d) {return xScale(d.x)}).attr("cy",function(d) {return yScale(d.y)});
+svg.selectAll(".point").data(data).enter().append("circle").attr("class","point").attr("fill",function(d,i){return pointColor(i)})
+                       .attr("r",4).attr("cx",function(d) {return xScale(d.x)}).attr("cy",function(d) {return yScale(d.y)});
 </script></div>
    <h1>Parametric plots with d3.js could look very pretty</h1>
 Jupyter Notebook &#38; SageMath Kernel 
