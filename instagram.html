@@ -55,9 +55,43 @@ svg.selectAll(".point").data(data).enter().append("circle").attr("class","point"
     .attr("fill",function(d,i){return pointColor(i)}).attr("r",4)
     .attr("cx",function(d) {return xScale(d.x)}).attr("cy",function(d) {return yScale(d.y)});
 </script></div>
-    <p></p>
+   <h1>Parametric plots with d3.js could look very pretty</h1>
+Jupyter Notebook &#38; SageMath Kernel 
+<p>Click “Evaluate” twice. Use in HTML documents with &#60;/script&#62; in the end.</p> 
 <div class="compute"><script type="text/x-sage">
-
+%%html
+<style>
+svg {background-color:silver;}
+text {fill:#fff; font-size:135%;} 
+.line {fill:none; stroke:#3636ff; stroke-width:2;}             
+.grid line,.grid path {stroke:#fff; stroke-opacity:0.9; shape-rendering:crispEdges;}       
+</style>
+<script src="https://d3js.org/d3.v4.min.js"/>
+<svg id="pp2"/><script>
+var n = 630, m = 35, margin = {top:m,right:m,bottom:m,left:m},
+    width = 500-margin.left-margin.right, height = 500-margin.top-margin.bottom; 
+var xScale = d3.scaleLinear().domain([-2,2]).range([0,width]);
+var yScale = d3.scaleLinear().domain([-2,2]).range([height,0]);
+function make_x_gridlines() {return d3.axisBottom(xScale).ticks(11)};
+function make_y_gridlines() {return d3.axisLeft(yScale).ticks(11)};            
+var data = d3.range(0,n).map(function(i){return {
+    "x":Math.cos(0.01*i)+Math.cos(0.11*i)/2+Math.sin(0.3*i)/3,
+    "y":Math.sin(0.01*i)+Math.sin(0.11*i)/2+Math.cos(0.3*i)/3}
+    })
+var lineColor = d3.scaleSequential().domain([0,n]).interpolator(d3.interpolateCool);                       
+var svg = d3.select("#pp2")
+            .attr("width",width+margin.left+margin.right)
+            .attr("height",height+margin.top+margin.bottom)
+            .append("g").attr("transform","translate("+margin.left+","+margin.top+")");
+svg.append("g").attr("class","x axis").call(d3.axisBottom(xScale).tickSize(0.5))
+               .attr("transform","translate(0,"+height+")"); 
+svg.append("g").attr("class","y axis").call(d3.axisLeft(yScale).tickSize(0.5));    
+svg.append("g").attr("class","grid").attr("transform","translate(0,"+height+")")
+               .call(make_x_gridlines().tickSize(-height).tickFormat(""));
+svg.append("g").attr("class","grid").call(make_y_gridlines().tickSize(-width).tickFormat(""));
+var line = d3.line().curve(d3.curveMonotoneX)
+             .x(function(d) {return xScale(d.x);}).y(function(d) {return yScale(d.y);});
+svg.append("path").datum(data).attr("class","line").attr("d",line);
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
