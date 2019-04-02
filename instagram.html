@@ -8,7 +8,8 @@
     <script>$(function () {
     sagecell.makeSagecell({inputLocation:'#cell_1',evalButtonText:'Run HTML'});
     sagecell.makeSagecell({inputLocation:'#cell_2',evalButtonText:'Run HTML'});  
-    sagecell.makeSagecell({inputLocation:'#cell_3',languages:['r'],evalButtonText:'Run R'});        
+    sagecell.makeSagecell({inputLocation:'#cell_3',languages:['r'],evalButtonText:'Run R'});  
+    sagecell.makeSagecell({inputLocation:'#cell_4',languages:['html'],evalButtonText:'Run HTML'});
     sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Evaluate'});
     });
     </script>
@@ -28,7 +29,7 @@ Jupyter Notebook &#38; SageMath Kernel
 <div id="cell_1"><script type="text/x-sage">
 %%html
 <style>
-text {fill:#fff; font-size:135%;} 
+.xaxis1 text,.yaxis1 text {fill:#36ff36; font-size:150%;} 
 .point {stroke:#fff; stroke-width:1;}             
 .grid1 line,.grid1 path {stroke:#fff; stroke-opacity:0.9; shape-rendering:crispEdges;}       
 </style>
@@ -36,8 +37,8 @@ text {fill:#fff; font-size:135%;}
 <svg id="pp1" style="background-color:slategray;"/><script>
 var n = 255, m = 35, margin = {top:m,right:m,bottom:m,left:m},
     width = 500-margin.left-margin.right, height = 500-margin.top-margin.bottom; 
-var xScale = d3.scaleLinear().domain([-1,1]).range([0,width]);
-var yScale = d3.scaleLinear().domain([-1,1]).range([height,0]);
+var xScale = d3.scaleLinear().domain([-1.2,1.2]).range([0,width]);
+var yScale = d3.scaleLinear().domain([-1.2,1.2]).range([height,0]);
 function make_x_gridlines() {return d3.axisBottom(xScale).ticks(11)};
 function make_y_gridlines() {return d3.axisLeft(yScale).ticks(11)};
 var pointColor = d3.scaleSequential().domain([0,n]).interpolator(d3.interpolateCool);            
@@ -46,9 +47,9 @@ var svg = d3.select("#pp1")
             .attr("width",width+margin.left+margin.right)
             .attr("height",height+margin.top+margin.bottom)
             .append("g").attr("transform","translate("+margin.left+","+margin.top+")");
-svg.append("g").attr("class","x axis").call(d3.axisBottom(xScale).tickSize(0.5))
+svg.append("g").attr("class","xaxis1").call(d3.axisBottom(xScale).tickSize(0.5))
                .attr("transform","translate(0,"+height+")"); 
-svg.append("g").attr("class","y axis").call(d3.axisLeft(yScale).tickSize(0.5));    
+svg.append("g").attr("class","yaxis1").call(d3.axisLeft(yScale).tickSize(0.5));    
 svg.append("g").attr("class","grid1").attr("transform","translate(0,"+height+")")
                .call(make_x_gridlines().tickSize(-height).tickFormat(""));
 svg.append("g").attr("class","grid1").call(make_y_gridlines().tickSize(-width).tickFormat(""));
@@ -102,7 +103,7 @@ svg(id="pp3",filename="rplots.svg",width=10,height=5,pointsize=12,onefile=T,fami
 dev.off()
 </script></div>
     <p></p>
-<div class="compute"><script type="text/x-sage">
+<div id="cell_4" class="compute"><script type="text/x-sage">
 
 </script></div>
     <p></p>      
