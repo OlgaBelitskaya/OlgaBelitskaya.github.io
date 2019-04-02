@@ -24,11 +24,11 @@
    <h1>If you need to create parametric plots with d3.js</h1>
 Jupyter Notebook &#38; SageMath Kernel 
 <p>Click “Run” twice. Use in HTML documents with &#60;/script&#62; in the end.</p>      
-<div id="cell_1" class="compute"><script type="text/x-sage">          
+<div id="cell_1" class="compute"><script type="text/x-sage">
 <style>
 text {fill:#fff; font-size:135%;} 
 .point {stroke:#fff; stroke-width:1;}             
-.grid line,.grid path {stroke:#fff; stroke-opacity:0.9; shape-rendering:crispEdges;}       
+.grid1 line,.grid1 path {stroke:#fff; stroke-opacity:0.9; shape-rendering:crispEdges;}       
 </style>
 <script src="https://d3js.org/d3.v4.min.js"/>
 <svg id="pp1" style="background-color:slategray;"/><script>
@@ -47,9 +47,9 @@ var svg = d3.select("#pp1")
 svg.append("g").attr("class","x axis").call(d3.axisBottom(xScale).tickSize(0.5))
                .attr("transform","translate(0,"+height+")"); 
 svg.append("g").attr("class","y axis").call(d3.axisLeft(yScale).tickSize(0.5));    
-svg.append("g").attr("class","grid").attr("transform","translate(0,"+height+")")
+svg.append("g").attr("class","grid1").attr("transform","translate(0,"+height+")")
                .call(make_x_gridlines().tickSize(-height).tickFormat(""));
-svg.append("g").attr("class","grid").call(make_y_gridlines().tickSize(-width).tickFormat(""));
+svg.append("g").attr("class","grid1").call(make_y_gridlines().tickSize(-width).tickFormat(""));
 svg.selectAll(".point").data(data).enter().append("circle").attr("class","point")
     .attr("fill",function(d,i){return pointColor(i)}).attr("r",4)
     .attr("cx",function(d) {return xScale(d.x)}).attr("cy",function(d) {return yScale(d.y)});
@@ -61,7 +61,7 @@ Jupyter Notebook &#38; SageMath Kernel
 <style>
 text {fill:#fff; font-size:135%;} 
 .line {fill:none; stroke:#3636ff; stroke-width:2;}             
-.grid line,.grid path {stroke:#fff; stroke-opacity:0.9; shape-rendering:crispEdges;}       
+.grid2 line,.grid2 path {stroke:#fff; stroke-opacity:0.9; shape-rendering:crispEdges;}       
 </style>
 <script src="https://d3js.org/d3.v4.min.js"/>
 <svg id="pp2" style="background-color:silver;"/><script>
@@ -83,9 +83,9 @@ var svg = d3.select("#pp2")
 svg.append("g").attr("class","x axis").call(d3.axisBottom(xScale).tickSize(0.5))
                .attr("transform","translate(0,"+height+")"); 
 svg.append("g").attr("class","y axis").call(d3.axisLeft(yScale).tickSize(0.5));    
-svg.append("g").attr("class","grid").attr("transform","translate(0,"+height+")")
+svg.append("g").attr("class","grid2").attr("transform","translate(0,"+height+")")
                .call(make_x_gridlines().tickSize(-height).tickFormat(""));
-svg.append("g").attr("class","grid").call(make_y_gridlines().tickSize(-width).tickFormat(""));
+svg.append("g").attr("class","grid2").call(make_y_gridlines().tickSize(-width).tickFormat(""));
 var line = d3.line().curve(d3.curveMonotoneX)
              .x(function(d) {return xScale(d.x);}).y(function(d) {return yScale(d.y);});
 svg.append("path").datum(data).attr("class","line").attr("d",line);
