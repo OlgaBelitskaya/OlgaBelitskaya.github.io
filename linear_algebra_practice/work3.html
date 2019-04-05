@@ -10,6 +10,7 @@
     sagecell.makeSagecell({inputLocation:'div.linked_python',linked:true,evalButtonText:'Run Linked Python Cells'});
     sagecell.makeSagecell({inputLocation:'div.linked_r',linked:true,evalButtonText:'Run Linked R Cells'});
     sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run'});
+    sagecell.makeSagecell({inputLocation:'div.sage_latex',evalButtonText:'Run LaTex'});
     });
     </script>
   </head>
@@ -56,17 +57,44 @@ for el in [M,N]: sympy.pprint(el)
 A <- matrix(sample.int(100,size=3*3,replace=T),nrow=3,ncol=3)
 B <- matrix(sample.int(100,size=3*3,replace=T),nrow=3,ncol=3)
 C <- matrix(sample.int(100,size=4*4,replace=T),nrow=4,ncol=4)
+library(Matrix)
 </script></div>
     <p></p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-print(c(det(A),det(B),det(C)))
+c(det(A),det(B),det(C))
 </script></div>      
     <p></p>  
     <h2>2. Свойства определителей</h2>
 <div class="linked_sage"><script type="text/x-sage">
 pretty_print('A.det()=A.T.det(): '+str(A.det()==A.T.det()))
 pretty_print('(A*B).det()=(B*A).det()=A.det()*B.det(): '+str((A*B).det()==(B*A).det()==A.det()*B.det()))
+pretty_print('(-2*A).det()=(-2)^A.dimensions()[0]*A.det(): '+str((-2*A).det()==(-2)^A.dimensions()[0]*A.det()))
+# linear dependence
+matrix([[1,2,3],[0,0,0],[7,8,9]]).det(), matrix([[1,2,3],[2,4,6],[7,8,9]]).det()
+</script></div>
+    <p></p>
+<div class="linked_python"><script type="text/x-sage">
+round(numpy.linalg.det(A1))==round(numpy.linalg.det(A1.T)),\
+round(numpy.linalg.det(A1*B1))==round(numpy.linalg.det(B1*A1))==round(numpy.linalg.det(A1))*round(numpy.linalg.det(B1))
+</script></div>
+    <p></p>  
+<div class="linked_r"><script type="text/x-sage">
+%%r
+
+</script></div>
+    <p></p> 
+    <h2>3. Миноры и алгебраические дополнения</h2>
+      
+Матрицы знаков для определителей 3-ого и 4-ого порядка      
+      
+<div class="sage_latex"><script type="text/x-sage">
+%%latex
+
+</script></div>
+    <p></p>
+<div class="linked_sage"><script type="text/x-sage">
+
 </script></div>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
@@ -77,7 +105,7 @@ pretty_print('(A*B).det()=(B*A).det()=A.det()*B.det(): '+str((A*B).det()==(B*A).
 %%r
 
 </script></div>
-    <p></p>      
+    <p></p>       
     <h2>4. Задание</h2>
 Инициировать матрицу A (3x3), рассчитать определитель и исследовать его свойства, используя SageMath, Numpy, SymPy или R. 
 <br/><br/>Вычислить определитель с помощью разложения по третьему столбцу.
