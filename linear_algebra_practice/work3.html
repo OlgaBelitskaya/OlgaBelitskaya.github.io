@@ -123,9 +123,8 @@ M3.det()==M3[0,0]*M3.minors(2)[8]-M3[1,0]*M3.minors(2)[5]+M3[2,0]*M3.minors(2)[2
 <div class="linked_python"><script type="text/x-sage">
 def minor(m,i,j): return [row[:j]+row[j+1:] for row in (m[:i]+m[i+1:])]
 def deternminant(m):
-    if len(m) == 2: return m[0][0]*m[1][1]-m[0][1]*m[1][0]
-    det = 0
-    for c in range(len(m)): det+=((-1)**c)*m[0][c]*deternminant(minor(m,0,c))
+    if len(m)==2: return m[0][0]*m[1][1]-m[0][1]*m[1][0]
+    det=0; for c in range(len(m)): det+=((-1)**c)*m[0][c]*deternminant(minor(m,0,c))
     return det
 minor([[1,2,3],[-4,5,-6],[-7,8,-9]],1,1),deternminant([[1,2,3],[-4,5,-6],[-7,8,-9]])
 </script></div>
@@ -149,7 +148,7 @@ c(minor_matrix(A,1,2),minor(A,1,2),cofactor(A,1,2))
     <p></p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-
+c(det(A),(A[1,1]*minor(A,1,1)-A[2,1]*minor(A,2,1)+A[3,1]*minor(A,3,1)))
 </script></div>
     <p></p>
     <h2>4. Задание</h2>
