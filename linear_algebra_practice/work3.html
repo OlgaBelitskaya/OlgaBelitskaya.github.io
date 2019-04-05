@@ -92,6 +92,7 @@ sympy.Matrix([[1,2,3],[0,0,0],[7,8,9]]).det(),sympy.Matrix([[1,2,3],[2,4,6],[7,8
 </script></div>
     <p></p> 
 <div class="linked_r"><script type="text/x-sage">
+%%r
 print(c(det(A)==det(t(A)),all.equal(det(A%*%B),det(B%*%A),det(A)*det(B)),all.equal(det(-2*A),(-2)^(dim(A)[1])*det(A))))
 # linear dependence
 c(det(matrix(c(1,3,5,0,0,0,2,4,6),nrow=3,ncol=3)),det(matrix(c(1,3,5,2,6,10,2,4,6),nrow=3,ncol=3)))
@@ -117,6 +118,16 @@ M3.minors(2),M4.minors(3),A.minors(2),B.minors(2),C.minors(3)
 <div class="linked_sage"><script type="text/x-sage">
 # разложение определителя по первому столбцу
 M3.det()==M3[0,0]*M3.minors(2)[8]-M3[1,0]*M3.minors(2)[5]+M3[2,0]*M3.minors(2)[2]
+</script></div>
+    <p></p>
+<div class="linked_python"><script type="text/x-sage">
+def minor(m,i,j): return [row[:j]+row[j+1:] for row in (m[:i]+m[i+1:])]
+def deternminant(m):
+    if len(m) == 2: return m[0][0]*m[1][1]-m[0][1]*m[1][0]
+    det = 0
+    for c in range(len(m)): det+=((-1)**c)*m[0][c]*deternminant(minor(m,0,c))
+    return det
+minor([[1,2,3],[-4,5,-6],[-7,8,-9]],1,1),deternminant([[1,2,3],[-4,5,-6],[-7,8,-9]])
 </script></div>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
