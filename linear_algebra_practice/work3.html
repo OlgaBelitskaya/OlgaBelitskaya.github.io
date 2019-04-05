@@ -93,7 +93,7 @@ sympy.Matrix([[1,2,3],[0,0,0],[7,8,9]]).det(),sympy.Matrix([[1,2,3],[2,4,6],[7,8
     <p></p> 
 <div class="linked_r"><script type="text/x-sage">
 %%r
-print(c(det(A)==det(t(A)),all.equal(det(A%*%B),det(B%*%A),det(A)*det(B)),all.equal(det(-2*A),(-2)^(dim(A)[1])*det(A))))
+print(c(all.equal(det(A),det(t(A))),all.equal(det(A%*%B),det(B%*%A),det(A)*det(B)),all.equal(det(-2*A),(-2)^(dim(A)[1])*det(A))))
 # linear dependence
 c(det(matrix(c(1,3,5,0,0,0,2,4,6),nrow=3,ncol=3)),det(matrix(c(1,3,5,2,6,10,2,4,6),nrow=3,ncol=3)))
 </script></div>
@@ -131,9 +131,14 @@ minor([[1,2,3],[-4,5,-6],[-7,8,-9]],1,1),deternminant([[1,2,3],[-4,5,-6],[-7,8,-
 </script></div>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
-
+sympy.pprint(A2); sympy.pprint(A2.minorMatrix(0,0))
 </script></div>
-    <p></p>  
+    <p></p> 
+<div class="linked_python"><script type="text/x-sage">
+# разложение определителя по первому столбцу
+B2.det()==B2[0,0]*B2.minorMatrix(0,0).det()-B2[1,0]*B2.minorMatrix(1,0).det()+B2[2,0]*B2.minorMatrix(2,0).det()
+</script></div>
+    <p></p> 
 <div class="linked_r"><script type="text/x-sage">
 %%r
 minor_matrix <- function(A,i,j) A[-i,-j]
