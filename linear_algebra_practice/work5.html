@@ -190,7 +190,28 @@ SAb[2,:]=(11*SAb.row(2)+SAb.row(1))/4; SAb[3,:]=(11*SAb.row(3)+7*SAb.row(1))/2; 
     <p></p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-
+rref <- function(m) {
+  pivot <- 1
+  for(r in 1:nrow(m)) {
+    if (ncol(m)<=pivot) break;
+    i <- r
+    while(m[i,pivot]==0) {
+      i <- i+1
+      if (nrow(m)==i) {
+        i <- r
+        pivot <- pivot+1
+        if (ncol(m)==pivot) return(m)
+      }
+    }
+    trow <- m[i,]; m[i,] <- m[r,]; m[r,] <- trow; m[r,] <- m[r,]/m[r,pivot]
+    for(i in 1:nrow(m)) {
+      if (i!=r) m[i,] <- m[i,]-m[r,]*m[i,pivot]
+    }
+    pivot <- pivot+1
+  }
+  return(m)
+}
+A <- matrix(c(8,-5,-2,-2,35,-2,4,-4,1,-8,-2,1,4,4,-11,4,1,3,10,10),4,5,byrow=T); rref(A)
 </script></div>
     <p></p>
 Библиотека matlib здесь не установлена. Можно локально установить и запустить с R.<br/><br/>
