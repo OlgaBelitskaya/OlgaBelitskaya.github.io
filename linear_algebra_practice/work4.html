@@ -92,7 +92,7 @@ MS4,A,B,C,D
 %%r
 A <- matrix(sample.int(100,size=2*2,replace=T),nrow=2,ncol=2)
 B <- matrix(sample.int(100,size=3*3,replace=T),nrow=3,ncol=3)
-C <- matrix(sample.int(100,size=4*4,replace=T),nrow=4,ncol=4)
+M <- matrix(sample.int(100,size=4*4,replace=T),nrow=4,ncol=4)
 minor_matrix <- function(A,i,j) A[-i,-j]
 minor <- function(A,i,j) det(A[-i,-j])
 cofactor <- function(A,i,j) (-1)^(i+j)*minor(A,i,j)
@@ -107,17 +107,19 @@ library(Matrix)
     <p></p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-list(round(A%*%solve(A)), round(B%*%solve(B)), round(C%*%solve(C)))
+list(round(A%*%solve(A)), round(B%*%solve(B)), round(M%*%solve(M)))
 </script></div>      
     <p></p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-
+list(t(cofactor_matrix(B))/det(B),solve(B),B^(-1)) # !!! solve(B) != B^(-1) in R
 </script></div>      
     <p></p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-
+A <- M[1:2,1:2]; B <- M[1:2,3:4]; C <- M[3:4,1:2]; D <- M[3:4,3:4]
+print(c(det(A)*det(D-C%*%solve(A)%*%B),det(M)))
+list(M,A,B,C,D)
 </script></div>      
     <p></p>
       <h2>2. Ранг матрицы</h2>
