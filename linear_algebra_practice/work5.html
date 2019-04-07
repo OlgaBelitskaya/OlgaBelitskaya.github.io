@@ -193,7 +193,9 @@ SAb[0,:]=(SAb.row(0)+2*SAb.row(3)); SAb[1,:]=(SAb.row(1)-2*SAb.row(3)); SAb[2,:]
 </script></div>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
-
+# Умножим 3-ю строчку на 2 и сложим со 1-ой, 3-ю - на 18 и сложим со 2-ой
+# Поделим 2-ю на 11
+SAb[0,:]=SAb.row(0)+2*SAb.row(2); SAb[1,:]=(SAb.row(1)+18*SAb.row(2))/11; SAb
 </script></div>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
@@ -207,18 +209,9 @@ rref <- function(m) {
   for(r in 1:nrow(m)) {
     if (ncol(m)<=pivot) break;
     i <- r
-    while(m[i,pivot]==0) {
-      i <- i+1
-      if (nrow(m)==i) {
-        i <- r
-        pivot <- pivot+1
-        if (ncol(m)==pivot) return(m)
-      }
-    }
+    while(m[i,pivot]==0) {i <- i+1; if (nrow(m)==i) {i <- r; pivot <- pivot+1; if (ncol(m)==pivot) return(m)}}
     trow <- m[i,]; m[i,] <- m[r,]; m[r,] <- trow; m[r,] <- m[r,]/m[r,pivot]
-    for(i in 1:nrow(m)) {
-      if (i!=r) m[i,] <- m[i,]-m[r,]*m[i,pivot]
-    }
+    for(i in 1:nrow(m)) {if (i!=r) m[i,] <- m[i,]-m[r,]*m[i,pivot]}
     pivot <- pivot+1
   }
   return(m)
