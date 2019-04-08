@@ -53,7 +53,8 @@ a+b,c+d
     <p></p>
     <p>Активируйте этот код перед использованием любых ячеек Linked Python Cells</p>
 <div class="linked_python"><script type="text/x-sage">
-import numpy,sympy,sympy.vector; sympy.init_printing(use_unicode=True)
+import numpy,sympy,sympy.vector; from scipy.optimize import fsolve 
+sympy.init_printing(use_unicode=True)
 ni,nj,nk,nv=numpy.array([1,0,0]),numpy.array([0,1,0]),numpy.array([0,0,1]),numpy.array([2,3,2])
 na,nb=numpy.array(['a1','a2','a3'],dtype='string'),numpy.array(['+b1','+b2','+b3'],dtype='string')
 nc,nd=numpy.array([2,0,-2]),numpy.array([1,2,1])
@@ -144,10 +145,17 @@ vector_product3d(c,d)
 <div class="linked_sage"><script type="text/x-sage">
 var('k'); A,B=vector(SR,[a1,a2,a3]),vector(SR,[b1,b2,b3])
 C,D=vector(SR,[3,4,1]),vector(SR,[1,2,1])
-solve([(A+B-C)[0]==0,(A+B-C)[1]==0,(A+B-C)[2]==0, # A + B = C
-       A.dot_product(D)==0, # A ⊥ D
-       (k*D-B)[0]==0,(k*D-B)[1]==0,(k*D-B)[2]==0], # B || D
-      a1,a2,a3,b1,b2,b3,k)
+solution = solve([(A+B-C)[0]==0,(A+B-C)[1]==0,(A+B-C)[2]==0, # A + B = C
+                  A.dot_product(D)==0, # A ⊥ D
+                  (k*D-B)[0]==0,(k*D-B)[1]==0,(k*D-B)[2]==0], # B || D
+                 a1,a2,a3,b1,b2,b3,k)
+A=vector(SR,[solution[0][0].rhs(),solution[0][1].rhs(),solution[0][2].rhs()])
+B=vector(SR,[solution[0][3].rhs(),solution[0][4].rhs(),solution[0][5].rhs()])
+solution
+</script></div>
+    <p></p>
+<div class="linked_sage"><script type="text/x-sage">
+vs=[A,B,C,D]; vl=['A','B','C','D']; colors=['#3636ff','#36ff36','#ff3636','#ff36ff']
 </script></div>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
