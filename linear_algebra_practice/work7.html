@@ -159,9 +159,27 @@ vs=[A,B,C,D]; vl=['A','B','C','D']; colors=['#3636ff','#36ff36','#ff3636','#ff36
 </script></div>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
-
+def equations(v):
+    a1,a2,a3,b1,b2,b3,k=v
+    f1=a1+b1-3; f2=a2+b2-4; f3=a3+b3-1 # A + B = C
+    f4=a1*1+a2*2+a3*1 # A ⊥ D
+    f5=k*1-b1; f6=k*2-b2; f7=k*1-b3 # B || D 
+    return (f1,f2,f3,f4,f5,f6,f7)
+a1,a2,a3,b1,b2,b3,k = round(fsolve(equations,(0,0,0,0,0,0,0)))
+[(a1,a2,a3),(b1,b2,b3),k]
 </script></div>
-    <p></p>  
+    <p></p>
+<div class="linked_python"><script type="text/x-sage">
+a1,a2,a3,b1,b2,b3,k=sympy.symbols('a1 a2 a3 b1 b2 b3 k')
+A,B=sympy.Matrix([a1,a2,a3]),sympy.Matrix([b1,b2,b3])
+C,D=sympy.Matrix([3,4,1]),sympy.Matrix([1,2,1])
+a1,a2,a3,b1,b2,b3,k=sympy.nsolve(((A+B-C)[0],(A+B-C)[1],(A+B-C)[2], # A + B = C
+                                  A.dot(D), # A ⊥ D
+                                  (k*D-B)[0],(k*D-B)[1],(k*D-B)[2]), # B || D
+                                 (a1,a2,a3,b1,b2,b3,k),(0,0,0,0,0,0,0))
+[(a1,a2,a3),(b1,b2,b3),k]
+</script></div>
+    <p></p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
 
