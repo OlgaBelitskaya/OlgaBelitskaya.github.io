@@ -276,7 +276,7 @@ T <- seq(from=-1,to=1,by=0.1); print(T); line3D2(3,-1,-4,5,2,3,T)
     <p></p>      
 <div class="linked_sage"><script type="text/x-sage">
 var('x,y,z,t')
-xA,yA,zA,xB,yB,zB,xC,yC,zC,xD,yD,zD,xE,yE,zE = 2,5,3,3,2,1,4,1,2,1,4,4,0,6,7
+xA,yA,zA,xB,yB,zB,xC,yC,zC,xD,yD,zD,xE,yE,zE=2,5,3,3,2,1,4,1,2,1,4,4,0,6,7
 Pi=Matrix(SR,3,[x-xA,y-yA,z-zA,xB-xA,yB-yA,zB-zA,xC-xA,yC-yA,zC-zA]).det()==0
 l=[x==xD+(xE-xD)*t,y==yD+(yE-yD)*t,z==zD+(zE-zD)*t]
 solve([Pi,l[0],l[1],l[2]],x,y,z,t)
@@ -285,7 +285,7 @@ solve([Pi,l[0],l[1],l[2]],x,y,z,t)
 <div class="linked_python"><script type="text/x-sage">
 import sympy; sympy.init_printing(use_unicode=True)
 x,y,z,t=sympy.symbols('x,y,z,t')
-xA,yA,zA,xB,yB,zB,xC,yC,zC,xD,yD,zD,xE,yE,zE = 2,5,3,3,2,1,4,1,2,1,4,4,0,6,7
+xA,yA,zA,xB,yB,zB,xC,yC,zC,xD,yD,zD,xE,yE,zE=2,5,3,3,2,1,4,1,2,1,4,4,0,6,7
 Pi=sympy.Matrix([[x-xA,y-yA,z-zA],[xB-xA,yB-yA,zB-zA],[xC-xA,yC-yA,zC-zA]]).det()
 l=[x-xD-(xE-xD)*t,y-yD-(yE-yD)*t,z-zD-(zE-zD)*t]
 sympy.solve([Pi,l[0],l[1],l[2]],x,y,z,t)
@@ -324,7 +324,14 @@ sympy.solve([Pi,l[0],l[1],l[2]],x,y,z,t)
 <p>$cos \angle (l_1, l_2) = \frac{p_1p_2 + q_1q_2 + r_1r_2}{\sqrt{p_1^2 + q_1^2 + r_1^2}\sqrt{p_2^2 + q_2^2 + r_2^2}}$</p>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
-
+import numpy
+x1,y1,z1,x2,y2,z2=2,5,3,3,2,1 # A1∈l1,A2∈l2
+p1,q1,r1,p2,q2,r2=4,1,2,1,4,4 # s1||l1,s2||l2
+detD=numpy.linalg.det(numpy.matrix([[x2-x1,y2-y1,z2-z1],[p1,q1,r1],[p2,q2,r2]])) # Δ
+detDx=numpy.linalg.det(numpy.matrix([[q1,r1],[q2,r2]])) # Δx
+detDy=numpy.linalg.det(numpy.matrix([[p1,r1],[p2,r2]])) # Δy
+detDz=numpy.linalg.det(numpy.matrix([[p1,q1],[p2,q2]])) # Δz
+round(abs(detD)/(detDx**2+detDy**2+detDz**2)**0.5,2) # ρ(l1,l2)
 </script></div>
     <p></p>  
 <div class="linked_r"><script type="text/x-sage">
