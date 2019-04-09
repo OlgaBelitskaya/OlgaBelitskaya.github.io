@@ -366,7 +366,15 @@ Pi=(nx*(x-xO)+ny*(y-yO)+nz*(z-zO)==0)/(-7)
 </script></div>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
-
+import sympy; sympy.init_printing(use_unicode=True)
+x,y,z,t,i,j,k=sympy.symbols('x,y,z,t,i,j,k')
+x1,y1,z1,x2,y2,z2=4,2,-1,-1,5,10 # A1∈l1,A2∈l2
+p1,q1,r1,p2,q2,r2=-3,-1,1,2,3,4 # s1||l1,s2||l2
+l1=[(x-x1)/p1-(y-y1)/q1,(z-z1)/r1-(y-y1)/q1]; l2=[(x-x2)/p2-(y-y2)/q2,(z-z2)/r2-(y-y2)/q2]
+O=sympy.solve([l1[0],l1[1],l2[0],l2[1]],x,y,z) # O=l1∩l2, O∈π
+n=sympy.Matrix([[i,j,k],[p1,q1,r1],[p2,q2,r2]]).det() # n=s1xs2, n⊥π
+Pi=(n.coeff(i)*(x-O[x])+n.coeff(j)*(y-O[y])+n.coeff(i)*(z-O[z]))/(-7)
+'%s; '%str((O[x],O[y],O[z]))+'%s = 0'%str(Pi) # O,π
 </script></div>
     <p></p> 
     <h2>5. Задание</h2>
