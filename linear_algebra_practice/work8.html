@@ -275,11 +275,20 @@ T <- seq(from=-1,to=1,by=0.1); print(T); line3D2(3,-1,-4,5,2,3,T)
 </script></div>
     <p></p>      
 <div class="linked_sage"><script type="text/x-sage">
-
+var('x,y,z,t')
+xA,yA,zA,xB,yB,zB,xC,yC,zC,xD,yD,zD,xE,yE,zE = 2,5,3,3,2,1,4,1,2,1,4,4,0,6,7
+Pi=Matrix(SR,3,[x-xA,y-yA,z-zA,xB-xA,yB-yA,zB-zA,xC-xA,yC-yA,zC-zA]).det()==0
+l=[x==xD+(xE-xD)*t,y==yD+(yE-yD)*t,z==zD+(zE-zD)*t]
+solve([Pi,l[0],l[1],l[2]],x,y,z,t)
 </script></div>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
-
+import sympy; sympy.init_printing(use_unicode=True)
+x,y,z,t=sympy.symbols('x,y,z,t')
+xA,yA,zA,xB,yB,zB,xC,yC,zC,xD,yD,zD,xE,yE,zE = 2,5,3,3,2,1,4,1,2,1,4,4,0,6,7
+Pi=sympy.Matrix([[x-xA,y-yA,z-zA],[xB-xA,yB-yA,zB-zA],[xC-xA,yC-yA,zC-zA]]).det()
+l=[x-xD-(xE-xD)*t,y-yD-(yE-yD)*t,z-zD-(zE-zD)*t]
+sympy.solve([Pi,l[0],l[1],l[2]],x,y,z,t)
 </script></div>
     <p></p> 
     <h2>4. Взаимное расположение точек и прямых в пространстве</h2>
