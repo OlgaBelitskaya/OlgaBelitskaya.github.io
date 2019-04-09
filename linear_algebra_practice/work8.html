@@ -251,7 +251,15 @@ legend(-4,-2,labs,col=cols,lwd=3); grid(); dev.off()
 <p>$\overrightarrow{l}\{p;q;r\} \parallel l, \ M_0(x_0;y_0;z_0) \in l$</p>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
-
+import numpy; from mpl_toolkits.mplot3d import Axes3D
+X=numpy.linspace(start=-10,stop=10,num=20); T=numpy.linspace(start=-30,stop=30,num=20)
+def line3D1(x1,y1,z1,x2,y2,z2,x): return ((y2-y1)*(x-x1)/(x2-x1)+y1,(z2-z1)*(x-x1)/(x2-x1)+z1)
+def line3D2(x0,y0,z0,p,q,r,t): return(x0+p*t,y0+q*t,z0+r*t)
+fig=pylab.figure(); ax=fig.add_subplot(111,projection='3d')
+ax.plot(X,line3D1(3,-1,-1,5,2,2,X)[0],line3D1(3,-1,-1,5,2,2,X)[1],color='#3636ff',label='l1')
+ax.plot(line3D2(-3,1,1,2,-1,2,T)[0],line3D2(-3,1,1,2,-1,2,T)[1],line3D2(-3,1,1,2,-1,2,T)[2],color='#ff3636',label='l2')
+ax.legend(loc=9); ax.set_xlim(-30,30); ax.set_ylim(-30,30); ax.set_zlim(-30,30)
+pylab.show()
 </script></div>
     <p></p>  
 <div class="linked_r"><script type="text/x-sage">
