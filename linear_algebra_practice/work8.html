@@ -124,10 +124,12 @@ library(grDevices); library(Matrix)
 %%r
 svg(filename="Rplots.svg",width=7,height=7,pointsize=12,onefile=TRUE,
     family="sans",bg="white",antialias = c("default","none","gray","subpixel"))
-plot(X,line1(3,-1,-1,X),col='#3636ff',type="l",lwd=3,xlim=c(-5,5),ylim=c(-5,5),ylab='y')
-lines(X,line2(-3,1,1,X),col='#ff3636',lwd=3); lines(X,line3(-3,-2,-1,4,X),col='#36ff36',lwd=3) 
-grid(); lines(line4(1,-2,-1,3,T)[[1]],line4(1,-2,-1,3,T)[[2]],col='#ffff36',lwd=3)
-dev.off()
+cols <- c('#3636ff','#ff3636','#36ff36','#ffff36')
+labs <- c('3x-y-1=0','y=-3x+4','(y+2)/(4+2)=(x+3)/(-1+3)','x=2t+1,y=-4t-1')
+plot(X,line1(3,-1,-1,X),col=cols[1],type="l",lwd=3,xlim=c(-5,5),ylim=c(-5,5),ylab='y')
+lines(X,line2(-3,1,1,X),col=cols[2],lwd=3); lines(X,line3(-3,-2,-1,4,X),col=cols[3],lwd=3) 
+lines(line4(1,-2,-1,3,T)[[1]],line4(1,-2,-1,3,T)[[2]],col=cols[4],lwd=3)
+legend(-4,-2,labs,col=cols,lwd=3); grid(); dev.off()
 </script></div>      
     <p></p>
     <h2>2. Взаимное расположение точек и прямых на плоскости</h2>
