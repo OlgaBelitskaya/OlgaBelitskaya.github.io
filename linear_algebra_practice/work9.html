@@ -149,9 +149,9 @@ library(grDevices); library(Matrix)
 svg(filename="Rplots.svg",width=7,height=7,pointsize=12,onefile=TRUE,
     family="sans",bg="white",antialias = c("default","none","gray","subpixel"))
 cols <- c('#3636ff','#ff3636','#36ff36'); labs <- c('3x-y-z+2=0','3x+2y-z+1=0','-2x-2y-z-1=0')
-plot(X,Z1,col=cols[1],type='l',lwd=3,xlim=c(-10,10),ylim=c(-10,10),xlab='x (y=0)',ylab='z')
+plot(X,Z1,col=cols[1],type='l',lwd=3,xlim=c(-10,10),ylim=c(-10,10),xlab='x',ylab='z')
 lines(X,Z2,col=cols[2],lwd=3); lines(X,Z3,col=cols[3],lwd=3)
-legend(4,-4,title='y=0',labs,col=cols,lwd=3); grid(); dev.off()
+legend(4,-4,title='XOZ: y=0',labs,col=cols,lwd=3); grid(); dev.off()
 </script></div>      
     <p></p>
     <h2>2. Взаимное расположение точек, прямых и плоскостей</h2>
@@ -208,7 +208,7 @@ eq=[Matrix(SR,3,[x0-x1,y0-y1,z0-z1,x2-x1,y2-y1,z2-z1,x3-x1,y3-y1,z3-z1]).det()==
     (x0-x3)^2+(y0-y3)^2+(z0-z3)^2==(x0-x2)^2+(y0-y2)^2+(z0-z2)^2]
 O=solve(eq,x0,y0,z0)
 x0,y0,z0=O[0][0].rhs(),O[0][1].rhs(),O[0][2].rhs()
-R=sqrt((x0-x1)^2+(y0-y1)^2+(z0-z1)^2); R
+R=sqrt((x0-x1)^2+(y0-y1)^2+(z0-z1)^2); x0,y0,z0,R
 </script></div>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
@@ -218,7 +218,7 @@ eq=[sympy.Matrix([[x0-x1,y0-y1,z0-z1],[x2-x1,y2-y1,z2-z1],[x3-x1,y3-y1,z3-z1]]).
     (x0-x1)**2+(y0-y1)**2+(z0-z1)**2-(x0-x2)**2-(y0-y2)**2-(z0-z2)**2,
     (x0-x3)**2+(y0-y3)**2+(z0-z3)**2-(x0-x2)**2-(y0-y2)**2-(z0-z2)**2]
 O=sympy.solve(eq,x0,y0,z0); x0,y0,z0=O[x0],O[y0],O[z0]
-R=sympy.sqrt((x0-x1)**2+(y0-y1)**2+(z0-z1)**2); R
+R=sympy.sqrt((x0-x1)**2+(y0-y1)**2+(z0-z1)**2); x0,y0,z0,R
 </script></div>
     <p></p>
 Решение с уравнениями первого порядка
@@ -234,7 +234,21 @@ R=sympy.sqrt((x0-x1)**2+(y0-y1)**2+(z0-z1)**2); R
 <p>$O \in \pi, \pi_1, \pi_2$</p>   
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
-
+import numpy; xA,yA,zA,xB,yB,zB,xC,yC,zC=1,1,3,-1,2,2,7,-3,1
+# π
+a1=numpy.array([(yB-yA)*(zC-zA)-(yC-yA)*(zB-zA),-(xB-xA)*(zC-zA)+(xC-xA)*(zB-zA),(xB-xA)*(yC-yA)-(xC-xA)*(yB-yA)])
+b1=sum(numpy.array([xA,yA,zA])*a1)
+# π1
+a2=numpy.array([xB-xA,yB-yA,zB-zA])
+b2=sum(numpy.array([(xA+xB)/2,(yA+yB)/2,(zA+zB)/2])*a2)
+# π2
+a3=numpy.array([xC-xA,yC-yA,zC-zA])
+b3=sum(numpy.array([(xA+xC)/2,(yA+yC)/2,(zA+zC)/2])*a3)
+# O,R
+a=numpy.array([a1,a2,a3]); b=numpy.array([b1,b2,b3]) 
+[x0,y0,z0]=numpy.linalg.solve(a,b)
+R=numpy.sqrt((x0-x1)**2+(y0-y1)**2+(z0-z1)**2)
+print(a); print(b); print([x0,y0,z0]); print(R)
 </script></div>      
     <p></p>  
 <div class="linked_r"><script type="text/x-sage">
