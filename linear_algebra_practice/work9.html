@@ -253,7 +253,21 @@ print(a); print(b); print([x0,y0,z0]); print(R)
     <p></p>  
 <div class="linked_r"><script type="text/x-sage">
 %%r
-
+xA <- 1; yA <- 1; zA <- 3; xB <- -1; yB <- 2; zB <- 2; xC <- 7; yC <- -3; zC <- 1
+# π
+a1 <- c((yB-yA)*(zC-zA)-(yC-yA)*(zB-zA),-(xB-xA)*(zC-zA)+(xC-xA)*(zB-zA),(xB-xA)*(yC-yA)-(xC-xA)*(yB-yA))
+b1 <- sum(c(xA,yA,zA)*a1)
+# π1
+a2 <- c(xB-xA,yB-yA,zB-zA)
+b2 <- sum(c((xA+xB)/2,(yA+yB)/2,(zA+zB)/2)*a2)
+# π2
+a3 <- c(xC-xA,yC-yA,zC-zA)
+b3 <- sum(c((xA+xC)/2,(yA+yC)/2,(zA+zC)/2)*a3)
+# O,R
+a <- matrix(c(a1,a2,a3),ncol=3,byrow=T); b <- c(b1,b2,b3)
+O <- solve(a,b); x0 <- O[1]; y0 <- O[2]; z0 <- O[3]
+R <- sqrt((x0-xA)^2+(y0-yA)^2+(z0-zA)^2)
+print(a); print(b); print(O); R
 </script></div>
     <p></p> 
     <h2>3. Задание</h2>
