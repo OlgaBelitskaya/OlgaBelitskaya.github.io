@@ -91,7 +91,7 @@ t=sum([text3d(labels[i],text_xyz[i],color=colors[i]) for i in [0..2]])
 import numpy,sympy,pylab; sympy.init_printing(use_unicode=True)
 from mpl_toolkits.mplot3d import Axes3D
 
-X=numpy.linspace(start=-10,stop=10,num=50); X,Y=numpy.meshgrid(X,Y)
+X=numpy.linspace(start=-10,stop=10,num=50); X,Y=numpy.meshgrid(X,X)
 def plane1(a,b,c,d,x,y): return -(a*x+b*y+d)/c
 def plane2(a,b,c,x0,y0,z0,x,y): return -(a*(x-x0)+b*(y-y0))/c+z0
 def plane3(x1,y1,z1,x2,y2,z2,x3,y3,z3,x,y):
@@ -110,7 +110,11 @@ eq=[a*x+b*y+c*z+d,
 </script></div>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
-
+solutions=[sympy.solve([eq[0],a-3,b+1,c+1,d-2],a,b,c,d,z),
+           sympy.solve([eq[1],a-3,b-2,c+1,x0-1,y0+1,z0-2],a,b,c,x0,y0,z0,z),
+           sympy.solve([eq[2],x1+3,y1-2,z1-1,x2-1,y2+3,z2-3,x3+2,y3-1,z3-1],x1,y1,z1,x2,y2,z2,x3,y3,z3,z),
+           sympy.solve([eq[3],eq[4],eq[5],x0+1,y0-2,z0+2,p1-2,q1-1,r1+1,p2+2,q2+3,r2-2],x0,y0,z0,p1,q1,r1,p2,q2,r2,x,y,z)]
+for s in solutions: sympy.pprint(s); print('\n')
 </script></div>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
