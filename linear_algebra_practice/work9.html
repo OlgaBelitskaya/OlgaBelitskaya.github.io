@@ -90,9 +90,23 @@ t=sum([text3d(labels[i],text_xyz[i],color=colors[i]) for i in [0..2]])
 <div class="linked_python"><script type="text/x-sage">
 import numpy,sympy,pylab; sympy.init_printing(use_unicode=True)
 from mpl_toolkits.mplot3d import Axes3D
+
+X=numpy.linspace(start=-10,stop=10,num=50); X,Y=numpy.meshgrid(X,Y)
+def plane1(a,b,c,d,x,y): return -(a*x+b*y+d)/c
+def plane2(a,b,c,x0,y0,z0,x,y): return -(a*(x-x0)+b*(y-y0))/c+z0
+def plane3(x1,y1,z1,x2,y2,z2,x3,y3,z3,x,y):
+    detX=(y2-y1)*(z3-z1)-(y3-y1)*(z2-z1)
+    detY=(x2-x1)*(z3-z1)-(x3-x1)*(z2-z1)
+    detZ=(x2-x1)*(y3-y1)-(x3-x1)*(y2-y1)
+    return z1-((x-x1)*detX-(y-y1)*detY)/detZ
+Z1=plane1(3,-1,-1,2,X,Y); Z2=plane2(3,2,-1,1,-1,2,X,Y); Z3=plane3(-3,2,1,1,-3,3,-2,1,1,X,Y)
+
 x,y,z,x0,y0,z0,x1,y1,z1,x2,y2,z2,x3,y3,z3=sympy.symbols('x,y,z,x0,y0,z0,x1,y1,z1,x2,y2,z2,x3,y3,z3')
 a,b,c,d,p1,q1,r1,p2,q2,r2,t1,t2=sympy.symbols('a,b,c,d,p1,q1,r1,p2,q2,r2,t1,t2')
-
+eq=[a*x+b*y+c*z+d,
+    a*(x-x0)+b*(y-y0)+c*(z-z0),
+    sympy.Matrix([[x-x1,y-y1,z-z1],[x2-x1,y2-y1,z2-z1],[x3-x1,y3-y1,z3-z1]]).det(),
+    x-x0-p1*t1-p2*t2,y-y0-q1*t1-q2*t2,z-z0-r1*t1-r2*t2]
 </script></div>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
