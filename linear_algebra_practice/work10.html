@@ -145,7 +145,7 @@ ax.legend(lines,labels,loc=1); pylab.show()
     <p>Активируйте этот код перед использованием любых ячеек Linked R Cells</p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-X1 <- seq(from=-1,to=3,by=0.1); X2 <- seq(from=-4,to=6,by=0.2); T <- seq(from=0,to=2*pi,by=0.1)
+X1 <- seq(from=-1,to=3,by=0.1); X2 <- seq(from=-4,to=6,by=0.2); T <- seq(from=0,to=2*pi+0.1,by=0.1)
 circle1 <- function(x0,y0,r,x){list(-(r**2-(x-x0)**2)**0.5+y0,(r**2-(x-x0)**2)**0.5+y0)}
 circle2 <- function(x0,y0,r,t){list(r*cos(t)+x0,r*sin(t)+y0)}
 ellipse1 <- function(x0,y0,p,q,x){list(-q/p*(p**2-(x-x0)**2)**0.5+y0,q/p*(p**2-(x-x0)**2)**0.5+y0)}
@@ -168,8 +168,12 @@ library(grDevices); library(Matrix)
 %%r
 svg(filename="Rplots.svg",width=7,height=7,pointsize=12,onefile=TRUE,
     family="sans",bg="white",antialias = c("default","none","gray","subpixel"))
-
-dev.off()
+cols <- c('#3636ff','#ff3636','#36ff36','#ff36ff')
+plot(X1,Y1[1,],col=cols[1],type='l',lwd=3,xlim=c(-7,7),ylim=c(-7,7),xlab='x',ylab='y')
+lines(X1,Y1[2,],col=cols[1],lwd=3); lines(XY[1,],XY[2,],col=cols[2],lwd=3)
+lines(X2,Y2[1,],col=cols[3],lwd=3); lines(X2,Y2[2,],col=cols[3],lwd=3)
+lines(XY2[1,],XY2[2,],col=cols[4],lwd=3)
+grid(); dev.off()
 </script></div>      
     <p></p>
     <h2>2. Гипербола</h2>
