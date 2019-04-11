@@ -145,7 +145,22 @@ ax.legend(lines,labels,loc=1); pylab.show()
     <p>Активируйте этот код перед использованием любых ячеек Linked R Cells</p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-
+X1 <- seq(from=-1,to=3,by=0.1); X2 <- seq(from=-4,to=6,by=0.2); T <- seq(from=0,to=2*pi,by=0.1)
+circle1 <- function(x0,y0,r,x){list(-(r**2-(x-x0)**2)**0.5+y0,(r**2-(x-x0)**2)**0.5+y0)}
+circle2 <- function(x0,y0,r,t){list(r*cos(t)+x0,r*sin(t)+y0)}
+ellipse1 <- function(x0,y0,p,q,x){list(-q/p*(p**2-(x-x0)**2)**0.5+y0,q/p*(p**2-(x-x0)**2)**0.5+y0)}
+ellipse2 <- function(a,b,c,d,e,f,t) {
+    M <- matrix(c(f,d/2,e/2,d/2,a,b/2,e/2,b/2,c),nrow=3,byrow=TRUE)
+    m <- matrix(c(a,b/2,b/2,c),nrow=2,byrow=TRUE)
+    mlambda <- eigen(m)$values
+    p <- sqrt(-det(M)/(det(m)*mlambda[1])); q <- sqrt(-det(M)/(det(m)*mlambda[2]))
+    x0 <- (b*e-2*c*d)/(4*a*c-b^2); y0 <- (b*d-2*a*e)/(4*a*c-b^2)
+    phi <- (pi/2-atan((a-c)/b))/2 
+    x <- x0+p*cos(t)*cos(phi)-q*sin(t)*sin(phi); y <- y0+p*cos(t)*sin(phi)+q*sin(t)*cos(phi)
+    list(x,y)
+}
+Y1 <- sapply(X1,circle1,x0=1,y0=-1,r=2); XY <- sapply(T,circle2,x0=-1,y0=1,r=3)
+Y2 <- sapply(X2,ellipse1,x0=1,y0=-1,p=5,q=4); XY2 <- sapply(T,ellipse2,a=1,b=1,c=1,d=2,e=6,f=3)
 library(grDevices); library(Matrix)
 </script></div>
     <p></p>
