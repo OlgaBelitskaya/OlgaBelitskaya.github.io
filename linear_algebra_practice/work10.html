@@ -75,7 +75,7 @@ eq1=[(x-x0)**2+(y-y0)**2-r**2==0,
 solutions1=[solve([eq1[0],x0==1,y0==-1,r==2],x0,y0,r,y),
             solve([eq1[1],eq1[2],x0==-1,y0==1,r==3],x0,y0,r,x,y),
             solve([eq1[3],x0==1,y0==-1,p==5,q==4],x0,y0,p,q,y),
-            solve([eq[4],a==1,b==1,c==1,d==2,e==6,f==3],a,b,c,d,e,f,y)]
+            solve([eq1[4],a==1,b==1,c==1,d==2,e==6,f==3],a,b,c,d,e,f,y)]
 for s in solutions1: pretty_print(s)
 </script></div>
     <p></p>
@@ -86,8 +86,11 @@ labels=['$(x-1)^2+(y+1)^2=2^2$','$x=3 \cos t-1, \ y=3 \sin t+1$',
         '$(x-1)^2/5^2+(y+1)^2/4^2=1$','$x^2+xy+y^2+2x+6y+3=0$']
 p1=implicit_plot(f1[0],(-2,4),(-4,2),color=colors[0])+parametric_plot(f1[1],(0,2*pi),color=colors[1])+\
    implicit_plot(f1[2],(-5,7),(-5,5),color=colors[2])+implicit_plot(f1[3],(-5,5),(-8,1),color=colors[3])
+p11=points([(-2,-1),(4,-1),(4.5,-4/5*sqrt(-4.5^2+2*4.5+24)-1)],color=colors[2],size=100,marker='*')
+p12=line([(-2,-1),(4.5,-4/5*sqrt(-4.5^2+2*4.5+24)-1),(4,-1)],linestyle=':',thickness=2,color=colors[2])
+p13=implicit_plot((x-1)*(4.5-1)/5**2+(y+1)*(-4/5*sqrt(-4.5^2+2*4.5+24)-1+1)/4**2-1,(1,7),(-6,-2),linestyle='--',color=colors[2])
 t1=sum([text(labels[i],text_xy[i],color=colors[i],fontsize=15) for i in [0..3]])
-(p1+t1).show(gridlines=True,figsize=(7,7))
+(p1+t1+p11+p12+p13).show(gridlines=True,figsize=(7,7))
 </script></div>
     <p></p>
     <p>Активируйте этот код перед использованием любых ячеек Linked Python Cells</p>
