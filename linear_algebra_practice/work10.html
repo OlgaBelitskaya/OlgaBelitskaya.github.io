@@ -233,6 +233,11 @@ diff_distance==2*p,round(diff_distance)==2*p
 </script></div>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
+T=numpy.linspace(start=-1.7,stop=1.7,num=50); X=numpy.linspace(start=-10,stop=10,num=50); X,Y=numpy.meshgrid(X,X)
+def hyperbole1(x0,y0,p,q,x,y): return (x-x0)**2/p**2-(y-y0)**2/q**2-1
+def hyperbole2(x0,y0,p,q,t): return numpy.array([p*cosh(t)+x0,q*sinh(t)+y0,-p*cosh(t)+x0,-q*sinh(t)+y0])
+def hyperbole3(a,b,c,d,e,f,x,y): return a*x**2+b*x*y+c*y**2+d*x+e*y+f
+
 x,y,x0,y0,a,b,c,d,e,f,p,q,t=sympy.symbols('x,y,x0,y0,a,b,c,d,e,f,p,q,t')
 eq2=[(x-x0)**2/p**2-(y-y0)**2/q**2-1,[x-p*cosh(t)-x0,y-q*sinh(t)-y0],a*x**2+b*x*y+c*y**2+d*x+e*y+f]
 solutions2=[sympy.solve([eq2[0],x0-1,y0+1,p-3,q-4],x0,y0,p,q,y),
