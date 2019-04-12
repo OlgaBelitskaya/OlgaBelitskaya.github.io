@@ -260,19 +260,16 @@ ax.set_xlim(-10,10); ax.set_ylim(-10,10); ax.legend(lines,labels,loc=1); pylab.s
     <p></p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-X1 <- seq(from=-10,to=-2,by=0.5); X2 <- seq(from=4,to=10,by=0.5); T <- seq(from=-2,to=2,by=0.05)
+X1 <- X2 <- seq(from=-10,to=10,by=0.5); T <- seq(from=-2,to=2,by=0.05)
 hyperbole1 <- function(x0,y0,p,q,x){list(-q/p*((x-x0)**2-p**2)**0.5+y0,q/p*((x-x0)**2-p**2)**0.5+y0)}
 hyperbole2 <- function(x0,y0,p,q,t){list(p*cosh(t)+x0,q*sinh(t)+y0)}
-hyperbole3 <- function(a,b,c,d,e,f,t) {
-    M <- matrix(c(f,d/2,e/2,d/2,a,b/2,e/2,b/2,c),nrow=3,byrow=TRUE)
-    m <- matrix(c(a,b/2,b/2,c),nrow=2,byrow=TRUE)
-    mlambda <- eigen(m)$values
-    p <- sqrt(-det(M)/(det(m)*mlambda[1])); q <- sqrt(-det(M)/(det(m)*mlambda[2]))
-    x0 <- (b*e-2*c*d)/(4*a*c-b^2); y0 <- (b*d-2*a*e)/(4*a*c-b^2)
-    phi <- (pi/2-atan((a-c)/b))/2 
-    x <- x0+p*cos(t)*cos(phi)-q*sin(t)*sin(phi); y <- y0+p*cos(t)*sin(phi)+q*sin(t)*cos(phi)
-    list(x,y)
+hyperbole3 <- function(a,b,c,d,e,f,X,Y) {
+    func <- function(x,y) {a*x**2+b*x*y+c*y**2+d*x+e*y+f}
+    Z <- outer(X,Y,func); Z[is.na(Z)] <- 0; list(Z,-Z)
 }
+Y1 <- sapply(X1,hyperbole1,x0=1,y0=-1,p=3,q=4); Y2 <- sapply(X2,hyperbole1,x0=1,y0=-1,p=3,q=4)
+XY <- sapply(T,hyperbole2,x0=-1,y0=1,p=3,q=4); XY2 <- hyperbole3(1,1,-1,2,6,3,X1,X2);
+dim(data.frame(XY2[1]))
 </script></div>
     <p></p>
 <div class="linked_r"><script type="text/x-sage">
