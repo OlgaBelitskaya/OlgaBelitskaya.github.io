@@ -323,11 +323,6 @@ t3=sum([text(labels[i],text_xy[i],color=colors[i],fontsize=15) for i in [0..2]])
 </script></div>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
-X=numpy.linspace(start=-12,stop=12,num=50); X,Y=numpy.meshgrid(X,X)
-def parabole1(x0,y0,p,x,y): return (y-y0)**2-2*p*(x-x0)
-def parabole2(a,b,c,d,e,f,x,y): return a*x**2+b*x*y+c*y**2+d*x+e*y+f
-def parabole3(a,d,e,f,x,y): return a*x**2+d*x+e*y+f
-
 x,y,x0,y0,a,b,c,d,e,f,p = sympy.symbols('x,y,x0,y0,a,b,c,d,e,f,p')
 eq3=[(y-y0)**2-2*p*(x-x0),a*x**2+b*x*y+c*y**2+d*x+e*y+f,a*x**2+d*x+e*y+f]
 solutions3=[sympy.solve([eq3[0],x0-1,y0+1,p-3],x0,y0,p,y),
@@ -337,7 +332,17 @@ for s in solutions3: display(s); print('\n')
 </script></div>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
+X=numpy.linspace(start=-12,stop=12,num=50); X,Y=numpy.meshgrid(X,X)
+def parabole1(x0,y0,p,x,y): return (y-y0)**2-2*p*(x-x0)
+def parabole2(a,b,c,d,e,f,x,y): return a*x**2+b*x*y+c*y**2+d*x+e*y+f
+def parabole3(a,d,e,f,x,y): return a*x**2+d*x+e*y+f
 
+fig=pylab.figure(figsize=(7,7)); ax=fig.add_subplot(111); pylab.grid()
+colors=['#3636ff','#ff3636','#36ff36']
+lines=[Line2D([0],[0],color=c,linewidth=2,linestyle='-') for c in colors]
+labels=['$(y+1)^2=2*3*(x-1)$','$x^2-4xy+4y^2+x+4y+3=0$','$2x^2+4x+y-7=0$']
+
+ax.set_xlim(-10,10); ax.set_ylim(-10,10); ax.legend(lines,labels,loc=1); pylab.show()
 </script></div>
     <p></p>
 <div class="linked_r"><script type="text/x-sage">
