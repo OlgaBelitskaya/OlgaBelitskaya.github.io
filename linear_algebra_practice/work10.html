@@ -348,7 +348,15 @@ ax.set_xlim(-10,10); ax.set_ylim(-10,10); ax.legend(lines,labels,loc=1); pylab.s
     <p></p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-
+X <- Y <- seq(from=-12,to=12,by=0.5)
+parabola1 <- function(x0,y0,p,y){(y-y0)**2/2/p+x0}
+parabola2 <- function(a,b,c,d,e,f,X,Y) {
+    func <- function(x,y) {a*x**2+b*x*y+c*y**2+d*x+e*y+f}
+    Z <- outer(X,Y,func); Z[is.na(Z)] <- 0; list(Z,-Z)
+}
+parabola3 <- function(a,d,e,f,x){-(a*x**2+d*x+f)/e}
+X1 <- sapply(Y,parabola1,x0=1,y0=-1,p=3); Y3 <- sapply(X,parabola3,a=2,d=4,e=1,f=-7)
+XY <- parabola2(1,-4,4,1,4,3,X,Y); dim(data.frame(XY[1]))
 </script></div>
     <p></p>
 <div class="linked_r"><script type="text/x-sage">
