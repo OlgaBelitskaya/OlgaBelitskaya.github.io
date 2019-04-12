@@ -233,11 +233,6 @@ diff_distance==2*p,round(diff_distance)==2*p
 </script></div>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
-T=numpy.linspace(start=-1.7,stop=1.7,num=50); X=numpy.linspace(start=-10,stop=10,num=50); X,Y=numpy.meshgrid(X,X)
-def hyperbole1(x0,y0,p,q,x,y): return (x-x0)**2/p**2-(y-y0)**2/q**2-1
-def hyperbole2(x0,y0,p,q,t): return numpy.array([p*cosh(t)+x0,q*sinh(t)+y0,-p*cosh(t)+x0,-q*sinh(t)+y0])
-def hyperbole3(a,b,c,d,e,f,x,y): return a*x**2+b*x*y+c*y**2+d*x+e*y+f
-
 x,y,x0,y0,a,b,c,d,e,f,p,q,t=sympy.symbols('x,y,x0,y0,a,b,c,d,e,f,p,q,t')
 eq2=[(x-x0)**2/p**2-(y-y0)**2/q**2-1,[x-p*cosh(t)-x0,y-q*sinh(t)-y0],a*x**2+b*x*y+c*y**2+d*x+e*y+f]
 solutions2=[sympy.solve([eq2[0],x0-1,y0+1,p-3,q-4],x0,y0,p,q,y),
@@ -247,7 +242,20 @@ for s in solutions2: display(s); print('\n')
 </script></div>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
+T=numpy.linspace(start=-2,stop=2,num=50); X=numpy.linspace(start=-10,stop=10,num=50); X,Y=numpy.meshgrid(X,X)
+def hyperbole1(x0,y0,p,q,x,y): return (x-x0)**2/p**2-(y-y0)**2/q**2-1
+def hyperbole2(x0,y0,p,q,t): return numpy.array([p*cosh(t)+x0,q*sinh(t)+y0,-p*cosh(t)+x0,-q*sinh(t)+y0])
+def hyperbole3(a,b,c,d,e,f,x,y): return a*x**2+b*x*y+c*y**2+d*x+e*y+f
 
+fig=pylab.figure(figsize=(7,7)); ax=fig.add_subplot(111); pylab.grid()
+colors=['#3636ff','#ff3636','#ff9696','#36ff36']
+lines=[Line2D([0],[0],color=c,linewidth=2,linestyle='-') for c in colors]
+labels=['$(x-1)^2/3^2-(y+1)^2/4^2=1$', '$x=3 \cosh t-1$\n$y=4 \sinh t+1$', 
+        '$x=-3 \cosh t-1$\n$y=-4 \sinh t+1$', '$x^2+xy-y^2+2x+6y+3=0$']
+ax.contour(X,Y,hyperbole1(1,-1,3,4,X,Y),[0],colors=colors[0])
+[ax.plot(hyperbole2(-1,1,3,4,T)[2*i],hyperbole2(-1,1,3,4,T)[2*i+1],color=colors[i+1]) for i in [0,1]]
+ax.set_xlim(-10,10); ax.set_ylim(-10,10)
+ax.legend(lines,labels,loc=1); pylab.show()
 </script></div>
     <p></p>
 <div class="linked_r"><script type="text/x-sage">
