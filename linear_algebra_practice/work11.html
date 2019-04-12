@@ -53,12 +53,14 @@ for s in sol1: pretty_print(s)
 </script></div>
     <p></p>      
 <div class="linked_sage"><script type="text/x-sage">
-s=(-4,4); colors=['#3636ff','#ff3636']
+var('x,y,z,t1,t2'); s=(-4,4); colors=['#3636ff','#ff3636','#ff36ff']; text_xyz=[(4,4,4),(-4,-4,4),(-4,4,4)]
+labels=['x^2+y^2+z^2=4^2','x=3cos(t1)*sin(t2)\ny=3sin(t1)*sin(t2)\nz=3cos(t1)','x^2/1^2+y^2/2^2+z^2/3^2=1']
 f1=[x^2+y^2+z^2-4^2,(3*cos(t1)*sin(t2),3*sin(t1)*sin(t2),3*cos(t2)),x^2/1^2+y^2/2^2+z^2/3^2-1] 
 p1=implicit_plot3d(f1[0],s,s,s,opacity=0.2,color=colors[0])+\
    parametric_plot3d(f1[1],(0,2*pi),(0,pi),opacity=0.2,color=colors[1])+\
    implicit_plot3d(f1[2],s,s,s,color=(abs(x).function(x,y,z),colormaps.bwr_r))
-p1.show()
+t1=sum([text3d(labels[i],text_xyz[i],color=colors[i],fontsize=12) for i in [0..2]])
+(p1+t1).show()
 </script></div>
     <p></p>
 <div class="linked_sage"><script type="text/x-sage">
