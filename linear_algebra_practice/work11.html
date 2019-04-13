@@ -118,11 +118,19 @@ dev.off()
 <p>$\frac{x^2}{p^2} + \frac{y^2}{q^2} - \frac{z^2}{r^2} = 0$</p>
     <p></p>
 <div class="linked_sage"><script type="text/x-sage">
-
+var('x,y,z,p,q,r')
+eq2=[x^2/p^2+y^2/q^2-z^2/r^2==-1,x^2/p^2+y^2/q^2-z^2/r^2==1,x^2/p^2+y^2/q^2-z^2/r^2==0]
+sol2=[solve([eq2[0],p==1,q==2,r==3],p,q,r,z),
+      solve([eq2[1],p==3,q==4,r==5],p,q,r,z),
+      solve([eq2[2],p==2,q==3,r==4],p,q,r,z)]
+for s in sol2: pretty_print(s)
 </script></div>
     <p></p>
 <div class="linked_sage"><script type="text/x-sage">
-
+var('x,y,z'); s=(-7,7); colors=['#ff36ff','#ff3636','#3636ff'] 
+f2=[x^2/1^2+y^2/2^2-z^2/3^2+1,x^2/3^2+y^2/4^2-z^2/5^2-1,x^2/2^2+y^2/3^2-z^2/4^2]
+[pretty_print(html('<left><font color="%s">$%s = 0$</font></left>'%(colors[i],latex(f2[i])))) for i in [0..2]]
+sum([implicit_plot3d(f2[i],s,s,s,opacity=ops[i],color=colors[i],mesh=True) for i in [0..2]]).show()
 </script></div>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
