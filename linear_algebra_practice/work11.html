@@ -48,19 +48,20 @@ $(t_1, t_2)$ - внутренние координаты поверхности
 <div class="linked_sage"><script type="text/x-sage">
 var('x,y,z,R,p,q,r,t1,t2')
 eq1=[x^2+y^2+z^2-R^2==0,[x==R*cos(t1)*sin(t2),y==R*sin(t1)*sin(t2),z==R*cos(t2)],x^2/p^2+y^2/q^2+z^2/r^2==1]
-sol1=[solve([eq1[0],R==4],R,z),solve([eq1[1][0],eq1[1][1],eq1[1][2],R==3],R,x,y,z),solve([eq1[2],p==1,q==2,r==3],p,q,r,z)]
+sol1=[solve([eq1[0],R==4],R,z),
+      solve([eq1[1][0],eq1[1][1],eq1[1][2],R==3],R,x,y,z),
+      solve([eq1[2],p==1,q==2,r==3],p,q,r,z)]
 for s in sol1: pretty_print(s)
 </script></div>
     <p></p>      
 <div class="linked_sage"><script type="text/x-sage">
-var('x,y,z,t1,t2'); s=(-4,4); colors=['#3636ff','#ff3636','#ff36ff']; text_xyz=[(4,4,4),(-4,-4,4),(-4,4,4)]
-labels=['x^2+y^2+z^2=4^2','x=3cos(t1)*sin(t2)\ny=3sin(t1)*sin(t2)\nz=3cos(t2)','x^2/1^2+y^2/2^2+z^2/3^2=1']
-f1=[x^2+y^2+z^2-4^2,(3*cos(t1)*sin(t2),3*sin(t1)*sin(t2),3*cos(t2)),x^2/1^2+y^2/2^2+z^2/3^2-1] 
-p1=implicit_plot3d(f1[0],s,s,s,opacity=0.2,color=colors[0])+\
-   parametric_plot3d(f1[1],(0,2*pi),(0,pi),opacity=0.2,color=colors[1])+\
-   implicit_plot3d(f1[2],s,s,s,color=(abs(x).function(x,y,z),colormaps.bwr_r))
-t1=sum([text3d(labels[i],text_xyz[i],color=colors[i],fontsize=12) for i in [0..2]])
-(p1+t1).show()
+var('x,y,z,t1,t2'); s=(-4,4); colors=['#3636ff','#ff3636','#ff36ff']
+f1=[x^2+y^2+z^2-4^2,(3*cos(t1)*sin(t2),3*sin(t1)*sin(t2),3*cos(t2)),x^2/1^2+y^2/2^2+z^2/3^2-1]
+pretty_print(html('<left><font color="%s">$(x,y,z) = %s$</font></left>'%(colors[1],latex(f1[1]))))
+[pretty_print(html('<left><font color="%s">$%s = 0$</font></left>'%(colors[i],latex(f1[i])))) for i in [0,2]]
+(implicit_plot3d(f1[0],s,s,s,opacity=0.3,color=colors[0])+\
+ parametric_plot3d(f1[1],(0,2*pi),(0,pi),opacity=0.3,color=colors[1])+\
+ implicit_plot3d(f1[2],s,s,s,color=(abs(x).function(x,y,z),colormaps.bwr_r))).show()
 </script></div>
     <p></p>
 Выбор цветовых решений. 
@@ -86,7 +87,7 @@ angle=numpy.linspace(0,2*numpy.pi,64); T1,T2=numpy.meshgrid(angle,angle)
 X=numpy.cos(T1)*numpy.sin(T2); Y=numpy.sin(T1)*numpy.sin(T2); Z=numpy.cos(T2)
 labels=['$x^2+y^2+z^2=4^2$','$x=3cos(t_1)*sin(t_2)$\n$y=3sin(t_1)*sin(t_2)$\n$z=3cos(t_2)$','$x^2/1^2+y^2/2^2+z^2/3^2=1$']
 colors=['#3636ff','#ff3636','#ff36ff']
-fig=pylab.figure(figsize=(10,10)); ax=fig.add_subplot(111,projection='3d')
+fig=pylab.figure(figsize=(7,7)); ax=fig.add_subplot(111,projection='3d')
 ax.plot_surface(4*X,4*Y,4*Z,color=colors[0],alpha=0.1)
 ax.plot_surface(3*X,3*Y,3*Z,color=colors[1],alpha=0.1)
 ax.plot_surface(1*X,2*Y,3*Z,cmap=pylab.cm.bwr_r,linewidth=1,antialiased=True,rstride=1,cstride=1)
