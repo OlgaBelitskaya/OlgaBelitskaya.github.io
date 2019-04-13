@@ -294,9 +294,42 @@ ax.legend(fake2Dlines,labels,loc=9); pylab.show()
     <p></p>  
 <div class="linked_r"><script type="text/x-sage">
 %%r
-
+X <- Z <- seq(from=-3,to=3,by=0.1)
+planes1 <- function(p, q, X, Z) {
+    for (x in X) {
+        for (z in Z) {
+            y <- x*q/p
+            if (min(X) <= y && y <= max(X)) {
+                v <- c(x,y,z,x,-y,z); v <- replace(v,is.na(v),0)
+                write.table(matrix(v,nrow=2,ncol=3,byrow=T),file ="planes1.csv",append=T,quote=F,col.names=F,row.names=F)
+            }
+        }
+    }
+}
+planes2 <- function(p, X, Z) {
+    for (x in X) {
+        for (z in Z) {
+            v <- c(x,p,z,x,-p,z)
+            write.table(matrix(v,nrow=2,ncol=3,byrow=T),file ="planes2.csv",append=T,quote=F,col.names=F,row.names=F)
+        }
+    }
+}
+planes1(1,2,X,Z); planes2(1,X,Z); 'files are created'
 </script></div>
     <p></p>
+<div class="linked_r"><script type="text/x-sage">
+# python code inside linked sage cells with r code
+import numpy,pylab; from mpl_toolkits.mplot3d import Axes3D; from matplotlib.lines import Line2D
+X1,Y1,Z1=numpy.loadtxt('planes1.csv',delimiter=' ',unpack=True)
+X2,Y2,Z2=numpy.loadtxt('planes2.csv',delimiter=' ',unpack=True)
+fig=pylab.figure(figsize=(7,7)); ax=fig.add_subplot(111,projection='3d')
+ax.scatter(X1,Y1,Z1,s=2,c=Z1,cmap=pylab.cm.bwr_r,marker='1')
+ax.scatter(X2,Y2,Z2,s=2,c='#ff36ff',marker='1')
+labels=['$x^2/1^2=y^2/2^2$','$y^2=1^2$']; colors=['#ff3636','#ff36ff']
+fake2Dlines=[Line2D([0],[0],linestyle="none",c=c,marker='1') for c in colors]
+ax.legend(fake2Dlines,labels,loc=9); pylab.show()
+</script></div>
+    <p></p>  
     <h2>5. Задание</h2>
     <p></p>
 Инициировать три поверхности второго порядка с помощью функций и выполнить их трехмерные изображения,
