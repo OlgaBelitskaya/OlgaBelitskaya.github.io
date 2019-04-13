@@ -171,12 +171,14 @@ ax.legend(fake2Dlines,labels,loc=9); pylab.show()
     <p></p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
+X1 <- seq(from=-0.9,to=0.9,by=0.25); Y1 <- 2*X1
+hyperboloid1 <- function(p,q,r,X,Y) {
+    func <- function(x,y) {r*(x^2/p^2+y^2/q^2+1)^0.5}
+    Z <- outer(X,Y,func); list(Z,-Z)
+}
 
-</script></div>
-    <p></p>
-<div class="linked_r"><script type="text/x-sage">
-%%r
-
+Z1 <- hyperboloid1(1,2,3,X1,Y1)
+dZ1=data.frame(Z1[1]); rownames(dZ1) <- X1; colnames(dZ1) <- Y1; dZ1
 </script></div>
     <p></p>
     <h2>3. Параболический тип</h2>
