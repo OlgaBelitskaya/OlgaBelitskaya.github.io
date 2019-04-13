@@ -54,7 +54,7 @@ for s in sol1: pretty_print(s)
     <p></p>      
 <div class="linked_sage"><script type="text/x-sage">
 var('x,y,z,t1,t2'); s=(-4,4); colors=['#3636ff','#ff3636','#ff36ff']; text_xyz=[(4,4,4),(-4,-4,4),(-4,4,4)]
-labels=['x^2+y^2+z^2=4^2','x=3cos(t1)*sin(t2)\ny=3sin(t1)*sin(t2)\nz=3cos(t1)','x^2/1^2+y^2/2^2+z^2/3^2=1']
+labels=['x^2+y^2+z^2=4^2','x=3cos(t1)*sin(t2)\ny=3sin(t1)*sin(t2)\nz=3cos(t2)','x^2/1^2+y^2/2^2+z^2/3^2=1']
 f1=[x^2+y^2+z^2-4^2,(3*cos(t1)*sin(t2),3*sin(t1)*sin(t2),3*cos(t2)),x^2/1^2+y^2/2^2+z^2/3^2-1] 
 p1=implicit_plot3d(f1[0],s,s,s,opacity=0.2,color=colors[0])+\
    parametric_plot3d(f1[1],(0,2*pi),(0,pi),opacity=0.2,color=colors[1])+\
@@ -82,7 +82,16 @@ for s in sol1: display(s); print('\n')
 </script></div>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
-
+angle=numpy.linspace(0,2*numpy.pi,64); T1,T2=numpy.meshgrid(angle,angle)
+X=numpy.cos(T1)*numpy.sin(T2); Y=numpy.sin(T1)*numpy.sin(T2); Z=numpy.cos(T2)
+labels=['$x^2+y^2+z^2=4^2$','$x=3cos(t_1)*sin(t_2)$\n$y=3sin(t_1)*sin(t_2)$\n$z=3cos(t_2)$','$x^2/1^2+y^2/2^2+z^2/3^2=1$']
+colors=['#3636ff','#ff3636','#ff36ff']
+fig=pylab.figure(figsize=(10,10)); ax=fig.add_subplot(111,projection='3d')
+ax.plot_surface(4*X,4*Y,4*Z,color=colors[0],alpha=0.1)
+ax.plot_surface(3*X,3*Y,3*Z,color=colors[1],alpha=0.1)
+ax.plot_surface(1*X,2*Y,3*Z,cmap=pylab.cm.bwr_r,linewidth=1,antialiased=True,rstride=1,cstride=1)
+fake2Dlines=[Line2D([0],[0],linestyle="none",c=c,marker='o') for c in colors]
+ax.legend(fake2Dlines,labels,loc=9); ax.set_xlim(-4,4); ax.set_ylim(-4,4); ax.set_zlim(-4,4); pylab.show()
 </script></div>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
