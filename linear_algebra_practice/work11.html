@@ -63,18 +63,22 @@ t1=sum([text3d(labels[i],text_xyz[i],color=colors[i],fontsize=12) for i in [0..2
 (p1+t1).show()
 </script></div>
     <p></p>
-<div class="linked_sage"><script type="text/x-sage">
-
-</script></div>
+Выбор цветовых решений. 
     <p></p>
 <div class="linked_sage"><script type="text/x-sage">
-
+print(sorted(colormaps))
 </script></div>
     <p></p>
     <p>Активируйте этот код перед использованием любых ячеек Linked Python Cells</p>
 <div class="linked_python"><script type="text/x-sage">
 import numpy,sympy,pylab; sympy.init_printing(use_unicode=True)
-
+from mpl_toolkits.mplot3d import Axes3D; from matplotlib.lines import Line2D
+x,y,z,R,p,q,r,t1,t2 = sympy.symbols('x,y,z,R,p,q,r,t1,t2')
+eq1=[x^2+y^2+z^2-R^2,[x-R*cos(t1)*sin(t2),y-R*sin(t1)*sin(t2),z-R*cos(t2)],x^2/p^2+y^2/q^2+z^2/r^2-1]
+sol1=[sympy.solve([eq1[0],R-4],R,z),
+      sympy.solve([eq1[1][0],eq1[1][1],eq1[1][2],R-3],R,x,y,z),
+      sympy.solve([eq1[2],p-1,q-2,r-3],p,q,r,z)]
+for s in sol1: display(s); print('\n')
 </script></div>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
