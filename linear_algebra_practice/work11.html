@@ -93,7 +93,7 @@ ax.plot_surface(4*X,4*Y,4*Z,color=colors[0],alpha=0.1)
 ax.plot_surface(3*X,3*Y,3*Z,color=colors[1],alpha=0.1)
 ax.plot_surface(1*X,2*Y,3*Z,cmap=pylab.cm.bwr_r,linewidth=1,antialiased=True,rstride=1,cstride=1)
 fake2Dlines=[Line2D([0],[0],linestyle="none",c=c,marker='o') for c in colors]
-ax.legend(fake2Dlines,labels,loc=9); ax.set_xlim(-4,4); ax.set_ylim(-4,4); ax.set_zlim(-4,4); pylab.show()
+ax.legend(fake2Dlines,labels,loc=9); pylab.show()
 </script></div>
     <p></p>
     <p>Активируйте этот код перед использованием любых ячеек Linked R Cells</p>
@@ -145,7 +145,18 @@ for s in sol2: display(s); print('\n')
 </script></div>
     <p></p> 
 <div class="linked_python"><script type="text/x-sage">
-
+X=numpy.linspace(-7,7,128); X,Y=numpy.meshgrid(X,X) 
+def f1(x,y): return 3/2*numpy.sqrt(4*x**2+y**2+4)
+def f2(x,y): return 5/12*numpy.sqrt(16*x**2+9*y**2-144)
+def f3(x,y): return 2/3*numpy.sqrt(9*x**2+4*y**2)
+Z=[f1(X,Y),f2(X,Y),f3(X,Y),-f1(X,Y),-f2(X,Y),-f3(X,Y)]
+for z in Z: z[z<-7]=numpy.NaN; z[z>7]=numpy.NaN
+fig=pylab.figure(figsize=(7,7)); ax=fig.add_subplot(111,projection='3d')
+colors=2*['#ff36ff','#ff3636','#3636ff']; alphas=2*[0.6,0.4,0.2]
+[ax.plot_wireframe(X,Y,Z[i],color=colors[i],alpha=alphas[i]) for i in range(6)]
+labels=['$x^2/1^2+y^2/2^2-z^2/3^2=-1$','$x^2/3^2+y^2/4^2-z^2/5^2=1$','$x^2/2^2+y^2/3^2-z^2/4^2=0$']
+fake2Dlines=[Line2D([0],[0],linestyle="none",c=c,marker='o') for c in colors[:3]]
+ax.legend(fake2Dlines,labels,loc=9); pylab.show()
 </script></div>
     <p></p>
 <div class="linked_r"><script type="text/x-sage">
