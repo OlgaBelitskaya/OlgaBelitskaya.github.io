@@ -271,7 +271,7 @@ var('x,y,z,p,q'); eq4=[[x^2/p^2-y^2/q^2==0,p==1,q==2],[y^2==p^2,p==1],y^2==0]
 for e in eq4[:2]: pretty_print(solve(e,p,q,y))
 s=(-3,3); f4=[x^2/1^2-y^2/2^2,y^2-1^2]; colors=['#ff3636','#ff36ff']
 [pretty_print(html('<left><font color="%s">$%s = 0$</font></left>'%(colors[i],latex(f4[i])))) for i in [0,1]]
-(implicit_plot3d(f4[0],(x,-3,3),(y,-3,3),(z,-3,3),color=(abs(sin(x*y*z)),colormaps.bwr_r))+\
+(implicit_plot3d(f4[0],(x,-3,3),(y,-3,3),(z,-3,3),color=(abs(sin(x*y*z)),colormaps.bwr))+\
 implicit_plot3d(f4[1],s,s,s,color=colors[1],opacity=0.7)).show()
 </script></div>
     <p></p>
@@ -279,15 +279,17 @@ implicit_plot3d(f4[1],s,s,s,color=colors[1],opacity=0.7)).show()
 x,y,z,p,q = sympy.symbols('x,y,z,p,q')
 eq4=[[x^2/p^2-y^2/q^2,p-1,q-2],[y^2-p^2,p-1],y^2]
 for e in eq4: display(sympy.solve(e,y)); print('\n')
-X=numpy.linspace(-5,5,128); X,Z=numpy.meshgrid(X,X) 
+X=numpy.linspace(-3,3,128); X,Z=numpy.meshgrid(X,X) 
 def f1(x,z): return 2*x
 def f2(x,z): return 1
 Y=[f1(X,Z),-f1(X,Z),f2(X,Z),-f2(X,Z)] 
-for y in Y[:2]: y[y<-6]=numpy.NaN; y[y>6]=numpy.NaN
+for y in Y[:2]: y[y<-3]=numpy.NaN; y[y>3]=numpy.NaN
+colors=['#ff3636','#ff36ff']; labels=['$x^2/1^2=y^2/2^2$','$y^2=1^2$']
 fig=pylab.figure(figsize=(7,7)); ax=fig.add_subplot(111,projection='3d')
-[ax.plot_surface(X,y,Z,cmap=pylab.cm.bwr_r,linewidth=1,antialiased=True,rstride=1,cstride=1) for y in Y[:2]]
-[ax.plot_wireframe(X,y,Z,color='#ff36ff',alpha=0.5) for y in Y[2:]]
-pylab.show()
+[ax.plot_surface(X,y,Z,cmap=pylab.cm.bwr,linewidth=1,antialiased=True,rstride=3,cstride=3) for y in Y[:2]]
+[ax.plot_wireframe(X,y,Z,color=colors[1],alpha=0.3) for y in Y[2:]]
+fake2Dlines=[Line2D([0],[0],linestyle="none",c=c,marker='o') for c in colors]
+ax.legend(fake2Dlines,labels,loc=9); pylab.show()
 </script></div>
     <p></p>  
 <div class="linked_r"><script type="text/x-sage">
