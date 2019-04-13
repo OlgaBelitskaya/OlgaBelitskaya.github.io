@@ -279,6 +279,15 @@ implicit_plot3d(f4[1],s,s,s,color=colors[1],opacity=0.7)).show()
 x,y,z,p,q = sympy.symbols('x,y,z,p,q')
 eq4=[[x^2/p^2-y^2/q^2,p-1,q-2],[y^2-p^2,p-1],y^2]
 for e in eq4: display(sympy.solve(e,y)); print('\n')
+X=numpy.linspace(-5,5,128); X,Z=numpy.meshgrid(X,X) 
+def f1(x,z): return 2*x
+def f2(x,z): return 1
+Y=[f1(X,Z),-f1(X,Z),f2(X,Z),-f2(X,Z)] 
+for y in Y[:2]: y[y<-6]=numpy.NaN; y[y>6]=numpy.NaN
+fig=pylab.figure(figsize=(7,7)); ax=fig.add_subplot(111,projection='3d')
+[ax.plot_surface(X,y,Z,cmap=pylab.cm.bwr_r,linewidth=1,antialiased=True,rstride=1,cstride=1) for y in Y[:2]]
+[ax.plot_wireframe(X,y,Z,color='#ff36ff',alpha=0.5) for y in Y[2:]]
+pylab.show()
 </script></div>
     <p></p>  
 <div class="linked_r"><script type="text/x-sage">
