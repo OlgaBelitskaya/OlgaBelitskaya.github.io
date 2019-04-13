@@ -262,16 +262,44 @@ ax.legend(fake2Dlines,labels,loc=9); pylab.show()
     <p></p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-
+X1 <- Y1 <- X2 <- Y2 <- seq(from=-9,to=9,by=1); X3 <- Z3 <- X4 <- Z4 <- Y5 <- Z5 <- seq(from=-9,to=9,by=0.5)
+paraboloid1 <- function(p,q,X,Y) {outer(X,Y,function(x,y) {(x^2/p^2+y^2/q^2)/2})}
+paraboloid2 <- function(p,q,X,Y) {outer(X,Y,function(x,y) {(x^2/p^2-y^2/q^2)/2})}
+Z1 <- paraboloid1(1,2,X1,Y1); Z2 <- paraboloid2(2,3,X2,Y2)
+cylinder1 <- function(p,q,X,Z) {
+    for (x in X) {
+        for (z in Z) {
+            y <- q*(1-x^2/p^2)^0.5; v <- c(x,y,z,x,-y,z)
+            if (sum(is.na(v))==0) {write.table(matrix(v,nrow=2,ncol=3,byrow=T),file ="cylinder1.csv",append=T,quote=F,col.names=F,row.names=F)}
+        }
+    }
+};
+cylinder2 <- function(p,q,X,Z) {
+    for (x in X) {
+        for (z in Z) {
+            y <- q*(x^2/p^2-1)^0.5; v <- c(x,y,z,x,-y,z)
+            if (sum(is.na(v))==0) {write.table(matrix(v,nrow=2,ncol=3,byrow=T),file ="cylinder2.csv",append=T,quote=F,col.names=F,row.names=F)}
+        }
+    }
+}
+'run the next cell'
 </script></div>
     <p></p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-
+cylinder3 <- function(p,Y,Z) {
+    for (y in Y) {
+        for (z in Z) {
+            x <- y^2/2/p; v <- c(x,y,z)
+            write.table(matrix(v,nrow=1,ncol=3,byrow=T),file ="cylinder3.csv",append=T,quote=F,col.names=F,row.names=F)
+        }
+    }
+}
+cylinder1(3,4,X3,Z3); cylinder2(2,3,X4,Z4); cylinder3(2,Y5,Z5); 'files are created'
 </script></div>
     <p></p>
 <div class="linked_r"><script type="text/x-sage">
-%%r
+
 
 </script></div>
     <p></p>
@@ -342,7 +370,7 @@ planes1(1,2,X,Z); planes2(1,X,Z); 'files are created'
 X1,Y1,Z1=numpy.loadtxt('planes1.csv',delimiter=' ',unpack=True)
 X2,Y2,Z2=numpy.loadtxt('planes2.csv',delimiter=' ',unpack=True)
 fig=pylab.figure(figsize=(7,7)); ax=fig.add_subplot(111,projection='3d')
-ax.scatter(X1,Y1,Z1,s=2,c=Z1,cmap=pylab.cm.bwr_r,marker='1')
+ax.scatter(X1,Y1,Z1,s=2,c=Z1,cmap=pylab.cm.bwr,marker='1')
 ax.scatter(X2,Y2,Z2,s=2,c='#ff36ff',marker='1')
 labels=['$x^2/1^2=y^2/2^2$','$y^2=1^2$']; colors=['#ff3636','#ff36ff']
 fake2Dlines=[Line2D([0],[0],linestyle="none",c=c,marker='1') for c in colors]
