@@ -150,7 +150,12 @@ c1==len(binary_combinations),c2==0
     <p></p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-
+bc2 <- rbind(rbind(f(2,0),f(2,1)),f(2,2)) 
+c1 <- c2 <- 0; n <- length(bc2)/2
+tautology1 <- function(x) {(x[1]|(x[1]&x[2]))==x[1]}
+contradiction2 <- function(x) {(x[1]|(x[1]&x[2]))==~x[1]}
+for (i in 1:n){c1 <- c1+1*tautology1(bc2[i,]); c2 <- c2+1*contradiction2(bc2[i,])}
+c(c1==n,c2==0)
 </script></div>
     <p></p> 
     <h2>3. Задание</h2>
