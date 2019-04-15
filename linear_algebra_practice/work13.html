@@ -109,7 +109,7 @@ logical_function <- function(x) {
     eq2 <- (x[3]|!x[4])&(x[5]|!x[6])
     eq3 <- (x[5]|!x[6])&(x[7]|!x[8])
     eq4 <- (x[7]|!x[8])&(x[9]|!x[10])
-    (eq1&eq2&eq3&eq4)
+    eq1&eq2&eq3&eq4
 }
 for (i in c(1:2^10)){c <- c+1*logical_function(bc[i,])}; c
 </script></div>
@@ -127,7 +127,8 @@ for (i in c(1:2^10)){c <- c+1*logical_function(bc[i,])}; c
    - опираясь на набор заведомо истинных аксиом.
     <p></p>
 <div class="linked_sage"><script type="text/x-sage">
-
+var('A,B'); exp1=propcalc.formula('A | (A & B) <-> A'); exp2=propcalc.formula('A | (A & B) <-> ~A')
+exp1.is_tautology(), exp2.is_contradiction()
 </script></div>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
