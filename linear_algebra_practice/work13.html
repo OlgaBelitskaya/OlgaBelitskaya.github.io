@@ -48,11 +48,26 @@
     <p></p>
     <p>Активируйте этот код перед использованием любых ячеек Linked Sage Cells</p>
 <div class="linked_sage"><script type="text/x-sage">
-
+var('x1,x2,x3,x4,x5,x6,x7,x8,x9,x10')
+eq1=propcalc.formula("(x1|~x2)&(x3|~x4)")
+eq2=propcalc.formula("(x3|~x4)&(x5|~x6)")
+eq3=propcalc.formula("(x5|~x6)&(x7|~x8)")
+eq4=propcalc.formula("(x7|~x8)&(x9|~x10)")
+f=eq1&eq2&eq3&eq4; ftt=f.truthtable().get_table_list()
+print(sum([int(ftt[i][-1]) for i in [1..1024]]))
+f.truthtable(end=10)
 </script></div>
     <p></p>      
 <div class="linked_sage"><script type="text/x-sage">
-
+binary_combinations=Words(alphabet=[0,1],length=10); c=0
+def logical_function(x):
+    eq1=(x[0]|(not x[1]))&(x[2]|(not x[3]))
+    eq2=(x[2]|(not x[3]))&(x[4]|(not x[5]))
+    eq3=(x[4]|(not x[5]))&(x[6]|(not x[7]))
+    eq4=(x[6]|(not x[7]))&(x[8]|(not x[9]))    
+    return (eq1&eq2&eq3&eq4)
+for el in binary_combinations: c+=int(logical_function(el))
+c
 </script></div>
     <p></p>
     <p>Активируйте этот код перед использованием любых ячеек Linked Python Cells</p>
