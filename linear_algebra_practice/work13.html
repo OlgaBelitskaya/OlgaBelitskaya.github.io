@@ -101,15 +101,19 @@ c
     <p>Активируйте этот код перед использованием любых ячеек Linked R Cells</p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-
-library(Matrix)
+f <- function(n,m)
+ t(apply(combn(1:n,m=m),2,function(cm) replace(rep(0,n),cm,1)))
+c <-0; bc <- f(10,0); for (i in c(1:10)) {bc <- rbind(bc,f(10,i))}
+logical_function <- function(x) {
+    eq1 <- (x[1]|!x[2])&(x[3]|!x[4])
+    eq2 <- (x[3]|!x[4])&(x[5]|!x[6])
+    eq3 <- (x[5]|!x[6])&(x[7]|!x[8])
+    eq4 <- (x[7]|!x[8])&(x[9]|!x[10])
+    (eq1&eq2&eq3&eq4)
+}
+for (i in c(1:2^10)){c <- c+1*logical_function(bc[i,])}; c
 </script></div>
     <p></p> 
-<div class="linked_r"><script type="text/x-sage">
-%%r
-
-</script></div>
-    <p></p>
     <h2>2. Виды простейших доказательств</h2>
 <p>1) метод перебора</p>
    - исследование всех возможных вариантов;
