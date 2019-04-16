@@ -57,7 +57,7 @@ import numpy,sympy; sympy.init_printing(use_unicode=True)
 NA=numpy.array(range(1,9)).reshape(2,2,2)
 NB=numpy.array(["♔","♕","♖","♗"],dtype=object).reshape(2,2)
 G=numpy.array(['A','B','C','D'],dtype=object).reshape(2,2) 
-H=numpy.array([1,2,3,4]).reshape(2,2)
+H,F=numpy.array([1,2,3,4]).reshape(2,2),numpy.array([5,6,7,8]).reshape(2,2)
 </script></div>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
@@ -70,13 +70,13 @@ SA,SA.shape,SA.rank(),SB,SB.shape,SB.rank()
     <p>Активируйте этот код перед использованием любых ячеек Linked R Cells</p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-G <- t(array(LETTERS[1:8],c(2,2))); H <- t(array(c(1:4),c(2,2))); F <- t(array(c(5,6,7,8),c(2,2)))
-list(G,H,F)
+
 </script></div>
     <p></p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-
+G <- t(array(LETTERS[1:8],c(2,2))); H <- t(array(c(1:4),c(2,2))); F <- t(array(c(5,6,7,8),c(2,2)))
+list(G,H,F)
 </script></div>
     <p></p>
     <h2>2. Умножение тензоров второго ранга</h2>
@@ -160,16 +160,21 @@ GH=numpy.tensordot(H,G,0); sympy.pprint(GH); GH.shape
     <p></p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
+
+</script></div>
+    <p></p> 
+<div class="linked_r"><script type="text/x-sage">
+%%r
 GH <- outer(G,H,FUN=paste); list(GH,dim(GH))
 </script></div>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
-
+GHF=numpy.kron(GH,F); sympy.pprint(GHF); GHF.shape
 </script></div>
     <p></p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-FGH <- kronecker(GH,F,FUN=paste); list(FGH,dim(FGH))
+GHF <- kronecker(GH,F,FUN=paste); list(GHF,dim(GHF))
 </script></div>
     <p></p> 
     <h2>3. Примеры применения тензорного исчисления</h2>
