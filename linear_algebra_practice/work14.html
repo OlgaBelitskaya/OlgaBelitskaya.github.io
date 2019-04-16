@@ -56,6 +56,8 @@ for el in L: pretty_print(el)
 import numpy,sympy; sympy.init_printing(use_unicode=True)
 NA=numpy.array(range(1,9)).reshape(2,2,2)
 NB=numpy.array(["♔","♕","♖","♗"],dtype=object).reshape(2,2)
+G=numpy.array(['A','B','C','D'],dtype=object).reshape(2,2) 
+H=numpy.array([1,2,3,4]).reshape(2,2)
 </script></div>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
@@ -147,15 +149,17 @@ for t in [NAB[1],NAB[3],NAB[4],NAB[5]]:
 d1=[1,2,(0,1),(1,1),(2,1)]
 SAB=[sympy.tensorproduct(SA,SB,d1[i]) for i in [0..4]]
 for el in SAB: display(el); print(el.shape)
+d2 = [(0, 1, 2), (0, 1), (0, 2), (1, 2)]
+SBC = [sympy.tensorcontraction(SB, d2[i]) for i in [0..3]]; SBC
 </script></div>
     <p></p> 
 <div class="linked_python"><script type="text/x-sage">
-
+GH=numpy.tensordot(H,G,0); sympy.pprint(GH); GH.shape
 </script></div>
     <p></p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-GH <- outer(G, H, FUN=paste); list(GH, dim(GH))
+GH <- outer(G,H,FUN=paste); list(GH,dim(GH))
 </script></div>
     <p></p> 
 <div class="linked_r"><script type="text/x-sage">
