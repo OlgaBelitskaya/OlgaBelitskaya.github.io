@@ -77,7 +77,9 @@ list(A,B,C,D)
     <p></p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-G <- t(array(LETTERS[1:8],c(2,2))); H <- t(array(c(1:4),c(2,2))); F <- t(array(c(5,6,7,8),c(2,2)))
+G <- t(array(LETTERS[1:8],c(2,2))) 
+H <- t(array(c(1:4),c(2,2))) 
+F <- t(array(c(5,6,7,8),c(2,2)))
 list(G,H,F)
 </script></div>
     <p></p>
@@ -162,24 +164,6 @@ print(dim(A%*%B)); print(A%*%B); cat('\n\n'); print(dim(A%o%B)); print(A%o%B)
 cat('\n\n'); print(dim(C*D)); print(C*D); cat('\n\n'); print(dim(t(C)*t(D))); t(C)*t(D)
 </script></div>
     <p></p>
-<div class="linked_python"><script type="text/x-sage">
-GH=numpy.tensordot(H,G,0); sympy.pprint(GH); GH.shape
-</script></div>
-    <p></p> 
-<div class="linked_r"><script type="text/x-sage">
-%%r
-GH <- outer(G,H,FUN=paste); list(GH,dim(GH))
-</script></div>
-    <p></p>
-<div class="linked_python"><script type="text/x-sage">
-GHF=numpy.kron(GH,F); sympy.pprint(GHF); GHF.shape
-</script></div>
-    <p></p>
-<div class="linked_r"><script type="text/x-sage">
-%%r
-GHF <- kronecker(GH,F,FUN=paste); list(GHF,dim(GHF))
-</script></div>
-    <p></p> 
     <h2>3. Примеры применения тензорного исчисления</h2>
 <p>${x’} = \frac{2 \ x}{x^{2} + y^{2}} \ ; \ {y’} = \frac{2 \ y}{x^{2} + y^{2}} \\
 \begin{array}{llcl} \Delta_1: \ Md \ \longrightarrow \ \mathbb{R}^3 \\ \mbox{on}\ U : \ \left(x, y\right) \longmapsto \left(X, Y, Z\right) = \left(\frac{x}{x^{2} + y^{2} + 1}, \frac{y}{x^{2} + y^{2} + 1}, \frac{x^{2} + y^{2} - 1}{x^{2} + y^{2} + 1}\right) ; \ \mbox{on}\ V : \ \left({x’}, {y’}\right) \longmapsto \left(X, Y, Z\right) = \left(\frac{3 \, {x’}}{{x’}^{2} + {y’}^{2} + 1}, \frac{3 \, {y’}}{{x’}^{2} + {y’}^{2} + 1}, -\frac{{x’}^{2} + {y’}^{2} - 1}{{x’}^{2} + {y’}^{2} + 1}\right) \end{array} \\
@@ -211,11 +195,24 @@ display(ST)
 for el in [x,y,z,t,u,v,w]: display(ST.diff(el)); print('\n')
 </script></div>
     <p></p>  
+<div class="linked_python"><script type="text/x-sage">
+GH=numpy.tensordot(H,G,0); sympy.pprint(GH); GH.shape
+</script></div>
+    <p></p> 
 <div class="linked_r"><script type="text/x-sage">
 %%r
-
+GH <- outer(G,H,FUN=paste); list(GH,dim(GH))
 </script></div>
-    <p></p>       
+    <p></p>
+<div class="linked_python"><script type="text/x-sage">
+GHF=numpy.kron(GH,F); sympy.pprint(GHF); GHF.shape
+</script></div>
+    <p></p>
+<div class="linked_r"><script type="text/x-sage">
+%%r
+GHF <- kronecker(GH,F,FUN=paste); list(GHF,dim(GHF))
+</script></div>
+    <p></p>     
     <h2>4. Задание</h2>
     <p></p>
 Инициировать скаляры, векторы, тензоры 2-ого ранга и выполнить не менее 3 видов умножения тензоров,
