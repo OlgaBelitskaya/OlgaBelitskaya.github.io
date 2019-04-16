@@ -11824,11 +11824,289 @@ div#notebook {
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%</span><span class="k">display</span> ascii_art
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span><span class="o">,</span><span class="nn">sympy</span><span class="o">,</span><span class="nn">warnings</span> 
+<span class="n">sympy</span><span class="o">.</span><span class="n">init_printing</span><span class="p">(</span><span class="n">use_unicode</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="ne">UserWarning</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># sage</span>
+<span class="n">M</span><span class="o">=</span><span class="n">FiniteRankFreeModule</span><span class="p">(</span><span class="n">ZZ</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;M&#39;</span><span class="p">);</span> <span class="n">e</span><span class="o">=</span><span class="n">M</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">)</span> 
+<span class="n">d</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">]]</span>
+<span class="n">T</span><span class="o">=</span><span class="p">[</span><span class="n">M</span><span class="o">.</span><span class="n">tensor_module</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.</span><span class="o">.</span><span class="mi">9</span><span class="p">]];</span> <span class="n">T</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[5]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[ Free module of type-(0,0) tensors on the Rank-3 free module M over the Integer Ring,
+
+ Rank-3 free module M over the Integer Ring,
+
+ Free module of type-(0,1) tensors on the Rank-3 free module M over the Integer Ring,
+
+ Free module of type-(1,1) tensors on the Rank-3 free module M over the Integer Ring,
+
+ Free module of type-(2,0) tensors on the Rank-3 free module M over the Integer Ring,
+
+ Free module of type-(0,2) tensors on the Rank-3 free module M over the Integer Ring,
+
+ Free module of type-(2,1) tensors on the Rank-3 free module M over the Integer Ring,
+
+ Free module of type-(1,2) tensors on the Rank-3 free module M over the Integer Ring,
+
+ Free module of type-(3,0) tensors on the Rank-3 free module M over the Integer Ring,
+
+ Free module of type-(0,3) tensors on the Rank-3 free module M over the Integer Ring ]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">A1</span><span class="o">=</span><span class="n">M</span><span class="o">.</span><span class="n">linear_form</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;A1&#39;</span><span class="p">);</span> <span class="n">A1</span><span class="p">[:]</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span> 
+<span class="n">A2</span><span class="o">=</span><span class="n">M</span><span class="o">.</span><span class="n">linear_form</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;A2&#39;</span><span class="p">);</span> <span class="n">A2</span><span class="p">[:]</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">B1</span><span class="o">=</span><span class="n">M</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;B1&#39;</span><span class="p">);</span> <span class="n">B2</span><span class="o">=</span><span class="n">M</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;B2&#39;</span><span class="p">)</span>
+<span class="n">L</span><span class="o">=</span><span class="p">[[</span><span class="n">l</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">e</span><span class="p">),</span><span class="n">l</span><span class="o">.</span><span class="n">tensor_type</span><span class="p">()]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="p">[</span><span class="n">A1</span><span class="p">,</span><span class="n">A2</span><span class="p">,</span><span class="n">B1</span><span class="p">,</span><span class="n">B2</span><span class="p">]]</span>
+<span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">L</span><span class="p">:</span> <span class="n">pretty_print</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>[ A1 = -e^0 + 2 e^1 - 3 e^2, ( 0, 1 ) ]</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>[ A2 = 3 e^0 - 2 e^1 + e^2, ( 0, 1 ) ]</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>[ B1 = 4 e_0 - 5 e_1 + 6 e_2, ( 1, 0 ) ]</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>[ B2 = -3 e_0 + e_1 + 2 e_2, ( 1, 0 ) ]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># python numpy</span>
+<span class="n">NA</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">NB</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s2">&quot;♔&quot;</span><span class="p">,</span><span class="s2">&quot;♕&quot;</span><span class="p">,</span><span class="s2">&quot;♖&quot;</span><span class="p">,</span><span class="s2">&quot;♗&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;D&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">NA</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[67]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[[[1 2]
+  [3 4]]
+
+ [[5 6]
+  [7 8]]]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># python sympy</span>
+<span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">w</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x,y,z,t,u,v,w&#39;</span><span class="p">)</span>
+<span class="n">SA</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]])</span>
+<span class="n">SB</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Array</span><span class="p">([[[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">],[</span><span class="n">z</span><span class="p">,</span><span class="n">t</span><span class="p">]],[[</span><span class="n">z</span><span class="o">/</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">t</span><span class="o">/</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">],[</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">z</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">t</span><span class="o">**</span><span class="mi">2</span><span class="p">]]])</span>
+<span class="n">SA</span><span class="p">,</span> <span class="n">SA</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">SA</span><span class="o">.</span><span class="n">rank</span><span class="p">(),</span> <span class="n">SB</span><span class="p">,</span> <span class="n">SB</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">SB</span><span class="o">.</span><span class="n">rank</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[39]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left ( \left[\begin{matrix}1 & 2\\3 & 4\end{matrix}\right], \quad \left ( 2, \quad 2\right ), \quad 2, \quad \left[\begin{matrix}\left[\begin{matrix}x & y\\z & t\end{matrix}\right] & \left[\begin{matrix}\frac{z}{x^{2}} & \frac{t}{y^{2}}\\x^{2} + y^{2} & t^{2} + z^{2}\end{matrix}\right]\end{matrix}\right], \quad \left ( 2, \quad 2, \quad 2\right ), \quad 3\right )$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">r</span>
+G &lt;- t(array(LETTERS[1:8],c(2,2))); H &lt;- t(array(c(1:4),c(2,2))); list(G,H)
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[[1]]
+     [,1] [,2]
+[1,] &#34;A&#34;  &#34;B&#34; 
+[2,] &#34;C&#34;  &#34;D&#34; 
+
+[[2]]
+     [,1] [,2]
+[1,]    1    2
+[2,]    3    4
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="2.-&#1055;&#1088;&#1080;&#1084;&#1077;&#1088;&#1099;-&#1087;&#1088;&#1080;&#1084;&#1077;&#1085;&#1077;&#1085;&#1080;&#1103;-&#1090;&#1077;&#1085;&#1079;&#1086;&#1088;&#1085;&#1086;&#1075;&#1086;-&#1080;&#1089;&#1095;&#1080;&#1089;&#1083;&#1077;&#1085;&#1080;&#1103;.">2. &#1055;&#1088;&#1080;&#1084;&#1077;&#1088;&#1099; &#1087;&#1088;&#1080;&#1084;&#1077;&#1085;&#1077;&#1085;&#1080;&#1103; &#1090;&#1077;&#1085;&#1079;&#1086;&#1088;&#1085;&#1086;&#1075;&#1086; &#1080;&#1089;&#1095;&#1080;&#1089;&#1083;&#1077;&#1085;&#1080;&#1103;.<a class="anchor-link" href="#2.-&#1055;&#1088;&#1080;&#1084;&#1077;&#1088;&#1099;-&#1087;&#1088;&#1080;&#1084;&#1077;&#1085;&#1077;&#1085;&#1080;&#1103;-&#1090;&#1077;&#1085;&#1079;&#1086;&#1088;&#1085;&#1086;&#1075;&#1086;-&#1080;&#1089;&#1095;&#1080;&#1089;&#1083;&#1077;&#1085;&#1080;&#1103;.">&#182;</a></h2><h3 id="&#1059;&#1084;&#1085;&#1086;&#1078;&#1077;&#1085;&#1080;&#1077;-&#1090;&#1077;&#1085;&#1079;&#1086;&#1088;&#1086;&#1074;-&#1074;&#1090;&#1086;&#1088;&#1086;&#1075;&#1086;-&#1088;&#1072;&#1085;&#1075;&#1072;">&#1059;&#1084;&#1085;&#1086;&#1078;&#1077;&#1085;&#1080;&#1077; &#1090;&#1077;&#1085;&#1079;&#1086;&#1088;&#1086;&#1074; &#1074;&#1090;&#1086;&#1088;&#1086;&#1075;&#1086; &#1088;&#1072;&#1085;&#1075;&#1072;<a class="anchor-link" href="#&#1059;&#1084;&#1085;&#1086;&#1078;&#1077;&#1085;&#1080;&#1077;-&#1090;&#1077;&#1085;&#1079;&#1086;&#1088;&#1086;&#1074;-&#1074;&#1090;&#1086;&#1088;&#1086;&#1075;&#1086;-&#1088;&#1072;&#1085;&#1075;&#1072;">&#182;</a></h3><p>Формальное произведение двух векторов (диада)</p>
+<h2 id="2.-&#1059;&#1084;&#1085;&#1086;&#1078;&#1077;&#1085;&#1080;&#1077;-&#1090;&#1077;&#1085;&#1079;&#1086;&#1088;&#1086;&#1074;-&#1074;&#1090;&#1086;&#1088;&#1086;&#1075;&#1086;-&#1088;&#1072;&#1085;&#1075;&#1072;">2. &#1059;&#1084;&#1085;&#1086;&#1078;&#1077;&#1085;&#1080;&#1077; &#1090;&#1077;&#1085;&#1079;&#1086;&#1088;&#1086;&#1074; &#1074;&#1090;&#1086;&#1088;&#1086;&#1075;&#1086; &#1088;&#1072;&#1085;&#1075;&#1072;<a class="anchor-link" href="#2.-&#1059;&#1084;&#1085;&#1086;&#1078;&#1077;&#1085;&#1080;&#1077;-&#1090;&#1077;&#1085;&#1079;&#1086;&#1088;&#1086;&#1074;-&#1074;&#1090;&#1086;&#1088;&#1086;&#1075;&#1086;-&#1088;&#1072;&#1085;&#1075;&#1072;">&#182;</a></h2><p>Формальное произведение двух векторов (диада)</p>
 <p>(или произведение их координат и ортогональных нормированных векторов базиса):</p>
 <p>$ab = (a_m e_m)(b_n e_n) = a_m b_n e_m e_n$</p>
 <p>$e_m e_n$ - линейно независимые комбинации, элементы тензорного базиса.</p>
@@ -11837,17 +12115,17 @@ div#notebook {
 <p>$E \cdot x = x \cdot E = x$</p>
 <p>$E = e_1 e_1 + e_2 e_2 + e_3 e_3$</p>
 <ol>
-<li>Скалярные умножения тензора на вектор</li>
+<li>Скалярное умножение тензора на вектор</li>
 </ol>
 <p>$AB \cdot c = a_m (b_m \cdot c), c \cdot AB = (c \cdot a_m) b_m$</p>
 <p>! тензор 2-го ранга на вектор = вектор</p>
 <ol>
-<li>Векторные умножения тензора на вектор</li>
+<li>Векторное умножение тензора на вектор</li>
 </ol>
 <p>$AB \times c = a_m (b_m \times c), c \times AB = (c \times a_m) b_m$</p>
 <p>! тензор 2-ого ранга на вектор = тензор 2-ого ранга</p>
 <ol>
-<li>Тензорные умножения тензора на вектор</li>
+<li>Тензорное умножение тензора на вектор</li>
 </ol>
 <p>$AB c = a_m b_m c, c AB = c a_m b_m$</p>
 <p>! тензор 2-ого ранга на вектор = тензор 3-ого ранга</p>
@@ -11906,154 +12184,18 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%</span><span class="k">display</span> ascii_art
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># sage</span>
-<span class="n">M</span> <span class="o">=</span> <span class="n">FiniteRankFreeModule</span><span class="p">(</span><span class="n">ZZ</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;M&#39;</span><span class="p">)</span>
-<span class="n">e</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">)</span>
-
-<span class="n">T00</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">tensor_module</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span> <span class="n">T10</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">tensor_module</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span> <span class="n">T01</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">tensor_module</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">T11</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">tensor_module</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span> <span class="n">T20</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">tensor_module</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span> <span class="n">T02</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">tensor_module</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">T21</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">tensor_module</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span> <span class="n">T12</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">tensor_module</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">T30</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">tensor_module</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span> <span class="n">T03</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">tensor_module</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">T</span> <span class="o">=</span> <span class="p">[</span><span class="n">T00</span><span class="p">,</span> <span class="n">T10</span><span class="p">,</span> <span class="n">T01</span><span class="p">,</span> <span class="n">T11</span><span class="p">,</span> <span class="n">T20</span><span class="p">,</span> <span class="n">T02</span><span class="p">,</span> <span class="n">T21</span><span class="p">,</span> <span class="n">T12</span><span class="p">,</span> <span class="n">T30</span><span class="p">,</span> <span class="n">T03</span><span class="p">]</span>
-<span class="n">T</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[2]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>Free module of type-(1,1) tensors on the Rank-3 free module M over the Integer Ring</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">T</span><span class="p">:</span> 
-    <span class="k">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">rank</span><span class="p">(),</span> <span class="n">t</span><span class="o">.</span><span class="n">base_ring</span><span class="p">())</span>
-    <span class="k">if</span> <span class="n">t</span> <span class="o">!=</span> <span class="n">T00</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">an_element</span><span class="p">()</span><span class="o">.</span><span class="n">tensor_type</span><span class="p">())</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>(1, Integer Ring)
-(3, Integer Ring)
-(1, 0)
-(3, Integer Ring)
-(0, 1)
-(9, Integer Ring)
-(1, 1)
-(9, Integer Ring)
-(2, 0)
-(9, Integer Ring)
-(0, 2)
-(27, Integer Ring)
-(2, 1)
-(27, Integer Ring)
-(1, 2)
-(27, Integer Ring)
-(3, 0)
-(27, Integer Ring)
-(0, 3)
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">linear_form</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">)</span> <span class="p">;</span> <span class="n">A</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">B</span> <span class="o">=</span> <span class="n">M</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">A</span><span class="o">.</span><span class="n">tensor_type</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">B</span><span class="o">.</span><span class="n">tensor_type</span><span class="p">())</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>(A = -e^0 + 2 e^1 - 3 e^2, (0, 1))
-(B = 4 e_0 - 5 e_1 + 6 e_2, (1, 0))
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">AB</span> <span class="o">=</span> <span class="n">A</span><span class="o">*</span><span class="n">B</span>
-<span class="k">print</span><span class="p">(</span><span class="n">AB</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="n">AB</span><span class="o">.</span><span class="n">tensor_type</span><span class="p">())</span>
-<span class="n">MAB</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="n">AB</span><span class="o">.</span><span class="n">comp</span><span class="p">(</span><span class="n">e</span><span class="p">));</span> <span class="n">MAB</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># sage</span>
+<span class="n">v</span><span class="o">=</span><span class="n">matrix</span><span class="p">(</span><span class="n">SR</span><span class="p">,</span><span class="mi">3</span><span class="p">,[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">A1A2</span><span class="o">=</span><span class="n">A1</span><span class="o">*</span><span class="n">A2</span><span class="p">;</span> <span class="n">MA1A2</span><span class="o">=</span><span class="n">matrix</span><span class="p">(</span><span class="n">A1A2</span><span class="o">.</span><span class="n">comp</span><span class="p">(</span><span class="n">e</span><span class="p">));</span> <span class="n">vA1A2</span><span class="o">=</span><span class="n">MA1A2</span><span class="o">*</span><span class="n">v</span> <span class="c1"># MA1A2: v → vA1A2</span>
+<span class="n">A1B1</span><span class="o">=</span><span class="n">A1</span><span class="o">*</span><span class="n">B1</span><span class="p">;</span> <span class="n">MA1B1</span><span class="o">=</span><span class="n">matrix</span><span class="p">(</span><span class="n">A1B1</span><span class="o">.</span><span class="n">comp</span><span class="p">(</span><span class="n">e</span><span class="p">));</span> <span class="n">vA1B1</span><span class="o">=</span><span class="n">MA1B1</span><span class="o">*</span><span class="n">v</span> <span class="c1"># MA1B1: v → vA1B1</span>
+<span class="n">B1B2</span><span class="o">=</span><span class="n">B1</span><span class="o">*</span><span class="n">B2</span><span class="p">;</span> <span class="n">MB1B2</span><span class="o">=</span><span class="n">matrix</span><span class="p">(</span><span class="n">B1B2</span><span class="o">.</span><span class="n">comp</span><span class="p">(</span><span class="n">e</span><span class="p">));</span> <span class="n">vB1B2</span><span class="o">=</span><span class="n">MB1B2</span><span class="o">*</span><span class="n">v</span> <span class="c1"># MB1B2: v → vB1B2</span>
+<span class="n">L</span><span class="o">=</span><span class="p">[[</span><span class="n">A1A2</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">e</span><span class="p">),</span><span class="n">A1A2</span><span class="o">.</span><span class="n">tensor_type</span><span class="p">()],</span><span class="n">MA1A2</span><span class="p">,[</span><span class="n">v</span><span class="p">,</span><span class="n">vA1A2</span><span class="p">],</span>
+   <span class="p">[</span><span class="n">A1B1</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">e</span><span class="p">),</span><span class="n">A1B1</span><span class="o">.</span><span class="n">tensor_type</span><span class="p">()],</span><span class="n">MA1B1</span><span class="p">,[</span><span class="n">v</span><span class="p">,</span><span class="n">vA1B1</span><span class="p">],</span>
+   <span class="p">[</span><span class="n">B1B2</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">e</span><span class="p">),</span><span class="n">B1B2</span><span class="o">.</span><span class="n">tensor_type</span><span class="p">()],</span><span class="n">MB1B2</span><span class="p">,[</span><span class="n">v</span><span class="p">,</span><span class="n">vB1B2</span><span class="p">]]</span>
+<span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">L</span><span class="p">:</span> <span class="n">pretty_print</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12097,12 +12239,14 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="n">SR</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]);</span> <span class="n">u</span> <span class="o">=</span> <span class="n">MAB</span> <span class="o">*</span> <span class="n">v</span>
-<span class="c1"># MAB: v → u</span>
-<span class="n">v</span><span class="p">,</span> <span class="n">u</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># python numpy</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="n">NAB</span> <span class="o">=</span> <span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span><span class="n">NA</span><span class="p">,</span> <span class="n">NB</span><span class="p">,</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.</span><span class="o">.</span><span class="mi">5</span><span class="p">]]</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">NAB</span><span class="p">:</span> 
+    <span class="k">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12115,15 +12259,452 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[6]:</div>
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(2, 2, 2, 2, 2)
+(2, 2, 2)
+(2,)
+(2, 2, 2)
+(2, 2, 2)
+(2, 2, 2)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="p">[</span><span class="n">display</span><span class="p">(</span><span class="n">el</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">])</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">NAB</span><span class="p">[</span><span class="mi">0</span><span class="p">]];</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
 
 
 
 
-<div class="output_text output_subarea output_execute_result">
-<pre>( [1]  [-24] )
-( [2]  [ 30] )
-( [3], [-36] )</pre>
+<div class="output_text output_subarea ">
+<pre>♔</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♔♔♔♔♔</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♔♔♔</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♔♔♔♔♔♔♔</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♔♔</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♔♔♔♔♔♔</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♔♔♔♔</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♔♔♔♔♔♔♔♔</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♖</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♖♖♖♖♖</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♖♖♖</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♖♖♖♖♖♖♖</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♖♖</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♖♖♖♖♖♖</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♖♖♖♖</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♖♖♖♖♖♖♖♖</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♕</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♕♕♕♕♕</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♕♕♕</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♕♕♕♕♕♕♕</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♕♕</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♕♕♕♕♕♕</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♕♕♕♕</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♕♕♕♕♕♕♕♕</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♗</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♗♗♗♗♗</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♗♗♗</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♗♗♗♗♗♗♗</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♗♗</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♗♗♗♗♗♗</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♗♗♗♗</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♗♗♗♗♗♗♗♗</pre>
 </div>
 
 </div>
@@ -12134,10 +12715,842 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">Md</span> <span class="o">=</span> <span class="n">Manifold</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Md&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="p">[</span><span class="n">display</span><span class="p">(</span><span class="n">el</span><span class="p">)</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">NAB</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="p">[</span><span class="n">NAB</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">NAB</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">NAB</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span><span class="n">NAB</span><span class="p">[</span><span class="mi">5</span><span class="p">]]:</span>
+    <span class="k">print</span><span class="p">(</span><span class="mi">15</span><span class="o">*</span><span class="s1">&#39;=_=&#39;</span><span class="p">)</span>
+    <span class="p">[</span><span class="n">display</span><span class="p">(</span><span class="n">el</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">])</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">t</span><span class="p">];</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♔♕♕♖♖♖♗♗♗♗</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♔♔♔♔♔♕♕♕♕♕♕♖♖♖♖♖♖♖♗♗♗♗♗♗♗♗</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>=_==_==_==_==_==_==_==_==_==_==_==_==_==_==_=
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♔♖♖</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♔♔♔♔♔♖♖♖♖♖♖</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♔♔♔♖♖♖♖</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♔♔♔♔♔♔♔♖♖♖♖♖♖♖♖</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♕♗♗</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♕♕♕♕♕♗♗♗♗♗♗</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♕♕♕♗♗♗♗</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♕♕♕♕♕♕♕♗♗♗♗♗♗♗♗</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>=_==_==_==_==_==_==_==_==_==_==_==_==_==_==_=
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♔♕♕♕♕♕</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♔♔♔♕♕♕♕♕♕♕</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♔♔♕♕♕♕♕♕</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♔♔♔♔♕♕♕♕♕♕♕♕</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♖♗♗♗♗♗</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♖♖♖♗♗♗♗♗♗♗</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♖♖♗♗♗♗♗♗</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♖♖♖♖♗♗♗♗♗♗♗♗</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>=_==_==_==_==_==_==_==_==_==_==_==_==_==_==_=
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♔♕♕♕</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♔♔♔♔♔♕♕♕♕♕♕♕</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♔♔♕♕♕♕</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♔♔♔♔♔♔♕♕♕♕♕♕♕♕</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♖♗♗♗</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♖♖♖♖♖♗♗♗♗♗♗♗</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♖♖♗♗♗♗</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♖♖♖♖♖♖♗♗♗♗♗♗♗♗</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>=_==_==_==_==_==_==_==_==_==_==_==_==_==_==_=
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♔♕♕</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♔♔♔♔♔♕♕♕♕♕♕</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♔♔♔♕♕♕♕</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♔♔♔♔♔♔♔♕♕♕♕♕♕♕♕</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♖♗♗</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♖♖♖♖♖♗♗♗♗♗♗</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♖♖♖♗♗♗♗</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>♖♖♖♖♖♖♖♗♗♗♗♗♗♗♗</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># python sympy</span>
+<span class="n">d1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="n">SAB</span> <span class="o">=</span> <span class="p">[</span><span class="n">sympy</span><span class="o">.</span><span class="n">tensorproduct</span><span class="p">(</span><span class="n">SA</span><span class="p">,</span> <span class="n">SB</span><span class="p">,</span> <span class="n">d1</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.</span><span class="o">.</span><span class="mi">4</span><span class="p">]]</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">SAB</span><span class="p">:</span> 
+    <span class="k">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">);</span> <span class="n">display</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(2, 2, 2, 2, 2)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_latex output_subarea ">
+$$\left[\begin{matrix}\left[\begin{matrix}\left[\begin{matrix}2 x & x\\2 y & y\end{matrix}\right] & \left[\begin{matrix}2 z & z\\2 t & t\end{matrix}\right]\\\left[\begin{matrix}\frac{2 z}{x^{2}} & \frac{z}{x^{2}}\\\frac{2 t}{y^{2}} & \frac{t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}2 x^{2} + 2 y^{2} & x^{2} + y^{2}\\2 t^{2} + 2 z^{2} & t^{2} + z^{2}\end{matrix}\right]\end{matrix}\right] & \left[\begin{matrix}\left[\begin{matrix}4 x & 2 x\\4 y & 2 y\end{matrix}\right] & \left[\begin{matrix}4 z & 2 z\\4 t & 2 t\end{matrix}\right]\\\left[\begin{matrix}\frac{4 z}{x^{2}} & \frac{2 z}{x^{2}}\\\frac{4 t}{y^{2}} & \frac{2 t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}4 x^{2} + 4 y^{2} & 2 x^{2} + 2 y^{2}\\4 t^{2} + 4 z^{2} & 2 t^{2} + 2 z^{2}\end{matrix}\right]\end{matrix}\right]\\\left[\begin{matrix}\left[\begin{matrix}6 x & 3 x\\6 y & 3 y\end{matrix}\right] & \left[\begin{matrix}6 z & 3 z\\6 t & 3 t\end{matrix}\right]\\\left[\begin{matrix}\frac{6 z}{x^{2}} & \frac{3 z}{x^{2}}\\\frac{6 t}{y^{2}} & \frac{3 t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}6 x^{2} + 6 y^{2} & 3 x^{2} + 3 y^{2}\\6 t^{2} + 6 z^{2} & 3 t^{2} + 3 z^{2}\end{matrix}\right]\end{matrix}\right] & \left[\begin{matrix}\left[\begin{matrix}8 x & 4 x\\8 y & 4 y\end{matrix}\right] & \left[\begin{matrix}8 z & 4 z\\8 t & 4 t\end{matrix}\right]\\\left[\begin{matrix}\frac{8 z}{x^{2}} & \frac{4 z}{x^{2}}\\\frac{8 t}{y^{2}} & \frac{4 t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}8 x^{2} + 8 y^{2} & 4 x^{2} + 4 y^{2}\\8 t^{2} + 8 z^{2} & 4 t^{2} + 4 z^{2}\end{matrix}\right]\end{matrix}\right]\end{matrix}\right]$$
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(2, 2, 2, 2, 2)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_latex output_subarea ">
+$$\left[\begin{matrix}\left[\begin{matrix}\left[\begin{matrix}2 x & x\\2 y & y\end{matrix}\right] & \left[\begin{matrix}2 z & z\\2 t & t\end{matrix}\right]\\\left[\begin{matrix}\frac{2 z}{x^{2}} & \frac{z}{x^{2}}\\\frac{2 t}{y^{2}} & \frac{t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}2 x^{2} + 2 y^{2} & x^{2} + y^{2}\\2 t^{2} + 2 z^{2} & t^{2} + z^{2}\end{matrix}\right]\end{matrix}\right] & \left[\begin{matrix}\left[\begin{matrix}4 x & 2 x\\4 y & 2 y\end{matrix}\right] & \left[\begin{matrix}4 z & 2 z\\4 t & 2 t\end{matrix}\right]\\\left[\begin{matrix}\frac{4 z}{x^{2}} & \frac{2 z}{x^{2}}\\\frac{4 t}{y^{2}} & \frac{2 t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}4 x^{2} + 4 y^{2} & 2 x^{2} + 2 y^{2}\\4 t^{2} + 4 z^{2} & 2 t^{2} + 2 z^{2}\end{matrix}\right]\end{matrix}\right]\\\left[\begin{matrix}\left[\begin{matrix}6 x & 3 x\\6 y & 3 y\end{matrix}\right] & \left[\begin{matrix}6 z & 3 z\\6 t & 3 t\end{matrix}\right]\\\left[\begin{matrix}\frac{6 z}{x^{2}} & \frac{3 z}{x^{2}}\\\frac{6 t}{y^{2}} & \frac{3 t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}6 x^{2} + 6 y^{2} & 3 x^{2} + 3 y^{2}\\6 t^{2} + 6 z^{2} & 3 t^{2} + 3 z^{2}\end{matrix}\right]\end{matrix}\right] & \left[\begin{matrix}\left[\begin{matrix}8 x & 4 x\\8 y & 4 y\end{matrix}\right] & \left[\begin{matrix}8 z & 4 z\\8 t & 4 t\end{matrix}\right]\\\left[\begin{matrix}\frac{8 z}{x^{2}} & \frac{4 z}{x^{2}}\\\frac{8 t}{y^{2}} & \frac{4 t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}8 x^{2} + 8 y^{2} & 4 x^{2} + 4 y^{2}\\8 t^{2} + 8 z^{2} & 4 t^{2} + 4 z^{2}\end{matrix}\right]\end{matrix}\right]\end{matrix}\right]$$
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(2, 2, 2, 2, 2, 2)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_latex output_subarea ">
+$$\left[\begin{matrix}\left[\begin{matrix}\left[\begin{matrix}2 x & x\\2 y & y\end{matrix}\right] & \left[\begin{matrix}2 z & z\\2 t & t\end{matrix}\right]\\\left[\begin{matrix}\frac{2 z}{x^{2}} & \frac{z}{x^{2}}\\\frac{2 t}{y^{2}} & \frac{t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}2 x^{2} + 2 y^{2} & x^{2} + y^{2}\\2 t^{2} + 2 z^{2} & t^{2} + z^{2}\end{matrix}\right]\end{matrix}\right] & \left[\begin{matrix}\left[\begin{matrix}4 x & 2 x\\4 y & 2 y\end{matrix}\right] & \left[\begin{matrix}4 z & 2 z\\4 t & 2 t\end{matrix}\right]\\\left[\begin{matrix}\frac{4 z}{x^{2}} & \frac{2 z}{x^{2}}\\\frac{4 t}{y^{2}} & \frac{2 t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}4 x^{2} + 4 y^{2} & 2 x^{2} + 2 y^{2}\\4 t^{2} + 4 z^{2} & 2 t^{2} + 2 z^{2}\end{matrix}\right]\end{matrix}\right]\\\left[\begin{matrix}\left[\begin{matrix}6 x & 3 x\\6 y & 3 y\end{matrix}\right] & \left[\begin{matrix}6 z & 3 z\\6 t & 3 t\end{matrix}\right]\\\left[\begin{matrix}\frac{6 z}{x^{2}} & \frac{3 z}{x^{2}}\\\frac{6 t}{y^{2}} & \frac{3 t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}6 x^{2} + 6 y^{2} & 3 x^{2} + 3 y^{2}\\6 t^{2} + 6 z^{2} & 3 t^{2} + 3 z^{2}\end{matrix}\right]\end{matrix}\right] & \left[\begin{matrix}\left[\begin{matrix}8 x & 4 x\\8 y & 4 y\end{matrix}\right] & \left[\begin{matrix}8 z & 4 z\\8 t & 4 t\end{matrix}\right]\\\left[\begin{matrix}\frac{8 z}{x^{2}} & \frac{4 z}{x^{2}}\\\frac{8 t}{y^{2}} & \frac{4 t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}8 x^{2} + 8 y^{2} & 4 x^{2} + 4 y^{2}\\8 t^{2} + 8 z^{2} & 4 t^{2} + 4 z^{2}\end{matrix}\right]\end{matrix}\right]\end{matrix}\right]$$
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(2, 2, 2, 2, 2, 2)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_latex output_subarea ">
+$$\left[\begin{matrix}\left[\begin{matrix}\left[\begin{matrix}2 x & x\\2 y & y\end{matrix}\right] & \left[\begin{matrix}2 z & z\\2 t & t\end{matrix}\right]\\\left[\begin{matrix}\frac{2 z}{x^{2}} & \frac{z}{x^{2}}\\\frac{2 t}{y^{2}} & \frac{t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}2 x^{2} + 2 y^{2} & x^{2} + y^{2}\\2 t^{2} + 2 z^{2} & t^{2} + z^{2}\end{matrix}\right]\end{matrix}\right] & \left[\begin{matrix}\left[\begin{matrix}4 x & 2 x\\4 y & 2 y\end{matrix}\right] & \left[\begin{matrix}4 z & 2 z\\4 t & 2 t\end{matrix}\right]\\\left[\begin{matrix}\frac{4 z}{x^{2}} & \frac{2 z}{x^{2}}\\\frac{4 t}{y^{2}} & \frac{2 t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}4 x^{2} + 4 y^{2} & 2 x^{2} + 2 y^{2}\\4 t^{2} + 4 z^{2} & 2 t^{2} + 2 z^{2}\end{matrix}\right]\end{matrix}\right]\\\left[\begin{matrix}\left[\begin{matrix}6 x & 3 x\\6 y & 3 y\end{matrix}\right] & \left[\begin{matrix}6 z & 3 z\\6 t & 3 t\end{matrix}\right]\\\left[\begin{matrix}\frac{6 z}{x^{2}} & \frac{3 z}{x^{2}}\\\frac{6 t}{y^{2}} & \frac{3 t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}6 x^{2} + 6 y^{2} & 3 x^{2} + 3 y^{2}\\6 t^{2} + 6 z^{2} & 3 t^{2} + 3 z^{2}\end{matrix}\right]\end{matrix}\right] & \left[\begin{matrix}\left[\begin{matrix}8 x & 4 x\\8 y & 4 y\end{matrix}\right] & \left[\begin{matrix}8 z & 4 z\\8 t & 4 t\end{matrix}\right]\\\left[\begin{matrix}\frac{8 z}{x^{2}} & \frac{4 z}{x^{2}}\\\frac{8 t}{y^{2}} & \frac{4 t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}8 x^{2} + 8 y^{2} & 4 x^{2} + 4 y^{2}\\8 t^{2} + 8 z^{2} & 4 t^{2} + 4 z^{2}\end{matrix}\right]\end{matrix}\right]\end{matrix}\right]$$
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(2, 2, 2, 2, 2, 2)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_latex output_subarea ">
+$$\left[\begin{matrix}\left[\begin{matrix}\left[\begin{matrix}2 x & x\\2 y & y\end{matrix}\right] & \left[\begin{matrix}2 z & z\\2 t & t\end{matrix}\right]\\\left[\begin{matrix}\frac{2 z}{x^{2}} & \frac{z}{x^{2}}\\\frac{2 t}{y^{2}} & \frac{t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}2 x^{2} + 2 y^{2} & x^{2} + y^{2}\\2 t^{2} + 2 z^{2} & t^{2} + z^{2}\end{matrix}\right]\end{matrix}\right] & \left[\begin{matrix}\left[\begin{matrix}4 x & 2 x\\4 y & 2 y\end{matrix}\right] & \left[\begin{matrix}4 z & 2 z\\4 t & 2 t\end{matrix}\right]\\\left[\begin{matrix}\frac{4 z}{x^{2}} & \frac{2 z}{x^{2}}\\\frac{4 t}{y^{2}} & \frac{2 t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}4 x^{2} + 4 y^{2} & 2 x^{2} + 2 y^{2}\\4 t^{2} + 4 z^{2} & 2 t^{2} + 2 z^{2}\end{matrix}\right]\end{matrix}\right]\\\left[\begin{matrix}\left[\begin{matrix}6 x & 3 x\\6 y & 3 y\end{matrix}\right] & \left[\begin{matrix}6 z & 3 z\\6 t & 3 t\end{matrix}\right]\\\left[\begin{matrix}\frac{6 z}{x^{2}} & \frac{3 z}{x^{2}}\\\frac{6 t}{y^{2}} & \frac{3 t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}6 x^{2} + 6 y^{2} & 3 x^{2} + 3 y^{2}\\6 t^{2} + 6 z^{2} & 3 t^{2} + 3 z^{2}\end{matrix}\right]\end{matrix}\right] & \left[\begin{matrix}\left[\begin{matrix}8 x & 4 x\\8 y & 4 y\end{matrix}\right] & \left[\begin{matrix}8 z & 4 z\\8 t & 4 t\end{matrix}\right]\\\left[\begin{matrix}\frac{8 z}{x^{2}} & \frac{4 z}{x^{2}}\\\frac{8 t}{y^{2}} & \frac{4 t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}8 x^{2} + 8 y^{2} & 4 x^{2} + 4 y^{2}\\8 t^{2} + 8 z^{2} & 4 t^{2} + 4 z^{2}\end{matrix}\right]\end{matrix}\right]\end{matrix}\right]$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[65]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">d2</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
+<span class="n">SBC</span> <span class="o">=</span> <span class="p">[</span><span class="n">sympy</span><span class="o">.</span><span class="n">tensorcontraction</span><span class="p">(</span><span class="n">SB</span><span class="p">,</span> <span class="n">d2</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.</span><span class="o">.</span><span class="mi">3</span><span class="p">]];</span> <span class="n">SBC</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[65]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left [ t^{2} + x + z^{2}, \quad \left[\begin{matrix}x^{2} + x + y^{2} & t^{2} + y + z^{2}\end{matrix}\right], \quad \left[\begin{matrix}\frac{t}{y^{2}} + x & t^{2} + z^{2} + z\end{matrix}\right], \quad \left[\begin{matrix}t + x & t^{2} + z^{2} + \frac{z}{x^{2}}\end{matrix}\right]\right ]$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[155]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">r</span>
+library(tensor)
+G &lt;- matrix(c(1:4),2,2,byrow=T)
+H &lt;- matrix(c(5:8),2,2,byrow=T)
+G; H; tensor(G,H)
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+
+
+     [,1] [,2]
+[1,]    1    2
+[2,]    3    4
+     [,1] [,2]
+[1,]    5    6
+[2,]    7    8
+, , 1, 1
+
+     [,1] [,2]
+[1,]    5   10
+[2,]   15   20
+
+, , 2, 1
+
+     [,1] [,2]
+[1,]    7   14
+[2,]   21   28
+
+, , 1, 2
+
+     [,1] [,2]
+[1,]    6   12
+[2,]   18   24
+
+, , 2, 2
+
+     [,1] [,2]
+[1,]    8   16
+[2,]   24   32
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[163]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">r</span>
+G%*%H == tensor(G,H,2,1); G%*%t(H) == tensor(G,H,2,2); t(G)%*%t(H) == tensor(G,H,1,2); 
+cat(&#39;\n\n\n&#39;)
+G%o%H == tensor(G,H)
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>     [,1] [,2]
+[1,] TRUE TRUE
+[2,] TRUE TRUE
+     [,1] [,2]
+[1,] TRUE TRUE
+[2,] TRUE TRUE
+     [,1] [,2]
+[1,] TRUE TRUE
+[2,] TRUE TRUE
+
+
+
+, , 1, 1
+
+     [,1] [,2]
+[1,] TRUE TRUE
+[2,] TRUE TRUE
+
+, , 2, 1
+
+     [,1] [,2]
+[1,] TRUE TRUE
+[2,] TRUE TRUE
+
+, , 1, 2
+
+     [,1] [,2]
+[1,] TRUE TRUE
+[2,] TRUE TRUE
+
+, , 2, 2
+
+     [,1] [,2]
+[1,] TRUE TRUE
+[2,] TRUE TRUE
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="3.-&#1055;&#1088;&#1080;&#1084;&#1077;&#1088;&#1099;-&#1087;&#1088;&#1080;&#1084;&#1077;&#1085;&#1077;&#1085;&#1080;&#1103;-&#1090;&#1077;&#1085;&#1079;&#1086;&#1088;&#1085;&#1086;&#1075;&#1086;-&#1080;&#1089;&#1095;&#1080;&#1089;&#1083;&#1077;&#1085;&#1080;&#1103;.">3. &#1055;&#1088;&#1080;&#1084;&#1077;&#1088;&#1099; &#1087;&#1088;&#1080;&#1084;&#1077;&#1085;&#1077;&#1085;&#1080;&#1103; &#1090;&#1077;&#1085;&#1079;&#1086;&#1088;&#1085;&#1086;&#1075;&#1086; &#1080;&#1089;&#1095;&#1080;&#1089;&#1083;&#1077;&#1085;&#1080;&#1103;.<a class="anchor-link" href="#3.-&#1055;&#1088;&#1080;&#1084;&#1077;&#1088;&#1099;-&#1087;&#1088;&#1080;&#1084;&#1077;&#1085;&#1077;&#1085;&#1080;&#1103;-&#1090;&#1077;&#1085;&#1079;&#1086;&#1088;&#1085;&#1086;&#1075;&#1086;-&#1080;&#1089;&#1095;&#1080;&#1089;&#1083;&#1077;&#1085;&#1080;&#1103;.">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># sage</span>
+<span class="n">Md</span> <span class="o">=</span> <span class="n">Manifold</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Md&#39;</span><span class="p">)</span>
 <span class="n">U</span> <span class="o">=</span> <span class="n">Md</span><span class="o">.</span><span class="n">open_subset</span><span class="p">(</span><span class="s1">&#39;U&#39;</span><span class="p">);</span> <span class="n">V</span> <span class="o">=</span> <span class="n">Md</span><span class="o">.</span><span class="n">open_subset</span><span class="p">(</span><span class="s1">&#39;V&#39;</span><span class="p">)</span>
 <span class="n">XU</span><span class="o">.&lt;</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">U</span><span class="o">.</span><span class="n">chart</span><span class="p">();</span> <span class="n">XV</span><span class="o">.&lt;</span><span class="n">xp</span><span class="p">,</span><span class="n">yp</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">V</span><span class="o">.</span><span class="n">chart</span><span class="p">(</span><span class="s2">&quot;xp:x’ yp:y’&quot;</span><span class="p">)</span>
 <span class="n">p</span> <span class="o">=</span> <span class="n">U</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">chart</span><span class="o">=</span><span class="n">XU</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
@@ -12159,7 +13572,7 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[7]:</div>
+<div class="prompt output_prompt">Out[40]:</div>
 
 
 
@@ -12177,7 +13590,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">Md</span><span class="o">.</span><span class="n">atlas</span><span class="p">())</span>
@@ -12205,13 +13618,13 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[8]:</div>
+<div class="prompt output_prompt">Out[41]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>{ Chart (U, (x, y)):( 2, 1 ), Chart (V, (xp, yp)):( 4/5, 2/5 ) }</pre>
+<pre>{ Chart (V, (xp, yp)):( 4/5, 2/5 ), Chart (U, (x, y)):( 2, 1 ) }</pre>
 </div>
 
 </div>
@@ -12222,50 +13635,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">R3</span> <span class="o">=</span> <span class="n">Manifold</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;R^3&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;\mathbb{R}^3&#39;</span><span class="p">)</span>
-<span class="n">XR3</span><span class="o">.&lt;</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">Z</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">R3</span><span class="o">.</span><span class="n">chart</span><span class="p">()</span>
-<span class="n">Delta1</span> <span class="o">=</span> <span class="n">Md</span><span class="o">.</span><span class="n">diff_map</span><span class="p">(</span><span class="n">R3</span><span class="p">,</span> <span class="p">{(</span><span class="n">XU</span><span class="p">,</span> <span class="n">XR3</span><span class="p">):[</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">^</span><span class="mi">2</span><span class="p">),</span><span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">^</span><span class="mi">2</span><span class="p">),(</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">^</span><span class="mi">2</span><span class="p">)],</span>
-                          <span class="p">(</span><span class="n">XV</span><span class="p">,</span> <span class="n">XR3</span><span class="p">):[</span><span class="mi">4</span><span class="o">*</span><span class="n">xp</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">xp</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">yp</span><span class="o">^</span><span class="mi">2</span><span class="p">),</span><span class="mi">4</span><span class="o">*</span><span class="n">yp</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">xp</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">yp</span><span class="o">^</span><span class="mi">2</span><span class="p">),(</span><span class="mi">1</span><span class="o">-</span><span class="n">xp</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="n">yp</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">xp</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">yp</span><span class="o">^</span><span class="mi">2</span><span class="p">)]},</span>
-                     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Delta1&#39;</span><span class="p">,</span> <span class="n">latex_name</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\Delta_1&#39;</span><span class="p">)</span>
-<span class="n">Delta2</span> <span class="o">=</span> <span class="n">Md</span><span class="o">.</span><span class="n">diff_map</span><span class="p">(</span><span class="n">R3</span><span class="p">,</span> <span class="p">{(</span><span class="n">XU</span><span class="p">,</span> <span class="n">XR3</span><span class="p">):[</span><span class="n">x</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">^</span><span class="mi">2</span><span class="p">),</span><span class="n">y</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">^</span><span class="mi">2</span><span class="p">),(</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">^</span><span class="mi">2</span><span class="p">)],</span>
-                          <span class="p">(</span><span class="n">XV</span><span class="p">,</span> <span class="n">XR3</span><span class="p">):[</span><span class="mi">8</span><span class="o">*</span><span class="n">xp</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">xp</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">yp</span><span class="o">^</span><span class="mi">2</span><span class="p">),</span><span class="mi">8</span><span class="o">*</span><span class="n">yp</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">xp</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">yp</span><span class="o">^</span><span class="mi">2</span><span class="p">),(</span><span class="mi">1</span><span class="o">-</span><span class="n">xp</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="n">yp</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">xp</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">yp</span><span class="o">^</span><span class="mi">2</span><span class="p">)]},</span>
-                     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Delta2&#39;</span><span class="p">,</span> <span class="n">latex_name</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\Delta_2&#39;</span><span class="p">)</span>
-<span class="n">Delta1</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[9]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>Delta1: Md --&gt; R^3
-on U: (x, y) |--&gt; (X, Y, Z) = (2*x/(x^2 + y^2 + 1), 2*y/(x^2 + y^2 + 1), (x^2 + y^2 - 1)/(x^2 + y^2 + 1))
-on V: (xp, yp) |--&gt; (X, Y, Z) = (4*xp/(xp^2 + yp^2 + 1), 4*yp/(xp^2 + yp^2 + 1), -(xp^2 + yp^2 - 1)/(xp^2 + yp^2 + 1))</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">Md</span><span class="o">.</span><span class="n">scalar_field</span><span class="p">({</span><span class="n">XU</span><span class="p">:</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">^</span><span class="mi">2</span><span class="p">),</span><span class="n">XV</span><span class="p">:(</span><span class="n">xp</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">yp</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">xp</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">yp</span><span class="o">^</span><span class="mi">2</span><span class="p">)},</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;f&#39;</span><span class="p">)</span>
@@ -12297,7 +13667,7 @@ on V: (xp, yp) |--&gt; (xp^2 + yp^2)/(xp^2 + yp^2 + 1)
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[10]:</div>
+<div class="prompt output_prompt">Out[42]:</div>
 
 
 
@@ -12314,7 +13684,7 @@ on V: (xp, yp) |--&gt; (xp^2 + yp^2)/(xp^2 + yp^2 + 1)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">display</span><span class="p">(),</span> <span class="n">df</span><span class="o">.</span><span class="n">tensor_type</span><span class="p">()</span>
@@ -12330,7 +13700,7 @@ on V: (xp, yp) |--&gt; (xp^2 + yp^2)/(xp^2 + yp^2 + 1)
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[17]:</div>
+<div class="prompt output_prompt">Out[43]:</div>
 
 
 
@@ -12349,7 +13719,50 @@ on V: (xp, yp) |--&gt; (xp^2 + yp^2)/(xp^2 + yp^2 + 1)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">R3</span> <span class="o">=</span> <span class="n">Manifold</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;R^3&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;\mathbb{R}^3&#39;</span><span class="p">)</span>
+<span class="n">XR3</span><span class="o">.&lt;</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">Z</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">R3</span><span class="o">.</span><span class="n">chart</span><span class="p">()</span>
+<span class="n">Delta1</span> <span class="o">=</span> <span class="n">Md</span><span class="o">.</span><span class="n">diff_map</span><span class="p">(</span><span class="n">R3</span><span class="p">,</span> <span class="p">{(</span><span class="n">XU</span><span class="p">,</span> <span class="n">XR3</span><span class="p">):[</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">^</span><span class="mi">2</span><span class="p">),</span><span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">^</span><span class="mi">2</span><span class="p">),(</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">^</span><span class="mi">2</span><span class="p">)],</span>
+                          <span class="p">(</span><span class="n">XV</span><span class="p">,</span> <span class="n">XR3</span><span class="p">):[</span><span class="mi">4</span><span class="o">*</span><span class="n">xp</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">xp</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">yp</span><span class="o">^</span><span class="mi">2</span><span class="p">),</span><span class="mi">4</span><span class="o">*</span><span class="n">yp</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">xp</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">yp</span><span class="o">^</span><span class="mi">2</span><span class="p">),(</span><span class="mi">1</span><span class="o">-</span><span class="n">xp</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="n">yp</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">xp</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">yp</span><span class="o">^</span><span class="mi">2</span><span class="p">)]},</span>
+                     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Delta1&#39;</span><span class="p">,</span> <span class="n">latex_name</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\Delta_1&#39;</span><span class="p">)</span>
+<span class="n">Delta2</span> <span class="o">=</span> <span class="n">Md</span><span class="o">.</span><span class="n">diff_map</span><span class="p">(</span><span class="n">R3</span><span class="p">,</span> <span class="p">{(</span><span class="n">XU</span><span class="p">,</span> <span class="n">XR3</span><span class="p">):[</span><span class="n">x</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">^</span><span class="mi">2</span><span class="p">),</span><span class="n">y</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">^</span><span class="mi">2</span><span class="p">),(</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">^</span><span class="mi">2</span><span class="p">)],</span>
+                          <span class="p">(</span><span class="n">XV</span><span class="p">,</span> <span class="n">XR3</span><span class="p">):[</span><span class="mi">8</span><span class="o">*</span><span class="n">xp</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">xp</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">yp</span><span class="o">^</span><span class="mi">2</span><span class="p">),</span><span class="mi">8</span><span class="o">*</span><span class="n">yp</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">xp</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">yp</span><span class="o">^</span><span class="mi">2</span><span class="p">),(</span><span class="mi">1</span><span class="o">-</span><span class="n">xp</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="n">yp</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">xp</span><span class="o">^</span><span class="mi">2</span><span class="o">+</span><span class="n">yp</span><span class="o">^</span><span class="mi">2</span><span class="p">)]},</span>
+                     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Delta2&#39;</span><span class="p">,</span> <span class="n">latex_name</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\Delta_2&#39;</span><span class="p">)</span>
+<span class="n">Delta1</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[44]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Delta1: Md --&gt; R^3
+on U: (x, y) |--&gt; (X, Y, Z) = (2*x/(x^2 + y^2 + 1), 2*y/(x^2 + y^2 + 1), (x^2 + y^2 - 1)/(x^2 + y^2 + 1))
+on V: (xp, yp) |--&gt; (X, Y, Z) = (4*xp/(xp^2 + yp^2 + 1), 4*yp/(xp^2 + yp^2 + 1), -(xp^2 + yp^2 - 1)/(xp^2 + yp^2 + 1))</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">g1</span> <span class="o">=</span> <span class="n">XU</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">chart</span><span class="o">=</span><span class="n">XR3</span><span class="p">,</span> <span class="n">mapping</span><span class="o">=</span><span class="n">Delta1</span><span class="p">,</span> <span class="n">number_values</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#ff3636&#39;</span><span class="p">,</span> <span class="n">label_axes</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
@@ -12398,7 +13811,7 @@ on V: (xp, yp) |--&gt; (xp^2 + yp^2)/(xp^2 + yp^2 + 1)
   'data &quot;model list&quot;',
   '11',
   'empty',
-  'Xx 0.655803571429 0.403571428571 2.64094488189',
+  'Xx 1.49657738095 0.823958333333 0.948031496063',
   'Xx -3.0 -4.0 -3.0',
   'Xx 0.0 -4.0 -3.0',
   'Xx 3.0 -4.0 -3.0',
@@ -13220,7 +14633,7 @@ on V: (xp, yp) |--&gt; (xp^2 + yp^2)/(xp^2 + yp^2 + 1)
   'color $line_399  [0,0,139]',
   'draw line_400 diameter 1 curve {0.375415282392 -0.375415282392 -3.0}  {0.385616820232 -0.37519474401 -2.9987161886}  {0.39608515868 -0.374675150103 -2.99739880172}  {0.406817948725 -0.373832709639 -2.99604813495}  {0.417811296158 -0.372642507385 -2.99466467836}  {0.42905957304 -0.371078549656 -2.99324914021}  {0.440555218559 -0.369113831766 -2.99180247197}  {0.452288530789 -0.36672043037 -2.9903258946}  {0.464247451391 -0.363869624063 -2.98882092557}  {0.476417345993 -0.360532045616 -2.98728940653}  {0.488780783728 -0.356677869207 -2.98573353108}  {0.50131732025 -0.352277035851 -2.98415587204}  {0.514003289419 -0.347299519878 -2.98255940766}  {0.526811609832 -0.34171563881 -2.980947546}  {0.53971161327 -0.335496408249 -2.9793241465}  {0.552668903108 -0.328613942388 -2.9776935378}  {0.565645251523 -0.321041899513 -2.97606053068}  {0.57859854506 -0.312755970303 -2.97443042489}  {0.591482788549 -0.303734404931 -2.9728090087}  {0.60424817752 -0.293958572848 -2.97120254975}  {0.616841249018 -0.283413546846 -2.96961777606}  {0.629205119966 -0.272088700526 -2.9680618461}  {0.641279820919 -0.259978305778 -2.9665423067}  {0.653002731099 -0.24708211447 -2.96506703837}  {0.664309118002 -0.233405906325 -2.96364418737}  {0.675132781598 -0.218961983221 -2.96228208462}  {0.685406799261 -0.203769588969 -2.96098915201}  {0.69506436322 -0.187855233303 -2.95977379695}  {0.704039697626 -0.171252899422 -2.95864429699}  {0.712269037566 -0.154004116231 -2.95760867662}  {0.719691647786 -0.136157879311 -2.95667457906}  {0.726250854821 -0.11777040889 -2.95584913638}  {0.731895063043 -0.098904738249 -2.95513884162}  {0.73657872308 -0.0796301322249 -2.95454942695}  {0.740263220439 -0.0600213421977 -2.95408575179}  {0.742917653161 -0.0401577109817 -2.953751705}  {0.744519470019 -0.0201221478383 -2.95355012453}  {0.745054945055 6.29167048131e-16 -2.95348273773}  {0.744519470019 0.0201221478383 -2.95355012453}  {0.742917653161 0.0401577109817 -2.953751705}  {0.740263220439 0.0600213421977 -2.95408575179}  {0.73657872308 0.0796301322249 -2.95454942695}  {0.731895063043 0.098904738249 -2.95513884162}  {0.726250854821 0.11777040889 -2.95584913638}  {0.719691647786 0.136157879311 -2.95667457906}  {0.712269037566 0.154004116231 -2.95760867662}  {0.704039697626 0.171252899422 -2.95864429699}  {0.69506436322 0.187855233303 -2.95977379695}  {0.685406799261 0.203769588969 -2.96098915201}  {0.675132781598 0.218961983221 -2.96228208462}  {0.664309118002 0.233405906325 -2.96364418737}  {0.653002731099 0.24708211447 -2.96506703837}  {0.641279820919 0.259978305778 -2.9665423067}  {0.629205119966 0.272088700526 -2.9680618461}  {0.616841249018 0.283413546846 -2.96961777606}  {0.60424817752 0.293958572848 -2.97120254975}  {0.591482788549 0.303734404931 -2.9728090087}  {0.57859854506 0.312755970303 -2.97443042489}  {0.565645251523 0.321041899513 -2.97606053068}  {0.552668903108 0.328613942388 -2.9776935378}  {0.53971161327 0.335496408249 -2.9793241465}  {0.526811609832 0.34171563881 -2.980947546}  {0.514003289419 0.347299519878 -2.98255940766}  {0.50131732025 0.352277035851 -2.98415587204}  {0.488780783728 0.356677869207 -2.98573353108}  {0.476417345993 0.360532045616 -2.98728940653}  {0.464247451391 0.363869624063 -2.98882092557}  {0.452288530789 0.36672043037 -2.9903258946}  {0.440555218559 0.369113831766 -2.99180247197}  {0.42905957304 0.371078549656 -2.99324914021}  {0.417811296158 0.372642507385 -2.99466467836}  {0.406817948725 0.373832709639 -2.99604813495}  {0.39608515868 0.374675150103 -2.99739880172}  {0.385616820232 0.37519474401 -2.9987161886}  {0.375415282392 0.375415282392 -3.0} ',
   'color $line_400  [0,0,139]',
-  'draw point_401 DIAMETER 10 {0.504464285714 0.252232142857 2.03149606299}',
+  'draw point_401 DIAMETER 10 {1.34523809524 0.672619047619 0.338582677165}',
   'color $point_401  [255,54,255]',
   'select atomno = 1',
   'color atom  [255,54,255]',
@@ -13311,294 +14724,18 @@ on V: (xp, yp) |--&gt; (xp^2 + yp^2)/(xp^2 + yp^2 + 1)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># python numpy</span>
-<span class="kn">import</span> <span class="nn">numpy</span>
-<span class="n">A</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">B</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s2">&quot;♔&quot;</span><span class="p">,</span><span class="s2">&quot;♕&quot;</span><span class="p">,</span><span class="s2">&quot;♖&quot;</span><span class="p">,</span><span class="s2">&quot;♗&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">AB0</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">AB1</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">AB2</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">AB01</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-<span class="n">AB21</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="n">AB0</span><span class="o">.</span><span class="n">shape</span><span class="p">);</span> <span class="k">print</span><span class="p">(</span><span class="n">AB2</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">AB2</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>(2, 2, 2, 2, 2)
-(2,)
-♔♕♕♖♖♖♗♗♗♗
-♔♔♔♔♔♕♕♕♕♕♕♖♖♖♖♖♖♖♗♗♗♗♗♗♗♗
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
-            <span class="k">print</span><span class="p">(</span><span class="n">AB1</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="n">AB1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>♔♖♖
-♕♗♗
-♔♔♔♖♖♖♖
-♕♕♕♗♗♗♗
-♔♔♔♔♔♖♖♖♖♖♖
-♕♕♕♕♕♗♗♗♗♗♗
-♔♔♔♔♔♔♔♖♖♖♖♖♖♖♖
-♕♕♕♕♕♕♕♗♗♗♗♗♗♗♗
-(2, 2, 2)
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
-            <span class="k">print</span><span class="p">(</span><span class="n">AB01</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="n">AB01</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>♔♕♕♕♕♕
-♖♗♗♗♗♗
-♔♔♕♕♕♕♕♕
-♖♖♗♗♗♗♗♗
-♔♔♔♕♕♕♕♕♕♕
-♖♖♖♗♗♗♗♗♗♗
-♔♔♔♔♕♕♕♕♕♕♕♕
-♖♖♖♖♗♗♗♗♗♗♗♗
-(2, 2, 2)
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
-            <span class="k">print</span><span class="p">(</span><span class="n">AB21</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="n">AB21</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>♔♕♕
-♖♗♗
-♔♔♔♕♕♕♕
-♖♖♖♗♗♗♗
-♔♔♔♔♔♕♕♕♕♕♕
-♖♖♖♖♖♗♗♗♗♗♗
-♔♔♔♔♔♔♔♕♕♕♕♕♕♕♕
-♖♖♖♖♖♖♖♗♗♗♗♗♗♗♗
-(2, 2, 2)
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># python sympy</span>
-<span class="kn">import</span> <span class="nn">sympy</span>
-<span class="n">sympy</span><span class="o">.</span><span class="n">init_printing</span><span class="p">(</span><span class="n">use_unicode</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">w</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x,y,z,t,u,v,w&#39;</span><span class="p">)</span>
-<span class="n">A</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]])</span>
-<span class="n">B</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Array</span><span class="p">([[[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">],[</span><span class="n">z</span><span class="p">,</span><span class="n">t</span><span class="p">]],[[</span><span class="n">z</span><span class="o">/</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">t</span><span class="o">/</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">],[</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">z</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">t</span><span class="o">**</span><span class="mi">2</span><span class="p">]]])</span>
-<span class="n">A</span><span class="p">,</span> <span class="n">B</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[32]:</div>
-
-
-
-
-<div class="output_latex output_subarea output_execute_result">
-$$\left ( \left[\begin{matrix}1 & 2\\3 & 4\end{matrix}\right], \quad \left[\begin{matrix}\left[\begin{matrix}x & y\\z & t\end{matrix}\right] & \left[\begin{matrix}\frac{z}{x^{2}} & \frac{t}{y^{2}}\\x^{2} + y^{2} & t^{2} + z^{2}\end{matrix}\right]\end{matrix}\right]\right )$$
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">rank</span><span class="p">(),</span> <span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">B</span><span class="o">.</span><span class="n">rank</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[33]:</div>
-
-
-
-
-<div class="output_latex output_subarea output_execute_result">
-$$\left ( \left ( 2, \quad 2\right ), \quad 2, \quad \left ( 2, \quad 2, \quad 2\right ), \quad 3\right )$$
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">B</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">B</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">B</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="n">B</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[34]:</div>
-
-
-
-
-<div class="output_latex output_subarea output_execute_result">
-$$\left ( \left[\begin{matrix}\left[\begin{matrix}1 & 0\\0 & 0\end{matrix}\right] & \left[\begin{matrix}- \frac{2 z}{x^{3}} & 0\\2 x & 0\end{matrix}\right]\end{matrix}\right], \quad \left[\begin{matrix}\left[\begin{matrix}0 & 1\\0 & 0\end{matrix}\right] & \left[\begin{matrix}0 & - \frac{2 t}{y^{3}}\\2 y & 0\end{matrix}\right]\end{matrix}\right], \quad \left[\begin{matrix}\left[\begin{matrix}0 & 0\\1 & 0\end{matrix}\right] & \left[\begin{matrix}\frac{1}{x^{2}} & 0\\0 & 2 z\end{matrix}\right]\end{matrix}\right], \quad \left[\begin{matrix}\left[\begin{matrix}0 & 0\\0 & 1\end{matrix}\right] & \left[\begin{matrix}0 & \frac{1}{y^{2}}\\0 & 2 t\end{matrix}\right]\end{matrix}\right]\right )$$
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">AB1</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">tensorproduct</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">AB2</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">tensorproduct</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">AB01</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">tensorproduct</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-<span class="n">AB21</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">tensorproduct</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="n">AB1</span><span class="o">.</span><span class="n">shape</span><span class="p">);</span> <span class="k">print</span><span class="p">(</span><span class="n">AB2</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="n">AB1</span><span class="p">,</span> <span class="n">AB2</span>
+<span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">w</span><span class="o">=</span><span class="n">sympy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x,y,z,t,u,v,w&#39;</span><span class="p">)</span>
+<span class="n">ST</span><span class="o">=</span><span class="n">sympy</span><span class="o">.</span><span class="n">Array</span><span class="p">([[[</span><span class="n">x</span><span class="o">*</span><span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">u</span><span class="p">)</span><span class="o">*</span><span class="n">z</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="o">^</span><span class="mi">3</span><span class="o">*</span><span class="n">u</span><span class="o">*</span><span class="n">v</span><span class="o">^</span><span class="mi">6</span><span class="o">-</span><span class="n">sympy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">w</span><span class="o">*</span><span class="n">t</span><span class="p">)],</span>
+                 <span class="p">[</span><span class="n">t</span><span class="o">*</span><span class="n">sympy</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">u</span><span class="o">*</span><span class="n">w</span><span class="p">),</span><span class="n">sympy</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="n">z</span><span class="o">*</span><span class="n">u</span><span class="o">-</span><span class="n">w</span><span class="p">]],</span>
+                <span class="p">[[</span><span class="n">y</span><span class="o">^</span><span class="mi">3</span><span class="o">*</span><span class="n">v</span><span class="o">^</span><span class="mi">5</span><span class="o">-</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="o">*</span><span class="n">sympy</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="o">*</span><span class="n">z</span><span class="o">^</span><span class="mi">4</span><span class="p">],</span>
+                 <span class="p">[</span><span class="n">x</span><span class="o">-</span><span class="n">sympy</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">*</span><span class="n">w</span><span class="o">^</span><span class="mi">7</span><span class="p">,</span><span class="n">y</span><span class="o">*</span><span class="n">t</span><span class="o">^</span><span class="mi">8</span><span class="o">*</span><span class="n">u</span><span class="o">*</span><span class="n">v</span><span class="p">]]])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">ST</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">w</span><span class="p">]:</span> 
+    <span class="n">display</span><span class="p">(</span><span class="n">ST</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">el</span><span class="p">));</span> <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -13614,131 +14751,26 @@ $$\left ( \left[\begin{matrix}\left[\begin{matrix}1 & 0\\0 & 0\end{matrix}\right
 <div class="prompt"></div>
 
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>(2, 2, 2, 2, 2)
-(2, 2, 2, 2, 2)
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[35]:</div>
 
 
-
-
-<div class="output_latex output_subarea output_execute_result">
-$$\left ( \left[\begin{matrix}\left[\begin{matrix}\left[\begin{matrix}x & y\\z & t\end{matrix}\right] & \left[\begin{matrix}\frac{z}{x^{2}} & \frac{t}{y^{2}}\\x^{2} + y^{2} & t^{2} + z^{2}\end{matrix}\right]\\\left[\begin{matrix}2 x & 2 y\\2 z & 2 t\end{matrix}\right] & \left[\begin{matrix}\frac{2 z}{x^{2}} & \frac{2 t}{y^{2}}\\2 x^{2} + 2 y^{2} & 2 t^{2} + 2 z^{2}\end{matrix}\right]\end{matrix}\right] & \left[\begin{matrix}\left[\begin{matrix}3 x & 3 y\\3 z & 3 t\end{matrix}\right] & \left[\begin{matrix}\frac{3 z}{x^{2}} & \frac{3 t}{y^{2}}\\3 x^{2} + 3 y^{2} & 3 t^{2} + 3 z^{2}\end{matrix}\right]\\\left[\begin{matrix}4 x & 4 y\\4 z & 4 t\end{matrix}\right] & \left[\begin{matrix}\frac{4 z}{x^{2}} & \frac{4 t}{y^{2}}\\4 x^{2} + 4 y^{2} & 4 t^{2} + 4 z^{2}\end{matrix}\right]\end{matrix}\right]\end{matrix}\right], \quad \left[\begin{matrix}\left[\begin{matrix}\left[\begin{matrix}2 x & 2 y\\2 z & 2 t\end{matrix}\right] & \left[\begin{matrix}\frac{2 z}{x^{2}} & \frac{2 t}{y^{2}}\\2 x^{2} + 2 y^{2} & 2 t^{2} + 2 z^{2}\end{matrix}\right]\\\left[\begin{matrix}4 x & 4 y\\4 z & 4 t\end{matrix}\right] & \left[\begin{matrix}\frac{4 z}{x^{2}} & \frac{4 t}{y^{2}}\\4 x^{2} + 4 y^{2} & 4 t^{2} + 4 z^{2}\end{matrix}\right]\end{matrix}\right] & \left[\begin{matrix}\left[\begin{matrix}6 x & 6 y\\6 z & 6 t\end{matrix}\right] & \left[\begin{matrix}\frac{6 z}{x^{2}} & \frac{6 t}{y^{2}}\\6 x^{2} + 6 y^{2} & 6 t^{2} + 6 z^{2}\end{matrix}\right]\\\left[\begin{matrix}8 x & 8 y\\8 z & 8 t\end{matrix}\right] & \left[\begin{matrix}\frac{8 z}{x^{2}} & \frac{8 t}{y^{2}}\\8 x^{2} + 8 y^{2} & 8 t^{2} + 8 z^{2}\end{matrix}\right]\end{matrix}\right]\end{matrix}\right]\right )$$
+<div class="output_latex output_subarea ">
+$$\left[\begin{matrix}\left[\begin{matrix}x z^{2} \cos{\left (u \right )} - y & u v^{6} x^{3} - \sin{\left (t w \right )}\\t \tan{\left (u w \right )} & u z e^{y} - w\end{matrix}\right] & \left[\begin{matrix}- t + v^{5} y^{3} & x z^{4} \log{\left (w \right )}\\- w^{7} e^{z} + x & t^{8} u v y\end{matrix}\right]\end{matrix}\right]$$
 </div>
 
 </div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[36]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">AB01</span><span class="o">.</span><span class="n">shape</span><span class="p">);</span> <span class="k">print</span><span class="p">(</span><span class="n">AB21</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="n">AB01</span><span class="p">,</span> <span class="n">AB21</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
 
 <div class="output_area">
 
 <div class="prompt"></div>
 
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>(2, 2, 2, 2, 2, 2)
-(2, 2, 2, 2, 2, 2)
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[36]:</div>
 
 
-
-
-<div class="output_latex output_subarea output_execute_result">
-$$\left ( \left[\begin{matrix}\left[\begin{matrix}\left[\begin{matrix}0 & x\\0 & y\end{matrix}\right] & \left[\begin{matrix}0 & z\\0 & t\end{matrix}\right]\\\left[\begin{matrix}0 & \frac{z}{x^{2}}\\0 & \frac{t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}0 & x^{2} + y^{2}\\0 & t^{2} + z^{2}\end{matrix}\right]\end{matrix}\right] & \left[\begin{matrix}\left[\begin{matrix}0 & 2 x\\0 & 2 y\end{matrix}\right] & \left[\begin{matrix}0 & 2 z\\0 & 2 t\end{matrix}\right]\\\left[\begin{matrix}0 & \frac{2 z}{x^{2}}\\0 & \frac{2 t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}0 & 2 x^{2} + 2 y^{2}\\0 & 2 t^{2} + 2 z^{2}\end{matrix}\right]\end{matrix}\right]\\\left[\begin{matrix}\left[\begin{matrix}0 & 3 x\\0 & 3 y\end{matrix}\right] & \left[\begin{matrix}0 & 3 z\\0 & 3 t\end{matrix}\right]\\\left[\begin{matrix}0 & \frac{3 z}{x^{2}}\\0 & \frac{3 t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}0 & 3 x^{2} + 3 y^{2}\\0 & 3 t^{2} + 3 z^{2}\end{matrix}\right]\end{matrix}\right] & \left[\begin{matrix}\left[\begin{matrix}0 & 4 x\\0 & 4 y\end{matrix}\right] & \left[\begin{matrix}0 & 4 z\\0 & 4 t\end{matrix}\right]\\\left[\begin{matrix}0 & \frac{4 z}{x^{2}}\\0 & \frac{4 t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}0 & 4 x^{2} + 4 y^{2}\\0 & 4 t^{2} + 4 z^{2}\end{matrix}\right]\end{matrix}\right]\end{matrix}\right], \quad \left[\begin{matrix}\left[\begin{matrix}\left[\begin{matrix}2 x & x\\2 y & y\end{matrix}\right] & \left[\begin{matrix}2 z & z\\2 t & t\end{matrix}\right]\\\left[\begin{matrix}\frac{2 z}{x^{2}} & \frac{z}{x^{2}}\\\frac{2 t}{y^{2}} & \frac{t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}2 x^{2} + 2 y^{2} & x^{2} + y^{2}\\2 t^{2} + 2 z^{2} & t^{2} + z^{2}\end{matrix}\right]\end{matrix}\right] & \left[\begin{matrix}\left[\begin{matrix}4 x & 2 x\\4 y & 2 y\end{matrix}\right] & \left[\begin{matrix}4 z & 2 z\\4 t & 2 t\end{matrix}\right]\\\left[\begin{matrix}\frac{4 z}{x^{2}} & \frac{2 z}{x^{2}}\\\frac{4 t}{y^{2}} & \frac{2 t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}4 x^{2} + 4 y^{2} & 2 x^{2} + 2 y^{2}\\4 t^{2} + 4 z^{2} & 2 t^{2} + 2 z^{2}\end{matrix}\right]\end{matrix}\right]\\\left[\begin{matrix}\left[\begin{matrix}6 x & 3 x\\6 y & 3 y\end{matrix}\right] & \left[\begin{matrix}6 z & 3 z\\6 t & 3 t\end{matrix}\right]\\\left[\begin{matrix}\frac{6 z}{x^{2}} & \frac{3 z}{x^{2}}\\\frac{6 t}{y^{2}} & \frac{3 t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}6 x^{2} + 6 y^{2} & 3 x^{2} + 3 y^{2}\\6 t^{2} + 6 z^{2} & 3 t^{2} + 3 z^{2}\end{matrix}\right]\end{matrix}\right] & \left[\begin{matrix}\left[\begin{matrix}8 x & 4 x\\8 y & 4 y\end{matrix}\right] & \left[\begin{matrix}8 z & 4 z\\8 t & 4 t\end{matrix}\right]\\\left[\begin{matrix}\frac{8 z}{x^{2}} & \frac{4 z}{x^{2}}\\\frac{8 t}{y^{2}} & \frac{4 t}{y^{2}}\end{matrix}\right] & \left[\begin{matrix}8 x^{2} + 8 y^{2} & 4 x^{2} + 4 y^{2}\\8 t^{2} + 8 z^{2} & 4 t^{2} + 4 z^{2}\end{matrix}\right]\end{matrix}\right]\end{matrix}\right]\right )$$
+<div class="output_latex output_subarea ">
+$$\left[\begin{matrix}\left[\begin{matrix}z^{2} \cos{\left (u \right )} & 3 u v^{6} x^{2}\\0 & 0\end{matrix}\right] & \left[\begin{matrix}0 & z^{4} \log{\left (w \right )}\\1 & 0\end{matrix}\right]\end{matrix}\right]$$
 </div>
 
 </div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[37]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">B012</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">tensorcontraction</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-<span class="n">B01</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">tensorcontraction</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-<span class="n">B12</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">tensorcontraction</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-<span class="n">B</span><span class="p">,</span> <span class="n">B012</span><span class="p">,</span> <span class="n">B01</span><span class="p">,</span> <span class="n">B12</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[37]:</div>
-
-
-
-
-<div class="output_latex output_subarea output_execute_result">
-$$\left ( \left[\begin{matrix}\left[\begin{matrix}x & y\\z & t\end{matrix}\right] & \left[\begin{matrix}\frac{z}{x^{2}} & \frac{t}{y^{2}}\\x^{2} + y^{2} & t^{2} + z^{2}\end{matrix}\right]\end{matrix}\right], \quad t^{2} + x + z^{2}, \quad \left[\begin{matrix}x^{2} + x + y^{2} & t^{2} + y + z^{2}\end{matrix}\right], \quad \left[\begin{matrix}t + x & t^{2} + z^{2} + \frac{z}{x^{2}}\end{matrix}\right]\right )$$
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[122]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">r</span>
-G &lt;- t(array(LETTERS[1:8],c(2,2)))
-H &lt;- t(array(c(1:4),c(2,2)))
-GH &lt;- outer(G, H, FUN=paste)
-G; H; GH; dim(GH)
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
 
 <div class="output_area">
 
@@ -13748,38 +14780,156 @@ G; H; GH; dim(GH)
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
 
+</pre>
+</div>
+</div>
 
-     [,1] [,2]
-[1,] &#34;A&#34;  &#34;B&#34; 
-[2,] &#34;C&#34;  &#34;D&#34; 
-     [,1] [,2]
-[1,]    1    2
-[2,]    3    4
-, , 1, 1
+<div class="output_area">
 
-     [,1]  [,2] 
-[1,] &#34;A 1&#34; &#34;B 1&#34;
-[2,] &#34;C 1&#34; &#34;D 1&#34;
+<div class="prompt"></div>
 
-, , 2, 1
 
-     [,1]  [,2] 
-[1,] &#34;A 3&#34; &#34;B 3&#34;
-[2,] &#34;C 3&#34; &#34;D 3&#34;
 
-, , 1, 2
 
-     [,1]  [,2] 
-[1,] &#34;A 2&#34; &#34;B 2&#34;
-[2,] &#34;C 2&#34; &#34;D 2&#34;
+<div class="output_latex output_subarea ">
+$$\left[\begin{matrix}\left[\begin{matrix}-1 & 0\\0 & u z e^{y}\end{matrix}\right] & \left[\begin{matrix}3 v^{5} y^{2} & 0\\0 & t^{8} u v\end{matrix}\right]\end{matrix}\right]$$
+</div>
 
-, , 2, 2
+</div>
 
-     [,1]  [,2] 
-[1,] &#34;A 4&#34; &#34;B 4&#34;
-[2,] &#34;C 4&#34; &#34;D 4&#34;
+<div class="output_area">
 
-[1] 2 2 2 2
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_latex output_subarea ">
+$$\left[\begin{matrix}\left[\begin{matrix}2 x z \cos{\left (u \right )} & 0\\0 & u e^{y}\end{matrix}\right] & \left[\begin{matrix}0 & 4 x z^{3} \log{\left (w \right )}\\- w^{7} e^{z} & 0\end{matrix}\right]\end{matrix}\right]$$
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_latex output_subarea ">
+$$\left[\begin{matrix}\left[\begin{matrix}0 & - w \cos{\left (t w \right )}\\\tan{\left (u w \right )} & 0\end{matrix}\right] & \left[\begin{matrix}-1 & 0\\0 & 8 t^{7} u v y\end{matrix}\right]\end{matrix}\right]$$
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_latex output_subarea ">
+$$\left[\begin{matrix}\left[\begin{matrix}- x z^{2} \sin{\left (u \right )} & v^{6} x^{3}\\t w \left(\tan^{2}{\left (u w \right )} + 1\right) & z e^{y}\end{matrix}\right] & \left[\begin{matrix}0 & 0\\0 & t^{8} v y\end{matrix}\right]\end{matrix}\right]$$
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_latex output_subarea ">
+$$\left[\begin{matrix}\left[\begin{matrix}0 & 6 u v^{5} x^{3}\\0 & 0\end{matrix}\right] & \left[\begin{matrix}5 v^{4} y^{3} & 0\\0 & t^{8} u y\end{matrix}\right]\end{matrix}\right]$$
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+
+
+<div class="output_latex output_subarea ">
+$$\left[\begin{matrix}\left[\begin{matrix}0 & - t \cos{\left (t w \right )}\\t u \left(\tan^{2}{\left (u w \right )} + 1\right) & -1\end{matrix}\right] & \left[\begin{matrix}0 & \frac{x z^{4}}{w}\\- 7 w^{6} e^{z} & 0\end{matrix}\right]\end{matrix}\right]$$
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+
 </pre>
 </div>
 </div>
@@ -13790,11 +14940,10 @@ G; H; GH; dim(GH)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[129]:</div>
+<div class="prompt input_prompt">In&nbsp;[68]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;D&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">H</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># python numpy</span>
 <span class="n">GH</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">G</span><span class="p">);</span> <span class="k">print</span><span class="p">(</span><span class="n">H</span><span class="p">);</span> <span class="k">print</span><span class="p">(</span><span class="n">GH</span><span class="p">)</span> 
 <span class="n">GH</span><span class="o">.</span><span class="n">shape</span>
@@ -13836,13 +14985,148 @@ G; H; GH; dim(GH)
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[129]:</div>
+<div class="prompt output_prompt">Out[68]:</div>
 
 
 
 
 <div class="output_latex output_subarea output_execute_result">
 $$\left ( 2, \quad 2, \quad 2, \quad 2\right )$$
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">r</span>
+GH &lt;- outer(G, H, FUN=paste); list(GH, dim(GH))
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[[1]]
+, , 1, 1
+
+     [,1]  [,2] 
+[1,] &#34;A 1&#34; &#34;B 1&#34;
+[2,] &#34;C 1&#34; &#34;D 1&#34;
+
+, , 2, 1
+
+     [,1]  [,2] 
+[1,] &#34;A 3&#34; &#34;B 3&#34;
+[2,] &#34;C 3&#34; &#34;D 3&#34;
+
+, , 1, 2
+
+     [,1]  [,2] 
+[1,] &#34;A 2&#34; &#34;B 2&#34;
+[2,] &#34;C 2&#34; &#34;D 2&#34;
+
+, , 2, 2
+
+     [,1]  [,2] 
+[1,] &#34;A 4&#34; &#34;B 4&#34;
+[2,] &#34;C 4&#34; &#34;D 4&#34;
+
+
+[[2]]
+[1] 2 2 2 2
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[132]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># python numpy</span>
+<span class="n">F</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">FGH</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">GH</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">FGH</span><span class="p">)</span> 
+<span class="n">FGH</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[[[[&#39;AAAAA&#39; &#39;BBBBB&#39; &#39;AAAAAA&#39; &#39;BBBBBB&#39;]
+   [&#39;CCCCC&#39; &#39;DDDDD&#39; &#39;CCCCCC&#39; &#39;DDDDDD&#39;]
+   [&#39;AAAAAAA&#39; &#39;BBBBBBB&#39; &#39;AAAAAAAA&#39; &#39;BBBBBBBB&#39;]
+   [&#39;CCCCCCC&#39; &#39;DDDDDDD&#39; &#39;CCCCCCCC&#39; &#39;DDDDDDDD&#39;]]
+
+  [[&#39;AAAAAAAAAA&#39; &#39;BBBBBBBBBB&#39; &#39;AAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBB&#39;]
+   [&#39;CCCCCCCCCC&#39; &#39;DDDDDDDDDD&#39; &#39;CCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDD&#39;]
+   [&#39;AAAAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBBBB&#39; &#39;AAAAAAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBBBBBB&#39;]
+   [&#39;CCCCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDDDD&#39; &#39;CCCCCCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDDDDDD&#39;]]]
+
+
+ [[[&#39;AAAAAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBBBBB&#39; &#39;AAAAAAAAAAAAAAAAAA&#39;
+    &#39;BBBBBBBBBBBBBBBBBB&#39;]
+   [&#39;CCCCCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDDDDD&#39; &#39;CCCCCCCCCCCCCCCCCC&#39;
+    &#39;DDDDDDDDDDDDDDDDDD&#39;]
+   [&#39;AAAAAAAAAAAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBBBBBBBBBBB&#39;
+    &#39;AAAAAAAAAAAAAAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBBBBBBBBBBBBBB&#39;]
+   [&#39;CCCCCCCCCCCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDDDDDDDDDDD&#39;
+    &#39;CCCCCCCCCCCCCCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDDDDDDDDDDDDDD&#39;]]
+
+  [[&#39;AAAAAAAAAAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBBBBBBBBBB&#39;
+    &#39;AAAAAAAAAAAAAAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBBBBBBBBBBBBBB&#39;]
+   [&#39;CCCCCCCCCCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDDDDDDDDDD&#39;
+    &#39;CCCCCCCCCCCCCCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDDDDDDDDDDDDDD&#39;]
+   [&#39;AAAAAAAAAAAAAAAAAAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBBBBBBBBBBBBBBBBBB&#39;
+    &#39;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB&#39;]
+   [&#39;CCCCCCCCCCCCCCCCCCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDDDDDDDDDDDDDDDDDD&#39;
+    &#39;CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD&#39;]]]]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[132]:</div>
+
+
+
+
+<div class="output_latex output_subarea output_execute_result">
+$$\left ( 2, \quad 2, \quad 4, \quad 4\right )$$
 </div>
 
 </div>
@@ -13922,222 +15206,11 @@ F; FGH; dim(FGH)
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[132]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">F</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">FGH</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">GH</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">FGH</span><span class="p">)</span> 
-<span class="n">FGH</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[[[[&#39;AAAAA&#39; &#39;BBBBB&#39; &#39;AAAAAA&#39; &#39;BBBBBB&#39;]
-   [&#39;CCCCC&#39; &#39;DDDDD&#39; &#39;CCCCCC&#39; &#39;DDDDDD&#39;]
-   [&#39;AAAAAAA&#39; &#39;BBBBBBB&#39; &#39;AAAAAAAA&#39; &#39;BBBBBBBB&#39;]
-   [&#39;CCCCCCC&#39; &#39;DDDDDDD&#39; &#39;CCCCCCCC&#39; &#39;DDDDDDDD&#39;]]
-
-  [[&#39;AAAAAAAAAA&#39; &#39;BBBBBBBBBB&#39; &#39;AAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBB&#39;]
-   [&#39;CCCCCCCCCC&#39; &#39;DDDDDDDDDD&#39; &#39;CCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDD&#39;]
-   [&#39;AAAAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBBBB&#39; &#39;AAAAAAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBBBBBB&#39;]
-   [&#39;CCCCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDDDD&#39; &#39;CCCCCCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDDDDDD&#39;]]]
-
-
- [[[&#39;AAAAAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBBBBB&#39; &#39;AAAAAAAAAAAAAAAAAA&#39;
-    &#39;BBBBBBBBBBBBBBBBBB&#39;]
-   [&#39;CCCCCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDDDDD&#39; &#39;CCCCCCCCCCCCCCCCCC&#39;
-    &#39;DDDDDDDDDDDDDDDDDD&#39;]
-   [&#39;AAAAAAAAAAAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBBBBBBBBBBB&#39;
-    &#39;AAAAAAAAAAAAAAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBBBBBBBBBBBBBB&#39;]
-   [&#39;CCCCCCCCCCCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDDDDDDDDDDD&#39;
-    &#39;CCCCCCCCCCCCCCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDDDDDDDDDDDDDD&#39;]]
-
-  [[&#39;AAAAAAAAAAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBBBBBBBBBB&#39;
-    &#39;AAAAAAAAAAAAAAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBBBBBBBBBBBBBB&#39;]
-   [&#39;CCCCCCCCCCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDDDDDDDDDD&#39;
-    &#39;CCCCCCCCCCCCCCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDDDDDDDDDDDDDD&#39;]
-   [&#39;AAAAAAAAAAAAAAAAAAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBBBBBBBBBBBBBBBBBB&#39;
-    &#39;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&#39; &#39;BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB&#39;]
-   [&#39;CCCCCCCCCCCCCCCCCCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDDDDDDDDDDDDDDDDDD&#39;
-    &#39;CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC&#39; &#39;DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD&#39;]]]]
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[132]:</div>
-
-
-
-
-<div class="output_latex output_subarea output_execute_result">
-$$\left ( 2, \quad 2, \quad 4, \quad 4\right )$$
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[155]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">r</span>
-library(tensor)
-G &lt;- matrix(c(1:4),2,2,byrow=T)
-H &lt;- matrix(c(5:8),2,2,byrow=T)
-G; H; tensor(G,H)
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-
-
-     [,1] [,2]
-[1,]    1    2
-[2,]    3    4
-     [,1] [,2]
-[1,]    5    6
-[2,]    7    8
-, , 1, 1
-
-     [,1] [,2]
-[1,]    5   10
-[2,]   15   20
-
-, , 2, 1
-
-     [,1] [,2]
-[1,]    7   14
-[2,]   21   28
-
-, , 1, 2
-
-     [,1] [,2]
-[1,]    6   12
-[2,]   18   24
-
-, , 2, 2
-
-     [,1] [,2]
-[1,]    8   16
-[2,]   24   32
-
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[163]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">r</span>
-G%*%H == tensor(G,H,2,1); G%*%t(H) == tensor(G,H,2,2); t(G)%*%t(H) == tensor(G,H,1,2); 
-cat(&#39;\n\n\n&#39;)
-G%o%H == tensor(G,H)
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>     [,1] [,2]
-[1,] TRUE TRUE
-[2,] TRUE TRUE
-     [,1] [,2]
-[1,] TRUE TRUE
-[2,] TRUE TRUE
-     [,1] [,2]
-[1,] TRUE TRUE
-[2,] TRUE TRUE
-
-
-
-, , 1, 1
-
-     [,1] [,2]
-[1,] TRUE TRUE
-[2,] TRUE TRUE
-
-, , 2, 1
-
-     [,1] [,2]
-[1,] TRUE TRUE
-[2,] TRUE TRUE
-
-, , 1, 2
-
-     [,1] [,2]
-[1,] TRUE TRUE
-[2,] TRUE TRUE
-
-, , 2, 2
-
-     [,1] [,2]
-[1,] TRUE TRUE
-[2,] TRUE TRUE
-
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="3.-&#1047;&#1072;&#1076;&#1072;&#1085;&#1080;&#1077;">3. &#1047;&#1072;&#1076;&#1072;&#1085;&#1080;&#1077;<a class="anchor-link" href="#3.-&#1047;&#1072;&#1076;&#1072;&#1085;&#1080;&#1077;">&#182;</a></h2><p>Инициировать скаляры, векторы, тензоры 2-ого ранга</p>
-<p>и выполнить не меньше 3 видов умножения тензоров,</p>
+<h2 id="4.-&#1047;&#1072;&#1076;&#1072;&#1085;&#1080;&#1077;">4. &#1047;&#1072;&#1076;&#1072;&#1085;&#1080;&#1077;<a class="anchor-link" href="#4.-&#1047;&#1072;&#1076;&#1072;&#1085;&#1080;&#1077;">&#182;</a></h2><p>Инициировать скаляры, векторы, тензоры 2-ого ранга и выполнить не меньше 3 видов умножения тензоров,</p>
 <p>используя SageMath, Python, R.</p>
 
 </div>
