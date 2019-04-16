@@ -45,10 +45,10 @@ T=[M.tensor_module(d[i][0],d[i][1]) for i in [0..9]]; T
 </script></div>
     <p></p>      
 <div class="linked_sage"><script type="text/x-sage">
-A=M.linear_form(name='A'); A[:]=(-1, 2, -3); B=M([4,-5,6],name='B') 
-AB=A*B; MAB=matrix(AB.comp(e)); v=matrix(SR,3,[1,2,3]); u=MAB*v # MAB: v → u
-for el in [[A.display(e),A.tensor_type()],[B.display(e),B.tensor_type()],[AB.display(e),AB.tensor_type()],MAB,[v,u]]:
-    pretty_print(el)
+A1=M.linear_form(name='A1'); A1[:]=(-1,2,-3); A2=M.linear_form(name='A2'); A2[:]=(3,-2,1)
+B1=M([4,-5,6],name='B1'); B2=M([-3,1,2],name='B2')
+L=[[l.display(e),l.tensor_type()] for l in [A1,A2,B1,B2]]
+for el in L: pretty_print(el)
 </script></div>
     <p></p>
     <p>Активируйте этот код перед использованием любых ячеек Linked Python Cells</p>
@@ -122,7 +122,13 @@ import numpy,sympy; sympy.init_printing(use_unicode=True)
 и т.д.
     <p></p>
 <div class="linked_sage"><script type="text/x-sage">
-
+A1A2=A1*A2; MA1A2=matrix(A1A2.comp(e)); v=matrix(SR,3,[3,2,1]); vA1A2=MA1A2*v # MA1A2: v → vA1A2
+A1B1=A1*B1; MA1B1=matrix(A1B1.comp(e)); vA1B1=MA1B1*v # MA1B1: v → vA1B1
+B1B2=B1*B2; MB1B2=matrix(B1B2.comp(e)); vB1B2=MB1B2*v # MB1B2: v → vB1B2
+L=[[A1A2.display(e),A1A2.tensor_type()],MA1A2,[v,vA1A2],
+   [A1B1.display(e),A1B1.tensor_type()],MA1B1,[v,vA1B1],
+   [B1B2.display(e),B1B2.tensor_type()],MB1B2,[v,vB1B2]]
+for el in L: pretty_print(el)
 </script></div>
     <p></p>
 <div class="linked_python"><script type="text/x-sage">
