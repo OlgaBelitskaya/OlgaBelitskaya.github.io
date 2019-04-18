@@ -24,9 +24,27 @@
     <h1>&#x1F4D1; &nbsp;Instagram Posts. Part 2</h1>
 <a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp;</a>     
 <a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a>
-    <p>Click “Run” to evaluate your Sage code.</p>
-<div class="sage"><script type="text/x-sage">
-
+    <h1>Parametric plots with transition using d3.js </h1>
+Jupyter Notebook &#38; SageMath Kernel 
+    <p>Click “Run” twice. Use in HTML documents with &#60;/script&#62; in the end.</p>
+<div class="sage_html"><script type="text/x-sage">
+%%html
+<style>.point1, .point2 {stroke:#fff; stroke-width:1;} .grid1 line,.grid1 path {stroke:#fff; stroke-opacity:0.9; shape-rendering:crispEdges;} </style>>
+<script src="https://d3js.org/d3.v5.min.js"/><svg id="pp1" style="background-color:slategray;"/><script>
+var n=630, m0=35, m={top:m0,right:m0,bottom:m0,left:m0}, w=700-m.left-m.right, h=700-m.top-m.bottom; 
+var xScale=d3.scaleLinear().domain([-3,3]).range([0,w]); var yScale = d3.scaleLinear().domain([-3,3]).range([h,0]);
+function make_x_gridlines() {return d3.axisBottom(xScale).ticks(11)}; function make_y_gridlines() {return d3.axisLeft(yScale).ticks(11)};
+var svg=d3.select("#pp1").attr("width",w+m.left+m.right).attr("height",h+m.top+m.bottom).append("g").attr("transform","translate("+m.left+","+m.top+")");   
+svg.append("g").attr("class","grid1").attr("transform","translate(0,"+h+")").call(make_x_gridlines().tickSize(-h).tickFormat(""));
+svg.append("g").attr("class","grid1").call(make_y_gridlines().tickSize(-w).tickFormat(""));
+var data1=d3.range(0,n).map(function(i){return {"x":(Math.cos(0.12*i)+1)*Math.cos(0.01*i),"y":(Math.cos(0.12*i)+1)*Math.sin(0.01*i)}});
+var data2=d3.range(0,n).map(function(i){return {"x":(Math.cos(0.12*i)+2)*Math.cos(0.01*i),"y":(Math.cos(0.12*i)+2)*Math.sin(0.01*i)}});                       
+svg.selectAll(".point1").data(data1).enter().append("circle").attr("class","point1")
+                        .attr("r",3).attr("cx",function(d) {return xScale(d.x)}).attr("cy",function(d) {return yScale(d.y)})
+                        .transition().duration(20000).styleTween("fill",function(){return d3.interpolate('#3636ff','#ff3636')});
+svg.selectAll(".point2").data(data2).enter().append("circle").attr("class","point2")
+                        .attr("r",4).attr("cx",function(d) {return xScale(d.x)}).attr("cy",function(d) {return yScale(d.y)})
+                        .transition().duration(20000).styleTween("fill",function(){return d3.interpolate('#ff3636','#3636ff')});
 </script></div>
     <p></p> 
 <div class="linked"><script type="text/x-sage">
