@@ -77,7 +77,15 @@ function drawChart() {
 </script></div>
     <p></p>
 <div class="sage"><script type="text/x-sage">
-
+import numpy,pylab; T=numpy.linspace(start=0,stop=2*numpy.pi,num=200)
+XY=numpy.array([[(numpy.cos(12*T)+r)*numpy.cos(T),(numpy.cos(12*T)+r)*numpy.sin(T)] for r in range(3)])
+XYP=numpy.array([[T,abs(r+numpy.cos(12*T))] for r in range(3)])
+fig=pylab.figure(figsize=(10,5)); ax1=fig.add_subplot(121); ax2=fig.add_subplot(122,projection='polar')
+colors=['#36ff36','#ff3636','#3636ff']; labels=[u'ϱ = cos 12θ',u'ϱ = 1 + cos 12θ',u'ϱ = 2 + cos 12θ']
+[ax1.plot(XY[i][0],XY[i][1],color=colors[i],label=labels[i]) for i in range(3)]
+[ax2.plot(XYP[i][0],XYP[i][1],color=colors[i],label=labels[i]) for i in range(3)]
+lines,labels=ax1.get_legend_handles_labels(); ax1.legend(lines,labels,bbox_to_anchor=(1,1.15),loc=2); ax1.grid();
+ax1.set_xlim(-4,4); ax1.set_ylim(-4,4); ax1.set_xlabel('x'); ax1.set_ylabel('y'); pylab.show()
 </script></div>
     <p></p>
     <h1>If you want to test plotly.js </h1>
