@@ -125,7 +125,7 @@ output_file.write(input_file.read()); output_file.close(); input_file.close()
 zipf=zipfile.ZipFile(zf,'r'); zipf.extractall(''); zipf.close()
 f=h5py.File(zf[:-4],'r'); keys=list(f.keys()); letters=u'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
 backgrounds=numpy.array(f[keys[0]]); letter_images=numpy.array(f[keys[1]])/255; targets=numpy.array(f[keys[2]])
-print(letters[targets[3000]-1]); pylab.figure(figsize=(3,3)); pylab.xticks([]); pylab.yticks([]); 
+print(letters[targets[3000]-1]); pylab.figure(figsize=(5,5)); pylab.xticks([]); pylab.yticks([]); 
 pylab.imshow(letter_images[3000]); pylab.show()
 </script></div>
     <p></p>
@@ -136,7 +136,7 @@ output_file.write(input_file.read()); output_file.close(); input_file.close()
 zipf=zipfile.ZipFile(zf,'r'); zipf.extractall(''); zipf.close()
 f=h5py.File(zf[:-4],'r'); keys=list(f.keys()); 
 brands=numpy.array(f[keys[0]]); style_images=numpy.array(f[keys[1]])/255; products=numpy.array(f[keys[2]])
-print(brands[3000],products[3000]); pylab.figure(figsize=(3,3)); pylab.xticks([]); pylab.yticks([]); 
+print(brands[3000],products[3000]); pylab.figure(figsize=(5,5)); pylab.xticks([]); pylab.yticks([]); 
 pylab.imshow(style_images[3000]); pylab.show()
 </script></div>
     <p></p>
@@ -153,6 +153,12 @@ corpus=['Have you already set your goals for the New Year?','Do you want to lose
         'Invent a system to improve your English, one step at a time.','Good luck!']
 dv=DictVectorizer(); temperature_features=dv.fit_transform(temperature).toarray().astype('int16')
 print(temperature_features); print(dv.get_feature_names())
+cv=CountVectorizer(min_df=1); corpus_features=cv.fit_transform(corpus)
+corpus_array=corpus_features.toarray().astype('int16'); c_analyzer=cv.build_analyzer()
+import pylab; pylab.figure(figsize=(12,5)); pylab.grid()
+for i in range(len(corpus_array)): pylab.scatter(range(len(corpus_array[i])),(corpus_array[i]*0.5+i),marker='s')
+pylab.title("The Words' Occurrence in Sentences",fontsize=15); pylab.show()
+print(c_analyzer(corpus[0]))
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
