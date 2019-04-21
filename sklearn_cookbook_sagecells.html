@@ -23,7 +23,7 @@
     <h1>&#x1F4D1; &nbsp; Scikit-Learn Cookbook</h1>
     <p>Load Python libraries for all linked cells</p>
 <div class="linked"><script type="text/x-sage">
-import numpy,pandas,scipy,pylab,h5py
+import numpy,pandas,scipy,pylab,h5py,urllib,zipfile
 from sklearn import datasets,preprocessing,cluster,mixture,manifold,dummy,linear_model,svm
 from sklearn.feature_extraction import DictVectorizer 
 from sklearn.feature_extraction.text import CountVectorizer
@@ -119,7 +119,14 @@ pylab.title('Data Values by Product Categories'); pylab.show()
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+path='https://olgabelitskaya.github.io/'; zf='LetterColorImages_123.h5.zip'
+input_file=urllib.urlopen(path+zf); output_file=open(zf,'wb'); 
+output_file.write(input_file.read()); output_file.close(); input_file.close()
+zipf=zipfile.ZipFile(zf,'r'); zipf.extractall(''); zipf.close()
+f=h5py.File(zf[:-4],'r'); keys=list(f.keys()); letters=u'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
+backgrounds=numpy.array(f[keys[0]]); letter_images=numpy.array(f[keys[1]])/255; targets=numpy.array(f[keys[2]])
+print(letters[targets[3000]-1]); pylab.figure(figsize=(3,3)); pylab.xticks([]); pylab.yticks([]); 
+pylab.imshow(letter_images[2000]); pylab.show()
 </script></div>
     <p></p>
     <h2 class="font-effect-ice">Extraction and Preprocessing</h2>
