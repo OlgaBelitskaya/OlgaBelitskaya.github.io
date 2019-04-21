@@ -23,7 +23,7 @@
     <h1>&#x1F4D1; &nbsp; Scikit-Learn Cookbook</h1>
     <p>Load Python libraries for all linked cells</p>
 <div class="linked"><script type="text/x-sage">
-import numpy,pandas,scipy,pylab
+import numpy,pandas,scipy,pylab,h5py
 from sklearn import datasets,preprocessing,cluster,mixture,manifold,dummy,linear_model,svm
 from sklearn.feature_extraction import DictVectorizer 
 from sklearn.feature_extraction.text import CountVectorizer
@@ -115,8 +115,18 @@ pylab.show()
 </script></div>
     <p></p>
     <h2 class="font-effect-ice">Extraction and Preprocessing</h2>
+    <h3>extraction</h3>
 <div class="linked"><script type="text/x-sage">
-
+temperature=[{'city':'Hanoi','temperature':33.},{'city':'Frankfurt','temperature':16.},{'city':'Houston','temperature':28.},
+             {'city':'Riyadh','temperature':38.},{'city':'Barcelona','temperature':17.},{'city':'Ankara','temperature':27.}]
+corpus=['Have you already set your goals for the New Year?','Do you want to lose ten kilos, run a marathon or speak fluent English?', 
+        'Some experts believe that you need systems, not goals.','A system is something you do on a regular basis.',
+        'This means focusing on what you can control (your actions) rather than what you can’t.',
+        'For example, do not focus on losing ten kilos.','Focus on shopping for healthy food and cooking something light every day.',
+        'Do not focus on the marathon.','Focus on the training schedule.',
+        'Invent a system to improve your English, one step at a time.','Good luck!']
+dv=DictVectorizer(); temperature_features=dv.fit_transform(temperature).toarray().astype('int16')
+print(temperature_features); print(dv.get_feature_names())
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
