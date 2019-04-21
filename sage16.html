@@ -7,12 +7,9 @@
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
     <script>$(function () {
     // Make the div with id 'mycell' a Sage cell
-    sagecell.makeSagecell({inputLocation:  '#examplecell',
-                           template:       sagecell.templates.minimal,
-                           evalButtonText: 'Activate'});
+    sagecell.makeSagecell({inputLocation:'#examplecell',template:sagecell.templates.minimal,evalButtonText:'Activate'});
     // Make *any* div with class 'compute' a Sage cell
-    sagecell.makeSagecell({inputLocation: 'div.compute',
-                           evalButtonText: 'Evaluate'});
+    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText: 'Evaluate'});
     });
     </script>
   </head>
@@ -102,25 +99,20 @@ t(huge_cities[which(jpn_chn),1:9])
 <div class="compute"><script type="text/x-sage">
 %%html
 <style>
-svg {background:silver;}
-rect {fill:none; pointer-events:all;}
-circle {fill:none; stroke-width:2px;}
+svg {background:silver;} rect {fill:none; pointer-events:all;} circle {fill:none; stroke-width:2px;}
 </style>
 <div id="d3viz"></div>
-<script src="https://d3js.org/d3.v5.min.js"/>
-<script>
+<script src="https://d3js.org/d3.v5.min.js"/><script>
 var width=500, height=400, i=0;
 var svg=d3.select("#d3viz").append("svg").attr("width",width).attr("height",height);
 var rect=svg.append("rect").attr("width",width).attr("height",height)
             .on("ontouchstart" in document ? "touchmove":"mousemove",touch);
 function touch() {
   var m=d3.mouse(this);
-  svg.insert("circle","rect")
-      .attr("cx",m[0]).attr("cy",m[1]).attr("r",1e-6)
-      .style("stroke",d3.hsl((i=(i+1)%360),1,.5)).style("stroke-opacity",1)
-    .transition().duration(2000).ease(Math.sqrt)
-      .attr("r",10).style("stroke-opacity", 1e-6)
-    .remove();
+  svg.insert("circle","rect").attr("cx",m[0]).attr("cy",m[1]).attr("r",1e-6)
+     .style("stroke",d3.hsl((i=(i+1)%360),1,.5)).style("stroke-opacity",1)
+     .transition().duration(2000).ease(Math.sqrt)
+     .attr("r",10).style("stroke-opacity", 1e-6).remove();
   d3.event.preventDefault();
 };
 </script></div>    
