@@ -155,16 +155,23 @@ dv=DictVectorizer(); temperature_features=dv.fit_transform(temperature).toarray(
 print(temperature_features); print(dv.get_feature_names())
 cv=CountVectorizer(min_df=1); corpus_features=cv.fit_transform(corpus)
 corpus_array=corpus_features.toarray().astype('int16'); c_analyzer=cv.build_analyzer()
-import pylab; pylab.figure(figsize=(12,5)); pylab.grid()
+import pylab; pylab.figure(figsize=(12,5))
 for i in range(len(corpus_array)): pylab.scatter(range(len(corpus_array[i])),(corpus_array[i]*0.5+i),marker='s')
 pylab.title("The Words' Occurrence in Sentences",fontsize=15); pylab.show()
 print(c_analyzer(corpus[0]))
 </script></div>
     <p></p>
+    <h3>scaling</h3>
 <div class="linked"><script type="text/x-sage">
-
-</script></div>
-    <p></p>  
+SCX1=[X1,preprocessing.MinMaxScaler().fit_transform(X1),preprocessing.MaxAbsScaler().fit_transform(X1),
+      preprocessing.StandardScaler().fit_transform(X1),preprocessing.RobustScaler().fit_transform(X1)]
+n=50; pylab.figure(figsize=(12,5)); m=['*','v','^','<','>']
+labels=['Real Data','MinMax Scaler','MaxAbs Scaler','Standard Scaler','Robust Scaler']
+for i in range(5): pylab.scatter(range(n),SCX1[i][:n,4],marker=m[i],label=labels[i])
+pylab.legend(loc=8); pylab.show()
+</script></div>      
+    <p></p>
+    <h3>one-hot encoding</h3>
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
