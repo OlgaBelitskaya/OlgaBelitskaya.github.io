@@ -214,10 +214,10 @@ Univariate Selection, Recursive Feature Elimination, Principal Component Analysi
 # Univariate Selection; Wine Dataset
 select_kbest=SelectKBest(score_func=chi2,k=4); fit_select_kbest=select_kbest.fit(X4,y4)
 features_select_kbest=fit_select_kbest.transform(X4)
-print(("Kbest scores: \n%a")%fit_select_kbest.scores_)
-print(("Selected features: \n%a")%features_select_kbest[0:5,:])
+print(("Kbest scores: \n%s")%fit_select_kbest.scores_)
+print(("Selected features: \n%s")%features_select_kbest[0:5,:])
 # Recursive Feature Elimination; Wine Dataset
-rfe=RFE(linear_model.LogisticRegression(),3); fit_rfe=rfe.fit(X4,y4)
+rfe=RFE(linear_model.LogisticRegression(solver='liblinear',multi_class='ovr'),3); fit_rfe=rfe.fit(X4,y4)
 print(("RFE Selected Features: \n%s")%fit_rfe.support_)
 print(("Feature Ranking: \n%s")%fit_rfe.ranking_)
 # Principal Component Analysis; Boston Dataset
