@@ -288,9 +288,11 @@ def get_classifier_results():
 classifier_list,classifier_names,clf_datasets=[],[],[]
 acc_train,acc_test,loss_train,loss_test=[],[],[],[]
 df_list=['classifier_name','acc_train','acc_test','loss_train','loss_test']
-clf=[linear_model.LogisticRegression(),linear_model.LogisticRegressionCV(),linear_model.SGDClassifier(),
-     linear_model.RidgeClassifier(),linear_model.RidgeClassifierCV(),LinearDiscriminantAnalysis(),
-     QuadraticDiscriminantAnalysis(),svm.LinearSVC(),svm.SVC(C=10.0,kernel='poly'),svm.NuSVC(kernel='poly'),
+clf=[linear_model.LogisticRegression(solver='liblinear',multi_class='ovr'),
+     linear_model.LogisticRegressionCV(solver='liblinear',multi_class='ovr'),
+     linear_model.SGDClassifier(),linear_model.RidgeClassifier(),linear_model.RidgeClassifierCV(),
+     LinearDiscriminantAnalysis(),QuadraticDiscriminantAnalysis(),
+     svm.LinearSVC(),svm.SVC(gamma='scale',C=10.0,kernel='poly'),svm.NuSVC(kernel='poly'),
      KNeighborsClassifier(),RadiusNeighborsClassifier(radius=30),NearestCentroid(),
      DecisionTreeClassifier(),ExtraTreeClassifier(),GaussianNB(),BernoulliNB(),MultinomialNB(),
      BaggingClassifier(),RandomForestClassifier(),AdaBoostClassifier(),GradientBoostingClassifier(),
