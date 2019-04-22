@@ -152,7 +152,7 @@ corpus=['Have you already set your goals for the New Year?','Do you want to lose
         'Do not focus on the marathon.','Focus on the training schedule.',
         'Invent a system to improve your English, one step at a time.','Good luck!']
 dv=DictVectorizer(); temperature_features=dv.fit_transform(temperature).toarray().astype('int16')
-print(temperature_features); print(dv.get_feature_names())
+pretty_print([temperature_features,dv.get_feature_names()])
 cv=CountVectorizer(min_df=1); corpus_features=cv.fit_transform(corpus)
 corpus_array=corpus_features.toarray().astype('int16'); c_analyzer=cv.build_analyzer()
 import pylab; pylab.figure(figsize=(12,5))
@@ -173,9 +173,27 @@ pylab.legend(loc=8); pylab.show()
     <p></p>
     <h3>one-hot encoding</h3>
 <div class="linked"><script type="text/x-sage">
+def ohe(x): return preprocessing.OneHotEncoder(categories='auto').fit(x.reshape(-1,1)).transform(x.reshape(-1,1)).toarray().astype('int16')
+cat_brands ,cat_products,cat_backgrounds,cat_targets=ohe(brands),ohe(products),ohe(backgrounds),ohe(targets)
+pretty_print([targets[99:102],'=>',cat_targets[99:102]])
+</script></div>
+    <p></p>
+    <h3>imputation of missing values</h3>
+<div class="linked"><script type="text/x-sage">
 
 </script></div>
     <p></p>
+    <h3>features' importance</h3>
+<div class="linked"><script type="text/x-sage">
+
+</script></div>
+    <p></p>
+    <h3>dimensionality reduction</h3>
+<div class="linked"><script type="text/x-sage">
+
+</script></div>
+    <p></p>
+    <h3>shuffling and splitting</h3>
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
