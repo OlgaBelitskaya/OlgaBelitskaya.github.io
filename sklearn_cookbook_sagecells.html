@@ -23,7 +23,7 @@
     <h1>&#x1F4D1; &nbsp; Scikit-Learn Cookbook</h1>
     <p>Load Python libraries for all linked cells</p>
 <div class="linked"><script type="text/x-sage">
-import numpy,pandas,scipy,pylab,h5py,urllib,zipfile,time
+import numpy,pandas,scipy,pylab,h5py,urllib,zipfile,time,warnings
 from sklearn import datasets,preprocessing,impute,cluster,mixture,manifold,dummy,linear_model,svm
 from sklearn.feature_extraction import DictVectorizer 
 from sklearn.feature_extraction.text import CountVectorizer
@@ -49,6 +49,7 @@ from sklearn.neural_network import MLPClassifier,BernoulliRBM,MLPRegressor
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
+[warnings.filterwarnings('ignore',category=UserWarning) for el in [UserWarning,FutureWarning,DeprecationWarning]]
 numpy.set_printoptions(precision=4); pylab.style.use('seaborn-whitegrid')
 def ohe(x): return preprocessing.OneHotEncoder(categories='auto').fit(x.reshape(-1,1))\
             .transform(x.reshape(-1,1)).toarray().astype('int16')
@@ -315,12 +316,30 @@ for i in range(len(list3clf)):
 [y_train311,y_test311],[y_train312,y_test312],[y_train313,y_test313],[y_train314,y_test314],[y_train315,y_test315],
 [y_train316,y_test316],[y_train317,y_test317],[y_train318,y_test318],[y_train319,y_test319],[y_train320,y_test320],
 [y_train321,y_test321],[y_train322,y_test322],[y_train323,y_test323],[y_train324,y_test324]]=y3clf
+y_train925,y_test925=classifier_fit_score(clf[24],'GaussianProcessClassifier','Toy Blobs',X_train9,X_test9,y_train9,y_test9)[:2]
+y_train926,y_test926=classifier_fit_score(clf[25],'LabelPropagation','Toy Blobs',X_train9,X_test9,y_train9,y_test9)[:2]
+y_train927,y_test927=classifier_fit_score(clf[26],'LabelSpreading','Toy Blobs',X_train9,X_test9,y_train9,y_test9)[:2]
+y_train1111,y_test1111=classifier_fit_score(clf[10],'KNeighborsClassifier','Handwritten Letters',
+                       X_train11.reshape(-1,32*32*3),X_test11.reshape(-1,32*32*3),y_train11,y_test11)[:2]
+y_train1119,y_test1119=classifier_fit_score(clf[18],'BaggingClassifier','Handwritten Letters',
+                       X_train11.reshape(-1,32*32*3),X_test11.reshape(-1,32*32*3),y_train11,y_test11)[:2]
+y_train1120,y_test1120=classifier_fit_score(clf[19],'RandomForestClassifier','Handwritten Letters',
+                       X_train11.reshape(-1,32*32*3),X_test11.reshape(-1,32*32*3),y_train11,y_test11)[:2]
+y_train1122,y_test1122=classifier_fit_score(clf[21],'GradientBoostingClassifier','Handwritten Letters',
+                       X_train11.reshape(-1,32*32*3),X_test11.reshape(-1,32*32*3),y_train11,y_test11)[:2]
 df_classifier_results=get_classifier_results()
 df_classifier_results[df_list].sort_values('acc_test',ascending=False).style.set_properties(**style_dict)
+df_classifier_results.to_csv('classifier_results.csv')
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+pylab.figure(figsize=(12,5)); n=50; x=range(n)
+pylab.scatter(x,y_test3[:n],marker='*',s=600,color='royalblue',label='Real data')
+pylab.scatter(x,y_test39[:n],marker='v',s=200,color='darkblue',label='SVC')
+pylab.scatter(x,y_test32[:n],marker='s',s=100,color='darkgrey',label='Logistic RegressionCV')
+pylab.scatter(x,y_test311[:n],marker='o',s=50,color='darkgreen',label='KNeighborsClassifier')
+pylab.xlabel('Observations'); pylab.ylabel('Targets'); pylab.title('Classifiers. Test Results. Digits')
+pylab.legend(loc=2,fontsize=10); pylab.show()
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
