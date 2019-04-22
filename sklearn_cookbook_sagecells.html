@@ -46,7 +46,11 @@ from sklearn.gaussian_process.kernels import WhiteKernel,RationalQuadratic,RBF
 from sklearn.semi_supervised import LabelPropagation,LabelSpreading
 from sklearn.isotonic import IsotonicRegression
 from sklearn.neural_network import MLPClassifier,BernoulliRBM,MLPRegressor
-
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+def ohe(x): return preprocessing.OneHotEncoder(categories='auto').fit(x.reshape(-1,1))\
+            .transform(x.reshape(-1,1)).toarray().astype('int16')
 def sas(X,y): return train_test_split(X,y,test_size=0.2,random_state=1)
 </script></div>
     <p></p>
@@ -64,8 +68,7 @@ wine.data,wine.target,faces.data,faces.target,covtype.data,covtype.target]
 <div class="linked"><script type="text/x-sage">
 n=4; img=numpy.zeros((10*n,10*n))
 for i in range(n): 
-    for j in range(n): 
-        img[(10*i+1):(10*i+9),(10*j+1):(10*j+9)]=X3[i*n+j].reshape((8,8))
+    for j in range(n): img[(10*i+1):(10*i+9),(10*j+1):(10*j+9)]=X3[i*n+j].reshape((8,8))
 pylab.figure(figsize=(5,5)); pylab.imshow(img,cmap=pylab.cm.bone)
 pylab.title('Examples of 64-dimensional digits')
 pylab.xticks([]); pylab.yticks([]); pylab.show()
@@ -175,8 +178,7 @@ pylab.legend(loc=8); pylab.show()
     <p></p>
     <h3>one-hot encoding</h3>
 <div class="linked"><script type="text/x-sage">
-def ohe(x): return preprocessing.OneHotEncoder(categories='auto').fit(x.reshape(-1,1)).transform(x.reshape(-1,1)).toarray().astype('int16')
-cat_brands ,cat_products,cat_backgrounds,cat_targets=ohe(brands),ohe(products),ohe(backgrounds),ohe(targets)
+cat_brands,cat_products,cat_backgrounds,cat_targets=ohe(brands),ohe(products),ohe(backgrounds),ohe(targets)
 pretty_print([targets[99:102],'=>',cat_targets[99:102]])
 </script></div>
     <p></p>
