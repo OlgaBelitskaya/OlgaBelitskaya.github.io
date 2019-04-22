@@ -49,7 +49,7 @@ from sklearn.neural_network import MLPClassifier,BernoulliRBM,MLPRegressor
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-pylab.style.use('seaborn-whitegrid')
+numpy.set_printoptions(precision=4); pylab.style.use('seaborn-whitegrid')
 def ohe(x): return preprocessing.OneHotEncoder(categories='auto').fit(x.reshape(-1,1))\
             .transform(x.reshape(-1,1)).toarray().astype('int16')
 def sas(X,y): return train_test_split(X,y,test_size=0.2,random_state=1)
@@ -209,6 +209,24 @@ pylab.legend(loc=2,fontsize=10); pylab.title("Importance of Features; Wine Datas
 </script></div>
     <p></p>
     <h3>dimensionality reduction</h3>
+Univariate Selection, Recursive Feature Elimination, Principal Component Analysis, etc.
+<div class="linked"><script type="text/x-sage">
+# Univariate Selection; Wine Dataset
+select_kbest=SelectKBest(score_func=chi2,k=4); fit_select_kbest=select_kbest.fit(X4,y4)
+features_select_kbest=fit_select_kbest.transform(X4)
+print(("Kbest scores: \n%a")%fit_select_kbest.scores_)
+print(("Selected features: \n%a")%features_select_kbest[0:5,:])
+# Recursive Feature Elimination; Wine Dataset
+rfe=RFE(linear_model.LogisticRegression(),3); fit_rfe=rfe.fit(X4,y4)
+print(("RFE Selected Features: \n%s")%fit_rfe.support_)
+print(("Feature Ranking: \n%s")%fit_rfe.ranking_)
+# Principal Component Analysis; Boston Dataset
+pca3=PCA(n_components=3); fit_pca=pca3.fit(X1)
+print(("Explained Variance: \n%s\n")%fit_pca.explained_variance_ratio_)
+print(fit_pca.components_[0],'\n'); print(fit_pca.components_[1],'\n')
+print(fit_pca.components_[2])
+</script></div>
+    <p></p>
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
