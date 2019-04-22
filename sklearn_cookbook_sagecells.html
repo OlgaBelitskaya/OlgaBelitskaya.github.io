@@ -198,7 +198,14 @@ for el in [x1_test,mean_imp.transform(x1_test),median_imp.transform(x1_test),x1_
     <p></p>
     <h3>features' importance</h3>
 <div class="linked"><script type="text/x-sage">
-
+classifiers=[AdaBoostClassifier,GradientBoostingClassifier,DecisionTreeClassifier,ExtraTreeClassifier]
+labels=['AdaBoost','GradientBoosting','DecisionTree','ExtraTree']
+pylab.figure(figsize=(12,5)); df_importance=pandas.DataFrame(columns=range(13))
+for i in range(4):
+    df_importance.loc[i]=classifiers[i]().fit(X4,y4).feature_importances_
+    pylab.plot(df_importance.loc[i],'-v',label=labels[i],markersize=7,markerfacecolor="None",markeredgewidth=2)
+pylab.legend(loc=2,fontsize=10); pylab.grid()
+pylab.title("Importance of Features; Wine Dataset"); pylab.show()
 </script></div>
     <p></p>
     <h3>dimensionality reduction</h3>
