@@ -228,7 +228,12 @@ print(fit_pca.components_[2])
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+t0=time.time(); X_emb=manifold.TSNE(n_components=2,learning_rate=700.0).fit_transform(X3)
+x_min,x_max=numpy.min(X_emb,0),numpy.max(X_emb,0); X_emb=(X_emb-x_min)/(x_max-x_min)
+f,ax=pylab.subplots(1,figsize=(12,5)); pylab.axis("off")
+for i in range(X_emb.shape[0]):
+    pylab.text(X_emb[i,0],X_emb[i,1],str(y3[i]),color=pylab.cm.hsv(y3[i]/10.))
+pylab.title("t-SNE embedding %f s"%(time.time()-t0)); pylab.show()
 </script></div>
     <p></p>
     <h3>shuffling and splitting</h3>
