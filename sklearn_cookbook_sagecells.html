@@ -265,10 +265,8 @@ pretty_print('letters and labels, letters and backgrounds, style images and bran
 del letter_images,targets,backgrounds,style_images,brands,products
 </script></div>
     <p></p>      
-    <h2 class="font-effect-ice">Supervised Learning. Classification</h2>
+      <h2 class="font-effect-ice">Supervised Learning. Classification</h2>
 <div class="linked"><script type="text/x-sage">
-classifier_list,classifier_names,clf_datasets=[],[],[]
-acc_train,acc_test,loss_train,loss_test=[],[],[],[]
 def classifier_fit_score(classifier,classifier_name,clf_dataset,x_train,x_test,y_train,y_test):
     classifier.fit(x_train,y_train); clf_datasets.append(str(clf_dataset))
     classifier_list.append(str(classifier)); classifier_names.append(str(classifier_name)) 
@@ -284,9 +282,22 @@ def classifier_fit_score(classifier,classifier_name,clf_dataset,x_train,x_test,y
 def get_classifier_results():
     return pd.DataFrame({'classifier':classifier_list,'classifier_name':classifier_names,'clf_dataset':clf_datasets,
                          'acc_train':acc_train,'acc_test':acc_test,'loss_train':loss_train,'loss_test':loss_test})
-df_list=['classifier_name','acc_train','acc_test','loss_train','loss_test']
 </script></div>
-    <p></p>      
+    <p></p> 
+<div class="linked"><script type="text/x-sage">
+classifier_list,classifier_names,clf_datasets=[],[],[]
+acc_train,acc_test,loss_train,loss_test=[],[],[],[]
+df_list=['classifier_name','acc_train','acc_test','loss_train','loss_test']
+clf=[linear_model.LogisticRegression(),linear_model.LogisticRegressionCV(),linear_model.SGDClassifier(),
+     linear_model.RidgeClassifier(),linear_model.RidgeClassifierCV(),LinearDiscriminantAnalysis(),
+     QuadraticDiscriminantAnalysis(),svm.LinearSVC(),svm.SVC(C=10.0,kernel='poly'),svm.NuSVC(kernel='poly'),
+     KNeighborsClassifier(),RadiusNeighborsClassifier(radius=30),NearestCentroid(),
+     DecisionTreeClassifier(),ExtraTreeClassifier(),GaussianNB(),BernoulliNB(),MultinomialNB(),
+     BaggingClassifier(),RandomForestClassifier(),AdaBoostClassifier(),GradientBoostingClassifier(),
+     linear_model.Perceptron(),linear_model.PassiveAggressiveClassifier(),GaussianProcessClassifier(),
+     LabelPropagation(),LabelSpreading()]
+</script></div>
+    <p></p>
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
