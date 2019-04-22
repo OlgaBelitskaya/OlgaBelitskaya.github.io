@@ -24,7 +24,7 @@
     <p>Load Python libraries for all linked cells</p>
 <div class="linked"><script type="text/x-sage">
 import numpy,pandas,scipy,pylab,h5py,urllib,zipfile
-from sklearn import datasets,preprocessing,cluster,mixture,manifold,dummy,linear_model,svm
+from sklearn import datasets,preprocessing,impute,cluster,mixture,manifold,dummy,linear_model,svm
 from sklearn.feature_extraction import DictVectorizer 
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_selection import SelectKBest,chi2,RFE
@@ -173,7 +173,7 @@ SCX1=[X1,preprocessing.MinMaxScaler().fit_transform(X1),preprocessing.MaxAbsScal
 n=50; pylab.figure(figsize=(12,5)); m=['*','v','^','<','>']
 labels=['Real Data','MinMax Scaler','MaxAbs Scaler','Standard Scaler','Robust Scaler']
 for i in range(5): pylab.scatter(range(n),SCX1[i][:n,4],marker=m[i],label=labels[i])
-pylab.legend(loc=8); pylab.show()
+pylab.legend(loc=8); pylab.grid(); pylab.show()
 </script></div>      
     <p></p>
     <h3>one-hot encoding</h3>
@@ -187,9 +187,8 @@ pretty_print([targets[99:102],'=>',cat_targets[99:102]])
 x1_train=[[0,17],[numpy.nan,4],[1,7],[3,numpy.nan],[5,12],[10,25]]
 x1_test=[[numpy.nan,5],[3,15],[8,numpy.nan],[4,11]]
 # mean & median imputers, custom transformer (log)
-mean_imp=preprocessing.Imputer(missing_values='NaN',strategy='mean',axis=0)
-median_imp=preprocessing.Imputer(missing_values='NaN',strategy='median',axis=0)
-log_trans=preprocessing.FunctionTransformer(numpy.log1p)
+mean_imp=impute.SimpleImputer(strategy='mean'); median_imp=impute.SimpleImputer(strategy='median')
+log_trans=preprocessing.FunctionTransformer(numpy.log1p,validate=False)
 mean_imp.fit(x1_train); median_imp.fit(x1_train)
 x1_train_log=log_trans.transform(median_imp.transform(x1_train))
 x1_test_log=log_trans.transform(median_imp.transform(x1_test))
