@@ -267,7 +267,24 @@ del letter_images,targets,backgrounds,style_images,brands,products
     <p></p>      
     <h2 class="font-effect-ice">Supervised Learning. Classification</h2>
 <div class="linked"><script type="text/x-sage">
-
+classifier_list,classifier_names,clf_datasets=[],[],[]
+acc_train,acc_test,loss_train,loss_test=[],[],[],[]
+def classifier_fit_score(classifier,classifier_name,clf_dataset,x_train,x_test,y_train,y_test):
+    classifier.fit(x_train,y_train); clf_datasets.append(str(clf_dataset))
+    classifier_list.append(str(classifier)); classifier_names.append(str(classifier_name)) 
+    classifier.fit(x_train,y_train)    
+    y_clf_train=classifier.predict(x_train); y_clf_test=classifier.predict(x_test)        
+    acc_clf_train=round(accuracy_score(y_train,y_clf_train),4)
+    acc_clf_test=round(accuracy_score(y_test,y_clf_test),4)
+    acc_train.append(acc_clf_train); acc_test.append(acc_clf_test)   
+    loss_clf_train=round(hamming_loss(y_train,y_clf_train),4)
+    loss_clf_test=round(hamming_loss(y_test,y_clf_test),4)
+    loss_train.append(loss_clf_train); loss_test.append(loss_clf_test)    
+    return [y_clf_train,y_clf_test,acc_clf_train,acc_clf_test,loss_clf_train,loss_clf_test]
+def get_classifier_results():
+    return pd.DataFrame({'classifier':classifier_list,'classifier_name':classifier_names,'clf_dataset':clf_datasets,
+                         'acc_train':acc_train,'acc_test':acc_test,'loss_train':loss_train,'loss_test':loss_test})
+df_list=['classifier_name','acc_train','acc_test','loss_train','loss_test']
 </script></div>
     <p></p>      
 <div class="linked"><script type="text/x-sage">
