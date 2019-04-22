@@ -268,8 +268,8 @@ del letter_images,targets,backgrounds,style_images,brands,products
       <h2 class="font-effect-ice">Supervised Learning. Classification</h2>
 <div class="linked"><script type="text/x-sage">
 def classifier_fit_score(classifier,classifier_name,clf_dataset,x_train,x_test,y_train,y_test):
-    classifier.fit(x_train,y_train); clf_datasets.append(str(clf_dataset))
-    classifier_list.append(str(classifier)); classifier_names.append(str(classifier_name)) 
+    classifier.fit(x_train,y_train); clf_datasets.append(clf_dataset)
+    classifier_list.append(str(classifier)); classifier_names.append(classifier_name) 
     classifier.fit(x_train,y_train)    
     y_clf_train=classifier.predict(x_train); y_clf_test=classifier.predict(x_test)        
     acc_clf_train=round(accuracy_score(y_train,y_clf_train),4)
@@ -291,9 +291,9 @@ acc_train,acc_test,loss_train,loss_test=[],[],[],[]
 df_list=['classifier_name','acc_train','acc_test','loss_train','loss_test']
 clf=[linear_model.LogisticRegression(solver='liblinear',multi_class='ovr'),
      linear_model.LogisticRegressionCV(solver='liblinear',multi_class='ovr'),
-     linear_model.SGDClassifier(),linear_model.RidgeClassifier(),linear_model.RidgeClassifierCV(),
+     linear_model.SGDClassifier(max_iter=1000),linear_model.RidgeClassifier(),linear_model.RidgeClassifierCV(),
      LinearDiscriminantAnalysis(),QuadraticDiscriminantAnalysis(),
-     svm.LinearSVC(),svm.SVC(gamma='scale',C=10.0,kernel='poly'),svm.NuSVC(kernel='poly'),
+     svm.LinearSVC(),svm.SVC(gamma='scale',C=10.0,kernel='poly'),svm.NuSVC(gamma='scale',kernel='poly'),
      KNeighborsClassifier(),RadiusNeighborsClassifier(radius=30),NearestCentroid(),
      DecisionTreeClassifier(),ExtraTreeClassifier(),GaussianNB(),BernoulliNB(),MultinomialNB(),
      BaggingClassifier(),RandomForestClassifier(),AdaBoostClassifier(),GradientBoostingClassifier(),
