@@ -345,19 +345,7 @@ pylab.scatter(x,y_test311[:n],marker='o',s=50,color='darkgreen',label='KNeighbor
 pylab.xlabel('Observations'); pylab.ylabel('Targets'); pylab.title('Classifiers. Test Results. Digits')
 pylab.legend(loc=2,fontsize=10); pylab.show()
 </script></div>
-    <p></p>
-<div class="linked"><script type="text/x-sage">
-
-</script></div>
-    <p></p>
-<div class="linked"><script type="text/x-sage">
-
-</script></div>
-    <p></p>
-<div class="linked"><script type="text/x-sage">
-
-</script></div>
-    <p></p>      
+    <p></p>     
     <h2 class="font-effect-ice">Supervised Learning. Regression</h2>
 <div class="linked"><script type="text/x-sage">
 
@@ -375,17 +363,24 @@ pylab.legend(loc=2,fontsize=10); pylab.show()
 
 </script></div>
     <p></p>
-    <h2 class="font-effect-ice">Unsupervised Learning</h2>
-<div class="linked"><script type="text/x-sage">
-
-</script></div>
-    <p></p>      
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
     <p></p>
+    <h2 class="font-effect-ice">Unsupervised Learning</h2>
 <div class="linked"><script type="text/x-sage">
-
+usl=[mixture.GaussianMixture(n_components=4,n_init=4),mixture.BayesianGaussianMixture(n_components=4,n_init=4),
+     manifold.Isomap(),manifold.LocallyLinearEmbedding(),manifold.SpectralEmbedding(),manifold.MDS(),manifold.TSNE()]
+# Gaussian Mixture; Toy blobs
+usl[0].fit(X_train9,y_train9); y_test91=usl[0].predict(X_test9)
+usl[1].fit(X_train9,y_train9); y_test92=usl[1].predict(X_test9)
+</script></div>
+    <p></p>      
+<div class="linked"><script type="text/x-sage">
+pylab.figure(figsize=(12,12)); pylab.scatter(X_test9[:,0],X_test9[:,1],c=y_test9,cmap=pylab.cm.tab10)
+pylab.scatter(X_test9[:,0]+0.03,X_test9[:,1]+0.03,c=y_test91,alpha=0.4,cmap=pylab.cm.autumn)
+pylab.scatter(X_test9[:,0]+0.06,X_test9[:,1]+0.06,c=y_test92,alpha=0.4,cmap=pylab.cm.winter)
+pylab.scatter([1,-1,1,-1],[1,-1,-1,1],c='black',marker='*',s=150); pylab.show()
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
