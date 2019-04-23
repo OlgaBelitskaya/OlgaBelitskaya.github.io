@@ -292,13 +292,15 @@ acc_train,acc_test,loss_train,loss_test=[],[],[],[]
 df_list=['classifier_name','acc_train','acc_test','loss_train','loss_test']
 clf=[linear_model.LogisticRegression(solver='liblinear',multi_class='ovr'),
      linear_model.LogisticRegressionCV(solver='liblinear',multi_class='ovr'),
-     linear_model.SGDClassifier(max_iter=1000),linear_model.RidgeClassifier(),linear_model.RidgeClassifierCV(),
+     linear_model.SGDClassifier(max_iter=1000,tol=0.00001),
+     linear_model.RidgeClassifier(),linear_model.RidgeClassifierCV(),
      LinearDiscriminantAnalysis(),QuadraticDiscriminantAnalysis(),
      svm.LinearSVC(),svm.SVC(gamma='scale',C=10.0,kernel='poly'),svm.NuSVC(gamma='scale',kernel='poly'),
      KNeighborsClassifier(),RadiusNeighborsClassifier(radius=30),NearestCentroid(),
      DecisionTreeClassifier(),ExtraTreeClassifier(),GaussianNB(),BernoulliNB(),MultinomialNB(),
-     BaggingClassifier(),RandomForestClassifier(),AdaBoostClassifier(),GradientBoostingClassifier(),
-     linear_model.Perceptron(max_iter=1000),linear_model.PassiveAggressiveClassifier(max_iter=1000),
+     BaggingClassifier(),RandomForestClassifier(n_estimators=64),AdaBoostClassifier(),GradientBoostingClassifier(),
+     linear_model.Perceptron(max_iter=1000,tol=0.00001),
+     linear_model.PassiveAggressiveClassifier(max_iter=1000,tol=0.00001),
      GaussianProcessClassifier(),LabelPropagation(),LabelSpreading()]
 </script></div>
     <p></p>
@@ -327,6 +329,9 @@ y_train1120,y_test1120=classifier_fit_score(clf[19],'RandomForestClassifier','Ha
                        X_train11.reshape(-1,32*32*3),X_test11.reshape(-1,32*32*3),y_train11,y_test11)[:2]
 y_train1122,y_test1122=classifier_fit_score(clf[21],'GradientBoostingClassifier','Handwritten Letters',
                        X_train11.reshape(-1,32*32*3),X_test11.reshape(-1,32*32*3),y_train11,y_test11)[:2]
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
 df_classifier_results=get_classifier_results()
 df_classifier_results[df_list].sort_values('acc_test',ascending=False).style.set_properties(**style_dict)
 df_classifier_results.to_csv('classifier_results.csv')
