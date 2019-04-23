@@ -348,7 +348,25 @@ pylab.legend(loc=2,fontsize=10); pylab.show()
     <p></p>     
     <h2 class="font-effect-ice">Supervised Learning. Regression</h2>
 <div class="linked"><script type="text/x-sage">
-
+def regressor_fit_score(regressor,regressor_name,dataset,x_train,x_test,y_train,y_test):
+    regressor_list.append(str(regressor)); regressor_names.append(regressor_name); reg_datasets.append(dataset)    
+    regressor.fit(x_train,y_train); y_reg_train=regressor.predict(x_train); y_reg_test=regressor.predict(x_test)    
+    r2_reg_train=round(r2_score(y_train,y_reg_train),4); r2_train.append(r2_reg_train)
+    r2_reg_test=round(r2_score(y_test,y_reg_test),4); r2_test.append(r2_reg_test)    
+    ev_reg_train=round(explained_variance_score(y_train,y_reg_train),4); ev_train.append(ev_reg_train)
+    ev_reg_test=round(explained_variance_score(y_test, y_reg_test),4); ev_test.append(ev_reg_test)    
+    mse_reg_train=round(mean_squared_error(y_train,y_reg_train),4); mse_train.append(mse_reg_train)
+    mse_reg_test=round(mean_squared_error(y_test,y_reg_test),4); mse_test.append(mse_reg_test)
+    mae_reg_train=round(mean_absolute_error(y_train,y_reg_train),4); mae_train.append(mae_reg_train)
+    mae_reg_test=round(mean_absolute_error(y_test,y_reg_test),4); mae_test.append(mae_reg_test)
+    mdae_reg_train=round(median_absolute_error(y_train,y_reg_train),4); mdae_train.append(mdae_reg_train)
+    mdae_reg_test=round(median_absolute_error(y_test,y_reg_test),4); mdae_test.append(mdae_reg_test)    
+    return [y_reg_train,y_reg_test,r2_reg_train,r2_reg_test,ev_reg_train,ev_reg_test,
+            mse_reg_train,mse_reg_test,mae_reg_train,mae_reg_test,mdae_reg_train,mdae_reg_test]
+def get_regressor_results():
+    return pandas.DataFrame({'regressor' :regressor_list,'regressor_name':regressor_names,'dataset':reg_datasets,
+                               'r2_train':r2_train,'r2_test':r2_test,'ev_train':ev_train,'ev_test':ev_test,'mse_train':mse_train,'mse_test':mse_test,
+                               'mae_train':mae_train,'mae_test':mae_test,'mdae_train':mdae_train,'mdae_test':mdae_test})
 </script></div>
     <p></p>      
 <div class="linked"><script type="text/x-sage">
