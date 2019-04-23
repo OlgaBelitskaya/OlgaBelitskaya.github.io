@@ -51,6 +51,7 @@ from sklearn.neural_network import MLPClassifier,BernoulliRBM,MLPRegressor
 <div class="linked"><script type="text/x-sage">
 [warnings.filterwarnings('ignore',category=UserWarning) for el in [UserWarning,FutureWarning,DeprecationWarning]]
 numpy.set_printoptions(precision=4); pylab.style.use('seaborn-whitegrid')
+style_dict={'background-color':'gainsboro','color':'darkslategray','border-color':'white','font-family':'Roboto'}
 def ohe(x): return preprocessing.OneHotEncoder(categories='auto').fit(x.reshape(-1,1))\
             .transform(x.reshape(-1,1)).toarray().astype('int16')
 def sas(X,y): return train_test_split(X,y,test_size=0.2,random_state=1)
@@ -283,7 +284,6 @@ def classifier_fit_score(classifier,classifier_name,clf_dataset,x_train,x_test,y
 def get_classifier_results():
     return pandas.DataFrame({'classifier':classifier_list,'classifier_name':classifier_names,'clf_dataset':clf_datasets,
                              'acc_train':acc_train,'acc_test':acc_test,'loss_train':loss_train,'loss_test':loss_test})
-style_dict={'background-color':'gainsboro','color':'darkslategray','border-color':'white','font-family':'Roboto'}
 </script></div>
     <p></p> 
 <div class="linked"><script type="text/x-sage">
@@ -372,24 +372,39 @@ def get_regressor_results():
 <div class="linked"><script type="text/x-sage">
 regressor_list,regressor_names,reg_datasets=[],[],[]
 r2_train,r2_test,ev_train, ev_test,mse_train,mse_test,mae_train,mae_test,mdae_train,mdae_test=[],[],[],[],[],[],[],[],[],[]
-df_list2=['regressor_name','r2_train','r2_test','ev_train','ev_test',
-          'mse_train','mse_test','mae_train','mae_test','mdae_train','mdae_test']
+df_list2=['regressor_name','r2_train','r2_test','ev_train','ev_test','mse_train','mse_test','mae_train','mae_test','mdae_train','mdae_test']
 reg=[linear_model.LinearRegression(),linear_model.Ridge(),linear_model.RidgeCV(),
      linear_model.Lasso(),linear_model.LassoLarsCV(),linear_model.RANSACRegressor(),
      linear_model.BayesianRidge(),linear_model.ARDRegression(),
      linear_model.HuberRegressor(),linear_model.TheilSenRegressor(),
      PLSRegression(),DecisionTreeRegressor(),ExtraTreeRegressor(),
-     BaggingRegressor(),AdaBoostRegressor(),GradientBoostingRegressor(),RandomForestRegressor()]
+     BaggingRegressor(),AdaBoostRegressor(),GradientBoostingRegressor(),RandomForestRegressor(),
+     linear_model.PassiveAggressiveRegressor(max_iter=1000,tol=0.001),linear_model.ElasticNet(),
+     linear_model.SGDRegressor(max_iter=1000,tol=0.001),svm.SVR(),KNeighborsRegressor(),
+     RadiusNeighborsRegressor(radius=1.5),GaussianProcessRegressor()]
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
 list1reg=['LinearRegression','Ridge','RidgeCV','Lasso','LassoLarsCV','RANSACRegressor',
-          'BayesianRidge','ARDRegression']
-y1reg=[]
+          'BayesianRidge','ARDRegression','HuberRegressor','TheilSenRegressor','PLSRegression','DecisionTreeRegressor',
+          'ExtraTreeRegressor','BaggingRegressor','AdaBoostRegressor','GradientBoostingRegressor','RandomForestRegressor']
+y1reg=[]; y7reg=[]
 for i in range(len(list1reg)):
     y1reg.append(regressor_fit_score(reg[i],list1reg[i],'Boston',X_train1,X_test1,y_train1,y_test1)[:2])
 [[y_train11,y_test11],[y_train12,y_test12],[y_train13,y_test13],[y_train14,y_test14],[y_train15,y_test15],[y_train16,y_test16],
- [y_train17,y_test17],[y_train18,y_test18]]=y1reg
+ [y_train17,y_test17],[y_train18,y_test18],[y_train19,y_test19],[y_train110,y_test110],[y_train111,y_test111],[y_train112,y_test112],
+ [y_train113,y_test113],[y_train114,y_test114],[y_train115,y_test115],[y_train116,y_test116],[y_train117,y_test117]]=y1reg
+list7reg=['PassiveAggressiveRegressor','ElasticNet','SGDRegressor','SVR',
+          'KNeighborsRegressor','RadiusNeighborsRegressor','GaussianProcessRegressor']
+for i in range(len(list7reg)):
+    y7reg.append(regressor_fit_score(reg[i],list7reg[i],'Toy Regression',X_train7,X_test7,y_train7,y_test7)[:2])
+[[y_train718,y_test718],[y_train719,y_test719],[y_train720,y_test720],[y_train721,y_test721],
+ [y_train722,y_test722],[y_train723,y_test723],[y_train724,y_test724]]=y7reg    
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+df_regressor_results=get_regressor_results(); df_regressor_results.to_csv('regressor_results.csv')
+df_regressor_results[df_list2].sort_values('r2_test',ascending=False).style.set_properties(**style_dict)
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
