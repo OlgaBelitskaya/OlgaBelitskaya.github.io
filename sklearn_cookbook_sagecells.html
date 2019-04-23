@@ -408,11 +408,17 @@ nn_clf2.score(X_train11.reshape(-1,32*32*3),y_train11),nn_clf2.score(X_test11.re
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+# Multi-layer Perceptron; Regressor; Boston
+nn_reg1=MLPRegressor(hidden_layer_sizes=(104,),max_iter=1000,solver='lbfgs',alpha=0.015)
+nn_reg1.fit(X_train1,y_train1); y_test1_nn1=nn_reg1.predict(X_test1)
+nn_reg1.score(X_train1,y_train1),nn_reg1.score(X_test1,y_test1)
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+pylab.figure(figsize=(12,5)); n=50; x=range(n)
+pylab.plot(x,y_test1[:n],'-o',color='black',label='Real data'); pylab.plot(x,y_test1_nn1[:n],'-o',label='MLP Predictions')
+pylab.xlabel('Observations'); pylab.ylabel('Targets'); pylab.title('Multi-layer Perceptron. Test Results. Boston')
+pylab.legend(loc=2,fontsize=10); pylab.show()
 </script></div>
     <p></p>
     <h3>unsupervised</h3>
