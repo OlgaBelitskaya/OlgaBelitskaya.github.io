@@ -364,15 +364,16 @@ def regressor_fit_score(regressor,regressor_name,dataset,x_train,x_test,y_train,
     return [y_reg_train,y_reg_test,r2_reg_train,r2_reg_test,ev_reg_train,ev_reg_test,
             mse_reg_train,mse_reg_test,mae_reg_train,mae_reg_test,mdae_reg_train,mdae_reg_test]
 def get_regressor_results():
-    return pandas.DataFrame({'regressor' :regressor_list,'regressor_name':regressor_names,'dataset':reg_datasets,
-                               'r2_train':r2_train,'r2_test':r2_test,'ev_train':ev_train,'ev_test':ev_test,'mse_train':mse_train,'mse_test':mse_test,
-                               'mae_train':mae_train,'mae_test':mae_test,'mdae_train':mdae_train,'mdae_test':mdae_test})
+    return pandas.DataFrame({'regressor':regressor_list,'regressor_name':regressor_names,'dataset':reg_datasets,
+                             'r2_train':r2_train,'r2_test':r2_test,'ev_train':ev_train,'ev_test':ev_test,'mse_train':mse_train,'mse_test':mse_test,
+                             'mae_train':mae_train,'mae_test':mae_test,'mdae_train':mdae_train,'mdae_test':mdae_test})
 </script></div>
     <p></p>      
 <div class="linked"><script type="text/x-sage">
 regressor_list,regressor_names,reg_datasets=[],[],[]
 r2_train,r2_test,ev_train, ev_test,mse_train,mse_test,mae_train,mae_test,mdae_train,mdae_test=[],[],[],[],[],[],[],[],[],[]
-df_list2=['regressor_name','r2_train','r2_test','ev_train','ev_test','mse_train','mse_test','mae_train','mae_test','mdae_train','mdae_test']
+df_list2=['regressor_name','r2_train','r2_test','ev_train','ev_test',
+          'mse_train','mse_test','mae_train','mae_test','mdae_train','mdae_test']
 reg=[linear_model.LinearRegression(),linear_model.Ridge(),linear_model.RidgeCV(),
      linear_model.Lasso(),linear_model.LassoLarsCV(),linear_model.RANSACRegressor(),
      linear_model.BayesianRidge(),linear_model.ARDRegression(),
@@ -382,7 +383,13 @@ reg=[linear_model.LinearRegression(),linear_model.Ridge(),linear_model.RidgeCV()
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+list1reg=['LinearRegression','Ridge','RidgeCV','Lasso','LassoLarsCV','RANSACRegressor',
+          'BayesianRidge','ARDRegression']
+y1reg=[]
+for i in range(len(list1reg)):
+    y1reg.append(regressor_fit_score(reg[i],list1reg[i],'Boston',X_train1,X_test1,y_train1,y_test1)[:2])
+[[y_train11,y_test11],[y_train12,y_test12],[y_train13,y_test13],[y_train14,y_test14],[y_train15,y_test15],[y_train16,y_test16],
+ [y_train17,y_test17],[y_train18,y_test18]]=y1reg
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
