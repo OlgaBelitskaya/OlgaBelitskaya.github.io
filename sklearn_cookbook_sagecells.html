@@ -363,8 +363,19 @@ pylab.legend(loc=2,fontsize=10); pylab.show()
 
 </script></div>
     <p></p>
+      <h3>combining regression with kernels</h3>
 <div class="linked"><script type="text/x-sage">
-
+# Kernel Ridge; Toy regression 2
+reg25=KernelRidge(); reg25.fit(X_train8,y_train8); y_train825=reg25.predict(X_train8) 
+y_test825=reg25.predict(X_test8); print(reg25.score(X_test8,y_test8))
+pylab.figure(figsize=(12,5)); n=30; x=range(n)
+pylab.scatter(x,y_test8[:n,0],marker='*',s=200,color='darkblue',label='Real data 1')
+pylab.scatter(x,y_test8[:n,1],marker='*',s=200,color='darkgreen',label='Real data 2')
+pylab.plot(x,y_test825[:n,0],lw=2,color='steelblue',label='Kernel Ridge 1')
+pylab.plot(x,y_test825[:n,1],lw=2,color='seagreen',label='Kernel Ridge 2')
+pylab.xlabel('Observations'); pylab.ylabel('Targets') 
+pylab.title('Kernel Ridge Regressor. Test Results. Toy Regression 2')
+pylab.legend(loc=12,fontsize=10); pylab.show()
 </script></div>
     <p></p>
     <h2 class="font-effect-ice">Unsupervised Learning</h2>
