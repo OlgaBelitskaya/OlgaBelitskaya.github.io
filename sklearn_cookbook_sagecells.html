@@ -404,14 +404,27 @@ pylab.legend(loc=2,fontsize=10); pylab.show()
     <p></p>
     <h3>unsupervised</h3>
 <div class="linked"><script type="text/x-sage">
-
+X_train3_scaled=(X_train3-numpy.min(X_train3,0))/(numpy.max(X_train3,0)+0.0001)
+X_test3_scaled=(X_test3-numpy.min(X_test3,0))/(numpy.max(X_test3,0)+0.0001)
+logistic=linear_model.LogisticRegression(solver='liblinear',multi_class='ovr',max_iter=50,tol=0.0001,C=5000.0)
+brbm=BernoulliRBM(random_state=0,verbose=False); brbm.learning_rate,brbm.n_iter,brbm.n_components=0.05,50,64
+nn_clf2=Pipeline(steps=[('brbm',brbm),('logistic',logistic)])
+nn_clf2.fit(X_train3_scaled,y_train3)
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+print("Logistic regression using BRBM features:\n%s\n"%(classification_report(y_test3,nn_clf2.predict(X_test3_scaled))))
 </script></div>
     <p></p>
-    <h2 class="font-effect-ice">Additional Cells</h2>  
+    <h2 class="font-effect-ice">Additional Cells</h2>
+<div class="linked"><script type="text/x-sage">
+
+</script></div>
+    <p></p>      
+<div class="linked"><script type="text/x-sage">
+
+</script></div>
+    <p></p>      
 <div class="sage"><script type="text/x-sage">
 
 </script></div>
