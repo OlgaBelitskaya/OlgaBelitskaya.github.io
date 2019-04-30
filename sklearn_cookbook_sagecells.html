@@ -26,7 +26,7 @@
 import numpy,pandas,scipy,pylab,h5py,urllib,zipfile,time,warnings
 from sklearn import datasets,preprocessing,impute,cluster,mixture,manifold,dummy,linear_model,svm
 from sklearn.feature_extraction import DictVectorizer 
-from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import CountVectorizer,TfidfVectorizer
 from sklearn.feature_selection import SelectKBest,chi2,RFE
 from sklearn.decomposition import PCA; from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split
@@ -49,7 +49,7 @@ from sklearn.neural_network import MLPClassifier,BernoulliRBM,MLPRegressor
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-[warnings.filterwarnings('ignore',category=UserWarning) for el in [UserWarning,FutureWarning,DeprecationWarning]]
+[warnings.filterwarnings('ignore',category=el) for el in [UserWarning,FutureWarning,DeprecationWarning]]
 numpy.set_printoptions(precision=4); pylab.style.use('seaborn-whitegrid')
 style_dict={'background-color':'gainsboro','color':'darkslategray','border-color':'white','font-family':'Roboto'}
 def ohe(x): return preprocessing.OneHotEncoder(categories='auto').fit(x.reshape(-1,1))\
@@ -62,10 +62,12 @@ def sas(X,y): return train_test_split(X,y,test_size=0.2,random_state=1)
 <div class="linked"><script type="text/x-sage">
 boston=datasets.load_boston(); housing=datasets.fetch_california_housing()
 digits=datasets.load_digits(); wine=datasets.load_wine();
-faces=datasets.fetch_olivetti_faces(); covtype=datasets.fetch_covtype()
-[X1,y1,X2,y2,X3,y3,X4,y4,X5,y5,X6,y6]=\
+faces=datasets.fetch_olivetti_faces()
+[X1,y1,X2,y2,X3,y3,X4,y4,X5,y5]=\
 [boston.data,boston.target,housing.data,housing.target,digits.data,digits.target,
-wine.data,wine.target,faces.data,faces.target,covtype.data,covtype.target]
+wine.data,wine.target,faces.data,faces.target]
+train=datasets.fetch_20newsgroups(subset='train',shuffle=True,remove=('headers','footers','quotes'))
+test=datasets.fetch_20newsgroups(subset='test',shuffle=True,remove=('headers','footers','quotes'))
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
@@ -169,6 +171,13 @@ pylab.title("The Words' Occurrence in Sentences",fontsize=15); pylab.show()
 print(c_analyzer(corpus[0]))
 </script></div>
     <p></p>
+<div class="linked"><script type="text/x-sage">
+vectorizer=TfidfVectorizer(sublinear_tf=True,max_df=0.5,stop_words='english')
+x_train6=vectorizer.fit_transform(train.data); x_test6=vectorizer.transform(test.data)
+y_train6,y_test6=train.target,test.target
+del train,test
+</script></div>
+    <p></p>
     <h3>scaling</h3>
 <div class="linked"><script type="text/x-sage">
 SCX1=[X1,preprocessing.MinMaxScaler().fit_transform(X1),preprocessing.MaxAbsScaler().fit_transform(X1),
@@ -240,13 +249,13 @@ pylab.title("t-SNE embedding %f s"%(time.time()-t0)); pylab.show()
     <p></p>
     <h3>shuffling and splitting</h3>
 <div class="linked"><script type="text/x-sage">
-Xy=[sas(X1,y1),sas(X2,y2),sas(X3,y3),sas(X4,y4),sas(X5,y5),sas(X6,y6)]
+Xy=[sas(X1,y1),sas(X2,y2),sas(X3,y3),sas(X4,y4),sas(X5,y5)]
 [[X_train1,X_test1,y_train1,y_test1],[X_train2,X_test2,y_train2,y_test2],
  [X_train3,X_test3,y_train3,y_test3],[X_train4,X_test4,y_train4,y_test4],
- [X_train5,X_test5,y_train5,y_test5],[X_train6,X_test6,y_train6,y_test6]]=Xy
-[pretty_print([Xy[i][j].shape for j in range(4)]) for i in range(6)]
-pretty_print('boston, housing, digits, wine, faces, covtype')
-del X1,y1,X2,y2,X3,y3,X4,y4,X5,y5,X6,y6
+ [X_train5,X_test5,y_train5,y_test5]]=Xy
+[pretty_print([Xy[i][j].shape for j in range(4)]) for i in range(5)]
+pretty_print('boston, housing, digits, wine, faces')
+del X1,y1,X2,y2,X3,y3,X4,y4,X5,y5
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
