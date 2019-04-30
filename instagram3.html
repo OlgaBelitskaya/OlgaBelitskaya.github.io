@@ -25,12 +25,22 @@
 <a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp;</a>     
 <a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a>
     <p></p> 
-    <h1>1</h1>
+    <h1>If you want to display functions with plotly.js</h1>
 Jupyter Notebook &#38; SageMath Kernel 
     <p>Click “Run” twice. Use in HTML documents with &#60;/script&#62; in the end.</p>
 <div class="sage_html"><script type="text/x-sage">
 %%html
-
+<script src="https://cdn.plot.ly/plotly-latest.min.js"/>
+<div id="test_plotly" style="width:900px;height:600px;"/>
+<script>
+TEST1=document.getElementById('test_plotly');
+var x1=Array(80).fill(0.05).map((r,t) => (r*(t-200)));
+var y1=Array(80).fill(0.05).map((r,t) => (Math.exp(-Math.pow(r*(t-40),2))));
+var y2=Array(80).fill(0.05).map((r,t) => (-Math.exp(-Math.pow(r*(t-40),2))));
+var y3=Array(80).fill(0.05).map((r,t) => (Math.sin(Math.PI*Math.pow(r*(t-40),3))*Math.exp(-Math.pow(r*(t-40),2))));
+Plotly.plot(TEST1,data=[{x:x1,y:y1,line:{color:'#3636ff'},name:'$f(x) = e^{-x^2}$'}]);
+Plotly.plot(TEST1,[{x:x1,y:y2,line:{color:'#36ff36'},name:'$f(x) = -e^{-x^2}$'}]);
+Plotly.plot(TEST1,[{x:x1,y:y3,line:{color:'#ff3636'},mode:'lines+markers',name:'$f(x) = sin(πx^3) e^{-x^2}$'}]);
 </script></div>
     <h1>If you want to experiment with text classification</h1>
 Jupyter Notebook &#38; SageMath Kernel      
@@ -45,7 +55,7 @@ y_train,y_test=train.target,test.target
 vectorizer=TfidfVectorizer(sublinear_tf=True,max_df=0.5,stop_words='english')
 x_train=vectorizer.fit_transform(train.data); x_test=vectorizer.transform(test.data)
 del train,test; print(x_train.shape,x_test.shape,y_train.shape,y_test.shape)
-clf=MLPClassifier(hidden_layer_sizes=(64,),max_iter=5,solver='adam',verbose=2,random_state=1,learning_rate_init=.01)
+clf=MLPClassifier(hidden_layer_sizes=(128,),max_iter=3,solver='adam',verbose=2,random_state=1,learning_rate_init=.01)
 clf.fit(x_train,y_train); print(clf.score(x_test,y_test))
 y_test_predictions=clf.predict(x_test)
 pylab.figure(figsize=(12,5)); pylab.scatter(range(100),y_test[:100],s=100)
