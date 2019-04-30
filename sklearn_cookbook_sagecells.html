@@ -465,7 +465,7 @@ pylab.scatter([1,-1,1,-1],[1,-1,-1,1],c='black',marker='*',s=150); pylab.show()
     <h3>supervised</h3>
 <div class="linked"><script type="text/x-sage">
 # Multi-layer Perceptron; Classifier; Digits
-nn_clf1=MLPClassifier(hidden_layer_sizes=(512,),max_iter=70,solver='sgd',verbose=2,random_state=1,learning_rate_init=.01)
+nn_clf1=MLPClassifier(hidden_layer_sizes=(512,),max_iter=70,solver='sgd',verbose=1,random_state=1,learning_rate_init=.01)
 nn_clf1.fit(X_train3,y_train3); nn_clf1.score(X_train3,y_train3),nn_clf1.score(X_test3,y_test3)
 </script></div>
     <p></p>      
@@ -474,6 +474,15 @@ nn_clf1.fit(X_train3,y_train3); nn_clf1.score(X_train3,y_train3),nn_clf1.score(X
 nn_clf2=MLPClassifier(hidden_layer_sizes=(512,),max_iter=30,solver='sgd',verbose=1,random_state=1,learning_rate_init=.01)
 n=7000; nn_clf2.fit(X_train11[:n].reshape(-1,32*32*3),y_train11[:n])
 nn_clf2.score(X_train11[:n].reshape(-1,32*32*3),y_train11[:n]),nn_clf2.score(X_test11.reshape(-1,32*32*3),y_test11)
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+# Multi-layer Perceptron; Classifier; News
+nn_clf3=MLPClassifier(hidden_layer_sizes=(128,),max_iter=3,solver='adam',verbose=1,random_state=1,learning_rate_init=.01)
+nn_clf3.fit(x_train6,y_train6); print(nn_clf3.score(x_test6,y_test6))
+y_test6_predictions=nn_clf3.predict(x_test6)
+pylab.figure(figsize=(12,5)); pylab.scatter(range(100),y_test6[:100],s=100)
+pylab.scatter(range(100),y_test6_predictions[:100],s=25); pylab.show()
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
