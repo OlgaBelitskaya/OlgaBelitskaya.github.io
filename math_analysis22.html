@@ -135,9 +135,10 @@ def _(N=[20,23,26,29]):
     parametric_plot((X[N],Y[N]),(t0,T1[N],T2[N]),linestyle='-.',thickness=3,color='slategray')\
     .show(gridlines=True,figsize=(7,5));
     t = sympy.Symbol('t'); 
-    X = {20:exp(2*t)*sin(t),23:t^2,26:2*3^0.5*t^2,29:cos(t)+ln(tan(t/2))}
-    Y = {20:exp(2*t)*cos(t),23:t-t^3/3,26:4*t-t^3,29:sin(t)}
+    X = {20:sympy.exp(2*t)*sympy.sin(t),23:t^2,26:2*3^0.5*t^2,29:sympy.cos(t)+sympy.ln(sympy.tan(t/2))}
+    Y = {20:sympy.exp(2*t)*sympy.cos(t),23:t-t^3/3,26:4*t-t^3,29:sympy.sin(t)}
     L = sympy.Integral(((diff(X[N],t)^2+diff(Y[N],t)^2)^0.5).expand(),(t,T1[N],T2[N]))
+    print('\n[x, y] = '); display([X[N],Y[N]])
     print('\nL = '); display(L); print('= '+str(L.n()))
 </script></div>
 <p></p>
