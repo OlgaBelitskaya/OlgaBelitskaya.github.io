@@ -149,7 +149,11 @@ def _(N=[21,24,27]):
     PHI1 = {21:0,24:pi/6,27:0}
     PHI2 = {21:pi,24:pi/3,27:pi}
     polar_plot(RHO[N],(phi,PHI1[N],PHI2[N]),linestyle='-.',thickness=3,color='slategray')\
-    .show(gridlines=True,figsize=(7,5));
+    .show(gridlines=True,figsize=(7,5))
+    p = sympy.Symbol('p'); 
+    R = {21:(cos(p/4))^4,24:1+sin(p),27:(sin(p/4))^4}
+    L = sympy.Integral(((R[N]^2+diff(R[N],p)^2)^0.5).expand(),(p,PHI1[N],PHI2[N]))
+    print('\n'); display(L); print('= '+str(L.n()))
 </script></div>
 <p></p>
 <div class="linked"><script type="text/x-sage">
