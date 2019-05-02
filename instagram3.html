@@ -99,11 +99,19 @@ def _(N=[1,2,3]):
     print('\nL = '); display(L); print('= '+str(L.n()))
 </script></div>
     <p></p>
-    <h1>-</h1>
+    <h1>Fun graph plotting with symbols</h1>
 Jupyter Notebook &#38; SageMath Kernel 
 <div class="sage_r"><script type="text/x-sage">
 %%r
-
+svg(filename="Rplots.svg",width=7,height=7,pointsize=12,onefile=T,family="sans",
+    bg="slategray",antialias=c("default","none","gray","subpixel"))
+x <- seq(-2,2,len=100); y1 <- exp(-x^2); y2 <- -exp(-x^2); y3 <- exp(-x^2)*sin(pi*x^3)
+plot(x,y1,type='o',cex=0.7,col='#3636ff',xlim=c(-2,2),ylim=c(-1,1),
+     xlab='x',ylab='y',fg='white',col.axis='white',col.lab='white') 
+lines(x,y2,type='o',cex=0.7,col='#ff3636')
+df <- data.frame(x=x,y=y3); df$utf_sym <- sapply((30:129),intToUtf8)
+points(df$x,df$y,pch=df$utf_sym,cex=0.5,col='#ffffff')
+grid(col='white'); dev.off()
 </script></div>
     <p></p>
     <h1>Add your map parameters in Highcharts.js</h1>
