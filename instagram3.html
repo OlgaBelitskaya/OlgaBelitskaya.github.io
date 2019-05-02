@@ -77,12 +77,24 @@ T.texture('t',ambient=0.,diffuse=1,specular=.1,opacity=.1,color=Color('#00ff00')
 T.plot(f,(-3,3),(-3,3),'t',max_depth=5,initial_depth=3,grad_f=g); T.show()
 </script></div>
     <p></p>
-    <h1>-</h1>
+    <h1>If you want to calculate the length of a curve over a given interval</h1>
 Jupyter Notebook &#38; SageMath Kernel
-    <p>Click “Run” twice. Use in HTML documents with &#60;/script&#62; in the end.</p>
-<div class="sage_html"><script type="text/x-sage">
-%%html
-
+    <p></p>      
+<div class="sage"><script type="text/x-sage">
+import sympy; sympy.init_printing(use_unicode=True)
+from sage.symbolic.integration.integral import indefinite_integral,definite_integral
+@interact
+def _(N=[1,2,3]):
+    var('chi'); Y = {1:ln(cos(2*chi))/2,2:exp(chi)+3,3:chi^2/4-0.5}
+    X1 = {1:0,2:ln(8)/2,3:1}; X2 = {1:pi/12,2:ln(15)/2,3:2}
+    L = definite_integral((1+diff(Y[N],chi)^2)^0.5,chi,X1[N],X2[N])
+    pretty_print(html('<left><font>$\displaystyle{y = %s; \; FL = %s}$</font></left>'%\
+                      (latex(Y[N]),latex(indefinite_integral((1+diff(Y[N],chi)^2)^0.5,chi)))))
+    pretty_print(html('<left><font>$\displaystyle{L = %s = %s}$</font></left>'%(latex(L),str(L.n()))))
+    plot(Y[N],(chi,X1[N],X2[N]),linestyle='-.',thickness=3,color='#3636ff').show(gridlines=True,figsize=(7,5))
+    x = sympy.Symbol('x'); y = {1:ln(cos(2*x))/2,2:exp(x)+3,3:x^2/4-0.5}
+    L = sympy.Integral(((1+diff(y[N],x)^2)^0.5).expand(),(x,X1[N],X2[N]))   
+    print('\nL = '); display(L); print('= '+str(L.n()))
 </script></div>
     <p></p>
     <h1>-</h1>
