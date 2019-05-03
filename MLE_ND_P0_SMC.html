@@ -190,7 +190,7 @@ How accurate would a prediction be that all female passengers survived and the r
 accuracy_score(outcomes,predictions)
 </script></div>
     <p></p> 
-      Using just the <b>Sex</b> feature for each passenger, we are able to increase the accuracy of our predictions by a significant margin.<br/>
+Using just the <b>Sex</b> feature for each passenger, we are able to increase the accuracy of our predictions by a significant margin.<br/>
 Now, let's consider using an additional feature to see if we can further improve our predictions.<br/>
 For example, consider all of the male passengers aboard the RMS Titanic: can we find a subset of those passengers that had a higher rate of survival?<br/>
 Let's start by looking at the <b>Age</b> of each male, by again using the <i>survival_stats()</i> function.<br/> 
@@ -199,7 +199,25 @@ This time, we'll use the fourth parameter to filter out the data so that only pa
 survival_stats(data,outcomes,'Age',["Sex=='male'"])
 </script></div>
     <p></p>
+Examining the survival statistics, the majority of males younger than 10 survived the ship sinking, whereas most males age 10 or older did not survive the ship sinking.<br/>
+Let's continue to build on our previous prediction: if a passenger was female, then we will predict they survive.<br/> 
+If a passenger was male and younger than 10, then we will also predict they survive. Otherwise, we will predict they do not survive.      
+<div class="linked"><script type="text/x-sage">
+def predictions_2(data):
+    predictions=[]
+    for _,passenger in data.iterrows():
+        if passenger['Sex']=='female': predictions.append(1)
+        elif passenger['Sex']=='male' and passenger['Age']<10: predictions.append(1)
+        else: predictions.append(0)
+    return pandas.Series(predictions)
+predictions=predictions_2(data)
+</script></div>
+    <p></p>
       
+<div class="linked"><script type="text/x-sage">
+
+</script></div>
+    <p></p>
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
