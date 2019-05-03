@@ -19,7 +19,7 @@
   h1 {color:#ff603b; font-family:'Orbitron'; text-shadow:4px 4px 4px #ccc;} 
   h2,h3 {color:slategray; font-family:'Orbitron'; text-shadow:4px 4px 4px #ccc;}
   h4 {color:#ff603b; font-family:'Roboto';}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:30em;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:45em;}
   </style>  
   <body>
     <h1>Machine Learning Engineer Nanodegree</h1>
@@ -34,7 +34,7 @@ n 1912, the ship RMS Titanic struck an iceberg on its maiden voyage and sank, re
 <a href="https://scikit-learn.org/stable/modules/classes.html#module-sklearn.metrics">The scikit-learn metrics</a>
     <h3>Code Tools</h3>
 <div class="linked"><script type="text/x-sage">
-import numpy,pandas,pylab
+import numpy,pandas,pylab; pylab.style.use('ggplot')
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
@@ -54,7 +54,45 @@ def filter_data(data,condition):
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+def survival_stats(data,outcomes,key,filters = []):
+    if (key not in data.columns.values):
+        print ("'{}' is not a feature of the Titanic data. Did you spell something wrong?".format(key)); return False
+    if (key=='Cabin' or key=='PassengerId' or key=='Ticket'):
+        print ("'{}' has too many unique categories to display! Try a different feature.".format(key)); return False
+    all_data=pandas.concat([data,outcomes],axis=1)
+    for condition in filters: all_data=filter_data(all_data,condition)
+    all_data=all_data[[key,'Survived']]; pylab.figure(figsize=(12,5))
+    if (key=='Age' or key=='Fare'):
+        all_data=all_data[~numpy.isnan(all_data[key])]
+        min_value=all_data[key].min(); max_value=all_data[key].max(); value_range=max_value-min_value
+        if(key=='Fare'): bins=numpy.arange(0,all_data['Fare'].max()+20,20)
+        if(key=='Age'): bins=numpy.arange(0,all_data['Age'].max()+10,10)
+        nonsurv_vals=all_data[all_data['Survived']==0][key].reset_index(drop=True)
+        surv_vals=all_data[all_data['Survived']==1][key].reset_index(drop=True)
+        pylab.hist(nonsurv_vals,bins=bins,alpha=0.6,color='#FF7F50',label='Did not survive')
+        pylab.hist(surv_vals,bins=bins,alpha=0.6,color='#338DD4',label='Survived')
+        pylab.xlim(0,bins.max()); pylab.legend(framealpha=0.8)
+    else:
+        if (key=='Pclass'): values=numpy.arange(1,4)
+        if (key=='Parch' or key=='SibSp'): values=numpy.arange(0,numpy.max(data[key])+1)
+        if (key=='Embarked'): values=['C','Q','S']
+        if (key=='Sex'): values=['male','female']
+        frame=pandas.DataFrame(index=numpy.arange(len(values)),columns=(key,'Survived','NSurvived'))
+        for i,value in enumerate(values):
+            frame.loc[i]=[value,len(all_data[(all_data['Survived']==1) & (all_data[key]==value)]),
+                          len(all_data[(all_data['Survived']==0) & (all_data[key]==value)])]
+        bar_width=0.4
+        for i in numpy.arange(len(frame)):
+            nonsurv_bar =pylab.bar(i-bar_width,frame.loc[i]['NSurvived'],width=bar_width,color='#FF7F50')
+            surv_bar=plt.bar(i,frame.loc[i]['Survived'],width=bar_width,color='#338DD4')
+            pylab.xticks(np.arange(len(frame)),values)
+            pylab.legend((nonsurv_bar[0],surv_bar[0]),('Did not survive','Survived'),framealpha=0.8)
+    pylab.xlabel(key); pylab.ylabel('Number of Passengers')
+    pylab.title('Passenger Survival Statistics With \'%s\' Feature'%(key)); pylab.show()
+    if sum(pandas.isnull(all_data[key])):
+        nan_outcomes=all_data[pandas.isnull(all_data[key])]['Survived']
+        print ("Passengers with missing '{}' values: {} ({} survived, {} did not survive)"\
+               .format(key,len(nan_outcomes),sum(nan_outcomes==1),sum(nan_outcomes==0)))
 </script></div>
     <p></p>
 To begin working with the RMS Titanic passenger data, we'll first need to import the functionality we need, and load our data into a pandas DataFrame.
