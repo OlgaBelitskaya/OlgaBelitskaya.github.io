@@ -68,8 +68,8 @@ def survival_stats(data,outcomes,key,filters=[]):
         if(key=='Age'): bins=numpy.arange(0,all_data['Age'].max()+10,10)
         nonsurv_vals=all_data[all_data['Survived']==0][key].reset_index(drop=True).astype('float')
         surv_vals=all_data[all_data['Survived']==1][key].reset_index(drop=True).astype('float')
-        pylab.hist(nonsurv_vals,bins=bins,alpha=0.6,color='#FF7F50',label='Did not survive')
-        pylab.hist(surv_vals,bins=bins,alpha=0.6,color='#338DD4',label='Survived')
+        pylab.hist(nonsurv_vals,bins=bins,alpha=0.8,color='#FF7F50',label='Did not survive')
+        pylab.hist(surv_vals,bins=bins,alpha=0.8,color='#338DD4',label='Survived')
         pylab.xlim(0,bins.max()); pylab.legend(framealpha=0.8)
     else:
         if (key=='Pclass'): values=numpy.arange(1,4)
@@ -248,11 +248,25 @@ Describe the steps you took to implement the final prediction model so that it g
 What features did you look at? Were certain features more informative than others?<br/>
 Which conditions did you use to split the survival outcomes into the data? How accurate are your predictions?
     <h3>Answer 4</h3>
-      
+The final set of features <b>Sex</b>, <b>Age</b>, <b>SibSp</b> and <b>Pclass</b> are the most informative on my opinion.<br/>
+As we noted the percentage of survivors of passengers is much higher among women than among men, and it was used in our predictions.<br/>
+Next, I proceed from the assumption that because of humanitarian reasons people rescue children and elders at first.<br/> Unfortunately, this was only valid for the passengers of the first and second classes in this dataset.<br/>
+And the latest clarification, which overcomes the border of 80% in prediction accuracy:<br/>
+if a family has more than three children, absolutely all the family may not be survived in catastrophic situations and in an atmosphere of panic.     
 <div class="linked"><script type="text/x-sage">
-
+accuracy_score(outcomes,predictions)
 </script></div>
     <p></p>
+    <h3>Scikit-learn Metrics</h3>
+There is a set of metrics in the <b>scikit-learn</b> package for evaluation the quality of predictions.
+<div class="linked"><script type="text/x-sage">
+from sklearn.metrics import recall_score,accuracy_score,precision_score
+print ("Predictions have an accuracy of {:.2f}%.".format(accuracy_score(outcomes, predictions)*100))
+print ("Predictions have a recall score equal to {:.2f}%.".format(recall_score(outcomes, predictions)*100))
+print ("Predictions have a precision score equal to {:.2f}%.".format(precision_score(outcomes,predictions)*100))
+</script></div>
+    <p></p>
+      
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
