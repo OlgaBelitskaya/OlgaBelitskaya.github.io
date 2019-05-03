@@ -68,8 +68,8 @@ def survival_stats(data,outcomes,key,filters=[]):
         min_value=all_data[key].min(); max_value=all_data[key].max(); value_range=max_value-min_value
         if(key=='Fare'): bins=numpy.arange(0,all_data['Fare'].max()+20,20)
         if(key=='Age'): bins=numpy.arange(0,all_data['Age'].max()+10,10)
-        nonsurv_vals=all_data[all_data['Survived']==0][key].reset_index(drop=True)
-        surv_vals=all_data[all_data['Survived']==1][key].reset_index(drop=True)
+        nonsurv_vals=all_data[all_data['Survived']==0][key].reset_index(drop=True).astype('float')
+        surv_vals=all_data[all_data['Survived']==1][key].reset_index(drop=True).astype('float')
         pylab.hist(nonsurv_vals,bins=bins,alpha=0.6,color='#FF7F50',label='Did not survive')
         pylab.hist(surv_vals,bins=bins,alpha=0.6,color='#338DD4',label='Survived')
         pylab.xlim(0,bins.max()); pylab.legend(framealpha=0.8)
