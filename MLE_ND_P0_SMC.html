@@ -19,13 +19,15 @@
   h1 {color:#ff603b; font-family:'Orbitron'; text-shadow:4px 4px 4px #ccc;} 
   h2,h3 {color:slategray; font-family:'Orbitron'; text-shadow:4px 4px 4px #ccc;}
   h4 {color:#ff603b; font-family:'Roboto';}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:45em;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:48em;}
   </style>  
   <body>
     <h1>Machine Learning Engineer Nanodegree</h1>
     <h2>Introduction and Foundations</h2>
     <h1>&#x1F4D1; &nbsp;P0: Titanic Survival Exploration</h1>
-In 1912, the ship RMS Titanic struck an iceberg on its maiden voyage and sank, resulting in the deaths of most of its passengers and crew. In this introductory project, we will explore a subset of the RMS Titanic passenger manifest to determine which features best predict whether someone survived or did not survive.
+In 1912, the ship RMS Titanic struck an iceberg on its maiden voyage and sank, resulting in the deaths of most of its passengers and crew.<br/>
+In this introductory project, we will explore a subset of the RMS Titanic passenger manifest to determine<br/>
+which features best predict whether someone survived or did not survive.
     <h2>Getting Started</h2>
     <h3>Resources</h3>
 <a href="https://www.udacity.com/course/intro-to-data-science--ud359">Intro to Data Science. Udacity</a>
@@ -119,12 +121,30 @@ From a sample of the RMS Titanic data, we can see the various features present f
 <b>Fare:</b> Fare paid by the passenger<br/>
 <b>Cabin:</b> Cabin number of the passenger (Some entries contain NaN)<br/>
 <b>Embarked:</b> Port of embarkation of the passenger (C = Cherbourg; Q = Queenstown; S = Southampton)<br/>
-Since we're interested in the outcome of survival for each passenger or crew member, we can remove the Survived feature from this dataset and store it as its own separate variable outcomes. We will use these outcomes as our prediction targets.      
+Since we're interested in the outcome of survival for each passenger or crew member,<br/>
+we can remove the <b>Survived</b> feature from this dataset and store it as its own separate variable outcomes.<br/> 
+We will use these outcomes as our prediction targets.      
 <div class="linked"><script type="text/x-sage">
-outcomes=full_data['Survived']; data=full_data.drop('Survived',axis=1)
+outcomes=full_data['Survived']; data=full_data.drop('Survived',axis=1); full_data.head()
 </script></div>
     <p></p>
-      
+The very same sample of the RMS Titanic data now shows the <b>Survived</b> feature removed from the DataFrame.<br/>
+Note that the passenger data and the outcomes of survival are now paired. That means for any passenger <b>data.loc[i]</b>, they have the survival <b>outcomes[i]</b>.<br/>
+To measure the performance of our predictions, we need a metric to score our predictions against the true outcomes of survival - the function accuracy_score(). Since we are interested in how accurate our predictions are, we will calculate the proportion of passengers where our prediction of their survival is correct.<br/>
+<b>Think:</b> Out of the first five passengers, if we predict that all of them survived, what would you expect the accuracy of our predictions to be?      
+<div class="linked"><script type="text/x-sage">
+def accuracy_score(truth, pred):
+    if len(truth)==len(pred): 
+        return "Predictions have an accuracy of {:.2f}%.".format((truth==pred).mean()*100)    
+    else:
+        return "Number of predictions does not match number of outcomes!"
+predictions=pandas.Series(numpy.ones(5,dtype=int)); accuracy_score(outcomes[:5],predictions)
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+
+</script></div>
+    <p></p>
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
