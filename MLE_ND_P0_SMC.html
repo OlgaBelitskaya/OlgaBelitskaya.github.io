@@ -87,7 +87,7 @@ def survival_stats(data,outcomes,key,filters=[]):
             pylab.xticks(numpy.arange(len(frame)),values)
             pylab.legend((nonsurv_bar[0],surv_bar[0]),('Did not survive','Survived'),framealpha=0.8)
     pylab.xlabel(key); pylab.ylabel('Number of Passengers')
-    pylab.title('Passenger Survival Statistics With \'%s\' Feature'%(key)); pylab.show()
+    pylab.title('Passenger Survival Statistics With the \'%s\' Feature'%(key)); pylab.show()
     if sum(pandas.isnull(all_data[key])):
         nan_outcomes=all_data[pandas.isnull(all_data[key])]['Survived']
         print ("Passengers with missing '{}' values: {} ({} survived, {} did not survive)"\
@@ -216,6 +216,15 @@ How accurate would a prediction be that all female passengers and all male passe
     <h3>Answer 3</h3>     
 <div class="linked"><script type="text/x-sage">
 accuracy_score(outcomes,predictions)
+</script></div>
+    <p></p>
+Adding the feature <b>Age</b> as a condition in conjunction with <b>Sex</b> improves the accuracy by a small margin more than with simply using the feature <b>Sex</b> alone.<br/>
+Now we can try to find a series of features and conditions to split the data on to obtain an outcome prediction accuracy of at least 80%.<br/>
+This may require multiple features and multiple levels of conditional statements to succeed.<br/>
+We can use the same feature multiple times with different conditions.<br/>
+There are some experiments and the function <i>prediction_final()</i> as a result:
+<div class="linked"><script type="text/x-sage">
+survival_stats(data,outcomes,'SibSp',["Sex == 'male'", "Age < 15"])
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
