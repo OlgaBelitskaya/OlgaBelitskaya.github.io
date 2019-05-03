@@ -224,9 +224,31 @@ This may require multiple features and multiple levels of conditional statements
 We can use the same feature multiple times with different conditions.<br/>
 There are some experiments and the function <i>prediction_final()</i> as a result:
 <div class="linked"><script type="text/x-sage">
-survival_stats(data,outcomes,'SibSp',["Sex == 'male'", "Age < 15"])
+survival_stats(data,outcomes,'SibSp',["Sex == 'male'","Age < 15"])
 </script></div>
     <p></p>
+<div class="linked"><script type="text/x-sage">
+survival_stats(data,outcomes,'Pclass',["Sex == 'male'","Age < 15"])
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+def predictions_final(data):   
+    predictions=[]
+    for _,passenger in data.iterrows():
+        if (passenger['Sex']=='female'): predictions.append(1)                
+        elif passenger['Pclass'] in [1,2] and (passenger['Age']<16 or passenger['Age']>75): predictions.append(1)            
+        elif passenger['Age']<15 and passenger['SibSp']<3: predictions.append(1)            
+        else: predictions.append(0)
+    return pandas.Series(predictions) 
+predictions=predictions_final(data)
+</script></div>
+    <p></p>
+    <h3>Question 4</h3>
+Describe the steps you took to implement the final prediction model so that it got an accuracy of at least 80%.<br/>
+What features did you look at? Were certain features more informative than others?<br/>
+Which conditions did you use to split the survival outcomes into the data? How accurate are your predictions?
+    <h3>Answer 4</h3>
+      
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
