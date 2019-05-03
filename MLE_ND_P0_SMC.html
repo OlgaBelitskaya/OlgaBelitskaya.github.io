@@ -54,7 +54,7 @@ def filter_data(data,condition):
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-def survival_stats(data,outcomes,key,filters = []):
+def survival_stats(data,outcomes,key,filters=[]):
     if (key not in data.columns.values):
         print ("'{}' is not a feature of the Titanic data. Did you spell something wrong?".format(key)); return False
     if (key=='Cabin' or key=='PassengerId' or key=='Ticket'):
@@ -107,11 +107,24 @@ full_data=pandas.read_csv(path+'titanic_data.csv'); full_data.head()
 full_data.info();
 </script></div>
     <p></p>
-      
+From a sample of the RMS Titanic data, we can see the various features present for each passenger on the ship:<br/>
+<b>Survived:</b> Outcome of survival (0 = No; 1 = Yes)<br/>
+<b>Pclass:</b> Socio-economic class (1 = Upper class; 2 = Middle class; 3 = Lower class)<br/>
+<b>Name:</b> Name of passenger<br/>
+<b>Sex:</b> Sex of the passenger<br/>
+<b>Age:</b> Age of the passenger (Some entries contain NaN)<br/>
+<b>SibSp:</b> Number of siblings and spouses of the passenger aboard<br/>
+<b>Parch:</b> Number of parents and children of the passenger aboard<br/>
+<b>Ticket:</b> Ticket number of the passenger<br/>
+<b>Fare:</b> Fare paid by the passenger<br/>
+<b>Cabin:</b> Cabin number of the passenger (Some entries contain NaN)<br/>
+<b>Embarked:</b> Port of embarkation of the passenger (C = Cherbourg; Q = Queenstown; S = Southampton)<br/>
+Since we're interested in the outcome of survival for each passenger or crew member, we can remove the Survived feature from this dataset and store it as its own separate variable outcomes. We will use these outcomes as our prediction targets.      
 <div class="linked"><script type="text/x-sage">
-
+outcomes=full_data['Survived']; data=full_data.drop('Survived',axis=1)
 </script></div>
     <p></p>
+      
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
