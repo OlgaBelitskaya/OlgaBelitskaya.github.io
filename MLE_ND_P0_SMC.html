@@ -125,7 +125,7 @@ Since we're interested in the outcome of survival for each passenger or crew mem
 we can remove the <b>Survived</b> feature from this dataset and store it as its own separate variable outcomes.<br/> 
 We will use these outcomes as our prediction targets.      
 <div class="linked"><script type="text/x-sage">
-outcomes=full_data['Survived']; data=full_data.drop('Survived',axis=1); full_data.head()
+outcomes=full_data['Survived']; data=full_data.drop('Survived',axis=1); data.head()
 </script></div>
     <p></p>
 The very same sample of the RMS Titanic data now shows the <b>Survived</b> feature removed from the DataFrame.<br/>
@@ -138,13 +138,23 @@ def accuracy_score(truth, pred):
         return "Predictions have an accuracy of {:.2f}%.".format((truth==pred).mean()*100)    
     else:
         return "Number of predictions does not match number of outcomes!"
-predictions=pandas.Series(numpy.ones(5,dtype=int)); accuracy_score(outcomes[:5],predictions)
+predictions=pandas.Series(numpy.ones(5,dtype=int)); accuracy_score(outcomes[:5,],predictions)
 </script></div>
     <p></p>
+      <h2>Making Predictions</h2>
+If we were asked to make a prediction about any passenger aboard the RMS Titanic whom we knew nothing about,<br/> 
+then the best prediction we could make would be that they did not survive.<br/>
+This is because we can assume that a majority of the passengers (more than 50%) did not survive the ship sinking.<br/>
+The <i>predictions_0()</i> function below will always predict that a passenger did not survive.
 <div class="linked"><script type="text/x-sage">
-
+def predictions_0(data):
+    predictions=[]
+    for _,passenger in data.iterrows(): predictions.append(0)
+    return pandas.Series(predictions)
+predictions=predictions_0(data)
 </script></div>
     <p></p>
+      
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
