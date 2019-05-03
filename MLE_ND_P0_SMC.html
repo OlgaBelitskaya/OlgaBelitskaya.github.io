@@ -60,7 +60,7 @@ def survival_stats(data,outcomes,key,filters=[]):
         print ("'{}' is not a feature of the Titanic data. Did you spell something wrong?".format(key)); return False
     if (key=='Cabin' or key=='PassengerId' or key=='Ticket'):
         print ("'{}' has too many unique categories to display! Try a different feature.".format(key)); return False
-    all_data=pandas.concat([data,outcomes],axis=1)
+    all_data=data.T.append(outcomes).T
     for condition in filters: all_data=filter_data(all_data,condition)
     all_data=all_data[[key,'Survived']]; pylab.figure(figsize=(12,5))
     if (key=='Age' or key=='Fare'):
@@ -85,8 +85,8 @@ def survival_stats(data,outcomes,key,filters=[]):
         bar_width=0.4
         for i in numpy.arange(len(frame)):
             nonsurv_bar =pylab.bar(i-bar_width,frame.loc[i]['NSurvived'],width=bar_width,color='#FF7F50')
-            surv_bar=plt.bar(i,frame.loc[i]['Survived'],width=bar_width,color='#338DD4')
-            pylab.xticks(np.arange(len(frame)),values)
+            surv_bar=pylab.bar(i,frame.loc[i]['Survived'],width=bar_width,color='#338DD4')
+            pylab.xticks(numpy.arange(len(frame)),values)
             pylab.legend((nonsurv_bar[0],surv_bar[0]),('Did not survive','Survived'),framealpha=0.8)
     pylab.xlabel(key); pylab.ylabel('Number of Passengers')
     pylab.title('Passenger Survival Statistics With \'%s\' Feature'%(key)); pylab.show()
