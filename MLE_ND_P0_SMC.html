@@ -136,7 +136,7 @@ def accuracy_score(truth, pred):
         return "Predictions have an accuracy of {:.2f}%.".format((truth==pred).mean()*100)    
     else:
         return "Number of predictions does not match number of outcomes!"
-predictions=pandas.Series(numpy.ones(5,dtype=int)); accuracy_score(outcomes[:5,],predictions)
+predictions=pandas.Series(numpy.ones(5,dtype=int)).astype('int'); accuracy_score(outcomes[:5,],predictions)
 </script></div>
     <p></p>
       <h2>Making Predictions</h2>
@@ -148,7 +148,7 @@ The <i>predictions_0()</i> function below will always predict that a passenger d
 def predictions_0(data):
     predictions=[]
     for _,passenger in data.iterrows(): predictions.append(0)
-    return pandas.Series(predictions)
+    return pandas.Series(predictions).astype('int')
 predictions=predictions_0(data)
 </script></div>
     <p></p>
@@ -177,7 +177,7 @@ def predictions_1(data):
     for _,passenger in data.iterrows():
         if passenger['Sex']=='female': predictions.append(1)
         else: predictions.append(0)
-    return pandas.Series(predictions)
+    return pandas.Series(predictions).astype('int')
 predictions=predictions_1(data)
 </script></div>
     <p></p>
@@ -207,7 +207,7 @@ def predictions_2(data):
         if passenger['Sex']=='female': predictions.append(1)
         elif passenger['Sex']=='male' and passenger['Age']<10: predictions.append(1)
         else: predictions.append(0)
-    return pandas.Series(predictions)
+    return pandas.Series(predictions).astype('int')
 predictions=predictions_2(data)
 </script></div>
     <p></p>
@@ -239,7 +239,7 @@ def predictions_final(data):
         elif passenger['Pclass'] in [1,2] and (passenger['Age']<16 or passenger['Age']>75): predictions.append(1)            
         elif passenger['Age']<15 and passenger['SibSp']<3: predictions.append(1)            
         else: predictions.append(0)
-    return pandas.Series(predictions) 
+    return pandas.Series(predictions).astype('int') 
 predictions=predictions_final(data)
 </script></div>
     <p></p>
@@ -267,7 +267,6 @@ print ("Predictions have a precision score equal to {:.2f}%.".format(precision_s
 </script></div>
     <p></p>
 The evaluation terminology:
-
 $accuracy \ = \ \frac{number \ of \ people \ that \ are \ correctly \ predicted \ as \ survived \ or \ non−survived}{number \ of \ all \ people \ in \ the \ dataset}$     
 <div class="linked"><script type="text/x-sage">
 
