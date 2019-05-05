@@ -62,6 +62,7 @@ from sklearn.model_selection import train_test_split,ShuffleSplit,GridSearchCV
 from sklearn.metrics import mean_squared_error,r2_score,make_scorer
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.model_selection import learning_curve as curves
+from sklearn import datasets
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
@@ -166,6 +167,22 @@ My assumptions could be:<br/>
 'PTRATIO': shows the level of educational resources, its increase would lead to the decrease in the value of 'MEDV';<br/>
 'LSTAT': indicates the level of social environment comfort, its increase would lead to the decrease in the value of 'MEDV'.<br/>
 I have made the correlation list for all features in the original dataset to confirm the assumptions and created plots for the transformed features<br/>with the least squares regression fitted line and the hexagon-aggregated 2D histograms as an example to illustrate the trends.
+<div class="linked"><script type="text/x-sage">
+boston_data=datasets.load_boston(); boston_df=pandas.DataFrame(boston_data.data,columns=boston_data.feature_names)
+boston_df['MEDV']=boston_data.target; pearson=boston_df.corr(method='pearson')
+corr_with_prices=pearson.ix[-1][:-1]; corr_with_prices[abs(corr_with_prices).argsort()[::-1]]
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+pylab.figure(figsize=(12,5)); x,y=features['RM'],prices
+x1=numpy.array([[v,1] for v in x]); y1=numpy.array([[v,1] for v in y])
+(slope,bias),_,_,_=numpy.linalg.lstsq(x1,y1); y_lin=x1*slope +bias
+pylab.scatter(x1,y1,color='#348ABD',marker='*',facecolors='none',label='Original data')
+pylab.scatter(x1,y_lin,color='#104E8B',marker='v',facecolors='none',label='Fitted line')
+pylab.xlabel("Feature 'RM'"); pylab.ylabel('Prices')
+pylab.title('Boston Housing Data'); pylab.legend(); pylab.show()
+</script></div>
+    <p></p>
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
