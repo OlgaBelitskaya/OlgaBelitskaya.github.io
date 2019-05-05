@@ -89,6 +89,27 @@ def ModelLearning(X, y):
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
+def ModelComplexity(X, y):
+    cv=ShuffleSplit(X.shape[0],n_iter=10,test_size=0.2,random_state=0)
+    max_depth=numpy.arange(1,11)
+    train_scores,test_scores=curves\
+    .validation_curve(DecisionTreeRegressor(),X,y,param_name="max_depth",param_range=max_depth,cv=cv,scoring='r2')
+    train_mean=numpy.mean(train_scores,axis=1); train_std=numpy.std(train_scores,axis=1)
+    test_mean=numpy.mean(test_scores,axis=1); test_std=numpy.std(test_scores,axis=1)
+    pylab.figure(figsize=(12,5)); pylab.title('Decision Tree Regressor Complexity Performance')
+    pylab.plot(max_depth, train_mean,'o-',color='#E24A33',label='Training Score')
+    pylab.plot(max_depth,test_mean,'o-',color='#348ABD',label='Validation Score')
+    pylab.fill_between(max_depth,train_mean-train_std,train_mean+train_std,alpha=0.15,color='#E24A33')
+    pylab.fill_between(max_depth,test_mean-test_std,test_mean+test_std,alpha=0.15,color='#348ABD')
+    pylab.legend(loc='lower right'); pylab.xlabel('Maximum Depth'); pylab.ylabel('Score')
+    pylab.ylim([-0.05,1.05]); pylab.show()
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
 
 </script></div>
     <p></p>
