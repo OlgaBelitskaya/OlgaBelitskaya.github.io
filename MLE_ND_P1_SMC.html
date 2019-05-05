@@ -321,10 +321,24 @@ The residual evaluations do not give an indication of how well the model will ma
 The cross validation helps to overcome it and test the performance of the learned model on independent data (the testing set).<br/>
 In our case the grid search algorithm will choose the best parameters for the trained model and evaluate it using cross validation to avoid overfitting and optimize the result with limited data. 
       <h3>Implementation: Fitting a Model</h3>
-The final implementation requires that we bring everything together and train a model using the decision tree algorithm.<br/> 
+The final implementation requires that we bring everything together and train a model using the <b>decision tree</b> algorithm.<br/> 
 To ensure that you are producing an optimized model, we will train the model using the grid search technique to optimize the <i>max_depth</i> parameter for the decision tree.<br/>
 This parameter can be thought of as how many questions the decision tree algorithm is allowed to ask about the data before making a prediction.<br/> 
-Decision trees are part of a class of algorithms called <b>supervised learning</b> algorithms.
+Decision trees are part of a class of algorithms called <b>supervised learning</b> algorithms.<br/>
+In addition, we will use <i>ShuffleSplit()</i> for an alternative form of cross-validation.<br/>
+While it is not the k-fold cross-validation technique we described in Question 8, this type of cross-validation technique is just as useful.<br/>
+The <i>ShuffleSplit()</i> implementation will create 10 (<i>n_splits</i>) shuffled sets, and for each shuffle, 20% (<i>test_size</i>) of the data will be used as the validation set.<br/>
+! Please note that <i>ShuffleSplit()</i> has different parameters in scikit-learn versions.<br/>
+For the <i>fit_model</i> function in the code cell below, you will need to implement the following:<br/>
+- Use <i>DecisionTreeRegressor</i> from <i>sklearn.tree</i> to create a decision tree regressor object.<br/>
+- Assign this object to the <i>regressor</i> variable.<br/>
+- Create a dictionary for <i>max_depth</i> with the values from 1 to 10, and assign this to the <i>params</i> variable.<br/>
+- Use <i>make_scorer</i> from <i>sklearn.metrics</i> to create a scoring function object.<br/>
+- Pass the <i>performance_metric()</i> function as a parameter to the object.<br/>
+- Assign this scoring function to the <i>scoring_fnc</i> variable.<br/>
+- Use <i>GridSearchCV</i> from <i>sklearn.model_selection</i> to create a grid search object.<br/>
+- Pass the variables <i>regressor</i>, <i>params</i>, <i>scoring_fnc</i>, and <i>cv_sets</i> as parameters to the object.<br/>
+- Assign the <i>GridSearchCV</i> object to the <i>grid</i> variable.
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
