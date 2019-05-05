@@ -219,12 +219,23 @@ def performance_metric(y_true, y_predict): return r2_score(y_true,y_predict)
     <h3>Question 2 - Goodness of Fit</h3>
 Assume that a dataset contains five data points and a model made the following predictions for the target variable:
 $\begin{tabular}{ll} True Value & Prediction \\ 3.0 & 2.5 \\ -0.5 & 0.0 \\ 2.0 & 2.1 \\ 7.0 & 7.8 \\ 4.2 & 5.3 \\ \end{tabular}$
+<i>Would you consider this model to have successfully captured the variation of the target variable? Why or why not?</i>
 <div class="linked"><script type="text/x-sage">
-t=table([['True Value','Prediction'],[3.0,2.5],[-0.5,0.0],[2.0,2.1],[7.0,7.8],[4.2,5.3]]); t
+display(table([['True Value','Prediction'],[3.0,2.5],[-0.5,0.0],[2.0,2.1],[7.0,7.8],[4.2,5.3]]))
+score=performance_metric([3,-0.5,2,7,4.2],[2.5,0.0,2.1,7.8,5.3])
+print ("Model has a coefficient of determination, R^2, of {:.3f}.".format(score))
 </script></div>
     <p></p>
+    <h3>Answer 2</h3>
+<i>$R^2$</i> indicates the performance of the model between the predicted and observed values of the target variable very well (especially for linear regression).<br/>
+It is close to 1 and seems that the model predicts quite accurately. But we must be extremely careful with the conclusions in the case of a small amount of data.<br/>
+In addition, it is unknown whether it is a linear model and how many variables were needed to build it (details are given about the target variable only).<br/>
+Therefore, it can be stated only that a reasonably accurate prediction is possible to build in this case, but it is desirable to have more data.
+    <h3>Implementation: Shuffle and Split Data</h3>
+The next implementation requires that we take the Boston housing dataset and split the data into training and testing subsets.<br/>Typically, the data is splitted and shuffled into a random order when creating the training and testing subsets to remove any bias in the ordering of the dataset.
 <div class="linked"><script type="text/x-sage">
-
+X_train,X_test,y_train,y_test=train_test_split(features,prices,test_size=0.2,random_state=1)
+print ("Training and testing split was successful.")
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
