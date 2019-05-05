@@ -58,6 +58,7 @@ The feature 'MEDV' has been multiplicatively scaled to account for 35 years of m
       <h3>Code Library</h3>      
 <div class="linked"><script type="text/x-sage">
 import numpy,pandas,pylab,seaborn; pylab.style.use('seaborn-whitegrid')
+import warnings; warnings.filterwarnings("ignore",category=FutureWarning)
 from sklearn.model_selection import train_test_split,ShuffleSplit,GridSearchCV
 from sklearn.metrics import mean_squared_error,r2_score,make_scorer
 from sklearn.tree import DecisionTreeRegressor
@@ -357,7 +358,6 @@ We can use these predictions to gain information about data where the value of t
     <h3>Answer 9</h3>
 The result corresponds to the expressed in the Answer 6 assumptions based on visualization of the model complexity.      
 <div class="linked"><script type="text/x-sage">
-import warnings; warnings.filterwarnings("ignore",category=FutureWarning)
 fit=fit_model(X_train,y_train); reg=fit.best_estimator_; results=pandas.DataFrame(fit.cv_results_)
 print("Grid Search Process Results"); display(results.T)
 print ("\nParameter 'max_depth' is {} for the optimal model.".format(reg.get_params()['max_depth']))
@@ -388,6 +388,9 @@ print(data[(data['RM']>=4)&(data['RM']<4.2)&(data['LSTAT']>=30)&(data['LSTAT']<=
 print(data[(data['RM']>=8)&(data['RM']<8.2)&(data['LSTAT']>=2)&(data['LSTAT']<=4)])
 </script></div>
     <p></p>
+The predicted prices look reasonable but somewhat overpriced for a more comfortable housing.<br/>
+They can be recommended the clients as the start level for the sales with possible discounts of up to 10%.<br/>
+The tendency of price change depending on changes in the features under consideration corresponds to the predicted.<br/>
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
