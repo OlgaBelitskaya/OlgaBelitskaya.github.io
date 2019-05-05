@@ -70,7 +70,7 @@ from sklearn import datasets
 def ModelLearning(X, y):
     cv=ShuffleSplit(n_splits=10,test_size=0.2,random_state=1)
     train_sizes=numpy.rint(numpy.linspace(1,X.shape[0]*0.8-1,9)).astype(int)
-    fig=pylab.figure(figsize=(10,10))
+    fig=pylab.figure(figsize=(12,8))
     for k,depth in enumerate([1,3,6,10]):
         regressor=DecisionTreeRegressor(max_depth=depth)
         sizes,train_scores,test_scores=learning_curve(regressor,X,y,cv=cv,train_sizes=train_sizes,scoring='r2')
@@ -83,7 +83,7 @@ def ModelLearning(X, y):
         ax.fill_between(sizes,test_mean-test_std,test_mean+test_std,alpha=0.15,color = '#348ABD')
         ax.set_title('max_depth=%s'%(depth)); ax.set_xlabel('Number of Training Points')
         ax.set_ylabel('Score'); ax.set_xlim([0,X.shape[0]*0.8]); ax.set_ylim([-0.05,1.05])
-    ax.legend(bbox_to_anchor=(1.05,2.05),loc='lower left',borderaxespad=0.)
+    ax.legend(bbox_to_anchor=(1.05,1.05),loc='lower left',borderaxespad=0.)
     fig.suptitle('Decision Tree Regressor Learning Performances',fontsize=16,y=1.03)
     fig.tight_layout(); pylab.show()
 </script></div>
@@ -245,7 +245,7 @@ print ("Training and testing split was successful.")
 </script></div>
     <p></p>
     <h3>Question 3 - Training and Testing</h3>
-What is the benefit to splitting a dataset into some ratio of training and testing subsets for a learning algorithm?
+<i>What is the benefit to splitting a dataset into some ratio of training and testing subsets for a learning algorithm?</i>
     <h3>Answer 3</h3>
 We should not only build a predictive model but also assess the quality of it.<br/> 
 Naturally, we would like to know how our predictions will be relatively close to the actual outcomes.<br/>
@@ -269,7 +269,7 @@ ModelLearning(features,prices)
 </script></div>
     <p></p>
     <h3>Question 4 - Learning the Data</h3>
-<i>Choose one of the graphs above and state the maximum depth for the model. What happens to the score of the training curve as more training points are added?</i>
+<i>Choose one of the graphs above and state the maximum depth for the model. What happens to the score of the training curve as more training points are added?</i><br/>
 <i>What about the testing curve? Would having more training points benefit the model?</i>
     <h3>Answer 4</h3>
 I would prefer the graph with <i>max_depth = 3</i>. As we can see, the training and testing score curves become enough close to 1 and to each other for this depth.<br/> 
@@ -287,6 +287,24 @@ and the model is scored on both the training and validation sets using the <i>pe
 ModelComplexity(X_train,y_train)
 </script></div>
     <p></p>
+    <h3>Question 5 - Bias-Variance Tradeoff</h3>
+<i>When the model is trained with a maximum depth of 1, does the model suffer from high bias or from high variance?</i><br/>
+<i>How about when the model is trained with a maximum depth of 10? What visual cues in the graph justify your conclusions?</i>
+    <h3>Answer 5</h3>
+With the maximum depth of 1, the model suffers from high bias and underfitting. The train and test datasets have low scores, it means the model does not represent the true relationship.<br/>
+With the maximum depth of 10, there are huge gaps between two curves, and I barely see the testing curve. In this case, the model suffers from overfitting and high variance.<br/>
+The visual cues in the graph confirm these conclusions:<br/> 
+- at the beginning of the graph both curves are close to each other but far away from the relable score 1;<br/>
+- at the end of the graph curves are close to the desired level of accuracy but diverge at a quite big distance from each other.
+    <h3>Question 6 - Best-Guess Optimal Model</h3>
+<i>Which maximum depth do you think results in a model that best generalizes to unseen data? What intuition lead you to this answer?</i>
+    <h3>Answer 6</h3>
+The goal of model building is to simultaneously reduce bias and variance as much as possible to obtain as accurate predictions as is feasible.<br/>
+The tradeoff consists of selecting models of different flexibility or complexity and appropriate training sets to minimize these indicators.<br/>
+The most tradeoff depth seems to equal to 4 in this model:<br/> 
+- before this point - the level of accuracy is not sufficient,<br/>
+- after this point - the curves begin to diverge.
+      
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
