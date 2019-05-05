@@ -90,10 +90,9 @@ def ModelLearning(X, y):
     <p></p>
 <div class="linked"><script type="text/x-sage">
 def ModelComplexity(X, y):
-    cv=ShuffleSplit(X.shape[0],n_iter=10,test_size=0.2,random_state=0)
-    max_depth=numpy.arange(1,11)
-    train_scores,test_scores=curves\
-    .validation_curve(DecisionTreeRegressor(),X,y,param_name="max_depth",param_range=max_depth,cv=cv,scoring='r2')
+    cv=ShuffleSplit(n_splits=10,test_size=0.2,random_state=0); max_depth=numpy.arange(1,11)
+    train_scores,test_scores=\
+    validation_curve(DecisionTreeRegressor(),X,y,param_name="max_depth",param_range=max_depth,cv=cv,scoring='r2')
     train_mean=numpy.mean(train_scores,axis=1); train_std=numpy.std(train_scores,axis=1)
     test_mean=numpy.mean(test_scores,axis=1); test_std=numpy.std(test_scores,axis=1)
     pylab.figure(figsize=(12,5)); pylab.title('Decision Tree Regressor Complexity Performance')
