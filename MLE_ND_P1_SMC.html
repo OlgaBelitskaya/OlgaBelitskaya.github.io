@@ -348,11 +348,37 @@ def fit_model(X, y):
     return grid.fit(X,y)
 </script></div>
     <p></p>
-      
+    <h3>Making Predictions</h3>
+Once a model has been trained on a given set of data, it can now be used to make predictions on new sets of input data.<br/>
+In the case of a <b>decision tree regressor</b>, the model has learned what the best questions to ask about the input data are, and can respond with a prediction for the <b>target</b> variable.<br/>
+We can use these predictions to gain information about data where the value of the target variable is unknown — such as data the model was not trained on.<br/>
+    <h3>Question 9 - Optimal Model</h3>
+<i>What maximum depth does the optimal model have? How does this result compare to your guess in Question 6?</i>
+    <h3>Answer 9</h3>
+The result corresponds to the expressed in the Answer 6 assumptions based on visualization of the model complexity.      
 <div class="linked"><script type="text/x-sage">
+import warnings; warnings.filterwarnings("ignore",category=FutureWarning)
 fit=fit_model(X_train,y_train); reg=fit.best_estimator_; results=pandas.DataFrame(fit.cv_results_)
 print("Grid Search Process Results"); display(results.T)
 print ("\nParameter 'max_depth' is {} for the optimal model.".format(reg.get_params()['max_depth']))
+</script></div>
+    <p></p>
+    <h3>Question 10 - Predicting Selling Prices</h3>
+Imagine that you were a real estate agent in the Boston area looking to use this model to help price homes owned by your clients that they wish to sell.<br/>
+You have collected the following information from three of your clients:
+      
+<div class="linked"><script type="text/x-sage">
+display(table([['Feature','Client 1','Client 2','Client 3'],['Total number of rooms in home','5 rooms','4 rooms','8 rooms'],
+       ['Neighborhood poverty level (as %)','17%','32%','3%'],['Student-teacher ratio of nearby schools','15-to-1','22-to-1','12-to-1']]))
+       
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
