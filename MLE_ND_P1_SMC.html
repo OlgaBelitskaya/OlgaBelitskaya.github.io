@@ -178,30 +178,37 @@ corr_with_prices[abs(corr_with_prices).sort_values(ascending=False).index]
 def lstsq_plot(feature):
     pylab.figure(figsize=(12,5)); x,y=features[feature],prices
     x1=numpy.array([[v,1] for v in x]); y1=numpy.array([[v,1] for v in y])
-    (slope,bias),_,_,_=numpy.linalg.lstsq(x1,y1); y_lin=x1*slope+bias
+    (slope,bias),_,_,_=numpy.linalg.lstsq(x1,y1,rcond=None); y_lin=x1*slope+bias
     pylab.scatter(x1,y1,color='#348ABD',marker='*',facecolors='none',label='Original data')
     pylab.scatter(x1,y_lin,color='#104E8B',marker='v',facecolors='none',label='Fitted line')
     pylab.xlabel('Feature %s'%feature); pylab.ylabel('Prices')
     pylab.title('Boston Housing Data'); pylab.legend(); pylab.show()
-lstsq_plot('RM') 
-seaborn.jointplot(features['RM'],prices,kind='hex',joint_kws={'alpha':0.8},size=12,color='#348ABD')
+seaborn.jointplot(features['RM'],prices,kind='hex',joint_kws={'alpha':0.8},height=5,color='#348ABD')
+pylab.show(); lstsq_plot('RM')
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-lstsq_plot('PTRATIO') 
-seaborn.jointplot(features['PTRATIO'],prices,kind='hex',joint_kws={'alpha':0.8},size=12,color='#348ABD')
+seaborn.jointplot(features['PTRATIO'],prices,kind='hex',joint_kws={'alpha':0.8},height=5,color='#348ABD')
+pylab.show(); lstsq_plot('PTRATIO')
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-lstsq_plot('LSTAT') 
-seaborn.jointplot(features['LSTAT'],prices,kind='hex',joint_kws={'alpha':0.8},size=12,color='#348ABD')
+seaborn.jointplot(features['LSTAT'],prices,kind='hex',joint_kws={'alpha':0.8},height=5,color='#348ABD')
+pylab.show(); lstsq_plot('LSTAT')
 </script></div>
     <p></p>
     <h2>Developing a Model</h2>
 In this section of the project, we will develop the tools and techniques necessary for a model to make a prediction.<br/>
 Being able to make accurate evaluations of each model's performance through the use of these tools and techniques helps to greatly reinforce the confidence in the predictions.
-<div class="linked"><script type="text/x-sage">
+    <h3>Implementation: Define a Performance Metric</h3>
+It is difficult to measure the quality of a given model without quantifying its performance over training and testing.<br/>
+This is typically done using some type of performance metric, whether it is through calculating some type of error, the goodness of fit, or some other useful measurement.<br/>
+For this project, we will be calculating the coefficient of determination,  <i>$R^2$</i> , to quantify the model's performance.<br/> 
+The coefficient of determination for a model is a useful statistic in regression analysis, as it often describes how "good" that model is at making predictions.
 
+
+<div class="linked"><script type="text/x-sage">
+def performance_metric(y_true, y_predict): return r2_score(y_true,y_predict)
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
