@@ -340,9 +340,15 @@ For the <i>fit_model</i> function in the code cell below, you will need to imple
 - Pass the variables <i>regressor</i>, <i>params</i>, <i>scoring_fnc</i>, and <i>cv_sets</i> as parameters to the object.<br/>
 - Assign the <i>GridSearchCV</i> object to the <i>grid</i> variable.
 <div class="linked"><script type="text/x-sage">
-
+def fit_model(X, y):
+    cv_sets=ShuffleSplit(n_splits=12,test_size=0.2,random_state=0)
+    regressor=DecisionTreeRegressor(); parameters={'max_depth':[1,2,3,4,5,6,7,8,9,10]}
+    scoring_function=make_scorer(performance_metric)
+    grid=GridSearchCV(estimator=regressor,param_grid=parameters,scoring=scoring_function,cv=cv_sets)
+    return grid.fit(X,y)
 </script></div>
     <p></p>
+      
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
