@@ -374,11 +374,13 @@ You have collected the following information from three of your clients:
 </tbody></table>
 <i>What price would you recommend each client sell his/her home at? Do these prices seem reasonable given the values for the respective features?</i>
 <div class="linked"><script type="text/x-sage">
-display(table([['Feature','Client 1','Client 2','Client 3'],['Total number of rooms in home','5 rooms','4 rooms','8 rooms'],
-               ['Neighborhood poverty level (as %)','17%','32%','3%'],['Student-teacher ratio of nearby schools','15-to-1','22-to-1','12-to-1']]))
+display(table([['Feature','Client 1','Client 2','Client 3'],
+               ['Total number of rooms in home','5 rooms','4 rooms','8 rooms'],
+               ['Neighborhood poverty level (as %)','17%','32%','3%'],
+               ['Student-teacher ratio of nearby schools','15-to-1','22-to-1','12-to-1']]))
 client_data=[[5,17,15],[4,32,22],[8,3,12]]
 for i,price in enumerate(reg.predict(client_data)):
-    print ("Predicted selling price for Client {}'s home: ${:,.2f}".format(i+1,price))     
+    print ("Predicted selling price for Client {}'s home: ${:,.2f}".format(i+1,price))    
 </script></div>
     <p></p>
 We can compare them to the real prices for the housing of the considered database, extracting items with roughly the same indicators. 
@@ -391,13 +393,44 @@ print(data[(data['RM']>=8)&(data['RM']<8.2)&(data['LSTAT']>=2)&(data['LSTAT']<=4
 The predicted prices look reasonable but somewhat overpriced for a more comfortable housing.<br/>
 They can be recommended the clients as the start level for the sales with possible discounts of up to 10%.<br/>
 The tendency of price change depending on changes in the features under consideration corresponds to the predicted.<br/>
+    <h3>Sensitivity</h3>
+An optimal model is not necessarily a robust model. Sometimes, a model is either too complex or too simple to sufficiently generalize to new data.<br/>
+Sometimes, a model could use a learning algorithm that is not appropriate for the structure of the data given.<br/> 
+Other times, the data itself could be too noisy or contain too few samples to allow a model to adequately capture the target variable — i.e., the model is underfitted.<br/>
+We can run the <i>fit_model()</i> function ten times with different training and testing sets to see how the prediction for a specific client changes with the data it's trained on.
+<div class="linked"><script type="text/x-sage">
+PredictTrials(features,prices,fit_model,client_data)
+</script></div>
+    <p></p>
+    <h3>Question 11 - Applicability</h3>
+<i>In a few sentences, discuss whether the constructed model should or should not be used in a real-world setting.<br/>
+- How relevant today is data that was collected from 1978?<br/>
+- Are the features present in the data sufficient to describe a home?<br/>
+- Is the model robust enough to make consistent predictions?<br/>
+- Would data collected in an urban city like Boston be applicable in a rural city?</i>
+    <h3>Answer 11</h3>
+The main methods used in the model are statistically justified. Preferences in house choosing change over time very slowly.<br/> 
+For the population, the features which are similar to our data are significant in our times as well.<br/>
+Comfort inside, the level of external social environment and city infrastructure development will always be the most reasonable in the housing choice.<br/>
+For practical application of the model the user has to perform several specific simple steps:<br/>
+- collect the set of modern data;<br/>
+- update the feature definitions according to the modern trends;<br/>
+- add to the model the certain features which are relevant exactly for the considered region;<br/>
+- apply the described programming steps.
+    <h2>Conclusion</h2>
+The goal of this report was to describe the built model that determined the best result in house pricing.<br/>
+Here various statistical and machine learning techniques were applied to predictions and observations.<br/> 
+The reader can see the parameters of the final model below.      
+<div class="linked"><script type="text/x-sage">
+reg
+</script></div>
+    <p></p>
+Of course, the model is a little bit outdated. In the modern version, the project can be implemented in the form of an interactive map<br/>
+of recommended prices with the basic indices of living comfort, which can serve as a guide for buyers and sellers.      
+    <h3>Additional Cell</h3>
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
-    <p></p>
-<div class="linked"><script type="text/x-sage">
-
-</script></div>
-    <p></p>
+    <p></p> 
   </body>
 </html>
