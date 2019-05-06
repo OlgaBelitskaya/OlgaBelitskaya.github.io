@@ -156,10 +156,16 @@ Let's plot a histogram of these two features and have a look on the range of the
 income_raw=data['income']; features_raw=data.drop('income',axis=1); distribution(data)
 </script></div>
     <p></p>
+For highly-skewed feature distributions such as <i>capital-gain</i> and <i>capital-loss</i>, it is common practice to apply a <a href="https://en.wikipedia.org/wiki/Data_transformation_(statistics)">&#x1F578;logarithmic transformation</a> on the data <br/>
+so that the very large and very small values do not negatively affect the performance of a learning algorithm.<br/>
+Using a logarithmic transformation significantly reduces the range of values caused by outliers.<br/> 
+Care must be taken when applying this transformation, however: the logarithm of 0 is undefined, so we must translate the values by a small amount above 0 to apply the logarithm successfully.
 <div class="linked"><script type="text/x-sage">
-
+skewed=['capital-gain','capital-loss']; features_raw[skewed]=data[skewed].apply(lambda x:numpy.log(x+1))
+distribution(features_raw,transformed=True)
 </script></div>
     <p></p>
+      
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
