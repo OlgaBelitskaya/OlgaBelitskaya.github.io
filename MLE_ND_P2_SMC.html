@@ -41,7 +41,7 @@ The data we investigate here consists of small changes to the original dataset, 
       <h3>Code Library</h3> 
 <div class="linked"><script type="text/x-sage">
 import numpy,pandas,pylab,seaborn,time; pylab.style.use('seaborn-whitegrid')
-import warnings; warnings.filterwarnings("ignore",category=FutureWarning)
+import warnings; warnings.filterwarnings("ignore",category=[FutureWarning,DataConversionWarning])
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split,GridSearchCV
 from sklearn.metrics import f1_score,accuracy_score,fbeta_score,confusion_matrix,make_scorer
@@ -195,11 +195,21 @@ Use <i>pandas.get_dummies()</i> to perform one-hot encoding on the <i>features_r
 Convert the target label <i>income_raw</i> to numerical entries.<br/>
 Set records with $'<=50K'$ to 0 and records with $'>50K'$ to 1.
 <div class="linked"><script type="text/x-sage">
-
+categorical=['workclass','education_level','marital-status','occupation','relationship','race','sex','native-country']
+features=pandas.DataFrame(features_raw); income=income_raw.replace(['<=50K','>50K'],[0,1]) 
+for element in categorical: features[element]=pandas.get_dummies(features_raw[element])
+income=income_raw.replace(['<=50K','>50K'],[0,1]) 
+print ("{} total features after one-hot encoding.".format(len(encoded))); print (encoded)
 </script></div>
     <p></p>
+    <h3>Shuffle and Split Data</h3>
+Now all <b>categorical</b> variables have been converted into <b>numerical</b> features, and all numerical features have been normalized.<br/> 
+As always, we will now split the data (both features and their labels) into training and test sets.<br/> 
+80% of the data will be used for training and 20% for testing.<br/>
 <div class="linked"><script type="text/x-sage">
-
+X_train,X_test,y_train,y_test=train_test_split(features,income,test_size=.2,random_state=0)
+print ("Training set has {} samples.".format(X_train.shape[0])) 
+print ("Testing set has {} samples.".format(X_test.shape[0]))
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
