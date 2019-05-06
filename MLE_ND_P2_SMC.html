@@ -52,7 +52,7 @@ from sklearn.svm import LinearSVC; from sklearn.linear_model import SGDClassifie
 <div class="linked"><script type="text/x-sage">
 # https://github.com/udacity/machine-learning/blob/master/projects/finding_donors/visuals.py
 def distribution(data,transformed=False):
-    fig=ylab.figure(figsize=(12,5));
+    fig=pylab.figure(figsize=(12,5));
     for i,feature in enumerate(['capital-gain','capital-loss']):
         ax=fig.add_subplot(1,2,i+1); ax.hist(data[feature],bins=25,color='#00A0A0')
         ax.set_title("'%s' Feature Distribution"%(feature),fontsize=14)
@@ -165,9 +165,14 @@ skewed=['capital-gain','capital-loss']; features_raw[skewed]=data[skewed].apply(
 distribution(features_raw,transformed=True)
 </script></div>
     <p></p>
-      
+    <h3>Normalizing Numerical Features</h3>
+In addition to performing transformations on features that are highly skewed, it is often good practice to perform some type of scaling on numerical features.<br/>
+Applying a scaling to the data does not change the shape of each feature's distribution (such as <i>capital-gain</i> or <i>capital-loss</i> above);<br/>
+however, normalization ensures that each feature is treated equally when applying supervised learners.<br/> 
+Note that once scaling is applied, observing the data in its raw form will no longer have the same original meaning.     
 <div class="linked"><script type="text/x-sage">
-
+scaler=MinMaxScaler(); numerical=['age','education-num','capital-gain','capital-loss','hours-per-week']
+features_raw[numerical]=scaler.fit_transform(data[numerical]); features_raw.head().T
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
