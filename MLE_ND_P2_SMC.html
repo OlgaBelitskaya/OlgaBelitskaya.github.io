@@ -159,7 +159,8 @@ income_raw=data['income']; features_raw=data.drop('income',axis=1); distribution
 For highly-skewed feature distributions such as <i>capital-gain</i> and <i>capital-loss</i>, it is common practice to apply a <a href="https://en.wikipedia.org/wiki/Data_transformation_(statistics)">&#x1F578;logarithmic transformation</a> on the data <br/>
 so that the very large and very small values do not negatively affect the performance of a learning algorithm.<br/>
 Using a logarithmic transformation significantly reduces the range of values caused by outliers.<br/> 
-Care must be taken when applying this transformation, however: the logarithm of 0 is undefined, so we must translate the values by a small amount above 0 to apply the logarithm successfully.
+Care must be taken when applying this transformation, however: the logarithm of 0 is undefined,<br/>
+so we must translate the values by a small amount above 0 to apply the logarithm successfully.
 <div class="linked"><script type="text/x-sage">
 skewed=['capital-gain','capital-loss']; features_raw[skewed]=data[skewed].apply(lambda x:numpy.log(x+1))
 distribution(features_raw,transformed=True)
@@ -175,10 +176,24 @@ scaler=MinMaxScaler(); numerical=['age','education-num','capital-gain','capital-
 features_raw[numerical]=scaler.fit_transform(data[numerical]); features_raw.head().T
 </script></div>
     <p></p>
+    <h3>Implementation: Data Preprocessing</h3>
+From the table in <b>Exploring the Data</b> above, we can see there are several features for each record that are non-numeric.<br/> Typically, learning algorithms expect input to be numeric, which requires that non-numeric features (called <b>categorical variables</b>) be converted.<br/>
+One popular way to convert categorical variables is by using the <b>one-hot encoding</b> scheme.<br/>
+One-hot encoding creates a <b>"dummy"</b> variable for each possible category of each non-numeric feature.<br/>
+For example, assume someFeature has three possible entries: A, B, or C.<br/>
+We then encode this feature into <i>someFeature_A</i>, <i>someFeature_B</i> and <i>someFeature_C</i>.
 <div class="linked"><script type="text/x-sage">
-
+display(table([[' ','someFeature',' ','someFeature_A','someFeature_B','someFeature_C'],
+               ['0','B',' ','0','1','0'],['1','C','=> one-hot encode =>','0','0','1'],['2','A',' ','1','0','0']]))
 </script></div>
     <p></p>
+Additionally, as with the non-numeric features, we need to convert the non-numeric target label, <i>income</i> to numerical values for the learning algorithm to work.<br/>
+Since there are only two possible categories for this label $('<=50K' /; and /; '>50K')$,<br/>
+we can avoid using one-hot encoding and simply encode these two categories as 0 and 1, respectively.<br/>
+In code cell below, we will need to implement the following:<br/>
+Use <i>pandas.get_dummies()</i> to perform one-hot encoding on the <i>features_raw</i> data.<br/>
+Convert the target label <i>income_raw</i> to numerical entries.<br/>
+Set records with $'<=50K'$ to 0 and records with $'>50K'$ to 1.
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
