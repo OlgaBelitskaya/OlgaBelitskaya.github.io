@@ -24,8 +24,30 @@
     <h2>Supervised Learning</h2>
     <h1>&#x1F4D1; &nbsp;P2: Finding Donors for CharityML</h1>
     <h2>Getting Started</h2>
+    <h3>Data</h3>
+In this project, we will employ several supervised algorithms of your choice to accurately model individuals' income using data collected from the 1994 U.S. Census.<br/>
+We will then choose the best candidate algorithm from preliminary results and further optimize this algorithm to best model the data.<br/>
+The goal with this implementation is to construct a model that accurately predicts whether an individual makes more than $50,000.<br/>
+This sort of task can arise in a non-profit setting, where organizations survive on donations.<br/>
+Understanding an individual's income can help a non-profit better understand how large of a donation to request, or whether or not they should reach out to begin with.<br/>
+While it can be difficult to determine an individual's general income bracket directly from public sources, we can (as we will see) infer this value from other publically available features.<br/>
+The dataset for this project originates from the <a href="https://archive.ics.uci.edu/ml/datasets/Census+Income">&#x1F578;UCI Machine Learning Repository.</a><br/>
+The datset was donated by Ron Kohavi and Barry Becker, after being published in the article "Scaling Up the Accuracy of Naive-Bayes Classifiers: A Decision-Tree Hybrid".You can find the article by Ron Kohavi <a href="https://www.aaai.org/Papers/KDD/1996/KDD96-033.pdf">&#x1F578;online.</a><br/>
+The data we investigate here consists of small changes to the original dataset, such as removing the <i>fnlwgt</i> feature and records with missing or ill-formatted entries.
+      <h3>Resources</h3>
+<a href="http://archive.ics.uci.edu/ml/datasets.php">&#x1F578;UCI Machine Learning Repository&nbsp;</a>
+<a href="https://scikit-learn.org/stable/index.html">&#x1F578;scikit-learn. Machine Learning in Python&nbsp;</a>
+<a href="http://seaborn.pydata.org/index.html">&#x1F578;seaborn: statistical data visualization&nbsp;</a>
+      <h3>Code Library</h3> 
 <div class="linked"><script type="text/x-sage">
-
+import numpy,pandas,pylab,seaborn,time; pylab.style.use('seaborn-whitegrid')
+import warnings; warnings.filterwarnings("ignore",category=FutureWarning)
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split,GridSearchCV
+from sklearn import grid_search
+from sklearn.metrics import f1_score,accuracy_score,fbeta_score,confusion_matrix,make_scorer
+from sklearn.ensemble import AdaBoostClassifier,GradientBoostingClassifier,RandomForestClassifier
+from sklearn.svm import LinearSVC; from sklearn.linear_model import SGDClassifier
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
