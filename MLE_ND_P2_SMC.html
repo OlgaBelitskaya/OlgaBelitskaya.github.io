@@ -13,14 +13,15 @@
   </head>
   <style>
   @import url('https://fonts.googleapis.com/css?family=Orbitron|Roboto');
-  body {background-color:mintcream;}; a,p {color:#00A050; font-family:'Roboto';} 
-  h1 {color:#00A0A0; font-family:'Orbitron'; text-shadow:4px 4px 4px #ccc;} 
-  h2,h3 {color:slategray; font-family:'Orbitron'; text-shadow:4px 4px 4px #ccc;}
-  h4 {color:#00A0A0; font-family:'Roboto';}
+  body {background-color:mintcream;}; a, p {color:#00a050; font-family:'Roboto';} 
+  h1 {color:#00a0a0; font-family:'Orbitron'; text-shadow:4px 4px 4px #ccc;} 
+  h2, h3 {color:slategray; font-family:'Orbitron'; text-shadow:4px 4px 4px #ccc;}
+  h4 {color:#00a0a0; font-family:'Roboto';}
   .sagecell .CodeMirror-scroll {min-height:3em; max-height:48em;}
-  .sagecell table.table_form tr.row-a {background-color:silver; color:#00A050}
-  .sagecell table.table_form tr.row-b {background-color:mintcream; color:#00A050}
-  .sagecell table.table_form td {padding:5px 15px; color:#00A050;}
+  .sagecell table.table_form tr.row-a {background-color:lightgray;} 
+  .sagecell table.table_form tr.row-b {background-color:mintcream;}
+  .sagecell table.table_form td {padding:5px 15px; color:#00a050; font-family:'Roboto';}
+  .sagecell_sessionOutput, .sagecell_sessionOutput pre {color:#00a050; font-family:'Roboto';}
   </style>  
   <body>
     <h1>Machine Learning Engineer Nanodegree</h1>
@@ -411,7 +412,20 @@ Use <i>make_scorer</i> to create a <i>fbeta_score</i> scoring object (with $\bet
 Perform grid search on the classifier <i>clf</i> using <i>scorer</i>, and store it in <i>grid_obj</i>.<br/>
 Fit the grid search object to the training data (<i>X_train, y_train</i>), and store it in <i>grid_fit</i>.<br/>
 <div class="linked"><script type="text/x-sage">
-
+clf=GradientBoostingClassifier(random_state=10)
+parameters={'n_estimators':[104,208,416],'learning_rate':[0.1,0.2,0.3],'max_depth':[2,3,4]}
+scorer=make_scorer(fbeta_score,beta=0.5)
+grid_obj=GridSearchCV(estimator=clf,param_grid=parameters,scoring=scorer)
+grid_fit=grid_obj.fit(X_train,y_train); best_clf=grid_fit.best_estimator_
+predictions=(clf.fit(X_train,y_train)).predict(X_test); best_predictions=best_clf.predict(X_test)
+print ("Unoptimized model\n------")
+print ("Accuracy score on testing data: {:.4f}".format(accuracy_score(y_test,predictions)))
+print ("F-score on testing data: {:.4f}".format(fbeta_score(y_test,predictions,beta=0.5)))
+print ("\nOptimized Model\n------")
+print ("Final accuracy score on the testing data: {:.4f}".format(accuracy_score(y_test,best_predictions)))
+print ("Final F-score on the testing data: {:.4f}".format(fbeta_score(y_test,best_predictions,beta=0.5)))
+print ("\nOptimized Model Parameters\n------")
+print (best_clf.get_params())
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
