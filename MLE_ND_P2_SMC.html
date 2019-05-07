@@ -44,8 +44,9 @@ The data we investigate here consists of small changes to the original dataset, 
       <h3>Code Library</h3> 
 <div class="linked"><script type="text/x-sage">
 import numpy,pandas,pylab,seaborn,time; pylab.style.use('seaborn-whitegrid')
+import matplotlib.patches as mpatches
 import warnings; from sklearn.exceptions import DataConversionWarning
-for el in [FutureWarning,DataConversionWarning]: warnings.filterwarnings("ignore",category=el)
+for el in [FutureWarning,UserWarning,DataConversionWarning]: warnings.filterwarnings("ignore",category=el)
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split,GridSearchCV
 from sklearn.metrics import f1_score,accuracy_score,fbeta_score,confusion_matrix,make_scorer
@@ -91,7 +92,7 @@ def evaluate(results,accuracy,f1):
     ax[0,1].set_ylim((0,1)); ax[0,2].set_ylim((0,1)); ax[1,1].set_ylim((0,1)); ax[1,2].set_ylim((0,1))
     patches = []
     for i,learner in enumerate(results.keys()): patches.append(mpatches.Patch(color=colors[i],label=learner))
-    pylab.legend(handles=patches,bbox_to_anchor=(-0.8,2.53),loc='upper center',borderaxespad=0.,ncol=3,fontsize='x-large')
+    pylab.legend(handles=patches,bbox_to_anchor=(-0.8,1.),loc='upper center',borderaxespad=0.,ncol=3,fontsize='x-large')
     pylab.suptitle("Performance Metrics for Three Supervised Learning Models",fontsize=16,y=1.15)
     pylab.tight_layout(); pylab.show()
 </script></div>
@@ -319,13 +320,14 @@ We will do the following points:<br/>
       - Make sure that you set the <i>beta</i> parameter!    
 <div class="linked"><script type="text/x-sage">
 def train_predict(learner,sample_size,X_train,y_train,X_test,y_test):   
-    results={}; start=time.time(); learner.fit(X_train[:sample_size],y_train[:sample_size]) 
+    results={}; n=int(300)
+    start=time.time(); learner.fit(X_train[:sample_size],y_train[:sample_size]) 
     end=time.time(); results['train_time']=end-start
-    start=time.time(); predictions_test=learner.predict(X_test); predictions_train=learner.predict(X_train[:300])
+    start=time.time(); predictions_test=learner.predict(X_test); predictions_train=learner.predict(X_train[:n])
     end=time.time(); results['pred_time']=end-start
-    results['acc_train']=accuracy_score(y_train[:300],predictions_train)
+    results['acc_train']=accuracy_score(y_train[:n],predictions_train)
     results['acc_test']=accuracy_score(y_test,predictions_test)
-    results['f_train']=fbeta_score(y_train[:300],predictions_train,average='macro',beta=0.5)
+    results['f_train']=fbeta_score(y_train[:n],predictions_train,average='macro',beta=0.5)
     results['f_test']=fbeta_score(y_test,predictions_test,average='macro',beta=0.5)
     print ("{} trained on {} samples.".format(learner.__class__.__name__,sample_size))
     return results
