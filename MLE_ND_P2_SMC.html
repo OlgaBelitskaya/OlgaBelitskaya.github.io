@@ -13,7 +13,7 @@
   </head>
   <style>
   @import url('https://fonts.googleapis.com/css?family=Orbitron|Roboto');
-  body {background-color:mintcream;}; a {color:#00a050; font-family:'Roboto';} 
+  body {background-color:mintcream;}; a,p {color:#00a050; font-family:'Roboto';} 
   h1 {color:#00A0A0; font-family:'Orbitron'; text-shadow:4px 4px 4px #ccc;} 
   h2,h3 {color:slategray; font-family:'Orbitron'; text-shadow:4px 4px 4px #ccc;}
   h4 {color:#00A0A0; font-family:'Roboto';}
@@ -41,8 +41,8 @@ The data we investigate here consists of small changes to the original dataset, 
       <h3>Code Library</h3> 
 <div class="linked"><script type="text/x-sage">
 import numpy,pandas,pylab,seaborn,time; pylab.style.use('seaborn-whitegrid')
-from sklearn.exceptions import DataConversionWarning
-import warnings; warnings.filterwarnings("ignore",category=[FutureWarning,DataConversionWarning])
+import warnings; from sklearn.exceptions import DataConversionWarning
+for el in [FutureWarning,DataConversionWarning]: warnings.filterwarnings("ignore",category=el)
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split,GridSearchCV
 from sklearn.metrics import f1_score,accuracy_score,fbeta_score,confusion_matrix,make_scorer
@@ -223,7 +223,7 @@ It would seem that using <b>accuracy</b> as a metric for evaluating a particular
 Additionally, identifying someone that <b>does not make more than 50,000 USD</b> as someone who does would be detrimental to CharityML, since they are looking to find individuals willing to donate.<br/>
 Therefore, a model's ability to <b>precisely</b> predict those that make more than 50,000 USD is <b>more important</b> than the model's ability to recall those individuals.<br/>
 We can use <b>F-beta</b> score as a metric that considers both precision and recall:<br/>
-<p>$F_{\beta} = (1 + \beta^2) \cdot$</p>
+<p>$F_{\beta} = (1 + \beta^2) \cdot = \frac {precision \cdot recall}{(\beta^2 \cdot precision) + recall}$</p>
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
