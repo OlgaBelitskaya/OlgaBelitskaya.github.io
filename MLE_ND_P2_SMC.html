@@ -41,7 +41,8 @@ The data we investigate here consists of small changes to the original dataset, 
       <h3>Code Library</h3> 
 <div class="linked"><script type="text/x-sage">
 import numpy,pandas,pylab,seaborn,time; pylab.style.use('seaborn-whitegrid')
-import warnings; warnings.filterwarnings("ignore",category=FutureWarning)
+from sklearn.exceptions import DataConversionWarning
+import warnings; warnings.filterwarnings("ignore",category=[FutureWarning,DataConversionWarning])
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split,GridSearchCV
 from sklearn.metrics import f1_score,accuracy_score,fbeta_score,confusion_matrix,make_scorer
@@ -210,6 +211,29 @@ As always, we will now split the data (both features and their labels) into trai
 X_train,X_test,y_train,y_test=train_test_split(features,income,test_size=.2,random_state=0)
 print ("Training set has {} samples.".format(X_train.shape[0])) 
 print ("Testing set has {} samples.".format(X_test.shape[0]))
+</script></div>
+    <p></p>
+    <h2>Evaluating Model Performance</h2>
+In this section, we will investigate four different algorithms, and determine which is best at modeling the data.<br/>
+Three of these algorithms will be supervised learners of your choice, and the fourth algorithm is known as a naive predictor.<br/>
+      <h3>Metrics and the Naive Predictor</h3>
+<b>CharityML</b>, equipped with their research, knows individuals that make more than 50,000 USD are most likely to donate to their charity.<br/> 
+Because of this, CharityML is particularly interested in predicting who makes more than 50,000 USD accurately.<br/> 
+It would seem that using <b>accuracy</b> as a metric for evaluating a particular model's performace would be appropriate.<br/>
+Additionally, identifying someone that <b>does not make more than 50,000 USD</b> as someone who does would be detrimental to CharityML, since they are looking to find individuals willing to donate.<br/>
+Therefore, a model's ability to <b>precisely</b> predict those that make more than 50,000 USD is <b>more important</b> than the model's ability to recall those individuals.<br/>
+We can use <b>F-beta</b> score as a metric that considers both precision and recall:<br/>
+<p>$F_{\beta} = (1 + \beta^2) \cdot$</p>
+<div class="linked"><script type="text/x-sage">
+
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
