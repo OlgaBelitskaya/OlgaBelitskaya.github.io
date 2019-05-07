@@ -394,6 +394,19 @@ This procedure has the following steps:<br/>
 The result of the model training should be that predictions slowly converge toward observed values.<br/>
 The model for the CharityML is trained to produce the best predictions for the <i>income</i> categorical variable,<br/>
 and the loss function evaluates how these predictions deviate from the actual values.
+    <h3>Implementation: Model Tuning</h3>
+We will tune the chosen model and use grid search (<i>GridSearchCV</i>) with at least one important parameter tuned with at least 3 different values.<br/>
+We will need to use the entire training set for this.<br/>
+Our steps:<br/>
+Import <i>sklearn.grid_search.GridSearchCV</i> and <i>sklearn.metrics.make_scorer</i>.<br/>
+Initialize the classifier you've chosen and store it in <i>clf</i>.<br/>
+Set a <i>random_state</i> if one is available to the same state you set before.<br/>
+Create a dictionary of parameters you wish to tune for the chosen model.<br/>
+Example: <i>parameters = {'parameter' : [list of values]}</i>.<br/>
+Note: Avoid tuning the <i>max_features</i> parameter of your learner if that parameter is available!<br/>
+Use <i>make_scorer</i> to create a <i>fbeta_score</i> scoring object (with $\beta=0.5$).<br/>
+Perform grid search on the classifier <i>clf</i> using <i>scorer</i>, and store it in <i>grid_obj</i>.<br/>
+Fit the grid search object to the training data (<i>X_train, y_train</i>), and store it in <i>grid_fit</i>.<br/>
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
