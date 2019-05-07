@@ -216,7 +216,7 @@ print ("Testing set has {} samples.".format(X_test.shape[0]))
     <h2>Evaluating Model Performance</h2>
 In this section, we will investigate four different algorithms, and determine which is best at modeling the data.<br/>
 Three of these algorithms will be supervised learners of your choice, and the fourth algorithm is known as a naive predictor.<br/>
-      <h3>Metrics and the Naive Predictor</h3>
+    <h3>Metrics and the Naive Predictor</h3>
 <b>CharityML</b>, equipped with their research, knows individuals that make more than 50,000 USD are most likely to donate to their charity.<br/> 
 Because of this, CharityML is particularly interested in predicting who makes more than 50,000 USD accurately.<br/> 
 It would seem that using <b>accuracy</b> as a metric for evaluating a particular model's performace would be appropriate.<br/>
@@ -244,8 +244,17 @@ It is a ratio of true positives to all individuals that actually made more than 
 For classification problems that are skewed in their classification distributions like in our case, accuracy by itself is not a very good metric.<br\>
 Precision and recall help a lot and can be combined to get the F1 score, which is the weighted average (harmonic mean) of the precision and recall scores.<br/>
 This score can range from 0 to 1, with 1 being the best possible F1 score (we take the harmonic mean as we are dealing with ratios).
+    <h3>Question 1 - Naive Predictor Performace</h3>
+<i>If we chose a model that always predicted an individual made more than 50,000 USD, what would that model's accuracy and F-score be on this dataset?</i>
+    <h3>Answer 1</h3>
+The code cell below displays both indicators in the output.
 <div class="linked"><script type="text/x-sage">
-
+beta=.5; accuracy=accuracy_score(income,numpy.array([1]*len(income)))
+recall=1 # ==numpy.sum(income)/(numpy.sum(income)+0) 
+precision=numpy.sum(income)/len(income)
+fscore=(1 + beta**2)*(precision*recall)/((beta**2*precision)+recall)
+fscore=fbeta_score(income,numpy.array([1]*len(income)),beta=0.5) # alternative method 
+print ("Naive Predictor: accuracy score - {:.4f}, F-score - {:.4f}".format(accuracy,fscore))
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
