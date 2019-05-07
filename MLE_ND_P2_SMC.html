@@ -340,6 +340,25 @@ Note: Use the default settings for each model — you will tune one specific mod
 Calculate the number of records equal to 1%, 10%, and 100% of the training data.<br/>
 Store those values in <i>samples_1</i>, <i>samples_10</i>, and <i>samples_100</i> respectively.
 <div class="linked"><script type="text/x-sage">
+clf_A=GradientBoostingClassifier(random_state=10); clf_B=RandomForestClassifier(); clf_C=AdaBoostClassifier()
+samples_1=int(len(X_train)/100); samples_10=int(len(X_train)/10); samples_100=len(X_train)
+results={}
+for clf in [clf_A,clf_B,clf_C]:
+    clf_name=clf.__class__.__name__; results[clf_name]={}
+    for i,samples in enumerate([samples_1,samples_10,samples_100]):
+        results[clf_name][i]=train_predict(clf,samples,X_train,y_train,X_test,y_test)
+evaluate(results,accuracy,fscore)
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
 
 </script></div>
     <p></p>
