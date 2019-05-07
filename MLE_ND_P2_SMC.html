@@ -314,10 +314,10 @@ We will do the following points:<br/>
 - Import <i>fbeta_score</i> and <i>accuracy_score</i> from <i>sklearn.metrics</i>.<br/>
 - Fit the learner to the sampled training data and record the training time.<br/>
 - Perform predictions on the test data <i>X_test</i>, and also on the first 300 training points <i>X_train[:300]</i>.<br/>
-      - Record the total prediction time.<br/>
+&nbsp;&nbsp;- Record the total prediction time.<br/>
 - Calculate the accuracy score for both the training subset and testing set.<br/>
 - Calculate the F-score for both the training subset and testing set.<br/>
-      - Make sure that you set the <i>beta</i> parameter!    
+&nbsp;&nbsp;- Make sure that you set the <i>beta</i> parameter!    
 <div class="linked"><script type="text/x-sage">
 def train_predict(learner,sample_size,X_train,y_train,X_test,y_test):   
     results={}; n=int(300)
@@ -368,6 +368,32 @@ pylab.ylabel('True label'); pylab.xlabel('Predicted label')
 pylab.title('Confusion matrix for:\n{}'.format(model.__class__.__name__)); pylab.show()
 </script></div>
     <p></p>
+    <h3>Question 4 - Describing the Model in Layman's Terms</h3>
+<i>In one to two paragraphs, explain to CharityML, in layman's terms, how the final model chosen is supposed to work.<br/>
+Be sure that you are describing the major qualities of the model, such as how the model is trained and how the model makes a prediction.<br/> 
+Avoid using advanced mathematical or technical jargon, such as describing equations or discussing the algorithm implementation.</i>
+    <h3>Answer 4</h3>
+Let's describe the mechanism of the model with three important component:<br/>
+- the measurement for checking how well our model predicts the outputs based on input values,<br/> 
+- the algorithm from the certain group (for examples, decision trees) for making predictions,<br/>
+- the additive mechanism for algorithms for minimizing the measure function.<br/>
+At first, we set up the most important component (a measurement) that maps every event onto a real number intuitively representing some "cost" associated with this event.<br/> 
+The goal of estimation for supervised learning is to find the measure function that models all inputs (events) well:<br/> 
+if it were applied to the training set, it should predict the output values enough well.<br/> 
+Then we check the model effectiveness applied it to the testing set.<br/>
+The measurement quantifies the amount by which the predictions deviate from the actual output values. Naturally, our task is to reach the minimum "cost".<br/>
+At each particular Gradient Boosting iteration, a new algorithm (in practice, it's almost always from a tree-based group) is trained with respect to the error that was learned so far.<br/>
+This procedure has the following steps:<br/>
+- add one algorithm that can reduce the loss based on the current estimates (existing algorithms in the model are not changed);<br/>
+- use an effective procedure called gradient descent to minimize the loss:<br/>
+&nbsp;&nbsp;- fit a new model to the data;<br/>
+&nbsp;&nbsp;- choose the directions for changing the measure function by finding the negative moving rates of this function, it helps to get a lower cost on the next iteration;<br/>
+&nbsp;&nbsp;- find the best step-size in the chosen directions, the step magnitude is multiplied by a factor between 0 and 1 called a learning rate;<br/>
+&nbsp;&nbsp;- update the measure function;<br/>
+- repeat till the fixed number of algorithms are added or the loss reaches an acceptable level or the loss no longer improves on an external validation dataset.<br/>
+The result of the model training should be that predictions slowly converge toward observed values.<br/>
+The model for the CharityML is trained to produce the best predictions for the <i>income</i> categorical variable,<br/>
+and the loss function evaluates how these predictions deviate from the actual values.
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
