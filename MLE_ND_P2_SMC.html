@@ -425,16 +425,16 @@ print ("\nOptimized Model\n------")
 print ("Final accuracy score on the testing data: {:.4f}".format(accuracy_score(y_test,best_predictions)))
 print ("Final F-score on the testing data: {:.4f}".format(fbeta_score(y_test,best_predictions,beta=0.5)))
 print ("\nOptimized Model Parameters\n------")
-pretty_print (best_clf.get_params())
+best_clf.get_params()
 </script></div>
     <p></p>
     <h3>Question 5 - Final Model Evaluation</h3>
 <i>What is your optimized model's accuracy and F-score on the testing data? Are these scores better or worse than the unoptimized model?<br/>
 How do the results from your optimized model compare to the naive predictor benchmarks you found earlier in Question 1?</i>
 <div class="linked"><script type="text/x-sage">
-display(table([['Metric','Benchmark Predictor','Unoptimized Model','Optimized Model'],
-               ['Accuracy Score	',accuracy0,accuracy_score(y_test,predictions),accuracy_score(y_test,best_predictions)],
-               ['F-score',fscore0,fbeta_score(y_test,predictions,beta=0.5),fbeta_score(y_test,best_predictions,beta=0.5)]]))
+table([['Metric','Benchmark Predictor','Unoptimized Model','Optimized Model'],
+       ['Accuracy Score',accuracy0,accuracy_score(y_test,predictions),accuracy_score(y_test,best_predictions)],
+       ['F-score',fscore0,fbeta_score(y_test,predictions,beta=0.5),fbeta_score(y_test,best_predictions,beta=0.5)]])
 </script></div>
     <p></p>
     <h3>Answer 5</h3>
@@ -447,8 +447,24 @@ In the case of this project, that means we wish to identify a small number of fe
 We will choose a scikit-learn classifier (e.g., Ada Boost, Random Forest) that has the <i>feature_importance_</i> attribute,<br/>
 which is a function that ranks the importance of features according to the chosen classifier,<br/>
 in the next python cell fit this classifier to training set and use this attribute to determine the top 5 most important features for the census dataset.
+    <h3>Question 6 - Feature Relevance Observation</h3>
+<i>In <b>Exploring the Data</b>, it was shown there are thirteen available features for each individual on record in the census data.<br/>
+Of these thirteen records, which five features do you believe to be most important for prediction, and in what order would you rank them and why?</i>
+    <h3>Answer 6</h3>
+For me, the variables “age”, “education-num”, “occupation”, “relationship”, “hours-per-week” look like the most influential.<br/> 
+Of course, it's expected to receive a higher pay if the person has studied longer, has a high paying occupation, is older and more experienced,<br/>has a longtime relationship and works more hours per week.
+I would rank them in the following order:<br/> 
+1) education-num; 2) age; 3) hours-per-week; 4) occupation; 5) relationship.
+    <h3>Implementation: Extracting Feature Importance</h3>
+We will choose a scikit-learn supervised learning algorithm that has a feature_importance_ attribute availble for it.<br/>
+This attribute is a function that ranks the importance of each feature when making predictions based on the chosen algorithm.<br/>
+We will need to implement the following:<br/>
+Import a supervised learning model from sklearn if it is different from the three used earlier.<br/>
+Train the supervised model on the entire training set.<br/>
+Extract the feature importances using <i>.feature_importances_</i>. 
 <div class="linked"><script type="text/x-sage">
-
+model=GradientBoostingClassifier(n_estimators=208,learning_rate=0.3,max_depth=2,random_state=10).fit(X_train,y_train)
+feature_plot(model.feature_importances_,X_train,y_train)
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
