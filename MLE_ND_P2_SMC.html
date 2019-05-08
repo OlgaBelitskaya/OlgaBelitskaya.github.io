@@ -413,7 +413,7 @@ Perform grid search on the classifier <i>clf</i> using <i>scorer</i>, and store 
 Fit the grid search object to the training data (<i>X_train, y_train</i>), and store it in <i>grid_fit</i>.<br/>
 <div class="linked"><script type="text/x-sage">
 clf=GradientBoostingClassifier(random_state=10)
-parameters={'n_estimators':[104,208,416],'learning_rate':[0.1,0.2,0.3],'max_depth':[2,3,4]}
+parameters={'n_estimators':[104,208],'learning_rate':[0.2,0.3],'max_depth':[2,3]}
 scorer=make_scorer(fbeta_score,beta=0.5)
 grid_obj=GridSearchCV(estimator=clf,param_grid=parameters,scoring=scorer)
 grid_fit=grid_obj.fit(X_train,y_train); best_clf=grid_fit.best_estimator_
@@ -425,7 +425,7 @@ print ("\nOptimized Model\n------")
 print ("Final accuracy score on the testing data: {:.4f}".format(accuracy_score(y_test,best_predictions)))
 print ("Final F-score on the testing data: {:.4f}".format(fbeta_score(y_test,best_predictions,beta=0.5)))
 print ("\nOptimized Model Parameters\n------")
-print (best_clf.get_params())
+pretty_print (best_clf.get_params())
 </script></div>
     <p></p>
     <h3>Question 5 - Final Model Evaluation</h3>
@@ -433,7 +433,7 @@ print (best_clf.get_params())
 How do the results from your optimized model compare to the naive predictor benchmarks you found earlier in Question 1?</i>
 <div class="linked"><script type="text/x-sage">
 display(table([['Metric','Benchmark Predictor','Unoptimized Model','Optimized Model'],
-               ['Accuracy Score	',accuracy0,accuracy_score(y_test,predictions),accuracy_score(y_test,bestpredictions)]]))
+               ['Accuracy Score	',accuracy0,accuracy_score(y_test,predictions),accuracy_score(y_test,best_predictions)]]))
 </script></div>
     <p></p>
     <h3>Answer 5</h3>
