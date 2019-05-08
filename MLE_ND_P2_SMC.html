@@ -96,8 +96,8 @@ def evaluate(results,accuracy,f1):
     ax[0,1].set_ylim((0,1)); ax[0,2].set_ylim((0,1)); ax[1,1].set_ylim((0,1)); ax[1,2].set_ylim((0,1))
     patches = []
     for i,learner in enumerate(results.keys()): patches.append(mpatches.Patch(color=colors[i],label=learner))
-    pylab.legend(handles=patches,bbox_to_anchor=(-.8,-.2),loc='upper center',borderaxespad=0.,ncol=3,fontsize='large')
-    pylab.suptitle("Performance Metrics for Three Supervised Learning Models",fontsize=12,y=.05)
+    pylab.legend(handles=patches,bbox_to_anchor=(-.8,-.3),loc='upper center',borderaxespad=0.,ncol=3,fontsize='large')
+    pylab.suptitle("Performance Metrics for Three Supervised Learning Models",fontsize=12,y=.1)
     pylab.tight_layout(); pylab.show()
 </script></div>
     <p></p>
@@ -353,7 +353,7 @@ for clf in [clf_A,clf_B,clf_C]:
     clf_name=clf.__class__.__name__; results[clf_name]={}
     for i,samples in enumerate([samples_1,samples_10,samples_100]):
         results[clf_name][i]=train_predict(clf,samples,X_train,y_train,X_test,y_test)
-evaluate(results,accuracy,fscore)
+evaluate(results,accuracy0,fscore0)
 </script></div>
     <p></p>
     <h3>Improving Results</h3>
@@ -432,7 +432,8 @@ print (best_clf.get_params())
 <i>What is your optimized model's accuracy and F-score on the testing data? Are these scores better or worse than the unoptimized model?<br/>
 How do the results from your optimized model compare to the naive predictor benchmarks you found earlier in Question 1?</i>
 <div class="linked"><script type="text/x-sage">
-
+display(table([['Metric','Benchmark Predictor','Unoptimized Model','Optimized Model'],
+               ['Accuracy Score	',accuracy0,accuracy_score(y_test,predictions),accuracy_score(y_test,bestpredictions)]]))
 </script></div>
     <p></p>
     <h3>Answer 5</h3>
