@@ -97,7 +97,24 @@ def biplot(good_data,reduced_data,pca):
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+def channel_results(reduced_data,outliers,pca_samples):
+    path='https://raw.githubusercontent.com/OlgaBelitskaya/'+\
+         'machine_learning_engineer_nd009/master/Machine_Learning_Engineer_ND_P3/'
+    full_data=pandas.read_csv(path+'customers.csv')
+    channel=pandas.DataFrame(full_data['Channel'],columns=['Channel'])
+    channel=channel.drop(channel.index[outliers]).reset_index(drop=True)
+    labeled=pandas.concat([reduced_data,channel],axis=1)
+    fig,ax=pylab.subplots(figsize=(12,5))
+    cmap=seaborn.cubehelix_palette(2,start=.1,rot=-.25,as_cmap=True)
+    labels=['Hotel/Restaurant/Cafe','Retailer']; grouped=labeled.groupby('Channel')
+    for i,channel in grouped:   
+        channel.plot(ax=ax,kind='scatter',x='Dimension 1',y='Dimension 2',
+                     color=cmap((i-1)*1.0/2),label=labels[i-1],s=30)  
+    for i,sample in enumerate(pca_samples):
+        ax.scatter(x=sample[0],y=sample[1],s=230,linewidth=3,color='black',marker='o',facecolors='none');
+        ax.scatter(x=sample[0]+0.25,y=sample[1]+0.3,marker='$%d$'%(i),alpha=1,s=200,color='black')
+    ax.set_title("PCA-Reduced Data Labeled by 'Channel'\nTransformed Sample Data Circled",fontsize=20)
+    pylab.show()
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
