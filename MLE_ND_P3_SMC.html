@@ -32,7 +32,7 @@
 In this project, we will analyze a dataset containing data on various customers' annual spending amounts (reported in monetary units) of diverse product categories for internal structure.<br/>
 One goal of this project is to best describe the variation in the different types of customers that a wholesale distributor interacts with.<br/>
 Doing so would equip the distributor with insight into how to best structure their delivery service to meet the needs of each customer.<br/>
-The dataset for this project can be found on the <a href="">&#x1F578;UCI Machine Learning Repository</a>.<br/> 
+The dataset for this project can be found on the <a href="https://archive.ics.uci.edu/ml/datasets/Wholesale+customers">&#x1F578;UCI Machine Learning Repository</a>.<br/> 
 For the purposes of this project, the features <i>Channel</i> and <i>Region</i> will be excluded in the analysis — with focus instead on the six product categories recorded for customers.      
     <h3>Resources</h3>
 <a href="http://archive.ics.uci.edu/ml/datasets.php">&#x1F578;UCI Machine Learning Repository&nbsp;</a>
@@ -40,7 +40,7 @@ For the purposes of this project, the features <i>Channel</i> and <i>Region</i> 
 <a href="http://seaborn.pydata.org/index.html">&#x1F578;seaborn: statistical data visualization&nbsp;</a><br/>
     <h3>Code Library</h3> 
 <div class="linked"><script type="text/x-sage">
-import numpy,pandas,pylab,seaborn,time; pylab.style.use('seaborn-whitegrid')
+import numpy,pandas,pylab,seaborn,time; pylab.style.use('seaborn-pastel')
 import warnings; from sklearn.exceptions import DataConversionWarning
 for el in [FutureWarning,UserWarning,DataConversionWarning]: warnings.filterwarnings("ignore",category=el)
 from sklearn.model_selection import train_test_split,cross_val_score
@@ -50,7 +50,18 @@ from sklearn.mixture import GaussianMixture; from sklearn.metrics import silhoue
 </script></div>
     <p></p>      
 <div class="linked"><script type="text/x-sage">
-
+# https://github.com/udacity/machine-learning/blob/master/projects/customer_segments/visuals.py
+def pca_results(good_data, pca):
+    dimensions=['Dimension {}'.format(i) for i in range(1,len(pca.components_)+1)]
+    components=pandas.DataFrame(numpy.round(pca.components_,4),columns=good_data.keys())
+    components.index=dimensions; ratios=pca.explained_variance_ratio_.reshape(len(pca.components_),1)
+    variance_ratios=pandas.DataFrame(numpy.round(ratios,4),columns=['Explained Variance'])
+    variance_ratios.index=dimensions 
+    fig,ax=pylab.subplots(figsize=(12,5)); components.plot(ax=ax,kind='bar');
+    ax.set_ylabel("Feature Weights",fontsize=12); ax.set_xticklabels(dimensions,rotation=0)
+    for i,ev in enumerate(pca.explained_variance_ratio_):
+        ax.text(i-0.40,ax.get_ylim()[1]+0.05,"Explained Variance \n %.4f"%(ev))
+    return pandas.concat([variance_ratios,components],axis =1)
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
