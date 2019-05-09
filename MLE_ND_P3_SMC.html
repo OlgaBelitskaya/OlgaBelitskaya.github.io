@@ -62,7 +62,7 @@ def pca_results(good_data,pca):
     for i,ev in enumerate(pca.explained_variance_ratio_):
         ax.text(i-0.40,ax.get_ylim()[1]+0.05,"Explained Variance \n %.4f"%(ev))
     pylab.show()
-    return pandas.concat([variance_ratios,components],axis =1)
+    return pandas.concat([variance_ratios,components],axis=1)
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
@@ -83,7 +83,17 @@ def cluster_results(reduced_data,preds,centers,pca_samples):
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+def biplot(good_data,reduced_data,pca):
+    fig,ax=pylab.subplots(figsize=(12,5))  
+    ax.scatter(x=reduced_data.loc[:,'Dimension 1'],y=reduced_data.loc[:,'Dimension 2'], 
+               facecolors='slategrey',edgecolors='1b2c45',s=70,alpha=0.5)
+    feature_vectors=pca.components_.T
+    arrow_size,text_pos=7.0,8.0
+    for i,v in enumerate(feature_vectors):
+        ax.arrow(0,0,arrow_size*v[0],arrow_size*v[1],head_width=0.2,head_length=0.2,linewidth=2,color='red')
+        ax.text(v[0]*text_pos,v[1]*text_pos,good_data.columns[i],color='black',ha='center',va='center',fontsize=20)
+    ax.set_xlabel("Dimension 1",fontsize=12); ax.set_ylabel("Dimension 2",fontsize=12)
+    ax.set_title("PC plane with original feature projections.",fontsize=20); pylab.show()
 </script></div>
     <p></p>
     <h3>Additional Code Cell</h3>
