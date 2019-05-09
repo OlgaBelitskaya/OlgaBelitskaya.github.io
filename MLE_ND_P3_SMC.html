@@ -212,24 +212,27 @@ pylab.xlabel("Delicatessen",fontsize=15); pylab.title("Customers' Annual Spendin
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-X_train,X_test,y_train,y_test=train_test_split(new_data,target,test_size=0.25,random_state=1)
-print ("Training and testing split was successful.")
-regressor1=DecisionTreeRegressor(random_state=1); regressor1.fit(X_train,y_train)
-regressor2=RandomForestRegressor(random_state=1); regressor2.fit(X_train,y_train)
-score1=regressor1.score(X_test,y_test); score2=regressor2.score(X_test,y_test)
-print("Decision Tree Regressor. The score of the prediction using the testing set is {}.".format(score1))
-print("Random Forest Regressor. The score of the prediction using the testing set is {}.".format(score2))
+def split():
+    X_train,X_test,y_train,y_test=train_test_split(new_data,target,test_size=0.25,random_state=1)
+    print ("Training and testing split was successful.")
+    regressor1=DecisionTreeRegressor(random_state=1); regressor1.fit(X_train,y_train)
+    regressor2=RandomForestRegressor(random_state=1); regressor2.fit(X_train,y_train)
+    score1=regressor1.score(X_test,y_test); score2=regressor2.score(X_test,y_test)
+    print("Decision Tree Regressor. The score of the prediction using the testing set is {}.".format(score1))
+    print("Random Forest Regressor. The score of the prediction using the testing set is {}.".format(score2))
+def plot_feature_importance(f):
+    D1=dict(zip(new_data,regressor1.feature_importances_)); D2=dict(zip(new_data,regressor2.feature_importances_))
+    pylab.figure(figsize=(12,5)); pylab.grid(); 
+    pylab.subplot(121); pylab.bar(range(len(D1)),D1.values(),alpha=0.5,color='slategrey',align='center')
+    pylab.xticks(range(len(D1)),D1.keys(),fontsize=8)
+    pylab.title('Experiment with "%s": Feature Importances, \nDecision Tree Regressor'%f)
+    pylab.subplot(122); pylab.bar(range(len(D2)),D2.values(),alpha=0.5,color='slategrey',align='center')
+    pylab.xticks(range(len(D2)),D2.keys(),fontsize=8)
+    pylab.title('Experiment with "%s": Feature Importances, \nRandom Forest Regressor'%f); pylab.show()
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-D1=dict(zip(new_data,regressor1.feature_importances_)); D2=dict(zip(new_data,regressor2.feature_importances_))
-pylab.figure(figsize=(12,5)); pylab.grid(); 
-pylab.subplot(121); pylab.bar(range(len(D1)),D1.values(),alpha=0.5,color='slategrey',align='center')
-pylab.xticks(range(len(D1)),D1.keys(),fontsize=8)
-pylab.title('Experiment with "Delicatessen": Feature Importances, \nDecision Tree Regressor')
-pylab.subplot(122); pylab.bar(range(len(D2)),D2.values(),alpha=0.5,color='slategrey',align='center')
-pylab.xticks(range(len(D2)),D2.keys(),fontsize=8)
-pylab.title('Experiment with "Delicatessen": Feature Importances, \nRandom Forest Regressor'); pylab.show()
+split(); plot_feature_importance('Delicatessen')
 </script></div>
     <p></p>
     <h4>Experiment with <i>Grocery</i></h4>      
@@ -247,7 +250,7 @@ pylab.xlabel("Grocery",fontsize=15); pylab.title("Customers' Annual Spending",fo
 </script></div>
     <p></p> 
 <div class="linked"><script type="text/x-sage">
-
+split(); plot_feature_importance('Grocery')
 </script></div>
     <p></p> 
 <div class="linked"><script type="text/x-sage">
