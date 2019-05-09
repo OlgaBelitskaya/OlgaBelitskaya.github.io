@@ -70,7 +70,7 @@ def cluster_results(reduced_data,preds,centers,pca_samples):
     predictions=pandas.DataFrame(preds,columns=['Cluster'])
     plot_data=pandas.concat([predictions,reduced_data],axis=1)
     fig,ax=pylab.subplots(figsize=(12,8))
-    cmap=seaborn.cubehelix_palette(2,start=0.1,rot=-.25,as_cmap=True)
+    cmap=seaborn.cubehelix_palette(2,start=.1,rot=-.25,as_cmap=True)
     for i,cluster in plot_data.groupby('Cluster'):   
         cluster.plot(ax=ax,kind='scatter',x='Dimension 1',y='Dimension 2',
                      color=cmap((i)*1.0/(len(centers)-1)),label='Cluster %i'%(i),s=30);
@@ -142,7 +142,7 @@ It is suggested to try different sets of samples until you obtain customers that
 indices=[23,25,27]; samples=pandas.DataFrame(data.loc[indices],columns=data.keys()).reset_index(drop=True)
 samples.index=['C0','C1','C2']; samples.loc['Mean']=samples.mean()
 print ("Chosen samples of wholesale customers dataset:"); samples
-#samples.T.plot(figsize=(12,5),colors=['#1b2c45','#5a8bbd','darkcyan','red'])
+#samples.T.plot(figsize=(12,5),colors=['#1b2c45','#5a8bbd','#008b8b','#ff5a8b'])
 #pylab.grid(); pylab.show()
 </script></div>
     <p></p>
@@ -160,7 +160,11 @@ Highcharts.chart('test_highcharts',{
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+pylab.figure(figsize=(12,5)); p_samples=samples.iloc[:].T.apply(lambda x:100.0*x/x.sum())
+cmap=seaborn.cubehelix_palette(2,start=.1,rot=-.25,as_cmap=True)
+seaborn.heatmap(p_samples,cmap=cmap,annot=True,annot_kws={"color":"White","size":20},fmt='.1f')
+pylab.title("Product categories in percentages for the sample customers",fontsize=15)
+pylab.xticks(ha='center',fontsize=12); pylab.yticks(fontsize=10); pylab.show()
 </script></div>
     <p></p> 
 <div class="linked"><script type="text/x-sage">
