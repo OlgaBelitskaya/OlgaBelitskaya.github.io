@@ -263,10 +263,18 @@ Therefore, it was easy to predict <i>Grocery</i> values by applying a simple reg
 An ensemble regressor (<i>Random Forest</i>) demonstrates better results and confirms the assumptions.<br/>
 It means also that this feature is not so important for identifying spending habits of customers, and these strong<br/> relationships between variables make possible to run the procedure of dimensionality reduction.<br/>
 The experiment with <i>Delicatessen</i> demonstrates the fact that it's hard to predict the values of this feature based on others, so <i>Delicatessen</i> is important for custom clustering.<br/>
-Visualize Feature Distributions
-To get a better understanding of the dataset, we can construct a scatter matrix of each of the six product features present in the data. If we found that the feature we attempted to predict above is relevant for identifying a specific customer, then the scatter matrix below may not show any correlation between that feature and the others. Conversely, if we believe that feature is not relevant for identifying a specific customer, the scatter matrix might show a correlation between that feature and another feature in the data.
+    <h3>Visualize Feature Distributions</h3>
+To get a better understanding of the dataset, we can construct a scatter matrix of each of the six product features present in the data.<br/> 
+If we found that the feature we attempted to predict above is relevant for identifying a specific customer,<br/>
+then the scatter matrix below may not show any correlation between that feature and the others.<br/> 
+Conversely, if we believe that feature is not relevant for identifying a specific customer,<br/>
+the scatter matrix might show a correlation between that feature and another feature in the data.
 <div class="linked"><script type="text/x-sage">
-
+axes=pandas.plotting.scatter_matrix(data,alpha=0.3,figsize=(12,8),diagonal='hist',c='#1b2c45',hist_kwds={'color':'SlateGrey','bins':100})
+corr=data.corr().as_matrix()
+for i,j in zip(*np.triu_indices_from(axes,k=1)):
+    axes[i,j].annotate("%.3f" %corr[i,j],(0.8,0.8),fontsize=20,xycoords='axes fraction',ha='center',va='center')
+pylab.grid(); pylab.show()
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
