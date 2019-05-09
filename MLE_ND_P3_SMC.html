@@ -133,7 +133,7 @@ data.describe()
 data.plot.area(stacked=False,figsize=(12,5)); pylab.grid(); pylab.show()
 </script></div>
     <p></p>
-      <h3>Implementation: Selecting Samples</h3>
+    <h3>Implementation: Selecting Samples</h3>
 To get a better understanding of the customers and how their data will transform through the analysis,<br/>
 it would be best to select a few sample data points and explore them in more detail.<br/>
 In the code block below, add three indices of your choice to the indices list which will represent the customers to track.<br/>
@@ -166,9 +166,39 @@ seaborn.heatmap(p_samples,cmap=cmap,annot=True,annot_kws={"color":"White","size"
 pylab.title("Product categories in percentages for the sample customers",fontsize=15)
 pylab.xticks(ha='center',fontsize=12); pylab.yticks(fontsize=10); pylab.show()
 </script></div>
-    <p></p> 
+    <p></p>
+<b>Customer C0</b> - food-oriented supermarket:<br/>
+- the wide range of products with big values; <br/>
+- the significant excess of the purchasing volumes of categories <i>Fresh, Milk</i> over others;<br/>
+- the purchasing volumes of categories <i>Fresh, Grocery, Milk, Delicatessen</i> are much higher than the mean values;<br/>
+- the categories <i>Detergents_Paper, Frozen</i> are close to the means values.<br/>
+<b>Customer C1</b> - market for the nearest neighborhood:<br/>
+- the highest purchasing volumes are in the category <i>Fresh</i>;<br/>
+- the purchasing volumes of all categories are close to the mean values.<br/>
+<b>Customer C2</b> - vegetarian cafe or restaurant:<br/>
+- the significant excess of the purchasing volumes of the category <i>Fresh</i> over others;<br/>
+- the purchasing volumes of categories <i>Frozen, Grocery, Milk, Detergents_Paper</i> are lower than the mean values;<br/>
+- the purchasing volumes of the category <i>Detergents_Paper</i> are extremely small.
+    <h3>Implementation: Feature Relevance</h3>
+One interesting thought to consider is if one (or more) of the six product categories is actually relevant for understanding customer purchasing.<br/>
+That is to say, is it possible to determine whether customers purchasing some amount of one category<br/> 
+of products will necessarily purchase some proportional amount of another category of products?<br/> 
+We can make this determination quite easily by training a supervised regression learner on a subset of the data with one feature removed,<br/>
+and then score how well that model can predict the removed feature.<br/>
+In the code block below, we will need to implement the following:<br/>
+Assign <i>new_data</i> a copy of the data by removing a feature of our choice using the <i>DataFrame.drop</i> function.<br/>
+Use <i>sklearn.model_selection.train_test_split</i> to split the dataset into training and testing sets.<br/>
+&nbsp;&nbsp;Use the removed feature as our target label.<br/>
+&nbsp;&nbsp;Set the <i>test_size</i> of 0.25 and set the <i>random_state</i> parameter.<br/>
+      Import the <i>Decision Tree Regressor</i>, set the <i>random_state</i> parameter, and fit the learner to the training data.<br/>
+Report the prediction score of the testing set using the regressor's score function.<br/>
+    <h4>Experiment with <i>Delicatessen</i></h4>
 <div class="linked"><script type="text/x-sage">
-
+new_data=data.drop('Delicatessen',axis = 1); target=data['Delicatessen']
+new_data_target=pandas.concat([new_data,target],axis=1)
+print ("The correlation table for the choosen feature 'Delicatessen'")
+pearson=new_data_target.corr(method='pearson'); corr_with_delicatesse =pearson.iloc[-1][:-1]
+corr_with_delicatessen[abs(corr_with_delicatessen).argsort()[::-1]]
 </script></div>
     <p></p> 
 <div class="linked"><script type="text/x-sage">
