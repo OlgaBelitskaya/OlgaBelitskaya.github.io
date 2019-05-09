@@ -212,7 +212,7 @@ pylab.xlabel("Delicatessen",fontsize=15); pylab.title("Customers' Annual Spendin
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-def split():
+def split_fit():
     X_train,X_test,y_train,y_test=train_test_split(new_data,target,test_size=0.25,random_state=1)
     print ("Training and testing split was successful.")
     regressor1=DecisionTreeRegressor(random_state=1); regressor1.fit(X_train,y_train)
@@ -220,7 +220,8 @@ def split():
     score1=regressor1.score(X_test,y_test); score2=regressor2.score(X_test,y_test)
     print("Decision Tree Regressor. The score of the prediction using the testing set is {}.".format(score1))
     print("Random Forest Regressor. The score of the prediction using the testing set is {}.".format(score2))
-def plot_feature_importance(f):
+    return regressor1,regressor2
+def plot_feature_importance(f,regressor1,regressor2):
     D1=dict(zip(new_data,regressor1.feature_importances_)); D2=dict(zip(new_data,regressor2.feature_importances_))
     pylab.figure(figsize=(12,5)); pylab.grid(); 
     pylab.subplot(121); pylab.bar(range(len(D1)),D1.values(),alpha=0.5,color='slategrey',align='center')
@@ -232,7 +233,7 @@ def plot_feature_importance(f):
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-split(); plot_feature_importance('Delicatessen')
+regressor1,regressor2=split_fit(); plot_feature_importance('Delicatessen',regressor1,regressor2)
 </script></div>
     <p></p>
     <h4>Experiment with <i>Grocery</i></h4>      
@@ -250,9 +251,28 @@ pylab.xlabel("Grocery",fontsize=15); pylab.title("Customers' Annual Spending",fo
 </script></div>
     <p></p> 
 <div class="linked"><script type="text/x-sage">
-split(); plot_feature_importance('Grocery')
+regressor1,regressor2=split_fit(); plot_feature_importance('Grocery',regressor1,regressor2)
 </script></div>
     <p></p> 
+    <h3>Question 2</h3>
+<i>Which feature did you attempt to predict? What was the reported prediction score? Is this feature is necessary for identifying customers' spending habits?</i>
+    <h3>Answer 2</h3>
+I have chosen <i>Grocery</i>.<br/>
+In this case, the reported score for predictions is much higher, and the feature has a strong correlation with at least two others (<i>Detergents_Paper</i> and <i>Milk</i>).<br/>
+Therefore, it was easy to predict <i>Grocery</i> values by applying a simple regressor (<i>Decision Tree</i>).<br/> 
+An ensemble regressor (<i>Random Forest</i>) demonstrates better results and confirms the assumptions.<br/>
+It means also that this feature is not so important for identifying spending habits of customers, and these strong<br/> relationships between variables make possible to run the procedure of dimensionality reduction.<br/>
+The experiment with <i>Delicatessen</i> demonstrates the fact that it's hard to predict the values of this feature based on others, so <i>Delicatessen</i> is important for custom clustering.<br/>
+Visualize Feature Distributions
+To get a better understanding of the dataset, we can construct a scatter matrix of each of the six product features present in the data. If we found that the feature we attempted to predict above is relevant for identifying a specific customer, then the scatter matrix below may not show any correlation between that feature and the others. Conversely, if we believe that feature is not relevant for identifying a specific customer, the scatter matrix might show a correlation between that feature and another feature in the data.
+<div class="linked"><script type="text/x-sage">
+
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+
+</script></div>
+    <p></p>
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
