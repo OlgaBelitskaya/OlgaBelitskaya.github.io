@@ -332,6 +332,17 @@ log_samples
 print ("Pearson correlation coefficients"); log_data.corr(method='pearson')
 </script></div>
     <p></p>
+    <h3>Implementation: Outlier Detection</h3>
+Detecting outliers in the data is extremely important in the data preprocessing step of any analysis.<br/> 
+The presence of outliers can often skew results which take into consideration these data points.<br/> 
+There are many "rules of thumb" for what constitutes an outlier in a dataset.<br/>
+Here, we will use the <a href="">&#x1F578;Tukey's Method</a> for identfying outliers: an <b>outlier step</b> is calculated as 1.5 times the interquartile range (IQR).<br/>
+A data point with a feature that is beyond an outlier step outside of the IQR for that feature is considered abnormal.<br/>
+So the next steps are the following:<br/>
+Assign the value of the 25th percentile for the given feature to Q1. Use numpy.percentile for this.<br/>
+Assign the value of the 75th percentile for the given feature to Q3. Again, use numpy.percentile.<br/>
+Assign the calculation of an outlier step for the given feature to step.<br/>
+Optionally remove data points from the dataset by adding indices to the outliers list.
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
