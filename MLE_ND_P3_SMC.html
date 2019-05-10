@@ -223,11 +223,13 @@ def split_fit():
     return regressor1,regressor2
 def plot_feature_importance(f,regressor1,regressor2):
     D1=dict(zip(new_data,regressor1.feature_importances_)); D2=dict(zip(new_data,regressor2.feature_importances_))
-    pylab.figure(figsize=(12,5)); pylab.grid(); 
-    pylab.subplot(121); pylab.bar(range(len(D1)),D1.values(),alpha=0.5,color='slategrey',align='center')
+    pylab.figure(figsize=(12,5)); 
+    pylab.subplot(121); pylab.grid()
+    pylab.bar(range(len(D1)),D1.values(),alpha=0.5,color='slategrey',align='center')
     pylab.xticks(range(len(D1)),D1.keys(),fontsize=7)
     pylab.title('Experiment with "%s": Feature Importances, \nDecision Tree Regressor'%f)
-    pylab.subplot(122); pylab.bar(range(len(D2)),D2.values(),alpha=0.5,color='slategrey',align='center')
+    pylab.subplot(122); pylab.grid()
+    pylab.bar(range(len(D2)),D2.values(),alpha=0.5,color='slategrey',align='center')
     pylab.xticks(range(len(D2)),D2.keys(),fontsize=7)
     pylab.title('Experiment with "%s": Feature Importances, \nRandom Forest Regressor'%f); pylab.show()
 </script></div>
@@ -292,9 +294,24 @@ These facts confirm the thoughts about the relevance of the feature we attempted
 We should also note that the features is not normally distributed. But the log-normal distribution looks very similar with our features.<br/>
 I have created the random example of the log-normal distribution for visual comparing.      
 <div class="linked"><script type="text/x-sage">
-
+pylab.figure(figsize=(12,5)); mu,sigma=3.,1.; s=numpy.random.lognormal(mu,sigma,1000)
+count,bins,ignored=pylab.hist(s,100,normed=True,align='mid',alpha=0.5,color='slategrey')
+x=numpy.linspace(min(bins),max(bins),10000)
+pdf=(numpy.exp(-(numpy.log(x)-mu)**2/(2*sigma**2))/(x*sigma*numpy.sqrt(2*numpy.pi)))
+pylab.plot(x,pdf,linewidth=2,color='#1b2c45'); pylab.axis('tight')
+pylab.title('Example of a Random Log-Normal Distribution',fontsize=15); pylab.show()
 </script></div>
     <p></p>
+Data Preprocessing
+In this section, we will preprocessing the data to create a better representation of customers by performing a scaling on the data and detecting (and optionally removing) outliers. Preprocessing data is often times a critical step in assuring that results you obtain from your analysis are significant and meaningful.
+
+Implementation: Feature Scaling
+If data is not normally distributed, especially if the mean and median vary significantly (indicating a large skew), it is most often appropriate to apply a non-linear scaling — particularly for financial data. One way to achieve this scaling is by using a Box-Cox test, which calculates the best power transformation of the data that reduces skewness. A simpler approach which can work in most cases would be applying the natural logarithm.
+
+Now we will do the following steps:
+
+Assign a copy of the data to log_data after applying logarithmic scaling. Use the np.log function for this.
+Assign a copy of the sample data to log_samples after applying logarithmic scaling. Again, use np.log.
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
