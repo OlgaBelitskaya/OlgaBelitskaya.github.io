@@ -61,8 +61,8 @@ def pca_results(good_data,pca):
     ax.set_ylabel("Feature Weights",fontsize=12); ax.set_xticklabels(dimensions,rotation=0)
     for i,ev in enumerate(pca.explained_variance_ratio_):
         ax.text(i-0.40,ax.get_ylim()[1]+0.05,"Explained Variance \n %.4f"%(ev))
-    pylab.show()
-    return pandas.concat([variance_ratios,components],axis=1)
+    pylab.grid(); pylab.show()
+    return pandas.concat([variance_ratios,components],axis=int(1))
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
@@ -381,12 +381,14 @@ Import <i>sklearn.decomposition.PCA</i> and assign the results of fitting PCA in
 Apply a PCA transformation of <i>log_samples</i> using <i>pca.transform</i>, and assign the results to <i>pca_samples</i>.
 <div class="linked"><script type="text/x-sage">
 pca=PCA(n_components=len(good_data.keys())).fit(good_data)
-pca_samples=pca.transform(log_samples)
-pca_result=pca_results(good_data,pca)
+pca_samples=pca.transform(log_samples) 
+pca_result=pca_results(good_data,pca); pca_result
 </script></div>
-    <p></p>
+    <p></p>      
 <div class="linked"><script type="text/x-sage">
-
+pylab.figure(figsize=(12,4)); pylab.xlabel('Dimension',fontsize=10)
+pylab.plot(numpy.arange(1,7),numpy.cumsum(pca.explained_variance_ratio_),'-o',c='#1b2c45')
+pylab.title('Explained Variance Ratio',fontsize=15); pylab.show()
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
