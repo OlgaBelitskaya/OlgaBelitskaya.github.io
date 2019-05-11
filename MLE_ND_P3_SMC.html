@@ -537,11 +537,21 @@ cluster_results(reduced_data,preds,centers,pca_samples,'K-Means')
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-clusterer2=GMM(n_components=2,covariance_type='full').fit(reduced_data); sample_preds2=clusterer2.predict(pca_samples)
-preds2=clusterer2.predict(reduced_data); centers2=clusterer2.means_; score2=silhouette_score(reduced_data,preds2)
+clusterer2=GaussianMixture(n_components=2,covariance_type='full').fit(reduced_data)
+sample_preds2=clusterer2.predict(pca_samples); preds2=clusterer2.predict(reduced_data)
+centers2=clusterer2.means_; score2=silhouette_score(reduced_data,preds2)
 cluster_results(reduced_data,preds2,centers2,pca_samples,'Gaussian Mixture Model')
 </script></div>
     <p></p>
+    <h3>Implementation: Data Recovery</h3>
+Each cluster present in the visualization above has a central point.<br/> 
+These centers (or means) are not specifically data points from the data, but rather the averages of all the data points predicted in the respective clusters.<br/> 
+For the problem of creating customer segments, a cluster's center point corresponds to the average customer of that segment.<br/>
+Since the data is currently reduced in dimension and scaled by a logarithm,<br/>
+we can recover the representative customer spending from these data points by applying the inverse transformations.<br/>
+It's time for the next steps:<br/>
+Apply the inverse transform to <i>centers</i> using <i>pca.inverse_transform</i> and assign the new centers to <i>log_centers</i>.<br/>
+Apply the inverse function of <i>numpy.log</i> to <i>log_centers</i> using <i>numpy.exp</i> and assign the true centers to <i>true_centers</i>.
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
