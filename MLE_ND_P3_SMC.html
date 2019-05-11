@@ -589,27 +589,31 @@ and reference the statistical description of the dataset at the beginning of thi
 What set of establishments could each of the customer segments represent?</i>
     <h3>Answer 8</h3>
 The values in categories are perfect indicators:<br/>
-<i>Detergents_Paper, Grocery, Milk, Delicatessen</i> are higher than the mean for <b>Retail</b> and less than the mean for <b>HoReCa</b> (Hotel/Restaurant/Cafe);
-<i>Fresh</i> has the highest level among others for <b>HoReCa</b> than for <b>Retail</b>.
+<i>Detergents_Paper, Grocery, Milk, Delicatessen</i> are higher than the mean for <b>Retail</b> and less than the mean for <b>HoReCa</b> (Hotel/Restaurant/Cafe).<br/>
+<i>Fresh</i> has the highest level among others for <b>HoReCa</b> than for <b>Retail</b>.<br/>
 <i>Detergents_Paper</i> has an extremely small level for <b>HoReCa</b>.
 <div class="linked"><script type="text/x-sage">
-category=pandas.DataFrame(5*[['','']],columns=['K-Means','Gaussian Mixture'],index=['Segment 0','Segment 1','C0','C1','C2'])
-category.loc[['C0','C1']]=2*[2*['Retail']]; category.loc['C2']=2*['HoReCa']
+clusters=pandas.DataFrame(2*[['','']],columns=['K-Means','Gaussian Mixture'],index=['Segment 0','Segment 1'])
 if true_centers['Fresh']['Segment 0']>true_centers['Fresh']['Segment 1']:
-    category['K-Means']['Segment 0']='HoReCa'; category['K-Means']['Segment 1']='Retail'
-else: category['K-Means']['Segment 0']='Retail'; category['K-Means']['Segment 1']='HoReCa'
+    clusters['K-Means']['Segment 0']='HoReCa'; clusters['K-Means']['Segment 1']='Retail'
+else: clusters['K-Means']['Segment 0']='Retail'; clusters['K-Means']['Segment 1']='HoReCa'
 if true_centers2['Fresh']['Segment 0']>true_centers2['Fresh']['Segment 1']:
-    category['Gaussian Mixture']['Segment 0']='HoReCa'; category['Gaussian Mixture']['Segment 1']='Retail'
-else: category['Gaussian Mixture']['Segment 0']='Retail'; category['Gaussian Mixture']['Segment 1']='HoReCa'
-category.loc[['Segment 0','Segment 1']]
+    clusters['Gaussian Mixture']['Segment 0']='HoReCa'; clusters['Gaussian Mixture']['Segment 1']='Retail'
+else: clusters['Gaussian Mixture']['Segment 0']='Retail'; clusters['Gaussian Mixture']['Segment 1']='HoReCa'
+clusters
 </script></div>
     <p></p>
-Question 9
-<i>For each sample point, which customer segment from Question 8 best represents it? 
+    <h3>Question 9</h3>
+<i>For each sample point, which customer segment from Question 8 best represents it?<br/> 
 Are the predictions for each sample point consistent with this?</i>
-Answer 9
+    <h3>Answer 9</h3>
 <div class="linked"><script type="text/x-sage">
-category.loc[['C0','C1','C2']]
+clusters2=pandas.DataFrame(3*[['','']],columns=['K-Means','Gaussian Mixture'],index=['C0','C1','C2'])
+clusters2['Cluster']=['Retail','Retail','HoReCa']
+for el in ['K-Means','Gaussian Mixture']:
+    if clusters[el].values[0]=='Retail': clusters2[el]=['Segment 0','Segment 0','Segment 1']
+    else: clusters2[el]=['Segment 1','Segment 1','Segment 0']
+clusters2
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
