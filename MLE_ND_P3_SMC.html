@@ -102,7 +102,7 @@ def channel_results(reduced_data,outliers,pca_samples):
     full_data=pandas.read_csv(path+'customers.csv')
     channel=pandas.DataFrame(full_data['Channel'],columns=['Channel'])
     channel=channel.drop(channel.index[outliers]).reset_index(drop=True)
-    labeled=pandas.concat([reduced_data,channel],axis=1)
+    labeled=pandas.concat([reduced_data,channel],axis=int(1))
     fig,ax=pylab.subplots(figsize=(12,5))
     labels=['Hotel/Restaurant/Cafe','Retailer']; grouped=labeled.groupby('Channel')
     for i,channel in grouped:   
@@ -652,7 +652,7 @@ It is possible to have absolutely different tendencies in the test results.<br/>
 One segment could have the significant effect, another segment could not demonstrate it.<br/> 
 Their spending habits are not similar. If we mixed them we could lose information about the real effect.
 <div class="linked"><script type="text/x-sage">
-
+channel_results(reduced_data,outliers,pca_samples[:3])
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
