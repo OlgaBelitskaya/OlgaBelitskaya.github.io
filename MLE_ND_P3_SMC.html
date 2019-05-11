@@ -305,7 +305,8 @@ In this section, we will preprocessing the data to create a better representatio
 Preprocessing data is often times a critical step in assuring that results you obtain from your analysis are significant and meaningful.
     <h3>Implementation: Feature Scaling</h3>
 If data is not normally distributed, especially if the mean and median vary significantly (indicating a large skew), 
-it is most often appropriate to apply a non-linear scaling — particularly for financial data.<br/>
+it is most often appropriate <br/>
+to apply a non-linear scaling — particularly for financial data.<br/>
 One way to achieve this scaling is by using a Box-Cox test, which calculates the best power transformation of the data that reduces skewness<br/> 
 A simpler approach which can work in most cases would be applying the natural logarithm.<br/>
 Now we will do the following steps:<br/>
@@ -462,7 +463,8 @@ Given your observations about the wholesale customer data so far, which of the t
       <h3>Answer 6</h3>
 The advantages of the K-Means clustering in comparing with the Gaussian Mixture Model clustering are speed and simplicity.<br/> 
 K-means only maintains cluster centers (linearly correlated with the feature numbers) and it will be much faster in model training.<br/>
-The advantages of the Gaussian Mixture Model are a "soft" classification (indicated how likely the concrete data point belongs to the certain cluster) and a good performance with different data distributions.<br/>
+The advantages of the Gaussian Mixture Model are a "soft" classification (indicated how likely the concrete data point belongs to the certain cluster) and<br/>
+a good performance with different data distributions.<br/>
 Theoretically, the Gaussian Mixture Model can do the job better thanks to its soft classification,<br/> 
 but the K-Means also can predict correctly without additional complexity of the model.<br/> 
 This project is not so large so we can try to apply both just to compare algorithms in action.
@@ -474,14 +476,23 @@ However, we can quantify the "goodness" of a clustering by calculating each data
 The silhouette coefficient for a data point measures how similar it is to its assigned cluster from -1 (dissimilar) to 1 (similar).<br/>
 Calculating the <b>mean silhouette coefficient</b> provides for a simple scoring method of a given clustering.<br/>
 Now we need to implement the following:<br/>
-Fit a clustering algorithm to the reduced_data and assign it to clusterer.<br/>
-Predict the cluster for each data point in reduced_data using clusterer.predict and assign them to preds.<br/>
-Find the cluster centers using the algorithm's respective attribute and assign them to centers.<br/>
-Predict the cluster for each sample data point in pca_samples and assign them sample_preds.<br/>
-Import sklearn.metrics.silhouette_score and calculate the silhouette score of reduced_data against preds.<br/>
-Assign the silhouette score to score and print the result.
+Fit a clustering algorithm to the <i>reduced_data</i> and assign it to clusterer.<br/>
+Predict the cluster for each data point in <i>reduced_data</i> using <i>clusterer.predict</i> and assign them to <i>preds</i>.<br/>
+Find the cluster centers using the algorithm's respective attribute and assign them to <i>centers</i>.<br/>
+Predict the cluster for each sample data point in <i>pca_samples</i> and assign them <i>sample_preds</i>.<br/>
+Import <i>sklearn.metrics.silhouette_score</i> and calculate the <i>silhouette score</i> of <i>reduced_data</i> against <i>preds</i>.<br/>
+&nbsp;&nbsp;Assign the <i>silhouette score</i> to <i>score</i> and print the result.
+      <h3>Question 7</h3>
+<i>Report the silhouette score for several cluster numbers you tried. Of these, which number of clusters has the best silhouette score?</i>
+      <h3>Answer 7</h3>
+I have printed scores for the K-Means clustering and the Gaussian Mixture Model.<br/>
+We can see the highest scores in case of 2 clusters for both algorithms. So it should be our choice.
 <div class="linked"><script type="text/x-sage">
-
+for n in list(range(2,12)):
+    clusterer=KMeans(n_clusters=n).fit(reduced_data)
+    preds=clusterer.predict(reduced_data); centers=clusterer.cluster_centers_
+    sample_preds=clusterer.predict(pca_samples); score=silhouette_score(reduced_data,preds)
+    print ("For number of clusters = {}, the silhouette_score is : {}".format(n,score))
 </script></div>
     <p></p> 
 <div class="linked"><script type="text/x-sage">
