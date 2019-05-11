@@ -104,14 +104,13 @@ def channel_results(reduced_data,outliers,pca_samples):
     channel=channel.drop(channel.index[outliers]).reset_index(drop=True)
     labeled=pandas.concat([reduced_data,channel],axis=1)
     fig,ax=pylab.subplots(figsize=(12,5))
-    cmap=seaborn.cubehelix_palette(2,start=.1,rot=-.25,as_cmap=True)
     labels=['Hotel/Restaurant/Cafe','Retailer']; grouped=labeled.groupby('Channel')
     for i,channel in grouped:   
         channel.plot(ax=ax,kind='scatter',x='Dimension 1',y='Dimension 2',color=cmap((i-1)*1.0/2),label=labels[i-1],s=30)  
     for i,sample in enumerate(pca_samples):
         ax.scatter(x=sample[0],y=sample[1],s=230,linewidth=3,color='black',marker='o',facecolors='none');
         ax.scatter(x=sample[0]+0.25,y=sample[1]+0.3,marker='$%d$'%(i),alpha=1,s=200,color='black')
-    ax.set_title("PCA-Reduced Data Labeled by 'Channel'\nTransformed Sample Data Circled",fontsize=20)
+    ax.set_title("PCA-Reduced Data Labeled by 'Channel'\nTransformed Sample Data Circled",fontsize=15)
     pylab.show()
 </script></div>
     <p></p>
@@ -553,15 +552,21 @@ It's time for the next steps:<br/>
 Apply the inverse transform to <i>centers</i> using <i>pca.inverse_transform</i> and assign the new centers to <i>log_centers</i>.<br/>
 Apply the inverse function of <i>numpy.log</i> to <i>log_centers</i> using <i>numpy.exp</i> and assign the true centers to <i>true_centers</i>.
 <div class="linked"><script type="text/x-sage">
-print ("Data Means"); pandas.DataFrame(numpy.mean(data)).T)
+print ("Data Means"); pandas.DataFrame(numpy.mean(data)).T
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+log_centers=pca.inverse_transform(centers); true_centers=numpy.exp(log_centers)
+segments=['Segment {}'.format(i) for i in range(0,len(centers))]
+true_centers=pandas.DataFrame(numpy.round(true_centers),columns=data.keys(),index=segments)
+print ("K-Means True Centers"); true_centers
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+true_centers=true_centers.append(data.describe().iloc['mean'])
+true_centers.plot(kind='bar',figsize=(12,5))
+pylab.title('Comparing K-Means Centers with Data Means',fontsize=15)
+pylab.xticks(rotation=0,fontsize=10); pylab.grid(); pylab.show()
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
