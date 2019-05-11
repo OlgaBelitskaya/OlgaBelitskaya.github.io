@@ -86,7 +86,7 @@ def cluster_results(reduced_data,preds,centers,pca_samples):
 def biplot(good_data,reduced_data,pca):
     fig,ax=pylab.subplots(figsize=(12,5))
     x=reduced_data.loc[:,'Dimension 1']; y=reduced_data.loc[:,'Dimension 2']
-    ax.scatter(x=x,y=y,facecolors='slategray',edgecolors=cmap((x*y)**2),s=70,alpha=0.5)
+    ax.scatter(x=x,y=y,facecolors='slategray',edgecolors=cmap((x*y)**2),s=70,alpha=0.4)
     feature_vectors=pca.components_.T; arrow_size,text_pos=7.0,5.0
     for i,v in enumerate(feature_vectors):
         ax.arrow(0,0,arrow_size*v[0],arrow_size*v[1],head_width=0.2,head_length=0.2,linewidth=2,color='#ff5a8b')
@@ -466,6 +466,20 @@ The advantages of the Gaussian Mixture Model are a "soft" classification (indica
 Theoretically, the Gaussian Mixture Model can do the job better thanks to its soft classification,<br/> 
 but the K-Means also can predict correctly without additional complexity of the model.<br/> 
 This project is not so large so we can try to apply both just to compare algorithms in action.
+      <h3>Implementation: Creating Clusters</h3>
+Depending on the problem, the number of clusters that we expect to be in the data may already be known.<br/> 
+When the number of clusters is not known a priori, there is no guarantee that a given number of clusters best segments the data,<br/>
+since it is unclear what structure exists in the data — if any.<br/> 
+However, we can quantify the "goodness" of a clustering by calculating each data point's silhouette coefficient.<br/>
+The silhouette coefficient for a data point measures how similar it is to its assigned cluster from -1 (dissimilar) to 1 (similar).<br/>
+Calculating the <b>mean silhouette coefficient</b> provides for a simple scoring method of a given clustering.<br/>
+Now we need to implement the following:<br/>
+Fit a clustering algorithm to the reduced_data and assign it to clusterer.<br/>
+Predict the cluster for each data point in reduced_data using clusterer.predict and assign them to preds.<br/>
+Find the cluster centers using the algorithm's respective attribute and assign them to centers.<br/>
+Predict the cluster for each sample data point in pca_samples and assign them sample_preds.<br/>
+Import sklearn.metrics.silhouette_score and calculate the silhouette score of reduced_data against preds.<br/>
+Assign the silhouette score to score and print the result.
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
