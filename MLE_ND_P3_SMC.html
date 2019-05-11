@@ -68,7 +68,7 @@ def pca_results(good_data,pca):
 <div class="linked"><script type="text/x-sage">
 def cluster_results(reduced_data,preds,centers,pca_samples):
     predictions=pandas.DataFrame(preds,columns=['Cluster'])
-    plot_data=pandas.concat([predictions,reduced_data],axis=1)
+    plot_data=pandas.concat([predictions,reduced_data],axis=int(1))
     fig,ax=pylab.subplots(figsize=(12,8))
     cmap=seaborn.cubehelix_palette(2,start=.1,rot=-.25,as_cmap=True)
     for i,cluster in plot_data.groupby('Cluster'):   
@@ -79,7 +79,7 @@ def cluster_results(reduced_data,preds,centers,pca_samples):
         ax.scatter(x=c[0],y=c[1],marker='$%d$'%(i),alpha=1,s=120,color='black');
         ax.scatter(x=pca_samples[:,0],y=pca_samples[:,1],s=150,linewidth=4,color='black',marker='x');
     ax.set_title("Cluster Learning on PCA-Reduced Data\nCentroids Marked by Number\n\
-    Transformed Sample Data Marked by Black Cross",fontsize=20); pylab.show()
+    Transformed Sample Data Marked by Black Cross",fontsize=15); pylab.show()
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
@@ -91,9 +91,9 @@ def biplot(good_data,reduced_data,pca):
     arrow_size,text_pos=7.0,8.0
     for i,v in enumerate(feature_vectors):
         ax.arrow(0,0,arrow_size*v[0],arrow_size*v[1],head_width=0.2,head_length=0.2,linewidth=2,color='red')
-        ax.text(v[0]*text_pos,v[1]*text_pos,good_data.columns[i],color='black',ha='center',va='center',fontsize=20)
-    ax.set_xlabel("Dimension 1",fontsize=12); ax.set_ylabel("Dimension 2",fontsize=12)
-    ax.set_title("PC plane with original feature projections.",fontsize=20); pylab.show()
+        ax.text(v[0]*text_pos,v[1]*text_pos,good_data.columns[i],color='black',ha='center',va='center',fontsize=15)
+    ax.set_xlabel("Dimension 1",fontsize=10); ax.set_ylabel("Dimension 2",fontsize=10)
+    ax.set_title("PC plane with original feature projections.",fontsize=15); pylab.show()
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
@@ -407,6 +407,9 @@ print ("The first and second principal components explained {}%".format(sum(pca_
 print ("The first four principal components explained {}%".format(sum(pca_result['Explained Variance'][:4])*100))
 </script></div>
     <p></p>
+    <h3>Dimensionality Reduction Observation</h3>
+Let's see how the log-transformed sample data has changed after having a PCA transformation applied to it using only two dimensions.<br/>
+Observe how the values for the first two dimensions remains unchanged when compared to a PCA transformation in six dimensions.
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
