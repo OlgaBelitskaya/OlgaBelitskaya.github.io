@@ -293,7 +293,7 @@ We should also note that the features is not normally distributed. But the log-n
 I have created the random example of the log-normal distribution for visual comparing.      
 <div class="linked"><script type="text/x-sage">
 pylab.figure(figsize=(12,5)); mu,sigma=3.,1.; s=numpy.random.lognormal(mu,sigma,1000)
-count,bins,ignored=pylab.hist(s,100,normed=True,align='mid',alpha=0.5,color='slategrey')
+count,bins,ignored=pylab.hist(s,200,normed=True,align='mid',alpha=0.5,color='slategrey')
 x=numpy.linspace(min(bins),max(bins),10000)
 pdf=(numpy.exp(-(numpy.log(x)-mu)**2/(2*sigma**2))/(x*sigma*numpy.sqrt(2*numpy.pi)))
 pylab.plot(x,pdf,linewidth=2,color='#1b2c45'); pylab.axis('tight'); pylab.grid()
@@ -534,6 +534,16 @@ The final visualization provided should, however, correspond with the optimal nu
 clusterer=KMeans(n_clusters=2).fit(reduced_data); sample_preds=clusterer.predict(pca_samples)
 preds=clusterer.predict(reduced_data); centers=clusterer.cluster_centers_; score=silhouette_score(reduced_data,preds)
 cluster_results(reduced_data,preds,centers,pca_samples,'K-Means')
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+clusterer2=GMM(n_components=2,covariance_type='full').fit(reduced_data); sample_preds2=clusterer2.predict(pca_samples)
+preds2=clusterer2.predict(reduced_data); centers2=clusterer2.means_; score2=silhouette_score(reduced_data,preds2)
+cluster_results(reduced_data,preds2,centers2,pca_samples,'Gaussian Mixture Model')
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
