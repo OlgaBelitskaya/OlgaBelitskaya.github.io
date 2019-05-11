@@ -388,7 +388,7 @@ pca_result=pca_results(good_data,pca); pca_result
 <div class="linked"><script type="text/x-sage">
 pylab.figure(figsize=(12,4)); pylab.xlabel('Dimension',fontsize=10)
 pylab.plot(numpy.arange(1,7),numpy.cumsum(pca.explained_variance_ratio_),'-o',c='#1b2c45')
-pylab.title('Explained Variance Ratio',fontsize=15); pylab.show()
+pylab.title('Explained Variance Ratio',fontsize=15); pylab.grid(); pylab.show()
 </script></div>
     <p></p>
     <h3>Question 5</h3>
@@ -403,15 +403,15 @@ We noted in the previous section that these three features are highly correlated
 so it can be a spending for restaurants and cafes with a special spectrum of the menu (fast food, for example).<br/>
 The first four dimensions represent enough well in terms of customer spending because they have explained the main part of the spending variance.
 <div class="linked"><script type="text/x-sage">
-print ("The first and second principal components explained {}%".format(sum(pca_result['Explained Variance'][:2])*100))
-print ("The first four principal components explained {}%".format(sum(pca_result['Explained Variance'][:4])*100))
+print ("The first and second principal components explained {}%".format(sum(pca_result['Explained Variance'][:int(2)])*100.0))
+print ("The first four principal components explained {}%".format(sum(pca_result['Explained Variance'][:int(4)])*100.0))
 </script></div>
     <p></p>
     <h3>Dimensionality Reduction Observation</h3>
 Let's see how the log-transformed sample data has changed after having a PCA transformation applied to it using only two dimensions.<br/>
 Observe how the values for the first two dimensions remains unchanged when compared to a PCA transformation in six dimensions.
 <div class="linked"><script type="text/x-sage">
-
+pandas.DataFrame(numpy.round(pca_samples,4),columns=pca_result.index.values,index=['C0','C1','C2','Mean'])
 </script></div>
     <p></p> 
 <div class="linked"><script type="text/x-sage">
