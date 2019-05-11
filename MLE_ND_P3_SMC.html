@@ -414,6 +414,21 @@ Observe how the values for the first two dimensions remains unchanged when compa
 pandas.DataFrame(numpy.round(pca_samples,4),columns=pca_result.index.values,index=['C0','C1','C2','Mean'])
 </script></div>
     <p></p> 
+    <h3>Implementation: Dimensionality Reduction</h3>
+When using principal component analysis, one of the main goals is to reduce the dimensionality of the data — in effect, reducing the complexity of the problem.<br/> 
+Dimensionality reduction comes at a cost: Fewer dimensions used implies less of the total variance in the data is being explained.<br/>
+Because of this, the cumulative explained variance ratio is extremely important for knowing how many dimensions are necessary for the problem.<br/>
+Additionally, if a signifiant amount of variance is explained by only two or three dimensions, the reduced data can be visualized afterwards.<br/>
+The next steps are the following:<br/>
+Assign the results of fitting PCA in two dimensions with <i>good_data</i> to pca.<br/>
+Apply a PCA transformation of <i>good_data</i> using <i>pca.transform</i>, and assign the results to <i>reduced_data</i>.<br/>
+Apply a PCA transformation of <i>log_samples</i> using <i>pca.transform</i>, and assign the results to <i>pca_samples</i>.
+<div class="linked"><script type="text/x-sage">
+pca=PCA(n_components=2).fit(good_data); pca_samples=pca.transform(log_samples)
+reduced_data=pandas.DataFrame(pca.transform(good_data),columns=['Dimension 1','Dimension 2'])
+</script></div>
+    <p></p> 
+      
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
@@ -421,7 +436,11 @@ pandas.DataFrame(numpy.round(pca_samples,4),columns=pca_result.index.values,inde
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
-    <p></p> 
+    <p></p>      
+<div class="linked"><script type="text/x-sage">
+
+</script></div>
+    <p></p>      
     <h3>Additional Code Cell</h3>
 <div class="linked"><script type="text/x-sage">
 
