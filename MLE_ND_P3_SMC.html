@@ -506,13 +506,13 @@ for n in list(range(2,12)):
 We also can run the speed comparison for the K-Means clustering and the Gaussian Mixture Model.
 <div class="linked"><script type="text/x-sage">
 n,k=300,6; kmeans_train_times=[]; gmm_train_times=[]
-for k in range(1,7):
+for k in range(2,k+1):
     cum_time=0.
     for i in range(n):
         start=time.time(); KMeans(n_clusters=k).fit(reduced_data); cum_time+=(time.time()-start)
     kmeans_train_times.append([k,cum_time/n])
 km_df=pandas.DataFrame(kmeans_train_times,columns=['KM_Clusters','KM_Time'])
-for k in range(1,7):
+for k in range(2,k+1):
     cum_time=0.
     for i in range(n):
         start=time.time(); GaussianMixture(n_components=k).fit(reduced_data); cum_time+=(time.time()-start)
@@ -520,16 +520,19 @@ for k in range(1,7):
 gmm_df=pandas.DataFrame(gmm_train_times,columns=['GMM_Components','GMM_Time']); times_df=km_df.join(gmm_df)
 pylab.figure(figsize=(12,4))
 pylab.plot(times_df.GMM_Components,times_df.GMM_Time*1000.,'-o',c='#5a8bbd',label='GMM Train Time')
-pylab.plot(times_df.GMM_Components, times_df.KM_Time*1000.,'-o',c='#008b8b',label='Kmeans Train Time')
+pylab.plot(times_df.GMM_Components,times_df.KM_Time*1000.,'-o',c='#008b8b',label='Kmeans Train Time')
 pylab.ylabel('Train time (in millisec.)',fontsize=10); pylab.xlabel('Cluster/Components Used in Training',fontsize=10)
 pylab.title('Training Time for Different Cluster/Component Sizes\nAveraged Over {} Runs Per Size'.format(n),fontsize=15)
 pylab.legend(loc='best'); pylab.grid(); pylab.show()
 </script></div>
     <p></p> 
-Cluster Visualization
-Once we've chosen the optimal number of clusters for the clustering algorithm using the scoring metric above, we can now visualize the results. Note that, for experimentation purposes, it's useful to adjust the number of clusters for the clustering algorithm to see various visualizations. The final visualization provided should, however, correspond with the optimal number of clusters.
+    <h3>Cluster Visualization</h3>
+Once we've chosen the optimal number of clusters for the clustering algorithm using the scoring metric above, we can now visualize the results.<br/>
+Note that, for experimentation purposes, it's useful to adjust the number of clusters for the clustering algorithm to see various visualizations.<br/> 
+The final visualization provided should, however, correspond with the optimal number of clusters.
 <div class="linked"><script type="text/x-sage">
-
+clusterer=KMeans(n_clusters=2).fit(reduced_data); sample_preds=clusterer.predict(pca_samples)
+preds=clusterer.predict(reduced_data); centers=clusterer.cluster_centers_; score=silhouette_score(reduced_data,preds)
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
