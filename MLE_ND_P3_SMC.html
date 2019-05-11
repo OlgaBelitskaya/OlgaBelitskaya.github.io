@@ -563,7 +563,7 @@ print ("K-Means True Centers"); true_centers
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-true_centers=true_centers.append(data.describe().iloc['mean'])
+true_centers=true_centers.append(data.describe().loc['mean'])
 true_centers.plot(kind='bar',figsize=(12,5))
 pylab.title('Comparing K-Means Centers with Data Means',fontsize=15)
 pylab.xticks(rotation=0,fontsize=10); pylab.grid(); pylab.show()
@@ -577,11 +577,30 @@ print ("Gaussian Mixture Model True Centers"); true_centers2
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+true_centers2=true_centers2.append(data.describe().loc['mean'])
+true_centers2.plot(kind='bar',figsize =(12,5))
+pylab.title('Comparing Gaussian Mixture Model Centers with Data Means',fontsize=15)
+pylab.xticks(rotation=0,fontsize=10); pylab.grid(); pylab.show()
 </script></div>
     <p></p>
+    <h3>Question 8</h3>
+<i>Consider the total purchase cost of each product category for the representative data points above,<br/>
+and reference the statistical description of the dataset at the beginning of this project.<br/>
+What set of establishments could each of the customer segments represent?</i>
+    <h3>Answer 8</h3>
+The values in categories are perfect indicators:<br/>
+<i>Detergents_Paper, Grocery, Milk, Delicatessen</i> are higher than the mean for <b>Retail</b> and less than the mean for <b>HoReCa</b> (Hotel/Restaurant/Cafe);
+<i>Fresh</i> has the highest level among others for <b>HoReCa</b> than for <b>Retail</b>.
+<i>Detergents_Paper</i> has an extremely small level for <b>HoReCa</b>.
 <div class="linked"><script type="text/x-sage">
-
+category=pandas.DataFrame([['',''],['','']],columns=['K-Means','Gaussian Mixture'],index=['Segment 0','Segment 1'])
+if true_centers['Fresh']['Segment 0']>true_centers['Fresh']['Segment 1']:
+    category['K-Means']['Segment 0']='HoReCa'; category['K-Means']['Segment 1']='Retail'
+else: category['K-Means']['Segment 0']='Retail'; category['K-Means']['Segment 1']='HoReCa'
+if true_centers2['Fresh']['Segment 0']>true_centers2['Fresh']['Segment 1']:
+    category['Gaussian Mixture']['Segment 0']='HoReCa'; category['Gaussian Mixture']['Segment 1']='Retail'
+else: category['Gaussian Mixture']['Segment 0']='Retail'; category['Gaussian Mixture']['Segment 1']='HoReCa'
+category
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
