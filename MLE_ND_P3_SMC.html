@@ -686,11 +686,13 @@ Differences between actual and algorithmic classification may indicate a lack of
 channel_data=pandas.read_csv(path+'customers.csv')
 channel_data=channel_data.drop(channel_data.index[outliers]).reset_index(drop=True)
 # Might need to switch around the 0 and 1, based on the cluster seed
-df=numpy.where(channel_data['Channel']==2,0,1)
+df1,df2=numpy.where(channel_data['Channel']==2,0,1),numpy.where(channel_data['Channel']==2,1,0)
+percentage_kmeans=max(sum(df1==preds)/float(len(preds)),sum(df2==preds)/float(len(preds)))
+percentage_gaussian_mixture=max(sum(df1==preds)/float(len(preds2)),sum(df2==preds2)/float(len(preds2)))
 print ("K-Means")
-print ("Percentage of correctly classified customers: {:.2%}".format(sum(df==preds)/float(len(preds))))
+print ("Percentage of correctly classified customers: {:.2%}".format(percentage_kmeans))
 print ("\nGaussian Mixture Model")
-print ("Percentage of correctly classified customers: {:.2%}".format(sum(df==preds2)/float(len(preds2))))
+print ("Percentage of correctly classified customers: {:.2%}".format(percentage_gaussian_mixture))
 </script></div>
     <p></p>
     <h3>Reflections</h3>
