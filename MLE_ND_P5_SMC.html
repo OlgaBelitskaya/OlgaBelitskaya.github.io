@@ -33,7 +33,7 @@
 <a href="http://scipy-lectures.org/">&#x1F578;Scipy Lecture Notes&nbsp;</a><br/>
     <h3>Code Library</h3> 
 <div class="linked"><script type="text/x-sage">
-import numpy,pandas,scipy,pylab; pylab.style.use('seaborn-whitegrid')
+import numpy,pandas,scipy,pylab,urllib; pylab.style.use('seaborn-whitegrid')
 import warnings; from sklearn.exceptions import DataConversionWarning
 for el in [FutureWarning,UserWarning,DataConversionWarning]: warnings.filterwarnings("ignore",category=el)
 from sklearn.model_selection import train_test_split
@@ -55,6 +55,10 @@ X1.shape,y1.shape,cy1.shape
 </script></div>
     <p></p> 
 <div class="linked"><script type="text/x-sage">
+
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
 n=5; img=numpy.zeros((10*n,10*n))
 for i in range(n): 
     for j in range(n): img[(10*i+1):(10*i+9),(10*j+1):(10*j+9)]=X1[i*n+j].reshape((8,8))
@@ -63,12 +67,19 @@ pylab.title('Examples of 64-dimensional digits')
 pylab.xticks([]); pylab.yticks([]); pylab.show()
 </script></div>
     <p></p> 
+<h4>Dataset #2. MNIST</h4>
 <div class="linked"><script type="text/x-sage">
-
+path='https://s3.amazonaws.com/img-datasets/'; f='mnist.npz'
+input_file=urllib.urlopen(path+f); output_file=open(f,'wb'); output_file.write(input_file.read()) 
+input_file.close(); output_file.close(); mnist=numpy.load(f) 
+[X_train2,y_train2,X_test2,y_test2]=[mnist[el]for el in ['x_train','y_train','x_test','y_test']]
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+fig,ax=pylab.subplots(figsize=(5,6),nrows=5,ncols=5,sharex=True,sharey=True)
+ax=ax.flatten(); [ax[i].imshow(X_train2[i],cmap=pylab.cm.Blues) for i in range(25)]
+ax[0].set_xticks([]); ax[0].set_yticks([]); pylab.tight_layout(); pylab.gcf() 
+ax[2].set_title('Examples of the 784-dimensional digits',fontsize=12); pylab.show()
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
