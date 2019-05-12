@@ -27,8 +27,7 @@
     <h1>Machine Learning Engineer Nanodegree</h1>
     <h2>Deep Learning</h2>
     <h1>&#x1F4D1; &nbsp;P5: Build a Digit Recognition Program</h1>
-    <h2>Getting Started</h2>
-      
+    <h2>Step 0: Load and Create Datasets</h2>      
     <h3>Resources</h3>
 <a href="https://scikit-learn.org/stable/index.html">&#x1F578;scikit-learn. Machine Learning in Python&nbsp;</a>
 <a href="http://scipy-lectures.org/">&#x1F578;Scipy Lecture Notes&nbsp;</a><br/>
@@ -39,21 +38,43 @@ import warnings; from sklearn.exceptions import DataConversionWarning
 for el in [FutureWarning,UserWarning,DataConversionWarning]: warnings.filterwarnings("ignore",category=el)
 from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPClassifier
-from sklearn import datasets,metrics
+from sklearn import datasets,metrics,preprocessing
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+def ohe(x): return preprocessing.OneHotEncoder(categories='auto').fit(x.reshape(-1,1))\
+            .transform(x.reshape(-1,1)).toarray().astype('int16')
+def sas(X,y): return train_test_split(X,y,test_size=0.2,random_state=1)
+</script></div>
+    <p></p> 
+    <h3>Experimental Datasets</h3>
+<h4>Dataset #1. Scikit-learn. Digits.</h4>
+<div class="linked"><script type="text/x-sage">
+digits=datasets.load_digits(n_class=10); X1,y1=digits.data,digits.target; cy1=ohe(y1)
+X1.shape,y1.shape,cy1.shape
+</script></div>
+    <p></p> 
+<div class="linked"><script type="text/x-sage">
+n=5; img=numpy.zeros((10*n,10*n))
+for i in range(n): 
+    for j in range(n): img[(10*i+1):(10*i+9),(10*j+1):(10*j+9)]=X3[i*n+j].reshape((8,8))
+pylab.figure(figsize=(5,5)); pylab.imshow(img,cmap=pylab.cm.bone)
+pylab.title('Examples of 64-dimensional digits')
+pylab.xticks([]); pylab.yticks([]); pylab.show()
+</script></div>
+    <p></p> 
+<div class="linked"><script type="text/x-sage">
+
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
-    <p></p> 
+    <p></p>
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
-    <p></p> 
-<div class="linked"><script type="text/x-sage">
-
-</script></div>
-    <p></p> 
+    <p></p>
     <h3>Additional Code Cell</h3>
 <div class="linked"><script type="text/x-sage">
 
