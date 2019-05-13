@@ -60,7 +60,7 @@ X_train1.shape,y_train1.shape,X_test1.shape,y_test1.shape
 n=5; img=numpy.zeros((10*n,10*n))
 for i in range(n): 
     for j in range(n): img[(10*i+1):(10*i+9),(10*j+1):(10*j+9)]=X_train1[i*n+j].reshape((8,8))
-pylab.figure(figsize=(5,5)); pylab.imshow(img,cmap=pylab.cm.bone)
+pylab.figure(figsize=(5,5)); pylab.imshow(img,cmap=pylab.cm.Blues)
 pylab.title('Examples of 64-dimensional digits')
 pylab.xticks([]); pylab.yticks([]); pylab.show()
 </script></div>
@@ -70,9 +70,8 @@ pylab.xticks([]); pylab.yticks([]); pylab.show()
 path='https://s3.amazonaws.com/img-datasets/'; f='mnist.npz'
 input_file=urllib.urlopen(path+f); output_file=open(f,'wb'); output_file.write(input_file.read()) 
 input_file.close(); output_file.close(); mnist=numpy.load(f) 
-[X_train2,cy_train2,X_test2,cy_test2]=[mnist[el]for el in ['x_train','y_train','x_test','y_test']]
-y_train2=numpy.array([numpy.where(r==1)[0] for r in cy_train2]).reshape(len(cy_train2))
-y_test2=numpy.array([numpy.where(r==1)[0] for r in cy_test2]).reshape(len(cy_test2))
+[X_train2,y_train2,X_test2,y_test2]=[mnist[el]for el in ['x_train','y_train','x_test','y_test']]
+cy_train2=ohe(y_train2); cy_test2=ohe(y_test2)
 X_train2.shape,y_train2.shape,X_test2.shape,y_test2.shape
 </script></div>
     <p></p>
@@ -83,6 +82,7 @@ ax[0].set_xticks([]); ax[0].set_yticks([]); pylab.tight_layout(); pylab.gcf()
 ax[2].set_title('Examples of the 784-dimensional digits',fontsize=12); pylab.show()
 </script></div>
     <p></p>
+<h4>Dataset #3. Synthetic - Two digits</h4>
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
@@ -105,7 +105,7 @@ ax[2].set_title('Examples of the 784-dimensional digits',fontsize=12); pylab.sho
     <p></p>
 <div class="linked"><script type="text/x-sage">
 clf=MLPClassifier(hidden_layer_sizes=(256,),max_iter=5,solver='adam',verbose=0,random_state=1,learning_rate_init=.01)
-clf.fit(X_train2.reshape(-1,784),y_train2); print(clf.score(X_test2.reshape(-1,784),y_test2)
+clf.fit(X_train2.reshape(-1,784),y_train2); print(clf.score(X_test2.reshape(-1,784),y_test2))
 y_test2_predictions=clf.predict(X_test2.reshape(-1,784))
 pylab.figure(figsize=(12,5)); pylab.scatter(range(100),y_test2[:100],s=100)
 pylab.scatter(range(100),y_test2_predictions[:100],s=25); pylab.show()
