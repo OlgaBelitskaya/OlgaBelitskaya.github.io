@@ -94,14 +94,15 @@ pylab.xticks([]); pylab.yticks([]); pylab.show()
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-n1,n2=int(X_train2.shape[0]/2),int(X_test2.shape[0]/2)
-h1=random.randrange(0,28); h2=28-h1
+n1,n2=int(X_train2.shape[0]/2),int(X_test2.shape[0]/2); h1=random.randrange(0,28); h2=28-h1
 X_train56=[numpy.concatenate((X_train2[:n1][i],X_train2[n1:][i]),axis=1) for i in range(n1)]
 X_train56=numpy.array([numpy.concatenate((numpy.zeros((h1,56)),X_train56[i],numpy.zeros((h2,56))),axis=0) for i in range(n1)])
 X_test56=[numpy.concatenate((X_test2[:n2][i],X_test2[n2:][i]),axis=1) for i in range(n2)]
 X_test56=numpy.array([numpy.concatenate((numpy.zeros((h1,56)),X_test56[i],numpy.zeros((h2,56))),axis=0) for i in range(n2)])
-pylab.title('Example of the third dataset')
-pylab.imshow(X_test56[20],cmap=pylab.cm.Blues); pylab.show()
+y_train56=numpy.array([numpy.concatenate((y_train2.reshape(-1,1)[:n1][i],y_train2.reshape(-1,1)[n1:][i])) for i in range(n1)])
+y_test56=numpy.array([numpy.concatenate((y_test2.reshape(-1,1)[:n2][i],y_test2.reshape(-1,1)[n2:][i])) for i in range(n2)])
+k=20; pylab.imshow(X_test56[k],cmap=pylab.cm.Blues); pylab.title('Example of the third dataset')
+pylab.show(); print(y_test56[k])
 X_train56=X_train56.reshape(-1,1,56,56).astype('float32'); X_test56=X_test56.reshape(-1,1,56,56).astype('float32')
 </script></div>
     <p></p>
