@@ -51,7 +51,7 @@ def sas(X,y): return train_test_split(X,y,test_size=0.2,random_state=1)
 <h4>Dataset #1. Scikit-learn. Digits.</h4>
 <div class="linked"><script type="text/x-sage">
 digits=datasets.load_digits(n_class=10)
-X_train1,y_train1,X_test1,y_test1=sas(digits.data,digits.target)
+X_train1,X_test1,y_train1,y_test1=sas(digits.data,digits.target)
 cy_train1=ohe(y_train1); cy_test1=ohe(y_test1)
 X_train1.shape,y_train1.shape,X_test1.shape,y_test1.shape
 </script></div>
@@ -60,9 +60,10 @@ X_train1.shape,y_train1.shape,X_test1.shape,y_test1.shape
 n=5; img=numpy.zeros((10*n,10*n))
 for i in range(n): 
     for j in range(n): img[(10*i+1):(10*i+9),(10*j+1):(10*j+9)]=X_train1[i*n+j].reshape((8,8))
-pylab.figure(figsize=(5,5)); pylab.imshow(img,cmap=pylab.cm.Blues)
+pylab.figure(figsize=(n,n)); pylab.imshow(img,cmap=pylab.cm.Blues)
 pylab.title('Examples of 64-dimensional digits')
 pylab.xticks([]); pylab.yticks([]); pylab.show()
+print(y_train1[:n*n])
 </script></div>
     <p></p> 
 <h4>Dataset #2. MNIST</h4>
@@ -76,10 +77,11 @@ X_train2.shape,y_train2.shape,X_test2.shape,y_test2.shape
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-fig,ax=pylab.subplots(figsize=(5,6),nrows=5,ncols=5,sharex=True,sharey=True)
-ax=ax.flatten(); [ax[i].imshow(X_train2[i],cmap=pylab.cm.Blues) for i in range(25)]
+n=5; fig,ax=pylab.subplots(figsize=(n,n+1),nrows=n,ncols=n,sharex=True,sharey=True)
+ax=ax.flatten(); [ax[i].imshow(X_train2[i],cmap=pylab.cm.Blues) for i in range(n*n)]
 ax[0].set_xticks([]); ax[0].set_yticks([]); pylab.tight_layout(); pylab.gcf() 
 ax[2].set_title('Examples of the 784-dimensional digits',fontsize=12); pylab.show()
+print(y_train2[:n*n])
 </script></div>
     <p></p>
 <h4>Dataset #3. Synthetic - Two digits</h4>
