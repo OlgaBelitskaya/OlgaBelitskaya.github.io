@@ -50,6 +50,31 @@ def label5d(label):
     zeros=numpy.full((5-len(label)),10)
     if len(label) >= 5: return label
     else: return numpy.array(numpy.concatenate((zeros,label),axis=0))
+def concatenate(images,labels,image_size):
+    i=0   
+    concat_images=numpy.array(numpy.zeros((image_size,image_size*5))).reshape(1,image_size,image_size*5)
+    concat_labels=numpy.array(numpy.zeros(5))   
+    while i<images.shape[0]:
+        if images.shape[0]-i<=5: 
+            image=images[i]; label=labels[i]            
+            for  j  in range(images.shape[0]-i-1): 
+                image=numpy.concatenate((image,images[i+j+1]),axis=1)
+                label=numpy.concatenate((label,labels[i+j+1]),axis=0)                
+            label=label5d(label); image=skimage.transform.resize(image,(image_size,image_size*5))            
+            concat_images=numpy.vstack((concat_images,[image]))
+            concat_labels=numpy.vstack((concat_labels,label))           
+            i+=5            
+        else:
+            random_n=numpy.random.randint(3,6); image=images[i]; label=labels[i]           
+            for k in range(random_n-1):
+                image=numpy.concatenate((image,images[i+k+1]),axis=1)
+                label=numpy.concatenate((label,labels[i+k+1]),axis=0)                
+            label=label5d(label); image=skimage.transform.resize(image,(image_size,image_size*5))           
+            concat_images=numpy.vstack((concat_images,[image]))
+            concat_labels=numpy.vstack((concat_labels,label))           
+            i+=random_n            
+    concat_images=concat_images[1:]; concat_labels=concat_labels[1:]
+    return concat_images,concat_labels
 </script></div>
     <p></p> 
     <h3>Experimental Datasets</h3>
