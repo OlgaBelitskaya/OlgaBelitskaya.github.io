@@ -46,6 +46,10 @@ def ohe(x): return preprocessing.OneHotEncoder(categories='auto').fit(x.reshape(
             .transform(x.reshape(-1,1)).toarray().astype('int16')
 def sas(X,y): return train_test_split(X,y,test_size=0.2,random_state=1)
 def random_rotate(img): return skimage.transform.rotate(img,numpy.random.randint(-20,20))
+def label5d(label):
+    zeros=numpy.full((5-len(label)),10)
+    if len(label) >= 5: return label
+    else: return numpy.array(numpy.concatenate((zeros,label),axis=0))
 </script></div>
     <p></p> 
     <h3>Experimental Datasets</h3>
@@ -121,11 +125,11 @@ X_train56=X_train56.reshape(-1,1,56,56).astype('float32'); X_test56=X_test56.res
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-clf=MLPClassifier(hidden_layer_sizes=(256,),max_iter=5,solver='adam',verbose=0,random_state=1,learning_rate_init=.01)
+clf=MLPClassifier(hidden_layer_sizes=(272,),max_iter=5,solver='adam',verbose=0,random_state=1,learning_rate_init=.01)
 clf.fit(X_train2.reshape(-1,784),y_train2); print(clf.score(X_test2.reshape(-1,784),y_test2))
 y_test2_predictions=clf.predict(X_test2.reshape(-1,784))
-pylab.figure(figsize=(12,5)); pylab.scatter(range(100),y_test2[:100],s=100)
-pylab.scatter(range(100),y_test2_predictions[:100],s=25); pylab.show()
+pylab.figure(figsize=(12,5)); pylab.scatter(range(100),y_test2[:100],color='#b8e2fc',s=100)
+pylab.scatter(range(100),y_test2_predictions[:100],color='#191970',s=25); pylab.show()
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
