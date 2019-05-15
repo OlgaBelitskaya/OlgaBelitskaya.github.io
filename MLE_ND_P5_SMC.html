@@ -146,9 +146,9 @@ pylab.xticks([]); pylab.yticks([]); pylab.show()
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-n=25000
+n=20000
 X_train140,y_train140=concatenate(X_train2r[:n],y_train2.reshape(-1,1)[:n],28)
-X_test140,y_test140=concatenate(X_test2r[:int(n/5)],y_train2.reshape(-1,1)[:int(n/5)],28)
+X_test140,y_test140=concatenate(X_test2r[:int(n/5)],y_test2.reshape(-1,1)[:int(n/5)],28)
 del X_train2r,X_test2r
 print(y_test140[k]); pylab.imshow(X_test140[k],cmap=pylab.cm.Blues)
 pylab.title('Example of the final synthetic datasets')
@@ -163,7 +163,12 @@ with h5py.File('Synthetic5Digits.h5','w') as f:
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+f=h5py.File('Synthetic5Digits.h5','r'); keys=list(f.keys()); print(keys)
+X_test140=numpy.array(f[keys[0]]); X_train140=numpy.array(f[keys[1]])
+y_test140=numpy.array(f[keys[2]]); y_train140=numpy.array(f[keys[3]])
+print(y_test140[k]); pylab.imshow(X_test140[k],cmap=pylab.cm.Blues)
+pylab.title('Example of the synthetic dataset (h5)')
+pylab.xticks([]); pylab.yticks([]); pylab.show()
 </script></div>
     <p></p>
     <h2>Step 1: Design and Test a Model Architecture</h2>
