@@ -42,14 +42,14 @@ from sklearn import datasets,metrics,preprocessing
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-def ohe(x): return preprocessing.OneHotEncoder(categories='auto').fit(x.reshape(-1,1))\
-            .transform(x.reshape(-1,1)).toarray().astype('int16')
+def ohe(x,categories='auto'): return preprocessing.OneHotEncoder(categories=categories).fit(x.reshape(-1,1))\
+                                     .transform(x.reshape(-1,1)).toarray().astype('int16')
 def sas(X,y): return train_test_split(X,y,test_size=0.2,random_state=1)
 def random_rotate(img): return skimage.transform.rotate(img,numpy.random.randint(-20,20))
 def label5d(label):
     zeros=numpy.full((5-len(label)),10)
     if len(label) >= 5: return label
-    else: return numpy.array(numpy.concatenate((zeros,label),axis=0)).astype('int16')
+    else: return numpy.array(numpy.concatenate((zeros,label),axis=0))
 def concatenate(images,labels,image_size):
     i=0   
     concat_images=numpy.array(numpy.zeros((image_size,image_size*5))).reshape(1,image_size,image_size*5)
@@ -71,7 +71,7 @@ def concatenate(images,labels,image_size):
                 label=numpy.concatenate((label,labels[i+k+1]),axis=0)                
             label=label5d(label); image=skimage.transform.resize(image,(image_size,image_size*5))           
             concat_images=numpy.vstack((concat_images,[image]))
-            concat_labels=numpy.vstack((concat_labels,label))           
+            concat_labels=numpy.vstack((concat_labels,label)).astype('int16')           
             i+=random_n            
     concat_images=concat_images[1:]; concat_labels=concat_labels[1:]
     return concat_images,concat_labels
