@@ -220,6 +220,18 @@ class NeuralNetMLP(object):
         a1=self._add_bias_unit(X,how='column'); z2=w1.dot(a1.T); a2=self._sigmoid(z2)
         a2=self._add_bias_unit(a2,how='row'); z3=w2.dot(a2); a3=self._sigmoid(z3)
         return a1,z2,a2,z3,a3
+    def _L2_reg(self,lambda_,w1,w2): return (lambda_/2.0)*(numpy.sum(w1[:,1:]**2)+numpy.sum(w2[:,1:]**2))
+    def _L1_reg(self,lambda_,w1,w2): return (lambda_/2.0)*(numpy.abs(w1[:,1:]).sum()+numpy.abs(w2[:,1:]).sum())
+    def _get_cost(self,y_enc,output,w1,w2):
+        term1=-y_enc*(numpy.log(output)); term2=(1-y_enc)*numpy.log(1-output)
+        L1_term=self._L1_reg(self.l1,w1,w2); L2_term=self._L2_reg(self.l2,w1,w2)
+        return numpy.sum(term1-term2)+L1_term+L2_term
+    def _get_gradient(self,a1,a2,a3,z2,y_enc,w1,w2):
+        sigma3=a3-y_enc; z2=self._add_bias_unit(z2,how='row')
+        sigma2=w2.T.dot(sigma3)*self._sigmoid_gradient(z2)
+        sigma2=sigma2[1:,:]; grad1=sigma2.dot(a1); grad2=sigma3.dot(a2.T)
+        grad1[:,1:]+=(w1[:,1:]*(self.l1+self.l2)); grad2[:,1:]+=(w2[:,1:]*(self.l1+self.l2))
+        return grad1,grad2
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
