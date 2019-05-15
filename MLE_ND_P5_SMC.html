@@ -33,7 +33,7 @@
 <a href="http://scipy-lectures.org/">&#x1F578;Scipy Lecture Notes&nbsp;</a><br/>
     <h3>Code Library</h3> 
 <div class="linked"><script type="text/x-sage">
-import numpy,pandas,skimage,pylab,urllib,random,h5py; pylab.style.use('seaborn-whitegrid')
+import numpy,pandas,skimage,pylab,urllib,random,h5py,sys; pylab.style.use('seaborn-whitegrid')
 import warnings; from sklearn.exceptions import DataConversionWarning
 for el in [FutureWarning,UserWarning,DataConversionWarning]: warnings.filterwarnings("ignore",category=el)
 from sklearn.model_selection import train_test_split
@@ -232,6 +232,25 @@ class NeuralNetMLP(object):
         sigma2=sigma2[1:,:]; grad1=sigma2.dot(a1); grad2=sigma3.dot(a2.T)
         grad1[:,1:]+=(w1[:,1:]*(self.l1+self.l2)); grad2[:,1:]+=(w2[:,1:]*(self.l1+self.l2))
         return grad1,grad2
+    def fit(self,X,y,print_progress=False):
+        self.cost_=[]; X_data,y_data=X.copy(),y.copy(); y_enc=self._encode_labels(y,self.n_output)
+        delta_w1_prev=numpy.zeros(self.w1.shape); delta_w2_prev=numpy.zeros(self.w2.shape)
+        for i in range(self.epochs):
+            self.eta/=(1+self.decrease_const*i)
+            if print_progress: sys.stderr.write('\rEpoch: %d/%d'%(i+1,self.epochs)); sys.stderr.flush()
+            if self.shuffle:
+                idx=numpy.random.permutation(y_data.shape[0])
+                X_data,y_enc=X_data[idx],y_enc[:,idx]
+            mini=numpy.array_split(range(y_data.shape[0]),self.minibatches)           
+            for idx in mini:
+                a1,z2,a2,z3,a3=self._feedforward(X_data[idx],self.w1,self.w2)
+                cost=self._get_cost(y_enc=y_enc[:,idx],output=a3,w1=self.w1,w2=self.w2)                
+                self.cost_.append(cost)
+                grad1,grad2=self._get_gradient(a1=a1,a2=a2,a3=a3,z2=z2,y_enc=y_enc[:,idx],w1=self.w1,w2=self.w2)
+                delta_w1,delta_w2=self.eta*grad1,self.eta*grad2
+                self.w1-=(delta_w1+(self.alpha*delta_w1_prev)); self.w2-=(delta_w2+(self.alpha*delta_w2_prev))
+                delta_w1_prev,delta_w2_prev=delta_w1,delta_w2
+        return self
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
