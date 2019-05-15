@@ -33,7 +33,7 @@
 <a href="http://scipy-lectures.org/">&#x1F578;Scipy Lecture Notes&nbsp;</a><br/>
     <h3>Code Library</h3> 
 <div class="linked"><script type="text/x-sage">
-import numpy,pandas,skimage,pylab,urllib,random; pylab.style.use('seaborn-whitegrid')
+import numpy,pandas,skimage,pylab,urllib,random,h5py; pylab.style.use('seaborn-whitegrid')
 import warnings; from sklearn.exceptions import DataConversionWarning
 for el in [FutureWarning,UserWarning,DataConversionWarning]: warnings.filterwarnings("ignore",category=el)
 from sklearn.model_selection import train_test_split
@@ -146,7 +146,7 @@ pylab.xticks([]); pylab.yticks([]); pylab.show()
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-n=30000
+n=25000
 X_train140,y_train140=concatenate(X_train2r[:n],y_train2.reshape(-1,1)[:n],28)
 X_test140,y_test140=concatenate(X_test2r[:int(n/5)],y_train2.reshape(-1,1)[:int(n/5)],28)
 del X_train2r,X_test2r
@@ -156,7 +156,10 @@ pylab.xticks([]); pylab.yticks([]); pylab.show()
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+with h5py.File('Synthetic5Digits.h5','w') as f:
+    f.create_dataset('X_train',data=X_train140); f.create_dataset('X_test',data=X_test140)
+    f.create_dataset('y_train',data=y_train140); f.create_dataset('y_test',data=y_test140)
+    f.close()
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
