@@ -71,7 +71,7 @@ def concatenate(images,labels,image_size):
                 label=numpy.concatenate((label,labels[i+k+1]),axis=0)                
             label=label5d(label); image=skimage.transform.resize(image,(image_size,image_size*5))           
             concat_images=numpy.vstack((concat_images,[image]))
-            concat_labels=numpy.vstack((concat_labels,label)).astype('int16')           
+            concat_labels=numpy.vstack((concat_labels,label))           
             i+=random_n            
     concat_images=concat_images[1:]; concat_labels=concat_labels[1:]
     return concat_images,concat_labels
@@ -114,7 +114,7 @@ ax[2].set_title('Examples of the 784-dimensional digits',fontsize=12); pylab.sho
 print(y_train2[:n*n])
 </script></div>
     <p></p>
-<h4>Dataset #3. Synthetic - Two digits</h4>
+<h4>Dataset #3. Synthetic - two digits</h4>
 <div class="linked"><script type="text/x-sage">
 img1=numpy.concatenate((X_train2[20],X_train2[30]),axis=1); zero1=numpy.zeros((14,56))
 img2=numpy.concatenate((zero1,img1,zero1),axis=0)
@@ -136,7 +136,7 @@ pylab.show(); print(y_test56[k])
 X_train56=X_train56.reshape(-1,1,56,56).astype('float32'); X_test56=X_test56.reshape(-1,1,56,56).astype('float32')
 </script></div>
     <p></p>
-<h4>Dataset #4. Synthetic. Several digits with rotation</h4>
+<h4>Dataset #4. Synthetic - five digits with rotation</h4>
 <div class="linked"><script type="text/x-sage">
 X_train2r=numpy.array([random_rotate(image) for image in X_train2])
 X_test2r=numpy.array([random_rotate(image) for image in X_test2])
