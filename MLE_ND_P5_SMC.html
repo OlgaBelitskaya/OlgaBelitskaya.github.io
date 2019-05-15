@@ -194,7 +194,22 @@ We can use the module <i>keras</i> or <i>tensorflow</i> or <i>sklearn</i> to imp
     <h3>Examples of Models</h3>
 Models N1 and N2 are classic examples, other models were designed for this project.
 <div class="linked"><script type="text/x-sage">
-
+class NeuralNetMLP(object):
+    def __init__(self,n_output,n_features,n_hidden=30,l1=0.0,l2=0.0,epochs=500,eta=0.001, 
+                 alpha=0.0,decrease_const=0.0,shuffle=True,minibatches=1,random_state=None):
+        numpy.random.seed(random_state); self.epochs=epochs; self.shuffle=shuffle; self.minibatches=minibatches 
+        self.n_output=n_output; self.n_features=n_features; self.n_hidden=n_hidden 
+        self.l1=l1; self.l2=l2; self.eta=eta; self.alpha=alpha; self.decrease_const=decrease_const
+        self.w1,self.w2=self._initialize_weights()
+    def _encode_labels(self,y,k):
+        onehot=numpy.zeros((k,y.shape[0]))
+        for idx,val in enumerate(y): onehot[val,idx]=1.0
+        return onehot
+    def _initialize_weights(self):
+        w1=numpy.random.uniform(-1.0,1.0,size=self.n_hidden*(self.n_features+1))      
+        w2=numpy.random.uniform(-1.0,1.0,size=self.n_output*(self.n_hidden+1))
+        return w1.reshape(self.n_hidden,self.n_features+1),w2.reshape(self.n_output,self.n_hidden+1)        
+    def _sigmoid(self,z): return expit(z) # expit is equivalent to 1.0/(1.0+numpy.exp(-z))
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
