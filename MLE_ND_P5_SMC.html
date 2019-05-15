@@ -166,9 +166,11 @@ with h5py.File('Synthetic5Digits.h5','w') as f:
 f=h5py.File('Synthetic5Digits.h5','r'); keys=list(f.keys()); print(keys)
 X_test140=numpy.array(f[keys[0]]); X_train140=numpy.array(f[keys[1]])
 y_test140=numpy.array(f[keys[2]]); y_train140=numpy.array(f[keys[3]])
-cy_train140=numpy.array[ohe(y_train140[:,i]) for i in range(5)]
-cy_test140=numpy.array[ohe(y_test140[:,i]) for i in range(5)]
-print(y_test140[k]); pylab.imshow(X_test140[k],cmap=pylab.cm.Blues)
+cy_train140=numpy.empty([len(y_train140),5,11]).astype('int16')
+for i in range(5): cy_train140[:,i]=ohe(y_train140[:,i].reshape(-1,1),categories=[list(range(11))])
+cy_test140=numpy.empty([len(y_test140),5,11]).astype('int16')
+for i in range(5): cy_test140[:,i]=ohe(y_test140[:,i].reshape(-1,1),categories=[list(range(11))])
+print(y_test140[k]); print(cy_test140[k]); pylab.imshow(X_test140[k],cmap=pylab.cm.Blues)
 pylab.title('Example of the synthetic dataset (h5)')
 pylab.xticks([]); pylab.yticks([]); pylab.show()
 </script></div>
