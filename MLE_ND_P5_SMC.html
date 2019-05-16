@@ -264,9 +264,11 @@ print('Dataset N1. Rows: %d, columns: %d'%(X_train1.shape[0],X_train1.shape[1]))
 nn1=NeuralNetMLP(n_output=10,n_features=X_train1.shape[1],n_hidden=128,l2=0.1,l1=0.0,epochs=1000, 
                  eta=0.01,alpha=0.01,decrease_const=0.001,shuffle=True,minibatches=128,random_state=0)
 nn1.fit(X_train1,y_train1,print_progress=True)
-y_test1_pred=nn1.predict(X_test1)
-nn1_accuracy =numpy.sum(y_test1==y_test1_pred,axis=0)/X_test1.shape[0]
-print('Train accuracy: %.2f%%'%(nn1_accuracy*100))
+y_train1_pred=nn1.predict(X_train1); y_test1_pred=nn1.predict(X_test1)
+nn1_train1_accuracy=1.*numpy.sum(y_train1==y_train1_pred)/X_train1.shape[0]
+nn1_test1_accuracy=1.*numpy.sum(y_test1==y_test1_pred)/X_test1.shape[0]
+print('Train accuracy: %.2f%%'%(nn1_train1_accuracy*100))
+print('Test accuracy: %.2f%%'%(nn1_test1_accuracy*100))
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
