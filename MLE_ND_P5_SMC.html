@@ -285,6 +285,7 @@ batches=numpy.array_split(range(len(nn2.cost_)),800)
 cost_ary=numpy.array(nn2.cost_); cost_avgs=[numpy.mean(cost_ary[i]) for i in batches]
 pylab.figure(figsize=(12,4)); pylab.plot(range(len(cost_avgs)),cost_avgs,lw=3,color='royalblue')
 pylab.ylim([0,1500]); pylab.ylabel('Cost'); pylab.xlabel('Epochs'); pylab.title('Cost Function'); pylab.show()
+print('Misclassified test MNIST images: {}'.format(len(y_test2[y_test2!=y_test2_pred])))
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
@@ -297,7 +298,6 @@ clf.fit(X_train2.reshape(-1,784),y_train2); print(clf.score(X_test2.reshape(-1,7
 y_test2_predictions=clf.predict(X_test2.reshape(-1,784))
 pylab.figure(figsize=(12,5)); pylab.scatter(range(100),y_test2[:100],color='#b8e2fc',s=100)
 pylab.scatter(range(100),y_test2_predictions[:100],color='#191970',s=25); pylab.show()
-print('Misclassified test MNIST images: {}'.format(len(y_test2[y_test2!=y_test2_pred])))
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
