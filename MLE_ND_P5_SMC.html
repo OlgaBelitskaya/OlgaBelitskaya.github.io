@@ -261,7 +261,7 @@ class NeuralNetMLP(object):
     <p></p>
 <div class="linked"><script type="text/x-sage">
 print('Dataset N1. Rows: %d, columns: %d'%(X_train1.shape[0],X_train1.shape[1]))
-nn1=NeuralNetMLP(n_output=10,n_features=X_train1.shape[1],n_hidden=128,l2=0.1,l1=0.0,epochs=1000, 
+nn1=NeuralNetMLP(n_output=10,n_features=X_train1.shape[1],n_hidden=128,l2=0.1,l1=0.0,epochs=800, 
                  eta=0.01,alpha=0.01,decrease_const=0.001,shuffle=True,minibatches=128,random_state=0)
 nn1.fit(X_train1,y_train1,print_progress=True)
 y_train1_pred=nn1.predict(X_train1); y_test1_pred=nn1.predict(X_test1)
@@ -272,7 +272,16 @@ print('Test accuracy: %.2f%%'%(nn1_test1_accuracy*100))
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+n=20000
+print('Dataset N2. Rows: %d, columns: %d'%(n,X_train2.shape[1]*X_train2.shape[2]))
+nn2=NeuralNetMLP(n_output=10,n_features=784,n_hidden=196,l2=0.01,l1=0.01,epochs=800, 
+                 eta=0.001,alpha=0.001,decrease_const=0.00001,shuffle=True,minibatches=50,random_state=1)
+nn2.fit(X_train2[:n].reshape(-1,784),y_train2[:n],print_progress=True)
+y_train2_pred=nn2.predict(X_train2.reshape(-1,784)); y_test2_pred=nn2.predict(X_test2.reshape(-1,784))
+nn1_train2_accuracy=1.*numpy.sum(y_train2==y_train2_pred)/X_train2.shape[0]
+nn1_test2_accuracy=1.*numpy.sum(y_test2==y_test2_pred)/X_test2.shape[0]
+print('Train accuracy: %.2f%%'%(nn1_train2_accuracy*100))
+print('Test accuracy: %.2f%%'%(nn1_test2_accuracy*100))
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
