@@ -35,7 +35,7 @@
 <div class="linked"><script type="text/x-sage">
 import numpy,pandas,skimage,pylab,urllib,random,h5py,sys; pylab.style.use('seaborn-whitegrid')
 import warnings; from sklearn.exceptions import DataConversionWarning
-for el in [FutureWarning,UserWarning,DataConversionWarning]: warnings.filterwarnings("ignore",category=el)
+for el in [FutureWarning,UserWarning,RuntimeWarning,DataConversionWarning]: warnings.filterwarnings("ignore",category=el)
 from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPClassifier
 from sklearn import datasets,metrics,preprocessing
@@ -253,7 +253,7 @@ class NeuralNetMLP(object):
     <p></p>
 <div class="linked"><script type="text/x-sage">
 print('Dataset N1. Rows: %d, columns: %d'%(X_train1.shape[0],X_train1.shape[1]))
-nn1=NeuralNetMLP(n_output=10,n_features=X_train1.shape[1],n_hidden=128,l2=0.1,l1=0.0,epochs=800, 
+nn1=NeuralNetMLP(n_output=10,n_features=X_train1.shape[1],n_hidden=128,l2=0.1,l1=0.0,epochs=400, 
                  eta=0.01,alpha=0.01,decrease_const=0.001,shuffle=True,minibatches=128,random_state=0)
 nn1.fit(X_train1,y_train1,print_progress=True)
 y_train1_pred=nn1.predict(X_train1); y_test1_pred=nn1.predict(X_test1)
