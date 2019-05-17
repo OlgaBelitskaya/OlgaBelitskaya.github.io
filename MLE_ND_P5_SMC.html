@@ -253,7 +253,7 @@ class NeuralNetMLP(object):
     <p></p>
 <div class="linked"><script type="text/x-sage">
 print('Dataset N1. Rows: %d, columns: %d'%(X_train1.shape[0],X_train1.shape[1]))
-nn1=NeuralNetMLP(n_output=10,n_features=X_train1.shape[1],n_hidden=128,l2=0.1,l1=0.0,epochs=400, 
+nn1=NeuralNetMLP(n_output=10,n_features=X_train1.shape[1],n_hidden=128,l2=0.1,l1=0.0,epochs=300, 
                  eta=0.01,alpha=0.01,decrease_const=0.001,shuffle=True,minibatches=128,random_state=0)
 nn1.fit(X_train1,y_train1,print_progress=True)
 y_train1_pred=nn1.predict(X_train1); y_test1_pred=nn1.predict(X_test1)
@@ -267,7 +267,7 @@ print('Test accuracy: %.2f%%'%(nn1_test1_accuracy*100))
 # for the best results (97.5-99.5%)
 # n=60000
 # nn2=NeuralNetMLP(n_output=10,n_features=784,n_hidden=196,l2=0.01,l1=0.0,epochs=1000, 
-#                    eta=0.001,alpha=0.001,decrease_const=0.00001,shuffle=True,minibatches=50,random_state=1)
+#                  eta=0.001,alpha=0.001,decrease_const=0.00001,shuffle=True,minibatches=50,random_state=1)
 n=5000
 print('Dataset N2. Rows: %d, columns: %d'%(n,X_train2.shape[1]*X_train2.shape[2]))
 nn2=NeuralNetMLP(n_output=10,n_features=784,n_hidden=32,l2=0.01,l1=0.0,epochs=800, 
@@ -283,6 +283,10 @@ print('Test accuracy: %.2f%%'%(nn1_test2_accuracy*100))
 <div class="linked"><script type="text/x-sage">
 batches=numpy.array_split(range(len(nn2.cost_)),800) 
 cost_ary=numpy.array(nn2.cost_); cost_avgs=[numpy.mean(cost_ary[i]) for i in batches]
+pylab.figure(figsize=(12,4)); pylab.grid()
+pylab.plot(range(len(cost_avgs)),cost_avgs,lw=3,color='royalblue')
+pylab.ylim([0,1000]); pylab.ylabel('Cost'); pylab.xlabel('Epochs')
+pylab.tight_layout(); pylab.title('Cost Function'); pylab.show()
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
