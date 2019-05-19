@@ -352,12 +352,16 @@ print('Dataset N2. Test accuracy: %.2f'%(numpy.mean(y_test2_pred==y_test2)*100))
     <p></p> 
 <h4>Model N3. Multi-Layer Perceptron Classifier (sklearn)</h4>
 <div class="linked"><script type="text/x-sage">
-
+clf1=MLPClassifier(hidden_layer_sizes=(256,),max_iter=30,solver='adam',verbose=0,random_state=1,learning_rate_init=.01)
+clf1.fit(X_train1,y_train1); print(clf1.score(X_test1,y_test1))
+y_test1_predictions=clf1.predict(X_test1)
+pylab.figure(figsize=(12,5)); pylab.scatter(range(100),y_test1[:100],color='#b8e2fc',s=100)
+pylab.scatter(range(100),y_test1_predictions[:100],color='#191970',s=25); pylab.show()
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-clf2=MLPClassifier(hidden_layer_sizes=(272,),max_iter=5,solver='adam',verbose=0,random_state=1,learning_rate_init=.01)
-clf2.fit(X_train2.reshape(-1,784),y_train2); print(clf.score(X_test2.reshape(-1,784),y_test2))
+clf2=MLPClassifier(hidden_layer_sizes=(272,),max_iter=5,solver='adam',verbose=0,random_state=1,learning_rate_init=.001)
+clf2.fit(X_train2.reshape(-1,784),y_train2); print(clf2.score(X_test2.reshape(-1,784),y_test2))
 y_test2_predictions=clf2.predict(X_test2.reshape(-1,784))
 pylab.figure(figsize=(12,5)); pylab.scatter(range(100),y_test2[:100],color='#b8e2fc',s=100)
 pylab.scatter(range(100),y_test2_predictions[:100],color='#191970',s=25); pylab.show()
