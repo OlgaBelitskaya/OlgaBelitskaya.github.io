@@ -104,12 +104,13 @@ def preprocess_features(X):
     for col,col_data in X.iteritems():
         if col_data.dtype==object: 
             col_data=col_data.replace(['yes','no'],[1,0])
+        if col_data.dtype==object:
             col_data=pandas.get_dummies(col_data,prefix=col)  
         output=output.join(col_data)    
     return output
 X_all=preprocess_features(X_all)
 print ("Processed feature columns (%d total features):"%len(X_all.columns))
-print(list(X_all.columns))
+for i in range(6): print(list(X_all.columns)[i*8:(i+1)*8])
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
