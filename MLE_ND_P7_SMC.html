@@ -155,10 +155,10 @@ Let's make quick checking F1 scores of the mentioned models:
 clf=[linear_model.LogisticRegression(solver='liblinear',multi_class='ovr'),
      linear_model.LogisticRegressionCV(solver='liblinear',multi_class='ovr'),
      linear_model.SGDClassifier(max_iter=1000,tol=0.00001),
-     svm.LinearSVC(),svm.SVC(gamma='scale',C=10.0,kernel='poly'),svm.NuSVC(gamma='scale',kernel='poly'),
-     KNeighborsClassifier(),RadiusNeighborsClassifier(radius=8),DecisionTreeClassifier(),ExtraTreeClassifier(),
-     BaggingClassifier(),RandomForestClassifier(n_estimators=64),AdaBoostClassifier(),GradientBoostingClassifier()]
-print('F1-scores')
+     svm.LinearSVC(),svm.SVC(gamma='scale',C=1.0,kernel='poly'),svm.NuSVC(gamma='scale',kernel='poly'),
+     KNeighborsClassifier(),RadiusNeighborsClassifier(radius=10),DecisionTreeClassifier(),ExtraTreeClassifier(),
+     BaggingClassifier(),RandomForestClassifier(n_estimators=100),AdaBoostClassifier(),GradientBoostingClassifier()]
+print('F1 scores:')
 for c in clf:
     c.fit(X_train,y_train); y_test_pred=c.predict(X_test)
     print(c.__class__.__name__+' - '+str(f1_score(y_test,y_test_pred,pos_label='yes')))
@@ -189,7 +189,21 @@ The functions are as follows:<br/>
 <i>train_predict</i> - takes as input a classifier, and the training and testing data, and performs <i>train_classifier</i> and <i>predict_labels</i>.<br/>
 &nbsp;&nbsp;- This function will report the F1 score for both the training and testing data separately.
 <div class="linked"><script type="text/x-sage">
-
+def train_classifier(clf,t_fit,X_train,y_train):
+    start=time(); clf.fit(X_train,y_train); end=time(); t_fit.append(end-start)
+    print ("Trained model in {:.4f} seconds".format(end-start)) 
+def predict_labels(clf,t_pred,features,target):
+    start=time(); y_pred=clf.predict(features); end=time(); t_pred.append(end-start)
+    print ("Made predictions in {:.4f} seconds.".format(end-start))    
+    return f1_score(target.values,y_pred,pos_label='yes')
+def train_predict(clf,t_fit,t_pred,f1_scores,X_train,y_train,X_test,y_test):
+    print ("Training a {} using a training set size of {}. . .".\
+           format(clf.__class__.__name__,len(X_train)))
+    train_classifier(clf,t_fit,X_train,y_train)
+    f1_train=predict_labels(clf,t_pred,X_train,y_train); f1_scores.append(f1_train)
+    f1_test=predict_labels(clf,t_pred,X_test,y_test); f1_scores.append(f1_test)    
+    print ("F1 score for training set: {:.4f}.".format(f1_train))
+    print ("F1 score for test set: {:.4f}.".format(f1_test))
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
