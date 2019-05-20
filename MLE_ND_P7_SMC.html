@@ -36,9 +36,12 @@
 import numpy,pandas,time,pylab; pylab.style.use('seaborn-whitegrid')
 import warnings; from sklearn.exceptions import DataConversionWarning
 for el in [FutureWarning,UserWarning,RuntimeWarning,DataConversionWarning]: warnings.filterwarnings("ignore",category=el)
+from sklearn import linear_model,svm
 from sklearn.model_selection import train_test_split,GridSearchCV,ShuffleSplit
 from sklearn.neural_network import MLPClassifier
-from sklearn.ensemble import AdaBoostClassifier,GradientBoostingClassifier,RandomForestClassifier
+from sklearn.tree import DecisionTreeClassifier,ExtraTreeClassifier
+from sklearn.neighbors import KNeighborsClassifier,RadiusNeighborsClassifier
+from sklearn.ensemble import BaggingClassifier,AdaBoostClassifier,GradientBoostingClassifier,RandomForestClassifier
 from sklearn.metrics import f1_score,make_scorer
 </script></div>
     <p></p>
@@ -131,7 +134,7 @@ In this section, you will choose 3 <b>supervised learning</b> models that are ap
 You will first discuss the reasoning behind choosing these three models by considering what you know about the data and each model's strengths and weaknesses. <br/>
 You will then fit the model to varying sizes of training data (100 data points, 200 data points, and 300 data points) and measure the F1 score. <br/>
 You will need to produce three tables (one for each model) that shows: <br/>
-- the training set size, training time, prediction time, F1 score on the training set, and F1 score on the testing set.<br/>
+- training set size, training time, prediction time, F1 score on the training set, and F1 score on the testing set.<br/>
 The following <b>supervised learning</b> models are currently available in <i>scikit-learn</i> that you may choose from:<br/>
 <i style="font-family:'Roboto';">- Gaussian Naive Bayes (GaussianNB)<br/>
 - Decision Trees<br/>
@@ -141,7 +144,16 @@ The following <b>supervised learning</b> models are currently available in <i>sc
 - Support Vector Machines (SVM)<br/>
 - Logistic Regression</i>
 <div class="linked"><script type="text/x-sage">
-
+clf=[linear_model.LogisticRegression(solver='liblinear',multi_class='ovr'),
+     linear_model.LogisticRegressionCV(solver='liblinear',multi_class='ovr'),
+     linear_model.SGDClassifier(max_iter=1000,tol=0.00001),
+     svm.LinearSVC(),svm.SVC(gamma='scale',C=10.0,kernel='poly'),svm.NuSVC(gamma='scale',kernel='poly'),
+     KNeighborsClassifier(),RadiusNeighborsClassifier(radius=8),DecisionTreeClassifier(),ExtraTreeClassifier(),
+     BaggingClassifier(),RandomForestClassifier(n_estimators=64),AdaBoostClassifier(),GradientBoostingClassifier()]
+print('F1-scores')
+for c in clf:
+    c.fit(X_train,y_train); y_test_pred=c.predict(X_test)
+    print(c.__class__.__name__+' - '+str(f1_score(y_test,y_test_pred,pos_label='yes')))
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
