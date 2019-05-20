@@ -85,7 +85,8 @@ It is often the case that the data you obtain contains non-numeric features.
 This can be a problem because most machine learning algorithms expect numeric data to perform computations with.
 <div class="linked"><script type="text/x-sage">
 feature_cols=list(data.columns[:-1]); target_col=data.columns[-1] 
-print ("Feature columns:"); for i in range(4): print(feature_cols[i*8:(i+1)*8])
+print ("Feature columns:")
+for i in range(4): print(feature_cols[i*8:(i+1)*8])
 print ("\nTarget column: {}".format(target_col))
 X_all,y_all=data[feature_cols],data[target_col]
 print ("Feature values:"); X_all.head().T
@@ -98,7 +99,17 @@ Other columns, like <i>Mjob</i> and <i>Fjob</i>, have more than two values, and 
 The recommended way to handle such a column is to create as many columns as possible values (e.g. <i>Fjob_teacher, Fjob_other, Fjob_services</i>, etc.),<br/> and assign a 1 to one of them and 0 to all others.<br/>
 These generated columns are sometimes called dummy variables, and we will use the <i>pandas.get_dummies()</i> function to perform this transformation.
 <div class="linked"><script type="text/x-sage">
-
+def preprocess_features(X):
+    output=pandas.DataFrame(index=X.index)
+    for col,col_data in X.iteritems():
+        if col_data.dtype==object: 
+            col_data=col_data.replace(['yes','no'],[1,0])
+            col_data=pandas.get_dummies(col_data,prefix=col)  
+        output=output.join(col_data)    
+    return output
+X_all=preprocess_features(X_all)
+print ("Processed feature columns (%d total features):"%len(X_all.columns))
+print(list(X_all.columns))
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
