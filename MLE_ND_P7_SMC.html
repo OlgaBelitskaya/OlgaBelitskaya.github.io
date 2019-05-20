@@ -190,10 +190,10 @@ The functions are as follows:<br/>
 &nbsp;&nbsp;- This function will report the F1 score for both the training and testing data separately.
 <div class="linked"><script type="text/x-sage">
 def train_classifier(clf,t_fit,X_train,y_train):
-    start=time(); clf.fit(X_train,y_train); end=time(); t_fit.append(end-start)
+    start=time.time(); clf.fit(X_train,y_train); end=time.time(); t_fit.append(end-start)
     print ("Trained model in {:.4f} seconds".format(end-start)) 
 def predict_labels(clf,t_pred,features,target):
-    start=time(); y_pred=clf.predict(features); end=time(); t_pred.append(end-start)
+    start=time.time(); y_pred=clf.predict(features); end=time.time(); t_pred.append(end-start)
     print ("Made predictions in {:.4f} seconds.".format(end-start))    
     return f1_score(target.values,y_pred,pos_label='yes')
 def train_predict(clf,t_fit,t_pred,f1_scores,X_train,y_train,X_test,y_test):
@@ -219,7 +219,16 @@ It's time to implement the following steps:<br/>
 &nbsp;&nbsp;- Do not reshuffle and resplit the data! The new training points should be drawn from <i>X_train</i> and <i>y_train</i>.<br/>
 - Fit each model with each training set size and make predictions on the test set (9 in total).
 <div class="linked"><script type="text/x-sage">
-
+clf_A=linear_model.LogisticRegressionCV(solver='liblinear',multi_class='ovr')
+clf_B=svm.SVC(gamma='scale',C=1.0,kernel='poly')
+clf_C=RadiusNeighborsClassifier(radius=30)
+X_train_100,y_train_100=X_train[:int(100)],y_train[:int(100)]
+X_train_200,y_train_200=X_train[:int(200)],y_train[:int(200)]
+X_train_300,y_train_300=X_train,y_train
+t_fit,t_pred,f1_scores=[],[],[]
+for clf in [clf_A,clf_B,clf_C]:
+    for (X_train,y_train) in [(X_train_100,y_train_100),(X_train_200,y_train_200),(X_train_300, y_train_300)]:
+        train_predict(clf,t_fit,t_pred,f1_scores,X_train,y_train,X_test,y_test)
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
