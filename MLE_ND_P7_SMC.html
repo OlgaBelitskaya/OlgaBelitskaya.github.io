@@ -227,12 +227,16 @@ X_train_200,y_train_200=X_train[:int(200)],y_train[:int(200)]
 X_train_300,y_train_300=X_train,y_train
 t_fit,t_pred,f1_scores=[],[],[]
 for clf in [clf_A,clf_B,clf_C]:
-    for (X_train,y_train) in [(X_train_100,y_train_100),(X_train_200,y_train_200),(X_train_300, y_train_300)]:
-        train_predict(clf,t_fit,t_pred,f1_scores,X_train,y_train,X_test,y_test)
+    for (X,y) in [(X_train_100,y_train_100),(X_train_200,y_train_200),(X_train_300, y_train_300)]:
+        train_predict(clf,t_fit,t_pred,f1_scores,X,y,X_test,y_test)
 </script></div>
     <p></p>
+    <h3>Tabular Results</h3>
 <div class="linked"><script type="text/x-sage">
-
+print(clf_A.__class__.__name__)
+table([['Training Set Size','Training Time','Prediction Time (test)','F1 Score (train)','F1 Score (test)'],
+       [100,t_fit[0],t_pred[1],f1_scores[0],f1_scores[1]],[200,t_fit[1],t_pred[3],f1_scores[2],f1_scores[3]],
+       [300,t_fit[2],t_pred[5],f1_scores[4],f1_scores[5]]])
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
