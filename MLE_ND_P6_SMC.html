@@ -146,7 +146,7 @@ target_train=train['price_doc']
 </script></div>
     <p>Create the distribution plot for the target</p>
 <div class="linked"><script type="text/x-sage">
-f,(ax1,ax2)=pylab.subplots(ncols=2,figsize=(12,5))
+f,(ax1,ax2)=pylab.subplots(ncols=2,figsize=(11,5))
 seaborn.distplot(target_train,bins=200,color='#228B22',ax=ax1)
 ax1.set_xlabel("Prices"); ax1.set_ylabel("Distribution")
 seaborn.distplot(numpy.log(target_train),bins=200,color='#228B22',ax=ax2)
@@ -175,7 +175,17 @@ pandas.DataFrame(test[X_list_num].isnull().sum(),columns=['nan'])
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+df_train=pandas.DataFrame(train,columns=X_list_num)
+df_train_cat=pandas.DataFrame(train,columns=X_list_num+X_list_cat)
+df_test=pandas.DataFrame(test,columns=X_list_num)
+df_test_cat=pandas.DataFrame(test,columns=X_list_num+X_list_cat)
+df_train['prices']=target_train; df_train_cat['prices']=target_train
+df_train=df_train.dropna(subset=['num_room'])
+df_train_cat=df_train_cat.dropna(subset=['num_room'])
+for el in ['metro_min_walk','railroad_station_walk_min']:
+    for df in [df_train,df_train_cat,df_test,df_test_cat]:
+        df[el]=df[el].interpolate(method='linear')
+len(df_train),len(df_test)
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
