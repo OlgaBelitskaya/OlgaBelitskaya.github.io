@@ -301,15 +301,22 @@ print('Shape of the test data frame:'+str(df_test_cat1.shape))
     <h3>Display Correlation</h3>
 <div class="linked"><script type="text/x-sage">
 corr_with_prices=df_train.corr(method='pearson').iloc[-int(1)][:-int(1)]
-pylab.figure(figsize=(10,10)); cols=df_train.corr().columns.values
-seaborn.heatmap(df_train.corr(),cmap=pylab.cm.Greens,xticklabels=cols,yticklabels=cols)
-pylab.title("Correlation Matrix",fontsize=15); pylab.show()
 pandas.DataFrame(corr_with_prices[abs(corr_with_prices).argsort()[::-int(1)]])
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
 features_list=corr_with_prices[abs(corr_with_prices).argsort()[::-int(1)]][:int(10)].index.values.tolist()
 print('The most correlated with prices:\n'+str(features_list))
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+pylab.figure(figsize=(12,12)); cols=df_train.corr().columns.values
+seaborn.heatmap(df_train.corr(),cmap=pylab.cm.Greens,xticklabels=cols,yticklabels=cols)
+pylab.title("Correlation Matrix",fontsize=15); pylab.xticks(fontsize=5); pylab.yticks(fontsize=6); pylab.show()
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
