@@ -132,6 +132,7 @@ train[n1:n2].T[n3:n4]
     <p></p>
     <h2>Solution Statement</h2>
     <h3>Selection of Features</h3>
+    <p>Create lists of the features</p>
 <div class="linked"><script type="text/x-sage">
 X_list_num=['timestamp','full_sq','num_room','area_m','kremlin_km','big_road2_km','big_road1_km','workplaces_km',
             'stadium_km','swim_pool_km','fitness_km','detention_facility_km','cemetery_km','radiation_km','oil_chemistry_km',
@@ -143,7 +144,7 @@ X_list_cat=['sub_area','ID_metro','office_raion','sport_objects_raion','raion_po
             'school_education_centers_raion','preschool_education_centers_raion']
 target_train=train['price_doc']
 </script></div>
-    <p></p>
+    <p>Create the distribution plot for the target</p>
 <div class="linked"><script type="text/x-sage">
 f,(ax1,ax2)=pylab.subplots(ncols=2,figsize=(12,5))
 seaborn.distplot(target_train,bins=200,color='#228B22',ax=ax1)
@@ -152,13 +153,21 @@ seaborn.distplot(numpy.log(target_train),bins=200,color='#228B22',ax=ax2)
 ax2.set_xlabel("Logarithm of the variable 'Prices'"); ax2.set_ylabel("Distribution")
 pylab.suptitle('Sberbank Russian Housing Data'); pylab.show()
 </script></div>
-    <p></p>
+    <p>Create the table of descriptive statistics</p>
 <div class="linked"><script type="text/x-sage">
-
+print ("Sberbank Russian Housing Dataset Statistics: \n")
+print ("Number of houses = ",len(target_train))
+print ("Number of features = ",len(list(train[X_list_num+X_list_cat].keys())))
+print ("Minimum house price = ",numpy.min(target_train))
+print ("Maximum house price = ",numpy.max(target_train))
+print ("Mean house price = ", "%.4f"%numpy.mean(target_train))
+print ("Median house price = ", "%.4f" %numpy.median(target_train))
+print ("Standard deviation of house prices =", "%.4f"%numpy.std(target_train))
 </script></div>
     <p></p>
+    <h3>Fill in Missing Values</h3>
 <div class="linked"><script type="text/x-sage">
-
+train[X_list_num].isnull().sum(),test[X_list_num].isnull().sum()
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
