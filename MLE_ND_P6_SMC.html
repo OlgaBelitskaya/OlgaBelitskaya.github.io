@@ -74,7 +74,7 @@ def scores(regressor,y_train,y_test,y_train_reg,y_test_reg):
     <h2>Capstone Proposal Overview</h2>
 In this capstone project proposal, the goals are stated to leverage what we've learned throughout the Nanodegree Program for solving a problem of our choice by applying machine learning techniques.<br/> 
 A project proposal encompasses seven key points.<br/>
-<b>project's domain backgroun</b>: the field of research where the project is derived;<br/>
+<b>project's domain background</b>: the field of research where the project is derived;<br/>
 <b>problem statement</b>: a problem being investigated for which a solution will be defined;<br/>
 <b>datasets and inputs</b>: data or inputs being used for the problem;<br/>
 <b>solution statement</b>: the solution proposed for the problem given;<br/>
@@ -82,21 +82,21 @@ A project proposal encompasses seven key points.<br/>
 <b>set of evaluation metrics</b>: functional representations for how the solution can be measured;<br/>
 <b>outline of the project design</b>: how the solution will be developed and results obtained.<br/>
 The full project report about results will be completed and published as well.
-    <h3>Domain Background</h3>
+    <h2>Domain Background</h2>
 Housing costs demand a significant investment from both consumers and developers. <br/>
 And when it comes to planning a budget—whether personal or corporate—the last thing anyone needs is uncertainty about one of their budgets expenses. <br/>
 Sberbank, Russia’s oldest and largest bank, helps their customers by making predictions about reality prices so renters, developers, <br/>and lenders are more confident when they sign a lease or purchase a building.<br/>
 Although the housing market is relatively stable in Russia, the country’s volatile economy makes forecasting prices as a function of apartment characteristics a unique challenge. <br/>
 Complex interactions between housing features such as a number of bedrooms and location are enough to make pricing predictions complicated. <br/>
 Adding an unstable economy to the mix means Sberbank and their customers need more than simple regression models in their arsenal.
-    <h3>Problem Statement</h3>
+    <h2>Problem Statement</h2>
 Sberbank is challenging programmers to develop algorithms which use a broad spectrum of features to predict real prices. <br/>Algorithm applications rely on a rich dataset that includes housing data and macroeconomic patterns.<br/> 
 An accurate forecasting model will allow Sberbank to provide more certainty to their customers in an uncertain economy.<br/>
 My choice of the solution in this situation is to select the most correlated indicators with the target variable and <br/>
 apply ensemble algorithms that have repeatedly shown successful results in the study of price trends in real estate. <br/>
 Boosting and bagging methods combine several models at once in order to improve the prediction accuracy on learning problems with a numerical target variable.<br/>
 Then I'm going to explore different types of neural networks for regression predictions and try to achieve the same with ensemble methods level of model perfomance.
-    <h3>Datasets and Inputs</h3>
+    <h2>Datasets and Inputs</h2>
 The basis for the investigation is a large number of economic indicators for pricing and prices themselves (<i>train.csv</i> and <i>test.csv</i>).<br/>
 Macroeconomic variables are collected in a separate file for transaction dates (<i>macro.csv</i>). <br/>
 In addition, the detailed description of variables is provided (<i>data_dictionary.txt</i>).<br/>
@@ -122,14 +122,26 @@ The predicted target isn't discrete, for the training set all the values of this
 <div class="linked"><script type="text/x-sage">
 path='https://raw.githubusercontent.com/OlgaBelitskaya/machine_learning_engineer_nd009/master/Machine_Learning_Engineer_ND_P6/'
 macro=pandas.read_csv(path+'macro.csv'); train=pandas.read_csv(path+'train.csv'); test=pandas.read_csv(path+'test.csv')
+n1,n2,n3,n4=int(100),int(111),int(1),int(15)
+macro[n1:n2].T[n3:n4]
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+train[n1:n2].T[n3:n4]
 </script></div>
     <p></p>
+    <h2>Solution Statement</h2>
+    <h3>Selection of Features</h3>
 <div class="linked"><script type="text/x-sage">
-
+X_list_num=['timestamp','full_sq','num_room','area_m','kremlin_km','big_road2_km','big_road1_km','workplaces_km',
+            'stadium_km','swim_pool_km','fitness_km','detention_facility_km','cemetery_km','radiation_km','oil_chemistry_km',
+            'theater_km','exhibition_km','museum_km','park_km','public_healthcare_km','metro_min_walk','metro_km_avto', 
+            'bus_terminal_avto_km','public_transport_station_min_walk','railroad_station_walk_min','railroad_station_avto_km',
+            'kindergarten_km','school_km','preschool_km','university_km','additional_education_km','shopping_centers_km',
+            'big_market_km','ekder_all','work_all','young_all']
+X_list_cat=['sub_area','ID_metro','office_raion','sport_objects_raion','raion_popul','healthcare_centers_raion',
+            'school_education_centers_raion','preschool_education_centers_raion']
+target_train=train['price_doc']
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
