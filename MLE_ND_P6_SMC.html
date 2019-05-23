@@ -170,11 +170,11 @@ print ("Standard deviation of house prices = %.4f"%numpy.std(target_train))
     <p></p>
     <h3>Fill in Missing Values</h3>
 <div class="linked"><script type="text/x-sage">
-pandas.DataFrame(train[X_list_num].isnull().sum(),columns=['nan'])
+pandas.DataFrame(train[X_list_num].isnull().sum()[train[X_list_num].isnull().sum()!=0],columns=['nan'])
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-pandas.DataFrame(test[X_list_num].isnull().sum(),columns=['nan'])
+pandas.DataFrame(test[X_list_num].isnull().sum()[test[X_list_num].isnull().sum()!=0],columns=['nan'])
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
@@ -298,8 +298,10 @@ print('Shape of the train data frame:'+str(df_train_cat1.shape))
 print('Shape of the test data frame:'+str(df_test_cat1.shape))
 </script></div>
     <p></p>
+    <h3>Display Correlation</h3>
 <div class="linked"><script type="text/x-sage">
-
+corr_with_prices=df_train.corr(method='pearson').iloc[-int(1)][:-int(1)]
+corr_with_prices[abs(corr_with_prices).argsort()[::-int(1)]]
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
