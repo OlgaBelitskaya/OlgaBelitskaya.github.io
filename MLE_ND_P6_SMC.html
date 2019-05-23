@@ -302,10 +302,14 @@ print('Shape of the test data frame:'+str(df_test_cat1.shape))
 <div class="linked"><script type="text/x-sage">
 corr_with_prices=df_train.corr(method='pearson').iloc[-int(1)][:-int(1)]
 corr_with_prices[abs(corr_with_prices).argsort()[::-int(1)]]
+pylab.figure(figsize=(12,10)); cols=df_train.corr().columns.values
+sseaborn.heatmap(df_train.corr(),cmap=plt.cm.Greens,xticklabels=cols,yticklabels=cols)
+pylab.title("Correlation Matrix",fontsize=15); pylab.show()
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+features_list=corr_with_prices[abs(corr_with_prices).argsort()[::-int(1)]][:int(10)].index.values.tolist()
+print('The most correlated with prices:\n'+str(features_list))
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
