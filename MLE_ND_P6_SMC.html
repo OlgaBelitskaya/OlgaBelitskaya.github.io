@@ -351,6 +351,8 @@ X_train_cat_enc.shape,X_test_cat_enc.shape,y_train_cat_enc.shape,y_test_cat_enc.
 for [Xtrain,ytrain,Xtest,ytest] in [[X_train,y_train,X_test,y_test],[X_train_cat,y_train_cat,X_test_cat,y_test_cat],
                                     [X_train_cat_enc,y_train_cat_enc,X_test_cat_enc,y_test_cat_enc]]:
     Xtrain,ytrain,Xtest,ytest=robust_scaler(Xtrain,ytrain,Xtest,ytest)
+del macro,train,test,df_train,df_train_cat,df_train_cat1,df_test,df_test_cat,df_test_cat1
+del target_train,features_train,features_train_cat,features_train_cat_enc,features_test,features_test_cat,features_test_cat_enc
 </script></div>
     <p></p>
     <h2>Benchmark Models</h2>
@@ -366,7 +368,9 @@ gridsearch_gbr.best_params_
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+param_gbr_cat={'max_depth':[3,4],'n_estimators':[110,220]}
+gridsearch_gbr_cat=GridSearchCV(GradientBoostingRegressor(),param_gbr_cat).fit(X_train_cat,y_train_cat)
+gridsearch_gbr_cat.best_params_
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
