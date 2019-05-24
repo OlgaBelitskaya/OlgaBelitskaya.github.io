@@ -52,6 +52,11 @@ from sklearn.preprocessing import OneHotEncoder,StandardScaler,RobustScaler,MinM
 def display_cat(df,feature):
     print ('\n'+'<_>'*30); print ('\n'+feature+': '+str(len(set(df[feature]))))
     sympy.pprint(set(df[feature]))
+def robust_scaler(Xtrain,ytrain,Xtest,ytest):
+    scale_X=RobustScaler(); scale_y=RobustScaler()
+    Xtrain=scale_X.fit_transform(Xtrain); Xtest=scale_X.transform(Xtest)
+    ytrain=scale_y.fit_transform(ytrain.reshape(-1,1)); ytest=scale_y.transform(ytest.reshape(-1,1))
+    return Xtrain,ytrain,Xtest,ytest
 def regression(regressor,X_train,X_test,y_train):
     regressor.fit(X_train,y_train)
     return regressor.predict(x_train),regressor.predict(x_test)
@@ -336,10 +341,18 @@ X_train_cat.shape,X_test_cat.shape,y_train_cat.shape,y_test_cat.shape
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-print('Numeric and Encoded Categorical Features')
+pretty_print('Numeric and Encoded Categorical Features')
 X_train_cat_enc,X_test_cat_enc,y_train_cat_enc,y_test_cat_enc=\
 train_test_split(features_train_cat_enc,target_train,test_size=0.2,random_state=1)
 X_train_cat_enc.shape,X_test_cat_enc.shape,y_train_cat_enc.shape,y_test_cat_enc.shape
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
