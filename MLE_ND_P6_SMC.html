@@ -59,7 +59,7 @@ def robust_scaler(Xtrain,ytrain,Xtest,ytest):
     return Xtrain,ytrain,Xtest,ytest
 def regression(regressor,X_train,X_test,y_train):
     regressor.fit(X_train,y_train)
-    return regressor.predict(x_train),regressor.predict(x_test)
+    return regressor.predict(X_train),regressor.predict(X_test)
 def scores(regressor,y_train,y_test,y_train_reg,y_test_reg):
     separator1,separator2 = '<_>'*18,'-'*10
     print(separator1,'\n',regressor,'\n'+separator1)
@@ -360,8 +360,8 @@ To compare the prediction quality, I chose the most effective (for financial ind
 In addition, I was wondering what the highest accuracy rate will be achieved by each of the presented algorithms 
 and whether the predicted trends of price change for all used types of techniques will coincide.
     <h3>Ensemble Regressors. Scikit-Learn</h3>
-<h4>Tuning Parameters. </h4>
-<p>Choose one of the Variants (Numeric Features, Numeric and Categorical Features, Numeric and Encoded Categorical Features</p>
+<h4>Tuning Parameters</h4>
+<p>Choose One of the Variants (Numeric Features, Numeric and Categorical Features, Numeric and Encoded Categorical Features)</p>
 <div class="linked"><script type="text/x-sage">
 pretty_print('Numeric Features. Unlock for experiments')
 #param_gbr={'max_depth':[3,4],'n_estimators':[240,360]}
@@ -383,8 +383,10 @@ pretty_print('Numeric Features and Encoded Categorical Features. Unlock for expe
 #gridsearch_gbr_cat_enc.best_params_
 </script></div>
     <p></p>
+<h4>Fit the Regressors</h4>
 <div class="linked"><script type="text/x-sage">
-
+y_train_gbr,y_test_gbr=regression(GradientBoostingRegressor(max_depth=4,n_estimators=240),X_train,X_test,y_train)
+scores('GradientBoostingRegressor',y_train,y_test,y_train_gbr,y_test_gbr)
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
