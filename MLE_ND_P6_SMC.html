@@ -75,7 +75,13 @@ def scores(title,y_train,y_test,y_train_reg,y_test_reg):
     print("MAE score. Test: "+str(mean_absolute_error(y_test,y_test_reg)))
     print(separator)
     print("MdAE score. Train: "+str(median_absolute_error(y_train,y_train_reg)))
-    print("MdAE score. Test: "+str(median_absolute_error(y_test,y_test_reg)))  
+    print("MdAE score. Test: "+str(median_absolute_error(y_test,y_test_reg))) 
+def display_importance(regressor,X,y,title):
+    importances=regressor.fit(X,y).feature_importances_
+    indices=numpy.argsort(importances)[::-int(1)]
+    pylab.figure(figsize=(12,4)); pylab.xlabel("Feature Index"); pylab.ylabel("Feature Importance")
+    pylab.bar(range(X.shape[1]),importances[indices],color="forestgreen",align="center",alpha=0.5)
+    pylab.xticks(range(X.shape[1]),indices); pylab.title(title); pylab.show()
 </script></div>
     <p></p>
     <h2>Capstone Proposal Overview</h2>
@@ -389,11 +395,12 @@ scores('GradientBoostingRegressor',y_train,y_test,y_train_gbr,y_test_gbr)
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+sympy.pprint(GradientBoostingRegressor(max_depth=4,n_estimators=360).get_params(deep=True))
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+display_importance(GradientBoostingRegressor(max_depth=4,n_estimators=360),X_train,y_train,
+                   "Importance of Numeric Features. Gradient Boosting Regressor")
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
