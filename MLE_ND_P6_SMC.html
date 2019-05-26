@@ -80,8 +80,8 @@ def display_importance(regressor,X,y,title):
     importances=regressor.fit(X,y).feature_importances_
     indices=numpy.argsort(importances)[::-int(1)][:int(36)]
     pylab.figure(figsize=(12,4)); pylab.xlabel("Feature Index"); pylab.ylabel("Feature Importance")
-    pylab.bar(range(X.shape[1]),importances[indices],color="forestgreen",align="center",alpha=0.5)
-    pylab.xticks(range(X.shape[1]),indices); pylab.title(title); pylab.show()
+    pylab.bar(range(36),importances[indices],color="forestgreen",align="center",alpha=0.5)
+    pylab.xticks(range(36),indices); pylab.title(title); pylab.show()
 </script></div>
     <p></p>
     <h2>Capstone Proposal Overview</h2>
@@ -414,11 +414,14 @@ display_importance(GradientBoostingRegressor(max_depth=4,n_estimators=220),X_tra
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+y_train_cat_enc_gbr,y_test_cat_enc_gbr=\
+regression(GradientBoostingRegressor(max_depth=4,n_estimators=16),X_train_cat_enc,X_test_cat_enc,y_train_cat_enc)
+scores('GradientBoostingRegressor. Numeric and Categorical Features',y_train_cat_enc,y_test_cat_enc,y_train_cat_enc_gbr,y_test_cat_enc_gbr)
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+display_importance(GradientBoostingRegressor(max_depth=4,n_estimators=16),X_train_cat_enc,y_train_cat_enc,
+                   "Importance of Numeric and Categorical Encoded Features. Gradient Boosting Regressor")
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
