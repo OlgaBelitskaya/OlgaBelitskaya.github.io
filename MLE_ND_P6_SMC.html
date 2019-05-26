@@ -78,7 +78,7 @@ def scores(title,y_train,y_test,y_train_reg,y_test_reg):
     print("MdAE score. Test: "+str(median_absolute_error(y_test,y_test_reg))) 
 def display_importance(regressor,X,y,title):
     importances=regressor.fit(X,y).feature_importances_
-    indices=numpy.argsort(importances)[::-int(1)]
+    indices=numpy.argsort(importances)[::-int(1)][:int(36)]
     pylab.figure(figsize=(12,4)); pylab.xlabel("Feature Index"); pylab.ylabel("Feature Importance")
     pylab.bar(range(X.shape[1]),importances[indices],color="forestgreen",align="center",alpha=0.5)
     pylab.xticks(range(X.shape[1]),indices); pylab.title(title); pylab.show()
@@ -390,25 +390,27 @@ pretty_print('Numeric Features and Encoded Categorical Features. Unlock for expe
     <p></p>
 <h4>Fit the Regressors</h4>
 <div class="linked"><script type="text/x-sage">
-y_train_gbr,y_test_gbr=regression(GradientBoostingRegressor(max_depth=4,n_estimators=360),X_train,X_test,y_train)
-scores('GradientBoostingRegressor',y_train,y_test,y_train_gbr,y_test_gbr)
+y_train_gbr,y_test_gbr=regression(GradientBoostingRegressor(max_depth=4,n_estimators=240),X_train,X_test,y_train)
+scores('GradientBoostingRegressor. Numeric Features',y_train,y_test,y_train_gbr,y_test_gbr)
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-sympy.pprint(GradientBoostingRegressor(max_depth=4,n_estimators=360).get_params(deep=True))
+sympy.pprint(GradientBoostingRegressor(max_depth=4,n_estimators=240).get_params(deep=True))
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-display_importance(GradientBoostingRegressor(max_depth=4,n_estimators=360),X_train,y_train,
+display_importance(GradientBoostingRegressor(max_depth=4,n_estimators=240),X_train,y_train,
                    "Importance of Numeric Features. Gradient Boosting Regressor")
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+y_train_cat_gbr,y_test_cat_gbr=regression(GradientBoostingRegressor(max_depth=4,n_estimators=220),X_train_cat,X_test_cat,y_train_cat)
+scores('GradientBoostingRegressor. Numeric and Categorical Features',y_train_cat,y_test_cat,y_train_cat_gbr,y_test_cat_gbr)
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+display_importance(GradientBoostingRegressor(max_depth=4,n_estimators=220),X_train_cat,y_train_cat,
+                   "Importance of Numeric and Categorical Features. Gradient Boosting Regressor")
 </script></div>
     <p></p>      
     <h3>Additional Code Cell</h3>
