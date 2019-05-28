@@ -428,14 +428,21 @@ display_importance(GradientBoostingRegressor(max_depth=4,n_estimators=16),X_trai
     <p></p>
     <h3>MLP Regressors. Scikit-Learn</h3>
 <div class="linked"><script type="text/x-sage">
-mlpr=MLPRegressor(hidden_layer_sizes=(240,),max_iter=200,solver='adam',batch_size=32)
-mlpr.fit(X_train,y_train); y_train_mlpr=mlpr.predict(X_train); y_test_mlpr=mlpr.predict(X_test)
+mlpr=MLPRegressor(hidden_layer_sizes=(128,),max_iter=50,solver='adam',batch_size=16,verbose='True')
+mlpr.fit(X_train,y_train)
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">      
+y_train_mlpr=mlpr.predict(X_train); y_test_mlpr=mlpr.predict(X_test)
 scores('MLP Regressor. Numeric Features',y_train,y_test,y_train_mlpr,y_test_mlpr)
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-mlpr_cat=MLPRegressor(hidden_layer_sizes=(264,),max_iter=200,solver='adam',batch_size=32)
+mlpr_cat=MLPRegressor(hidden_layer_sizes=(110,),max_iter=50,solver='adam',batch_size=16,verbose='True')
 mlpr_cat.fit(X_train_cat,y_train_cat) 
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
 y_train_cat_mlpr=mlpr_cat.predict(X_train_cat); y_test_cat_mlpr=mlpr_cat.predict(X_test_cat)
 scores('MLP Regressor. Numeric and Categorical Features',y_train_cat,y_test_cat,y_train_cat_mlpr,y_test_cat_mlpr)
 </script></div>
