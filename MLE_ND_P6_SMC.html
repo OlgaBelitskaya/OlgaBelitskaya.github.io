@@ -449,7 +449,7 @@ scores('GradientBoostingRegressor. Numeric and Categorical Features (PCA)',
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
-display_importance(GradientBoostingRegressor(max_depth=4,n_estimators=276),X_train_cat_pca,y_train_cat_pca,
+display_importance(GradientBoostingRegressor(max_depth=4,n_estimators=276),X_train_cat_pca,y_train_cat,
                    "Importance of Numeric and Categorical Features (PCA). Gradient Boosting Regressor",12)
 </script></div>
     <p></p>
@@ -468,6 +468,7 @@ display_importance(GradientBoostingRegressor(max_depth=4,n_estimators=16),X_trai
 </script></div>
     <p></p>
     <h3>MLP Regressors. Scikit-Learn</h3>
+<h4>Fit Regressors</h4>      
 <div class="linked"><script type="text/x-sage">
 mlpr=MLPRegressor(hidden_layer_sizes=(32*32,),max_iter=15,solver='adam',batch_size=12,learning_rate='adaptive',verbose='True')
 mlpr.fit(X_train,y_train)
@@ -492,6 +493,31 @@ scores('MLP Regressor. Numeric and Categorical Features',y_train_cat,y_test_cat,
 
 </script></div>
     <p></p>
+<h4>Fit Regressors with Dimensionality Reduction</h4>
+<div class="linked"><script type="text/x-sage">
+mlpr_pca=MLPRegressor(hidden_layer_sizes=(32*32,),max_iter=30,solver='adam',batch_size=12,learning_rate='adaptive',verbose='True')
+mlpr_pca.fit(X_train_pca,y_train)
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">      
+y_train_mlpr_pca=mlpr_pca.predict(X_train_pca); y_test_mlpr_pca=mlpr_pca.predict(X_test_pca)
+scores('MLP Regressor. Numeric Features (PCA)',y_train,y_test,y_train_mlpr_pca,y_test_mlpr_pca)
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+mlpr_cat_pca=MLPRegressor(hidden_layer_sizes=(32*32,),max_iter=30,solver='adam',batch_size=12,learning_rate='adaptive',verbose='True')
+mlpr_cat_pca.fit(X_train_cat_pca,y_train_cat) 
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+y_train_cat_mlpr_pca=mlpr_cat_pca.predict(X_train_cat_pca); y_test_cat_mlpr_pca=mlpr_cat_pca.predict(X_test_cat_pca)
+scores('MLP Regressor. Numeric and Categorical Features (PCA)',y_train_cat,y_test_cat,y_train_cat_mlpr_pca,y_test_cat_mlpr_pca)
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+
+</script></div>
+    <p></p>      
     <h3>Display Predictions</h3>
 <div class="linked"><script type="text/x-sage">
 n=int(50); pylab.figure(figsize=(12,5)); pylab.plot(y_test[1:n],color='black',label='Real Data')
