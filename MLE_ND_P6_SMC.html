@@ -78,12 +78,12 @@ def scores(title,y_train,y_test,y_train_reg,y_test_reg):
     print(separator)
     print("MdAE score. Train: "+str(median_absolute_error(y_train,y_train_reg)))
     print("MdAE score. Test: "+str(median_absolute_error(y_test,y_test_reg))) 
-def display_importance(regressor,X,y,title):
+def display_importance(regressor,X,y,title,n):
     importances=regressor.fit(X,y).feature_importances_
-    indices=numpy.argsort(importances)[::-int(1)][:int(36)]
+    indices=numpy.argsort(importances)[::-int(1)][:int(n)]
     pylab.figure(figsize=(12,4)); pylab.xlabel("Feature Index"); pylab.ylabel("Feature Importance")
-    pylab.bar(range(36),importances[indices],color="forestgreen",align="center",alpha=0.5)
-    pylab.xticks(range(36),indices); pylab.title(title); pylab.show()
+    pylab.bar(range(n),importances[indices],color="forestgreen",align="center",alpha=0.5)
+    pylab.xticks(range(n),indices); pylab.title(title); pylab.show()
 </script></div>
     <p></p>
     <h2>Capstone Proposal Overview</h2>
@@ -390,7 +390,7 @@ pretty_print('Numeric Features and Encoded Categorical Features. Unlock for expe
 #gridsearch_gbr_cat_enc.best_params_
 </script></div>
     <p></p>
-<h4>Fit the Regressors</h4>
+<h4>Fit Regressors</h4>
 <div class="linked"><script type="text/x-sage">
 y_train_gbr,y_test_gbr=regression(GradientBoostingRegressor(max_depth=4,n_estimators=242,validation_fraction=0.2),
                                   X_train,X_test,y_train)
@@ -403,7 +403,42 @@ sympy.pprint(GradientBoostingRegressor(max_depth=4,n_estimators=242,validation_f
     <p></p>
 <div class="linked"><script type="text/x-sage">
 display_importance(GradientBoostingRegressor(max_depth=4,n_estimators=242,validation_fraction=0.2),X_train,y_train,
-                   "Importance of Numeric Features. Gradient Boosting Regressor")
+                   "Importance of Numeric Features. Gradient Boosting Regressor",38)
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+y_train_cat_gbr,y_test_cat_gbr=regression(GradientBoostingRegressor(max_depth=4,n_estimators=276,validation_fraction=0.2),
+                                          X_train_cat,X_test_cat,y_train_cat)
+scores('GradientBoostingRegressor. Numeric and Categorical Features',y_train_cat,y_test_cat,y_train_cat_gbr,y_test_cat_gbr)
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+display_importance(GradientBoostingRegressor(max_depth=4,n_estimators=276,validation_fraction=0.2),X_train_cat,y_train_cat,
+                   "Importance of Numeric and Categorical Features. Gradient Boosting Regressor",46)
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+y_train_cat_enc_gbr,y_test_cat_enc_gbr=\
+regression(GradientBoostingRegressor(max_depth=4,n_estimators=16),X_train_cat_enc,X_test_cat_enc,y_train_cat_enc)
+scores('GradientBoostingRegressor. Numeric and Categorical Features',y_train_cat_enc,y_test_cat_enc,y_train_cat_enc_gbr,y_test_cat_enc_gbr)
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+display_importance(GradientBoostingRegressor(max_depth=4,n_estimators=16),X_train_cat_enc,y_train_cat_enc,
+                   "Importance of Numeric and Categorical Encoded Features. Gradient Boosting Regressor",30)
+</script></div>
+    <p></p>
+<h4>Fit Regressors with Dimensionality Reduction</h4>
+<div class="linked"><script type="text/x-sage">
+pca=PCA(n_components=12).fit(X_train); X_train_pca=pca.transform(X_train); X_test_pca=pca.transform(X_test)
+y_train_gbr_pca,y_test_gbr_pca=\
+regression(GradientBoostingRegressor(max_depth=4,n_estimators=256,validation_fraction=0.2),X_train_pca,X_test_pca,y_train)
+scores('GradientBoostingRegressor. Numeric Features',y_train,y_test,y_train_gbr_pca,y_test_gbr_pca)
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+display_importance(GradientBoostingRegressor(max_depth=4,n_estimators=256,validation_fraction=0.2),X_train_pca,y_train,
+                   "Importance of Numeric Features (PCA). Gradient Boosting Regressor",12)
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
