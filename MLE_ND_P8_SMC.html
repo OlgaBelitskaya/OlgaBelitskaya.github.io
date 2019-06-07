@@ -196,7 +196,7 @@ pylab.figure(figsize=(12,5)); pylab.title("Histogram of Residuals 'ENTRIESn_hour
 <div class="linked"><script type="text/x-sage">
 dummy_units=pandas.get_dummies(data2['UNIT'],prefix='unit')
 X=data2[numeric2].join(dummy_units); X,mu,sigma=normalize_features(X); y=data2['ENTRIESn_hourly']
-model=sm.OLS(y,sm.add_constant(X)); results=model.fit(); predictions2_ols=results.predict(X)
+model=sm.OLS(y,X); results=model.fit(); predictions2_ols=results.predict(X)
 coefficients2_ols=results.params; r2_ols=results.rsquared
 pretty_print ("Predictions for 'ENTRIESn_hourly'")
 pandas.DataFrame(predictions2_ols,columns=['predictions']).head()
@@ -228,14 +228,12 @@ The ridership also depends on the time of day and stations, then the variables '
     <h4>Answer 2.4</h4>
 Coefficients by the Set of Built Functions
 <div class="linked"><script type="text/x-sage">
-print ('hour {}'.format(predictions2[1][2]))
-print ('weekday {}'.format(predictions2[1][3]))
-print ('meantempi {}'.format(predictions2[1][4]))
+pandas.DataFrame(predictions2[1][:int(5)],columns=['coefficients'],index=numeric2)
 </script></div>
     <p></p>
 Coefficients by the OLS Model
 <div class="linked"><script type="text/x-sage">
-coefficients2_ols
+pandas.DataFrame(coefficients2_ols[:int(5)],columns=['coefficients'])
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
