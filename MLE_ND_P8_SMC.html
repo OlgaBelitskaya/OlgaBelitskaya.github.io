@@ -195,18 +195,26 @@ pylab.figure(figsize=(12,5)); pylab.title("Histogram of Residauls 'ENTRIESn_hour
     <h4>Predictions by the OLS Model</h4>
 <div class="linked"><script type="text/x-sage">
 dummy_units=pandas.get_dummies(data2['UNIT'],prefix='unit')
-X=data2[numeric2].join(dummy_units); X,mu,sigma=normalize_features(X); X=sm.add_constant(X)
-y=data2['ENTRIESn_hourly']
-model=sm.OLS(y,X); results=model.fit(); predictions2_ols=results.predict(X)
-coefficients=results.params; r2=results.rsquared
+X=data2[numeric2].join(dummy_units); X,mu,sigma=normalize_features(X); y=data2['ENTRIESn_hourly']
+model=sm.OLS(y,sm.add_constant(X)); results=model.fit(); predictions2_ols=results.predict(X)
+coefficients2_ols=results.params; r2_ols=results.rsquared
 pretty_print ("Predictions for 'ENTRIESn_hourly'")
 pandas.DataFrame(predictions2_ols,columns=['predictions']).head()
 </script></div>
     <p></p>
+    <h4>Predictions by the SGDRegressor</h4>
 <div class="linked"><script type="text/x-sage">
-
+reg=linear_model.SGDRegressor(); reg.fit(X,y)
+coefficients2_reg=reg.coef_; r2=reg.score(X,y); predictions2_reg=reg.predict(X)
+pretty_print ("Predictions for 'ENTRIESn_hourly'")
+pandas.DataFrame(predictions2_reg,columns=['predictions']).head()
 </script></div>
     <p></p>
+    <h4>Question 2.2</h4>
+<i>What features (input variables) did you use in your model? Did you use any dummy variables as part of your features?</i>
+    <h4>Answer 2.2</h4>
+I have included the feature spectrum in the model: 'rain', 'hour', 'weekday', 'Unit', 'meantempi'.<br/>
+Dummy features that take the values 0 or 1 to indicate absence or presence of some categorical effect ('rain', 'Unit') were used.
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
