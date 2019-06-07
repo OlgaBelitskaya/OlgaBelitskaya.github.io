@@ -60,7 +60,7 @@ data.describe().T
     <p></p>   
 <div class="linked"><script type="text/x-sage">
 pretty_print('Data Medians')
-data.median()
+pandas.DataFrame(data.median(),columns=['median'])
 </script></div>
     <p></p>
     <h3>Test Selection</h3>
@@ -91,13 +91,13 @@ At first, I will describe two samples, then I will run the test and display the 
 <div class="linked"><script type="text/x-sage">
 pretty_print("ENTRIESn_hourly in rainy days")
 rainy_entries_hourly=data['ENTRIESn_hourly'][data['rain']==1]
-rainy_entries_hourly.describe()
+pandas.DataFrame(rainy_entries_hourly.describe())
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
 pretty_print("ENTRIESn_hourly in non-rainy days")
 non_rainy_entries_hourly=data['ENTRIESn_hourly'][data['rain']==0]
-non_rainy_entries_hourly.describe()
+pandas.DataFrame(non_rainy_entries_hourly.describe())
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
@@ -120,12 +120,20 @@ print ("Mann-Whitney U test: U = {:.0f}, p = {:.5f}".format(U,p))
 These should include the following numerical values: p-values, as well as the medians / means for each of the two samples under test.</i>
     <h4>Answer 1.3</h4>
 <div class="linked"><script type="text/x-sage">
-table(['Mean for rainy days','Mean for non-rainy days','Median for rainy days','Median for non-rainy days',
-       'Number of rainy days','Number for non-rainy days','p-value of Mann-Whitney U-Test'],
-      [with_rain_mean,without_rain_mean,with_rain_median,without_rain_median,
-       len(rainy_entries_hourly),len(non_rainy_entries_hourly),p])
+table([['Mean for rainy days','Mean for non-rainy days','Median for rainy days','Median for non-rainy days',
+        'Number of rainy days','Number for non-rainy days','p-value of Mann-Whitney U-Test'],
+       [with_rain_mean,without_rain_mean,with_rain_median,without_rain_median,
+        len(rainy_entries_hourly),len(non_rainy_entries_hourly),p]])
 </script></div>
     <p></p>
+    <h4>Question 1.4</h4>
+<i>What is the significance and interpretation of these results?</i>
+    <h4>Answer 1.4</h4>
+The median / mean values of ENTRIESn_hourly in rainy days is only a little bit larger than in non-rainy days.<br/>
+I cannot determine whether the null hypothesis is rejected or not based on the difference between each pair of values.<br/>
+The Mann-Whitney U-Test detects more informative results on whether the null hypothesis is true or not.<br/>
+The p-value of this test is less than the p-critical value.<br/>
+Therefore, I can confirm that the null hypothesis is rejected with 95% of confidence level.
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
