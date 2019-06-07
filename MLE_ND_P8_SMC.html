@@ -194,7 +194,13 @@ pylab.figure(figsize=(12,5)); pylab.title("Histogram of Residauls 'ENTRIESn_hour
     <p></p>
     <h4>Predictions by the OLS Model</h4>
 <div class="linked"><script type="text/x-sage">
-
+dummy_units=pandas.get_dummies(data2['UNIT'],prefix='unit')
+X=data2[numeric2].join(dummy_units); X,mu,sigma=normalize_features(X); X=sm.add_constant(X)
+y=data2['ENTRIESn_hourly']
+model=sm.OLS(y,X); results=model.fit(); predictions2_ols=results.predict(X)
+coefficients=results.params; r2=results.rsquared
+pretty_print ("Predictions for 'ENTRIESn_hourly'")
+pandas.DataFrame(predictions2_ols,columns=['predictions']).head()
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
