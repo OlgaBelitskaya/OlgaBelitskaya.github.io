@@ -180,7 +180,7 @@ To produce predictions I would like to try<br/>
 It will be interesting to compare the results.
     <h4>Predictions by the Set of Built Functions</h4>
 <div class="linked"><script type="text/x-sage">
-numeric2=['rain','hour','weekday','meantempi']
+numeric2=['rain','fog','hour','weekday','meantempi']
 predictions2=predictions(data2,numeric2,'ENTRIESn_hourly')
 pretty_print ("Predictions for 'ENTRIESn_hourly'")
 pandas.DataFrame(predictions2[0],columns=['predictions']).head()
@@ -188,7 +188,7 @@ pandas.DataFrame(predictions2[0],columns=['predictions']).head()
     <p></p>
 The code cell below produce predictions and display the histogram of residuals (the differences between the observed values and the estimated values).
 <div class="linked"><script type="text/x-sage">
-pylab.figure(figsize=(12,5)); pylab.title("Histogram of Residauls 'ENTRIESn_hourly', Theta Gradient Descent",fontsize=15)
+pylab.figure(figsize=(12,5)); pylab.title("Histogram of Residuals 'ENTRIESn_hourly', Theta Gradient Descent",fontsize=15)
 (data2['ENTRIESn_hourly']-predictions2[0]).hist(bins=200,color='#4169E1',edgecolor='black',alpha=0.5); pylab.show()
 </script></div>
     <p></p>
@@ -213,8 +213,16 @@ pandas.DataFrame(predictions2_reg,columns=['predictions']).head()
     <h4>Question 2.2</h4>
 <i>What features (input variables) did you use in your model? Did you use any dummy variables as part of your features?</i>
     <h4>Answer 2.2</h4>
-I have included the feature spectrum in the model: 'rain', 'hour', 'weekday', 'Unit', 'meantempi'.<br/>
-Dummy features that take the values 0 or 1 to indicate absence or presence of some categorical effect ('rain', 'Unit') were used.
+I have included the feature spectrum in the model: 'rain', 'fog', 'hour', 'weekday', 'Unit', 'meantempi'.<br/>
+Dummy features that take the values 0 or 1 to indicate absence or presence of some categorical values (for the feature 'Unit') were used.
+    <h4>Question 2.3</h4>
+<i>Why did you select these features in your model?<br/> 
+We are looking for specific reasons that lead you to believe that the selected features will contribute to the predictive power of your model. Your reasons might be based on intuition.<br/>  
+For example, response for fog might be: “I decided to use fog because I thought that when it is very foggy outside people might decide to use the subway more often.” <br/> 
+Your reasons might also be based on data exploration and experimentation, for example: “I used feature X because as soon as I included it in my model, it drastically improved my R2 value.”</i>
+    <h4>Answer 2.3</h4>
+Based on intuitive assumptions, uncomfortable weather conditions increase the ridership, so I added the variables 'rain', 'fog' and 'meantempi'. 
+The ridership also depends on the time of day and stations, then the variables 'Unit' and 'hour' should be added to the feature list also.
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
