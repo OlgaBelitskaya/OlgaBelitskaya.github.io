@@ -385,7 +385,16 @@ The dataset and analysis have potential shortcomings.
 I can confirm my doubts by creating one additional visualization.<br/>
 It displays very clearly how close predictions of different models to each other and how they far away from the real data.
 <div class="linked"><script type="text/x-sage">
-
+pylab.figure(figsize=(11,7)); n1,n2=int(10000),int(10050)
+pylab.title("Predicitons vs Real Data for 'ENTRIESn_hourly'",fontsize=15)
+pylab.plot(range(n1,n2),predictions2_ols[n1:n2],'-o',color='#4169E1',markersize=10,
+           markeredgecolor='#4169E1',markerfacecolor="None",markeredgewidth=2)
+pylab.plot(range(n1,n2),predictions2_reg[n1:n2],'-o',color='steelblue',markersize=10,
+           markeredgecolor='steelblue',markerfacecolor="None",markeredgewidth=2)
+pylab.plot(range(n1,n2),data2['ENTRIESn_hourly'][n1:n2],'-o',color='black',markersize=10,
+           markeredgecolor='black',markerfacecolor="None",markeredgewidth=2)
+pylab.xlabel('Serial Number of Observations',fontsize=12); pylab.ylabel('ENTRIESn_hourly',fontsize=12)
+pylab.legend(['OLS Model','SGDRegressor','Real Data'],fontsize=12); pylab.show()
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
