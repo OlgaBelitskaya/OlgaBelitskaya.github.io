@@ -79,6 +79,11 @@ def ols_predictions(data,feature_list):
     X=data[feature_list].join(dummy_units); X,mu,sigma=normalize_features(X); Xsm=sm.add_constant(X)
     model=sm.OLS(y,Xsm); results=model.fit()
     return results.predict(Xsm),results.params,results.rsquared
+def sgd_predictions(data,feature_list):
+    y=data['ENTRIESn_hourly']; dummy_units=pandas.get_dummies(data['UNIT'],prefix='unit')
+    X=data[feature_list].join(dummy_units); X,mu,sigma=normalize_features(X)
+    reg=linear_model.SGDRegressor(); reg.fit(X,y)
+    return reg.predict(X),reg.coef_,reg.score(X,y)
 </script></div>
     <p></p>
     <h2>Statistical Test</h2> 
@@ -206,8 +211,7 @@ pandas.DataFrame(predictions2_ols,columns=['predictions']).head()
     <p></p>
     <h4>Predictions by the SGDRegressor</h4>
 <div class="linked"><script type="text/x-sage">
-reg=linear_model.SGDRegressor(); reg.fit(X,y)
-coefficients2_reg=reg.coef_; r2_reg=reg.score(X,y); predictions2_reg=reg.predict(X)
+predictions2_reg,coefficients2_reg,r2_reg=sgd_predictions(data2,numeric2)
 pretty_print ("Predictions for 'ENTRIESn_hourly'")
 pandas.DataFrame(predictions2_reg,columns=['predictions']).head()
 </script></div>
