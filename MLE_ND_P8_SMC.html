@@ -190,7 +190,7 @@ To produce predictions I would like to try<br/>
 It will be interesting to compare the results.
     <h4>Predictions by the Set of Built Functions</h4>
 <div class="linked"><script type="text/x-sage">
-numeric2=['rain','fog','hour','weekday','meantempi']
+numeric2=['rain','hour','weekday','meantempi']
 predictions2=predictions(data2,numeric2,'ENTRIESn_hourly')
 pretty_print ("Predictions for 'ENTRIESn_hourly'")
 pandas.DataFrame(predictions2[0],columns=['predictions']).head()
@@ -204,14 +204,14 @@ pylab.figure(figsize=(11,5)); pylab.title("Histogram of Residuals 'ENTRIESn_hour
     <p></p>
     <h4>Predictions by the OLS Model</h4>
 <div class="linked"><script type="text/x-sage">
-predictions2_ols,coefficients2_ols,r2_ols=ols_predictions(data2,numeric2)
+predictions2_ols,coefficients2_ols,r2_ols2=ols_predictions(data2,numeric2)
 pretty_print ("Predictions for 'ENTRIESn_hourly'")
 pandas.DataFrame(predictions2_ols,columns=['predictions']).head()
 </script></div>
     <p></p>
     <h4>Predictions by the SGDRegressor</h4>
 <div class="linked"><script type="text/x-sage">
-predictions2_reg,coefficients2_reg,r2_reg=sgd_predictions(data2,numeric2)
+predictions2_reg,coefficients2_reg,r2_reg2=sgd_predictions(data2,numeric2)
 pretty_print ("Predictions for 'ENTRIESn_hourly'")
 pandas.DataFrame(predictions2_reg,columns=['predictions']).head()
 </script></div>
@@ -219,7 +219,7 @@ pandas.DataFrame(predictions2_reg,columns=['predictions']).head()
     <h4>Question 2.2</h4>
 <i>What features (input variables) did you use in your model? Did you use any dummy variables as part of your features?</i>
     <h4>Answer 2.2</h4>
-I have included the feature spectrum in the model: 'rain', 'fog', 'hour', 'weekday', 'Unit', 'meantempi'.<br/>
+I have included the feature spectrum in the model: 'rain', 'hour', 'weekday', 'Unit', 'meantempi'.<br/>
 Dummy features that take the values 0 or 1 to indicate absence or presence of some categorical values (for the feature 'Unit') were used.
     <h4>Question 2.3</h4>
 <i>Why did you select these features in your model?<br/> 
@@ -227,7 +227,7 @@ We are looking for specific reasons that lead you to believe that the selected f
 For example, response for fog might be: “I decided to use fog because I thought that when it is very foggy outside people might decide to use the subway more often.” <br/> 
 Your reasons might also be based on data exploration and experimentation, for example: “I used feature X because as soon as I included it in my model, it drastically improved my R2 value.”</i>
     <h4>Answer 2.3</h4>
-Based on intuitive assumptions, uncomfortable weather conditions increase the ridership, so I added the variables 'rain', 'fog', and 'meantempi'.<br/> 
+Based on intuitive assumptions, uncomfortable weather conditions increase the ridership, so I added the variables 'rain' and 'meantempi'.<br/> 
 The ridership also depends on the time of day and stations, then the variables 'Unit', 'weekday', and 'hour' should be added to the feature list also.
     <h4>Question 2.4</h4>
 <i>What are the parameters (also known as "coefficients" or "weights") of the non-dummy features in your linear regression model?</i>
@@ -255,8 +255,8 @@ There are lots of statistic code libraries for the coefficient of determination 
 print ("Set of Built Functions (sklearn.metrics): {}".format(r2_score(data2['ENTRIESn_hourly'],predictions2[0])))
 slope,intercept,r_value,p_value,std_err=linregress(data2['ENTRIESn_hourly'],predictions2[0])
 print ("Set of Built Functions (scipy.stats): {}".format(r_value**2))
-print ("OLS model: {}".format(r2_ols))
-print ("SGDRegressor: {}".format(r2_reg))
+print ("OLS model: {}".format(r2_ols2))
+print ("SGDRegressor: {}".format(r2_reg2))
 </script></div>
     <p></p>
     <h4>Question 2.6</h4> 
@@ -351,6 +351,17 @@ There are some reasons why it needs to detect more clear tendencies in the rider
 <div class="linked"><script type="text/x-sage">
 # Medians' Difference
 100.0*(with_rain_median-without_rain_median)/with_rain_median
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+numeric=['hour','weekday','meantempi']
+predictions=predictions(data2,numeric,'ENTRIESn_hourly')
+predictions_ols,coefficients_ols,r2_ols=ols_predictions(data2,numeric)
+predictions_reg,coefficients_reg,r2_reg=sgd_predictions(data2,numeric)
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+
 </script></div>
     <p></p>
     <h2>Reflections</h2>
