@@ -233,7 +233,7 @@ pandas.DataFrame(predictions2[1][:int(5)],columns=['coefficients'],index=numeric
     <p></p>
 Coefficients by the OLS Model
 <div class="linked"><script type="text/x-sage">
-pandas.DataFrame(coefficients2_ols[:int(5)],columns=['coefficients'])
+pandas.DataFrame(coefficients2_ols[int(1):int(6)],columns=['coefficients'])
 </script></div>
     <p></p>
 Coefficients by the SGDRegressor
@@ -307,6 +307,21 @@ Some suggestions are:<br/>
 - Ridership by time-of-day<br/>
 - Ridership by day-of-week
     <h4>Answer 3.2</h4>
+<div class="linked"><script type="text/x-sage">
+data['ENTRIES_EXITS']=data['ENTRIESn_hourly']-data['EXITSn_hourly']
+data_ee=data[['Hour','ENTRIES_EXITS']].groupby('Hour',as_index=False).sum()
+pylab.figure(figsize=(11,5)); pylab.title('Entries - Exits By Hour',fontsize=15)
+pylab.plot(data_ee['Hour'],data_ee['ENTRIES_EXITS'],'--',lw=3,color='#4169E1')
+psize=list(2000*data_ee['ENTRIES_EXITS'].abs()/data_ee['ENTRIES_EXITS'].abs().mean())
+pylab.scatter(data_ee['Hour'],data_ee['ENTRIES_EXITS'],s=psize,marker='8',facecolors='none',edgecolors='steelblue',linewidth='3')
+pylab.xlabel('Hour',fontsize=12); pylab.ylabel('Entries - Exits',fontsize=12)
+pylab.axis((-1,23.5,-1000000,5500000)); pylab.show()
+</script></div>
+    <p></p>
+<div class="linked"><script type="text/x-sage">
+
+</script></div>
+    <p></p>
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
