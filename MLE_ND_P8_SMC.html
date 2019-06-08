@@ -74,6 +74,11 @@ def predictions(dataframe,numeric,target,alpha=0.1,num_iterations=50):
     gradient_descent(features_array,values_array,theta_gradient_descent,alpha,num_iterations)    
     predictions=numpy.dot(features_array,theta_gradient_descent)
     return predictions,theta_gradient_descent
+def ols_predictions(data,feature_list):
+    y=data['ENTRIESn_hourly']; dummy_units=pandas.get_dummies(data['UNIT'],prefix='unit')
+    X=data[feature_list].join(dummy_units); X,mu,sigma=normalize_features(X); Xsm=sm.add_constant(X)
+    model=sm.OLS(y,Xsm); results=model.fit()
+    return results.predict(Xsm),results.params,results.rsquared
 </script></div>
     <p></p>
     <h2>Statistical Test</h2> 
@@ -194,10 +199,7 @@ pylab.figure(figsize=(11,5)); pylab.title("Histogram of Residuals 'ENTRIESn_hour
     <p></p>
     <h4>Predictions by the OLS Model</h4>
 <div class="linked"><script type="text/x-sage">
-y=data2['ENTRIESn_hourly']; dummy_units=pandas.get_dummies(data2['UNIT'],prefix='unit')
-X=data2[numeric2].join(dummy_units); X,mu,sigma=normalize_features(X); Xsm=sm.add_constant(X)
-model=sm.OLS(y,Xsm); results=model.fit(); predictions2_ols=results.predict(Xsm)
-coefficients2_ols=results.params; r2_ols=results.rsquared
+predictions2_ols,coefficients2_ols,r2_ols=ols_predictions(data2,numeric2)
 pretty_print ("Predictions for 'ENTRIESn_hourly'")
 pandas.DataFrame(predictions2_ols,columns=['predictions']).head()
 </script></div>
