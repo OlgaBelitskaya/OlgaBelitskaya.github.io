@@ -30,16 +30,22 @@ Jupyter Notebook &#38; SageMath Kernel
     <p>Install the additional package.</p>
 <div class="linked"><script type="text/x-sage">
 !python -m pip install --upgrade pip --user
-!python -m pip install tensorflow --user
-import sys
-sys.path.append('/home/sc_work/.sage/local/lib/python2.7/site-packages')
+!python -m pip install pygal --user
+import sys; sys.path.append('/home/sc_work/.sage/local/lib/python2.7/site-packages')
 </script></div>
     <p></p>
     <h1>-</h1>
 Jupyter Notebook &#38; SageMath Kernel       
 <div class="linked"><script type="text/x-sage">
-import tensorflow,numpy,pylab
-
+import pygal,pandas; from pygal.style import BlueStyle
+columns=['Fresh','Milk','Grocery','Frozen','Detergents_Paper','Delicatessen']
+colors=['#1b2c45','#5a8bbd','#008b8b','#ff5a8b']; index= ['C1','C2','C3']
+data=[[26373,36423,22019,5154,4337,16523],[16165,4230,7595,201,4003,57],[14276,803,3045,485,100,518]]
+samples=pandas.DataFrame(data,columns=columns,index=index); 
+line=pygal.Line(fill=False,style=BlueStyle(opacity='.3',colors=colors,background='transparent'),height=int(400))
+line.title='Samples of the Wholesale Customers Dataset'; line.x_labels=columns
+line.add('C1',data[0]); line.add('C2',data[1]); line.add('C3',data[2]); line.add('MEAN',samples.mean())
+line.render_to_file('samples.svg'); html("""<figure><embed type="image/svg+xml" src="samples.svg"/></figure>""")
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
