@@ -51,7 +51,7 @@ Python &#38; SageMathCell
 <div class="sage"><script type="text/x-sage">
 !python -m pip install --upgrade pip --user
 !python -m pip install bokeh --user
-import sys,numpy; sys.path.append('/home/sc_work/.sage/local/lib/python2.7/site-packages')
+import sys,os,numpy; sys.path.append('/home/sc_work/.sage/local/lib/python2.7/site-packages')
 from bokeh.layouts import gridplot; from bokeh.plotting import figure,show,output_file
 t=numpy.linspace(0,2*numpy.pi,300); 
 x=(numpy.cos(24*t)+numpy.cos(12*t))*numpy.cos(t); y=(numpy.cos(24*t)+numpy.cos(12*t))*numpy.sin(t)
@@ -66,7 +66,8 @@ p2.square(x,2*y,legend=u'2ϱ',fill_color=None, line_color="green")
 p2.line(x,2*y,legend=u'2ϱ',line_color="green")
 output_file("legend.html",title="legend.py example")
 show(gridplot([p1,p2],ncols=int(2),plot_width=int(400),plot_height=int(400)))
-html("""<div id="data"><iframe src="legend.html" height="500" width="900"></iframe></div>""")
+path='https://sagecell.sagemath.org/kernel/'+os.getcwd()[14:]+'/files/legend.html'
+html("<div id='data'><iframe src=%s height='500' width='900'></iframe></div>"%path)
 </script></div>
     <p></p>
 <div class="sage"><script type="text/x-sage">
