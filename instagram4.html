@@ -108,11 +108,34 @@ pylab.style.use('seaborn-whitegrid'); df.boundary.plot(figsize=(12,7),markersize
 pylab.xlim(37.61,37.64); pylab.ylim(55.750,55.768); pylab.show()
 </script></div>
     <p></p>
+    <h1>You can use OpenCV in SageMathCell</h1>
+Python &#38; SageMathCell      
+<div class="sage"><script type="text/x-sage">
+#unlock to install opencv
+#!python -m pip install --upgrade pip --user
+#!pip install opencv-python --user
+sys.path.append('/home/sc_work/.sage/local/lib/python2.7/site-packages')
+import cv2,pylab,urllib; path='https://olgabelitskaya.github.io/new/'
+for f in ['10.png','24.png']:
+    input_file=urllib.urlopen(path+f); output_file=open(f,'wb')
+    output_file.write(input_file.read()); output_file.close(); input_file.close() 
+edge=cv2.imread('10.png'); edge=cv2.GaussianBlur(edge,(2*3+1,2*3+1),-1)[3:-3,3:-3]
+edge2=cv2.imread('24.png'); edge2=cv2.GaussianBlur(edge2,(2*5+1,2*5+1),-1)[5:-5,5:-5]
+s='size: %s, shape: %s, type: %s'%(str(edge.size),str(edge.shape),str(edge.dtype))+12*' '+\
+  'size: %s, shape: %s, type: %s'%(str(edge2.size),str(edge2.shape),str(edge2.dtype))
+gray_edge=cv2.cvtColor(edge,cv2.COLOR_BGR2GRAY); gray_edge2=cv2.cvtColor(edge2,cv2.COLOR_BGR2GRAY)
+edges=cv2.Canny(gray_edge,60,230); edge[edges!=0]=(0,0,255)
+edges2=cv2.Canny(gray_edge2,50,120); edge2[edges2!=0]=(0,0,255)
+pretty_print(s); pylab.figure(figsize=(12,5))
+pylab.subplot(121); pylab.imshow(cv2.cvtColor(edge,cv2.COLOR_BGR2RGB))
+pylab.subplot(122); pylab.imshow(cv2.cvtColor(edge2,cv2.COLOR_BGR2RGB)); pylab.show()
+</script></div>
+    <p></p>
     <h1>If you want to check installed packages for R in SageMathCell</h1>
 R &#38; SageMathCell
 <div class="sage_r"><script type="text/x-sage">
 %%r
-as.data.frame(installed.packages()[,c(1,3:4)])
+data.frame(installed.packages()[,c(1,3:4)])
 </script></div>
     <p></p>
 <div class="sage_r"><script type="text/x-sage">
