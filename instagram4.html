@@ -137,9 +137,12 @@ Python &#38; SageMathCell
 #unlock to install folium
 #!python -m pip install --upgrade pip --user
 #!pip install folium --user
+import warnings; warnings.filterwarnings('ignore',category=UserWarning)
 sys.path.append('/home/sc_work/.sage/local/lib/python2.7/site-packages'); import folium
 m=folium.Map(location=[55.7570,37.6190],zoom_start=17)
-folium.Marker(location=[55.7571,37.6224],popup='Nikolskaya',icon=folium.Icon(icon='cloud')).add_to(m); m
+folium.Marker(location=[55.7571,37.6224],popup='Nikolskaya',icon=folium.Icon(icon='cloud')).add_to(m)
+m.save('map.html'); path='https://sagecell.sagemath.org/kernel/'+os.getcwd()[14:]+'/files/map.html'
+html("<div id='data'><iframe src=%s height='700' width='1000'></iframe></div>"%path)
 </script></div>
     <p></p>
     <h1>If you want to check installed packages for R in SageMathCell</h1>
