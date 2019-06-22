@@ -34,11 +34,11 @@ Python &#38; SageMathCell
 #!python -m pip install geopandas --user
 sys.path.append('/home/sc_work/.sage/local/lib/python2.7/site-packages')
 import pandas,geopandas,pylab; pylab.style.use('seaborn-whitegrid')
-path='https://olgabelitskaya.github.io/map.geojson'; df=geopandas.read_file(path)
-ax=df[df['highway']=='footway'].geometry.plot(figsize=(12,7),markersize=0,color='gray',label='footways')
+path='https://olgabelitskaya.github.io/map.geojson'; df=geopandas.GeoDataFrame.from_file(path)
+ax=df.boundary.plot(figsize=(12,7),markersize=0,linewidth=0.3,edgecolor='gray')
 df[df['highway']=='street_lamp'].plot(color='r',ax=ax,label='lamps')
 df[df['highway']=='traffic_signals'].plot(color='g',ax=ax,label='traffic signals')
-pylab.legend(); pylab.xlim(37.615,37.635); pylab.ylim(55.752,55.764); pylab.show()
+pylab.legend(); pylab.xlim(37.610,37.635); pylab.ylim(55.752,55.762); pylab.show()
 </script></div>
     <p></p>     
 <div class="linked"><script type="text/x-sage">
