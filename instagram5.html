@@ -25,11 +25,20 @@
 <a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp;</a>     
 <a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a>
     <p></p> 
-    <h1>--</h1>
+    <h1>Do you think it's hard to create your own maps?</h1>
 Python &#38; SageMathCell 
     <p></p>
 <div class="linked"><script type="text/x-sage">
-
+#unlock to install geopandas
+#!python -m pip install --upgrade pip --user
+#!python -m pip install geopandas --user
+sys.path.append('/home/sc_work/.sage/local/lib/python2.7/site-packages')
+import geopandas,pylab; pylab.style.use('seaborn-whitegrid')
+path='https://olgabelitskaya.github.io/map.geojson'; df=geopandas.read_file(path)
+ax=df[df['highway']=='footway'].plot(figsize=(11,11),color='gray',label='footways')
+df[df['highway']=='street_lamp'].plot(color='r',ax=ax,label='lamps')
+df[df['highway']=='traffic_signals'].plot(color='g',ax=ax,label='traffic signals')
+pylab.legend(); pylab.xlim(37.61,37.64); pylab.ylim(55.750,55.768); pylab.show()
 </script></div>
     <p></p>     
 <div class="linked"><script type="text/x-sage">
