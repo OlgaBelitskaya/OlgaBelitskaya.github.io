@@ -43,24 +43,41 @@ df[df['highway']=='traffic_signals'].plot(edgecolor='r',markersize=20,ax=ax,labe
 pylab.legend(); pylab.xlim(37.610,37.635); pylab.ylim(55.752,55.762); pylab.show()
 </script></div>
     <p></p> 
-    <h1>Let's explore PyGame</h1>
+    <h1>It'spossible to install PyGame</h1>
 Python Modules &#38; SageMathCell      
 <div class="linked"><script type="text/x-sage">
 #unlock to install pygame
 #!python -m pip install --upgrade pip --user
 #!python -m pip install pygame --user
 sys.path.append('/home/sc_work/.sage/local/lib/python2.7/site-packages')
-import pygame; from itertools import chain
+import pygame
 </script></div>
     <p></p>
 <div class="linked"><script type="text/x-sage">
 
 </script></div>
-    <p></p>     
+    <p></p>  
+    <h1>Let's have a look at molecular structures with BioPandas</h1>
+Python Modules &#38; SageMathCell
+<div class="sage"><script type="text/x-sage">
+#unlock to install biopandas
+#!python -m pip install --upgrade pip --user
+#!python -m pip install  biopandas --user
+sys.path.append('/home/sc_work/.sage/local/lib/python2.7/site-packages')
+f='1b5e_2.mol2'; path='https://raw.githubusercontent.com/rasbt/biopandas/master/docs/sources/tutorials/data/'
+import biopandas,numpy,pylab,urllib; pylab.style.use('seaborn-whitegrid')
+from biopandas.mol2 import PandasMol2
+input_file=urllib.urlopen(path2+f); output_file=open(f,'wb')
+output_file.write(input_file.read()); output_file.close(); input_file.close()
+pmol=PandasMol2().read_mol2(f); colors=pylab.cm.ocean(numpy.linspace(.1,.9,9))
+pmol.df['atom_type'].value_counts().plot(kind='bar',color=colors,figsize=(8,6))
+pylab.xlabel('atom type'); pylab.ylabel('count'); pylab.show()
+</script></div>
+    <p></p>  
 <div class="sage"><script type="text/x-sage">
 
 </script></div>
-    <p></p>      
+    <p></p>  
 <div class="sage_r"><script type="text/x-sage">
 
 </script></div>
