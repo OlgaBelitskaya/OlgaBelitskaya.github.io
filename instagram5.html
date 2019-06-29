@@ -67,14 +67,24 @@ sys.path.append('/home/sc_work/.sage/local/lib/python2.7/site-packages')
 f='1b5e_2.mol2'; path='https://raw.githubusercontent.com/rasbt/biopandas/master/docs/sources/tutorials/data/'
 import biopandas,numpy,pylab,urllib; pylab.style.use('seaborn-whitegrid')
 from biopandas.mol2 import PandasMol2
-input_file=urllib.urlopen(path2+f); output_file=open(f,'wb')
+input_file=urllib.urlopen(path+f); output_file=open(f,'wb')
 output_file.write(input_file.read()); output_file.close(); input_file.close()
 pmol=PandasMol2().read_mol2(f); colors=pylab.cm.ocean(numpy.linspace(.1,.9,9))
 pmol.df['atom_type'].value_counts().plot(kind='bar',color=colors,figsize=(8,6))
 pylab.xlabel('atom type'); pylab.ylabel('count'); pylab.show()
 </script></div>
-    <p></p>  
+    <p></p>
+    <h1>Additional machine learning tools in Mlxtend</h1>
+Python Modules &#38; SageMathCell      
 <div class="sage"><script type="text/x-sage">
+#unlock to install mlxtend
+#!python -m pip install --upgrade pip --user
+#!python -m pip install mlxtend --user
+sys.path.append('/home/sc_work/.sage/local/lib/python2.7/site-packages')
+import numpy,warnings; warnings.simplefilter('ignore')
+from sklearn import datasets,model_selection; from mlxtend.classifier import StackingClassifier
+from sklearn.linear_model import LogisticRegression; from sklearn.neighbors import KNeighborsClassifier
+from sklearn.naive_bayes import GaussianNB ; from sklearn.ensemble import RandomForestClassifier
 
 </script></div>
     <p></p>  
