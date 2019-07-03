@@ -97,8 +97,28 @@ for clf,label in zip(clfs+[sclf1,sclf2,sclf3],labels):
     print("Accuracy: %0.2f (+/- %0.2f) [%s]" %(scores.mean(),scores.std(),label))
 </script></div>
     <p></p>
+      
 <div class="sage"><script type="text/x-sage">
-
+#unlock to install mlxtend
+#!python -m pip install --upgrade pip --user
+#!python -m pip install mlxtend --user
+sys.path.append('/home/sc_work/.sage/local/lib/python2.7/site-packages')
+import numpy,warnings; warnings.simplefilter('ignore')
+from sklearn import datasets,model_selection,svm,linear_model 
+from mlxtend.regressor import StackingRegressor
+from sklearn.neighbors import KNeighborsRegressor,RadiusNeighborsRegressor
+from sklearn.ensemble import GradientBoostingRegressor,RandomForestRegressor
+boston=datasets.load_boston(); X,y=boston.data,boston.target
+regs=[GradientBoostingRegressor(),KNeighborsRegressor(),svm.SVR(kernel='linear')]
+sreg1=StackingRegressor(regressors=regs,meta_regressor=RandomForestRegressor(random_state=1))
+sreg2=StackingRegressor(regressors=regs,meta_regressor=linear_model.Ridge(random_state=1))
+sreg3=StackingRegressor(regressors=regs,meta_regressor=linear_model.PassiveAggressiveRegressor(max_iter=1000,tol=0.001))
+labels=['GradientBoosting','KNeighbors','SVM',
+        'StackingRegressor - RandomForest','StackingRegressor - Ridge','StackingRegressor - PassiveAggressive']
+for reg,label in zip(regs+[sreg1,sreg2,sreg3],labels):    
+    print(label); reg.fit(X,y)
+    print("Mean Squared Error: %.4f"%numpy.mean((reg.predict(X)-y)**2))
+    print('Variance Score: %.4f'%reg.score(X,y))
 </script></div>
     <p></p> 
 <div class="sage_r"><script type="text/x-sage">
