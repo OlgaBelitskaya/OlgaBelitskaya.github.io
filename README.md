@@ -34,6 +34,14 @@
 #### [PP0](https://olgabelitskaya.github.io/MLE_ND_PP0.html) &nbsp; [PP1](https://olgabelitskaya.github.io/MLE_ND_PP1.html) &nbsp; [PP2](https://olgabelitskaya.github.io/MLE_ND_PP2.html) &nbsp; [PP3](https://olgabelitskaya.github.io/MLE_ND_PP3.html)
 #### PP4: [Part 1](https://olgabelitskaya.github.io/MLE_ND_PP4_1.html) &nbsp; [Part 2](https://olgabelitskaya.github.io/MLE_ND_PP4_2.html) &nbsp; [Part 3](https://olgabelitskaya.github.io/MLE_ND_PP4_3.html) &nbsp; [Part 4](https://olgabelitskaya.github.io/MLE_ND_PP4_4.html) &nbsp; [Part 5](https://olgabelitskaya.github.io/MLE_ND_PP4_5.html) &nbsp; [Part 6](https://olgabelitskaya.github.io/MLE_ND_PP4_6.html)
 
+### Interactive Reports with SageMathCell
+#### [P0: Titanic Survival Exploration](https://olgabelitskaya.github.io/MLE_ND_P0_SMC.html)
+#### [P1: Predicting Boston Housing Prices](https://olgabelitskaya.github.io/MLE_ND_P1_SMC.html)
+#### [P2: Finding Donors for CharityML](https://olgabelitskaya.github.io/MLE_ND_P2_SMC.html)
+#### [P3: Creating Customer Segments](https://olgabelitskaya.github.io/MLE_ND_P3_SMC.html)
+#### [P7: Building a Student Intervention System](https://olgabelitskaya.github.io/MLE_ND_P7_SMC.html)
+#### [P8: Analyzing the NYC Subway Dataset](https://olgabelitskaya.github.io/MLE_ND_P8_SMC.html)
+
 ## &#x1F4D1; &nbsp; Deep Learning Nanodegree 
 ### [Built with Udacity](https://www.udacity.com) 
 
@@ -64,25 +72,6 @@ Colaboratory Notebooks &nbsp; [decor_classification.ipynb &#x1F4D6; ](https://dr
 #### Udacity_Technical_Interview_Practice_Lessons.ipynb &nbsp; [&#x1F310;](https://gist.github.com/OlgaBelitskaya/a6cb19e1f3a041e6f6a56ccf58b4701c)
 #### Udacity_Technical_Interview_Practice_Project.ipynb &nbsp; [&#x1F310;](https://gist.github.com/OlgaBelitskaya/849e983dd6e90943d5760be4c4986501)
 
----
-# &#x1F4D8; &nbsp; Courses and Programs 
-https://olgabelitskaya.github.io/reflections/README.html
-
-# &#x1F4D8; &nbsp; Notebooks and Data Files
-https://olgabelitskaya.github.io/notebooks/README.html
-
-# &#x1F4D8; &nbsp; Additional Exercises
-https://olgabelitskaya.github.io/README_EXERCISES.html
-
-# &#x1F4D8; &nbsp;  Cookbooks
-### Keras Python &nbsp; [&#x1F310;](https://olgabelitskaya.github.io/keras_cookbook.html)
-### Keras R &nbsp; [&#x1F310;](https://olgabelitskaya.github.io/keras_cookbook_r.html)
-### Sklearn Python&nbsp; [&#x1F310;](https://olgabelitskaya.github.io/sklearn_cookbook.html)
-### TensorFlow Python &nbsp; [&#x1F310;](https://olgabelitskaya.github.io/tensorflow_cookbook.html)
-### OpenCV Python &nbsp; [&#x1F310;](https://olgabelitskaya.github.io/opencv_cookbook.html)
-
----
-# &#x1F3D9; &nbsp;  Other Web Links:
 ## &#x1F4D1; &nbsp; Kaggle
 ### Kernels
 - Digit Recognition Models &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/digit-recognition-models-2) &nbsp; [Web Page &#x1F310;](https://olgabelitskaya.github.io/kaggle_digits.html)
@@ -101,7 +90,7 @@ https://olgabelitskaya.github.io/README_EXERCISES.html
 
 - Mixed Styles &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/mixed-styles)
 
-### Datasets
+### Created Datasets
 - Flower Color Images &nbsp; [Kaggle Dataset &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/flower-color-images)
 
 - SVHN Preprocessed Fragments &nbsp; [Kaggle Dataset &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/svhn-preproccessed-fragments)
@@ -113,6 +102,115 @@ https://olgabelitskaya.github.io/README_EXERCISES.html
 - Style Color Images &nbsp; [Kaggle Dataset &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/style-color-images)
 
 - Traditional Decor Patterns &nbsp; [Kaggle Dataset &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/traditional-decor-patterns)
+
+
+## &#x1F4D1;  Cookbooks
+### Webpages
+#### Keras Python &nbsp; [&#x1F310;](https://olgabelitskaya.github.io/keras_cookbook.html) &nbsp; Keras R &nbsp; [&#x1F310;](https://olgabelitskaya.github.io/keras_cookbook_r.html) &nbsp; Sklearn Python&nbsp; [&#x1F310;](https://olgabelitskaya.github.io/sklearn_cookbook.html) &nbsp; TensorFlow Python &nbsp; [&#x1F310;](https://olgabelitskaya.github.io/tensorflow_cookbook.html) &nbsp; OpenCV Python &nbsp; [&#x1F310;](https://olgabelitskaya.github.io/opencv_cookbook.html)
+### Interactive
+#### [Sklearn Python + SageMath Cell](https://olgabelitskaya.github.io/sklearn_cookbook_sagecells.html)
+#### [Keras Python + Google Colab](https://colab.research.google.com/drive/16Xh8T4fPuk0AIBjnCo7e9WTrF1PgukoF)
+## &#x1F4D1;  Online Mini Campus- SageMath Practice with Wolfram "Translation"
+#### [SageMath PART 1](https://olgabelitskaya.github.io/sage.html) &nbsp; 📓 [Wolfram NB Part 1](https://www.wolframcloud.com/obj/safuolga/Published/wolfram.nb)
+#### [SageMath PART 2](https://olgabelitskaya.github.io/sage2.html) &nbsp; 📓 [Wolfram NB Part 2](https://www.wolframcloud.com/obj/safuolga/Published/wolfram2.nb)
+#### [SageMath PART 3](https://olgabelitskaya.github.io/sage3.html) &nbsp; 📓 [Wolfram NB Part 3](https://www.wolframcloud.com/obj/safuolga/Published/wolfram3.nb)
+#### [SageMath PART 4](https://olgabelitskaya.github.io/sage4.html) &nbsp; 📓 [Wolfram NB Part 4](https://www.wolframcloud.com/obj/safuolga/Published/wolfram4.nb)
+#### [SageMath PART 5](https://olgabelitskaya.github.io/sage5.html) &nbsp; 📓 [Wolfram NB Part 5](https://www.wolframcloud.com/obj/safuolga/Published/wolfram5.nb)
+#### [SageMath PART 6](https://olgabelitskaya.github.io/sage6.html) &nbsp; 📓 [Wolfram NB Part 6](https://www.wolframcloud.com/obj/safuolga/Published/wolfram6.nb)
+#### [SageMath PART 7](https://olgabelitskaya.github.io/sage7.html) &nbsp; 📓 [Wolfram NB Part 7](https://www.wolframcloud.com/obj/safuolga/Published/wolfram7.nb)
+#### [SageMath PART 8](https://olgabelitskaya.github.io/sage8.html) &nbsp; 📓 [Wolfram NB Part 8](https://www.wolframcloud.com/obj/safuolga/Published/wolfram8.nb)
+#### [SageMath PART 9](https://olgabelitskaya.github.io/sage9.html) &nbsp; 📓 [Wolfram NB Part 9](https://www.wolframcloud.com/obj/safuolga/Published/wolfram9.nb)
+#### [SageMath PART 10](https://olgabelitskaya.github.io/sage10.html) &nbsp; 📓 [Wolfram NB Part 10](https://www.wolframcloud.com/obj/safuolga/Published/wolfram10.nb)
+#### [SageMath PART 11](https://olgabelitskaya.github.io/sage11.html) &nbsp; 📓 [Wolfram NB Part 11](https://www.wolframcloud.com/obj/safuolga/Published/wolfram11.nb)
+#### [SageMath PART 12](https://olgabelitskaya.github.io/sage12.html)
+#### [SageMath PART 13](https://olgabelitskaya.github.io/sage13.html)
+#### [SageMath PART 14](https://olgabelitskaya.github.io/sage14.html)
+#### [SageMath PART 15](https://olgabelitskaya.github.io/sage15.html)
+
+## &#x1F4D1; Maths & IT. Standard Calculations & Labs
+### Linear Algebra
+
+#### [Standard Calculations 1-3](https://olgabelitskaya.github.io/linearalgebra_practice101102103.html) &nbsp; &nbsp; [Standard Calculations 4-6](https://olgabelitskaya.github.io/linearalgebra_practice104105106.html) &nbsp; &nbsp; [Standard Calculations 7-9](https://olgabelitskaya.github.io/linearalgebra_practice107108109.html)
+
+#### [Standard Calculations 10-12](https://olgabelitskaya.github.io/linearalgebra_practice110111112.html) &nbsp; &nbsp;  [Standard Calculations 13-15](https://olgabelitskaya.github.io/linearalgebra_practice113114115.html) &nbsp; &nbsp;  [Standard Calculations 16-18](https://olgabelitskaya.github.io/linearalgebra_practice116117118.html)
+
+### Math Analysis
+
+#### [Standard Calculations 1.1-1.9](https://olgabelitskaya.github.io/mathanalysis_standardcalc101-109.html)
+
+#### [Standard Calculations 1.10-1.15](https://olgabelitskaya.github.io/mathanalysis_standardcalc110-115.html)
+
+#### [Standard Calculations 2.1-2.8](https://olgabelitskaya.github.io/mathanalysis_standardcalc201-208.html)
+
+#### [Standard Calculations 2.9-2.15](https://olgabelitskaya.github.io/mathanalysis_standardcalc209-215.html)
+
+### Programming
+
+#### [Lab Works 2-4](https://olgabelitskaya.github.io/program_lab234.html) &nbsp; &nbsp; [Lab Work 5](https://olgabelitskaya.github.io/program_lab5.html) &nbsp; &nbsp; [Lab Work 6](https://olgabelitskaya.github.io/program_lab6.html)
+
+#### [Lab Work 7](https://olgabelitskaya.github.io/program_lab7.html) &nbsp; &nbsp; [Lab Work 8](https://olgabelitskaya.github.io/program_lab8.html) &nbsp; &nbsp; [Lab Work 9](https://olgabelitskaya.github.io/program_lab9.html)
+
+#### [Lab Works 10](https://olgabelitskaya.github.io/program_lab10.html) &nbsp; &nbsp; [Lab Works 11](https://olgabelitskaya.github.io/program_lab11.html) &nbsp; &nbsp; [Standard Calculation](https://olgabelitskaya.github.io/program_standardcalc.html)
+
+## &#x1F4D1; &nbsp; School Exams 
+
+### Math Exam Variants
+
+[Математика. Профильный уровень. 20 вариантов тестов. Тематическая рабочая тетрадь.](https://drive.google.com/file/d/0B8CJrELbJAyodmtvbV8xcEtZXzA/view)
+
+#### Variant 11:  &nbsp; [Notebook &#x1F310; &nbsp;](https://github.com/OlgaBelitskaya/math_20172018/blob/master/2018_Variant11.ipynb) [Web &#x1F310;](https://olgabelitskaya.github.io/2018_Variant11.html)
+
+#### Variant 12:  &nbsp; [Notebook &#x1F310; &nbsp;](https://github.com/OlgaBelitskaya/math_20172018/blob/master/2018_Variant12.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2018_Variant12.html)
+
+#### Variant 13:  &nbsp; [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/math_20172018/blob/master/2018_Variant13.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2018_Variant13.html)
+
+#### Variant 14: &nbsp; [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/math_20172018/blob/master/2018_Variant14.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2018_Variant14.html)
+
+#### Variant 15:  &nbsp; [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/math_20172018/blob/master/2018_Variant15.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2018_Variant15.html)
+
+#### Variant 16:  &nbsp; [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/math_20172018/blob/master/2018_Variant16.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2018_Variant16.html)
+
+#### Variant 17:  &nbsp; [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/math_20172018/blob/master/2018_Variant17.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2018_Variant17.html)
+
+#### Variant 18:  &nbsp; [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/math_20172018/blob/master/2018_Variant18.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2018_Variant18.html)
+
+#### Variant 19:  &nbsp; [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/math_20172018/blob/master/2018_Variant19.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2018_Variant19.html)
+
+#### Variant 20:  &nbsp; [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/math_20172018/blob/master/2018_Variant20.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2018_Variant20.html)
+
+### IT Exam Variants
+
+### 2017
+
+#### [ЕГЭ-2017. Информатика. 10 тренировочных вариантов. Ушаков Д.М](https://drive.google.com/file/d/0B6696ckkWj_zS2ptblAxNERHZzQ/view)
+
+#### Variant 1:  &nbsp; &nbsp; Python &nbsp; [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/it_20172018/blob/master/2017_Variant1.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2017_Variant1.html) &nbsp; &nbsp; R &nbsp;  [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/it_20172018/blob/master/2017_Variant1_R.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2017_Variant1_R.html)
+
+#### Variant 2:  &nbsp; &nbsp; Python &nbsp; [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/it_20172018/blob/master/2017_Variant2.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2017_Variant2.html) &nbsp; &nbsp; R &nbsp;  [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/it_20172018/blob/master/2017_Variant2_R.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2017_Variant2_R.html)
+
+#### Variant 3:  &nbsp; &nbsp; Python &nbsp; [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/it_20172018/blob/master/2017_Variant3.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2017_Variant3.html) &nbsp; &nbsp; R &nbsp; [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/it_20172018/blob/master/2017_Variant3_R.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2017_Variant3_R.html)
+
+#### Variant 4:  &nbsp; &nbsp; Python &nbsp; [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/it_20172018/blob/master/2017_Variant4.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2017_Variant4.html) &nbsp; &nbsp; R &nbsp;  [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/it_20172018/blob/master/2017_Variant4_R.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2017_Variant4_R.html)
+
+#### Variant 5:  &nbsp; &nbsp; Python &nbsp; [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/it_20172018/blob/master/2017_Variant5.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2017_Variant5.html) &nbsp; &nbsp; R &nbsp;  [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/it_20172018/blob/master/2017_Variant5_R.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2017_Variant5_R.html)
+
+#### Variant 6:  &nbsp; &nbsp; Python &nbsp; [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/it_20172018/blob/master/2017_Variant6.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2017_Variant6.html) &nbsp; &nbsp; R &nbsp;  [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/it_20172018/blob/master/2017_Variant6_R.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2017_Variant6_R.html)
+
+#### Variant 7:  &nbsp; &nbsp; Python &nbsp; [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/it_20172018/blob/master/2017_Variant7.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2017_Variant7.html) &nbsp; &nbsp; R &nbsp; [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/it_20172018/blob/master/2017_Variant7_R.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2017_Variant7_R.html)
+
+#### Variant 8:  &nbsp; &nbsp; Python &nbsp; [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/it_20172018/blob/master/2017_Variant8.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2017_Variant8.html) &nbsp; &nbsp; R &nbsp;  [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/it_20172018/blob/master/2017_Variant8_R.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2017_Variant8_R.html)
+
+#### Variant 9:  &nbsp; &nbsp; Python &nbsp; [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/it_20172018/blob/master/2017_Variant9.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2017_Variant9.html) &nbsp; &nbsp; R &nbsp;  [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/it_20172018/blob/master/2017_Variant9_R.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2017_Variant9_R.html)
+
+#### Variant 10:  &nbsp; &nbsp; Python &nbsp; [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/it_20172018/blob/master/2017_Variant10.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2017_Variant10.html) &nbsp; &nbsp; R &nbsp; [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/it_20172018/blob/master/2017_Variant10_R.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2017_Variant10_R.html)
+
+#### Д. В. Богданов:  &nbsp; &nbsp; Variant 1702:  &nbsp; [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/it_20172018/blob/master/2017_Variant1702.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/2017_Variant1702.html)
+
+### 2016
+#### СтатГрад: &nbsp; &nbsp; Variant ИН 10403:  &nbsp; [Notebook &#x1F310;](https://github.com/OlgaBelitskaya/it_20172018/blob/master/statgrad_in_10403_solutions.ipynb) &nbsp; [Web &#x1F310;](https://olgabelitskaya.github.io/statgrad_in_10403_solutions.html)
+
+---
+# &#x1F3D9; &nbsp;  Other Web Links:
 
 ## &#x1F4D1; &nbsp; GitHub gists https://gist.github.com/OlgaBelitskaya
 
@@ -130,6 +228,16 @@ https://cocalc.com/projects
 
 ## &#x1F4D1; &nbsp; Microsoft AML Studio
 https://studio.azureml.net/Home/
+
+---
+# &#x1F4D8; &nbsp; Courses and Programs 
+https://olgabelitskaya.github.io/reflections/README.html
+
+# &#x1F4D8; &nbsp; Notebooks and Data Files
+https://olgabelitskaya.github.io/notebooks/README.html
+
+# &#x1F4D8; &nbsp; Additional Exercises
+https://olgabelitskaya.github.io/README_EXERCISES.html
 
 
 ```python
