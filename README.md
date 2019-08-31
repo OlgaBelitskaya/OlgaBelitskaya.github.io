@@ -131,10 +131,10 @@ Colaboratory Notebooks &nbsp; [decor_classification.ipynb &#x1F4D6; ](https://dr
 #### [SageMath PART 18](https://olgabelitskaya.github.io/sage18.html) &nbsp; 📓 [Wolfram NB Part 18](https://www.wolframcloud.com/obj/safuolga/Published/wolfram18.nb) 
 #### [SageMath PART 19](https://olgabelitskaya.github.io/sage19.html) &nbsp; 📓 [Wolfram NB Part 19](https://www.wolframcloud.com/obj/safuolga/Published/wolfram19.nb)
 #### [SageMath PART 20](https://olgabelitskaya.github.io/sage20.html) &nbsp; 📓 [Wolfram NB Part 20](https://www.wolframcloud.com/obj/safuolga/Published/wolfram20.nb)
-#### [SageMath PART 21](https://olgabelitskaya.github.io/sage21.html)
-#### [SageMath PART 22](https://olgabelitskaya.github.io/sage22.html) 
-#### [SageMath PART 23](https://olgabelitskaya.github.io/sage23.html)
-#### [SageMath PART 24](https://olgabelitskaya.github.io/sage24.html)
+#### [SageMath PART 21](https://olgabelitskaya.github.io/sage21.html) &nbsp; 📓 [Wolfram NB Part 21](https://www.wolframcloud.com/obj/safuolga/Published/wolfram21.nb)
+#### [SageMath PART 22](https://olgabelitskaya.github.io/sage22.html) &nbsp; 📓 [Wolfram NB Part 22](https://www.wolframcloud.com/obj/safuolga/Published/wolfram22.nb) 
+#### [SageMath PART 23](https://olgabelitskaya.github.io/sage23.html) &nbsp; 📓 [Wolfram NB Part 23](https://www.wolframcloud.com/obj/safuolga/Published/wolfram23.nb)
+#### [SageMath PART 24](https://olgabelitskaya.github.io/sage24.html) &nbsp; 📓 [Wolfram NB Part 24](https://www.wolframcloud.com/obj/safuolga/Published/wolfram24.nb)
 
 ## &#x1F4D1; Maths & IT. Standard Calculations & Labs
 ### Linear Algebra
