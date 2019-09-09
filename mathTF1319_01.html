@@ -27,67 +27,23 @@ factorial(2)==2^2-2
       Построить графики следующих функций.
   <h2>Task 2</h2>
 <div class="compute"><script type="text/x-sage">
-V=21; var('x'); y=abs(V-x)+abs(V+x)
-pretty_print("y=",y,"; y'=",y.diff(),"; y'=0 ->",solve(y.diff(),x))
-plot(y,(x,-50,50),color='#3636ff',fill='axis')\
-.show(gridlines=True,figsize=(7,5))
-table([['x',-50,-21,0,21,50],['y',y(-50),y(-21),y(0),y(21),y(50)]])
-</script></div><br/>
-  <h2>Task 3</h2>
-<div class="compute"><script type="text/x-sage">
-V=21; var('x'); y=x^2+V*x-V*abs(x)
-pretty_print("y=",y,"; y'=",y.diff(),"; y'=0 ->",solve(y.diff(),x))
-plot(y,(x,-30,30),color='#3636ff',fill='axis')\
-.show(gridlines=True,figsize=(7,5))
-table([['x',-30,-21,0,21,30],['y',y(-30),y(-21),y(0),y(21),y(30)]])
-</script></div><br/>
-  <h2>Task 4</h2>
-<div class="compute"><script type="text/x-sage">
-V=21; var('x'); y=x^2-2*V*abs(x)+V^2
-pretty_print("y=",y,"; y'=",y.diff(),"; y'=0 ->",solve(y.diff(),x))
-plot(y,(x,-30,30),color='#3636ff',fill='axis')\
-.show(gridlines=True,figsize=(7,5))
-table([['x',-30,-21,0,21,30],['y',y(-30),y(-21),y(0),y(21),y(30)]])
-</script></div><br/>
-  <h2>Task 5</h2>
-<div class="compute"><script type="text/x-sage">
-V=21; var('x'); y=(x^2+2*x)*abs(x-V)/(x-V)
-pretty_print("y=",y,"; y'=",y.diff(),"; y'=0 ->",solve(y.diff(),x))
-plot(y,(x,-30,30),color='#3636ff',fill='axis')\
-.show(gridlines=True,figsize=(7,5))
-table([['x',-30,-21,0,20,30],['y',y(-30),y(-21),y(0),y(20),y(30)]])
-</script></div><br/> 
-  <h2>Task 6</h2>
-<div class="compute"><script type="text/x-sage">
-V=21; var('x'); y=x-V-sqrt((x-V)^2)
-pretty_print("y=",y,"; y'=",y.diff(),"; y'=0 ->",solve(y.diff(),x))
-plot(y,(x,-10,50),color='#3636ff',fill='axis')\
-.show(gridlines=True,figsize=(7,5))
-table([['x',-10,0,10,30,50],['y',y(-10),y(0),y(10),y(30),y(50)]])
-</script></div><br/>
-  <h2>Task 7</h2>
-<div class="compute"><script type="text/x-sage">
-V=21; var('x'); y=abs(x-V)/abs(x+V)
-pretty_print("y=",y,"; y'=",y.diff(),"; y'=0 ->",solve(y.diff(),x))
-plot(y,(x,-50,10),color='#3636ff',fill='axis')\
-.show(gridlines=True,figsize=(7,5),ymin=-10,ymax=90)
-table([['x',-50,-30,-10,0,10],['y',y(-50),y(-30),y(-10),y(0),y(10)]])
-</script></div><br/>
-  <h2>Task 8</h2>
-<div class="compute"><script type="text/x-sage">
-V=21; var('x'); y=floor(x+V)
-pretty_print("y=",y,"; y'=",y.diff(),"; y'=0 ->",solve(y.diff(),x))
-plot(y,(x,-30,30),color='#3636ff',fill='axis')\
-.show(gridlines=True,figsize=(7,5))
-table([['x',-30,-21,0,21,30],['y',y(-30),y(-21),y(0),y(21),y(30)]])
-</script></div><br/>
-  <h2>Task 9</h2>
-<div class="compute"><script type="text/x-sage">
-V=21; var('x'); y=V^abs(x)-V
-pretty_print("y=",y,"; y'=",y.diff(),"; y'=0 ->",solve(y.diff(),x))
-plot(y,(x,-2,2),color='#3636ff',fill='axis')\
-.show(gridlines=True,figsize=(7,5),ymin=-30,ymax=70)
-table([['x',-2,-1,0,1,2],['y',y(-2),y(-1),y(0),y(1),y(2)]])
+@interact
+def _(n=[2,3,4,5,6,7,8,9]):
+    V=21; var('x');
+    x1={2:-50,3:-45,4:-30,5:-30,6:-10,7:-50,8:-30,9:-2}
+    x2={2:-21,3:-42,4:-21,5:-21,6:0,7:-20,8:-30,9:-1}
+    x3={2:0,3:-21,4:0,5:0,6:10,7:-10,8:-21,9:0}
+    x4={2:21,3:0,4:21,5:20,6:21,7:0,8:0,9:1}
+    x5={2:50,3:21,4:30,5:30,6:50,7:21,8:21,9:2}
+    y1={2:-10,3:-450,4:-10,5:-900,6:-70,7:-10,8:-10,9:-30}
+    y2={2:110,3:450,4:450,5:1000,6:10,7:100,8:50,9:450}
+    y={2:abs(V-x)+abs(V+x),3:x^2+V*x-V*abs(x),4:x^2-2*V*abs(x)+V^2,5:(x^2+2*x)*abs(x-V)/(x-V),
+       6:x-V-sqrt((x-V)^2),7:abs(x-V)/abs(x+V),8:floor(x+V),9:V^abs(x)-V}
+    pretty_print("y=",y[n],"; y'=",y[n].diff(),"; y'=0 ->",solve(y[n].diff(),x))
+    plot(y[n],(x,x1[n],x5[n]),color='#3636ff',fill='axis')\
+    .show(gridlines=True,figsize=(7,5),ymin=y1[n],ymax=y2[n])
+    show(table([['x',x1[n],x2[n],x3[n],x4[n],x5[n]],
+           ['y',y[n](x=x1[n]),y[n](x=x2[n]),y[n](x=x3[n]),y[n](x=x4[n]),y[n](x=x5[n])]]))
 </script></div><br/>     
     <p></p>
   </body>
