@@ -135,6 +135,21 @@ Colaboratory Notebooks &nbsp; [decor_classification.ipynb &#x1F4D6; ](https://dr
 #### [SageMath PART 22](https://olgabelitskaya.github.io/sage22.html) &nbsp; 📓 [Wolfram NB Part 22](https://www.wolframcloud.com/obj/safuolga/Published/wolfram22.nb) 
 #### [SageMath PART 23](https://olgabelitskaya.github.io/sage23.html) &nbsp; 📓 [Wolfram NB Part 23](https://www.wolframcloud.com/obj/safuolga/Published/wolfram23.nb)
 #### [SageMath PART 24](https://olgabelitskaya.github.io/sage24.html) &nbsp; 📓 [Wolfram NB Part 24](https://www.wolframcloud.com/obj/safuolga/Published/wolfram24.nb)
+## &#x1F4D1;  &nbsp; Student Website for Pages with Exercises
+
+## Maths
+### [Standard Calculation. WolframCloud](https://studentwebsite2019.github.io/mathTF1319W.html)
+### [Standard Calculation. Google Colab](https://colab.research.google.com/drive/1MT0iq9l_Hzeh6FTbicvLuVdvNbV6J82p)
+### [Standard Calculation. Page 1](https://studentwebsite2019.github.io/mathTF1319_01.html)
+### [Standard Calculation. Page 2](https://studentwebsite2019.github.io/mathTF1319_02.html)
+## IT
+### [Standard Calculation. WolframCloud](https://studentwebsite2019.github.io/itTF1319W.html)
+### [Standard Calculation. Google Colab](https://colab.research.google.com/drive/1c1iJqa66AdXCwUru2aRfbAg4j-CGLVRe)
+### [Standard Calculation. Page 1](https://studentwebsite2019.github.io/itTF1319_01.html)
+## Physics
+
+## Chemistry
+
 
 ## &#x1F4D1; Maths & IT. Standard Calculations & Labs
 ### Linear Algebra
