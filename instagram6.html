@@ -78,7 +78,7 @@ f=lambda x,m,n: Sum((x+k)^m,(k,1,m))/(x^m+n^m)
 plot(f(x,9,7).doit(),(x,-50,50),line_color='#3636ff',ylim=(-10,40));
 display([f(x,9,7).doit().expand().simplify(),limit(f(x,9,7).doit(),x,oo)])
 </script></div><br/>
-    <h1>If you want to define function with summation</h1>
+    <h1>If you want to define function with summation in R</h1>
 R &#38; SageMathCell <br/>
 <div class="sage_r"><script type="text/x-sage">
 %%r
@@ -103,11 +103,30 @@ R &#38; SageMathCell <br/>
 %%r
 
 </script></div><br/>
-    <h1>___</h1>
-JavaScript &#38; SageMathCell <br/>
+    <h1>If you want to define function with summation in JavaScript</h1>
+HTML &#38; JavaScript &#38; SageMathCell <br/>
+<div class="sage_html"><script type="text/x-sage">
+%%html
+<script src="https://code.highcharts.com/highcharts.js"/>
+<div id="container" style="height:400px; width:800px; margin:0 auto">
+javascript cell is launching here...</div>
+</script></div><br/>
 <div class="sage_js"><script type="text/x-sage">
 %%javascript
-
+function myfunction(n,x) {
+  var i; var sum=0;
+  for (i=1; i<n+1; i++) {sum+=Math.sqrt(Math.pow(Math.E,-i*x)+Math.pow(x,i-1))/(Math.cos(i*x)+Math.sin(i*x));};
+  return sum*Math.log(n*x-1);
+}
+var xy2 = Array(45).fill(10).map((r,x) => [0.07*(x+r),myfunction(2,0.075*(x+r))]);
+var xy3 = Array(45).fill(10).map((r,x) => [0.07*(x+r),myfunction(3,0.075*(x+r))]);
+var xy4 = Array(45).fill(10).map((r,x) => [0.07*(x+r),myfunction(4,0.075*(x+r))]);
+Highcharts.chart('container', {
+    chart:{type:'line'},xAxis:{title:{text:'x'}},yAxis:{title:{text:'y'}},
+    title:{text:'Line Plot'},credits:{enabled:false},
+    series: [{name:'n=2',color:'#3636ff',data:xy2},{name:'n=3',color:'#ff36ff',data:xy3},
+             {name:'n=4',color:'#ff3636',data:xy4}]
+});
 </script></div><br/>
    <h1>Do you want to compare with Wolfram notebooks?</h1>
 HTML &#38; SageMathCell <br/>
