@@ -27,7 +27,16 @@
     <h1>___</h1>
 SageMath &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
-
+var('t'); a=(.5+random())*sample([-1,1],1)[0]; b=randint(6,36) 
+c=.01*randint(1,99)*sample([-1,1],1)[0]; d=randint(3,7)
+col=Color([random() for i in range(3)])
+fx(t)=sin(t/6)+a*sin(b*t)*cos(t)+c*sin(b*t)
+fy(t)=cos(t/6)+a*sin(b*t)*sin(t)+c*cos(d*b*t)
+pretty_print('a, b, c, d: %f, %f, %f, %f'%(a,b,c,d))
+parametric_plot([fx(t),fy(t)],(t,0,12*pi),plot_points=300,axes=False,
+                color=col,adaptive_recursion=10,thickness=.3).show()
+xy=[[fx(t),fy(t)] for t in [0,.001,..,12*pi]]
+list_plot(xy,color=col,axes=False,size=1).show()
 </script></div><br/>
     <h1>___</h1>
 SageMath &#38; SageMathCell <br/>
