@@ -107,17 +107,25 @@ Python &#38; SageMathCell <br/>
 <div class="linked"><script type="text/x-sage">
 
 </script></div><br/>
-    <h1>___</h1>
+    <h1>Random Plotting with R</h1>
 R &#38; SageMathCell <br/>
 <div class="sage_r"><script type="text/x-sage">
 %%r
 
 </script></div><br/>
-    <h1>___</h1>
-R &#38; SageMathCell <br/>
 <div class="sage_r"><script type="text/x-sage">
 %%r
-
+svg(filename="Rplots.svg",width=7,height=7,pointsize=10,onefile=T,family="sans",
+    bg="lightgray",antialias=c("default","none","gray","subpixel"))
+a<-(.5+runif(1))*sample(c(-1,1),1); b<-sample(6:18,1) 
+c<-.001*sample(1:99,1)*sample(c(-1,1),1)
+t<-seq(0,36*pi,len=36*360); col<-rgb(runif(1),runif(1),runif(1))
+x<-sin(t/6)-a*sin(b*t)*cos(t)-c*sin(16*b*t) 
+y<-cos(t/6)-a*sin(b*t)*sin(t)-c*cos(16*b*t)
+cat(c('a =',a,'b =',b,'c =',c,'color:',col,'\n'))
+plot(x,y,type='p',cex=0.2,col=col,xlab='x',ylab='y',
+     fg='slategray',col.axis='slategray',col.lab='slategray')
+grid(col='slategray'); dev.off()
 </script></div><br/>
     <h1>___</h1>
 HTML &#38; JavaScript &#38; SageMathCell <br/>
