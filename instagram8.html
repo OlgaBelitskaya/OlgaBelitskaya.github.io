@@ -73,11 +73,19 @@ def gen(max=Infinity):
         xyn=[xn+.684*(xn-xn^2+yn),yn+.684*(yn-yn^2+xn)]
 N=2000; XY=gen(N); XYN=[el for el in XY]
 cools=[colormaps.cool(1.*i/N)[:3] for i in [1..N]]
-polygon([[-1,-1],[-1,3],[3,3],[3,-1],[-1,-1]],color='black',alpha=.1)+\
+polygon([[-1,-1],[-1,3],[3,3],[3,-1],[-1,-1]],color='steelblue',alpha=.1)+\
 sum([point([XYN[i]],size=1,color=cools[i]) for i in [1..N-1]])
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
-
+def gen(max=Infinity):
+    n=1; xyn=[.1,.1]
+    while n<=max:
+        yield xyn; n+=1; xn,yn=xyn[0],xyn[1]
+        xyn=[.7*xn+yn,-.8+xn^2]
+N=5000; XY=gen(N); XYN=[el for el in XY]
+cols=[colormaps.autumn(1.*i/N)[:3] for i in [1..N]]
+polygon([[-1.5,-1],[-1.5,1.5],[1,1.5],[1,-1],[-1.5,-1]],color='silver',alpha=.1)+\
+sum([point([XYN[i]],size=1,color=cols[i]) for i in [1..N-1]])
 </script></div><br/>
     <h1>____</h1>
 SageMath &#38; SageMathCell <br/>
