@@ -150,7 +150,19 @@ grid(col='slategray'); dev.off()
 </script></div><br/>
 <div class="sage_r"><script type="text/x-sage">
 %%r
-
+svg(filename="Rplots.svg",width=7,height=7,pointsize=10,onefile=T,family="sans",
+    bg="black",antialias=c("default","none","gray","subpixel"))
+tmin<-pi; tmax<-pi; n<-36
+for(i in 1:n) {
+    t<-seq(0,4*pi,len=360)
+    f<-(sample(8:11,1)+.9*cos(sample(12:24,1)*t+pi*i/n))*(1+.1*cos(sample(25:81,1)*t+
+        pi*i/n))*(1+.05*cos(sample(216:256,1)*t+pi*i/n))*(1+sin(t+pi*i/n))
+    x<-f*sin(t); y<-f*cos(t)
+    plot(x,y,type='o',pch=sample(0:18,1),cex=.4,xlim=c(-25,25),ylim=c(-25,25),
+         col=rgb(runif(1),runif(1),runif(1)),lwd=1,
+         xlab='x',ylab='y',fg='gray',col.axis='gray',col.lab='gray'); par(new=T) 
+}
+grid(col='slategray'); dev.off()
 </script></div><br/>
     <h1>____</h1>
 HTML &#38; JavaScript &#38; SageMathCell <br/>
