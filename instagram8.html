@@ -123,7 +123,18 @@ sum([parametric_plot3d((1+0.1*i)*f(t),(-3,3),color=colormaps.ocean(.05*i),
     <h1>If you want to explore linked cells</h1>
 Python &#38; SageMathCell <br/>     
 <div class="linked"><script type="text/x-sage">
-
+import numpy,pylab 
+[a,b,c]=[.01*numpy.random.randint(30,99) for i in range(3)]
+d=numpy.max([a,2.*b,3.*c]); n=numpy.random.randint(5,11)
+def coord(m,k,p,n):
+    t=numpy.arange(0,k*numpy.pi,k*numpy.pi/(1000.*n))
+    x=m*numpy.sin(p*t)*numpy.sin(t); y=m*numpy.sin(p*t)*numpy.cos(t)
+    return [x,y]
+pylab.figure(figsize=(7,7)); ax=pylab.gca(); ax.set_facecolor('silver')
+for [x,y] in [coord(a,8.95,1.9,n),coord(b,12.18,2.3,n),coord(c,11.77,1.7,n)]:
+    pylab.scatter(x,y,s=.1,c=numpy.random.random(3))
+pylab.title(['a=%f'%a,'b=%f'%b,'c=%f'%c,'d=%f'%d]) 
+pylab.grid(c='slategray',alpha=.4); pylab.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
