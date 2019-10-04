@@ -216,15 +216,15 @@ function getinteger(min,max) {return Math.floor(Math.random()*(max-min+1))+min;}
 function ar(i,n) {
     var a=getinteger(5,11); var b=getinteger(12,24);
     var c=getinteger(25,81); var d=getinteger(216,256);
-    return Array(640).fill(i).map((r,t) => [f(t,i,a,b,c,d,n)*Math.cos(0.01*t),
-                                            f(t,i,a,b,c,d,n)*Math.sin(0.01*t)]);
+    return Array(640).fill(i).map((r,t)=>[f(t,i,a,b,c,d,n)*Math.cos(0.01*t),
+                                          f(t,i,a,b,c,d,n)*Math.sin(0.01*t)]);
 };
-function col() {
-    var rgb=Math.random()*256
-    return 'rgb('+rgb.toString()+','+rgb.toString()+','+rgb.toString()+')';
+function col(i) {
+    var r=getinteger(i,255); var g=getinteger(i,255); var b=getinteger(i,255);
+    return 'rgb('+r.toString()+','+g.toString()+','+b.toString()+')';
 }; 
 var series=[]; var i; var n=36;
-for (i=1; i<2*n+1; i++) {series.push({name:i.toString(),color:col(),data:ar(i,n)})};
+for (i=1; i<2*n+1; i++) {series.push({name:i.toString(),color:col(i),data:ar(i,n)})};
 Highcharts.chart('container1', {
     chart:{type:'line'},xAxis:{title:{text:'x'}},yAxis:{title:{text:'y'}},
     title:{text:'Random Parametric Plot'},credits:{enabled:false},
