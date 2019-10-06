@@ -41,10 +41,18 @@ sum([parametric_plot3d([fx*i,fy,fz*j],(u_min,u_max),(v_min,v_max),plotpoints=50,
                        color='silver',opacity=0.3,mesh=True,frame=False) 
      for i in [-1,1] for j in [-1,1]])
 </script></div><br/>
-    <h1>_____</h1>
+    <h1>Art of Recurrence Tables</h1>
 SageMath &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
-
+def gen(max=Infinity):
+    n=1; xyn=[0.,0.]
+    while n<=max:
+        yield xyn; n+=1; xn,yn=xyn[0],xyn[1]
+        xyn=[1-.2*xn^2+yn,0.9991*xn]
+N=5000; XY=gen(N); XYN=[el for el in XY]
+cools=[colormaps.cool(1.*i/N)[:3] for i in [1..N]]
+polygon([[-5,-5],[-5,5],[5,5],[5,-5],[-5,-5]],color='silver',alpha=.1)+\
+sum([point([XYN[i]],size=1,color=cools[i]) for i in [1..N-1]])
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 
