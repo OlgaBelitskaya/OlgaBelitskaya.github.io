@@ -59,6 +59,17 @@ def gen(a,b,max=Infinity):
     n=1; xyn=[0.,0.]
     while n<=max:
         yield xyn; n+=1; xn,yn=xyn[0],xyn[1]
+        xyn=[1-(.2+.01*a)*xn^2+yn,(0.9991+.0001*b)*xn]
+N=5000; XY=gen(N); XYN=[el for el in XY]
+cools=[colormaps.cool(1.*i/N)[:3] for i in [1..N]]
+(polygon([[-5,-5],[-5,5],[5,5],[5,-5],[-5,-5]],color='silver',alpha=.1)+\
+sum([point([XYN[i]],size=1,color=cools[i]) for i in [1..N-1]])).show(axes=False)
+</script></div><br/>
+<div class="sage"><script type="text/x-sage">
+def gen(a,b,max=Infinity):
+    n=1; xyn=[0.,0.]
+    while n<=max:
+        yield xyn; n+=1; xn,yn=xyn[0],xyn[1]
         xyn=[(1+.01*a)*abs(xn)-(1+.00001*b)*yn+1,xn]
 N,A,B=5000,7,5; XY=gen(A,B,N); XYN=[el for el in XY]
 cols=[colormaps.autumn(1.*i/N)[:3] for i in [1..N]]
@@ -66,7 +77,15 @@ cols=[colormaps.autumn(1.*i/N)[:3] for i in [1..N]]
 sum([point([XYN[i]],size=1,color=cols[i]) for i in [1..N-1]])).show(axes=False)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
-
+def gen(a,max=Infinity):
+    n=1; z0=1+2*I; xyn=[(a*z0).real(),(a*z0).imag()]
+    while n<=max:
+        yield xyn; n+=1; xn,yn=xyn[0],xyn[1]; zn=xn+yn*I
+        zn=a+(1-a)*zn; xyn=[zn.real(),zn.imag()]
+N,A=10000,.5+.5*I; XY=gen(A,N); XYN=[el for el in XY]
+cols=[colormaps.autumn(1.*i/N)[:3] for i in [1..N]]
+(polygon([[0,-1],[0,1],[1,1],[1,-1],[0,-1]],color='silver',alpha=.1)+\
+sum([point([XYN[i]],size=1,color=cols[i]) for i in [1..N-1]])).show(axes=False)
 </script></div><br/>
     <h1>_____</h1>
 SageMath &#38; SageMathCell <br/>
