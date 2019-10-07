@@ -124,7 +124,15 @@ pylab.scatter(xyn[:,0],xyn[:,1],s=.5,c=numpy.random.random(3))
 pylab.grid(c='slategray',alpha=.4); pylab.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+def gen(a,b,n):
+    i=1; xyi=[0.,0.]
+    while i<=n:
+        yield xyi; i+=1; xi,yi=xyi[0],xyi[1]
+        xyi=[1-(.2+.01*a)*xi**2+yi,(0.9991+.0001*b)*xi]
+n=50000; a,b=0,0; xy=gen(a,b,n); xyn=numpy.array([el for el in xy])      
+pylab.figure(figsize=(7,7)); ax=pylab.gca(); ax.set_facecolor('silver')
+pylab.scatter(xyn[:,0],xyn[:,1],s=.1,c=[numpy.random.random(3)])
+pylab.grid(c='slategray',alpha=.4); pylab.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def gen(a,b,n):
