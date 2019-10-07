@@ -127,7 +127,15 @@ pylab.grid(c='slategray',alpha=.4); pylab.show()
 
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+def gen(a,b,n):
+    i=1; xyi=[0.,0.]
+    while i<=n:
+        yield xyi; i+=1; xi,yi=xyi[0],xyi[1]
+        xyi=[(1+.01*a)*abs(xi)-(1+.00001*b)*yi+1,xi]
+n=50000; a,b=7,5; xy=gen(a,b,n); xyn=numpy.array([el for el in xy])      
+pylab.figure(figsize=(7,7)); ax=pylab.gca(); ax.set_facecolor('ghostwhite')
+pylab.scatter(xyn[:,0],xyn[:,1],s=.5,c=[numpy.random.random(3)])
+pylab.grid(c='slategray',alpha=.4); pylab.show()
 </script></div><br/>
     <h1>_____</h1>
 R &#38; SageMathCell <br/>
