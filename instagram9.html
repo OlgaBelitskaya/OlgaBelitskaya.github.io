@@ -145,7 +145,7 @@ pylab.figure(figsize=(7,7)); ax=pylab.gca(); ax.set_facecolor('ghostwhite')
 pylab.scatter(xyn[:,0],xyn[:,1],s=.1,c=[numpy.random.random(3)])
 pylab.grid(c='slategray',alpha=.4); pylab.show()
 </script></div><br/>
-    <h1>_____</h1>
+    <h1>Functions & Recurrence Tables in R</h1>
 R &#38; SageMathCell <br/>
 <div class="sage_r"><script type="text/x-sage">
 %%r
@@ -162,7 +162,17 @@ grid(col='gray'); dev.off()
 </script></div><br/>
 <div class="sage_r"><script type="text/x-sage">
 %%r
-
+svg(filename="Rplots.svg",width=7,height=7,pointsize=10,onefile=T,family="sans",
+    bg="black",antialias=c("default","none","gray","subpixel"))
+gen <- function (a,b,n) {i<-1; xyi<-array(c(0,0),c(n,2))
+    while (i<=n-1) {xi<-1-(.2+.01*a)*xyi[i,1]**2+xyi[i,2]
+                    yi<-(0.9991+.0001*b)*xyi[i,1]; 
+                    i<-i+1; xyi[i,1]<-xi; xyi[i,2]<-yi}
+    return(xyi)}
+xyn<-gen(0,0,5000); col<-rgb(runif(1),runif(1),runif(1))
+plot(xyn[,1],xyn[,2],type='p',cex=.5,col=col,xlab='x',ylab='y',
+     fg='gray',col.axis='gray',col.lab='gray')
+grid(col='gray'); dev.off()
 </script></div><br/>
     <h1>_____</h1>
 HTML &#38; JavaScript &#38; SageMathCell <br/>
