@@ -130,7 +130,18 @@ pylab.title('a=%d; b=%d'%(A,B)); pylab.grid(); pylab.show()
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 import numpy,pylab
-
+def t(i): return numpy.arange((i-1)*numpy.pi/24,i*numpy.pi/24,1/3600)
+def x(a,b,i,k): 
+  return numpy.cos(t(i)+k*numpy.pi/6)+numpy.cos(a*t(i))/2+numpy.sin((a+b)*t(i))/3
+def y(a,b,i,k):
+  return numpy.sin(t(i)+k*numpy.pi/6)+numpy.sin(a*t(i))/2+numpy.cos((a+b)*t(i))/3
+A=numpy.random.randint(7,15); B=numpy.random.randint(10,24) 
+pylab.figure(figsize=(10,10)); ax=pylab.gca(); ax.set_facecolor('ghostwhite')
+for i in range(48):
+  col=[numpy.random.random(3)]
+  for k in range(12):
+    pylab.scatter(x(A,B,i,k),y(A,B,i,k),s=.01,c=col)
+pylab.title('a=%d; b=%d'%(A,B)); pylab.grid(); pylab.show()
 </script></div><br/>
     <h1>If you want to explore linked cells</h1>
 Python &#38; SageMathCell <br/>     
