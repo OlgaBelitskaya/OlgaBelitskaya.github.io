@@ -287,5 +287,37 @@ Highcharts.chart('container3', {
     legend:{enabled:false},series:series
 });
 </script></div><br/>
+HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
+<div class="sage_html"><script type="text/x-sage">
+%%html
+<script src="https://code.highcharts.com/highcharts.js"/>
+<div id="container4" style="height:500px; width:500px; margin:0 auto"></div>
+<script>
+function getinteger(min,max) {return Math.floor(Math.random()*(max-min+1))+min;};
+function fx(a,b,c,d,t) {return Math.sin(0.01*t/6)+a*Math.sin(b*0.01*t)*Math.cos(0.01*t)+c*Math.sin(b*0.01*t)};
+function fy(a,b,c,d,t) {return Math.cos(0.01*t/6)+a*Math.sin(b*0.01*t)*Math.sin(0.01*t)+c*Math.cos(d*b*0.01*t)};
+function ar(k,a,b,c,d) {return Array(b*640).fill(k).map((k,t)=>[(1+0.01*k)*fx(a,b,c,d,t),(1+0.01*k)*fy(a,b,c,d,t)]);};
+function col(i) {
+    var r=getinteger(i,255); var g=getinteger(i,255); var b=getinteger(i,255);
+    return 'rgb('+r.toString()+','+g.toString()+','+b.toString()+')';
+}; 
+var series=[]; var i; var n=2;
+var a=0.5+Math.random(); var c=0.01*getinteger(1,99);
+var b=getinteger(6,18); var d=getinteger(3,6);
+for (i=1; i<n+1; i++) {series.push({name:i.toString(),color:col(i),lineWidth:0.7,data:ar(i,a,b,c,d)})};
+Highcharts.chart('container4', {
+    chart:{type:'line',backgroundColor:'mintcream'},xAxis:{title:{text:'x'}},yAxis:{title:{text:'y'}},
+    title:{text:'Random Parametric Plot: a,b,c,d = '+[a,b,c,d].toString()},credits:{enabled:false},
+    legend:{enabled:false},series:series
+});
+</script></div><br/>
+HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
+<div class="sage_html"><script type="text/x-sage">
+%%html
+<script src="https://code.highcharts.com/highcharts.js"/>
+<div id="container5" style="height:500px; width:500px; margin:0 auto"></div>
+<script>
+
+</script></div><br/>
   </body>
 </html>
