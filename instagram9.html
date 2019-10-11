@@ -246,8 +246,7 @@ HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 <div id="container2" style="height:500px; width:500px; margin:0 auto"></div>
 <script>
 function getinteger(min,max) {return Math.floor(Math.random()*(max-min+1))+min;};
-function ar(k) {
-    var a=getinteger(7,15); var b=getinteger(10,24);
+function ar(k,a,b) {
     return Array(640).fill(k).map((r,t)=>[k*(Math.cos(0.01*t)+Math.cos(a*0.01*t)/2+Math.sin((a+b)*0.01*t)/3),
                                           k*(Math.sin(0.01*t)+Math.sin(a*0.01*t)/2+Math.cos((a+b)*0.01*t)/3)]);
 };
@@ -255,11 +254,13 @@ function col(i) {
     var r=getinteger(i,255); var g=getinteger(i,255); var b=getinteger(i,255);
     return 'rgb('+r.toString()+','+g.toString()+','+b.toString()+')';
 }; 
-var series=[]; var i; var n=3;
-for (i=1; i<n+1; i++) {series.push({name:i.toString(),color:col(i),lineWidth:1,data:ar(i)})};
-Highcharts.chart('container1', {
+var series=[]; var i; var n=12;
+var a=getinteger(7,15); var b=getinteger(10,24);
+for (i=1; i<n+1; i++) {series.push({name:i.toString(),color:col(i),lineWidth:1,data:ar(i,a,b)})};
+Highcharts.chart('container2', {
     chart:{type:'line',backgroundColor:'mintcream'},xAxis:{title:{text:'x'}},yAxis:{title:{text:'y'}},
-    title:{text:'Random Parametric Plot'},credits:{enabled:false},legend:{enabled:false},series:series
+    title:{text:'Random Parametric Plot: a,b = '+[a,b].toString()},credits:{enabled:false},
+    legend:{enabled:false},series:series
 });
 </script></div><br/>
 HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
