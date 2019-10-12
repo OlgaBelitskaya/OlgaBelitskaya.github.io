@@ -77,8 +77,19 @@ SageMath &#38; SageMathCell <br/>
     <h1>___</h1>
 Python &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
-import numpy,pylab,random
-
+import numpy,pylab,random; from mpl_toolkits.mplot3d import Axes3D
+a,b,c=random.randint(2,12),1.5,.1+random.randint(1,5) 
+print('a=%d; b=%.1f; c=%d'%(a,b,c))
+r=numpy.arange(1,c+1); th=random.random() 
+t=numpy.arange(-2*b*numpy.pi,2*b*numpy.pi,1/3600) 
+fx=(a+numpy.cos(b*t))*numpy.cos(t); fy=(a+numpy.cos(b*t))*numpy.sin(t); fz=numpy.sin(b*t)
+fig=pylab.figure(figsize=(7,7)); ax=fig.gca(projection='3d')
+for i in r:
+    for j in r:
+        for k in r:
+            col=[random.random() for l in range(3)]
+            ax.plot(i*fx,j*fy,k*fz,c=col,linewidth=th)
+pylab.axis('off'); pylab.show()
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 import numpy,pylab,random
