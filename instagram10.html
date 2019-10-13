@@ -121,9 +121,11 @@ xyn<-gen(7,5,25000)
 write.csv(xyn,file="xyn.csv",row.names=FALSE)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-import pandas,pylab
+import pandas,pylab; from mpl_toolkits.mplot3d import Axes3D
 xyn=pandas.read_csv('xyn.csv',header=int(0),names=['x','y'])
-xyn.plot.scatter(x='x',y='y',s=.1); pylab.show()
+fig=pylab.figure(figsize=(7,7)); ax=fig.gca(projection='3d')
+n=[1 for i in [1..len(xyn)]]
+ax.scatter(n,xyn['x'],xyn['y'],s=.1); pylab.axis('off'); pylab.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
