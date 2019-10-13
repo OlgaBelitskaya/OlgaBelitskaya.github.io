@@ -180,7 +180,8 @@ var xScale=d3.scaleLinear().domain([-20,20]).range([0,width]); var yScale=d3.sca
 function make_x_gridlines() {return d3.axisBottom(xScale).ticks(11)};
 function make_y_gridlines() {return d3.axisLeft(yScale).ticks(11)}; 
 function get_integer(min,max) {return Math.floor(Math.random()*(max-min+1))+min;};
-var a=getinteger(7,15); var b=getinteger(10,24);                
+function get_color() {return '#'+get_integer(1,255).toString(16)+get_integer(1,255).toString(16)+get_integer(1,255).toString(16);}
+var a=get_integer(7,15); var b=get_integer(10,24);              
 function make_data(k) {return d3.range(0,n).map(function(i){
     return {"x":k*(Math.cos(0.01*i)+Math.cos(a*0.01*i)/2+Math.sin((a+b)*0.01*i)/3),
             "y":k*(Math.sin(0.01*i)+Math.sin(a*0.01*i)/2+Math.cos((a+b)*0.01*i)/3)} });};                                            
@@ -193,9 +194,9 @@ svg.append("g").attr("class","grid").attr("transform","translate(0,"+height+")")
                .call(make_x_gridlines().tickSize(-height).tickFormat(""));
 svg.append("g").attr("class","grid").call(make_y_gridlines().tickSize(-width).tickFormat(""));
 var line=d3.line().curve(d3.curveMonotoneX).x(function(d) {return xScale(d.x);}).y(function(d) {return yScale(d.y);});
-for (var i=1; i<11; i++) {var data=make_data(i);
+for (var i=1; i<11; i++) {var data=make_data(i); var col=get_color();
                           svg.append("path").datum(data).attr("class","line").attr("d",line)
-                                            .attr("stroke","#3636ff").attr("fill","none");};
+                                            .attr("stroke",col).attr("fill","none");};
 </script></div><br/>
   </body>
 </html>
