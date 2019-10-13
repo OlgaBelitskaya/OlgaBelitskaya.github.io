@@ -109,14 +109,21 @@ for i in r:
             ax.plot(i*fx,j*fy,k*fz,c=col,linewidth=th)
 pylab.axis('off'); pylab.show()
 </script></div><br/>
-    <h1>If you want to explore linked cells</h1>
-Python &#38; SageMathCell <br/>     
+    <h1>If you want to use linked cells and two languages</h1>
+R &#38; Python &#38; SageMathCell <br/>     
 <div class="linked"><script type="text/x-sage">
-import numpy,pylab,sympy
-
+%%r
+gen <- function (a,b,n) {i<-1; xyi<-array(c(0,0),c(n,2))
+    while (i<=n-1) {xi<-(1+0.01*a)*abs(xyi[i,1])-(1+.00001*b)*xyi[i,2]+1
+                    yi<-xyi[i,1]; i<-i+1; xyi[i,1]<-xi; xyi[i,2]<-yi}
+    return(xyi)}
+xyn<-gen(7,5,25000)
+write.csv(xyn,file="xyn.csv",row.names=FALSE)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+import pandas,pylab
+xyn=pandas.read_csv('xyn.csv',header=int(0),names=['x','y'])
+xyn.plot.scatter(x='x',y='y',s=.1); pylab.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
