@@ -180,8 +180,8 @@ HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 <script src="https://d3js.org/d3.v4.min.js"/><svg id="svg" style="background-color:silver;"/><script>
 var n=640,m=35,margin={top:m,right:m,bottom:m,left:m},width=600-margin.left-margin.right,height=600-margin.top-margin.bottom; 
 var xScale=d3.scaleLinear().domain([-20,20]).range([0,width]); var yScale=d3.scaleLinear().domain([-20,20]).range([height,0]);
-function make_x_gridlines() {return d3.axisBottom(xScale).ticks(11)};
-function make_y_gridlines() {return d3.axisLeft(yScale).ticks(11)}; 
+function make_x_gridlines() {return d3.axisBottom(xScale).ticks(11).tickFormat("")};
+function make_y_gridlines() {return d3.axisLeft(yScale).ticks(11).tickFormat("")}; 
 function get_integer(min,max) {return Math.floor(Math.random()*(max-min+1))+min;};
 function get_color() {return '#'+get_integer(1,255).toString(16)+get_integer(1,255).toString(16)+get_integer(1,255).toString(16);}
 var a=get_integer(7,15); var b=get_integer(10,24);              
@@ -194,8 +194,8 @@ svg.append("g").attr("class","x axis").call(d3.axisBottom(xScale).tickSize(0.5))
                .attr("transform","translate(0,"+height+")"); 
 svg.append("g").attr("class","y axis").call(d3.axisLeft(yScale).tickSize(0.5));    
 svg.append("g").attr("class","grid").attr("transform","translate(0,"+height+")")
-               .call(make_x_gridlines().tickSize(-height).tickFormat(""));
-svg.append("g").attr("class","grid").call(make_y_gridlines().tickSize(-width).tickFormat(""));
+               .call(make_x_gridlines().tickSize(-height));
+svg.append("g").attr("class","grid").call(make_y_gridlines().tickSize(-width));
 var line=d3.line().curve(d3.curveMonotoneX).x(function(d) {return xScale(d.x);}).y(function(d) {return yScale(d.y);});
 for (var i=1; i<11; i++) {var data=make_data(i); var col=get_color();
                           svg.append("path").datum(data).attr("class","line").attr("d",line)
