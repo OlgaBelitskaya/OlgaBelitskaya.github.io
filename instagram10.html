@@ -213,7 +213,8 @@ HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 var n=640,m=30; var i,j,k,xmax,xmin;
 var margin={top:m,right:m,bottom:m,left:m},width=500-margin.left-margin.right,height=500-margin.top-margin.bottom; 
 function get_integer(xmin,xmax) {return Math.floor(Math.random()*(xmax-xmin+1))+xmin;};
-function get_color() {return '#'+get_integer(1,255).toString(16)+get_integer(1,255).toString(16)+get_integer(1,255).toString(16);}
+function get_color(i) {var r=get_integer(20*i,255); var g=get_integer(20*i,255); var b=get_integer(20*i,255);
+    return '#'+r.toString(16)+g.toString(16)+b.toString(16);}
 var a=get_integer(7,15),b=get_integer(10,24);           
 function make_data(j) {return d3.range(0,n).map(function(i) {
     return {"x":4*j*(Math.cos(0.01*i)+Math.cos(a*0.01*i)/2+Math.sin((a+b)*0.01*i)/3),
@@ -225,7 +226,8 @@ var line=d3.line().curve(d3.curveMonotoneX).x(function(d) {return xScale(d.x);})
 for (k=1; k<4; k++) {var data=make_data(k);
     svg2.append("path").datum(data).attr("class","line").attr("d",line)
         .attr("fill","none").attr("stroke-width",2).transition().duration(5000)
-        .styleTween("stroke",function() {var col1=get_color(),col2=get_color(); return d3.interpolate(col1,col2);}); };
+        .styleTween("stroke",function() {var col1=get_color(k); var col2=get_color(k); 
+                                         return d3.interpolate(col1,col2);}); };
 svg2.append("text").attr("transform","translate("+20+","+20+")").style("fill","#aaa")
                    .text("a="+a+"; b="+b);
 </script></div><br/>
