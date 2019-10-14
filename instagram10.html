@@ -185,9 +185,9 @@ function make_y_gridlines() {return d3.axisLeft(yScale).ticks(11).tickFormat("")
 function get_integer(min,max) {return Math.floor(Math.random()*(max-min+1))+min;};
 function get_color() {return '#'+get_integer(1,255).toString(16)+get_integer(1,255).toString(16)+get_integer(1,255).toString(16);}
 var a=get_integer(7,15); var b=get_integer(10,24);              
-function make_data(k) {return d3.range(0,n).map(function(i){
-    return {"x":k*(Math.cos(0.01*i)+Math.cos(a*0.01*i)/2+Math.sin((a+b)*0.01*i)/3),
-            "y":k*(Math.sin(0.01*i)+Math.sin(a*0.01*i)/2+Math.cos((a+b)*0.01*i)/3)} });};                                            
+function make_data(k) {return d3.range(0,n).map(function(t){
+    return {"x":k*(Math.cos(0.01*t)+Math.cos(a*0.01*t)/2+Math.sin((a+b)*0.01*t)/3),
+            "y":k*(Math.sin(0.01*t)+Math.sin(a*0.01*t)/2+Math.cos((a+b)*0.01*t)/3)} });};                                            
 var svg=d3.select("#svg").attr("width",width+margin.left+margin.right).attr("height",height+margin.top+margin.bottom)
             .append("g").attr("transform","translate("+margin.left+","+margin.top+")");
 svg.append("g").attr("class","x axis").call(d3.axisBottom(xScale).tickSize(0.5))
@@ -208,20 +208,21 @@ HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 %%html
 <script src="https://d3js.org/d3.v4.min.js"/><svg id="svg2" style="background-color:ghostwhite;"/><script>
 var n=640,m=30,margin={top:m,right:m,bottom:m,left:m},width=500-margin.left-margin.right,height=500-margin.top-margin.bottom; 
-var xScale=d3.scaleLinear().domain([-18,18]).range([0,width+2*m]); var yScale=d3.scaleLinear().domain([-18,18]).range([height+2*m,0]); 
+var xScale=d3.scaleLinear().domain([-24,24]).range([0,width+2*m]),yScale=d3.scaleLinear().domain([-24,24]).range([height+2*m,0]); 
 function get_integer(xmin,xmax) {return Math.floor(Math.random()*(xmax-xmin+1))+xmin;};
-function get_random_color() {return '#'+get_integer(1,255).toString(16)+
-                                    get_integer(1,255).toString(16)+get_integer(1,255).toString(16);}
-var a=get_integer(7,15); var b=get_integer(10,24);              
+function get_color() {return '#'+get_integer(1,255).toString(16)+get_integer(1,255).toString(16)+get_integer(1,255).toString(16);}
+var a=get_integer(7,15),b=get_integer(10,24);              
 function make_data(k) {return d3.range(0,n).map(function(i){
-    return {"x":3*k*(Math.cos(0.01*i)+Math.cos(a*0.01*i)/2+Math.sin((a+b)*0.01*i)/3),
-            "y":3*k*(Math.sin(0.01*i)+Math.sin(a*0.01*i)/2+Math.cos((a+b)*0.01*i)/3)} });};                                            
+    return {"x":4*k*(Math.cos(0.01*i)+Math.cos(a*0.01*i)/2+Math.sin((a+b)*0.01*i)/3),
+            "y":4*k*(Math.sin(0.01*i)+Math.sin(a*0.01*i)/2+Math.cos((a+b)*0.01*i)/3)} });};                                     
 var svg2=d3.select("#svg2").attr("width",width+margin.left+margin.right).attr("height",height+margin.top+margin.bottom)
            .attr("transform","translate("+margin.left+","+margin.top+")");
 var line=d3.line().curve(d3.curveMonotoneX).x(function(d) {return xScale(d.x);}).y(function(d) {return yScale(d.y);});
-for (var i=1; i<4; i++) {var data=make_data(i); var col=get_random_color();
-                         svg2.append("path").datum(data).attr("class","line").attr("d",line)
-                                            .attr("stroke",col).attr("fill","none");};
+for (var j=1; j<4; j++) {var data=make_data(j);
+    svg2.append("path").datum(data).attr("class","line").attr("d",line)
+        .attr("fill","none").attr("stroke-width",2).transition().duration(5000)
+        .styleTween("stroke",function() {var col1=get_random_color(),col2=get_random_color(); 
+                                         return d3.interpolate(col1,col2);});};
 svg2.append("text").attr("transform","translate("+20+","+20+")").style("fill","#aaa")
                    .text("a="+a.toString()+"; b="+b.toString());
 </script></div><br/>
