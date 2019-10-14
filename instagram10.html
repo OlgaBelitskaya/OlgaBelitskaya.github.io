@@ -184,7 +184,8 @@ var margin={top:m,right:m,bottom:m,left:m},width=600-margin.left-margin.right,he
 function make_x_gridlines() {return d3.axisBottom(xScale).ticks(11).tickFormat("")};
 function make_y_gridlines() {return d3.axisLeft(yScale).ticks(11).tickFormat("")}; 
 function get_int(xmin,xmax) {return Math.floor(Math.random()*(xmax-xmin+1))+xmin;};
-function get_color() {return '#'+get_int(1,255).toString(16)+get_int(1,255).toString(16)+get_int(1,255).toString(16);}
+function get_color(k) {var r=get_integer(10*k,255); var g=get_integer(10*k,255); var b=get_integer(10*k,255);
+    return '#'+r.toString(16)+g.toString(16)+b.toString(16);}
 var a=get_int(7,15),b=get_int(10,24),l=get_int(3,12);              
 function make_data(k) {return d3.range(0,n).map(function(t){
     return {"x":k*(Math.cos(0.01*t)+Math.cos(a*0.01*t)/2+Math.sin((a+b)*0.01*t)/3),
@@ -200,8 +201,8 @@ svg.append("g").attr("class","grid").attr("transform","translate(0,"+height+")")
                .call(make_x_gridlines().tickSize(-height));
 svg.append("g").attr("class","grid").call(make_y_gridlines().tickSize(-width));
 var line=d3.line().curve(d3.curveMonotoneX).x(function(d) {return xScale(d.x);}).y(function(d) {return yScale(d.y);});
-for (i=1; i<l; i++) {var data=make_data(i); var col=get_color();
-                      svg.append("path").datum(data).attr("class","line").attr("d",line)
+for (i=1; i<l+1; i++) {var data=make_data(i); var col=get_color(i);
+                       svg.append("path").datum(data).attr("class","line").attr("d",line)
                          .attr("stroke",col).attr("fill","none");};
 svg.append("text").attr("transform","translate("+(width/2-50)+","+-5+")").style("fill","#fff")
                   .text("a="+a+"; b="+b+"; l="+l);
