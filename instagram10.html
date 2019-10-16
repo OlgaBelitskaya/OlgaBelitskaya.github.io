@@ -168,10 +168,18 @@ HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 <div class="sage_html"><script type="text/x-sage">
 %%html
-<script src="https://code.highcharts.com/highcharts.js"/>
-<div id="container3" style="height:500px; width:500px; margin:0 auto"></div>
+<script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'/>
+<div id='test_googlechart' style='width:500px; height:500px;'/>
 <script>
-
+google.charts.load('current',{'packages':['corechart']}); google.charts.setOnLoadCallback(drawChart);
+function drawChart() {
+  var a=Math.floor(Math.random()*(30-10+1))+10;
+  var xy=Array(1274).fill(1).map((r,t) => [(Math.floor(t/638)*r+Math.cos(a*0.01*t))*Math.cos(0.01*t),
+                                           (Math.cos(a*0.01*t))*Math.sin(0.01*t),(r+Math.cos(a*0.01*t))*Math.sin(0.01*t)]);
+  for (var i=1; i<637; i++) {xy[637+i][1]=NaN; xy[i+1][2]=NaN;}; xy.unshift(['x','ϱ = cos θ*'+a,'ϱ = 1 + cos θ*'+a]); 
+  var data=google.visualization.arrayToDataTable(xy); var options={curveType:'function',legend:{position:'bottom'}};
+  var chart=new google.visualization.LineChart(document.getElementById('test_googlechart')); chart.draw(data,options);
+};
 </script></div><br/>
 HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 <div class="sage_html"><script type="text/x-sage">
