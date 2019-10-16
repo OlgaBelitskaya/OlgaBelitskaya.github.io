@@ -169,18 +169,19 @@ HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 <div class="sage_html"><script type="text/x-sage">
 %%html
 <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'/>
-<div id='test_googlechart' style='width:500px; height:500px;'/><script>
+<div id='test_googlechart' style='width:600px; height:600px;'/><script>
 google.charts.load('current',{'packages':['corechart']}); google.charts.setOnLoadCallback(drawChart);
 function get_int(xmin,xmax) {return Math.floor(Math.random()*(xmax-xmin+1))+xmin;};
 function get_color(k) {var r=get_int(10*k,255); var g=get_int(10*k,255); var b=get_int(10*k,255);
     return '#'+r.toString(16)+g.toString(16)+b.toString(16);};
 function drawChart() {
-  var a=get_int(8,24); 
-  var xy=Array(1274).fill(1).map((k,t) => [(Math.floor(t/638)*k+Math.cos(a*0.01*t))*Math.cos(0.01*t),
-                                           (Math.cos(a*0.01*t))*Math.sin(0.01*t),(k+Math.cos(a*0.01*t))*Math.sin(0.01*t)]);
-  for (var i=1; i<637; i++) {xy[637+i][1]=NaN; xy[i+1][2]=NaN;}; xy.unshift(['x','ϱ = cos θ*'+a,'ϱ = 1 + cos θ*'+a]); 
+  var a=get_int(7,15); c=get_int(10,24);
+  var xy=Array(1274).fill(1).map((k,t)=>[(2*Math.floor(t/638)+k)*(Math.cos(0.01*t)+Math.cos(a*0.01*t)/2+Math.sin((a+c)*0.01*t)/3),
+                                         k*(Math.sin(0.01*t)+Math.sin(a*0.01*t)/2+Math.cos((a+c)*0.01*t)/3),
+                                         (k+2)*(Math.sin(0.01*t)+Math.sin(a*0.01*t)/2+Math.cos((a+c)*0.01*t)/3)]);
+  for (var i=1; i<637; i++) {xy[637+i][1]=NaN; xy[i+1][2]=NaN;}; xy.unshift(['x','k=1','k=3']); 
   var data=google.visualization.arrayToDataTable(xy); 
-  var options={curveType:'function',legend:{position:'bottom'},colors:[get_color(a-7),get_color(a-7)]};
+  var options={curveType:'function',legend:{position:'bottom'},colors:[get_color(a-6),get_color(c-9)]};
   var chart=new google.visualization.LineChart(document.getElementById('test_googlechart')); chart.draw(data,options);
 };
 </script></div><br/>
