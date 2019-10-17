@@ -146,11 +146,25 @@ for i in r:
             ax.plot(i*xyz['x'],j*xyz['y'],k*xyz['z'],c=col,linewidth=th)
 pylab.axis('off'); pylab.show()
 </script></div><br/>
-    <h1>____</h1>
+    <h1>Random Parametric Plotting in R</h1>
 R &#38; SageMathCell <br/>
 <div class="sage_r"><script type="text/x-sage">
 %%r
-
+svg(filename="Rplots.svg",width=7,height=7,pointsize=10,onefile=T,family="sans",
+    bg="lavender",antialias=c("default","none","gray","subpixel"))
+a<-sample(5:11,1); b<-sample(13:19,1); c<-2*sample(3:6,1); n<-sample(18:36,1)
+cat(c('a =',a,'b =',b,'c =',c,'n =',n,'\n'))
+t<-seq(1,2*n+1,.1)
+fx0<-sin(pi*t/n)-sin(a*pi*t/n)+sin(b*pi*t/n)
+fy0<-cos(pi*t/n)+cos(a*pi*t/n)+cos(b*pi*t/n)
+for (k in 1:(2*c)){
+    fx<-sin(pi*t/n+k*2*pi/c)-sin(a*pi*t/n+k*2*pi/c)+sin(b*pi*t/n+k*2*pi/c)
+    fy<-cos(pi*t/n+k*2*pi/c)+cos(a*pi*t/n+k*2*pi/c)+cos(b*pi*t/n+k*2*pi/c)
+    plot(fx,fy,type='o',cex=.1,lwd=.5,col=rgb(runif(1),0,runif(1)),
+         xlab='',ylab='',xlim=c(-3,3),ylim=c(-3,3)); par(new=T)}
+plot(fx0,fy0,type='o',cex=.2,lwd=10,col=rgb(runif(1),0,runif(1),alpha=0.1),
+     xlab='x',ylab='y',xlim=c(-3,3),ylim=c(-3,3));
+grid(col='slategray'); dev.off()
 </script></div><br/>
 <div class="sage_r"><script type="text/x-sage">
 %%r
