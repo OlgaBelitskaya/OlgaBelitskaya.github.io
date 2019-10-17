@@ -44,13 +44,27 @@ fx=-d*cos(t)-f*cos(b*t)+e*sin(a*t); fy=-e*cos(a*t)+d*sin(t)-f*sin(b*t); fz=d*cos
 sum([parametric_plot3d([i*fx,j*fy,k*fz],(0,2*pi),frame=False,thickness=th,
                        color=(random(),random(),random())) for i in r for j in r for k in r])
 </script></div><br/>
-    <h1>___</h1>
+    <h1>Random Polygon Plotting</h1>
 SageMath &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
-
+var('t,k'); a,b,c=randint(8,16),randint(13,19),2*randint(3,6); n=randint(16,24)
+s='<p style="color:#aa00ff;">$a=%d; \; b=%d; \; c=%d; \; n=%d$</p>'
+pretty_print(html(s%(a,b,c,n)))
+fy(t,k)=cos(pi*t/n+2*k*pi/c)+cos(a*pi*t/n+2*k*pi/c)+cos(b*pi*t/n+2*k*pi/c)
+fx(t,k)=sin(pi*t/n+2*k*pi/c)-sin(a*pi*t/n+2*k*pi/c)+sin(b*pi*t/n+2*k*pi/c)
+L=[[[fx(t,k),fy(t,k)] for t in range(2*n)] for k in range(2*c)]
+sum([polygon2d(L[i],color=(0,random(),random()),thickness=.5,
+               alpha=.1,axes=False) for i in range(2*c)])
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
-
+var('t,k'); a,b,c=randint(8,16),randint(13,19),2*randint(3,6); n=randint(16,24)
+s='<p style="color:#aa00ff;">$a=%d; \; b=%d; \; c=%d; \; n=%d$</p>'
+pretty_print(html(s%(a,b,c,n)))
+fy(t,k)=cos(pi*t/n+2*k*pi/c)+cos(a*pi*t/n+2*k*pi/c)+cos(b*pi*t/n+2*k*pi/c)
+fx(t,k)=sin(pi*t/n+2*k*pi/c)-sin(a*pi*t/n+2*k*pi/c)+sin(b*pi*t/n+2*k*pi/c)
+L=[[[fx(t,k),fy(t,k)] for t in range(2*n)] for k in range(2*c)]
+sum([polygon2d(L[i],color=(0,random(),random()),thickness=.5,
+               fill=False,axes=False) for i in range(2*c)])
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 
@@ -149,7 +163,7 @@ HTML &#38; JavaScript &#38; SageMathCell <br/>
 %%html
 <script src='https://code.highcharts.com/highcharts.js'/>
 <script src='https://code.highcharts.com/modules/histogram-bellcurve.js'/>
-<div id='container1' style='height:400px; width:600px; margin:0 auto'>
+<div id='container1' style='height:600px; width:600px; margin:0 auto'>
 the javascript cell is launching here...</div>
 </script></div><br/>
 <div class="sage_js"><script type="text/x-sage">
