@@ -198,6 +198,23 @@ for (k in 1:c){
     polygon(fx,fy,lwd=1,border=col,xlab='',ylab='',xlim=c(-3,3),ylim=c(-3,3)); par(new=T)}
 dev.off()
 </script></div><br/>
+<div class="sage_r"><script type="text/x-sage">
+%%r
+svg(filename="Rplots.svg",width=7,height=7,pointsize=10,onefile=T,family="sans",
+    bg="oldlace",antialias=c("default","none","gray","subpixel"))
+a<-sample(5:11,1); b<-sample(13:19,1); c<-2*sample(3:10,1); n<-sample(18:144,1)
+cat(c('a =',a,'b =',b,'c =',c,'n =',n,'\n'))
+t<-seq(1,2*n+1,1); col=rgb(runif(1),runif(1),1,alpha=.3)
+fx0<-sin(pi*t/n)-sin(a*pi*t/n)+sin(b*pi*t/n)
+fy0<-cos(pi*t/n)+cos(a*pi*t/n)+cos(b*pi*t/n)
+plot(fx0,fy0,type="n",xlim=c(-3,3),ylim=c(-3,3))
+for (k in 1:c){
+    fx<-sin(pi*t/n+k*2*pi/c)-sin(a*pi*t/n+k*2*pi/c)+sin(b*pi*t/n+k*2*pi/c)
+    fy<-cos(pi*t/n+k*2*pi/c)+cos(a*pi*t/n+k*2*pi/c)+cos(b*pi*t/n+k*2*pi/c)
+    polygon(fx,fy,lwd=1,border=rgb(1,runif(1),runif(1),alpha=.8),
+            xlab='',ylab='',xlim=c(-3,3),ylim=c(-3,3)); par(new=T)}
+dev.off()
+</script></div><br/>
     <h1>Random Parametric Plotting in JavaScript</h1>
 HTML &#38; JavaScript &#38; SageMathCell <br/>
 <div class="sage_html"><script type="text/x-sage">
