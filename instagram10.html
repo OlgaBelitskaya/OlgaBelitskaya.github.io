@@ -147,13 +147,25 @@ R &#38; SageMathCell <br/>
 HTML &#38; JavaScript &#38; SageMathCell <br/>
 <div class="sage_html"><script type="text/x-sage">
 %%html
-<script src="https://code.highcharts.com/highcharts.js"/>
-<div id="container1" style="height:500px; width:500px; margin:0 auto">
+<script src='https://code.highcharts.com/highcharts.js'/>
+<script src='https://code.highcharts.com/modules/histogram-bellcurve.js'/>
+<div id='container1' style='height:400px; width:600px; margin:0 auto'>
 the javascript cell is launching here...</div>
 </script></div><br/>
 <div class="sage_js"><script type="text/x-sage">
 %%javascript
-
+function get_int(xmin,xmax) {return Math.floor(Math.random()*(xmax-xmin+1))+xmin;};
+var n=3000; var m=get_int(6,24)
+var col='rgb('+get_int(10,240)+','+get_int(10,240)+','+get_int(10,240)+')';
+var data=Array(n).fill(m).map((a,t)=>[Math.cos(a*t*0.01)*Math.cos(t*0.01),
+                                      Math.cos(a*t*0.01)*Math.sin(t*0.01)])
+Highcharts.chart('container1',{
+    title:{text:'Array Histogram: a='+m},
+    xAxis:[{title:{text:'Values'},alignTicks:false},{title: {text:'Histogram'},alignTicks:false,opposite:true}],
+    yAxis:[{title:{text:'Values'}},{title:{text:'Histogram'},opposite:true}],
+    series:[{name:'Histogram',type:'histogram',color:'silver',xAxis:1,yAxis:1,baseSeries:'s1',zIndex:-1},
+            {name:'Data',type:'scatter',color:col,data:data,id:'s1',marker:{radius:1.5}}]
+});
 </script></div><br/>
    <h1>Plotting and Functions</h1>
    <h1>in JavaScript inside HTML Cells</h1>
