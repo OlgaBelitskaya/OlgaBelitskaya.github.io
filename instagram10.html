@@ -115,7 +115,19 @@ g=graphs.CubeGraph(5); krotate_graph(g)
     <h1>____</h1>
 SageMath &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
-
+el=["😀","😁","😂","😃","😄","😅","😆","😇","😈","😉","😊","😋","😌","😍","😎","😏",
+    "😐","😑","😒","😓","😔","😕","😖","😗","😘","😙","😚","😛","😜","😝","😞","😟",
+    "😠","😡","😢","😣","😥","😦","😧","😨","😩","😪","😫","😭","😮","😯",
+    "😰","😱","😲","😳","😴","😵","😶","😷"]
+var('t,k'); a,b,c=randint(8,16),randint(13,19),2*randint(3,6); n=randint(16,24)
+fy(t,k)=cos(pi*t/n+2*k*pi/c)+cos(a*pi*t/n+2*k*pi/c)+cos(b*pi*t/n+2*k*pi/c)
+fx(t,k)=sin(pi*t/n+2*k*pi/c)-sin(a*pi*t/n+2*k*pi/c)+sin(b*pi*t/n+2*k*pi/c)
+L=[[[fx(t,k),fy(t,k)] for t in range(2*n)] for k in range(2*c)]
+EL=[(3*cos(j*pi/12),3*sin(j*pi/12)) for j in [1..24]]
+EP1=sum([polygon2d(L[i],color=(random(),0,random()),thickness=.5,alpha=.1) for i in range(2*c)])
+EP2=sum([text(el[randint(0,len(el)-1)].decode('utf-8'),EL[j],
+              fontsize=30,color=(random(),0,random())) for j in [0..23]])
+(EP1+EP2).show(axes=False)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 
