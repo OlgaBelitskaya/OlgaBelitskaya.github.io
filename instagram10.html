@@ -66,10 +66,24 @@ sum([polygon2d(L[i],color=(1,random(),random()),thickness=.5,
                fill=False,axes=False) for i in range(2*c)])
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
-
+def rcc(i,a,coord):
+    rm=matrix(2,2,[cos(i*a),-sin(i*a),sin(i*a),cos(i*a)])
+    cm=list(rm*matrix(2,1,coord))
+    return N(cm[0])[0]+N(cm[1][0])*I
+n=randint(6,36); [a,b,c,d,e]=[random() for i in [1..5]]
+HP=[[0,a],[-.5,b],[-1,c],[-.5,1+d],[0,1+e],[.5,1+d],[1,c],[.5,b]]
+sum([hyperbolic_polygon([rcc(i,pi/n,coord) for coord in HP],
+     color=(random(),0,random())).plot() for i in [0..2*n-1]]).show(axes=False)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
-
+def rcc(i,a,coord):
+    rm=matrix(2,2,[cos(i*a),-sin(i*a),sin(i*a),cos(i*a)])
+    cm=list(rm*matrix(2,1,coord))
+    return N(cm[0])[0]+N(cm[1][0])*I
+n=randint(6,36); [a,b,c,d,e]=[random() for i in [1..5]]
+HP=[[0,a],[-.5,b],[-1,c],[-.5,1+d],[0,1+e],[.5,1+d],[1,c],[.5,b]]
+sum([hyperbolic_polygon([rcc(i,pi/n,coord) for coord in HP],fill=True,alpha=.07,
+     color=(0,random(),random())).plot() for i in [0..2*n-1]]).show(axes=False)
 </script></div><br/>
     <h1>____</h1>
 SageMath &#38; SageMathCell <br/>
