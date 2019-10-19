@@ -99,7 +99,17 @@ def rotate_graph(g,k):
 g=graphs.CubeGraph(5); k=7; rotate_graph(g,k)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
-
+def krotate_graph(g):
+    G=Graphics(); nv=g.get_pos().keys(); n=len(nv); v=g.get_pos().values()
+    k=randint(3,9); pretty_print('k = %d'%k)
+    for i in range(2*k):
+        a=i*pi/k; col=(randint(10,90)/100,randint(10,90)/100,randint(10,90)/100)
+        va=[[(.3*k*cos(a)*x-sin(a)*y).n(),(.3*k*sin(a)*x+cos(a)*y).n()] for [x,y] in v]
+        da=dict((nv[i],va[i]) for i in range(n))
+        G+=g.graphplot(pos=da,edge_color=col,edge_thickness=.5,
+                       vertex_size=0,vertex_labels=False).plot()
+    G.show(axes=False)
+g=graphs.CubeGraph(5); krotate_graph(g)
 </script></div><br/>
     <h1>____</h1>
 SageMath &#38; SageMathCell <br/>
