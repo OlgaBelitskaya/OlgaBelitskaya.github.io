@@ -121,13 +121,13 @@ el=["😀","😁","😂","😃","😄","😅","😆","😇","😈","😉","😊"
     "😫","😭","😮","😯","😰","😱","😲","😳","😴","😵","😶","😷"]
 st='Emotional Horoscope for the Day'
 pretty_print(html('<p style="color:#aa00ff; font-size:270%;">'+st+'</p>'))
-var('t,k'); a,b,c=randint(8,12),randint(13,19),2*randint(3,6); n=randint(16,24)
+var('t,k'); a,b,c=randint(5,11),randint(12,24),2*randint(3,6); n=randint(16,36)
 fy(t,k)=cos(pi*t/n+2*k*pi/c)+cos(a*pi*t/n+2*k*pi/c)+cos(b*pi*t/n+2*k*pi/c)
 fx(t,k)=sin(pi*t/n+2*k*pi/c)-sin(a*pi*t/n+2*k*pi/c)+sin(b*pi*t/n+2*k*pi/c)
 L=[[[fx(t,k),fy(t,k)] for t in range(2*n)] for k in range(2*c)]
 EL=[(3*cos(j*pi/12),3*sin(j*pi/12)) for j in [1..24]]
 COL=[(random(),0,random()) for j in [1..24]]
-EP1=sum([polygon2d(L[i],color=(random(),0,random()),thickness=.5,alpha=.1) for i in range(2*c)])
+EP1=sum([polygon2d(L[i],color=(random(),0,random()),thickness=.5,alpha=.05) for i in range(2*c)])
 EP2=sum([text(el[randint(0,len(el)-1)].decode('utf-8')+' '+str(31-j),EL[j-1],
               fontsize=20,color=COL[j-1]) for j in [7..24]])
 EP3=text(el[randint(0,len(el)-1)].decode('utf-8'),(0,0),fontsize=60,color=COL[0])
