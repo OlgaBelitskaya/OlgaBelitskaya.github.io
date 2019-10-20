@@ -57,7 +57,7 @@ def zoom_linegraph(g,n):
     (LG+t).show(axes=False,figsize=(6,6))
 g=graphs.CubeGraph(6); n=4; zoom_linegraph(g,n)
 </script></div><br/>
-    <h1>3D Line Graph</h1>
+    <h1>3D Line Graphs</h1>
 SageMath &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
 def linegraph3d(g,n):
@@ -67,9 +67,9 @@ def linegraph3d(g,n):
     y0=mean([vg.values()[i][1] for i in range(nv)])
     coord=[[list(vg[eg[i][0]]),list(vg[eg[i][1]])] for i in range(ne)]
     lg=[[[x-x0,y-y0] for [x,y] in coord[i]] for i in range(ne)]
-    zlg=[[[(1+k*j)*x,(1+k*j)*y,-j] for [x,y] in lg[i]] for j in range(n) for i in range(ne)]
+    zlg=[[[(1+k*j)*x,j,(1+k*j)*y] for [x,y] in lg[i]] for j in range(n) for i in range(ne)]
     for i in range(n*ne): 
-        LG+=line3d(zlg[i],color=(floor(i/ne)/n,random(),random()))
+        LG+=line3d(zlg[i],color=(floor(i/ne)/(n-1),random(),random()))
     LG.show(frame=False,aspect_ratio=1)
 g=graphs.CubeGraph(6); n=5; linegraph3d(g,n)
 </script></div><br/>
@@ -80,12 +80,12 @@ def linegraph3d(g,k):
     y0=mean([vg.values()[i][1] for i in range(nv)])
     coord=[[list(vg[eg[i][0]]),list(vg[eg[i][1]])] for i in range(ne)]
     lg=[[[x-x0,y-y0] for [x,y] in coord[i]] for i in range(ne)]
-    zlg=[[[(cos(j*pi/k)*x-sin(j*pi/k)*y).n(),(sin(j*pi/k)*x+cos(j*pi/k)*y).n(),(j+1)/k] \
+    zlg=[[[(cos(j*pi/k)*x-sin(j*pi/k)*y).n(),(sin(j*pi/k)*x+cos(j*pi/k)*y).n(),(j+1)/k] 
           for [x,y] in lg[i]] for j in range(2*k) for i in range(ne)]
     for i in range(2*k*ne): 
         LG+=line3d(zlg[i],color=(0,random(),random()))
     LG.show(frame=False,aspect_ratio=1)
-g=graphs.CubeGraph(5); k=4; linegraph3d(g,k)
+g=graphs.CubeGraph(5); k=6; linegraph3d(g,k)
 </script></div><br/>
     <h1>___</h1>
 SageMath &#38; SageMathCell <br/>
