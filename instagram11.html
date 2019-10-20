@@ -40,7 +40,21 @@ def rotate_linegraph(g,k):
 g=graphs.CubeGraph(6); k=4; rotate_linegraph(g,k)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
-
+def zum_line(a,l): 
+    return [[a*x,a*y] for [x,y] in l]
+def linegraph(g):
+    vg=g.get_pos(); eg=g.edges(); nv=len(vg); ne=len(eg)
+    x0=mean([vg.values()[i][0] for i in range(nv)])
+    y0=mean([vg.values()[i][1] for i in range(nv)])
+    coord=[[list(vg[eg[i][0]]),list(vg[eg[i][1]])] for i in range(ne)]
+    return [[[x-x0,y-y0] for [x,y] in coord[i]] for i in range(ne)]   
+def zum_linegraph(g,k,n):
+    LG=Graphics(); lg=linegraph(g)
+    rlg=[zum_line(1+k*j,lg[i]) for j in range(n) for i in range(len(lg))]
+    for i in range(n*len(lg)): 
+        LG+=line(rlg[i],color=(0,random(),random()),thickness=.5)
+    LG.show(axes=False,figsize=(6,6))
+g=graphs.CubeGraph(6); k=.1; n=4; zum_linegraph(g,k,n)
 </script></div><br/>
     <h1>___</h1>
 SageMath &#38; SageMathCell <br/>
