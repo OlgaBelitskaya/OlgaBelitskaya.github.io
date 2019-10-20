@@ -107,7 +107,24 @@ def graph_pe(g,n):
 g=graphs.CubeGraph(7); n=5; graph_pe(g,n)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
-
+def graph_pe(g,n):
+    PG=Graphics(); vg=g.get_pos(); vgp=vg.values(); nv=len(vg)
+    eg=g.edges(); ne=len(eg); k=randint(10,50)/100
+    x0=mean([vgp[i][0] for i in range(nv)])
+    y0=mean([vgp[i][1] for i in range(nv)])
+    cp=[[vgp[i][0]-x0,vgp[i][1]-y0] for i in range(nv)]
+    l=[[list(vg[eg[i][0]]),list(vg[eg[i][1]])] for i in range(ne)]
+    cl=[[[x-x0,y-y0] for [x,y] in l[i]] for i in range(ne)]
+    cp3d=[[[cos(j*pi/k)*x-sin(j*pi/k)*y,sin(j*pi/k)*x+cos(j*pi/k)*y,(j+1)/k] 
+           for j in range(n)] for [x,y] in cp]
+    cl3d=[[[cos(j*pi/k)*x-sin(j*pi/k)*y,sin(j*pi/k)*x+cos(j*pi/k)*y,(j+1)/k] 
+           for [x,y] in cl[i]] for j in range(n) for i in range(ne)]
+    for i in range(nv): 
+        PG+=line3d(cp3d[i],color=(0,random(),random()))
+    for i in range(n*ne): 
+        PG+=line3d(cl3d[i],color=(0,random(),random()))
+    PG.show(frame=False)
+g=graphs.CubeGraph(7); n=4; graph_pe(g,n)
 </script></div><br/>
     <h1>___</h1>
 SageMath &#38; SageMathCell <br/>
