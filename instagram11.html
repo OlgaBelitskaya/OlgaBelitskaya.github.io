@@ -23,7 +23,7 @@
     <h1>&#x1F4D1; &nbsp;Instagram Posts. Part 11</h1>
 <a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp;</a>     
 <a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a><br/>
-    <h1>___</h1>
+    <h1>Rotate and Zoom Graph Lines</h1>
 SageMath &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
 def rotate_line(a,l): 
@@ -40,7 +40,7 @@ def rotate_linegraph(g,k):
 g=graphs.CubeGraph(6); k=4; rotate_linegraph(g,k)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
-def zum_line(a,l): 
+def zoom_line(a,l): 
     return [[a*x,a*y] for [x,y] in l]
 def linegraph(g):
     vg=g.get_pos(); eg=g.edges(); nv=len(vg); ne=len(eg)
@@ -48,13 +48,13 @@ def linegraph(g):
     y0=mean([vg.values()[i][1] for i in range(nv)])
     coord=[[list(vg[eg[i][0]]),list(vg[eg[i][1]])] for i in range(ne)]
     return [[[x-x0,y-y0] for [x,y] in coord[i]] for i in range(ne)]   
-def zum_linegraph(g,k,n):
+def zoom_linegraph(g,k,n):
     LG=Graphics(); lg=linegraph(g)
-    rlg=[zum_line(1+k*j,lg[i]) for j in range(n) for i in range(len(lg))]
+    zlg=[zoom_line(1+k*j,lg[i]) for j in range(n) for i in range(len(lg))]
     for i in range(n*len(lg)): 
-        LG+=line(rlg[i],color=(0,random(),random()),thickness=.5)
+        LG+=line(zlg[i],color=(0,random(),random()),thickness=.5)
     LG.show(axes=False,figsize=(6,6))
-g=graphs.CubeGraph(6); k=.1; n=4; zum_linegraph(g,k,n)
+g=graphs.CubeGraph(6); k=.1; n=4; zoom_linegraph(g,k,n)
 </script></div><br/>
     <h1>___</h1>
 SageMath &#38; SageMathCell <br/>
