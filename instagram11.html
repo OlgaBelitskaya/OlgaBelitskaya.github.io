@@ -87,10 +87,24 @@ def linegraph3d(g,k):
     LG.show(frame=False,aspect_ratio=1)
 g=graphs.CubeGraph(5); k=6; linegraph3d(g,k)
 </script></div><br/>
-    <h1>___</h1>
-SageMath &#38; SageMathCell <br/>
+SageMath &#38; SageMathCell 
 <div class="sage"><script type="text/x-sage">
-
+def graph_pe(g,n):
+    PG=Graphics(); vg=g.get_pos(); vgp=vg.values(); nv=len(vg)
+    eg=g.edges(); ne=len(eg); k=randint(10,50)/100
+    x0=mean([vgp[i][0] for i in range(nv)])
+    y0=mean([vgp[i][1] for i in range(nv)])
+    cp=[[vgp[i][0]-x0,vgp[i][1]-y0] for i in range(nv)]
+    l=[[list(vg[eg[i][0]]),list(vg[eg[i][1]])] for i in range(ne)]
+    cl=[[[x-x0,y-y0] for [x,y] in l[i]] for i in range(ne)]
+    cp3d=[[[(1+k*j)*x,(1+k*j)*y,j] for j in range(n)] for [x,y] in cp]
+    cl3d=[[[(1+k*j)*x,(1+k*j)*y,j] for [x,y] in cl[i]] for j in range(n) for i in range(ne)]
+    for i in range(nv): 
+        PG+=line3d(cp3d[i],color=(0,random(),random()))
+    for i in range(n*ne): 
+        PG+=line3d(cl3d[i],color=(0,random(),random()))
+    PG.show(frame=False)
+g=graphs.CubeGraph(7); n=5; graph_pe(g,n)<div class="sage"><script type="text/x-sage">
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 
