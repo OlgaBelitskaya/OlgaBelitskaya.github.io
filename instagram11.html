@@ -74,7 +74,18 @@ def linegraph3d(g,n):
 g=graphs.CubeGraph(6); n=5; linegraph3d(g,n)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
-
+def linegraph3d(g,k):
+    LG=Graphics(); vg=g.get_pos(); eg=g.edges(); nv=len(vg); ne=len(eg)
+    x0=mean([vg.values()[i][0] for i in range(nv)])
+    y0=mean([vg.values()[i][1] for i in range(nv)])
+    coord=[[list(vg[eg[i][0]]),list(vg[eg[i][1]])] for i in range(ne)]
+    lg=[[[x-x0,y-y0] for [x,y] in coord[i]] for i in range(ne)]
+    zlg=[[[(cos(j*pi/k)*x-sin(j*pi/k)*y).n(),(sin(j*pi/k)*x+cos(j*pi/k)*y).n(),(j+1)/k] \
+          for [x,y] in lg[i]] for j in range(2*k) for i in range(ne)]
+    for i in range(2*k*ne): 
+        LG+=line3d(zlg[i],color=(0,random(),random()))
+    LG.show(frame=False,aspect_ratio=1)
+g=graphs.CubeGraph(5); k=4; linegraph3d(g,k)
 </script></div><br/>
     <h1>___</h1>
 SageMath &#38; SageMathCell <br/>
