@@ -48,13 +48,14 @@ def linegraph(g):
     y0=mean([vg.values()[i][1] for i in range(nv)])
     coord=[[list(vg[eg[i][0]]),list(vg[eg[i][1]])] for i in range(ne)]
     return [[[x-x0,y-y0] for [x,y] in coord[i]] for i in range(ne)]   
-def zoom_linegraph(g,k,n):
-    LG=Graphics(); lg=linegraph(g)
+def zoom_linegraph(g,n):
+    LG=Graphics(); lg=linegraph(g); k=randint(10,50)/100
     zlg=[zoom_line(1+k*j,lg[i]) for j in range(n) for i in range(len(lg))]
     for i in range(n*len(lg)): 
         LG+=line(zlg[i],color=(0,random(),random()),thickness=.5)
-    LG.show(axes=False,figsize=(6,6))
-g=graphs.CubeGraph(6); k=.1; n=4; zoom_linegraph(g,k,n)
+    t=text('k=%.2f'%k.n(),((1+k*n)*n/3,(1+k*n)*n/3),fontsize=13)
+    (LG+t).show(axes=False,figsize=(6,6))
+g=graphs.CubeGraph(6); n=4; zoom_linegraph(g,n)
 </script></div><br/>
     <h1>___</h1>
 SageMath &#38; SageMathCell <br/>
