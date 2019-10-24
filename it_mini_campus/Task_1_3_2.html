@@ -33,7 +33,16 @@ SageMath &#38; SageMathCell <br/>
 
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
-
+var('k'); X,N=.5,20; 
+def create_plottable(f,x,n,y):
+    pretty_print(html(latex(f))); S=[2..7]
+    pretty_print(html('x='+str(X)+' ↦ f(x)='+str(f(X,N).n())))
+    l=[[[x,f(x,n).n()] for x in srange(1.1,5,.01)] for n in S]
+    t=[['x','n','f(x,n)','f(x,n)']]+[[2,i,f(2,i),f(2,i).n()] for i in S]
+    p=sum([line(l[i-2],color=hue(.1*i),legend_label=i) for i in S])
+    p.show(ymin=-y,ymax=y,figsize=7); show(table(t))
+f21(x,n)=ln(n*x-1)*sum(sqrt(exp(1)^(-k*x)+x^(k-1))/(cos(k*x)+sin(k*x)),k,1,n)
+Y21=200; create_plottable(f21,X,N,Y21)
 </script></div><br/>
 Python &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
