@@ -27,29 +27,54 @@ Create an algorithm and a program
     <h2>Explore detached cells</h2>
 SageMath &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
-var('x'); A,B,N=.55,1,10
-def create_table(f,a,b,n):
+var('x'); A,B,N=.55,1,10; X1,X2=1000,6000
+def create_plottable(f,a,b,n):
     t=[[round(x,4),round(f(x),4)] for x in srange(a,b,(b-a)/n)]
-    pretty_print(html(latex(f))); line(t).show(gridlines=True,figsize=5)
+    pretty_print(html(latex(f))); x=randint(X1,X2)/10^4 
+    list_plot(t).show(gridlines=True,figsize=4)
+    pretty_print(html('x='+str(round(x,4))+' ↦ f(x)='+str(round(f(x),4))))
     show(table([['x','f(x)']]+t))
+def create_table(f,a,b,n):
+    t=[[round(x,4),f(x)] for x in srange(a,b,(b-a)/n)]
+    pretty_print(html(latex(f))); x=randint(X1,X2)/10^4 
+    show(table([['x','f(x)']]+t))
+    pretty_print(html('x='+str(round(x,4))+' ↦ f(x)='+str(f(x).n())))
+f1(x)=sqrt(exp(2.2*x))-abs(sin(pi*x/(x+2/3)))+1.7
+f2(x)=sqrt(x^(4/5)+x^((4-x)/5))+log(abs(x-20.5))
+f3(x)=(1/7+log(sqrt(x)))*exp(sqrt((x+0j)-2))
+for f in [f1,f2]: create_plottable(f,A,B,N) 
+create_table(f3,A,B,N)
+</script></div><br/>
+<div class="sage"><script type="text/x-sage">
+var('x'); A,B,N=.55,1,10; X1,X2=1000,6000
+def create_plottable(f,a,b,n):
+    t=[[round(x,4),round(f(x),4)] for x in srange(a,b,(b-a)/n)]
+    pretty_print(html(latex(f))); x=randint(X1,X2)/10^4 
+    list_plot(t).show(gridlines=True,figsize=4)
+    pretty_print(html('x='+str(round(x,4))+' ↦ f(x)='+str(round(f(x),4))))
+    show(table([['x','f(x)']]+t))
+def create_table(f,a,b,n):
+    t=[[round(x,4),f(x)] for x in srange(a,b,(b-a)/n)]
+    pretty_print(html(latex(f))); x=randint(X1,X2)/10^4 
+    show(table([['x','f(x)']]+t))
+    pretty_print(html('x='+str(round(x,4))+' ↦ f(x)='+str(f(x).n())))
 
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
-var('x'); A,B,N=.55,1,10
-def create_table(f,a,b,n):
+var('x'); A,B,N=.55,1,10; X1,X2=1000,6000
+def create_plottable(f,a,b,n):
     t=[[round(x,4),round(f(x),4)] for x in srange(a,b,(b-a)/n)]
-    pretty_print(html(latex(f))); line(t).show(gridlines=True,figsize=5)
+    pretty_print(html(latex(f))); x=randint(X1,X2)/10^4 
+    list_plot(t).show(gridlines=True,figsize=4)
+    pretty_print(html('x='+str(round(x,4))+' ↦ f(x)='+str(round(f(x),4))))
     show(table([['x','f(x)']]+t))
-
-</script></div><br/>
-<div class="sage"><script type="text/x-sage">
-var('x'); A,B,N=.55,1,10
 def create_table(f,a,b,n):
-    t=[[round(x,4),round(f(x),4)] for x in srange(a,b,(b-a)/n)]
-    pretty_print(html(latex(f))); line(t).show(gridlines=True,figsize=5)
+    t=[[round(x,4),f(x)] for x in srange(a,b,(b-a)/n)]
+    pretty_print(html(latex(f))); x=randint(X1,X2)/10^4 
     show(table([['x','f(x)']]+t))
+    pretty_print(html('x='+str(round(x,4))+' ↦ f(x)='+str(f(x).n())))
 f21(x)=(sin(x*pi/2)+x^(1/5))/(sqrt(abs(cos(pi*x)+1))*exp(sqrt(x)))
-create_table(f21,A,B,N)
+create_plottable(f21,A,B,N)
 </script></div><br/>
 Python &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
