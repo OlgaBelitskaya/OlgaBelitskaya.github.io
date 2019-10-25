@@ -33,7 +33,13 @@ def create_table(R,H,N):
     pretty_print(html(latex(V))); S=[1..N]
     l=[[i,R,H,V(R,H,i),V(R,H,i).n()] for i in S]
     show(table([['N','R','H','V','V=']]+l))
-create_table(random(),random(),5)
+from sage.plot.plot3d.shapes import Sphere
+def display_shell(R,H,N):
+    g=Graphics(); s=Sphere(R,frame=false)
+    layers=sum([Sphere(R+i*H,opacity=1/i) for i in [1..N]])
+    pretty_print('R=%.2f, H=%.2f, N=%d -> V=%f'%(R,H,N,V(R,H,N))) 
+    (g+s+layers).show()
+R,H,N=random(),random(),7; create_table(R,H,N); display_shell(R,H,N)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 #2

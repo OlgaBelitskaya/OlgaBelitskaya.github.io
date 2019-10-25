@@ -95,8 +95,8 @@ P(D,G,N)=sum(v(D,i)*G/i,i,1,N)
 pretty_print('total gravity of N layers:'); pretty_print(P(D,G,N).factor())
 from sage.plot.plot3d.shapes import Sphere
 def display_shell(D,G,N):
-    g=Graphics(); s=Sphere(D,color='gray',frame=false)
-    layers=sum([Sphere(D+i,opacity=G/i) for i in [1..N]])
+    g=Graphics(); s=Sphere(D/2,color='gray',frame=false)
+    layers=sum([Sphere((D+i)/2,opacity=G/i) for i in [1..N]])
     pretty_print('D=%d, G=%.2f, N=%d -> P=%f'%(D,G,N,P(D,G,N))) 
     (g+s+layers).show()
 display_shell(7,.75,10)
