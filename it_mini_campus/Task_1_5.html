@@ -27,13 +27,57 @@ Create an algorithm and a program
     <h2>Explore detached cells</h2>
 SageMath &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
+var('k'); E=10^(-4); seg=[.05,.1,..,.95]
+def nfind(controlf,sumf,e):
+    cond=True; n=1
+    while cond:
+        diff=[abs(controlf(x)-sumf(x,n)).n()<e for x in seg]
+        cond=sum(diff)!=len(diff); n+=1
+    return(n-1)
+def nplot(controlf,sumf,n,var):
+    sumline3=[[x,sumf(x,2).n()] for x in seg]
+    sumline=[[x,sumf(x,n).n()] for x in seg]
+    controlline=[[x,controlf(x).n()] for x in seg]
+    (list_plot(sumline3,size=50,legend_label='sum function n=2',title='variant %d'%var)+\
+     list_plot(sumline,size=50,color='green',legend_label='sum function n=%d'%n)+\
+     list_plot(controlline,color='red',legend_label='control function')).show(gridlines=True)
 
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
+var('k'); E=10^(-4); seg=[.05,.1,..,.95]
+def nfind(controlf,sumf,e):
+    cond=True; n=1
+    while cond:
+        diff=[abs(controlf(x)-sumf(x,n)).n()<e for x in seg]
+        cond=sum(diff)!=len(diff); n+=1
+    return(n-1)
+def nplot(controlf,sumf,n,var):
+    sumline3=[[x,sumf(x,2).n()] for x in seg]
+    sumline=[[x,sumf(x,n).n()] for x in seg]
+    controlline=[[x,controlf(x).n()] for x in seg]
+    (list_plot(sumline3,size=50,legend_label='sum function n=2',title='variant %d'%var)+\
+     list_plot(sumline,size=50,color='green',legend_label='sum function n=%d'%n)+\
+     list_plot(controlline,color='red',legend_label='control function')).show(gridlines=True)
 
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
-
+var('k'); E=10^(-4); seg=[.05,.1,..,.95]
+def nfind(controlf,sumf,e):
+    cond=True; n=1
+    while cond:
+        diff=[abs(controlf(x)-sumf(x,n)).n()<e for x in seg]
+        cond=sum(diff)!=len(diff); n+=1
+    return(n-1)
+def nplot(controlf,sumf,n,var):
+    sumline3=[[x,sumf(x,2).n()] for x in seg]
+    sumline=[[x,sumf(x,n).n()] for x in seg]
+    controlline=[[x,controlf(x).n()] for x in seg]
+    (list_plot(sumline3,size=50,legend_label='sum function n=2',title='variant %d'%var)+\
+     list_plot(sumline,size=50,color='green',legend_label='sum function n=%d'%n)+\
+     list_plot(controlline,color='red',legend_label='control function')).show(gridlines=True)
+controlf21(x)=2*x-x*exp(-x^2)-sin(x)
+sumf21(x,n)=sum(sign(-1)^(k+1)*x^(2*k+1)*(1/factorial(k)+1/factorial(2*k+1)),k,1,n)
+N21=nfind(controlf21,sumf21,E); nplot(controlf21,sumf21,N21,21)
 </script></div><br/>
 Python &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
