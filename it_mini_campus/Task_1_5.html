@@ -41,7 +41,15 @@ def nplot(controlf,sumf,n,var):
     (list_plot(sumline3,size=50,legend_label='sum function n=2',title='variant %d'%var)+\
      list_plot(sumline,size=50,color='green',legend_label='sum function n=%d'%n)+\
      list_plot(controlline,color='red',legend_label='control function')).show(gridlines=True)
-
+controlf1(x)=3*(x+1)^(1/3)-3
+def pf1(x,i):
+    if i==0 or i==1: return x
+    else: return pf1(x,i-1)*(-x)*(3*i-4)/(3*i)
+def sumf1(x,n):
+    s=0 
+    for i in range(1,n+1): s+=pf1(x,i)
+    return s
+N1=nfind(controlf1,sumf1,E); nplot(controlf1,sumf1,15,1)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 var('k'); E=10^(-4); seg=[.05,.1,..,.95]
