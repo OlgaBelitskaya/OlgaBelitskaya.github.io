@@ -27,8 +27,16 @@ Create an algorithm and a program
     <h2>Explore detached cells</h2>
 SageMath &#38; SageMathCell<br/>
 <div class="sage"><script type="text/x-sage">
-#1
-
+def localmax(f,x1,x2,dx,var):
+    print('5 iteration steps'); t=[[]]
+    for x in [x1,x1+dx,..,x2]:
+        x0=x; t+=[[f(x),f(x+dx)]]
+        if f(x+dx)<f(x): break
+    show(table([['f(x)','f(x+dx)']]+t[-5:]))
+    (plot(f,(x1,x2))+point((x0,f(x0)),color='red')).show(gridlines=True,figsize=(7,4))
+    print('var %d: f(x)=max => x≈%.10f'%(var,x0))
+X1,X2,dX=.1,10,.1; f1(x)=(x+1)/(x^5+1)+log(x+1)
+localmax(f1,X1,X2,dX,1)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 #2
