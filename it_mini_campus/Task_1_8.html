@@ -89,6 +89,15 @@ SageMath &#38; SageMathCell<br/>
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 #21
+def localmax(f,x1,x2,dx,var):
+    print('Iteration steps'); t=[['f(x)','f(x+dx)']]
+    for x in [x1,x1+dx,..,x2]:
+        x0=x; t+=[[f(x),f(x+dx)]]
+        if f(x+dx)<f(x): break
+    show(table(t)); plot(f,(x1,x2)).show()
+    print('var %d: f(x)=max => x≈%.10f'%(var,x0))
+X1,X2,dX=.1,10,.1; f21(x)=x^2-exp(-x-1)
+localmax(f21,X1,X2,dX,21)    
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 #22
