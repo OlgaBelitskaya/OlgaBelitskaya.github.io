@@ -51,12 +51,15 @@ var('a,x')
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 def create_table(f,a,x1,dx,n):
-    pretty_print(latex(f)); t=[['n','X','Y','Y≈']]
+    t=[['n','X','Y≈']]; x0=x1
     for i in [1..n]:
-        y=f(a=a,x=x1); t.append([i,x1,y,y.n()]); x1+=dx
-    return(table(t))
-var('a,x')
-
+        t.append([i,x0,f(a,x0)]); x0+=dx
+    show(table(t))
+def f212(a,x):
+    if x<3*a: return -a*exp(x-3*a)
+    else: return -a-a*log(x-3*a)
+A21=.8; X21,dX21=-4*A21,2*A21/5
+create_table(f212,A21,X21,dX21,20)
 </script></div><br/>
 Python &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
