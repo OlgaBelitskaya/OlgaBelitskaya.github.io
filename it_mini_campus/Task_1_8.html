@@ -27,6 +27,7 @@ Create an algorithm and a program
     <h2>Explore detached cells</h2>
 SageMath &#38; SageMathCell<br/>
 <div class="sage"><script type="text/x-sage">
+#1
 def localmax(f,x1,x2,dx,var):
     print('5 iteration steps'); t=[[]]
     for x in [x1,x1+dx,..,x2]:
@@ -40,6 +41,15 @@ localmax(f1,X1,X2,dX,1)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 #2
+def nulfunction(f,x1,x2,dx,var):
+    print('iteration steps'); t=[['f(x)','f(x+dx)']]; x=x1;
+    while sign(f(x))==sign(f(x+dx)):
+        x+=dx; t+=[[f(x),f(x+dx)]]
+    show(table(t))
+    (plot(f,(x1,x2))+point((x,f(x)),color='red')).show(gridlines=True,figsize=(7,4))
+    print('var %d: f(x)=0 => x≈%.10f'%(var,x))
+X1,X2,dX=.1,10,.1; f2(x)=x-atan(sqrt(x))
+nulfunction(f2,X1,X2,dX,2)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 #3
