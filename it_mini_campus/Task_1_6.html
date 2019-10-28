@@ -32,20 +32,30 @@ def create_table(f,a,x1,dx,n):
     for i in [1..n]:
         y=f(a=a,x=x1); t.append([i,x1,y,y.n()]); x1+=dx
     return(table(t))
-#def f11(a,x):
-#    if x<=0: return a/2*(exp(x/a)+exp(-x/a))
-#    else: return 4*a^3*(x^2+4*a^2)
 var('a,x')
-f12=piecewise([((-oo,0),a/2*(exp(x/a)+exp(-x/a))),([0,0],a/2*(exp(x/a)+exp(-x/a))),
+f11=piecewise([((-oo,0),a/2*(exp(x/a)+exp(-x/a))),([0,0],a/2*(exp(x/a)+exp(-x/a))),
               ((0,+oo),4*a^3*(x^2+4*a^2))],var=x)
-A1=1; X1,dX1=-2*A1,A1/5 
-#create_table(f11,A1,X1,dX1,5); 
-create_table(f12,A1,X1,dX1,5)
+def f12(a,x):
+    if x<=0: return a/2*(exp(x/a)+exp(-x/a))
+    else: return 4*a^3*(x^2+4*a^2)
+A1=1; X1,dX1=-2*A1,A1/5; create_table(f11,A1,X1,dX1,12); #create_table(f12,A1,X1,dX1,12)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
+def create_table(f,a,x1,dx,n):
+    pretty_print(latex(f)); t=[['n','X','Y','Y≈']]
+    for i in [1..n]:
+        y=f(a=a,x=x1); t.append([i,x1,y,y.n()]); x1+=dx
+    return(table(t))
+var('a,x')
 
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
+def create_table(f,a,x1,dx,n):
+    pretty_print(latex(f)); t=[['n','X','Y','Y≈']]
+    for i in [1..n]:
+        y=f(a=a,x=x1); t.append([i,x1,y,y.n()]); x1+=dx
+    return(table(t))
+var('a,x')
 
 </script></div><br/>
 Python &#38; SageMathCell <br/>
