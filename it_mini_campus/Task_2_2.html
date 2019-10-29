@@ -34,14 +34,14 @@ SageMath &#38; SageMathCell <br/>
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 var('k'); X,H,M=.1,.05,10; 
-def create_plottable(f,x,h,n,y):
-    pretty_print(html(latex(f))); s=[2..7]; m=[0..M-1]
-    l=[[[x+i*h,f(x+i*h,n).n()] for i in m] for n in s]
-    t=[['x','n','f(x,n)','f(x,n)≈']]+[[X+i*H,3,f(X+i*H,3),f(X+i*H,3).n()] for i in m]
-    p=sum([line(l[j-2],color=hue(.1*j),legend_label=j) for j in s])
-    p.show(ymin=-y,ymax=y,figsize=7); show(table(t))
+def create_plottable(f,x,h,m,y1,y2):
+    pretty_print(html(latex(f))); s=[15,20,25]
+    l=[[[x+j*h,f(x+j*h,i).n()] for j in range(m)] for i in s]
+    t=[['x','n','f(x,n)','f(x,n)≈']]+[[x+j*h,20,f(x+j*h,20),f(x+j*h,20).n()] for j in range(m)]
+    p=sum([line(l[i],color=hue(.3*i),legend_label='n=%d'%s[i]) for i in range(3)])
+    p.show(ymin=y1,ymax=y2,figsize=7,gridlines=True); show(table(t))
 f21(x,n)=ln(n*x-1)*sum(sqrt(exp(1)^(-k*x)+x^(k-1))/(cos(k*x)+sin(k*x)),k,1,n)
-Y21=200; create_plottable(f21,X,H,M,Y21)
+create_plottable(f21,X,H,M,-5,85)
 </script></div><br/>
 Python &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
