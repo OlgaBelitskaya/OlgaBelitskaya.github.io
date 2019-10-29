@@ -108,9 +108,10 @@ show(title='(x0,y0)=(%.4f,%.4f) '%(x0,y0)+s)
 <div class="sage"><script type="text/x-sage">
 #13
 var('x,y')
-[cx,cy1,cy2,cy11,cy21]=[-3<=x<=3,x^2+y^2<=4,x^2/9+y^2<=1,x^2+y^2-4,x^2/9+y^2-1]
+[cx1,cx2,cy1,cy2,cy11,cy21]=[-3<=x,x<=3,x^2+y^2<=4,x^2/9+y^2<=1,x^2+y^2-4,x^2/9+y^2-1]
 [bx,by]=[(x,-3,3),(y,-3,3)]; (x0,y0)=(6*random()-3,6*random()-3)
-cond=(bool(cx(x=x0))&bool(cy1(x=x0,y=y0))&bool(cy2(x=x0,y=y0)))
+cond=(bool(cx1(x=x0))&bool(cy1(x=x0,y=y0))&bool(cy2(x=x0,y=y0)))|\
+(bool(cx2(x=x0))&bool(cy1(x=x0,y=y0))&bool(cy2(x=x0,y=y0)))
 if cond: s='$\in$'
 else: s='$\\notin$'
 (region_plot([cy1,cy2],bx,by,alpha=.7)+implicit_plot(cy11,bx,by,fill=False)+
