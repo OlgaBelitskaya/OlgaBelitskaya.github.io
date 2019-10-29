@@ -84,6 +84,15 @@ show(title='(x0,y0)=(%.4f,%.4f) '%(x0,y0)+s)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 #11
+var('x,y')
+[cx1,cx2,cy1,cy2]=[-3<=x<3,-1<=x<=1,x^2/9+y^2<=1,-2<=y<=0]
+[bx1,bx2,by1,by2]=[(x,-3,3),(x,-1,1),(y,0,1),(y,-2,0)]
+(x0,y0)=(6*random()-3,4*random()-3)
+cond=(bool(cx1(x=x0))&bool(cy1(x=x0,y=y0)))|(bool(cx2(x=x0))&bool(cy2(x=x0,y=y0)))
+if cond: s='$\in$'
+else: s='$\\notin$'
+(region_plot(cy1,bx1,by1,alpha=.7)+region_plot(cy2,bx2,by2,alpha=.7)+
+point((x0,y0),size=50,color='red')).show(title='(x0,y0)=(%.4f,%.4f) '%(x0,y0)+s)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 #12
