@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Task_2_3</title>
+    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <script>$(function () {
+    sagecell.makeSagecell({inputLocation:'div.linked',linked:true,evalButtonText:'Run Linked Cells'});
+    sagecell.makeSagecell({inputLocation:'div.sage_html',evalButtonText:'Run HTML'});  
+    sagecell.makeSagecell({inputLocation:'div.sage_js',evalButtonText:'Run JavaScript'});
+    sagecell.makeSagecell({inputLocation:'div.sage_r',evalButtonText:'Run R'});  
+    sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run SageMath'}); });
+    </script>
+  </head>
+  <style>
+  @import url('https://fonts.googleapis.com/css?family=Orbitron');
+  h1, h2 {color:#3636ff; font-size:110%; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
+  p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:50em;}
+  </style>  
+  <body>
+    <h1>IT Online Mini Campus. Task 2.3</h1>
+    <a href="https://search.rsl.ru/ru/record/01001821198">&#x1F300; Сборник задач по базовой компьютерной подготовке:[Для втузов]</a>
+    <h1>Calculation of a Function Value by Expanding It in a Series</h1>
+Create an algorithm and a program
+    <h2>Explore detached cells</h2>
+SageMath &#38; SageMathCell <br/>
+<div class="sage"><script type="text/x-sage">
+var('k'); E=10^(-4); X1,X2,H=.5,.7,.05; seg=[X1,X1+H,..,X2]
+def nfind(controlf,sumf,e):
+    cond=True; n=1
+    while cond:
+        diff=[abs(controlf(x)-sumf(x,n)).n()<e for x in seg]
+        cond=sum(diff)!=len(diff); n+=1
+    return(n-1)
+def nplot(controlf,sumf,n,var):
+    sumline3=[[x,sumf(x,2).n()] for x in seg]
+    sumline=[[x,sumf(x,n).n()] for x in seg]
+    controlline=[[x,controlf(x).n()] for x in seg]
+    (list_plot(sumline3,size=50,legend_label='sum function n=2',title='variant %d'%var)+\
+     list_plot(sumline,size=50,color='green',legend_label='sum function n=%d'%n)+\
+     list_plot(controlline,color='red',legend_label='control function')).show(gridlines=True)
+controlf1(x)=3*(x+1)^(1/3)-3
+def pf1(x,i):
+    if i==0 or i==1: return x
+    else: return pf1(x,i-1)*(-x)*(3*i-4)/(3*i)
+def sumf1(x,n):
+    s=0 
+    for i in range(1,n+1): s+=pf1(x,i)
+    return s
+N1=nfind(controlf1,sumf1,E); nplot(controlf1,sumf1,N1,1)
+</script></div><br/>
+<div class="sage"><script type="text/x-sage">
+var('k'); E=10^(-4); X1,X2,H=.5,.7,.05; seg=[X1,X1+H,..,X2]
+def nfind(controlf,sumf,e):
+    cond=True; n=1
+    while cond:
+        diff=[abs(controlf(x)-sumf(x,n)).n()<e for x in seg]
+        cond=sum(diff)!=len(diff); n+=1
+    return(n-1)
+def nplot(controlf,sumf,n,var):
+    sumline3=[[x,sumf(x,2).n()] for x in seg]
+    sumline=[[x,sumf(x,n).n()] for x in seg]
+    controlline=[[x,controlf(x).n()] for x in seg]
+    (list_plot(sumline3,size=50,legend_label='sum function n=2',title='variant %d'%var)+\
+     list_plot(sumline,size=50,color='green',legend_label='sum function n=%d'%n)+\
+     list_plot(controlline,color='red',legend_label='control function')).show(gridlines=True)
+controlf11(x)=2-exp(-x^2)-cos(x)
+sumf11(x,n)=sum((-1)^(k+1)*x^(2*k)*(1/factorial(k)+1/factorial(2*k)),k,1,n)
+N11=nfind(controlf11,sumf11,E); nplot(controlf11,sumf11,N11,11)
+</script></div><br/>
+<div class="sage"><script type="text/x-sage">
+var('k'); E=10^(-4); X1,X2,H=.5,.7,.05; seg=[X1,X1+H,..,X2]
+def nfind(controlf,sumf,e):
+    cond=True; n=1
+    while cond:
+        diff=[abs(controlf(x)-sumf(x,n)).n()<e for x in seg]
+        cond=sum(diff)!=len(diff); n+=1
+    return(n-1)
+def nplot(controlf,sumf,n,var):
+    sumline3=[[x,sumf(x,2).n()] for x in seg]
+    sumline=[[x,sumf(x,n).n()] for x in seg]
+    controlline=[[x,controlf(x).n()] for x in seg]
+    (list_plot(sumline3,size=50,legend_label='sum function n=2',title='variant %d'%var)+\
+     list_plot(sumline,size=50,color='green',legend_label='sum function n=%d'%n)+\
+     list_plot(controlline,color='red',legend_label='control function')).show(gridlines=True)
+controlf21(x)=2*x-x*exp(-x^2)-sin(x)
+sumf21(x,n)=sum((-1)^(k+1)*x^(2*k+1)*(1/factorial(k)+1/factorial(2*k+1)),k,1,n)
+N21=nfind(controlf21,sumf21,E); nplot(controlf21,sumf21,N21,21)
+</script></div><br/>
+Python &#38; SageMathCell <br/>
+<div class="sage"><script type="text/x-sage">
+import numpy,pylab,random
+
+</script></div><br/>
+<div class="sage"><script type="text/x-sage">
+import numpy,pylab,random
+
+</script></div><br/>
+R &#38; SageMathCell <br/>
+<div class="sage_r"><script type="text/x-sage">
+%%r
+
+</script></div><br/>
+<div class="sage_r"><script type="text/x-sage">
+%%r
+
+</script></div><br/>
+HTML, JavaScript &#38; SageMathCell (Click “Run HTML” twice!)<br/>
+<div class="sage_html"><script type="text/x-sage">
+%%html
+<script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'/>
+<div id='googlechart' style='width:500px; height:500px;'/><script>
+
+</script></div><br/>
+<div class="sage_html"><script type="text/x-sage">
+%%html
+<script src='https://d3js.org/d3.v4.min.js'/>
+<svg id='d3chart' style='background-color:silver; width:500px; height:500px;'/><script>
+
+</script></div><br/>
+<div class="sage_html"><script type="text/x-sage">
+%%html
+<script src='https://cdn.plot.ly/plotly-latest.min.js'/>
+<div id='plotlychart' style='width:500px; height:500px;'/><script>
+
+</script></div><br/>      
+    <h2>Explore linked cells</h2>
+Python, R, JavaScript, HTML &#38; SageMathCell <br/>     
+<div class="linked"><script type="text/x-sage">
+
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+
+</script></div><br/>
+<div class="sage_html"><script type="text/x-sage">
+%%html
+<script src='https://code.highcharts.com/highcharts.js'/>
+<div id='highcharts' style='height:500px; width:500px; margin:0 auto'>
+the javascript cell is launching here...</div>
+</script></div><br/>
+<div class="sage_js"><script type="text/x-sage">
+%%javascript
+
+</script></div><br/>    
+  </body>
+</html>
