@@ -42,21 +42,22 @@ point((x0,y0),size=50,color='red')).show(title='(x0,y0)=(%.4f,%.4f) '%(x0,y0)+s)
 <div class="sage"><script type="text/x-sage">
 #2
 var('x,y')
-[cx1,cx2,cy1,cy2]=[-2<=x<=0,0<=x<=2,0<=y<=2,-1<=y<=1]
+[cx1,cx2,cx3,cx4,cy1,cy2,cy3,cy4]=[-2<=x,x<=0,0<=x,x<=2,0<=y,y<=2,-1<=y,y<=1]
 [bx1,bx2,by1,by2]=[(x,-2,0),(x,0,2),(y,0,2),(y,-1,1)]
 (x0,y0)=(4*random()-2,3*random()-1)
-cond=(bool(cx1(x=x0))&bool(cy1(x=x0,y=y0)))|(bool(cx2(x=x0))&bool(cy2(x=x0,y=y0)))
+cond=(bool(cx1(x=x0))&bool(cx2(x=x0))&bool(cy1(y=y0))&bool(cy2(y=y0)))|\
+(bool(cx3(x=x0))&bool(cx4(x=x0))&bool(cy3(y=y0))&bool(cy4(y=y0)))
 if cond: s='$\in$'
 else: s='$\\notin$'
-(region_plot(cy1,bx1,by1,alpha=.7)+region_plot(cy2,bx2,by2,alpha=.7)+
+(region_plot(cy1,bx1,by1,alpha=.7)+region_plot(cy3,bx2,by2,alpha=.7)+
 point((x0,y0),size=50,color='red')).show(title='(x0,y0)=(%.4f,%.4f) '%(x0,y0)+s)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 #3
 var('x,y')
-[cx,cy1,cy2]=[-1<=x<=1,x^2+y^2>=1,y<=2]
+[cx1,cx2,cy1,cy2]=[-1<=x,x<=1,x^2+y^2>=1,y<=2]
 [bx,by]=[(x,-1,1),(y,0,2)]; (x0,y0)=(2*random()-1,2*random())
-cond=(bool(cx(x=x0))&bool(cy1(x=x0,y=y0))&bool(cy2(x=x0,y=y0)))
+cond=(bool(cx1(x=x0))&bool(cx2(x=x0))&bool(cy1(x=x0,y=y0))&bool(cy2(y=y0)))
 if cond: s='$\in$'
 else: s='$\\notin$'
 (region_plot([cy1,cy2],bx,by,alpha=.7)+point((x0,y0),size=50,color='red')).\
