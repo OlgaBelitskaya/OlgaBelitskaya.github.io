@@ -27,7 +27,15 @@ Create an algorithm and a program
     <h2>Explore detached cells</h2>
 SageMath &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
-
+var('k'); X,H,M=.1,.05,10; 
+def create_plottable(f,x,h,m,y1,y2):
+    pretty_print(html(latex(f))); s=[15,20,25]
+    l=[[[x+j*h,f(x+j*h,i).n()] for j in range(m)] for i in s]
+    t=[['x','n','f(x,n)','f(x,n)≈']]+[[x+j*h,20,f(x+j*h,20),f(x+j*h,20).n()] for j in range(m)]
+    p=sum([line(l[i],color=hue(.3*i),legend_label='n=%d'%s[i]) for i in range(3)])
+    p.show(ymin=y1,ymax=y2,figsize=7,gridlines=True); show(table(t))
+f1(x,n)=sqrt(n*pi)*sum((sin(k*x/2)+sin((k*x-1)/2))/exp(x-1/k),k,1,n)
+create_plottable(f1,X,H,M,0,250)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 
