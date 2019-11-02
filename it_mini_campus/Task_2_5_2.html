@@ -99,10 +99,17 @@ def check_matrix(m,c,n):
         sj=sum([m[i,j]>c for i in range(n)])
         s+=sj; x.append(int(sj!=0))
     return x,s
-X,S=check_matrix(M,C,N); pretty_print([X,S])
+X,S=check_matrix(M,C,N)
+pretty_print('resulting array and element quantity: '+str([X,S]))
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 #22
+N=5; S=0; A=random_matrix(QQ,N,N); pretty_print(A)
+for i in range(N):
+    for j in range(N):
+        if i>j and A[i,j]>A[j,i]: A[i,j]=(A[i,j]+A[j,i])/2
+        if i==j: S+=A[i,j]
+pretty_print('sum of elements on the main diagonal: %s'%str(S)); pretty_print(A)            
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 #23
