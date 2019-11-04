@@ -111,7 +111,25 @@ predict_Y=Matrix([labeling(layer1[i,0]) for i in range(10)]).T
 pretty_print([predict_Y,Y])
 </script></div><br/>  
 <div class="sage"><script type="text/x-sage">
-
+# all steps together and more stronger conditions for labeling
+sigmoid(x)=1/(1+exp(-x)); sigmoid_derivation(x)=x*(1-x)
+X=Matrix([[.1,.05,.95],[.09,.03,.08],[.01,.09,.91],[.04,.92,.07],[.05,.02,.04],
+          [.07,.97,.05],[.06,.02,.98],[.02,.06,.03],[.01,.09,.03],[.02,.94,.01]])
+Y=Matrix([[1,0,1,2,0,2,1,0,1,2]]).T
+layer0=X; synapse0=Matrix([[normalvariate(0,1) for i in range(3)]]).T
+for i in range(100):
+    layer1=Matrix(map(sigmoid(x),[Matrix(layer0*synapse0)[i,0] for i in range(10)])).T
+    layer1_error=layer1-Y 
+    layer1_delta=Matrix([layer1_error[i,0]*map(sigmoid_derivation(x),[Matrix(layer1)[i,0] \
+    for i in range(10)])[i] for i in range(10)]).T
+    synapse0_derivative=layer0.T*layer1_delta
+    synapse0-=synapse0_derivative
+def labeling(x):
+    if (x<.75): return 0
+    if (x>.75) and (x<.99): return 1
+    else: return 2
+predict_Y=Matrix([labeling(layer1[i,0]) for i in range(10)]).T
+pretty_print([predict_Y,Y])
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 import numpy # python translation of all steps
