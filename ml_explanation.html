@@ -98,7 +98,14 @@ for i in range(100):
 pretty_print([layer1,Y])
 </script></div><br/> 
 <div class="link"><script type="text/x-sage">
-
+# comparing predictions and real data
+# the error in the start labeling (the 9th image) had been corrected
+def labeling(x):
+    if (x<.8): return 0
+    if (x>.8) and (x<.99): return 1
+    else: return 2
+predict_Y=Matrix([labeling(layer1[i,0]) for i in range(10)]).T
+pretty_print([predict_Y,Y])
 </script></div><br/>  
 <div class="sage"><script type="text/x-sage">
 
