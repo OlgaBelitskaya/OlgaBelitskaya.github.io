@@ -61,13 +61,16 @@ for i in range(10):
 layer0=X; synapse0=Matrix([[normalvariate(0,1) for i in range(3)]]).T
 pretty_print([layer0,synapse0])
 </script></div><br/>
-Выполним первое вычисление. Пока нейрон явно не готов классифицировать изображения правильно. <br/>
+Выполним первое вычисление значений функции sigmoid(x). <br/>
+Пока нейрон явно не готов классифицировать изображения правильно. <br/>
 Столбец слева отличается от столбца справа.
 <div class="link"><script type="text/x-sage">
 # the first step of iteration
 layer1=Matrix(map(sigmoid(x),[Matrix(layer0*synapse0)[i,0] for i in range(10)])).T
 pretty_print([layer1,Y])
 </script></div><br/>
+Определим, насколько нейрон ошибся, вычитая из получившихся значений, <br/>
+и "подскажем" направление для корректировки с помощью функции sigmoid_derivation(x). <br/>
 <div class="link"><script type="text/x-sage">
 # finding errors and directions for correction
 layer1_error=layer1-Y 
@@ -75,18 +78,31 @@ layer1_delta=Matrix([layer1_error[i,0]*map(sigmoid_derivation(x),[Matrix(layer1)
 for i in range(10)])[i] for i in range(10)]).T
 pretty_print([layer1_error,layer1_delta])
 </script></div><br/> 
+После первой корректировки (столбец 1) стартовый набор коэффициентов изменился (столбец 2).
 <div class="link"><script type="text/x-sage">
 # correction values & coefficients after the first step
 synapse0_derivative=layer0.T*layer1_delta
 synapse0-=synapse0_derivative
 pretty_print([synapse0_derivative,synapse0])
 </script></div><br/> 
+Повторим вычисления 100 раз. Это и есть "обучение" нейрона.
+<div class="link"><script type="text/x-sage">
+# repeated iterations (100 times)
+for i in range(100):
+    layer1=Matrix(map(sigmoid(x),[Matrix(layer0*synapse0)[i,0] for i in range(10)])).T
+    layer1_error=layer1-Y 
+    layer1_delta=Matrix([layer1_error[i,0]*map(sigmoid_derivation(x),[Matrix(layer1)[i,0] \
+    for i in range(10)])[i] for i in range(10)]).T
+    synapse0_derivative=layer0.T*layer1_delta
+    synapse0-=synapse0_derivative
+pretty_print([layer1,Y])
+</script></div><br/> 
 <div class="link"><script type="text/x-sage">
 
-</script></div><br/> 
+</script></div><br/>  
 <div class="sage"><script type="text/x-sage">
 
-</script></div><br/>      
+</script></div><br/>
 <div class="sage"><script type="text/x-sage">
 import numpy # python translation of all steps
 def sigmoid(x): return 1.0/(1+numpy.exp(-x))
