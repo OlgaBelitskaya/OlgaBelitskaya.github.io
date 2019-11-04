@@ -69,7 +69,11 @@ layer1=Matrix(map(sigmoid(x),[Matrix(layer0*synapse0)[i,0] for i in range(10)]))
 pretty_print([layer1,Y])
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
-
+# finding errors and directions for correction
+layer1_error=layer1-Y 
+layer1_delta=Matrix([layer1_error[i,0]*map(sigmoid_derivation(x),[Matrix(layer1)[i,0] \
+for i in range(10)])[i] for i in range(10)]).T
+pretty_print([layer1_error,layer1_delta])
 </script></div><br/> 
 <div class="link"><script type="text/x-sage">
 
