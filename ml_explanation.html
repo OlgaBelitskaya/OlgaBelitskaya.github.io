@@ -22,22 +22,25 @@
 <a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp;</a>     
 <a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a><br/>
     <h1>One Neuron</h1>
-Выберем функции для конструирования нейрона.
+Выберем две функции для конструирования нейрона.
 <div class="link"><script type="text/x-sage">
 # functions for neuron construction
 sigmoid(x)=1/(1+exp(-x)); pretty_print(['sigmoid',sigmoid(x)])
 sigmoid_derivation(x)=x*(1-x); pretty_print(['sigmoid derivation',sigmoid_derivation(x)])
 plot([sigmoid(x),sigmoid_derivation(x)],(0,1),legend_label='automatic').show(gridlines=True)
 </script></div><br/>
-Находить значения этих функций будем сразу для набора чисел.
+Находить значения этих функций будем сразу для набора чисел (как в строке 2),<br/>
+а не для каждого числа отдельно (как в строке 1).
 <div class="link"><script type="text/x-sage">
 # function values for several values of the variable
 pretty_print([sigmoid(.1),sigmoid(.05),sigmoid(.95)])
 pretty_print(map(sigmoid(x),[.1,.05,.95]))
 </script></div><br/>
-Для опыта классификации нейроном изображений будем использовать простой ряд из трех пикселей.<br/>
-И всего три вида изображений:<br/>
-темная полоса (номер 0), со светлым пикселем с краю (номер 1) и со светлым пикселем в середине (номер 2).
+Эксперимент проведем с классификацией нейроном изображений и будем использовать ряд из трех пикселей.<br/>
+Для простоты возьмем всего три вида изображений-"полосок":<br/>
+- темная полоса и все номера оттенков - достаточно близкие к нулю числа (присвоим такому виду номер 0),<br/>
+- со светлым пикселем с краю и, соответственно, 3-й пиксель имеет номер оттенка, близкий к 1 (вид изображения номер 1),<br/> 
+- со светлым пикселем в середине и, соответственно, 2-й пиксель имеет номер оттенка, близкий к 1 (номер 2).
 <div class="link"><script type="text/x-sage">
 # examples of simple images for classification
 numbers=[[.09,.03,.08],[.1,.05,.95],[.04,.92,.07]]
@@ -46,7 +49,7 @@ for i in range(3):
 </script></div><br/>
 Возьмем набор из 10 изображений трех указанных видов. <br/>
 Обозначим большинство из них правильно и одно - с ошибкой: <br/>
-9-ое изображение состоит только из темных пикселей, нужно бы поставить номер 0, а стоит номер 1. <br/>
+9-ое изображение состоит только из темных пикселей, нужно бы поставить номер 0, а стоит вид номер 1. <br/>
 <div class="link"><script type="text/x-sage">
 # artificial data for the experiment
 X=Matrix([[.1,.05,.95],[.09,.03,.08],[.01,.09,.91],[.04,.92,.07],[.05,.02,.04],
@@ -55,7 +58,8 @@ Y=Matrix([[1,0,1,2,0,2,1,0,1,2]]).T
 for i in range(10):
     matrix_plot(-1*X[i,:],vmin=-1,title=Y[i],vmax=0,figsize=2.5,frame=False).show()
 </script></div><br/>
-Определим стартовую позицию для подбора коэффициентов к переменным (оттенкам 3 пикселей) - набор 3 случайно выбранных чисел.
+Определим стартовую позицию для подбора нейроном коэффициентов к переменным (оттенкам 3 пикселей), т.е. <br/>
+выберем случайным образом 3 числа, но не очень далеко от 0.
 <div class="link"><script type="text/x-sage">
 # the start point for iterations
 layer0=X; synapse0=Matrix([[normalvariate(0,1) for i in range(3)]]).T
@@ -63,14 +67,15 @@ pretty_print([layer0,synapse0])
 </script></div><br/>
 Выполним первое вычисление значений функции sigmoid(x). <br/>
 Пока нейрон явно не готов классифицировать изображения правильно. <br/>
-Столбец слева отличается от столбца справа.
+Столбец слева отличается от столбца справа, и никакой закономерности в полученных числах нет.
 <div class="link"><script type="text/x-sage">
 # the first step of iteration
 layer1=Matrix(map(sigmoid(x),[Matrix(layer0*synapse0)[i,0] for i in range(10)])).T
 pretty_print([layer1,Y])
 </script></div><br/>
-Определим, насколько нейрон ошибся, вычитая из получившихся значений, <br/>
-и "подскажем" направление для корректировки с помощью функции sigmoid_derivation(x). <br/>
+Определим, насколько нейрон ошибся, вычитая из получившихся значений то, чего нам хотелось бы достичь. <br/>
+На первом шаге разница получается достаточно большая (столбец 1). <br/>
+Теперь "подскажем" направление для корректировки с помощью функции sigmoid_derivation(x) (столбец 2).<br/>
 <div class="link"><script type="text/x-sage">
 # finding errors and directions for correction
 layer1_error=layer1-Y 
@@ -78,7 +83,7 @@ layer1_delta=Matrix([layer1_error[i,0]*map(sigmoid_derivation(x),[Matrix(layer1)
 for i in range(10)])[i] for i in range(10)]).T
 pretty_print([layer1_error,layer1_delta])
 </script></div><br/> 
-После первой корректировки (столбец 1) стартовый набор коэффициентов изменился (столбец 2).
+После применения первой корректировки (столбец 1) стартовый набор коэффициентов изменился (столбец 2).
 <div class="link"><script type="text/x-sage">
 # correction values & coefficients after the first step
 synapse0_derivative=layer0.T*layer1_delta
@@ -86,6 +91,7 @@ synapse0-=synapse0_derivative
 pretty_print([synapse0_derivative,synapse0])
 </script></div><br/> 
 Повторим вычисления 100 раз. Это и есть "обучение" нейрона.
+Каждый раз он будет определять коэффициенты лучше и лучше.
 <div class="link"><script type="text/x-sage">
 # repeated iterations (100 times)
 for i in range(100):
@@ -97,7 +103,7 @@ for i in range(100):
     synapse0-=synapse0_derivative
 pretty_print([layer1,Y])
 </script></div><br/> 
-"Переведем" классификацию с помощью чисел от 0.5 до 1 в более простую (0, 1 или 2) и <br/>
+"Переведем" полученную классификацию изображений (значениями функций от 0.5 до 1) в более простую (0, 1 или 2) и <br/>
 сравним результат предсказаний с имеющимися реальными данными. <br/>
 Электронный нейрон "исправил" нарочно допущенную ошибку в классификации 9-ого изображения.
 <div class="link"><script type="text/x-sage">
@@ -111,7 +117,7 @@ predict_Y=Matrix([labeling(layer1[i,0]) for i in range(10)]).T
 pretty_print([predict_Y,Y])
 </script></div><br/>  
 Объединим все шаги в одну программу и повторим в независимой кодовой ячейке. <br/>
-Условия для классификации чисел от 0.5 до 1 сделаем чуть "пожестче" для гарантированной успешности: <br/>
+Условия для классификации по значению функции от 0.5 до 1 сделаем чуть "пожестче" для гарантированной успешности: <br/>
 вид изображения под номером 0 соответствует числам меньше 0.7, <br/>
 вид изображения под номером 1 - это числа от 0.7 до 0.99, <br/>
 вид изображения под номером 2 - это числа, примерно равные 1.  
