@@ -112,8 +112,8 @@ pretty_print([predict_Y,Y])
 </script></div><br/>  
 Объединим все шаги в одну программу и повторим в независимой кодовой ячейке. <br/>
 Условия для классификации чисел от 0.5 до 1 сделаем чуть "пожестче" для гарантированной успешности: <br/>
-вид изображения под номером 0 соответствует числам меньше 0.7,
-вид изображения под номером 1 - это числа от 0.7 до 0.99,
+вид изображения под номером 0 соответствует числам меньше 0.7, <br/>
+вид изображения под номером 1 - это числа от 0.7 до 0.99, <br/>
 вид изображения под номером 2 - это числа, примерно равные 1.  
 <div class="sage"><script type="text/x-sage">
 # all steps together and more stronger conditions for labeling
@@ -136,6 +136,7 @@ def labeling(x):
 predict_Y=Matrix([labeling(layer1[i,0]) for i in range(10)]).T
 pretty_print([predict_Y,Y])
 </script></div><br/>
+Повторим опыт, используя только Python.    
 <div class="sage"><script type="text/x-sage">
 import numpy # python translation of all steps
 def sigmoid(x): return 1.0/(1+numpy.exp(-x))
@@ -150,7 +151,12 @@ for iter in range(100):
     layer1_error=layer1-Y; layer1_delta=layer1_error*sigmoid_derivation(layer1)
     synapse0_derivative=numpy.dot(layer0.T,layer1_delta)
     synapse0-=synapse0_derivative
-print (numpy.hstack((numpy.hstack((X,Y)),(layer1.round(3)))))
+def labeling(x):
+    if (x<.7): return 0
+    if (x>.7) and (x<.99): return 1
+    else: return 2
+predict_Y=numpy.array([[labeling(layer1[i,0]) for i in range(10)]]).T; predict_Y
+print (numpy.hstack((numpy.hstack((X,Y)),(layer1.round(3)),(predict_Y))))
 </script></div><br/>
   </body>
 </html>
