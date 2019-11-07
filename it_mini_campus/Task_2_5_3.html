@@ -92,6 +92,18 @@ SageMath &#38; SageMathCell<br/>
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 #21
+N1=5; A=random_matrix(ZZ,N1,x=-70,y=50)
+N2=7; C=sample(range(-100,100),7)
+pretty_print(html('$A=%s$<br/><br/>$C=%s$'%(latex(A),latex(C))))
+def check_matrix_vector(a,c,n1,n2):
+    ind=Permutations(2*range(n1),2).list()
+    q=sum([a[i,j] for [i,j] in ind if a[i,j]>0])
+    s=sum([abs(c[k]) for k in range(n2) if c[k]<0])
+    if q>s: c=[c[k]+q for k in range(n2)]
+    return c,q,s
+C,Q,S=check_matrix_vector(A,C,N1,N2)
+pretty_print(html('<br/>'+30*'=-'))
+pretty_print(html('<br/>C=%s; Q=%s; S=%s; Q>S: %s'%(C,Q,S,Q>S)))
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 #22
