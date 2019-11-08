@@ -33,7 +33,16 @@ SageMath &#38; SageMathCell <br/>
 
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
-
+def compute_array21(a,b,c1,r):
+    p=1; s=a.trace(); x=[]
+    for i in range(a.dimensions()[0]):
+        pr=prod([(c1+r*j)/(a[i,j]+.2*(c1+r*i)) for j in range(a.dimensions()[1])])
+        xi=s*p/(b*(c1+r*i))*pr; p=xi; x.append(xi)
+    return x
+N=5; A=random_matrix(RR,N)
+[B,C1,R]=[100*random() for i in range(3)]
+pretty_print(html('$A=%s;$<br/><br/>$B=%s; C1=%s, R=%s$<br/><br/>'%(latex(A),B,C1,R)))
+X=compute_array21(A,B,C1,R); pretty_print(html('$X=%s$'%latex(X)))
 </script></div><br/>
 Python &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
