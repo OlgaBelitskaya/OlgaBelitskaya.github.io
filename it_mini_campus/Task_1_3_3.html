@@ -28,6 +28,13 @@ Create an algorithm and a program
 SageMath &#38; SageMathCell<br/>
 <div class="sage"><script type="text/x-sage">
 #1
+N=10; A=[0]; R=1; L=[]
+[A.append(A[i-1]+4*pi*i/(N*(N+1))) for i in [1..N]]
+ar=sum([arc((0,0),R,sector=(A[i],A[i+1]),color=hue(i/N)) for i in range(N)])
+for i in range(N+1):
+    x=1-2*sin(A[i]/2)^2; y=sqrt(1-x^2)*sign(cos(A[i]/2)); L.append([x,y])
+l=sum([line((L[i],L[i+1]),color=hue(i/N)) for i in range(N)])
+(ar+l).show()
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 #2
