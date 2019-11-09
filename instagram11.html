@@ -130,7 +130,17 @@ pretty_print([m,n]); graph_pe(g,n)
     <h1>___</h1>
 SageMath &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
-
+def display_polyarc(n,r):
+    A=[0]; L=[]; [A.append(A[i-1]+4*pi*i/(n*(n+1))) for i in [1..n]]
+    pretty_print(html('$A=%s$'%latex(A)))
+    ar=sum([arc((0,0),r,sector=(A[i],A[i+1]),color=hue(i/n)) for i in range(n)])
+    for i in range(n+1):
+        x=1-2*sin(A[i]/2)^2; y=sqrt(1-x^2)*sign(cos(A[i]/2)); L.append([r*x,r*y])
+    l=sum([line((L[i],L[i+1]),color=hue(i/n)) for i in range(n)])
+    p=sum([2*r*sin((A[i+1]-A[i])/2) for i in range(n)])
+    pretty_print(html('$P=%s$<br/>$P=%.4f$'%(latex(p),p.n())))
+    (ar+l).show(gridlines=True)
+display_polyarc(11,3)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 
