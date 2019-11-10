@@ -143,6 +143,7 @@ def display_polyarc(n,r):
 display_polyarc(7,3)
 </script></div><br/>
       <h1>Random Polygons. Plotting with Shadow</h1>
+SageMath &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
 a,b,c,q=randint(5,9),randint(10,14),randint(15,19),2*randint(3,6); n=randint(4,16)
 var('t,k'); s1='$a=%d; \; b=%d; \; c=%d; \; q=%d; \; n=%d$'
@@ -154,14 +155,26 @@ p=sum([polygon2d(L[i],color=(random()/2,random()/2,1),thickness=.5,fill=False) f
 pt=sum([polygon2d(LT[i],color=(random(),random(),1),thickness=.5,alpha=.1) for i in range(2*q)])
 (pt+p+text(s1%(a,b,c,q,n),(0,4.9))).show(axes=False,figsize=9)
 </script></div><br/>
-    <h1>___</h1>
-Python &#38; SageMathCell <br/>
+    <h1>Graph Transformations</h1>
+SageMath &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
-import numpy,pylab,random
-
+def graph2d(g,n,ti):
+    PG=Graphics(); vg=g.get_pos(); vgp=vg.values(); nv=len(vg)
+    eg=g.edges(); ne=len(eg); k=randint(10,50)/100
+    x0=mean([vgp[i][0] for i in range(nv)]); y0=mean([vgp[i][1] for i in range(nv)])
+    cp=[[vgp[i][0]-x0,vgp[i][1]-y0] for i in range(nv)]
+    l=[[list(vg[eg[i][0]]),list(vg[eg[i][1]])] for i in range(ne)]
+    cl=[[[x-x0,y-y0] for [x,y] in l[i]] for i in range(ne)]
+    cp=[[[cos(j*pi/k)*x-sin(j*pi/k)*y,sin(j*pi/k)*x+cos(j*pi/k)*y] for j in range(n)] for [x,y] in cp]
+    cl=[[[cos(j*pi/k)*x-sin(j*pi/k)*y,sin(j*pi/k)*x+cos(j*pi/k)*y] 
+         for [x,y] in cl[i]] for j in range(n) for i in range(ne)]
+    for i in range(nv): PG+=polygon(cp[i],color=(random(),random(),1),alpha=0.1)
+    for i in range(n*ne): PG+=polygon(cl[i],color=(random(),random(),1),fill=False)        
+    PG.show(axes=False,figsize=7,title=ti)
+m=randint(3,7); n=randint(3,6); g=graphs.CubeGraph(m); graph_pe(g,n,str([m,n]))
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
-import numpy,pylab,random
+
 
 </script></div><br/>
     <h1>If you want to use linked cells</h1>
