@@ -223,14 +223,14 @@ def shape_mandala(k,n,m):
     centers=[rotate_xy(n,.5+k*i,.5+k*i) for i in range(m)] 
     r=[randint(300,1800)/1000 for i in range(m)]
     col=[[randint(300,900)/1000 for j in range(2)]+[1] for i in range(m)]
-    p=sum([sum([polygon([[x+cos(pi*j/4),y+sin(pi*j/4)] for j in range(8)],
+    p=sum([sum([polygon([[x+cos(pi*j/i),y+sin(pi*j/i)] for j in range(2*i)],
                         color=col[m-i-1],fill=False,thickness=.7) for [x,y] in centers[i]]) for i in [m-3,m-5]])
-    el=sum([sum([ellipse([x,y],r[i],r[m-i-1],facecolor=col[i],fill=True,alpha=.05)+\
-       ellipse([x,y],r[i],r[m-i-1],color=col[m-i-1],thickness=.7) for [x,y] in centers[i]]) for i in [m-2,m-4]])
+    el=sum([sum([ellipse([x,y],r[i],r[m-i-1],arctan(y/x),facecolor=col[i],fill=True,alpha=.05)+\
+       ellipse([x,y],r[i],r[m-i-1],arctan(y/x),color=col[m-i-1],thickness=.7) for [x,y] in centers[i]]) for i in [m-2,m-4]])
     c=sum([sum([circle([x,y],r[i],facecolor=col[i],fill=True,alpha=.05)+\
        circle([x,y],r[i],color=col[m-i-1],thickness=.7) for [x,y] in centers[i]]) for i in range(m-5)+[m-1]])
-    (c+p+el).show(axes=false,figsize=9,title='$k=%.3f; \ m=%d; \ n=%d$'%(k,m,n))
-k=randint(100,900)/1000; n=randint(5,15); m=randint(6,10); shape_mandala(k,n,m)
+    (p+el+c).show(axes=false,figsize=9,title='$k=%.3f; \ m=%d; \ n=%d$'%(k,m,n))
+k=randint(100,900)/1000; n=randint(5,15); m=randint(7,12); shape_mandala(k,n,m)
 </script></div><br/>
     <h1>If you want to use linked cells</h1>
 Python &#38; SageMathCell <br/>     
