@@ -258,7 +258,20 @@ k=rd.randint(100,900)/1000; n=rd.randint(5,15); m=rd.randint(3,9)
 circle_mandala(k,n,m)    
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+a,b,c,q=rd.randint(5,9),rd.randint(10,14),rd.randint(15,19),2*rd.randint(3,6) 
+n=rd.randint(4,16); s1='$a=%d; \; b=%d; \; c=%d; \; q=%d; \; n=%d$'; yl=5.5
+def fy(t,k): return np.cos(np.pi*t/n+2*k*np.pi/q)+np.cos(a*np.pi*t/n+2*k*np.pi/q)+\
+                    np.cos(b*np.pi*t/n+2*k*np.pi/q)+np.cos(c*np.pi*t/n+2*k*np.pi/q)
+def fx(t,k): return np.sin(np.pi*t/n+2*k*np.pi/q)-np.sin(a*np.pi*t/n+2*k*np.pi/q)+\
+                    np.sin(b*np.pi*t/n+2*k*np.pi/q)-np.sin(c*np.pi*t/n+2*k*np.pi/q)
+L=np.array([[[fx(t,k),fy(t,k)] for t in range(2*n)] for k in range(2*q)])
+LT=[[[1.5*fx(t,k),1.2*fy(t,k)] for t in range(2*n)] for k in range(2*q)]
+pl.figure(figsize=(7,7)); ax=pl.gca(); pl.axis('off')
+for k in range(2*q):
+    col=np.array([rd.randint(100,900)/1000 for l in range(2)]+[1])
+    ax.add_patch(pt.Polygon(LT[k],alpha=.1,color=col))
+    ax.add_patch(pt.Polygon(L[k],fill=False,color=col/2))
+pl.title(s1%(a,b,c,q,n)); pl.xlim(-yl,yl); pl.ylim(-yl,yl); pl.show()
 </script></div><br/>
     <h1>____</h1>
 R &#38; SageMathCell <br/>
