@@ -78,14 +78,12 @@ pretty_print(html('$x=%.2f => \\lim_{x \\to 1}y\\prime=\\lim_{x \\to 1}(%s)=%s$'
 pretty_print(html('$x=%.2f => y\\prime=%s=%.2f$'%(3,latex(dy21c),dy21(3))))
 pretty_print(html('$x=%.2f => \\lim_{x \\to 4}y\\prime=\\lim_{x \\to 4}(%s)=%s$'%\
                   (4,latex(dy21c),latex(limit(dy21,x=4)))))
-el4=[["x","y","y'","y'>0?","y'=0?","y'<0?"],[x,y21,dy21,'','','']]
+el4=[["x","y","y'","y'>0?","y'=0?","y'<0?"],[x,y21c,dy21c,'','','']]
 for xv in [-1.5,-.5,..,5.5]: 
     el4+=[[xv,y21(xv),dy21(xv),bool(dy21(xv)>0),bool(dy21(xv)==0),bool(dy21(xv)<0)]]
 el4+=[["x","y","y max or min",'','','']]
 for xv in [0,3]: el4+=[[xv,y21(xv).n(),'min','','','']]
 for xv in [1,4]: el4+=[[xv,y21(xv),'max','','','']]
-#el4=[["x","y","y'"],[x,y21c,dy21c]]
-#for xv in [-1.5,-.5,..,5.5]: el4+=[[xv,y21(xv).n(),dy21(xv).n()]]
 show(table(el4)); ll=['$%s$'%latex(y21c),'$%s$'%latex(dy21c)] 
 p4=plot([y21,dy21],(-1,5),legend_label=ll); p4.set_legend_options(font_size=15)
 p4.show(ymin=-4,ymax=4,gridlines=True)
