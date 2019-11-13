@@ -138,7 +138,14 @@ $(-3; 1)$ - график функции является выпуклым вве
 </script></div><br/> 
 8) Построим график функции.
 <div class="link1"><script type="text/x-sage"># sage; task 1 
-
+yb=10; cols=['steelblue','darkblue','magenta']; xra=[(-5.1,-3.1),(-2.9,0.9),(1.1,3.1)]
+p=sum([plot([y21.factor(),diff(y21,x).factor(),diff(y21,x,x).factor()],xr,color=cols,
+            legend_label='automatic') for xr in xra])
+p+=sum([point((x0,y21(x0)),color=cols[0],size=15) for x0 in [-4,-1,2]])
+p+=line([[-3,-yb],[-3,yb]],color='darkred',linestyle=':',legend_label='x=-3')
+p+=line([[1,-yb],[1,yb]],color='red',linestyle='-.',legend_label='x=1')
+p+=line([[-5,0],[3,0]],color='darkorange',linestyle='--',thickness=2,legend_label='y=0')
+p.show(gridlines=True,figsize=(8,8),ymin=-yb,ymax=yb)
 </script></div><br/>
 <div class="link2"><script type="text/x-sage"># python; task 1
 x=sp.symbols('x'); y21=4/(x**2+2*x-3); p=sp.plot(y21,(x,-5.1,-3.1),show=False)
@@ -153,7 +160,7 @@ d2y21=lambda x: 8*(3*x**2+6*x+7)/(x**2+2*x-3)**3
 pl.figure(figsize=(9,9)); pl.grid(c='steelblue',ls='--',lw=0.5)
 ll1=[r'$y = \frac{4}{x^2 + 2 x - 3}$',r'$y = \frac{-8 \ (x + 1)}{(x + 3)^2 (x - 1)^2} $',
      r'$y = \frac{8 \ (3 x^2 + 6x + 7)}{(x + 3)^3 (x - 1)^3}$']
-ll2=[r'$x \in (-4.1; -3.1)$',r'$x \in (-2.9; 0.9)$',r'$x \in (1.1; 2.1)$']
+ll2=[r'$x \in (-5.1; -3.1)$',r'$x \in (-2.9; 0.9)$',r'$x \in (1.1; 2.1)$']
 for i in range(3):
     pl.plot(xa[i],y21(xa[i]),c='steelblue',lw=3,label=ll1[0]+','+ll2[i])
     pl.plot(xa[i],dy21(xa[i]),c='darkblue',lw=1,label=ll1[1]+','+ll2[i])
