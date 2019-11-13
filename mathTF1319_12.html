@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Maths_TF1319_12</title>
+    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <script>$(function(){
+            sagecell.makeSagecell({inputLocation:'div.link',linked:true,evalButtonText:'Run Linked Cells'});
+            sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run Detached Cells'});
+        });
+    </script>
+  </head>
+  <style>
+  @import url('https://fonts.googleapis.com/css?family=Orbitron');
+  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:38em;}
+  </style>  
+  <body>
+  <h1>&#x1F4D1; &nbsp;Maths. TF1319. Standard Calculation 12</h1>
+  <h2>Task 1</h2>
+Find intervals of increasing and decreasing  for the function and its extremum points
+<div class="link"><script type="text/x-sage"># sage; task 1
+var('x'); y21=x/ln(x); dy21=diff(y21,x).factor()
+pretty_print(html('$\\lim_{x \\to 0}(%s)=%.2f$'%(latex(dy21),limit(diff(y21,x),x=0))))
+pretty_print(html('$\\lim_{x \\to 1}(%s)=%s$'%(latex(dy21),latex(limit(diff(y21,x),x=1)))))
+el1=[["x","y","y'","y'>0?","y'=0?","y'<0?"],[x,y21,dy21,'','','']]
+for xv in [.05,.25,..,2]: 
+    el1+=[[xv,y21(xv),dy21(xv),bool(dy21(xv)>0),bool(dy21(xv)==0),bool(dy21(xv)<0)]]
+show(table(el1)); ll=['$%s$'%latex(y21),'$%s$'%latex(dy21)]
+p1=plot([y21,dy21],(0,2),legend_label=ll); p1.set_legend_options(font_size=15)
+p1.show(ymin=-50,ymax=50,gridlines=True)
+</script></div><br/>
+<div class="link"><script type="text/x-sage"># sage; task 1
+
+</script></div><br/>
+  <h2>Task 2</h2>
+Build a function plot using the first-order derivative
+<div class="link"><script type="text/x-sage"># sage; task 2 (#1.21)
+var('x'); y21=x^2*(x-4)^2/16; dy21=diff(y21,x).factor()
+for x0 in [0,2,4]:
+    pretty_print(html('$x=%.2f => y\\prime=%s=%.2f$'%(x0,latex(dy21),dy21(x0))))
+el2=[["x","y","y'","y'>0?","y'=0?","y'<0?"],[x,y21,dy21,'','','']]
+for xv in [-3,-2,..,7]: 
+    el2+=[[xv,y21(xv),dy21(xv),bool(dy21(xv)>0),bool(dy21(xv)==0),bool(dy21(xv)<0)]]
+show(table(el2)); ll=['$%s$'%latex(y21),'$%s$'%latex(dy21)]
+p2=plot([y21,dy21],(-3,7),legend_label=ll); p2.set_legend_options(font_size=15)
+p2.show(ymin=-30,ymax=30,gridlines=True)
+</script></div><br/>
+<div class="link"><script type="text/x-sage"># sage; task 2
+
+</script></div><br/>
+  <h2>Task 3</h2>
+Build a function plot using the first-order derivative
+<div class="link"><script type="text/x-sage"># sage; task 3 (#2.21)
+var('x'); y21=sign(x*(x-1))*abs(4*x*(x-1))^(1/3); y21c=(4*x*(x-1))^(1/3)
+dy21=4^(1/3)*(2*x-1)/(3*(abs(x*(x-1)))^(2/3)); dy21c=diff((4*x*(x-1))^(1/3),x)
+pretty_print(html('$\\lim_{x \\to 0}(%s)=%s$'%(latex(dy21c),latex(limit(dy21c,x=0)))))
+pretty_print(html('$x=%.2f => y\\prime=%s=%.2f$'%(.5,latex(dy21c),dy21(.5))))
+pretty_print(html('$\\lim_{x \\to 1}(%s)=%s$'%(latex(dy21c),latex(limit(dy21c,x=1)))))
+el3=[["x","y","y'","y'>0?","y'=0?","y'<0?"],[x,y21c,dy21c,'','','']]
+for xv in [-2.5,-1.5,..,8.5]: 
+    el3+=[[xv,y21(xv).n(),dy21(xv).n(),bool(dy21(xv)>0),bool(dy21(xv)==0),bool(dy21(xv)<0)]]
+show(table(el3)); ll=['$%s$'%latex(y21c),'$%s$'%latex(dy21c)]
+p3=plot([y21,dy21],(-5,5),legend_label=ll); p3.set_legend_options(font_size=15)
+p3.show(ymin=-2,ymax=8,gridlines=True)
+</script></div><br/>
+<div class="link"><script type="text/x-sage"># sage; task 3
+
+</script></div><br/>
+  <h2>Task 4</h2>
+Find the largest and smallest function values on given segments.
+<div class="link"><script type="text/x-sage"># sage; task 4 (#3.21)
+var('x'); y21c=(2*(x-1)^2*(x-4))^(1/3); y21=sign(x-4)*(2*(x-1)^2*abs(x-4))^(1/3)
+dy21c=diff(y21c,x).factor(); dy21=sign(x-4)*2*(1/3)*(x-1)*(x-3)/((x-1)^2*abs(x-4))^(2/3)
+pretty_print(html('$x=%.2f => \\lim_{x \\to 1}y\\prime=\\lim_{x \\to 1}(%s)=%s$'%\
+                  (1,latex(dy21c),latex(limit(dy21c,x=1)))))
+pretty_print(html('$x=%.2f => y\\prime=%s=%.2f$'%(3,latex(dy21c),dy21(3))))
+pretty_print(html('$x=%.2f => \\lim_{x \\to 4}y\\prime=\\lim_{x \\to 4}(%s)=%s$'%\
+                  (4,latex(dy21c),latex(limit(dy21,x=4)))))
+el4=[["x","y","y'","y'>0?","y'=0?","y'<0?"],[x,y21,dy21,'','','']]
+for xv in [-1.5,-.5,..,5.5]: 
+    el4+=[[xv,y21(xv),dy21(xv),bool(dy21(xv)>0),bool(dy21(xv)==0),bool(dy21(xv)<0)]]
+el4+=[["x","y","y max or min",'','','']]
+for xv in [0,3]: el4+=[[xv,y21(xv).n(),'min','','','']]
+for xv in [1,4]: el4+=[[xv,y21(xv),'max','','','']]
+#el4=[["x","y","y'"],[x,y21c,dy21c]]
+#for xv in [-1.5,-.5,..,5.5]: el4+=[[xv,y21(xv).n(),dy21(xv).n()]]
+show(table(el4)); ll=['$%s$'%latex(y21c),'$%s$'%latex(dy21c)] 
+p4=plot([y21,dy21],(-1,5),legend_label=ll); p4.set_legend_options(font_size=15)
+p4.show(ymin=-4,ymax=4,gridlines=True)
+</script></div><br/>
+<div class="link"><script type="text/x-sage"># sage; task 4
+
+</script></div><br/>      
+   <h2>Cells for Your Experiments</h2>
+<div class="sage"><script type="text/x-sage"># sage 
+</script></div><br/>
+<div class="sage"><script type="text/x-sage"># python / sympy,numpy,pylab
+import sympy,numpy,pylab
+</script></div><br/>
+  </body>
+</html>
