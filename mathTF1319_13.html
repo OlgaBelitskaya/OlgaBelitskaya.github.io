@@ -70,10 +70,10 @@ $\displaystyle{\forall x \in \mathbb{R}: y(x) \neq 0}$<br/>
 </script></div><br/>
 5) Найдем наклонные асимпоты графика функции.<br/>
 Вычислим коэффициенты для прямой $y = kx + b$, являющейся наклонной асимптотой.<br/>
-$\displaystyle{k=\lim_{x \to +\infty} \frac{\frac{4}{x^2 + 2 x - 3}}{x} = \lim_{ x \to +\infty}  \frac{4}{x^3+2x^2-3 x} = 0}$<br/>
-$\displaystyle{k=\lim_{x \to -\infty} \frac{\frac{4}{x^2 + 2 x - 3}}{x} = \lim_{ x \to -\infty}  \frac{4}{x^3+2x^2-3 x} = 0}$<br/>
-$\displaystyle{b=\lim_{x \to +\infty} \frac{4}{x^2 + 2 x - 3} - kx = \lim_{ x \to +\infty} \frac{4}{x^2+2 x-3}-0=0}$<br/>
-$\displaystyle{b=\lim_{x \to -\infty} \frac{4}{x^2 + 2 x - 3} - kx = \lim_{ x \to -\infty} \frac{4}{x^2+2 x-3}-0=0}$<br/>
+$\displaystyle{k=\lim_{x \to +\infty} \frac{\frac{4}{x^2+2 x-3}}{x} = \lim_{x \to +\infty} \frac{4}{x^3+2x^2-3 x} = 0}$<br/>
+$\displaystyle{k=\lim_{x \to -\infty} \frac{\frac{4}{x^2+2 x-3}}{x} = \lim_{x \to -\infty} \frac{4}{x^3+2x^2-3 x} = 0}$<br/>
+$\displaystyle{b=\lim_{x \to +\infty} \frac{4}{x^2+2 x-3}-kx = \lim_{x \to +\infty} \frac{4}{x^2+2 x-3}-0=0}$<br/>
+$\displaystyle{b=\lim_{x \to -\infty} \frac{4}{x^2+2 x-3}-kx = \lim_{x \to -\infty} \frac{4}{x^2+2 x-3}-0=0}$<br/>
 $y = 0$ - уравнение наклонной асимптоты.<br/>
 <div class="link1"><script type="text/x-sage"># sage; task 1 
 x0='oo'; s='x='+str(x0)+' => '
@@ -88,8 +88,8 @@ print(s+'b='+str([sp.limit(y21-sp.limit(y21/x,x,x0)*x,x,x0,'+'),
                   sp.limit(y21-sp.limit(y21/x,x,x0)*x,x,x0,'-')]))
 </script></div><br/>
 6) Вычислим первую производную. Найдем точки локального экстремума и промежутки монотонности.<br/>
-$\displaystyle{y ' =\bigg(\frac{4}{x^2 + 2 x - 3}\bigg) ' =\frac{(4)' \ (x^2+2 x-3)-4 \ (x^2+2 x-3)'}{(x^2+2 x-3)^2}=}$<br/>
-$\displaystyle{= \frac{0 \ (x^2+2 x-3) - 4 \ (2 x+2 x)}{(x^2+2 x-3)^2} = \frac{- 8 \ ( +1)}{(x+3)^2 (x-1)^2}}$<br/>
+$\displaystyle{y ' =\bigg(\frac{4}{x^2+2 x-3}\bigg) ' =\frac{(4)' \ (x^2+2 x-3)-4 \ (x^2+2 x-3)'}{(x^2+2 x-3)^2}=}$<br/>
+$\displaystyle{= \frac{0 \ (x^2+2 x-3)-4 \ (2 x+2 x)}{(x^2+2 x-3)^2} = \frac{-8 \ ( +1)}{(x+3)^2 (x-1)^2}}$<br/>
 Функция может иметь локальный экстремум в критических точках, если:<br/>
 - функция определена и непрерывна в этих точках,<br/>
 - значение производной в них равно нулю или не существует.<br/>
@@ -118,7 +118,10 @@ $x = -3$, $x = 1$ не являются точками локального эк
 $(-\infty; -3), \ (-3; -1)$ - функция возрастает.<br/>
 $(-1; 1), \ (1; +\infty)$ - функция убывает.<br/>
 <div class="link1"><script type="text/x-sage"># sage; task 1 
-
+print('x=x0 => [y(x0),y(x0)>0,dy(x0),dy(x0)>0]')
+for x0 in [-4,-2,0,2]:
+    y021=y21(x=x0); dy021=diff(y21,x)(x=x0)
+    print('x='+str(x0)+' => '+str([y021,bool(y021>0),dy021,bool(dy021>0)]))
 </script></div><br/>
 <div class="link2"><script type="text/x-sage"># python; task 1
 print('x=x0 => [y(x0),y(x0)>0,dy(x0),dy(x0)>0]')
