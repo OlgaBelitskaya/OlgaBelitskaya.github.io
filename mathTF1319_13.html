@@ -378,9 +378,12 @@ pl.legend(fontsize=10,shadow=True,bbox_to_anchor=(.3,1.1)); pl.show()
 - в точках разрыва. <br/>
 Найдем вертикальные асимптоты.<br/>
 <div class="link1"><script type="text/x-sage"># sage; task 3 (#9.21)
-var('x'); y21=(x-2)^(2/3)-(x-3)^(2/3)
+var('x'); y21=(x-2)^(2/3)-(x-3)^(2/3); pretty_print(html('$y=%s$'%latex(y21)))
 y21c=sign(x-2)*(abs(x-2))^(2/3)-sign(x-3)*(abs(x-3))^(2/3)
-
+dy21=diff(y21,x); pretty_print(html('$y \\prime=%s$'%latex(dy21)))
+dy21c=2/(3*sign(x-2)*(abs(x-2))^(1/3))-2/(3*sign(x-3)*(abs(x-3))^(1/3))
+d2y21=diff(y21,x,x); pretty_print(html('$y \\prime \\prime=%s$'%latex(d2y21)))
+d2y21c=-2/(9*sign(x-2)*(abs(x-2))^(4/3))+2/(9*sign(x-3)*(abs(x-3))^(4/3))
 </script></div><br/>
 <div class="link2"><script type="text/x-sage"># python; task 3
 import sympy as sp; import numpy as np; import pylab as pl
@@ -396,7 +399,11 @@ y21c=sp.sign(x-2)*(abs(x-2))**(2/3)-sp.sign(x-3)*(abs(x-3))**(2/3)
 </script></div><br/> 
 8) Построим график функции.
 <div class="link1"><script type="text/x-sage"># sage; task 3 
-
+xb=5; yb=3; cols=['steelblue','darkblue','magenta']
+ll=['$y=%s$'%latex(y21),'$y \\prime=%s$'%latex(diff(y21,x)),
+    '$y \\prime \\prime=%s$'%latex(diff(y21,x,x))]
+p=plot([y21c,dy21c,d2y21c],(-xb,xb),color=cols,thickness=1.5,legend_label=ll)
+p.set_legend_options(font_size=20,loc=2); p.show(gridlines=True,figsize=(8,8),ymin=-yb,ymax=yb)
 </script></div><br/>
 <div class="link2"><script type="text/x-sage"># python; task 3
 
