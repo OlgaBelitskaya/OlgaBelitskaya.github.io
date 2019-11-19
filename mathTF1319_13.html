@@ -24,7 +24,7 @@ Conduct a complete study of functions and build their graphs.
 1) Найдем область определения функции и точки разрыва.<br/>
 $\displaystyle{y = \frac{4}{x^2+2 x-3} = \frac{4}{(x-1) \ (x+3)}}$<br/>
 $\displaystyle{D(y)= (-\infty; -3) \cup (-3; 1) \cup (1; +\infty)}$<br/>
-$\displaystyle{x = -3; x = 1}$ - точки разрыва.<br/>
+$\displaystyle{x = -3; x = 1}$ - точки разрыва второго рода.<br/>
 2) Вычислим односторонние пределы функции<br/>
 - в граничных точках области определения, <br/>
 - в точках разрыва. <br/>
@@ -207,16 +207,17 @@ pl.legend(fontsize=10,shadow=True,bbox_to_anchor=(.7,.45)); pl.show()
 $\displaystyle{y = 2 \ \ln \frac{x}{x-4}-3}$<br/>
 $\displaystyle{D(y)=(-\infty; 0) \cup (4; +\infty)}$<br/>
 $\displaystyle{\frac{x}{x-4}>0}$<br/>
+$\displaystyle{x = 0; x = 4}$ - точки разрыва второго рода.<br/> 
 2) Вычислим односторонние пределы функции<br/>
 - в граничных точках области определения, <br/>
 - в точках разрыва. <br/>
 Найдем вертикальные и горизонтальные асимптоты.<br/>
 $\displaystyle{\lim_{x \to +\infty} 2 \ \ln \frac{x}{x-4}-3=-3; \lim_{x \to +\infty}\ln \frac{x}{x-4}=+0}$<br/>
 $\displaystyle{\lim_{x \to -\infty} 2 \ \ln \frac{x}{x-4}-3=-3; \lim_{x \to -\infty}\ln \frac{x}{x-4}=-0}$<br/>
-$\displaystyle{\lim_{x \to 0+0} 2 \ \ln \frac{x}{x-4}-3=\lim_{x \to 0+0} \ln (1+\frac{4}{x-4})=\ln (1-1-0) \nexists }$<br/>
+$\displaystyle{\lim_{x \to 0+0} 2 \ \ln \frac{x}{x-4}-3=\lim_{x \to 0+0} \ln (1+\frac{4}{x-4})=\ln (1-1-0) \; \nexists }$<br/>
 $\displaystyle{\lim_{x \to 0-0} 2 \ \ln \frac{x}{x-4}-3=\lim_{x \to 0-0} \ln (1+\frac{4}{x-4})=\ln (1-1+0)=-\infty }$<br/>
 $\displaystyle{\lim_{x \to 4+0} 2 \ \ln \frac{x}{x-4}-3=\lim_{x \to 4+0} \ln (1+\frac{4}{x-4})=\ln (1+4/(4+0-4))=+\infty }$<br/>
-$\displaystyle{\lim_{x \to 4-0} 2 \ \ln \frac{x}{x-4}-3=\lim_{x \to 4-0} \ln (1+\frac{4}{x-4})=\ln (1+4/(4-0-4))\nexists}$<br/>
+$\displaystyle{\lim_{x \to 4-0} 2 \ \ln \frac{x}{x-4}-3=\lim_{x \to 4-0} \ln (1+\frac{4}{x-4})=\ln (1+4/(4-0-4)) \; \nexists}$<br/>
 Прямые $x = 0, \ x = 4$ являются вертикальными асимптотами, прямая $y = -3$ - горизонтальной.<br/>
 <div class="link1"><script type="text/x-sage"># sage; task 2 (#8.21)
 var('x'); y21=2*ln(x/(x-4))-3
@@ -230,6 +231,25 @@ x=sp.symbols('x'); y21=2*sp.ln(x/(x-4))-3; sp.pprint('y=%s'%y21)
 for x0 in ['oo',0,4]:
     print('x='+str(x0)+ ' => right & left limits: %s'%\
           [sp.limit(y21,x,x0,dir='+'),sp.limit(y21,x,x0,dir='-')])
+</script></div><br/>
+3) Проверим, является ли функция четной, нечетной, периодической.<br/>
+$\displaystyle{y(-x)=2 \ln \frac{-x}{-x-4}-3=2 \ln \frac{x}{x+4}-3 \implies y(-x) \neq y(x) \land y(-x) \neq -y(x)}$<br/>
+Функция не является четной или нечетной.<br/>
+Обозначим $ t \neq 0$ предполагаемый период функции.<br/>
+$\displaystyle{y(x+t)=y(x) \iff \frac{x+t}{x+t-4} = \frac{x}{x-4} \iff}$ <br/>
+$\displaystyle{\iff (x+t) (x-4)= x (x+t-4) \iff x^2+t x-4 x-4 t=x^2+t x -4x \iff 4 t=0 \iff t=0}$<br/>
+$\displaystyle{t \neq const}$<br/>
+Функция не является периодической.<br/>
+4) Найдем точки пересечения графика функции с осями координат.<br/>
+$\displaystyle{x=0 \notin D(y)}$<br/>
+$\displaystyle{2 \ln \frac{-x}{-x-4}-3=0 \implies x=\frac{4 e^{\frac{2}{3}}}{e^{\frac{2}{3}}-1}}$<br/>
+График функции не пересекает ось $Oy$ и пересекает ось $Ox$ в точке $x=$.<br/>
+<div class="link1"><script type="text/x-sage"># sage; task 2 
+pretty_print(html('$y=0 => %s = %s$'%(latex(solve(y21==0,x)[0]),solve(y21==0,x)[0].rhs().n())))
+pretty_print(html('$x=0 => y=%s$'%latex(y21(x=0))))
+</script></div><br/>
+<div class="link2"><script type="text/x-sage"># python; task 2
+[y21(x=0),sp.solve(y21==0,x)[0], sp.solve(y21==0,x)[0].n()]
 </script></div><br/>
 <div class="link1"><script type="text/x-sage"># sage; task 2 
 
