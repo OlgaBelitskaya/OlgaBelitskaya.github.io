@@ -378,8 +378,8 @@ $\displaystyle{D(y)= (-\infty; +\infty)}$<br/>
 2) Вычислим односторонние пределы функции<br/>
 - в граничных точках области определения, <br/>
 - в точках разрыва. <br/>
-$\displaystyle{\lim_{x \to +\infty}(x-2)^2)^{1/3}-((x-3)^2)^{1/3}=\lim_{x \to +\infty}(x^2-4 x+4)^{1/3}-(x^2-6 x+9)^{1/3} = \lim_{x \to +\infty} (x^2)^{1/3}-(x^2)^{1/3}=0}$<br/>
-$\displaystyle{\lim_{x \to -\infty}(x-2)^2)^{1/3}-((x-3)^2)^{1/3}=\lim_{x \to -\infty}(x^2-4 x+4)^{1/3}-(x^2-6 x+9)^{1/3} = \lim_{x \to +\infty} (x^2)^{1/3}-(x^2)^{1/3}=0}$<br/>
+$\displaystyle{\lim_{x \to +\infty}(((x-2)^2)^{1/3}-((x-3)^2)^{1/3})=\lim_{x \to +\infty}((x^2-4 x+4)^{1/3}-(x^2-6 x+9)^{1/3}) = \lim_{x \to +\infty} ((x^2)^{1/3}-(x^2)^{1/3})=0}$<br/>
+$\displaystyle{\lim_{x \to -\infty}(((x-2)^2)^{1/3}-((x-3)^2)^{1/3})=\lim_{x \to -\infty}((x^2-4 x+4)^{1/3}-(x^2-6 x+9)^{1/3}) = \lim_{x \to +\infty} ((x^2)^{1/3}-(x^2)^{1/3})=0}$<br/>
 Найдем вертикальные асимптоты.<br/>
 <div class="link1"><script type="text/x-sage"># sage; task 3 (#9.21)
 var('x'); y21=((x-2)^2)^(1/3)-((x-3)^2)^(1/3); pretty_print(html('$y=%s$'%latex(y21)))
@@ -415,17 +415,25 @@ pretty_print(html('$y=0 => %s => x=%.2f $'%(latex(sol),find_root(sol,-10,10))))
 pretty_print(html('$x=0 => y=%s=%s$'%(latex(y21(x=0)),y21(x=0).n())))
 </script></div><br/>
 <div class="link2"><script type="text/x-sage"># python; task 3
-
+x=sp.symbols('x'); y21(x)=((x-2)**2)**(1/3)-((x-3)**2)**(1/3)
+[y21(0),sp.solve(y21(x)==0,x)[0]]
 </script></div><br/> 
 5) Найдем наклонные асимпоты графика функции.<br/>
 Вычислим коэффициенты для прямой $y=kx+b$, являющейся наклонной асимптотой.<br/>  
 Наклонная асимптота совпадает с горизонтальной.<br/> 
 <div class="link1"><script type="text/x-sage"># sage; task 3 
-
+x0='oo'; s='x='+str(x0)+' => '
+print(s+'k='+str([limit(y21/x,x=x0,dir='+'),limit(y21/x,x=x0,dir='-')]))
+print(s+'b='+str([limit(y21-limit(y21/x,x=x0)*x,x=x0,dir='+'),
+                  limit(y21-limit(y21/x,x=x0)*x,x=x0,dir='-')]))
 </script></div><br/>
 <div class="link2"><script type="text/x-sage"># python; task 3
-
+x0='oo'; s='x='+str(x0)+' => '
+print(s+'k='+str([sp.limit(y21/x,x,x0,'+'),sp.limit(y21/x,x,x0,'-')]))
+print(s+'b='+str([sp.limit(y21-sp.limit(y21/x,x,x0)*x,x,x0,'+'),
+                  sp.limit(y21-sp.limit(y21/x,x,x0)*x,x,x0,'-')]))
 </script></div><br/>
+      
 <div class="link1"><script type="text/x-sage"># sage; task 3 
 
 </script></div><br/>
