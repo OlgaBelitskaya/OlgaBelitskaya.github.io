@@ -435,15 +435,25 @@ print(s+'b='+str([sp.limit(y21-sp.limit(y21/x,x,x0)*x,x,x0,'+'),
 </script></div><br/>
 6) Вычислим первую производную. Найдем точки локального экстремума и промежутки монотонности.<br/>
 $\displaystyle{y \prime = \bigg( ((x-2)^2)^{1/3}-((x-3)^2)^{1/3} \bigg) \prime = \bigg( ((x-2)^2)^{1/3} \bigg) \prime - \bigg( ((x-3)^2)^{1/3} \bigg) \prime =}$<br/>
-$\displaystyle{= }$<br/>
-$\displaystyle{= }$<br/>
+$\displaystyle{=\frac {1}{3} ((x-2)^2)^{1/3-1} \cdot ((x-2)^2) \prime - \frac {1}{3} ((x-3)^2)^{1/3-1} \cdot ((x-3)^2) \prime =}$<br/>
+$\displaystyle{=\frac {2 (x-2)}{3((x-2)^2)^{2/3}} - \frac {2 (x-3)}{3((x-3)^2)^{2/3}}}$<br/>
 Функция может иметь локальный экстремум в критических точках, если:<br/>
 - функция определена и непрерывна в этих точках,<br/>
 - значение производной в них равно нулю или не существует.<br/>
 В данном случае производная функции определена на всей $D(y)=(-\infty; +\infty)$, кроме точек $x=2 \land x=3$,<br/>
 а стационарных точек $x$, для которых $y \prime (x) = 0$, не существует.<br/>
+$\displaystyle{\frac {2 (x-2)}{3((x-2)^2)^{2/3}} - \frac {2 (x-3)}{3((x-3)^2)^{2/3}}=0 \iff \frac {x-2}{((x-2)^2)^{2/3}}=\frac {x-3}{((x-3)^2)^{2/3}} \iff }$<br/> 
+$\displaystyle{\frac {(x-2)^3}{(x-2)^4}=\frac {(x-3)^3}{(x-3)^4} \iff \frac {1}{x-2}}=\frac {1}{x-3} \iff x \in \emptyset }$<br/>
 <div class="link1"><script type="text/x-sage"># sage; task 3 
-
+pretty_print(html("$\\large{y'=%s}$"%latex(diff(y21,x))))
+for x0 in [2,3]:
+    pretty_print(html('$x \\to \\pm %s'%x0+' \implies y \prime \\to %s$'\
+    %[latex(limit(diff(y21,x),x=x0,dir='+')),latex(limit(diff(y21,x),x=x0,dir='-'))]))
+var('x'); sol=solve(1/(x-2)==1/(x-3),x)
+pretty_print(html('$y \prime =0 => x \in %s$'%latex(sol)))
+pretty_print(html("$y' \\neq 0 \; \\forall x: x \\in D(y)$"))
+plot([2/3*(x-2)/((x-2)^2)^(2/3),2/3*(x-3)/((x-3)^2)^(2/3)],(x,-1,6),
+     detect_poles=True,legend_label='automatic').show(ymin=-5,ymax=5)
 </script></div><br/>
 <div class="link2"><script type="text/x-sage"># python; task 3
 
