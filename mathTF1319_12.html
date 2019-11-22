@@ -62,7 +62,18 @@ p2=plot([y21,dy21],(-3,7),legend_label=ll); p2.set_legend_options(font_size=15)
 p2.show(ymin=-30,ymax=30,gridlines=True)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage"># python; task 2
-
+import sympy as sp; x=sp.symbols('x')
+y21=x**2*(x-4)**2/16; dy21=sp.diff(y21,x).factor()
+p=sp.plot(y21,(x,-3,7),ylim=(-5,5),show=False,legend='automatic') 
+p.extend(sp.plot(sp.diff(y21,x).factor(),(x,-3,7),line_color=(.3,.7,.3),show=False)) 
+p.show()
+y21=lambda x: x**2*(x-4)**2/16
+dy21=lambda x: sp.diff(x**2*(x-4)**2/16,x).simplify()
+print('x=x0   => [y(x0), y(x0)>0, dy(x0), dy(x0)>0]')
+for x0 in range(-3,8):
+    y021=y21(x).evalf(subs={x:x0}); dy021=dy21(x).evalf(subs={x:x0})
+    st=[round(y021,2),bool(y021>0),round(dy021,2),bool(dy021>0)]
+    print('x=%.2f'%x0+' => '+str(st))
 </script></div><br/>
   <h2>Task 3</h2>
 Build a function plot using the first-order derivative
