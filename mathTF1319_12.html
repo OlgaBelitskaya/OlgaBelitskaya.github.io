@@ -30,8 +30,19 @@ show(table(el1)); ll=['$y=%s$'%latex(y21),'$y\prime=%s$'%latex(dy21)]
 p1=plot([y21,dy21],(0,2),legend_label=ll,detect_poles=True) 
 p1.set_legend_options(font_size=15); p1.show(ymin=-50,ymax=50,gridlines=True)
 </script></div><br/>
-<div class="sage"><script type="text/x-sage"># sage; task 1
-
+<div class="sage"><script type="text/x-sage"># python; task 1
+import sympy as sp; x=sp.symbols('x')
+y21=x/ln(x); dy21=sp.diff(y21,x).factor()
+print("x->0 => y'->%s"%sp.limit(sp.diff(y21,x),x,0))
+print("x->1 => y'->%s"%sp.limit(sp.diff(y21,x),x,1))
+el=["x, y,          y',                   y'>0?, y'=0?, y'<0?",
+    '%s, %s, %s, -,      -,      -'%(x,y21,dy21)]
+for i in range(2): print(el[i])
+p=sp.plot(y21,(x,0.01,0.99),ylim=(-50,50),show=False,legend='automatic') 
+p.extend(sp.plot(y21,(x,1.01,2),show=False))
+p.extend(sp.plot(sp.diff(y21,x).factor(),(x,0.01,0.99),line_color=(.9,.1,.7),show=False))
+p.extend(sp.plot(sp.diff(y21,x).factor(),(x,1.01,2),line_color=(.9,.1,.7),show=False)) 
+p.show()
 </script></div><br/>
   <h2>Task 2</h2>
 Build a function plot using the first-order derivative
@@ -46,7 +57,7 @@ show(table(el2)); ll=['$y=%s$'%latex(y21),'$y\prime=%s$'%latex(dy21)]
 p2=plot([y21,dy21],(-3,7),legend_label=ll); p2.set_legend_options(font_size=15)
 p2.show(ymin=-30,ymax=30,gridlines=True)
 </script></div><br/>
-<div class="sage"><script type="text/x-sage"># sage; task 2
+<div class="sage"><script type="text/x-sage"># python; task 2
 
 </script></div><br/>
   <h2>Task 3</h2>
@@ -64,7 +75,7 @@ show(table(el3)); ll=['$%s$'%latex(y21c),'$%s$'%latex(dy21c)]
 p3=plot([y21,dy21],(-5,5),legend_label=ll); p3.set_legend_options(font_size=15)
 p3.show(ymin=-2,ymax=8,gridlines=True)
 </script></div><br/>
-<div class="sage"><script type="text/x-sage"># sage; task 3
+<div class="sage"><script type="text/x-sage"># python; task 3
 
 </script></div><br/>
   <h2>Task 4</h2>
@@ -87,7 +98,7 @@ show(table(el4)); ll=['$%s$'%latex(y21c),'$%s$'%latex(dy21c)]
 p4=plot([y21,dy21],(-1,5),legend_label=ll); p4.set_legend_options(font_size=15)
 p4.show(ymin=-4,ymax=4,gridlines=True)
 </script></div><br/>
-<div class="sage"><script type="text/x-sage"># sage; task 4
+<div class="sage"><script type="text/x-sage"># python; task 4
 
 </script></div><br/>      
    <h2>Cells for Your Experiments</h2>
