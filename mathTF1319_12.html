@@ -91,7 +91,19 @@ p3=plot([y21,dy21],(-5,5),legend_label=ll); p3.set_legend_options(font_size=15)
 p3.show(ymin=-2,ymax=8,gridlines=True)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage"># python; task 3
-
+import sympy as sp; x=sp.symbols('x')
+y21=sp.sign(x*(x-1))*abs(4*x*(x-1))**(1/3)
+dy21=sp.sign(x*(x-1))*4**(1/3)/3*(2*x-1)/abs(x*(x-1))**(2/3)
+p=sp.plot(y21,(x,-5,5),ylim=(-5,5),show=False,legend=True) 
+p.extend(sp.plot(dy21,(x,-3,7),line_color=(.3,.7,.3),show=False)) 
+p[0].label='$y$'; p[1].label='$y\prime$'; p.show()
+y21=lambda x: sp.sign(x*(x-1))*abs(4*x*(x-1))**(1/3)
+dy21=lambda x: 4**(1/3)/3*(2*x-1)/((x*(x-1))**2)**(1/3)
+print('x=x0   => [y(x0), y(x0)>0, dy(x0), dy(x0)>0]')
+for x0 in [-3,-2,-1,.5,2,3,4]:
+    y021=y21(x0); dy021=dy21(x0)
+    st=[round(y021,2),bool(y021>0),round(dy021,2),bool(dy021>0)]
+    print('x=%.2f'%x0+' => '+str(st))
 </script></div><br/>
   <h2>Task 4</h2>
 Find the largest and smallest function values on given segments.
