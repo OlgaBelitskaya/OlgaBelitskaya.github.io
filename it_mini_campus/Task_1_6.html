@@ -36,11 +36,13 @@ var('a,x')
 f1_1=piecewise([((-oo,0),a/2*(exp(x/a)+exp(-x/a))),([0,0],a/2*(exp(x/a)+exp(-x/a))),
                ((0,+oo),4*a^3*(x^2+4*a^2))],var=x)
 A1=1; X1,dX1=-2*A1,A1/5 
-pretty_print(latex(f1_1)); create_table(f1_1,A1,X1,dX1,12)
+pretty_print(latex(f1_1)); show(create_table(f1_1,A1,X1,dX1,12))
 def f1_2(a,x):
     if x<=0: return a/2*(exp(x/a)+exp(-x/a))
     else: return 4*a^3*(x^2+4*a^2) 
-#pretty_print(latex(f1_2(a,x))); create_table(f1_2,A1,X1,dX1,12)
+var('a,x'); st1=(latex(a/2*(exp(x/a)+exp(-x/a))),latex(4*a^3*(x^2+4*a^2)))
+s1='$x<=0 => f(x)=%s; x>0 => f(x)=%s$'%st1
+pretty_print(html(s1)); #create_table(f1_2,A1,X1,dX1,12)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 def create_table(f,a,x1,dx,n):
@@ -60,8 +62,9 @@ def create_table(f,a,x1,dx,n):
 def f21(a,x):
     if x<3*a: return -a*exp(x-3*a)
     else: return -a-a*log(x-3*a)
-A21=.8; X21,dX21=-4*A21,2*A21/5
-pretty_print(latex(f21(a,x))); create_table(f21,A21,X21,dX21,20)
+var('a,x'); A21=.8; X21,dX21=-4*A21,2*A21/5
+s21='$x<3a => f(x)=%s; x<=3a => f(x)=%s$'%(latex(-a*exp(x-3*a)),latex(-a-a*log(x-3*a)))
+pretty_print(html(s21)); create_table(f21,A21,X21,dX21,20)
 </script></div><br/>
 Python &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
