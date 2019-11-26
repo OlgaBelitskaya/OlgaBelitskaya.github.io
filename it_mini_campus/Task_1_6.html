@@ -28,17 +28,19 @@ Create an algorithm and a program
 SageMath &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
 def create_table(f,a,x1,dx,n):
-    pretty_print(latex(f)); t=[['n','X','Y','Y≈']]
+    t=[['n','X','Y','Y≈']]
     for i in [1..n]:
         y=f(a=a,x=x1); t.append([i,x1,y,y.n()]); x1+=dx
     return(table(t))
 var('a,x')
-f11=piecewise([((-oo,0),a/2*(exp(x/a)+exp(-x/a))),([0,0],a/2*(exp(x/a)+exp(-x/a))),
-              ((0,+oo),4*a^3*(x^2+4*a^2))],var=x)
-def f12(a,x):
+f1_1=piecewise([((-oo,0),a/2*(exp(x/a)+exp(-x/a))),([0,0],a/2*(exp(x/a)+exp(-x/a))),
+               ((0,+oo),4*a^3*(x^2+4*a^2))],var=x)
+A1=1; X1,dX1=-2*A1,A1/5 
+pretty_print(latex(f1_1)); create_table(f1_1,A1,X1,dX1,12)
+def f1_2(a,x):
     if x<=0: return a/2*(exp(x/a)+exp(-x/a))
-    else: return 4*a^3*(x^2+4*a^2)
-A1=1; X1,dX1=-2*A1,A1/5; create_table(f11,A1,X1,dX1,12); #create_table(f12,A1,X1,dX1,12)
+    else: return 4*a^3*(x^2+4*a^2) 
+#pretty_print(latex(f1_2(a,x))); create_table(f1_2,A1,X1,dX1,12)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 def create_table(f,a,x1,dx,n):
@@ -55,11 +57,11 @@ def create_table(f,a,x1,dx,n):
     for i in [1..n]:
         t.append([i,x1,f(a,x1)]); x1+=dx
     show(table(t))
-def f212(a,x):
+def f21(a,x):
     if x<3*a: return -a*exp(x-3*a)
     else: return -a-a*log(x-3*a)
 A21=.8; X21,dX21=-4*A21,2*A21/5
-create_table(f212,A21,X21,dX21,20)
+pretty_print(latex(f21(a,x))); create_table(f21,A21,X21,dX21,20)
 </script></div><br/>
 Python &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
