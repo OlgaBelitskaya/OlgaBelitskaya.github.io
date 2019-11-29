@@ -339,7 +339,7 @@ function colrb(i) {var r=getinteger(i,255); var g=0; var b=getinteger(i,255);
     return 'rgb('+r.toString()+','+g.toString()+','+b.toString()+')';};   
 var a=getinteger(5,9),b=getinteger(10,14),c=getinteger(15,19);
 var q=getinteger(3,6),n=getinteger(4,24); var series=[];
-for (var k=1; k<2*q+1; k++) {
+for (var k=1; k<2*q+2; k++) {
     series.push({name:[k,a,b,c,n].toString(),marker:{symbol:"circle",radius:1},
                  color:colrb(k),lineWidth:0.5,data:ar(a,b,c,q,n,k)})};
 Highcharts.chart('highcharts', {
@@ -367,7 +367,7 @@ function colgb(i) {var r=0; var g=getinteger(i-100,255); var b=getinteger(i-100,
     return 'rgb('+r.toString()+','+g.toString()+','+b.toString()+')';};   
 var a=getinteger(5,11),b=getinteger(12,24),c=getinteger(25,35);
 var q=getinteger(3,6),n=getinteger(150,300); var series=[];
-for (var k=1; k<2*q+1; k++) {series.push({name:[k,a,b,c,n].toString(),marker:{symbol:'circle',radius:0.3},
+for (var k=1; k<2*q+2; k++) {series.push({name:[k,a,b,c,n].toString(),marker:{symbol:'circle',radius:0.3},
                                           lineWidth:0.15,color:colgb(k),data:ar(a,b,c,q,n,k)})};
 Highcharts.chart('highcharts2', {
     chart:{type:'scatter',backgroundColor:'lightcyan'},xAxis:{visible:false},yAxis:{visible:false},
@@ -385,15 +385,15 @@ function fx(a,b,c,q,n,t,k) {
     var x2=Math.cos(b*Math.PI*t/n+k*Math.PI/q)+Math.cos(c*Math.PI*t/n+k*Math.PI/q);
     return x1+x2};
 function fy(a,b,c,q,n,t,k) {
-    var y1=Math.sin(Math.PI*t/n+k*Math.PI/q)-Math.sin(a*Math.PI*t/n+k*Math.PI/q);
-    var y2=Math.sin(b*Math.PI*t/n+k*Math.PI/q)-Math.sin(c*Math.PI*t/n+k*Math.PI/q);
+    var y1=Math.sin(Math.PI*t/n+k*Math.PI/q)+Math.sin(a*Math.PI*t/n+k*Math.PI/q);
+    var y2=Math.sin(b*Math.PI*t/n+k*Math.PI/q)+Math.sin(c*Math.PI*t/n+k*Math.PI/q);
     return y1+y2};
 function ar(a,b,c,q,n,k) {return Array(2*n+1).fill(k).map((k,t)=>[fx(a,b,c,q,n,t,k),fy(a,b,c,q,n,t,k)]);};
 google.charts.load('current',{'packages':['corechart']}); google.charts.setOnLoadCallback(drawChart);
 function drawChart() {
     var a=get_int(5,9),b=get_int(10,14),c=get_int(15,19),q=get_int(3,6),n=get_int(4,16); 
     var xy=ar(a,b,c,q,n,1); xy.unshift(['x',[a,b,c,q,n].toString()]); 
-    for (var k=2; k<2*q+1; k++) {xy=xy.concat(ar(a,b,c,q,n,k));};
+    for (var k=2; k<2*q+2; k++) {xy=xy.concat(ar(a,b,c,q,n,k));};
     var data=google.visualization.arrayToDataTable(xy); 
     var options={chartArea:{left:0,top:0,right:0,bottom:20},legend:{position:'bottom'},
         curveType:'none',lineWidth:1,legend:{position:'bottom'},pointSize:3,
@@ -421,7 +421,7 @@ google.charts.load('current',{'packages':['corechart']}); google.charts.setOnLoa
 function drawChart() {
     var a=get_int(5,9),b=get_int(10,14),c=get_int(15,19),q=get_int(3,8),n=get_int(10,350); 
     var xy=ar(a,b,c,q,n,1); xy.unshift(['x',[a,b,c,q,n].toString()]); 
-    for (var k=2; k<2*q+1; k++) {xy=xy.concat(ar(a,b,c,q,n,k));};
+    for (var k=2; k<2*q+2; k++) {xy=xy.concat(ar(a,b,c,q,n,k));};
     var data=google.visualization.arrayToDataTable(xy); 
     var options={chartArea:{left:0,top:0,right:0,bottom:20},legend:{position:'bottom'},
                  curveType:'none',lineWidth:.75,colors:[get_color(a)],
