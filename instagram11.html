@@ -346,6 +346,31 @@ Highcharts.chart('highcharts', {
     chart:{type:'line',backgroundColor:'ghostwhite'},xAxis:{title:{text:'x'}},yAxis:{title:{text:'y'}},
     title:{text:'Random Parametric Polygons'},credits:{enabled:false},legend:{enabled:false},series:series});
 </script></div><br/>
+HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
+<div class="sage_html"><script type="text/x-sage">
+%%html
+<script src='https://code.highcharts.com/highcharts.js'/>
+<div id='highcharts2' style='height:600px; width:600px; margin:0 auto'></div><script>
+function getinteger(min,max) {return Math.floor(Math.random()*(max-min+1))+min;};
+function fx(a,b,c,q,n,t,k) {
+    var x1=Math.cos(Math.PI*t/n+k*Math.PI/q)+Math.cos(a*Math.PI*t/n+k*Math.PI/q);
+    var x2=Math.cos(b*Math.PI*t/n+k*Math.PI/q)+Math.cos(c*Math.PI*t/n+k*Math.PI/q);
+    return x1+x2};
+function fy(a,b,c,q,n,t,k) {
+    var y1=Math.sin(Math.PI*t/n+k*Math.PI/q)-Math.sin(a*Math.PI*t/n+k*Math.PI/q);
+    var y2=Math.sin(b*Math.PI*t/n+k*Math.PI/q)-Math.sin(c*Math.PI*t/n+k*Math.PI/q);
+    return y1+y2};
+function ar(a,b,c,q,n,k) {return Array(2*n+1).fill(k).map((k,t)=>[fx(a,b,c,q,n,t,k),fy(a,b,c,q,n,t,k)]);};
+function colgb(i) {var r=0; var g=getinteger(i-100,255); var b=getinteger(i-100,255);
+    return 'rgb('+r.toString()+','+g.toString()+','+b.toString()+')';};   
+var a=getinteger(5,11),b=getinteger(12,24); var c=getinteger(25,35);
+var q=getinteger(3,6); var n=getinteger(150,300); var series=[];
+for (var k=1; k<2*q+1; k++) {series.push({name:[k,a,b,c].toString(),marker:{symbol:"circle",radius:0.3},
+                                          lineWidth:0.15,color:colgb(k),data:ar(a,b,c,q,n,k)})};
+Highcharts.chart('highcharts', {
+    chart:{type:'scatter',backgroundColor:'lightcyan'},xAxis:{visible:false},yAxis:{visible:false},
+    title:{text:'Random Parametric Scatter Plots'},credits:{enabled:false},legend:{enabled:false},series:series});
+</script></div><br/>
    <h1>Plotting and Functions</h1>
    <h1>in JavaScript inside HTML Cells</h1>
 HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
