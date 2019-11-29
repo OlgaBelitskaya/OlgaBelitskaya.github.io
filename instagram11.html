@@ -379,8 +379,7 @@ HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'/>
 <div id='googlechart' style='width:600px; height:600px;'/><script>
 function get_int(xmin,xmax) {return Math.floor(Math.random()*(xmax-xmin+1))+xmin;};
-function get_color(k) {var g=get_int(10*k,255),b=get_int(10*k,255);
-    return '#00'+g.toString(16)+b.toString(16);};
+function get_color(k) {return '#00'+get_int(10*k,255).toString(16)+get_int(10*k,255).toString(16);};
 function fx(a,b,c,q,n,t,k) {
     var x1=Math.cos(Math.PI*t/n+k*Math.PI/q)+Math.cos(a*Math.PI*t/n+k*Math.PI/q);
     var x2=Math.cos(b*Math.PI*t/n+k*Math.PI/q)+Math.cos(c*Math.PI*t/n+k*Math.PI/q);
@@ -393,13 +392,13 @@ function ar(a,b,c,q,n,k) {return Array(2*n+1).fill(k).map((k,t)=>[fx(a,b,c,q,n,t
 google.charts.load('current',{'packages':['line']}); google.charts.setOnLoadCallback(drawChart);
 function drawChart() {
     var a=get_int(5,9),b=get_int(10,14),c=get_int(15,19),q=get_int(3,6),n=get_int(4,16); 
-    var xy=ar(a,b,c,q,n,1); xy.unshift(['x','y']); 
+    var xy=ar(a,b,c,q,n,1); xy.unshift(['x',[a,b,c,q,n].toString()]); 
     for (var k=2; k<2*q+1; k++) {xy=xy.concat(ar(a,b,c,q,n,k));};
     var data=google.visualization.arrayToDataTable(xy); 
-    var options={curveType:'function',legend:{position:'none'},colors:[get_color(a)]};
+    var options={curveType:'none',lineWidth:1,legend:{position:'bottom'},
+                 colors:[get_color(a)],hAxis:{textColor:'#fff'},vAxis:{textColor:'#fff'}};
     var chart=new google.visualization.LineChart(document.getElementById('googlechart')); 
-    chart.draw(data,options);
-};
+    chart.draw(data,options);};
 </script></div><br/>
 HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 <div class="sage_html"><script type="text/x-sage">
