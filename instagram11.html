@@ -337,11 +337,11 @@ function fy(a,b,c,q,n,t,k) {
 function ar(a,b,c,q,n,k) {return Array(2*n+1).fill(k).map((k,t)=>[fx(a,b,c,q,n,t,k),fy(a,b,c,q,n,t,k)]);};
 function colrb(i) {var r=getinteger(i,255); var g=0; var b=getinteger(i,255);
     return 'rgb('+r.toString()+','+g.toString()+','+b.toString()+')';};   
-var a=getinteger(5,9),b=getinteger(10,14); var c=getinteger(15,19);
-var q=getinteger(3,6); var n=getinteger(4,16); var series=[];
+var a=getinteger(5,9),b=getinteger(10,14),c=getinteger(15,19);
+var q=getinteger(3,6),n=getinteger(4,24); var series=[];
 for (var k=1; k<2*q+1; k++) {
-    series.push({name:[k,a,b,c].toString(),marker:{symbol:"circle",radius:1.5},
-                 color:colrb(k),lineWidth:0.75,data:ar(a,b,c,q,n,k)})};
+    series.push({name:[k,a,b,c,n].toString(),marker:{symbol:"circle",radius:1},
+                 color:colrb(k),lineWidth:0.5,data:ar(a,b,c,q,n,k)})};
 Highcharts.chart('highcharts', {
     chart:{type:'line',backgroundColor:'ghostwhite'},xAxis:{title:{text:'x'}},yAxis:{title:{text:'y'}},
     title:{text:'Random Parametric Polygons'},credits:{enabled:false},legend:{enabled:false},series:series});
