@@ -325,7 +325,26 @@ the javascript cell is launching here...</div>
 </script></div><br/>
 <div class="sage_js"><script type="text/x-sage">
 %%javascript
-
+function getinteger(min,max) {return Math.floor(Math.random()*(max-min+1))+min;};
+function fx(a,b,c,q,n,t,k) {
+    var x1=Math.cos(Math.PI*t/n+2*k*Math.PI/q)+Math.cos(a*Math.PI*t/n+2*k*Math.PI/q);
+    var x2=Math.cos(b*Math.PI*t/n+2*k*Math.PI/q)+Math.cos(c*Math.PI*t/n+2*k*Math.PI/q);
+    return x1+x2};
+function fy(a,b,c,q,n,t,k) {
+    var y1=Math.sin(Math.PI*t/n+2*k*Math.PI/q)-Math.sin(a*Math.PI*t/n+2*k*Math.PI/q);
+    var y2=Math.sin(b*Math.PI*t/n+2*k*Math.PI/q)-Math.sin(c*Math.PI*t/n+2*k*Math.PI/q);
+    return y1+y2};
+function ar(a,b,c,q,n,k) {return Array(2*n).fill(k).map((k,t)=>[fx(a,b,c,q,n,t,k),fy(a,b,c,q,n,t,k)]);};
+function colrb(i) {var r=getinteger(i,255); var g=0; var b=getinteger(i,255);
+    return 'rgb('+r.toString()+','+g.toString()+','+b.toString()+')';};   
+var a=getinteger(5,9); var b=getinteger(10,14); var c=getinteger(15,19);
+var q=2*getinteger(3,6); var n=getinteger(4,16); var series=[];
+for (var k=1; k<q+1; k++) {series.push({name:[k,a,b,c].toString(),color:colrb(k),
+                                        lineWidth:1,data:ar(a,b,c,q,n,k)})};
+Highcharts.chart('highcharts', {
+    chart:{type:'line',backgroundColor:'ghostwhite'},xAxis:{title:{text:'x'}},yAxis:{title:{text:'y'}},
+    title:{text:'Random Parametric Plot'},credits:{enabled:false},legend:{enabled:false},series:series
+});
 </script></div><br/>
    <h1>Plotting and Functions</h1>
    <h1>in JavaScript inside HTML Cells</h1>
