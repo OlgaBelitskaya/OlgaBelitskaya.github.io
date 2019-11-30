@@ -111,8 +111,27 @@ HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 <div class="sage_html"><script type="text/x-sage">
 %%html
 <script src='https://cdn.plot.ly/plotly-latest.min.js'/>
-<div id='plotlychart' style='width:600px;height:600px;'/><script>
-
+<div id='plotlychart' style='width:750px;height:600px;'/>
+<script>TEST=document.getElementById('plotlychart');
+function get_int(min,max) {return Math.floor(Math.random()*(max-min+1))+min;};
+function fx(a,b,c,d,e,q,n,t,k) {
+    var x1=Math.cos(Math.PI*t/n+k*Math.PI/q)+Math.cos(a*Math.PI*t/n+k*Math.PI/q);
+    var x2=Math.cos(b*Math.PI*t/n+k*Math.PI/q)+Math.cos(c*Math.PI*t/n+k*Math.PI/q);
+    var x3=Math.cos(d*Math.PI*t/n+k*Math.PI/q)+Math.cos(e*Math.PI*t/n+k*Math.PI/q);
+    return x1+x2+x3};
+function fy(a,b,c,d,e,q,n,t,k) {
+    var y1=Math.sin(Math.PI*t/n+k*Math.PI/q)+Math.sin(a*Math.PI*t/n+k*Math.PI/q);
+    var y2=Math.sin(b*Math.PI*t/n+k*Math.PI/q)+Math.sin(c*Math.PI*t/n+k*Math.PI/q);
+    var y3=Math.sin(d*Math.PI*t/n+k*Math.PI/q)+Math.sin(e*Math.PI*t/n+k*Math.PI/q);
+    return y1+y2+y3};
+function arx(a,b,c,d,e,q,n,k) {return Array(2*n+1).fill(k).map((k,t)=>fx(a,b,c,d,e,q,n,t,k));};
+function ary(a,b,c,d,e,q,n,k) {return Array(2*n+1).fill(k).map((k,t)=>fy(a,b,c,d,e,q,n,t,k));};
+function col(k,q) {return 'rgb('+(k/(2*q+2)).toString()+',0,'+(1-k/(2*q+2)).toString()+')';};
+function plt(k) {return Plotly.plot(TEST,[{x:arx(a,b,c,d,e,q,n,k),y:ary(a,b,c,d,e,q,n,k),
+    line:{color:col(k,q),width:.5},name:[a,b,c,d,e,q,n,k].toString()}]);};
+var a=get_int(5,9),b=get_int(10,14),c=get_int(15,19),d=get_int(20,36),e=get_int(37,81);
+var q=get_int(3,12),n=get_int(3,15);
+for (var k=1; k<2*q+1; k++) {plt(k);}
 </script></div><br/>
   </body>
 </html>
