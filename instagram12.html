@@ -103,9 +103,25 @@ HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 <div class="sage_html"><script type="text/x-sage">
 %%html
-<script src='https://d3js.org/d3.v4.min.js'/>
-<svg id='d3chart' style='background-color:silver;'/><script>
-
+<script src='https://cdn.plot.ly/plotly-latest.min.js'/>
+<div id='plotlychart' style='width:750px;height:600px;'/>
+<script>TEST=document.getElementById('plotlychart');
+function get_int(min,max) {return Math.floor(Math.random()*(max-min+1))+min;};
+function f(a,b,c,d,e,q,n,t,k) {
+    var x1=a+.1*b*Math.cos(c*Math.PI*t/n+k*Math.PI/q);
+    var x2=1+.01*d*Math.cos(e*Math.PI*t/n+k*Math.PI/q);
+    var x3=1+Math.sin(Math.PI*t/n+k*Math.PI/q);
+    return x1*x2*x3};
+function fx(a,b,c,d,e,q,n,t,k) {return f(a,b,c,d,e,q,n,t,k)*Math.cos(Math.PI*t/n+k*Math.PI/q)};
+function fy(a,b,c,d,e,q,n,t,k) {return f(a,b,c,d,e,q,n,t,k)*Math.sin(Math.PI*t/n+k*Math.PI/q)};
+function arx(a,b,c,d,e,q,n,k) {return Array(2*n+1).fill(k).map((k,t)=>fx(a,b,c,d,e,q,n,t,k));};
+function ary(a,b,c,d,e,q,n,k) {return Array(2*n+1).fill(k).map((k,t)=>fy(a,b,c,d,e,q,n,t,k));};
+function col(k,q) {return 'rgb(0,'+(k/(2*q+2)).toString()+','+(1-k/(2*q+2)).toString()+')';};
+function plt(k) {return Plotly.plot(TEST,[{x:arx(a,b,c,d,e,q,n,k),y:ary(a,b,c,d,e,q,n,k),
+    line:{color:col(k,q),width:.5},name:[a,b,c,d,e,q,n,k].toString()}]);};
+var a=get_int(5,9),b=get_int(3,25),c=get_int(10,14),d=get_int(5,9),e=get_int(200,300);
+var q=get_int(2,10),n=get_int(30,300);
+for (var k=1; k<2*q+1; k++) {plt(k);}
 </script></div><br/>
 HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 <div class="sage_html"><script type="text/x-sage">
