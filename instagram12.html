@@ -66,13 +66,13 @@ p.axes_color('silver'); p.tick_label_color('silver'); p.show(gridlines=True,figs
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 a,b,c=(1-random()/2),(1-random()/2),(1-random()/2)
-x=[x1(t),x2(t),x3(t),x4(t),x5(t),x6(t),x7(t),x8(t)]; 
+x=[x1(t),x2(t),x3(t),x4(t),x5(t),x6(t),x7(t),x8(t)] 
 y=[a*y1(t),b*y2(t),c*y3(t),b*y4(t),c*y5(t),a*y6(t),y7(t),y8(t)]
 xp(t)=sum([x[i]*unit_step((31-4*i)*pi-t)*unit_step((-27+4*i)*pi+t) for i in range(8)])
 yp(t)=sum([y[i]*unit_step((31-4*i)*pi-t)*unit_step((-27+4*i)*pi+t) for i in range(8)])
 xp(t)=xp(t)*unit_step(sign(sin(t/2))); yp(t)=yp(t)*unit_step(sign(sin(t/2)))
-p=Graphics()+sum([parametric_plot((xp(t),yp(t)),(t,0.001+2*pi*i,1.999*pi+2*pi*i),
-  fill=True,fillalpha=.3,fillcolor='bisque',color='pink') for i in range(16)])
+p=Graphics()+parametric_plot((xp(t),yp(t)),(t,0,32*pi),exclude=[2*pi*i for i in range(16)],
+                             fill=True,fillalpha=.5,fillcolor='bisque',color='crimson')
 p.axes_color('silver'); p.tick_label_color('silver'); p.show(gridlines=True,figsize=7)
 </script></div><br/>
     <h1>_____</h1>
