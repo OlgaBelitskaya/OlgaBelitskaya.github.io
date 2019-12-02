@@ -116,12 +116,18 @@ H=.5; N=60; A=random_matrix(ZZ,N,2,x=-100,y=100)/100
 AH=[check_distance(A[i,0],A[i,1],H) for i in range(N)]
 X,Y=create_array(N),create_array(N)
 XYH=[check_distance(X[i],Y[i],H) for i in range(N)]
-pa=sum([list_plot([A[i]],title='A',color=hue(int(AH[i])/1.5)) for i in range(N)])
+pa=sum([list_plot([A[i]],title='matrix A',color=hue(int(AH[i])/1.5)) for i in range(N)])
 pa+=sum([text(str(AH[i])[0],(A[i,0],A[i,1]),fontsize=10,color=hue(int(AH[i])/1.5)) for i in range(N)])
-pxy=sum([list_plot([(X[i],Y[i])],title='XY',color=hue(int(XYH[i])/1.5)) for i in range(N)])
+pxy=sum([list_plot([(X[i],Y[i])],title='arrays X&Y',color=hue(int(XYH[i])/1.5)) for i in range(N)])
 pxy+=sum([text(str(XYH[i])[0],(X[i],Y[i]),fontsize=10,color=hue(int(XYH[i])/1.5)) for i in range(N)])
 pc=circle((0,0),H,fill=True,alpha=.5)
 graphics_array([pa+pc,pxy+pc]).show(figsize=10,gridlines=True)
+@interact
+def _(x=(-1,1,.1),y=(-1,1,.1),h=(.9,.1,-.1)):
+    ch=check_distance(x,y,h); col=hue(int(ch)/1.5)
+    p=list_plot([(x,y)],color=col,title='[(x=%.1f,y=%.1f),h=%.1f]'%(x,y,h))
+    p+=circle((0,0),h,fill=True,alpha=.5)+text(str(ch),(x,y),color=col)
+    p.show(figsize=7,gridlines=True,ymin=-1,ymax=1,xmin=-1,xmax=1)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 #22
