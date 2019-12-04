@@ -45,7 +45,9 @@ import sympy as sp
 </script></div><br/>
   <h2>Task 3</h2>
 <div class="sage"><script type="text/x-sage"># sage; task 3 
-var('x,t,u'); f21=cos(cos(ln(x)))
+from sage.symbolic.integration.integral import indefinite_integral
+var('x,t,u'); f21=cos(cos(ln(x))); intf21(x)=indefinite_integral(f21(x),x)
+pretty_print(html('$f(x)=%s => \int f(x) dx= %s$'%(latex(f21(x)),latex(intf21(x)))))
 # u=cos(ln(x)) => x=e^arccos(u), u'=-sin(log(x))/x => 
 # du=u'dx => dx=du/u'=-x*du/sin(ln(x))=-e^arccos(u)*du/(sqrt(1-cos(ln(x))^2))=-e^arccos(u)*du/(sqrt(1-u^2))
 # f(x)dx=-cos(u)*du*e^arccos(u)/(sqrt(1-u^2))=-cos(u)*du*e^arcsin(sqrt(1-u^2))/(sqrt(1-u^2))
