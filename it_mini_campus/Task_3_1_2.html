@@ -121,10 +121,12 @@ def check_cone(r,h,t):
     else: return False
 def create_array(n): return [round(randint(10,100)/100,3) for i in range(n)]
 T=.5; N=10; A=random_matrix(ZZ,N,2,x=10,y=100)/100
-AT=[check_cone(A[i,0],A[i,1],T) for i in range(N)]
-ATI=' '.join([str(i+1) for i in range(N) if AT[i]==True]); print('A:%s'%ATI)
+AT=[check_cone(A[i,0],A[i,1],T) for i in range(N)]; AN=sum(AT)
+ATI=' '.join([str(i+1) for i in range(N) if AT[i]==True]) 
+print('A:%s; N=%s'%(ATI,AN))
 R,H=create_array(N),create_array(N); RHT=[check_cone(R[i],H[i],T) for i in range(N)]
-RHTI=' '.join([str(i+1) for i in range(N) if RHT[i]==True]); print('R&H:%s'%RHTI)
+RHN=sum(RHT); RHTI=' '.join([str(i+1) for i in range(N) if RHT[i]==True]) 
+print('R&H:%s; N=%s'%(RHTI,RHN))
 ps=sphere((0,0,0),T,color='magenta',alpha=.2)
 pa=sum([Cone(A[i,0],A[i,1],color=hue(int(AT[i])/1.5),alpha=.3).translate(0,0,0) for i in range(N)])
 prh=sum([Cone(R[i],H[i],color=hue(int(RHT[i])/1.5),alpha=.3).translate(0,0,0) for i in range(N)])
