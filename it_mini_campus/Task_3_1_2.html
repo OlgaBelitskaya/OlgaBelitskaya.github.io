@@ -115,7 +115,15 @@ SageMath &#38; SageMathCell<br/>
 а радиус основания R больше $\sqrt T$. Объем конуса $V=\frac{\pi R^2 H}{3}$.
 <div class="sage"><script type="text/x-sage">
 #21
-
+def check_cone(r,h,t):
+    if (t>=h) and (t<sqrt(r)): return True
+    else: return False
+def create_array(n): return [round(randint(-100,100)/100,3) for i in range(n)]
+T=.7; N=10; A=random_matrix(ZZ,N,2,x=-100,y=100)/100
+AT=[check_cone(A[i,0],A[i,1],T) for i in range(N)]
+ATI=' '.join([str(i+1) for i in range(N) if AT[i]==True]); print('A:%s'%ATI)
+X,Y=create_array(N),create_array(N); XYT=[check_cone(X[i],Y[i],T) for i in range(N)]
+XYTI=' '.join([str(i+1) for i in range(N) if XYT[i]==True]); print('X&Y:%s'%XYTI)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 #22
