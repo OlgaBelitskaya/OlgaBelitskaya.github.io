@@ -119,15 +119,15 @@ from sage.plot.plot3d.shapes import Cone
 def check_cone(r,h,t):
     if (t>=h) and (t<sqrt(r)): return True
     else: return False
-def create_array(n): return [round(randint(-100,100)/100,3) for i in range(n)]
-T=.7; N=10; A=random_matrix(ZZ,N,2,x=-100,y=100)/100
+def create_array(n): return [round(randint(10,100)/100,3) for i in range(n)]
+T=.7; N=10; A=random_matrix(ZZ,N,2,x=10,y=100)/100
 AT=[check_cone(A[i,0],A[i,1],T) for i in range(N)]
 ATI=' '.join([str(i+1) for i in range(N) if AT[i]==True]); print('A:%s'%ATI)
 R,H=create_array(N),create_array(N); RHT=[check_cone(R[i],H[i],T) for i in range(N)]
 RHTI=' '.join([str(i+1) for i in range(N) if RHT[i]==True]); print('R&H:%s'%RHTI)
 ps=sphere((0,0,0),T,color='red',alpha=.2)
-pa=sum([Cone(A[i,0],A[i,1],alpha=.4).translate(0,0,0) for i in range(N)])
-prh=sum([Cone(R[i],H[i],alpha=.4).translate(0,0,0) for i in range(N)])
+pa=sum([Cone(A[i,0],A[i,1],alpha=.3).translate(0,0,0) for i in range(N)])
+prh=sum([Cone(R[i],H[i],alpha=.3).translate(0,0,0) for i in range(N)])
 (pa+ps).show(frame=false,aspect_ratio=1); (prh+ps).show(frame=false,aspect_ratio=1)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
