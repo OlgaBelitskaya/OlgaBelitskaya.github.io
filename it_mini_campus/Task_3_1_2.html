@@ -129,12 +129,19 @@ for i in range(N):
         AN+=1; ATI+=str(i+1)+' '; AV+=pi*A[i,0]^2*A[i,1]/3
     if RHT[i]==True: 
         RHN+=1; RHTI+=str(i+1)+' '; RHV+=pi*R[i]^2*H[i]/3
-print('A: %s; N=%s; V=%s'%(ATI,AN,AV))
-print('R&H: %s; N=%s; V=%s'%(RHTI,RHN,RHV))
+print('A: %s; N=%s; V=%s'%(ATI,AN,AV)); print('R&H: %s; N=%s; V=%s'%(RHTI,RHN,RHV))
 ps=sphere((0,0,0),T,color='magenta',alpha=.2)
 pa=sum([Cone(A[i,0],A[i,1],color=hue(int(AT[i])/1.5),alpha=.3).translate(0,0,0) for i in range(N)])
 prh=sum([Cone(R[i],H[i],color=hue(int(RHT[i])/1.5),alpha=.3).translate(0,0,0) for i in range(N)])
 (pa+ps).show(frame=false,aspect_ratio=1); (prh+ps).show(frame=false,aspect_ratio=1)
+@interact
+def _(r=(.1,1,.1),h=(.1,1,.1),t=(.1,1,.1)):
+    if (t>=h) and (sqrt(t)<r): cc=True
+    else: cc=False
+    print('[(r=%.1f,h=%.1f),t=%.1f]'%(r,h,t))
+    p=Cone(r,h,color=hue(int(cc)/1.5),alpha=.3).translate(0,0,0)
+    p+=sphere((0,0,0),t,color='magenta',alpha=.2)
+    p.show(frame=false,aspect_ratio=1)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 #22
