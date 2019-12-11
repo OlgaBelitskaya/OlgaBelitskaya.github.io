@@ -30,21 +30,26 @@ Create an algorithm and a program<br/>
     <h2>Explore detached cells</h2>
 SageMath &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
-
-</script></div><br/>
-<div class="sage"><script type="text/x-sage">
-
-</script></div><br/>
-<div class="sage"><script type="text/x-sage">
 def create_matrix(f,x,z):
     t=[]; pretty_print(html(latex(f)))
     for zv in z: t+=[[zv]+[f(xv,zv) for xv in x]]
+    nt=[['$z$']+['$x_%s=%s$'%(i+1,x[i]) for i in range(len(x))]]
+    show(table(nt+t))
     return Matrix(t)
 f21(x,z)=(abs(x^z+z^(x+3)))^(1/7)/(sin(x*z)^2+1/4)
-X=[1,2,3,4,5]; Z=[1.2,1.3,1.4,1.5,1.6]
-plot3d(f21,(x,1,5),(z,1.2,1.6),mesh=True,opacity=.7,adaptive=True).show()
-t=[['$z$']+['$x_%s=%s$'%(i+1,X[i]) for i in range(len(X))]]
-table(create_matrix(f21,X,Z))
+X=[1,2,3,4,5]; Z=[1.2,1.3,1.4,1.5,1.6]; create_matrix(f21,X,Z)
+plot3d(f21,(x,1,5),(z,1.2,1.6),mesh=True,opacity=.5,adaptive=True).show()
+</script></div><br/>
+<div class="sage"><script type="text/x-sage">
+def create_matrix2(f,x,z):
+    t=[]; pretty_print(html(latex(f)))
+    for xv in x: t+=[[xv]+[f(xv,zv) for zv in z]]
+    nt=[['$x$']+['$z_%s=%s$'%(i+1,round(z[i],1)) for i in range(len(z))]]
+    show(table(nt+t))
+    return Matrix(t)
+f22(x,z)=(3/7+arctan((x+z)/(x*z)))/(ln(abs(z))+(x*z)^2)
+X=[1,2,3,5,8]; Z=[.2,.4,.6,.8,1.]; create_matrix2(f22,X,Z)
+plot3d(f22,(x,1,8),(z,.2,1),mesh=True,opacity=.5,adaptive=True).show()
 </script></div><br/>
 Python &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
@@ -68,21 +73,11 @@ R &#38; SageMathCell <br/>
 %%r
 
 </script></div><br/>
-<div class="sage_r"><script type="text/x-sage">
-%%r
-
-</script></div><br/>
 HTML, JavaScript &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 <div class="sage_html"><script type="text/x-sage">
 %%html
 <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'/>
 <div id='googlechart' style='width:500px; height:500px;'/><script>
-
-</script></div><br/>
-<div class="sage_html"><script type="text/x-sage">
-%%html
-<script src='https://d3js.org/d3.v4.min.js'/>
-<svg id='d3chart' style='background-color:silver; width:500px; height:500px;'/><script>
 
 </script></div><br/>
 <div class="sage_html"><script type="text/x-sage">
