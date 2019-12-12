@@ -64,11 +64,14 @@ p=Graphics()+sum([parametric_plot((x(t),y(t)),(t,.1^5+2*pi*i,(2-.1^5)*pi+2*pi*i)
 p.axes_color('silver'); p.tick_label_color('silver'); p.show(gridlines=True,figsize=7)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-a,b,c=(1-random()/2),(1-random()/2),(1-random()/2); K=[a,b,c,b,c,a,1,1]
-y(t)=gus(t)*sum([sum([K[j]*bf(Y[j][i],t) for i in range(17)])*us(j,t) for j in range(8)])
-p=Graphics()+parametric_plot((x(t),y(t)),(t,0,32*pi),exclude=[2*pi*i for i in range(16)],
+@interact
+def _(a=(.1,.9,.05),b=(.1,.9,.05),c=(.1,.9,.05)): 
+    K=[a,b,c,b,c,a,1,1]
+    x(t)=gus(t)*sum([sum([bf(X[j][i],t) for i in range(17)])*us(j,t) for j in range(8)])
+    y(t)=gus(t)*sum([sum([K[j]*bf(Y[j][i],t) for i in range(17)])*us(j,t) for j in range(8)])
+    p=Graphics()+parametric_plot((x(t),y(t)),(t,0,32*pi),exclude=[2*pi*i for i in range(16)],
                              fill=True,fillalpha=.5,fillcolor='bisque',color='crimson')
-p.axes_color('silver'); p.tick_label_color('silver'); p.show(gridlines=True,figsize=7)
+    p.axes_color('silver'); p.tick_label_color('silver'); p.show(gridlines=True,figsize=7)
 </script></div><br/>
     <h1>_____</h1>
 SageMath &#38; SageMathCell <br/>
