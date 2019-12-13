@@ -32,13 +32,14 @@
     <p>Click the “Activate” button below to display an interactive example.</p>      
 <div id="examplecell"><script type="text/x-sage">
 @interact
-def _(N=(1,20,1)):
+def _(N=(24,1,-1)):
     var('x'); f=sin(x)*exp(1)^(-x)
-    p=plot(f,-1,5,thickness=5,color='#3636ff',alpha=0.5)+\
-    sum([plot(f.taylor(x,0,i),-1,5,hue=cos(i/20),thickness=1,legend_label=str(i)) for i in [1..N]])
-    p.show(ymin=-.5,ymax=0.5,figsize=(10,5),title='$Taylor \ Series \ f=sin \ x \cdot e^{-x}$',fontsize=15)
+    p=plot(f,-1,6,thickness=5,color='#3636ff',alpha=0.5)+\
+    sum([plot(f.taylor(x,0,i),-1,6,hue=cos(i/24),thickness=1,
+              legend_label=str(i)) for i in [1..N]])
+    p.show(ymin=-.5,ymax=0.5,figsize=(7,5),gridlines=True,
+           title='$Taylor \ Series \ f=sin \ x \cdot e^{-x}$',fontsize=12)
 </script></div>
-
   <h2>Your Field for Experiments</h2>
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>
       
@@ -71,13 +72,13 @@ def _(a=(2,4,1),b=(4,8,1),c=(4,8,1),n=(2,8,1),m=(2,8,1)):
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
-g = Graphics()
-f1(x,y) = x^2+x*y+y^2+2*x+6*y+3; f2(x,y) = x^2+x*y-y^2+2*x+6*y+3;
-p1 = implicit_plot(f1, (-8,8), (-8,8), gridlines=True, color='#3636ff')
-t1 = text('$x^2+xy+y^2+2x+6y+3=0$', (1,-7), color='#3636ff', fontsize=15)
-p2 = implicit_plot(f2, (-8,8), (-8,8), gridlines=True, color='#ff36ff')
-t2 = text('$x^2+xy-y^2+2x+6y+3=0$', (1,3), color='#ff36ff', fontsize=15)
-g = g+p1+t1+p2+t2; g.show(figsize=[5,5])
+g=Graphics()
+f1(x,y)=x^2+x*y+y^2+2*x+6*y+3; f2(x,y)=x^2+x*y-y^2+2*x+6*y+3;
+g+=implicit_plot(f1,(-8,8),(-8,8),color='#3636ff')
+g+=text('$x^2+xy+y^2+2x+6y+3=0$',(1,-7),color='#3636ff',fontsize=12)
+g+=implicit_plot(f2,(-8,8),(-8,8),color='#ff36ff')
+g+=text('$x^2+xy-y^2+2x+6y+3=0$',(1,3),color='#ff36ff',fontsize=12)
+g.show(figsize=[7,7],gridlines=True)
 </script></div> 
       
   <h2>Try Python Modules</h2>
