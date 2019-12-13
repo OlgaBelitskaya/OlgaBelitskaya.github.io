@@ -52,10 +52,12 @@ sum([polar_plot(f(t,i,a,b,c,d),(tmin,tmax),thickness=.3,axes=False,
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 var('t,i'); tmin,tmax,n=-pi,pi,12
-f(t,i)=(randint(8,11)+.9*cos(randint(12,24)*t+pi*i/n))*(1+.1*cos(randint(25,81)*t+\
-       pi*i/n))*(1+.05*cos(randint(216,256)*t+pi*i/n))*(1+sin(t+pi*i/n))
-sum([polar_plot(f(t,i),(tmin,tmax),thickness=.2,axes=False,
-                color=hue(i/n)) for i in [1..2*n]])
+f1(t,i)=(randint(5,10)+.9*cos(randint(11,20)*t+pi*i/n))
+f2(t,i)=(1+.1*cos(randint(25,100)*t+pi*i/n))
+f3(t,i)=(1+.01*cos(randint(200,300)*t+pi*i/n))
+f(t,i)=f1(t,i)*f2(t,i)*f3(t,i)*(1+sin(t+pi*i/n))
+sum([polar_plot(f(t,i),(tmin,tmax),thickness=.2,color=hue(i/n)) 
+     for i in [1..2*n]]).show(axes=False,figsize=7)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 var('t,i'); tmin,tmax,n=[0,0,0],[8.95*pi,12.18*pi,11.77*pi],3
