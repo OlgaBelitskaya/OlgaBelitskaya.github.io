@@ -32,17 +32,16 @@
     <p>Click the “Activate” button below to display an interactive example.</p>      
 <div id="examplecell"><script type="text/x-sage">
 @interact
-def _(N=(8,1,-1)):
-    pretty_print(html('<center><font color="#3636ff" size=5>Derivatives till the %s Order</font></center>'%str(N)))
-    var('x'); f = exp(x)*x; F = [f]; g = 1/(x+1); G = [g]
+def _(N=(9,1,-1)):
+    s='<center><font color="#3636ff" size=5>Derivatives till the %s Order</font></center>'
+    var('x'); pretty_print(html(s%str(N))); f,g=exp(x)*x,1/(x+1); F,G=[f],[g]
     for i in range(N): 
-        f = f.diff().factor(); g = g.diff().factor(); F.append(f); G.append(g)
-    p1 = sum([plot(F[i],(-2,1),color=colormaps.jet(35*i)[:3],legend_label=str(i)) for i in [0..N]])
-    p2 = sum([plot(G[i],(0,3),color=colormaps.jet(35*i)[:3],legend_label=str(i)) for i in [0..N]])
-    p1.show(title='$f= x \cdot e^x$',fontsize=15,figsize=[5,5])
-    p2.show(title='$f= \\frac{1}{x+1}$',fontsize=15,figsize=[5,5],ymin=-20,ymax=20)
+        f=f.diff().factor(); g=g.diff().factor(); F.append(f); G.append(g)
+    p1=sum([plot(F[i],(-2,1),color=colormaps.jet(30*i)[:3],legend_label=str(i)) for i in [0..N]])
+    p2=sum([plot(G[i],(0,3),color=colormaps.jet(30*i)[:3],legend_label=str(i)) for i in [0..N]])
+    p1.show(title='$f= x \cdot e^x$',fontsize=12,figsize=(4,5),gridlines=True)
+    p2.show(title='$f= \\frac{1}{x+1}$',fontsize=12,figsize=(4,5),gridlines=True,ymin=-20,ymax=20)
 </script></div>
-
   <h2>Your Field for Experiments</h2>
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>
       
