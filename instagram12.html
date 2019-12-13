@@ -76,7 +76,15 @@ def _(a=(.9,.1,-.05),b=(.9,.1,-.05),c=(.9,.1,-.05)):
     <h1>_____</h1>
 SageMath &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
-
+def tf(k,t): 
+    f1=(1/k[0]+sin(k[1]+k[2]*t))*(1/k[0]+cos(k[1]+k[2]*t))
+    f2=(1/k[0]-sin(k[1]+k[2]*t)^3)*(1/k[1]-cos(k[1]+k[2]*t)^3)
+    return f1*f2
+def x(k,t): return tf(k,t)*cos(t)
+def y(k,t): return tf(k,t)*sin(t)
+var('t'); K=[randint(2,16) for i in range(3)]
+p=sum([parametric_plot((i*x(K,t),i*y(K,t)),(t,0,2*pi),color=hue(i/5)) for i in range(1,6)])
+p.show(title=K,axes=False,figsize=7)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 
