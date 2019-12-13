@@ -43,22 +43,23 @@ def _(N=(9,1,-1)):
     p2.show(title='$f= \\frac{1}{x+1}$',fontsize=12,figsize=(4,5),gridlines=True,ymin=-20,ymax=20)
 </script></div>
   <h2>Your Field for Experiments</h2>
-    <p>Type your own SageMath code lines below and click “Evaluate”.</p>
-      
+    <p>Type your own SageMath code lines below and click “Evaluate”.</p>      
 <div class="compute"><script type="text/x-sage">
-var('x,y,z'); from sage.plot.plot3d.shapes import Sphere
-implicit_plot3d(x^2/9+y^2/4+z^2-1,(x,-3,3),(y,-3,3),(z,-3,3),contour=0,frame=False,
-                color=((abs(z)).function(x,y,z),colormaps.flag))+\
-sum([Sphere(.2,color=(i/4,0,i/3)).translate(0,3*cos(pi*i/12),3*sin(pi*i/12)) for i in [1..24]])
+var('x,y,z'); tr(i)=(0,3*cos(pi*i/12),3*sin(pi*i/12))
+from sage.plot.plot3d.shapes import Sphere
+p=implicit_plot3d(x^2/9+y^2/4+z^2-1,(x,-3,3),(y,-3,3),(z,-3,3),contour=0,
+                  frame=False,color=((abs(z)).function(x,y,z),colormaps.flag))
+p+sum([Sphere(.3,color=(i/4,0,i/3)).translate(tr(i)) for i in [1..24]])
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
 @interact
 def _(N=(16,4,-1)):
-    sum([polar_plot(log(floor(x)),(x,k*pi/2,(k+1)*pi/2),color=colormaps.winter(N*k)[:3],
-                    thickness=2,exclude=[1..int((k+1)*pi/2)]) for k in [1..N]]).show(figsize=(10,5))
-    sum([polar_plot(log(floor(x)),(x,k*pi/2,(k+1)*pi/2),color=colormaps.summer(N*k)[:3],
-                    thickness=2,exclude=[1..int(k*pi/2)]) for k in [1..N]]).show()
+    p1=sum([polar_plot(log(floor(x)),(x,k*pi/2,(k+1)*pi/2),color=colormaps.winter(N*k)[:3],
+                       thickness=1,exclude=[1..int((k+1)*pi/2)]) for k in [1..N]])
+    p2=sum([polar_plot(log(floor(x)),(x,k*pi/2,(k+1)*pi/2),color=colormaps.summer(N*k)[:3],
+                       thickness=1,exclude=[1..int(k*pi/2)]) for k in [1..N]])
+    p1.show(figsize=(8,4)); p2.show(figsize=(8,4))
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
@@ -69,8 +70,7 @@ a,b = float(str(ff[0])[5:]),float(str(ff[1])[5:]); F=[a*x+b for x in X]
 pf=points(zip(X,F),color='#ff3636',legend_label='fitted line')
 pr=points(zip(X,Y),color='#3636ff',legend_label='real data') 
 print(ff); (pf+pr).show(figsize=(10,5))
-</script></div> 
-      
+</script></div>    
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
 from sklearn.feature_extraction.text import CountVectorizer
