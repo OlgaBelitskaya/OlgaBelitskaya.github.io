@@ -99,7 +99,7 @@ complex_plot(cos(m*zn)*sin(zn),(-1,1),(-1,1),axes=False,
              plot_points=300,figsize=(6,6))
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
-x,y,k=var('x,y,k'); m,n=144,3; seg=[-.3,-.29,..,.3]
+x,y,k=var('x,y,k'); m,n=144,3; seg=[-.5,-.48,..,.5]
 xy=arg(sum(((x+I*y)^n+10^(-3)*(x+I*y))^factorial(k),k,1,3))
 f(x,y)=cos(m*xy)*sin(xy)
 fl=[f(x,y) for x in seg for y in seg]
@@ -116,9 +116,10 @@ p+parametric_plot3d(f,(-70,70),plot_points=300,frame=False,thickness=5)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 var('t'); a,b,c=randint(100,150),randint(10,20),randint(5,15)
-f(t)=[a*cos(t*pi)+c*cos(t*pi)*cos(b*t*pi),\
-      c*sin(b*t*pi)+c^2*t,a*sin(t*pi)+c*sin(t*pi)*cos(b*t*pi)]
-pretty_print(f)
+x(t)=a*cos(t*pi)+c*cos(t*pi)*cos(b*t*pi)
+y(t)=c*sin(b*t*pi)+c^2*t
+z(t)=a*sin(t*pi)+c*sin(t*pi)*cos(b*t*pi)
+f(t)=[x(t),y(t),z(t)]; pretty_print(html('<left>$\mathbb{%s}$</left>'%latex(f(t))))
 sum([parametric_plot3d((1+0.1*i)*f(t),(-3,3),color=colormaps.ocean(.05*i),
                        frame=False,thickness=5) for i in [1..20]])
 </script></div><br/>
