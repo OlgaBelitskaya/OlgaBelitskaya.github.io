@@ -33,8 +33,10 @@
 <div id="examplecell"><script type="text/x-sage">
 @interact
 def _(N=(11,0,-1)):
-    var('t'); p=sum([polar_plot(sin(6*t)^2,(pi*i/6,pi*(i+1)/6),color=colormaps.jet(20*i)[:3]) for i in [0..N]])
-    show(p,figsize=(5,5))
+    var('t'); 
+    p=sum([polar_plot((.5*j+1)*sin(6*t)^2,(pi*i/6,pi*(i+1)/6),color=colormaps.jet(20*i)[:3]) 
+           for i in [0..N] for j in range(3)])
+    show(p,figsize=7,gridlines=True,ymin=-2,ymax=2,xmin=-2,xmax=2)
 </script></div>
   <h2>Your Field for Experiments</h2>
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>   
@@ -50,7 +52,7 @@ def _(N=(8,1,-1)):
     for i in [1..N]:
         a1,a2,a3,a4,a6=i-5,i+5,i-1,i+1,i+3; c=colormaps.jet(30*i)[:3]; 
         E=EllipticCurve([a1,a2,a3,a4,a6]);
-        g=g+plot(E,gridlines=True,color=c,plot_points=50,legend_label='$%s$'%latex(E))
+        g+=plot(E,gridlines=True,color=c,plot_points=50,legend_label='$%s$'%latex(E))
     g.show(ymin=-30,ymax=30,figsize=(7,5))
 </script></div>
     <p></p>
