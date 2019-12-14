@@ -33,17 +33,15 @@
 <div id="examplecell"><script type="text/x-sage">
 @interact
 def _(x=(1,5,1),y=(1,5,1),z=(1,5,1)):
-    av = vector(SR,[x,y,z]); bv = vector(SR,[x,y,-z]); cv = av.cross_product(bv)
+    av=vector(SR,[x,y,z]); bv=vector(SR,[x,y,-z]); cv=av.cross_product(bv)
     a=arrow3d((0,0,0),av,color='#ff3636',width=(x+y+z)/1.5)+text3d('a',av*1.1)
     b=arrow3d((0,0,0),bv,color='#3636ff',width=(x+y+z)/1.5)+text3d('b',bv*1.1)    
     c=arrow3d((0,0,0),cv,color='#ff36ff',width=(x+y+z)/1.5)+text3d('axb',cv*1.1)
     pretty_print('a={x,y,z}; b={x,y,-z}')
     (a+b+c).show()
 </script></div>
-
   <h2>Your Field for Experiments</h2>
-    <p>Type your own SageMath code lines below and click “Evaluate”.</p>
-      
+    <p>Type your own SageMath code lines below and click “Evaluate”.</p>     
 <div class="compute"><script type="text/x-sage">
 var('x,y,z'); f=x^2+y^2-z^2
 sum([implicit_plot3d(f,(x,-t,t),(y,-t,t),(z,-t,0),contour=0,frame=False,plot_points=30,
@@ -51,32 +49,35 @@ sum([implicit_plot3d(f,(x,-t,t),(y,-t,t),(z,-t,0),contour=0,frame=False,plot_poi
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
+from sage.plot.plot3d.shapes import Box
+var('t'); tr(t)=(sin(t/20)*cos(t/20),cos(t/30),sin(t/20)*sin(t/20))
 @interact
 def _(N=(210,0,-30)):
-    sum([sage.plot.plot3d.shapes.Box([0.1,0.1,0.001],color=(0.1*i,0.2*i,1))\
-    .translate((sin(i/20)*cos(i/20),cos(i/30),sin(i/20)*sin(i/20))) for i in [0..N]]).show()
+    sum([Box([0.1,0.1,0.001],color=(0.1*i,0.2*i,1))\
+    .translate(tr(i)) for i in [0..N]]).show()
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
 var('x,y,z'); 
-p1 = implicit_plot3d(x^2/1^2-y^2/2^2,(x,-3,3),(y,-3,3),(z,-3,3),contour=0,color=(cos(x+y)*sin(z),colormaps.bwr))
-p2 = implicit_plot3d(y^2-1^2, (x,-3,3),(y,-3,3),(z,-3,3),contour=0,opacity=0.7,color='#3636ff',frame=False)
+p1=implicit_plot3d(x^2/1^2-y^2/2^2,(x,-3,3),(y,-3,3),(z,-3,3),
+                   contour=0,color=(cos(x+y)*sin(z),colormaps.bwr))
+p2=implicit_plot3d(y^2-1^2,(x,-3,3),(y,-3,3),(z,-3,3),
+                   contour=0,opacity=0.7,color='#3636ff',frame=False)
 (p1+p2).show()
-</script></div> 
-      
+</script></div>       
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
 import pylab,numpy; from mpl_toolkits.mplot3d import Axes3D
 pylab.rcParams['grid.color']='steelblue'; pylab.rcParams['grid.linestyle']='--'
-f = pylab.figure(figsize=(10,10)); ax = f.add_subplot(111,projection='3d')
-X = numpy.linspace(-7,7,128); X,Y = numpy.meshgrid(X,X)
-Z1 = 1/2*X**2+1/8*Y**2; Z1[Z1>6] = numpy.nan;
-Z2 = 1/8*X**2-1/18*Y**2; Z2[Z2<-6] = numpy.nan; Z2[Z2>6] = numpy.nan;
+f=pylab.figure(figsize=(10,10)); ax=f.add_subplot(111,projection='3d')
+X=numpy.linspace(-7,7,128); X,Y=numpy.meshgrid(X,X)
+Z1=1/2*X**2+1/8*Y**2; Z1[Z1>6]=numpy.nan;
+Z2=1/8*X**2-1/18*Y**2; Z2[Z2<-6]=numpy.nan; Z2[Z2>6]=numpy.nan;
 ax.plot_wireframe(X,Y,Z1,alpha=0.7,colors='#ff3636')
 ax.plot_wireframe(X,Y,Z2,alpha=0.4,colors='#3636ff')
 ax.text(2,7,7,'$x^2/1^2+y^2/2^2=2 \cdot z$',color='#ff3636',fontsize=20)
 ax.text(-12,-7,-7,'$x^2/2^2-y^2/3^2=2 \cdot z$',color='#3636ff',fontsize=20)
-ax.xaxis.pane.fill,ax.yaxis.pane.fill,ax.zaxis.pane.fill = False,False,False
+ax.xaxis.pane.fill,ax.yaxis.pane.fill,ax.zaxis.pane.fill=False,False,False
 ax.set_xlim(-7,7); ax.set_ylim(-7,7); ax.set_zlim(-7,7); pylab.show();
 </script></div>
       
