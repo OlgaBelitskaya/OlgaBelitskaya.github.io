@@ -42,8 +42,8 @@ def _(N=(47,0,-1)):
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>     
 <div class="compute"><script type="text/x-sage">
 var('x,y,z'); f1=x^2/9+y^2/16-z^2/25-1; f2=x^2/4+y^2/9-z^2/16
-implicit_plot3d(f1,(x,-7,7),(y,-7,7),(z,-7,7),contour=0,color="#ff3636",opacity=0.3,mesh=True)+\
-implicit_plot3d(f2,(x,-7,7),(y,-7,7),(z,-7,7),contour=0,color="#3636ff",opacity=0.5,frame=False)
+implicit_plot3d(f1,(x,-7,7),(y,-7,7),(z,-7,7),contour=0,color="#ff3636",opacity=.3,mesh=True)+\
+implicit_plot3d(f2,(x,-7,7),(y,-7,7),(z,-7,7),contour=0,color="#3636ff",opacity=.5,frame=False)
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
@@ -70,13 +70,13 @@ table([[(bc[i*10+j],lf(bc[i*5+j])) for j in range(5)] for i in range(10)])
 # 1000 data points, 4 clusters
 import pylab; from sklearn import datasets,mixture
 from sklearn.model_selection import train_test_split
-bd=datasets.make_blobs(n_samples=1000,centers=[[1,1],[-1,-1],[1,-1],[-1,1]],cluster_std=0.5)
-X_train,X_test,y_train,y_test=train_test_split(bd[0],bd[1],test_size=0.2,random_state=1)
+bd=datasets.make_blobs(n_samples=1000,centers=[[1,1],[-1,-1],[1,-1],[-1,1]],cluster_std=.5)
+X_train,X_test,y_train,y_test=train_test_split(bd[0],bd[1],test_size=.2,random_state=1)
 usl=mixture.BayesianGaussianMixture(n_components=4,n_init=4)
 usl.fit(X_train,y_train); y_predict=usl.predict(X_test)
 pylab.figure(figsize=(7,7)); pylab.grid()
 pylab.scatter(X_test[:,0],X_test[:,1],c=y_test,s=70,alpha=.5,cmap=pylab.cm.summer)
-pylab.scatter(X_test[:,0]+0.03,X_test[:,1]+0.03,c=y_predict,s=50,alpha=.5,cmap=pylab.cm.winter)
+pylab.scatter(X_test[:,0]+.03,X_test[:,1]+.03,c=y_predict,s=50,alpha=.5,cmap=pylab.cm.winter)
 pylab.scatter([1,-1,1,-1],[1,-1,-1,1],c='#3636ff',marker='*',s=500,alpha=.7); pylab.show()
 </script></div>    
   <h2>Try Other Languages (R, HTML, ...)</h2>
@@ -84,7 +84,7 @@ pylab.scatter([1,-1,1,-1],[1,-1,-1,1],c='#3636ff',marker='*',s=500,alpha=.7); py
 %%r
 A<-matrix(rexp(25,rate=0.1),nrow=5,ncol=5); 
 norm_type<-c("O","I","F","M","2")
-for (t in norm_type) {cat(paste0(norm(A,type=t),'\n'))}; A
+for (t in norm_type) {cat(t,norm(A,type=t),'\n')}; A
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
