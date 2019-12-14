@@ -32,10 +32,12 @@
     <p>Click the “Activate” button below to display an interactive example.</p>      
 <div id="examplecell"><script type="text/x-sage">
 @interact
-def _(N=(23,0,-1)):
-    var('x'); sum([plot(sin(x),(pi*n/6,pi*(n+1)/6),thickness=10,color=colormaps.jet(12*n)[:3]) for n in [0..N]]).show()
+def _(N=(47,0,-1)):
+    var('x,y'); p=implicit_plot(sin(x)-cos(x),(0,4*pi),(-1,1),linestyle=':')
+    p+=sum([plot((sin(x),cos(x)),(pi*n/12,pi*(n+1)/12),thickness=12,alpha=.7,
+              color=colormaps.jet(6*n)[:3]) for n in [0..N]])
+    p.show(aspect_ratio=4,gridlines=True,figsize=7)
 </script></div>
-
   <h2>Your Field for Experiments</h2>
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>
       
