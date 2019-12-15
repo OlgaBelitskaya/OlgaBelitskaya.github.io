@@ -33,14 +33,13 @@
 <div id="examplecell"><script type="text/x-sage">
 @interact
 def _(N=(2,7,1)):
-    a = "".join(list('A_%d%d '%(i,j) for i in [1..N] for j in [1..N])); A = Matrix(SR,N,N,var(a))
-    c = [Color(colormaps.cool(40*i)[:3]).html_color() for i in range(2,8,1)] 
-    pretty_print(html('<center><font color=%s>$%s$</font></center>'%(c[N-2],latex(A))))
+    a="".join(list('A_%d%d '%(i,j) for i in [1..N] for j in [1..N]))
+    A=Matrix(SR,N,N,var(a)); S='<center><font color=%s>$%s$</font></center>' 
+    c=[Color(colormaps.cool(40*i)[:3]).html_color() for i in range(2,8,1)] 
+    pretty_print(html(S%(c[N-2],latex(A))))
 </script></div>
-
   <h2>Your Field for Experiments</h2>
-    <p>Type your own SageMath code lines below and click “Evaluate”.</p>
-      
+    <p>Type your own SageMath code lines below and click “Evaluate”.</p>     
 <div class="compute"><script type="text/x-sage">
 var('r,phi,z'); trans=(r*cos(phi),r*sin(phi),z)
 plot3d(cos(r),(r,0,20*pi/2),(phi,0,2*pi),transformation=trans,opacity=0.7)+\
@@ -61,7 +60,6 @@ def _(a=(1,5,2),b=(-6,-2,2),c=(6,2,-2),d=(-1,-5,-2)):
 <div class="compute"><script type="text/x-sage">
 plot(log(x^3),1,5,fill=lambda x:nth_prime(x^3)/floor(x^3),fillcolor='#3636ff').show(figsize=(10,5))
 </script></div> 
-      
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
 import numpy
