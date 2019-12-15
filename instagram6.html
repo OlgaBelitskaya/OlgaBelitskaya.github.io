@@ -47,9 +47,11 @@ p2=plot3d(v/6+cos(5*u),(u,0,2*pi),(v,0,2*pi),color='green',opacity=0.3,
     <h1>Polar plots could look not so boring... Really</h1>
 SageMath &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
-var('u')
-sum([polar_plot(i*(9+.9*cos(12*u))*(1+.05*cos(36*u))*(1+.05*cos(216*u))*(1+sin(u)),
-               (u,-pi,pi),color=(0,1-.3*i,0)) for i in [.1,.2,..,3]]).show(axes=False)
+var('u,i'); f1(u,i)=i*(9+.9*cos(12*u))
+f2(u,i)=(1+.05*cos(36*u)); f3(u,i)=(1+.05*cos(216*u))*(1+sin(u))
+sum([polar_plot(f1(u,i)*f2(u,i)*f3(u,i),(u,-pi,pi),
+                color=(0,1-.3*i,0),thickness=1.5,plot_points=90) 
+     for i in [.1,.2,..,3]]).show(axes=False)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 var('u,v'); f=(9+.9*cos(27*u))*(1+sin(u))
