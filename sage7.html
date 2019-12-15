@@ -58,7 +58,7 @@ def _(a=(1,5,2),b=(-6,-2,2),c=(6,2,-2),d=(-1,-5,-2)):
                    legend_label=l[i],rgbcolor=colormaps.jet(cos(arg(z[i])))[:3],
                    legend_color=colormaps.jet(cos(arg(z[i])))[:3])
     g.set_legend_options(bbox_to_anchor=(1.0,0.1,0.1,0.7),font_size=15)
-    g.show(figsize=(10,5),gridlines=True)
+    g.show(figsize=(8,5),gridlines=True)
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
@@ -72,27 +72,28 @@ p.show(figsize=8,gridlines=True)
 import numpy
 def sigmoid(x): return 1.0/(1+numpy.exp(-x))
 def sigmoid_derivation(x): return x*(1.0-x)
-X = numpy.array([[0.10,0.05,0.95],[0.09,0.03,0.08],[0.01,0.09,0.91],
-                 [0.04,0.92,0.07],[0.05,0.02,0.04],[0.07,0.97,0.05],
-                 [0.06,0.02,0.98],[0.02,0.06,0.03],[0.01,0.09,0.03],[0.02,0.94,0.01]])
-Y = numpy.array([[1,0,1,2,0,2,1,0,1,2]]).T
-synapse0 = numpy.random.randn(3,1)
+X=numpy.array([[.10,.05,.95],[.09,.03,.08],[.01,.09,.91],
+               [.04,.92,.07],[.05,.02,.04],[.07,.97,.05],
+               [.06,.02,.98],[.02,.06,.03],[.01,.09,.03],
+               [.02,.94,.01]])
+Y=numpy.array([[1,0,1,2,0,2,1,0,1,2]]).T
+synapse0=numpy.random.randn(3,1)
 for iter in range(100):
-    layer0 = X; layer1 = sigmoid(numpy.dot(layer0,synapse0))
-    layer1_error = layer1-Y; layer1_delta = layer1_error*sigmoid_derivation(layer1)
-    synapse0_derivative = numpy.dot(layer0.T,layer1_delta)
-    synapse0 -= synapse0_derivative
+    layer0=X; layer1=sigmoid(numpy.dot(layer0,synapse0))
+    layer1_error=layer1-Y; layer1_delta=layer1_error*sigmoid_derivation(layer1)
+    synapse0_derivative=numpy.dot(layer0.T,layer1_delta)
+    synapse0-=synapse0_derivative
 print (numpy.hstack((numpy.hstack((X,Y)),(layer1.round(3)))))
 </script></div>
       
   <h2>Try Other Languages (R, HTML, ...)</h2>
 <div class="compute"><script type="text/x-sage">
 %%r
-z <- complex(real=-sqrt(2-sqrt(3)),imaginary=sqrt(2+sqrt(3)))
+z<-complex(real=-sqrt(2-sqrt(3)),imaginary=sqrt(2+sqrt(3)))
 # polar form
-zp <- Mod(z)*(cos(Arg(z))+sin(Arg(z))*sqrt(as.complex(-1)))
+zp<-Mod(z)*(cos(Arg(z))+sin(Arg(z))*sqrt(as.complex(-1)))
 # exponential form
-ze <- Mod(z) * exp(Arg(z) * sqrt(as.complex(-1)))
+ze<-Mod(z)*exp(Arg(z)*sqrt(as.complex(-1)))
 c(z,zp,ze)
 </script></div>
     <p>Click “Evaluate” twice. Use in HTML documents with &#60;/script&#62; in the end.</p>
