@@ -67,16 +67,23 @@ Jupyter Notebook &#38; SageMath Kernel
 <div class="sage_html"><script type="text/x-sage">
 %%html
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"/>
-<div id="test_googlechart" style="width:700px; height:700px;"/>
-<script>
-google.charts.load('current',{'packages':['corechart']}); google.charts.setOnLoadCallback(drawChart);
+<div id="googlechart" style="width:700px; height:700px;"/><script>
+google.charts.load('current',{'packages':['corechart']})
+google.charts.setOnLoadCallback(drawChart);
+var doc=document.getElementById('googlechart');
+var n=24,q=.01,m=638; var s2='ϱ = 1 + cos '.concat(n).concat(' θ');
+var s1='ϱ = cos  '.concat(n).concat(' θ');
 function drawChart() {
-    var xy=Array(1274).fill(0).map((r,t) => [(Math.floor(t/638)+r+Math.cos(0.12*t))*Math.cos(0.01*t),
-                                             (r+Math.cos(0.12*t))*Math.sin(0.01*t),(r+1+Math.cos(0.12*t))*Math.sin(0.01*t)]);
-    for (var i=1; i<637; i++) {xy[637+i][1]=NaN; xy[i+1][2]=NaN;}; xy.unshift(['x','ϱ = cos 12θ','ϱ = 1 + cos 12θ']); 
-    var data=google.visualization.arrayToDataTable(xy); var options={curveType:'function',legend:{position:'bottom'}};
-    var chart=new google.visualization.LineChart(document.getElementById('test_googlechart')); chart.draw(data,options);
-};
+    var xy=Array(2*m).fill(0).map((r,t)=>
+        [(Math.floor(t/m)+r+Math.cos(n*q*t))*Math.cos(q*t),
+         (r+Math.cos(n*q*t))*Math.sin(q*t),
+         (r+Math.floor(t/m)+Math.cos(n*q*t))*Math.sin(q*t)]);
+    for (var i=1; i<m-1; i++) {xy[m-1+i][1]=NaN; xy[i+1][2]=NaN;}
+    xy.unshift(['x',s1,s2]); 
+    var data=google.visualization.arrayToDataTable(xy),
+        options={curveType:'function',legend:{position:'bottom'}};
+    var chart=new google.visualization.LineChart(doc); 
+    chart.draw(data,options); };
 </script></div>
     <p></p>
 <div class="sage"><script type="text/x-sage">
@@ -142,7 +149,7 @@ var xy1=Array(640).fill(0).map((r,t)=>
     [(r+Math.cos(q*t))*Math.cos(n*q*t),(r+Math.cos(n*q*t))*Math.sin(q*t)]);
 var xy2=Array(640).fill(1).map((r,t)=>
     [(r+Math.cos(n*q*t))*Math.cos(q*t),(r+Math.cos(n*q*t))*Math.sin(q*t)]);
-Highcharts.chart('container', {
+Highcharts.chart('container1', {
     chart:{type:'area'},xAxis:{title:{text:'x'}},yAxis:{title:{text:'y'}},
     title:{text:'Parametric Area Plot'},credits:{enabled:false},
     series: [{name:s2,color:'#3636ff',data:xy2},
