@@ -20,7 +20,7 @@
   @import url('https://fonts.googleapis.com/css?family=Orbitron');
   h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
   p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:26em;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:50em;}
   </style>  
   <body>
   <h1>&#x1F4D1; &nbsp;SageMath Online Mini Campus. Part 9</h1>
@@ -41,12 +41,13 @@ def _(n=(30,75,5)):
     g.graphplot(edge_colors=edge_colors,edge_thickness=2,
                 vertex_labels=False,vertex_size=0).show(figsize=(5,5))
 </script></div>
-
   <h2>Your Field for Experiments</h2>
-    <p>Type your own SageMath code lines below and click “Evaluate”.</p>
-      
+    <p>Type your own SageMath code lines below and click “Evaluate”.</p>      
 <div class="compute"><script type="text/x-sage">
-var('z'); complex_plot(z^4+1/z^4,(-2,2),(-2,2)).show(figsize=(7,7))
+@interact
+def _(n=[4..7]):
+    var('z'); cf=z^n+1/z^n; d=2
+    complex_plot(cf,(-d,d),(-d,d)).show(figsize=(7,7))
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
