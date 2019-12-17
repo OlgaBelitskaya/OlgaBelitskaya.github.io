@@ -67,9 +67,14 @@ def _(N=[5,4,..,1]):
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
-var('u v'); f=exp(-(u^4+v^4)/4)
-sum([plot_vector_field(f.gradient(),(u,-0.1*i,0.1*i),(v,-0.1*i,0.1*i),color=hue(i/3),
-                       frame=False) for i in [1..3]]).show(figsize=(5,5))
+@interact
+def _(n=[4,5,..,8]):
+    f(u,v)=exp(-(u^n+v^n)/n)
+    s1(u,t)=(u,-0.1*t,0.1*t); s2(v,t)=(v,-0.1*t,0.1*t)
+    pvf=sum([plot_vector_field(f(u,v).gradient(),s1(u,i),s2(v,i),
+                               color=hue(i/3),frame=False) 
+             for i in [1..3]])
+    pvf.show(figsize=(5,5))
 </script></div> 
       
   <h2>Try Python Modules</h2>
