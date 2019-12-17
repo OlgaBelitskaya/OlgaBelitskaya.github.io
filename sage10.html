@@ -53,13 +53,16 @@ t.show(layout='tree',tree_root=0,color_by_label=True,
     <p></p>
 <div class="compute"><script type="text/x-sage">
 @interact
-def _(N=(1,5,1)):
-    var('x,y,z')
-    p1=sum([implicit_plot3d(x^2+y^2-2*z*i^2,(x,-i,i),(y,-i,i),(z,0,1),color=hue(sin(0.24*i)),
-                            opacity=0.7,plot_points=5,frame=False) for i in [1..N]])
-    p2=sum([implicit_plot3d(x^2+y^2+2*z*i^2,(x,-i,i),(y,-i,i),(z,-1,0),color=hue(sin(0.24*i)),
-                            opacity=0.3,plot_points=5,frame=False) for i in [1..N]])
-    p3=plot3d(lambda x,y:0,(-2*N,2*N),(-2*N,2*N),color="steelblue",opacity=0.5)
+def _(N=[5,4,..,1]):
+    f1(x,y,z,t)=x^2+y^2-2*z*t^2; f2(x,y,z,t)=x^2+y^2+2*z*t^2
+    p1=sum([implicit_plot3d(f1(x,y,z,i),(x,-i,i),(y,-i,i),(z,0,1),
+                            color=hue(sin(0.24*i)),opacity=0.7,
+                            plot_points=5,frame=False) for i in [1..N]])
+    p2=sum([implicit_plot3d(f2(x,y,z,i),(x,-i,i),(y,-i,i),(z,-1,0),
+                            color=hue(sin(0.24*i)),opacity=0.3,
+                            plot_points=5,frame=False) for i in [1..N]])
+    p3=plot3d(lambda x,y:0,(-2*N,2*N),(-2*N,2*N),
+              color="steelblue",opacity=0.5)
     (p1+p2+p3).show()
 </script></div>
     <p></p>
