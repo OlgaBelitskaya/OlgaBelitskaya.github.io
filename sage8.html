@@ -20,7 +20,7 @@
   @import url('https://fonts.googleapis.com/css?family=Orbitron');
   h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
   p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:26em;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:50em;}
   </style>  
   <body>
   <h1>&#x1F4D1; &nbsp;SageMath Online Mini Campus. Part 8</h1>
@@ -94,23 +94,36 @@ cat("\n"); print(det(A)); qr(A)
   <p>Click “Evaluate” twice. Use in HTML documents with &#60;/script&#62; in the end.</p>
 <div class="compute"><script type="text/x-sage">
 %%html
-<style>@import url('https://fonts.googleapis.com/css?family=Orbitron');
-svg {background-color:lavender;} text {fill:#3636ff; font-family:Orbitron; font-size:120%; text-shadow:3px 3px 3px #aaa;} 
-.line {fill:none; stroke:#3636ff; stroke-width:2;} .dot {fill:#3636ff; stroke:#fff; stroke-width:2;} 
+<style>@import url('https://fonts.googleapis.com/css?family=Monoton');
+svg {background-color:lavender;} 
+text {fill:#3636ff; font-family:Monoton; 
+      font-size:130%; text-shadow:3px 3px 3px slategray;} 
+.line1 {fill:none; stroke:slategray; stroke-width:6;}
+.line2 {fill:none; stroke:#3636ff; stroke-width:2;} 
+.dot {fill:#3636ff; stroke:slategray; stroke-width:2;} 
 </style>
 <script src="https://d3js.org/d3.v4.min.js"/><svg/><script>
-var n=20,m=35,margin={top:m,right:m,bottom:m,left:m},width=750-margin.left-margin.right,height=500-margin.top-margin.bottom; 
-var xScale=d3.scaleLinear().domain([0,n-1]).range([0,width]); var yScale=d3.scaleLinear().domain([0,n]).range([height,0]); 
-var line=d3.line().curve(d3.curveMonotoneX).x(function(d,i) {return xScale(i);}).y(function(d) {return yScale(d.y);});
+var n=20,m=35,margin={top:m,right:m,bottom:m,left:m},
+    width=750-margin.left-margin.right,height=500-margin.top-margin.bottom; 
+var xScale=d3.scaleLinear().domain([0,n-1]).range([0,width]),
+    yScale=d3.scaleLinear().domain([0,n]).range([height,0]); 
+var line=d3.line().curve(d3.curveMonotoneX)
+           .x(function(d,i) {return xScale(i);})
+           .y(function(d) {return yScale(d.y);});
 var data=d3.range(n).map(function(d) {return {"y":d3.randomUniform(n)()}})
-var svg=d3.select("svg").attr("width",width+margin.left+margin.right).attr("height",height+margin.top+margin.bottom)
+var svg=d3.select("svg").attr("width",width+margin.left+margin.right)
+                        .attr("height",height+margin.top+margin.bottom)
           .append("g").attr("transform","translate("+margin.left+","+margin.top+")");
-svg.append("g").attr("class","x axis").call(d3.axisBottom(xScale)).attr("transform","translate(0,"+height+")"); 
+svg.append("g").attr("class","x axis").call(d3.axisBottom(xScale))
+               .attr("transform","translate(0,"+height+")"); 
 svg.append("g").attr("class","y axis").call(d3.axisLeft(yScale));
-svg.append("path").datum(data).attr("class","line").attr("d",line); 
-svg.selectAll(".dot").data(data).enter().append("circle").attr("class","dot").attr("r",3)
-                     .attr("cx",function(d,i) {return xScale(i)}).attr("cy",function(d) {return yScale(d.y)});
-svg.append("text").attr("x",300).text('Just One Line');
+svg.append("path").datum(data).attr("class","line1").attr("d",line);
+svg.append("path").datum(data).attr("class","line2").attr("d",line);
+svg.selectAll(".dot").data(data).enter()
+                     .append("circle").attr("class","dot").attr("r",3)
+                     .attr("cx",function(d,i) {return xScale(i)})
+                     .attr("cy",function(d) {return yScale(d.y)});
+svg.append("text").attr("x",300).text('D3 & Google Fonts');
 </script></div> 
     <p></p>
   </body>
