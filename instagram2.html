@@ -104,15 +104,17 @@ Jupyter Notebook &#38; SageMath Kernel
 <div class="sage_html"><script type="text/x-sage">
 %%html
 <script src="https://cdn.plot.ly/plotly-latest.min.js"/>
-<div id="test_plotly" style="width:600px;height:600px;"/>
-<script>
-TEST1=document.getElementById('test_plotly');
-var x1=Array(640).fill(0).map((r,t) => ((r+Math.cos(0.12*t))*Math.cos(0.01*t)));
-var y1=Array(640).fill(0).map((r,t) => ((r+Math.cos(0.12*t))*Math.sin(0.01*t)));
-var x2=Array(640).fill(1).map((r,t) => ((r+Math.cos(0.12*t))*Math.cos(0.01*t)));
-var y2=Array(640).fill(1).map((r,t) => ((r+Math.cos(0.12*t))*Math.sin(0.01*t)));
-Plotly.plot(TEST1,[{x:x1,y:y1,line:{color:'#3636ff'},name:'ϱ = cos 12θ'}]);
-Plotly.plot(TEST1,[{x:x2,y:y2,line:{color:'#ff3636'},name:'ϱ = 1 + cos 12θ'}]);
+<div id="test_plotly" style="width:600px;height:600px;"/><script>
+function plotlyChart(embed,n,m,q) {doc=document.getElementById(embed);
+    var s1='ϱ = cos  '.concat(n).concat(' θ'),
+        s2='ϱ = 1 + cos '.concat(n).concat(' θ');
+    var x1=Array(m).fill(0).map((r,t)=>(r+Math.cos(n*q*t))*Math.cos(q*t)),
+        y1=Array(m).fill(0).map((r,t)=>(r+Math.cos(n*q*t))*Math.sin(q*t));
+    var x2=Array(m).fill(1).map((r,t)=>(r+Math.cos(n*q*t))*Math.cos(q*t)),
+        y2=Array(m).fill(1).map((r,t)=>(r+Math.cos(n*q*t))*Math.sin(q*t));
+    Plotly.plot(doc,[{x:x1,y:y1,line:{color:'#3636ff'},name:s1}]);
+    Plotly.plot(doc,[{x:x2,y:y2,line:{color:'#ff3636'},name:s2}]); };
+plotlyChart('test_plotly',24,640,.01);
 </script></div>
     <p></p>
     <h1>Parametric plots with simple basic R libraries</h1>
