@@ -21,8 +21,10 @@ Find integrals
 from sage.symbolic.integration.integral import indefinite_integral
 set_verbose(-1); f21(x)=(1+sin(x)^2)*cos(x)/(1+sin(x))^2
 intf21(x)=indefinite_integral(f21(x),x)
-pretty_print(html('$f(x)=%s => \int f(x) dx= %s$'%(latex(f21(x)),latex(intf21(x)))))
-plot([f21(x),intf21(x)],(2,10),legend_label='automatic',ymin=-10,ymax=10)
+s='$f(x)=%s => \int f(x) dx= %s$'
+pretty_print(html(s%(latex(f21(x)),latex(intf21(x)))))
+plot([f21(x),intf21(x)],(-8,10),detect_poles=True,
+     legend_label='automatic',ymin=-10,ymax=10,gridlines=True)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage"># python; task 1
 import sympy as sp
@@ -30,11 +32,15 @@ import sympy as sp
 </script></div><br/>
   <h2>Task 2</h2>
 <div class="sage"><script type="text/x-sage"># sage; task 2
+# sage; task 2
 from sage.symbolic.integration.integral import indefinite_integral
-set_verbose(-1); f21(x)=(1+cos(x)+3*sin(x))/(sin(x)+1-cox(2*x))
-intf21(x)=indefinite_integral(f21(x),x)
-pretty_print(html('$f(x)=%s => \int f(x) dx= %s$'%(latex(f21(x)),latex(intf21(x)))))
-plot([f21(x),intf21(x)],(0,5),legend_label='automatic',detect_poles=True,ymin=-10,ymax=10)
+# cos(2*x)=1-2*sin(x)^2
+set_verbose(-1); f21(x)=(1+cos(x)+3*sin(x))/(sin(x)+2*sin(x)^2)
+intf21(x)=simplify(indefinite_integral(f21(x),x))
+s='$f(x)=%s => \int f(x) dx= %s$'
+pretty_print(html(s%(latex(f21(x)),latex(intf21(x)))))
+plot([f21(x),intf21(x)],(-2*pi,4*pi),legend_label=['f(x)','F(x)'],
+     detect_poles=True,ymin=-10,ymax=10,gridlines=True)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage"># python; task 2
 import sympy as sp
