@@ -71,17 +71,22 @@ for M in ppl: pretty_print(html(M))
 </script></div>     
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
-import networkx,pylab
-g=networkx.MultiDiGraph(); pylab.figure(figsize=(7,5))
-edge_list=[('♔','♕'),('♔','♖'),('♔','♗'),('♔','♘'),('♕','♘'),('♖','♘'),
-           ('♖','♚'),('♖','♛'),('♗','♖'),('♗','♚'),('♘','♛'),('♚','♛'),
+import networkx as nx,pylab as pl
+g=nx.MultiDiGraph(); pl.figure(figsize=(7,5))
+edge_list=[('♔','♕'),('♔','♖'),('♔','♗'),
+           ('♔','♘'),('♕','♘'),('♖','♘'),
+           ('♖','♚'),('♖','♛'),('♗','♖'),
+           ('♗','♚'),('♘','♛'),('♚','♛'),
            ('♛','♜'),('♛','♝'),('♜','♝'),('♜','♞')]
-edge_list=[(n1.decode('utf-8'),n2.decode('utf-8')) for (n1,n2) in edge_list]
-g.add_edges_from(edge_list); pos=networkx.shell_layout(g)
-networkx.draw_networkx_edges(g,pos,width=3,alpha=0.5,edge_color='#ff3636',arrowsize=30,arrowstyle='-|>')
-networkx.draw_networkx_nodes(g,pos,node_size=1500,alpha=0.5,node_color='#3636ff',node_shape='h')
-networkx.draw_networkx_labels(g,pos,font_size=25,font_weight='bold')
-pylab.axis('off'); pylab.show()
+edge_list=[(n1.decode('utf-8'),n2.decode('utf-8')) 
+           for (n1,n2) in edge_list]
+g.add_edges_from(edge_list); pos=nx.shell_layout(g)
+nx.draw_networkx_edges(g,pos,width=3,alpha=0.5,edge_color='silver',
+                       arrowsize=30,arrowstyle='-|>')
+nx.draw_networkx_nodes(g,pos,node_size=1500,alpha=0.7,
+                       node_color='steelblue',node_shape='h')
+nx.draw_networkx_labels(g,pos,font_size=25,font_weight='bold')
+pl.axis('off'); pl.show()
 </script></div>      
   <h2>Try Other Languages (R, HTML, ...)</h2>
 <div class="compute"><script type="text/x-sage">
