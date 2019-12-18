@@ -32,17 +32,20 @@
     <p>Click the “Activate” button below to display an interactive example.</p>      
 <div id="examplecell"><script type="text/x-sage">
 @interact
-def _(graph=['Petersen','Moebius Kantor','Dodecahedral','Icosahedral','Flower Snark']):
-    graph_dict = {'Moebius Kantor':graphs.MoebiusKantorGraph(),'Flower Snark':graphs.FlowerSnark(),\
-                  'Dodecahedral':graphs.DodecahedralGraph(),'Icosahedral':graphs.IcosahedralGraph(),\
-                  'Petersen':graphs.PetersenGraph()}
-    g=graph_dict[graph]; [g.set_edge_label(u,v,u) for u,v,l in g.edges()]
-    gp=g.graphplot(vertex_labels=False,vertex_size=0,color_by_label=True); gp.show(figsize=(5,5))
+def _(Graph=['Petersen','Moebius Kantor','Dodecahedral',
+             'Icosahedral','Kittell','Flower Snark']):
+    graph_dict={'Moebius Kantor':graphs.MoebiusKantorGraph(),
+                'Flower Snark':graphs.FlowerSnark(),
+                'Dodecahedral':graphs.DodecahedralGraph(),
+                'Icosahedral':graphs.IcosahedralGraph(),
+                'Kittell':graphs.KittellGraph(),
+                'Petersen':graphs.PetersenGraph()}
+    g=graph_dict[Graph]; [g.set_edge_label(u,v,u) for u,v,l in g.edges()]
+    gp=g.graphplot(vertex_labels=False,vertex_size=0,color_by_label=True)
+    gp.show(figsize=(5,5))
 </script></div>
-
   <h2>Your Field for Experiments</h2>
-    <p>Type your own SageMath code lines below and click “Evaluate”.</p>
-      
+    <p>Type your own SageMath code lines below and click “Evaluate”.</p>     
 <div class="compute"><script type="text/x-sage">
 i=CDF.gen(); N=500 
 z=[zeta(0.1*(5+n*i)) for n in range(N)]
