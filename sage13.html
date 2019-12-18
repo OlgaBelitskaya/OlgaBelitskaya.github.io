@@ -57,11 +57,12 @@ def _(n=[2,3,4,5]):
     <p></p>
 <div class="compute"><script type="text/x-sage">
 @interact
-def _(n=[24,22,..,2],h=[21,19,..,3]):
-    L=[[n*cos(pi*i/100)+h*cos((n/2)*pi*i/100),
-        n*sin(pi*i/100)-h*sin((n/2)*pi*i/100)] 
-       for i in range(202)]
-    line(L,color='#3636ff').show(figsize=(5,5))
+def _(n=[24,22,..,2],h=[21,19,..,3],k=[60,120,..,360]):
+    def L(i): return [n*cos(2*pi*i/k)+h*cos((n/2)*2*pi*i/k),
+                      n*sin(2*pi*i/k)-h*sin((n/2)*2*pi*i/k)]
+    l=sum([line([L(j),L(j+1)],color=hue(j/k)) 
+           for j in range(k)])
+    l.show(figsize=(5,5))
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
