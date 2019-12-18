@@ -43,10 +43,16 @@ def _(N=(12,3,-1)):
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>
       
 <div class="compute"><script type="text/x-sage">
-L1 = [[0,0]]+[[0.6+0.005*i,1.2+sin(0.03*i)] for i in range(200)]+[[2,0]]
-L2 = [[0,0]]+[[0.5,2.3]]+[[1.5,2.3]]+[[2,0]]
-polygon2d(L1,color="#3636ff",edgecolor="darkgrey",thickness=3,axes=False)+\
-polygon2d(L2,color="silver",edgecolor="darkgrey",alpha=0.3,thickness=3)
+@interact
+def _(n=[2,3,4,5]):
+    L1=[[0,0]]+[[0.5+0.004*i,.9+.3*sin(n*0.01*i)] 
+                for i in range(200)]+[[2,0]]
+    L2=[[0,0]]+[[0.5,1.5]]+[[1.5,1.5]]+[[2,0]]
+    p=polygon2d(L1,color="#3636ff",edgecolor="darkgrey",
+                thickness=3,axes=False)
+    p+=polygon2d(L2,color="silver",edgecolor="darkgrey",
+                 alpha=0.3,thickness=3)
+    p.show()
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
