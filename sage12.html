@@ -59,16 +59,23 @@ sum([line([(z[n].real(),z[n].imag()),
 pretty_print('Probability of an Edge in Percentage')
 @interact
 def _(p=(100,0,-10)):
-    g=graphs.RandomGNP(16,p/100); 
-    ec={(1,1,1):list(g.edges())}; vc={Color('#3636ff'):list(g)}
+    g=graphs.RandomGNP(16,p/100) 
+    ec={(1,1,1):list(g.edges())}
+    vc={Color('#3636ff'):list(g)}
     g.show3d(edge_colors=ec,vertex_colors=vc)
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
-var('x,y'); f(x,y)=(x^2-y)*sin(x*y); t=3
-cp=contour_plot(f,(x,-t,t),(y,-t,t),contours=[-t,0,t], fill=False,cmap='cool',labels=True,
-                label_inline=True,label_fmt={-t:"f=-%d"%t,0:"f=0",t:"f=%d"%t},label_colors='black')
-cp.show(figsize=(7,7))
+@interact
+def _(cmap=['cool','prism','jet','flag',
+            'gnuplot','tab10','tab20']):
+    var('x,y'); f(x,y)=(x^2-y)*sin(x*y); t=3
+    ld={-t:"f=-%d"%t,0:"f=0",t:"f=%d"%t}
+    cp=contour_plot(f,(x,-t,t),(y,-t,t),
+                    contours=[-t,0,t],fill=False,
+                    cmap=cmap,labels=True,label_inline=True,
+                    label_fmt=ld,label_colors='black')
+    cp.show(figsize=(7,7))
 </script></div> 
       
   <h2>Try Python Modules</h2>
