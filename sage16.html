@@ -71,12 +71,18 @@ def _(season=['winter','spring','summer','autumn']):
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
-v=EllipticCurve('57a').lseries().values_along_line(1-10*I,1+10*I,100)
-l=line([(z[1].real(),z[1].imag()) for z in v],color='#ff3636',
-       marker=r'$\Re \Im$',markersize=20,markerfacecolor='w',markeredgecolor='#3636ff')
-l.show(figsize=(7,7))
+@interact
+def _(k1=[3,4,5],k2=[2..8]):
+    v=EllipticCurve('%s%sa'%(k1,k2)).lseries(); n=120
+    v=v.values_along_line(1-10*I,1+10*I,n)
+    v=[(v[i][1].real(),v[i][1].imag()) for i in range(n)]
+    col=[[random() for i in range(3)] for j in range(n)]
+    l=line(v,color='silver')
+    l+=sum([line(v[i],marker=r'$\Re \Im$',
+            markersize=16,markerfacecolor='w',
+            markeredgecolor=col[i]) for i in range(n)])
+    l.show(figsize=(7,7))
 </script></div> 
-      
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
 import numpy; from sklearn import datasets,model_selection,linear_model,pipeline,neural_network,metrics
