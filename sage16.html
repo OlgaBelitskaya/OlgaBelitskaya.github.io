@@ -37,16 +37,20 @@ def _(N=[20,40,60]):
 </script></div>
   <h2>Your Field for Experiments</h2>
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>
-      
 <div class="compute"><script type="text/x-sage">
-t = Tachyon(xres=600,yres=400,camera_center=(2,0,0))
+t=Tachyon(xres=600,yres=400,camera_center=(2,0,0))
 t.light((3,2,1),0.3,(1,1,1))
-p1=(0,.7,0); p2=(.7,0,0); p3=(0,0,.7); p4=(-.7,-.7,-.7)
-t.texture('tr',ambient=.01,diffuse=.3,specular=.5,opacity=.5,color=(1,0,0))
-t.texture('tg',ambient=.05,diffuse=.6,specular=.75,opacity=.75,color=(0,1,0))
-t.texture('tb',ambient=.1,diffuse=.9,specular=1.0,opacity=1.0,color=(0,0,1))
-t.sphere(p1,.2,'tr'); t.sphere(p2,.2,'tg'); t.sphere(p3,.2,'tb')
-t.fcylinder(p1,p4,.05,'tr'); t.fcylinder(p2,p4,.05,'tg'); t.fcylinder(p3,p4,.05,'tb')
+p1=(0,.7,0); p2=(.7,0,0)
+p3=(0,0,.7); p4=(-.7,-.7,-.7)
+t.texture('tr',ambient=.01,diffuse=.3,
+          specular=.5,opacity=.5,color=(1,0,0))
+t.texture('tg',ambient=.05,diffuse=.6,
+          specular=.75,opacity=.75,color=(0,1,0))
+t.texture('tb',ambient=.1,diffuse=.9,
+          specular=1.0,opacity=1.0,color=(0,0,1))
+t.sphere(p1,.2,'tr'); t.sphere(p2,.2,'tg')
+t.sphere(p3,.2,'tb'); t.fcylinder(p1,p4,.05,'tr')
+t.fcylinder(p2,p4,.05,'tg'); t.fcylinder(p3,p4,.05,'tb')
 t.show()
 </script></div>
     <p></p>
@@ -54,11 +58,13 @@ t.show()
 @interact
 def _(season=['winter','spring','summer','autumn']):
     var('x,y,z'); x0,y0,z0,s=.4,.15,.15,.1
-    hat=implicit_plot3d(4*x^2+4*y^2-(z-1.3)^2,(x,-1,1),(y,-1,1),(z,0.3,1.3),
-                        color=((z-0.3).function(x,y,z),colormaps[season]))
+    f=4*x^2+4*y^2-(z-1.3)^2; g=cos(49*x+16*y)*sin(50*z)
+    hat=implicit_plot3d(f,(x,-1,1),(y,-1,1),(z,0.3,1.3),\
+        color=(g.function(x,y,z),colormaps[season]))
     head=sphere(size=5*s,color='pink')
     eyes=sum([sphere((x0,i*y0,z0),size=s,color=(1,1,1))+\
-              sphere((x0+0.06,i*y0,z0+.02),size=s/2,color=(0,0,0)) for i in [-1,1]])
+              sphere((x0+0.06,i*y0,z0+.02),size=s/2,
+                     color=(0,0,0)) for i in [-1,1]])
     nose=sphere((x0+.1,0,-z0+.05),size=s,color='pink')
     mouth=sphere((x0-.1,0,-2*z0),size=s,color='red')
     (hat+head+eyes+nose+mouth).show(frame=False)
