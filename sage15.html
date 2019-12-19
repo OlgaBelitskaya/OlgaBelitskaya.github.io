@@ -34,17 +34,21 @@
 var('x'); c=colors.keys()
 @interact
 def _(n=(len(c),1,-1)):
-    sum([polar_plot(sin(5*x)^2+0.02*i,(x,0,2*pi),color=c[i-1]) for i in [1..n]]).\
-    show(figsize=(7,7),axes=False)
+    p=sum([polar_plot(sin(5*x)^2+0.02*i,(x,0,2*pi),
+                      color=c[i-1]) for i in [1..n]])
+    p.show(figsize=(7,7),axes=False)
 </script></div>
   <h2>Your Field for Experiments</h2>
-    <p>Type your own SageMath code lines below and click “Evaluate”.</p>
-  
+    <p>Type your own SageMath code lines below and click “Evaluate”.</p> 
 <div class="compute"><script type="text/x-sage">
-def c(cm): return [colormaps[cm](12*i) for i in [1..20]]
-icosahedron().stickers(c('bwr'),.05,.05).show(frame=False)
-</script></div>
-    <p></p>
+@interact
+def _(colormap=['bwr','cool','prism','jet','terrain',
+                'flag','ocean','hsv','bone']):
+    def c(cm): return [colormaps[cm](12*i) 
+                       for i in [1..20]]
+    g=icosahedron().stickers(c(colormap),.05,.05)
+    g.show(frame=False)
+</script></div><br/>
 <div class="compute"><script type="text/x-sage">
 @interact
 def _(marker=('☕','⚖','☘','⚜','⚙')):
