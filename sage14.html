@@ -32,13 +32,15 @@
     <p>Click the “Activate” button below to display an interactive example.</p>      
 <div id="examplecell"><script type="text/x-sage">
 @interact
-def _(x=(1,10,1),y=(1,10,1),z=(1,10,1)):
+def _(x=[1..10],y=[1..10],z=[1..10]):
     from sage.plot.plot3d.plot3d import axes
-    var('u'); c=colormaps.jet(8*(x+y+z))[:3]; a=axes(11,.5); 
-    r=revolution_plot3d((0.5*cos(u),0.5*sin(u)),(u,0,2*pi),color=c,
-                        plot_points=10,mesh=True,opacity=0.1)
-    t=text3d("(%.1f,%.1f,%.1f)"%(x,y,z),(x,y,z+0.8),color=c)
-    (a+r.translate(x,y,z)+t).show();
+    var('u'); f=(0.75*cos(u),0.75*sin(u))
+    c=colormaps.jet(8*(x+y+z))[:3]; a=axes(11,.5); 
+    r=revolution_plot3d(f,(u,0,2*pi),color=c,mesh=True,
+                        plot_points=10,opacity=0.2)
+    t=text3d("(%.1f,%.1f,%.1f)"%(x,y,z),
+             (x,y,z+2),color=c)
+    (a+r.translate(x,y,z)+t).show()
 </script></div>
   <h2>Your Field for Experiments</h2>
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>      
