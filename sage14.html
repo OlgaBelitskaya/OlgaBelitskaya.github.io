@@ -74,23 +74,25 @@ def _(style=[':','-.','--','-'],thick=[2..5]):
     gp=g.graphplot(vertex_color='w',vertex_size=850,
                    color_by_label=True,edge_thickness=thick,
                    edge_style=style).show(figsize=(7,7))
-</script></div> 
-      
+</script></div>    
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
 import numpy
-A = numpy.array(range(1,9)).reshape(2,2,2); B = ['♔','♕','♖','♗']; 
-B = [el.decode('utf-8') for el in B]; B = numpy.array(B,dtype=object).reshape(2,2)
-AB1 = numpy.tensordot(A,B,1); AB01 = numpy.tensordot(A,B,(0,1))
+A=numpy.array(range(1,9)).reshape(2,2,2)
+B=['♔','♕','♖','♗']; 
+B=[el.decode('utf-8') for el in B]
+B=numpy.array(B,dtype=object).reshape(2,2)
+AB1=numpy.tensordot(A,B,1)
+AB01=numpy.tensordot(A,B,(0,1))
+AB10=numpy.tensordot(A,B,(1,0))
 def result(X):
     for i in range(2): 
         for j in range(2): 
             for k in range(2):
                 print(X[i,j,k])
     print(X.shape)
-result(AB1); result(AB01)
-</script></div>
-      
+result(AB1); result(AB01); result(AB10)
+</script></div>   
   <h2>Try Other Languages (R, HTML, ...)</h2>
 <div class="compute"><script type="text/x-sage">
 %%r
@@ -102,18 +104,17 @@ print(eigen(A)$values); cat('\n'); round(eigen(A)$vectors)
 <div class="compute"><script type="text/x-sage">
 %%html
 <script src="https://d3js.org/d3.v4.min.js"/>
-<svg width=60px height=60px/><script>
-var svg = d3.select("svg")
-            .transition()
-            .duration(5000)
-            .styleTween("background-color",function() {return d3.interpolate("#ff3636","#3636ff")});
+<svg width=100px height=100px/><script>
+var c1="#ff3636",c2="#3636ff"; var n=10000
+var svg=d3.select("svg");
+d3.select("svg").transition().duration(n)
+  .styleTween("background-color",
+              function(){return d3.interpolate(c1,c2)});
 d3.select("svg").append("circle")
-            .attr("cx",30)
-            .attr("cy",30)
-            .attr("r",20)
-            .transition()
-            .duration(5000)
-            .styleTween("fill",function() {return d3.interpolate("#3636ff","#ff3636")});           
+  .attr("cx",50).attr("cy",50).attr("r",35)
+  .transition().duration(n)
+  .styleTween("fill",
+              function(){return d3.interpolate(c2,c1)});          
 </script></div>    
     <p></p>
   </body>
