@@ -119,7 +119,8 @@ print(DV.get_feature_names()[:7]); print(DV.get_feature_names()[7:])
   <h2>Try Other Languages (R, HTML, ...)</h2>
 <div class="compute"><script type="text/x-sage">
 %%r
-y <- structure(c(a=1,b=2,c=3,d=4,e=5,f=6,g=7,h=8),dtype="vector",shape=8)
+y<-structure(c(a=1,b=2,c=3,d=4,e=5,f=6,g=7,h=8),
+             dtype="vector",shape=8)
 attributes(y)
 </script></div>
     <p>Click “Evaluate” twice. Use in HTML documents with &#60;/script&#62; in the end.</p>
@@ -132,20 +133,20 @@ svg {background-color:cornflowerblue;}
 </style>
 <script src="https://d3js.org/d3.v3.min.js"/>
 <script src="https://d3js.org/topojson.v0.min.js"/>
-<svg width=1000 height=500/>
+<svg width=900 height=470/>
 <script type="text/javascript">
-var projection = d3.geo.equirectangular().translate([500,250]);
-var svg = d3.select("svg"); var g = svg.append("g");
-var path = d3.geo.path().projection(projection);
-d3.json("https://raw.githubusercontent.com/n1n9-jp/CSIS_map_140514/master/data/world-50m.json",
-        function(error,world) {
-    d3.select("svg").append("g").attr("class","land").selectAll("land")
-                    .data([topojson.object(world,world.objects.land)])
-                    .enter().append("path").attr("d",path);
-    d3.select("svg").append("g").attr("class","countries").selectAll("countries")
-                    .data([topojson.object(world,world.objects.countries)])
-                    .enter().append("path").attr("d",path);
-});        
+var projection=d3.geo.equirectangular().translate([430,250]);
+var svg=d3.select("svg"),g=svg.append("g");
+var path=d3.geo.path().projection(projection);
+var url="https://raw.githubusercontent.com/n1n9-jp/CSIS_map_140514/master/data/"
+d3.json(url.concat("world-50m.json"),
+        function(world) {
+            g.attr("class","land").selectAll("land")
+             .data([topojson.object(world,world.objects.land)])
+             .enter().append("path").attr("d",path);
+            svg.attr("class","countries").selectAll("countries")
+               .data([topojson.object(world,world.objects.countries)])
+               .enter().append("path").attr("d",path);});      
 </script></div>    
     <p></p>
   </body>
