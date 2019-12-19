@@ -31,12 +31,14 @@
   <h2>Example of Computations</h2>
     <p>Click the “Activate” button below to display an interactive example.</p>      
 <div id="examplecell"><script type="text/x-sage">
-var('x'); c=colors.keys()
+c=colors.keys()
+f(x,t)=sin(5*x)^2+0.02*t
 @interact
-def _(n=(len(c),1,-1)):
-    p=sum([polar_plot(sin(5*x)^2+0.02*i,(x,0,2*pi),
-                      color=c[i-1]) for i in [1..n]])
-    p.show(figsize=(7,7),axes=False)
+def _(n=[20,28,..,len(c)]):
+    p=sum([polar_plot(f(x,i),(x,0,2*pi),plot_points=30,
+                      thickness=1,color=c[i-1]) 
+           for i in [1..n]])
+    p.show(figsize=(5,5),gridlines=True)
 </script></div>
   <h2>Your Field for Experiments</h2>
     <p>Type your own SageMath code lines below and click “Evaluate”.</p> 
