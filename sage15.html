@@ -50,13 +50,16 @@ def _(colormap=['bwr','cool','prism','jet','terrain',
     g.show(frame=False)
 </script></div><br/>
 <div class="compute"><script type="text/x-sage">
+marker_list=[el.decode('utf-8') 
+    for el in ['☕','⚖','☘','⚜','⚙']]
 @interact
-def _(marker=('☕','⚖','☘','⚜','⚙')):
-    m,mc=marker.decode('utf-8'),Color('#3636ff').rgb()
-    X = [cos(t)*ln(t+1) for t in srange(0,2*pi,0.1)] 
-    Y = [sin(t)^3 for t in srange(0,2*pi,0.1)]
-    sum([text(m,(x,y),fontsize=20,rgbcolor=mc) for (x,y) in list(zip(X,Y))])\
-    .show(figsize=(10,5),ymin=-1.1,ymax=1.1)
+def _(marker=marker_list):
+    m,mc=marker,Color('#3636ff').rgb()
+    X=[cos(t)*ln(t+1) for t in srange(0,2*pi,.1)] 
+    Y=[sin(t)^3 for t in srange(0,2*pi,.1)]
+    p=sum([text(m,(x,y),fontsize=20,rgbcolor=mc) 
+         for (x,y) in list(zip(X,Y))])
+    p.show(figsize=(8,5),ymin=-1.1,ymax=1.1)
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
