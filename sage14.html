@@ -40,17 +40,16 @@ def _(x=(1,10,1),y=(1,10,1),z=(1,10,1)):
     t=text3d("(%.1f,%.1f,%.1f)"%(x,y,z),(x,y,z+0.8),color=c)
     (a+r.translate(x,y,z)+t).show();
 </script></div>
-
   <h2>Your Field for Experiments</h2>
-    <p>Type your own SageMath code lines below and click “Evaluate”.</p>
-      
+    <p>Type your own SageMath code lines below and click “Evaluate”.</p>      
 <div class="compute"><script type="text/x-sage">
-L1 = [[j*sin(pi*i/100)+sin(pi*i/50),-j*(1+cos(pi*i/100)+cos(pi*i/50))] \
-     for j in [1..20] for i in range(-100,101)]
-L2 = [[j*sin(pi*i/100)+sin(pi*i/50),-j*(1+cos(pi*i/100)+cos(pi*i/50))] \
-     for i in range(-100,101) for j in [1..20]]
-l1=line(L1,color='#3636ff'); l2=line(L2,color='#ff3636')
-graphics_array(([l1],[l2])).show(figsize=7)
+@interact
+def _(N=[20,25,..,40],M=[20,40,..,100]):
+    f(l,k)=[l*sin(pi*k/M)+sin(2*pi*k/M),-l*(1+cos(pi*k/M)+cos(2*pi*k/M))]
+    L1=[f(j,i) for j in [1..N] for i in range(-2*M,2*M+1)]
+    L2=[f(j,i) for i in range(-2*M,2*M+1) for j in [1..N]]
+    l1=line(L1,color='#3636ff'); l2=line(L2,color='#ff3636')
+    graphics_array(([l1],[l2])).show(figsize=7)
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
