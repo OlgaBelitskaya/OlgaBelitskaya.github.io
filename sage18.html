@@ -88,19 +88,22 @@ p=sum([text(sym[i].decode('utf-8'),L[i],
        for i in [0..99]])
 p.show(figsize=(8,5),gridlines=True)
 </script></div> 
-      
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
 import pandas
-school_explorer = pandas.read_json('https://data.cityofnewyork.us/resource/h7rb-945c.json')
-feature_list = ['dbn','ell_programs','language_classes','finalgrades','total_students',
-                'graduation_rate','attendance_rate','college_career_rate','pct_stu_safe',
-                'pct_stu_enough_variety','latitude','longitude','council_district','city']
-school_explorer = school_explorer[feature_list]
-print(school_explorer.isna().sum()[school_explorer.isna().sum() != 0].to_frame()); print('\n')
-school_explorer = school_explorer.dropna(); school_explorer.head().T
+path='https://data.cityofnewyork.us/resource/'
+se=pandas.read_json(path+'h7rb-945c.json')
+fl=['dbn','ell_programs','language_classes',
+    'finalgrades','total_students',
+    'graduation_rate','attendance_rate',
+    'college_career_rate','pct_stu_safe',
+    'pct_stu_enough_variety','latitude',
+    'longitude','council_district','city']
+se=se[fl]
+sesum=se.isna().sum()[se.isna().sum()!=0]
+print(sesum.to_frame()); print('\n')
+se=se.dropna(); se.head().loc[:2].T
 </script></div>
-      
   <h2>Try Other Languages (R, HTML, ...)</h2>
 <div class="compute"><script type="text/x-sage">
 a1 = r([[2.9,3.0,2.5,2.6,3.2],[3.8,2.7,4.0,2.4],[2.8,3.4,3.7,2.2,2.0]])
