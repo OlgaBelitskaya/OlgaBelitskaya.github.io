@@ -50,16 +50,27 @@ def _(nodes=[2,3,4,5],blocks=[15,10,5]):
   <h2>Your Field for Experiments</h2>
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>
 <div class="compute"><script type="text/x-sage">
-var('u,v,r,t'); x,y = real_part((u+I*v)^3),imag_part((u+I*v)^3)
-uv = {real_part(u):u,imag_part(u):0,real_part(v):v,imag_part(v):0}
-xx,yy = x.subs(uv),y.subs(uv)
-rt = {u:r*cos(t),v:r*sin(t)}
-px,py = xx.subs(rt), yy.subs(rt); pz=r*cos(t)
 def c(r,t): return abs(r*sin(t))
-string = '<left style="color:#3636ff; font-size:150;">$px=%s; \; py=%s; \; pz=%s$</left>'
-pretty_print(html(string%(px,py,pz)))
-parametric_plot3d((px,py,pz),(r,0,1),(t,0,4*pi),adaptive=True,plot_points=20,
-                  color=(c,colormaps.bwr)).show(frame=False)
+s1='<left style="color:#3636ff; font-size:150;">'
+s2='$px=%s$<br/>$py=%s$<br/>$pz=%s$</left>'
+@interact
+def _(n=[2..8],pp=[20,30,..,80],
+      cm=['cool','hsv','bwr']):
+    var('u,v,r,t') 
+    x=real_part((u+I*v)^n)
+    y=imag_part((u+I*v)^n)
+    uv={real_part(u):u,imag_part(u):0,
+    real_part(v):v,imag_part(v):0}
+    xx,yy=x.subs(uv),y.subs(uv)
+    rt={u:r*cos(t),v:r*sin(t)}
+    px,py=xx.subs(rt),yy.subs(rt)
+    pz=r*cos(t)
+    pretty_print(html(s1+s2%(px,py,pz)))
+    p=parametric_plot3d((px,py,pz),
+                        (r,0,1),(t,0,4*pi),
+                        plot_points=pp,
+                        color=(c,colormaps[cm]))
+    p.show(frame=False)
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
