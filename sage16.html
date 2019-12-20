@@ -29,11 +29,14 @@
     <p>Click the “Activate” button below to display an interactive example.</p>      
 <div id="examplecell"><script type="text/x-sage">
 @interact
-def _(N=[20,40,60]):
+def _(N=[20,40,60],CM=['hsv','prism','jet']):
     def f(i): return (ln(i)*cos(i),ln(i)*sin(i))
-    def c(i): return colormaps.hsv(i/(1.0*N))[:3]
-    sum([polygon([f(i),(0,f(i)[1]),(f(i)[0],0)],color=c(i),alpha=0.5)\
-    .plot3d(z=-0.01*i,frame=False) for i in [1..N]]).show()
+    def c(i,cmap): return colormaps[cmap](i/(1.0*N))[:3]
+    p=sum([polygon([f(i),(0,f(i)[1]),(f(i)[0],0)],
+                   color=c(i,CM),
+                   alpha=0.5).plot3d(z=-0.01*i) 
+           for i in [1..N]])
+    p.show(frame=False)
 </script></div>
   <h2>Your Field for Experiments</h2>
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>
