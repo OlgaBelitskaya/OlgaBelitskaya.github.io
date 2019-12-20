@@ -32,22 +32,33 @@
     <p>Click the “Activate” button below to display an interactive example.</p>      
 <div id="examplecell"><script type="text/x-sage">
 @interact
-def _(N=[2,3,4,5]):
+def _(N=[2,3,4]):
     bd=digraphs.ButterflyGraph(N)
-    [bd.set_edge_label(u,v,v) for u,v,l in bd.edges()]
-    bd.show(figsize=7,vertex_size=10,
-            vertex_color='w',
+    nvl=[u+'$\\to$'+str(v) 
+         for u,v in bd.vertices()]
+    bd.relabel(dict(zip(bd.vertices(),nvl)))
+    [bd.set_edge_label(u,v,v) 
+     for u,v,l in bd.edges()]
+    bd.show(figsize=7,vertex_size=3,
             layout='circular',
             color_by_label=True)
 </script></div>
   <h2>Your Field for Experiments</h2>
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>
 <div class="compute"><script type="text/x-sage">
-import pandas; filepath="https://olgabelitskaya.github.io/c_bank.csv"
-silver = finance.TimeSeries(pandas.read_csv(filepath)['silver'].values)
-sp1=scatter_plot(list(enumerate(silver)),edgecolor='#3636ff',facecolor='none',markersize=5)
-sp2=scatter_plot(list(enumerate(stats.moving_average(silver,5))),edgecolor='#ff3636',facecolor='none',markersize=5)
-(sp1+sp2).show(title='An example of the moving_average() usage for silver prices',figsize=(10,5))
+import pandas
+fp='https://olgabelitskaya.github.io/c_bank.csv'
+df=pandas.read_csv(fp)['silver'].values
+silver=finance.TimeSeries(df)
+silver_mav=stats.moving_average(silver,5)
+silver=list(enumerate(silver))
+silver_mav=list(enumerate(silver_mav))
+t='The moving_average() usage for silver prices'
+sp1=scatter_plot(silver,edgecolor='#3636ff',
+                 facecolor='none',markersize=5)
+sp2=scatter_plot(silver_mav,edgecolor='#36ff36',
+                 facecolor='none',markersize=5)
+(sp1+sp2).show(title=t,figsize=7,gridlines=True)
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
