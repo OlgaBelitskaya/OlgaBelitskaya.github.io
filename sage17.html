@@ -20,7 +20,7 @@
   @import url('https://fonts.googleapis.com/css?family=Orbitron');
   h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
   p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:26em;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:48em;}
   </style>  
   <body>
   <h1>&#x1F4D1; &nbsp;SageMath Online Mini Campus. Part 17</h1>
@@ -32,15 +32,17 @@
     <p>Click the “Activate” button below to display an interactive example.</p>      
 <div id="examplecell"><script type="text/x-sage">
 @interact
-def _(axis=['x','y','z']):
-    var('u,phi'); curve_f=(1+u^2/4,1-u^3/8,u)
-    def color_f(u,phi): return cos(2*phi+u)^2
-    revolution_plot3d(curve_f,(u,-4,8),(phi,0,2*pi),parallel_axis=axis,
-                      color=(color_f,colormaps.bwr),frame=False).show()
+def _(axis=['x','y','z'],
+      cm=['bwr','jet','cool','hsv']):
+    var('u,phi'); curve=(1+u^2/4,1-u^3/8,u)
+    def cf(u,phi): return cos(2*phi+u)^2
+    p=revolution_plot3d(curve,(u,-4,8),(phi,0,2*pi),
+                        parallel_axis=axis,
+                        color=(cf,colormaps[cm]))
+    p.show(frame=False)
 </script></div>
   <h2>Your Field for Experiments</h2>
-    <p>Type your own SageMath code lines below and click “Evaluate”.</p>
-      
+    <p>Type your own SageMath code lines below and click “Evaluate”.</p>     
 <div class="compute"><script type="text/x-sage">
 digraphs.Kautz(4,2).show(vertex_color='lightgrey',vertex_size=400,color_by_label=True,figsize=(7,7))
 </script></div>
@@ -64,7 +66,6 @@ f_list = [-sin(x),cos(-x),-tan(x),exp(-x)]; df_list = [f.diff() for f in f_list]
 p=plot(f_list+df_list,(x,-1,1),linestyle=s_list,thickness=3,color=c_list,gridlines=True,legend_label='automatic')
 p.set_legend_options(back_color='silver',bbox_to_anchor=(1.1,0.75)); p.show(figsize=(10,5))
 </script></div> 
-      
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
 import pandas, seaborn, pylab; pylab.style.use('seaborn-pastel')
