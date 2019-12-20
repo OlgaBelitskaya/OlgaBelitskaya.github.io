@@ -63,11 +63,15 @@ sp2=scatter_plot(silver_mav,edgecolor='#36ff36',
     <p></p>
 <div class="compute"><script type="text/x-sage">
 @interact
-def _(a=[2,4,6,8],b=[4,8,12,16]):
-    var('u,phi'); curve = (u^3,cos(a*u),u^2)
-    def color_f(u,phi): return sin(phi+b*u)^2
-    revolution_plot3d(curve,(u,0,1),(phi,0,2*pi),parallel_axis='z',plot_points=120,
-                      color=(color_f,colormaps.bwr),frame=False).show()
+def _(a=[2,4,6,8],b=[4,8,12,16],
+      cm=['cool','jet','bwr','hsv']):
+    var('u,phi'); curve=(u^3,cos(a*u),u^2)
+    def cf(u,phi): return sin(phi+b*u)^2
+    p=revolution_plot3d(curve,(u,0,1),(phi,0,2*pi),
+                        parallel_axis='z',
+                        plot_points=120,
+                        color=(cf,colormaps[cm]))
+    p.show(frame=False)
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
