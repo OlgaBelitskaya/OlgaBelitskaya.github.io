@@ -32,10 +32,14 @@
     <p>Click the “Activate” button below to display an interactive example.</p>      
 <div id="examplecell"><script type="text/x-sage">
 @interact
-def _(n=(9,3,-1)):
-    var('r,phi,theta'); SE = SphericalElevation('elevation',['radius','azimuth'])
-    sum([plot3d(pi/i,(r,0,1),(theta,0,2*pi),transformation=SE,frame=False,opacity=0.1*i,
-                color=colormaps.cool_r(35*(i-2))[:3]) for i in [3..n]]).show()
+def _(n=[9,8,..,3],cm=['cool','jet','hsv']):
+    var('r,phi,theta')
+    def c(i,cmap): return colormaps[cmap](i/(1.*n))[:3]
+    SE=SphericalElevation('elevation',['radius','azimuth'])
+    p=sum([plot3d(pi/i,(r,0,1),(theta,0,2*pi),opacity=.1*i,
+                  transformation=SE,color=c(i,cm)) 
+           for i in [3..n]])
+    p.show(frame=False)
 </script></div>
   <h2>Your Field for Experiments</h2>
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>      
