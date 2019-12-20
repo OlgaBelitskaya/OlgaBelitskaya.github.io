@@ -29,17 +29,23 @@
     <p>Click the “Activate” button below to display an interactive example.</p>      
 <div id="examplecell"><script type="text/x-sage">
 @interact
-def _(nodes=[2,3,4],blocks=[10,15,20]):
-    pretty_print(html('<left style="font-size:120;">Random Graph: %d Blocks with %d Nodes in a Block</left>'%(blocks,nodes)))
-    g = graphs.RandomBlockGraph(blocks,nodes); n=blocks*(nodes-1)+1
+def _(nodes=[2,3,4,5],blocks=[15,10,5]):
+    s1='<left style="font-size:120;">Random Graph: '
+    s2='%d Blockswith %d Nodes in a Block</left>'
+    pretty_print(html(s1+s2%(blocks,nodes)))
+    g=graphs.RandomBlockGraph(blocks,nodes)
+    n=blocks*(nodes-1)+1; ec={};
     [g.set_edge_label(u,v,u) for u,v,l in g.edges()]
-    c = [colormaps.jet(int(255/n)*i)[:3] for i in xrange(n)]; ec = {};
-    for i in xrange(n):
-        ec[c[i]] = [] 
+    c=[colormaps.jet(int(255/n)*i)[:3] 
+       for i in xrange(n)]
+    for i in xrange(n): ec[c[i]]=[] 
     for u,v,l in g.edges():
-        [ec[c[i]].append((u,v,l)) for i in xrange(n) if (u!=v and l==i)] 
-    vc = dict(zip(c,[[i] for i in xrange(n)]))
-    g.graphplot(vertex_size=300,vertex_colors=vc,edge_colors=ec,layout='circular').show(figsize=(5,5))
+        [ec[c[i]].append((u,v,l)) 
+         for i in xrange(n) if (u!=v and l==i)] 
+    vc=dict(zip(c,[[i] for i in xrange(n)]))
+    g=g.graphplot(vertex_size=300,vertex_colors=vc,
+                  edge_colors=ec,layout='circular')
+    g.show(figsize=7)
 </script></div>
   <h2>Your Field for Experiments</h2>
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>
@@ -89,14 +95,14 @@ pylab.show()
 <div class="compute"><script type="text/x-sage">
 %%r
 # samples are random, independent, 
-#from normally distributed statistical population
+# from normally distributed statistical population
 a<-rnorm(16); b<-rnorm(16)
 print(a); print(b)
 print(var.test(a,b)); print(qf(0.95,15,15))
 print(t.test(a,b,var.equal=TRUE,paired=FALSE))
 qt(0.975,30)
 # the null hypothesis H0 
-#of equality of the means is accepted
+# of equality of the means is accepted
 </script></div><br/>
 <div class="compute"><script type="text/x-sage">
 %%html
