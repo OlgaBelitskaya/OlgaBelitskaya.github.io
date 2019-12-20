@@ -55,14 +55,17 @@ def _(layout=['spring','circular'],n=[3,4,5]):
 <div class="compute"><script type="text/x-sage">
 @interact
 def _(N=[1,2,3]):
-    var('phi');
-    if N==1: 
-        def rho(phi): return sqrt(2*cos(2*phi)) if 2*cos(2*phi)>=0 else 0
-    if N==2: 
-        def rho(phi): return 4*cos(2*phi-pi/4)^2
-    if N==3: 
-        def rho(phi): return 6*cos(2*phi) if 6*cos(2*phi)>=3 else 0
-    polar_plot(rho,(phi,0,2*pi),fill=True,fillcolor='#3636ff',figsize=(7,5)).show()
+    def rho(phi):
+        if N==1: 
+            return sqrt(2*cos(2*phi)) if 2*cos(2*phi)>=0 else 0
+        if N==2: 
+            return 4*cos(2*phi-pi/4)^2
+        if N==3: 
+            return 6*cos(2*phi) if 6*cos(2*phi)>=3 else 0
+    var('phi')
+    p=polar_plot(rho,(phi,0,2*pi),fill=True,
+                 fillcolor='#3636ff')
+    p.show(figsize=(7,5),gridlines=True)
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
@@ -86,8 +89,7 @@ data = pandas.read_csv(user+path+"customers.csv")
 data.drop(['Region','Channel'],axis=1,inplace=True)
 data.plot.area(stacked=False,figsize=(10,5),grid=True); 
 pylab.title('Data Values by Product Categories'); pylab.show();
-</script></div>
-      
+</script></div>     
   <h2>Try Other Languages (R, HTML, ...)</h2>
 <div class="compute"><script type="text/x-sage">
 %%r
