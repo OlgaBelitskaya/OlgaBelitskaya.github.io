@@ -94,9 +94,9 @@ X_train_scaled=(X_train-numpy.min(X_train,0))/(numpy.max(X_train,0)+.1^4)
 X_test_scaled=(X_test-numpy.min(X_test,0))/(numpy.max(X_test,0)+.1^4)
 logistic=linear_model.LogisticRegression(max_iter=50,solver='liblinear',
                                          multi_class='ovr')
-logistic.C=5000.0
+logistic.C=2000.0
 brbm=neural_network.BernoulliRBM(random_state=0,verbose=False)
-brbm.learning_rate,brbm.n_iter,brbm.n_components=0.05,50,64
+brbm.learning_rate,brbm.n_iter,brbm.n_components=.05,50,96
 nn_clf=pipeline.Pipeline(steps=[('brbm',brbm),('logistic',logistic)])
 nn_clf.fit(X_train_scaled,y_train)
 print("Logistic regression using BRBM features:\n%s\n"%\
