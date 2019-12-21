@@ -99,17 +99,25 @@ p.show(frame=False)
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
 import pandas,pylab
-school_explorer = pandas.read_json('https://data.cityofnewyork.us/resource/h7rb-945c.json')
-feature_list = ['dbn','ell_programs','language_classes','finalgrades','total_students',
-                'graduation_rate','attendance_rate','college_career_rate','pct_stu_safe',
-                'pct_stu_enough_variety','latitude','longitude','council_district','city']
-school_explorer = school_explorer[feature_list].dropna()
-f,ax = pylab.subplots(ncols=2,figsize=(12,5))
+fp='https://data.cityofnewyork.us/resource/'
+se=pandas.read_json(fp+'h7rb-945c.json')
+fl=['dbn','ell_programs','language_classes',
+    'finalgrades','total_students',
+    'graduation_rate','attendance_rate',
+    'college_career_rate','pct_stu_safe',
+    'pct_stu_enough_variety','latitude',
+    'longitude','council_district','city']
+se=se[fl].dropna()
+f,ax=pylab.subplots(ncols=2,figsize=(11,5))
 for i in range(2):
-    school_explorer[feature_list[i+5]]=school_explorer[feature_list[i+5]]\
-    .astype('string').str.replace("N/A","0").astype('float')
-    school_explorer.plot(kind="scatter",x="longitude",y="latitude",s=10,c=feature_list[i+5],cmap=pylab.cm.jet,
-                         title=feature_list[i+5].replace("_"," "),ax=ax[i],alpha=0.8,grid=True)
+    se[fl[i+5]]=se[fl[i+5]].astype('string')\
+    .str.replace("N/A","0").astype('float')
+    se.plot(kind="scatter",
+            x="longitude",y="latitude",
+            s=10,c=fl[i+5],
+            cmap=pylab.cm.jet,
+            title=fl[i+5].replace("_"," "),
+    ax=ax[i],alpha=.8,grid=True)
     ax[i].set_facecolor('slategray')
 pylab.show()
 </script></div>     
