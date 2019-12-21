@@ -86,15 +86,15 @@ def _(a=[3,4,5,6],b=[3,4,5,6]):
     <p></p>
 <div class="compute"><script type="text/x-sage">
 var('u')
-curves=[(cos(u),0,u^2),
-        (2*sin(u/2),0,u^2),
-        (3*cos(u/3),0,u^2)]
-sum([revolution_plot3d(c,(u,0,6*pi),
-                       parallel_axis='z',
-                       plot_points=30,
-                       opacity=0.4,mesh=True,
-                       color='#3636ff') 
-     for c in curves]).show()
+def cm(t): return colormaps.ocean(80*t)[:3]
+f=[(cos(u),0,u^2),(2*sin(u/2),0,u^2),
+   (3*cos(u/3),0,u^2)]
+p=sum([revolution_plot3d(f[i],(u,0,6*pi),
+                         parallel_axis='z',
+                         plot_points=30,opacity=0.4,
+                         mesh=True,color=cm(i+1)) 
+       for i in range(3)])
+p.show(frame=False)
 </script></div>       
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
