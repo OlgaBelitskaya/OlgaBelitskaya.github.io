@@ -47,18 +47,30 @@ def _(a=[2,3,4],b=[3,4,5],c=[1,2,3]):
   <h2>Your Field for Experiments</h2>
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>
 <div class="compute"><script type="text/x-sage">
-k=1; v=[[[k,k,k],[k,k,k-1],[k-1,k,k],[k,k-1,k]],[[k-1,k-1,k],[k-1,k-1,k-1],[k-1,k,k],[k,k-1,k]],
-       [[k,k,-k],[k,k,-k+1],[k-1,k,-k],[k,k-1,-k]],[[k-1,k-1,-k],[k-1,k-1,-k+1],[k-1,k,-k],[k,k-1,-k]]]
-p=sum([Polyhedron(vertices=v[i]).render_solid(opacity=0.5,color=colormaps.hsv(55*i)[:3]) for i in [0..3]])
-(p+cube((0.5,0.5,0),0.5,opacity=0.5,color=colormaps.hsv(220)[:3])).show(frame=False)
+def v(k): 
+    v=[[[k,k,k],[k,k,k-1],[k-1,k,k],[k,k-1,k]],
+      [[k-1,k-1,k],[k-1,k-1,k-1],[k-1,k,k],[k,k-1,k]],
+      [[k,k,-k],[k,k,-k+1],[k-1,k,-k],[k,k-1,-k]],
+      [[k-1,k-1,-k],[k-1,k-1,-k+1],[k-1,k,-k],[k,k-1,-k]]]
+    return v
+def col(i,cm): return colormaps[cm](55*i)[:3]
+p=sum([Polyhedron(vertices=v(1)[i]).render_solid(opacity=.5,
+       color=col(i,'hsv')) for i in [0..3]])
+c=cube((.5,.5,0),.5,opacity=.5,color=col(4,'hsv'))
+(p+c).show(frame=False)
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
 @interact
-def _(a=[7,9,11],b=[10,14,18]):
-    var('t'); x = cos(t)+cos(a*t)/2+sin((a+b)*t)/3; y = sin(t)+sin(a*t)/2+cos((a+b)*t)/3
-    p=sum([parametric_plot((x,y),(t,(i-1)*pi/24,i*pi/24),color=colormaps.hsv(5*i)[:3]) for i in [1..48]])
-    p.show(aspect_ratio=1,figsize=(7,7))
+def _(a=[7,9,11],b=[10,14,18],m=[48,36,24,16]):
+    x(t)=cos(t)+cos(a*t)/2+sin((a+b)*t)/3
+    y(t)=sin(t)+sin(a*t)/2+cos((a+b)*t)/3
+    def col(c): return colormaps.hsv(5*c)[:3]
+    p=sum([parametric_plot((x,y),
+                           (t,(i-1)*pi/24,i*pi/24),
+                            color=col(i)) 
+          for i in [1..m]])
+    p.show(aspect_ratio=1,figsize=7,gridlines=True)
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
