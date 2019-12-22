@@ -104,7 +104,22 @@ g.show(title='NYC School Districts',
 %%r
 library(stats) # f1=2^x, f2=4*x-x^2, x1=0, x2=4
 f<-function(x) {2^x-(4*x-x^2)}
-integrate(f,lower=0,upper=4)
+print(integrate(f,lower=0,upper=4))
+svg(filename="Rplots.svg",width=7,height=7,pointsize=12,
+    onefile=T,family="sans",bg="white",
+    antialias=c("default","none","gray","subpixel"))
+n<-100; x<-seq(0,4,len=n)
+xy1<-data.frame(x=x,y=2^x)
+xy2<-data.frame(x=x,y=4*x-x^2)
+min_xy<-pmin(xy1,xy2); max_xy<-pmax(xy1,xy2)
+plot(x,xy2$y,type='o',cex=.5,col='#3636ff',
+     xlab='',ylab=''); par(new=T) 
+plot(x,xy1$y,type='o',cex=.5,col='#ff3636',
+     xlim=c(0,4),ylim=c(0,4),xlab='x',ylab='y',
+     fg='gray',col.axis='gray',col.lab='gray')
+polygon(c(xy1$x,rev(xy1$x)),c(max_xy$y,rev(min_xy$y)),
+        col=rgb(.9,0,.9,.3))
+grid(col='gray'); dev.off()
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
