@@ -112,6 +112,16 @@ create_table(randint(1,10),7)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 #21
+var('N,i,A,R,T')
+D(A,R,T,i)=sqrt(T^2+(.5*A*i^2-sqrt(R^2-T^2))^2)
+def create_table(N,A,R,T):
+    pretty_print(html(latex(D))); S=[1..N]
+    if (R<T) or (A<=0): 
+        pretty_print('Введите другие данные')
+    else:
+        d=[[i,A,R,T,D(A,R,T,i)] for i in S]
+        show(table([['N','A','R','T','D']]+d))
+create_table(7,3.2,23.1,9.4)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 #22
