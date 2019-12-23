@@ -28,23 +28,31 @@
 <a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a>
     <p>The set of interactive pages with the following structure:</p>
     <p>Example of Computations $\implies$ Your Field for Experiments $\implies$ Try Python Modules $\implies$ Try Other Languages</p>
-      
   <h2>Example of Computations</h2>
     <p>Click the “Activate” button below to display an interactive example.</p>      
 <div id="examplecell"><script type="text/x-sage">
 @interact
-def _(A='a,3,2,c,1,ф,⎈,D',B='ф,7,a,⎈,2,1,B,θ',C='8,N,a,θ,4,P,⎈,r'):
-    S = [sorted(list(el.encode('utf-8').split(','))) for el in [A,B,C]]
-    AB,AC,BC = list(set(S[0])&set(S[1])),list(set(S[0])&set(S[2])),list(set(S[1])&set(S[2])) 
-    ABC = list(set(AB)&set(S[2]))
-    pretty_print(html('<left style="color:#ff3636; font-size:18px;">$A \cap B = %s$</left>'%('{'+','.join(AB)+'}')))
-    pretty_print(html('<left style="color:#36ff36; font-size:18px;">$A \cap C = %s$</left>'%('{'+','.join(AC)+'}')))
-    pretty_print(html('<left style="color:#3636ff; font-size:18px;">$B \cap C = %s$</left>'%('{'+','.join(BC)+'}')))
-    pretty_print(html('<left style="font-size:20px;">$A \cap B \cap C = %s$</left>'%('{'+','.join(ABC)+'}')))
+def _(A='a,3,2,c,1,ф,⎈,D',
+      B='ф,7,a,⎈,2,1,B,θ',
+      C='8,N,a,θ,4,P,⎈,r'):
+    S=[sorted(list(el.encode('utf-8').split(','))) 
+       for el in [A,B,C]]
+    s='<left style="color:%s; font-size:20px;">'
+    s1='$A \cap B = %s$</left>'
+    s2='$A \cap C = %s$</left>'
+    s3='$B \cap C = %s$</left>'
+    s4='$A \cap B \cap C = %s$</left>'
+    AB=list(set(S[0])&set(S[1]))
+    AC=list(set(S[0])&set(S[2]))
+    BC=list(set(S[1])&set(S[2])) 
+    ABC=list(set(AB)&set(S[2]))
+    pretty_print(html(s%'#ff3636'+s1%('{'+','.join(AB)+'}')))
+    pretty_print(html(s%'#36ff36'+s2%('{'+','.join(AC)+'}')))
+    pretty_print(html(s%'#3636ff'+s3%('{'+','.join(BC)+'}')))
+    pretty_print(html(s%'#ff36ff'+s4%('{'+','.join(ABC)+'}')))
 </script></div>
   <h2>Your Field for Experiments</h2>
-    <p>Type your own SageMath code lines below and click “Evaluate”.</p>
-      
+    <p>Type your own SageMath code lines below and click “Evaluate”.</p>     
 <div class="compute"><script type="text/x-sage">
 var('t,k'); f=exp(-(-t+k)^2)*sin(2*pi*(t+k)); c=[colormaps.bwr(30*i)[:3] for i in range(10)]
 fragments = [plot(f(t,k),(t,-3,3),fill='axis',fillcolor=c[k]) for k in range(10)]
