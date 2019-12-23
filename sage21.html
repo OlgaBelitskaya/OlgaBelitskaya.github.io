@@ -20,7 +20,7 @@
   @import url('https://fonts.googleapis.com/css?family=Orbitron');
   h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
   p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}      
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:26em;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:58em;}
   </style>  
   <body>
   <h1>&#x1F4D1; &nbsp;SageMath Online Mini Campus. Part 21</h1>
@@ -65,24 +65,30 @@ animate(fragments,title=cm,gridlines=True,
     <p></p>
 <div class="compute"><script type="text/x-sage">
 @interact
-def _(function=['(2t, t^2)','(7sin(t), 4cos(t)+6)','(2t cos(t)^2, t^2 cos(t)^2)']):
+def _(function=['(2t, t^2)','(7sin(t), 4cos(t)+6)',
+                '(2t cos(t)^2, t^2 cos(t)^2)']):
     n=10; var('t'); c=['#3636ff','#ff3636']; 
-    if function=='(2t, t^2)':
-        f = (2*t,t^2)
+    if function=='(2t, t^2)': f=(2*t,t^2)
     elif function=='(7sin(t), 4cos(t)+6)':
-        f = (7*sin(t),4*cos(t)+6)
-    else: 
-        f = (2*t*cos(t)^2,t^2*cos(t)^2)
-    df = (f[0].diff(),f[1].diff()); d2f = (df[0].diff(),df[1].diff())
+        f=(7*sin(t),4*cos(t)+6)
+    else: f=(2*t*cos(t)^2,t^2*cos(t)^2)
+    df=(f[0].diff(),f[1].diff()) 
+    d2f=(df[0].diff(),df[1].diff())
     def norm(g): return sqrt(sum(el^2 for el in g))
-    normdf,normd2f = norm(df),norm(d2f); fnormal=(df[1]/normdf,-df[0]/normdf) 
-    r=norm(df)^3/(df[1]*d2f[0]-df[0]*d2f[1]); centers=(f[0]+r*fnormal[0],f[1]+r*fnormal[1])
+    normdf,normd2f=norm(df),norm(d2f)
+    fnormal=(df[1]/normdf,-df[0]/normdf) 
+    r=norm(df)^3/(df[1]*d2f[0]-df[0]*d2f[1])
+    centers=(f[0]+r*fnormal[0],f[1]+r*fnormal[1])
     print('f: x(t)=%s; y(t)=%s'%(f))
-    p=parametric_plot(f,(t,-n,n),color=c[0],thickness=2)
-    p+=parametric_plot(centers,(t,-n,n),color=c[1],thickness=3,linestyle='--')
-    p+=sum(line2d([(f[0](t=i),f[1](t=i)),(centers[0](t=i),centers[1](t=i))], 
-           thickness=1,rgbcolor=Color('silver').rgb()) for i in sxrange(-n,n,0.1))
-    p.show(xmin=-8,xmax=8,ymin=-2,ymax=14,figsize=(5,5))
+    p=parametric_plot(f,(t,-n,n),
+                      color=c[0],thickness=2)
+    p+=parametric_plot(centers,(t,-n,n),color=c[1],
+                       thickness=3,linestyle='--')
+    p+=sum(line2d([(f[0](t=i),f[1](t=i)),
+                   (centers[0](t=i),centers[1](t=i))], 
+           thickness=1,rgbcolor=Color('silver').rgb()) 
+           for i in sxrange(-n,n,0.1))
+    p.show(xmin=-8,xmax=8,ymin=-2,ymax=14,figsize=7)
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
