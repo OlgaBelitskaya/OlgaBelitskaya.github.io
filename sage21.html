@@ -102,24 +102,39 @@ p.show(figsize=7,aspect_ratio=1)
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
 import pandas,pylab
-se = pandas.read_json('https://data.cityofnewyork.us/resource/h7rb-945c.json')
-feature_list = ['graduation_rate','city','council_district']
-se = se[feature_list].dropna(); se['graduation_rate_range']=se.shape[0]*['0']
-se['graduation_rate']=se['graduation_rate'].astype('string').str.replace("N/A","0").astype('float')
-se['council_district']=se['council_district'].astype('int').astype('string')
-se.loc[se['graduation_rate']<=0.5,'graduation_rate_range'] = 'gr <= 0.5'
-se.loc[(se['graduation_rate']>0.5)&(se['graduation_rate']<=0.75),'graduation_rate_range'] = '0.5 < gr <= 0.75'
-se.loc[(se['graduation_rate']>0.75)&(se['graduation_rate']<=0.9),'graduation_rate_range'] = '0.75 < gr <= 0.9'
-se.loc[se['graduation_rate']>0.90,'graduation_rate_range'] = 'gr > 0.9'
-gr_list=['gr <= 0.5','0.5 < gr <= 0.75','0.75 < gr <= 0.9','gr > 0.9']
-fig,ax = pylab.subplots(nrows=2,ncols=1,figsize=(10,10)); ax[0].tick_params('x',rotation=90)
-pandas.crosstab(se['council_district'],se['graduation_rate_range'])[gr_list].plot.bar(ax=ax[0],cmap=pylab.cm.bwr)
-city_list = ['New York','Bronx','Brooklyn','Staten Island','Jamaica','Flushing','Long Island City','Manhattan']
-data = se.loc[se['city'].isin(city_list)]
-pandas.crosstab(data['city'],se['graduation_rate_range'])[gr_list].plot.barh(ax=ax[1],cmap=pylab.cm.bwr)
-pylab.suptitle('Student Graduation Rate by Council Districts and Cities'); pylab.show();
-</script></div>
-      
+fp='https://data.cityofnewyork.us/resource/'
+se=pandas.read_json(fp+'h7rb-945c.json')
+fl=['graduation_rate','city','council_district']
+se=se[fl].dropna()
+se['graduation_rate_range']=se.shape[0]*['0']
+se['graduation_rate']=se['graduation_rate']\
+.astype('string').str.replace("N/A","0").astype('float')
+se['council_district']=se['council_district']\
+.astype('int').astype('string')
+se.loc[se['graduation_rate']<=0.5,
+       'graduation_rate_range']='gr <= 0.5'
+se.loc[(se['graduation_rate']>0.5)&(se['graduation_rate']<=0.75),
+       'graduation_rate_range']='0.5 < gr <= 0.75'
+se.loc[(se['graduation_rate']>0.75)&(se['graduation_rate']<=0.9),
+       'graduation_rate_range'] = '0.75 < gr <= 0.9'
+se.loc[se['graduation_rate']>0.90,
+       'graduation_rate_range']='gr > 0.9'
+gr_list=['gr <= 0.5','0.5 < gr <= 0.75',
+         '0.75 < gr <= 0.9','gr > 0.9']
+fig,ax=pylab.subplots(nrows=2,ncols=1,figsize=(10,10))
+s='Student Graduation Rate by Council Districts and Cities'
+ax[0].tick_params('x',rotation=90)
+pandas.crosstab(se['council_district'],
+                se['graduation_rate_range'])[gr_list]\
+.plot.bar(ax=ax[0],cmap=pylab.cm.bwr)
+city_list=['New York','Bronx','Brooklyn','Staten Island',
+           'Jamaica','Flushing','Long Island City','Manhattan']
+data=se.loc[se['city'].isin(city_list)]
+pandas.crosstab(data['city'],
+                se['graduation_rate_range'])[gr_list]\
+.plot.barh(ax=ax[1],cmap=pylab.cm.bwr)
+pylab.suptitle(s); pylab.show()
+</script></div>      
   <h2>Try Other Languages (R, HTML, ...)</h2>
 <div class="compute"><script type="text/x-sage">
 %%r
@@ -143,7 +158,6 @@ Evaluate the javascript code for converting the Fahrenheit temperature 86 &ordm;
 %%javascript
 function f2c(f) {return (5/9)*(f-32)};
 document.getElementById('demo').innerHTML = f2c(86);
-</script></div> 
-    <p></p>      
+</script></div>     
   </body>
 </html>
