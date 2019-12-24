@@ -89,17 +89,25 @@ animate(sn,frame=False)
 </script></div> 
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
-import pandas,pylab; from sklearn import datasets,linear_model,feature_selection; 
-from sklearn.ensemble import GradientBoostingClassifier,AdaBoostClassifier
-wine = datasets.load_wine(); X,y = wine.data,wine.target
-selected_features = pandas.DataFrame(columns=range(13))
-selected_features.loc['GradientBoostingClassifier'] = GradientBoostingClassifier().fit(X,y).feature_importances_
-selected_features.loc['AdaBoostClassifier'] = AdaBoostClassifier().fit(X,y).feature_importances_
-kbest = feature_selection.SelectKBest(score_func=feature_selection.chi2,k=3)
-selected_features.loc['SelectKBest'] = kbest.fit(X,y).pvalues_
-rfe=feature_selection.RFE(linear_model.LogisticRegression(solver='liblinear',multi_class='ovr'),3)
-selected_features.loc['RFE'] = 1/rfe.fit(X,y).ranking_
-f,ax = pylab.subplots(1,figsize=(10,5)); selected_features.T.plot(ax=ax); pylab.grid(); pylab.show()
+import pandas,pylab; from sklearn import linear_model as lm
+from sklearn import datasets,feature_selection
+from sklearn.ensemble import GradientBoostingClassifier as GBC
+from sklearn.ensemble import AdaBoostClassifier as ABC
+wine=datasets.load_wine(); X,y=wine.data,wine.target
+selected_features=pandas.DataFrame(columns=range(13))
+selected_features.loc['Gradient Boosting']=\
+GBC().fit(X,y).feature_importances_
+selected_features.loc['Ada Boost']=\
+ABC().fit(X,y).feature_importances_
+kbest=feature_selection\
+.SelectKBest(score_func=feature_selection.chi2,k=3)
+selected_features.loc['Select KBest']=kbest.fit(X,y).pvalues_
+lmlr=lm.LogisticRegression(solver='liblinear',multi_class='ovr')
+rfe=feature_selection.RFE(lmlr,3)
+selected_features.loc['RFE']=1/rfe.fit(X,y).ranking_
+f,ax = pylab.subplots(1,figsize=(8,5))
+selected_features.T.plot(ax=ax)
+pylab.grid(); pylab.show()
 </script></div>
   <h2>Try Other Languages (R, HTML, ...)</h2>
 <div class="compute"><script type="text/x-sage">
