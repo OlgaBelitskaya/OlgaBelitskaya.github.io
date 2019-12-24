@@ -31,14 +31,25 @@
   <h2>Example of Computations</h2>
     <p>Click the “Activate” button below to display an interactive example.</p>      
 <div id="examplecell"><script type="text/x-sage">
+sx='$x=-%.1f*cos(%.1f*t)-%.1f*cos(%.1f*t)+%.1f*sin(%.1f*t)$'
+sy='$y=-%.1f*cos(%.1f*t)+%.1f*sin(%.1f*t)-%.1f*sin(%.1f*t)$'
+sz='$z=%.1f*cos(%.1f*t)$'
+def L(i): return (-a*cos(d*i)-b*cos(e*i)+c*sin(f*i),
+                  -c*cos(f*i)+a*sin(d*i)-b*sin(e*i),
+                  a*cos(g*i))
 @interact
 def _(a=[10,15,20],b=[2,4,6],c=[15,10,5]):
     d=0.1; e=0.4; f=0.2; g=0.3; var('t')
-    pretty_print('x = -%.1f*cos(%.1f*t)-%.1f*cos(%.1f*t)+%.1f*sin(%.1f*t))'%(a,d,b,e,c,f)) 
-    pretty_print('y = -%.1f*cos(%.1f*t)+%.1f*sin(%.1f*t)-%.1f*sin(%.1f*t)'%(c,f,a,d,b,e))
-    pretty_print('z = %.1f*cos(%.1f*t)'%(a,g))
-    def L(i): return (-a*cos(d*i)-b*cos(e*i)+c*sin(f*i),-c*cos(f*i)+a*sin(d*i)-b*sin(e*i),a*cos(g*i))
-    sum([line3d([L(i),L(i+1)],color=colormaps.winter(4*i)[:3],radius=.5) for i in [0..64]]).show(frame=False)
+    pretty_print(html(sx%(a,d,b,e,c,f)))
+    pretty_print(html(sy%(c,f,a,d,b,e)))
+    pretty_print(html(sz%(a,g)))
+    def L(i): return (-a*cos(d*i)-b*cos(e*i)+c*sin(f*i),
+                      -c*cos(f*i)+a*sin(d*i)-b*sin(e*i),
+                      a*cos(g*i))
+    p=sum([line3d([L(i),L(i+1)],radius=.5,
+                  color=colormaps.winter(4*i)[:3]) 
+           for i in [0..64]])
+    p.show(frame=False)
 </script></div>
   <h2>Your Field for Experiments</h2>
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>
@@ -73,7 +84,6 @@ spheres=[sphere12+Sphere(2,color=(0.2*i,0,0.3*i))\
          .translate(0,13*cos(pi*i/12),7*sin(pi*i/12)) for i in [0..24]]
 animate(spheres,frame=False)
 </script></div> 
-      
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
 import pandas,pylab; from sklearn import datasets,linear_model,feature_selection; 
