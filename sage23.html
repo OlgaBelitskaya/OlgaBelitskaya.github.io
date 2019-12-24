@@ -82,14 +82,17 @@ animate([t+text(M,(x,y),fontsize=30,rgbcolor=c[2])
 </script></div>    
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
-import numpy,pylab; from scipy.io import wavfile; import urllib
-input_file = urllib.urlopen('https://ccrma.stanford.edu/~jos/wav/slideflute.wav')
-output_file = open('slideflute.wav','wb'); output_file.write(input_file.read())
+import numpy,pylab,urllib; from scipy.io import wavfile
+url='https://ccrma.stanford.edu/~jos/wav/slideflute.wav'
+input_file=urllib.urlopen(url)
+output_file=open('slideflute.wav','wb')
+output_file.write(input_file.read())
 output_file.close(); input_file.close()
-sr, wav = wavfile.read('slideflute.wav');
-wav = wav.astype('float')/numpy.iinfo(numpy.int16).max
-f,ax = pylab.subplots(1,figsize=(7,5));
-ax.plot(wav[:,1],c='#3636ff'); ax.plot(wav[:,0],c='#ff3636',alpha=0.7);
+sr,wav=wavfile.read('slideflute.wav');
+wav=wav.astype('float')/numpy.iinfo(numpy.int16).max
+f,ax=pylab.subplots(1,figsize=(7,5))
+ax.plot(wav[:,1],c='#3636ff',lw=.05)
+ax.plot(wav[:,0],c='#ff36ff',lw=.05,alpha=.7)
 ax.set_ylabel('amplitude'); pylab.show()
 </script></div>
       
