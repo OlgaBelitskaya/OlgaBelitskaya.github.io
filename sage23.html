@@ -70,11 +70,15 @@ def _(N=[200,175,..,50]):
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
-X=[x for x in srange(-2,2,0.1)]; Y=[exp(-x^2)*sin(pi*x^3) for x in X]; 
+X=[x for x in srange(-2,2,0.1)]
+Y=[exp(-x^2)*sin(pi*x^3) for x in X] 
 Y1,Y2=[exp(-x^2) for x in X],[-exp(-x^2) for x in X]
-m,M='◎'.decode('utf-8'),'☕'.decode('utf-8'); c=[hue(0.3*i) for i in [0..2]]
-t=sum([text(m,(x,y),fontsize=5,rgbcolor=c[i]) for i in [0..2] for (x,y) in list(zip(X,[Y1,Y2,Y][i]))])
-animate([t+text(M,(x,y),fontsize=25,rgbcolor=c[2]) for (x,y) in list(zip(X,Y))])
+m,M='◎'.decode('utf-8'),'☕'.decode('utf-8')
+c=[colormaps.cool(80*i)[:3] for i in [0,1,2]]
+t=sum([text(m,(x,y),fontsize=10,rgbcolor=c[i],gridlines=True) 
+       for i in [0..2] for (x,y) in list(zip(X,[Y1,Y2,Y][i]))])
+animate([t+text(M,(x,y),fontsize=30,rgbcolor=c[2]) 
+         for (x,y) in list(zip(X,Y))])
 </script></div>    
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
