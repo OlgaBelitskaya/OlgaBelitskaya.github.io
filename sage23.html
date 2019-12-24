@@ -45,23 +45,27 @@ def _(t=slider(0.05,0.95,0.05,0.05)):
 </script></div>
   <h2>Your Field for Experiments</h2>
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>
-      
 <div class="compute"><script type="text/x-sage">
-pretty_print('Random Color Walk')
-n=100; p=[0,0,0]; rw=[copy(p)]; c=[colormaps.hsv((1/n).n()*i)[:3] for i in [0..n]]
+pretty_print(html('<p>Random Color Walk</p>'))
+n=100; p=[0,0,0]; rw=[copy(p)]
+c=[colormaps.hsv((1/n).n()*i)[:3] for i in [0..n]]
 for i in [1..n]: 
     for j in [0..2]: p[j]+=random()-0.5;
     rw.append(copy(p))
-sum([line3d([rw[i],rw[i+1]],color=c[i],radius=0.1) for i in [0..n-1]]).show(aspect_ratio=[1,1,1]) 
+l=sum([line3d([rw[i],rw[i+1]],color=c[i],radius=0.1) 
+       for i in [0..n-1]])
+l.show(aspect_ratio=[1,1,1])
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
 @interact
 def _(N=(50,200,25)):
-    L = [CC(0,0)]; var('n'); z = lambda n:exp(I*pi*n*2^0.2).n()
-    c = [colormaps.hsv_r((200^(-1)).n()*i)[:3] for i in [1..200]]
+    L=[CC(0,0)]; z=lambda n:exp(I*pi*n*2^0.2).n()
+    c=[colormaps.hsv_r((200^(-1)).n()*i)[:3] for i in [1..200]]
     for n in [1..N]: L.append(L[n-1]+CC(z(n))); 
-    sum([line([L[i],L[i+1]],color=c[i]) for i in [1..N-1]]).show(figsize=(5,5),axes=False)
+    p=sum([line([L[i],L[i+1]],color=c[i]) 
+           for i in [1..N-1]])
+    p.show(figsize=(5,5),axes=False)
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
@@ -70,8 +74,7 @@ Y1,Y2=[exp(-x^2) for x in X],[-exp(-x^2) for x in X]
 m,M='◎'.decode('utf-8'),'☕'.decode('utf-8'); c=[hue(0.3*i) for i in [0..2]]
 t=sum([text(m,(x,y),fontsize=5,rgbcolor=c[i]) for i in [0..2] for (x,y) in list(zip(X,[Y1,Y2,Y][i]))])
 animate([t+text(M,(x,y),fontsize=25,rgbcolor=c[2]) for (x,y) in list(zip(X,Y))])
-</script></div> 
-      
+</script></div>    
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
 import numpy,pylab; from scipy.io import wavfile; import urllib
