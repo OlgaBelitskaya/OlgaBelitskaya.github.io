@@ -78,11 +78,14 @@ def _(n=[1..11]):
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
-var('x,y,z'); from sage.plot.plot3d.shapes import Sphere
-sphere12=Sphere(15,color='#3030ff',opacity=0.05).translate(0,0,0)+Sphere(5,color='#3030ff').translate(0,0,0)
-spheres=[sphere12+Sphere(2,color=(0.2*i,0,0.3*i))\
-         .translate(0,13*cos(pi*i/12),7*sin(pi*i/12)) for i in [0..24]]
-animate(spheres,frame=False)
+from sage.plot.plot3d.shapes import Sphere
+var('x,y,z'); c='#3030ff'; n=12
+s1=Sphere(8,color=c,opacity=.05).translate(0,0,0)
+s2=Sphere(3,color=c).translate(0,0,0)
+sn=[s1+s2+Sphere(1,color=(.2*i,0,.3*i))\
+   .translate(0,7*cos(pi*i/n),4*sin(pi*i/n)) 
+    for i in [0..2*n]]
+animate(sn,frame=False)
 </script></div> 
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
@@ -98,7 +101,6 @@ rfe=feature_selection.RFE(linear_model.LogisticRegression(solver='liblinear',mul
 selected_features.loc['RFE'] = 1/rfe.fit(X,y).ranking_
 f,ax = pylab.subplots(1,figsize=(10,5)); selected_features.T.plot(ax=ax); pylab.grid(); pylab.show()
 </script></div>
-      
   <h2>Try Other Languages (R, HTML, ...)</h2>
 <div class="compute"><script type="text/x-sage">
 %%r
