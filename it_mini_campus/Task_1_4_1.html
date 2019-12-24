@@ -100,13 +100,30 @@ pretty_print('string summation'); pretty_print(X1,'->',sum_arr(X1))
 pretty_print('number summation'); pretty_print(X2,'->',sum_arr(X2))
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
-#22
-V=0; N=10; R=[round(random()*1000,2) for i in [0..N]]
-H=[round(2*random()*R[i],2) for i in [0..N-1]]
-for i in [0..N-1]: V+=pi*H[i]^2*(R[i]-H[i]/3)
-pretty_print('radiuses: %s'%str(R))
-pretty_print('heights: %s'%str(H))
-pretty_print('volume: %.4f'%V)
+# Variant 1
+V=0; N=5; c=0; s='Данные не корректны'
+R=[282.26,246.19,943.02,902.51,245.93]
+H=[112.35,184.01,0,1414.61,91.32]
+for i in [0..N-1]: 
+    if (R[i]<=0 or H[i]<0 or 2*R[i]<H[i]):
+        pretty_print(s); c=1; break   
+    else: V+=pi*H[i]^2*(R[i]-H[i]/3)
+t=[['radiuses',html(ascii_art('%s'%R))],
+   ['heights',html(ascii_art('%s'%H))],
+   ['volume',html(ascii_art('<p>$%s$</p>'\
+   %[latex(V),latex(V.n())]))]]
+if c==0: show(table(t))
+# Variant 2
+V=0; N=7; R,H=[],[]
+for i in [0..N-1]: 
+    R+=[round(random()*1000,2)]
+    H+=[round(2*random()*R[i],2)]
+    V+=pi*H[i]^2*(R[i]-H[i]/3)
+t=[['radiuses',html(ascii_art('%s'%R))],
+   ['heights',html(ascii_art('%s'%H))],
+   ['volume',html(ascii_art('<p>$%s$</p>'\
+   %[latex(V),latex(V.n())]))]]
+table(t)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 #23
