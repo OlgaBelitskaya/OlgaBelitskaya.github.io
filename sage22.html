@@ -42,12 +42,17 @@ def _(a=[10,15,20],b=[2,4,6],c=[15,10,5]):
 </script></div>
   <h2>Your Field for Experiments</h2>
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>
-      
 <div class="compute"><script type="text/x-sage">
-N = 10000; L = [CC(0,0)]; var('n'); c = [colormaps.cool((N^(-1)).n()*i)[:3] for i in [1..N]]
-z = lambda n:exp(I*pi*n*ln(n/4)*2^0.5).n() 
-for n in [1..N]: L.append(L[n-1]+CC(z(n))); 
-sum([line([L[i],L[i+1]],color=c[i]) for i in [200..N-1]]).show(figsize=(5,5))
+@interact
+def _(N=[2*10^3,5*10^3,10^4]): 
+    L=[CC(0,0)]
+    c=[colormaps.cool((N^(-1)).n()*i)[:3] 
+       for i in [1..N]]
+    z=lambda n:exp(I*pi*n*ln(n/4)*2^0.5).n() 
+    for n in [1..N]: L.append(L[n-1]+CC(z(n))) 
+    p=sum([line([L[i],L[i+1]],color=c[i]) 
+           for i in [200..N-1]])
+    p.show(figsize=(5,5))
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
