@@ -107,13 +107,17 @@ pylab.axis("off"); pylab.show()
   <h2>Try Other Languages (R, HTML, ...)</h2>
 <div class="compute"><script type="text/x-sage">
 %%r
-library('grDevices'); library('MASS'); library('nnet'); data(Boston); n <- dim(Boston)[1];
-svg(filename="Rplots.svg",width=10,height=5,pointsize=12,onefile=T,
-      family="sans",bg="white",antialias=c("default","none","gray","subpixel"))
-model <- nnet(as.matrix(Boston[1:430,-14]),as.matrix(Boston[1:430,14]),size=64,maxit=800,linout=T,decay=0.01)
-predictions <- predict(model,as.matrix(Boston[431:n,-14]),type="raw")
-plot(as.matrix(Boston[431:n,14]),col="#3636ff",type="o",ylab='targets & predictions',yaxt="n");  
-par(new=TRUE); plot(predictions,col="#ff3636",type="o",cex=1.3,ylab='targets & predictions'); dev.off()
+library('MASS'); library('nnet'); data(Boston); n<-dim(Boston)[1];
+svg(filename="Rplots.svg",width=8,height=5,pointsize=12,
+    onefile=T,family="courier",bg="white",
+    antialias=c("default","none","gray","subpixel"))
+model<-nnet(as.matrix(Boston[1:430,-14]),as.matrix(Boston[1:430,14]),
+            size=52,trace=F,maxit=10^3,linout=T,decay=5*.1^4)
+predictions<-predict(model,as.matrix(Boston[431:n,-14]),type="raw")
+plot(as.matrix(Boston[431:n,14]),col="#3636ff",type="o",
+     xlab='',ylab='',yaxt='n'); par(new=T)
+plot(predictions,col="#ff3636",type="o",
+     cex=1.3,ylab='Targets & Predictions'); dev.off()
 </script></div>
     <p>Click “Evaluate” twice. Use in HTML documents with &#60;/script&#62; in the end.</p>
 <div class="compute"><script type="text/x-sage">
