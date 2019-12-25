@@ -94,22 +94,24 @@ p2=sum([parametric_plot(tf2(i,K,t),(t,0,2*pi),color=hue(i/6)) for i in range(1,5
     <h1>Tachyon 3D Ray Tracer</h1>
 SageMath &#38; SageMathCell 
 <div class="sage"><script type="text/x-sage">
-a,b,c=1,2,3
-sx='x(t)=%s*sin(%s*t/2)*cos(%s*t/2); '
-sy='y(t)=%s*cos(%s*t/3); '
-sz='z(t)=%s*sin(%s*t/2)*sin(%s*t/2)'
-s='<p style="font-size:110%;">'
-s+=sx%(a,c,c)+sy%(b,b)+sz%(c,a,a)+'</p>'
-pretty_print(html(s))
-f=lambda p:(a*sin(c*p/2)*cos(c*p/2),
-            b*cos(b*p/3),
-            c*sin(a*p/2)*sin(a*p/2))
-t=Tachyon(xres=500,yres=500,camera_center=(-6,-6,1))
-t.texture('t1',color=(.3,0,.3),opacity=.5)
-t.texture('t2',color=(.7,.7,.7),texfunc=2)
-t.parametric_plot(f,0,6*pi,'t1',r=.05)
-t.plane((7,7,-7),(0,-1,1),'t2')
-t.light((-7,-7,7),2,(1,1,1)); t.show()
+@interact
+def _(a=[1,2,3,4],b=[2,3,1],
+      c=[3,2,1],d=[7,6,5,4]):
+    sx='x(t)=%s*sin(%s*t/2)*cos(%s*t/2)<br/>'
+    sy='y(t)=%s*cos(%s*t/3)*cos(%s*t/3)<br/>'
+    sz='z(t)=%s*sin(%s*t/2)*sin(%s*t/2)'
+    s='<p style="font-size:120%;">'
+    s+=sx%(a,c,c)+sy%(b,a,c)+sz%(c,a,a)+'</p>'
+    pretty_print(html(s))
+    f=lambda p:(a*sin(c*p/2)*cos(c*p/2),
+                b*cos(a*p/3)*cos(c*p/3),
+                c*sin(a*p/2)*sin(a*p/2))
+    t=Tachyon(xres=400,yres=400,camera_center=(-6,-6,2))
+    t.texture('t1',color=(0,0,.3),opacity=.5)
+    t.texture('t2',color=(.7,.7,.7),texfunc=2)
+    t.parametric_plot(f,0,6*pi,'t1',r=.05,min_depth=d)
+    t.plane((7,7,-7),(0,-1,1),'t2')
+    t.light((-7,-7,7),2,(1,1,1)); t.show()
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 
