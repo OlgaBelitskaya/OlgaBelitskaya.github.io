@@ -78,11 +78,14 @@ def _(proj=['perspective','fisheye','perspective_dof'],
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
-var('k,x,y'); pretty_print(y==x^2*k^2-12*x^2+k^2*x-3*sqrt(3)*k*x+6*x+k^2-sqrt(3)*k-6)
-c=[colormaps.jet(0.03*i)[:3] for i in [0..31]]; k=[0.12*i for i in [0..31]]
-p=sum([plot(x^2*k[i]^2-12*x^2+k[i]^2*x-3^1.5*k[i]*x+6*x+k[i]^2-3^0.5*k[i]-6,(x,-2,2),color=c[i],
-            legend_label='%.2f'%k[i]) for i in [0..31]])
-p.set_legend_options(loc=(1.1,-0.1)); p.show(ymin=-8,ymax=2,figsize=(10,5))
+y(k,x)=x^2*k^2-12*x^2+k^2*x-3*sqrt(3)*k*x+6*x+k^2-sqrt(3)*k-6
+pretty_print(html('<p>$y=%s$</p>'%latex(y(k,x))))
+n=31; k=[.12*i for i in [0..n]]
+c=[colormaps.hsv(.03*i)[:3] for i in [0..n]]
+p=sum([plot(y(k[i],x),(x,-2,2),color=c[i],
+            legend_label='%.2f'%k[i]) for i in [0..n]])
+p.set_legend_options(loc=(1.1,-.1))
+p.show(ymin=-8,ymax=2,figsize=(8,5),gridlines=True)
 </script></div>       
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
