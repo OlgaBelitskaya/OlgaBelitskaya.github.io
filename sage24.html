@@ -89,14 +89,20 @@ p.show(ymin=-8,ymax=2,figsize=(8,5),gridlines=True)
 </script></div>       
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
-import numpy,pylab,time; from sklearn import manifold,datasets
-X,y = datasets.load_digits(return_X_y=True); t0=time.time()
-X_emb = manifold.TSNE(n_components=2,learning_rate=700.0).fit_transform(X)
-x_min,x_max = numpy.min(X_emb,0),numpy.max(X_emb,0); X_emb = (X_emb-x_min)/(x_max-x_min)
-f,ax = pylab.subplots(1,figsize=(7,7)); pylab.axis("off")
+import numpy,pylab,time
+from sklearn import manifold,datasets
+X,y=datasets.load_digits(return_X_y=True)
+tsne=manifold.TSNE(n_components=2,learning_rate=700.0)
+t0=time.time(); X_emb=tsne.fit_transform(X)
+t=time.time()-t0
+x_min,x_max=numpy.min(X_emb,0),numpy.max(X_emb,0)
+X_emb=(X_emb-x_min)/(x_max-x_min)
+f,ax=pylab.subplots(1,figsize=(7,7))
 for i in range(X_emb.shape[0]):
-    pylab.text(X_emb[i,0],X_emb[i,1],str(y[i]),color=pylab.cm.hsv(y[i]/10.))
-pylab.title("t-SNE embedding %f s"%(time.time()-t0)); pylab.show()
+    pylab.text(X_emb[i,0],X_emb[i,1],str(y[i]),
+               color=pylab.cm.hsv(.1*y[i]))
+pylab.title("t-SNE embedding %f s"%t)
+pylab.axis("off"); pylab.show()
 </script></div>      
   <h2>Try Other Languages (R, HTML, ...)</h2>
 <div class="compute"><script type="text/x-sage">
