@@ -139,17 +139,26 @@ function make_x_gridlines() {return d3.axisBottom(xScale).ticks(11)};
 function make_y_gridlines() {return d3.axisLeft(yScale).ticks(11)};            
 var data=d3.range(0,n).map(function(i){return {
     "x":Math.cos(0.01*i)+Math.cos(0.11*i)/2+Math.sin(0.3*i)/3,
-    "y":Math.sin(0.01*i)+Math.sin(0.11*i)/2+Math.cos(0.3*i)/3}})
-var lineColor=d3.scaleSequential().domain([0,n]).interpolator(d3.interpolateCool);                       
-var svg=d3.select("svg").attr("width",width+margin.left+margin.right).attr("height",height+margin.top+margin.bottom)
-            .append("g").attr("transform","translate("+margin.left+","+margin.top+")");
-svg.append("g").attr("class","x axis").call(d3.axisBottom(xScale).tickSize(0.5))
-               .attr("transform","translate(0,"+height+")"); 
-svg.append("g").attr("class","y axis").call(d3.axisLeft(yScale).tickSize(0.5));    
-svg.append("g").attr("class","grid").attr("transform","translate(0,"+height+")")
-               .call(make_x_gridlines().tickSize(-height).tickFormat(""));
-svg.append("g").attr("class","grid").call(make_y_gridlines().tickSize(-width).tickFormat(""));
-var line=d3.line().curve(d3.curveMonotoneX).x(function(d) {return xScale(d.x);}).y(function(d) {return yScale(d.y);});
+    "y":Math.sin(0.01*i)+Math.sin(0.11*i)/2+Math.cos(0.3*i)/3}});
+var tt1="translate("+margin.left+","+margin.top+")",
+    tt2="translate(0,"+height+")";
+var lineColor=d3.scaleSequential().domain([0,n])
+                .interpolator(d3.interpolateCool);                       
+var svg=d3.select("svg").attr("width",width+margin.left+margin.right)
+                        .attr("height",height+margin.top+margin.bottom)
+                        .append("g").attr("transform",tt1);
+svg.append("g").attr("class","x axis")
+               .call(d3.axisBottom(xScale).tickSize(0.5)).attr(tt2); 
+svg.append("g").attr("class","y axis")
+               .call(d3.axisLeft(yScale).tickSize(0.5));    
+svg.append("g").attr("class","grid").attr("transform",tt2)
+               .call(make_x_gridlines()
+               .tickSize(-height).tickFormat(""));
+svg.append("g").attr("class","grid").call(make_y_gridlines()
+               .tickSize(-width).tickFormat(""));
+var line=d3.line().curve(d3.curveMonotoneX)
+                  .x(function(d) {return xScale(d.x);})
+                  .y(function(d) {return yScale(d.y);});
 svg.append("path").datum(data).attr("class","line").attr("d",line);
 </script></div>
   </body>
