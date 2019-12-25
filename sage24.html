@@ -56,13 +56,13 @@ t.light((7,7,1),1,(2,2,1)); show(t)
 @interact
 def _(proj=['perspective','fisheye','perspective_dof'],
       cm=['hsv','jet','cool','hot','prism']):
-    k=1; e =[[[k,-k,k],[0,0,0]],[[0,0,0],[k,k,k]],
-             [[k,k,k],[-k,k,k]],[[-k,k,k],[-k,-k,k]],
-             [[-k,-k,k],[k,-k,k]],[[k,-k,k],[k,k,k]],
-             [[k,k,k],[k,k,-k]],[[k,k,-k],[-k,k,-k]],
-             [[-k,k,-k],[-k,-k,-k]],[[-k,-k,-k],[k,-k,-k]],
-             [[k,-k,-k],[k,k,-k]],[[k,k,-k],[0,0,0]],
-             [[0,0,0],[k,-k,-k]],[[k,-k,-k],[k,-k,k]]]
+    k=1; e=[[[k,-k,k],[0,0,0]],[[0,0,0],[k,k,k]],
+            [[k,k,k],[-k,k,k]],[[-k,k,k],[-k,-k,k]],
+            [[-k,-k,k],[k,-k,k]],[[k,-k,k],[k,k,k]],
+            [[k,k,k],[k,k,-k]],[[k,k,-k],[-k,k,-k]],
+            [[-k,k,-k],[-k,-k,-k]],[[-k,-k,-k],[k,-k,-k]],
+            [[k,-k,-k],[k,k,-k]],[[k,k,-k],[0,0,0]],
+            [[0,0,0],[k,-k,-k]],[[k,-k,-k],[k,-k,k]]]
     if proj=='perspective_dof':
         t=Tachyon(xres=500,yres=500,projection=proj,
                   camera_center=(-3.5,0.,0.),
@@ -83,8 +83,7 @@ c=[colormaps.jet(0.03*i)[:3] for i in [0..31]]; k=[0.12*i for i in [0..31]]
 p=sum([plot(x^2*k[i]^2-12*x^2+k[i]^2*x-3^1.5*k[i]*x+6*x+k[i]^2-3^0.5*k[i]-6,(x,-2,2),color=c[i],
             legend_label='%.2f'%k[i]) for i in [0..31]])
 p.set_legend_options(loc=(1.1,-0.1)); p.show(ymin=-8,ymax=2,figsize=(10,5))
-</script></div> 
-      
+</script></div>       
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
 import numpy,pylab,time; from sklearn import manifold,datasets
@@ -95,8 +94,7 @@ f,ax = pylab.subplots(1,figsize=(7,7)); pylab.axis("off")
 for i in range(X_emb.shape[0]):
     pylab.text(X_emb[i,0],X_emb[i,1],str(y[i]),color=pylab.cm.hsv(y[i]/10.))
 pylab.title("t-SNE embedding %f s"%(time.time()-t0)); pylab.show()
-</script></div>
-      
+</script></div>      
   <h2>Try Other Languages (R, HTML, ...)</h2>
 <div class="compute"><script type="text/x-sage">
 %%r
@@ -137,6 +135,5 @@ svg.append("g").attr("class","grid").call(make_y_gridlines().tickSize(-width).ti
 var line=d3.line().curve(d3.curveMonotoneX).x(function(d) {return xScale(d.x);}).y(function(d) {return yScale(d.y);});
 svg.append("path").datum(data).attr("class","line").attr("d",line); 
 </script></div>
-    <p></p>
   </body>
 </html>
