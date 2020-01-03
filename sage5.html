@@ -44,15 +44,13 @@ implicit_plot3d(f1,(x,-7,7),(y,-7,7),(z,-7,7),contour=0,
                 mesh=True,meshcolor='red')+\
 implicit_plot3d(f2,(x,-7,7),(y,-7,7),(z,-7,7),contour=0,
                 color="#3636ff",opacity=.5,frame=False)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="compute"><script type="text/x-sage">
 @interact
 def _(N=(1,12,1)):
     p=sum(plot(sin(x-2*k)-x^2,x,hue=sin(k/N)) for k in [-1.45,-1.4,..,1.5])
     p.show(figsize=(7,5),gridlines=True)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="compute"><script type="text/x-sage">
 bc=Words(alphabet=[0,1],length=10); c=0
 def lf(x):
@@ -70,14 +68,21 @@ table([[(bc[i*10+j],lf(bc[i*5+j])) for j in range(5)] for i in range(10)])
 # 1000 data points, 4 clusters
 import pylab; from sklearn import datasets,mixture
 from sklearn.model_selection import train_test_split
-bd=datasets.make_blobs(n_samples=1000,centers=[[1,1],[-1,-1],[1,-1],[-1,1]],cluster_std=.5)
-X_train,X_test,y_train,y_test=train_test_split(bd[0],bd[1],test_size=.2,random_state=1)
+bd=datasets.make_blobs(n_samples=1000,
+                       centers=[[1,1],[-1,-1],[1,-1],[-1,1]],
+                       cluster_std=.5)
+X_train,X_test,y_train,y_test=\
+train_test_split(bd[0],bd[1],test_size=.2,random_state=1)
 usl=mixture.BayesianGaussianMixture(n_components=4,n_init=4)
 usl.fit(X_train,y_train); y_predict=usl.predict(X_test)
 pylab.figure(figsize=(7,7)); pylab.grid()
-pylab.scatter(X_test[:,0],X_test[:,1],c=y_test,s=70,alpha=.5,cmap=pylab.cm.summer)
-pylab.scatter(X_test[:,0]+.03,X_test[:,1]+.03,c=y_predict,s=50,alpha=.5,cmap=pylab.cm.winter)
-pylab.scatter([1,-1,1,-1],[1,-1,-1,1],c='#3636ff',marker='*',s=500,alpha=.7); pylab.show()
+pylab.scatter(X_test[:,0],X_test[:,1],c=y_test,
+              s=70,alpha=.5,cmap=pylab.cm.summer)
+pylab.scatter(X_test[:,0]+.03,X_test[:,1]+.03,c=y_predict,
+              s=50,alpha=.5,cmap=pylab.cm.winter)
+pylab.scatter([1,-1,1,-1],[1,-1,-1,1],c='#3636ff',
+              marker='*',s=500,alpha=.7)
+pylab.show()
 </script></div>    
   <h2>Try Other Languages (R, HTML, ...)</h2>
 <div class="compute"><script type="text/x-sage">
@@ -92,10 +97,10 @@ for (t in norm_type) {cat(t,norm(A,type=t),'\n')}; A
 <style>
 @import url('https://fonts.googleapis.com/css?family=Sancreek&effect=3d');
 </style>
-<p style="color:#ff3636; font-family:Sancreek; font-size:300%;" class="font-effect-3d">
+<p style="color:#ff3636; font-family:Sancreek; 
+          font-size:300%;" class="font-effect-3d">
 Sancreek Font and 3D Effect
 </p>
 </script></div> 
-    <p></p>
   </body>
 </html>
