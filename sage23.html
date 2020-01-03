@@ -68,10 +68,10 @@ def _(N=[200,175,..,50]):
     p.show(figsize=(5,5),axes=False)
 </script></div><br/>
 <div class="compute"><script type="text/x-sage">
-X=[x for x in srange(-2,2,.1)]
+X=[x for x in srange(-2,2,.25)]
 Y=[exp(-x^2)*sin(pi*x^3) for x in X] 
 Y1,Y2=[exp(-x^2) for x in X],[-exp(-x^2) for x in X]
-m,M='◎'.decode('utf-8'),'☕'.decode('utf-8')
+m,M='◎','☕'
 c=[colormaps.cool(80*i)[:3] for i in [0,1,2]]
 t=sum([text(m,(x,y),fontsize=10,rgbcolor=c[i],gridlines=True) 
        for i in [0..2] for (x,y) in list(zip(X,[Y1,Y2,Y][i]))])
@@ -82,7 +82,7 @@ animate([t+text(M,(x,y),fontsize=30,rgbcolor=c[2])
 <div class="compute"><script type="text/x-sage">
 import numpy,pylab,urllib; from scipy.io import wavfile
 url='https://ccrma.stanford.edu/~jos/wav/slideflute.wav'
-input_file=urllib.urlopen(url)
+input_file=urllib.request.urlopen(url)
 output_file=open('slideflute.wav','wb')
 output_file.write(input_file.read())
 output_file.close(); input_file.close()
