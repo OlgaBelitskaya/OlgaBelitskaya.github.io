@@ -67,7 +67,8 @@ var data=d3.range(0,n)
            .map(function(i){return {"x":Math.sin(4*Math.PI/n*i),
                                     "y":Math.sin(10*Math.PI/n*i)}});
 </script></div>
-<div class="linked"><script type="text/x-sage">      
+<div class="linked"><script type="text/x-sage">
+%%html
 <svg id="pp1" style="background-color:slategray;"/><script>
 var ttr1="translate("+margin.left+","+margin.top+")",
     ttr2="translate(0,"+height+")";
@@ -88,7 +89,9 @@ svg.append("g").attr("class","grid1")
                .tickSize(-width).tickFormat(""));
 svg.selectAll(".point").data(data).enter().append("circle")
    .attr("class","point").attr("r",4)
-   .attr("fill",function(d,i){return pointColor(i)});
+   .attr("fill",function(d,i){return pointColor(i)})
+   .attr('cx',function(d){return xScale(d.x)})
+   .attr('cy',function(d){return yScale(d.y)});
 </script></div>
     <h1>Parametric plots with d3.js could look very pretty</h1>
 Jupyter Notebook &#38; SageMath Kernel 
