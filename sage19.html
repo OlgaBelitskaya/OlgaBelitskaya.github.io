@@ -34,15 +34,15 @@ def _(nodes=[2,3,4,5],blocks=[15,10,5]):
     s2='%d Blockswith %d Nodes in a Block</left>'
     pretty_print(html(s1+s2%(blocks,nodes)))
     g=graphs.RandomBlockGraph(blocks,nodes)
-    n=blocks*(nodes-1)+1; ec={};
-    [g.set_edge_label(u,v,u) for u,v,l in g.edges()]
+    n=blocks*(nodes-1)+1; ec={}
+    [g.set_edge_label(u,v,u) for (u,v,l) in g.edges()]
     c=[colormaps.jet(int(255/n)*i)[:3] 
-       for i in xrange(n)]
-    for i in xrange(n): ec[c[i]]=[] 
-    for u,v,l in g.edges():
+       for i in range(n)]
+    for i in range(n): ec[c[i]]=[] 
+    for (u,v,l) in g.edges():
         [ec[c[i]].append((u,v,l)) 
-         for i in xrange(n) if (u!=v and l==i)] 
-    vc=dict(zip(c,[[i] for i in xrange(n)]))
+         for i in range(n) if (u!=v and l==i)] 
+    vc=dict(zip(c,[[i] for i in range(n)]))
     g=g.graphplot(vertex_size=300,vertex_colors=vc,
                   edge_colors=ec,layout='circular')
     g.show(figsize=7)
