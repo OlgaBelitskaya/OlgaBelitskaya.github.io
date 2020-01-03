@@ -41,41 +41,54 @@ def _(N=(11,0,-1)):
 plot3d(lambda x,y: sin(x^5*y^2)+cos(x^4*y^3),(-pi,pi),(-pi,pi),
        color=[colormaps['terrain'](.1^2*i)[:3] for i in range(100)],
        adaptive=True,mesh=True,frame=False)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="compute"><script type="text/x-sage">
 @interact
 def _(N=(8,1,-1)):
     g=Graphics()
     for i in [1..N]:
-        a1,a2,a3,a4,a6=i-5,i+5,i-1,i+1,i+3; c=colormaps.jet(30*i)[:3]; 
+        a1,a2,a3,a4,a6=i-5,i+5,i-1,i+1,i+3
+        c=colormaps.jet(30*i)[:3]; 
         E=EllipticCurve([a1,a2,a3,a4,a6]);
-        g+=plot(E,gridlines=True,color=c,plot_points=50,legend_label='$%s$'%latex(E))
+        g+=plot(E,gridlines=True,color=c,
+                plot_points=50,legend_label='$%s$'%latex(E))
     g.show(ymin=-30,ymax=30,figsize=(7,5))
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="compute"><script type="text/x-sage">
-var('x'); t=15; f=cos(x); g=sqrt(x)*sin(x); h=cos(sqrt(x)*sin(x))
+var('x'); t=15
+f=cos(x); g=sqrt(x)*sin(x); h=cos(sqrt(x)*sin(x))
 fun=[f,f.diff(),g,g.diff(),h,h.diff()]
 c=[colormaps.hsv_r(35*i)[:3] for i in [0..5]] 
-l=['$f$','$f \prime$','$g$','$g \prime$','$h$','$h \prime$']
-p=plot(fun,(0,t),color=c,thickness=2,fill='axis',fillcolor=c,fillalpha=0.1,legend_label=l)
-p.show(legend_fancybox=True,legend_loc=3,legend_font_size=16,figsize=7,gridlines=True)
+l=[r'$f$',r'$f \prime$',r'$g$',
+   r'$g \prime$',r'$h$',r'$h \prime$']
+p=plot(fun,(0,t),color=c,thickness=2,fill='axis',
+       fillcolor=c,fillalpha=0.1,legend_label=l)
+p.show(legend_fancybox=True,legend_loc=3,
+       legend_font_size=16,figsize=(8,5),gridlines=True)
 </script></div>     
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
 %matplotlib inline
 import pylab,numpy
-columns=['Fresh','Milk','Grocery','Frozen','Detergents_Paper','Delicatessen']
-rows=['Customer 1','Customer 2','Customer 3']; colors = ['#3636ff','#36ff36','#ff3636']
-data=[[26373,36423,22019,5154,4337,16523],[16165,4230,7595,201,4003,57],[14276,803,3045,485,100,518]]
-pylab.figure(figsize=(10,7)); pylab.ylabel('Value'); pylab.xticks([]); 
-x=numpy.arange(len(columns))+0.2; y=numpy.array([0.0]*len(columns)); bar_width=0.5; cell_text=[]
+columns=['Fresh','Milk','Grocery',
+         'Frozen','Detergents_Paper','Delicatessen']
+rows=['Customer 1','Customer 2','Customer 3']
+colors = ['#3636ff','#36ff36','#ff3636']
+data=[[26373,36423,22019,5154,4337,16523],
+      [16165,4230,7595,201,4003,57],
+      [14276,803,3045,485,100,518]]
+pylab.figure(figsize=(10,7))
+pylab.ylabel('Value'); pylab.xticks([]); 
+x=numpy.arange(len(columns))+0.2
+y=numpy.array([0.0]*len(columns))
+bar_width=0.5; cell_text=[]
 for i in range(len(rows)):
     pylab.bar(x,data[i],bar_width,bottom=y,color=colors[i])
     y=y+data[i]; cell_text.append(['%1.0f'%(d)for d in data[i]])
-pylab.table(cellText=cell_text,rowLabels=rows,rowColours=colors,colLabels=columns,loc='bottom')
-pylab.title('Samples of the Wholesale Customers Dataset'); pylab.subplots_adjust(left=0.1,bottom=0.05);
+pylab.table(cellText=cell_text,rowLabels=rows,
+            rowColours=colors,colLabels=columns,loc='bottom')
+pylab.title('Samples of the Wholesale Customers Dataset')
+pylab.subplots_adjust(left=0.1,bottom=0.05);
 </script></div>
   <h2>Try Other Languages (R, HTML, ...)</h2>
 <div class="compute"><script type="text/x-sage">
