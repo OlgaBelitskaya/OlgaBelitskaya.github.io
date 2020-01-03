@@ -38,9 +38,10 @@ def _(N=(2,7,1)):
   <h2>Your Field for Experiments</h2>
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>     
 <div class="compute"><script type="text/x-sage">
-var('r,phi,z'); trans=(r*cos(phi),r*sin(phi),z)
-p=plot3d(cos(r),(r,0,20*pi/2),(phi,0,2*pi),transformation=trans,opacity=0.7)
-p+plot3d(lambda x,y:.1^3*(x^2+y^2)-1,(-30,30),(-30,30),
+var('r,phi,z'); trans=(r*cos(phi),r*sin(phi),10*z)
+p=plot3d(cos(r),(r,0,20*pi/2),(phi,0,2*pi),
+         transformation=trans,opacity=0.7)
+p+plot3d(lambda x,y:.1^2*(x^2+y^2)-10,(-30,30),(-30,30),
          mesh=True,color="#ff3636",opacity=0.3)
 </script></div>
     <p></p>
@@ -49,7 +50,8 @@ p+plot3d(lambda x,y:.1^3*(x^2+y^2)-1,(-30,30),(-30,30),
 def _(a=(1,5,2),b=(-6,-2,2),c=(6,2,-2),d=(-1,-5,-2)):
     var('a,b,c,d'); i=ComplexField(2).0; z1,z2=a+b*i,c+d*i
     g=Graphics(); z=[z1,z2,z1+z2,z1-z2] 
-    l=['$z_1=a+b*i$','$z_2=c+d*i$','$z_1+z_2=(a+c)+(b+d)*i$','$z_1-z_2=(a-c)+(b-d)*i$']
+    l=['$z_1=a+b*i$','$z_2=c+d*i$',
+       '$z_1+z_2=(a+c)+(b+d)*i$','$z_1-z_2=(a-c)+(b-d)*i$']
     for i in range(4):
         g+=arrow2d((0,0),(z[i].real(),z[i].imag()),width=1.5,arrowsize=2,
                    legend_label=l[i],rgbcolor=colormaps.jet(cos(arg(z[i])))[:3],
@@ -61,7 +63,9 @@ def _(a=(1,5,2),b=(-6,-2,2),c=(6,2,-2),d=(-1,-5,-2)):
 <div class="compute"><script type="text/x-sage">
 p=Graphics()
 for i in range(2,9):
-    p+=plot(log(x^i),1,2,fill=lambda x:nth_prime(x^i)/floor(x^i),fillcolor=hue((i-2)/7))
+    p+=plot(log(x^i),1,2,
+            fill=lambda x:nth_prime(x^i)/floor(x^i),
+            fillcolor=hue((i-2)/7))
 p.show(figsize=8,gridlines=True)
 </script></div> 
   <h2>Try Python Modules</h2>
