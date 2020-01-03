@@ -6,7 +6,7 @@
     <title>SageMath_Part15</title>
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
     <script>$(function () {
-    // Make the div with id 'mycell' a Sage cell
+    // Make the div with id 'examplecell' a Sage cell
     sagecell.makeSagecell({inputLocation:'#examplecell',template:sagecell.templates.minimal,evalButtonText:'Activate'});
     // Make *any* div with class 'compute' a Sage cell
     sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Evaluate'});});
@@ -43,14 +43,13 @@ def _(n=[20,28,..,len(c)]):
 @interact
 def _(colormap=['bwr','cool','prism','jet','terrain',
                 'flag','ocean','hsv','bone']):
-    def c(cm): return [colormaps[cm](12*i) 
-                       for i in [1..20]]
+    def c(cm): 
+        return [colormaps[cm](12*i)[:3] for i in [1..20]]
     g=icosahedron().stickers(c(colormap),.05,.05)
     g.show(frame=False)
 </script></div><br/>
 <div class="compute"><script type="text/x-sage">
-marker_list=[el.decode('utf-8') 
-    for el in ['☕','⚖','☘','⚜','⚙']]
+marker_list=['☕','⚖','☘','⚜','⚙']
 @interact
 def _(marker=marker_list):
     m,mc=marker,Color('#3636ff').rgb()
