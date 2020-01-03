@@ -17,7 +17,7 @@
   @import url('https://fonts.googleapis.com/css?family=Orbitron');
   h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
   p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:26em;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
   </style>  
   <body>
   <h1>&#x1F4D1; &nbsp;SageMath Online Mini Campus. Part 4</h1>
@@ -30,14 +30,21 @@
 <div id="examplecell"><script type="text/x-sage">
 @interact
 def _(N=(9,1,-1)):
-    s='<center><font color="#3636ff" size=5>Derivatives till the %s Order</font></center>'
-    var('x'); pretty_print(html(s%str(N))); f,g=exp(x)*x,1/(x+1); F,G=[f],[g]
+    s1=r'<center><font color="#3636ff" size=5>'
+    s2=r'Derivatives till the %s Order</font></center>'
+    var('x'); pretty_print(html(s1+s2%str(N)))
+    f,g=exp(x)*x,1/(x+1); F,G=[f],[g]
     for i in range(N): 
-        f=f.diff().factor(); g=g.diff().factor(); F.append(f); G.append(g)
-    p1=sum([plot(F[i],(-2,1),color=colormaps.jet(30*i)[:3],legend_label=str(i)) for i in [0..N]])
-    p2=sum([plot(G[i],(0,3),color=colormaps.jet(30*i)[:3],legend_label=str(i)) for i in [0..N]])
-    p1.show(title='$f= x \cdot e^x$',fontsize=12,figsize=(4,5),gridlines=True)
-    p2.show(title='$f= \\frac{1}{x+1}$',fontsize=12,figsize=(4,5),gridlines=True,ymin=-20,ymax=20)
+        f=f.diff().factor(); g=g.diff().factor()
+        F.append(f); G.append(g)
+    p1=sum([plot(F[i],(-2,1),color=colormaps.jet(30*i)[:3],
+                 legend_label=str(i)) for i in [0..N]])
+    p2=sum([plot(G[i],(0,3),color=colormaps.jet(30*i)[:3],
+                 legend_label=str(i)) for i in [0..N]])
+    p1.show(title=r'$f= x \cdot e^x$',fontsize=12,
+            figsize=(4,5),gridlines=True)
+    p2.show(title=r'$f= \frac{1}{x+1}$',fontsize=12,
+            figsize=(4,5),gridlines=True,ymin=-20,ymax=20)
 </script></div>
   <h2>Your Field for Experiments</h2>
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>      
@@ -62,14 +69,19 @@ def _(N=(16,4,-1)):
     p1.show(figsize=(8,5)); p2.show(figsize=(8,5))
 </script></div><br/>
 <div class="compute"><script type="text/x-sage">
-A,B=1+round(random(),2),round(.01+random(),2); N=500 
-X=[0.1*i*random() for i in range(N)]
+A,B=1+round(random(),2),round(.01+random(),2)
+N=500; X=[0.1*i*random() for i in range(N)]
 Y=[A*x+B+5*random()*(-1)^randint(0,1) for x in X]
-var('a,b,x'); F=a*x+b; ff=find_fit(zip(X,Y),F,variables=[x]); 
-a,b=float(str(ff[0])[5:]),float(str(ff[1])[5:]); F=[a*x+b for x in X]
-pf=points(zip(X,F),color='#ff36ff',size=5,legend_label='fitted line')
-pr=points(zip(X,Y),color='#3636ff',marker='*',size=9,legend_label='real data') 
-(pf+pr).show(figsize=(8,5),title=['[A == %s,B == %s]'%(A,B),ff],gridlines=True)
+var('a,b,x'); F=a*x+b
+ff=find_fit(list(zip(X,Y)),F,variables=[x]) 
+a,b=float(str(ff[0])[5:]),float(str(ff[1])[5:])
+F=[a*x+b for x in X]
+pf=points(zip(X,F),color='#ff36ff',size=5,
+          legend_label='fitted line')
+pr=points(zip(X,Y),color='#3636ff',marker='*',
+          size=9,legend_label='real data') 
+(pf+pr).show(figsize=(8,5),gridlines=True,
+             title=['[A == %s,B == %s]'%(A,B),ff])
 </script></div>    
   <h2>Try Python Modules</h2>
 <div class="compute"><script type="text/x-sage">
@@ -96,11 +108,11 @@ pylab.grid(); pylab.show()
   <h2>Try Other Languages (R, HTML, ...)</h2>
 <div class="compute"><script type="text/x-sage">
 %%r
-bin2dec<-function(n) {sapply(strsplit(as.character(n),split=''),
-                             function(x) sum(as.numeric(x)*2**(rev(seq_along(x)-1))))}
-bin2dec(c('11100110010','1001','1010101111'))
-</script></div>
-    <p></p>
+bin2dec<-function(n) {
+    sapply(strsplit(as.character(n),split=''),
+           function(x) sum(as.numeric(x)*2**(rev(seq_along(x)-1))))}
+bin2dec(c('11100110010','10001','1010101111','1001001','10'))
+</script></div><br/>
 <div class="compute"><script type="text/x-sage">
 %%html
 <div title="An Image Example" 
