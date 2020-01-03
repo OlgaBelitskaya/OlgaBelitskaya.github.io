@@ -41,8 +41,11 @@ def _(x=(1,5,1),y=(1,5,1),z=(1,5,1)):
     <p>Type your own SageMath code lines below and click “Evaluate”.</p>     
 <div class="compute"><script type="text/x-sage">
 var('x,y,z'); f=x^2+y^2-z^2
-sum([implicit_plot3d(f,(x,-t,t),(y,-t,t),(z,-t,0),contour=0,frame=False,plot_points=30,
-                     opacity=t/30,mesh=True,color='#3636ff') for t in [3,6]]).show()
+p=sum([implicit_plot3d(f,(x,-t,t),(y,-t,t),(z,-t,0),
+                       contour=0,frame=False,plot_points=20,
+                       opacity=t/12,mesh=True,
+                       color='#3636ff') for t in [3,6]])
+p.show()
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
@@ -73,8 +76,8 @@ Z1=1/2*X**2+1/8*Y**2; Z1[Z1>6]=numpy.nan;
 Z2=1/8*X**2-1/18*Y**2; Z2[Z2<-6]=numpy.nan; Z2[Z2>6]=numpy.nan;
 ax.plot_wireframe(X,Y,Z1,alpha=0.7,colors='#ff3636')
 ax.plot_wireframe(X,Y,Z2,alpha=0.4,colors='#3636ff')
-ax.text(2,7,7,'$x^2/1^2+y^2/2^2=2 \cdot z$',color='#ff3636',fontsize=15)
-ax.text(-12,-7,-7,'$x^2/2^2-y^2/3^2=2 \cdot z$',color='#3636ff',fontsize=15)
+ax.text(2,7,7,r'$x^2/1^2+y^2/2^2=2 \cdot z$',color='#ff3636',fontsize=15)
+ax.text(-12,-7,-7,r'$x^2/2^2-y^2/3^2=2 \cdot z$',color='#3636ff',fontsize=15)
 ax.xaxis.pane.fill,ax.yaxis.pane.fill,ax.zaxis.pane.fill=False,False,False
 ax.set_xlim(-7,7); ax.set_ylim(-7,7); ax.set_zlim(-7,7); pylab.show()
 </script></div> 
@@ -87,8 +90,8 @@ vector_product3d<-function(x,y){
       -x[1]*y[3]+x[3]*y[1],
       x[1]*y[2]-x[2]*y[1])
 }
-cat('c+d = (',c+d,'); c*d =',c%*%d) 
-cat('; cxd = (',vector_product3d(c,d),') \n');
+cat('c+d; c*d; cxd =>')
+c(c+d,c%*%d,vector_product3d(c,d))
 </script></div>
     <p></p>
 <div class="compute"><script type="text/x-sage">
