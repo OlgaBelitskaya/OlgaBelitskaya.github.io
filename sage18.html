@@ -6,7 +6,7 @@
     <title>SageMath_Part18</title>
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
     <script>$(function () {
-    // Make the div with id 'mycell' a Sage cell
+    // Make the div with id 'examplecell' a Sage cell
     sagecell.makeSagecell({inputLocation:'#examplecell',template:sagecell.templates.minimal,evalButtonText:'Activate'});
     // Make *any* div with class 'compute' a Sage cell
     sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Evaluate'});});
@@ -70,15 +70,11 @@ def _(a=[2,4,6,8],b=[4,8,12,16],
     p.show(frame=False)
 </script></div><br/>
 <div class="compute"><script type="text/x-sage">
-ends1=[chr(i) for i in range(144,144+48)]
-ends2=[chr(i) for i in range(128,128+16)]
-sym=['\xe2\x86'+e for e in ends1]
-sym+=['\xe2\x87'+e for e in ends2+ends1[:36]] 
 v=[(1/cos(-pi/2+pi*i/100),tan(-pi/2+pi*i/100)) 
    for i in [1,3,..,99]+[101,103,..,199]]
 L=[(a/(a^2+b^2),b/(a^2+b^2)) for a,b in v]
 def col(i): return colormaps.cool(2*i)[:3]
-p=sum([text(sym[i].decode('utf-8'),L[i],
+p=sum([text(chr(i+160),L[i],
             fontsize=20,rgbcolor=col(i))
        for i in [0..99]])
 p.show(figsize=(8,5),gridlines=True)
