@@ -13,6 +13,7 @@
     sagecell.makeSagecell({inputLocation:'div.sage_maxima',evalButtonText:'Run Maxima'});
     sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run'});});
     </script>
+    <script data-ad-client="ca-pub-9200929962680356" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   </head>
   <style>
   @import url('https://fonts.googleapis.com/css?family=Orbitron');
@@ -94,22 +95,44 @@ Jupyter Notebook &#38; SageMath Kernel
     <p>Click “Run” twice. Use in HTML documents with &#60;/script&#62; in the end.</p> 
 <div class="sage_html"><script type="text/x-sage">
 %%html
-<style>.line {fill:none; stroke:#ff3636; stroke-width:2;} .xaxis2 text,.yaxis2 text {fill:#3636ff; font-size:135%;}       
-.grid2 line,.grid2 path {stroke:#3636ff; stroke-opacity:0.9; shape-rendering:crispEdges;} </style>
-<script src="https://d3js.org/d3.v4.min.js"/><svg id="pp2" style="background-color:silver;"/><script>
-var n=630,m=35,margin={top:m,right:m,bottom:m,left:m},width=500-margin.left-margin.right,height=500-margin.top-margin.bottom; 
-var xScale = d3.scaleLinear().domain([-2,2]).range([0,width]); var yScale = d3.scaleLinear().domain([-2,2]).range([height,0]);
-function make_x_gridlines() {return d3.axisBottom(xScale).ticks(11)}; function make_y_gridlines() {return d3.axisLeft(yScale).ticks(11)};
-var data=d3.range(0,n).map(function(i){return {"x":Math.cos(0.01*i)+Math.cos(0.11*i)/2+Math.sin(0.3*i)/3,
-                                                 "y":Math.sin(0.01*i)+Math.sin(0.11*i)/2+Math.cos(0.3*i)/3}});
-var lineColor=d3.scaleSequential().domain([0,n]).interpolator(d3.interpolateCool);                       
-var svg=d3.select("#pp2").attr("width",width+margin.left+margin.right).attr("height",height+margin.top+margin.bottom)
-          .append("g").attr("transform","translate("+margin.left+","+margin.top+")");
-svg.append("g").attr("class","xaxis2").call(d3.axisBottom(xScale).tickSize(0.5)).attr("transform","translate(0,"+height+")"); 
-svg.append("g").attr("class","yaxis2").call(d3.axisLeft(yScale).tickSize(0.5));                       
-svg.append("g").attr("class","grid2").attr("transform","translate(0,"+height+")").call(make_x_gridlines().tickSize(-height).tickFormat(""));
-svg.append("g").attr("class","grid2").call(make_y_gridlines().tickSize(-width).tickFormat(""));
-var line=d3.line().curve(d3.curveMonotoneX).x(function(d) {return xScale(d.x);}).y(function(d) {return yScale(d.y);});
+<style>
+.line {fill:none; stroke:#ff3636; stroke-width:2;} 
+.xaxis2 text,.yaxis2 text {fill:#3636ff; font-size:135%;}       
+.grid2 line,.grid2 path {stroke:#3636ff; stroke-opacity:0.9; 
+                         shape-rendering:crispEdges;} 
+</style>
+<script src="https://d3js.org/d3.v4.min.js"/>
+<svg id="pp2" style="background-color:silver;"/><script>
+var n=630,m=35,margin={top:m,right:m,bottom:m,left:m},
+    width=500-margin.left-margin.right,
+    height=500-margin.top-margin.bottom;
+var ttr1="translate("+margin.left+","+margin.top+")",
+    ttr2="translate(0,"+height+")";
+var xScale=d3.scaleLinear().domain([-2,2]).range([0,width]),
+    yScale=d3.scaleLinear().domain([-2,2]).range([height,0]);
+function make_x_gridlines(){return d3.axisBottom(xScale).ticks(11)}; 
+function make_y_gridlines(){return d3.axisLeft(yScale).ticks(11)};
+var data=d3.range(0,n)
+           .map(function(i){return 
+           {"x":Math.cos(0.01*i)+Math.cos(0.11*i)/2+Math.sin(0.3*i)/3,
+            "y":Math.sin(0.01*i)+Math.sin(0.11*i)/2+Math.cos(0.3*i)/3}});
+var lineColor=d3.scaleSequential().domain([0,n])
+                .interpolator(d3.interpolateCool);                       
+var svg=d3.select("#pp2").attr("width",width+margin.left+margin.right)
+                         .attr("height",height+margin.top+margin.bottom)
+          .append("g").attr("transform",ttr1);
+svg.append("g").attr("class","xaxis2")
+               .call(d3.axisBottom(xScale).tickSize(0.5))
+               .attr("transform",ttr2); 
+svg.append("g").attr("class","yaxis2")
+               .call(d3.axisLeft(yScale).tickSize(0.5));                       
+svg.append("g").attr("class","grid2").attr("transform",ttr2)
+               .call(make_x_gridlines().tickSize(-height).tickFormat(""));
+svg.append("g").attr("class","grid2")
+               .call(make_y_gridlines().tickSize(-width).tickFormat(""));
+var line=d3.line().curve(d3.curveMonotoneX)
+           .x(function(d){return xScale(d.x);})
+           .y(function(d){return yScale(d.y);});
 svg.append("path").datum(data).attr("class","line").attr("d",line);
 </script></div>
     <h1>If you want to explore Highcharts.js</h1>
@@ -119,27 +142,28 @@ Jupyter Notebook &#38; SageMath Kernel
 %%html
 <script src="https://code.highcharts.com/highcharts.js"/>
 </script></div>
-    <p></p>
 <div class="sage_javascript"><script type="text/x-sage">
 %%javascript
 Highcharts.chart('container', {
-    xAxis:{categories:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']},
+    xAxis:{categories:['Jan','Feb','Mar','Apr','May','Jun',
+                       'Jul','Aug','Sep','Oct','Nov','Dec']},
     yAxis:{max:150,title:{text:'Temperature'}},
-    title:{style:{'color':'#3636ff','fontSize':'24px'},text:'Global Station Temperature'},
-    series:[{name:'2017',color:'#ff3636',data:[113,141,137,115,122,76,108,110,96,115,105,115]},
-            {name:'2018',color:'#36ff36',data:[103,114,121,120,100,86,106,90,89,111,97,121]}]
+    title:{style:{'color':'#3636ff','fontSize':'24px'},
+           text:'Global Station Temperature'},
+    series:[{name:'2017',color:'#ff3636',
+             data:[113,141,137,115,122,76,108,110,96,115,105,115]},
+            {name:'2018',color:'#36ff36',
+             data:[103,114,121,120,100,86,106,90,89,111,97,121]}]
 }, function (chart) {
     var point=chart.series.data,
-    text=chart.renderer.text(point.plotX+chart.plotLeft+10,point.plotY+chart.plotTop-10).add(),
-    box=text.getBBox();
-});
-</script></div>
-    <p></p>  
-<div id="container" style="height:400px;">highcharts.js is launching here...</div>
-    <p></p>   
+    text=chart.renderer.text(point.plotX+chart.plotLeft+10,
+                             point.plotY+chart.plotTop-10).add(),
+    box=text.getBBox();});
+</script></div><br/>  
+<div id="container" style="height:400px; font-family:'Orbitron';">
+highcharts.js is launching here...</div>  
     <h1>Applying Neural Networks could consist of two code rows. No jokes</h1>
-Jupyter Notebook &#38; SageMath Kernel
-    <p></p>   
+Jupyter Notebook &#38; SageMath Kernel<br/>  
 <div class="sage_r"><script type="text/x-sage">
 %%r
 svg(filename="Rplots.svg",width=8,height=5,
@@ -156,8 +180,7 @@ legend(10,55,legend=c("targets","predictions"),
        col=c("#3636ff","#ff3636"),lty=c(1,1)); dev.off()
 </script></div>
      <h1>If you want to try Maxima computations</h1>
-Jupyter Notebook &#38; SageMath Kernel      
-    <p></p>
+Jupyter Notebook &#38; SageMath Kernel<br/>
 <div class="sage_maxima" class="compute"><script type="text/x-sage">
 %%maxima
 exp:sin(x)^3*cos(x)+sin(x)^2+cos(x)^2;
