@@ -6,15 +6,12 @@
     <title>SageMath_Part4</title>
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
     <script>$(function () {
-    // Make the div with id 'mycell' a Sage cell
-    sagecell.makeSagecell({inputLocation:  '#examplecell',
-                           template:       sagecell.templates.minimal,
-                           evalButtonText: 'Activate'});
+    // Make the div with id 'examplecell' a Sage cell
+    sagecell.makeSagecell({inputLocation:'#examplecell',template:sagecell.templates.minimal,evalButtonText:'Activate'});
     // Make *any* div with class 'compute' a Sage cell
-    sagecell.makeSagecell({inputLocation: 'div.compute',
-                           evalButtonText: 'Evaluate'});
-    });
+    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Evaluate'});});
     </script>
+    <script data-ad-client="ca-pub-9200929962680356" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   </head>
   <style>
   @import url('https://fonts.googleapis.com/css?family=Orbitron');
@@ -47,21 +44,23 @@ def _(N=(9,1,-1)):
 <div class="compute"><script type="text/x-sage">
 var('x,y,z'); tr(i)=(0,3*cos(pi*i/12),3*sin(pi*i/12))
 from sage.plot.plot3d.shapes import Sphere
-p=implicit_plot3d(x^2/9+y^2/4+z^2-1,(x,-3,3),(y,-3,3),(z,-3,3),contour=0,
-                  frame=False,color=((abs(z)).function(x,y,z),colormaps.flag))
-p+sum([Sphere(.3,color=(i/4,0,i/3)).translate(tr(i)) for i in [1..24]])
-</script></div>
-    <p></p>
+p=implicit_plot3d(x^2/9+y^2/4+z^2-1,(x,-3,3),(y,-3,3),(z,-3,3),
+                  contour=0,frame=False,
+                  color=((abs(z)).function(x,y,z),colormaps.flag))
+p+sum([Sphere(.3,color=(i/4,0,i/3)).translate(tr(i)) 
+       for i in [1..24]])
+</script></div><br/>
 <div class="compute"><script type="text/x-sage">
 @interact
 def _(N=(16,4,-1)):
-    p1=sum([polar_plot(log(floor(x)),(x,k*pi/2,(k+1)*pi/2),color=colormaps.winter(N*k)[:3],
-                       thickness=1,exclude=[1..int((k+1)*pi/2)]) for k in [1..N]])
-    p2=sum([polar_plot(log(floor(x)),(x,k*pi/2,(k+1)*pi/2),color=colormaps.summer(N*k)[:3],
-                       thickness=1,exclude=[1..int(k*pi/2)]) for k in [1..N]])
-    p1.show(figsize=(8,4)); p2.show(figsize=(8,4))
-</script></div>
-    <p></p>
+    p1=sum([polar_plot(log(floor(x)),(x,k*pi/2,(k+1)*pi/2),
+                       color=colormaps.winter(N*k)[:3],thickness=1,
+                       exclude=[1..int((k+1)*pi/2)]) for k in [1..N]])
+    p2=sum([polar_plot(log(floor(x)),(x,k*pi/2,(k+1)*pi/2),
+                       color=colormaps.summer(N*k)[:3],thickness=1,
+                       exclude=[1..int(k*pi/2)]) for k in [1..N]])
+    p1.show(figsize=(8,5)); p2.show(figsize=(8,5))
+</script></div><br/>
 <div class="compute"><script type="text/x-sage">
 A,B=1+round(random(),2),round(.01+random(),2); N=500 
 X=[0.1*i*random() for i in range(N)]
