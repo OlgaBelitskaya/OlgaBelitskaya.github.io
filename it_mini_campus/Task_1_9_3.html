@@ -30,18 +30,22 @@ SageMath &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
 def F(k): return k^3-25*k^2+50*k+1000
 def create_table(values,cond,a,b,m):
-    t=[['k','f(k)']]; c=0; s='<left>number of others: %d</left>'
+    t=[['k','f(k)']]; c=0
+    s='<left>Number of others: %d</left>'
     for k in values:
         if cond(F(k),a,b,m): t.append([k,F(k)])
         else: c+=1
     show(table(t)); pretty_print(html(s%c))
 def C21(v,a,b,m):
-    if (v<=abs(a+b+m))&(v<0)&(v<-(a+b)/m): return True
-    if (v<=abs(a+b+m))&(v>=0): return True
+    c1=(v<=abs(a+b+m))&(v<0)&(v<-(a+b)/m)
+    c2=(v<=abs(a+b+m))&(v>=0)
+    if (c1 or c2): return True
     return False
-A,B,M=3*10^4,6*10^4,4; k1,k2=-30,60; 
-var('k'); pretty_print('f(k)=%s'%str(k^3-25*k^2+50*k+1000)) 
-K=sample(range(k1,k2),20); pretty_print('K=%s'%str(K))
+N,A,B,M=20,3*10^4,6*10^4,4
+var('K'); K1,K2=-30,60 
+pretty_print(html('f(K)=%s'%str(K^3-25*K^2+50*K+1000)))
+K=sample(range(K1,K2),N)
+pretty_print(html('K=%s'%K))
 create_table(K,C21,A,B,M)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
