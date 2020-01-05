@@ -224,13 +224,18 @@ text(el[randint(0,len(el)-1)],
     <h1>Parametric 3D Plotting in Python</h1>
 Python &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
-import numpy,pylab,random; from mpl_toolkits.mplot3d import Axes3D
+import numpy,pylab,random
+from mpl_toolkits.mplot3d import Axes3D
 a,b,c=random.randint(2,12),1.5,random.randint(1,7) 
 print('a=%d; b=%.1f; c=%d'%(a,b,c))
 r=numpy.arange(1,c+1); th=.1+random.random() 
-t=numpy.arange(-2*b*numpy.pi,2*b*numpy.pi,5/10**random.randint(1,3)) 
-fx=(a+numpy.cos(b*t))*numpy.cos(t); fy=(a+numpy.cos(b*t))*numpy.sin(t); fz=numpy.sin(b*t)
-fig=pylab.figure(figsize=(7,7)); ax=fig.gca(projection='3d')
+t=numpy.arange(-2*b*numpy.pi,2*b*numpy.pi,
+               5/10**random.randint(1,3)) 
+fx=(a+numpy.cos(b*t))*numpy.cos(t)
+fy=(a+numpy.cos(b*t))*numpy.sin(t)
+fz=numpy.sin(b*t)
+fig=pylab.figure(figsize=(7,7))
+ax=fig.gca(projection='3d')
 for i in r:
     for j in r:
         for k in r:
@@ -239,9 +244,11 @@ for i in r:
 pylab.axis('off'); pylab.show()
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
-import numpy,pylab,random; from mpl_toolkits.mplot3d import Axes3D
-a,b,c=random.randint(1,3),random.randint(4,6),random.randint(2,4)
-d,e,f=random.randint(9,11),random.randint(14,16),random.randint(1,3)
+import numpy,pylab,random
+from mpl_toolkits.mplot3d import Axes3D
+a,b=random.randint(1,3),random.randint(4,6)
+c,d=random.randint(2,4),random.randint(9,11)
+e,f=random.randint(14,16),random.randint(1,3)
 print('a=%d; b=%d; c=%d; d=%d; e=%d; f=%d'%(a,b,c,d,e,f))
 r=[-1,0,1]; th=.1+random.random() 
 t=numpy.arange(0,2*numpy.pi+.5,1/10**random.randint(1,3)) 
@@ -262,22 +269,31 @@ R &#38; Python &#38; SageMathCell <br/>
 %%r
 a<-sample(1:3,1); b<-sample(4:6,1); c<-sample(2:4,1)
 d<-sample(9:11,1); e<-sample(14:16,1); f<-sample(1:3,1)
-n<-36*10^sample(0:2,1); T<-seq(0,2*pi,len=n); xyz<-array(c(0,0,0),c(n,3))
-cat(c('a =',a,'b =',b,'c =',c,'d =',d,'e =',e,'f =',f,'n =',n,'\n'))
-for (i in 1:n) {t<-T[i]; xyz[i,1]<--d*cos(t)-f*cos(b*t)+e*sin(a*t); 
-                xyz[i,2]<--e*cos(a*t)+d*sin(t)-f*sin(b*t); xyz[i,3]<-d*cos(c*t)}
+n<-36*10^sample(0:2,1); T<-seq(0,2*pi,len=n)
+xyz<-array(c(0,0,0),c(n,3))
+for (i in 1:n) {t<-T[i] 
+                xyz[i,1]<--d*cos(t)-f*cos(b*t)+e*sin(a*t) 
+                xyz[i,2]<--e*cos(a*t)+d*sin(t)-f*sin(b*t)
+                xyz[i,3]<-d*cos(c*t)}
 write.csv(xyz,file="xyz.csv",row.names=FALSE)
+c(paste0('a = ',a),paste0('b = ',b),paste0('c = ',c),
+  paste0('d = ',d),paste0('e = ',e),paste0('f = ',f),
+  paste0('n = ',n))
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-import pandas,pylab,random; from mpl_toolkits.mplot3d import Axes3D
-xyz=pandas.read_csv('xyz.csv',header=int(0),names=['x','y','z'])
-fig=pylab.figure(figsize=(7,7)); ax=fig.gca(projection='3d')
+import pandas,pylab,random
+from mpl_toolkits.mplot3d import Axes3D
+xyz=pandas.read_csv('xyz.csv',header=int(0),
+                    names=['x','y','z'])
+fig=pylab.figure(figsize=(7,7))
+ax=fig.gca(projection='3d')
 r=[-1,0,1]; th=.3+random.random()
 for i in r:
     for j in r:
         for k in r:
             col=[random.random() for l in range(3)]
-            ax.plot(i*xyz['x'],j*xyz['y'],k*xyz['z'],c=col,linewidth=th)
+            ax.plot(i*xyz['x'],j*xyz['y'],k*xyz['z'],
+                    c=col,linewidth=th)
 pylab.axis('off'); pylab.show()
 </script></div><br/>
     <h1>Random Parametric Plotting in R</h1>
