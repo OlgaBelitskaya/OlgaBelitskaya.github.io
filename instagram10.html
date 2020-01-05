@@ -146,24 +146,37 @@ rotate_graph(graphs.CubeGraph(4),9)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 def krotate_graph(g):
-    G=Graphics(); nv=g.get_pos().keys(); n=len(nv); v=g.get_pos().values()
+    G=Graphics(); nv=list(g.get_pos().keys())
+    n=len(nv); v=g.get_pos().values()
     k=randint(3,9); pretty_print('k = %d'%k)
     for i in range(2*k):
-        a=i*pi/k; col=(randint(10,90)/100,randint(10,90)/100,randint(10,90)/100)
-        va=[[(.3*k*cos(a)*x-sin(a)*y).n(),(.3*k*sin(a)*x+cos(a)*y).n()] for [x,y] in v]
-        da=dict((nv[i],va[i]) for i in range(n))
-        G+=g.graphplot(pos=da,edge_color=col,edge_thickness=.5,
-                       vertex_size=0,vertex_labels=False).plot()
+        a=i*pi/k
+        col=[.01*randint(10,90) 
+             for i in range(3)]         
+        va=[[(.3*k*cos(a)*x-sin(a)*y).n(),
+             (.3*k*sin(a)*x+cos(a)*y).n()] 
+            for [x,y] in v]
+        da=dict((nv[i],va[i]) 
+                for i in range(n))
+        G+=g.graphplot(pos=da,
+                       edge_color=col,
+                       edge_thickness=.5,
+                       vertex_labels=False,
+                       vertex_size=0).plot()
     G.show(axes=False)
-g=graphs.CubeGraph(5); krotate_graph(g)
+krotate_graph(graphs.CubeGraph(5))
 </script></div><br/>
     <h1>Fun App with Several Code Lines</h1>
 SageMath &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
-el=["😀","😁","😂","😃","😄","😅","😆","😇","😈","😉","😊","😋","😌","😍",
-    "😎","😏","😐","😑","😒","😓","😔","😕","😖","😗","😘","😙","😚","😛",
-    "😜","😝","😞","😟","😠","😡","😢","😣","😥","😦","😧","😨","😩","😪",
-    "😫","😭","😮","😯","😰","😱","😲","😳","😴","😵","😶","😷"]
+el=["😀","😁","😂","😃","😄","😅","😆",
+    "😇","😈","😉","😊","😋","😌","😍",
+    "😎","😏","😐","😑","😒","😓","😔",
+    "😕","😖","😗","😘","😙","😚","😛",
+    "😜","😝","😞","😟","😠","😡","😢",
+    "😣","😥","😦","😧","😨","😩","😪",
+    "😫","😭","😮","😯","😰","😱","😲",
+    "😳","😴","😵","😶","😷"]
 st='Emotional Horoscope for the Day'
 pretty_print(html('<p style="color:#aa00ff; font-size:270%;">'+st+'</p>'))
 var('t,k'); a,b,c=randint(5,11),randint(12,24),2*randint(3,6); n=randint(16,36)
