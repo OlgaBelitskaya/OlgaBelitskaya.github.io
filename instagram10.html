@@ -493,15 +493,22 @@ var n=640,m=30; var i,t,k,xmax,xmin;
 var margin={top:m,right:m,bottom:m,left:m},
     width=600-margin.left-margin.right,
     height=600-margin.top-margin.bottom; 
-function make_x_gridlines(){return d3.axisBottom(xScale).ticks(11).tickFormat('')};
-function make_y_gridlines(){return d3.axisLeft(yScale).ticks(11).tickFormat('')}; 
-function randi(xmin,xmax){return Math.floor(Math.random()*(xmax-xmin+1))+xmin;};
-function gcolor(k){var r=randi(10*k,255),g=randi(10*k,255),b=randi(10*k,255);
+function make_x_gridlines(){return d3.axisBottom(xScale)
+                                     .ticks(11).tickFormat('')};
+function make_y_gridlines(){return d3.axisLeft(yScale)
+                                     .ticks(11).tickFormat('')}; 
+function randi(xmin,xmax){
+    return Math.floor(Math.random()*(xmax-xmin+1))+xmin;};
+function gcolor(k){var r=randi(10*k,255),
+                       g=randi(10*k,255),
+                       b=randi(10*k,255);
     return '#'+r.toString(16)+g.toString(16)+b.toString(16);}
 var a=randi(7,15),b=randi(10,24),l=randi(3,12),p=.01;              
 function make_data(k) {return d3.range(0,n).map(function(t){
-    return {'x':k*(Math.cos(p*t)+Math.cos(a*p*t)/2+Math.sin((a+b)*p*t)/3),
-            'y':k*(Math.sin(p*t)+Math.sin(a*p*t)/2+Math.cos((a+b)*p*t)/3)}});};
+    return {'x':k*(Math.cos(p*t)+Math.cos(a*p*t)/2+
+                Math.sin((a+b)*p*t)/3),
+            'y':k*(Math.sin(p*t)+Math.sin(a*p*t)/2+
+                Math.cos((a+b)*p*t)/3)}});};
 var xScale=d3.scaleLinear().domain([-1.8*l,1.8*l]).range([0,width]),
     yScale=d3.scaleLinear().domain([-1.8*l,1.8*l]).range([height,0]);
 var ttr1='translate('+margin.left+','+margin.top+')',
@@ -532,27 +539,48 @@ svg.append('text').attr('transform',ttr3)
 HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 <div class="sage_html"><script type="text/x-sage">
 %%html
-<script src="https://d3js.org/d3.v4.min.js"/><svg id="svg2" style="background-color:ghostwhite;"/><script>
+<script src="https://d3js.org/d3.v4.min.js"/>
+<svg id="svg2" style="background-color:ghostwhite;"/>
+<script>
 var n=640,m=30; var i,j,k,xmax,xmin;
-var margin={top:m,right:m,bottom:m,left:m},width=500-margin.left-margin.right,height=500-margin.top-margin.bottom; 
-function get_integer(xmin,xmax) {return Math.floor(Math.random()*(xmax-xmin+1))+xmin;};
-function get_color(i) {var r=get_integer(20*i,255); var g=get_integer(20*i,255); var b=get_integer(20*i,255);
+var margin={top:m,right:m,bottom:m,left:m},
+    width=500-margin.left-margin.right,
+    height=500-margin.top-margin.bottom; 
+function randi(xmin,xmax){
+    return Math.floor(Math.random()*(xmax-xmin+1))+xmin;};
+function gcolor(i){var r=randi(20*i,255),
+                       g=randi(20*i,255),
+                       b=randi(20*i,255);
     return '#'+r.toString(16)+g.toString(16)+b.toString(16);}
-var a=get_integer(7,15),b=get_integer(10,24);           
-function make_data(j) {return d3.range(0,n).map(function(i) {
-    return {"x":4*j*(Math.cos(0.01*i)+Math.cos(a*0.01*i)/2+Math.sin((a+b)*0.01*i)/3),
-            "y":4*j*(Math.sin(0.01*i)+Math.sin(a*0.01*i)/2+Math.cos((a+b)*0.01*i)/3)} }); };
-var xScale=d3.scaleLinear().domain([-24,24]).range([0,width+2*m]),yScale=d3.scaleLinear().domain([-24,24]).range([height+2*m,0]); 
-var svg2=d3.select("#svg2").attr("width",width+margin.left+margin.right).attr("height",height+margin.top+margin.bottom)
-           .attr("transform","translate("+margin.left+","+margin.top+")");
-var line=d3.line().curve(d3.curveMonotoneX).x(function(d) {return xScale(d.x);}).y(function(d) {return yScale(d.y);});
+var a=randi(7,15),b=randi(10,24),p=.01;          
+function make_data(j){return d3.range(0,n).map(function(i) {
+    return {"x":4*j*(Math.cos(p*i)+Math.cos(a*p*i)/2+
+                     Math.sin((a+b)*p*i)/3),
+            "y":4*j*(Math.sin(p*i)+Math.sin(a*p*i)/2+
+                     Math.cos((a+b)*p*i)/3)}});};
+var xScale=d3.scaleLinear().domain([-24,24])
+             .range([0,width+2*m]),
+    yScale=d3.scaleLinear().domain([-24,24])
+             .range([height+2*m,0]);
+var ttr1="translate("+margin.left+","+margin.top+")",
+    ttr2="translate("+20+","+40+")";
+var svg2=d3.select("#svg2")
+           .attr("width",width+margin.left+margin.right)
+           .attr("height",height+margin.top+margin.bottom)
+           .attr("transform",ttr1);
+var line=d3.line().curve(d3.curveMonotoneX)
+           .x(function(d){return xScale(d.x);})
+           .y(function(d){return yScale(d.y);});
 for (k=1; k<4; k++) {var data=make_data(k);
-    svg2.append("path").datum(data).attr("class","line").attr("d",line)
-        .attr("fill","none").attr("stroke-width",2).transition().duration(5000)
-        .styleTween("stroke",function() {var col1=get_color(k); var col2=get_color(k); 
-                                         return d3.interpolate(col1,col2);}); };
-svg2.append("text").attr("transform","translate("+20+","+20+")").style("fill","#aaa")
-                   .text("a="+a+"; b="+b);
+    svg2.append("path").datum(data)
+        .attr("class","line").attr("d",line)
+        .attr("fill","none").attr("stroke-width",2)
+        .transition().duration(5000)
+        .styleTween("stroke",function(){
+            var col1=gcolor(k),col2=gcolor(k); 
+            return d3.interpolate(col1,col2);});};
+svg2.append("text").attr(ttr2)
+    .style("fill","#aaa").text("a="+a+"; b="+b);
 </script></div><br/>
   </body>
 </html>
