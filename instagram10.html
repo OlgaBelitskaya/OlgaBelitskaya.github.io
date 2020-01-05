@@ -451,22 +451,33 @@ function drawChart() {
 HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 <div class="sage_html"><script type="text/x-sage">
 %%html
-<script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'/>
-<div id='test_googlechart' style='width:600px; height:600px;'/><script>
-google.charts.load('current',{'packages':['corechart']}); google.charts.setOnLoadCallback(drawChart);
-function get_int(xmin,xmax) {return Math.floor(Math.random()*(xmax-xmin+1))+xmin;};
-function get_color(k) {var r=get_int(10*k,255); var g=get_int(10*k,255); var b=get_int(10*k,255);
+<script src='https://www.gstatic.com/charts/loader.js'/>
+<div id='gchart' style='width:600px; height:600px;'/>
+<script>
+google.charts.load('current',{'packages':['corechart']}); 
+google.charts.setOnLoadCallback(drawChart);
+function randi(xmin,xmax){
+    return Math.floor(Math.random()*(xmax-xmin+1))+xmin;};
+function gcolor(k){
+    var r=randi(10*k,255),g=randi(10*k,255),b=randi(10*k,255);
     return '#'+r.toString(16)+g.toString(16)+b.toString(16);};
-function drawChart() {
-  var a=get_int(7,15); c=get_int(10,24);
-  var xy=Array(1274).fill(1).map((k,t)=>[(2*Math.floor(t/638)+k)*(Math.cos(0.01*t)+Math.cos(a*0.01*t)/2+Math.sin((a+c)*0.01*t)/3),
-                                         k*(Math.sin(0.01*t)+Math.sin(a*0.01*t)/2+Math.cos((a+c)*0.01*t)/3),
-                                         (k+2)*(Math.sin(0.01*t)+Math.sin(a*0.01*t)/2+Math.cos((a+c)*0.01*t)/3)]);
-  for (var i=1; i<637; i++) {xy[637+i][1]=NaN; xy[i+1][2]=NaN;}; xy.unshift(['x','k=1','k=3']); 
+function drawChart(){
+  var a=randi(7,15),c=randi(10,24),d=.01,n=638;
+  var xy=Array(2*n).fill(1).map((k,t)=>
+      [(2*Math.floor(t/n)+k)*(Math.cos(d*t)+
+       Math.cos(a*d*t)/2+Math.sin((a+c)*d*t)/3),
+       k*(Math.sin(d*t)+Math.sin(a*d*t)/2+
+       Math.cos((a+c)*d*t)/3),
+       (k+2)*(Math.sin(d*t)+Math.sin(a*d*t)/2+
+       Math.cos((a+c)*d*t)/3)]);
+  for (var i=1; i<n-1; i++){xy[n-1+i][1]=NaN; xy[i+1][2]=NaN;}; 
+  xy.unshift(['x','k=1','k=3']); 
   var data=google.visualization.arrayToDataTable(xy); 
-  var options={curveType:'function',legend:{position:'bottom'},colors:[get_color(a-6),get_color(c-9)]};
-  var chart=new google.visualization.LineChart(document.getElementById('test_googlechart')); chart.draw(data,options);
-};
+  var options={curveType:'function',legend:{position:'bottom'},
+               colors:[gcolor(a-6),gcolor(c-9)]};
+  var doc=document.getElementById('gchart');
+  var chart=new google.visualization.LineChart(doc); 
+  chart.draw(data,options);};
 </script></div><br/>
 HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 <div class="sage_html"><script type="text/x-sage">
