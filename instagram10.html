@@ -123,16 +123,26 @@ sum([hyperbolic_polygon([rcc(i,pi/n,coord)
     <h1>Rotations of Graph Plots</h1>
 SageMath &#38; SageMathCell<br/>
 <div class="sage"><script type="text/x-sage">
+def col(): 
+    return [.01*randint(30,90)
+            for i in range(3)]
 def rotate_graph(g,k):
-    G=Graphics(); nv=g.get_pos().keys(); n=len(nv); v=g.get_pos().values() 
+    G=Graphics(); nv=list(g.get_pos().keys())
+    n=len(nv); v=g.get_pos().values() 
     for i in range(2*k):
-        a=i*pi/k; col=(randint(10,90)/100,randint(10,90)/100,randint(10,90)/100)
-        va=[[(cos(a)*x-sin(a)*y).n(),(sin(a)*x+cos(a)*y).n()] for [x,y] in v]
-        da=dict((nv[i],va[i]) for i in range(n))
-        G+=g.graphplot(pos=da,edge_color=col,edge_thickness=.7,
-                       vertex_size=0,vertex_labels=False).plot()
+        a=i*pi/k
+        va=[[(cos(a)*x-sin(a)*y).n(),
+             (sin(a)*x+cos(a)*y).n()] 
+            for [x,y] in v]
+        da=dict((nv[i],va[i]) 
+                for i in range(n))
+        G+=g.graphplot(pos=da,
+                       edge_color=col(),
+                       edge_thickness=.7,
+                       vertex_labels=False,
+                       vertex_size=0).plot()
     G.show(axes=False)
-g=graphs.CubeGraph(4); k=11; rotate_graph(g,k)
+rotate_graph(graphs.CubeGraph(4),9)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 def krotate_graph(g):
