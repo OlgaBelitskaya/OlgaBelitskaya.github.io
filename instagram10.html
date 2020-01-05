@@ -202,15 +202,24 @@ EP3=text(el[randint(0,len(el)-1)],
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 el=["😸","😹","😻","😼","😽","😾","😿","🙀"]
-var('t,k'); a,b,c=randint(5,12),randint(13,24),2*randint(3,6); n=randint(16,36)
-s='=>Fortune Telling on a Chamomile'; col=Color(1,random(),random()).html_color()
-pretty_print(html('<p style="font-size:200%; color:'+col+'">'+s+'</p>'))
-fy(t,k)=cos(pi*t/n+2*k*pi/c)+cos(a*pi*t/n+2*k*pi/c)+cos(b*pi*t/n+2*k*pi/c)
-fx(t,k)=sin(pi*t/n+2*k*pi/c)-sin(a*pi*t/n+2*k*pi/c)+sin(b*pi*t/n+2*k*pi/c)
-L=[[[fx(t,k),fy(t,k)] for t in range(2*n)] for k in range(2*c)]
-sum([polygon2d(L[i],color=(1,random(),random()),thickness=.5,
-               alpha=.1,axes=False) for i in range(2*c)])+\
-text(el[randint(0,len(el)-1)].decode('utf-8'),(0,0),fontsize=100,color=col)
+var('t,k'); n=randint(16,36)
+a,b,c=randint(5,12),randint(13,24),2*randint(3,6)
+st1='<p style="font-size:190%; color:'
+st2='">=>Fortune Telling on a Chamomile</p>'
+def col(): 
+    return Color(1,random(),random()).html_color()
+pretty_print(html(st1+col()+st2))
+fy(t,k)=cos(pi*t/n+2*k*pi/c)+\
+cos(a*pi*t/n+2*k*pi/c)+cos(b*pi*t/n+2*k*pi/c)
+fx(t,k)=sin(pi*t/n+2*k*pi/c)-\
+sin(a*pi*t/n+2*k*pi/c)+sin(b*pi*t/n+2*k*pi/c)
+L=[[[fx(t,k),fy(t,k)] 
+    for t in range(2*n)] for k in range(2*c)]
+sum([polygon2d(L[i],color=col(),
+               thickness=.5,alpha=.1,axes=False) 
+     for i in range(2*c)])+\
+text(el[randint(0,len(el)-1)],
+     (0,0),fontsize=120,color=col())
 </script></div><br/>
     <h1>Parametric 3D Plotting in Python</h1>
 Python &#38; SageMathCell <br/>
