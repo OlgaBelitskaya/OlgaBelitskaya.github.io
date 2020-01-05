@@ -141,30 +141,29 @@ def rotate_graph(g,k):
                        edge_thickness=.7,
                        vertex_labels=False,
                        vertex_size=0).plot()
-    G.show(axes=False)
+    G.show(axes=False,figsize=7)
 rotate_graph(graphs.CubeGraph(4),9)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 def krotate_graph(g):
     G=Graphics(); nv=list(g.get_pos().keys())
     n=len(nv); v=g.get_pos().values()
-    k=randint(3,9); pretty_print('k = %d'%k)
+    k=randint(3,12); pretty_print('k = %d'%k)
     for i in range(2*k):
         a=i*pi/k
-        col=[.01*randint(10,90) 
-             for i in range(3)]         
+        col=colormaps.prism(randint(10,250))         
         va=[[(.3*k*cos(a)*x-sin(a)*y).n(),
              (.3*k*sin(a)*x+cos(a)*y).n()] 
             for [x,y] in v]
         da=dict((nv[i],va[i]) 
                 for i in range(n))
         G+=g.graphplot(pos=da,
-                       edge_color=col,
-                       edge_thickness=.5,
+                       edge_color=col[:3],
+                       edge_thickness=.7,
                        vertex_labels=False,
                        vertex_size=0).plot()
-    G.show(axes=False)
-krotate_graph(graphs.CubeGraph(5))
+    G.show(axes=False,figsize=7)
+krotate_graph(graphs.CubeGraph(3))
 </script></div><br/>
     <h1>Fun App with Several Code Lines</h1>
 SageMath &#38; SageMathCell <br/>
@@ -177,18 +176,28 @@ el=["😀","😁","😂","😃","😄","😅","😆",
     "😣","😥","😦","😧","😨","😩","😪",
     "😫","😭","😮","😯","😰","😱","😲",
     "😳","😴","😵","😶","😷"]
-st='Emotional Horoscope for the Day'
-pretty_print(html('<p style="color:#aa00ff; font-size:270%;">'+st+'</p>'))
-var('t,k'); a,b,c=randint(5,11),randint(12,24),2*randint(3,6); n=randint(16,36)
-fy(t,k)=cos(pi*t/n+2*k*pi/c)+cos(a*pi*t/n+2*k*pi/c)+cos(b*pi*t/n+2*k*pi/c)
-fx(t,k)=sin(pi*t/n+2*k*pi/c)-sin(a*pi*t/n+2*k*pi/c)+sin(b*pi*t/n+2*k*pi/c)
-L=[[[fx(t,k),fy(t,k)] for t in range(2*n)] for k in range(2*c)]
-EL=[(3*cos(j*pi/12),3*sin(j*pi/12)) for j in [1..24]]
-COL=[(random(),0,random()) for j in [1..24]]
-EP1=sum([polygon2d(L[i],color=(random(),0,random()),thickness=.5,alpha=.05) for i in range(2*c)])
-EP2=sum([text(el[randint(0,len(el)-1)].decode('utf-8')+' '+str(31-j),EL[j-1],
-              fontsize=20,color=COL[j-1]) for j in [7..24]])
-EP3=text(el[randint(0,len(el)-1)].decode('utf-8'),(0,0),fontsize=60,color=COL[0])
+st1='<p style="color:#aa00ff; font-size:270%;">'
+st2='Emotional Horoscope for the Day</p>'
+pretty_print(html(st1+st2))
+var('t,k'); n=randint(16,36)
+a,b,c=randint(5,11),randint(12,24),2*randint(3,6)
+fy(t,k)=cos(pi*t/n+2*k*pi/c)+\
+cos(a*pi*t/n+2*k*pi/c)+cos(b*pi*t/n+2*k*pi/c)
+fx(t,k)=sin(pi*t/n+2*k*pi/c)-\
+sin(a*pi*t/n+2*k*pi/c)+sin(b*pi*t/n+2*k*pi/c)
+L=[[[fx(t,k),fy(t,k)] 
+    for t in range(2*n)] for k in range(2*c)]
+EL=[(3*cos(j*pi/12),3*sin(j*pi/12)) 
+    for j in [1..24]]
+def col(): return (random(),0,random())
+EP1=sum([polygon2d(L[i],color=col(),
+                   thickness=.7,alpha=.05) 
+         for i in range(2*c)])
+EP2=sum([text(el[randint(0,len(el)-1)]+' '+str(31-j),
+              EL[j-1],fontsize=20,color=col()) 
+         for j in [7..24]])
+EP3=text(el[randint(0,len(el)-1)],
+         (0,0),fontsize=60,color=col())
 (EP1+EP2+EP3).show(axes=False,figsize=(6,6))
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
