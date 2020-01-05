@@ -91,12 +91,12 @@ def _(N=[1,2,3]):
     var('chi'); Y={1:ln(cos(2*chi))/2,2:exp(chi)+3,3:chi^2/4-0.5}
     X1={1:0,2:ln(8)/2,3:1}; X2={1:pi/12,2:ln(15)/2,3:2}
     L=definite_integral((1+diff(Y[N],chi)^2)^0.5,chi,X1[N],X2[N])
-    s1='<left><font>$\displaystyle{y = %s; \; FL = %s}$</font></left>'
-    s2='<left><font>$\displaystyle{L = %s = %s}$</font></left>'
+    s1=r'<left><font>$\displaystyle{y = %s; \; FL = %s}$</font></left>'
+    s2=r'<left><font>$\displaystyle{L = %s = %s}$</font></left>'
     pretty_print(html(s1%(latex(Y[N]),
                           latex(indefinite_integral((1+diff(Y[N],chi)^2)^0.5,chi)))))
     pretty_print(html(s2%(latex(L),str(L.n()))))
-    M='☕'.decode('utf-8'); X=[x for x in srange(X1[N],X2[N],0.01)]
+    M='☕'; X=[x for x in srange(X1[N],X2[N],0.01)]
     YN=[Y[N](chi=x) for x in X]
     t=sum([text(M,(x,y),fontsize=12,rgbcolor=Color('#3636ff')) 
            for (x,y) in list(zip(X,YN))])
