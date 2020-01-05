@@ -320,22 +320,28 @@ plot(fx0,fy0,type='o',cex=.2,lwd=7,
      col=rgb(runif(1),0,runif(1),alpha=0.1),
      xlab='x',ylab='y',xlim=c(-3,3),ylim=c(-3,3))
 grid(col='slategray'); dev.off()
-c(paste0('a = ',a),paste0('b =',b),
-  paste0('c =',c),paste0('n =',n))
+c(paste0('a = ',a),paste0('b = ',b),
+  paste0('c = ',c),paste0('n = ',n))
 </script></div><br/>
 <div class="sage_r"><script type="text/x-sage">
 %%r
-svg(filename="Rplots.svg",width=7,height=7,pointsize=10,onefile=T,family="sans",
-    bg="black",antialias=c("default","none","gray","subpixel"))
-a<-sample(5:11,1); b<-sample(13:19,1); c<-2*sample(3:10,1); n<-sample(18:36,1)
-cat(c('a =',a,'b =',b,'c =',c,'n =',n,'\n'))
+svg(filename="Rplots.svg",width=7,height=7,pointsize=10,
+    onefile=T,family="sans",bg="black",
+    antialias=c("default","none","gray","subpixel"))
+a<-sample(5:11,1); b<-sample(13:19,1)
+c<-2*sample(3:10,1); n<-sample(18:36,1)
 t<-seq(1,2*n+1,1); col=rgb(runif(1),1,runif(1),alpha=.1)
 plot(0,0,type="n",xlim=c(-3,3),ylim=c(-3,3))
 for (k in 1:c){
-    fx<-sin(pi*t/n+k*2*pi/c)-sin(a*pi*t/n+k*2*pi/c)+sin(b*pi*t/n+k*2*pi/c)
-    fy<-cos(pi*t/n+k*2*pi/c)+cos(a*pi*t/n+k*2*pi/c)+cos(b*pi*t/n+k*2*pi/c)
-    polygon(fx,fy,lwd=.01,col=col,xlab='',ylab='',xlim=c(-3,3),ylim=c(-3,3)); par(new=T)}
+    fx<-sin(pi*t/n+k*2*pi/c)-
+        sin(a*pi*t/n+k*2*pi/c)+sin(b*pi*t/n+k*2*pi/c)
+    fy<-cos(pi*t/n+k*2*pi/c)+
+        cos(a*pi*t/n+k*2*pi/c)+cos(b*pi*t/n+k*2*pi/c)
+    polygon(fx,fy,lwd=.01,col=col,xlab='',ylab='',
+            xlim=c(-3,3),ylim=c(-3,3)); par(new=T)}
 dev.off()
+c(paste0('a = ',a),paste0('b = ',b),
+  paste0('c = ',c),paste0('n = ',n))
 </script></div><br/>
 <div class="sage_r"><script type="text/x-sage">
 %%r
