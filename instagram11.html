@@ -53,17 +53,23 @@ def zoom_line(a,l):
     return [[a*x,a*y] for [x,y] in l]
 def linegraph(g):
     vg=g.get_pos(); eg=g.edges(); nv=len(vg); ne=len(eg)
-    x0=mean([vg.values()[i][0] for i in range(nv)])
-    y0=mean([vg.values()[i][1] for i in range(nv)])
-    coord=[[list(vg[eg[i][0]]),list(vg[eg[i][1]])] for i in range(ne)]
-    return [[[x-x0,y-y0] for [x,y] in coord[i]] for i in range(ne)]   
+    x0=mean([list(vg.values())[i][0] for i in range(nv)])
+    y0=mean([list(vg.values())[i][1] for i in range(nv)])
+    coord=[[list(vg[eg[i][0]]),list(vg[eg[i][1]])] 
+           for i in range(ne)]
+    return [[[x-x0,y-y0] for [x,y] in coord[i]] 
+            for i in range(ne)]   
 def zoom_linegraph(g,n):
-    LG=Graphics(); lg=linegraph(g); k=randint(100,400)/1000
-    zlg=[zoom_line(1+k*j,lg[i]) for j in range(n) for i in range(len(lg))]
-    for i in range(n*len(lg)): 
-        LG+=line(zlg[i],color=(0,random(),random()),thickness=.3)
-    LG.show(axes=False,figsize=(5,5),fontsize=15,title='$k=%.3f$'%k.n())
-g=graphs.CubeGraph(6); n=3; zoom_linegraph(g,n)
+    LG=Graphics(); lg=linegraph(g)
+    k=randint(100,400)/1000
+    zlg=[zoom_line(1+k*j,lg[i]) 
+         for j in range(n) for i in range(len(lg))]
+    for i in range(n*len(lg)):
+        col=(0,random(),random())
+        LG+=line(zlg[i],color=col,thickness=.3)
+    LG.show(axes=False,figsize=(5,5),fontsize=15,
+            title='$k=%.3f$'%k.n())
+zoom_linegraph(graphs.CubeGraph(6),3)
 </script></div><br/>
     <h1>3D Line Graphs</h1>
 SageMath &#38; SageMathCell <br/>
