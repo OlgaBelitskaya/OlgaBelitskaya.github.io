@@ -19,7 +19,7 @@
   h1,h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
   p,a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
   .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
-  body {margin:5px 5px 5px 10px;}
+  body {margin:5px 5px 5px 15px;}
   </style>  
   <body>
     <h1>&#x1F4D1; &nbsp;Instagram Posts. Part 8</h1>
@@ -87,30 +87,40 @@ def gen(max=Infinity):
     n=1; xyn=[.1,.01]
     while n<=max:
         yield xyn; n+=1; xn,yn=xyn[0],xyn[1]
-        xyn=[xn+.684*(xn-xn^2+yn),yn+.684*(yn-yn^2+xn)]
+        xyn=[xn+.684*(xn-xn^2+yn),
+             yn+.684*(yn-yn^2+xn)]
 N=3000; XY=gen(N); XYN=[el for el in XY]
-cools=[colormaps.cool(1.*i/N)[:3] for i in [1..N]]
-p=polygon([[-1,-1],[-1,3],[3,3],[3,-1],[-1,-1]],color='steelblue',alpha=.1)
-p+sum([point([XYN[i]],size=1,color=cools[i]) for i in [1..N-1]])
+cools=[colormaps.cool(1.*i/N)[:3] 
+       for i in [1..N]]
+p=polygon([[-1,-1],[-1,3],[3,3],[3,-1],[-1,-1]],
+          color='steelblue',alpha=.1)
+p+sum([point([XYN[i]],size=1,color=cools[i]) 
+       for i in [1..N-1]])
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 def gen(max=Infinity):
     n=1; xyn=[.1,.1]
     while n<=max:
-        yield xyn; n+=1; xn,yn=xyn[0],xyn[1]
+        yield xyn; n+=1
+        xn,yn=xyn[0],xyn[1]
         xyn=[.7*xn+yn,-.8+xn^2]
 N=5000; XY=gen(N); XYN=[el for el in XY]
-cols=[colormaps.autumn(1.*i/N)[:3] for i in [1..N]]
-p=polygon([[-1.5,-1],[-1.5,1.5],[1,1.5],[1,-1],[-1.5,-1]],color='silver',alpha=.05)
-p+sum([point([XYN[i]],size=1,color=cols[i]) for i in [1..N-1]])
+cols=[colormaps.autumn(1.*i/N)[:3] 
+      for i in [1..N]]
+p=polygon([[-1.5,-1],[-1.5,1.5],[1,1.5],
+           [1,-1],[-1.5,-1]],
+          color='silver',alpha=.05)
+p+sum([point([XYN[i]],size=1,color=cols[i]) 
+       for i in [1..N-1]])
 </script></div><br/>
     <h1>Complex Functions as Exercises</h1>
 SageMath &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
 z,k=var('z,k'); m,n=144,16
 zn=arg(sum((z^n+10^(-3)*z)^factorial(k),k,1,4))
-complex_plot(cos(m*zn)*sin(zn),(-1,1),(-1,1),axes=False,
-             plot_points=300,figsize=(6,6))
+complex_plot(cos(m*zn)*sin(zn),(-1,1),(-1,1),
+             axes=False,plot_points=300,
+             figsize=(6,6))
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 x,y,k=var('x,y,k'); m,n=144,3; seg=[-.5,-.48,..,.5]
