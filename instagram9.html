@@ -37,11 +37,17 @@ sum([parametric_plot3d([fx*i,fy*j,fz*k],
      for i in [-2,1] for j in [-2,1] for k in [-2,1]])
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
-var('u,v'); u_min,u_max=-3*pi,3*pi; v_min,v_max=.001,pi-.001 
-a,b,c=1,2,2; h=a*(1+u^2*sin(v^2)); fx=(log(tan(v/c))/c+cos(v)/h)/b
-fy,fz=b*(sin(u)-u*cos(u))*sin(v)/h,b*(cos(u)+u*sin(u))*sin(v)/h
-sum([parametric_plot3d([fx*i,fy,fz*j],(u_min,u_max),(v_min,v_max),plotpoints=50,
-                       color='silver',opacity=0.3,mesh=True,frame=False) 
+var('u,v'); u_min,u_max=-3*pi,3*pi
+v_min,v_max=.001,pi-.001 
+a,b,c=1,2,2; h=a*(1+u^2*sin(v^2))
+fx=(log(tan(v/c))/c+cos(v)/h)/b
+fy=b*(sin(u)-u*cos(u))*sin(v)/h
+fz=b*(cos(u)+u*sin(u))*sin(v)/h
+sum([parametric_plot3d([fx*i,fy,fz*j],
+                       (u_min,u_max),(v_min,v_max),
+                       plotpoints=50,color='silver',
+                       opacity=0.3,mesh=True,
+                       frame=False) 
      for i in [-1,1] for j in [-1,1]])
 </script></div><br/>
     <h1>Art of Recurrence Tables</h1>
@@ -54,8 +60,10 @@ def gen(max=Infinity):
         xyn=[1-.2*xn^2+yn,0.9991*xn]
 N=5000; XY=gen(N); XYN=[el for el in XY]
 cools=[colormaps.cool(1.*i/N)[:3] for i in [1..N]]
-(polygon([[-5,-5],[-5,5],[5,5],[5,-5],[-5,-5]],color='silver',alpha=.1)+\
-sum([point([XYN[i]],size=1,color=cools[i]) for i in [1..N-1]])).show(axes=False)
+(polygon([[-5,-5],[-5,5],[5,5],[5,-5],[-5,-5]],
+         color='silver',alpha=.1)+\
+sum([point([XYN[i]],size=1,color=cools[i]) 
+    for i in [1..N-1]])).show(axes=False)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 def gen(a,b,max=Infinity):
