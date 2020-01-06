@@ -203,13 +203,19 @@ Python &#38; SageMathCell <br/>
 <div class="linked"><script type="text/x-sage">
 import numpy,pylab
 def gen(a,n):
-    i=1; z0=numpy.array([1+1j])[0]; xyi=[(a*z0).real,(a*z0).imag]
+    i=1; z0=numpy.array([1+1j])[0]
+    xyi=[(a*z0).real,(a*z0).imag]
     while i<=n:
-        yield xyi; i+=1; xi,yi=xyi[0],xyi[1]; zi=numpy.array([xi+yi*1j])[0]
-        zi=a+(1-a)*zi; xyi=[zi.real,zi.imag]
-n=50000; a=.01+.15*1j; xy=gen(a,n); xyn=numpy.array([el for el in xy])      
-pylab.figure(figsize=(7,7)); ax=pylab.gca(); ax.set_facecolor('silver')
-pylab.scatter(xyn[:,0],xyn[:,1],s=.1,c=numpy.random.random(3))
+        yield xyi; i+=1; xi,yi=xyi[0],xyi[1]
+        zi=numpy.array([xi+yi*1j])[0]
+        zi=a+(1-a)*zi
+        xyi=[zi.real,zi.imag]
+n=50000; a=.01+.15*1j; xy=gen(a,n)
+xyn=numpy.array([el for el in xy])      
+pylab.figure(figsize=(7,7)); ax=pylab.gca()
+ax.set_facecolor('silver')
+pylab.scatter(xyn[:,0],xyn[:,1],
+              s=.1,c=numpy.random.random(3))
 pylab.grid(c='slategray',alpha=.4); pylab.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
@@ -217,10 +223,14 @@ def gen(a,b,n):
     i=1; xyi=[0.,0.]
     while i<=n:
         yield xyi; i+=1; xi,yi=xyi[0],xyi[1]
-        xyi=[1-(.2+.01*a)*xi**2+yi,(0.9991+.0001*b)*xi]
-n=100000; a,b=0,0; xy=gen(a,b,n); xyn=numpy.array([el for el in xy])      
-pylab.figure(figsize=(7,7)); ax=pylab.gca(); ax.set_facecolor('black')
-pylab.scatter(xyn[:,0],xyn[:,1],s=.1,c=[numpy.random.random(3)])
+        xyi=[1-(.2+.01*a)*xi**2+yi,
+             (0.9991+.0001*b)*xi]
+n=100000; a,b=0,0; xy=gen(a,b,n)
+xyn=numpy.array([el for el in xy])      
+pylab.figure(figsize=(7,7)); ax=pylab.gca()
+ax.set_facecolor('black')
+pylab.scatter(xyn[:,0],xyn[:,1],
+              s=.1,c=[numpy.random.random(3)])
 pylab.grid(c='slategray',alpha=.4); pylab.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
@@ -229,9 +239,12 @@ def gen(a,b,n):
     while i<=n:
         yield xyi; i+=1; xi,yi=xyi[0],xyi[1]
         xyi=[(1+.01*a)*abs(xi)-(1+.00001*b)*yi+1,xi]
-n=50000; a,b=7,5; xy=gen(a,b,n); xyn=numpy.array([el for el in xy])      
-pylab.figure(figsize=(7,7)); ax=pylab.gca(); ax.set_facecolor('ghostwhite')
-pylab.scatter(xyn[:,0],xyn[:,1],s=.1,c=[numpy.random.random(3)])
+n=50000; a,b=7,5; xy=gen(a,b,n)
+xyn=numpy.array([el for el in xy])      
+pylab.figure(figsize=(7,7)); ax=pylab.gca()
+ax.set_facecolor('ghostwhite')
+pylab.scatter(xyn[:,0],xyn[:,1],
+              s=.1,c=[numpy.random.random(3)])
 pylab.grid(c='slategray',alpha=.4); pylab.show()
 </script></div><br/>
     <h1>Functions & Recurrence Tables in R</h1>
