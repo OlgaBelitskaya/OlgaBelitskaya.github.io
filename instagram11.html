@@ -5,39 +5,48 @@
     <meta name="viewport" content="width=device-width">
     <title>Instagram_Posts11</title>
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
-    <script>$(function () {
+    <script>$(function (){
     sagecell.makeSagecell({inputLocation:'div.linked',linked:true,evalButtonText:'Run Linked Cells'});
     sagecell.makeSagecell({inputLocation:'div.sage_html',evalButtonText:'Run HTML'});  
     sagecell.makeSagecell({inputLocation:'div.sage_js',evalButtonText:'Run JavaScript'});
     sagecell.makeSagecell({inputLocation:'div.sage_r',evalButtonText:'Run R'});  
-    sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run SageMath'}); });
+    sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run SageMath'});});
     </script>
+    <script data-ad-client="ca-pub-9200929962680356" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   </head>
   <style>
   @import url('https://fonts.googleapis.com/css?family=Orbitron');
-  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
-  p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:50em;}
+  h1,h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
+  p,a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
   </style>  
   <body>
     <h1>&#x1F4D1; &nbsp;Instagram Posts. Part 11</h1>
 <a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp;</a>     
 <a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a><br/>
     <h1>Rotate and Zoom Graph Lines</h1>
-SageMath &#38; SageMathCell <br/>
+SageMath &#38; SageMathCell<br/>
 <div class="sage"><script type="text/x-sage">
 def rotate_line(a,l): 
-    return [[(cos(a)*x-sin(a)*y).n(),(sin(a)*x+cos(a)*y).n()] for [x,y] in l]
+    return [[(cos(a)*x-sin(a)*y).n(),
+             (sin(a)*x+cos(a)*y).n()] 
+            for [x,y] in l]
 def linegraph(g):
     vg=g.get_pos(); eg=g.edges(); ne=len(eg)
-    return [[list(vg[eg[i][0]]),list(vg[eg[i][1]])] for i in range(ne)]    
+    return [[list(vg[eg[i][0]]),
+             list(vg[eg[i][1]])] 
+            for i in range(ne)]    
 def rotate_linegraph(g,k):
     LG=Graphics(); lg=linegraph(g)
-    rlg=[rotate_line(j*pi/k,lg[i]) for j in range(2*k) for i in range(len(lg))]
+    rlg=[rotate_line(j*pi/k,lg[i]) 
+         for j in range(2*k) 
+         for i in range(len(lg))]
     for i in range(2*k*len(lg)): 
-        LG+=line(rlg[i],color=(random(),0,random()),thickness=.3)
-    LG.show(axes=False,figsize=(5,5),fontsize=15,title='$\\alpha=\\frac{\\pi}{%d}$'%k)
-g=graphs.CubeGraph(5); k=7; rotate_linegraph(g,k)
+        col=(random(),0,random())
+        LG+=line(rlg[i],color=col,thickness=.3)
+    LG.show(axes=False,figsize=(5,5),fontsize=15,
+            title='$\\alpha=\\frac{\\pi}{%d}$'%k)
+rotate_linegraph(graphs.CubeGraph(5),7)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 def zoom_line(a,l): 
