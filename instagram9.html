@@ -300,7 +300,7 @@ function ar(k,a,b){var d=.01,n=640;
             k*(Math.sin(d*t)+Math.sin(a*d*t)/2+Math.cos((a+b)*d*t)/3)]);};
 function col(i){
     var r=randi(i,255),g=randi(i,255),b=randi(i,255);
-    return 'rgb('+r.toString()+','+g.toString()+','+b.toString()+')';}; 
+    return 'rgb('+r+','+g+','+b+')';}; 
 var series=[]; var n=3;
 for (var i=1; i<n+1; i++){
     var a=randi(7,15),b=randi(10,24);
@@ -318,25 +318,30 @@ HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 <div class="sage_html"><script type="text/x-sage">
 %%html
 <script src="https://code.highcharts.com/highcharts.js"/>
-<div id="container2" style="height:500px; width:500px; margin:0 auto"></div>
-<script>
-function getinteger(min,max) {return Math.floor(Math.random()*(max-min+1))+min;};
-function ar(k,a,b) {
-    return Array(640).fill(k).map((k,t)=>[k*(Math.cos(0.01*t)+Math.cos(a*0.01*t)/2+Math.sin((a+b)*0.01*t)/3),
-                                          k*(Math.sin(0.01*t)+Math.sin(a*0.01*t)/2+Math.cos((a+b)*0.01*t)/3)]);
-};
-function col(i) {
-    var r=getinteger(i,255); var g=getinteger(i,255); var b=getinteger(i,255);
-    return 'rgb('+r.toString()+','+g.toString()+','+b.toString()+')';
-}; 
-var series=[]; var i; var n=12;
-var a=getinteger(7,15); var b=getinteger(10,24);
-for (i=1; i<n+1; i++) {series.push({name:i.toString(),color:col(i),lineWidth:1,data:ar(i,a,b)})};
-Highcharts.chart('container2', {
-    chart:{type:'line',backgroundColor:'mintcream'},xAxis:{title:{text:'x'}},yAxis:{title:{text:'y'}},
-    title:{text:'Random Parametric Plot: a,b = '+[a,b].toString()},credits:{enabled:false},
-    legend:{enabled:false},series:series
-});
+<div id="container2" style="height:500px; width:500px; margin:0 auto">
+</div><script>
+function randi(min,max){
+    return Math.floor(Math.random()*(max-min+1))+min;};
+function ar(k,a,b){var d=.01,m=640;
+    return Array(m).fill(k).map((k,t)=>
+           [k*(Math.cos(d*t)+Math.cos(a*d*t)/2+
+               Math.sin((a+b)*d*t)/3),
+            k*(Math.sin(d*t)+Math.sin(a*d*t)/2+
+               Math.cos((a+b)*d*t)/3)]);};
+function col(i){
+    var r=randi(i,255),g=randi(i,255),b=randi(i,255);
+    return 'rgb('+r+','+g+','+b+')';}; 
+var series=[],n=12;
+var a=randi(7,15),b=randi(10,24);
+for (var i=1; i<n+1; i++){
+    series.push({name:i.toString(),color:col(i),
+                 lineWidth:1,data:ar(i,a,b)})};
+Highcharts.chart('container2',{
+    chart:{type:'line',backgroundColor:'mintcream'},
+    xAxis:{title:{text:'x'}},yAxis:{title:{text:'y'}},
+    title:{text:'Random Parametric Plot: a,b = '+[a,b]},
+    credits:{enabled:false},
+    legend:{enabled:false},series:series});
 </script></div><br/>
 HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 <div class="sage_html"><script type="text/x-sage">
