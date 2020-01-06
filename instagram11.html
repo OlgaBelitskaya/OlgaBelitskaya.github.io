@@ -46,7 +46,7 @@ def rotate_linegraph(g,k):
         LG+=line(rlg[i],color=col,thickness=.3)
     LG.show(axes=False,figsize=(5,5),fontsize=15,
             title='$\\alpha=\\frac{\\pi}{%d}$'%k)
-rotate_linegraph(graphs.CubeGraph(5),7)
+rotate_linegraph(graphs.CubeGraph(4),7)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 def zoom_line(a,l): 
@@ -69,7 +69,7 @@ def zoom_linegraph(g,n):
         LG+=line(zlg[i],color=col,thickness=.3)
     LG.show(axes=False,figsize=(5,5),fontsize=15,
             title='$k=%.3f$'%k.n())
-zoom_linegraph(graphs.CubeGraph(6),3)
+zoom_linegraph(graphs.CubeGraph(5),3)
 </script></div><br/>
     <h1>3D Line Graphs</h1>
 SageMath &#38; SageMathCell <br/>
@@ -94,18 +94,28 @@ def linegraph3d(g,n):
 linegraph3d(graphs.CubeGraph(6),5)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
+def col(): 
+    c1,c2,c3=.3,random(),random()
+    return sage.plot.colors.float_to_html(c1,c2,c3)
 def linegraph3d(g,k):
-    LG=Graphics(); vg=g.get_pos(); eg=g.edges(); nv=len(vg); ne=len(eg)
-    x0=mean([vg.values()[i][0] for i in range(nv)])
-    y0=mean([vg.values()[i][1] for i in range(nv)])
-    coord=[[list(vg[eg[i][0]]),list(vg[eg[i][1]])] for i in range(ne)]
-    lg=[[[x-x0,y-y0] for [x,y] in coord[i]] for i in range(ne)]
-    zlg=[[[(cos(j*pi/k)*x-sin(j*pi/k)*y).n(),(sin(j*pi/k)*x+cos(j*pi/k)*y).n(),(j+1)/k] 
-          for [x,y] in lg[i]] for j in range(2*k) for i in range(ne)]
+    LG=Graphics(); vg=g.get_pos(); eg=g.edges()
+    nv=len(vg); ne=len(eg)
+    x0=mean([list(vg.values())[i][0] 
+             for i in range(nv)])
+    y0=mean([list(vg.values())[i][1] 
+             for i in range(nv)])
+    coord=[[list(vg[eg[i][0]]),list(vg[eg[i][1]])] 
+           for i in range(ne)]
+    lg=[[[x-x0,y-y0] for [x,y] in coord[i]] 
+        for i in range(ne)]
+    zlg=[[[(cos(j*pi/k)*x-sin(j*pi/k)*y).n(),
+           (sin(j*pi/k)*x+cos(j*pi/k)*y).n(),
+           (j+1)/k] for [x,y] in lg[i]] 
+         for j in range(2*k) for i in range(ne)]
     for i in range(2*k*ne): 
-        LG+=line3d(zlg[i],color=(0,random(),random()))
+        LG+=line3d(zlg[i],color=col())
     LG.show(frame=False,aspect_ratio=1)
-g=graphs.CubeGraph(5); k=6; linegraph3d(g,k)
+linegraph3d(graphs.CubeGraph(5),6)
 </script></div><br/>
 SageMath &#38; SageMathCell 
 <div class="sage"><script type="text/x-sage">
