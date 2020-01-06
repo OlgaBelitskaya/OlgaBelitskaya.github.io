@@ -292,24 +292,25 @@ the javascript cell is launching here...</div>
 </script></div><br/>
 <div class="sage_js"><script type="text/x-sage">
 %%javascript
-function getinteger(min,max) {return Math.floor(Math.random()*(max-min+1))+min;};
-function ar(k,a,b) {
-    return Array(640).fill(k).map((k,t)=>[k*(Math.cos(0.01*t)+Math.cos(a*0.01*t)/2+Math.sin((a+b)*0.01*t)/3),
-                                          k*(Math.sin(0.01*t)+Math.sin(a*0.01*t)/2+Math.cos((a+b)*0.01*t)/3)]);
-};
-function col(i) {
-    var r=getinteger(i,255); var g=getinteger(i,255); var b=getinteger(i,255);
-    return 'rgb('+r.toString()+','+g.toString()+','+b.toString()+')';
-}; 
-var series=[]; var i; var n=3;
-for (i=1; i<n+1; i++) {
-    var a=getinteger(7,15); var b=getinteger(10,24);
-    series.push({name:[i,a,b].toString(),color:col(i),lineWidth:1,data:ar(i,a,b)})
-};
-Highcharts.chart('container1', {
-    chart:{type:'line',backgroundColor:'ghostwhite'},xAxis:{title:{text:'x'}},yAxis:{title:{text:'y'}},
-    title:{text:'Random Parametric Plot'},credits:{enabled:false},legend:{enabled:false},series:series
-});
+function randi(min,max){
+    return Math.floor(Math.random()*(max-min+1))+min;};
+function ar(k,a,b){var d=.01,n=640;
+    return Array(n).fill(k).map((k,t)=>
+           [k*(Math.cos(d*t)+Math.cos(a*d*t)/2+Math.sin((a+b)*d*t)/3),
+            k*(Math.sin(d*t)+Math.sin(a*d*t)/2+Math.cos((a+b)*d*t)/3)]);};
+function col(i){
+    var r=randi(i,255),g=randi(i,255),b=randi(i,255);
+    return 'rgb('+r.toString()+','+g.toString()+','+b.toString()+')';}; 
+var series=[]; var n=3;
+for (var i=1; i<n+1; i++){
+    var a=randi(7,15),b=randi(10,24);
+    series.push({name:[i,a,b].toString(),color:col(i),
+                 lineWidth:1,data:ar(i,a,b)})};
+Highcharts.chart('container1',{
+    chart:{type:'line',backgroundColor:'ghostwhite'},
+    xAxis:{title:{text:'x'}},yAxis:{title:{text:'y'}},
+    title:{text:'Random Parametric Plot'},
+    credits:{enabled:false},legend:{enabled:false},series:series});
 </script></div><br/>
    <h1>Random Plotting and Functions</h1>
    <h1>in JavaScript inside HTML Cells</h1>
