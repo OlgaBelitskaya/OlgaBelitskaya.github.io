@@ -31,61 +31,75 @@ Jupyter Notebook &#38; SageMath Kernel
 <div class="sage_html"><script type="text/x-sage">
 %%html
 <script src="https://cdn.plot.ly/plotly-latest.min.js"/>
-<div id="test_plotly" style="width:900px; height:600px;"/>
+<div id="plotly1" style="width:900px; height:600px;"/>
 <script>
-TEST1=document.getElementById('test_plotly');
+doc1=document.getElementById('plotly1');
 var x1=Array(80).fill(0.05).map((r,t)=>r*(t-40));
-var y1=Array(80).fill(0.05).map((r,t)=>Math.exp(-Math.pow(r*(t-40),2)));
-var y2=Array(80).fill(0.05).map((r,t)=>-Math.exp(-Math.pow(r*(t-40),2)));
+var y1=Array(80).fill(0.05).map((r,t)=>
+       Math.exp(-Math.pow(r*(t-40),2)));
+var y2=Array(80).fill(0.05).map((r,t)=>
+       -Math.exp(-Math.pow(r*(t-40),2)));
 var y3=Array(80).fill(0.05).map((r,t)=>
-       Math.sin(Math.PI*Math.pow(r*(t-40),3))*Math.exp(-Math.pow(r*(t-40),2)));
-Plotly.plot(TEST1,[{x:x1,y:y1,line:{color:'#3636ff'},marker:{symbol:317},mode:'markers',
-                    hoverinfo:'y',name:'$f(x) = e^{-x^2}$'}]);
-Plotly.plot(TEST1,[{x:x1,y:y2,line:{color:'#36ff36'},marker:{symbol:218},mode:'markers',
-                    hoverinfo:'y',name:'$f(x) = -e^{-x^2}$'}]);
-Plotly.plot(TEST1,[{x:x1,y:y3,line:{color:'#ff3636'},mode:'text',text:'☕',
-                    hoverinfo:'y',name:'$f(x) = sin(πx^3) e^{-x^2}$'}]);
+       Math.sin(Math.PI*Math.pow(r*(t-40),3))*
+       Math.exp(-Math.pow(r*(t-40),2)));
+Plotly.plot(doc1,[{x:x1,y:y1,line:{color:'#3636ff'},
+                   marker:{symbol:317},mode:'markers',
+                   hoverinfo:'y',name:'$f(x) = e^{-x^2}$'}]);
+Plotly.plot(doc1,[{x:x1,y:y2,line:{color:'#36ff36'},
+                   marker:{symbol:218},mode:'markers',
+                   hoverinfo:'y',name:'$f(x) = -e^{-x^2}$'}]);
+Plotly.plot(doc1,[{x:x1,y:y3,line:{color:'#ff3636'},
+                   mode:'text',text:'☕',hoverinfo:'y',
+                   name:'$f(x) = sin(πx^3) e^{-x^2}$'}]);
 </script></div>
     <h1>If you want to experiment with text classification</h1>
-Jupyter Notebook &#38; SageMath Kernel      
-    <p></p> 
+Jupyter Notebook &#38; SageMath Kernel<br/>
 <div class="sage"><script type="text/x-sage">
 import pylab; from sklearn.datasets import fetch_20newsgroups
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.neural_network import MLPClassifier
 import warnings; warnings.filterwarnings("ignore")
-train=fetch_20newsgroups(subset='train',shuffle=True,remove=('headers','footers','quotes'))
-test=fetch_20newsgroups(subset='test',shuffle=True,remove=('headers','footers','quotes'))
+train=fetch_20newsgroups(subset='train',shuffle=True,
+                         remove=('headers','footers','quotes'))
+test=fetch_20newsgroups(subset='test',shuffle=True,
+                        remove=('headers','footers','quotes'))
 y_train,y_test=train.target,test.target
-vectorizer=TfidfVectorizer(sublinear_tf=True,max_df=0.5,stop_words='english')
-x_train=vectorizer.fit_transform(train.data); x_test=vectorizer.transform(test.data)
-del train,test; print(x_train.shape,x_test.shape,y_train.shape,y_test.shape)
-clf=MLPClassifier(hidden_layer_sizes=(128,),max_iter=3,solver='adam',
-                  verbose=2,random_state=1,learning_rate_init=.01)
+vectorizer=TfidfVectorizer(sublinear_tf=True,
+                           max_df=0.5,stop_words='english')
+x_train=vectorizer.fit_transform(train.data)
+x_test=vectorizer.transform(test.data)
+del train,test 
+print(x_train.shape,x_test.shape,y_train.shape,y_test.shape)
+clf=MLPClassifier(hidden_layer_sizes=(128,),max_iter=3,
+                  solver='adam',verbose=2,random_state=1,
+                  learning_rate_init=.01)
 clf.fit(x_train,y_train); print(clf.score(x_test,y_test))
 y_test_predictions=clf.predict(x_test)
-pylab.figure(figsize=(9,5)); pylab.scatter(range(100),y_test[:100],s=100)
-pylab.scatter(range(100),y_test_predictions[:100],s=25); pylab.show()
+pylab.figure(figsize=(9,5))
+pylab.scatter(range(100),y_test[:100],s=100)
+pylab.scatter(range(100),y_test_predictions[:100],s=25)
+pylab.show()
 </script></div>
-    <p></p>
     <h1>If you want to create art objects with math functions</h1>
-Jupyter Notebook &#38; SageMath Kernel      
-    <p></p> 
+Jupyter Notebook &#38; SageMath Kernel<br/>
 <div class="sage"><script type="text/x-sage">
-T=Tachyon(xres=600,yres=600,camera_center=(6,6,3),viewdir=(-5,-5,-3),raydepth=4)
+T=Tachyon(xres=600,yres=600,camera_center=(6,6,3),
+          viewdir=(-5,-5,-3),raydepth=4)
 T.light((6.2,6.2,3.2),0.3,(1,1,1))
 def f(x,y): return float(sin(x*y)*cos(x*y))
 def g(x,y): return (float(sin(x*y)),1,float(cos(x*y)))
-T.texture('t',ambient=0.,diffuse=1,specular=.1,opacity=.1,color=Color('#00ff00'))
-T.plot(f,(-3,3),(-3,3),'t',max_depth=5,initial_depth=3,grad_f=g); T.show()
-</script></div>
-    <p></p>
+T.texture('t',ambient=0.,diffuse=1,specular=.1,
+           opacity=.1,color=Color('#00ff00'))
+T.plot(f,(-3,3),(-3,3),'t',max_depth=5,
+       initial_depth=3,grad_f=g); T.show()
+</script></div><br/>
     <h1>If you want to calculate the length of a curve over a given interval</h1>
 Jupyter Notebook &#38; SageMath Kernel
     <p></p>      
 <div class="sage"><script type="text/x-sage">
 import sympy; sympy.init_printing(use_unicode=True)
-from sage.symbolic.integration.integral import indefinite_integral,definite_integral
+from sage.symbolic.integration.integral import indefinite_integral
+from sage.symbolic.integration.integral import definite_integral
 @interact
 def _(N=[1,2,3]):
     var('chi'); Y={1:ln(cos(2*chi))/2,2:exp(chi)+3,3:chi^2/4-0.5}
@@ -93,8 +107,8 @@ def _(N=[1,2,3]):
     L=definite_integral((1+diff(Y[N],chi)^2)^0.5,chi,X1[N],X2[N])
     s1=r'<left><font>$\displaystyle{y = %s; \; FL = %s}$</font></left>'
     s2=r'<left><font>$\displaystyle{L = %s = %s}$</font></left>'
-    pretty_print(html(s1%(latex(Y[N]),
-                          latex(indefinite_integral((1+diff(Y[N],chi)^2)^0.5,chi)))))
+    II=indefinite_integral((1+diff(Y[N],chi)^2)^0.5,chi)
+    pretty_print(html(s1%(latex(Y[N]),latex(II))))
     pretty_print(html(s2%(latex(L),str(L.n()))))
     M='☕'; X=[x for x in srange(X1[N],X2[N],0.01)]
     YN=[Y[N](chi=x) for x in X]
@@ -105,8 +119,7 @@ def _(N=[1,2,3]):
     x=sympy.Symbol('x'); y={1:ln(cos(2*x))/2,2:exp(x)+3,3:x^2/4-0.5}
     L=sympy.Integral(((1+diff(y[N],x)^2)^0.5).expand(),(x,X1[N],X2[N]))   
     print('\nL = '); display(L); print('= '+str(L.n()))
-</script></div>
-    <p></p>
+</script></div><br/>
     <h1>Fun graph plotting with symbols</h1>
 Jupyter Notebook &#38; SageMath Kernel 
 <div class="sage_r"><script type="text/x-sage">
