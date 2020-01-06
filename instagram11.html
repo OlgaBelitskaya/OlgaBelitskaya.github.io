@@ -119,22 +119,32 @@ linegraph3d(graphs.CubeGraph(5),6)
 </script></div><br/>
 SageMath &#38; SageMathCell 
 <div class="sage"><script type="text/x-sage">
+def col(): 
+    c1,c2,c3=random(),.3,random()
+    return sage.plot.colors.float_to_html(c1,c2,c3)
 def graph_pe(g,n):
-    PG=Graphics(); vg=g.get_pos(); vgp=vg.values(); nv=len(vg)
-    eg=g.edges(); ne=len(eg); k=randint(10,50)/100
+    PG=Graphics(); k=randint(10,50)/100
+    vg=g.get_pos(); vgp=list(vg.values())
+    eg=g.edges(); nv=len(vg); ne=len(eg);
     x0=mean([vgp[i][0] for i in range(nv)])
     y0=mean([vgp[i][1] for i in range(nv)])
-    cp=[[vgp[i][0]-x0,vgp[i][1]-y0] for i in range(nv)]
-    l=[[list(vg[eg[i][0]]),list(vg[eg[i][1]])] for i in range(ne)]
-    cl=[[[x-x0,y-y0] for [x,y] in l[i]] for i in range(ne)]
-    cp3d=[[[(1+k*j)*x,(1+k*j)*y,j] for j in range(n)] for [x,y] in cp]
-    cl3d=[[[(1+k*j)*x,(1+k*j)*y,j] for [x,y] in cl[i]] for j in range(n) for i in range(ne)]
+    cp=[[vgp[i][0]-x0,vgp[i][1]-y0] 
+        for i in range(nv)]
+    l=[[list(vg[eg[i][0]]),list(vg[eg[i][1]])] 
+       for i in range(ne)]
+    cl=[[[x-x0,y-y0] for [x,y] in l[i]] 
+        for i in range(ne)]
+    cp3d=[[[(1+k*j)*x,(1+k*j)*y,j] 
+           for j in range(n)] for [x,y] in cp]
+    cl3d=[[[(1+k*j)*x,(1+k*j)*y,j] 
+           for [x,y] in cl[i]] 
+          for j in range(n) for i in range(ne)]
     for i in range(nv): 
-        PG+=line3d(cp3d[i],color=(0,random(),random()))
+        PG+=line3d(cp3d[i],color=col())
     for i in range(n*ne): 
-        PG+=line3d(cl3d[i],color=(0,random(),random()))
+        PG+=line3d(cl3d[i],color=col())
     PG.show(frame=False)
-g=graphs.CubeGraph(7); n=5; graph_pe(g,n)
+graph_pe(graphs.CubeGraph(7),5)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 def graph_pe(g,n):
