@@ -19,6 +19,7 @@
   h1,h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
   p,a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
   .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
+  body {margin:5px 5px 5px 10px;}
   </style>  
   <body>
     <h1>&#x1F4D1; &nbsp;Instagram Posts. Part 11</h1>
@@ -183,14 +184,21 @@ graph_pe(g,randint(3,6))
 SageMath &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
 def display_polyarc(n,r):
-    A=[0]; L=[]; [A.append(A[i-1]+4*pi*i/(n*(n+1))) for i in [1..n]]
+    A=[0]; L=[]; st='$P=%s$<br/>$P=%.4f$'
+    [A.append(A[i-1]+4*pi*i/(n*(n+1))) 
+     for i in [1..n]]
     pretty_print(html('$A=%s$'%latex(A)))
-    ar=sum([arc((0,0),r,sector=(A[i],A[i+1]),color=hue(i/n)) for i in range(n)])
+    ar=sum([arc((0,0),r,sector=(A[i],A[i+1]),
+                color=hue(i/n)) for i in range(n)])
     for i in range(n+1):
-        x=1-2*sin(A[i]/2)^2; y=sqrt(1-x^2)*sign(cos(A[i]/2)); L.append([r*x,r*y])
-    l=sum([line((L[i],L[i+1]),color=hue(i/n)) for i in range(n)])
-    p=sum([2*r*sin((A[i+1]-A[i])/2) for i in range(n)])
-    pretty_print(html('$P=%s$<br/>$P=%.4f$'%(latex(p),p.n())))
+        x=1-2*sin(A[i]/2)^2
+        y=sqrt(1-x^2)*sign(cos(A[i]/2))
+        L.append([r*x,r*y])
+    l=sum([line((L[i],L[i+1]),color=hue(i/n)) 
+           for i in range(n)])
+    p=sum([2*r*sin((A[i+1]-A[i])/2) 
+           for i in range(n)])
+    pretty_print(html(st%(latex(p),p.n())))
     (ar+l).show(gridlines=True)
 display_polyarc(7,3)
 </script></div><br/>
