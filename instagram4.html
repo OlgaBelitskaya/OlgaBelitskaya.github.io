@@ -106,9 +106,9 @@ import sys; sys.path.append(path)
 import numpy,pylab,torch,torchvision
 import torchvision.transforms as transforms
 tr0=(0.5,0.5,0.5)
-tr=transforms.Compose([transforms.ToTensor(),
-                       transforms.Normalize(tr0,tr0)])
-trainset=\torchvision.datasets.CIFAR10(root='./data',
+transform=transforms.Compose([transforms.ToTensor(),
+                              transforms.Normalize(tr0,tr0)])
+trainset=torchvision.datasets.CIFAR10(root='./data',
                                       train=True,
                                       download=True,
                                       transform=transform)
@@ -126,22 +126,25 @@ def imshow(img):
     pylab.show()
 dataiter=iter(trainloader); images,labels=dataiter.next()
 imshow(torchvision.utils.make_grid(images))
-pretty_print(' '.join('%5s'%classes[labels[j]] 
-             for j in range(8)))
+print(' '.join('%5s'%classes[labels[j]] 
+      for j in range(8)))
 </script></div>
     <h1>Yes. It's possible to use GeoPandas in SageMathCell</h1>
 Python &#38; SageMathCell
 <div class="sage"><script type="text/x-sage">
 #unlock to install geopandas
-#!python -m pip install --upgrade pip --user
-#!python -m pip install geopandas --user
-sys.path.append('/home/sc_work/.sage/local/lib/python2.7/site-packages')
+#!python3 -m pip install --upgrade pip --user
+#!python3 -m pip install geopandas --user
+path='/home/sc_work/.sage/local/lib/python3.7/site-packages'
+import sys; sys.path.append(path)
 import pandas,geopandas,pylab
 path='https://olgabelitskaya.github.io/map.geojson'
 df=geopandas.read_file(path)
 pylab.style.use('seaborn-whitegrid') 
-df.boundary.plot(figsize=(9,7),markersize=0,lw=.5,edgecolor='gray') 
-pylab.xlim(37.61,37.64); pylab.ylim(55.750,55.768); pylab.show()
+df.boundary.plot(figsize=(9,7),markersize=0,
+                 lw=.5,edgecolor='gray') 
+pylab.xlim(37.61,37.64); pylab.ylim(55.750,55.768)
+pylab.show()
 </script></div>
     <h1>You can use OpenCV in SageMathCell</h1>
 Python &#38; SageMathCell      
