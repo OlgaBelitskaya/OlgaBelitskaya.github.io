@@ -257,17 +257,21 @@ c(paste0('a = ',a),paste0('b = ',b),
 </script></div><br/>
 <div class="sage_r"><script type="text/x-sage">
 %%r
-svg(filename="Rplots.svg",width=7,height=7,pointsize=10,onefile=T,family="sans",
-    bg="black",antialias=c("default","none","gray","subpixel"))
-tmin<--pi; tmax<-pi; n<-36; t<-seq(0,2*pi,len=180)
-for (i in 1:n) {
-    f<-(sample(8:11,1)+.9*cos(sample(12:24,1)*t+2*pi*i/n))*(1+.1*cos(sample(25:81,1)*t+
-        2*pi*i/n))*(1+.05*cos(sample(216:256,1)*t+2*pi*i/n))*(1+sin(t+2*pi*i/n))
-    x<-f*cos(t); y<-f*sin(t)
+svg(filename="Rplots.svg",width=6.8,height=7,onefile=T,
+    pointsize=12,family="courier",bg="black",
+    antialias=c("default","none","gray","subpixel"))
+tmin<--pi; tmax<-pi; n<-36; t<-seq(0,2*pi,len=120)
+for (i in 1:n){
+    f1<-(sample(8:11,1)+.9*cos(sample(12:24,1)*t+2*pi*i/n))
+    f2<-(1+.1*cos(sample(25:81,1)*t+2*pi*i/n))
+    f3<-(1+.05*cos(sample(216:256,1)*t+2*pi*i/n))
+    f4<-(1+sin(t+2*pi*i/n))
+    x<-f1*f2*f3*f4*cos(t); y<-f1*f2*f3*f4*sin(t)
     plot(x,y,type='o',cex=.3,xlim=c(-27,27),ylim=c(-27,27),
-         col=rgb(runif(1),runif(1),runif(1)),lwd=.7,xlab='x',ylab='y',
-         fg='slategray',col.axis='slategray',col.lab='slategray'); par(new=T) 
-}
+         col=rgb(runif(1),runif(1),runif(1)),lwd=1,
+         xlab='x',ylab='y',fg='slategray',
+         col.axis='slategray',col.lab='slategray')
+    par(new=T)}
 grid(col='slategray'); dev.off()
 </script></div><br/>
     <h1>Random Plotting with Highcharts</h1>
