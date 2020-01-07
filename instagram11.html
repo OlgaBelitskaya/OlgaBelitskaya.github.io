@@ -354,22 +354,28 @@ import pylab as pl; import matplotlib.patches as pt
 import numpy as np; import random as rd
 def rotate_xy(k,x,y):
     return np.array([[np.cos(i*np.pi/k)*x-np.sin(i*np.pi/k)*y,
-             np.sin(i*np.pi/k)*x+np.cos(i*np.pi/k)*y] for i in range(2*k)])
+                      np.sin(i*np.pi/k)*x+np.cos(i*np.pi/k)*y] 
+                     for i in range(2*k)])
 def circle_mandala(k,n,m):
-    c=np.array([rotate_xy(n,.5+k*i,.5+k*i) for i in range(m)])
+    c=np.array([rotate_xy(n,.5+k*i,.5+k*i) 
+                for i in range(m)])
     r=[rd.randint(300,1800)/1000 for i in range(m)]
     l=.1+r[m-1]+c.max()
-    col=[[rd.randint(100,900)/1000 for j in range(2)]+[1] for i in range(m)]
+    col=[[rd.randint(100,900)/1000 
+          for j in range(2)]+[1] for i in range(m)]
     fig,ax=pl.subplots(figsize=(7,7))
     for i in range(m):
         for j in range(2*n):
-            ax.add_patch(pt.Circle(c[i][j],r[i],alpha=0.1,color=col[i]))
-            ax.add_patch(pt.Circle(c[i][j],r[i],fill=False,edgecolor=col[m-i-1]))
+            ax.add_patch(pt.Circle(c[i][j],r[i],
+                                   alpha=0.1,color=col[i]))
+            ax.add_patch(pt.Circle(c[i][j],r[i],fill=False,
+                                   edgecolor=col[m-i-1]))
     pl.title(r'$k=%.3f; \ m=%d; \ n=%d$'%(k,m,n))
     pl.axis('off'); pl.xlim(-l,l); pl.ylim(-l,l); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-k=rd.randint(100,900)/1000; n=rd.randint(5,15); m=rd.randint(3,9)
+k=rd.randint(100,900)/1000; 
+n,m=rd.randint(5,15),rd.randint(3,9)
 circle_mandala(k,n,m)    
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
