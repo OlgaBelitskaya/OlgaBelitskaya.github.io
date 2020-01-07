@@ -29,29 +29,44 @@
 Python &#38; SageMathCell 
     <p>Install additional packages</p>
 <div class="linked"><script type="text/x-sage">
-!python -m pip install --upgrade pip --user
-!python -m pip install pygal --user
-import sys; sys.path.append('/home/sc_work/.sage/local/lib/python2.7/site-packages')
+#unlock to install bokeh
+#!python3 -m pip install --upgrade pip --user
+#!python3 -m pip install pygal --user
+path='/home/sc_work/.sage/local/lib/python3.7/site-packages'
+import sys; sys.path.append(path)
 </script></div>
     <p>Apply them</p>     
 <div class="linked"><script type="text/x-sage">
-import pygal,pandas; from pygal.style import BlueStyle
-columns=['Fresh','Milk','Grocery','Frozen','Detergents_Paper','Delicatessen']
-colors=['#1b2c45','#5a8bbd','#008b8b','#ff5a8b']; index= ['C1','C2','C3']
-data=[[26373,36423,22019,5154,4337,16523],[16165,4230,7595,201,4003,57],[14276,803,3045,485,100,518]]
-samples=pandas.DataFrame(data,columns=columns,index=index); 
-line=pygal.Line(fill=False,style=BlueStyle(opacity='.3',colors=colors,background='transparent'),height=int(400))
-line.title='Samples of the Wholesale Customers Dataset'; line.x_labels=columns
-line.add('C1',data[0]); line.add('C2',data[1]); line.add('C3',data[2]); line.add('MEAN',samples.mean())
-line.render_to_file('samples.svg'); html("""<figure><embed type="image/svg+xml" src="samples.svg" width=900/></figure>""")
+import pygal,pandas as pd
+from pygal.style import BlueStyle
+columns=['Fresh','Milk','Grocery','Frozen',
+         'Detergents_Paper','Delicatessen']
+colors=['#1b2c45','#5a8bbd','#008b8b','#ff5a8b']
+index= ['C1','C2','C3']
+data=[[26373,36423,22019,5154,4337,16523],
+      [16165,4230,7595,201,4003,57],
+      [14276,803,3045,485,100,518]]
+samples=pd.DataFrame(data,columns=columns,index=index) 
+line=pygal.Line(fill=False,height=int(400),
+                style=BlueStyle(opacity='.3',colors=colors,
+                                background='transparent'))
+line.title='Samples of the Wholesale Customers Dataset'
+line.x_labels=columns
+line.add('C1',data[0]); line.add('C2',data[1])
+line.add('C3',data[2]); line.add('MEAN',samples.mean())
+line.render_to_file('samples.svg')
+s1='<figure><embed type="image/svg+xml" '
+s2='src="samples.svg" width=900/></figure>'
+html(s1+s2)
 </script></div>
     <h1>If you want to try Bokeh in SageMathCell</h1>
 Python &#38; SageMathCell
 <div class="sage"><script type="text/x-sage">
 #unlock to install bokeh
-#!python -m pip install --upgrade pip --user
-#!python -m pip install bokeh --user
-import sys,os,numpy; sys.path.append('/home/sc_work/.sage/local/lib/python2.7/site-packages')
+#!python3 -m pip install --upgrade pip --user
+#!python3 -m pip install bokeh --user
+path='/home/sc_work/.sage/local/lib/python3.7/site-packages'
+import sys,os,numpy; sys.path.append(path)
 from bokeh.layouts import gridplot; from bokeh.plotting import figure,show,output_file
 t=numpy.linspace(0,2*numpy.pi,500); 
 x=(numpy.cos(12*t)+numpy.cos(6*t))*numpy.cos(t); y=(numpy.cos(12*t)+numpy.cos(6*t))*numpy.sin(t)
