@@ -29,7 +29,7 @@
 Python &#38; SageMathCell 
     <p>Install additional packages</p>
 <div class="linked"><script type="text/x-sage">
-#unlock to install bokeh
+#unlock to install pygal
 #!python3 -m pip install --upgrade pip --user
 #!python3 -m pip install pygal --user
 path='/home/sc_work/.sage/local/lib/python3.7/site-packages'
@@ -96,9 +96,9 @@ html(s1+fpath+s2)
 Python &#38; SageMathCell
 <div class="linked"><script type="text/x-sage">
 #unlock to install torch & torchvision
-#!python -m pip install --upgrade pip --user
-#!python -m pip install torch --user
-#!python -m pip install torchvision --user
+#!python3 -m pip install --upgrade pip --user
+#!python3 -m pip install torch --user
+#!python3 -m pip install torchvision --user
 path='/home/sc_work/.sage/local/lib/python3.7/site-packages'
 import sys; sys.path.append(path)
 </script></div>
@@ -119,11 +119,15 @@ trainloader=torch.utils.data.DataLoader(trainset,
 classes=('plane','car','bird','cat','deer',
          'dog','frog','horse','ship','truck')
 def imshow(img):
-    npimg=img.numpy()/2.0+0.5; pylab.figure(figsize=(11,2))
-    pylab.imshow(numpy.transpose(npimg,(int(1),int(2),int(0)))); pylab.show()
+    npimg=img.numpy()/2.0+0.5
+    pylab.figure(figsize=(11,2))
+    tr1=(int(1),int(2),int(0))
+    pylab.imshow(numpy.transpose(npimg,tr1))
+    pylab.show()
 dataiter=iter(trainloader); images,labels=dataiter.next()
 imshow(torchvision.utils.make_grid(images))
-pretty_print(' '.join('%5s'%classes[labels[j]] for j in range(8)))
+pretty_print(' '.join('%5s'%classes[labels[j]] 
+             for j in range(8)))
 </script></div>
     <h1>Yes. It's possible to use GeoPandas in SageMathCell</h1>
 Python &#38; SageMathCell
