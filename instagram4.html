@@ -99,14 +99,25 @@ Python &#38; SageMathCell
 #!python -m pip install --upgrade pip --user
 #!python -m pip install torch --user
 #!python -m pip install torchvision --user
-#sys.path.append('/home/sc_work/.sage/local/lib/python2.7/site-packages')
+path='/home/sc_work/.sage/local/lib/python3.7/site-packages'
+import sys; sys.path.append(path)
 </script></div>
 <div class="linked"><script type="text/x-sage">
-import numpy,pylab,torch,torchvision; import torchvision.transforms as transforms
-transform=transforms.Compose([transforms.ToTensor(),transforms.Normalize((0.5,0.5,0.5),(0.5,0.5,0.5))])
-trainset=torchvision.datasets.CIFAR10(root='./data',train=True,download=True,transform=transform)
-trainloader=torch.utils.data.DataLoader(trainset,batch_size=int(8),shuffle=True,num_workers=int(2))
-classes=('plane','car','bird','cat','deer','dog','frog','horse','ship','truck')
+import numpy,pylab,torch,torchvision
+import torchvision.transforms as transforms
+tr0=(0.5,0.5,0.5)
+tr=transforms.Compose([transforms.ToTensor(),
+                       transforms.Normalize(tr0,tr0)])
+trainset=\torchvision.datasets.CIFAR10(root='./data',
+                                      train=True,
+                                      download=True,
+                                      transform=transform)
+trainloader=torch.utils.data.DataLoader(trainset,
+                                        batch_size=int(8),
+                                        shuffle=True,
+                                        num_workers=int(2))
+classes=('plane','car','bird','cat','deer',
+         'dog','frog','horse','ship','truck')
 def imshow(img):
     npimg=img.numpy()/2.0+0.5; pylab.figure(figsize=(11,2))
     pylab.imshow(numpy.transpose(npimg,(int(1),int(2),int(0)))); pylab.show()
