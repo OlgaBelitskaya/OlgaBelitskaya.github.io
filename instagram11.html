@@ -254,9 +254,9 @@ def graph2d(g,m,n):
     for i in range(n*ne):
         col=(random(),random(),1)
         PG+=line(cl[i],color=col,thickness=1)        
-    PG.show(axes=False,figsize=7,
+    PG.show(axes=False,figsize=9,
             title=r'$k=%.3f; \ m=%d; \ n=%d$'%(k,m,n))
-m,n=randint(3,5),randint(2,9); 
+m,n=randint(3,7),randint(2,9); 
 g=graphs.CubeGraph(m); graph2d(g,m,n)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
@@ -294,16 +294,28 @@ g=graphs.CubeGraph(m); graph2d(g,m,n)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 def rotate_line(a,l): 
-    return [[(cos(a)*x-sin(a)*y).n(),(sin(a)*x+cos(a)*y).n()] for [x,y] in l]
+    return [[(cos(a)*x-sin(a)*y).n(),
+             (sin(a)*x+cos(a)*y).n()] 
+            for [x,y] in l]
 def linegraph(g):
     vg=g.get_pos(); eg=g.edges(); ne=len(eg)
-    return [[list(vg[eg[i][0]]),list(vg[eg[i][1]])] for i in range(ne)]    
+    return [[list(vg[eg[i][0]]),
+             list(vg[eg[i][1]])] 
+            for i in range(ne)]    
 def rotate_bezier_path_cubegraph(m,k):
-    g=graphs.CubeGraph(m); lg=linegraph(g); LG=Graphics()
-    rlg=[[rotate_line(j*pi/k,lg[i]) for i in range(len(lg))] for j in range(2*k)] 
-    for i in range(2*k): LG+=bezier_path(rlg[i],color=(random(),0,random()),thickness=.3)
-    LG.show(axes=False,figsize=(5,5),title='$m=%d; \ k=%d$'%(m,k))
-m=randint(3,5); k=randint(3,5); rotate_bezier_path_cubegraph(m,k)
+    g=graphs.CubeGraph(m) 
+    lg=linegraph(g); LG=Graphics()
+    rlg=[[rotate_line(j*pi/k,lg[i]) 
+          for i in range(len(lg))] 
+         for j in range(2*k)] 
+    for i in range(2*k): 
+        col=(random(),0,random())
+        LG+=bezier_path(rlg[i],color=col,
+                        thickness=.3)
+    LG.show(axes=False,figsize=(7,7),
+            title=r'$m=%d; \ k=%d$'%(m,k))
+m,k=randint(3,5),randint(3,5)
+rotate_bezier_path_cubegraph(m,k)
 </script></div><br/>
     <h1>Rotation of Basic Shapes</h1>
 SageMath &#38; SageMathCell<br/>
