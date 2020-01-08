@@ -133,13 +133,20 @@ grid(col='white'); dev.off()
 R &#38; SageMathCell <br/>
 <div class="sage_r"><script type="text/x-sage">
 %%r
-svg(filename="Rplots.svg",width=7,height=7,pointsize=10,onefile=T,family="sans",
-    bg="steelblue",antialias=c("default","none","gray","subpixel"))
-t<-seq(0,2*pi,len=360); f<-(7+.9*cos(12*t))*(1+.05*cos(48*t))*(1+.05*cos(216*t))*(1+sin(t))
-x<-f*cos(t); y<-f*sin(t) 
-for(i in 1:25) {
-    plot(0.04*i*x,0.04*i*y,type='l',cex=0.7,col=rgb(0,0.04*i,0),xlim=c(-11,11),ylim=c(-3,18), 
-         xlab='x',ylab='y',fg='gray',col.axis='gray',col.lab='gray'); par(new=T)}
+svg(filename="Rplots.svg",width=7,height=7,onefile=T,
+    pointsize=10,family="times",bg="steelblue",
+    antialias=c("default","none","gray","subpixel"))
+t<-seq(0,2*pi,len=360)
+f1<-(7+.9*cos(12*t))*(1+.05*cos(72*t))
+f2<-(1+.05*cos(256*t))*(1+sin(t))
+x<-f1*f2*cos(t); y<-f1*f2*sin(t) 
+for (i in 1:25){
+    plot(.04*i*x,.04*i*y,type='l',
+         col=rgb(0,.04*i,0),
+         xlim=c(-11,11),ylim=c(-3,17), 
+         xlab='x',ylab='y',fg='gray',
+         col.axis='gray',col.lab='gray')
+    par(new=T)}
 grid(col='gray'); dev.off()
 </script></div><br/>
     <h1>If you want to define a function with summation in JavaScript</h1>
