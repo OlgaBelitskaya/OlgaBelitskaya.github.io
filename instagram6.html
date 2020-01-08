@@ -104,19 +104,28 @@ display([f(x,9,7).doit().expand().simplify(),
 R &#38; SageMathCell <br/>
 <div class="sage_r"><script type="text/x-sage">
 %%r
-svg(filename="Rplots.svg",width=9,height=6,pointsize=15,onefile=T,family="times",
-    bg="black",antialias=c("default","none","gray","subpixel"))
-f<-function(n,x) {
-  s=0; for(i in 1:n) {s<-s+sqrt(exp(1)^(-i*x)+x^(i-1))/(cos(i*x)+sin(i*x))};
-  return(s*log(n*x-1));
-}
+svg(filename="Rplots.svg",width=9,height=6,pointsize=15,
+    onefile=T,family="times",bg="black",
+    antialias=c("default","none","gray","subpixel"))
+f<-function(n,x){s=0; 
+    for (i in 1:n){
+        d<-cos(i*x)+sin(i*x)
+        s<-s+sqrt(exp(1)^(-i*x)+x^(i-1))/d};
+    return (s*log(n*x-1));}
 x<-seq(1,5,len=47); y2<-f(2,x); y3<-f(3,x); y4<-f(4,x)
-plot(x,y2,type='o',cex=0.9,col='#3636ff',pch=7,xlim=c(1,5),ylim=c(-150,150),xlab='',ylab=''); par(new=T) 
-plot(x,y3,type='o',cex=0.9,col='#ff36ff',pch=8,xlim=c(1,5),ylim=c(-150,150),xlab='',ylab=''); par(new=T)
-plot(x,y4,type='o',cex=0.9,col='#ff3636',pch=9,xlab='x',ylab='y',xlim=c(1,5),ylim=c(-150,150),
+plot(x,y2,type='o',cex=0.9,col='#3636ff',pch=7,
+     xlim=c(1,5),ylim=c(-150,150),xlab='',ylab='')
+par(new=T) 
+plot(x,y3,type='o',cex=0.9,col='#ff36ff',pch=8,
+     xlim=c(1,5),ylim=c(-150,150),xlab='',ylab='')
+par(new=T)
+plot(x,y4,type='o',cex=0.9,col='#ff3636',pch=9,
+     xlab='x',ylab='y',xlim=c(1,5),ylim=c(-150,150),
      fg='white',col.axis='white',col.lab='white')
-legend(list(x=3,y=150),legend=c("n=2","n=3","n=4"),col=c('#3636ff','#ff36ff','#ff3636'),
-       pch=7:9,lty=1,merge=TRUE,text.col=c('#3636ff','#ff36ff','#ff3636'),box.col="white")
+legend(list(x=3,y=150),legend=c("n=2","n=3","n=4"),
+       col=c('#3636ff','#ff36ff','#ff3636'),
+       pch=7:9,lty=1,merge=TRUE,box.col="white",
+       text.col=c('#3636ff','#ff36ff','#ff3636'))
 grid(col='white'); dev.off()
 </script></div><br/>
     <h1>A parametric plot and an art object at once</h1>
