@@ -196,19 +196,25 @@ HTML &#38; JavaScript &#38; SageMathCell <br/>
 <div class="sage_html"><script type="text/x-sage">
 %%html
 <script src="https://code.highcharts.com/highcharts.js"/>
-<div id="container" style="height:400px; width:300px; margin:0 auto">
-the javascript cell is launching here...</div>
+<div id="container" style="height:400px; width:400px; margin:0 auto; font-family:Orbitron;">
+the JavaScript cell is launching here...</div>
 </script></div><br/>
 <div class="sage_js"><script type="text/x-sage">
 %%javascript
-function f(t) {return Math.exp(Math.pow(Math.cos(0.01*t),2)+Math.sin(0.01*t))-3*Math.cos(0.04*t);}
-function ar(a) {return Array(640).fill(a).map((r,t) => [r*f(t)*Math.cos(0.01*t),r*f(t)*Math.sin(0.01*t)]);}
-Highcharts.chart('container', {
-    chart:{type:'line'},xAxis:{title:{text:'x'}},yAxis:{title:{text:'y'}},
-    title:{text:'Parametric Plot'},credits:{enabled:false},
-    series: [{name:'r=1',color:'#3636ff',data:ar(1)},{name:'r=1.1',color:'#ff36ff',data:ar(1.1)},
-             {name:'r=1.2',color:'#ff3636',data:ar(1.2)}]
-});
+function f(t){var d=.01;
+    return Math.exp(Math.pow(Math.cos(d*t),2)+
+           Math.sin(d*t))-3*Math.cos(4*d*t);};
+function ar(a){var d=.01;
+    return Array(640).fill(a).map((r,t)=>
+           [r*f(t)*Math.cos(d*t),
+            r*f(t)*Math.sin(d*t)]);};
+Highcharts.chart('container',{
+    chart:{type:'line'},title:{text:'Parametric Plot'},
+    xAxis:{title:{text:'x'}},yAxis:{title:{text:'y'}},
+    credits:{enabled:false},
+    series: [{name:'r=1',color:'#3636ff',data:ar(1)},
+             {name:'r=1.1',color:'#ff36ff',data:ar(1.1)},
+             {name:'r=1.2',color:'#ff3636',data:ar(1.2)}]});
 </script></div><br/>
    <h1>Parametric Plotting and Functions</h1>
    <h1>in JavaScript inside HTML Cells</h1>
