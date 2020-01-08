@@ -50,17 +50,31 @@ df[df['highway']=='traffic_signals']\
 pylab.legend(); pylab.xlim(37.613,37.636)
 pylab.ylim(55.752,55.762); pylab.show()
 </script></div>
-    <h1>It's possible to install PyGame</h1>
+    <h1>It's possible to install TensorFlow</h1>
 Python Modules &#38; SageMathCell<br/>     
 <div class="linked"><script type="text/x-sage">
 #unlock to install pygame
 #!python3 -m pip install --upgrade pip --user
-#!python3 -m pip install pygame --user
-path='/home/sc_work/.sage/local/lib/python3.7/site-packages'
-import sys; sys.path.append(path); import pygame
+#!python3 -m pip install tensorflow --user
+path1='/home/sc_work/.sage/local/lib/python3.7/site-packages'
+path2='/home/sc_work/.sage//local/bin'
+import sys; sys.path.append(path1); sys.path.append(path2)
+import tensorflow as tf
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+n=5000; mnist=tf.keras.datasets.mnist
+(x_train,y_train),(x_test,y_test)=mnist.load_data()
+x_train,x_test=x_train[:3*n]/255.0,x_test[:n]/255.0
+model=tf.keras.models.Sequential([
+  tf.keras.layers.Flatten(input_shape=(28,28)),
+  tf.keras.layers.Dense(128,activation='relu'),
+  tf.keras.layers.Dropout(0.2),
+  tf.keras.layers.Dense(10,activation='softmax')])
+model.compile(optimizer='adam',
+              loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
+model.fit(x_train,y_train,epochs=5)
+model.evaluate(x_test, y_test,verbose=2)
 </script></div>  
     <h1>Let's have a look at </h1>
     <h1>molecular structures with BioPandas</h1>
@@ -124,7 +138,8 @@ for clf,label in zip(clfs+[sclf1,sclf2,sclf3],labels):
     print("Accuracy: %0.2f (+/- %0.2f) [%s]"\
           %(scores.mean(),scores.std(),label))
 </script></div>
-    <h1>Do you want to apply stacking regressors in Mlxtend?</h1>
+    <h1>Do you want to apply </h1>
+    <h1>stacking regressors in Mlxtend?</h1>
 Python Modules &#38; SageMathCell<br/>       
 <div class="sage"><script type="text/x-sage">
 #unlock to install mlxtend
