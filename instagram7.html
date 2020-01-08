@@ -222,14 +222,25 @@ HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 <div class="sage_html"><script type="text/x-sage">
 %%html
 <script src="https://cdn.plot.ly/plotly-latest.min.js"/>
-<div id="test_plotly" style="width:600px;height:600px;"/>
-<script>TEST=document.getElementById('test_plotly');
-function f(t) {return Math.exp(Math.pow(Math.cos(0.01*t),2)+Math.sin(0.01*t))-3*Math.cos(0.04*t);};
-function arx(a) {return Array(640).fill(1+0.1*a).map((r,t) => r*f(t)*Math.cos(0.01*t));};
-function ary(a) {return Array(640).fill(1+0.1*a).map((r,t) => r*f(t)*Math.sin(0.01*t));};
-function col(a) {return 'rgb('+(1-0.1*a).toString()+',0,'+(0.1*a).toString()+')';};
-function plt(a) {return Plotly.plot(TEST,[{x:arx(a),y:ary(a),line:{color:col(a)},name:a.toString()}]);};
-for (i=1; i<10; i++) {plt(i);}
+<div id="plotlychart" style="width:600px;height:600px;"/>
+<script>doc=document.getElementById('plotlychart');
+function f(t){
+    return Math.exp(Math.pow(Math.cos(0.01*t),2)+
+           Math.sin(0.01*t))-3*Math.cos(0.04*t);};
+function arx(a){
+    return Array(640).fill(1+0.1*a).map((r,t)=>
+           r*f(t)*Math.cos(0.01*t));};
+function ary(a){
+    return Array(640).fill(1+0.1*a).map((r,t)=>
+           r*f(t)*Math.sin(0.01*t));};
+function col(a){
+    return 'rgb('+(1-0.1*a)+',0,'+(0.1*a)+')';};
+function plt(a){
+    return Plotly.plot(doc,
+           [{x:arx(a),y:ary(a),
+             line:{color:col(a)},
+             name:a.toString()}]);};
+for (i=1; i<10; i++){plt(i);};
 </script></div><br/>
   </body>
 </html>
