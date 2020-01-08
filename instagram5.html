@@ -98,29 +98,43 @@ Python Modules &#38; SageMathCell<br/>
 path='/home/sc_work/.sage/local/lib/python3.7/site-packages'
 import sys; sys.path.append(path)
 import numpy,warnings; warnings.simplefilter('ignore')
-from sklearn import datasets,model_selection,svm; from mlxtend.classifier import StackingClassifier
-from sklearn.linear_model import LogisticRegression,LogisticRegressionCV,SGDClassifier 
+from sklearn import datasets,model_selection,svm
+from mlxtend.classifier import StackingClassifier
+from sklearn.linear_model import LogisticRegression,SGDClassifier
+from sklearn.linear_model import LogisticRegressionCV 
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.naive_bayes import GaussianNB; from sklearn.ensemble import RandomForestClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.ensemble import RandomForestClassifier
 digits=datasets.load_digits(); X,y=digits.data,digits.target
-clfs=[KNeighborsClassifier(n_neighbors=int(5)),RandomForestClassifier(random_state=1),GaussianNB()]
-sclf1=StackingClassifier(classifiers=clfs,meta_classifier=SGDClassifier(tol=0.001))
-sclf2=StackingClassifier(classifiers=clfs,meta_classifier=LogisticRegression())
-sclf3=StackingClassifier(classifiers=clfs,meta_classifier=svm.SVC(gamma='scale',C=10.0,kernel='poly'))
-labels=['KNN','Random Forest','Naive Bayes','StackingClassifier - SGD','StackingClassifier - LR','StackingClassifier - SVM']
+clfs=[KNeighborsClassifier(n_neighbors=int(5)),
+      RandomForestClassifier(random_state=1),GaussianNB()]
+sclf1=StackingClassifier(classifiers=clfs,
+                         meta_classifier=SGDClassifier(tol=0.001))
+sclf2=StackingClassifier(classifiers=clfs,
+                         meta_classifier=LogisticRegression())
+sclf3=StackingClassifier(classifiers=clfs,
+                         meta_classifier=\
+                         svm.SVC(gamma='scale',C=10.0,kernel='poly'))
+labels=['KNN','Random Forest','Naive Bayes',
+        'StackingClassifier - SGD','StackingClassifier - LR',
+        'StackingClassifier - SVM']
 for clf,label in zip(clfs+[sclf1,sclf2,sclf3],labels):
-    scores=model_selection.cross_val_score(clf,X,y,cv=3,scoring='accuracy')
-    print("Accuracy: %0.2f (+/- %0.2f) [%s]" %(scores.mean(),scores.std(),label))
+    scores=model_selection\
+    .cross_val_score(clf,X,y,cv=3,scoring='accuracy')
+    print("Accuracy: %0.2f (+/- %0.2f) [%s]"\
+          %(scores.mean(),scores.std(),label))
 </script></div>
     <h1>Do you want to apply stacking regressors in Mlxtend?</h1>
 Python Modules &#38; SageMathCell<br/>       
 <div class="sage"><script type="text/x-sage">
 #unlock to install mlxtend
-#!python -m pip install --upgrade pip --user
-#!python -m pip install mlxtend --user
-sys.path.append('/home/sc_work/.sage/local/lib/python2.7/site-packages')
+#!python3 -m pip install --upgrade pip --user
+#!python3 -m pip install mlxtend --user
+path='/home/sc_work/.sage/local/lib/python3.7/site-packages'
+import sys; sys.path.append(path)
 import numpy,warnings; warnings.simplefilter('ignore')
-from sklearn import datasets,model_selection,svm,linear_model 
+from sklearn import datasets,model_selection
+from sklearn import svm,linear_model 
 from mlxtend.regressor import StackingRegressor
 from sklearn.neighbors import KNeighborsRegressor,RadiusNeighborsRegressor
 from sklearn.ensemble import GradientBoostingRegressor,RandomForestRegressor
