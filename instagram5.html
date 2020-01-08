@@ -33,7 +33,7 @@ Python Modules &#38; SageMathCell
 #!python3 -m pip install --upgrade pip --user
 #!python3 -m pip install geopandas --user
 path='/home/sc_work/.sage/local/lib/python3.7/site-packages'
-import sys,os,numpy; sys.path.append(path)
+import sys; sys.path.append(path)
 import pandas,geopandas,pylab
 pylab.style.use('seaborn-pastel')
 fpath='https://olgabelitskaya.github.io/map.geojson'
@@ -58,33 +58,39 @@ pylab.ylim(55.752,55.762); pylab.show()
 Python Modules &#38; SageMathCell      
 <div class="linked"><script type="text/x-sage">
 #unlock to install pygame
-#!python -m pip install --upgrade pip --user
-#!python -m pip install pygame --user
-sys.path.append('/home/sc_work/.sage/local/lib/python2.7/site-packages')
-import pygame
+#!python3 -m pip install --upgrade pip --user
+#!python3 -m pip install pygame --user
+path='/home/sc_work/.sage/local/lib/python3.7/site-packages'
+import sys,pygame; sys.path.append(path)
 </script></div>
-    <p></p>
+
 <div class="linked"><script type="text/x-sage">
 
-</script></div>
-    <p></p>  
+</script></div>  
     <h1>Let's have a look at molecular structures with BioPandas</h1>
 Python Modules &#38; SageMathCell
 <div class="sage"><script type="text/x-sage">
 #unlock to install biopandas
-#!python -m pip install --upgrade pip --user
-#!python -m pip install  biopandas --user
-sys.path.append('/home/sc_work/.sage/local/lib/python2.7/site-packages')
-f='1b5e_2.mol2'; path='https://raw.githubusercontent.com/rasbt/biopandas/master/docs/sources/tutorials/data/'
-import biopandas,numpy,pylab,urllib; pylab.style.use('seaborn-whitegrid')
+#!python3 -m pip install --upgrade pip --user
+#!python3 -m pip install  biopandas --user
+path='/home/sc_work/.sage/local/lib/python3.7/site-packages'
+import sys; sys.path.append(path)
+f='1b5e_2.mol2'
+fpath='https://raw.githubusercontent.com/rasbt/'
+fpath+='biopandas/master/docs/sources/tutorials/data/'
+import biopandas,numpy,pylab,urllib
+pylab.style.use('seaborn-whitegrid')
 from biopandas.mol2 import PandasMol2
-input_file=urllib.urlopen(path+f); output_file=open(f,'wb')
-output_file.write(input_file.read()); output_file.close(); input_file.close()
-pmol=PandasMol2().read_mol2(f); colors=pylab.cm.ocean(numpy.linspace(.1,.9,9))
-pmol.df['atom_type'].value_counts().plot(kind='bar',color=colors,figsize=(8,6))
-pylab.xlabel('atom type'); pylab.ylabel('count'); pylab.show()
+input_file=urllib.request.urlopen(fpath+f)
+output_file=open(f,'wb');output_file.write(input_file.read())
+output_file.close(); input_file.close()
+pmol=PandasMol2().read_mol2(f)
+colors=pylab.cm.ocean(numpy.linspace(.1,.9,9))
+pmol.df['atom_type'].value_counts()\
+.plot(kind='bar',color=colors,figsize=(8,6))
+pylab.xlabel('atom type')
+pylab.ylabel('count'); pylab.show()
 </script></div>
-    <p></p>
     <h1>Feel free to experiment with stacking classifiers in Mlxtend</h1>
 Python Modules &#38; SageMathCell      
 <div class="sage"><script type="text/x-sage">
