@@ -136,18 +136,28 @@ import numpy,warnings; warnings.simplefilter('ignore')
 from sklearn import datasets,model_selection
 from sklearn import svm,linear_model 
 from mlxtend.regressor import StackingRegressor
-from sklearn.neighbors import KNeighborsRegressor,RadiusNeighborsRegressor
-from sklearn.ensemble import GradientBoostingRegressor,RandomForestRegressor
+from sklearn.neighbors import KNeighborsRegressor,\
+                              RadiusNeighborsRegressor
+from sklearn.ensemble import GradientBoostingRegressor,\
+                             RandomForestRegressor
 boston=datasets.load_boston(); X,y=boston.data,boston.target
-regs=[GradientBoostingRegressor(),KNeighborsRegressor(),svm.SVR(kernel='linear')]
-sreg1=StackingRegressor(regressors=regs,meta_regressor=RandomForestRegressor(random_state=1))
-sreg2=StackingRegressor(regressors=regs,meta_regressor=linear_model.Ridge(random_state=1))
-sreg3=StackingRegressor(regressors=regs,meta_regressor=linear_model.PassiveAggressiveRegressor(max_iter=1000,tol=0.001))
+regs=[GradientBoostingRegressor(),
+      KNeighborsRegressor(),svm.SVR(kernel='linear')]
+sreg1=StackingRegressor(regressors=regs,\
+      meta_regressor=RandomForestRegressor(random_state=1))
+sreg2=StackingRegressor(regressors=regs,\
+      meta_regressor=linear_model.Ridge(random_state=1))
+sreg3=StackingRegressor(regressors=regs,\
+      meta_regressor=linear_model.\
+      PassiveAggressiveRegressor(max_iter=1000,tol=0.001))
 labels=['GradientBoosting','KNeighbors','SVM',
-        'StackingRegressor - RandomForest','StackingRegressor - Ridge','StackingRegressor - PassiveAggressive']
+        'StackingRegressor - RandomForest',
+        'StackingRegressor - Ridge',
+        'StackingRegressor - PassiveAggressive']
 for reg,label in zip(regs+[sreg1,sreg2,sreg3],labels):    
     print(label); reg.fit(X,y)
-    print("Mean Squared Error: %.4f"%numpy.mean((reg.predict(X)-y)**2))
+    print("Mean Squared Error: %.4f"\
+          %numpy.mean((reg.predict(X)-y)**2))
     print('Variance Score: %.4f'%reg.score(X,y))
 </script></div>
     <h1>Drawing by parametric plots</h1>
