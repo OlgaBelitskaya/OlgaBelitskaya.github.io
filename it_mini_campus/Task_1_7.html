@@ -62,9 +62,12 @@ find_root(f11,A,B,E,11)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 E=10^(-4); A,B=E,2-E;
-def find_root(f,a,b,e,var):
+def find_root_div2(f,a,b,e,var):
+    pretty_print(html(latex(f)))
     if sign(f(a))==sign(f(b)):
-        print('The segment does not possible to use for this decision method')
+        s='It is not possible to use '
+        s+='this decision method for the segment'
+        print(s)
     else:
         print('Iteration steps'); t=[['f(a)','f((a+b)/2)','f(b)']]
         while b-a>e:            
@@ -73,9 +76,11 @@ def find_root(f,a,b,e,var):
                 if f(ab)==0: break 
                 b=ab
             else: a=ab
-    show(table(t)); print('var %d: f(x)=0 => x≈%.10f'%(var,ab))    
+        show(table(t))
+        print('var %d f(x)=0 =>\nprogram answer: x≈%.10f'%(var,ab))
+        print('SageMath answer: x≈%.10f'%find_root(f21(x),0,2))
 f21(x)=log(20/sqrt(.009))-1.5*(exp(x/3)+exp(-x/3))-x
-find_root(f21,A,B,E,21)
+find_root_div2(f21,A,B,E,21)
 </script></div><br/>
 Python &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
