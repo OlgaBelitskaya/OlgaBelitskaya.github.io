@@ -79,25 +79,28 @@ def nfind(controlf,sumf,e,seg):
         diff=[abs(controlf(x)-sumf(x,n)).n()<e for x in seg]
         cond=sum(diff)!=len(diff); n+=1
     return(n-1)
-def nplot(controlf,sumf,n,seg,var):
-    sumline3=[[x,sumf(x,2).n()] for x in seg]
-    sumline=[[x,sumf(x,n).n()] for x in seg]
-    controlline=[[x,controlf(x).n()] for x in seg]
+def nplottable(controlf,sumf,n,seg,var):
+    t=[['x','sumf(x)','controlf(x)']]
+    sumline3,sumlinen,controlline=[],[],[]
+    for x in seg:
+        t+=[[x,sumf(x,n).n(),controlf(x).n()]]
+        sumline3+=[[x,sumf(x,2).n()]]
+        sumlinen+=[[x,sumf(x,n).n()]]
+        controlline+=[[x,controlf(x).n()]]
     (list_plot(sumline3,size=50,
                legend_label='sum function n=2',
-               title='variant %d'%var)+\
-     list_plot(sumline,size=50,color='green',
+               title='Variant %d: N = %d'%(var,n))+\
+     list_plot(sumlinen,size=50,color='green',
                legend_label='sum function n=%d'%n)+\
      list_plot(controlline,color='red',
                legend_label='control function'))\
-    .show(gridlines=True)
-#def ntable(controlf,sumf,n,seg):
-#    t=[['x','fs(x)','f(x)']]
+    .show(gridlines=True) 
+    show(table(t))
 controlf21(x)=2*x-x*exp(-x^2)-sin(x)
 sumf21(x,n)=sum((-1)^(k+1)*x^(2*k+1)*(1/factorial(k)+\
                 1/factorial(2*k+1)),k,1,n)
 N21=nfind(controlf21,sumf21,E,SEG)
-nplot(controlf21,sumf21,N21,SEG,21)
+nplottable(controlf21,sumf21,N21,SEG,21)
 </script></div><br/>
 Python &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
