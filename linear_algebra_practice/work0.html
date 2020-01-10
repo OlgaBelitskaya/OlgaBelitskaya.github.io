@@ -102,7 +102,7 @@ print(length(S)==factorial(4)); S
 <div class="sage_r"><script type="text/x-sage">
 %%r
 elements<-c("🍊","🍋","🍎","🍐","🍑"); 
-S <-unique(t(sapply(1:10^3,
+S<-unique(t(sapply(1:10^3,
            function(x) sample(elements,3)))) 
 S<-apply(S,1,function(x) paste0(x,collapse=""))
 for (i in c(1:6)){
@@ -162,13 +162,25 @@ ST=['Cycles in P: ',P.to_cycles(),'Product of P cycles: ',
 for st in ST: print(st)
 </script></div><br/>       
 <div class="linked"><script type="text/x-sage">
-P=permutations.Permutation([x-1 for x in [3,2,4,1,5,7,6]])
-print(P.list(),P.array_form,P.atoms(),P.size,P.ascents(),P.descents())
-print('Cycles in P: '); print(P.cyclic_form, P.full_cyclic_form)
-print('Product of cycles == P'); print(permutations.Permutation([2,1,3,0,4,5,6])*permutations.Permutation([0,1,2,3,4,6,5])==P)
-print('Transpositions in P: '); print(P.transpositions())
-print('Inversions in P: '); print(P.inversion_vector(), P.inversions())
-print('Adjacency matrix: '); P.get_adjacency_matrix()
+from sympy.combinatorics import permutations
+X=[3,2,4,1,5,7,6]
+X1,X2=[2,1,3,0,4,5,6],[0,1,2,3,4,6,5]
+P=permutations.Permutation([x-1 for x in X])
+ST=['Permutation indices: ',
+    [P.list(),P.array_form],P.atoms(),
+    P.size,[P.ascents(),P.descents()],
+    'Cycles in P: ',
+    P.cyclic_form,P.full_cyclic_form,
+    'Product of cycles == P',
+    permutations.Permutation(X1)*\
+    permutations.Permutation(X2)==P,
+    'Transpositions in P: ',
+    P.transpositions(),
+    'Inversions in P: ',
+    [P.inversion_vector(), P.inversions()],
+    'Adjacency matrix: ']
+for st in ST: print(st)
+P.get_adjacency_matrix()
 </script></div><br/>
 <div class="sage_r"><script type="text/x-sage">
 %%r
