@@ -53,39 +53,39 @@ from sympy.utilities.iterables import multiset_combinations
 sympy.init_printing(use_unicode=True)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-S=multiset_permutations(["☜","☞","☝︎","☟"])
-C=0
+C=0; S=["☜","☞","☝︎","☟"]
+S=multiset_permutations(S)
 for s in S: print(ascii_art(s)); C+=1
 C==sympy.factorial(4)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-S=multiset_permutations(["🍊","🍋","🍎","🍐","🍑"],3)
-C=0
+C=0; S=["🍊","🍋","🍎","🍐","🍑"]
+S=multiset_permutations(S,int(3))
 for s in S: print(ascii_art(s)); C+=1
 C==sympy.factorial(5)/sympy.factorial(5-3)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-S=multiset_combinations(["♔","♕","♖",
-                         "♗","♘","♙"],3)
-C=0
+C=0; S=["♔","♕","♖","♗","♘","♙"]
+S=multiset_combinations(S,3)
 for s in S: print(ascii_art(s)); C+=1
-C==sympy.factorial(6)/(sympy.factorial(6-3)*sympy.factorial(3))
+C==sympy.factorial(6)/\
+(sympy.factorial(6-3)*sympy.factorial(3))
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-S=itertools.permutations(["☜","☞","☝︎","☟"],4)
-C=0
+C=0; S=["☜","☞","☝︎","☟"]
+S=itertools.permutations(S,int(4))
 for s in S: print(ascii_art(s)); C+=1
 C==numpy.math.factorial(4)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-S=itertools.permutations(["🍊","🍋","🍎","🍐","🍑"],3)
-C=0
+C=0; S=["🍊","🍋","🍎","🍐","🍑"]
+S=itertools.permutations(S,3)
 for s in S: print(ascii_art(s)); C+=1
 C==numpy.math.factorial(5)/numpy.math.factorial(5-3)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-S=itertools.combinations(["♔","♕","♖","♗","♘","♙"],3)
-C=0
+C=0; S=["♔","♕","♖","♗","♘","♙"]
+S=itertools.combinations(S,3)
 for s in S: print(ascii_art(s)); C+=1
 C==numpy.math.factorial(6)/\
 (numpy.math.factorial(6-3)*numpy.math.factorial(3))
@@ -183,13 +183,11 @@ determinant(P)$sign
 for n in [1..3]:
     aa=" ".join(list('a_%d%d' %(i,j) for i in [1..n] for j in [1..n]))
     A=matrix(SR,n,var(aa)); pretty_print(A); pretty_print(A.det())
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 aa=sympy.symbols(" ".join(list('a_%d%d' %(i,j) for i in (1..3) for j in (1..3))))
 A=sympy.Matrix(int(3),int(3),aa); A, A.det()
 </script></div>
-    <p></p>
     <h2>4. Задание</h2>
 
 Представить подстановку в виде произведения циклов и транспозиций, найти инверсии в подстановке, используя SageMath, Numpy, SymPy или R.
