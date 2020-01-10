@@ -97,8 +97,7 @@ S<-unique(t(sapply(1:10^3,function(x) sample(elements,n))))
 S<-apply(S,1,function(x) paste0(x,collapse=""))
 cat(S[1:8],"\n"); cat(S[9:16],"\n"); cat(S[17:24],"\n")
 length(S)==factorial(4)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="sage_r"><script type="text/x-sage">
 %%r
 elements<-c("🍊","🍋","🍎","🍐","🍑"); 
@@ -109,8 +108,7 @@ cat(S[1:10],"\n"); cat(S[11:20],"\n")
 cat(S[21:30],"\n"); cat(S[31:40],"\n")
 cat(S[41:50],"\n"); cat(S[51:60],"\n")
 length(S)==factorial(5)/factorial(5-3)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="sage_r"><script type="text/x-sage">
 %%r
 elements<-c("♔","♕","♖","♗","♘","♙")
@@ -118,7 +116,6 @@ S<-t(combn(elements,3)); S<-apply(S,1,function(x) paste0(x,collapse=""))
 cat(S[1:10],"\n"); cat(S[11:20],"\n")
 c(length(S)==factorial(6)/(factorial(6-3)*factorial(3)),length(S)==choose(6,3))
 </script></div>
-    <p></p>
     <h2>2. Свойства перестановок</h2>
 
 Пример для конечного множества элементов
@@ -151,16 +148,14 @@ c(length(S)==factorial(6)/(factorial(6-3)*factorial(3)),length(S)==choose(6,3))
 
 <p>$\tau = \begin {cases} 1 \ 2 \ 3 \ 4 \ 5 \ 6 \ 7 \\ 3 \ 2 \ 4 \ 1 \ 5 \ 7 \ 6 \end{cases} \\ (2,1), (3,1), (4,1), \\ (3,2), \\ (7,6)$</p>
 
-Четность подстановки определяется числом инверсий. 
-    <p></p>      
+Четность подстановки определяется числом инверсий. <br/>    
 <div class="sage"><script type="text/x-sage">
 P=Permutation([3,2,4,1,5,7,6]); 
 print('Cycles in P: '); print(P.to_cycles()); 
 print('Product of P cycles: '); print(Permutation([3,2,4,1,5,6,7])*Permutation([1,2,3,4,5,7,6]))
 print('Inversions in P: '); print(P.inversions(),P.number_of_inversions(),P.is_even())
 print('P matrix: '); P.to_matrix()
-</script></div>
-    <p></p>       
+</script></div><br/>       
 <div class="linked"><script type="text/x-sage">
 P=permutations.Permutation([x-1 for x in [3,2,4,1,5,7,6]])
 print(P.list(),P.array_form,P.atoms(),P.size,P.ascents(),P.descents())
@@ -169,15 +164,13 @@ print('Product of cycles == P'); print(permutations.Permutation([2,1,3,0,4,5,6])
 print('Transpositions in P: '); print(P.transpositions())
 print('Inversions in P: '); print(P.inversion_vector(), P.inversions())
 print('Adjacency matrix: '); P.get_adjacency_matrix()
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="sage_r"><script type="text/x-sage">
 %%r
 library(Matrix)
 p<-c(3,2,4,1,5,7,6); P<-as(p,"pMatrix"); print(t(P)); print(P@perm)
 determinant(P)$sign
 </script></div>
-    <p></p>
     <h2>3. В формуле определителя n-ого порядка</h2>
 
 <p>$\large{\displaystyle{| \Delta | = \sum_i (-1)^{t(j)} a_{1j_1}a_{2j_2}}...a_{nj_n}}$, где </p>
