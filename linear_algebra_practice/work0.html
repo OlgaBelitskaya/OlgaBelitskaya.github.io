@@ -10,13 +10,14 @@
     sagecell.makeSagecell({inputLocation:'div.sage_r',evalButtonText:'Run R'});
     sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run'});});
     </script>
+    <script data-ad-client="ca-pub-9200929962680356" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   </head>
   <style>
   @import url('https://fonts.googleapis.com/css?family=Orbitron');
   h1,h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
   p,a {color:darkblue; font-size:110%; text-shadow:5px 5px 5px #aaa;}
   .sagecell .CodeMirror-scroll {min-height:3em; max-height:68em;}
-  body {margin:5px 5px 5px 15px}
+  body {margin:5px 5px 5px 25px}
   </style>  
   <body>
     <h1>&#x1F4D1; &nbsp;Линейная алгебра. Практическая работа №0</h1>
@@ -145,7 +146,9 @@ c(length(S)==factorial(6)/(factorial(6-3)*factorial(3)),
 
 <p>$\{a_1 a_2 a_3 a_4 a_5 a_6 a_7\} \to \{a_2 a_1 a_3 a_4 a_5 a_6 a_7\} \\ \tau = \begin {cases} 1 \ 2 \ 3 \ 4 \ 5 \ 6 \ 7 \\ 2 \ 1 \ 3 \ 4 \ 5 \ 6 \ 7 \end{cases}$</p>
 
-Любой цикл - произведение транспозиций. $\implies$ Любая перестановка - произведение транспозиций.
+Любой цикл - произведение транспозиций. 
+      
+<br/><br/>$\implies$ Любая перестановка - произведение транспозиций.
 
 <br/><br/>Инверсии в подстановке
 
@@ -193,7 +196,7 @@ c(P,paste(P@perm,collapse=" "),
   t(P),determinant(P)$sign)
 </script></div>
     <h2>3. В формуле определителя n-ого порядка</h2>
-
+      
 <p>$\large{\displaystyle{| \Delta | = \sum_i (-1)^{t(j)} a_{1j_1}a_{2j_2}}...a_{nj_n}}$, где </p>
 
 <p>$\{j_1, j_2, ..., j_n\}$ - все возможные перестановки из чисел $\{1, 2, ..., n\}$; </p>
@@ -202,18 +205,27 @@ c(P,paste(P@perm,collapse=" "),
       
 <div class="sage"><script type="text/x-sage">
 for n in [1..3]:
-    aa=" ".join(list('a_%d%d' %(i,j) for i in [1..n] for j in [1..n]))
-    A=matrix(SR,n,var(aa)); pretty_print(A); pretty_print(A.det())
+    aa=" ".join(['a_%d%d' %(i,j) 
+                 for i in [1..n] for j in [1..n]])
+    A=matrix(SR,n,var(aa))
+    pretty_print(A); pretty_print(A.det())
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-aa=sympy.symbols(" ".join(list('a_%d%d' %(i,j) for i in (1..3) for j in (1..3))))
-A=sympy.Matrix(int(3),int(3),aa); A, A.det()
+import sympy
+aa=['a_%d%d' %(i,j) 
+    for i in (1..3) for j in (1..3)]
+aa=sympy.symbols(" ".join(aa))
+A=sympy.Matrix(int(3),int(3),aa)
+A,A.det()
 </script></div>
     <h2>4. Задание</h2>
-
-Представить подстановку в виде произведения циклов и транспозиций, найти инверсии в подстановке, используя SageMath, Numpy, SymPy или R.
+      
+Представить подстановку в виде произведения циклов и транспозиций, 
+      
+<br/><br/>найти инверсии в подстановке, используя SageMath, Numpy, SymPy или R.
 
 <p>$\tau = \begin {cases} 1 \ 2 \ 3 \ 4 \ 5 \ 6 \ 7 \ 8 \\ 3 \ 5 \ 4 \ 1 \ 2 \ 8 \ 6 \ 7 \end{cases}$</p>
+      
 <div class="sage"><script type="text/x-sage">
 
 </script></div><br/>
