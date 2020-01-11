@@ -16,8 +16,8 @@
   </head>
   <style>
   @import url('https://fonts.googleapis.com/css?family=Orbitron');
-  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
-  p, a {color:darkblue; font-size:110%; text-shadow:5px 5px 5px #aaa;}
+  h1,h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
+  p,a {color:darkblue; font-size:110%; text-shadow:5px 5px 5px #aaa;}
   .sagecell .CodeMirror-scroll {min-height:3em; max-height:68em;}
   body {margin:5px 5px 5px 25px}
   </style>  
@@ -27,7 +27,11 @@
     <h2>1. Способы инициализации</h2>
 <div class="sage_html"><script type="text/x-sage">
 %%html
-<p style="color:slategray;">$A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix}$</p>
+<p style="color:slategray;">
+$\mathscr{A=\begin{bmatrix} 
+1 & 2 & 3 \\ 4 & 5 & 6 \\ 
+7 & 8 & 9 \\ 10 & 11 & 12         
+\end{bmatrix}}$</p>
 </script></div>
     <p>Активируйте этот код перед использованием любых ячеек Linked Sage Cells</p>
 <div class="linked_sage"><script type="text/x-sage">
@@ -38,12 +42,13 @@ E=matrix.identity(3)
 M=matrix(SR,3,var('a,b,c,d,e,f,g,h,i'))
 M1=matrix(SR,3,var('a1,b1,c1,d1,e1,f1,g1,h1,i1')) 
 M2=matrix(SR,3,var('a2,b2,c2,d2,e2,f2,g2,h2,i2'))
-</script></div>
-    <p></p>      
+</script></div><br/>     
 <div class="linked_sage"><script type="text/x-sage"> 
-pretty_print(A,B,C,E)
-print(A.ncols(),A.nrows(),A.dimensions()); print('\n')
-print(html(A)); print('\n'); print(latex(C))
+pretty_print(A,B)
+pretty_print(C,E)
+print(A.ncols(),A.nrows(),A.dimensions())
+print('\n'); print(html(A))
+print('\n'); print(latex(C))
 </script></div>
     <p>Активируйте этот код перед использованием любых ячеек Linked Python Cells</p>
 <div class="linked_python"><script type="text/x-sage">
@@ -56,95 +61,82 @@ A2=sympy.Matrix([[-3,-3,-6,-3],[-4,-7,8,-7]])
 B2=sympy.Matrix([[2,10,7],[-5,-6,-2],[-8,4,-8],[7,4,-6]])
 C2=sympy.Matrix([[-8,-4,5,2],[3,-5,8,-2]])
 E2=sympy.Identity(3)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 print(A1); print(B1); print(C1); print(E1)
 print(A1.shape,B1.shape,C1.shape,E1.shape)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
-sympy.pprint(A2); sympy.pprint(B2); sympy.pprint(C2); sympy.pprint(E2.as_explicit())
+sympy.pprint(A2); sympy.pprint(B2); 
+sympy.pprint(C2); sympy.pprint(E2.as_explicit())
 print(A2.shape,B2.shape,C2.shape,E2.shape)
 </script></div>
     <p>Активируйте этот код перед использованием любых ячеек Linked R Cells</p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-A <- matrix(rexp(25,rate=0.1),nrow=5,ncol=5)
-B <- matrix(c(1,3,5,7,2,4,6,8),nrow=2,ncol=4)
-C <- matrix(rexp(25,rate=0.2),nrow=5,ncol=5)
-D <- matrix(sample.int(100,size=3*4,replace=T),nrow=3,ncol=4)
-E <- matrix(0,5,5); diag(E) <- 1
-</script></div>
-    <p></p>
+A<-matrix(rexp(25,rate=0.1),nrow=5,ncol=5)
+B<-matrix(c(1,3,5,7,2,4,6,8),nrow=2,ncol=4)
+C<-matrix(rexp(25,rate=0.2),nrow=5,ncol=5)
+D<-matrix(sample.int(100,size=3*4,replace=T),nrow=3,ncol=4)
+E<-matrix(0,5,5); diag(E) <- 1
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
 print(A); print(B); print(C); print(D); print(E)
 c(dim(A),'',dim(B),'',dim(C),'',dim(D),'',dim(E));
 </script></div>
-    <p></p>
     <h2>2. Операции над матрицами</h2>
     <h3>2.1 Умножение на число</h3>
 <div class="linked_sage"><script type="text/x-sage">
 html(var('k')*M)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 print(-3*A1)
 sympy.pprint(1.5*A2)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
 5*A
 </script></div>
-    <p></p>
     <h3>2.2 Сложение и вычитание матриц</h3>
 <div class="linked_sage"><script type="text/x-sage">
 pretty_print(M1+M2); print('\n'); pretty_print('M1+M2=M2+M1: %s'%str(M1+M2==M2+M1)); pretty_print(M1-M2) 
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 print(A1+B1)
 sympy.pprint(A2-C2)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
 print(A+C); A-C
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>2.3 Умножение матриц</h3>
 <div class="linked_sage"><script type="text/x-sage">
 pretty_print(M1*M2); print('\n'); pretty_print('M1*M2=M2*M1: %s'%str(M1*M2==M2*M1)); pretty_print(M2*M1) 
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 print(A1*B1.T); print(B1.T*A1); print(numpy.dot(A1,B1.T)==A1*B1.T);
 sympy.pprint(A2*C2.T); print(A2*C2.T==C2.T*A2)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
 print(A%*%C==C%*%A); print(A%*%C==A*C); A%*%C
-</script></div>
-    <p></p>
+</script></div><br/>
     <h2>3. Задание</h2>
-
-Инициировать матрицы A (2x4) и B (4x2) и рассчитать их сумму A+B и произведения A∗B, B∗A, используя SageMath, Numpy, SymPy или R.
-    <p></p>
+Инициировать матрицы A (2x4) и B (4x2),<br/> 
+      
+рассчитать их сумму A+B и произведения A∗B, B∗A,<br/> 
+      
+используя SageMath, Numpy, SymPy или R.<br/>
 <div class="linked_sage"><script type="text/x-sage">
 
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 
-</script></div>
-    <p></p>  
+</script></div><br/> 
 <div class="linked_r"><script type="text/x-sage">
 %%r
 
-</script></div>
-    <p></p>  
+</script></div> 
   </body>
 </html> 
