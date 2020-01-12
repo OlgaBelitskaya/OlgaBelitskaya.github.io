@@ -114,10 +114,16 @@ pretty_print(html(r'<br/>C=%s; Q=%s; S=%s; Q>S: %s'%\
 #22
 #Если в последовательности C1, C2, …, C5 имеются равные элементы, 
 #изменить значения всех ее элементов по правилу: Ci:=Ci+Aii.
-N1=5; A=N(10*random_matrix(RR,N1),digits=2)
-N2=5; C=[round(random(),1) for i in range(N2)]
+N1=5; S=False; A=N(10*random_matrix(RR,N1),digits=2)
+N2=5; CN=[]; C=[round(random(),1) for i in range(N2)]
 pretty_print(html(r'$A=%s$<br/><br/>$C=%s$'%\
                   (latex(A),latex(C))))
+for i in range(N1):
+    CN.append(C[i]+A[i,i])
+    for j in range(i,N1):
+        if C[i]==C[j] and i!=j: S=True
+if S: C=CN
+pretty_print(html(r'$C=%s$'%latex(C)))
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 #23
