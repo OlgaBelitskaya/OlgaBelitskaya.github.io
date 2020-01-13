@@ -112,16 +112,19 @@ f1x,f1y=x0-sqrt(p^2-q^2),y0; f2x,f2y=x0+sqrt(p^2-q^2),y0
 xm=4.5; ym=-4/5*sqrt(-xm^2+2*xm+24)-1
 ((xm-f1x)^2+(ym-f1y)^2)^0.5+((xm-f2x)^2+(ym-f2y)^2)^0.5==2*p
 </script></div>
-    <p></p>
     <p>Активируйте этот код перед использованием любых ячеек Linked Python Cells</p>
 <div class="linked_python"><script type="text/x-sage">
-import numpy,sympy,pylab; sympy.init_printing(use_unicode=True)
+import numpy,sympy,pylab
+sympy.init_printing(use_unicode=True)
 from matplotlib.lines import Line2D
-x,y,x0,y0,a,b,c,d,e,f,p,q,r,t=sympy.symbols('x,y,x0,y0,a,b,c,d,e,f,p,q,r,t')
-eq1=[(x-x0)**2+(y-y0)**2-r**2,[x-r*cos(t)-x0,y-r*sin(t)-y0],
-     (x-x0)**2/p**2+(y-y0)**2/q**2-1,a*x**2+b*x*y+c*y**2+d*x+e*y+f]
-
-X1,X2=numpy.linspace(start=-1,stop=3,num=50),numpy.linspace(start=-4,stop=6,num=100)
+x,y,x0,y0,a,b,c,d,e,f,p,q,r,t=\
+sympy.symbols('x,y,x0,y0,a,b,c,d,e,f,p,q,r,t')
+eq1=[(x-x0)**2+(y-y0)**2-r**2,
+     [x-r*cos(t)-x0,y-r*sin(t)-y0],
+     (x-x0)**2/p**2+(y-y0)**2/q**2-1,
+     a*x**2+b*x*y+c*y**2+d*x+e*y+f]
+X1=numpy.linspace(start=-1,stop=3,num=50)
+X2=numpy.linspace(start=-4,stop=6,num=100)
 T=numpy.linspace(start=0,stop=6.3,num=50)
 X,Y=numpy.linspace(start=-2.3,stop=3.6,num=50),numpy.linspace(start=-6.3,stop=-0.3,num=50)
 X,Y=numpy.meshgrid(X,Y)
@@ -129,8 +132,7 @@ def circle1(x0,y0,r,x): return numpy.array([-(r**2-(x-x0)**2)**0.5+y0,(r**2-(x-x
 def circle2(x0,y0,r,t): return numpy.array([r*numpy.cos(t)+x0,r*numpy.sin(t)+y0])
 def ellipse1(x0,y0,p,q,x): return numpy.array([q/p*(p**2-(x-x0)**2)**0.5+y0,-q/p*(p**2-(x-x0)**2)**0.5+y0])
 def ellipse2(a,b,c,d,e,f,x,y): return a*x**2+b*x*y+c*y**2+d*x+e*y+f
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 solutions1=[sympy.solve([eq1[0],x0-1,y0+1,r-2],x0,y0,r,y),
             sympy.solve([eq1[1][0],eq1[1][1],x0+1,y0-1,r-3],x0,y0,r,x,y),
