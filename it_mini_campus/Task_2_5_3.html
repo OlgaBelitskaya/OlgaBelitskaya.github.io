@@ -126,6 +126,57 @@ for i in range(N1):
 if S: C=CN
 pretty_print(html(r'$C=%s$'%latex(C)))
 </script></div><br/>
+<div><code type="pascal">
+Program Lab13;
+type ReArr=array [0..1000] of real;
+var C,CN: ReArr;
+var i,j: integer;
+var c1,c2: boolean;
+var SC,SA,SCN,st: string;
+function st2ar(a:string;n:integer): ReArr;
+var k: integer;
+var x: real;
+var ka: string;
+begin
+    st2ar[n]:=0;
+    for k:=1 to n do
+    begin 
+        if k=n then ka:=a else 
+            ka:=copy(a,1,pos(' ',a)-1); 
+        val(ka,x); delete(a,1,pos(' ',a));
+        if ((x<>0) or ((x=0) and (ka='0'))) then
+            st2ar[k-1]:=x
+        else
+        begin
+            st2ar[n]:=1; break;
+        end;
+    end;
+end;
+begin
+    writeln('Лаб.13':38);
+    c1:=true; c2:=false; SCN:='';
+    readln(SC); C:=st2ar(SC,5);
+    writeln('Исходный массив C: ',SC);
+    if C[5]=1 then c1:=false; 
+    writeln('Матрица A: ');
+    for i:=1 to 5 do
+    begin 
+        readln(SA); writeln(SA); 
+        CN[i-1]:=st2ar(SA,5)[i-1];
+        if st2ar(SA,5)[5]=1 then c1:=false;
+        CN[i-1]:=CN[i-1]+C[i-1];
+        str(CN[i-1]:5:2,st); SCN:=concat(SCN,st);        
+        for j:=1 to 5 do
+        begin
+            if ((i>j) and (C[i-1]=C[j-1])) then
+                c2:=true;
+        end;
+    end;
+    if c2 then SC:=SCN;
+    if c1 then writeln('Полученный массив C: ',SC)
+    else writeln('Данные не корректны');
+end.
+</code></div>
 <div class="sage"><script type="text/x-sage">
 #23
 </script></div><br/>
