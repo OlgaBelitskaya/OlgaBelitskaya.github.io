@@ -9,15 +9,15 @@
     sagecell.makeSagecell({inputLocation:'div.linked_sage',linked:true,evalButtonText:'Run Linked Sage Cells'});
     sagecell.makeSagecell({inputLocation:'div.linked_python',linked:true,evalButtonText:'Run Linked Python Cells'});
     sagecell.makeSagecell({inputLocation:'div.linked_r',linked:true,evalButtonText:'Run Linked R Cells'});
-    sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run'});
-    });
+    sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run'});});
     </script>
   </head>
   <style>
   @import url('https://fonts.googleapis.com/css?family=Orbitron');
   h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
   p, a {color:darkblue; font-size:110%; text-shadow:5px 5px 5px #aaa;}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:26em;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:68em;}
+  body {margin:5px 5px 5px 25px}
   </style>  
   <body>
     <h1>&#x1F4D1; &nbsp;Линейная алгебра. Практическая работа №2</h1>
@@ -28,25 +28,36 @@
 <div class="linked_sage"><script type="text/x-sage">
 A=random_matrix(ZZ,5,x=0,y=100)
 B=random_matrix(ZZ,5,x=-100,y=0)
-mm=" ".join(list('m_%d%d'%(i,j) for i in [1..3] for j in [1..3])); M=matrix(SR,3,var(mm)) 
-nn=" ".join(list('n_%d%d'%(i,j) for i in [1..3] for j in [1..3])); N=matrix(SR,3,var(nn))
-</script></div>
-    <p></p>      
+mm=" ".join(list('m_%d%d'%(i,j) 
+            for i in [1..3] for j in [1..3]))
+M=matrix(SR,3,var(mm)) 
+nn=" ".join(list('n_%d%d'%(i,j) 
+            for i in [1..3] for j in [1..3]))
+N=matrix(SR,3,var(nn))
+</script></div><br/>     
 <div class="linked_sage"><script type="text/x-sage">
-pretty_print(A,B); pretty_print(M,N); pretty_print(M^2)
-pretty_print('A^3 = A*A*A: %s'%str(A^3==A*A*A)); pretty_print(A^3)
+pretty_print(A,B); pretty_print(M,N)
+pretty_print(M^2)
+pretty_print('A^3 = A*A*A: %s'%str(A^3==A*A*A))
+pretty_print(A^3)
 </script></div>
     <p>Активируйте этот код перед использованием любых ячеек Linked Python Cells</p>
 <div class="linked_python"><script type="text/x-sage">
-import numpy,sympy; sympy.init_printing(use_unicode=True)
+import numpy,sympy
+sympy.init_printing(use_unicode=True)
 A1=numpy.matrix(numpy.random.randint(0,100,size=(5,5)))
 B1=numpy.matrix(numpy.random.randint(-100,0,size=(5,5)))
-A2=sympy.Matrix([[-3,-3,-6,-3],[-4,-7,8,-7],[2,-3,9,-5],[6,-3,8,2]])
-B2=sympy.Matrix([[-8,-4,5,2],[3,-5,8,-2],[5,4,-8,1],[7,-2,9,5]])
-mm=sympy.symbols(" ".join(list('m_%d%d' %(i,j) for i in [1,2,3] for j in [1,2,3]))); M=sympy.Matrix(3,3,mm) 
-nn=sympy.symbols(" ".join(list('n_%d%d' %(i,j) for i in [1,2,3] for j in [1,2,3]))); N=sympy.Matrix(3,3,nn)
-</script></div>
-    <p></p>
+A2=sympy.Matrix([[-3,-3,-6,-3],[-4,-7,8,-7],
+                 [2,-3,9,-5],[6,-3,8,2]])
+B2=sympy.Matrix([[-8,-4,5,2],[3,-5,8,-2],
+                 [5,4,-8,1],[7,-2,9,5]])
+mm=sympy.symbols(" ".join(list('m_%d%d' %(i,j) 
+                 for i in [1,2,3] for j in [1,2,3])))
+M=sympy.Matrix(3,3,mm) 
+nn=sympy.symbols(" ".join(list('n_%d%d' %(i,j) 
+                 for i in [1,2,3] for j in [1,2,3])))
+N=sympy.Matrix(3,3,nn)
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 for el in [A1,B1]: print(el)
 for el in [A2,B2,M,N]: sympy.pprint(el)
