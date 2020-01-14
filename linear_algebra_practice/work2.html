@@ -53,10 +53,10 @@ B2=sympy.Matrix([[-8,-4,5,2],[3,-5,8,-2],
                  [5,4,-8,1],[7,-2,9,5]])
 mm=sympy.symbols(" ".join(list('m_%d%d' %(i,j) 
                  for i in [1,2,3] for j in [1,2,3])))
-M=sympy.Matrix(3,3,mm) 
+M=sympy.Matrix(int(3),int(3),mm) 
 nn=sympy.symbols(" ".join(list('n_%d%d' %(i,j) 
                  for i in [1,2,3] for j in [1,2,3])))
-N=sympy.Matrix(3,3,nn)
+N=sympy.Matrix(int(3),int(3),nn)
 </script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 for el in [A1,B1]: print(el)
@@ -67,26 +67,26 @@ print(A1**int(3)); sympy.pprint(A2^3)
     <p>Активируйте этот код перед использованием любых ячеек Linked R Cells</p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-A <- matrix(rexp(25,rate=0.1),nrow=5,ncol=5); B <- matrix(rexp(25,rate=1.0),nrow=5,ncol=5)
+A<-matrix(rexp(25,rate=0.1),nrow=5,ncol=5) 
+B<-matrix(rexp(25,rate=1.0),nrow=5,ncol=5)
 library(Matrix)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
 print(A); print(B)
 print(A%*%A%*%A) # Matrix Power 
 expm(B) # Matrix Exponential
-</script></div>      
-    <p></p>      
+</script></div>     
     <h3>1.2 Транспонирование</h3>
 <div class="linked_sage"><script type="text/x-sage">
-M.T.T==M,(M+N).T==M.T+N.T,(M-N).T==M.T-N.T,(var('k')*M).T==var('k')*M.T,(M*N).T==N.T*M.T
-</script></div>
-    <p></p>
+[M.T.T==M,(M+N).T==M.T+N.T,(M-N).T==\
+ M.T-N.T,(var('k')*M).T==var('k')*M.T,
+ (M*N).T==N.T*M.T]
+</script></div><br/>
 <div class="linked_sage"><script type="text/x-sage">
-pretty_print(M,'->',M.T); pretty_print((M+N).T,(M*N).T)
-</script></div>
-    <p></p>
+pretty_print(M,'->',M.T)
+pretty_print((M+N).T,(M*N).T)
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 print(A1); print(numpy.transpose(A1))
 sympy.pprint(A2); sympy.pprint(A2.T)
