@@ -55,17 +55,19 @@ C2=sympy.Matrix([[-8,-4,5,2],[3,-5,8,-2],
                  [5,4,-8,1],[7,-2,9,5]])
 mm=sympy.symbols(" ".join(list('m_%d%d' %(i,j) 
                  for i in [1,2] for j in [1,2])))
-M=sympy.Matrix(2,2,mm) 
+M=sympy.Matrix(int(2),int(2),mm) 
 nn=sympy.symbols(" ".join(list('n_%d%d' %(i,j) 
                  for i in [1,2,3] for j in [1,2,3])))
-N=sympy.Matrix(3,3,nn)
+N=sympy.Matrix(int(3),int(3),nn)
 </script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
-print(round(numpy.linalg.det(A1)),
-      round(numpy.linalg.det(B1)),
-      round(numpy.linalg.det(C1)))
-print(A2.det(),B2.det(),C2.det())
-for el in [M,N]: sympy.pprint(el)
+for m in [A1,B1,C1]:
+    print([m,round(numpy.linalg.det(m))])
+for m in [A2,B2,C2]:
+    print([m,m.det()])
+for m in [M,N]: 
+    sympy.pprint(m)
+    sympy.pprint(m.det())
 </script></div>
     <p>Активируйте этот код перед использованием любых ячеек Linked R Cells</p>
 <div class="linked_r"><script type="text/x-sage">
@@ -110,15 +112,19 @@ round(numpy.linalg.det(numpy.matrix([[1,2,3],[2,4,6],[7,8,9]])))
 print(A2.det()==A2.T.det(),(A2*B2).det()==(B2*A2).det()==A2.det()*B2.det(),(-2*A2).det()==(-2)^A2.shape[0]*A2.det())
 # linear dependence
 sympy.Matrix([[1,2,3],[0,0,0],[7,8,9]]).det(),sympy.Matrix([[1,2,3],[2,4,6],[7,8,9]]).det()
-</script></div>
-    <p></p> 
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-print(c(all.equal(det(A),det(t(A))),all.equal(det(A%*%B),det(B%*%A),det(A)*det(B)),all.equal(det(-2*A),(-2)^(dim(A)[1])*det(A))))
+print(c(all.equal(det(A),det(t(A))),
+        all.equal(det(A%*%B),
+        det(B%*%A),det(A)*det(B)),
+        all.equal(det(-2*A),(-2)^(dim(A)[1])*det(A))))
 # linear dependence
-c(det(matrix(c(1,3,5,0,0,0,2,4,6),nrow=3,ncol=3)),det(matrix(c(1,3,5,2,6,10,2,4,6),nrow=3,ncol=3)))
+c(det(matrix(c(1,3,5,0,0,0,2,4,6),
+             nrow=3,ncol=3)),
+  det(matrix(c(1,3,5,2,6,10,2,4,6),
+             nrow=3,ncol=3)))
 </script></div>
-    <p></p> 
     <h2>3. Миноры и алгебраические дополнения</h2>
       
 Матрицы знаков для определителей 3-ого и 4-ого порядка      
