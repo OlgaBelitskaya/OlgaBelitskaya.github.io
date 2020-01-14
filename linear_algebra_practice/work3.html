@@ -70,35 +70,42 @@ for el in [M,N]: sympy.pprint(el)
     <p>Активируйте этот код перед использованием любых ячеек Linked R Cells</p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-A <- matrix(sample.int(100,size=3*3,replace=T),nrow=3,ncol=3)
-B <- matrix(sample.int(100,size=3*3,replace=T),nrow=3,ncol=3)
-C <- matrix(sample.int(100,size=4*4,replace=T),nrow=4,ncol=4)
+A<-matrix(sample.int(100,size=3*3,replace=T),
+          nrow=3,ncol=3)
+B<-matrix(sample.int(100,size=3*3,replace=T),
+          nrow=3,ncol=3)
+C<-matrix(sample.int(100,size=4*4,replace=T),
+          nrow=4,ncol=4)
 library(Matrix)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
 c(det(A),det(B),det(C))
-</script></div>      
-    <p></p>  
+</script></div>       
     <h2>2. Свойства определителей</h2>
 <div class="linked_sage"><script type="text/x-sage">
-pretty_print('A.det()=A.T.det(): '+str(A.det()==A.T.det()))
-pretty_print('(A*B).det()=(B*A).det()=A.det()*B.det(): '+str((A*B).det()==(B*A).det()==A.det()*B.det()))
-pretty_print('(-2*A).det()=(-2)^A.dimensions()[0]*A.det(): '+str((-2*A).det()==(-2)^A.dimensions()[0]*A.det()))
+pretty_print('A.det()=A.T.det(): '+\
+             str(A.det()==A.T.det()))
+pretty_print('(A*B).det()=(B*A).det()=A.det()*B.det(): '+\
+             str((A*B).det()==(B*A).det()==A.det()*B.det()))
+pretty_print('(-2*A).det()=(-2)^A.dimensions()[0]*A.det(): '+\
+             str((-2*A).det()==(-2)^A.dimensions()[0]*A.det()))
 # linear dependence
-matrix([[1,2,3],[0,0,0],[7,8,9]]).det(), matrix([[1,2,3],[2,4,6],[7,8,9]]).det()
-</script></div>
-    <p></p>
+[matrix([[1,2,3],[0,0,0],[7,8,9]]).det(),
+ matrix([[1,2,3],[2,4,6],[7,8,9]]).det()]
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
-print(round(numpy.linalg.det(A1))==round(numpy.linalg.det(A1.T)),\
-round(numpy.linalg.det(A1*B1))==round(numpy.linalg.det(B1*A1))==round(numpy.linalg.det(A1))*round(numpy.linalg.det(B1)),\
-round(numpy.linalg.det(-2*A1))==-2**A2.shape[0]*round(numpy.linalg.det(A1))) 
+print(round(numpy.linalg.det(A1))==\
+round(numpy.linalg.det(A1.T)),\
+round(numpy.linalg.det(A1*B1))==\
+round(numpy.linalg.det(B1*A1))==\
+round(numpy.linalg.det(A1))*round(numpy.linalg.det(B1)),\
+round(numpy.linalg.det(-2*A1))==\
+-2**A2.shape[0]*round(numpy.linalg.det(A1))) 
 # linear dependence
 round(numpy.linalg.det(numpy.matrix([[1,2,3],[0,0,0],[7,8,9]]))),\
 round(numpy.linalg.det(numpy.matrix([[1,2,3],[2,4,6],[7,8,9]])))
-</script></div>
-    <p></p> 
+</script></div><br/> 
 <div class="linked_python"><script type="text/x-sage">
 print(A2.det()==A2.T.det(),(A2*B2).det()==(B2*A2).det()==A2.det()*B2.det(),(-2*A2).det()==(-2)^A2.shape[0]*A2.det())
 # linear dependence
