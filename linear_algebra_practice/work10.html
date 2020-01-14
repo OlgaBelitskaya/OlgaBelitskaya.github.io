@@ -479,15 +479,16 @@ ax.legend(lines,labels,loc=1); pylab.show()
 </script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-X <- Y <- seq(from=-12,to=12,by=0.2)
-parabola1 <- function(x0,y0,p,y){(y-y0)**2/2/p+x0}
-parabola2 <- function(a,b,c,d,e,f,X,Y) {
-    func <- function(x,y) {a*x**2+b*x*y+c*y**2+d*x+e*y+f}
-    Z <- outer(X,Y,func); Z[is.na(Z)] <- 0; Z
-}
-parabola3 <- function(a,d,e,f,x){-(a*x**2+d*x+f)/e}
-X1 <- sapply(Y,parabola1,x0=1,y0=-1,p=3); Y3 <- sapply(X,parabola3,a=2,d=4,e=1,f=-7)
-XY <- parabola2(1,-4,4,1,4,3,X,Y); dim(data.frame(XY))
+X<-Y<-seq(from=-12,to=12,by=0.2)
+parabola1<-function(x0,y0,p,y){(y-y0)**2/2/p+x0}
+parabola2<-function(a,b,c,d,e,f,X,Y){
+    func<-function(x,y){a*x**2+b*x*y+c*y**2+d*x+e*y+f}
+    Z<-outer(X,Y,func); Z[is.na(Z)] <- 0; Z}
+parabola3<-function(a,d,e,f,x){-(a*x**2+d*x+f)/e}
+X1<-sapply(Y,parabola1,x0=1,y0=-1,p=3)
+Y3<-sapply(X,parabola3,a=2,d=4,e=1,f=-7)
+XY<-parabola2(1,-4,4,1,4,3,X,Y)
+dim(data.frame(XY))
 </script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
@@ -495,10 +496,17 @@ svg(filename="Rplots.svg",width=7,height=7,pointsize=12,
     onefile=TRUE,family="sans",bg="white",
     antialias=c("default","none","gray","subpixel"))
 cols<-c('#3636ff','#ff3636','#36ff36')
-labs<-c('(y+1)^2=2*3*(x-1)','x^2-4xy+4y^2+x+4y+3=0','2x^2+4x+y-7=0')
-contour(X,X,data.matrix(data.frame(XY)),levels=0,col=cols[2],lwd=3,xlim=c(-10,10),ylim=c(-10,10),xlab='x',ylab='y')
-lines(X1,Y,col=cols[1],lwd=3); lines(X,Y3,col=cols[3],lwd=3)
-legend(1,10,labs,col=cols,lwd=3,cex=0.9); grid(); dev.off()
+labs<-c('(y+1)^2=2*3*(x-1)',
+        'x^2-4xy+4y^2+x+4y+3=0',
+        '2x^2+4x+y-7=0')
+contour(X,X,data.matrix(data.frame(XY)),
+        levels=0,col=cols[2],lwd=3,
+        xlim=c(-10,10),ylim=c(-10,10),
+        xlab='x',ylab='y')
+lines(X1,Y,col=cols[1],lwd=3)
+lines(X,Y3,col=cols[3],lwd=3)
+legend(1,10,labs,col=cols,lwd=3,cex=0.9)
+grid(); dev.off()
 </script></div>
     <h2>4. Задание</h2>
 Инициировать 3 кривые второго порядка с помощью уравнений в каноническом виде,<br/> 
