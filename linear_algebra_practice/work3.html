@@ -132,69 +132,73 @@ c(det(matrix(c(1,3,5,0,0,0,2,4,6),
 Матрицы знаков для определителей 3-ого и 4-ого порядка<br/>      
 <div class="sage_html"><script type="text/x-sage">
 %%html
-$SIGN_{(3,3)} = \begin{pmatrix} + & - & + \\ - & + & - \\ + & - & + \\ \end{pmatrix} \ \
-SIGN_{(4,4)} = \begin{pmatrix} + & - & + & - \\ - & + & - & + \\ + & - & + & - \\ - & + & - & + \end{pmatrix}$
+$SIGN_{(3,3)} = \begin{pmatrix} + & - & + \\ 
+- & + & - \\ + & - & + \\ \end{pmatrix} \ \
+SIGN_{(4,4)} = \begin{pmatrix} + & - & + & - \\ - & + & - & + 
+\\ + & - & + & - \\ - & + & - & + \end{pmatrix}$
 </script></div>   
 Алгебраическое дополнение = Минор &#38; Знак (+/-)<br/>
 <div class="linked_sage"><script type="text/x-sage">
-M3.minors(2),M4.minors(3),A.minors(2),B.minors(2),C.minors(3)
+[M3.minors(2),M4.minors(3),
+ A.minors(2),B.minors(2),C.minors(3)]
 </script></div><br/>
 <div class="linked_sage"><script type="text/x-sage">
 # разложение определителя по первому столбцу
-M3.det()==M3[0,0]*M3.minors(2)[8]-M3[1,0]*M3.minors(2)[5]+M3[2,0]*M3.minors(2)[2]
+M3.det()==M3[0,0]*M3.minors(2)[8]-\
+M3[1,0]*M3.minors(2)[5]+M3[2,0]*M3.minors(2)[2]
 </script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
-def minor(m,i,j): return [row[:j]+row[j+1:] for row in (m[:i]+m[i+1:])]
+def minor(m,i,j): 
+    return [row[:j]+row[j+1:] 
+            for row in (m[:i]+m[i+1:])]
 def deternminant(m):
-    if len(m)==2: return m[0][0]*m[1][1]-m[0][1]*m[1][0]
-    det=0; for c in range(len(m)): det+=((-1)**c)*m[0][c]*deternminant(minor(m,0,c))
+    if len(m)==2: 
+        return m[0][0]*m[1][1]-m[0][1]*m[1][0]
+    det=0
+    for c in range(len(m)): 
+        det+=((-1)**c)*m[0][c]*deternminant(minor(m,0,c))
     return det
-minor([[1,2,3],[-4,5,-6],[-7,8,-9]],1,1),deternminant([[1,2,3],[-4,5,-6],[-7,8,-9]])
-</script></div>
-    <p></p>
+[minor([[1,2,3],[-4,5,-6],[-7,8,-9]],1,1),
+deternminant([[1,2,3],[-4,5,-6],[-7,8,-9]])]
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
-sympy.pprint(A2); sympy.pprint(A2.minorMatrix(0,0))
-</script></div>
-    <p></p> 
+sympy.pprint(A2)
+sympy.pprint(A2.minorMatrix(0,0))
+</script></div><br/> 
 <div class="linked_python"><script type="text/x-sage">
 # разложение определителя по первому столбцу
-B2.det()==B2[0,0]*B2.minorMatrix(0,0).det()-B2[1,0]*B2.minorMatrix(1,0).det()+B2[2,0]*B2.minorMatrix(2,0).det()
-</script></div>
-    <p></p> 
+B2.det()==B2[0,0]*B2.minorMatrix(0,0).det()-\
+B2[1,0]*B2.minorMatrix(1,0).det()+\
+B2[2,0]*B2.minorMatrix(2,0).det()
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
 minor_matrix <- function(A,i,j) A[-i,-j]
 minor <- function(A,i,j) det(A[-i,-j])
 cofactor <- function(A,i,j) (-1)^(i+j)*minor(A,i,j)
 c(minor_matrix(A,1,2),minor(A,1,2),cofactor(A,1,2))
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
 c(det(A),(A[1,1]*minor(A,1,1)-A[2,1]*minor(A,2,1)+A[3,1]*minor(A,3,1)))
 </script></div>
-    <p></p>
     <h2>4. Задание</h2>
-Инициировать матрицу A (3x3), рассчитать определитель и исследовать его свойства, используя SageMath, Numpy, SymPy или R. 
-<br/><br/>Вычислить определитель с помощью разложения по третьему столбцу.
-    <p></p>
+Инициировать матрицу A (3x3), рассчитать определитель <br/>
+и исследовать его свойства, используя SageMath, Numpy, SymPy или R. <br/>
+Вычислить определитель с помощью разложения по третьему столбцу.<br/>
 <div class="linked_sage"><script type="text/x-sage">
 
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 
-</script></div>
-    <p></p>  
+</script></div><br/>  
 <div class="linked_r"><script type="text/x-sage">
 %%r
 
 </script></div>
-    <p></p> 
     <h2>5. Отдельная ячейка для дополнительных экспериментов</h2>      
 <div class="sage"><script type="text/x-sage">
 
 </script></div>
-    <p></p>
   </body>
 </html>
