@@ -436,6 +436,9 @@ t3=sum([text(labels[i],text_xy[i],
              xmax=10,xmin=-10,ymax=10,ymin=-10)
 </script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
+import numpy,sympy,pylab
+sympy.init_printing(use_unicode=True)
+from matplotlib.lines import Line2D
 x,y,x0,y0,a,b,c,d,e,f,p=\
 sympy.symbols('x,y,x0,y0,a,b,c,d,e,f,p')
 eq3=[(y-y0)**2-2*p*(x-x0),
@@ -466,11 +469,14 @@ ax=fig.add_subplot(111); pylab.grid()
 colors=['#3636ff','#ff3636','#36ff36']
 lines=[Line2D([0],[0],color=c,linewidth=2,
        linestyle='-') for c in colors]
-labels=['$(y+1)^2=2*3*(x-1)$','$x^2-4xy+4y^2+x+4y+3=0$','$2x^2+4x+y-7=0$']
-[ax.contour(X,Y,f3[i],[0],colors=[colors[i]]) for i in range(3)]
-ax.set_xlim(-10,10); ax.set_ylim(-10,10); ax.legend(lines,labels,loc=1); pylab.show()
-</script></div>
-    <p></p>
+labels=['$(y+1)^2=2*3*(x-1)$',
+        '$x^2-4xy+4y^2+x+4y+3=0$',
+        '$2x^2+4x+y-7=0$']
+[ax.contour(X,Y,f3[i],[0],colors=[colors[i]]) 
+ for i in range(3)]
+ax.set_xlim(-10,10); ax.set_ylim(-10,10)
+ax.legend(lines,labels,loc=1); pylab.show()
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
 X <- Y <- seq(from=-12,to=12,by=0.2)
@@ -485,10 +491,11 @@ XY <- parabola2(1,-4,4,1,4,3,X,Y); dim(data.frame(XY))
 </script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-svg(filename="Rplots.svg",width=7,height=7,pointsize=12,onefile=TRUE,
-    family="sans",bg="white",antialias = c("default","none","gray","subpixel"))
-cols <- c('#3636ff','#ff3636','#36ff36')
-labs <- c('(y+1)^2=2*3*(x-1)','x^2-4xy+4y^2+x+4y+3=0','2x^2+4x+y-7=0')
+svg(filename="Rplots.svg",width=7,height=7,pointsize=12,
+    onefile=TRUE,family="sans",bg="white",
+    antialias=c("default","none","gray","subpixel"))
+cols<-c('#3636ff','#ff3636','#36ff36')
+labs<-c('(y+1)^2=2*3*(x-1)','x^2-4xy+4y^2+x+4y+3=0','2x^2+4x+y-7=0')
 contour(X,X,data.matrix(data.frame(XY)),levels=0,col=cols[2],lwd=3,xlim=c(-10,10),ylim=c(-10,10),xlab='x',ylab='y')
 lines(X1,Y,col=cols[1],lwd=3); lines(X,Y3,col=cols[3],lwd=3)
 legend(1,10,labs,col=cols,lwd=3,cex=0.9); grid(); dev.off()
