@@ -271,15 +271,27 @@ f21=[y-4/3*(x-1)+1,y+4/3*(x-1)+1]
 f22=[(1-(3^2+4^2)^0.5,-1),
      (-3,4/3*sqrt((-3)^2-2*(-3)-8)-1),
      (1+(3^2+4^2)^0.5,-1)]
-s=(-10,10); colors=['#3636ff',2*['#ff3636'],'#36ff36']; text_xy=[(1,-9),[(7,1),(-7,1)],(1,9)]
-labels=['$(x-1)^2/3^2-(y+1)^2/4^2=1$',['$x=3 \cosh t-1$\n$y=4 \sinh t+1$','$x=-3 \cosh t-1$\n$y=-4 \sinh t+1$'],'$x^2+xy-y^2+2x+6y+3=0$']
-p2=sum([implicit_plot(f2[i],s,s,color=colors[i]) for i in [0,2]])+\
-   sum([parametric_plot(f2[1][i],(-2,2),color=colors[1][i]) for i in [0,1]])
-p21=sum([implicit_plot(f21[i],s,s,linestyle='--',linewidth=1,color=colors[0]) for i in [0,1]])+\
-    line(f22,linestyle=':',thickness=2,color=colors[0])+points(f22,color=colors[0],size=100,marker='*')
-t2=sum([text(labels[i],text_xy[i],color=colors[i],fontsize=15) for i in [0,2]])+\
-   sum([text(labels[1][i],text_xy[1][i],color=colors[1][i],fontsize=15) for i in [0,1]])
-(p2+p21+t2).show(gridlines=True,figsize=(7,7),xmax=10,xmin=-10,ymax=10,ymin=-10)
+s=(-10,10); colors=['#3636ff',2*['#ff3636'],'#36ff36']
+text_xy=[(1,-9),[(7,1),(-7,1)],(1,9)]
+labels=[r'$(x-1)^2/3^2-(y+1)^2/4^2=1$',
+       [r'$x=3 \cosh t-1$\n$y=4 \sinh t+1$',
+        r'$x=-3 \cosh t-1$\n$y=-4 \sinh t+1$'],
+        r'$x^2+xy-y^2+2x+6y+3=0$']
+p2=sum([implicit_plot(f2[i],s,s,color=colors[i]) 
+        for i in [0,2]])+\
+   sum([parametric_plot(f2[1][i],(-2,2),
+        color=colors[1][i]) for i in [0,1]])
+p21=sum([implicit_plot(f21[i],s,s,linestyle='--',
+                       linewidth=1,color=colors[0]) 
+         for i in [0,1]])+\
+    line(f22,linestyle=':',thickness=2,color=colors[0])+\
+    points(f22,color=colors[0],size=100,marker='*')
+t2=sum([text(labels[i],text_xy[i],color=colors[i],
+             fontsize=15) for i in [0,2]])+\
+   sum([text(labels[1][i],text_xy[1][i],color=colors[1][i],
+             fontsize=15) for i in [0,1]])
+(p2+p21+t2).show(gridlines=True,figsize=(7,7),
+                 xmax=10,xmin=-10,ymax=10,ymin=-10)
 </script></div><br/>
 <div class="linked_sage"><script type="text/x-sage">
 x0,y0,p,q=1,-1,3,4
@@ -290,6 +302,9 @@ abs(((xm-f1x)^2+(ym-f1y)^2)^0.5-((xm-f2x)^2+(ym-f2y)^2)^0.5)
 diff_distance==2*p,round(diff_distance)==2*p
 </script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
+import numpy,sympy,pylab
+sympy.init_printing(use_unicode=True)
+from matplotlib.lines import Line2D
 x,y,x0,y0,a,b,c,d,e,f,p,q,t=\
 sympy.symbols('x,y,x0,y0,a,b,c,d,e,f,p,q,t')
 eq2=[(x-x0)**2/p**2-(y-y0)**2/q**2-1,
