@@ -99,11 +99,11 @@ sympy.pprint((A2*B2).T)
 </script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-print(A); cat('->\n'); t(A)
+matrix(c(A,t(A)),nrow=7)
 </script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-print(t(A+B)); t(A%*%B)
+matrix(c(t(A),t(B),t(A+B),t(A%*%B)),nrow=7)
 </script></div><br/>
     <h2>2. След матрицы</h2>
 <table border="1">
@@ -117,19 +117,21 @@ print(t(A+B)); t(A%*%B)
 </tbody></table><br/>
 <div class="linked_sage"><script type="text/x-sage">
 pretty_print(A,'->',A.trace()), pretty_print(B,'->',B.trace())
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
-print(numpy.trace(A1),sum(numpy.diagonal(A1))==numpy.trace(A1))
-sympy.trace(A2),sum([A2[i,j] for i in [0..A2.shape[0]-1] for j in [0..A2.shape[0]-1] if i==j])==sympy.trace(A2)
-</script></div>
-    <p></p>      
+print(numpy.trace(A1),
+      sum(numpy.diagonal(A1))==numpy.trace(A1))
+[sympy.trace(A2),
+sum([A2[i,j] for i in [0..A2.shape[0]-1] 
+             for j in [0..A2.shape[0]-1] 
+             if i==j])==sympy.trace(A2)]
+</script></div><br/>      
 <div class="linked_r"><script type="text/x-sage">
 %%r
-print(c(dim(A)[1]==dim(A)[2],dim(B)[1]==dim(B)[2]))
+print(c(dim(A)[1]==dim(A)[2],
+        dim(B)[1]==dim(B)[2]))
 c(sum(diag(A)),sum(diag(B)))
 </script></div>
-    <p></p>
     <h2>3. Норма матрицы</h2>
 <div class="linked_sage"><script type="text/x-sage">
 pretty_print(A.norm(p=1),' - the largest column-sum norm')
