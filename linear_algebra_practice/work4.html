@@ -12,12 +12,14 @@
     sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run'});
     sagecell.makeSagecell({inputLocation:'div.sage_html',evalButtonText:'Run HTML'});});
     </script>
+    <script data-ad-client="ca-pub-9200929962680356" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   </head>
   <style>
   @import url('https://fonts.googleapis.com/css?family=Orbitron');
   h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
   p, a {color:darkblue; font-size:110%; text-shadow:5px 5px 5px #aaa;}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:26em;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:68em;}
+  body {margin:5px 5px 5px 25px}
   </style>  
   <body>
     <h1>&#x1F4D1; &nbsp; Линейная алгебра. Практическая работа №4</h1>
@@ -55,18 +57,22 @@ MN2=numpy.matrix(numpy.random.randint(0,100,size=(2,2)))
 MN3=numpy.matrix(numpy.random.randint(-100,0,size=(3,3)))
 MN4=numpy.matrix(numpy.random.randint(-100,100,size=(4,4)))
 def minor_matrix(M,x,y):
-    return numpy.matrix([[M[i,j] for j in range(len(M)) if j!=y] for i in range(len(M)) if i!=x])
+    return numpy.matrix([[M[i,j] for j in range(len(M)) if j!=y] 
+                         for i in range(len(M)) if i!=x])
 def minor(M,x,y):
     return numpy.linalg.det(minor_matrix(M,x,y))
 def cofactor_matrix(M):
-    return numpy.matrix([[(-1)**(i+j)*minor(M,i,j) for j in range(len(M))] for i in range(len(M))])
+    return numpy.matrix([[(-1)**(i+j)*minor(M,i,j) 
+                          for j in range(len(M))] 
+                         for i in range(len(M))])
 MS2=sympy.Matrix([[-3,1],[-4,-7]])
 MS3=sympy.Matrix([[2,10,7],[-5,-6,-2],[-8,4,5]])
-MS4=sympy.Matrix([[3,2,8,-5],[-1,-3,6,4],[-6,2,5,-3],[2,-7,1,5]])
-</script></div>
-    <p></p>
+MS4=sympy.Matrix([[3,2,8,-5],[-1,-3,6,4],
+                  [-6,2,5,-3],[2,-7,1,5]])
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
-print(round(MN3*numpy.linalg.inv(MN3))); print(round(MN4*numpy.linalg.inv(MN4)))
+print(round(MN3*numpy.linalg.inv(MN3)))
+print(round(MN4*numpy.linalg.inv(MN4)))
 MS2*MS2.inv(),MS3*MS3.inv(),MS4*MS4.inv()
 </script></div>
     <p></p>
