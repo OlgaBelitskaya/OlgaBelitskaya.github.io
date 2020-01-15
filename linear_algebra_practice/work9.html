@@ -275,7 +275,8 @@ x0,y0,z0,R
             (z_C-z_A)*(z-\frac{z_A+z_C}{2})=0$</p> 
 <p>$O \in \pi, \pi_1, \pi_2$</p>
 <div class="linked_python"><script type="text/x-sage">
-import numpy; xA,yA,zA,xB,yB,zB,xC,yC,zC=1,1,3,-1,2,2,7,-3,1
+import numpy
+xA,yA,zA,xB,yB,zB,xC,yC,zC=1,1,3,-1,2,2,7,-3,1
 # π
 a1=numpy.array([(yB-yA)*(zC-zA)-(yC-yA)*(zB-zA),
                 -(xB-xA)*(zC-zA)+(xC-xA)*(zB-zA),
@@ -291,11 +292,13 @@ b3=sum(numpy.array([(xA+xC)/2,(yA+yC)/2,(zA+zC)/2])*a3)
 a=numpy.array([a1,a2,a3]); b=numpy.array([b1,b2,b3]) 
 [x0,y0,z0]=numpy.linalg.solve(a,b)
 R=numpy.sqrt((x0-x1)**2+(y0-y1)**2+(z0-z1)**2)
-print(a); print(b); print([x0,y0,z0]); print(R)
+print([x0,y0,z0]); print(R); print(a); print(b) 
 </script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-xA<-1; yA<-1; zA<-3; xB<--1; yB<-2; zB<-2; xC<-7; yC<--3; zC<-1
+xA<-1; yA<-1; zA<-3
+xB<--1; yB<-2; zB<-2
+xC<-7; yC<--3; zC<-1
 # π
 a1<-c((yB-yA)*(zC-zA)-(yC-yA)*(zB-zA),
       -(xB-xA)*(zC-zA)+(xC-xA)*(zB-zA),
@@ -308,10 +311,11 @@ b2<-sum(c((xA+xB)/2,(yA+yB)/2,(zA+zB)/2)*a2)
 a3<-c(xC-xA,yC-yA,zC-zA)
 b3<-sum(c((xA+xC)/2,(yA+yC)/2,(zA+zC)/2)*a3)
 # O,R
-a<-matrix(c(a1,a2,a3),ncol=3,byrow=T); b<-c(b1,b2,b3)
+a<-matrix(c(a1,a2,a3),ncol=3,byrow=T)
+b<-c(b1,b2,b3)
 O<-solve(a,b); x0<-O[1]; y0<-O[2]; z0<-O[3]
 R<-sqrt((x0-xA)^2+(y0-yA)^2+(z0-zA)^2)
-print(a); print(b); print(O); R
+print(c(O,R)); matrix(c(a,b),nrow=3)
 </script></div> 
     <h2>3. Задание</h2>
 Создать массив координат 4 точек так, чтобы они не принадлежали одной плоскости.<br/>
