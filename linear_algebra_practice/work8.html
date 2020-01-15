@@ -132,24 +132,23 @@ legend(-4,-2,labs,col=cols,lwd=3); grid(); dev.off()
 </script></div>      
     <h2>2. Взаимное расположение точек и прямых на плоскости</h2>
 Расстояние между прямой и точкой
-<p>$\begin {cases} l: a * x + b * y + c = 0 \\ M: (x_0;y_0) \end {cases} \to \rho(M,l) = \frac{|a * x_0 + b * y_0 + c|}{\sqrt{a^2 + b^2}}$</p>
+<p>$\begin {cases} l: a * x + b * y + c = 0 \\ M: (x_0;y_0) \end {cases} 
+    \to \rho(M,l) = \frac{|a * x_0 + b * y_0 + c|}{\sqrt{a^2 + b^2}}$</p>
 Две прямые
-
 <p>$\begin {cases} l_1: y = k_1 * x + m_1 = 0 \\ l_2: y = k_2 * x + m_2 = 0 \end {cases}$</p>
 <p>$k_1 = k_2, m_1 = m_2 \implies l_1 \equiv l_2$</p>
 <p>$k_1 = k_2, m_1 \neq m_2 \implies l_1 \parallel l_2$</p>
 <p>$k_1 \neq k_2 \implies l_1 \cap l_2 = O$</p>
 <p>$tg \ \varphi = \bigg|\frac{k_1 - k_2}{1 + k_1 \cdot k_2}\bigg|$</p>
 <p>$k_1 \cdot k_2 = -1 \implies l_1 \perp l_2$</p>    
-    <p></p>
 <div class="linked_sage"><script type="text/x-sage">
 # l1:2x+3y-5=0, l2:-3x-4y+7=0
 solve([2*x+3*y-5==0,-3*x-4*y+7==0],x,y)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 # l1:2x+3y-5=0, l2:-3x-4y+7=0
-print(numpy.linalg.solve(numpy.matrix([[2,3],[-3,-4]]),numpy.matrix([5,-7]).T))
+print(numpy.linalg.solve(numpy.matrix([[2,3],[-3,-4]]),
+      numpy.matrix([5,-7]).T))
 sympy.solve([2*x+3*y-5,-3*x-4*y+7],x,y)
 </script></div>
     <p></p>  
@@ -357,14 +356,14 @@ n=Matrix(SR,3,[i,j,k,p1,q1,r1,p2,q2,r2]).det() # n=s1xs2, n⊥π
 [nx,ny,nz]=map(lambda w: w.subs(i=1,j=1,k=1),n.operands())
 Pi=(nx*(x-xO)+ny*(y-yO)+nz*(z-zO)==0)/(-7)
 [xO,yO,zO],Pi # O,π
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
-import sympy; sympy.init_printing(use_unicode=True)
+import sympy
 x,y,z,t,i,j,k=sympy.symbols('x,y,z,t,i,j,k')
 x1,y1,z1,x2,y2,z2=4,2,-1,-1,5,10 # A1∈l1,A2∈l2
 p1,q1,r1,p2,q2,r2=-3,-1,1,2,3,4 # s1||l1,s2||l2
-l1=[(x-x1)/p1-(y-y1)/q1,(z-z1)/r1-(y-y1)/q1]; l2=[(x-x2)/p2-(y-y2)/q2,(z-z2)/r2-(y-y2)/q2]
+l1=[(x-x1)/p1-(y-y1)/q1,(z-z1)/r1-(y-y1)/q1]
+l2=[(x-x2)/p2-(y-y2)/q2,(z-z2)/r2-(y-y2)/q2]
 O=sympy.solve([l1[0],l1[1],l2[0],l2[1]],x,y,z) # O=l1∩l2, O∈π
 n=sympy.Matrix([[i,j,k],[p1,q1,r1],[p2,q2,r2]]).det() # n=s1xs2, n⊥π
 Pi=(n.coeff(i)*(x-O[x])+n.coeff(j)*(y-O[y])+n.coeff(i)*(z-O[z]))/(-7)
