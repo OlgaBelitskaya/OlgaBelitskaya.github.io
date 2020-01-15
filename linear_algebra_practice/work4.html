@@ -87,12 +87,17 @@ MS3.adjugate()/MS3.det(),MS3.inv(),MS3^-1
 <div class="linked_python"><script type="text/x-sage">
 A,B,C,D=MN4[0:2,0:2],MN4[0:2,2:4],MN4[2:4,0:2],MN4[2:4,2:4]
 for m in [MN4,A,B,C,D]:
-    print numpy.array_str(m,precision=2,suppress_small=True)
-print(numpy.linalg.det(A)*numpy.linalg.det(D-C*numpy.linalg.inv(A)*B),numpy.linalg.det(MN4))
-print(round(numpy.linalg.det(A)*numpy.linalg.det(D-C*numpy.linalg.inv(A)*B))==round(numpy.linalg.det(MN4)))
-print(50*'=%=')
+    print(numpy.array_str(m,precision=2,suppress_small=True))
+print(numpy.linalg.det(A)*\
+      numpy.linalg.det(D-C*numpy.linalg.inv(A)*B),
+      numpy.linalg.det(MN4))
+print(round(numpy.linalg.det(A)*\
+            numpy.linalg.det(D-C*numpy.linalg.inv(A)*B))==\
+      round(numpy.linalg.det(MN4)))
+print(30*'=%=')
 A,B,C,D=MS4[0:2,0:2],MS4[0:2,2:4],MS4[2:4,0:2],MS4[2:4,2:4]
-sympy.pprint('A.det()*(D-C*A^(-1)*B).det()=MS4.det(): %s'%str(A.det()*(D-C*A.inv()*B).det()==MS4.det()))
+sympy.pprint('A.det()*(D-C*A^(-1)*B).det()=MS4.det(): %s'\
+             %str(A.det()*(D-C*A.inv()*B).det()==MS4.det()))
 MS4,A,B,C,D
 </script></div>
     <p>Активируйте этот код перед использованием любых ячеек Linked R Cells</p>
@@ -111,18 +116,16 @@ cofactor_matrix <- function(A) {
     return(M)
 }
 library(Matrix)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
 list(round(A%*%solve(A)), round(B%*%solve(B)), round(M%*%solve(M)))
-</script></div>      
-    <p></p>
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-list(t(cofactor_matrix(B))/det(B),solve(B),B^(-1)) # !!! solve(B) != B^(-1) in R
-</script></div>      
-    <p></p>
+list(t(cofactor_matrix(B))/det(B),solve(B),B^(-1)) 
+# !!! solve(B) != B^(-1) in R
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
 A<-M[1:2,1:2]; B<-M[1:2,3:4]; C<-M[3:4,1:2]; D<-M[3:4,3:4]
@@ -142,7 +145,9 @@ list(M,A,B,C,D)
 M2.rank(),M3.rank(),M4.rank(),S.rank()
 </script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
-print([numpy.linalg.matrix_rank(MN2),numpy.linalg.matrix_rank(MN3),numpy.linalg.matrix_rank(MN4)])
+print([numpy.linalg.matrix_rank(MN2),
+       numpy.linalg.matrix_rank(MN3),
+       numpy.linalg.matrix_rank(MN4)])
 sympy.pprint([MS2.rank(),MS3.rank(),MS4.rank()])
 </script></div><br/> 
 <div class="linked_r"><script type="text/x-sage">
