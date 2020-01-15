@@ -53,62 +53,72 @@ eq=[a*x+b*y+c==0,
 <div class="linked_sage"><script type="text/x-sage">
 solutions=[solve([eq[0],a==3,b==-1,c==-1],a,b,c,x,y),
            solve([eq[1],k==-3,x0==1,y0==1],k,x0,y0,x,y),
-           solve([eq[2],x1==-3,y1==-2,x2==-1,y2==4],x1,y1,x2,y2,x,y),
-           solve([eq[3],eq[4],x0==1,y0==-1,p==2,q==-4],x0,y0,p,q,t,x,y)]
+           solve([eq[2],x1==-3,y1==-2,x2==-1,y2==4],
+                 x1,y1,x2,y2,x,y),
+           solve([eq[3],eq[4],x0==1,y0==-1,
+                  p==2,q==-4],x0,y0,p,q,t,x,y)]
 solutions
 </script></div><br/>
 <div class="linked_sage"><script type="text/x-sage">
 g=Graphics(); lines=[3*x-1,-3*x+4,3*x+7] 
 colors=['#3636ff','#ff3636','#36ff36']
 llabels=['3x-y-1=0','y=-3x+4','(y+2)/(4+2)=(x+3)/(-1+3)']
-l123=sum([plot(lines[i],(x,-5,5),color=colors[i],thickness=2,legend_label=llabels[i]) for i in [0..2]])
-l4=parametric_plot((2*t+1,-4*t-1),(t,-3,3),thickness=2,color='#ffff36',legend_label='x=2t+1,y=-4t-1')
+l123=sum([plot(lines[i],(x,-5,5),color=colors[i],thickness=2,
+               legend_label=llabels[i]) for i in [0..2]])
+l4=parametric_plot((2*t+1,-4*t-1),(t,-3,3),
+                   thickness=2,color='#ffff36',
+                   legend_label='x=2t+1,y=-4t-1')
 g=g+l123+l4; g.set_legend_options(loc=3) 
-g.show(xmax=5,xmin=-5,ymax=5,ymin=-5,gridlines=True,figsize=(5,5))
+g.show(xmax=5,xmin=-5,ymax=5,ymin=-5,
+       gridlines=True,figsize=7)
 </script></div>
-    <p></p>
     <p>Активируйте этот код перед использованием любых ячеек Linked Python Cells</p>
 <div class="linked_python"><script type="text/x-sage">
-import numpy,sympy,pylab; sympy.init_printing(use_unicode=True)
+import numpy,sympy,pylab
 from mpl_toolkits.mplot3d import Axes3D
-X=numpy.linspace(start=-10,stop=10,num=20); T=numpy.linspace(start=-5,stop=5,num=20)
+X=numpy.linspace(start=-10,stop=10,num=20)
+T=numpy.linspace(start=-5,stop=5,num=20)
 def line1(a,b,c,x): return -(a*x+c)/b
 def line2(k,x0,y0,x): return k*(x-x0)+y0
-def line3(x1,y1,x2,y2,x): return (y2-y1)*(x-x1)/(x2-x1)+y1
+def line3(x1,y1,x2,y2,x): 
+    return (y2-y1)*(x-x1)/(x2-x1)+y1
 def line4(x0,y0,p,q,t): return(x0+p*t,y0+q*t)
-a,b,c,x,y,x0,y0,k,x1,y1,x2,y2,p,q,t = sympy.symbols('a b c x y x0 y0 k x1 y1 x2 y2 p q t')
-eq=[a*x+b*y+c,y-y0-k*(x-x0),(y-y1)/(y2-y1)-(x-x1)/(x2-x1),x-x0-p*t,y-y0-q*t]
-</script></div>
-    <p></p>
+a,b,c,x,y,x0,y0,k,x1,y1,x2,y2,p,q,t=\
+sympy.symbols('a b c x y x0 y0 k x1 y1 x2 y2 p q t')
+eq=[a*x+b*y+c,y-y0-k*(x-x0),
+    (y-y1)/(y2-y1)-(x-x1)/(x2-x1),
+    x-x0-p*t,y-y0-q*t]
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 solutions=[sympy.solve([eq[0],a-3,b+1,c+1],a,b,c,y),
            sympy.solve([eq[1],x0-1,y0-1,k+3],x0,y0,k,y),
-           sympy.solve([eq[2],x1+3,y1+2,x2+1,y2-4],x1,y1,x2,y2,y),
-           sympy.solve([eq[3],eq[4],x0-1,y0+1,p-2,q+4],x0,y0,p,q,t,y)]
+           sympy.solve([eq[2],x1+3,y1+2,x2+1,y2-4],
+                       x1,y1,x2,y2,y),
+           sympy.solve([eq[3],eq[4],x0-1,y0+1,p-2,q+4],
+                       x0,y0,p,q,t,y)]
 for i in range(4): display(solutions[i]); print('\n')
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 f,ax=pylab.subplots(1,figsize=(5,5))
 ax.plot(X,line1(3,-1,-1,X),color='#3636ff',label='3x-y-1=0')
 ax.plot(X,line2(-3,1,1,X),color='#ff3636',label='y=-3x+4')
-ax.plot(X,line3(-3,-2,-1,4,X),color='#36ff36',label='(y+2)/(4+2)=(x+3)/(-1+3)')
-ax.plot(line4(1,-1,2,-4,T)[0],line4(1,-1,2,-4,T)[1],color='#ffff36',label='x=2t+1,y=-4t-1')
+ax.plot(X,line3(-3,-2,-1,4,X),color='#36ff36',
+        label='(y+2)/(4+2)=(x+3)/(-1+3)')
+ax.plot(line4(1,-1,2,-4,T)[0],line4(1,-1,2,-4,T)[1],
+        color='#ffff36',label='x=2t+1,y=-4t-1')
 ax.legend(loc=3); ax.set_xlim(-5,5); ax.set_ylim(-5,5)
 pylab.grid(); pylab.show()
 </script></div>
-    <p></p>
     <p>Активируйте этот код перед использованием любых ячеек Linked R Cells</p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-line1 <- function(a,b,c,x){-(a*x+c)/b}
-line2 <- function(k,x0,y0,x){k*(x-x0)+y0}
-line3 <- function(x1,y1,x2,y2,x){(y2-y1)*(x-x1)/(x2-x1)+y1}
-line4 <- function(x0,y0,p,q,t){list(x0+p*t,y0+q*t)}
-T <- X <- seq(from=-10,to=11,by=1)
+line1<-function(a,b,c,x){-(a*x+c)/b}
+line2<-function(k,x0,y0,x){k*(x-x0)+y0}
+line3<-function(x1,y1,x2,y2,x){(y2-y1)*(x-x1)/(x2-x1)+y1}
+line4<-function(x0,y0,p,q,t){list(x0+p*t,y0+q*t)}
+T<-X<-seq(from=-10,to=11,by=1)
 library(grDevices); library(Matrix)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
 svg(filename="Rplots.svg",width=7,height=7,pointsize=12,onefile=TRUE,
@@ -120,13 +130,9 @@ lines(X,line2(-3,1,1,X),col=cols[2],lwd=3); lines(X,line3(-3,-2,-1,4,X),col=cols
 lines(line4(1,-2,-1,3,T)[[1]],line4(1,-2,-1,3,T)[[2]],col=cols[4],lwd=3)
 legend(-4,-2,labs,col=cols,lwd=3); grid(); dev.off()
 </script></div>      
-    <p></p>
     <h2>2. Взаимное расположение точек и прямых на плоскости</h2>
-
 Расстояние между прямой и точкой
-
 <p>$\begin {cases} l: a * x + b * y + c = 0 \\ M: (x_0;y_0) \end {cases} \to \rho(M,l) = \frac{|a * x_0 + b * y_0 + c|}{\sqrt{a^2 + b^2}}$</p>
-
 Две прямые
 
 <p>$\begin {cases} l_1: y = k_1 * x + m_1 = 0 \\ l_2: y = k_2 * x + m_2 = 0 \end {cases}$</p>
