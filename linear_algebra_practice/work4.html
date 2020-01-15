@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width">
     <title>LinearAlgebraWork4</title>
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
-    <script>$(function () {
+    <script>$(function (){
     sagecell.makeSagecell({inputLocation:'div.linked_sage',linked:true,evalButtonText:'Run Linked Sage Cells'});
     sagecell.makeSagecell({inputLocation:'div.linked_python',linked:true,evalButtonText:'Run Linked Python Cells'});
     sagecell.makeSagecell({inputLocation:'div.linked_r',linked:true,evalButtonText:'Run Linked R Cells'});
     sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run'});
-    sagecell.makeSagecell({inputLocation:'div.sage_html',evalButtonText:'Run HTML'});
-    });
+    sagecell.makeSagecell({inputLocation:'div.sage_html',evalButtonText:'Run HTML'});});
     </script>
   </head>
   <style>
@@ -27,23 +26,23 @@
 Обратная матрица = Транспонированная матрица алгебраических дополнений / Определитель      
     <p>$A^{-1} = \frac{A_S^T}{\Delta_A}$</p>
 Вычисление определителя 4-ого порядка      
-    <p>$| M | = \begin{vmatrix} A & B \\ C & D \end{vmatrix} = | A | * |D - C * A^{-1} * B|$</p>      
-      
+    <p>$| M | = \begin{vmatrix} A & B \\ C & D \end{vmatrix} = | A | * |D - C * A^{-1} * B|$</p>            
     <p>Активируйте этот код перед использованием любых ячеек Linked Sage Cells</p>
 <div class="linked_sage"><script type="text/x-sage">
 S=matrix(SR,2,var('a,b,c,d'))
-M2=random_matrix(ZZ,2,x=0,y=100); M3=random_matrix(ZZ,3,x=-100,y=0); M4=random_matrix(ZZ,4,x=-100,y=100)
-</script></div>
-    <p></p>      
+M2=random_matrix(ZZ,2,x=0,y=100)
+M3=random_matrix(ZZ,3,x=-100,y=0)
+M4=random_matrix(ZZ,4,x=-100,y=100)
+</script></div><br/>     
 <div class="linked_sage"><script type="text/x-sage">
 pretty_print(S^(-1),S.inverse())
 pretty_print(S*S^(-1),(S*S^(-1)).simplify_rational(),S^(-1)*S,(S^(-1)*S).simplify_rational())
 (S*S^(-1)).simplify_rational()==(S^(-1)*S).simplify_rational()==identity_matrix(2)
-</script></div>
+</script></div><br/> 
 <div class="linked_sage"><script type="text/x-sage">
 M3m=M3.minors(2); M3m.reverse(); pretty_print(matrix(3,M3m).T,M3.adjugate())
 M3*M3^(-1)==identity_matrix(3),M3.adjugate()/M3.det()==M3.inverse()==M3^(-1)
-</script></div>
+</script></div><br/> 
 <div class="linked_sage"><script type="text/x-sage">
 A,B,C,D=M4[0:2,0:2],M4[0:2,2:4],M4[2:4,0:2],M4[2:4,2:4]
 pretty_print(M4,A,B,C,D)
@@ -151,30 +150,23 @@ sympy.pprint([MS2.rank(),MS3.rank(),MS4.rank()])
 %%r
 print(c(qr(A)$rank,qr(M)$rank))
 qr(M)
-</script></div>
-    <p></p>             
+</script></div>             
     <h2>3. Задание</h2>
-      
-Инициировать матрицу A (3x3), рассчитать для нее определитель, ранг и обратную матрицу, используя SageMath, Numpy, SymPy или R. 
-      
-    <p></p>
+Инициировать матрицу A (3x3), рассчитать для нее определитель, ранг и обратную матрицу,<br/> 
+используя SageMath, Numpy, SymPy или R. 
 <div class="linked_sage"><script type="text/x-sage">
 
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 
-</script></div>
-    <p></p>  
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
 
 </script></div>
-    <p></p> 
     <h2>4. Отдельная ячейка для дополнительных экспериментов</h2>      
 <div class="sage"><script type="text/x-sage">
 
 </script></div>
-    <p></p>
   </body>
 </html>
