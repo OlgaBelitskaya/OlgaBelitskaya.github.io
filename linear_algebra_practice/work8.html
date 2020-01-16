@@ -149,10 +149,13 @@ legend(-4,-2,labs,col=cols,lwd=3); grid(); dev.off()
 <p>$k_1 \cdot k_2 = -1 \implies l_1 \perp l_2$</p>    
 <div class="linked_sage"><script type="text/x-sage">
 # l1:2x+3y-5=0, l2:-3x-4y+7=0
+var('x,y')
 solve([2*x+3*y-5==0,-3*x-4*y+7==0],x,y)
 </script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 # l1:2x+3y-5=0, l2:-3x-4y+7=0
+import numpy,sympy
+x,y=sympy.symbols('x,y')
 print(numpy.linalg.solve(numpy.matrix([[2,3],[-3,-4]]),
       numpy.matrix([5,-7]).T))
 sympy.solve([2*x+3*y-5,-3*x-4*y+7],x,y)
@@ -160,27 +163,27 @@ sympy.solve([2*x+3*y-5,-3*x-4*y+7],x,y)
 <div class="linked_r"><script type="text/x-sage">
 %%r
 # l1:2x+3y-5=0, l2:-3x-4y+7=0
-a <- matrix(data=c(2,3,-3,-4),nrow=2,ncol=2,byrow=T)    
-b <- matrix(data=c(5,-7),nrow=2,ncol=1,byrow=F)
+a<-matrix(data=c(2,3,-3,-4),nrow=2,ncol=2,byrow=T)    
+b<-matrix(data=c(5,-7),nrow=2,ncol=1,byrow=F)
 round(solve(a,b))
 </script></div><br/>
+Пример типового расчета<br/>
 <div class="sage_html"><script type="text/x-sage">
 %%html
 <p style="color:slategray;">
-$l_1: 11 * x + 2 * y - 7 = 0 \\ l_2: 2 * x - y + 3 = 0 \\
+$\mathscr{l_1: 11 * x + 2 * y - 7 = 0 \\ l_2: 2 * x - y + 3 = 0 \\
 m_1, m_2: \rho(M,l_1) = \rho(M,l_2),\; 
-\forall M \in m_1, m_2 \\ m_1, m_2: \ ?$</p>
-<p style="color:darkred;">$\rho(M,l_1) = \rho(M,l_2) \iff 
+\forall M \in m_1, m_2 \\ m_1, m_2: \; ?}$</p>
+<p style="color:darkblue;">
+$\mathbb{\rho(M,l_1) = \rho(M,l_2) \iff 
 \frac{|11 * x + 2 * y - 7|}{\sqrt{11^2 + 2^2}} = 
-\frac{|2 * x - y + 3|}{\sqrt{2^2 + (-1)^2}}$</p>
-</script></div>
-    <p></p>
+\frac{|2 * x - y + 3|}{\sqrt{2^2 + (-1)^2}}}$</p>
+</script></div><br/>
 <div class="linked_sage"><script type="text/x-sage">
 eq_m1=(11*x+2*y-7)/sqrt(11^2+2^2)==(2*x-y+3)/sqrt(2^2+(-1)^2)
 eq_m2=(11*x+2*y-7)/sqrt(11^2+2^2)==-(2*x-y+3)/sqrt(2^2+(-1)^2)
 solve(eq_m1,y),solve(eq_m2,y)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_sage"><script type="text/x-sage">
 g=Graphics(); lines=[-11/2*x+7/2,2*x+3,-1/7*x+22/7,7*x+8/3]; colors=['#3636ff','#ff3636','#36ff36','#ffff36']
 llabels=['l1: 11 * x + 2 * y - 7 = 0','l2: 2 * x - y + 3 = 0','m1: y = -1/7x + 22/7','m2: y = 7x + 8/3']
