@@ -1,17 +1,6 @@
 
 # &#x1F3D9; &nbsp;  Certificated Projects
 
-## &#x1F4D1; &nbsp; Data Analyst Nanodegree 
-### [Built with Udacity](https://www.udacity.com) &nbsp; [Certificate](https://olgabelitskaya.github.io/certificate.pdf)
-
-### &#x1F310; &nbsp; [click to view the github repository](https://github.com/OlgaBelitskaya/data-analyst-nd002)
-
-#### [P0: Chopsticks!](https://olgabelitskaya.github.io/Data_Analyst_ND_Project0.html) &nbsp;  [P1: The Stroop Effect](https://olgabelitskaya.github.io/Data_Analyst_ND_Project1.html) &nbsp;  [P2: Titanic](https://olgabelitskaya.github.io/Data_Analyst_ND_Project2.html)  &nbsp;  [P3: Extraction MongoDB](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_Dubai-AbuDhabi_Extraction_MongoDB.html) &nbsp;  [P3: MongoDB](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_Dubai-AbuDhabi_MongoDB.html) &nbsp; [P3: Postcodes](https://olgabelitskaya.github.io/P3_postcodes.html) 
-#### [P3: Additional SQL](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_Dubai-AbuDhabi_SQL.html) &nbsp;  [P3: Additional R SQL MongoDB](https://olgabelitskaya.github.io/P3_R_SQL_MongoDB.html) &nbsp; [P3: Additional Moscow Region](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_MoscowRegion.html) &nbsp; [P4: Explore and Summarize Data](https://olgabelitskaya.github.io/P4Beta.html)
-#### [P5: Identify Fraud from Enron Email. Extraction](https://olgabelitskaya.github.io/P5_Identify_Fraud_from_Enron_Email_Extraction.txt) &nbsp;  [P5: Identify Fraud from Enron Email](https://olgabelitskaya.github.io/P5_Identify_Fraud_from_Enron_Email.html) &nbsp; [P5: Identify Fraud from Enron Email. Response Questions](https://olgabelitskaya.github.io/P5_Enron_Submission_Free_Response_Questions.txt)
-#### [P6: Make Effective Data Visualization. Review](https://olgabelitskaya.github.io/P6_Readme.html) &nbsp;  [P6: Make Effective Data Visualization](https://olgabelitskaya.github.io/P6_index_final.html)
-#### [P7: Design an A/B Test](https://olgabelitskaya.github.io/P7_Design_an_A_B_Test_Overview.html) &nbsp;  [P7: Design an A/B Test. Extraction](https://olgabelitskaya.github.io/P7_Design_an_A_B_Test_Extraction.pdf)
-
 ## &#x1F4D1; &nbsp; Machine Learning Engineer Nanodegree
 ### [Built with Udacity](https://www.udacity.com) &nbsp; [Certificate](https://olgabelitskaya.github.io/certificate_nd009.pdf)
 
@@ -34,15 +23,19 @@
 #### [P3: Creating Customer Segments](https://olgabelitskaya.github.io/MLE_ND_P3_SMC.html)
 #### [P7: Building a Student Intervention System](https://olgabelitskaya.github.io/MLE_ND_P7_SMC.html) &nbsp;  [P8: Analyzing the NYC Subway Dataset](https://olgabelitskaya.github.io/MLE_ND_P8_SMC.html)
 
-# &#x1F3D9; &nbsp;  Under Construction Projects
+## &#x1F4D1; &nbsp; Data Analyst Nanodegree 
+### [Built with Udacity](https://www.udacity.com) &nbsp; [Certificate](https://olgabelitskaya.github.io/certificate.pdf)
 
-## &#x1F4D1; &nbsp; Deep Learning Nanodegree 
-### [Built with Udacity](https://www.udacity.com) 
+### &#x1F310; &nbsp; [click to view the github repository](https://github.com/OlgaBelitskaya/data-analyst-nd002)
 
-### &#x1F310; &nbsp; [click to view the github repository](https://github.com/OlgaBelitskaya/deep_learning_nanodegree_nd101)
-
-#### [P1: Your first neural network](https://olgabelitskaya.github.io/DL_ND_P1_V0.html)  &nbsp;  [P2:  Image Classification](https://olgabelitskaya.github.io/DL_ND_P2_V0.html) &nbsp;  [P3  Generate TV scripts](https://olgabelitskaya.github.io/DL_ND_P3_V0.html) 
-#### [P4:  Translate a Language](https://olgabelitskaya.github.io/DL_ND_P4_V0.html) &nbsp;  [P5: Generate Faces ](https://olgabelitskaya.github.io/DL_ND_P5_V0.html)
+#### [P0: Chopsticks!](https://olgabelitskaya.github.io/Data_Analyst_ND_Project0.html) &nbsp;  [P1: The Stroop Effect](https://olgabelitskaya.github.io/Data_Analyst_ND_Project1.html) &nbsp;  [P2: Titanic](https://olgabelitskaya.github.io/Data_Analyst_ND_Project2.html)  
+####  [P3: Extraction MongoDB](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_Dubai-AbuDhabi_Extraction_MongoDB.html) &nbsp;  [P3: MongoDB](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_Dubai-AbuDhabi_MongoDB.html) &nbsp; [P3: Postcodes](https://olgabelitskaya.github.io/P3_postcodes.html) 
+#### [P3: Additional SQL](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_Dubai-AbuDhabi_SQL.html) &nbsp;  [P3: Additional R SQL MongoDB](https://olgabelitskaya.github.io/P3_R_SQL_MongoDB.html) &nbsp; [P3: Additional Moscow Region](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_MoscowRegion.html) 
+#### [P4: Explore and Summarize Data](https://olgabelitskaya.github.io/P4Beta.html)
+#### [P5: Identify Fraud from Enron Email. Extraction](https://olgabelitskaya.github.io/P5_Identify_Fraud_from_Enron_Email_Extraction.txt) &nbsp;  [P5: Identify Fraud from Enron Email](https://olgabelitskaya.github.io/P5_Identify_Fraud_from_Enron_Email.html) 
+#### [P5: Identify Fraud from Enron Email. Response Questions](https://olgabelitskaya.github.io/P5_Enron_Submission_Free_Response_Questions.txt)
+#### [P6: Make Effective Data Visualization. Review](https://olgabelitskaya.github.io/P6_Readme.html) &nbsp;  [P6: Make Effective Data Visualization](https://olgabelitskaya.github.io/P6_index_final.html)
+#### [P7: Design an A/B Test](https://olgabelitskaya.github.io/P7_Design_an_A_B_Test_Overview.html) &nbsp;  [P7: Design an A/B Test. Extraction](https://olgabelitskaya.github.io/P7_Design_an_A_B_Test_Extraction.pdf)
 
 # &#x1F3D9; &nbsp;  My Own Experimental Projects
 
@@ -97,36 +90,51 @@ Colaboratory Notebooks &nbsp; [decor_classification.ipynb &#x1F4D6; ](https://dr
 
 # &#x1F3D9; &nbsp; Online Training Courses & Exercises
 
-## &#x1F4D8; &nbsp; My Own Practice Programs
-https://olgabelitskaya.github.io/README_PRACTICE.html
+## &#x1F4D1; &nbsp; My Own Practice Programs [&#x1F310;](https://olgabelitskaya.github.io/README_PRACTICE.html)
 
-## &#x1F4D8; &nbsp; Various Exercises
-https://olgabelitskaya.github.io/README_EXERCISES.html
+## &#x1F4D1; &nbsp; Various Exercises [&#x1F310;](https://olgabelitskaya.github.io/README_EXERCISES.html)
 
-## &#x1F4D8; &nbsp; Reflections for Courses and Programs 
-https://olgabelitskaya.github.io/reflections/README.html
+## &#x1F4D1; &nbsp; Reflections for Courses and Programs [&#x1F310;](https://olgabelitskaya.github.io/reflections/README.html)
 
-## &#x1F4D8; &nbsp; Notebooks and Data Files
-https://olgabelitskaya.github.io/notebooks/README.html
+## &#x1F4D1; &nbsp; Notebooks and Data Files [&#x1F310;](https://olgabelitskaya.github.io/notebooks/README.html)
 
-# &#x1F3D9; &nbsp;  Other Web Links:
+# &#x1F3D9; &nbsp;  Under Construction Projects
 
-## &#x1F4D1; &nbsp; GitHub gists https://gist.github.com/OlgaBelitskaya
+## &#x1F4D1; &nbsp; Deep Learning Nanodegree 
+### [Built with Udacity](https://www.udacity.com) 
 
-## &#x1F4D1; &nbsp; Pages on http://bl.ocks.org/
+### &#x1F310; &nbsp; [click to view the github repository](https://github.com/OlgaBelitskaya/deep_learning_nanodegree_nd101)
+
+#### [P1: Your first neural network](https://olgabelitskaya.github.io/DL_ND_P1_V0.html)  &nbsp;  [P2:  Image Classification](https://olgabelitskaya.github.io/DL_ND_P2_V0.html) &nbsp;  [P3  Generate TV scripts](https://olgabelitskaya.github.io/DL_ND_P3_V0.html) 
+#### [P4:  Translate a Language](https://olgabelitskaya.github.io/DL_ND_P4_V0.html) &nbsp;  [P5: Generate Faces ](https://olgabelitskaya.github.io/DL_ND_P5_V0.html)
+
+## &#x1F4D1; &nbsp; Interview and Technical Interview Practice.
+#### Udacity_Interview_Practice.ipynb &nbsp; [&#x1F310;](https://gist.github.com/OlgaBelitskaya/1ddb287592832cf581fc122d6bc2732e)
+#### Udacity_Technical_Interview_Practice_Lessons.ipynb &nbsp; [&#x1F310;](https://gist.github.com/OlgaBelitskaya/a6cb19e1f3a041e6f6a56ccf58b4701c)
+#### Udacity_Technical_Interview_Practice_Project.ipynb &nbsp; [&#x1F310;](https://gist.github.com/OlgaBelitskaya/849e983dd6e90943d5760be4c4986501)
+
+# &#x1F3D9; &nbsp;  Useful Web Links for Online Training
+
+## &#x1F4D1; &nbsp; Blocks [&#x1F310;](http://bl.ocks.org)
+
+#### My Examples of Blocks [&#x1F310;](http://bl.ocks.org/OlgaBelitskaya)
 
 - [Visualization. Map I](http://bl.ocks.org/OlgaBelitskaya/bcc84d52267612a32b2a5bf79ae11b94)
 - [Visualization. Map II](http://bl.ocks.org/OlgaBelitskaya/de4685ce8630c2ea00229750097e1fb4)
 - [Visualization. Interpolation](http://bl.ocks.org/OlgaBelitskaya/aec204a67eec24cec8568258395ce62b)
 - [Visualization. Multiline Chart](https://bl.ocks.org/OlgaBelitskaya/2ec3804fd98d4cbd86e28eed38cddbdb)
 
-#### [Block's Example](https://olgabelitskaya.github.io/multiline.html)
+#### HTML. Multiline Chart [&#x1F310;](https://olgabelitskaya.github.io/multiline.html)
 
-## &#x1F4D1; &nbsp; Cocal.com Projects 
-https://cocalc.com/projects
+## &#x1F4D1; &nbsp; GitHub Gist [&#x1F310;](https://gist.github.com)
 
-## &#x1F4D1; &nbsp; Microsoft AML Studio
-https://studio.azureml.net/Home/
+#### My Examples of GitHub Gist [&#x1F310;](https://gist.github.com/OlgaBelitskaya)
+
+## &#x1F4D1; &nbsp; COCALC [&#x1F310;](https://cocalc.com)
+
+## &#x1F4D1; &nbsp; Google Colaboratory [&#x1F310;](https://colab.research.google.com) 
+
+## &#x1F4D1; &nbsp; Microsoft AML Studio [&#x1F310;](https://studio.azureml.net)
 
 
 ```python
