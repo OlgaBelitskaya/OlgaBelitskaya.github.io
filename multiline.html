@@ -59,20 +59,17 @@ d3.tsv("data2.tsv",type,function(error,data){
       .attr("fill","#000")
       .style("font","10px sans-serif")
       .text("Prices, ₽");
-  var metal=g.selectAll(".metal")
-      .data(metals)
-      .enter().append("g")
-      .attr("class","metal");
-  metal.append("path")
-      .attr("class" "line")
-      .attr("d",function(d){return line(d.values);})
-      .style("stroke",function(d){return z(d.id);});
+  var metal=g.selectAll(".metal").data(metals)
+             .enter().append("g")
+             .attr("class","metal");
+  metal.append("path").attr("class","line")
+       .attr("d",function(d){return line(d.values);})
+       .style("stroke",function(d){return z(d.id);});
   metal.append("text")
-      .datum(function(d){return {id:d.id, value:d.values[d.values.length-1]};})
+      .datum(function(d){return {id:d.id,value:d.values[d.values.length-1]};})
       .attr("transform",function(d){return "translate("+x(d.value.date)+","+y(d.value.price)+")";})
-      .attr("x",3)
-      .attr("dy","0.75em")
-      .style("font","10px sans-serif")
+      .attr("x",3).attr("dy","0.75em")
+      .style("font","15px sans-serif")
       .style("stroke",function(d){return z(d.id);})
       .text(function(d){return d.id;});});
 function type(d,_,columns){
