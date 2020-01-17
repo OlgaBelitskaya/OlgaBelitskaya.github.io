@@ -5,51 +5,48 @@
     <meta name="viewport" content="width=device-width">
     <title>LinearAlgebraWork6</title>
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
-    <script>$(function () {
+    <script>$(function (){
     sagecell.makeSagecell({inputLocation:'div.linked_sage',linked:true,evalButtonText:'Run Linked Sage Cells'});
     sagecell.makeSagecell({inputLocation:'div.linked_python',linked:true,evalButtonText:'Run Linked Python Cells'});
     sagecell.makeSagecell({inputLocation:'div.linked_r',linked:true,evalButtonText:'Run Linked R Cells'});
     sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run'});
-    sagecell.makeSagecell({inputLocation:'div.sage_html',evalButtonText:'Run HTML'});
-    });
+    sagecell.makeSagecell({inputLocation:'div.sage_html',evalButtonText:'Run HTML'});});
     </script>
+      
   </head>
   <style>
   @import url('https://fonts.googleapis.com/css?family=Orbitron');
   h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
   p, a {color:darkblue; font-size:110%; text-shadow:5px 5px 5px #aaa;}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:26em;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:68em;}
+  body {margin:5px 5px 5px 25px;}
   </style>  
   <body>
     <h1>&#x1F4D1; &nbsp; Линейная алгебра. Практическая работа №6</h1>
     <h1>Комплексные числа</h1>
     <h2>1. Действия с комплексными числами</h2>
-
 Сложение комплексных чисел
 <p>$(a + bi) + (c + di) = (a + c) + (b + d)i$</p>
-
 Вычитание комплексных чисел
 <p>$(a + bi) - (c + di) = (a - c) + (b - d)i$</p>
-
 Умножение комплексных чисел
 <p>$(a + bi) * (c + di) = (ac - bd) + (ad + bc)i$</p>
-
 Деление комплексных чисел
-<p>$\large{\frac{a + bi}{c + di} = \frac{(a + bi) * (c - di)}{(c + di) * (c - di)} = \frac{ac+ bd}{c^2 + d^2} + \frac{bc - ad}{c^2 + d^2}i}$</p>      
-    <p></p>
+<p>$\large{\frac{a + bi}{c + di} = \frac{(a + bi) * (c - di)}{(c + di) * (c - di)} = 
+    \frac{ac+ bd}{c^2 + d^2} + \frac{bc - ad}{c^2 + d^2}i}$</p>      
     <p>Активируйте этот код перед использованием любых ячеек Linked Sage Cells</p>
 <div class="linked_sage"><script type="text/x-sage">
-var('a b c d'); i=ComplexField(20).0; Z1=a+b*i; Z2=c+d*i
+var('a b c d'); 
+i=ComplexField(20).0; Z1=a+b*i; Z2=c+d*i
 z11,z12,z13,z14,z15=4+3*i,1+2*i,1+3*i,-10+1*i,-7+6*i
-z21,z22,z23,z24,z25=CDF(4,3),CDF(1,2),CDF(1,3),CDF(-10,1),CDF(-7,6)
+z21,z22,z23,z24,z25=\
+CDF(4,3),CDF(1,2),CDF(1,3),CDF(-10,1),CDF(-7,6)
 z1=-(2-3**0.5)**0.5+i*(2+3**0.5)**0.5; z2=3**0.5+i; z3=-1+i
 Z1,Z2,z1,z2,z3
-</script></div>
-    <p></p>      
+</script></div>     
 <div class="linked_sage"><script type="text/x-sage">
 Z1+Z2,Z1-Z2,(Z1*Z2).expand(),(Z1/Z2).expand()
 </script></div>
-    <p></p>
 <div class="linked_sage"><script type="text/x-sage">
 pretty_print([r'z1+z2',r'z2-z3',r'z1*z4',r'z2/z5'])
 pretty_print([z11+z12,z12-z13,z11*z14,z12/z15])
@@ -60,22 +57,27 @@ for k in [0..8]:
                rgbcolor=hue(abs(Z[k])/7),legend_color=hue(abs(Z[k])/7),legend_label=Z[k])
 g.set_legend_options(bbox_to_anchor=(1.3,0.1,0.1,0.7),font_size=15); g.show(gridlines=True,figsize=(9,5))
 </script></div>
-    <p></p>
     <p>Активируйте этот код перед использованием любых ячеек Linked Python Cells</p>
 <div class="linked_python"><script type="text/x-sage">
-import numpy,sympy,mpmath; sympy.init_printing(use_unicode=True)
-NZ=numpy.array([4+3j,1+2j,1+3j,-10+1j,-7+6j])
-nz=numpy.array([-(2-3**0.5)**0.5+(2+3**0.5)**0.5*1j,3**0.5+1j,-1+1j])
-SZ=[complex(4+3*sympy.I),complex(1+2*sympy.I),complex(1+3*sympy.I),complex(-10+1*sympy.I),complex(-7+6*sympy.I)]
-sz=[complex(-sympy.sqrt(2-sympy.sqrt(3))+sympy.sqrt(2+sympy.sqrt(3))*sympy.I),
-    complex(sympy.sqrt(3)+1*sympy.I),complex(-1+1*sympy.I)]
-</script></div>
-    <p></p>
+import numpy,sympy,mpmath
+NZ=numpy.array([4+3j,1+2j,1+3j,
+                -10+1j,-7+6j])
+nz=numpy.array([-(2-3**0.5)**0.5+(2+3**0.5)**0.5*1j,
+                3**0.5+1j,-1+1j])
+SZ=[complex(4+3*sympy.I),complex(1+2*sympy.I),
+    complex(1+3*sympy.I),complex(-10+1*sympy.I),
+    complex(-7+6*sympy.I)]
+sz=[complex(-sympy.sqrt(2-sympy.sqrt(3))+\
+            sympy.sqrt(2+sympy.sqrt(3))*sympy.I),
+    complex(sympy.sqrt(3)+1*sympy.I),
+    complex(-1+1*sympy.I)]
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
-print(NZ[0]+NZ[1],NZ[1]-NZ[2],NZ[0]*NZ[3],NZ[1]/NZ[4])
-SZ[0]+SZ[1],SZ[1]-SZ[2],SZ[0]*SZ[3],SZ[1]/SZ[4]
+print(NZ[0]+NZ[1],NZ[1]-NZ[2],
+      NZ[0]*NZ[3],NZ[1]/NZ[4])
+[SZ[0]+SZ[1],SZ[1]-SZ[2],
+ SZ[0]*SZ[3],SZ[1]/SZ[4]]
 </script></div>
-    <p></p>
     <p>Активируйте этот код перед использованием любых ячеек Linked R Cells</p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
@@ -90,10 +92,8 @@ list(Z,z)
 <div class="linked_r"><script type="text/x-sage">
 %%r
 c(Z[1]+Z[2],Z[2]-Z[3],Z[1]*Z[4],Z[2]/Z[5])
-</script></div>      
-    <p></p>   
+</script></div>         
     <h2>2. Тригонометрическая форма</h2>
-    <p></p>
 Возведение комплексного числа в степень в тригонометрической форме: 
 <p>$z^k = [r * (\cos \varphi + i \sin \varphi)]^n = r^n * [\cos(n\varphi) + i \sin(n\varphi)]$</p>
 Умножение комплексных чисел в тригонометрической форме:   
