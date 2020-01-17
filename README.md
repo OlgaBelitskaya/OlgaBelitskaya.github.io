@@ -120,11 +120,8 @@ Colaboratory Notebooks &nbsp; [decor_classification.ipynb &#x1F4D6; ](https://dr
 #### My Examples of Blocks [&#x1F310;](http://bl.ocks.org/OlgaBelitskaya)
 
 - [Visualization. Map I](http://bl.ocks.org/OlgaBelitskaya/bcc84d52267612a32b2a5bf79ae11b94)
-- [Visualization. Map II](http://bl.ocks.org/OlgaBelitskaya/de4685ce8630c2ea00229750097e1fb4)
 - [Visualization. Interpolation](http://bl.ocks.org/OlgaBelitskaya/aec204a67eec24cec8568258395ce62b)
 - [Visualization. Multiline Chart](https://bl.ocks.org/OlgaBelitskaya/2ec3804fd98d4cbd86e28eed38cddbdb)
-
-#### HTML. Multiline Chart [&#x1F310;](https://olgabelitskaya.github.io/multiline.html)
 
 ## &#x1F4D1; &nbsp; GitHub Gist [&#x1F310;](https://gist.github.com)
 
@@ -133,6 +130,8 @@ Colaboratory Notebooks &nbsp; [decor_classification.ipynb &#x1F4D6; ](https://dr
 ## &#x1F4D1; &nbsp; COCALC [&#x1F310;](https://cocalc.com)
 
 ## &#x1F4D1; &nbsp; Google Colaboratory [&#x1F310;](https://colab.research.google.com) 
+
+## &#x1F4D1; &nbsp; Wolfram Cloud [&#x1F310;](https://www.wolframcloud.com)
 
 ## &#x1F4D1; &nbsp; Microsoft AML Studio [&#x1F310;](https://studio.azureml.net)
 
