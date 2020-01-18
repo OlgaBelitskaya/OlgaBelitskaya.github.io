@@ -27,7 +27,7 @@
 Общий вид
 <p>$F(x,y,z) = 0$</p>
 Параметрические 
-<br/><br/>
+<br/>
 $(t_1, t_2)$ - внутренние координаты поверхности
 <p>$x = X(t_1, t_2); y = Y(t_1, t_2); z = Z(t_1, t_2)$</p>
 Как функция двух переменных
@@ -168,12 +168,12 @@ colors=['#ff36ff','#ff3636','#3636ff']
 f2=[x^2/1^2+y^2/2^2-z^2/3^2+1,
     x^2/3^2+y^2/4^2-z^2/5^2-1,
     x^2/2^2+y^2/3^2-z^2/4^2]
-s='<left><font color="%s">$%s = 0$</font></left>'
-[pretty_print(html(s%(colors[i],latex(f2[i])))) 
+st='<left><font color="%s">$%s = 0$</font></left>'
+[pretty_print(html(st%(colors[i],latex(f2[i])))) 
  for i in [0..2]]
 sum([implicit_plot3d(f2[i],s,s,s,opacity=ops[i],mesh=True,
                      color=colors[i],plot_points=20) 
-     for i in [0..2]]).show()
+     for i in [0..2]]).show(frame=False)
 </script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 x,y,z,p,q,r=sympy.symbols('x,y,z,p,q,r')
@@ -238,35 +238,30 @@ dZ3=data.frame(Z3[1]); rownames(dZ3) <- X3; colnames(dZ3) <- Y3; dZ3
 <p>$\frac{x^2}{p^2} - \frac{y^2}{q^2} = 1$</p>
 Параболический цилиндр
 <p>$y^2 = 2 * p * x$</p>
-    <p></p>
 <div class="linked_sage"><script type="text/x-sage">
 var('x,y,z,p,q')
 eq3=[x^2/p^2+y^2/q^2==2*z,x^2/p^2-y^2/q^2==2*z,x^2/p^2+y^2/q^2-1==0,x^2/p^2-y^2/q^2-1==0,y^2==2*p*x]
 sol3=[solve([eq3[0],p==1,q==2],p,q,z),solve([eq3[1],p==2,q==3],p,q,z),solve([eq3[2],p==3,q==4],p,q,y,z),
       solve([eq3[3],p==2,q==3],p,q,y,z),solve([eq3[4],p==2],p,y,z)]
 for s in sol3: pretty_print(s)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_sage"><script type="text/x-sage">
 var('x,y,z'); f31=[x^2/1^2+y^2/2^2-2*z,x^2/2^2-y^2/3^2-2*z]; s=(-8,8); colors=['#ff3636','#3636ff']
 [pretty_print(html('<left><font color="%s">$%s = 0$</font></left>'%(colors[i],latex(f31[i])))) for i in [0,1]]
 sum([implicit_plot3d(f31[i],s,s,s,opacity=0.7,mesh=True,plot_points=20,color=colors[i]) for i in [0,1]]).show()
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_sage"><script type="text/x-sage">
 var('x,y,z'); f32=[x^2/3^3+y^2/4^2-1,x^2/2^3-y^2/3^2-1,y^2-2*2*x]; s=(-9,9); colors=['#36ff36','#36ffff','#ff36ff']
 [pretty_print(html('<left><font color="%s">$%s = 0$</font></left>'%(colors[i],latex(f32[i])))) for i in [0..2]]
 sum([implicit_plot3d(f32[i],s,s,s,opacity=0.7,mesh=True,plot_points=20,color=colors[i]) for i in [0..2]]).show()
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 x,y,z,p,q=sympy.symbols('x,y,z,p,q')
 eq3=[x^2/p^2+y^2/q^2-2*z,x^2/p^2-y^2/q^2-2*z,x^2/p^2+y^2/q^2-1,x^2/p^2-y^2/q^2-1,y^2-2*p*x]
 sol3=[sympy.solve([eq3[0],p-1,q-2],p,q,z),sympy.solve([eq3[1],p-2,q-3],p,q,z),sympy.solve([eq3[2],p-3,q-4],p,q,y,z),
       sympy.solve([eq3[3],p-2,q-3],p,q,y,z),sympy.solve([eq3[4],p-2],p,y,z)]
 for s in sol3: display(s); print('\n')
-</script></div>
-    <p></p> 
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 X=numpy.linspace(-8,8,128); X,Y=numpy.meshgrid(X,X) 
 def f1(x,y): return 1/2*x**2+1/8*y**2
@@ -316,8 +311,7 @@ cylinder2 <- function(p,q,X,Z) {
     }
 }
 'run the next cell'
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
 cylinder3 <- function(p,Y,Z) {
@@ -329,8 +323,7 @@ cylinder3 <- function(p,Y,Z) {
     }
 }
 cylinder1(3,4,X3,Z3); cylinder2(2,3,X4,Z4); cylinder3(2,Y5,Z5); 'files are created'
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 files=['cylinder1.csv','cylinder2.csv','cylinder3.csv']; colors=['#36ff36','#36ffff','#ff36ff']
 labels=['$x^2/3^2+y^2/4^2=1$','$x^2/2^2-y^2/3^2=1$','$y^2=2*2*x$']
@@ -340,7 +333,6 @@ fig=pylab.figure(figsize=(7,7)); ax=fig.add_subplot(111,projection='3d')
 fake2Dlines=[Line2D([0],[0],linestyle="none",c=c,marker='1') for c in colors]
 ax.legend(fake2Dlines,labels,loc=9); pylab.show()
 </script></div>
-    <p></p>
     <h2>4. Плоскости</h2>
 Пара мнимых пересекающихся плоскостей
 <p>$\frac{x^2}{p^2} + \frac{y^2}{q^2} = 0$</p>
@@ -352,7 +344,6 @@ ax.legend(fake2Dlines,labels,loc=9); pylab.show()
 <p>$y^2 = -p^2$</p>
 Пара совпадающих плоскостей
 <p>$y^2 = 0$</p>
-    <p></p>
 <div class="linked_sage"><script type="text/x-sage">
 var('x,y,z,p,q'); eq4=[[x^2/p^2-y^2/q^2==0,p==1,q==2],[y^2==p^2,p==1],y^2==0]
 for e in eq4[:2]: pretty_print(solve(e,p,q,y))
@@ -360,8 +351,7 @@ s=(-3,3); f4=[x^2/1^2-y^2/2^2,y^2-1^2]; colors=['#ff3636','#ff36ff']
 [pretty_print(html('<left><font color="%s">$%s = 0$</font></left>'%(colors[i],latex(f4[i])))) for i in [0,1]]
 (implicit_plot3d(f4[0],(x,-3,3),(y,-3,3),(z,-3,3),color=(abs(sin(x*y*z)),colormaps.bwr))+\
 implicit_plot3d(f4[1],s,s,s,color=colors[1],opacity=0.7)).show()
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 x,y,z,p,q = sympy.symbols('x,y,z,p,q')
 eq4=[[x^2/p^2-y^2/q^2,p-1,q-2],[y^2-p^2,p-1],y^2]
@@ -377,8 +367,7 @@ fig=pylab.figure(figsize=(7,7)); ax=fig.add_subplot(111,projection='3d')
 [ax.plot_wireframe(X,y,Z,color=colors[1],alpha=0.3) for y in Y[2:]]
 fake2Dlines=[Line2D([0],[0],linestyle="none",c=c,marker='o') for c in colors]
 ax.legend(fake2Dlines,labels,loc=9); pylab.show()
-</script></div>
-    <p></p>  
+</script></div><br/>  
 <div class="linked_r"><script type="text/x-sage">
 %%r
 X <- Z <- seq(from=-3,to=3,by=0.1)
