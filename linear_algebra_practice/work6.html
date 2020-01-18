@@ -172,55 +172,66 @@ g.set_legend_options(bbox_to_anchor=(1.1,0.1,0.1,0.7))
 g.show(gridlines=True,figsize=(9,5))
 </script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
-print(nz[0]**10*nz[1]**6,nr[0]**10*nr[1]**6*(numpy.cos(10*nt[0]+6*nt[1])+numpy.sin(10*nt[0]+6*nt[1])*1j))
-print(nz[1]**15/nz[2]**27,nr[1]**15/nr[2]**27*(numpy.cos(15*nt[1]-27*nt[2])+numpy.sin(15*nt[1]-27*nt[2])*1j))
+print(nz[0]**10*nz[1]**6,
+      nr[0]**10*nr[1]**6*(numpy.cos(10*nt[0]+6*nt[1])+\
+                          numpy.sin(10*nt[0]+6*nt[1])*1j))
+print(nz[1]**15/nz[2]**27,
+      nr[1]**15/nr[2]**27*(numpy.cos(15*nt[1]-27*nt[2])+\
+                           numpy.sin(15*nt[1]-27*nt[2])*1j))
 print(nz[0]**(1/4))
-[nr[0]**(1/4)*(numpy.cos((nt[0]+2*numpy.pi*k)/4)+numpy.sin((nt[0]+2*numpy.pi*k)/4)*1j) for k in range(4)]
-</script></div>
-    <p></p>
+[nr[0]**(1/4)*(numpy.cos((nt[0]+2*numpy.pi*k)/4)+\
+               numpy.sin((nt[0]+2*numpy.pi*k)/4)*1j) 
+ for k in range(4)]
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
-print([sz[0]**10*sz[1]**6,complex(mpmath.fabs(sz[0])**10*mpmath.fabs(sz[1])**6*(mpmath.cos(10*mpmath.arg(sz[0])+6*mpmath.arg(sz[1]))+\
-                                  mpmath.sin(10*mpmath.arg(sz[0])+6*mpmath.arg(sz[1]))*sympy.I))])
-print([sz[1]**15/sz[2]**27,complex(mpmath.fabs(sz[1])**15/mpmath.fabs(sz[2])**27*(mpmath.cos(15*mpmath.arg(sz[1])-27*mpmath.arg(sz[2]))+\
-                                   mpmath.sin(15*mpmath.arg(sz[1])-27*mpmath.arg(sz[2]))*sympy.I))])
+print([sz[0]**10*sz[1]**6,
+complex(mpmath.fabs(sz[0])**10*mpmath.fabs(sz[1])**6*\
+(mpmath.cos(10*mpmath.arg(sz[0])+6*mpmath.arg(sz[1]))+\
+mpmath.sin(10*mpmath.arg(sz[0])+6*mpmath.arg(sz[1]))*sympy.I))])
+print([sz[1]**15/sz[2]**27,
+complex(mpmath.fabs(sz[1])**15/mpmath.fabs(sz[2])**27*\
+(mpmath.cos(15*mpmath.arg(sz[1])-27*mpmath.arg(sz[2]))+\
+mpmath.sin(15*mpmath.arg(sz[1])-27*mpmath.arg(sz[2]))*sympy.I))])
 print(sz[0]**(1/4))
-[complex(mpmath.fabs(sz[0])**(1/4)*(mpmath.cos((mpmath.arg(sz[0])+2*mpmath.pi*k)/4)+\
- mpmath.sin((mpmath.arg(sz[0])+2*mpmath.pi*k)/4)*sympy.I)) for k in range(4)]
-</script></div>
-    <p></p>
+[complex(mpmath.fabs(sz[0])**(1/4)*\
+ (mpmath.cos((mpmath.arg(sz[0])+2*mpmath.pi*k)/4)+\
+ mpmath.sin((mpmath.arg(sz[0])+2*mpmath.pi*k)/4)*sympy.I)) 
+ for k in range(4)]
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
 print(c((z[1]^10)*(z[2]^6),(z[2]^15)/(z[3]^27),z[1]^(1/4)))
 cat(replicate(20,"=-=")); cat("\n")
-print(Mod(z[1])^10*Mod(z[2])^6*(cos(10*Arg(z[1])+6*Arg(z[2]))+sin(10*Arg(z[1])+6*Arg(z[2]))*sqrt(as.complex(-1))))
-print(Mod(z[2])^15/Mod(z[3])^27*(cos(15*Arg(z[2])-27*Arg(z[3]))+sin(15*Arg(z[2])-27*Arg(z[3]))*sqrt(as.complex(-1))))
-complex_k_root_n <- function(z,k,n) {Mod(z)^(1/k)*(cos((Arg(z)+2*pi*(n-1))/4)+sin((Arg(z)+2*pi*(n-1))/4)*sqrt(as.complex(-1)))}
-c(complex_k_root_n(z[1],4,1),complex_k_root_n(z[1],4,2),complex_k_root_n(z[1],4,3),complex_k_root_n(z[1],4,4))
+print(Mod(z[1])^10*Mod(z[2])^6*(cos(10*Arg(z[1])+6*Arg(z[2]))+\
+      sin(10*Arg(z[1])+6*Arg(z[2]))*sqrt(as.complex(-1))))
+print(Mod(z[2])^15/Mod(z[3])^27*(cos(15*Arg(z[2])-27*Arg(z[3]))+\
+      sin(15*Arg(z[2])-27*Arg(z[3]))*sqrt(as.complex(-1))))
+complex_k_root_n<-function(z,k,n){
+    Mod(z)^(1/k)*(cos((Arg(z)+2*pi*(n-1))/4)+\
+                  sin((Arg(z)+2*pi*(n-1))/4)*sqrt(as.complex(-1)))}
+c(complex_k_root_n(z[1],4,1),
+  complex_k_root_n(z[1],4,2),
+  complex_k_root_n(z[1],4,3),
+  complex_k_root_n(z[1],4,4))
 </script></div>
-    <p></p> 
     <h2>3. Задание</h2>
-    <p></p>
-Задать пару произвольных комплексных чисел, выполнить сложение, вычитание, деление, возведение в степень и извлечение корня, 
-<br/><br/>
-используя SageMath, Numpy, SymPy или R.     
-    <p></p>
+Задать пару произвольных комплексных чисел,<br/> 
+выполнить сложение, вычитание, деление, возведение в степень и извлечение корня,<br/>
+используя SageMath, Numpy, SymPy или R.<br/>  
 <div class="linked_sage"><script type="text/x-sage">
 
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
+import numpy,sympy
 
-</script></div>
-    <p></p>  
+</script></div><br/>  
 <div class="linked_r"><script type="text/x-sage">
 %%r
 
-</script></div>
-    <p></p> 
+</script></div> 
     <h2>4. Отдельная ячейка для дополнительных экспериментов</h2>      
 <div class="sage"><script type="text/x-sage">
 
 </script></div>
-    <p></p>
   </body>
 </html>
