@@ -56,7 +56,9 @@ SA=matrix(3,var('a1 a2 a3 a4 a5 a6 a7 a8 a9'))
 Sb=vector(var('b1 b2 b3'))
 </script></div><br/>      
 <div class="linked_sage"><script type="text/x-sage">
-solve([eq1,eq2,eq3],x,y,z), solve([eq4,eq5,eq6,eq7],x1,x2,x3,x4), A.solve_right(b)
+solve([eq1,eq2,eq3],x,y,z),
+solve([eq4,eq5,eq6,eq7],x1,x2,x3,x4),
+A.solve_right(b)
 </script></div>
     <p>Активируйте этот код перед использованием любых ячеек Linked Python Cells</p>
 <div class="linked_python"><script type="text/x-sage">
@@ -79,50 +81,47 @@ Sb2=sympy.Matrix([35,-8,-11,10])
 <div class="linked_python"><script type="text/x-sage">
 print(numpy.linalg.solve(NA,Nb))
 sympy.solve_linear_system(system2,a,b,c,d)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
-SA1.gauss_jordan_solve(Sb1),sympy.solve_linear_system(system1,x,y,z)
-</script></div>
-    <p></p>
+[SA1.gauss_jordan_solve(Sb1),
+sympy.solve_linear_system(system1,x,y,z)]
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 %timeit sympy.solve_linear_system(system3,a,b,c,d,e,f)
 </script></div>
-    <p></p>
     <p>Активируйте этот код перед использованием любых ячеек Linked R Cells</p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-A <- matrix(data=c(8,-5,-2,-2,-2,4,-4,1,-2,1,4,4,4,1,3,10),nrow=4,ncol=4,byrow=TRUE)    
-b <- matrix(data=c(35,-8,-11,10),nrow=4,ncol=1,byrow=FALSE)
+A<-matrix(data=c(8,-5,-2,-2,-2,4,-4,1,
+                 -2,1,4,4,4,1,3,10),
+                 nrow=4,ncol=4,byrow=TRUE)    
+b<-matrix(data=c(35,-8,-11,10),
+          nrow=4,ncol=1,byrow=FALSE)
 library(Matrix)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
 round(solve(A,b))
-</script></div>      
-    <p></p>   
+</script></div>  
 Библиотека matlib здесь не установлена. Можно локально установить и запустить с R.<br/><br/>
-library(matlib)<br/><br/>
-A <- matrix(c(8,-2,-2,4,-5,4,1,1,-2,-4,4,3,-2,1,4,10),4,4)<br/><br/>    
-b <- c(35,-8,-11,10)<br/><br/>
-showEqn(A,b)<br/><br/>
-Solve(A,b)<br/><br/>    
+library(matlib)<br/>
+<pre><code class="r">
+A<-matrix(c(8,-2,-2,4,-5,4,1,1,-2,-4,4,3,-2,1,4,10),4,4)    
+b<-c(35,-8,-11,10)
+showEqn(A,b)
+Solve(A,b)
+</code></pre>
     <h2>2. Правило Крамера</h2>
-Алгоритм решения:
-<br/><br/>
-1) вычисляем определитель основной матрицы системы (должен быть ненулевым);
-<br/><br/>
-2) вычисляем определители матриц, полученных заменой каждого столбца основной матрицы столбцом свободных членов;
-<br/><br/>
-3) вычисляем значения переменных как отношение определителя с замененным соответствующим столбцом к определителю основной матрицы.  
-    <p></p>
+Алгоритм решения:<br/><br/>
+1) вычисляем определитель основной матрицы системы (должен быть ненулевым);<br/><br/>
+2) вычисляем определители матриц, полученных заменой каждого столбца основной матрицы столбцом свободных членов;<br/><br/>
+3) вычисляем значения переменных как отношение определителя с замененным<br/><br/>
+соответствующим столбцом к определителю основной матрицы.<br/><br/>
 <div class="linked_sage"><script type="text/x-sage">
 X1=copy(SA); X2=copy(SA); X3=copy(SA); X1[:,0]=Sb; X2[:,1]=Sb; X3[:,2]=Sb
 x1=X1.det()/SA.det(); x2=X2.det()/SA.det(); x3=X3.det()/SA.det()
 for el in [[X1,X2,X3],x1,x2,x3]: pretty_print(el)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_sage"><script type="text/x-sage">
 X1=copy(A); X2=copy(A); X3=copy(A); X4=copy(A); X1[:,0]=b; X2[:,1]=b; X3[:,2]=b; X4[:,3]=b
 x1=X1.det()/A.det(); x2=X2.det()/A.det(); x3=X3.det()/A.det(); x4=X4.det()/A.det()
@@ -179,39 +178,43 @@ k-ый столбец станет столбцом единичной матр�
 5) продолжим процесс до того приведения матрицы к верхнему треугольному виду.
 <br/><br/>
 При вычислениях можно избежать дробей, применив элементарные преобразования. 
-    <p></p>
+<br/>
 <div class="linked_sage"><script type="text/x-sage">
 Ab=A.augment(b); Ab.echelon_form(),Ab.rref()
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 SAb=sympy.Matrix([[8,-5,-2,-2,35],[-2,4,-4,1,-8],[-2,1,4,4,-11],[4,1,3,10,10]]); sympy.pprint(SAb)
 # Умножим 2-ую и 3-ю строки на 4, 4-ую - на -2 и сложим с 1-ой:
 SAb[1,:]=4*SAb.row(1)+SAb.row(0); SAb[2,:]=4*SAb.row(2)+SAb.row(0); SAb[3,:]=-2*SAb.row(3)+SAb.row(0); sympy.pprint(SAb)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
-# Умножим 3-ю строчку на 11 и сложим со 2-й; умножим 2-ую на 7, 4-ую - на 11 и сложим
+# Умножим 3-ю строчку на 11 и сложим со 2-й; 
+# умножим 2-ую на 7, 4-ую - на 11 и сложим
 # Поделим 3-ю строчку на 4, 4-ую - на 2
-SAb[2,:]=(11*SAb.row(2)+SAb.row(1))/4; SAb[3,:]=(11*SAb.row(3)+7*SAb.row(1))/2; SAb
-</script></div>
-    <p></p>
+SAb[2,:]=(11*SAb.row(2)+SAb.row(1))/4
+SAb[3,:]=(11*SAb.row(3)+7*SAb.row(1))/2
+SAb
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 # Умножим 3-ю строчку на 107, 4-ую - на 34 и сложим
 # Поделим 4-ю на 297
 SAb[3,:]=(34*SAb.row(3)+107*SAb.row(2))/297; SAb
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
-# Умножим 4-ю строчку на -39 и сложим с 3-ей, 4-ю - на -2 и сложим со 2-ой, 4-ю - на 2 и сложим со 1-ой
+# Умножим 4-ю строчку на -39 и сложим с 3-ей, 
+# 4-ю - на -2 и сложим со 2-ой, 4-ю - на 2 и сложим со 1-ой
 # Поделим 3-ю на 34
-SAb[0,:]=(SAb.row(0)+2*SAb.row(3)); SAb[1,:]=(SAb.row(1)-2*SAb.row(3)); SAb[2,:]=(SAb.row(2)-39*SAb.row(3))/34; SAb
-</script></div>
-    <p></p>
+SAb[0,:]=(SAb.row(0)+2*SAb.row(3))
+SAb[1,:]=(SAb.row(1)-2*SAb.row(3))
+SAb[2,:]=(SAb.row(2)-39*SAb.row(3))/34
+SAb
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 # Умножим 3-ю строчку на 2 и сложим со 1-ой, 3-ю - на 18 и сложим со 2-ой
 # Поделим 2-ю на 11
-SAb[0,:]=SAb.row(0)+2*SAb.row(2); SAb[1,:]=(SAb.row(1)+18*SAb.row(2))/11; SAb
+SAb[0,:]=SAb.row(0)+2*SAb.row(2)
+SAb[1,:]=(SAb.row(1)+18*SAb.row(2))/11
+SAb
 </script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 # Умножим 2-ю строчку на 5 и сложим со 1-ой
