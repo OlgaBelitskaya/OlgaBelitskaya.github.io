@@ -46,7 +46,7 @@ Z1,Z2,z1,z2,z3
 </script></div>     
 <div class="linked_sage"><script type="text/x-sage">
 Z1+Z2,Z1-Z2,(Z1*Z2).expand(),(Z1/Z2).expand()
-</script></div>
+</script></div><br/>
 <div class="linked_sage"><script type="text/x-sage">
 pretty_print([r'z1+z2',r'z2-z3',r'z1*z4',r'z2/z5'])
 pretty_print([z11+z12,z12-z13,z11*z14,z12/z15])
@@ -118,8 +118,8 @@ c(Z[1]+Z[2],Z[2]-Z[3],Z[1]*Z[4],Z[2]/Z[5])
 <p>$\sqrt[n] {z} = \sqrt[n] {r * (\cos \varphi + i \sin \varphi)} = 
     \sqrt[n]{r} * \bigg(\cos \frac{\varphi + 2\pi m}{n} + i \sin \frac{\varphi + 2\pi m}{n} \bigg), 
     \ m = 0, 1, ..., n-1$</p>
-<p style="color:slategray;">$Z_1 = -\sqrt{2 - \sqrt{3}} + \sqrt{2 + \sqrt{3}} i; 
-    \ Z_2 = \sqrt{3} + i; \ Z_3 = -1 + i$</p>
+<p style="color:slategray;">$\mathscr{Z_1 = -\sqrt{2 - \sqrt{3}} + \sqrt{2 + \sqrt{3}} i; 
+    \ Z_2 = \sqrt{3} + i; \ Z_3 = -1 + i}$</p>
 <div class="linked_sage"><script type="text/x-sage">
 print([z1,abs(z1),arg(z1)])
 # [polar form, exponential form]
@@ -132,8 +132,7 @@ nt=numpy.arctan2(numpy.imag(nz),numpy.real(nz))
 # [polar form, exponential form]
 [nr[0]*(numpy.cos(nt[0])+numpy.sin(nt[0])*1j),
  nr[0]*numpy.exp(1j*(nt[0]))]
-</script></div>
-    <p></p>  
+</script></div><br/>  
 <div class="linked_python"><script type="text/x-sage">
 print(mpmath.polar(sz[0]))
 # [polar form, exponential form]
@@ -143,28 +142,35 @@ print(mpmath.polar(sz[0]))
 </script></div><br/>  
 <div class="linked_r"><script type="text/x-sage">
 %%r
-cart2pol <- function(z) {c(Mod(z), Arg(z))}
+cart2pol<-function(z) {c(Mod(z), Arg(z))}
 print(cart2pol(z[1]))
 # polar form, exponential form
 c(Mod(z[1])*(cos(Arg(z[1]))+sin(Arg(z[1]))*sqrt(as.complex(-1))),
   Mod(z[1])*exp(Arg(z[1])*sqrt(as.complex(-1))))
 </script></div>
-<p>$Z_1^{10} * Z_2^6, \ Z_2^{15} \ / \ Z_3^{27}, \sqrt[4] {Z_1}$</p>
+<p>$\mathbb{Z_1^{10} * Z_2^6, \ Z_2^{15} \ / \ Z_3^{27}, \sqrt[4] {Z_1}}$</p>
 <div class="linked_sage"><script type="text/x-sage">
-print(z1**10*z2**6,abs(z1)**10*abs(z2)**6*(cos(10*arg(z1)+6*arg(z2))+i*sin(10*arg(z1)+6*arg(z2))))
-print(z2**15/z3**27,abs(z2)**15/abs(z3)**27*(cos(15*arg(z2)-27*arg(z3))+i*sin(15*arg(z2)-27*arg(z3))))
-r=[abs(z1)**(1/4)*(cos((arg(z1)+2*pi.n()*j)/4)+i*sin((arg(z1)+2*pi.n()*j)/4)) for j in[0..3]]; 
+print(z1**10*z2**6,
+      abs(z1)**10*abs(z2)**6*(cos(10*arg(z1)+6*arg(z2))+\
+                              i*sin(10*arg(z1)+6*arg(z2))))
+print(z2**15/z3**27,
+      abs(z2)**15/abs(z3)**27*(cos(15*arg(z2)-27*arg(z3))+\
+                               i*sin(15*arg(z2)-27*arg(z3))))
+r=[abs(z1)**(1/4)*(cos((arg(z1)+2*pi.n()*j)/4)+\
+                   i*sin((arg(z1)+2*pi.n()*j)/4)) 
+   for j in[0..3]] 
 print(z1**(1/4)); print(r)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_sage"><script type="text/x-sage">
-g = Graphics()
+g=Graphics()
 for j in [0..3]:
-    g+=arrow2d((0,0),(r[j].real(),r[j].imag()),width=3,arrowsize=2,rgbcolor=hue(arg(r[j])),
-               legend_color=hue(arg(r[j])),legend_label='r'+str(j+1)+'='+str(r[j]))
-g.set_legend_options(bbox_to_anchor=(1.1,0.1,0.1,0.7)); g.show(gridlines=True,figsize=(9,5))
-</script></div>
-    <p></p>
+    g+=arrow2d((0,0),(r[j].real(),r[j].imag()),
+               width=3,arrowsize=2,rgbcolor=hue(arg(r[j])),
+               legend_color=hue(arg(r[j])),
+               legend_label='r'+str(j+1)+'='+str(r[j]))
+g.set_legend_options(bbox_to_anchor=(1.1,0.1,0.1,0.7))
+g.show(gridlines=True,figsize=(9,5))
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 print(nz[0]**10*nz[1]**6,nr[0]**10*nr[1]**6*(numpy.cos(10*nt[0]+6*nt[1])+numpy.sin(10*nt[0]+6*nt[1])*1j))
 print(nz[1]**15/nz[2]**27,nr[1]**15/nr[2]**27*(numpy.cos(15*nt[1]-27*nt[2])+numpy.sin(15*nt[1]-27*nt[2])*1j))
