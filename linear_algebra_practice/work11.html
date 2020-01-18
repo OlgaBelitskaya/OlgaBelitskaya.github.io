@@ -63,11 +63,15 @@ colors=['#3636ff','#ff3636','#ff36ff']
 f1=[x^2+y^2+z^2-4^2,(3*cos(t1)*sin(t2),
     3*sin(t1)*sin(t2),3*cos(t2)),
     x^2/1^2+y^2/2^2+z^2/3^2-1]
-pretty_print(html('<left><font color="%s">$(x,y,z) = %s$</font></left>'%(colors[1],latex(f1[1]))))
-[pretty_print(html('<left><font color="%s">$%s = 0$</font></left>'%(colors[i],latex(f1[i])))) for i in [0,2]]
-(implicit_plot3d(f1[0],s,s,s,opacity=0.3,color=colors[0])+\
- parametric_plot3d(f1[1],(0,2*pi),(0,pi),opacity=0.3,color=colors[1])+\
- implicit_plot3d(f1[2],s,s,s,plot_points=20,color=((z).function(x,y,z),colormaps.bwr_r))).show()
+s1='<left><font color="%s">$(x,y,z) = %s$</font></left>'
+s2='<left><font color="%s">$%s = 0$</font></left>'
+pretty_print(html(s1%(colors[1],latex(f1[1]))))
+[pretty_print(html(s2%(colors[i],latex(f1[i])))) for i in [0,2]]
+(implicit_plot3d(f1[0],s,s,s,opacity=.3,color=colors[0])+\
+ parametric_plot3d(f1[1],(0,2*pi),(0,pi),opacity=.5,color=colors[1])+\
+ implicit_plot3d(f1[2],s,s,s,plot_points=20,
+                 color=((z).function(x,y,z),colormaps.bwr_r)))\
+.show(frame=False)
 </script></div><br/>
 Выбор цветовых решений.<br/> 
 <div class="linked_sage"><script type="text/x-sage">
@@ -75,17 +79,23 @@ for i in [0..18]: print(sorted(colormaps)[8*i:8*(i+1)])
 </script></div>
     <p>Активируйте этот код перед использованием любых ячеек Linked Python Cells</p>
 <div class="linked_python"><script type="text/x-sage">
-import numpy,sympy,pylab; sympy.init_printing(use_unicode=True)
-from mpl_toolkits.mplot3d import Axes3D; from matplotlib.lines import Line2D
-import warnings; warnings.simplefilter("ignore", category=RuntimeWarning)
-x,y,z,R,p,q,r,t1,t2 = sympy.symbols('x,y,z,R,p,q,r,t1,t2')
-eq1=[x^2+y^2+z^2-R^2,[x-R*cos(t1)*sin(t2),y-R*sin(t1)*sin(t2),z-R*cos(t2)],x^2/p^2+y^2/q^2+z^2/r^2-1]
+import numpy,sympy,pylab,warnings
+sympy.init_printing(use_unicode=True)
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib.lines import Line2D
+warnings.simplefilter("ignore", category=RuntimeWarning)
+x,y,z,R,p,q,r,t1,t2=\
+sympy.symbols('x,y,z,R,p,q,r,t1,t2')
+eq1=[x^2+y^2+z^2-R^2,
+     [x-R*cos(t1)*sin(t2),
+      y-R*sin(t1)*sin(t2),
+      z-R*cos(t2)],
+     x^2/p^2+y^2/q^2+z^2/r^2-1]
 sol1=[sympy.solve([eq1[0],R-4],R,z),
       sympy.solve([eq1[1][0],eq1[1][1],eq1[1][2],R-3],R,x,y,z),
       sympy.solve([eq1[2],p-1,q-2,r-3],p,q,r,z)]
 for s in sol1: display(s); print('\n')
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 angle=numpy.linspace(0,2*numpy.pi,64); T1,T2=numpy.meshgrid(angle,angle)
 X=numpy.cos(T1)*numpy.sin(T2); Y=numpy.sin(T1)*numpy.sin(T2); Z=numpy.cos(T2)
@@ -98,14 +108,11 @@ ax.plot_surface(1*X,2*Y,3*Z,cmap=pylab.cm.bwr_r,linewidth=1,antialiased=True,rst
 fake2Dlines=[Line2D([0],[0],linestyle="none",c=c,marker='o') for c in colors]
 ax.legend(fake2Dlines,labels,loc=9); pylab.show()
 </script></div>
-    <p></p>
     <p>Активируйте этот код перед использованием любых ячеек Linked R Cells</p>
 <div class="linked_r"><script type="text/x-sage">
 # python code inside linked sage cells with r code
 import numpy,pylab; from mpl_toolkits.mplot3d import Axes3D; from matplotlib.lines import Line2D
-</script></div>
-    <p></p>  
-    <p></p>
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
 X1 <- Y1 <- seq(from=-3.2,to=3.2,by=0.9)
