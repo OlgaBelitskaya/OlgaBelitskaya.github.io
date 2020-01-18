@@ -97,40 +97,54 @@ sol1=[sympy.solve([eq1[0],R-4],R,z),
 for s in sol1: display(s); print('\n')
 </script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
-angle=numpy.linspace(0,2*numpy.pi,64); T1,T2=numpy.meshgrid(angle,angle)
-X=numpy.cos(T1)*numpy.sin(T2); Y=numpy.sin(T1)*numpy.sin(T2); Z=numpy.cos(T2)
-labels=['$x^2+y^2+z^2=4^2$','$x=3cos(t_1)*sin(t_2)$\n$y=3sin(t_1)*sin(t_2)$\n$z=3cos(t_2)$','$x^2/1^2+y^2/2^2+z^2/3^2=1$']
+angle=numpy.linspace(0,2*numpy.pi,64)
+T1,T2=numpy.meshgrid(angle,angle)
+X=numpy.cos(T1)*numpy.sin(T2)
+Y=numpy.sin(T1)*numpy.sin(T2)
+Z=numpy.cos(T2)
+labels=['$x^2+y^2+z^2=4^2$',
+        '$x=3cos(t_1)*sin(t_2)$'+\
+        '\n$y=3sin(t_1)*sin(t_2)$'+\
+        '\n$z=3cos(t_2)$',
+        '$x^2/1^2+y^2/2^2+z^2/3^2=1$']
 colors=['#3636ff','#ff3636','#ff36ff']
-fig=pylab.figure(figsize=(7,7)); ax=fig.add_subplot(111,projection='3d')
-ax.plot_surface(4*X,4*Y,4*Z,color=colors[0],alpha=0.1)
-ax.plot_surface(3*X,3*Y,3*Z,color=colors[1],alpha=0.1)
-ax.plot_surface(1*X,2*Y,3*Z,cmap=pylab.cm.bwr_r,linewidth=1,antialiased=True,rstride=1,cstride=1)
-fake2Dlines=[Line2D([0],[0],linestyle="none",c=c,marker='o') for c in colors]
+fig=pylab.figure(figsize=(7,7))
+ax=fig.add_subplot(111,projection='3d')
+ax.plot_surface(4*X,4*Y,4*Z,color=colors[0],alpha=.1)
+ax.plot_surface(3*X,3*Y,3*Z,color=colors[1],alpha=.1)
+ax.plot_surface(1*X,2*Y,3*Z,cmap=pylab.cm.bwr_r,
+                linewidth=1,antialiased=True,
+                rstride=1,cstride=1)
+fake2Dlines=[Line2D([0],[0],linestyle="none",
+                    c=c,marker='o') for c in colors]
 ax.legend(fake2Dlines,labels,loc=9); pylab.show()
-</script></div>
+</script></div><br/>
     <p>Активируйте этот код перед использованием любых ячеек Linked R Cells</p>
 <div class="linked_r"><script type="text/x-sage">
 # python code inside linked sage cells with r code
-import numpy,pylab; from mpl_toolkits.mplot3d import Axes3D; from matplotlib.lines import Line2D
+import numpy,pylab
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib.lines import Line2D
 </script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-X1 <- Y1 <- seq(from=-3.2,to=3.2,by=0.9)
-sphere1 <- function(R,X,Y){
-    func <- function(x,y) {(-x^2-y^2+R^2)^0.5}
-    Z <- outer(X,Y,func); Z[is.na(Z)] <- 0; list(Z,-Z)
-}
-T1 <- seq(from=0,to=2*pi,length.out=12); T2 <- seq(from=0,to=pi,length.out=12)
-sphere2 <- function(R,t1,t2){list(R*cos(t1)*sin(t2),R*sin(t1)*sin(t2),R*cos(t2))}
-X3 <- seq(from=-0.9,to=0.9,by=0.22); Y3 <- 2*X3
-ellipsoid1 <- function(p,q,r,X,Y) {
-    func <- function(x,y) {r*(-x^2/p^2-y^2/q^2+1)^0.5}
-    Z <- outer(X,Y,func); Z[is.na(Z)] <- 0; list(Z,-Z)
-}
-Z1 <- sphere1(4,X1,Y1); XYZ2 <- sphere2(3,T1,T2); Z3 <- ellipsoid1(1,2,3,X3,Y3)
-dZ1=data.frame(Z1[1]); rownames(dZ1) <- X1; colnames(dZ1) <- Y1; dZ1
+X1<-Y1<-seq(from=-3.2,to=3.2,by=.9)
+sphere1<-function(R,X,Y){
+    func<-function(x,y){(-x^2-y^2+R^2)^.5}
+    Z<-outer(X,Y,func); Z[is.na(Z)]<-0; list(Z,-Z)}
+T1<-seq(from=0,to=2*pi,length.out=12) 
+T2<-seq(from=0,to=pi,length.out=12)
+sphere2<-function(R,t1,t2){
+    list(R*cos(t1)*sin(t2),R*sin(t1)*sin(t2),R*cos(t2))}
+X3<-seq(from=-.9,to=.9,by=.22); Y3<-2*X3
+ellipsoid1<-function(p,q,r,X,Y){
+    func<-function(x,y){r*(-x^2/p^2-y^2/q^2+1)^.5}
+    Z<-outer(X,Y,func); Z[is.na(Z)]<-0; list(Z,-Z)}
+Z1<-sphere1(4,X1,Y1); XYZ2<-sphere2(3,T1,T2) 
+Z3<-ellipsoid1(1,2,3,X3,Y3)
+dZ1=data.frame(Z1[1]) 
+rownames(dZ1)<-X1; colnames(dZ1)<-Y1; dZ1
 </script></div>      
-    <p></p>
     <h2>2. Гиперболический тип</h2>
 Двуполостный гиперболоид
 <p>$\frac{x^2}{p^2} + \frac{y^2}{q^2} - \frac{z^2}{r^2} = -1$</p>
@@ -138,32 +152,39 @@ dZ1=data.frame(Z1[1]); rownames(dZ1) <- X1; colnames(dZ1) <- Y1; dZ1
 <p>$\frac{x^2}{p^2} + \frac{y^2}{q^2} - \frac{z^2}{r^2} = 1$</p>
 Конус
 <p>$\frac{x^2}{p^2} + \frac{y^2}{q^2} - \frac{z^2}{r^2} = 0$</p>
-    <p></p>
 <div class="linked_sage"><script type="text/x-sage">
 var('x,y,z,p,q,r')
-eq2=[x^2/p^2+y^2/q^2-z^2/r^2==-1,x^2/p^2+y^2/q^2-z^2/r^2==1,x^2/p^2+y^2/q^2-z^2/r^2==0]
+eq2=[x^2/p^2+y^2/q^2-z^2/r^2==-1,
+     x^2/p^2+y^2/q^2-z^2/r^2==1,
+     x^2/p^2+y^2/q^2-z^2/r^2==0]
 sol2=[solve([eq2[0],p==1,q==2,r==3],p,q,r,z),
       solve([eq2[1],p==3,q==4,r==5],p,q,r,z),
       solve([eq2[2],p==2,q==3,r==4],p,q,r,z)]
 for s in sol2: pretty_print(s)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_sage"><script type="text/x-sage">
-var('x,y,z'); s=(-7,7); colors=['#ff36ff','#ff3636','#3636ff']; ops=[0.5,0.7,0.3] 
-f2=[x^2/1^2+y^2/2^2-z^2/3^2+1,x^2/3^2+y^2/4^2-z^2/5^2-1,x^2/2^2+y^2/3^2-z^2/4^2]
-[pretty_print(html('<left><font color="%s">$%s = 0$</font></left>'%(colors[i],latex(f2[i])))) for i in [0..2]]
-sum([implicit_plot3d(f2[i],s,s,s,opacity=ops[i],color=colors[i],plot_points=20,mesh=True) for i in [0..2]]).show()
-</script></div>
-    <p></p>
+var('x,y,z'); s=(-7,7); ops=[.5,.7,.3]
+colors=['#ff36ff','#ff3636','#3636ff'] 
+f2=[x^2/1^2+y^2/2^2-z^2/3^2+1,
+    x^2/3^2+y^2/4^2-z^2/5^2-1,
+    x^2/2^2+y^2/3^2-z^2/4^2]
+s='<left><font color="%s">$%s = 0$</font></left>'
+[pretty_print(html(s%(colors[i],latex(f2[i])))) 
+ for i in [0..2]]
+sum([implicit_plot3d(f2[i],s,s,s,opacity=ops[i],mesh=True,
+                     color=colors[i],plot_points=20) 
+     for i in [0..2]]).show()
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 x,y,z,p,q,r=sympy.symbols('x,y,z,p,q,r')
-eq2=[x^2/p^2+y^2/q^2-z^2/r^2+1,x^2/p^2+y^2/q^2-z^2/r^2-1,x^2/p^2+y^2/q^2-z^2/r^2]
+eq2=[x^2/p^2+y^2/q^2-z^2/r^2+1,
+     x^2/p^2+y^2/q^2-z^2/r^2-1,
+     x^2/p^2+y^2/q^2-z^2/r^2]
 sol2=[sympy.solve([eq2[0],p-1,q-2,r-3],p,q,r,z),
       sympy.solve([eq2[1],p-3,q-4,r-5],p,q,r,z),
       sympy.solve([eq2[2],p-2,q-3,r-4],p,q,r,z)]
 for s in sol2: display(s); print('\n')
-</script></div>
-    <p></p> 
+</script></div><br/> 
 <div class="linked_python"><script type="text/x-sage">
 X=numpy.linspace(-7,7,128); X,Y=numpy.meshgrid(X,X) 
 def f1(x,y): return 3/2*numpy.sqrt(4*x**2+y**2+4)
@@ -171,14 +192,19 @@ def f2(x,y): return 5/12*numpy.sqrt(16*x**2+9*y**2-144)
 def f3(x,y): return 2/3*numpy.sqrt(9*x**2+4*y**2)
 Z=[f1(X,Y),f2(X,Y),f3(X,Y),-f1(X,Y),-f2(X,Y),-f3(X,Y)]
 for z in Z: z[z<-7]=numpy.NaN; z[z>7]=numpy.NaN
-fig=pylab.figure(figsize=(7,7)); ax=fig.add_subplot(111,projection='3d')
-colors=2*['#ff36ff','#ff3636','#3636ff']; alphas=2*[0.6,0.4,0.2]
-[ax.plot_wireframe(X,Y,Z[i],color=colors[i],alpha=alphas[i]) for i in range(6)]
-labels=['$x^2/1^2+y^2/2^2-z^2/3^2=-1$','$x^2/3^2+y^2/4^2-z^2/5^2=1$','$x^2/2^2+y^2/3^2-z^2/4^2=0$']
-fake2Dlines=[Line2D([0],[0],linestyle="none",c=c,marker='o') for c in colors[:3]]
+fig=pylab.figure(figsize=(7,7))
+ax=fig.add_subplot(111,projection='3d')
+colors=2*['#ff36ff','#ff3636','#3636ff']
+alphas=2*[.6,.4,.2]
+[ax.plot_wireframe(X,Y,Z[i],color=colors[i],
+                   alpha=alphas[i]) for i in range(6)]
+labels=['$x^2/1^2+y^2/2^2-z^2/3^2=-1$',
+        '$x^2/3^2+y^2/4^2-z^2/5^2=1$',
+        '$x^2/2^2+y^2/3^2-z^2/4^2=0$']
+fake2Dlines=[Line2D([0],[0],linestyle="none",c=c,
+                    marker='o') for c in colors[:3]]
 ax.legend(fake2Dlines,labels,loc=9); pylab.show()
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
 X1 <- seq(from=-0.9,to=0.9,by=0.22); Y1 <- 2*X1
@@ -199,7 +225,6 @@ cone1 <- function(p,q,r,X,Y) {
 Z1 <- hyperboloid1(1,2,3,X1,Y1); Z2 <- hyperboloid2(3,4,5,X2,Y2); Z3 <- cone1(2,3,4,X3,Y3)
 dZ3=data.frame(Z3[1]); rownames(dZ3) <- X3; colnames(dZ3) <- Y3; dZ3
 </script></div>
-    <p></p>
     <h2>3. Параболический тип</h2>
 Эллиптический параболоид
 <p>$\frac{x^2}{p^2} + \frac{y^2}{q^2} = 2 * z$</p>
@@ -253,8 +278,7 @@ labels=['$x^2/1^2+y^2/2^2=2*z$','$x^2/2^2-y^2/3^2=2*z$']
 [ax.plot_wireframe(X,Y,Z[i],color=colors[i],alpha=alphas[i]) for i in range(2)]
 fake2Dlines=[Line2D([0],[0],linestyle="none",c=c,marker='o') for c in colors]
 ax.legend(fake2Dlines,labels,loc=9); pylab.show()
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 X=numpy.linspace(-9,9,128); X,Z=numpy.meshgrid(X,X) 
 def f3(x): return 4/3*(-x**2+9)**0.5
@@ -268,8 +292,7 @@ labels=['$x^2/3^2+y^2/4^2=1$','$x^2/2^2-y^2/3^2=1$','$y^2=2*2*x$']
 [ax.plot_wireframe(X,Y[i],Z,color=colors[i],alpha=alphas[i]) for i in range(6)]
 fake2Dlines=[Line2D([0],[0],linestyle="none",c=c,marker='o') for c in colors[:3]]
 ax.legend(fake2Dlines,labels,loc=9); pylab.show()
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
 X1 <- Y1 <- X2 <- Y2 <- seq(from=-9,to=9,by=1); X3 <- Z3 <- X4 <- Z4 <- Y5 <- Z5 <- seq(from=-5,to=5,by=0.1)
@@ -378,9 +401,9 @@ planes2 <- function(p, X, Z) {
         }
     }
 }
-planes1(1,2,X,Z); planes2(1,X,Z); 'files are created'
-</script></div>
-    <p></p>
+planes1(1,2,X,Z); planes2(1,X,Z)
+'files are created'
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 X1,Y1,Z1=numpy.loadtxt('planes1.csv',delimiter=' ',unpack=True)
 X2,Y2,Z2=numpy.loadtxt('planes2.csv',delimiter=' ',unpack=True)
@@ -391,31 +414,24 @@ labels=['$x^2/1^2=y^2/2^2$','$y^2=1^2$']; colors=['#ff3636','#ff36ff']
 fake2Dlines=[Line2D([0],[0],linestyle="none",c=c,marker='1') for c in colors]
 ax.legend(fake2Dlines,labels,loc=9); pylab.show()
 </script></div>
-    <p></p>  
     <h2>5. Задание</h2>
-    <p></p>
-Инициировать три поверхности второго порядка с помощью функций и выполнить их трехмерные изображения,
-<br/><br/>
-используя SageMath, Numpy, SymPy или R. 
-    <p></p>
+Инициировать три поверхности второго порядка с помощью функций<br/> 
+и выполнить их трехмерные изображения,<br/>
+используя SageMath, Numpy, SymPy или R.<br/>
 <div class="linked_sage"><script type="text/x-sage">
 
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
+import numpy,sympy,pylab
 
-</script></div>
-    <p></p>  
+</script></div><br/>  
 <div class="linked_r"><script type="text/x-sage">
 %%r
 
-</script></div>
-    <p></p> 
-    <h2>6. Отдельная ячейка для дополнительных экспериментов</h2>
-    <p></p>   
+</script></div> 
+    <h2>6. Отдельная ячейка для дополнительных экспериментов</h2>   
 <div class="sage"><script type="text/x-sage">
 
 </script></div>
-    <p></p>
   </body>
 </html> 
