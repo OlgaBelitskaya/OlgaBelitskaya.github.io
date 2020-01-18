@@ -57,65 +57,62 @@ a+b,c+d
 </script></div>
     <p>Активируйте этот код перед использованием любых ячеек Linked Python Cells</p>
 <div class="linked_python"><script type="text/x-sage">
-import numpy,sympy,sympy.vector; from scipy.optimize import fsolve 
+import numpy,sympy,sympy.vector
+from scipy.optimize import fsolve 
 sympy.init_printing(use_unicode=True)
-ni,nj,nk,nv=numpy.array([1,0,0]),numpy.array([0,1,0]),numpy.array([0,0,1]),numpy.array([2,3,2])
-na,nb=numpy.array(['a1','a2','a3'],dtype='string'),numpy.array(['+b1','+b2','+b3'],dtype='string')
+ni,nj=numpy.array([1,0,0]),numpy.array([0,1,0])
+nk,nv=numpy.array([0,0,1]),numpy.array([2,3,2])
+na=numpy.array(['a1','a2','a3'],dtype='string')
+nb=numpy.array(['+b1','+b2','+b3'],dtype='string')
 nc,nd=numpy.array([2,0,-2]),numpy.array([1,2,1])
 se=sympy.vector.CoordSys3D('se'); sv=2*se.i+3*se.j+2*se.k
 a1,a2,a3,b1,b2,b3 = sympy.symbols('a1 a2 a3 b1 b2 b3')
 sa=a1*se.i+a2*se.j+a3*se.k; sb=b1*se.i+b2*se.j+b3*se.k
 sc=2*se.i+0*se.j-2*se.k; sd=1*se.i+2*se.j+1*se.k
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 print(2*ni+3*nj+2*nk ==nv,numpy.linalg.norm(nv))
-sv,sv.to_matrix(se).norm(),sv.to_matrix(se).norm().evalf()
-</script></div>
-    <p></p>
+[sv,sv.to_matrix(se).norm(),
+ sv.to_matrix(se).norm().evalf()]
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 print(numpy.core.defchararray.add(na,nb),nc+nd)
-sa+sb,sc+sd
+[sa+sb,sc+sd]
 </script></div>
-    <p></p>
     <p>Активируйте этот код перед использованием любых ячеек Linked R Cells</p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-i <- c(1,0,0); j <- c(0,1,0); k <- c(0,0,1); v <- c(2,3,2)
-a <- c('a1','a2','a3'); b <- c('+ b1','+ b2','+ b3'); c <- c(2,0,-2); d <- c(1,2,1)
+i<-c(1,0,0); j<-c(0,1,0); k<-c(0,0,1)
+v<-c(2,3,2)
+a<-c('a1','a2','a3')
+b<-c('+ b1','+ b2','+ b3')
+c<-c(2,0,-2); d<-c(1,2,1)
 library(Matrix)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-list(matrix(c(i,j,k,v),4,3,byrow=T),v==2*i+3*j+2*k,norm(matrix(v),'f'))
-</script></div>      
-    <p></p>
+list(matrix(c(i,j,k,v),4,3,byrow=T),
+     v==2*i+3*j+2*k,norm(matrix(v),'f'))
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
 print(paste(a,b)); c+d
-</script></div>      
-    <p></p>
+</script></div>
     <h2>2. Скалярное произведение</h2>
-    <p></p>
 <div class="linked_sage"><script type="text/x-sage">
 print(c.dot_product(d))
 a.dot_product(b)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 print(nc.dot(nd))
 sympy.pprint(sc.dot(sd))
 sa.dot(sb)
-</script></div>
-    <p></p>  
+</script></div><br/> 
 <div class="linked_r"><script type="text/x-sage">
 %%r
 c%*%d
-</script></div>
-    <p></p>      
+</script></div>    
     <h2>3. Векторное произведение</h2>
-    <p></p>
 <div class="linked_sage"><script type="text/x-sage">
 print(matrix([e,a,b]).det().collect(e2).collect(e3))
 print(a.cross_product(b))
