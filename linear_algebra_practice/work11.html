@@ -338,6 +338,9 @@ paraboloid2<-function(p,q,X,Y){
     outer(X,Y,function(x,y){(x^2/p^2-y^2/q^2)/2})}
 Z1<-paraboloid1(1,2,X1,Y1)
 Z2<-paraboloid2(2,3,X2,Y2)
+</script></div><br/>
+<div class="linked_r"><script type="text/x-sage">
+%%r
 cylinder1<-function(p,q,X,Z){
     for (x in X){for (z in Z){
         y<-q*(1-x^2/p^2)^0.5
@@ -354,29 +357,32 @@ cylinder2<-function(p,q,X,Z){
             write.table(matrix(v,nrow=2,ncol=3,byrow=T),
                         file="cylinder2.csv",append=T,
                         quote=F,col.names=F,row.names=F)}}}}
-"run the next cell"
+cylinder3<-function(p,Y,Z){
+    for (y in Y){for (z in Z){
+        x<-y^2/2/p; v<-c(x,y,z)
+        write.table(matrix(v,nrow=1,ncol=3,byrow=T),
+                    file ="cylinder3.csv",append=T,
+                    quote=F,col.names=F,row.names=F)}}}
+cylinder1(3,4,X3,Z3)
+cylinder2(2,3,X4,Z4)
+cylinder3(2,Y5,Z5)
+"files are created"
 </script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
-%%r
-cylinder3 <- function(p,Y,Z) {
-    for (y in Y) {
-        for (z in Z) {
-            x <- y^2/2/p; v <- c(x,y,z)
-            write.table(matrix(v,nrow=1,ncol=3,byrow=T),
-                        file ="cylinder3.csv",append=T,
-                        quote=F,col.names=F,row.names=F)
-        }
-    }
-}
-cylinder1(3,4,X3,Z3); cylinder2(2,3,X4,Z4); cylinder3(2,Y5,Z5); 'files are created'
-</script></div><br/>
-<div class="linked_r"><script type="text/x-sage">
-files=['cylinder1.csv','cylinder2.csv','cylinder3.csv']; colors=['#36ff36','#36ffff','#ff36ff']
-labels=['$x^2/3^2+y^2/4^2=1$','$x^2/2^2-y^2/3^2=1$','$y^2=2*2*x$']
-XYZ=[numpy.array(numpy.loadtxt(files[i],delimiter=' ',unpack=True)) for i in range(3)]
-fig=pylab.figure(figsize=(7,7)); ax=fig.add_subplot(111,projection='3d')
-[ax.scatter(XYZ[i][0],XYZ[i][1],XYZ[i][2],s=1,c=colors[i],marker='1') for i in range(3)]
-fake2Dlines=[Line2D([0],[0],linestyle="none",c=c,marker='1') for c in colors]
+files=['cylinder1.csv','cylinder2.csv',
+       'cylinder3.csv']
+colors=['#36ff36','#36ffff','#ff36ff']
+labels=['$x^2/3^2+y^2/4^2=1$',
+        '$x^2/2^2-y^2/3^2=1$',
+        '$y^2=2*2*x$']
+XYZ=[numpy.array(numpy.loadtxt(files[i],\
+     delimiter=' ',unpack=True)) for i in range(3)]
+fig=pylab.figure(figsize=(7,7))
+ax=fig.add_subplot(111,projection='3d')
+[ax.scatter(XYZ[i][0],XYZ[i][1],XYZ[i][2],s=1,\
+ c=colors[i],marker='1') for i in range(3)]
+fake2Dlines=[Line2D([0],[0],linestyle="none",\
+             c=c,marker='1') for c in colors]
 ax.legend(fake2Dlines,labels,loc=9); pylab.show()
 </script></div>
     <h2>4. Плоскости</h2>
