@@ -140,18 +140,20 @@ vector_product3d<-function(x,y){
 vector_product3d(c,d)
 </script></div>      
     <h2>4. Пример типового расчета</h2>
-<p>$\overrightarrow{C} (3,4,1); \ \overrightarrow{D} (1,2,1) \\
+<p style="color:slategray;">$\mathscr{\overrightarrow{C} (3,4,1); \ \overrightarrow{D} (1,2,1) \\
 \overrightarrow{A} + \overrightarrow{B} = \overrightarrow{C}; \\ 
 \overrightarrow{A} \perp \overrightarrow{D} \ (\overrightarrow{A} \cdot \overrightarrow{D} = 0) ;\\ 
 \overrightarrow{B} \parallel \overrightarrow{D} \ (\overrightarrow{D} * k = \overrightarrow{B});\\
-\overrightarrow{A}(a_1, a_2, a_3), \ \overrightarrow{B} (b_1, b_2, b_3), \ k = \ ?$</p>
+\overrightarrow{A}(a_1, a_2, a_3), \ \overrightarrow{B} (b_1, b_2, b_3), \ k = \ ?}$</p>
 <div class="linked_sage"><script type="text/x-sage">
-var('k'); A,B=vector(SR,[a1,a2,a3]),vector(SR,[b1,b2,b3])
+var('k')
+A,B=vector(SR,[a1,a2,a3]),vector(SR,[b1,b2,b3])
 C,D=vector(SR,[3,4,1]),vector(SR,[1,2,1])
-solution = solve([(A+B-C)[0]==0,(A+B-C)[1]==0,(A+B-C)[2]==0, # A + B = C
-                  A.dot_product(D)==0, # A ⊥ D
-                  (k*D-B)[0]==0,(k*D-B)[1]==0,(k*D-B)[2]==0], # B || D
-                 a1,a2,a3,b1,b2,b3,k)
+solution=\
+solve([(A+B-C)[0]==0,(A+B-C)[1]==0,(A+B-C)[2]==0,#A+B=C
+       A.dot_product(D)==0,#A⊥D
+       (k*D-B)[0]==0,(k*D-B)[1]==0,(k*D-B)[2]==0],#B||D
+      a1,a2,a3,b1,b2,b3,k)
 A=vector(SR,[solution[0][0].rhs(),
              solution[0][1].rhs(),
              solution[0][2].rhs()])
@@ -169,11 +171,12 @@ text3d(vl[n],vs[n]*1.1) for n in [0..3]]).show()
 <div class="linked_python"><script type="text/x-sage">
 def equations(v):
     a1,a2,a3,b1,b2,b3,k=v
-    f1=a1+b1-3; f2=a2+b2-4; f3=a3+b3-1 # A + B = C
-    f4=a1*1+a2*2+a3*1 # A ⊥ D
-    f5=k*1-b1; f6=k*2-b2; f7=k*1-b3 # B || D 
+    f1=a1+b1-3; f2=a2+b2-4; f3=a3+b3-1 #A+B=C
+    f4=a1*1+a2*2+a3*1 #A⊥D
+    f5=k*1-b1; f6=k*2-b2; f7=k*1-b3 #B||D 
     return (f1,f2,f3,f4,f5,f6,f7)
-a1,a2,a3,b1,b2,b3,k=round(fsolve(equations,(0,0,0,0,0,0,0)))
+a1,a2,a3,b1,b2,b3,k=\
+round(fsolve(equations,(0,0,0,0,0,0,0)))
 [(a1,a2,a3),(b1,b2,b3),k]
 </script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
@@ -181,9 +184,9 @@ a1,a2,a3,b1,b2,b3,k=sympy.symbols('a1 a2 a3 b1 b2 b3 k')
 A,B=sympy.Matrix([a1,a2,a3]),sympy.Matrix([b1,b2,b3])
 C,D=sympy.Matrix([3,4,1]),sympy.Matrix([1,2,1])
 a1,a2,a3,b1,b2,b3,k=\
-sympy.nsolve(((A+B-C)[0],(A+B-C)[1],(A+B-C)[2], # A + B = C
-              A.dot(D), # A ⊥ D
-              (k*D-B)[0],(k*D-B)[1],(k*D-B)[2]), # B || D
+sympy.nsolve(((A+B-C)[0],(A+B-C)[1],(A+B-C)[2],#A+B=C
+              A.dot(D),#A⊥D
+              (k*D-B)[0],(k*D-B)[1],(k*D-B)[2]),#B||D
               (a1,a2,a3,b1,b2,b3,k),(0,0,0,0,0,0,0))
 [(a1,a2,a3),(b1,b2,b3),k]
 </script></div><br/>
