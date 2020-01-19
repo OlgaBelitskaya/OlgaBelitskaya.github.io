@@ -120,22 +120,22 @@ c.cross_product(d)
 </script></div>
     <p></p>
 <div class="linked_sage"><script type="text/x-sage">
-vs=[c,d,c+d,c.cross_product(d)]; vl=['c','d','c+d','cxd']; colors=['#3636ff','#36ff36','#ff3636','#ff36ff']
-sum([arrow3d([0,0,0],vs[n],color=colors[n],width=3)+text3d(vl[n],vs[n]*1.1) for n in [0..3]]).show()
-</script></div>
-    <p></p>
+vs=[c,d,c+d,c.cross_product(d)]
+vl=['c','d','c+d','cxd']
+colors=['#3636ff','#36ff36','#ff3636','#ff36ff']
+sum([arrow3d([0,0,0],vs[n],color=colors[n],width=3)+\
+text3d(vl[n],vs[n]*1.1) for n in [0..3]]).show()
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 print(numpy.cross(nc,nd))
 sympy.pprint(sc.cross(sd))
 sa.cross(sb)
-</script></div>
-    <p></p>  
+</script></div><br/> 
 <div class="linked_r"><script type="text/x-sage">
 %%r
 vector_product3d <- function(x,y){c(x[2]*y[3]-x[3]*y[2],-x[1]*y[3]+x[3]*y[1],x[1]*y[2]-x[2]*y[1])}
 vector_product3d(c,d)
-</script></div>
-    <p></p>      
+</script></div>      
     <h2>4. Пример типового расчета</h2>
 <p>$\overrightarrow{C} (3,4,1); \ \overrightarrow{D} (1,2,1) \\
 \overrightarrow{A} + \overrightarrow{B} = \overrightarrow{C}; \\ 
@@ -153,14 +153,13 @@ solution = solve([(A+B-C)[0]==0,(A+B-C)[1]==0,(A+B-C)[2]==0, # A + B = C
 A=vector(SR,[solution[0][0].rhs(),solution[0][1].rhs(),solution[0][2].rhs()])
 B=vector(SR,[solution[0][3].rhs(),solution[0][4].rhs(),solution[0][5].rhs()])
 solution
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_sage"><script type="text/x-sage">
 vs=[A,B,C,D]; vl=['A','B','C','D']
 colors=['#3636ff','#36ff36','#ff3636','#ff36ff']
 sum([arrow3d([0,0,0],vs[n],color=colors[n],width=3)+\
 text3d(vl[n],vs[n]*1.1) for n in [0..3]]).show()
-</script></div><r/>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 def equations(v):
     a1,a2,a3,b1,b2,b3,k=v
@@ -168,7 +167,7 @@ def equations(v):
     f4=a1*1+a2*2+a3*1 # A ⊥ D
     f5=k*1-b1; f6=k*2-b2; f7=k*1-b3 # B || D 
     return (f1,f2,f3,f4,f5,f6,f7)
-a1,a2,a3,b1,b2,b3,k = round(fsolve(equations,(0,0,0,0,0,0,0)))
+a1,a2,a3,b1,b2,b3,k=round(fsolve(equations,(0,0,0,0,0,0,0)))
 [(a1,a2,a3),(b1,b2,b3),k]
 </script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
