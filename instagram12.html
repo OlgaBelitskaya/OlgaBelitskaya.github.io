@@ -194,14 +194,13 @@ R &#38; SageMathCell <br/>
 HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 <div class="sage_html"><script type="text/x-sage">
 %%html
-<style>
-svg {background:#101050;} path {stroke:#fff; fill-opacity:.8;}
-</style>
-<script src="//d3js.org/d3.v3.min.js"/><script>
+<style>path {stroke:#fff; fill-opacity:.8;}</style>
+<script src="//d3js.org/d3.v3.min.js"/>
+<svg id='d308' style='background-color:#101050;'/><script>
 var width=250,height=250,ra=3*360,
     col=["silver","darkgray","slategray","darkslategray"],
     per=["40%","60%","80%","100%"];
-var svg=d3.select("body").append("svg")
+var svg=d3.select("#d308")
           .attr("width",2*width).attr("height",2*height).append("g")
           .attr("transform","translate("+width+","+height+")");
 var gradient=svg.append("defs")
@@ -228,31 +227,34 @@ function raindrop(size){
 HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 <div class="sage_html"><script type="text/x-sage">
 %%html
-<script src='https://d3js.org/d3.v4.min.js'/>
-<svg id='d303' style='background-color:ghostwhite;'/>
-<script>
-var n=640,m=50,d=.01,margin={top:m,right:m,bottom:m,left:m},
-    width=600-margin.left-margin.right,height=600-margin.top-margin.bottom; 
-function f(t){
-    return Math.exp(Math.pow(Math.cos(d*t),2)+Math.sin(d*t))-3*Math.cos(4*d*t);};
-function randi(xmin,xmax){return Math.floor(Math.random()*(xmax-xmin+1))+xmin;};
-function rcolor(i){var r=randi(i,255),g=randi(i,255),b=randi(i,255);
-    return '#'+r.toString(16)+g.toString(16)+b.toString(16);} 
-function make_data(k){return d3.range(1,n).map(function(t){
-    return {'x':d*k*f(t)*Math.cos(d*t),
-            'y':d*k*f(t)*Math.sin(d*t)}});};    
-var xScale=d3.scaleLinear().domain([-5*d*m,5*d*m]).range([0,width+2*m]),
-    yScale=d3.scaleLinear().domain([-5*d*m,5*d*m]).range([height+2*m,0]); 
-var svg=d3.select("#d303").attr("width",width+margin.left+margin.right)
-                          .attr("height",height+margin.top+margin.bottom)
-          .attr("transform","translate("+margin.left+","+margin.top+")");
-var line=d3.line().curve(d3.curveMonotoneX)
-           .x(function(d){return xScale(d.x);})
-           .y(function(d){return yScale(d.y);});
-for (var i=1; i<m; i++) {var data=make_data(i),col=rcolor(i);
-    svg.append('path').datum(data)
-       .attr('class','line').attr('d',line)
-       .attr('stroke',col).attr('fill','none');};
+<script src="//d3js.org/d3.v3.min.js"/>
+<svg id='d3b02' style='background-color:#101050;'/><script>
+var width=250,height=250,ra=3*360,
+    col=["silver","darkgray","slategray","darkslategray"],
+    per=["40%","60%","80%","100%"];
+var svg=d3.select("#d3b02")
+          .attr("width",2*width).attr("height",2*height).append("g")
+          .attr("transform","translate("+width+","+height+")");
+var gradient=svg.append("defs")
+                .append("linearGradient").attr("id","gradient")
+                .attr("x1","0%").attr("y1","30%")
+                .attr("x2","70%").attr("y2","100%");
+for (var i=0; i<4; i++){
+    gradient.append("stop").attr("offset",per[i])
+                           .attr("stop-color",col[i]);};
+svg.selectAll("path").data(d3.range(ra))
+   .enter().append("path").attr("stroke","#fff")
+   .attr("fill","url(#gradient)").attr("fill-opacity",.8)
+   .attr("d",function(){return raindrop(Math.random()*100);})
+   .attr("transform",function(d){
+       return "rotate("+d+")"
+              +"translate("+.9*height*Math.random()+",0)"
+              +"rotate(270)";});
+function raindrop(size){
+  var r=Math.cos(Math.PI*size)+Math.sqrt(size);
+  return "M"+r+",0"+"A"+r+","+r+" 0 1,1 "+-r+",0"
+         +"C"+-r+","+-r+" 0,"+-r+" 0,"+-3*r
+         +"C0,"+-r+" "+r+","+-r+" "+r+",0"+"Z";};
 </script></div><br/>
 HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 <div class="sage_html"><script type="text/x-sage">
