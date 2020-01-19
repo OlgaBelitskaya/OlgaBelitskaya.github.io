@@ -275,21 +275,34 @@ sum([implicit_plot3d(f32[i],s,s,s,opacity=0.7,mesh=True,
 </script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 x,y,z,p,q=sympy.symbols('x,y,z,p,q')
-eq3=[x^2/p^2+y^2/q^2-2*z,x^2/p^2-y^2/q^2-2*z,x^2/p^2+y^2/q^2-1,x^2/p^2-y^2/q^2-1,y^2-2*p*x]
-sol3=[sympy.solve([eq3[0],p-1,q-2],p,q,z),sympy.solve([eq3[1],p-2,q-3],p,q,z),sympy.solve([eq3[2],p-3,q-4],p,q,y,z),
-      sympy.solve([eq3[3],p-2,q-3],p,q,y,z),sympy.solve([eq3[4],p-2],p,y,z)]
+eq3=[x^2/p^2+y^2/q^2-2*z,
+     x^2/p^2-y^2/q^2-2*z,
+     x^2/p^2+y^2/q^2-1,
+     x^2/p^2-y^2/q^2-1,
+     y^2-2*p*x]
+sol3=[sympy.solve([eq3[0],p-1,q-2],p,q,z),
+      sympy.solve([eq3[1],p-2,q-3],p,q,z),
+      sympy.solve([eq3[2],p-3,q-4],p,q,y,z),
+      sympy.solve([eq3[3],p-2,q-3],p,q,y,z),
+      sympy.solve([eq3[4],p-2],p,y,z)]
 for s in sol3: display(s); print('\n')
 </script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
-X=numpy.linspace(-8,8,128); X,Y=numpy.meshgrid(X,X) 
+X=numpy.linspace(-8,8,128)
+X,Y=numpy.meshgrid(X,X) 
 def f1(x,y): return 1/2*x**2+1/8*y**2
 def f2(x,y): return 1/8*x**2-1/18*y**2
-Z=[f1(X,Y),f2(X,Y)]; colors=['#ff3636','#3636ff']; alphas=[0.8,0.4]
+Z=[f1(X,Y),f2(X,Y)]
+colors=['#ff3636','#3636ff']; alphas=[0.8,0.4]
 for z in Z: z[z<-8]=numpy.NaN; z[z>8]=numpy.NaN
-fig=pylab.figure(figsize=(7,7)); ax=fig.add_subplot(111,projection='3d')
-labels=['$x^2/1^2+y^2/2^2=2*z$','$x^2/2^2-y^2/3^2=2*z$']
-[ax.plot_wireframe(X,Y,Z[i],color=colors[i],alpha=alphas[i]) for i in range(2)]
-fake2Dlines=[Line2D([0],[0],linestyle="none",c=c,marker='o') for c in colors]
+fig=pylab.figure(figsize=(7,7))
+ax=fig.add_subplot(111,projection='3d')
+labels=['$x^2/1^2+y^2/2^2=2*z$',
+        '$x^2/2^2-y^2/3^2=2*z$']
+[ax.plot_wireframe(X,Y,Z[i],color=colors[i],
+                   alpha=alphas[i]) for i in range(2)]
+fake2Dlines=[Line2D([0],[0],linestyle="none",
+                    c=c,marker='o') for c in colors]
 ax.legend(fake2Dlines,labels,loc=9); pylab.show()
 </script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
