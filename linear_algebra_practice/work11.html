@@ -306,22 +306,32 @@ fake2Dlines=[Line2D([0],[0],linestyle="none",
 ax.legend(fake2Dlines,labels,loc=9); pylab.show()
 </script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
-X=numpy.linspace(-9,9,128); X,Z=numpy.meshgrid(X,X) 
+X=numpy.linspace(-9,9,128)
+X,Z=numpy.meshgrid(X,X) 
 def f3(x): return 4/3*(-x**2+9)**0.5
 def f4(x): return 3/2*(x**2-4)**0.5
 def f5(x): return -2*(x)**0.5
 Y=[f3(X),f4(X),f5(X),-f3(X),-f4(X),-f5(X)] 
-colors=2*['#36ff36','#36ffff','#ff36ff']; alphas=2*[.5,.7,.3]
+colors=2*['#36ff36','#36ffff','#ff36ff']
+alphas=2*[.5,.7,.3]
 for y in Y: y[y<-9]=numpy.NaN; y[y>9]=numpy.NaN
-fig=pylab.figure(figsize=(7,7)); ax=fig.add_subplot(111,projection='3d')
-labels=['$x^2/3^2+y^2/4^2=1$','$x^2/2^2-y^2/3^2=1$','$y^2=2*2*x$']
-[ax.plot_wireframe(X,Y[i],Z,color=colors[i],alpha=alphas[i]) for i in range(6)]
-fake2Dlines=[Line2D([0],[0],linestyle="none",c=c,marker='o') for c in colors[:3]]
+fig=pylab.figure(figsize=(7,7))
+ax=fig.add_subplot(111,projection='3d')
+labels=['$x^2/3^2+y^2/4^2=1$',
+        '$x^2/2^2-y^2/3^2=1$',
+        '$y^2=2*2*x$']
+[ax.plot_wireframe(X,Y[i],Z,\
+ color=colors[i],alpha=alphas[i]) 
+ for i in range(6)]
+fake2Dlines=\
+[Line2D([0],[0],linestyle="none",c=c,marker='o') 
+ for c in colors[:3]]
 ax.legend(fake2Dlines,labels,loc=9); pylab.show()
 </script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-X1 <- Y1 <- X2 <- Y2 <- seq(from=-9,to=9,by=1); X3 <- Z3 <- X4 <- Z4 <- Y5 <- Z5 <- seq(from=-5,to=5,by=0.1)
+X1 <- Y1 <- X2 <- Y2 <- seq(from=-9,to=9,by=1)
+X3 <- Z3 <- X4 <- Z4 <- Y5 <- Z5 <- seq(from=-5,to=5,by=0.1)
 paraboloid1 <- function(p,q,X,Y) {outer(X,Y,function(x,y) {(x^2/p^2+y^2/q^2)/2})}
 paraboloid2 <- function(p,q,X,Y) {outer(X,Y,function(x,y) {(x^2/p^2-y^2/q^2)/2})}
 Z1 <- paraboloid1(1,2,X1,Y1); Z2 <- paraboloid2(2,3,X2,Y2)
@@ -376,27 +386,42 @@ ax.legend(fake2Dlines,labels,loc=9); pylab.show()
 Пара совпадающих плоскостей
 <p>$y^2 = 0$</p>
 <div class="linked_sage"><script type="text/x-sage">
-var('x,y,z,p,q'); eq4=[[x^2/p^2-y^2/q^2==0,p==1,q==2],[y^2==p^2,p==1],y^2==0]
+var('x,y,z,p,q')
+eq4=[[x^2/p^2-y^2/q^2==0,p==1,q==2],
+     [y^2==p^2,p==1],y^2==0]
 for e in eq4[:2]: pretty_print(solve(e,p,q,y))
-s=(-3,3); f4=[x^2/1^2-y^2/2^2,y^2-1^2]; colors=['#ff3636','#ff36ff']
-[pretty_print(html('<left><font color="%s">$%s = 0$</font></left>'%(colors[i],latex(f4[i])))) for i in [0,1]]
-(implicit_plot3d(f4[0],(x,-3,3),(y,-3,3),(z,-3,3),color=(abs(sin(x*y*z)),colormaps.bwr))+\
-implicit_plot3d(f4[1],s,s,s,color=colors[1],opacity=0.7)).show()
+s=(-3,3); f4=[x^2/1^2-y^2/2^2,y^2-1^2]
+colors=['#ff3636','#ff36ff']
+st='<left><font color="%s">$%s = 0$</font></left>'
+[pretty_print(html(st%(colors[i],latex(f4[i])))) 
+ for i in [0,1]]
+(implicit_plot3d(f4[0],(x,-3,3),(y,-3,3),(z,-3,3),
+                 color=(abs(sin(x*y*z)),colormaps.bwr))+\
+implicit_plot3d(f4[1],s,s,s,
+                color=colors[1],opacity=0.7)).show()
 </script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 x,y,z,p,q = sympy.symbols('x,y,z,p,q')
 eq4=[[x^2/p^2-y^2/q^2,p-1,q-2],[y^2-p^2,p-1],y^2]
 for e in eq4: display(sympy.solve(e,y)); print('\n')
-X=numpy.linspace(-3,3,128); X,Z=numpy.meshgrid(X,X) 
+X=numpy.linspace(-3,3,128)
+X,Z=numpy.meshgrid(X,X) 
 def f1(x,z): return 2*x
 def f2(x,z): return 1
 Y=[f1(X,Z),-f1(X,Z),f2(X,Z),-f2(X,Z)] 
 for y in Y[:2]: y[y<-3]=numpy.NaN; y[y>3]=numpy.NaN
-colors=['#ff3636','#ff36ff']; labels=['$x^2/1^2=y^2/2^2$','$y^2=1^2$']
-fig=pylab.figure(figsize=(7,7)); ax=fig.add_subplot(111,projection='3d')
-[ax.plot_surface(X,y,Z,cmap=pylab.cm.bwr,linewidth=1,antialiased=True,rstride=3,cstride=3) for y in Y[:2]]
-[ax.plot_wireframe(X,y,Z,color=colors[1],alpha=0.3) for y in Y[2:]]
-fake2Dlines=[Line2D([0],[0],linestyle="none",c=c,marker='o') for c in colors]
+colors=['#ff3636','#ff36ff']
+labels=['$x^2/1^2=y^2/2^2$','$y^2=1^2$']
+fig=pylab.figure(figsize=(7,7))
+ax=fig.add_subplot(111,projection='3d')
+[ax.plot_surface(X,y,Z,cmap=pylab.cm.bwr,
+                 linewidth=1,antialiased=True,
+                 rstride=3,cstride=3) 
+ for y in Y[:2]]
+[ax.plot_wireframe(X,y,Z,color=colors[1],alpha=0.3) 
+ for y in Y[2:]]
+fake2Dlines=[Line2D([0],[0],linestyle="none",
+                    c=c,marker='o') for c in colors]
 ax.legend(fake2Dlines,labels,loc=9); pylab.show()
 </script></div><br/>  
 <div class="linked_r"><script type="text/x-sage">
