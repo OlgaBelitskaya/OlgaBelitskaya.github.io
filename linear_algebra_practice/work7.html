@@ -156,10 +156,11 @@ solution
 </script></div>
     <p></p>
 <div class="linked_sage"><script type="text/x-sage">
-vs=[A,B,C,D]; vl=['A','B','C','D']; colors=['#3636ff','#36ff36','#ff3636','#ff36ff']
-sum([arrow3d([0,0,0],vs[n],color=colors[n],width=3)+text3d(vl[n],vs[n]*1.1) for n in [0..3]]).show()
-</script></div>
-    <p></p>
+vs=[A,B,C,D]; vl=['A','B','C','D']
+colors=['#3636ff','#36ff36','#ff3636','#ff36ff']
+sum([arrow3d([0,0,0],vs[n],color=colors[n],width=3)+\
+text3d(vl[n],vs[n]*1.1) for n in [0..3]]).show()
+</script></div><r/>
 <div class="linked_python"><script type="text/x-sage">
 def equations(v):
     a1,a2,a3,b1,b2,b3,k=v
@@ -169,40 +170,36 @@ def equations(v):
     return (f1,f2,f3,f4,f5,f6,f7)
 a1,a2,a3,b1,b2,b3,k = round(fsolve(equations,(0,0,0,0,0,0,0)))
 [(a1,a2,a3),(b1,b2,b3),k]
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 a1,a2,a3,b1,b2,b3,k=sympy.symbols('a1 a2 a3 b1 b2 b3 k')
 A,B=sympy.Matrix([a1,a2,a3]),sympy.Matrix([b1,b2,b3])
 C,D=sympy.Matrix([3,4,1]),sympy.Matrix([1,2,1])
-a1,a2,a3,b1,b2,b3,k=sympy.nsolve(((A+B-C)[0],(A+B-C)[1],(A+B-C)[2], # A + B = C
-                                  A.dot(D), # A ⊥ D
-                                  (k*D-B)[0],(k*D-B)[1],(k*D-B)[2]), # B || D
-                                 (a1,a2,a3,b1,b2,b3,k),(0,0,0,0,0,0,0))
+a1,a2,a3,b1,b2,b3,k=\
+sympy.nsolve(((A+B-C)[0],(A+B-C)[1],(A+B-C)[2], # A + B = C
+              A.dot(D), # A ⊥ D
+              (k*D-B)[0],(k*D-B)[1],(k*D-B)[2]), # B || D
+              (a1,a2,a3,b1,b2,b3,k),(0,0,0,0,0,0,0))
 [(a1,a2,a3),(b1,b2,b3),k]
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
 
-</script></div>
-    <p></p>
-Библиотека pracma здесь не установлена. Можно локально установить и запустить с R.
-<br/><br/>
+</script></div><br/>
+Библиотека pracma здесь не установлена. Можно локально установить и запустить с R.<br/>
+<pre><code class="r">
 library(pracma)
-<br/><br/>
-problem_decision <- function(x){ <br/>
-    c(x[1]+x[4]-3, # A + B = C <br/>
-      x[2]+x[5]-4, <br/>
-      x[3]+x[6]-1, <br/>
-      x[1]*1+x[2]*2+x[3]*1, # A ⊥ D <br/>
-      x[7]*1-x[4], # B || D <br/> 
-      x[7]*2-x[5], <br/>
-      x[7]*1-x[6]) <br/>
-} <br/>
-<br/><br/>
-print('a1 a2 a3 b1 b2 b2 k')<br/>
-round(fsolve(problem_decision,c(0,0,0,0,0,0,0))$x)<br/>
+problem_decision<-function(x){
+    c(x[1]+x[4]-3, # A + B = C
+      x[2]+x[5]-4, 
+      x[3]+x[6]-1, 
+      x[1]*1+x[2]*2+x[3]*1, # A ⊥ D 
+      x[7]*1-x[4], # B || D 
+      x[7]*2-x[5],
+      x[7]*1-x[6])}
+print('a1 a2 a3 b1 b2 b2 k')
+round(fsolve(problem_decision,c(0,0,0,0,0,0,0))$x)
+</code></pre>
     <h2>5. Задание</h2>
 Зная стороны $\overrightarrow{AB}(3,-4,0), \ 
 \overrightarrow{BC}(1,5,0)$ в $\triangle ABC$, найти высоту $\overrightarrow{CD}$,<br/>
