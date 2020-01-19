@@ -330,28 +330,31 @@ ax.legend(fake2Dlines,labels,loc=9); pylab.show()
 </script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-X1 <- Y1 <- X2 <- Y2 <- seq(from=-9,to=9,by=1)
-X3 <- Z3 <- X4 <- Z4 <- Y5 <- Z5 <- seq(from=-5,to=5,by=0.1)
-paraboloid1 <- function(p,q,X,Y) {outer(X,Y,function(x,y) {(x^2/p^2+y^2/q^2)/2})}
-paraboloid2 <- function(p,q,X,Y) {outer(X,Y,function(x,y) {(x^2/p^2-y^2/q^2)/2})}
-Z1 <- paraboloid1(1,2,X1,Y1); Z2 <- paraboloid2(2,3,X2,Y2)
-cylinder1 <- function(p,q,X,Z) {
-    for (x in X) {
-        for (z in Z) {
-            y <- q*(1-x^2/p^2)^0.5; v <- c(x,y,z,x,-y,z)
-            if (sum(is.na(v))==0) {write.table(matrix(v,nrow=2,ncol=3,byrow=T),file ="cylinder1.csv",append=T,quote=F,col.names=F,row.names=F)}
-        }
-    }
-};
-cylinder2 <- function(p,q,X,Z) {
-    for (x in X) {
-        for (z in Z) {
-            y <- q*(x^2/p^2-1)^0.5; v <- c(x,y,z,x,-y,z)
-            if (sum(is.na(v))==0) {write.table(matrix(v,nrow=2,ncol=3,byrow=T),file ="cylinder2.csv",append=T,quote=F,col.names=F,row.names=F)}
-        }
-    }
-}
-'run the next cell'
+X1<-Y1<-X2<-Y2<-seq(from=-9,to=9,by=1)
+X3<-Z3<-X4<-Z4<-Y5<-Z5<-seq(from=-5,to=5,by=0.1)
+paraboloid1<-function(p,q,X,Y){
+    outer(X,Y,function(x,y){(x^2/p^2+y^2/q^2)/2})}
+paraboloid2<-function(p,q,X,Y){
+    outer(X,Y,function(x,y){(x^2/p^2-y^2/q^2)/2})}
+Z1<-paraboloid1(1,2,X1,Y1)
+Z2<-paraboloid2(2,3,X2,Y2)
+cylinder1<-function(p,q,X,Z){
+    for (x in X){for (z in Z){
+        y<-q*(1-x^2/p^2)^0.5
+        v<-c(x,y,z,x,-y,z)
+        if (sum(is.na(v))==0){
+            write.table(matrix(v,nrow=2,ncol=3,byrow=T),
+                        file ="cylinder1.csv",append=T,
+                        quote=F,col.names=F,row.names=F)}}}}
+cylinder2<-function(p,q,X,Z){
+    for (x in X){for (z in Z){
+        y<-q*(x^2/p^2-1)^0.5
+        v<-c(x,y,z,x,-y,z)
+        if (sum(is.na(v))==0){
+            write.table(matrix(v,nrow=2,ncol=3,byrow=T),
+                        file="cylinder2.csv",append=T,
+                        quote=F,col.names=F,row.names=F)}}}}
+"run the next cell"
 </script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
@@ -359,7 +362,9 @@ cylinder3 <- function(p,Y,Z) {
     for (y in Y) {
         for (z in Z) {
             x <- y^2/2/p; v <- c(x,y,z)
-            write.table(matrix(v,nrow=1,ncol=3,byrow=T),file ="cylinder3.csv",append=T,quote=F,col.names=F,row.names=F)
+            write.table(matrix(v,nrow=1,ncol=3,byrow=T),
+                        file ="cylinder3.csv",append=T,
+                        quote=F,col.names=F,row.names=F)
         }
     }
 }
