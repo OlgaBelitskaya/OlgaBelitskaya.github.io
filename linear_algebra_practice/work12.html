@@ -274,38 +274,42 @@ for el in [f,(A*e1==f1,A*e2==f2,A*e3==f3)]:
 <div class="linked_python"><script type="text/x-sage">
 A11,A12,A13,A21,A22,A23,A31,A32,A33=\
 sympy.symbols('A11,A12,A13,A21,A22,A23,A31,A32,A33')
-a=[[1,3,3,0,0,0,0,0,0],[-3,-3,-2,0,0,0,0,0,0],
-   [-2,2,3,0,0,0,0,0,0],[0,0,0,1,3,3,0,0,0],
-   [0,0,0,-3,-3,-2,0,0,0],[0,0,0,-2,2,3,0,0,0],
-   [0,0,0,0,0,0,1,3,3],[0,0,0,0,0,0,-3,-3,-2],
-   [0,0,0,0,0,0,-2,2,3]]
+a=[[1,3,3,0,0,0,0,0,0,1],[-3,-3,-2,0,0,0,0,0,0,-2],
+   [-2,2,3,0,0,0,0,0,0,4],[0,0,0,1,3,3,0,0,0,4],
+   [0,0,0,-3,-3,-2,0,0,0,-1],[0,0,0,-2,2,3,0,0,0,1],
+   [0,0,0,0,0,0,1,3,3,-2],[0,0,0,0,0,0,-3,-3,-2,2], 
+   [0,0,0,0,0,0,-2,2,3,-2]]
 system=sympy.Matrix(a)
 A=sympy.solve_linear_system(system,\
 A11,A12,A13,A21,A22,A23,A31,A32,A33)
-A=sympy.Matrix(3,3,[A[x]\
+A=sympy.Matrix(int(3),int(3),[A[x]\
 for x in [A11,A12,A13,A21,A22,A23,A31,A32,A33]])
-e1=sympy.Matrix(3,1,[1,3,3])
-f1=sympy.Matrix(3,1,[1,4,-2])
-e2=sympy.Matrix(3,1,[-3,-3,-2])
-f2=sympy.Matrix(3,1,[-2,-1,2])
-e3=sympy.Matrix(3,1,[-2,2,3])
-f3=sympy.Matrix(3,1,[4,1,-2])
-e=sympy.Matrix(3,1,[-19,7,16])
+e1=sympy.Matrix(int(3),int(1),[1,3,3])
+f1=sympy.Matrix(int(3),int(1),[1,4,-2])
+e2=sympy.Matrix(int(3),int(1),[-3,-3,-2])
+f2=sympy.Matrix(int(3),int(1),[-2,-1,2])
+e3=sympy.Matrix(int(3),int(1),[-2,2,3])
+f3=sympy.Matrix(int(3),int(1),[4,1,-2])
+e=sympy.Matrix(int(3),int(1),[-19,7,16])
 f=A*e
 for el in [f,(A*e1==f1,A*e2==f2,A*e3==f3)]: 
     display(el)
 </script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
-a=numpy.matrix([[1,3,3,0,0,0,0,0,0],[-3,-3,-2,0,0,0,0,0,0],[-2,2,3,0,0,0,0,0,0],
-                [0,0,0,1,3,3,0,0,0],[0,0,0,-3,-3,-2,0,0,0],[0,0,0,-2,2,3,0,0,0],
-                [0,0,0,0,0,0,1,3,3],[0,0,0,0,0,0,-3,-3,-2],[0,0,0,0,0,0,-2,2,3]])
+a=[[1,3,3,0,0,0,0,0,0],[-3,-3,-2,0,0,0,0,0,0],
+   [-2,2,3,0,0,0,0,0,0],[0,0,0,1,3,3,0,0,0],
+   [0,0,0,-3,-3,-2,0,0,0],[0,0,0,-2,2,3,0,0,0],
+   [0,0,0,0,0,0,1,3,3],[0,0,0,0,0,0,-3,-3,-2],
+   [0,0,0,0,0,0,-2,2,3]]
+a=numpy.matrix(a)
 b=numpy.matrix([1,-2,4,4,-1,1,-2,2,-2]).T
 A=numpy.matrix(numpy.linalg.solve(a,b)).reshape(3,3)
 e1=numpy.matrix([1,3,3]).T; f1=numpy.matrix([1,4,-2]).T
 e2=numpy.matrix([-3,-3,-2]).T; f2=numpy.matrix([-2,-1,2]).T
 e3=numpy.matrix([-2,2,3]).T; f3=numpy.matrix([4,1,-2]).T
 e=numpy.matrix([-19,7,16]).T; f=A*e
-for el in [f,numpy.array([round(A*e1)==f1,round(A*e2)==f2,round(A*e3)==f3]).reshape(3,3)]: print(el)
+ar=[round(A*e1)==f1,round(A*e2)==f2,round(A*e3)==f3]
+for el in [f,numpy.array(ar).reshape(3,3)]: print(el)
 </script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
@@ -366,7 +370,8 @@ C%*%A%*%t(matrix(solve(C),3,3,byrow=T))
     a_{31} & a_{32} & a_{33}-\lambda \end{vmatrix} = 0$</p>
 <div class="linked_sage"><script type="text/x-sage">
 A=matrix(SR,3,[-4,-3,-5,5,4,5,-7,-7,-6])
-var('t'); At=matrix([[-4-t,-3,-5],[5,4-t,5],[-7,-7,-6-t]])
+var('t')
+At=matrix([[-4-t,-3,-5],[5,4-t,5],[-7,-7,-6-t]])
 for el in [solve(At.det(),t),A.eigenvalues(),
            A.eigenvectors_right()]: 
     pretty_print(el)
