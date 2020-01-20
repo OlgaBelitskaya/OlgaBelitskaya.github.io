@@ -104,19 +104,17 @@ c
     <p>Активируйте этот код перед использованием любых ячеек Linked R Cells</p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-f <- function(n,m)
- t(apply(combn(1:n,m=m),2,function(cm) replace(rep(0,n),cm,1)))
-c <-0; bc <- f(10,0); for (i in c(1:10)) {bc <- rbind(bc,f(10,i))}
-logical_function <- function(x) {
-    eq1 <- (x[1]|!x[2])&(x[3]|!x[4])
-    eq2 <- (x[3]|!x[4])&(x[5]|!x[6])
-    eq3 <- (x[5]|!x[6])&(x[7]|!x[8])
-    eq4 <- (x[7]|!x[8])&(x[9]|!x[10])
-    eq1&eq2&eq3&eq4
-}
-for (i in c(1:2^10)){c <- c+1*logical_function(bc[i,])}; c
+f<-function(n,m) t(apply(combn(1:n,m=m),2,
+                   function(cm) replace(rep(0,n),cm,1)))
+c<-0; bc<-f(10,0); for (i in c(1:10)){bc<-rbind(bc,f(10,i))}
+logical_function<-function(x){
+    eq1<-(x[1]|!x[2])&(x[3]|!x[4])
+    eq2<-(x[3]|!x[4])&(x[5]|!x[6])
+    eq3<-(x[5]|!x[6])&(x[7]|!x[8])
+    eq4<-(x[7]|!x[8])&(x[9]|!x[10])
+    eq1&eq2&eq3&eq4}
+for (i in c(1:2^10)){c<-c+1*logical_function(bc[i,])}; c
 </script></div>
-    <p></p> 
     <h2>2. Виды простейших доказательств</h2>
 <p>1) метод перебора</p>
    - исследование всех возможных вариантов;
@@ -127,52 +125,53 @@ for (i in c(1:2^10)){c <- c+1*logical_function(bc[i,])}; c
 <p>4) математическая индукция</p>
    - если верно для начальной позиции (например, n=1) и для произвольного n, то истинно и для n+1;
 <p>5) аксиоматический метод</p>
-   - опираясь на набор заведомо истинных аксиом.
-    <p></p>
+   - опираясь на набор заведомо истинных аксиом.<br/>
 <div class="linked_sage"><script type="text/x-sage">
-var('A,B'); exp1=propcalc.formula('A | (A & B) <-> A'); exp2=propcalc.formula('A | (A & B) <-> ~A')
+var('A,B'); exp1=propcalc.formula('A | (A & B) <-> A')
+exp2=propcalc.formula('A | (A & B) <-> ~A')
 exp1.is_tautology(), exp2.is_contradiction()
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 A,B=sympy.symbols('A,B') 
-eq1=Equivalent(Or(A,And(A,B)),A); eq2=Equivalent(Or(A,And(A,B)),Not(A))
-le=[sympy.simplify_logic(eq1),sympy.simplify(A|(A&B)).equals(A),
-    sympy.simplify_logic(eq2),sympy.simplify(~(A|(A&B))).equals(A)]
+eq1=Equivalent(Or(A,And(A,B)),A)
+eq2=Equivalent(Or(A,And(A,B)),Not(A))
+le=[sympy.simplify_logic(eq1),
+    sympy.simplify(A|(A&B)).equals(A),
+    sympy.simplify_logic(eq2),
+    sympy.simplify(~(A|(A&B))).equals(A)]
 for el in le: display(el)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
-binary_combinations=numpy.array(list(itertools.product([0,1],repeat=2))); c1,c2=0,0
+bc=numpy.array(list(itertools.product([0,1],repeat=2)))
+c1,c2=0,0
 def tautology1(x): return (x[1] or (x[1] and x[2]))==x[1]
 def contradiction2(x): return (x[1] or (x[1] and x[2]))==(not x[1])
-for el in binary_combinations: 
-    c1+=int(tautology1(el)); c2+=int(contradiction2(el))
-c1==len(binary_combinations),c2==0
-</script></div>
-    <p></p>
+for el in bc: 
+    c1+=int(tautology1(el))
+    c2+=int(contradiction2(el))
+c1==len(bc),c2==0
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-bc2 <- rbind(rbind(f(2,0),f(2,1)),f(2,2)) 
-c1 <- c2 <- 0; n <- length(bc2)/2
-tautology1 <- function(x) {(x[1]|(x[1]&x[2]))==x[1]}
-contradiction2 <- function(x) {(x[1]|(x[1]&x[2]))==~x[1]}
-for (i in 1:n){c1 <- c1+1*tautology1(bc2[i,]); c2 <- c2+1*contradiction2(bc2[i,])}
+bc2<-rbind(rbind(f(2,0),f(2,1)),f(2,2)) 
+c1<-c2<-0; n<-length(bc2)/2
+tautology1<-function(x){(x[1]|(x[1]&x[2]))==x[1]}
+contradiction2<-function(x){(x[1]|(x[1]&x[2]))==~x[1]}
+for (i in 1:n){c1<-c1+1*tautology1(bc2[i,]);
+               c2<-c2+1*contradiction2(bc2[i,])}
 c(c1==n,c2==0)
 </script></div> 
     <h2>3. Задание</h2>
-Задать логическую формулу-тавтологию, построить для нее противоположное утверждение.
-<br/><br/>
-Доказать, что эти выражения являются тавтологией и противоречием, используя SageMath, Numpy, SymPy или R.
-    <p></p>
+Задать логическую формулу-тавтологию, построить для нее противоположное утверждение.<br/>
+Доказать, что эти выражения являются тавтологией и противоречием,<br/>
+используя SageMath, Numpy, SymPy или R.<br/>
 <div class="linked_sage"><script type="text/x-sage">
 
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
+import numpy,sympy,pylab
 
-</script></div>
-    <p></p>  
+</script></div><br/>  
 <div class="linked_r"><script type="text/x-sage">
 %%r
 
