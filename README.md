@@ -3,9 +3,7 @@
 
 ## &#x1F4D1; &nbsp; Machine Learning Engineer Nanodegree
 ### [Built with Udacity](https://www.udacity.com) &nbsp; [Certificate](https://olgabelitskaya.github.io/certificate_nd009.pdf)
-
 ### &#x1F310; &nbsp; [click to view the github repository](https://github.com/OlgaBelitskaya/machine_learning_engineer_nd009)
-
 ### Program Projects
 #### [P0: Titanic Survival Exploration](https://olgabelitskaya.github.io/MLE_ND_P0_V0.html) &nbsp;  [P1: Predicting Boston Housing Prices](https://olgabelitskaya.github.io/MLE_ND_P1_V0.html)  
 #### [P2: Finding Donors for CharityML](https://olgabelitskaya.github.io/MLE_ND_P2_V0.html) &nbsp; [P3: Creating Customer Segments](https://olgabelitskaya.github.io/MLE_ND_P3_V0.html)
@@ -13,11 +11,9 @@
 #### P6: Capstone Project &nbsp; [Version 0](https://olgabelitskaya.github.io/MLE_ND_P6_V0.html) &nbsp; [Version 1](https://olgabelitskaya.github.io/MLE_ND_P6_V1.html) &nbsp; [Proposal](https://olgabelitskaya.github.io/MLE_ND_P6_PP.pdf) &nbsp; [Report](https://olgabelitskaya.github.io/MLE_ND_P6_PR.pdf) 
 #### [P7: Building a Student Intervention System](https://olgabelitskaya.github.io/MLE_ND_P7_V0.html) &nbsp; [P8: Analyzing the NYC Subway Dataset](https://olgabelitskaya.github.io/MLE_ND_P8_V0.html)
 #### P9: Image Classification &nbsp; [Version 0](https://olgabelitskaya.github.io/MLE_ND_P9_V0.html) &nbsp; [Version 3](https://olgabelitskaya.github.io/MLE_ND_P9_V3.html)  &nbsp;  [P10: Write an Algorithm for a Dog Identification App](https://olgabelitskaya.github.io/MLE_ND_P10_V0.html)
-
 ### Practice Projects
 #### [PP0](https://olgabelitskaya.github.io/MLE_ND_PP0.html) &nbsp; [PP1](https://olgabelitskaya.github.io/MLE_ND_PP1.html) &nbsp; [PP2](https://olgabelitskaya.github.io/MLE_ND_PP2.html) &nbsp; [PP3](https://olgabelitskaya.github.io/MLE_ND_PP3.html)
 #### PP4: [Part 1](https://olgabelitskaya.github.io/MLE_ND_PP4_1.html) &nbsp; [Part 2](https://olgabelitskaya.github.io/MLE_ND_PP4_2.html) &nbsp; [Part 3](https://olgabelitskaya.github.io/MLE_ND_PP4_3.html) &nbsp; [Part 4](https://olgabelitskaya.github.io/MLE_ND_PP4_4.html) &nbsp; [Part 5](https://olgabelitskaya.github.io/MLE_ND_PP4_5.html) &nbsp; [Part 6](https://olgabelitskaya.github.io/MLE_ND_PP4_6.html)
-
 ### Interactive Reports with SageMathCell
 #### [P0: Titanic Survival Exploration](https://olgabelitskaya.github.io/MLE_ND_P0_SMC.html) &nbsp;  [P1: Predicting Boston Housing Prices](https://olgabelitskaya.github.io/MLE_ND_P1_SMC.html) &nbsp;  [P2: Finding Donors for CharityML](https://olgabelitskaya.github.io/MLE_ND_P2_SMC.html)
 #### [P3: Creating Customer Segments](https://olgabelitskaya.github.io/MLE_ND_P3_SMC.html)
@@ -56,7 +52,6 @@ Colaboratory Notebooks  &nbsp; [style_recognition.ipynb &#x1F4D6; ](https://driv
 Colaboratory Notebooks &nbsp; [decor_classification.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1Tt3qZePsf2P6kNNao-hQ58DlG71Abj5a) &nbsp; [decor_colorization.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1Is0ll753U0dlR2RhQVwelaegRFhkvoxw) &nbsp; [style_transfer.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1svW40BBscfSLD7Je99TyctBeRWIOYHKa)
 
 # &#x1F3D9; &nbsp;  Kaggle Activity
-
 ## &#x1F4D1; &nbsp;  Kernels
 - Digit Recognition Models &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/digit-recognition-models-2) &nbsp; [Web Page &#x1F310;](https://olgabelitskaya.github.io/kaggle_digits.html)
  
@@ -87,52 +82,35 @@ Colaboratory Notebooks &nbsp; [decor_classification.ipynb &#x1F4D6; ](https://dr
 
 - Traditional Decor Patterns &nbsp; [Kaggle Dataset &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/traditional-decor-patterns)
 
-
 # &#x1F3D9; &nbsp; Online Training Courses & Exercises
 
 ## &#x1F4D1; &nbsp; My Own Practice Programs [&#x1F310;](https://olgabelitskaya.github.io/README_PRACTICE.html)
 
-## &#x1F4D1; &nbsp; Various Exercises [&#x1F310;](https://olgabelitskaya.github.io/README_EXERCISES.html)
+## &#x1F4D1; &nbsp; Various Exam Exercises [&#x1F310;](https://olgabelitskaya.github.io/README_EXERCISES.html)
 
 ## &#x1F4D1; &nbsp; Reflections for Courses and Programs [&#x1F310;](https://olgabelitskaya.github.io/reflections/README.html)
 
 ## &#x1F4D1; &nbsp; Notebooks and Data Files [&#x1F310;](https://olgabelitskaya.github.io/notebooks/README.html)
 
 # &#x1F3D9; &nbsp;  Under Construction Projects
-
 ## &#x1F4D1; &nbsp; Deep Learning Nanodegree 
 ### [Built with Udacity](https://www.udacity.com) 
-
 ### &#x1F310; &nbsp; [click to view the github repository](https://github.com/OlgaBelitskaya/deep_learning_nanodegree_nd101)
-
 #### [P1: Your first neural network](https://olgabelitskaya.github.io/DL_ND_P1_V0.html)  &nbsp;  [P2:  Image Classification](https://olgabelitskaya.github.io/DL_ND_P2_V0.html) &nbsp;  [P3  Generate TV scripts](https://olgabelitskaya.github.io/DL_ND_P3_V0.html) 
 #### [P4:  Translate a Language](https://olgabelitskaya.github.io/DL_ND_P4_V0.html) &nbsp;  [P5: Generate Faces ](https://olgabelitskaya.github.io/DL_ND_P5_V0.html)
-
 ## &#x1F4D1; &nbsp; Interview and Technical Interview Practice.
 #### Udacity_Interview_Practice.ipynb &nbsp; [&#x1F310;](https://gist.github.com/OlgaBelitskaya/1ddb287592832cf581fc122d6bc2732e)
 #### Udacity_Technical_Interview_Practice_Lessons.ipynb &nbsp; [&#x1F310;](https://gist.github.com/OlgaBelitskaya/a6cb19e1f3a041e6f6a56ccf58b4701c)
 #### Udacity_Technical_Interview_Practice_Project.ipynb &nbsp; [&#x1F310;](https://gist.github.com/OlgaBelitskaya/849e983dd6e90943d5760be4c4986501)
 
 # &#x1F3D9; &nbsp;  Useful Web Links for Online Training
-
 ## &#x1F4D1; &nbsp; Blocks [&#x1F310;](http://bl.ocks.org)
-
-#### My Examples of Blocks [&#x1F310;](http://bl.ocks.org/OlgaBelitskaya)
-
-- [Visualization. Map I](http://bl.ocks.org/OlgaBelitskaya/bcc84d52267612a32b2a5bf79ae11b94)
-- [Visualization. Interpolation](http://bl.ocks.org/OlgaBelitskaya/aec204a67eec24cec8568258395ce62b)
-- [Visualization. Multiline Chart](https://bl.ocks.org/OlgaBelitskaya/2ec3804fd98d4cbd86e28eed38cddbdb)
-
+#### My Examples of Blocks [&#x1F310;](http://bl.ocks.org/OlgaBelitskaya) 
 ## &#x1F4D1; &nbsp; GitHub Gist [&#x1F310;](https://gist.github.com)
-
 #### My Examples of GitHub Gist [&#x1F310;](https://gist.github.com/OlgaBelitskaya)
-
 ## &#x1F4D1; &nbsp; COCALC [&#x1F310;](https://cocalc.com)
-
 ## &#x1F4D1; &nbsp; Google Colaboratory [&#x1F310;](https://colab.research.google.com) 
-
 ## &#x1F4D1; &nbsp; Wolfram Cloud [&#x1F310;](https://www.wolframcloud.com)
-
 ## &#x1F4D1; &nbsp; Microsoft AML Studio [&#x1F310;](https://studio.azureml.net)
 
 
