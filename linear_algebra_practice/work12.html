@@ -256,29 +256,44 @@ f
     A\mathfrak{e_3=f_3}: \mathfrak{e_3}\{-2;2;3\}; \mathfrak{f_3} \{4;1;-2\}$</p>
 <p>$A\mathfrak{e=f}: \mathfrak{e}\{-19;7;16\}; \mathfrak{f} \{x;y;z\}?$</p>
 <div class="linked_sage"><script type="text/x-sage">
-a=matrix(SR,[[1,3,3,0,0,0,0,0,0],[-3,-3,-2,0,0,0,0,0,0],[-2,2,3,0,0,0,0,0,0],
-             [0,0,0,1,3,3,0,0,0],[0,0,0,-3,-3,-2,0,0,0],[0,0,0,-2,2,3,0,0,0],
-             [0,0,0,0,0,0,1,3,3],[0,0,0,0,0,0,-3,-3,-2],[0,0,0,0,0,0,-2,2,3]])
+a=[[1,3,3,0,0,0,0,0,0],[-3,-3,-2,0,0,0,0,0,0],
+   [-2,2,3,0,0,0,0,0,0],[0,0,0,1,3,3,0,0,0],
+   [0,0,0,-3,-3,-2,0,0,0],[0,0,0,-2,2,3,0,0,0],
+   [0,0,0,0,0,0,1,3,3],[0,0,0,0,0,0,-3,-3,-2],
+   [0,0,0,0,0,0,-2,2,3]]
+a=matrix(SR,a)
 b=matrix(SR,9,[1,-2,4,4,-1,1,-2,2,-2])
 A=matrix(SR,3,[x[0] for x in a.solve_right(b)])
 e1=matrix(SR,3,[1,3,3]); f1=matrix(SR,3,[1,4,-2])
 e2=matrix(SR,3,[-3,-3,-2]); f2=matrix(SR,3,[-2,-1,2])
 e3=matrix(SR,3,[-2,2,3]); f3=matrix(SR,3,[4,1,-2])
 e=matrix(SR,3,[-19,7,16]); f=A*e
-for el in [f,(A*e1==f1,A*e2==f2,A*e3==f3)]: pretty_print(el)
+for el in [f,(A*e1==f1,A*e2==f2,A*e3==f3)]: 
+    pretty_print(el)
 </script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
-A11,A12,A13,A21,A22,A23,A31,A32,A33=sympy.symbols('A11,A12,A13,A21,A22,A23,A31,A32,A33')
-system=sympy.Matrix([[1,3,3,0,0,0,0,0,0,1],[-3,-3,-2,0,0,0,0,0,0,-2],[-2,2,3,0,0,0,0,0,0,4],
-                     [0,0,0,1,3,3,0,0,0,4],[0,0,0,-3,-3,-2,0,0,0,-1],[0,0,0,-2,2,3,0,0,0,1],
-                     [0,0,0,0,0,0,1,3,3,-2],[0,0,0,0,0,0,-3,-3,-2,2],[0,0,0,0,0,0,-2,2,3,-2]])
-A=sympy.solve_linear_system(system,A11,A12,A13,A21,A22,A23,A31,A32,A33)
-A=sympy.Matrix(3,3,[A[x] for x in [A11,A12,A13,A21,A22,A23,A31,A32,A33]])
-e1=sympy.Matrix(3,1,[1,3,3]); f1=sympy.Matrix(3,1,[1,4,-2])
-e2=sympy.Matrix(3,1,[-3,-3,-2]); f2=sympy.Matrix(3,1,[-2,-1,2])
-e3=sympy.Matrix(3,1,[-2,2,3]); f3=sympy.Matrix(3,1,[4,1,-2])
-e=sympy.Matrix(3,1,[-19,7,16]); f=A*e
-for el in [f,(A*e1==f1,A*e2==f2,A*e3==f3)]: display(el)
+A11,A12,A13,A21,A22,A23,A31,A32,A33=\
+sympy.symbols('A11,A12,A13,A21,A22,A23,A31,A32,A33')
+a=[[1,3,3,0,0,0,0,0,0],[-3,-3,-2,0,0,0,0,0,0],
+   [-2,2,3,0,0,0,0,0,0],[0,0,0,1,3,3,0,0,0],
+   [0,0,0,-3,-3,-2,0,0,0],[0,0,0,-2,2,3,0,0,0],
+   [0,0,0,0,0,0,1,3,3],[0,0,0,0,0,0,-3,-3,-2],
+   [0,0,0,0,0,0,-2,2,3]]
+system=sympy.Matrix(a)
+A=sympy.solve_linear_system(system,\
+A11,A12,A13,A21,A22,A23,A31,A32,A33)
+A=sympy.Matrix(3,3,[A[x]\
+for x in [A11,A12,A13,A21,A22,A23,A31,A32,A33]])
+e1=sympy.Matrix(3,1,[1,3,3])
+f1=sympy.Matrix(3,1,[1,4,-2])
+e2=sympy.Matrix(3,1,[-3,-3,-2])
+f2=sympy.Matrix(3,1,[-2,-1,2])
+e3=sympy.Matrix(3,1,[-2,2,3])
+f3=sympy.Matrix(3,1,[4,1,-2])
+e=sympy.Matrix(3,1,[-19,7,16])
+f=A*e
+for el in [f,(A*e1==f1,A*e2==f2,A*e3==f3)]: 
+    display(el)
 </script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 a=numpy.matrix([[1,3,3,0,0,0,0,0,0],[-3,-3,-2,0,0,0,0,0,0],[-2,2,3,0,0,0,0,0,0],
