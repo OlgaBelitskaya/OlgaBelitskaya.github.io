@@ -209,29 +209,46 @@ list(dim(t(C)*t(D)),t(C)*t(D))
     \frac{12 \, {y’}}{{x’}^{2} + {y’}^{2} + 1}, -
     \frac{{x’}^{2} + {y’}^{2} - 1}{{x’}^{2} + {y’}^{2} + 1}\right) \end{array}$</p>
 <div class="linked_sage"><script type="text/x-sage">
-Md=Manifold(2,'Md'); U=Md.open_subset('U'); V=Md.open_subset('V')
-XU.<x,y>=U.chart(); XV.<xp,yp>=V.chart("xp:x’ yp:y’"); Md.declare_union(U,V)
-XU_to_XV=XU.transition_map(XV,(2*x/(x^2+y^2),2*y/(x^2+y^2)),intersection_name='W',
-                           restrictions1=x^2+y^2!=0,restrictions2=xp^2+yp^2!=0)
-R3=Manifold(3,'R^3',r'\mathbb{R}^3'); XR3.<X,Y,Z>=R3.chart()
-Delta1=Md.diff_map(R3,{(XU,XR3):[1*x/(1+x^2+y^2),1*y/(1+x^2+y^2),(x^2+y^2-1)/(1+x^2+y^2)],
-                       (XV,XR3):[3*xp/(1+xp^2+yp^2),3*yp/(1+xp^2+yp^2),(1-xp^2-yp^2)/(1+xp^2+yp^2)]},
-                   name='Delta1',latex_name=r'\Delta_1')
-Delta2=Md.diff_map(R3,{(XU,XR3):[6*x/(1+x^2+y^2),6*y/(1+x^2+y^2),(x^2+y^2-1)/(1+x^2+y^2)],
-                       (XV,XR3):[12*xp/(1+xp^2+yp^2),12*yp/(1+xp^2+yp^2),(1-xp^2-yp^2)/(1+xp^2+yp^2)]},
-                   name='Delta2',latex_name=r'\Delta_2')
-p=XU.plot(chart=XR3,mapping=Delta1,number_values=30,color='#3636ff',label_axes=False)+\
-XV.plot(chart=XR3,mapping=Delta1,number_values=30,color='#ff36ff',label_axes=False)+\
-XU.plot(chart=XR3,mapping=Delta2,number_values=45,color='#ff3636',label_axes=False)+\
-XV.plot(chart=XR3,mapping=Delta2,number_values=6,color='#36ff36',thickness=2,label_axes=False)
+Md=Manifold(2,'Md')
+U=Md.open_subset('U'); V=Md.open_subset('V')
+XU.<x,y>=U.chart(); XV.<xp,yp>=V.chart("xp:x’ yp:y’")
+Md.declare_union(U,V)
+XU_to_XV=XU.transition_map(XV,\
+(2*x/(x^2+y^2),2*y/(x^2+y^2)),intersection_name='W',\
+restrictions1=x^2+y^2!=0,restrictions2=xp^2+yp^2!=0)
+R3=Manifold(3,'R^3',r'\mathbb{R}^3')
+XR3.<X,Y,Z>=R3.chart()
+Delta1=Md.diff_map(R3,\
+{(XU,XR3):[1*x/(1+x^2+y^2),1*y/(1+x^2+y^2),
+           (x^2+y^2-1)/(1+x^2+y^2)],\
+(XV,XR3):[3*xp/(1+xp^2+yp^2),3*yp/(1+xp^2+yp^2),
+          (1-xp^2-yp^2)/(1+xp^2+yp^2)]},\
+name='Delta1',latex_name=r'\Delta_1')
+Delta2=Md.diff_map(R3,\
+{(XU,XR3):[6*x/(1+x^2+y^2),6*y/(1+x^2+y^2),
+           (x^2+y^2-1)/(1+x^2+y^2)],\
+(XV,XR3):[12*xp/(1+xp^2+yp^2),12*yp/(1+xp^2+yp^2),
+          (1-xp^2-yp^2)/(1+xp^2+yp^2)]},\
+name='Delta2',latex_name=r'\Delta_2')
+p=XU.plot(chart=XR3,mapping=Delta1,number_values=30,
+          color='#3636ff',label_axes=False)+\
+XV.plot(chart=XR3,mapping=Delta1,number_values=30,
+        color='#ff36ff',label_axes=False)+\
+XU.plot(chart=XR3,mapping=Delta2,number_values=45,
+        color='#ff3636',label_axes=False)+\
+XV.plot(chart=XR3,mapping=Delta2,number_values=6,
+        color='#36ff36',thickness=2,label_axes=False)
 p.show(frame=False)
 </script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 x,y,z,t,u,v,w=sympy.symbols('x,y,z,t,u,v,w')
-ST=sympy.Array([[[x*sympy.cos(u)*z^2-y,x^3*u*v^6-sympy.sin(w*t)],[t*sympy.tan(u*w),sympy.exp(y)*z*u-w]],
-                [[y^3*v^5-t,x*sympy.log(w)*z^4],[x-sympy.exp(z)*w^7,y*t^8*u*v]]])
+ST=sympy.Array([[[x*sympy.cos(u)*z^2-y,x^3*u*v^6-sympy.sin(w*t)],
+                 [t*sympy.tan(u*w),sympy.exp(y)*z*u-w]],
+                [[y^3*v^5-t,x*sympy.log(w)*z^4],
+                 [x-sympy.exp(z)*w^7,y*t^8*u*v]]])
 display(ST)
-for el in [x,y,z,t,u,v,w]: display(ST.diff(el)); print('\n')
+for el in [x,y,z,t,u,v,w]: 
+    display(ST.diff(el))
 </script></div><br/>  
 <div class="linked_python"><script type="text/x-sage">
 GH=numpy.tensordot(H,G,0)
