@@ -291,17 +291,26 @@ for el in [f,numpy.array([round(A*e1)==f1,round(A*e2)==f2,round(A*e3)==f3]).resh
 </script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-a <- matrix(c(1,3,3,0,0,0,0,0,0,-3,-3,-2,0,0,0,0,0,0,-2,2,3,0,0,0,0,0,0,
-              0,0,0,1,3,3,0,0,0,0,0,0,-3,-3,-2,0,0,0,0,0,0,-2,2,3,0,0,0,
-              0,0,0,0,0,0,1,3,3, 0,0,0,0,0,0,-3,-3,-2,0,0,0,0,0,0,-2,2,3),
-            9,9,byrow=T)
-b <- matrix(c(1,-2,4,4,-1,1,-2,2,-2),9,1)
-A <- matrix(solve(a,b),3,3,byrow=T)
-e1 <- matrix(c(1,3,3),3,1); f1 <- matrix(c(1,4,-2),3,1)
-e2 <- matrix(c(-3,-3,-2),3,1); f2 <- matrix(c(-2,-1,2),3,1)
-e3 <- matrix(c(-2,2,3),3,1); f3 <- matrix(c(4,1,-2),3,1)
-e <- matrix(c(-19,7,16),3,1); f <- A%*%e
-print(c(round(A%*%e1)==f1,round(A%*%e2)==f2,round(A%*%e3)==f3)); f
+a<-matrix(c(1,3,3,0,0,0,0,0,0,
+            -3,-3,-2,0,0,0,0,0,0,
+            -2,2,3,0,0,0,0,0,0,
+            0,0,0,1,3,3,0,0,0,
+            0,0,0,-3,-3,-2,0,0,0,
+            0,0,0,-2,2,3,0,0,0,
+            0,0,0,0,0,0,1,3,3,
+            0,0,0,0,0,0,-3,-3,-2,
+            0,0,0,0,0,0,-2,2,3),
+          9,9,byrow=T)
+b<-matrix(c(1,-2,4,4,-1,1,-2,2,-2),9,1)
+A<-matrix(solve(a,b),3,3,byrow=T)
+e1<-matrix(c(1,3,3),3,1); f1<-matrix(c(1,4,-2),3,1)
+e2<-matrix(c(-3,-3,-2),3,1); f2<-matrix(c(-2,-1,2),3,1)
+e3<-matrix(c(-2,2,3),3,1); f3<-matrix(c(4,1,-2),3,1)
+e<-matrix(c(-19,7,16),3,1); f<-A%*%e
+print(c(round(A%*%e1)==f1,
+      round(A%*%e2)==f2,
+      round(A%*%e3)==f3))
+f
 </script></div>
 Пример решения задачи с матрицей перехода и матрицей линейного оператора
 <p>$C: (\mathfrak{e_1},\mathfrak{e_2},\mathfrak{e_3}) \to (\mathfrak{f_1},\mathfrak{f_2},\mathfrak{f_3}) \\ 
@@ -322,8 +331,10 @@ C*A*C.inv()
 </script></div><br/> 
 <div class="linked_r"><script type="text/x-sage">
 %%r
-A <- matrix(c(-3,-4,-1,4,-3,-3,-3,2,-6),3,3,byrow=T)
-C <- matrix(c(1,1,1,2,3,4,3,5,8),3,3,byrow=T)
+A<-matrix(c(-3,-4,-1,4,-3,-3,-3,2,-6),
+          3,3,byrow=T)
+C<-matrix(c(1,1,1,2,3,4,3,5,8),
+          3,3,byrow=T)
 C%*%A%*%t(matrix(solve(C),3,3,byrow=T))
 </script></div>     
     <h2>4. Собственные значения и собственные векторы линейного оператора</h2>
@@ -334,21 +345,27 @@ C%*%A%*%t(matrix(solve(C),3,3,byrow=T))
 \begin{pmatrix} x \\ y \\ z \end{pmatrix} = \begin{pmatrix} \lambda x \\ 
     \lambda y \\ \lambda z \end{pmatrix} \iff 
 \begin{vmatrix} a_{11}-\lambda & a_{12} & a_{13} \\ a_{21} & a_{22}-\lambda & a_{23} \\ 
-    a_{31} & a_{32} & a_{33}-\lambda \end{vmatrix} = 0$</p><br/>
+    a_{31} & a_{32} & a_{33}-\lambda \end{vmatrix} = 0$</p>
 <div class="linked_sage"><script type="text/x-sage">
 A=matrix(SR,3,[-4,-3,-5,5,4,5,-7,-7,-6])
 var('t'); At=matrix([[-4-t,-3,-5],[5,4-t,5],[-7,-7,-6-t]])
-for el in [solve(At.det(),t),A.eigenvalues(),A.eigenvectors_right()]: pretty_print(el)
+for el in [solve(At.det(),t),A.eigenvalues(),
+           A.eigenvectors_right()]: 
+    pretty_print(el)
 </script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
-A=sympy.Matrix([[-4,-3,-5],[5,4,5],[-7,-7,-6]]); t=sympy.symbols('t')
+A=sympy.Matrix([[-4,-3,-5],[5,4,5],[-7,-7,-6]])
+t=sympy.symbols('t')
 At=sympy.Matrix([[-4-t,-3,-5],[5,4-t,5],[-7,-7,-6-t]])
-for el in [sympy.solve(At.det(),t),A.eigenvals(),A.eigenvects()]: display(el)
+for el in [sympy.solve(At.det(),t),
+           A.eigenvals(),A.eigenvects()]: 
+    display(el)
 </script></div><br/> 
 <div class="linked_python"><script type="text/x-sage">
 A=numpy.matrix([-4,-3,-5,5,4,5,-7,-7,-6]).reshape(3,3)
 print(numpy.linalg.eigvals(A))
-for i in range(3): print(round(numpy.linalg.eig(A)[1])[:,i])
+for i in range(3): 
+    print(round(numpy.linalg.eig(A)[1])[:,i])
 </script></div><br/> 
 <div class="linked_r"><script type="text/x-sage">
 %%r
