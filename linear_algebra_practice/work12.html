@@ -187,15 +187,21 @@ F=matrix(SR,3,var(ff))
 pretty_print(C*E-F)
 </script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
-cc=" ".join(list('c_%d%d' %(i,j) for i in (1..2) for j in (1..2)))
-C=sympy.Matrix(2,2,sympy.symbols(cc))
-for el in [C,C.det(),C.inv(),(C^(-1)).transpose()]: display(el,15*'=-=')
+cc=" ".join(list('c_%d%d' %(i,j) 
+    for i in [1,2] for j in [1,2]))
+C=sympy.Matrix(int(2),int(2),sympy.symbols(cc))
+for el in [C,C.det(),C.inv(),
+           (C^(-1)).transpose()]: 
+    display(el,15*'=-=')
 NC=numpy.matrix([[1,2],[3,4]])
-for el in [NC,numpy.linalg.inv(NC),numpy.linalg.inv(NC).T]: print(el)
+for el in [NC,numpy.linalg.inv(NC),
+           numpy.linalg.inv(NC).T]: 
+    print(el)
 </script></div><br/>  
 <div class="linked_r"><script type="text/x-sage">
 %%r
-C <- matrix(c(1,2,3,4),2,2,byrow=T); list(C,solve(C),t(solve(C)))
+C<-matrix(c(1,2,3,4),2,2,byrow=T)
+list(C,solve(C),t(solve(C)))
 </script></div><br/>
 Пример решения задачи с матрицей перехода 
 <p>$C: (\mathfrak{e_1},\mathfrak{e_2},\mathfrak{e_3}) \to (\mathfrak{f_1},\mathfrak{f_2},\mathfrak{f_3}) \\
@@ -323,9 +329,12 @@ C%*%A%*%t(matrix(solve(C),3,3,byrow=T))
     <h2>4. Собственные значения и собственные векторы линейного оператора</h2>
 Собственный ненулевой вектор $\overline{u}\{x;y;z\}$ и соответствующее ему собственное значение $\lambda$ для матрицы $A$
 <p>$A \overline{u} = \lambda \overline{u} \iff 
-\begin{pmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\ a_{31} & a_{32} & a_{33} \end{pmatrix} * 
-\begin{pmatrix} x \\ y \\ z \end{pmatrix} = \begin{pmatrix} \lambda x \\ \lambda y \\ \lambda z \end{pmatrix} \iff 
-\begin{vmatrix} a_{11}-\lambda & a_{12} & a_{13} \\ a_{21} & a_{22}-\lambda & a_{23} \\ a_{31} & a_{32} & a_{33}-\lambda \end{vmatrix} = 0$</p><br/>
+\begin{pmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\ 
+    a_{31} & a_{32} & a_{33} \end{pmatrix} * 
+\begin{pmatrix} x \\ y \\ z \end{pmatrix} = \begin{pmatrix} \lambda x \\ 
+    \lambda y \\ \lambda z \end{pmatrix} \iff 
+\begin{vmatrix} a_{11}-\lambda & a_{12} & a_{13} \\ a_{21} & a_{22}-\lambda & a_{23} \\ 
+    a_{31} & a_{32} & a_{33}-\lambda \end{vmatrix} = 0$</p><br/>
 <div class="linked_sage"><script type="text/x-sage">
 A=matrix(SR,3,[-4,-3,-5,5,4,5,-7,-7,-6])
 var('t'); At=matrix([[-4-t,-3,-5],[5,4-t,5],[-7,-7,-6-t]])
