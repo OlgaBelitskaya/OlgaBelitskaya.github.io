@@ -137,18 +137,23 @@ list(G,H,F)
 <p>3) $c \cdot A \cdot d = d \cdot A^T \cdot = A \cdot \cdot (dc) = (dc) \cdot \cdot A$;</p>
 <p>4) $(c \times d) \times A = (dc − cd) \cdot A$;</p>
 <p>5) $(A \cdot B)^T = B^T \cdot A^T$;</p>
-и т.д.
-    <p></p>
+и т.д.<br/>
 <div class="linked_sage"><script type="text/x-sage">
-A1A2=A1*A2; MA1A2=matrix(A1A2.comp(e)); v=matrix(SR,3,[3,2,1]); vA1A2=MA1A2*v # MA1A2: v → vA1A2
-A1B1=A1*B1; MA1B1=matrix(A1B1.comp(e)); vA1B1=MA1B1*v # MA1B1: v → vA1B1
-B1B2=B1*B2; MB1B2=matrix(B1B2.comp(e)); vB1B2=MB1B2*v # MB1B2: v → vB1B2
-L=[[A1A2.display(e),A1A2.tensor_type()],MA1A2,[v,vA1A2],
-   [A1B1.display(e),A1B1.tensor_type()],MA1B1,[v,vA1B1],
-   [B1B2.display(e),B1B2.tensor_type()],MB1B2,[v,vB1B2]]
+A1A2=A1*A2; MA1A2=matrix(A1A2.comp(e))
+v=matrix(SR,3,[3,2,1])
+vA1A2=MA1A2*v # MA1A2: v → vA1A2
+A1B1=A1*B1; MA1B1=matrix(A1B1.comp(e))
+vA1B1=MA1B1*v # MA1B1: v → vA1B1
+B1B2=B1*B2; MB1B2=matrix(B1B2.comp(e))
+vB1B2=MB1B2*v # MB1B2: v → vB1B2
+L=[[A1A2.display(e),A1A2.tensor_type()],
+   MA1A2,[v,vA1A2],
+   [A1B1.display(e),A1B1.tensor_type()],
+   MA1B1,[v,vA1B1],
+   [B1B2.display(e),B1B2.tensor_type()],
+   MB1B2,[v,vB1B2]]
 for el in L: pretty_print(el)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 d=[0,1,2,(0,1),(1,1),(2,1)] ; NAB=[numpy.tensordot(NA,NB,d[i]) for i in [0..5]]
 for t in NAB: print(t.shape)
@@ -170,12 +175,24 @@ SBC = [sympy.tensorcontraction(SB, d2[i]) for i in [0..3]]; SBC
 print(dim(A%*%B)); print(A%*%B); cat('\n\n'); print(dim(A%o%B)); print(A%o%B)
 cat('\n\n'); print(dim(C*D)); print(C*D); cat('\n\n'); print(dim(t(C)*t(D))); t(C)*t(D)
 </script></div>
-    <p></p>
     <h2>3. Примеры применения тензорного исчисления</h2>
 <p>${x’} = \frac{2 \ x}{x^{2} + y^{2}} \ ; \ {y’} = \frac{2 \ y}{x^{2} + y^{2}} \\
-\begin{array}{llcl} \Delta_1: \ Md \ \longrightarrow \ \mathbb{R}^3 \\ \mbox{on}\ U : \ \left(x, y\right) \longmapsto \left(X, Y, Z\right) = \left(\frac{x}{x^{2} + y^{2} + 1}, \frac{y}{x^{2} + y^{2} + 1}, \frac{x^{2} + y^{2} - 1}{x^{2} + y^{2} + 1}\right) ; \ \mbox{on}\ V : \ \left({x’}, {y’}\right) \longmapsto \left(X, Y, Z\right) = \left(\frac{3 \, {x’}}{{x’}^{2} + {y’}^{2} + 1}, \frac{3 \, {y’}}{{x’}^{2} + {y’}^{2} + 1}, -\frac{{x’}^{2} + {y’}^{2} - 1}{{x’}^{2} + {y’}^{2} + 1}\right) \end{array} \\
-\begin{array}{llcl} \Delta_2: \ Md \ \longrightarrow \ \mathbb{R}^3 \\ \mbox{on}\ U : \ \left(x, y\right) \longmapsto \left(X, Y, Z\right) = \left(\frac{6 \, x}{x^{2} + y^{2} + 1}, \frac{6 \, y}{x^{2} + y^{2} + 1}, \frac{x^{2} + y^{2} - 1}{x^{2} + y^{2} + 1}\right) ; \ \mbox{on}\ V : \ \left({x’}, {y’}\right) \longmapsto \left(X, Y, Z\right) = \left(\frac{12 \, {x’}}{{x’}^{2} + {y’}^{2} + 1}, \frac{12 \, {y’}}{{x’}^{2} + {y’}^{2} + 1}, -\frac{{x’}^{2} + {y’}^{2} - 1}{{x’}^{2} + {y’}^{2} + 1}\right) \end{array}$</p>
-    <p></p>
+\begin{array}{llcl} \Delta_1: \ Md \ \longrightarrow \ \mathbb{R}^3 \\ 
+    \mbox{on}\ U : \ \left(x, y\right) \longmapsto \left(X, Y, Z\right) = 
+    \left(\frac{x}{x^{2} + y^{2} + 1}, \frac{y}{x^{2} + y^{2} + 1}, 
+    \frac{x^{2} + y^{2} - 1}{x^{2} + y^{2} + 1}\right) ; \ 
+    \mbox{on}\ V : \ \left({x’}, {y’}\right) \longmapsto \left(X, Y, Z\right) = 
+    \left(\frac{3 \, {x’}}{{x’}^{2} + {y’}^{2} + 1}, 
+    \frac{3 \, {y’}}{{x’}^{2} + {y’}^{2} + 1}, -
+    \frac{{x’}^{2} + {y’}^{2} - 1}{{x’}^{2} + {y’}^{2} + 1}\right) \end{array} \\
+\begin{array}{llcl} \Delta_2: \ Md \ \longrightarrow \ \mathbb{R}^3 \\ 
+    \mbox{on}\ U : \ \left(x, y\right) \longmapsto \left(X, Y, Z\right) = 
+    \left(\frac{6 \, x}{x^{2} + y^{2} + 1}, \frac{6 \, y}{x^{2} + y^{2} + 1}, 
+    \frac{x^{2} + y^{2} - 1}{x^{2} + y^{2} + 1}\right) ; \ 
+    \mbox{on}\ V : \ \left({x’}, {y’}\right) \longmapsto \left(X, Y, Z\right) = 
+    \left(\frac{12 \, {x’}}{{x’}^{2} + {y’}^{2} + 1}, 
+    \frac{12 \, {y’}}{{x’}^{2} + {y’}^{2} + 1}, -
+    \frac{{x’}^{2} + {y’}^{2} - 1}{{x’}^{2} + {y’}^{2} + 1}\right) \end{array}$</p>
 <div class="linked_sage"><script type="text/x-sage">
 Md=Manifold(2,'Md'); U=Md.open_subset('U'); V=Md.open_subset('V')
 XU.<x,y>=U.chart(); XV.<xp,yp>=V.chart("xp:x’ yp:y’"); Md.declare_union(U,V)
@@ -201,14 +218,14 @@ ST=sympy.Array([[[x*sympy.cos(u)*z^2-y,x^3*u*v^6-sympy.sin(w*t)],[t*sympy.tan(u*
                 [[y^3*v^5-t,x*sympy.log(w)*z^4],[x-sympy.exp(z)*w^7,y*t^8*u*v]]])
 display(ST)
 for el in [x,y,z,t,u,v,w]: display(ST.diff(el)); print('\n')
-</script></div>
-    <p></p>  
+</script></div><br/>  
 <div class="linked_python"><script type="text/x-sage">
-GH=numpy.tensordot(H,G,0); sympy.pprint(GH); GH.shape
+GH=numpy.tensordot(H,G,0)
+sympy.pprint(GH); GH.shape
 </script></div><br/> 
 <div class="linked_r"><script type="text/x-sage">
 %%r
-GH <- outer(G,H,FUN=paste); list(GH,dim(GH))
+GH<-outer(G,H,FUN=paste); list(GH,dim(GH))
 </script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 GHF=numpy.kron(GH,F); sympy.pprint(GHF)
@@ -227,6 +244,7 @@ list(GHF,dim(GHF))
 
 </script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
+import numpy,sympy,pylab
 
 </script></div><br/>  
 <div class="linked_r"><script type="text/x-sage">
