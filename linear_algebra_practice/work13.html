@@ -72,32 +72,35 @@ c
 </script></div>
     <p>Активируйте этот код перед использованием любых ячеек Linked Python Cells</p>
 <div class="linked_python"><script type="text/x-sage">
-import numpy,sympy,itertools; sympy.init_printing(use_unicode=True)
-from sympy.logic import simplify_logic,satisfiable,And,Or,Not,Xor,Implies,Equivalent
-x1,x2,x3,x4,x5,x6,x7,x8,x9,x10=sympy.symbols('x1,x2,x3,x4,x5,x6,x7,x8,x9,x10')
+import numpy,sympy,itertools
+sympy.init_printing(use_unicode=True)
+from sympy.logic import simplify_logic,satisfiable
+from sympy.logic import And,Or,Not,Xor,Implies,Equivalent
+x1,x2,x3,x4,x5,x6,x7,x8,x9,x10=\
+sympy.symbols('x1,x2,x3,x4,x5,x6,x7,x8,x9,x10')
 eq1=Or(x1,Not(x2))&(x3|~x4)
 eq2=Or(x3,Not(x4))&(x5|~x6)
 eq3=Or(x5,Not(x6))&(x7|~x8)
 eq4=Or(x7,Not(x8))&(x9|~x10)
 eq=simplify_logic(And(eq1,eq2)&And(eq3,eq4))
 s=list(satisfiable(eq,all_models=True))
-for el in [eq,eq.subs({x1:1,x2:1,x3:1,x4:1,x5:1,x6:1,x7:1,x8:1,x9:1,x10:1}),s[0],len(s)]:
+eqs=eq.subs({x1:1,x2:1,x3:1,x4:1,x5:1,
+             x6:1,x7:1,x8:1,x9:1,x10:1})
+for el in [eq,eqs,s[0],len(s)]:
     display(el); print('\n')
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
-binary_combinations=numpy.array(list(itertools.product([0,1],repeat=10))); c = 0
+bc=numpy.array(list(itertools.product([0,1],repeat=10)))
+c=0
 def logical_function(x):
     eq1=(x[0] or not x[1]) and (x[2] or not x[3])
     eq2=(x[2] or not x[3]) and (x[4] or not x[5])
     eq3=(x[4] or not x[5]) and (x[6] or not x[7])
     eq4=(x[6] or not x[7]) and (x[8] or not x[9])    
     return (eq1 and eq2 and eq3 and eq4)
-for el in binary_combinations: 
-    c+=int(logical_function(el))
+for el in bc: c+=int(logical_function(el))
 c
 </script></div>
-    <p></p>
     <p>Активируйте этот код перед использованием любых ячеек Linked R Cells</p>
 <div class="linked_r"><script type="text/x-sage">
 %%r
