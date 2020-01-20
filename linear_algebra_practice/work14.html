@@ -155,25 +155,40 @@ L=[[A1A2.display(e),A1A2.tensor_type()],
 for el in L: pretty_print(el)
 </script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
-d=[0,1,2,(0,1),(1,1),(2,1)] ; NAB=[numpy.tensordot(NA,NB,d[i]) for i in [0..5]]
+d=[0,1,2,(0,1),(1,1),(2,1)]
+NAB=[numpy.tensordot(NA,NB,d[i]) 
+     for i in [0..5]]
 for t in NAB: print(t.shape)
-[sympy.pprint(el.decode('utf-8')) for el in NAB[2]]
+[sympy.pprint(el) for el in NAB[2]]
 for t in [NAB[1],NAB[3],NAB[4],NAB[5]]:
-    print(15*'=_='); [sympy.pprint(el[i,j].decode('utf-8')) for j in range(2) for i in range(2) for el in t];
-</script></div>
-    <p></p>  
+    print(15*'=_='); 
+    [sympy.pprint(el[i,j]) 
+     for j in range(2) for i in range(2) 
+     for el in t]
+</script></div><br/>  
 <div class="linked_python"><script type="text/x-sage">
 d1=[1,2,(0,1),(1,1),(2,1)]
-SAB=[sympy.tensorproduct(SA,SB,d1[i]) for i in [0..4]]
-for el in SAB: display(el); print(el.shape)
-d2 = [(0, 1, 2), (0, 1), (0, 2), (1, 2)]
-SBC = [sympy.tensorcontraction(SB, d2[i]) for i in [0..3]]; SBC
-</script></div>
-    <p></p>
+SAB=[sympy.tensorproduct(SA,SB,d1[i]) 
+     for i in range(5)]
+for el in SAB: 
+    display(el); print(el.shape)
+d2=[(0,1,2),(0,1),(0,2),(1,2)]
+SBC=[sympy.tensorcontraction(SB,d2[i]) 
+     for i in range(4)]
+SBC
+</script></div><br/>
 <div class="linked_r"><script type="text/x-sage">
 %%r
-print(dim(A%*%B)); print(A%*%B); cat('\n\n'); print(dim(A%o%B)); print(A%o%B)
-cat('\n\n'); print(dim(C*D)); print(C*D); cat('\n\n'); print(dim(t(C)*t(D))); t(C)*t(D)
+print(c(dim(A%*%B),A%*%B))
+print(dim(A%o%B)); A%o%B[1]
+</script></div><br/>
+<div class="linked_r"><script type="text/x-sage">
+%%r
+list(dim(C*D),C*D)
+</script></div><br/>
+<div class="linked_r"><script type="text/x-sage">
+%%r
+list(dim(t(C)*t(D)),t(C)*t(D))
 </script></div>
     <h2>3. Примеры применения тензорного исчисления</h2>
 <p>${x’} = \frac{2 \ x}{x^{2} + y^{2}} \ ; \ {y’} = \frac{2 \ y}{x^{2} + y^{2}} \\
@@ -210,8 +225,7 @@ XV.plot(chart=XR3,mapping=Delta1,number_values=30,color='#ff36ff',label_axes=Fal
 XU.plot(chart=XR3,mapping=Delta2,number_values=45,color='#ff3636',label_axes=False)+\
 XV.plot(chart=XR3,mapping=Delta2,number_values=6,color='#36ff36',thickness=2,label_axes=False)
 p.show(frame=False)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked_python"><script type="text/x-sage">
 x,y,z,t,u,v,w=sympy.symbols('x,y,z,t,u,v,w')
 ST=sympy.Array([[[x*sympy.cos(u)*z^2-y,x^3*u*v^6-sympy.sin(w*t)],[t*sympy.tan(u*w),sympy.exp(y)*z*u-w]],
