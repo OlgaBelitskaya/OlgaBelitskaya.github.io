@@ -258,14 +258,19 @@ pretty_print(html('$$y=%s$$'%latex(y21)))
 for x0 in ['oo',0,4]:
     pretty_print('x='+str(x0)+\
     ' => right & left limits: %s'\
-    %[limit(y21,x=x0,dir='+'),limit(y21,x=x0,dir='-')])
+    %[limit(y21,x=x0,dir='+'),
+    limit(y21,x=x0,dir='-')])
 </script></div><br/>
 <div class="link2"><script type="text/x-sage"># python; task 2
-import sympy as sp; import numpy as np; import pylab as pl
-x=sp.symbols('x'); y21=2*sp.ln(x/(x-4))-3; sp.pprint('y=%s'%y21)
+import sympy as sp
+import numpy as np; import pylab as pl
+x=sp.symbols('x'); y21=2*sp.ln(x/(x-4))-3
+sp.pprint('y=%s'%y21)
 for x0 in ['oo',0,4]:
-    print('x='+str(x0)+ ' => right & left limits: %s'%\
-          [sp.limit(y21,x,x0,dir='+'),sp.limit(y21,x,x0,dir='-')])
+    print('x='+str(x0)+\
+          ' => right & left limits: %s'%\
+          [sp.limit(y21,x,x0,dir='+'),
+          sp.limit(y21,x,x0,dir='-')])
 </script></div><br/>
 3) Проверим, является ли функция четной, нечетной, периодической.<br/>
 $\displaystyle{y(-x)=2 \ln \frac{-x}{-x-4}-3=2 \ln \frac{x}{x+4}-3 \implies y(-x) \neq y(x) \land y(-x) \neq -y(x)}$<br/>
@@ -280,20 +285,26 @@ $\displaystyle{x=0 \notin D(y)}$<br/>
 $\displaystyle{2 \ln \frac{x}{x-4}-3=0 \implies x=\frac{4 e^{\frac{2}{3}}}{e^{\frac{2}{3}}-1}}$<br/>
 График функции не пересекает ось $Oy$ и пересекает ось $Ox$ в точке $x=\frac{4 e^{\frac{2}{3}}}{e^{\frac{2}{3}}-1} \approx 5.1$.<br/>
 <div class="link1"><script type="text/x-sage"># sage; task 2 
-pretty_print(html('$y=0 => %s = %s$'%(latex(solve(y21==0,x)[0]),solve(y21==0,x)[0].rhs().n())))
+pretty_print(html('$y=0 => %s = %s$'\
+                  %(latex(solve(y21==0,x)[0]),
+                          solve(y21==0,x)[0].rhs().n())))
 pretty_print(html('$x=0 => y=%s$'%latex(y21(x=0))))
 </script></div><br/>
 <div class="link2"><script type="text/x-sage"># python; task 2
-[y21(x=0),sp.solve(y21==0,x)[0], sp.solve(y21==0,x)[0].n()]
+[y21(x=0),sp.solve(y21==0,x)[0],
+ sp.solve(y21==0,x)[0].n()]
 </script></div><br/>
 5) Найдем наклонные асимпоты графика функции.<br/>
 Вычислим коэффициенты для прямой $y=kx+b$, являющейся наклонной асимптотой.<br/>  
 Наклонная асимптота совпадает с горизонтальной.<br/> 
 <div class="link1"><script type="text/x-sage"># sage; task 2 
 x0='oo'; s='x='+str(x0)+' => '
-print(s+'k='+str([limit(y21/x,x=x0,dir='+'),limit(y21/x,x=x0,dir='-')]))
-print(s+'b='+str([limit(y21-limit(y21/x,x=x0)*x,x=x0,dir='+'),
-                  limit(y21-limit(y21/x,x=x0)*x,x=x0,dir='-')]))
+print(s+'k='+str([limit(y21/x,x=x0,dir='+'),
+                  limit(y21/x,x=x0,dir='-')]))
+print(s+'b='+str([limit(y21-limit(y21/x,x=x0)*x,
+                        x=x0,dir='+'),
+                  limit(y21-limit(y21/x,x=x0)*x,
+                        x=x0,dir='-')]))
 </script></div><br/>
 <div class="link2"><script type="text/x-sage"># python; task 2
 x0='oo'; s='x='+str(x0)+' => '
