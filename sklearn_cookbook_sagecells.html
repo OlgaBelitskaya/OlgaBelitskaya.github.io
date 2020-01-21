@@ -114,7 +114,7 @@ feature_list=['dbn','ell_programs','language_classes','finalgrades','total_stude
               'pct_stu_enough_variety','latitude','longitude','council_district','city']
 se=se[feature_list].dropna(); f,ax=pylab.subplots(ncols=3,figsize=(12,5))
 for i in range(3):
-    se[feature_list[i+5]]=se[feature_list[i+5]].astype('string').str.replace("N/A","0").astype('float')
+    se[feature_list[i+5]]=se[feature_list[i+5]].astype('U').str.replace("N/A","0").astype('float')
     se.plot(kind="scatter",x="longitude",y="latitude",s=10,c=feature_list[i+5],cmap=pylab.cm.jet,ax=ax[i],alpha=0.8)
     ax[i].set_xticks([]); ax[i].set_yticks([]);
 pylab.show()
@@ -130,7 +130,7 @@ pylab.title('Data Values by Product Categories'); pylab.show()
     <p></p>
 <div class="linked"><script type="text/x-sage">
 path='https://olgabelitskaya.github.io/'; zf='LetterColorImages_123.h5.zip'
-input_file=urllib.urlopen(path+zf); output_file=open(zf,'wb'); 
+input_file=urllib.request.urlopen(path+zf); output_file=open(zf,'wb'); 
 output_file.write(input_file.read()); output_file.close(); input_file.close()
 zipf=zipfile.ZipFile(zf,'r'); zipf.extractall(''); zipf.close()
 f=h5py.File(zf[:-4],'r'); keys=list(f.keys()); letters=u'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
@@ -141,7 +141,7 @@ pylab.imshow(letter_images[2000]); pylab.show()
     <p></p>
 <div class="linked"><script type="text/x-sage">
 path='https://olgabelitskaya.github.io/'; zf='StyleColorImages.h5.zip'
-input_file=urllib.urlopen(path+zf); output_file=open(zf,'wb'); 
+input_file=urllib.request.urlopen(path+zf); output_file=open(zf,'wb'); 
 output_file.write(input_file.read()); output_file.close(); input_file.close()
 zipf=zipfile.ZipFile(zf,'r'); zipf.extractall(''); zipf.close()
 f=h5py.File(zf[:-4],'r'); keys=list(f.keys()); 
