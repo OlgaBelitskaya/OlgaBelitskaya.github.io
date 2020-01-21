@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>IT_TF1319_1</title>
+    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <script>$(function (){
+            sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Run'});});
+    </script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  </head>
+  <style>
+  @import url('https://fonts.googleapis.com/css?family=Orbitron');
+  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
+  p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
+  </style>  
+  <body>
+  <h1>&#x1F4D1; &nbsp;IT. TF1319. Standard Calculation 1</h1>
+<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a>
+<a href="https://olgabelitskaya.github.io/README_EXERCISES.html">&#x1F300; &nbsp; Various Exam Exercises &nbsp; &nbsp;</a>
+  <h2>Task 1</h2>
+      Create functions for computations
+  <p>1. $\frac{e^{-\sqrt{x}} \left(\sqrt[5]{x}+\sin \left(\frac{\pi 
+   x}{2}\right)\right)}{\sqrt{\left| \cos (\pi  x)+1\right| }}$</p>
+  <p>2. $\ln\left(n x - 1\right) {\sum_{k=1}^{n} \frac{\sqrt{e^{-k x} + x^{k-1}}}
+        {\cos \ k x + \sin \ k x}}$</p>
+<div class="compute"><script>
+# sage 
+var('x'); A,B,N=.55,1,10; X1,X2=1000,6000
+def F(f,x,a,b): 
+    try: return round(f(x),4)
+    except: return NaN
+    if a>=b: return NaN
+def create_table(f,a,b,n):
+    d=(b-a)/(n-1); x0=randint(X1,X2)*.1^4    
+    t=[[round(x,4),F(f,x,a,b)] for x in srange(a,b+d,d)]
+    pretty_print(html(latex(f)))
+    pretty_print(html('x=%.4f ↦ f(x)=%s'%(x0,F(f,x0,a,b))))
+    show(table([['x','f(x)']]+t))
+    return t
+def create_plottable(f,a,b,n): 
+    t=create_table(f,a,b,n)
+    list_plot(t).show(gridlines=True,figsize=4)
+f21(x)=(sin(x*pi/2)+x^(1/5))/(sqrt(abs(cos(pi*x)+1))*exp(sqrt(x)))
+create_plottable(f21,A,B,N)
+</script></div><br/>
+<div class="compute"><script># sage
+var('k'); f(x,n)=ln(n*x-1)*sum(sqrt(exp(1)^(-k*x)+x^(k-1))/(cos(k*x)+sin(k*x)),k,1,n)
+l=[[[x,N(f(x,n))] for x in srange(1.1,5,.01)] for n in [2..7]]
+sum([line(l[i-2],color=hue(i/7),legend_label=i) for i in [2..7]])\
+.show(ymin=-300,ymax=300,figsize=10)
+table([['x','n','f(x,n)','f(x,n)'],[2,2,f(2,2),f(2,2).n()],[2,3,f(2,3),f(2,3).n()],
+      [2,4,f(2,4),f(2,4).n()],[2,5,f(2,5),f(2,5).n()],[2,6,f(2,6),f(2,6).n()]])
+</script></div><br/>
+<div class="compute"><script>
+import sympy; from sympy import *
+sympy.init_printing(use_unicode=True)
+x=Symbol('x')
+y=(sin(x*pi/2.)+x^(1/5.))/(sqrt(abs(cos(pi*x)+1.))*exp(1.)^sqrt(x));
+a,b,n=.55,1,10; d=(b-a)/(n-1)
+print('x   ->   f(x)'); print(15*'-')
+for t in range(n):
+    x0=a+t*d
+    if cos(pi*x0)!=-1 and x0>0 and a<b:
+        pprint('%.2f, %.4f'%(x0,y.evalf(subs={x:x0}))); print(15*'-')
+    else:
+        pprint('%.2f, %s'%(x0,'NaN'))
+plot(y,(x,.55,1),ylim=(0,30));
+</script></div><br/>
+<div class="compute"><script># python / sympy
+import sympy; from sympy import *
+sympy.init_printing(use_unicode=True)
+k,n=symbols('n k',integer=True); x,a,b=symbols('x a b')
+f=lambda x,n: ln(n*x-1)*Sum(sqrt(exp(1)^(-k*x)+x^(k-1))/(cos(k*x)+sin(k*x)),(k,1,n))
+for i in range(2,5): 
+    display([2,i,f(2,i).doit(),f(2,i).doit().evalf()])
+p2=plot(f(x,2).doit(),(x,1,5),line_color='#3636ff',ylim=(-200,200),show=False)
+p3=plot(f(x,3).doit(),(x,1,5),line_color='#ff3636',show=False)
+p4=plot(f(x,4).doit(),(x,1,5),line_color='#36ff36',show=False)
+p2.extend(p3); p2.extend(p4); p2.show()
+</script></div><br/>
+<div class="compute"><script>
+%%javascript
+var xy=Array(10).fill(20).map((r,x) => [(0.1*(x+r)),
+((Math.sin(0.05*(x+r)*Math.PI)+Math.pow(0.1*(x+r),1/5))/
+ (Math.sqrt(Math.abs(Math.cos(Math.PI*0.1*(x+r))+1))*Math.pow(Math.E,Math.sqrt(0.1*(x+r)))))]);
+Highcharts.chart('container1', {
+    chart:{type:'line'},xAxis:{title:{text:'x'}},yAxis:{title:{text:'y'}},
+    title:{text:'Line Plot'},credits:{enabled:false},
+    series: [{name:'f(x)',color:'#3636ff',data:xy}]});
+</script></div><br/>
+<div id="container1" style="height:600px; width:600px; margin:0 auto">javascript cell 1 is launching here...</div><br/>
+<div class="compute"><script>
+%%html
+<style>@import url('https://fonts.googleapis.com/css?family=Roboto|Miss Fajardose');</style>
+<p style="background-color:white; color:#3636ff; font-family:Miss Fajardose; font-size:300%;">
+The code cell calls a function which performs calculations and returns the result:</p>
+<button id="calculation" width=600 
+style="background-color:silver; text-align:left; color:#3636ff; font-family:Roboto; font-size:200%;"></button>
+<script>
+function myfunction(n,x) {
+  var i; var sum=0;
+  for (i=1; i<n+1; i++) {
+      sum+=Math.sqrt(Math.pow(Math.E,-i*x)+
+                     Math.pow(x,i-1))/(Math.cos(i*x)+Math.sin(i*x));};
+  return sum*Math.log(n*x-1);}
+var xy=[["n","x","f(n,x)"]];
+for (i=2; i<7; i++) {xy.push(["<br/>"+i,2,myfunction(i,2)]);
+document.getElementById("calculation").innerHTML=xy;};
+</script></div><br/>
+<div class="compute"><script>
+%%javascript
+function myfunction(n,x) {
+  var i; var sum=0;
+  for (i=1; i<n+1; i++) {
+      sum+=Math.sqrt(Math.pow(Math.E,-i*x)+
+                              Math.pow(x,i-1))/(Math.cos(i*x)+Math.sin(i*x));};
+  return sum*Math.log(n*x-1);}
+var xy2 = Array(30).fill(10).map((r,x) => [0.1*(x+r),myfunction(2,0.1*(x+r))]);
+var xy3 = Array(30).fill(10).map((r,x) => [0.1*(x+r),myfunction(3,0.1*(x+r))]);
+var xy4 = Array(30).fill(10).map((r,x) => [0.1*(x+r),myfunction(4,0.1*(x+r))]);
+Highcharts.chart('container2', {
+    chart:{type:'line'},xAxis:{title:{text:'x'}},yAxis:{title:{text:'y'}},
+    title:{text:'Line Plot'},credits:{enabled:false},
+    series: [{name:'n=2',color:'#ff3636',data:xy2},{name:'n=3',color:'#3636ff',data:xy3},
+             {name:'n=4',color:'#36ff36',data:xy4}]
+});
+</script></div><br/>
+<div id="container2" style="height:600px; width:600px; margin:0 auto">
+    javascript cell 2 is launching here...</div><br/>
+<div class="compute"><script>
+%%r
+svg(filename="Rplots.svg",width=7,height=7,pointsize=12,onefile=T,family="sans",
+    bg="slategray",antialias=c("default","none","gray","subpixel"))
+x<-seq(2.,3.,len=50); y<-(sin(x*pi/2.)+x^(1/5.))/(sqrt(abs(cos(pi*x)+1.))*exp(1.)^sqrt(x))  
+plot(x,y,type='o',cex=0.7,col='#3636ff',xlab='x',ylab='y',xlim=c(2,3),ylim=c(0.05,0.25),
+     fg='white',col.axis='white',col.lab='white')
+cat("x "); cat(round(x[2:10],6)); cat("\n"); cat("y "); cat(round(y[2:10],6)); cat("\n")
+grid(col='white'); dev.off()
+</script></div><br/>
+<div class="compute"><script>
+%%r
+svg(filename="Rplots.svg",width=9,height=7,pointsize=12,onefile=T,family="sans",
+    bg="slategray",antialias=c("default","none","gray","subpixel"))
+f<-function(n,x) {
+  s=0; for(i in 1:n) {s<-s+sqrt(exp(1)^(-i*x)+x^(i-1))/(cos(i*x)+sin(i*x))};
+  return(s*log(n*x-1));
+}
+x<-seq(1,5,len=47); y2<-f(2,x); y3<-f(3,x); y4<-f(4,x)
+plot(x,y2,type='o',cex=0.9,col='#3636ff',pch=7,xlim=c(1,5),ylim=c(-150,150),xlab='',ylab=''); par(new=T) 
+plot(x,y3,type='o',cex=0.9,col='#ff36ff',pch=8,xlim=c(1,5),ylim=c(-150,150),xlab='',ylab=''); par(new=T)
+plot(x,y4,type='o',cex=0.9,col='#ff3636',pch=9,xlab='x',ylab='y',xlim=c(1,5),ylim=c(-150,150),
+     fg='white',col.axis='white',col.lab='white')
+legend(list(x=3,y=150),legend=c("n=2","n=3","n=4"),col=c('#3636ff','#ff36ff','#ff3636'),
+       pch=7:9,lty=1,merge=TRUE,text.col=c('#3636ff','#ff36ff','#ff3636'),box.col="white")
+cat("x      "); cat(round(x[2:11],6)); cat("\n"); cat("f(2,x) "); cat(round(y2[2:11],6)); cat("\n"); 
+cat("f(3,x) "); cat(round(y3[2:11],6)); cat("\n"); cat("f(4,x) "); cat(round(y4[2:11],6)); cat("\n")
+grid(col='white'); dev.off()
+</script></div>
+  </body>
+</html>
