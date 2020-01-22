@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>IT_TF1319_2</title>
+    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <script>$(function (){
+            sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Run'});});
+    </script>
+  </head>
+  <style>
+  @import url('https://fonts.googleapis.com/css?family=Orbitron');
+  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
+  p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
+  body: {margin:5px 5px 5px 15px;}
+  </style>  
+  <body>
+  <h1>&#x1F4D1; &nbsp;IT. TF1319. Standard Calculation 2</h1>
+<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> &nbsp; &nbsp;
+<a href="https://olgabelitskaya.github.io/README_EXERCISES.html">&#x1F300; &nbsp; Various Exam Exercises &nbsp; &nbsp;</a>
+  <h2>Create code for the next tasks</h2>
+  <p>1. Form an array T from a one-dimensional array X of n elements according to the rule:</p>
+  <p>$T_1=X_1, T_2=X_1+X_2, ..., T_n=X_1+X_2+...X_n$</p>
+  <p>2. Find the total gravity of the N-layer spherical shell with the inner diameter D, </p>
+  <p>if the outer diameters of the layers are equal: D + 1, D + 2, ..., D + N, </p>
+  <p>and the specific gravity of the material of the layers is respectively: G, G / 2, ..., G / N. </p>
+  <p>The layers fit tightly together.</p>
+<div class="compute"><script># sage / task 1
+X1=["♔","♕","♖","♗","♘","♙"]
+X2=[randint(1,99) for i in [0..10]]
+def sum_arr(X):
+    T=[X[0]]
+    for i in [1..len(X)-1]: T.append(T[i-1]+X[i])
+    return T
+pretty_print('string summation')
+pretty_print(X1,'->',sum_arr(X1))
+pretty_print('number summation')
+    pretty_print(X2,'->',sum_arr(X2))
+</script></div><br/>
+<div class="compute"><script># sage / task 2
+var('D,G,i,N'); Vi(D,i)=4/3*pi*((D+i)/2)^3-4/3*pi*((D+i-1)/2)^3
+v(D,i)=Vi(D,i).expand().simplify().factor()
+pretty_print('volume of the i-th layer:'); pretty_print(v(D,i))
+P(D,G,N)=sum(v(D,i)*G/i,i,1,N)
+pretty_print('total gravity of N layers:'); pretty_print(P(D,G,N).factor())
+from sage.plot.plot3d.shapes import Sphere
+def display_shell(D,G,N):
+    g=Graphics(); s=Sphere(D,color='gray',frame=false)
+    layers=sum([Sphere(D+i,opacity=G/i) for i in [1..N]])
+    pretty_print('D=%d, G=%.2f, N=%d -> P=%f'%(D,G,N,P(D,G,N))) 
+    (g+s+layers).show()
+display_shell(7,.75,10)
+</script></div><br/>
+<div class="compute"><script>
+# python / task 1
+import random,sympy
+X1=["♔","♕","♖","♗","♘","♙"]; X2=[random.randint(1,99) for i in range(10)]
+def sum_arr(X):
+    T=[X[0]]
+    for i in range(1,len(X)): T.append(T[i-1]+X[i])
+    return T
+sympy.pprint('string summation'); sympy.pprint(X1); sympy.pprint(sum_arr(X1))
+print('number summation'); print(X2); print(sum_arr(X2))
+</script></div><br/>
+<div class="compute"><script>
+# python / task 2
+import sympy as sp; D,G=sp.symbols('D G'); n=sp.symbols('n',integer=True)
+expression=(4/3*sp.pi*((D+n)/2)^3-4/3*sp.pi*((D+n-1)/2)^3)*G/n
+Pn=sp.lambdify([D,G,n],sp.factor(sp.simplify(sp.expand(expression))))
+print('gravity of the n-th layer:'); print(Pn(D,G,n))
+def P(D,G,N):
+    s=Pn(D,G,1)
+    for n in range(2,N+1): s+=Pn(D,G,n)
+    return s
+print('total gravity of 10 layers for D=7 and G=0.75:'); print(P(7,.75,10))
+</script></div><br/>
+HTML & JavaScript / Task 1
+<div class="compute"><script>
+%%html
+<style>@import url('https://fonts.googleapis.com/css?family=Monoton|Roboto&effect=3d');</style>
+<p class='font-effect-3d' style='color:crimson; font-family:Monoton; font-size:200%;'>string summation</p>
+<button id='cell11' class='font-effect-3d' style='color:crimson; font-family:Roboto; font-size:150%;'
+onclick='document.getElementById("cell11").innerHTML=result1()'>click >>></button>
+<p class='font-effect-3d' style='color:darkblue; font-family:Monoton; font-size:200%;'>number summation</p>
+<button id='cell12' class='font-effect-3d' style='color:darkblue; font-family:Roboto; font-size:150%;'
+onclick='document.getElementById("cell12").innerHTML=result2()'>click >>></button>
+<script>
+X1=["♔","♕","♖","♗","♘","♙"]; T1=[X1[0]];
+var n; for (n=1; n<X1.length; n++) {T1[n]=T1[n-1].concat(X1[n])};
+function result1() {return X1.join().concat(" -> ").concat(T1.join());}
+X2=Array.from({length:10},()=>Math.floor(Math.random()*100)); T2=[X2[0]];
+var n; for (n=1; n<X2.length; n++) {T2[n]=T2[n-1]+X2[n]};
+function result2() {return X2.toString().concat(" -> ").concat(T2.toString());}
+</script></div><br/>
+HTML & JavaScript / Task 2
+<div class="compute"><script>
+%%html
+<style>@import url('https://fonts.googleapis.com/css?family=Ewert&effect=ice');</style>
+<p class='font-effect-ice' style='font-size:170%;'>total gravity of N=10 layers for D=7 and G=0.75:</p>
+<button id='cell2' class='font-effect-ice' style='font-family:Ewert; font-size:300%;'
+onclick='document.getElementById("cell2").innerHTML=P(7,0.75,10);'>click >>></button>
+<script>
+function Pn(D,G,n) {
+    return (4/3*Math.PI*Math.pow((D+n)/2,3)-4/3*Math.PI*Math.pow((D+n-1)/2,3))*G/n;}
+function P(D,G,N) {
+    var n,D,G,N; var s=Pn(D,G,1); for (n=2; n<N+1; n++) {s=s+Pn(D,G,n)}; return s};
+</script></div><br/>
+<div class="compute"><script>
+%%r
+# task 1
+X1<-c("♔","♕","♖","♗","♘","♙"); T1<-X1[1]
+for(i in 2:length(X1)) {T1[i]<-paste(c(T1[i-1],X1[i]),collapse="")}
+cat(c("string summation \n",X1,"->",T1,"\n"))
+X2<-sample(1:99,10); T2<-X2[1]
+for(i in 2:length(X2)) {T2[i]<-T2[i-1]+X2[i]}
+cat(c("number summation \n",X2,"->",T2,"\n"))
+T2[length(X2)]==sum(X2)
+</script></div><br/>
+<div class="compute"><script>
+%%r
+# task 2
+Pn<-function(D,G,n) {return((4/3*pi*((D+n)/2)^3-4/3*pi*((D+n-1)/2)^3)*G/n)}
+P<-function(D,G,N) {s=Pn(D,G,1); for (n in 2:N) {s<-s+Pn(D,G,n)}; return(s)}
+cat('total gravity of N=10 layers for D=7 and G=0.75: \n'); P(7,.75,10)
+</script></div>
+  </body>
+</html>
