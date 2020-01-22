@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>IT_TF1319_3</title>
+    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <script>$(function (){
+            sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Run'});});
+    </script>
+  </head>
+  <style>
+  @import url('https://fonts.googleapis.com/css?family=Orbitron');
+  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
+  p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
+  body: {margin:5px 5px 5px 15px;}  
+  </style>  
+  <body>
+  <h1>&#x1F4D1; &nbsp;IT. TF1319. Standard Calculation 3</h1>
+<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> &nbsp; &nbsp;
+<a href="https://olgabelitskaya.github.io/README_EXERCISES.html">&#x1F300; &nbsp; Various Exam Exercises &nbsp; &nbsp;</a>
+  <h2>Create code for the next tasks</h2>
+  <p>1. Calculate the difference between the largest and smallest absolute values of elements in the given array A</p>
+  <p>2. For given values $X_1, X_2, ..., X_n$ and $Y_1, Y_2, ..., Y_n$,</p>
+  <p>replace each non-positive value of an element in the array $X_1, X_2, ..., X_n$</p>
+  <p>by the value of an element in the array $Y_1, Y_2, ..., Y_n$ with the same number.</p>
+  <p>Find the number of replacements.</p>
+<div class="compute"><script>
+# sage / task 1
+A=[round(random()*100-50,2) for i in [0..20]]
+pretty_print(A)
+minabs,maxabs=10**20,-10**20
+for a in A:
+    if abs(a)<minabs: minabs=abs(a)
+    if abs(a)>maxabs: maxabs=abs(a)    
+pretty_print('max: %.2f, min: %.2f, difference: %.2f'%(maxabs,minabs,maxabs-minabs))
+</script></div><br/>
+<div class="compute"><script>
+# sage / task 2
+N=20; Z=[]; c=0
+X=[round(random()*100-50,2) for i in [0..N]]; pretty_print(X)
+Y=[round(random()*100-50,2) for i in [0..N]]; pretty_print(Y)
+for i in [0..N]:
+    if X[i]>0:
+        Z.append(X[i])
+    else: 
+        Z.append(Y[i]); c+=1
+pretty_print('result: %s'%str(Z))
+pretty_print('number of replacements: %d'%c)
+</script></div><br/>
+<div class="compute"><script>
+# python / task 1
+import random
+A=[round(random.random()*100-50,2) for i in range(20)]
+print(A)
+def diff_abs(X):
+    minabs,maxabs=10**20,-10**20
+    for x in X:
+        if abs(x)<minabs: minabs=abs(x)
+        if abs(x)>maxabs: maxabs=abs(x)    
+    return maxabs,minabs,maxabs-minabs
+print('max: %f, min: %f, difference: %f'%diff_abs(A))
+</script></div><br/>
+<div class="compute"><script>
+# python / task 2
+import random
+X=[round(random.random()*100-50) for i in range(20)]; print(X)
+Y=[round(random.random()*100-50) for i in range(20)]; print(Y)
+def replace_el(X,Y):
+    Z=[]; i,c=0,0
+    for x in X:
+        if x>0: Z.append(x)
+        else: 
+            Z.append(Y[i]); c+=1
+        i+=1
+    return Z,c
+print('\nresult: \n'); print(replace_el(X,Y))
+</script></div><br/>
+HTML & JavaScript / Task 1
+<div class="compute"><script>
+%%html
+<style>@import url('https://fonts.googleapis.com/css?family=Monoton|Roboto&effect=3d');</style>
+<p class='font-effect-3d' style='color:darkgreen; font-family:Monoton; font-size:200%;'>array A</p>
+<button id='cell11' class='font-effect-3d' style='color:darkgreen; font-family:Roboto; font-size:110%;'
+onclick='document.getElementById("cell11").innerHTML=result11()'>click >>></button>
+<p class='font-effect-3d' style='color:darkgreen; font-family:Monoton; font-size:200%;'>max, min, and difference</p>
+<button id='cell12' class='font-effect-3d' style='color:darkgreen; font-family:Roboto; font-size:110%;'
+onclick='document.getElementById("cell12").innerHTML=result12()'>click >>></button>
+<script>
+A=Array.from({length:20},()=>Math.round(Math.random()*10000-5000)/100);
+function result11() {return A.toString();}
+var minabs=Math.pow(10,20); var maxabs=0;
+for (var n=0; n<A.length; n++) {
+    if (Math.abs(A[n])<minabs) {minabs=Math.abs(A[n])};
+    if (Math.abs(A[n])>maxabs) {maxabs=Math.abs(A[n])}};
+function result12() {return [maxabs.toString(),minabs.toString(),
+                            (Math.round((maxabs-minabs)*100)/100).toString()];}
+</script></div><br/>
+HTML & JavaScript / Task 2
+<div class="compute"><script>
+%%html
+<style>@import url('https://fonts.googleapis.com/css?family=Ewert|Roboto&effect=ice|fire-animation');</style>
+<p class='font-effect-ice' style='color:darkblue; font-family:Ewert; font-size:200%;'>arrays X & Y</p>
+<button id='cell21' class='font-effect-fire-animation' style='color:darkblue; font-family:Roboto; font-size:110%;'
+onclick='document.getElementById("cell21").innerHTML=result21()'>click >>></button>
+<p class='font-effect-ice' style='color:darkblue; font-family:Ewert; font-size:200%;'>result and number of replacements</p>
+<button id='cell22' class='font-effect-fire-animation' style='color:darkblue; font-family:Roboto; font-size:110%;'
+onclick='document.getElementById("cell22").innerHTML=result22()'>click >>></button>
+<script>
+X=Array.from({length:20},()=>Math.round(Math.random()*10000-5000)/100);
+Y=Array.from({length:20},()=>Math.round(Math.random()*10000-5000)/100);
+function result21() {return 'X => '+X.toString()+'</br>Y => '+Y.toString();}
+var Z=[]; var c=0;
+for (var n=0; n<X.length; n++) {if (X[n]>0) {Z[n]=X[n]} else {Z[n]=Y[n]; c++};}
+function result22() {return 'result => '+Z.toString()+'</br>number of replacements => '+c.toString();}
+</script></div><br/>
+<div class="compute"><script>
+%%r
+# task 1
+A<-sample(1:9999,20); A<-round(A/100-50,2); cat(A)
+minabs<-10**20; maxabs<--10**20
+for (a in A) {if (abs(a)<minabs) {minabs<-abs(a)};
+              if (abs(a)>maxabs) {maxabs<-abs(a)}}
+cat(c("\n max: ",maxabs,"; min: ",minabs,"; difference: ",maxabs-minabs,"\n"))
+</script></div><br/>
+<div class="compute"><script>
+%%r
+# task 2
+N<-20; Z<-c(); c<-0
+X<-sample(1:9999,N); X<-round(X/100-50,2); cat(X); cat("\n")
+Y<-sample(1:9999,N); Y<-round(Y/100-50,2); cat(Y); cat("\n")
+for (i in 1:N) {if (X[i]>0) {Z[i]<-X[i]} else {Z[i]<-Y[i]; c<-c+1}}
+cat(c(" => result: ",Z,"\n","=> number of replacements: ",c,"\n"))
+</script></div>
+  </body>
+</html>
