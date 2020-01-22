@@ -178,23 +178,27 @@ HTML & JavaScript / Task 2
 <div class="compute"><script>
 %%html
 <script src='https://code.highcharts.com/highcharts.js'/>
-<div id='container2' style='height:600px; width:600px; margin:0 auto'></div><script>
-function f(x,z) {
-    return (Math.log(Math.sqrt(Math.PI))+Math.abs(2-x))/(3.3-1/z)+Math.pow(z,2/3)*Math.cos(Math.pow(x,2));};
-var series=[]; var x0=6.7,hx=0.1,n=4,z0=3.3,hz=0.2,m=3; var j;
-for (j=0; j<m; j++) {
+<div id='container2' style='height:500px; width:500px; margin:0 auto'>
+</div><script>
+function f(x,z){
+    return (Math.log(Math.sqrt(Math.PI))+Math.abs(2-x))/
+           (3.3-1/z)+Math.pow(z,2/3)*Math.cos(Math.pow(x,2));};
+var series=[]; var x0=6.7,hx=0.1,n=4,z0=3.3,hz=0.2,m=3;
+for (var j=0; j<m; j++) {
     xz=Array(4).fill(z0+j*hz).map((z,i)=>[x0+i*hx,f(x0+i*hx,z)]); 
-    series.push({name:'z='+(z0+j*hz),marker:{radius:9-3*j},data:xz});
-};
-Highcharts.chart('container2', {
-    chart:{type:'line'},xAxis:{title:{text:'x'}},yAxis:{title:{text:'f(x,z)'}},
-    title:{text:'Function of Two Variables'},credits:{enabled:false},series:series });
+    series.push({name:'z='+(z0+j*hz),marker:{radius:9-3*j},data:xz});};
+Highcharts.chart('container2',{
+    chart:{type:'line'},title:{text:'Function of Two Variables'},
+    xAxis:{title:{text:'x'}},yAxis:{title:{text:'f(x,z)'}},
+    credits:{enabled:false},series:series });
 </script></div><br/>
 HTML & JavaScript / Task 3
 <div class="compute"><script>
 %%html
 <script src='https://code.highcharts.com/highcharts.js'/>
-<div id='container3' style='height:600px; width:600px; margin:0 auto'></div><script>
+<div id='container3' 
+     style='height:600px; width:600px; margin:0 auto'></div>
+<script>
 function factorial(x) {if (x===0){return 1;} return x*factorial(x-1);};
 function sumf(n,x) {
   var s=0; var k;
