@@ -143,22 +143,29 @@ function P(D,G,N){
     for (var n=2; n<N+1; n++){s=s+Pn(D,G,n)}; return s};
 </script></div><br/>
 <div class="compute"><script>
-%%r
+%%r 
 # task 1
 X1<-c("♔","♕","♖","♗","♘","♙"); T1<-X1[1]
-for(i in 2:length(X1)) {T1[i]<-paste(c(T1[i-1],X1[i]),collapse="")}
-cat(c("string summation \n",X1,"->",T1,"\n"))
+for (i in 2:length(X1)){
+    T1[i]<-paste(c(T1[i-1],X1[i]),collapse="")}
+print(paste(c("String summation: ",
+              X1,"->",T1),collapse=" "))
 X2<-sample(1:99,10); T2<-X2[1]
-for(i in 2:length(X2)) {T2[i]<-T2[i-1]+X2[i]}
-cat(c("number summation \n",X2,"->",T2,"\n"))
+for(i in 2:length(X2)){T2[i]<-T2[i-1]+X2[i]}
+print(paste(c("Number summation: ",
+            X2,"->",T2),collapse=" "))
 T2[length(X2)]==sum(X2)
 </script></div><br/>
 <div class="compute"><script>
 %%r
 # task 2
-Pn<-function(D,G,n) {return((4/3*pi*((D+n)/2)^3-4/3*pi*((D+n-1)/2)^3)*G/n)}
-P<-function(D,G,N) {s=Pn(D,G,1); for (n in 2:N) {s<-s+Pn(D,G,n)}; return(s)}
-cat('total gravity of N=10 layers for D=7 and G=0.75: \n'); P(7,.75,10)
+Pn<-function(D,G,n){
+    return((4/3*pi*((D+n)/2)^3-
+            4/3*pi*((D+n-1)/2)^3)*G/n)}
+P<-function(D,G,N){s=Pn(D,G,1);
+    for (n in 2:N) {s<-s+Pn(D,G,n)}; return(s)}
+cat('Total gravity of N=10 layers for D=7 and G=0.75: \n')
+P(7,.75,10)
 </script></div>
   </body>
 </html>
