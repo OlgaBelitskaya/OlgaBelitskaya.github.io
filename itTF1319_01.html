@@ -162,32 +162,44 @@ Highcharts.chart('container2',{
     javascript cell 2 is launching here...</div><br/>
 <div class="compute"><script>
 %%r
-svg(filename="Rplots.svg",width=7,height=7,pointsize=12,onefile=T,family="sans",
-    bg="slategray",antialias=c("default","none","gray","subpixel"))
-x<-seq(2.,3.,len=50); y<-(sin(x*pi/2.)+x^(1/5.))/(sqrt(abs(cos(pi*x)+1.))*exp(1.)^sqrt(x))  
-plot(x,y,type='o',cex=0.7,col='#3636ff',xlab='x',ylab='y',xlim=c(2,3),ylim=c(0.05,0.25),
+svg(filename="Rplots.svg",width=7,height=7,pointsize=12,
+    onefile=T,family="sans",bg="slategray",
+    antialias=c("default","none","gray","subpixel"))
+x<-seq(2,3,len=50)
+y<-(sin(x*pi/2.)+x^(1/5.))/
+   (sqrt(abs(cos(pi*x)+1.))*exp(1.)^sqrt(x))  
+plot(x,y,type='o',cex=0.7,col='#3636ff',
+     xlab='x',ylab='y',xlim=c(2,3),ylim=c(0.05,0.25),
      fg='white',col.axis='white',col.lab='white')
-cat("x "); cat(round(x[2:10],6)); cat("\n"); cat("y "); cat(round(y[2:10],6)); cat("\n")
 grid(col='white'); dev.off()
+m<-matrix(c(round(x[2:9],6),round(y[2:9],6)),ncol=2)
+colnames(m)<-c('x','y'); m
 </script></div><br/>
 <div class="compute"><script>
 %%r
-svg(filename="Rplots.svg",width=9,height=7,pointsize=12,onefile=T,family="sans",
-    bg="slategray",antialias=c("default","none","gray","subpixel"))
-f<-function(n,x) {
-  s=0; for(i in 1:n) {s<-s+sqrt(exp(1)^(-i*x)+x^(i-1))/(cos(i*x)+sin(i*x))};
-  return(s*log(n*x-1));
-}
+svg(filename="Rplots.svg",width=9,height=7,pointsize=12,
+    onefile=T,family="sans",bg="slategray",
+    antialias=c("default","none","gray","subpixel"))
+f<-function(n,x){s=0; 
+    for(i in 1:n){
+        s<-s+sqrt(exp(1)^(-i*x)+x^(i-1))/(cos(i*x)+sin(i*x))};
+    return(s*log(n*x-1));}
 x<-seq(1,5,len=47); y2<-f(2,x); y3<-f(3,x); y4<-f(4,x)
-plot(x,y2,type='o',cex=0.9,col='#3636ff',pch=7,xlim=c(1,5),ylim=c(-150,150),xlab='',ylab=''); par(new=T) 
-plot(x,y3,type='o',cex=0.9,col='#ff36ff',pch=8,xlim=c(1,5),ylim=c(-150,150),xlab='',ylab=''); par(new=T)
-plot(x,y4,type='o',cex=0.9,col='#ff3636',pch=9,xlab='x',ylab='y',xlim=c(1,5),ylim=c(-150,150),
+plot(x,y2,type='o',cex=0.9,col='#3636ff',pch=7,xlim=c(1,5),
+     ylim=c(-150,150),xlab='',ylab=''); par(new=T) 
+plot(x,y3,type='o',cex=0.9,col='#ff36ff',pch=8,xlim=c(1,5),
+     ylim=c(-150,150),xlab='',ylab=''); par(new=T)
+plot(x,y4,type='o',cex=0.9,col='#ff3636',pch=9,
+     xlab='x',ylab='y',xlim=c(1,5),ylim=c(-150,150),
      fg='white',col.axis='white',col.lab='white')
-legend(list(x=3,y=150),legend=c("n=2","n=3","n=4"),col=c('#3636ff','#ff36ff','#ff3636'),
-       pch=7:9,lty=1,merge=TRUE,text.col=c('#3636ff','#ff36ff','#ff3636'),box.col="white")
-cat("x      "); cat(round(x[2:11],6)); cat("\n"); cat("f(2,x) "); cat(round(y2[2:11],6)); cat("\n"); 
-cat("f(3,x) "); cat(round(y3[2:11],6)); cat("\n"); cat("f(4,x) "); cat(round(y4[2:11],6)); cat("\n")
+legend(list(x=3,y=150),legend=c('n=2','n=3','n=4'),
+       col=c('#3636ff','#ff36ff','#ff3636'),
+       pch=7:9,lty=1,merge=TRUE,box.col='white',
+       text.col=c('#3636ff','#ff36ff','#ff3636'))
 grid(col='white'); dev.off()
+m<-matrix(c(round(x[2:11],6),round(y2[2:11],6),
+            round(y3[2:11],6),round(y4[2:11],6)),ncol=4)
+colnames(m)<-c('x','f(2,x)','f(3,x)','f(4,x)'); m
 </script></div>
   </body>
 </html>
