@@ -146,22 +146,22 @@ HTML & JavaScript / Task 1
 The code cell calls a function 
 which performs iterations and returns the result:</p>
 <button id="calculation1" width=600 
-style="background-color:silver; text-align:left; 
-       color:steelblue; font-family:Roboto; font-size:120%;"></button>
+style="background-color:lightgray; text-align:left; 
+       color:steelblue; font-family:Roboto; font-size:90%;"></button>
 <button id="calculation2" width=600 
-style="background-color:silver; text-align:left; 
-       color:steelblue; font-family:Roboto; font-size:120%;"></button>
+style="background-color:lightgray; text-align:left; 
+       color:steelblue; font-family:Roboto; font-size:80%;"></button>
 <script>
 function F1(x){return Math.pow(x,3);};
 var A1=-0.1,B1=0.1,A2=0,B2=2,E=Math.pow(10,-4);
-function F2(x){return Math.log(20/Math.sqrt(0.009))-
+function F2(x){return Math.log(20/Math.sqrt(.009))-
                       1.5*(Math.exp(x/3)+Math.exp(-x/3))-x;};
 function findroot(f,a,b,e){
     var s1='It is not possible to use ',
         s2='the segment for this decision method';
     l=f.toString().length; 
     var s3='Iteration steps'+'<br/>f(x)='+
-           f.toString().slice(23,l-2);
+           f.toString().slice(22,l-2);
     if (Math.sign(f(a))==Math.sign(f(b))){return s1+s2;} 
     else {
         while (b-a>e){
@@ -221,20 +221,22 @@ Highcharts.chart('container3', {
 <div class="compute"><script>
 %%r
 # task 1
-find_root<-function (f,a,b,e) {
+find_root<-function (f,a,b,e){
     if (sign(f(a))==sign(f(b))){
-      print('The segment does not possible to use for this decision method')}
+      print(paste(c('It is not possible to use ',
+                    'the segment for ',
+                    'this decision method'),
+                  collapse='')}
     else {
       print('Iteration steps')
-      while (b-a>e) {
+      while (b-a>e){
         ab<-a+(b-a)/2 
         print(c(f(a),f(ab),f(b)))
-        if (sign(f(a))!=sign(f(ab))) {
+        if (sign(f(a))!=sign(f(ab))){
           if (f(ab)==0) {break}
           b<-ab}
-        else {a<-ab} } 
-    }
-   cat(c('f(x)=0 => x≈',ab,'\n'))}
+        else {a<-ab}} }
+   print(paste(c('f(x)=0 => x≈',ab),collapse=''))}
 G<-function (x) {return(x^3)}
 A<--.1; B<-.1; E<-10^(-4)
 find_root(G,A,B,E)
