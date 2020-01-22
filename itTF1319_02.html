@@ -60,22 +60,28 @@ display_shell(7,.75,10)
 <div class="compute"><script># python / task 1
 import random,sympy
 X1=["♔","♕","♖","♗","♘","♙"]
-X2=[random.randint(1,99) for i in range(10)]
+X2=[random.randint(1,99) 
+    for i in range(10)]
 def sum_arr(X):
     T=[X[0]]
-    for i in range(1,len(X)): T.append(T[i-1]+X[i])
+    for i in range(1,len(X)): 
+        T.append(T[i-1]+X[i])
     return T
 sympy.pprint('string summation')
-sympy.pprint(X1); sympy.pprint(sum_arr(X1))
+sympy.pprint(X1)
+sympy.pprint(sum_arr(X1))
 print('number summation')
 print(X2); print(sum_arr(X2))
 </script></div><br/>
 <div class="compute"><script># python / task 2
 import sympy as sp
-D,G=sp.symbols('D G'); n=sp.symbols('n',integer=True)
+D,G=sp.symbols('D G')
+n=sp.symbols('n',integer=True)
 expression=(4/3*sp.pi*((D+n)/2)^3-4/3*sp.pi*((D+n-1)/2)^3)*G/n
-Pn=sp.lambdify([D,G,n],sp.factor(sp.simplify(sp.expand(expression))))
-print('gravity of the n-th layer:'); print(Pn(D,G,n))
+Pn=sp.lambdify([D,G,n],\
+sp.factor(sp.simplify(sp.expand(expression))))
+print('gravity of the n-th layer:')
+print(Pn(D,G,n))
 def P(D,G,N):
     s=Pn(D,G,1)
     for n in range(2,N+1): s+=Pn(D,G,n)
