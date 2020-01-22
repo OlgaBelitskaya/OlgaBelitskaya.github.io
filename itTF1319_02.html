@@ -42,9 +42,11 @@ pretty_print('number summation')
 <div class="compute"><script># sage / task 2
 var('D,G,i,N'); Vi(D,i)=4/3*pi*((D+i)/2)^3-4/3*pi*((D+i-1)/2)^3
 v(D,i)=Vi(D,i).expand().simplify().factor()
-pretty_print('volume of the i-th layer:'); pretty_print(v(D,i))
+pretty_print('volume of the i-th layer:')
+pretty_print(v(D,i))
 P(D,G,N)=sum(v(D,i)*G/i,i,1,N)
-pretty_print('total gravity of N layers:'); pretty_print(P(D,G,N).factor())
+pretty_print('total gravity of N layers:')
+pretty_print(P(D,G,N).factor())
 from sage.plot.plot3d.shapes import Sphere
 def display_shell(D,G,N):
     g=Graphics(); s=Sphere(D,color='gray',frame=false)
@@ -53,20 +55,22 @@ def display_shell(D,G,N):
     (g+s+layers).show()
 display_shell(7,.75,10)
 </script></div><br/>
-<div class="compute"><script>
-# python / task 1
+<div class="compute"><script># python / task 1
 import random,sympy
-X1=["♔","♕","♖","♗","♘","♙"]; X2=[random.randint(1,99) for i in range(10)]
+X1=["♔","♕","♖","♗","♘","♙"]
+X2=[random.randint(1,99) for i in range(10)]
 def sum_arr(X):
     T=[X[0]]
     for i in range(1,len(X)): T.append(T[i-1]+X[i])
     return T
-sympy.pprint('string summation'); sympy.pprint(X1); sympy.pprint(sum_arr(X1))
-print('number summation'); print(X2); print(sum_arr(X2))
+sympy.pprint('string summation')
+sympy.pprint(X1); sympy.pprint(sum_arr(X1))
+print('number summation')
+print(X2); print(sum_arr(X2))
 </script></div><br/>
-<div class="compute"><script>
-# python / task 2
-import sympy as sp; D,G=sp.symbols('D G'); n=sp.symbols('n',integer=True)
+<div class="compute"><script># python / task 2
+import sympy as sp
+D,G=sp.symbols('D G'); n=sp.symbols('n',integer=True)
 expression=(4/3*sp.pi*((D+n)/2)^3-4/3*sp.pi*((D+n-1)/2)^3)*G/n
 Pn=sp.lambdify([D,G,n],sp.factor(sp.simplify(sp.expand(expression))))
 print('gravity of the n-th layer:'); print(Pn(D,G,n))
@@ -74,18 +78,29 @@ def P(D,G,N):
     s=Pn(D,G,1)
     for n in range(2,N+1): s+=Pn(D,G,n)
     return s
-print('total gravity of 10 layers for D=7 and G=0.75:'); print(P(7,.75,10))
+print('total gravity of 10 layers for D=7 and G=0.75:')
+print(P(7,.75,10))
 </script></div><br/>
 HTML & JavaScript / Task 1
 <div class="compute"><script>
 %%html
-<style>@import url('https://fonts.googleapis.com/css?family=Monoton|Roboto&effect=3d');</style>
-<p class='font-effect-3d' style='color:crimson; font-family:Monoton; font-size:200%;'>string summation</p>
-<button id='cell11' class='font-effect-3d' style='color:crimson; font-family:Roboto; font-size:150%;'
-onclick='document.getElementById("cell11").innerHTML=result1()'>click >>></button>
-<p class='font-effect-3d' style='color:darkblue; font-family:Monoton; font-size:200%;'>number summation</p>
-<button id='cell12' class='font-effect-3d' style='color:darkblue; font-family:Roboto; font-size:150%;'
-onclick='document.getElementById("cell12").innerHTML=result2()'>click >>></button>
+<style>
+@import url('https://fonts.googleapis.com/css?family=Monoton|Roboto&effect=3d');
+</style>
+<p class='font-effect-3d' 
+    style='color:crimson; font-family:Monoton; font-size:200%;'>
+string summation</p>
+<button id='cell11' class='font-effect-3d' 
+    style='color:crimson; font-family:Roboto; font-size:150%;'
+onclick='document.getElementById("cell11").innerHTML=result1()'>
+    click >>></button>
+<p class='font-effect-3d' 
+    style='color:darkblue; font-family:Monoton; font-size:200%;'>
+    number summation</p>
+<button id='cell12' class='font-effect-3d' 
+    style='color:darkblue; font-family:Roboto; font-size:150%;'
+onclick='document.getElementById("cell12").innerHTML=result2()'>
+    click >>></button>
 <script>
 X1=["♔","♕","♖","♗","♘","♙"]; T1=[X1[0]];
 var n; for (n=1; n<X1.length; n++) {T1[n]=T1[n-1].concat(X1[n])};
