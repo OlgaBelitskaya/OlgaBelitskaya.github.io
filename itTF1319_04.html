@@ -81,22 +81,23 @@ nplot(3); nplot(5)
 import sympy as sp
 def find_root(f,a,b,e):
     if sp.sign(f(a))==sp.sign(f(b)):
-      print('The segment does not possible to use for this decision method')
+        print('It is not possible to use '+\
+              'this segment for this decision method')
     else:
-      print('Iteration steps')
-      while b-a>e:
-        ab=a+(b-a)/2; print([f(a),f(ab),f(b)])
-        if sp.sign(f(a))!=sp.sign(f(ab)):
-          if f(ab)==0: break
-          b=ab
-        else:
-          a=ab
+        print('Iteration steps')
+        while b-a>e:
+            ab=a+(b-a)/2
+            print([f(a).n(),f(ab).n(),f(b).n()])
+            if sp.sign(f(a))!=sp.sign(f(ab)):
+                if f(ab)==0: break
+                b=ab
+            else:
+                a=ab
     print('f(x)=0 => x≈%.10f'%ab)
 x=sp.symbols('x');
-def G(x): return x**3 
-A,B=-.1,.1; E=10**(-4)
-find_root(G,A,B,E)
-def F(x): return sp.log(20/sp.sqrt(.009))-1.5*(sp.exp(x/3)+sp.exp(-x/3))-x; 
+def F(x): 
+    return sp.log(20/sp.sqrt(.009))-\
+           1.5*(sp.exp(x/3)+sp.exp(-x/3))-x 
 A,B=0,2; E=10**(-4)
 find_root(F,A,B,E)
 </script></div><br/>
