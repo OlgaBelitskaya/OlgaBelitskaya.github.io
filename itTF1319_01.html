@@ -43,28 +43,40 @@ def create_table(f,a,b,n):
 def create_plottable(f,a,b,n): 
     t=create_table(f,a,b,n)
     list_plot(t).show(gridlines=True,figsize=4)
-f21(x)=(sin(x*pi/2)+x^(1/5))/(sqrt(abs(cos(pi*x)+1))*exp(sqrt(x)))
+f21(x)=(sin(x*pi/2)+x^(1/5))/\
+       (sqrt(abs(cos(pi*x)+1))*exp(sqrt(x)))
 create_plottable(f21,A,B,N)
 </script></div><br/>
 <div class="compute"><script># sage
-var('k'); f(x,n)=ln(n*x-1)*sum(sqrt(exp(1)^(-k*x)+x^(k-1))/(cos(k*x)+sin(k*x)),k,1,n)
-l=[[[x,N(f(x,n))] for x in srange(1.1,5,.01)] for n in [2..7]]
-sum([line(l[i-2],color=hue(i/7),legend_label=i) for i in [2..7]])\
-.show(ymin=-300,ymax=300,figsize=10)
-table([['x','n','f(x,n)','f(x,n)'],[2,2,f(2,2),f(2,2).n()],[2,3,f(2,3),f(2,3).n()],
-      [2,4,f(2,4),f(2,4).n()],[2,5,f(2,5),f(2,5).n()],[2,6,f(2,6),f(2,6).n()]])
+var('k')
+f(x,n)=ln(n*x-1)*sum(sqrt(exp(1)^(-k*x)+\
+       x^(k-1))/(cos(k*x)+sin(k*x)),k,1,n)
+l=[[[x,N(f(x,n))] for x in srange(1.1,5,.01)] 
+   for n in [2..7]]
+p=sum([line(l[i-2],color=hue(i/7),legend_label=i) 
+     for i in [2..7]])
+p.show(ymin=-300,ymax=300,figsize=10)
+table([['x','n','f(x,n)','f(x,n)'],
+       [2,2,f(2,2),f(2,2).n()],
+       [2,3,f(2,3),f(2,3).n()],
+      [2,4,f(2,4),f(2,4).n()],
+       [2,5,f(2,5),f(2,5).n()],
+       [2,6,f(2,6),f(2,6).n()]])
 </script></div><br/>
 <div class="compute"><script>
 import sympy; from sympy import *
 sympy.init_printing(use_unicode=True)
 x=Symbol('x')
-y=(sin(x*pi/2.)+x^(1/5.))/(sqrt(abs(cos(pi*x)+1.))*exp(1.)^sqrt(x));
+y=(sin(x*pi/2.)+x^(1/5.))/\
+  (sqrt(abs(cos(pi*x)+1.))*exp(1.)^sqrt(x))
 a,b,n=.55,1,10; d=(b-a)/(n-1)
 print('x   ->   f(x)'); print(15*'-')
 for t in range(n):
     x0=a+t*d
     if cos(pi*x0)!=-1 and x0>0 and a<b:
-        pprint('%.2f, %.4f'%(x0,y.evalf(subs={x:x0}))); print(15*'-')
+        pprint('%.2f, %.4f'%\
+               (x0,y.evalf(subs={x:x0})))
+        print(15*'-')
     else:
         pprint('%.2f, %s'%(x0,'NaN'))
 plot(y,(x,.55,1),ylim=(0,30));
@@ -72,13 +84,18 @@ plot(y,(x,.55,1),ylim=(0,30));
 <div class="compute"><script># python / sympy
 import sympy; from sympy import *
 sympy.init_printing(use_unicode=True)
-k,n=symbols('n k',integer=True); x,a,b=symbols('x a b')
-f=lambda x,n: ln(n*x-1)*Sum(sqrt(exp(1)^(-k*x)+x^(k-1))/(cos(k*x)+sin(k*x)),(k,1,n))
+k,n=symbols('n k',integer=True)
+x,a,b=symbols('x a b')
+f=lambda x,n: ln(n*x-1)*Sum(sqrt(exp(1)^(-k*x)+\
+              x^(k-1))/(cos(k*x)+sin(k*x)),(k,1,n))
 for i in range(2,5): 
     display([2,i,f(2,i).doit(),f(2,i).doit().evalf()])
-p2=plot(f(x,2).doit(),(x,1,5),line_color='#3636ff',ylim=(-200,200),show=False)
-p3=plot(f(x,3).doit(),(x,1,5),line_color='#ff3636',show=False)
-p4=plot(f(x,4).doit(),(x,1,5),line_color='#36ff36',show=False)
+p2=plot(f(x,2).doit(),(x,1,5),
+        line_color='#3636ff',ylim=(-200,200),show=False)
+p3=plot(f(x,3).doit(),(x,1,5),
+        line_color='#ff3636',show=False)
+p4=plot(f(x,4).doit(),(x,1,5),
+        line_color='#36ff36',show=False)
 p2.extend(p3); p2.extend(p4); p2.show()
 </script></div><br/>
 <div class="compute"><script>
