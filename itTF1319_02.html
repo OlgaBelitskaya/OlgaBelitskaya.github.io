@@ -77,14 +77,16 @@ print(X2); print(sum_arr(X2))
 import sympy as sp
 D,G=sp.symbols('D G')
 n=sp.symbols('n',integer=True)
-expression=(4/3*sp.pi*((D+n)/2)^3-4/3*sp.pi*((D+n-1)/2)^3)*G/n
+expression=(4/3*sp.pi*((D+n)/2)^3-
+            4/3*sp.pi*((D+n-1)/2)^3)*G/n
 Pn=sp.lambdify([D,G,n],\
 sp.factor(sp.simplify(sp.expand(expression))))
 print('gravity of the n-th layer:')
 print(Pn(D,G,n))
 def P(D,G,N):
     s=Pn(D,G,1)
-    for n in range(2,N+1): s+=Pn(D,G,n)
+    for n in range(2,N+1): 
+        s+=Pn(D,G,n)
     return s
 print('total gravity of 10 layers for D=7 and G=0.75:')
 print(P(7,.75,10))
