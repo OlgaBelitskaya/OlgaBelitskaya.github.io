@@ -31,19 +31,21 @@
 <div class="compute"><script># sage / task 1
 def find_root(f,a,b,e):
     if sign(f(a))==sign(f(b)):
-        print('The segment does not possible to use for this decision method')
+        print('It is not possible to use '+\
+              'this segment for this decision method')
     else:
+        print('Iteration steps')
         while b-a>e:
-            ab=a+(b-a)/2; print([f(a).n(),f(ab).n(),f(b).n()])
+            ab=a+(b-a)/2
+            print([f(a).n(),f(ab).n(),f(b).n()])
             if sign(f(a))!=sign(f(ab)):
                 if f(ab)==0: break
                 b=ab
             else:
                 a=ab
     print('f(x)=0 => x≈%.10f'%ab)
-G(x)=x^3; A,B=-.1,.1; E=10^(-4)
-find_root(G,A,B,E)
-F(x)=log(20/sqrt(.009))-1.5*(exp(x/3)+exp(-x/3))-x; A,B=0,2; E=10^(-4)
+F(x)=log(20/sqrt(.009))-1.5*(exp(x/3)+exp(-x/3))-x
+A,B=0,2; E=10^(-4)
 find_root(F,A,B,E)
 </script></div><br/>
 <div class="compute"><script># sage / task 2
@@ -52,23 +54,30 @@ def create_table(f,x0,hx,n,z0,hz,m):
     for i in [1..n]:
         for j in [1..m]:
             x,z=x0+(i-1)*hx,z0+(j-1)*hz
-            t.append([i,j,x,z,f(x,z),f(x,z).n()])
+            t.append([i,j,round(x,2),round(z,2),
+                      f(x,z),f(x,z).n()])
     return(table(t))
 f(x,z)=(log(sqrt(pi))+abs(2-x))/(3.3-1/z)+z^(2/3)*cos(x^2)
 create_table(f,6.7,.1,4,3.3,.2,3)
 </script></div><br/>
 <div class="compute"><script># sage / task 3
 var('k'); controlf(x)=2*x-x*exp(-x^2)-sin(x)
-sumf(x,n)=sum(sign(-1)^(k+1)*x^(2*k+1)*(1/factorial(k)+1/factorial(2*k+1)),k,1,n)
+sumf(x,n)=sum(sign(-1)^(k+1)*x^(2*k+1)*\
+          (1/factorial(k)+1/factorial(2*k+1)),k,1,n)
 def nplot(n):
-    sumline=[[x,sumf(x,n).n()] for x in [.05,.1,..,1.05]]
-    controlline=[[x,controlf(x).n()] for x in [.05,.1,..,1.05]]
-    (list_plot(sumline,size=50,legend_label='sum function',title='n=%d'%n)+\
-     list_plot(controlline,color='red',legend_label='control function')).show(gridlines=True)
+    sumline=[[x,sumf(x,n).n()] 
+             for x in [.05,.1,..,1.05]]
+    controlline=[[x,controlf(x).n()] 
+                 for x in [.05,.1,..,1.05]]
+    p=list_plot(sumline,size=50,
+                legend_label='sum function',
+                title='n=%d'%n)+\
+      list_plot(controlline,color='red',
+                legend_label='control function')
+    p.show(gridlines=True,figsize=4)
 nplot(3); nplot(5)
 </script></div><br/>
-<div class="compute"><script>
-# python / task 1
+<div class="compute"><script># python / task 1
 import sympy as sp
 def find_root(f,a,b,e):
     if sp.sign(f(a))==sp.sign(f(b)):
@@ -91,8 +100,7 @@ def F(x): return sp.log(20/sp.sqrt(.009))-1.5*(sp.exp(x/3)+sp.exp(-x/3))-x;
 A,B=0,2; E=10**(-4)
 find_root(F,A,B,E)
 </script></div><br/>
-<div class="compute"><script>
-# python / task 2
+<div class="compute"><script># python / task 2
 import sympy as sp
 def create_table(f,x0,hx,n,z0,hz,m):
     T=[['n','m','x','z','f(x,z)','f(x,z)=']]
