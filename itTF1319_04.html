@@ -147,7 +147,7 @@ The code cell calls a function
 which performs iterations and returns the result:</p>
 <button id="calculation1" width=600 
 style="background-color:lightgray; text-align:left; 
-       color:steelblue; font-family:Roboto; font-size:90%;"></button>
+       color:steelblue; font-family:Roboto; font-size:80%;"></button>
 <button id="calculation2" width=600 
 style="background-color:lightgray; text-align:left; 
        color:steelblue; font-family:Roboto; font-size:80%;"></button>
@@ -178,15 +178,17 @@ HTML & JavaScript / Task 2
 <div class="compute"><script>
 %%html
 <script src='https://code.highcharts.com/highcharts.js'/>
-<div id='container2' style='height:500px; width:500px; margin:0 auto'>
+<div id='container2' 
+     style='height:500px; width:500px; margin:0 auto'>
 </div><script>
 function f(x,z){
     return (Math.log(Math.sqrt(Math.PI))+Math.abs(2-x))/
            (3.3-1/z)+Math.pow(z,2/3)*Math.cos(Math.pow(x,2));};
-var series=[]; var x0=6.7,hx=0.1,n=4,z0=3.3,hz=0.2,m=3;
+var series=[]; var x0=6.7,hx=.1,n=4,z0=3.3,hz=.2,m=3;
 for (var j=0; j<m; j++) {
     xz=Array(4).fill(z0+j*hz).map((z,i)=>[x0+i*hx,f(x0+i*hx,z)]); 
-    series.push({name:'z='+(z0+j*hz),marker:{radius:9-3*j},data:xz});};
+    series.push({name:'z='+(z0+j*hz),
+                 marker:{radius:7-2*j},data:xz});};
 Highcharts.chart('container2',{
     chart:{type:'line'},title:{text:'Function of Two Variables'},
     xAxis:{title:{text:'x'}},yAxis:{title:{text:'f(x,z)'}},
@@ -197,26 +199,31 @@ HTML & JavaScript / Task 3
 %%html
 <script src='https://code.highcharts.com/highcharts.js'/>
 <div id='container3' 
-     style='height:600px; width:600px; margin:0 auto'></div>
+     style='height:500px; width:500px; margin:0 auto'></div>
 <script>
-function factorial(x) {if (x===0){return 1;} return x*factorial(x-1);};
-function sumf(n,x) {
-  var s=0; var k;
-  for (k=1; k<n+1; k++) {
-      s+=Math.pow(Math.sign(-1),k+1)*Math.pow(x,2*k+1)*(1/factorial(k)+1/factorial(2*k+1));};
-  return s;
-};
-function controlf(x) {return 2*x-x*Math.exp(-Math.pow(x,2))-Math.sin(x);};
-var cxy=Array(35).fill(0.03).map((r,x)=>[x*r,controlf(x*r)]);
-var sxy3=Array(35).fill(0.03).map((r,x)=>[x*r,sumf(3,x*r)]);
-var sxy5=Array(35).fill(0.03).map((r,x)=>[x*r,sumf(5,x*r)]);
-Highcharts.chart('container3', {
-    chart:{type:'line'},xAxis:{title:{text:'x'}},yAxis:{title:{text:'y'}},
-    title:{text:'Sum Function and Control Function'},credits:{enabled:false},
-    series:[{name:'control function',color:'#ff3636',marker:{radius:7,opacity:0.5},data:cxy},
-            {name:'sum function n=3',color:'#3636ff',marker:{radius:7,symbol:'triangle-down'},data:sxy3},
-            {name:'sum function n=5',color:'#36ff36',data:sxy5,marker:{radius:4,symbol:'square'}}]
-});
+function factorial(x){
+    if (x===0){return 1;} return x*factorial(x-1);};
+function sumf(n,x){var s=0;
+  for (var k=1; k<n+1; k++){
+      var m=1/factorial(k)+1/factorial(2*k+1);
+      s+=Math.pow(Math.sign(-1),k+1)*Math.pow(x,2*k+1)*m;};
+  return s;};
+function controlf(x){
+    return 2*x-x*Math.exp(-1*Math.pow(x,2))-Math.sin(x);};
+var n=35,d=.03;
+var cxy=Array(n).fill(d).map((r,x)=>[x*r,controlf(x*r)]);
+    sxy3=Array(n).fill(d).map((r,x)=>[x*r,sumf(3,x*r)]);
+    sxy5=Array(n).fill(d).map((r,x)=>[x*r,sumf(5,x*r)]);
+Highcharts.chart('container3',{
+    chart:{type:'line'},credits:{enabled:false},
+    xAxis:{title:{text:'x'}},yAxis:{title:{text:'y'}},
+    title:{text:'Sum Function and Control Function'},
+    series:[{name:'sum function n=3',color:'#3636ff',
+             marker:{radius:4,symbol:'triangle-down'},data:sxy3},
+            {name:'sum function n=5',color:'#36ff36',
+             marker:{radius:4,symbol:'square'},data:sxy5},
+            {name:'control function',color:'#ff3636',
+             marker:{radius:2,symbol:'circle',opacity:.5},data:cxy}]});
 </script></div><br/>
 <div class="compute"><script>
 %%r
