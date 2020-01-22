@@ -32,7 +32,7 @@
 def find_root(f,a,b,e):
     if sign(f(a))==sign(f(b)):
         print('It is not possible to use '+\
-              'this segment for this decision method')
+              'the segment for this decision method')
     else:
         print('Iteration steps')
         while b-a>e:
@@ -82,7 +82,7 @@ import sympy as sp
 def find_root(f,a,b,e):
     if sp.sign(f(a))==sp.sign(f(b)):
         print('It is not possible to use '+\
-              'this segment for this decision method')
+              'the segment for this decision method')
     else:
         print('Iteration steps')
         while b-a>e:
@@ -138,28 +138,39 @@ nplot(3); nplot(5)
 HTML & JavaScript / Task 1
 <div class="compute"><script>
 %%html
-<style>@import url('https://fonts.googleapis.com/css?family=Roboto|Miss Fajardose');</style>
-<p style="background-color:white; color:steelblue; font-family:Miss Fajardose; font-size:300%;">
-The code cell calls a function which performs iterations and returns the result:</p>
+<style>
+ @import url('https://fonts.googleapis.com/css?family=Roboto|Miss Fajardose');
+</style>
+<p style="background-color:white; color:steelblue; 
+          font-family:Miss Fajardose; font-size:300%;">
+The code cell calls a function 
+which performs iterations and returns the result:</p>
 <button id="calculation1" width=600 
-style="background-color:silver; text-align:left; color:steelblue; font-family:Roboto; font-size:120%;"></button>
+style="background-color:silver; text-align:left; 
+       color:steelblue; font-family:Roboto; font-size:120%;"></button>
 <button id="calculation2" width=600 
-style="background-color:silver; text-align:left; color:steelblue; font-family:Roboto; font-size:120%;"></button>
+style="background-color:silver; text-align:left; 
+       color:steelblue; font-family:Roboto; font-size:120%;"></button>
 <script>
-function F1(x) {return Math.pow(x,3);};
+function F1(x){return Math.pow(x,3);};
 var A1=-0.1,B1=0.1,A2=0,B2=2,E=Math.pow(10,-4);
-function F2(x) {return Math.log(20/Math.sqrt(0.009))-1.5*(Math.exp(x/3)+Math.exp(-x/3))-x;};
-function findroot(f,a,b,e) {
-    var s1='The segment does not possible to use for this decision method';
-    l=f.toString().length; var s2='Iteration steps'+'<br/>f(x)='+f.toString().slice(23,l-2);
-    if (Math.sign(f(a))==Math.sign(f(b))) {return s1;} 
+function F2(x){return Math.log(20/Math.sqrt(0.009))-
+                      1.5*(Math.exp(x/3)+Math.exp(-x/3))-x;};
+function findroot(f,a,b,e){
+    var s1='It is not possible to use ',
+        s2='the segment for this decision method';
+    l=f.toString().length; 
+    var s3='Iteration steps'+'<br/>f(x)='+
+           f.toString().slice(23,l-2);
+    if (Math.sign(f(a))==Math.sign(f(b))){return s1+s2;} 
     else {
-        while (b-a>e) {
-            var ab=a+(b-a)/2; s2=s2+'<br/>'+f(a)+'; '+f(ab)+'; '+f(b);
-            if (Math.sign(f(a))!=Math.sign(f(ab))) {if (f(ab)==0) {break}; b=ab;}
-            else {a=ab;}; };
-        return s2+'<br/> f(x)=0 => x≈'+ab+'<p/>';};
-}
+        while (b-a>e){
+            var ab=a+(b-a)/2; 
+            s3=s3+'<br/>'+f(a)+'; '+f(ab)+'; '+f(b);
+            if (Math.sign(f(a))!=Math.sign(f(ab)))
+                {if (f(ab)==0){break}; b=ab;}
+            else {a=ab;};};
+        return s3+'<br/> f(x)=0 => x≈'+ab+'<p/>';};}
 document.getElementById('calculation1').innerHTML=findroot(F1,A1,B1,E);
 document.getElementById('calculation2').innerHTML=findroot(F2,A2,B2,E);
 </script></div><br/>
