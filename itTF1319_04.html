@@ -1,0 +1,248 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>IT_TF1319_4</title>
+    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <script>$(function (){
+            sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Run'});});
+    </script>
+  </head>
+  <style>
+  @import url('https://fonts.googleapis.com/css?family=Orbitron');
+  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
+  p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
+  body: {margin:5px 5px 5px 15px;}
+  </style>  
+  <body>
+  <h1>&#x1F4D1; &nbsp;IT. TF1319. Standard Calculation 4</h1>
+<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> &nbsp; &nbsp;
+<a href="https://olgabelitskaya.github.io/README_EXERCISES.html">&#x1F300; &nbsp; Various Exam Exercises &nbsp; &nbsp;</a>
+  <h2>Create code for the next tasks</h2>
+  <p>1. Create a program for solving the equation $f(x)=0$ on the segment [A, B] up to $10^{-4}$</p> 
+  <p>using the method of sequential approximation and dividing the segment in half.</p>
+  <p>2. Create a program for calculating values of the function $F(X,Z)$</p>
+  <p>for N values of X (with the start position $X_0$ and the step HX)</p>
+  <p>and for M values of Z (with the start position $Z_0$ and the step HZ).</p>
+  <p>3. Create a program for calculating sums of the series and values of the corresponding function</p>
+  <p>for the variable X (with the start position $X_0$, the end position $X_N$, and the step value H).</p>
+<div class="compute"><script># sage / task 1
+def find_root(f,a,b,e):
+    if sign(f(a))==sign(f(b)):
+        print('The segment does not possible to use for this decision method')
+    else:
+        while b-a>e:
+            ab=a+(b-a)/2; print([f(a).n(),f(ab).n(),f(b).n()])
+            if sign(f(a))!=sign(f(ab)):
+                if f(ab)==0: break
+                b=ab
+            else:
+                a=ab
+    print('f(x)=0 => x≈%.10f'%ab)
+G(x)=x^3; A,B=-.1,.1; E=10^(-4)
+find_root(G,A,B,E)
+F(x)=log(20/sqrt(.009))-1.5*(exp(x/3)+exp(-x/3))-x; A,B=0,2; E=10^(-4)
+find_root(F,A,B,E)
+</script></div><br/>
+<div class="compute"><script># sage / task 2
+def create_table(f,x0,hx,n,z0,hz,m):
+    t=[['n','m','x','z','f(x,z)=','f(x,z)≈']]
+    for i in [1..n]:
+        for j in [1..m]:
+            x,z=x0+(i-1)*hx,z0+(j-1)*hz
+            t.append([i,j,x,z,f(x,z),f(x,z).n()])
+    return(table(t))
+f(x,z)=(log(sqrt(pi))+abs(2-x))/(3.3-1/z)+z^(2/3)*cos(x^2)
+create_table(f,6.7,.1,4,3.3,.2,3)
+</script></div><br/>
+<div class="compute"><script># sage / task 3
+var('k'); controlf(x)=2*x-x*exp(-x^2)-sin(x)
+sumf(x,n)=sum(sign(-1)^(k+1)*x^(2*k+1)*(1/factorial(k)+1/factorial(2*k+1)),k,1,n)
+def nplot(n):
+    sumline=[[x,sumf(x,n).n()] for x in [.05,.1,..,1.05]]
+    controlline=[[x,controlf(x).n()] for x in [.05,.1,..,1.05]]
+    (list_plot(sumline,size=50,legend_label='sum function',title='n=%d'%n)+\
+     list_plot(controlline,color='red',legend_label='control function')).show(gridlines=True)
+nplot(3); nplot(5)
+</script></div><br/>
+<div class="compute"><script>
+# python / task 1
+import sympy as sp
+def find_root(f,a,b,e):
+    if sp.sign(f(a))==sp.sign(f(b)):
+      print('The segment does not possible to use for this decision method')
+    else:
+      print('Iteration steps')
+      while b-a>e:
+        ab=a+(b-a)/2; print([f(a),f(ab),f(b)])
+        if sp.sign(f(a))!=sp.sign(f(ab)):
+          if f(ab)==0: break
+          b=ab
+        else:
+          a=ab
+    print('f(x)=0 => x≈%.10f'%ab)
+x=sp.symbols('x');
+def G(x): return x**3 
+A,B=-.1,.1; E=10**(-4)
+find_root(G,A,B,E)
+def F(x): return sp.log(20/sp.sqrt(.009))-1.5*(sp.exp(x/3)+sp.exp(-x/3))-x; 
+A,B=0,2; E=10**(-4)
+find_root(F,A,B,E)
+</script></div><br/>
+<div class="compute"><script>
+# python / task 2
+import sympy as sp
+def create_table(f,x0,hx,n,z0,hz,m):
+    T=[['n','m','x','z','f(x,z)','f(x,z)=']]
+    for i in range(1,n+1):
+        for j in range(1,m+1):
+            x,z=x0+(i-1)*hx,z0+(j-1)*hz
+            T.append([i,j,x,z,f(x,z),f(x,z).n()])
+    for t in T: print(t); print(60*'--')
+x,z=sp.symbols('x,z');
+def f(x,z): return (sp.log(sp.sqrt(sp.pi))+abs(2-x))/(3.3-1/z)+z**(2/3)*sp.cos(x**2)
+create_table(f,6.7,.1,4,3.3,.2,3)
+</script></div><br/>
+<div class="compute"><script>
+# python / task 3
+import sympy as sp; import pylab as pl; k=sp.symbols('k') 
+def controlf(x): return 2*x-x*sp.exp(-x**2)-sp.sin(x)
+sumf=lambda x,n: sp.Sum(sp.sign(-1)**(k+1)*x**(2*k+1)*\
+                        (1/sp.factorial(k)+1/sp.factorial(2*k+1)),(k,1,n))
+x=[.03*i for i in range(1,35)]
+controlline=[controlf(.03*i).n() for i in range(1,35)]
+def nplot(n):
+    sumline=[sumf(.03*i,n).doit().evalf() for i in range(1,35)]
+    pl.figure(figsize=(5,5)); ax=pl.gca()
+    ax.scatter(x,sumline,label='sum line',s=100);
+    ax.scatter(x,controlline,label='control line',c='red');
+    pl.title('n=%d'%n); pl.legend(); pl.grid(); pl.show();
+nplot(3); nplot(5)
+</script></div><br/>
+HTML & JavaScript / Task 1
+<div class="compute"><script>
+%%html
+<style>@import url('https://fonts.googleapis.com/css?family=Roboto|Miss Fajardose');</style>
+<p style="background-color:white; color:steelblue; font-family:Miss Fajardose; font-size:300%;">
+The code cell calls a function which performs iterations and returns the result:</p>
+<button id="calculation1" width=600 
+style="background-color:silver; text-align:left; color:steelblue; font-family:Roboto; font-size:120%;"></button>
+<button id="calculation2" width=600 
+style="background-color:silver; text-align:left; color:steelblue; font-family:Roboto; font-size:120%;"></button>
+<script>
+function F1(x) {return Math.pow(x,3);};
+var A1=-0.1,B1=0.1,A2=0,B2=2,E=Math.pow(10,-4);
+function F2(x) {return Math.log(20/Math.sqrt(0.009))-1.5*(Math.exp(x/3)+Math.exp(-x/3))-x;};
+function findroot(f,a,b,e) {
+    var s1='The segment does not possible to use for this decision method';
+    l=f.toString().length; var s2='Iteration steps'+'<br/>f(x)='+f.toString().slice(23,l-2);
+    if (Math.sign(f(a))==Math.sign(f(b))) {return s1;} 
+    else {
+        while (b-a>e) {
+            var ab=a+(b-a)/2; s2=s2+'<br/>'+f(a)+'; '+f(ab)+'; '+f(b);
+            if (Math.sign(f(a))!=Math.sign(f(ab))) {if (f(ab)==0) {break}; b=ab;}
+            else {a=ab;}; };
+        return s2+'<br/> f(x)=0 => x≈'+ab+'<p/>';};
+}
+document.getElementById('calculation1').innerHTML=findroot(F1,A1,B1,E);
+document.getElementById('calculation2').innerHTML=findroot(F2,A2,B2,E);
+</script></div><br/>
+HTML & JavaScript / Task 2
+<div class="compute"><script>
+%%html
+<script src='https://code.highcharts.com/highcharts.js'/>
+<div id='container2' style='height:600px; width:600px; margin:0 auto'></div><script>
+function f(x,z) {
+    return (Math.log(Math.sqrt(Math.PI))+Math.abs(2-x))/(3.3-1/z)+Math.pow(z,2/3)*Math.cos(Math.pow(x,2));};
+var series=[]; var x0=6.7,hx=0.1,n=4,z0=3.3,hz=0.2,m=3; var j;
+for (j=0; j<m; j++) {
+    xz=Array(4).fill(z0+j*hz).map((z,i)=>[x0+i*hx,f(x0+i*hx,z)]); 
+    series.push({name:'z='+(z0+j*hz),marker:{radius:9-3*j},data:xz});
+};
+Highcharts.chart('container2', {
+    chart:{type:'line'},xAxis:{title:{text:'x'}},yAxis:{title:{text:'f(x,z)'}},
+    title:{text:'Function of Two Variables'},credits:{enabled:false},series:series });
+</script></div><br/>
+HTML & JavaScript / Task 3
+<div class="compute"><script>
+%%html
+<script src='https://code.highcharts.com/highcharts.js'/>
+<div id='container3' style='height:600px; width:600px; margin:0 auto'></div><script>
+function factorial(x) {if (x===0){return 1;} return x*factorial(x-1);};
+function sumf(n,x) {
+  var s=0; var k;
+  for (k=1; k<n+1; k++) {
+      s+=Math.pow(Math.sign(-1),k+1)*Math.pow(x,2*k+1)*(1/factorial(k)+1/factorial(2*k+1));};
+  return s;
+};
+function controlf(x) {return 2*x-x*Math.exp(-Math.pow(x,2))-Math.sin(x);};
+var cxy=Array(35).fill(0.03).map((r,x)=>[x*r,controlf(x*r)]);
+var sxy3=Array(35).fill(0.03).map((r,x)=>[x*r,sumf(3,x*r)]);
+var sxy5=Array(35).fill(0.03).map((r,x)=>[x*r,sumf(5,x*r)]);
+Highcharts.chart('container3', {
+    chart:{type:'line'},xAxis:{title:{text:'x'}},yAxis:{title:{text:'y'}},
+    title:{text:'Sum Function and Control Function'},credits:{enabled:false},
+    series:[{name:'control function',color:'#ff3636',marker:{radius:7,opacity:0.5},data:cxy},
+            {name:'sum function n=3',color:'#3636ff',marker:{radius:7,symbol:'triangle-down'},data:sxy3},
+            {name:'sum function n=5',color:'#36ff36',data:sxy5,marker:{radius:4,symbol:'square'}}]
+});
+</script></div><br/>
+<div class="compute"><script>
+%%r
+# task 1
+find_root<-function (f,a,b,e) {
+    if (sign(f(a))==sign(f(b))){
+      print('The segment does not possible to use for this decision method')}
+    else {
+      print('Iteration steps')
+      while (b-a>e) {
+        ab<-a+(b-a)/2 
+        print(c(f(a),f(ab),f(b)))
+        if (sign(f(a))!=sign(f(ab))) {
+          if (f(ab)==0) {break}
+          b<-ab}
+        else {a<-ab} } 
+    }
+   cat(c('f(x)=0 => x≈',ab,'\n'))}
+G<-function (x) {return(x^3)}
+A<--.1; B<-.1; E<-10^(-4)
+find_root(G,A,B,E)
+F<-function(x) {return(log(20/sqrt(.009))-1.5*(exp(x/3)+exp(-x/3))-x)} 
+A<-0; B<-2; E<-10^(-4)
+find_root(F,A,B,E)
+</script></div><br/>
+<div class="compute"><script>
+%%r
+# task 2
+create_table<-function(f,x0,hx,n,z0,hz,m) {
+    cat(c('n | m |  x  |  z  |    f(x,z)\n',replicate(10,'=-='),'\n'))
+    for (i in 1:n) {
+        for (j in 1:m) {
+            x<-x0+(i-1)*hx; z<-z0+(j-1)*hz
+            cat(c(i,'|',j,'|',x,'|',z,'|',f(x,z),'\n',replicate(10,'=-='),'\n'))} } }
+f<-function(x,z){return((log(sqrt(pi))+abs(2-x))/(3.3-1/z)+z^(2/3)*cos(x^2))}
+create_table(f,6.7,.1,4,3.3,.2,3)
+</script></div><br/>
+<div class="compute"><script>
+%%r
+# task 3
+svg(filename="Rplots.svg",width=8,height=5,pointsize=12,onefile=T,family="sans",
+    bg="slategray",antialias=c("default","none","gray","subpixel"))
+controlf<-function(x) {return(2*x-x*exp(-x^2)-sin(x))}
+sumf<-function(n,x) {
+    s=0; for(k in 1:n) {s<-s+sign(-1)^(k+1)*x^(2*k+1)*(1/factorial(k)+1/factorial(2*k+1))}
+    return(s)}
+x<-seq(0.03,1.05,len=35); yc<-controlf(x); ys3<-sumf(3,x); ys5<-sumf(5,x)
+plot(x,yc,type='o',cex=2,col='#3636ff',pch=7,xlim=c(0,1.1),ylim=c(0,1),xlab='',ylab=''); par(new=T) 
+plot(x,ys3,type='o',cex=1,col='#ff36ff',pch=8,xlim=c(0,1.1),ylim=c(0,1),xlab='',ylab=''); par(new=T)
+plot(x,ys5,type='o',cex=1,col='#ff3636',pch=9,xlab='x',ylab='y',xlim=c(0,1.1),ylim=c(0,1),
+     fg='white',col.axis='white',col.lab='white')
+legend(list(x=0,y=1),legend=c("control function","sum function n=3","sum function n=5"),
+       col=c('#3636ff','#ff36ff','#ff3636'),pch=7:9,lty=1,merge=TRUE,
+       text.col=c('#3636ff','#ff36ff','#ff3636'),box.col="white")
+grid(col='white'); dev.off()
+</script></div><br/>
+  </body>
+</html>
