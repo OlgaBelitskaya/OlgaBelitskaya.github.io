@@ -254,32 +254,50 @@ find_root(F,A,B,E)
 <div class="compute"><script>
 %%r
 # task 2
-create_table<-function(f,x0,hx,n,z0,hz,m) {
-    cat(c('n | m |  x  |  z  |    f(x,z)\n',replicate(10,'=-='),'\n'))
-    for (i in 1:n) {
-        for (j in 1:m) {
+create_table<-function(f,x0,hx,n,z0,hz,m){
+    st<-paste(c(replicate(10,'=-=')),collapse=' ')
+    print('| n | m |  x  |  z  |      f(x,z)     |')
+    print(st)
+    for (i in 1:n){
+        for (j in 1:m){
             x<-x0+(i-1)*hx; z<-z0+(j-1)*hz
-            cat(c(i,'|',j,'|',x,'|',z,'|',f(x,z),'\n',replicate(10,'=-='),'\n'))} } }
-f<-function(x,z){return((log(sqrt(pi))+abs(2-x))/(3.3-1/z)+z^(2/3)*cos(x^2))}
+            print(paste(c('|',i,'|',j,'|',x,'|',z,'|',
+                          f(x,z),'|'),collapse=' '))
+            print(st)}}}                  
+f<-function(x,z){
+    return((log(sqrt(pi))+abs(2-x))/(3.3-1/z)+
+           z^(2/3)*cos(x^2))}
 create_table(f,6.7,.1,4,3.3,.2,3)
 </script></div><br/>
 <div class="compute"><script>
 %%r
 # task 3
-svg(filename="Rplots.svg",width=8,height=5,pointsize=12,onefile=T,family="sans",
-    bg="slategray",antialias=c("default","none","gray","subpixel"))
-controlf<-function(x) {return(2*x-x*exp(-x^2)-sin(x))}
-sumf<-function(n,x) {
-    s=0; for(k in 1:n) {s<-s+sign(-1)^(k+1)*x^(2*k+1)*(1/factorial(k)+1/factorial(2*k+1))}
-    return(s)}
-x<-seq(0.03,1.05,len=35); yc<-controlf(x); ys3<-sumf(3,x); ys5<-sumf(5,x)
-plot(x,yc,type='o',cex=2,col='#3636ff',pch=7,xlim=c(0,1.1),ylim=c(0,1),xlab='',ylab=''); par(new=T) 
-plot(x,ys3,type='o',cex=1,col='#ff36ff',pch=8,xlim=c(0,1.1),ylim=c(0,1),xlab='',ylab=''); par(new=T)
-plot(x,ys5,type='o',cex=1,col='#ff3636',pch=9,xlab='x',ylab='y',xlim=c(0,1.1),ylim=c(0,1),
+svg(filename="Rplots.svg",width=8,height=5,pointsize=12,
+    onefile=T,family="sans",bg="slategray",
+    antialias=c("default","none","gray","subpixel"))
+controlf<-function(x){return(2*x-x*exp(-x^2)-sin(x))}
+sumf<-function(n,x){s<-0
+    for (k in 1:n){
+        m<-1/factorial(k)+1/factorial(2*k+1);
+        s<-s+sign(-1)^(k+1)*x^(2*k+1)*m}
+    return (s)}
+x<-seq(.03,1.05,len=35); yc<-controlf(x)
+ys3<-sumf(3,x); ys5<-sumf(5,x)
+plot(x,yc,type='o',cex=2,col='#3636ff',pch=7,
+     xlim=c(0,1.1),ylim=c(0,1),xlab='',ylab='')
+par(new=T) 
+plot(x,ys3,type='o',cex=1,col='#ff36ff',pch=8,
+     xlim=c(0,1.1),ylim=c(0,1),xlab='',ylab='')
+par(new=T)
+plot(x,ys5,type='o',cex=1,col='#ff3636',pch=9,
+     xlab='x',ylab='y',xlim=c(0,1.1),ylim=c(0,1),
      fg='white',col.axis='white',col.lab='white')
-legend(list(x=0,y=1),legend=c("control function","sum function n=3","sum function n=5"),
-       col=c('#3636ff','#ff36ff','#ff3636'),pch=7:9,lty=1,merge=TRUE,
-       text.col=c('#3636ff','#ff36ff','#ff3636'),box.col="white")
+legend(list(x=0,y=1),
+       legend=c('control function',
+                'sum function n=3','sum function n=5'),
+       col=c('#3636ff','#ff36ff','#ff3636'),
+       pch=7:9,lty=1,merge=TRUE,box.col='white',
+       text.col=c('#3636ff','#ff36ff','#ff3636'))
 grid(col='white'); dev.off()
 </script></div><br/>
   </body>
