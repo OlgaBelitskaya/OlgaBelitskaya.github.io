@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Maths_TF1319_5</title>
+    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <script>$(function (){
+            sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Run'});});
+    </script>
+  </head>
+  <style>
+  @import url('https://fonts.googleapis.com/css?family=Orbitron');
+  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
+  p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:68em;}
+  body: {margin:5px 5px 5px 15px;}
+  </style>  
+  <body>
+  <h1>&#x1F4D1; &nbsp;Maths. TF1319. Standard Calculation 5</h1>
+<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> &nbsp; &nbsp;
+<a href="https://olgabelitskaya.github.io/README_EXERCISES.html">&#x1F300; &nbsp; Various Exam Exercises &nbsp; &nbsp;</a><br/>
+Compute derivatives.
+  <h2>Task #6.21, #7.21, #8.21, #9.21, #10.21</h2>   
+<div class="compute"><script type="text/x-sage">
+# sage
+var('x,a,b,m'); 
+#6.21
+f621=(1/(m*sqrt(a*b)))*arctan(e^(m*x)*sqrt(a/b)); df621=diff(f621,x)
+pretty_print("6.21: y="+latex(f621)+"; y'="+latex(df621))
+F621,dF621=f621.subs(a==1,b==1,m==1),df621.subs(a==1,b==1,m==1)
+plot([F621,dF621],(x,-7,7),legend_label='automatic',detect_poles=True).\
+show(ymin=0,ymax=2,gridlines=True,figsize=7)
+#7.21
+f721=log(arcsin(sqrt(1-e^(2*x)))); df721=diff(f721,x)
+pretty_print("7.21: y="+latex(f721)+"; y'="+latex(df721))
+plot([f721,df721],(x,-2,0),legend_label='automatic',detect_poles=True).\
+show(ymin=-5,ymax=3,gridlines=True,figsize=7)
+#8.21
+f821=sqrt(tan(4))+(sin(21*x))^2/(21*cos(42*x)); df821=diff(f821,x)
+pretty_print("8.21: y="+latex(f821)+"; y'="+latex(df821))
+plot([f821,df821],(x,-.5,.5),legend_label='automatic',detect_poles=True).\
+show(ymin=-5,ymax=5,gridlines=True,figsize=7)
+#9.21
+f921=arctan(x)+5/6*log((x^2+1)/(x^2+4)); df921=diff(f921,x)
+pretty_print("9.21: y="+latex(f921)+"; y'="+latex(df921))
+plot([f921,df921],(x,-20,20),legend_label='automatic',detect_poles=True).\
+show(ymin=-2,ymax=2,gridlines=True,figsize=7)
+#10.21
+f1021=(-1/4)*arcsin((5+3*cosh(x))/(3+5*cosh(x))); df1021=diff(f1021,x)
+pretty_print("10.21: y="+latex(f1021)+"; y'="+latex(df1021.factor()))
+plot([f1021,df1021.factor()],(x,-10,10),legend_label='automatic',detect_poles=True).\
+show(ymin=-.5,ymax=.5,gridlines=True,figsize=7)
+</script></div><br/>
+<div class="compute"><script type="text/x-sage">
+# python / sympy
+import sympy as sp; x,a,b,m=sp.symbols('x,a,b,m')
+def dplot(G,dG,xmin,xmax,ymin,ymax):
+    p=sp.plot(G,(x,xmin,xmax),line_color='#3636ff',ylim=(ymin,ymax),show=False)
+    dp=sp.plot(dG,(x,xmin,xmax),line_color='#36ff36',ylim=(ymin,ymax),show=False)
+    p.extend(dp); p.show()
+#6.21
+f621=(1/(m*sp.sqrt(a*b)))*sp.atan(sp.E**(m*x)*sp.sqrt(a/b)); df621=sp.diff(f621,x)
+sp.pretty_print("6.21: y="+str(f621)+";\n y'="+str(df621))
+F=lambda x,a,b,m:(1/(m*sp.sqrt(a*b)))*sp.atan(sp.E**(m*x)*sp.sqrt(a/b)) 
+dF=lambda x,a,b,m:sp.sqrt(a/b)*sp.E**(m*x)/(sp.sqrt(a*b)*(a*sp.E**(2*m*x)/b+1)) 
+dplot(F(x,1,1,1),dF(x,1,1,1),-10,10,0,2)
+#7.21
+f721=sp.log(sp.asin(sp.sqrt(1-sp.exp(2*x)))); df721=sp.diff(f721,x)
+sp.pretty_print("7.21: y="+str(f721)+";\n y'="+str(df721))
+dplot(f721,df721,-2,-.1,-5,3)
+#8.21
+f821=sp.sqrt(sp.tan(4))+(sp.sin(21*x))**2/(21*sp.cos(42*x)); df821=sp.diff(f821,x)
+sp.pretty_print("8.21: y="+str(f821)+";\n y'="+str(df821))
+dplot(f821,df821,-1,1,-50,50)
+#9.21
+f921=sp.atan(x)+5/6*sp.log((x**2+1)/(x**2+4)); df921=sp.diff(f921,x)
+sp.pretty_print("9.21: y="+str(f921)+";\n y'="+str(df921))
+dplot(f921,df921,-20,20,-2,2)
+#10.21
+f1021=(-1/4)*sp.asin((5+3*sp.cosh(x))/(3+5*sp.cosh(x))); df1021=sp.diff(f1021,x)
+sp.pretty_print("10.21: y="+str(f1021)+";\n y'="+str(df1021.factor()))
+dplot(f1021,df1021,-10,10,-.5,.5)
+</script></div><br/>
+  <h2>2.3 Task 1.21</h2>
+Based on the definition of a derivative, find the value of f'(0).
+<div class="compute"><script type="text/x-sage">
+# sage
+var('x'); f121=3^(x^2*sin(2/x))-1+2*x if x!=0 else 0
+df121=diff(f121,x)
+pretty_print("1.21: y="+latex(f121)+"; y'="+latex(df121))
+pretty_print("y'(10^{-22.5})="+latex(df121(x=10^(-22.5)).n())+"; y'(10^{-5})="+latex(df121(x=10^(-5)).n()))
+for c in [1,.1]:
+    plot([f121,df121],(x,-c,c),legend_label='automatic',gridlines=True).show(ymin=-2,ymax=5,figsize=7)
+limit(diff(3**(x**2*sin(2/x))-1+2*x,x),x=0)
+</script></div><br/>
+<div class="compute"><script type="text/x-sage">
+# python / sympy
+import sympy as sp; x=sp.symbols('x')
+def f121(x):
+    if x!=0: return 3**(x**2*sp.sin(2/x))-1+2*x
+    else: return 0 
+def df121(x): return sp.diff(f121(x),x)
+sp.pretty_print("1.21: y="+str(f121(x))+";\n y'="+str(df121(x)))
+sp.pretty_print("y'(0)="+str(sp.limit(sp.diff(3**(x**2*sp.sin(2/x))-1+2*x,x),x,0)))
+for c in [1,.1]:
+    p=sp.plot(f121(x),(x,-c,c),line_color='#3636ff',ylim=(-2,5),show=False)
+    dp=sp.plot(df121(x),(x,-c,c),line_color='#36ff36',ylim=(-2,5),show=False)
+    lp=sp.plot(2,(x,-c,c),line_color='#ff3636',show=False)
+    p.extend(dp); p.extend(lp); p.show()
+</script></div><br/>
+  <h2>2.3 Task 2.21</h2>
+Write the equation of the tangent line to this curve at the point with abscissa $x_0$.
+<div class="compute"><script type="text/x-sage">
+# sage
+var('x'); f221=x/(x^2+1); x0=-2; df221=diff(f221,x)
+pretty_print("2.21: y="+latex(f221)+"; y'="+latex(df221))
+tf221=f221(x=x0)+df221(x=x0)*(x-x0)
+pretty_print("tangent \; line: y="+latex(tf221))
+nf221=f221(x=x0)-1/df221(x=x0)*(x-x0)
+pretty_print("normal \; line: y="+latex(nf221))
+plot([f221,df221,tf221,nf221],(x,-4,0),legend_label='automatic').\
+show(ymin=-2.5,ymax=1.5,gridlines=True,figsize=7,aspect_ratio=1)
+</script></div><br/>
+<div class="compute"><script type="text/x-sage">
+# python / sympy
+import sympy as sp; x=sp.symbols('x'); x0=-2
+f221=x/(x**2+1); df221=sp.diff(f221,x)
+sp.pretty_print("2.21: y="+str(f221)+";\n y'="+str(df221))
+tf221=f221.subs({x:x0})+df221.subs({x:x0})*(x-x0)
+sp.pretty_print("tangent line: y="+str(tf221))
+nf221=f221.subs({x:x0})-1/df221.subs({x:x0})*(x-x0)
+sp.pretty_print("normal line: y="+str(nf221))
+p=sp.plot(f221,(x,-5,0),line_color='#3636ff',ylim=(-2.5,1.5),show=False)
+dp=sp.plot(df221,(x,-5,0),line_color='#36ff36',ylim=(-2.5,1.5),show=False)
+tp=sp.plot(tf221,(x,-5,0),line_color='#ff3636',ylim=(-2.5,1.5),show=False)
+np=sp.plot(nf221,(x,-5,0),line_color='#ff36ff',ylim=(-2.5,1.5),show=False)
+p.extend(dp); p.extend(tp); p.extend(np); p.show()
+</script></div><br/>
+   <h2>Cells for Your Experiments</h2>
+<div class="compute"><script type="text/x-sage"># sage 
+</script></div><br/>
+<div class="compute"><script type="text/x-sage"># python / sympy,numpy,pylab
+import sympy,numpy,pylab
+</script></div><br/>
+  </body>
+</html>
