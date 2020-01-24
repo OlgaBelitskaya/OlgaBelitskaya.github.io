@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Maths_TF1319_9</title>
+    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <script>$(function (){sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Run'});});</script>
+  </head>
+  <style>
+  @import url('https://fonts.googleapis.com/css?family=Orbitron');
+  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:68em;}
+  body: {margin:5px 5px 5px 15px;}
+  </style>  
+  <body>
+  <h1>&#x1F4D1; &nbsp;Maths. TF1319. Standard Calculation 9</h1>
+<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> &nbsp; &nbsp;
+<a href="https://olgabelitskaya.github.io/README_EXERCISES.html">&#x1F300; &nbsp; Various Exam Exercises &nbsp; &nbsp;</a><br/>
+Find the second-order derivative $y_{xx} \prime \prime$ of a parametrically defined function.
+  <h2>Task 1 (#19.21)</h2>   
+<div class="compute"><script type="text/x-sage">
+# sage; task 1 (19.21)
+set_verbose(-1); var('t')
+x,y=cos(t),log(sin(t)); g=Graphics()
+dx,dy=diff(x,t),diff(y,t); d2y=diff(dy/dx,t)/dx
+el=[(x,y),(x,dy),(x,factor(d2y))]; l=["y","y'","y''"]
+show(table([l]+[el]))
+for i in range(3):
+    g+=parametric_plot(el[i],(t,-3,3),color=hue(i/3),legend_label=el[i])
+g.show(ymin=-3,ymax=3,aspect_ratio=1/4)
+</script></div><br/>
+<div class="compute"><script type="text/x-sage">
+# python / sympy; task 1 (19.21)
+import sympy as sp; x,y,t=sp.symbols('x,y,t')
+x=sp.cos(t); y=sp.log(sp.sin(t))
+dx=sp.diff(x,t); dy=sp.diff(y,t); d2y=sp.simplify(sp.diff(dy/dx,t)/dx)
+for f in [{"y":[x,y]},{"y'":[x,dy]},{"y''":[x,d2y]}]: sp.pretty_print(f)
+</script></div><br/>
+  <h2>Task 2</h2>
+Find the 21-order derivative.
+<div class="compute"><script type="text/x-sage">
+# sage; task 2
+var('x'); t=[['n','$y^{(n)}$']]
+y=(3*x^2+2*x+1)*cos(x)^2
+for i in range(21): 
+    dy=diff(y,x); y=dy; t+=[[i+1,simplify(dy)]]
+pretty_print(html('$y^{(21)}=%s$'%y)); show(table(t))
+</script></div><br/>
+<div class="compute"><script type="text/x-sage">
+# python / sympy; task 2
+import sympy as sp; x=sp.symbols('x'); 
+y=(3*x**2+2*x+1)*sp.cos(x)**2
+for i in range(21): 
+    dy=sp.diff(y,x); y=dy; print([i+1,sp.simplify(dy)])
+print(33*'_==_'+'\n'+str(y))
+</script></div><br/>
+   <h2>Cells for Your Experiments</h2>
+<div class="compute"><script type="text/x-sage"># sage 
+</script></div><br/>
+<div class="compute"><script type="text/x-sage"># python / sympy,numpy,pylab
+import sympy,numpy,pylab
+</script></div><br/>
+  </body>
+</html>
