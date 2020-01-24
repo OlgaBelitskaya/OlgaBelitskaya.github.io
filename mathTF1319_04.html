@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Maths_TF1319_4</title>
+    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <script>$(function (){
+    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Run'});});
+    </script>
+  </head>
+  <style>
+  @import url('https://fonts.googleapis.com/css?family=Orbitron');
+  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
+  p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:68em;}
+  body: {margin:5px 5px 5px 15px;}
+  </style>  
+  <body>
+  <h1>&#x1F4D1; &nbsp;Maths. TF1319. Standard Calculation 4</h1>
+<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> &nbsp; &nbsp;
+<a href="https://olgabelitskaya.github.io/README_EXERCISES.html">&#x1F300; &nbsp; Various Exam Exercises &nbsp; &nbsp;</a><br/>
+  <h2>Task 1</h2>
+At what ratio of parameters a and b will the function f(x) be continuous?
+<div class="compute"><script type="text/x-sage">
+# sage
+var('x,a,b'); V=21; f1(a,x)=a*(x+V); g1(b,x)=(x-V)^2+b
+pretty_print('x<0:%s, x>0:%s'%(str(f1),str(g1)))
+pretty_print(solve(f1(a,0)-g1(b,0),a))
+(sum([plot(f1(a,x),(-10,0),gridlines=True,legend_label='a=%d'%a,color=hue(a/44)) for a in [20..24]])+
+sum([plot(g1(b,x),(0,10),legend_label='b=%d'%b,color=hue(b/44)) for b in [7,14..35]])).show()
+</script></div><br/>
+<div class="compute"><script type="text/x-sage">
+# python / sympy
+import sympy as sp; V=21; x,a,b=sp.symbols('x,a,b')
+def f1(a,x): return a*(x+V)
+def g1(b,x): return (x-V)**2+b
+sp.pretty_print('x<0:%s, x>0:%s'%(str(f1(a,x)),str(g1(b,x))))
+sp.pretty_print(sp.solve(f1(a,0)-g1(b,0),a))
+p1=sp.plot(f1(22,x),(x,-10,0),show=False)
+p2=sp.plot(g1(21,x),(x,0,10),show=False)
+p1.extend(p2); p1.show()
+</script></div><br/>
+  <h2>Task 2</h2>
+Find breakpoints and make the function continuous, if it is possible.
+<div class="compute"><script type="text/x-sage">
+# sage
+set_verbose(-1); var('x'); f(x)=(2^cos(x)-2)/(3^(x^2)-1)
+pretty_print('f(x)=%s if x≠0, f(x)=%f if x=0'%(str(f),limit(f,x=0)))
+plot(f(x),(-pi,pi),gridlines=True).show()
+limit(f,x=0)
+</script></div><br/>
+<div class="compute"><script type="text/x-sage">
+# python / sympy
+import sympy as sp; x=sp.symbols('x'); 
+def f(x): return (2**sp.cos(x)-2)/(3**(x**2)-1)
+sp.pretty_print('f(x)=%s if x≠0, f(x)=%f if x=0'%(str(f(x)),sp.limit(f(x),x,0)))
+sp.plot(f(x),(x,-sp.pi,sp.pi)); sp.limit(f(x),x,0)
+</script></div><br/>
+  <h2>Task 3</h2>
+Find breakpoints and make the function continuous, if it is possible.
+<div class="compute"><script type="text/x-sage">
+# sage
+set_verbose(-1); var('x'); f=5^(x/(1-x^2))
+pretty_print('f(x)=%s'%str(f)) 
+pretty_print('limit f(x) (x->-1), left & right: %s & %s)'%(limit(f,x=-1,dir='left'),limit(f,x=-1,dir='right')))
+pretty_print('limit f(x) (x->1), left & right: %s & %s)'%(limit(f,x=1,dir='left'),limit(f,x=1,dir='right')))
+plot(f,(-3,3),ymax=5,gridlines=True).show()
+</script></div><br/>
+<div class="compute"><script type="text/x-sage">
+# python / sympy
+import sympy as sp; x=sp.symbols('x')
+def f(x): return 5**(x/(1-x**2))
+sp.pretty_print('f(x)=%s'%str(f(x))) 
+sp.pretty_print('limit f(x) (x->-1), left & right: %s & %s)'%\
+                (sp.limit(f(x),x,-1,'-'),sp.limit(f(x),x,-1,'+')))
+sp.pretty_print('limit f(x) (x->1), left & right: %s & %s)'%\
+                (sp.limit(f(x),x,1,'-'),sp.limit(f(x),x,1,'+')))
+sp.plot((f(x),(x,-3.1,-1.1)),(f(x),(x,-.9,.9)),(f(x),(x,1.1,3.1)),ylim=(-1,5))
+</script></div><br/>
+   <h2>Task 4</h2>
+Find asymptotes and create function graphs
+<div class="compute"><script type="text/x-sage">
+# sage #6.21
+var('x'); f=(x^3-2*x^2-3*x+2)/(1-x^2); pretty_print('f(x)=%s'%str(f)) 
+pretty_print('1-x^2≠0 => x≠-1 or x≠1'); pretty_print('y=kx+b: k=-1,b=2')
+print([limit(f,x=-1,dir='+'),limit(f,x=-1,dir='-'),
+       limit(f,x=1,dir='+'),limit(f,x=1,dir='-'),
+       limit(f/x,x=oo), limit(f-(limit(f/x,x=oo))*x,x=oo)])
+show(table([['x',-3,-1.5,-.5,0,.5,1.5,3],
+           ['f(x)',f(x=-3),f(x=-1.5),f(x=-.5),f(x=0),f(x=.5),f(x=1.5),f(x=3)]]))
+plot(f,(-3,3),ymin=-5,ymax=5,gridlines=True,detect_poles=True)+\
+sum([line([[i,-5],[i,5]],color='red',linestyle='-.') for i in [-1,1]])+\
+plot(-1*x+2,(-3,3),color='red',linestyle='-.')
+</script></div><br/>
+<div class="compute"><script type="text/x-sage">
+# python / sympy
+import sympy as sp; x,t=sp.symbols('x,t')
+def f(x): return (x**3-2*x**2-3*x+2)/(1-x**2)
+sp.pretty_print('f(x)=%s'%str(f(x))) 
+sp.pretty_print('1-x^2≠0 => x≠-1 or x≠1')
+sp.pretty_print('y=kx+b: k=-1,b=2')
+print([sp.limit(f(x),x,-1,'+'),sp.limit(f(x),x,-1,'-'),
+       sp.limit(f(x),x,1,'+'),sp.limit(f(x),x,1,'-'),
+       sp.limit(f(x)/x,x,'oo'),sp.limit(f(x)-(sp.limit(f(x)/x,x,'oo'))*x,x,'oo')])
+p=sp.plot(f(x),(x,-3,3),ylim=(-5,5),show=False)
+p.extend(sp.plot_implicit(x-1.03,line_color='r',show=False))
+p.extend(sp.plot_implicit(x+1.03,line_color='r',show=False))
+p.extend(sp.plot(-x+2,(x,-3,3),line_color='r',show=False))
+p.show()
+</script></div><br/>
+  </body>
+</html>
