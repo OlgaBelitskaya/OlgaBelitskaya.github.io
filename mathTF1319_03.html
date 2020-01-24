@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Maths_TF1319_3</title>
+    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <script>$(function (){
+    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Run'});});
+    </script>
+  </head>
+  <style>
+  @import url('https://fonts.googleapis.com/css?family=Orbitron');
+  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
+  p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:68em;}
+  body: {margin:5px 5px 5px 15px;}
+  </style>  
+  <body>
+  <h1>&#x1F4D1; &nbsp;Maths. TF1319. Standard Calculation 3</h1>
+<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> &nbsp; &nbsp;
+<a href="https://olgabelitskaya.github.io/README_EXERCISES.html">&#x1F300; &nbsp; Various Exam Exercises &nbsp; &nbsp;</a><br/>
+  <h2>Compute limits.</h2>
+  <h2>Task 1-2</h2>
+<div class="compute"><script type="text/x-sage">
+# sage
+var('x'); f1=sin(5*x)/tan(3*x)
+pretty_print(html("<p>$\lim_{x → \pi}"+str(latex(f1))+\
+                  "="+str(limit(f1,x=pi))+"="+str(limit(f1,x=pi).n())+"$</p>"))
+(plot(f1,(-2*pi,2*pi),ymin=-3,ymax=3,gridlines=True)+
+ plot(limit(f1,x=pi),(-2*pi,2*pi),color='red',linestyle='-.',thickness=2)).show()
+f2=(cos(x)-sin(x))^3/(1-sin(5*x))
+pretty_print(html("<p>$\lim_{x → \pi/4}"+str(latex(f2))+"="+str(limit(f2,x=pi/4))+"$</p>"))
+plot(f2,(-2*pi,2*pi),ymin=-3,ymax=3,gridlines=True)+\
+plot(limit(f2,x=pi/4),(-2*pi,2*pi),color='red',linestyle='-.',thickness=2)
+</script></div><br/>
+<div class="compute"><script type="text/x-sage">
+# python / sympy
+import sympy as sp; sp.symbols('x')
+f1=sp.sin(5*x)/sp.tan(3*x); sp.pretty_print(f1)
+print('limit f(x) (x->pi): %s'%sp.limit(f1,x,sp.pi))
+p1=sp.plot(f1,(x,-2*sp.pi,2*sp.pi),ylim=(-3,3),show=False)
+pl1=sp.plot(sp.limit(f1,x,sp.pi),(x,-2*sp.pi,2*sp.pi),line_color='red',show=False)
+p1.extend(pl1); p1.show()
+f2=(sp.cos(x)-sp.sin(x))^3/(1-sp.sin(5*x)); sp.pretty_print(f2)
+print('limit f(x) (x->pi/4): %s'%sp.limit(f2,x,sp.pi/4))
+p2=sp.plot(f2,(x,-2*sp.pi,2*sp.pi),ylim=(-3,3),show=False)
+pl2=sp.plot(sp.limit(f2,x,sp.pi/4),(x,-2*sp.pi,2*sp.pi),line_color='red',show=False)
+p2.extend(pl2); p2.show()
+</script></div><br/>
+  <h2>Task 3-4</h2>
+<div class="compute"><script type="text/x-sage">
+# sage
+set_verbose(-1)
+# 3->11.21
+var('x'); f3=(1-sqrt(cos(x)))/(x*sin(x))
+pretty_print(html("<p>$\lim_{x → 0}"+str(latex(f3))+"="+\
+                  str(limit(f3,x=0))+"="+str(limit(f3,x=0).n())+"$</p>"))
+(plot(f3,(-3*pi,3*pi),ymin=-.4,ymax=.8,gridlines=True)+
+ plot(limit(f3,x=0),(-3*pi,3*pi),color='red',linestyle='-.',thickness=2)).show()
+# 4->12.21
+f4=(1-2^(4-x^2))/(2*(sqrt(2*x)-sqrt(3*x^2-5*x+2)))
+pretty_print(html("<p>$\lim_{x → 2}"+str(latex(f4))+"="+\
+                  str(limit(f4,x=2))+"="+str(limit(f4,x=2).n())+"$</p>"))
+plot(f4,(0,3),ymin=-15,ymax=15,gridlines=True)+\
+plot(limit(f4,x=2),(0,3),color='red',linestyle='-.',thickness=2)
+</script></div><br/>
+<div class="compute"><script type="text/x-sage">
+# python / sympy
+import sympy as sp; sp.symbols('x')
+# 3->11.21
+f3=(1-sp.sqrt(sp.cos(x)))/(x*sp.sin(x)); sp.pretty_print(f3)
+print('limit f(x) (x->0): %s'%sp.limit(f3,x,0))
+p3=sp.plot(f3,(x,-sp.pi/2,sp.pi/2),ylim=(-0.4,0.8),show=False)
+pl3=sp.plot(sp.limit(f3,x,0),(x,-sp.pi/2,sp.pi/2),line_color='red',show=False)
+p3.extend(pl3); p3.show()
+# 4->12.21
+f4=(1-2^(4-x^2))/(2*(sp.sqrt(2*x)-sp.sqrt(3*x^2-5*x+2))); sp.pretty_print(f4)
+print('limit f(x) (x->2): %s'%sp.limit(f4,x,2))
+p4=sp.plot(f4,(x,1,3),ylim=(-3,0),show=False)
+pl4=sp.plot(sp.limit(f4,x,2),(x,1,3),line_color='red',show=False)
+p4.extend(pl4); p4.show()
+</script></div><br/>
+  <h2>Task 5-6</h2>
+<div class="compute"><script type="text/x-sage">
+# sage
+# 5->13.21
+var('x'); f5=(sqrt(2^x+7)-sqrt(2^(x+1)+5))/(x^3-1)
+pretty_print(html("<p>$\lim_{x → 1}"+str(latex(f5))+"="+\
+                  str(limit(f5,x=1))+"="+str(limit(f5,x=1).n())+"$</p>"))
+(plot(f5,(-2*pi,2*pi),ymin=-.3,ymax=.3,gridlines=True)+
+ plot(limit(f5,x=1),(-2*pi,2*pi),color='red',linestyle='-.',thickness=2)).show()
+# 6->14.21
+f6=(4^(5*x)-9^(-2*x))/(sin(x)-tan(x^3))
+pretty_print(html("<p>$\lim_{x → 0}"+str(latex(f6))+"="+\
+                  str(limit(f6,x=0))+"="+str(limit(f6,x=0).n())+"$</p>"))
+plot(f6,(-2,2),ymin=-50,ymax=50,gridlines=True)+\
+plot(limit(f6,x=0),(-2,2),color='red',linestyle='-.',thickness=2)
+</script></div><br/>
+<div class="compute"><script type="text/x-sage">
+# python / sympy
+import sympy as sp; sp.symbols('x')
+# 5->13.21
+f5=(sp.sqrt(2^x+7)-sp.sqrt(2^(x+1)+5))/(x^3-1); sp.pprint(f5)
+sp.pprint('limit f(x) (x->1): %s'%sp.limit(f5,x,1))
+p5=sp.plot(f5,(x,-5,5),ylim=(-0.3,0.1),show=False)
+pl5=sp.plot(sp.limit(f5,x,1),(x,-5,5),line_color='red',show=False)
+p5.extend(pl5); p5.show()
+# 6->14.21
+f6=(4^(5*x)-9^(-2*x))/(sp.sin(x)-sp.tan(x^3)); sp.pprint(f6)
+sp.pprint('limit f(x) (x->0): %s'%sp.limit(f6,x,0))
+p6=sp.plot(f6,(x,-sp.pi/2,sp.pi/2),ylim=(-3,23),show=False)
+pl6=sp.plot(sp.limit(f6,x,0),(x,-sp.pi/2,sp.pi/2),line_color='red',show=False)
+p6.extend(pl6); p6.show()
+</script></div><br/>
+  <h2>Task 7-8</h2>
+<div class="compute"><script type="text/x-sage">
+# sage
+set_verbose(-1)
+# 7->15.21
+var('a,h,x'); f7(a,h,x)=(a^(x+h)+a^(x-h)-2*a^x)/h^2
+pretty_print(html("<p>$\lim_{h → 0}"+str(latex(f7(a,h,x)))+"="+str(limit(f7(a,h,x),h=0))+"$</p>"))
+(plot([f7(2,1,x),f7(2,.00001,x)],(-1,1),gridlines=True,thickness=2,
+      legend_label=['a=2, h=1','a=2, h=.00001'],color=['darkblue','purple'])+
+ plot(limit(f7(2,h,x),h=0),(-1,1),thickness=7,alpha=.3,
+      color='red',legend_label=str(limit(f7(2,h,x),h=0)))).show()
+# 8->16.21
+f8=(6-5/cos(x))^(cot(x)^2)
+pretty_print(html("<p>$\lim_{x → 0}"+str(latex(f8))+"="+\
+                  str(limit(f8,x=0))+"="+str(limit(f8,x=0).n())+"$</p>"))
+plot(f8,(-2,2),ymin=-.5,ymax=2.5,gridlines=True)+\
+plot(limit(f8,x=0),(-2,2),color='red',linestyle='-.',thickness=2)
+</script></div><br/>
+<div class="compute"><script type="text/x-sage">
+# python / sympy
+import sympy as sp; sp.symbols('x,a,h')
+# 7->15.21
+f7(a,h,x)=(a^(x+h)+a^(x-h)-2*a^x)/h^2; sp.pprint(f7(a,h,x))
+sp.pprint('limit f(h,x) (h->0): %s'%sp.limit(f7(a,h,x),h,0))
+p7=sp.plot(f7(2,1,x),(x,-1,1),show=False)
+pl7=sp.plot(sp.limit(f7(2,h,x),h,0),(x,-1,1),line_color='red',show=False)
+p7.extend(pl7); p7.show()
+# 8->16.21
+f8=(6-5/sp.cos(x))^(sp.cot(x)^2); sp.pprint(f8)
+sp.pprint('limit f(x) (x->0): %s'%sp.limit(f8,x,0))
+p8=sp.plot(f8,(x,-sp.pi/6,sp.pi/6),show=False)
+pl8=sp.plot(sp.limit(f8,x,0),(x,-sp.pi/6,sp.pi/6),line_color='red',show=False)
+p8.extend(pl8); p8.show()
+</script></div><br/>
+  </body>
+</html>
