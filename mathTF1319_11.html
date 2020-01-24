@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Maths_TF1319_11</title>
+    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <script>$(function(){
+            sagecell.makeSagecell({inputLocation:'div.link',linked:true,evalButtonText:'Run Linked Cells'});
+            sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run Detached Cells'});});
+    </script>
+  </head>
+  <style>
+  @import url('https://fonts.googleapis.com/css?family=Orbitron');
+  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:68em;}
+  body: {margin:5px 5px 5px 15px;}
+  </style>  
+  <body>
+  <h1>&#x1F4D1; &nbsp;Maths. TF1319. Standard Calculation 11</h1>
+<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> &nbsp; &nbsp;
+<a href="https://olgabelitskaya.github.io/README_EXERCISES.html">&#x1F300; &nbsp; Various Exam Exercises &nbsp; &nbsp;</a><br/>
+  <h2>Task 1</h2>
+Write the 3rd order Taylor formula
+<div class="link"><script type="text/x-sage"># sage; task 1
+def create_ptable1(f,n,a):
+    t=[['f(x)','$f \prime (x)$','$f \prime \prime (x)$','$f \prime \prime \prime(x)$'],
+       [f,diff(f,x),diff(f,x,x),diff(f,x,x,x)],
+       ['f(a)','$f \prime (a)$','$f \prime \prime (a)$','$f \prime \prime \prime(a)$'],
+       [f(x=a),diff(f,x)(x=a),diff(f,x,x)(x=a),diff(f,x,x,x)(x=a)],
+       ['%d order Taylor formula'%i for i in range(n+1)],
+       [f.taylor(x,a,i) for i in range(n+1)],[f.taylor(x,a,i).factor() for i in range(n+1)]]
+    show(table(t)); ls=['--','-.',':']
+    p=plot(f,a-5,a+5,thickness=3,color='#3636ff',alpha=0.5,legend_label='$f(x)=%s$'%latex(f))+\
+    sum([plot(f.taylor(x,a,i),a-5,a+5,hue=cos(i/n),thickness=2,linestyle=ls[i-1],
+              legend_label='$n=%d: %s$'%(i,latex(f.taylor(x,a,i)))) for i in [1..n]])
+    p.set_legend_options(back_color='none',font_size=15,loc=5)
+    p.show(figsize=(10,7),gridlines=True,title='$f(x)=%s; a=%s$'%(latex(f),a),fontsize=20)
+function('f'); var('x,a'); lf=latex(f(x).taylor(x,a,3))
+pretty_print(html('<p style="font-size:22px">3d order Taylor formula: $f(x)=%s$</p>'%lf)) 
+f21=ln(4+3*x+x^2); n21=3; a21=2; create_ptable1(f21,n21,a21)
+</script></div><br/>
+<div class="link"><script type="text/x-sage">#sage; task 1
+set_verbose(-1)
+f20=sin(x)^4; n20=3; a20=pi/4; create_ptable1(f20,n20,a20)
+f22=ln(x); n22=3; a22=1; create_ptable1(f22,n22,a22)
+</script></div><br/>
+  <h2>Task 2</h2>
+Write the 4th-order Maclaurin formula
+<div class="link"><script type="text/x-sage"># sage; task 2
+def create_ptable2(g,n):
+    function('f'); var('x'); lf=latex(f(x).taylor(x,0,n))
+    ls='<p style="font-size:20px">%d-th order Maclaurin formula: <br/>'
+    pretty_print(html(ls%n+'$f(x)=%s$</p>'%lf))
+    s='$\lim\limits_{x \\to 0}'; ls=['--','-.',':','-','--','-.',':','-'] 
+    t1=[['$f(x)$',g],['$f \prime (x)$',diff(g,x)],['$f \prime \prime (x)$',diff(g,x,x)],
+        ['$f \prime \prime \prime(x)$',diff(g,x,x,x)],
+        ['$f \prime \prime \prime \prime(x)$',diff(g,x,x,x,x)]]
+    t2=[[s+'f'+i*'\prime'+'(x)$' for i in range(n+1)],
+        [limit(diff(g,x,i),x=0) for i in range(n+1)],
+        ['%d order Maclaurin formula'%i for i in range(n+1)],
+        [g.taylor(x,0,i) for i in range(n+1)]]
+    show(table(t1)); show(table(t2))
+    p=plot(g,-3,3,thickness=3,color='#3636ff',alpha=0.7,legend_label='$f(x)=%s$'%latex(g))+\
+    sum([plot(g.taylor(x,0,i),-3,3,hue=cos(i/n),thickness=2,linestyle=ls[i-1],
+              legend_label='$n=%d: %s$'%(i,latex(g.taylor(x,0,i).factor()))) for i in [1..n]])
+    p.set_legend_options(back_color='none',font_size=15,loc=1)
+    p.show(figsize=(10,7),gridlines=True,title='$f(x)=%s$'%latex(g),fontsize=20) 
+f21=sin(2*x)/x; n21=4; create_ptable2(f21,n21)
+</script></div><br/>
+<div class="link"><script type="text/x-sage"># sage; task 2
+set_verbose(-1)
+f20=exp(-x^2)*sin(x); n20=4; create_ptable2(f20,n20)
+f22=arcsin(x)/x-1; n22=5; create_ptable2(f22,n22)
+</script></div><br/>
+   <h2>Cells for Your Experiments</h2>
+<div class="sage"><script type="text/x-sage"># sage 
+</script></div><br/>
+<div class="sage"><script type="text/x-sage"># python / sympy,numpy,pylab
+import sympy,numpy,pylab
+</script></div><br/>
+  </body>
+</html>
