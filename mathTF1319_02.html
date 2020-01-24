@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Maths_TF1319_2</title>
+    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <script>$(function (){
+    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Run'});
+    });</script>
+  </head>
+  <style>
+  @import url('https://fonts.googleapis.com/css?family=Orbitron');
+  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
+  p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
+  body: {margin:5px 5px 5px 15px;}
+  </style>  
+  <body>
+  <h1>&#x1F4D1; &nbsp;Maths. TF1319. Standard Calculation 2</h1>
+<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> &nbsp; &nbsp;
+<a href="https://olgabelitskaya.github.io/README_EXERCISES.html">&#x1F300; &nbsp; Various Exam Exercises &nbsp; &nbsp;</a><br/>
+  <h2>Task 1-5</h2>
+  Compute limits.
+<div class="compute"><script type="text/x-sage">
+V=21; var('x,k'); xl=[oo,1,V,-3,1/4]
+f=[sum((x+k)^5,k,1,V)/(x^5+V^5),(x^V-1)/(x^(V+6)-x),(x^2-V^2)/(sqrt(x)-sqrt(V)),
+   (x^2+2*x-3)/(x^3+4*x^2+3*x),((x/16)^(1/3)-1/4)/(sqrt(1/4+x)-sqrt(2*x))]
+x1=[-100,0.1,0,-5,0]; x2=[100,1.1,30,5,1]
+y1=[-10,0,0,-3,-1]; y2=[90,10,400,3,0]
+@interact
+def _(n=[1,2,3,4,5]):
+    pretty_print('f: ',f[n-1],'; limit f(x-> ',xl[n-1],
+                 '): ',limit(f[n-1],x=xl[n-1]),'=',N(limit(f[n-1],x=xl[n-1])))
+    p1=plot(limit(f[n-1],x=xl[n-1]),x,x1[n-1],x2[n-1],color='red')
+    p2=plot(f[n-1],x,x1[n-1],x2[n-1],detect_poles='show')
+    (p1+p2).show(ymin=y1[n-1],ymax=y2[n-1],gridlines=True)
+</script></div><br/>
+<div class="compute"><script type="text/x-sage">
+import sympy; from sympy import *
+sympy.init_printing(use_unicode=True)
+k,V=sympy.symbols('k,V',integer=True); x=sympy.symbols('x')
+f1=lambda x,V: Sum((x+k)^5,(k,1,V))/(x^5+V^5)
+p=plot(f1(x,21).doit(),(x,-100,100),line_color='#3636ff',ylim=(-10,90));
+display([f1(x,21).doit().simplify(),limit(f1(x,21).doit(),x,oo)])
+f2=lambda x,V: (x^V-1)/(x^(V+6)-x)
+p=plot(f2(x,21),(x,.1,1.1),line_color='#3636ff');
+display([f2(x,21).simplify(),limit(f2(x,21),x,1)])
+f3=lambda x,V: (x^2-V^2)/(sqrt(x)-sqrt(V))
+p=plot(f3(x,21),(x,0,30),line_color='#3636ff');
+display([f3(x,21).simplify(),limit(f3(x,21),x,21)])
+f4=lambda x: (x^2+2*x-3)/(x^3+4*x^2+3*x)
+p=plot(f4(x),(x,-5,5),line_color='#3636ff',ylim=(-3,3));
+display([f4(x).simplify(),limit(f4(x),x,-3)])
+f5=lambda x: ((x/16)^(1/3)-1/4)/(sqrt(1/4+x)-sqrt(2*x))
+p=plot(f5(x),(x,0,1),line_color='#3636ff',ylim=(-1,0));
+display([f5(x).simplify(),limit(f5(x),x,1/4)])
+</script></div><br/>
+  </body>
+</html>
