@@ -580,15 +580,18 @@ $x=2$ - точка минимума, $x=3$ - точка максимума. Ли
 <div class="link1"><script type="text/x-sage"># sage; task 3 
 print('x=x0 =>   [y(x0),y(x0)>0,dy(x0),dy(x0)>0]')
 for x0 in [-2,2.3,2.5,2.7,7]:
-    y021=y21(x=x0); dy021=diff(y21,x)(x=x0)
-    s=[round(y021.n(),2),bool(y021>0),round(dy021.n(),2),bool(dy021>0)]
+    y021=y21(x=x0)
+    dy021=diff(y21,x)(x=x0)
+    s=[round(y021.n(),2),bool(y021>0),
+       round(dy021.n(),2),bool(dy021>0)]
     print('x=%.2f'%x0+' => '+str(s))
 </script></div><br/>
 <div class="link2"><script type="text/x-sage"># python; task 3
 print('x=x0 =>   [y(x0),y(x0)>0,dy(x0),dy(x0)>0]')
 for x0 in [-2,2.3,2.5,2.7,7]:
     y021=y21(x=x0); dy021=sp.diff(y21,x)(x=x0)
-    s=[round(y021.n(),2),bool(y021>0),round(dy021.n(),2),bool(dy021>0)]
+    s=[round(y021.n(),2),bool(y021>0),
+       round(dy021.n(),2),bool(dy021>0)]
     print('x=%.2f'%x0+' => '+str(s))
 </script></div><br/>
 7) Вычислим вторую производную. Найдем точки перегиба графика функции и промежутки выпуклости.<br/>
@@ -603,18 +606,23 @@ $\displaystyle{=\frac{2}{3 ((x-2)^2)^{2/3}}-\frac{8 (x-2)^2}{9 ((x-2)^2)^{5/3}}-
 $\displaystyle{y \prime \prime=0 \iff x=2.5}$    
 <div class="link1"><script type="text/x-sage"># sage; task 3 
 pretty_print(html("$y''=%s$"%latex(diff(y21,x,x))))
-t=[['x=x0','y(x0)','y(x0)≈','y(x0)>0','d2y(x0)','d2y(x0)>0']]
+t=[['x=x0','y(x0)','y(x0)≈','y(x0)>0',
+    'd2y(x0)','d2y(x0)>0']]
 for x0 in [-2,2.3,2.5,2.7,7]:
     y021=y21(x=x0); d2y021=diff(y21,x,x)(x=x0)
-    t.append([round(x0,1),y021,round(y021.n(),3),bool(y021>0),round(d2y021.n(),3),bool(d2y021>0)])
+    t.append([round(x0,1),y021,
+              round(y021.n(),3),bool(y021>0),
+              round(d2y021.n(),3),bool(d2y021>0)])
 table(t)
 </script></div><br/>
 <div class="link2"><script type="text/x-sage"># python; task 3
 sp.pprint("y''=%s"%sp.diff(y21,x,x))
 print('x=x0    => [y(x0)≈,y(x0)>0,d2y(x0),d2y(x0)>0]')
 for x0 in [-2,2.3,2.5,2.7,7]:
-    y021=y21(x=x0); d2y021=sp.diff(y21,x,x)(x=x0)
-    s=[round(y021.n(),3),bool(y021>0),round(d2y021.n(),3),bool(d2y021>0)]
+    y021=y21(x=x0)
+    d2y021=sp.diff(y21,x,x)(x=x0)
+    s=[round(y021.n(),3),bool(y021>0),
+       round(d2y021.n(),3),bool(d2y021>0)]
     print('x=%.3f'%x0+' => %s'%s)
 </script></div><br/>
 Промежутки выпуклости:<br/>      
@@ -626,38 +634,63 @@ for x0 in [-2,2.3,2.5,2.7,7]:
 $x=2.5$ является точкой перегиба.<br/>
 8) Построим график функции.
 <div class="link1"><script type="text/x-sage"># sage; task 3 
-yb=5; cols=['steelblue','darkblue','magenta']; ly=['$y=-1$','$y=0$','$y=1$']
-ll=['$y=%s$'%latex(y21),'$y \\prime=%s$'%latex(diff(y21,x)),'$y \\prime \\prime=%s$'%latex(diff(y21,x,x))]
-p=plot([y21,dy21,d2y21],(-2,7),color=cols,thickness=2,legend_label=ll,detect_poles=True,plot_points=400)
-p+=plot([-1,0,1],(-2,7),color='darkorange',thickness=2,linestyle=':',legend_label=ly)
+yb=5; cols=['steelblue','darkblue','magenta']
+ly=['$y=-1$','$y=0$','$y=1$']
+ll=['$y=%s$'%latex(y21),
+    '$y \\prime=%s$'%latex(diff(y21,x)),
+    '$y \\prime \\prime=%s$'%latex(diff(y21,x,x))]
+p=plot([y21,dy21,d2y21],(-2,7),color=cols,thickness=2,
+       legend_label=ll,detect_poles=True,plot_points=400)
+p+=plot([-1,0,1],(-2,7),color='darkorange',
+        thickness=2,linestyle=':',legend_label=ly)
 p.set_legend_options(font_size=18,loc=3)
 p.show(gridlines=True,figsize=(8,8),ymin=-yb,ymax=yb)
 </script></div><br/>
 <div class="link2"><script type="text/x-sage"># python; task 3
-x=sp.symbols('x'); y21=((x-2)**2)**(1/3)-((x-3)**2)**(1/3)
+x=sp.symbols('x')
+y21=((x-2)**2)**(1/3)-((x-3)**2)**(1/3)
 p=sp.plot(y21,(x,-2,7),ylim=(-5,5),show=False) 
-p.extend(sp.plot(dy21,(x,-2,7),line_color=(.1,.1,.7),show=False))
-p.extend(sp.plot(d2y21,(x,-2,7),line_color=(.9,.1,.9),show=False))
-for y0 in [-1,0,1]: p.extend(sp.plot(y0,(x,-2,7),line_color=(.9,.1,.1),show=False))
-p.show()
+p.extend(sp.plot(dy21,(x,-2,7),
+                 line_color=(.1,.1,.7),
+                 show=False))
+p.extend(sp.plot(d2y21,(x,-2,7),
+                 line_color=(.9,.1,.9),
+                 show=False))
+for y0 in [-1,0,1]: 
+    p.extend(sp.plot(y0,(x,-2,7),
+                     line_color=(.9,.1,.1),
+                     show=False))
+p.show(
 </script></div><br/> 
 <div class="link2"><script type="text/x-sage"># python; task 3
-x1=np.linspace(-2,1.999); x2=np.linspace(2.001,2.999); x3=np.linspace(3.001,7)
-xa=[x1,x2,x3]; y21=lambda x: ((x-2)**2)**(1/3)-((x-3)**2)**(1/3)
-dy21=lambda x: 2/3*(x-2)/((x-2)**2)**(2/3)-2/3*(x-3)/((x-3)**2)**(2/3)
-d2y21=lambda x: -8/9*(x-2)**2/((x-2)**2)**(5/3)+8/9*(x-3)**2/((x-3)**2)**(5/3)+\
-                2/3/((x-2)**2)**(2/3)-2/3/((x-3)**2)**(2/3)
-pl.figure(figsize=(9,9)); pl.grid(c='steelblue',ls='--',lw=0.5)
+x1=np.linspace(-2,1.999)
+x2=np.linspace(2.001,2.999); x3=np.linspace(3.001,7)
+xa=[x1,x2,x3]
+y21=lambda x: 
+    ((x-2)**2)**(1/3)-((x-3)**2)**(1/3)
+dy21=lambda x: 
+    2/3*(x-2)/((x-2)**2)**(2/3)-2/3*(x-3)/((x-3)**2)**(2/3)
+d2y21=lambda x: 
+    -8/9*(x-2)**2/((x-2)**2)**(5/3)+8/9*(x-3)**2/((x-3)**2)**(5/3)+\
+    2/3/((x-2)**2)**(2/3)-2/3/((x-3)**2)**(2/3)
+pl.figure(figsize=(9,9))
+pl.grid(c='steelblue',ls='--',lw=0.5)
 ll1=[r"$y$",r"$y \prime$",r"$y \prime \prime$"]
 ll2=[r'$x \in (-2; 2)$',r'$x \in (2; 3)$',r'$x \in (3; 7)$']
 ll3=[r'$y=-1$',r'$y=0$',r'$y=1$']; y0=[-1,0,1]
 for i in range(3):
-    pl.plot(xa[i],y21(xa[i]),c=(.1,.1,.2*(i+3)),lw=3,label=ll1[0]+','+ll2[i])
-    pl.plot(xa[i],dy21(xa[i]),c=(.2*(i+3),.1,.1*(i+3)),lw=2,label=ll1[1]+','+ll2[i])
-    pl.plot(xa[i],d2y21(xa[i]),c=(.2*(i+3),.1,.2*(i+3)),lw=2,label=ll1[2]+','+ll2[i])
-    pl.axhline(y0[i],c='darkorange',ls='--',lw=2,label=ll3[i])
-pl.xlabel(r'$x$',fontsize=15); pl.ylabel(r'$y$',fontsize=15); pl.ylim(-5,5)
-pl.legend(fontsize=13,bbox_to_anchor=(.7,.5)); pl.show()
+    pl.plot(xa[i],y21(xa[i]),c=(.1,.1,.2*(i+3)),
+            lw=3,label=ll1[0]+','+ll2[i])
+    pl.plot(xa[i],dy21(xa[i]),c=(.2*(i+3),.1,.1*(i+3)),
+            lw=2,label=ll1[1]+','+ll2[i])
+    pl.plot(xa[i],d2y21(xa[i]),c=(.2*(i+3),.1,.2*(i+3)),
+            lw=2,label=ll1[2]+','+ll2[i])
+    pl.axhline(y0[i],c='darkorange',
+               ls='--',lw=2,label=ll3[i])
+pl.xlabel(r'$x$',fontsize=15)
+pl.ylabel(r'$y$',fontsize=15); pl.ylim(-5,5)
+pl.legend(fontsize=13,bbox_to_anchor=(.7,.5))
+pl.show()
 </script></div><br/> 
    <h2>Cells for Your Experiments</h2>
 <div class="sage"><script type="text/x-sage"># sage 
