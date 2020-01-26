@@ -18,16 +18,22 @@
   <body>
   <h1>&#x1F4D1; &nbsp;Maths. TF1319. Standard Calculation 17</h1>
 <a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> &nbsp; &nbsp;
-<a href="https://olgabelitskaya.github.io/README_EXERCISES.html">&#x1F300; &nbsp; Various Exam Exercises &nbsp; &nbsp;</a>      
+<a href="https://olgabelitskaya.github.io/README_EXERCISES.html">&#x1F300; &nbsp; Various Exam Exercises &nbsp; &nbsp;</a><br/>
 Find integrals  
   <h2>Task 1</h2>
 <div class="sage"><script type="text/x-sage"># sage; task 1
-from sage.symbolic.integration.integral import indefinite_integral
-set_verbose(-1); f21(x)=(x^2*x^(1/3)+2*x^(1/2))/(x+x^(1/2))
-intf21(x)=indefinite_integral(f21(x),x)
-s=r'$f(x)=%s => $'+r'<br/>'+r'$F(x)=\int f(x) dx= %s$'
-pretty_print(html(s%(latex(f21(x)),latex(intf21(x)))))
-plot([f21(x),intf21(x)],(0,10),legend_label=[r'f(x)',r'F(x)'],
+from sage.symbolic.integration.integral \
+import indefinite_integral as ii
+set_verbose(-1)
+f21(x)=(x^2*x^(1/3)+2*x^(1/2))/(x+x^(1/2))
+intf21(x)=ii(f21(x),x)
+st=r'$\displaystyle{f(x)=%s=>}$'+r'<br/>'+\
+   r'$F(x)=\int f(x)\;dx=%s$<br/>$%s$'
+stf=(latex(f21(x)),str(latex(intf21(x)))[:167],
+     str(latex(intf21(x)))[166:])
+pretty_print(html(st%stf))
+plot([f21(x),intf21(x)],(0,10),
+     legend_label=[r'f(x)',r'F(x)'],
      detect_poles=True,gridlines=True)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage"># python; task 1
@@ -36,13 +42,19 @@ import sympy as sp
 </script></div><br/>
   <h2>Task 2</h2>
 <div class="sage"><script type="text/x-sage"># sage; task 2
-from sage.symbolic.integration.integral import indefinite_integral
-set_verbose(-1); f21(x)=x^2/(x^2-2*x+4)/(2+2*x-x^2)^(1/2)
-intf21(x)=simplify(indefinite_integral(f21(x),x))
-s=r'$f(x)=%s =>$<br/>$F(x)=\int f(x) dx= %s$<br/>$-%s$<br/>$+%s$'
-pretty_print(html(s%(latex(f21(x)),str(latex(intf21(x)))[:141],
-                 str(latex(intf21(x)))[141:449],str(latex(intf21(x)))[449:])))
-plot([f21(x),intf21(x)],(-1,3),legend_label=[r'f(x)',r'F(x)'],
+from sage.symbolic.integration.integral \
+import indefinite_integral as ii
+set_verbose(-1)
+f21(x)=x^2/(x^2-2*x+4)/(2+2*x-x^2)^(1/2)
+intf21(x)=simplify(ii(f21(x),x))
+st=r'$\displaystyle{f(x)=%s=>}$<br/>$F(x)='+\
+   r'\int f(x)\;dx=%s$<br/>$-%s$<br/>$+%s$'
+stf=(latex(f21(x)),str(latex(intf21(x)))[:141],
+     str(latex(intf21(x)))[141:449],
+     str(latex(intf21(x)))[449:])
+pretty_print(html(st%stf))
+plot([f21(x),intf21(x)],(-1,3),
+     legend_label=[r'f(x)',r'F(x)'],
      detect_poles=True,gridlines=True)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage"># python; task 2
