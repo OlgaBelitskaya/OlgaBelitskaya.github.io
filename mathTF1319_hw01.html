@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Maths_TF1319_HW01</title>
+    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <script>$(function (){
+        sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Run'});});
+    </script>
+  </head>
+  <style>
+  @import url('https://fonts.googleapis.com/css?family=Orbitron');
+  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
+  p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:68em;}
+  body: {margin:5px 5px 5px 15px;}
+  </style>  
+  <body>
+  <h1>&#x1F4D1; &nbsp;Maths. TF1319. Homework. Part 1</h1>
+<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> &nbsp; &nbsp;
+<a href="https://olgabelitskaya.github.io/README_EXERCISES.html">&#x1F300; &nbsp; Various Exam Exercises &nbsp; &nbsp;</a><br/>
+  <h2>Tasks 6.21-6.51</h2>
+  Compute derivatives.
+<div class="compute"><script type="text/x-sage">
+set_verbose(-1); var('x,a,b')
+f=[3-2*x+2/3*x^4,1/x-1/x^2-1/x^3,(x^2+1)/(x^3-x),(1+3*x^2)/sqrt(2*pi),
+  a/x^(3/5)+x^(2/3)/b,2/(2*x-1)-1/x,(sqrt(x)-1)*(1/sqrt(x)+1),
+  (3*x^(2/3)+6*x^(1/3))*x^(4/3),x^3*cot(x),cos(x)/(1+sin(x)),
+  x*x^(2/3)*(2*log(x)-3^x),2*sin(x)-3*tan(x),x^(3/2)*(x^5+a)^(1/3),
+  sin(3*x/2),(1+4*x^2)^3,(sin(x/2))^2]
+df=[diff(y,x) for y in f]
+@interact
+def _(n=range(16)):
+    pretty_print("6."+str(21+2*n)+": y="+latex(f[n])+"; y'="+latex(df[n]))
+    F=[f[n],df[n]]; LF=["$%s$"%latex(el) for el in F]
+    if n==4: F=[f[n].subs(a==1,b==1),df[n].subs(a==1,b==1)]
+    if n==12: F=[f[n].subs(a==1),df[n].subs(a==1)]
+    plot(F,(x,-5,5),legend_label=LF).\
+    show(ymin=-10,ymax=10,gridlines=True,figsize=10)
+</script></div><br/>
+<div class="compute"><script type="text/x-sage">
+import sympy as sp; x,a,b=sp.symbols('x,a,b')
+f=[3-2*x+2/3*x**4,1/x-1/x**2-1/x**3,(x**2+1)/(x**3-x),(1+3*x**2)/sp.sqrt(2*sp.pi),
+  a/x**(3/5)+x**(2/3)/b,2/(2*x-1)-1/x,(sp.sqrt(x)-1)*(1/sp.sqrt(x)+1),
+  (3*x**(2/3)+6*x**(1/3))*x**(4/3),x**3*sp.cot(x),sp.cos(x)/(1+sp.sin(x)),
+  x*x**(2/3)*(2*sp.log(x)-3**x),2*sp.sin(x)-3*sp.tan(x),x**(3/2)*(x**5+a)**(1/3),
+  sp.sin(3*x/2),(1+4*x**2)**3,(sp.sin(x/2))**2]
+df=[sp.diff(y,x) for y in f]
+def dplot(G,dG,xmin,xmax,ymin,ymax):
+    p=sp.plot(G,(x,xmin,xmax),line_color='#3636ff',ylim=(ymin,ymax),show=False)
+    dp=sp.plot(dG,(x,xmin,xmax),line_color='#36ff36',ylim=(ymin,ymax),show=False)
+    p.extend(dp); p.show()
+for n in range(16):
+    sp.pretty_print("6."+str(21+2*n)+": y="+str(f[n])+"; y'="+str(df[n]))
+    if (n not in [4,6,7,10,12,13,15]): 
+        dplot(f[n],df[n],-5,5,-10,10) 
+    if (n in [6,7,10]): 
+        dplot(f[n],df[n],.1,5,-30,30)
+    if (n in [13,15]): 
+        dplot(f[n],df[n],-5,5,-2,2)
+    if n==4:
+        F=lambda x,a,b:a/x**(3/5)+x**(2/3)/b 
+        dF=lambda x,a,b:-3*a/(5*x**(8/5))+2/(3*b*x**(1/3)) 
+        dplot(F(x,1,1),dF(x,1,1),.1,5,-30,30)
+    if n==12:
+        F=lambda x,a:x**(3/2)*(x**5+a)**(1/3) 
+        dF=lambda x,a:5*x**(11/2)/(3*(a+x**5)**(2/3))+3*sp.sqrt(x)*(a+x**5)**(1/3)/2
+        dplot(F(x,1),dF(x,1),.1,5,-30,30)
+</script></div><br/>
+  </body>
+</html>
