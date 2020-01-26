@@ -21,11 +21,15 @@
 Find integrals  
   <h2>Task 1</h2>
 <div class="sage"><script type="text/x-sage"># sage; task 1
-from sage.symbolic.integration.integral import indefinite_integral
+from sage.symbolic.integration.integral \
+import indefinite_integral as ii
 f21(x)=(5*x^3-17*x^2+18*x-5)/(x-1)^3/(x-2)
-intf21(x)=indefinite_integral(f21(x),x)
-pretty_print(html('$f(x)=%s => \int f(x) dx= %s$'%(latex(f21(x)),latex(intf21(x)))))
-plot([f21(x),intf21(x)],(2,10),legend_label='automatic',ymin=-10,ymax=10)
+intf21(x)=ii(f21(x),x)
+st=r'$\displaystyle{f(x)=%s => \int f(x) dx= %s}$'
+pretty_print(html(st%(latex(f21(x)),
+                      latex(intf21(x)))))
+plot([f21(x),intf21(x)],(2,10),gridlines=True,
+     legend_label='automatic',ymin=-10,ymax=10)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage"># python; task 1
 import sympy as sp
@@ -33,11 +37,16 @@ import sympy as sp
 </script></div><br/>
   <h2>Task 2</h2>
 <div class="sage"><script type="text/x-sage"># sage; task 2
-from sage.symbolic.integration.integral import indefinite_integral
-set_verbose(-1); f21(x)=x^2/(x^2-4*x+3) 
-intf21(x)=indefinite_integral(f21(x),x)
-pretty_print(html('$f(x)=%s => \int f(x) dx= %s$'%(latex(f21(x)),latex(intf21(x)))))
-plot([f21(x),intf21(x)],(0,5),legend_label='automatic',detect_poles=True,ymin=-10,ymax=10)
+from sage.symbolic.integration.integral \
+import indefinite_integral as ii
+set_verbose(-1)
+f21(x)=x^2/(x^2-4*x+3); intf21(x)=ii(f21(x),x)
+st=r'$\displaystyle{f(x)=%s => \int f(x) dx= %s}$'
+pretty_print(html(st%(latex(f21(x)),
+                      latex(intf21(x)))))
+plot([f21(x),intf21(x)],(0,5),
+     legend_label='automatic',detect_poles=True,
+     ymin=-10,ymax=10,gridlines=True)
 </script></div><br/>
 <div class="sage"><script type="text/x-sage"># python; task 2
 import sympy as sp
