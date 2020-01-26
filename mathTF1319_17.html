@@ -36,9 +36,26 @@ plot([f21(x),intf21(x)],(0,10),
      legend_label=[r'f(x)',r'F(x)'],
      detect_poles=True,gridlines=True)
 </script></div><br/>
+<p>u=x**(1/6); u'=1/(6*x**(5/6))=> du=dx/(6*x**(5/6)) => dx=(6*u**5)*du</p>
+<p>f211 dx=(x**(7/3)/(x+x**(1/2)))*dx=((u**14/(u**6+u**3))*(6*u**5)+</p>
+<p>+2*(u+1)/(u**2-u+1)-2*(u+1)/(u**2-u+1))*du</p>
+<p>-2*(u+1)/(u**2-u+1))=</p>
+<p>v=u-1/2; dv=du; u=v+1/2</p>
 <div class="sage"><script type="text/x-sage"># python; task 1
-import sympy as sp
-
+# python; task 1
+import sympy as sp; x,u=sp.symbols('x,u')
+f21=(x**(7/3)+2*sp.sqrt(x))/(x+sp.sqrt(x))
+f211=x**(7/3)/(x+x**(1/2))
+f212=2*x**.5/(x+x**(1/2))
+fu211=(u**14/(u**6+u**3))*(6*u**5)+2*(u+1)/(u**2-u+1)
+intf211=sp.integrate(f212,x,manual=True)
+intfu211=sp.integrate(fu211,u,manual=True)
+p=sp.plot(f21,(x,.01,10),
+          show=False,line_color=(.1,.1,.7))
+p.extend(sp.plot(f211,(x,.01,10),show=False))
+p.extend(sp.plot(f212,(x,.01,10),show=False))
+p.show()
+[intf211,intfu211]
 </script></div><br/>
   <h2>Task 2</h2>
 <div class="sage"><script type="text/x-sage"># sage; task 2
