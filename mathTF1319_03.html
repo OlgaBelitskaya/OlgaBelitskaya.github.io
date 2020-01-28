@@ -111,16 +111,28 @@ p4.extend(pl4); p4.show()
 <div class="compute"><script type="text/x-sage"># sage
 # 5->13.21
 var('x'); f5=(sqrt(2^x+7)-sqrt(2^(x+1)+5))/(x^3-1)
-pretty_print(html("<p>$\lim_{x → 1}"+str(latex(f5))+"="+\
-                  str(limit(f5,x=1))+"="+str(limit(f5,x=1).n())+"$</p>"))
-(plot(f5,(-2*pi,2*pi),ymin=-.3,ymax=.3,gridlines=True)+
- plot(limit(f5,x=1),(-2*pi,2*pi),color='red',linestyle='-.',thickness=2)).show()
+st5=r'<p>$\displaystyle{\lim_{x → 1}'+\
+    str(latex(f5))+'='+str(limit(f5,x=1))+\
+    '='+str(limit(f5,x=1).n(digits=6))+'}$</p>'
+pretty_print(html(st5))
+p5=plot(f5,(-2*pi,2*pi),ymin=-.3,ymax=.1)
+p5+=line([[1,-.3],[1,.1]],color='magenta',
+         linestyle='-.',thickness=2)
+p5+=plot(limit(f5,x=1),(-2*pi,2*pi),
+         color='red',linestyle='-.',thickness=2)
+p5.show(gridlines=True,frame=True,figsize=(7,5))
 # 6->14.21
 f6=(4^(5*x)-9^(-2*x))/(sin(x)-tan(x^3))
-pretty_print(html("<p>$\lim_{x → 0}"+str(latex(f6))+"="+\
-                  str(limit(f6,x=0))+"="+str(limit(f6,x=0).n())+"$</p>"))
-plot(f6,(-2,2),ymin=-50,ymax=50,gridlines=True)+\
-plot(limit(f6,x=0),(-2,2),color='red',linestyle='-.',thickness=2)
+st6=r'<p>$\displaystyle{\lim_{x → 0}'+\
+    str(latex(f6))+'='+str(limit(f6,x=0))+\
+    '='+str(limit(f6,x=0).n(digits=6))+'}$</p>'
+pretty_print(html(st6))
+p6=plot(f6,(-2,2),ymin=-30,ymax=70)
+p6+=line([[0,-30],[0,70]],color='magenta',
+         linestyle='-.',thickness=2)
+p6+=plot(limit(f6,x=0),(-2,2),
+         color='red',linestyle='-.',thickness=2)
+p6.show(gridlines=True,frame=True,figsize=(7,5))
 </script></div><br/>
 <div class="compute"><script type="text/x-sage"># python / sympy
 import sympy as sp; sp.symbols('x')
