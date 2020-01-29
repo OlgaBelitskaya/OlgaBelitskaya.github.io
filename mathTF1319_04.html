@@ -22,24 +22,28 @@
 <a href="https://olgabelitskaya.github.io/README_EXERCISES.html">&#x1F300; &nbsp; Various Exam Exercises &nbsp; &nbsp;</a><br/>
   <h2>Task 1</h2>
 At what ratio of parameters a and b will the function f(x) be continuous?
-<div class="compute"><script type="text/x-sage">
-# sage
-var('x,a,b'); V=21; f1(a,x)=a*(x+V); g1(b,x)=(x-V)^2+b
-pretty_print('x<0:%s, x>0:%s'%(str(f1),str(g1)))
-pretty_print(solve(f1(a,0)-g1(b,0),a))
-(sum([plot(f1(a,x),(-10,0),gridlines=True,legend_label='a=%d'%a,color=hue(a/44)) for a in [20..24]])+
-sum([plot(g1(b,x),(0,10),legend_label='b=%d'%b,color=hue(b/44)) for b in [7,14..35]])).show()
+<div class="compute"><script type="text/x-sage"># sage
+var('x,a,b'); V=21
+f11(a,x)=a*(x+V); f12(b,x)=(x-V)^2+b
+pretty_print('x<0: %s; x>0: %s'%(str(f11),str(f12)))
+pretty_print(solve(f11(a,0)-f12(b,0),a))
+p1=sum([plot(f11(a,x),(-5,0),color=hue((25-a)/5),
+             legend_label='a=%d'%a) for a in [20..24]])
+p1+=sum([plot(f12(b,x),(0,5),color=hue(1.2-b/35),
+              legend_label='b=%d'%b) for b in [7,14..35]])
+p1.show(gridlines=True,frame=True,figsize=(7,5))
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
-# python / sympy
-import sympy as sp; V=21; x,a,b=sp.symbols('x,a,b')
-def f1(a,x): return a*(x+V)
-def g1(b,x): return (x-V)**2+b
-sp.pretty_print('x<0:%s, x>0:%s'%(str(f1(a,x)),str(g1(b,x))))
-sp.pretty_print(sp.solve(f1(a,0)-g1(b,0),a))
-p1=sp.plot(f1(22,x),(x,-10,0),show=False)
-p2=sp.plot(g1(21,x),(x,0,10),show=False)
-p1.extend(p2); p1.show()
+<div class="compute"><script type="text/x-sage"># python / sympy
+import sympy as sp; V=21
+x,a,b=sp.symbols('x,a,b')
+def f11(a,x): return a*(x+V)
+def f12(b,x): return (x-V)**2+b
+sp.pretty_print('x<0: %s; x>0: %s'\
+                %(str(f11(a,x)),str(f12(b,x))))
+sp.pretty_print(sp.solve(f11(a,0)-f12(b,0),a))
+p11=sp.plot(f11(22,x),(x,-10,0),show=False)
+p12=sp.plot(f12(21,x),(x,0,10),show=False)
+p11.extend(p12); p11.show()
 </script></div><br/>
   <h2>Task 2</h2>
 Find breakpoints and make the function continuous, if it is possible.
