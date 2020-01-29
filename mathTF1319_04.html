@@ -47,32 +47,32 @@ p11.extend(p12); p11.show()
 </script></div><br/>
   <h2>Task 2</h2>
 Find breakpoints and make the function continuous, if it is possible.
-<div class="compute"><script type="text/x-sage">
-# sage
-set_verbose(-1); var('x'); f(x)=(2^cos(x)-2)/(3^(x^2)-1)
-pretty_print('f(x)=%s if x≠0, f(x)=%f if x=0'%(str(f),limit(f,x=0)))
-plot(f(x),(-pi,pi),gridlines=True).show()
-limit(f,x=0)
+<div class="compute"><script type="text/x-sage"># sage
+set_verbose(-1); var('x')
+f(x)=(2^cos(x)-2)/(3^(x^2)-1)
+st='f(x)=%s if x≠0, f(x)=%s if x=0'\
+   %(str(f),limit(f,x=0))
+p=plot(f(x),(-pi,pi),gridlines=True)
+p+=point([0,limit(f,x=0)],marker='o',size=30)
+p.show(title=st,frame=True,figsize=(7,5))
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
-# python / sympy
+<div class="compute"><script type="text/x-sage"># python / sympy
 import sympy as sp; x=sp.symbols('x'); 
 def f(x): return (2**sp.cos(x)-2)/(3**(x**2)-1)
-sp.pretty_print('f(x)=%s if x≠0, f(x)=%f if x=0'%(str(f(x)),sp.limit(f(x),x,0)))
+sp.pretty_print('f(x)=%s if x≠0, f(x)=%f if x=0'\
+                %(str(f(x)),sp.limit(f(x),x,0)))
 sp.plot(f(x),(x,-sp.pi,sp.pi)); sp.limit(f(x),x,0)
 </script></div><br/>
   <h2>Task 3</h2>
 Find breakpoints and make the function continuous, if it is possible.
-<div class="compute"><script type="text/x-sage">
-# sage
+<div class="compute"><script type="text/x-sage"># sage
 set_verbose(-1); var('x'); f=5^(x/(1-x^2))
 pretty_print('f(x)=%s'%str(f)) 
 pretty_print('limit f(x) (x->-1), left & right: %s & %s)'%(limit(f,x=-1,dir='left'),limit(f,x=-1,dir='right')))
 pretty_print('limit f(x) (x->1), left & right: %s & %s)'%(limit(f,x=1,dir='left'),limit(f,x=1,dir='right')))
 plot(f,(-3,3),ymax=5,gridlines=True).show()
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
-# python / sympy
+<div class="compute"><script type="text/x-sage"># python / sympy
 import sympy as sp; x=sp.symbols('x')
 def f(x): return 5**(x/(1-x**2))
 sp.pretty_print('f(x)=%s'%str(f(x))) 
