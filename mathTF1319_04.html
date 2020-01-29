@@ -6,7 +6,7 @@
     <title>Maths_TF1319_4</title>
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
     <script>$(function (){
-    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Run'});});
+        sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Run'});});
     </script>
   </head>
   <style>
@@ -58,29 +58,46 @@ p.show(title=st,frame=True,figsize=(7,5))
 </script></div><br/>
 <div class="compute"><script type="text/x-sage"># python / sympy
 import sympy as sp; x=sp.symbols('x'); 
-def f(x): return (2**sp.cos(x)-2)/(3**(x**2)-1)
-sp.pretty_print('f(x)=%s if x≠0, f(x)=%f if x=0'\
-                %(str(f(x)),sp.limit(f(x),x,0)))
-sp.plot(f(x),(x,-sp.pi,sp.pi)); sp.limit(f(x),x,0)
+def f(x): 
+    return (2**sp.cos(x)-2)/(3**(x**2)-1)
+st='f(x)=%s if x≠0, f(x)=%s if x=0'\
+   %(str(f(x)),sp.limit(f(x),x,0))
+sp.plot(f(x),(x,-sp.pi,sp.pi))
+sp.pprint(st)
 </script></div><br/>
   <h2>Task 3</h2>
 Find breakpoints and make the function continuous, if it is possible.
 <div class="compute"><script type="text/x-sage"># sage
 set_verbose(-1); var('x'); f=5^(x/(1-x^2))
-pretty_print('f(x)=%s'%str(f)) 
-pretty_print('limit f(x) (x->-1), left & right: %s & %s)'%(limit(f,x=-1,dir='left'),limit(f,x=-1,dir='right')))
-pretty_print('limit f(x) (x->1), left & right: %s & %s)'%(limit(f,x=1,dir='left'),limit(f,x=1,dir='right')))
-plot(f,(-3,3),ymax=5,gridlines=True).show()
+st=r'$\displaystyle{f(x)=%s}$'%latex(f)
+st1=r'$\displaystyle{\lim_{x\to-1^{-}}f(x)=%s;\;}$'\
+    %latex(limit(f,x=-1,dir='left'))
+st2=r'$\displaystyle{\;\;\lim_{x\to-1^{+}}f(x)=%s}$'\
+    %latex(limit(f,x=-1,dir='right'))
+st3=r'$\displaystyle{\lim_{x\to1^{-}}f(x)=%s;\;}$'\
+    %latex(limit(f,x=1,dir='left'))
+st4=r'$\displaystyle{\;\;\lim_{x\to1^{+}}f(x)=%s}$'\
+    %latex(limit(f,x=1,dir='right'))
+for el in [st,st1+st2,st3+st4]:
+    pretty_print(html(el))
+p=plot(f,(-5,5),ymax=3)
+p+=line([[-1,0],[-1,3]],color='slategray',
+        linestyle='--',thickness=2)
+p+=line([[1,0],[1,3]],color='slategray',
+        linestyle='--',thickness=2)
+p.show(frame=True,gridlines=True,figsize=(7,5))
 </script></div><br/>
 <div class="compute"><script type="text/x-sage"># python / sympy
 import sympy as sp; x=sp.symbols('x')
 def f(x): return 5**(x/(1-x**2))
-sp.pretty_print('f(x)=%s'%str(f(x))) 
-sp.pretty_print('limit f(x) (x->-1), left & right: %s & %s)'%\
-                (sp.limit(f(x),x,-1,'-'),sp.limit(f(x),x,-1,'+')))
-sp.pretty_print('limit f(x) (x->1), left & right: %s & %s)'%\
-                (sp.limit(f(x),x,1,'-'),sp.limit(f(x),x,1,'+')))
-sp.plot((f(x),(x,-3.1,-1.1)),(f(x),(x,-.9,.9)),(f(x),(x,1.1,3.1)),ylim=(-1,5))
+sp.pretty_print('f(x)=%s'%str(f(x)))
+st1='x -> -1 => f(x) -> (left & right): %s & %s)'%\
+    (sp.limit(f(x),x,-1,'-'),sp.limit(f(x),x,-1,'+'))
+st2='x -> 1 => f(x) -> (left & right): %s & %s)'%\
+    (sp.limit(f(x),x,1,'-'),sp.limit(f(x),x,1,'+'))
+sp.pretty_print(st1); sp.pretty_print(st2)
+sp.plot((f(x),(x,-3.1,-1.1)),(f(x),(x,-.9,.9)),
+        (f(x),(x,1.1,3.1)),ylim=(-1,5))
 </script></div><br/>
    <h2>Task 4</h2>
 Find asymptotes and create function graphs
