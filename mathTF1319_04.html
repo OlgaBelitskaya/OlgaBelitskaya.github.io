@@ -103,13 +103,18 @@ sp.plot((f(x),(x,-3.1,-1.1)),(f(x),(x,-.9,.9)),
 Find asymptotes and create function graphs
 <div class="compute"><script type="text/x-sage">
 # sage #6.21
-var('x'); f=(x^3-2*x^2-3*x+2)/(1-x^2); pretty_print('f(x)=%s'%str(f)) 
-pretty_print('1-x^2≠0 => x≠-1 or x≠1'); pretty_print('y=kx+b: k=-1,b=2')
+var('x'); f=(x^3-2*x^2-3*x+2)/(1-x^2)
+st=r'$\displaystyle{f(x)=%s}$'%latex(f)
+st1=r'$1-x^2≠0 \implies x≠-1 \lor x≠1$'
+st2=r'$y=kx+b:\;k=-1,\;b=2$'
+for el in [st,st1,st2]:
+    pretty_print(html(el))
 print([limit(f,x=-1,dir='+'),limit(f,x=-1,dir='-'),
        limit(f,x=1,dir='+'),limit(f,x=1,dir='-'),
-       limit(f/x,x=oo), limit(f-(limit(f/x,x=oo))*x,x=oo)])
+       limit(f/x,x=oo),limit(f-(limit(f/x,x=oo))*x,x=oo)])
 show(table([['x',-3,-1.5,-.5,0,.5,1.5,3],
-           ['f(x)',f(x=-3),f(x=-1.5),f(x=-.5),f(x=0),f(x=.5),f(x=1.5),f(x=3)]]))
+           ['f(x)',f(x=-3),f(x=-1.5),f(x=-.5),
+           f(x=0),f(x=.5),f(x=1.5),f(x=3)]]))
 plot(f,(-3,3),ymin=-5,ymax=5,gridlines=True,detect_poles=True)+\
 sum([line([[i,-5],[i,5]],color='red',linestyle='-.') for i in [-1,1]])+\
 plot(-1*x+2,(-3,3),color='red',linestyle='-.')
