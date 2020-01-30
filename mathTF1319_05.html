@@ -98,12 +98,20 @@ dplot(f1021,df1021,-10,10,-.5,.5)
   <h2>Task 2 V21</h2>
 Based on the definition of a derivative, find the value of f'(0).
 <div class="compute"><script type="text/x-sage"># sage
-var('x'); f121=3^(x^2*sin(2/x))-1+2*x if x!=0 else 0
+var('x')
+f121=3^(x^2*sin(2/x))-1+2*x if x!=0 else 0
 df121=diff(f121,x)
-pretty_print("1.21: y="+latex(f121)+"; y'="+latex(df121))
-pretty_print("y'(10^{-22.5})="+latex(df121(x=10^(-22.5)).n())+"; y'(10^{-5})="+latex(df121(x=10^(-5)).n()))
+pretty_print("1.21: y="+latex(f121)+\
+             "; y'="+latex(df121))
+pretty_print("y'(10^{-22.5})="+\
+             latex(df121(x=10^(-22.5)).n())+\
+             "; y'(10^{-5})="+\
+             latex(df121(x=10^(-5)).n()))
 for c in [1,.1]:
-    plot([f121,df121],(x,-c,c),legend_label='automatic',gridlines=True).show(ymin=-2,ymax=5,figsize=7)
+    p=plot([f121,df121],(x,-c,c),
+           legend_label=["y","y'"])
+    p.show(ymin=-2,ymax=5,figsize=7,
+           gridlines=True,frame=True)
 limit(diff(3**(x**2*sin(2/x))-1+2*x,x),x=0)
 </script></div><br/>
 <div class="compute"><script type="text/x-sage"># python / sympy
@@ -112,12 +120,20 @@ def f121(x):
     if x!=0: return 3**(x**2*sp.sin(2/x))-1+2*x
     else: return 0 
 def df121(x): return sp.diff(f121(x),x)
-sp.pretty_print("1.21: y="+str(f121(x))+";\n y'="+str(df121(x)))
-sp.pretty_print("y'(0)="+str(sp.limit(sp.diff(3**(x**2*sp.sin(2/x))-1+2*x,x),x,0)))
+sp.pretty_print("1.21: \ny="+str(f121(x))+\
+                ";\n y'="+str(df121(x)))
+df1210=sp.limit(sp.diff(3**(x**2*sp.sin(2/x))-\
+                        1+2*x,x),x,0)
+sp.pretty_print("y'(0)="+str(df1210))
 for c in [1,.1]:
-    p=sp.plot(f121(x),(x,-c,c),line_color='#3636ff',ylim=(-2,5),show=False)
-    dp=sp.plot(df121(x),(x,-c,c),line_color='#36ff36',ylim=(-2,5),show=False)
-    lp=sp.plot(2,(x,-c,c),line_color='#ff3636',show=False)
+    p=sp.plot(f121(x),(x,-c,c),
+              line_color='#3636ff',
+              ylim=(-2,5),show=False)
+    dp=sp.plot(df121(x),(x,-c,c),
+               line_color='#36ff36',
+               ylim=(-2,5),show=False)
+    lp=sp.plot(2,(x,-c,c),
+               line_color='#ff3636',show=False)
     p.extend(dp); p.extend(lp); p.show()
 </script></div><br/>
   <h2>Task 3 V21</h2>
