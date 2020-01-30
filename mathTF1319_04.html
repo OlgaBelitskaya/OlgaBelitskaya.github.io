@@ -123,9 +123,11 @@ pretty_print(html(st4%latex(L[4])))
 pretty_print(html(st5%latex(L[5])))
 show(table([['x']+['%.2f'%el for el in X],
            ['f(x)']+['%.2f'%f(x=el) for el in X]]))
-plot(f,(-3,3),ymin=-5,ymax=10,gridlines=True,detect_poles=True)+\
-sum([line([[i,-5],[i,10]],color='red',linestyle='-.') for i in [-1,1]])+\
-plot(-1*x+2,(-3,3),color='red',linestyle='-.')
+p=plot(f,(-3,3),ymin=-5,ymax=10,detect_poles=True)
+p+=sum([line([[i,-5],[i,10]],color='red',
+             linestyle='-.') for i in [-1,1]])
+p+=plot(-1*x+2,(-3,3),color='red',linestyle='-.')
+p.show(gridlines=True,frame=True,figsize=(7,5))
 </script></div><br/>
 <div class="compute"><script type="text/x-sage"># python / sympy
 import sympy as sp; x,t=sp.symbols('x,t')
