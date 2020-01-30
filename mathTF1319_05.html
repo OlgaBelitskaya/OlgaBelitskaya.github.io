@@ -20,11 +20,10 @@
   <h1>&#x1F4D1; &nbsp;Maths. TF1319. Standard Calculation 5</h1>
 <a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> &nbsp; &nbsp;
 <a href="https://olgabelitskaya.github.io/README_EXERCISES.html">&#x1F300; &nbsp; Various Exam Exercises &nbsp; &nbsp;</a><br/>
-Compute derivatives.
-  <h2>Task #6.21, #7.21, #8.21, #9.21, #10.21</h2>   
-<div class="compute"><script type="text/x-sage">
-# sage
-var('x,a,b,m'); 
+Вычислите произвдные. Compute derivatives.
+  <h2>Task 1 #6.21, #7.21, #8.21, #9.21, #10.21</h2>   
+<div class="compute"><script type="text/x-sage"># sage
+var('x,a,b,m') 
 #6.21
 f621=(1/(m*sqrt(a*b)))*arctan(e^(m*x)*sqrt(a/b)); df621=diff(f621,x)
 pretty_print("6.21: y="+latex(f621)+"; y'="+latex(df621))
@@ -52,8 +51,7 @@ pretty_print("10.21: y="+latex(f1021)+"; y'="+latex(df1021.factor()))
 plot([f1021,df1021.factor()],(x,-10,10),legend_label='automatic',detect_poles=True).\
 show(ymin=-.5,ymax=.5,gridlines=True,figsize=7)
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
-# python / sympy
+<div class="compute"><script type="text/x-sage"># python / sympy
 import sympy as sp; x,a,b,m=sp.symbols('x,a,b,m')
 def dplot(G,dG,xmin,xmax,ymin,ymax):
     p=sp.plot(G,(x,xmin,xmax),line_color='#3636ff',ylim=(ymin,ymax),show=False)
@@ -82,10 +80,9 @@ f1021=(-1/4)*sp.asin((5+3*sp.cosh(x))/(3+5*sp.cosh(x))); df1021=sp.diff(f1021,x)
 sp.pretty_print("10.21: y="+str(f1021)+";\n y'="+str(df1021.factor()))
 dplot(f1021,df1021,-10,10,-.5,.5)
 </script></div><br/>
-  <h2>2.3 Task 1.21</h2>
+  <h2>Task 2 V21</h2>
 Based on the definition of a derivative, find the value of f'(0).
-<div class="compute"><script type="text/x-sage">
-# sage
+<div class="compute"><script type="text/x-sage"># sage
 var('x'); f121=3^(x^2*sin(2/x))-1+2*x if x!=0 else 0
 df121=diff(f121,x)
 pretty_print("1.21: y="+latex(f121)+"; y'="+latex(df121))
@@ -94,8 +91,7 @@ for c in [1,.1]:
     plot([f121,df121],(x,-c,c),legend_label='automatic',gridlines=True).show(ymin=-2,ymax=5,figsize=7)
 limit(diff(3**(x**2*sin(2/x))-1+2*x,x),x=0)
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
-# python / sympy
+<div class="compute"><script type="text/x-sage"># python / sympy
 import sympy as sp; x=sp.symbols('x')
 def f121(x):
     if x!=0: return 3**(x**2*sp.sin(2/x))-1+2*x
@@ -109,10 +105,9 @@ for c in [1,.1]:
     lp=sp.plot(2,(x,-c,c),line_color='#ff3636',show=False)
     p.extend(dp); p.extend(lp); p.show()
 </script></div><br/>
-  <h2>2.3 Task 2.21</h2>
+  <h2>Task 3 V21</h2>
 Write the equation of the tangent line to this curve at the point with abscissa $x_0$.
-<div class="compute"><script type="text/x-sage">
-# sage
+<div class="compute"><script type="text/x-sage"># sage
 var('x'); f221=x/(x^2+1); x0=-2; df221=diff(f221,x)
 pretty_print("2.21: y="+latex(f221)+"; y'="+latex(df221))
 tf221=f221(x=x0)+df221(x=x0)*(x-x0)
@@ -122,8 +117,7 @@ pretty_print("normal \; line: y="+latex(nf221))
 plot([f221,df221,tf221,nf221],(x,-4,0),legend_label='automatic').\
 show(ymin=-2.5,ymax=1.5,gridlines=True,figsize=7,aspect_ratio=1)
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
-# python / sympy
+<div class="compute"><script type="text/x-sage"># python / sympy
 import sympy as sp; x=sp.symbols('x'); x0=-2
 f221=x/(x**2+1); df221=sp.diff(f221,x)
 sp.pretty_print("2.21: y="+str(f221)+";\n y'="+str(df221))
