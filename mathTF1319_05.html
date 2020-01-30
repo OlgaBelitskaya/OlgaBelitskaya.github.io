@@ -20,36 +20,41 @@
   <h1>&#x1F4D1; &nbsp;Maths. TF1319. Standard Calculation 5</h1>
 <a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> &nbsp; &nbsp;
 <a href="https://olgabelitskaya.github.io/README_EXERCISES.html">&#x1F300; &nbsp; Various Exam Exercises &nbsp; &nbsp;</a><br/>
-Вычислите произвдные. Compute derivatives.
+Вычислите производные. Compute derivatives.
   <h2>Task 1 #6.21, #7.21, #8.21, #9.21, #10.21</h2>   
 <div class="compute"><script type="text/x-sage"># sage
-var('x,a,b,m') 
+var('x,a,b,m')
+st=r'$\displaystyle{%d.21: y=%s; y\prime=%s}$'
+def fplot(f,df,x1,x2,y1,y2):
+    p=plot([f,df],(x,x1,x2),
+           legend_label=["f(x)","f'(x)"],
+           detect_poles=True)
+    p.show(ymin=y1,ymax=y2,gridlines=True,
+           figsize=7,frame=True)
 #6.21
-f621=(1/(m*sqrt(a*b)))*arctan(e^(m*x)*sqrt(a/b)); df621=diff(f621,x)
-pretty_print("6.21: y="+latex(f621)+"; y'="+latex(df621))
-F621,dF621=f621.subs(a==1,b==1,m==1),df621.subs(a==1,b==1,m==1)
-plot([F621,dF621],(x,-7,7),legend_label='automatic',detect_poles=True).\
-show(ymin=0,ymax=2,gridlines=True,figsize=7)
+f621=(1/(m*sqrt(a*b)))*arctan(e^(m*x)*sqrt(a/b))
+df621=diff(f621,x)
+pretty_print(html(st%(6,latex(f621),latex(df621))))
+fplot(f621.subs(a==1,b==1,m==1),
+      df621.subs(a==1,b==1,m==1),-7,7,0,2)
 #7.21
 f721=log(arcsin(sqrt(1-e^(2*x)))); df721=diff(f721,x)
-pretty_print("7.21: y="+latex(f721)+"; y'="+latex(df721))
-plot([f721,df721],(x,-2,0),legend_label='automatic',detect_poles=True).\
-show(ymin=-5,ymax=3,gridlines=True,figsize=7)
+pretty_print(html(st%(7,latex(f721),latex(df721))))
+fplot(f721,df721,-2,0,-5,3)
 #8.21
-f821=sqrt(tan(4))+(sin(21*x))^2/(21*cos(42*x)); df821=diff(f821,x)
-pretty_print("8.21: y="+latex(f821)+"; y'="+latex(df821))
-plot([f821,df821],(x,-.5,.5),legend_label='automatic',detect_poles=True).\
-show(ymin=-5,ymax=5,gridlines=True,figsize=7)
+f821=sqrt(tan(4))+(sin(21*x))^2/(21*cos(42*x))
+df821=diff(f821,x)
+pretty_print(html(st%(8,latex(f821),latex(df821))))
+fplot(f821,df821,-.5,.5,-5,5)
 #9.21
 f921=arctan(x)+5/6*log((x^2+1)/(x^2+4)); df921=diff(f921,x)
-pretty_print("9.21: y="+latex(f921)+"; y'="+latex(df921))
-plot([f921,df921],(x,-20,20),legend_label='automatic',detect_poles=True).\
-show(ymin=-2,ymax=2,gridlines=True,figsize=7)
+pretty_print(html(st%(9,latex(f921),latex(df921))))
+fplot(f921,df921,-20,20,-2,2)
 #10.21
-f1021=(-1/4)*arcsin((5+3*cosh(x))/(3+5*cosh(x))); df1021=diff(f1021,x)
-pretty_print("10.21: y="+latex(f1021)+"; y'="+latex(df1021.factor()))
-plot([f1021,df1021.factor()],(x,-10,10),legend_label='automatic',detect_poles=True).\
-show(ymin=-.5,ymax=.5,gridlines=True,figsize=7)
+f1021=(-1/4)*arcsin((5+3*cosh(x))/(3+5*cosh(x)))
+df1021=diff(f1021,x)
+pretty_print(html(st%(10,latex(f1021),latex(df1021))))
+fplot(f1021,df1021,-10,10,-.5,.5)
 </script></div><br/>
 <div class="compute"><script type="text/x-sage"># python / sympy
 import sympy as sp; x,a,b,m=sp.symbols('x,a,b,m')
