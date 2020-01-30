@@ -101,26 +101,33 @@ sp.plot((f(x),(x,-3.1,-1.1)),(f(x),(x,-.9,.9)),
 </script></div><br/>
    <h2>Task 4</h2>
 Find asymptotes and create function graphs
-<div class="compute"><script type="text/x-sage">
-# sage #6.21
+<div class="compute"><script type="text/x-sage"># sage #6.21
 var('x'); f=(x^3-2*x^2-3*x+2)/(1-x^2)
 st=r'$\displaystyle{f(x)=%s}$'%latex(f)
 st1=r'$1-x^2≠0 \implies x≠-1 \lor x≠1$'
 st2=r'$y=kx+b:\;k=-1,\;b=2$'
+st3=r'$\displaystyle{\lim_{x\to%s}f(x)=%s}$'
+st4=r'$\displaystyle{\lim_{x\to\infty}\frac{f(x)}{x}=%s}$'
+st5=r'$\displaystyle{\lim_{x\to\infty}{f(x)-'+\
+    r'x*\lim_{x\to\infty}\frac{f(x)}{x}}=%s}$'
+L=[limit(f,x=-1,dir='+'),limit(f,x=-1,dir='-'),
+   limit(f,x=1,dir='+'),limit(f,x=1,dir='-'),
+   limit(f/x,x=oo),limit(f-(limit(f/x,x=oo))*x,x=oo)]
+stl=[r'-1^{+}',r'-1^{-}',r'1^{+}',r'1^{-}']
+X=[-3,-2,-1.5,-.5,0,.5,1.5,2,3]
 for el in [st,st1,st2]:
     pretty_print(html(el))
-print([limit(f,x=-1,dir='+'),limit(f,x=-1,dir='-'),
-       limit(f,x=1,dir='+'),limit(f,x=1,dir='-'),
-       limit(f/x,x=oo),limit(f-(limit(f/x,x=oo))*x,x=oo)])
-show(table([['x',-3,-1.5,-.5,0,.5,1.5,3],
-           ['f(x)',f(x=-3),f(x=-1.5),f(x=-.5),
-           f(x=0),f(x=.5),f(x=1.5),f(x=3)]]))
-plot(f,(-3,3),ymin=-5,ymax=5,gridlines=True,detect_poles=True)+\
-sum([line([[i,-5],[i,5]],color='red',linestyle='-.') for i in [-1,1]])+\
+for i in range(4):
+    pretty_print(html(st3%(stl[i],latex(L[i]))))
+pretty_print(html(st4%latex(L[4])))
+pretty_print(html(st5%latex(L[5])))
+show(table([['x']+['%.2f'%el for el in X],
+           ['f(x)']+['%.2f'%f(x=el) for el in X]]))
+plot(f,(-3,3),ymin=-5,ymax=10,gridlines=True,detect_poles=True)+\
+sum([line([[i,-5],[i,10]],color='red',linestyle='-.') for i in [-1,1]])+\
 plot(-1*x+2,(-3,3),color='red',linestyle='-.')
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
-# python / sympy
+<div class="compute"><script type="text/x-sage"># python / sympy
 import sympy as sp; x,t=sp.symbols('x,t')
 def f(x): return (x**3-2*x**2-3*x+2)/(1-x**2)
 sp.pretty_print('f(x)=%s'%str(f(x))) 
@@ -128,7 +135,8 @@ sp.pretty_print('1-x^2≠0 => x≠-1 or x≠1')
 sp.pretty_print('y=kx+b: k=-1,b=2')
 print([sp.limit(f(x),x,-1,'+'),sp.limit(f(x),x,-1,'-'),
        sp.limit(f(x),x,1,'+'),sp.limit(f(x),x,1,'-'),
-       sp.limit(f(x)/x,x,'oo'),sp.limit(f(x)-(sp.limit(f(x)/x,x,'oo'))*x,x,'oo')])
+       sp.limit(f(x)/x,x,'oo'),
+       sp.limit(f(x)-(sp.limit(f(x)/x,x,'oo'))*x,x,'oo')])
 p=sp.plot(f(x),(x,-3,3),ylim=(-5,5),show=False)
 p.extend(sp.plot_implicit(x-1.03,line_color='r',show=False))
 p.extend(sp.plot_implicit(x+1.03,line_color='r',show=False))
