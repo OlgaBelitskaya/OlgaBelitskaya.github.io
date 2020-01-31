@@ -65,23 +65,34 @@ f22=ln(x); n22=3; a22=1; create_ptable1(f22,n22,a22)
 Write the 4th-order Maclaurin formula
 <div class="link"><script type="text/x-sage"># sage; task 2
 def create_ptable2(g,n):
-    function('f'); var('x'); lf=latex(f(x).taylor(x,0,n))
-    ls='<p style="font-size:20px">%d-th order Maclaurin formula: <br/>'
+    function('f'); var('x')
+    lf=latex(f(x).taylor(x,0,n))
+    ls=r'<p style="font-size:20px">'+\
+        '%d-th order Maclaurin formula: <br/>'
     pretty_print(html(ls%n+'$f(x)=%s$</p>'%lf))
-    s='$\lim\limits_{x \\to 0}'; ls=['--','-.',':','-','--','-.',':','-'] 
-    t1=[['$f(x)$',g],['$f \prime (x)$',diff(g,x)],['$f \prime \prime (x)$',diff(g,x,x)],
-        ['$f \prime \prime \prime(x)$',diff(g,x,x,x)],
-        ['$f \prime \prime \prime \prime(x)$',diff(g,x,x,x,x)]]
-    t2=[[s+'f'+i*'\prime'+'(x)$' for i in range(n+1)],
+    s=r'$\lim_{x \to 0}'
+    ls=['--','-.',':','-','--','-.',':','-'] 
+    t1=[[r'$f(x)$',g],
+        [r'$f\prime(x)$',diff(g,x)],
+        [r'$f\prime\prime(x)$',diff(g,x,x)],
+        [r'$f\prime\prime\prime(x)$',diff(g,x,x,x)],
+        [r'$f\prime\prime\prime\prime(x)$',diff(g,x,x,x,x)]]
+    t2=[[s+'f'+i*r'\prime'+r'(x)$' for i in range(n+1)],
         [limit(diff(g,x,i),x=0) for i in range(n+1)],
         ['%d order Maclaurin formula'%i for i in range(n+1)],
         [g.taylor(x,0,i) for i in range(n+1)]]
     show(table(t1)); show(table(t2))
-    p=plot(g,-3,3,thickness=3,color='#3636ff',alpha=0.7,legend_label='$f(x)=%s$'%latex(g))+\
-    sum([plot(g.taylor(x,0,i),-3,3,hue=cos(i/n),thickness=2,linestyle=ls[i-1],
-              legend_label='$n=%d: %s$'%(i,latex(g.taylor(x,0,i).factor()))) for i in [1..n]])
-    p.set_legend_options(back_color='none',font_size=15,loc=1)
-    p.show(figsize=(10,7),gridlines=True,title='$f(x)=%s$'%latex(g),fontsize=20) 
+    p=plot(g,-3,3,thickness=3,color='#3636ff',alpha=0.7,
+           legend_label=r'$f(x)=%s$'%latex(g))
+    p+=sum([plot(g.taylor(x,0,i),-3,3,
+                 hue=cos(i/n),thickness=2,linestyle=ls[i-1],
+                 legend_label=r'$n=%d:\;%s$'\
+                 %(i,latex(g.taylor(x,0,i).factor()))) 
+            for i in [1..n]])
+    p.set_legend_options(back_color='none',
+                         font_size=15,loc=9)
+    p.show(figsize=(10,7),gridlines=True,frame=True,
+           title=r'$f(x)=%s$'%latex(g),fontsize=20) 
 f21=sin(2*x)/x; n21=4; create_ptable2(f21,n21)
 </script></div><br/>
 <div class="link"><script type="text/x-sage"># sage; task 2
