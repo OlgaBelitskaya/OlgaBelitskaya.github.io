@@ -139,27 +139,36 @@ for c in [1,.1]:
   <h2>Task 3 V21</h2>
 Write the equation of the tangent line to this curve at the point with abscissa $x_0$.
 <div class="compute"><script type="text/x-sage"># sage
-var('x'); f221=x/(x^2+1); x0=-2; df221=diff(f221,x)
-pretty_print("2.21: y="+latex(f221)+"; y'="+latex(df221))
+var('x'); f221=x/(x^2+1)
+x0=-2; df221=diff(f221,x)
+pretty_print(r"2.21: y="+latex(f221)+\
+             r";\;y'="+latex(df221))
 tf221=f221(x=x0)+df221(x=x0)*(x-x0)
-pretty_print("tangent \; line: y="+latex(tf221))
+pretty_print(r"tangent\;line: y="+latex(tf221))
 nf221=f221(x=x0)-1/df221(x=x0)*(x-x0)
-pretty_print("normal \; line: y="+latex(nf221))
-plot([f221,df221,tf221,nf221],(x,-4,0),legend_label='automatic').\
-show(ymin=-2.5,ymax=1.5,gridlines=True,figsize=7,aspect_ratio=1)
+pretty_print(r"normal\;line: y="+latex(nf221))
+p=plot([f221,df221,tf221,nf221],
+       (x,-4,0),legend_label='automatic')
+p.show(ymin=-2.5,ymax=1.5,gridlines=True,
+       frame=True,figsize=(7,5))
 </script></div><br/>
 <div class="compute"><script type="text/x-sage"># python / sympy
-import sympy as sp; x=sp.symbols('x'); x0=-2
-f221=x/(x**2+1); df221=sp.diff(f221,x)
-sp.pretty_print("2.21: y="+str(f221)+";\n y'="+str(df221))
+import sympy as sp; x=sp.symbols('x')
+x0=-2; f221=x/(x**2+1); df221=sp.diff(f221,x)
+sp.pretty_print("2.21: y="+str(f221)+\
+                ";\n y'="+str(df221))
 tf221=f221.subs({x:x0})+df221.subs({x:x0})*(x-x0)
 sp.pretty_print("tangent line: y="+str(tf221))
 nf221=f221.subs({x:x0})-1/df221.subs({x:x0})*(x-x0)
 sp.pretty_print("normal line: y="+str(nf221))
-p=sp.plot(f221,(x,-5,0),line_color='#3636ff',ylim=(-2.5,1.5),show=False)
-dp=sp.plot(df221,(x,-5,0),line_color='#36ff36',ylim=(-2.5,1.5),show=False)
-tp=sp.plot(tf221,(x,-5,0),line_color='#ff3636',ylim=(-2.5,1.5),show=False)
-np=sp.plot(nf221,(x,-5,0),line_color='#ff36ff',ylim=(-2.5,1.5),show=False)
+p=sp.plot(f221,(x,-5,0),line_color='#3636ff',
+          ylim=(-2.5,1.5),show=False)
+dp=sp.plot(df221,(x,-5,0),line_color='#36ff36',
+           ylim=(-2.5,1.5),show=False)
+tp=sp.plot(tf221,(x,-5,0),line_color='#ff3636',
+           ylim=(-2.5,1.5),show=False)
+np=sp.plot(nf221,(x,-5,0),line_color='#ff36ff',
+           ylim=(-2.5,1.5),show=False)
 p.extend(dp); p.extend(tp); p.extend(np); p.show()
 </script></div><br/>
    <h2>Cells for Your Experiments</h2>
