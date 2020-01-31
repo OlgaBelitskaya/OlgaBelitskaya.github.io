@@ -19,23 +19,29 @@
 <a href="https://olgabelitskaya.github.io/README_EXERCISES.html">&#x1F300; &nbsp; Various Exam Exercises &nbsp; &nbsp;</a><br/>
 Find the second-order derivative $y_{xx} \prime \prime$ of a parametrically defined function.
   <h2>Task 1 (#19.21)</h2>   
-<div class="compute"><script type="text/x-sage">
-# sage; task 1 (19.21)
+<div class="compute"><script type="text/x-sage"># sage; task 1 (19.21)
 set_verbose(-1); var('t')
-x,y=cos(t),log(sin(t)); g=Graphics()
-dx,dy=diff(x,t),diff(y,t); d2y=diff(dy/dx,t)/dx
-el=[(x,y),(x,dy),(x,factor(d2y))]; l=["y","y'","y''"]
+x,y=cos(t),log(sin(t))
+g=Graphics()
+l=["(x,y)","(x,y')","(x,y'')"]
+dx,dy=diff(x,t),diff(y,t)
+d2y=diff(dy/dx,t)/dx
+el=[(x,y),(x,dy),(x,factor(d2y))]
 show(table([l]+[el]))
 for i in range(3):
-    g+=parametric_plot(el[i],(t,-3,3),color=hue(i/3),legend_label=el[i])
+    g+=parametric_plot(el[i],(t,-3,3),
+                       color=hue(i/3),
+                       legend_label=el[i])
 g.show(ymin=-3,ymax=3,aspect_ratio=1/4)
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
-# python / sympy; task 1 (19.21)
+<div class="compute"><script type="text/x-sage"># python / sympy; task 1 (19.21)
 import sympy as sp; x,y,t=sp.symbols('x,y,t')
 x=sp.cos(t); y=sp.log(sp.sin(t))
-dx=sp.diff(x,t); dy=sp.diff(y,t); d2y=sp.simplify(sp.diff(dy/dx,t)/dx)
-for f in [{"y":[x,y]},{"y'":[x,dy]},{"y''":[x,d2y]}]: sp.pretty_print(f)
+dx=sp.diff(x,t); dy=sp.diff(y,t)
+d2y=sp.simplify(sp.diff(dy/dx,t)/dx)
+F=[{"[x,y]":[x,y]},{"[x,y']":[x,dy]},
+   {"[x,y'']":[x,d2y]}]
+for f in F: sp.pretty_print(f)
 </script></div><br/>
   <h2>Task 2</h2>
 Find the 21-order derivative.
