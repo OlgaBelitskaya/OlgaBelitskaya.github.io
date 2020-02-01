@@ -144,11 +144,22 @@ pretty_print(html(st%(latex(f21(x)),
                       latex(intf21(x)))))
 plot([f21(x),intf21(x)],(-7,7),
      legend_label='automatic',gridlines=True,
-     detect_poles=True,ymin=-7,ymax=7)
+     detect_poles=True,ymin=-7,ymax=7,
+     frame=True,figsize=(7,5))
 </script></div><br/>
 <div class="sage"><script type="text/x-sage"># python; task 5
-import sympy as sp
-
+import sympy as sp; x=sp.symbols('x')
+sp.init_printing(use_unicode=True)
+f21=(4*x^2+3*x+4)/(x^2+1)/(x^2+x+1)
+intf21=sp.integrate(f21,x)
+display([f21,intf21])
+sp.pprint(75*'=')
+col=['#3636ff','#36ff36']
+p=sp.plot(f21,(x,-7,7),ylim=(-7,7),
+          line_color=col[0],show=False)
+ip=sp.plot(intf21,(x,-7,7),ylim=(-7,7),
+           line_color=col[1],show=False)
+p.extend(ip); p.show()
 </script></div><br/> 
    <h2>Cells for Your Experiments</h2>
 <div class="sage"><script type="text/x-sage"># sage 
