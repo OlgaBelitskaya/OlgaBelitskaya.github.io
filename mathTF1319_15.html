@@ -55,13 +55,24 @@ f21(x)=x^2/(x^2-4*x+3); intf21(x)=ii(f21(x),x)
 st=r'$\displaystyle{f(x)=%s => \int f(x) dx= %s}$'
 pretty_print(html(st%(latex(f21(x)),
                       latex(intf21(x)))))
-plot([f21(x),intf21(x)],(0,5),
+plot([f21(x),intf21(x)],(0,8),
      legend_label='automatic',detect_poles=True,
-     ymin=-10,ymax=10,gridlines=True)
+     ymin=-10,ymax=10,gridlines=True,
+     frame=True,figsize=(7,5))
 </script></div><br/>
 <div class="sage"><script type="text/x-sage"># python; task 2
-import sympy as sp
-
+import sympy as sp; x=sp.symbols('x')
+sp.init_printing(use_unicode=True)
+f21=x^2/(x^2-4*x+3)
+intf21=sp.integrate(f21,x)
+display([f21,intf21])
+sp.pprint(75*'=')
+col=['#3636ff','#36ff36']
+p=sp.plot(f21,(x,0,8),ylim=(-10,10),
+          line_color=col[0],show=False)
+ip=sp.plot(intf21,(x,3.1,8),ylim=(-10,10),
+           line_color=col[1],show=False)
+p.extend(ip); p.show()
 </script></div><br/>
   <h2>Task 3</h2>
 <div class="sage"><script type="text/x-sage"># sage; task 3 (#5.21)
