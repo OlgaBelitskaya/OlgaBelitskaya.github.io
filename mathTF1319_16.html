@@ -56,10 +56,39 @@ import indefinite_integral as ii
 # cos(2*x)=1-2*sin(x)^2
 set_verbose(-1)
 f21(x)=(1+cos(x)+3*sin(x))/(sin(x)+2*sin(x)^2)
+f211(x)=(1+sqrt(1-sin(x)^2)+3*sin(x))/(sin(x)+2*sin(x)^2)
+f212(x)=(1-sqrt(1-sin(x)^2)+3*sin(x))/(sin(x)+2*sin(x)^2)
+intf21(x)=simplify(ii(f21(x),x))
+intf211(x)=simplify(ii(f211(x),x))
+intf212(x)=simplify(ii(f212(x),x))
+s=r'$\displaystyle{f(x)=%s => }$'+\
+  r'<br/>$\displaystyle{\int f(x) dx= %s}$'+\
+  r'<br/>$\displaystyle{f1(x)=%s => }$'+\
+  r'<br/>$\displaystyle{\int f1(x) dx= %s}$'+\
+  r'<br/>$\displaystyle{f2(x)=%s => }$'+\
+  r'<br/>$\displaystyle{\int f2(x) dx= %s}$'
+st=(latex(f21(x)),latex(intf21(x)),
+    latex(f211(x)),latex(intf211(x)),
+    latex(f212(x)),latex(intf212(x)))
+pretty_print(html(s%st))
+plot([f21(x),f211(x),f212(x),
+      intf21(x),intf211(x),intf212(x)],
+     (-2*pi,2*pi),thickness=2,alpha=.5,
+     frame=True,detect_poles=True,
+     legend_label=['f(x)','f1(x)','f2(x)',
+                   'F(x)','F1(x)','F2(x)'],
+     ymin=-15,ymax=15,gridlines=True,figsize=(7,5))
+</script></div><br/>      
+<div class="sage"><script type="text/x-sage"># sage; task 2
+from sage.symbolic.integration.integral \
+import indefinite_integral as ii
+# f21(x)=(1+cos(x)+3*sin(x))/(sin(x)+1-cos(2*x))
+# cos(2*x)=1-2*sin(x)^2
+set_verbose(-1)
+f21(x)=(1+cos(x)+3*sin(x))/(sin(x)+2*sin(x)^2)
 intf21(x)=simplify(ii(f21(x),x))
 cintf21(x)=-log(tan(x/2)**2+4*tan(x/2)+1)+\
-           2*log(tan(x/2))+\
-           ii(-2/(tan(x/2)**2+4*tan(x/2)+1),x)
+           2*log(tan(x/2))
 s=r'$\displaystyle{f(x)=%s => }$'+\
   r'<br/>$\displaystyle{\int f(x) dx= %s}$'+\
   r'<br/>$\displaystyle{cF(x)=%s}$'
