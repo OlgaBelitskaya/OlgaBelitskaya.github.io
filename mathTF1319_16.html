@@ -87,9 +87,12 @@ set_verbose(-1); f21(x)=cos(4*x)*cos(5*x)
 intf21(x)=ii(f21(x),x)
 s=r'$\displaystyle{f(x)=%s => }$'+\
   r'<br/>$\displaystyle{\int f(x) dx= %s}$'
-pretty_print(html(s%(latex(f21(x)),latex(intf21(x)))))
-plot([f21(x),intf21(x)],(-pi,pi),legend_label='automatic',
-     gridlines=True,ymin=-1.2,ymax=1.2)
+pretty_print(html(s%(latex(f21(x)),
+                     latex(intf21(x)))))
+plot([f21(x),intf21(x)],(-pi,pi),
+     legend_label='automatic',frame=True,
+     gridlines=True,ymin=-1.2,ymax=1.2,
+     figsize=(7,5))
 </script></div><br/>
 <div class="sage"><script type="text/x-sage"># python; task 3
 import sympy as sp; x=sp.symbols('x')
@@ -97,7 +100,7 @@ sp.init_printing(use_unicode=True)
 f21=cos(4*x)*cos(5*x)
 intf21=sp.integrate(f21,x).simplify()
 display([f21,intf21])
-sp.pprint(75*'='); xl=3*sp.pi
+sp.pprint(75*'='); xl=sp.pi
 col=['#3636ff','#36ff36']
 p=sp.plot(f21,(x,-xl,xl),ylim=(-1.5,1.5),
           line_color=col[0],show=False)
@@ -107,17 +110,32 @@ p.extend(ip); p.show()
 </script></div><br/>
   <h2>Task 4</h2>
 <div class="sage"><script type="text/x-sage"># sage; task 4 
-from sage.symbolic.integration.integral import indefinite_integral
+from sage.symbolic.integration.integral \
+import indefinite_integral as ii
 set_verbose(-1); f21(x)=cos(2*x)^4*sin(2*x)^3
-intf21(x)=indefinite_integral(f21(x),x)
-s=r'$f(x)=%s => \int f(x) dx= %s$'
-pretty_print(html(s%(latex(f21(x)),latex(intf21(x)))))
-plot([f21(x),intf21(x)],(-pi,pi),legend_label='automatic',
-     gridlines=True,ymin=-.12,ymax=.12)
+intf21(x)=ii(f21(x),x)
+s=r'$\displaystyle{f(x)=%s => }$'+\
+  r'<br/>$\displaystyle{\int f(x) dx= %s}$'
+pretty_print(html(s%(latex(f21(x)),
+                     latex(intf21(x)))))
+plot([f21(x),intf21(x)],(-pi,pi),
+     legend_label='automatic',frame=True,
+     gridlines=True,ymin=-.12,ymax=.12,
+     figsize=(7,5))
 </script></div><br/> 
 <div class="sage"><script type="text/x-sage"># python; task 4
-import sympy as sp
-
+import sympy as sp; x=sp.symbols('x')
+sp.init_printing(use_unicode=True)
+f21=cos(2*x)^4*sin(2*x)^3
+intf21=sp.integrate(f21,x).simplify()
+display([f21,intf21])
+sp.pprint(75*'='); xl=sp.pi
+col=['#3636ff','#36ff36']
+p=sp.plot(f21,(x,-xl,xl),ylim=(-.15,.15),
+          line_color=col[0],show=False)
+ip=sp.plot(intf21,(x,-xl,xl),ylim=(-.15,.15),
+           line_color=col[1],show=False)
+p.extend(ip); p.show()
 </script></div><br/>  
    <h2>Cells for Your Experiments</h2>
 <div class="sage"><script type="text/x-sage"># sage 
