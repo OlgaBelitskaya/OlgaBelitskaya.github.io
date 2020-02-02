@@ -109,24 +109,21 @@ f21=(1+sp.cos(x)+3*sp.sin(x))/(sp.sin(x)+2*sp.sin(x)^2)
 f21u1=1+sp.cos(x).subs(sp.cos(x),(1-u**2)/(1+u**2))+\
       3*sp.sin(x).subs(sp.sin(x),2*u/(u**2+1))
 f21u2=(sp.sin(x)+2*sp.sin(x)^2).subs(sp.sin(x),2*u/(u**2+1))
-f21u=(f21u1/f21u2)*2/(u**2+1)
-#f21u=(f21u1/f21u2)*2/(u**2+1)+\
-#2*(u+1)/(u**2+4*u+1)-2*(u+2)/(u**2+4*u+1)-2/(u**2+4*u+1)
-intf21u1=sp.integrate(f21u+2*(u+1)/(u**2+4*u+1),u,manual=True)
-intf21u2=sp.integrate(2*(u+2)/(u**2+4*u+1),u,manual=True)
-intf21u3=sp.log(-u+sp.sqrt(3)-2)/sp.sqrt(3)-\
-         sp.log(u+sp.sqrt(3)+2)/sp.sqrt(3)
-intf21u=intf21u1-intf21u2
+f21u=((f21u1/f21u2)*2/(u**2+1)).factor()
+intf21u=sp.integrate(f21u,u).simplify()
+display([f21u,intf21u])
 #u=tan(x/2)
 intf21=intf21u.subs(u,sp.tan(x/2))
-display([f21,intf21])
-sp.pprint(75*'='); xl=2*sp.pi
-col=['#3636ff','#36ff36']
-p=sp.plot(f21,(x,-xl,xl),ylim=(-15,5),
+print(75*'='); print(f21) 
+print(intf21.simplify()); print(75*'=') 
+xl=2*sp.pi; col=['#3636ff','#36ff36']
+p=sp.plot(f21,(x,-xl,xl),ylim=(-15,15),
           line_color=col[0],show=False)
-ip=sp.plot(intf21,(x,.01,xl/2-.01),ylim=(-15,5),
+ip1=sp.plot(intf21,(x,.01,xl/2-.01),ylim=(-15,15),
            line_color=col[1],show=False)
-p.extend(ip); p.show()
+ip2=sp.plot(intf21,(x,-xl+.01,-xl/2-.01),ylim=(-15,15),
+           line_color=col[1],show=False)
+p.extend(ip1); p.extend(ip2); p.show()
 </script></div><br/>
   <h2>Task 3</h2>
 <div class="sage"><script type="text/x-sage"># sage; task 3 
