@@ -57,16 +57,27 @@ import indefinite_integral as ii
 set_verbose(-1)
 f21(x)=(1+cos(x)+3*sin(x))/(sin(x)+2*sin(x)^2)
 intf21(x)=simplify(ii(f21(x),x))
-s=r'$\displaystyle{f(x)=%s => \int f(x) dx= %s}$'
+s=r'$\displaystyle{f(x)=%s => }$'+\
+  r'<br/>$\displaystyle{\int f(x) dx= %s}$'
 pretty_print(html(s%(latex(f21(x)),latex(intf21(x)))))
-plot([f21(x),intf21(x)],(-2*pi,4*pi),
+plot([f21(x),intf21(x)],(-3*pi,3*pi),
      legend_label=['f(x)','F(x)'],frame=True,
-     detect_poles=True,ymin=-10,ymax=10,
+     detect_poles=True,ymin=-15,ymax=5,
      gridlines=True,figsize=(7,5))
 </script></div><br/>
 <div class="sage"><script type="text/x-sage"># python; task 2
-import sympy as sp
-
+import sympy as sp; x=sp.symbols('x')
+sp.init_printing(use_unicode=True)
+f21=(1+cos(x)+3*sin(x))/(sin(x)+2*sin(x)^2)
+intf21=sp.integrate(f21,x).simplify()
+display([f21,intf21])
+sp.pprint(75*'='); xl=3*sp.pi
+col=['#3636ff','#36ff36']
+p=sp.plot(f21,(x,-xl,xl),ylim=(-15,5),
+          line_color=col[0],show=False)
+ip=sp.plot(intf21,(x,-xl,xl),ylim=(-15,15),
+           line_color=col[1],show=False)
+p.extend(ip); p.show()
 </script></div><br/>
   <h2>Task 3</h2>
 <div class="sage"><script type="text/x-sage"># sage; task 3 
