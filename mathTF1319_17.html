@@ -103,9 +103,9 @@ p.extend(sp.plot(f212,(x,.01,10),show=False))
 p.show()
 </script></div><br/>
 <div class="link"><script type="text/x-sage"># python; task 1
-s=r'$\displaystyle{f(x)}'+50*r'='+r'=>\int f(x)\;dx$'
+s=r'$\displaystyle{f(u)}'+50*r'='+r'=>\int f(u)\;du$'
 display(html(s)); print(120*'=')
-fu211=(u**14/(u**6+u**3))*(6*u**5)
+fu211=((f211*6*x**(5/6)).subs({x**(1/6):u})).simplify()
 intfu211=sp.integrate(fu211,u,manual=True)
 fd(fu211,intfu211,120)
 fu2111=-int(2)*(u+1)/(u**2-u+1)
@@ -120,15 +120,19 @@ fd(fu21111,intfu21111,120)
 fu21112=(fu2111-fu21111).simplify()
 intfu21112=sp.integrate(fu21112,u,manual=True)
 fd(fu21112,intfu21112,120)
+fv21112=(fu21112.subs({u:sp.sqrt(3)*v/2+1/2})).simplify()
+intfv21112=sp.integrate(fv21112,v,manual=True)
+fd(fv21112,intfv21112,120)
+intfu21112=(intfv21112.subs({v:(u-1/2)*2/sp.sqrt(3)}))\
+           .simplify()
+fd(fu21112,intfu21112,120)
+intfu211=intfu2112+intfu21111+intfu21112
+fd(fu211,intfu211,120)
 </script></div><br/>
 <div class="link"><script type="text/x-sage"># python; task 1
 s=r'$\displaystyle{f(x)'+50*r'='+r'=>\int f(x)\;dx}$'
 display(html(s)); print(120*'=')
-fu21121=(2*(3*u**14+3*u**13-3*u**11-3*u**10+3*u**8+\
-           3*u**7-3*u**5-3*u**4+3*u**2+3*u+1)/(u+1)-\
-         (2*u-1)/(u**2-u+1)).factor()
-intfu21121=sp.integrate(fu21121,u,manual=True)
-fd(fu21121,intfu21121,120)
+
 </script></div><br/>
 <div class="link"><script type="text/x-sage"># python; task 1
 
