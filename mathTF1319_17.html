@@ -74,9 +74,9 @@ p.show(gridlines=True,figsize=(7,5),frame=True)
 <p>g(x) dx=(((u^14/(u^6+u^3))*(6*u^5))*du+</p>
 <p>+(2*(u+1)/(u^2-u+1)-2*(u+1)/(u^2-u+1))*du</p>
 <p>h(u)=-2*(u+1)/(u^2-u+1))=(1-2*u)/(u^2-u+1)-3/(u^2-u+1)=(1-2*u)/(u^2-u+1)+s(u)</p>
-<p>v=(u-1/2)*2/sqrt(3); dv=du; u=sqrt(3)*v/2+1/2</p>
+<p>v=(u-1/2)*2/sqrt(3); u=sqrt(3)*v/2+1/2; du=sqrt(3)*dv/2</p>
 <p>s(u)=-3/(u^2-u+1)=-3/((sqrt(3)*v/2+1/2)^2-sqrt(3)*v/2-1/2+1)=-4/(v^2+1)</p>
-<p>s(u)du=(-4/(v^2+1))*dv</p>
+<p>s(u)du=(-2*sqrt(3)/(v^2+1))*dv</p>
 <div class="link"><script type="text/x-sage"># python; task 1
 import sympy as sp
 sp.init_printing(use_unicode=True) 
@@ -120,10 +120,11 @@ fd(fu21111,intfu21111,120)
 fu21112=(fu2111-fu21111).simplify()
 intfu21112=sp.integrate(fu21112,u,manual=True)
 fd(fu21112,intfu21112,120)
-fv21112=(fu21112.subs({u:sp.sqrt(3)*v/2+1/2})).simplify()
+fv21112=(sp.sqrt(3)/2*fu21112\
+         .subs({u:sp.sqrt(3)*v/2+1/2})).simplify()
 intfv21112=sp.integrate(fv21112,v,manual=True)
 fd(fv21112,intfv21112,120)
-intfu21112=(intfv21112.subs({v:(u-1/2)*2/sp.sqrt(3)}))
+intfu21112=intfv21112.subs({v:(u-1/2)*2/sp.sqrt(3)})
 fd(fu21112,intfu21112,120)
 intfu211=intfu2112+intfu21111+intfu21112
 fd(fu211,intfu211,120)
@@ -135,11 +136,22 @@ p.show()
 </script></div><br/>
 <div class="link"><script type="text/x-sage"># python; task 1
 s=r'$\displaystyle{f(x)'+50*r'='+r'=>\int f(x)\;dx}$'
-display(html(s)); print(120*'=')
-
-</script></div><br/>
-<div class="link"><script type="text/x-sage"># python; task 1
-
+display(html(s)); print(120*'='); print()
+intf21=intf212+intfu211.subs({u:x**(1/6)})
+fd(f21,intf21,120)
+from sage.symbolic.integration.integral \
+import indefinite_integral as ii
+var('x')
+f21sm(x)=(x^2*x^(1/3)+2*x^(1/2))/(x+x^(1/2))
+intf21sm(x)=ii(f21sm(x),x)
+st=r'$\displaystyle{f(x)=%s}$'+r'<br/><br/>'+\
+   r'$F(x)=\int f(x)\;dx=%s$'
+pretty_print(html(st%(latex(f21sm(x)),
+                      latex(intf21sm(x)))))
+p=sp.plot(f21,(x,.1,10),
+          show=False,line_color=(.1,.1,.7))
+p.extend(sp.plot(intf21,(x,.1,10),show=False))
+p.show()
 </script></div><br/>
   <h2>Task 2</h2>
 <div class="sage"><script type="text/x-sage"># sage; task 2
@@ -159,7 +171,9 @@ plot([f21(x),intf21(x)],(-1,3),
      detect_poles=True,gridlines=True)
 </script></div><br/>
 <div class="link"><script type="text/x-sage"># python; task 2
-
+import sympy as sp
+sp.init_printing(use_unicode=True) 
+x,u,v=sp.symbols('x,u,v')
 
 </script></div><br/>
    <h2>Cells for Your Experiments</h2>
