@@ -21,22 +21,37 @@
   <body>
     <h1>&#x1F4D1; &nbsp;SQL Cookbook</h1>
 <div class="link"><script type="text/x-sage">
-
+import sqlite3; import pandas as pd
+def connect_to_db(dbf):
+    sqlconn=None
+    try:
+        sqlconn=sqlite3.connect(dbf)
+        return sqlconn
+    except Error as err:
+        print(err)
+        if sqlconn is not None:
+            sqlconn.close()
+connection=connect_to_db("my_dataset.db")
+if connection is not None:
+    cursor=connection.cursor()
+def get_query(g):
+    cursor.execute(q11)
+    result=cursor.fetchall() 
+    for r in result: print(r)
 </script></div><br/>
     <h2>&#x1F4D1; &nbsp;SQL & Pandas</h1>
 <div class="link"><script type="text/x-sage">
-import pandas as pd
 url='https://raw.github.com/pydata/pandas/master/pandas/tests/data/tips.csv'
 tips=pd.read_csv(url)
 tips.head()
+tips.to_sql('tips',con=connection)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
-q11=\
-'''
+get_query('''
 SELECT total_bill,tip,smoker,time
-FROM my_dataset.tips
+FROM tips
 LIMIT 7;
-'''
+''')
 tips[['total_bill','tip','smoker','time']].head(7)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
