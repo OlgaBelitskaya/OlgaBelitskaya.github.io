@@ -35,10 +35,16 @@ def connect_to_db(dbf):
 connection=connect_to_db("example.db")
 if connection is not None:
     cursor=connection.cursor()
+</script></div><br/>
+<div class="link"><script type="text/x-sage">
 def get_query(q):
-    cursor.execute(q)
-    result=cursor.fetchall() 
-    for r in result: print(r)
+    tr=[]; cursor.execute(q)
+    result=cursor.fetchall()
+    for r in result: tr+=[r]
+    display(table(tr))
+style_dict={'background-color':'silver',
+            'color':'darkblue',
+            'border-color':'slategray'}
 </script></div><br/>
     <h2>&#x1F4D1; &nbsp;Create SQL Tables</h2>      
 <div class="link"><script type="text/x-sage">
@@ -51,7 +57,8 @@ url='https://raw.github.com/pydata/pandas/'+\
 tips=pd.read_csv(url)
 tips.to_sql('tips',con=connection,
             if_exists='replace')
-tips.head(int(10))
+tips.head(int(10)).style\
+    .set_properties(**style_dict)
 </script></div><br/>
     <h2>&#x1F4D1; &nbsp;SQL & Pandas Similarity</h2>
 <div class="link"><script type="text/x-sage">
@@ -61,7 +68,8 @@ FROM tips
 LIMIT 7;
 ''')
 tips[['total_bill','tip',
-      'smoker','time']].head(int(7))
+      'smoker','time']].head(int(7))\
+    .style.set_properties(**style_dict)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
 get_query('''
@@ -70,7 +78,8 @@ FROM tips
 WHERE time='Dinner'
 LIMIT 3;
 ''')
-tips[tips['time']=='Dinner'].head(int(3))
+tips[tips['time']=='Dinner'].head(int(3))\
+    .style.set_properties(**style_dict)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
 
