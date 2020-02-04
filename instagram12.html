@@ -119,13 +119,54 @@ def _(a=[1,2,3,4],b=[2,3,1],
 <div class="sage"><script type="text/x-sage">
 
 </script></div><br/>
-    <h1>_____</h1>
-SageMath &#38; SageMathCell <br/>
-<div class="sage"><script type="text/x-sage">
-
+    <h1>If you want to use linked cells</h1>
+Python &#38; SageMathCell <br/>
+<div class="linked"><script type="text/x-sage">
+import sqlite3; import pandas as pd
+def connect_to_db(dbf):
+    sqlconn=None
+    try:
+        sqlconn=sqlite3.connect(dbf)
+        return sqlconn
+    except Error as err:
+        print(err)
+        if sqlconn is not None:
+            sqlconn.close()
+connection=connect_to_db("example.db")
+if connection is not None:
+    cursor=connection.cursor()
+def get_query(q):
+    pretty_print(html('<p>SQL Queries</p>'))
+    tr=[]; cursor.execute(q)
+    result=cursor.fetchall()
+    for r in result: tr+=[r]
+    display(table(tr))
+thp=[('font-size','17px'),('text-align','center'),
+     ('font-weight','bold'),('padding','5px 5px'),
+     ('color','white'),('background-color','slategray')]
+tdp=[('font-size','16px'),('padding','5px 5px'),
+     ('text-align','center'),('color','darkblue'),
+     ('background-color','silver')]
+style_dict=[dict(selector="th",props=thp),
+            dict(selector="td",props=tdp)]
 </script></div><br/>
-<div class="sage"><script type="text/x-sage">
-
+<div class="linked"><script type="text/x-sage">
+url='https://raw.github.com/pydata/pandas/'+\
+    'master/pandas/tests/data/tips.csv'
+tips=pd.read_csv(url)
+tips.to_sql('tips',con=connection,
+            if_exists='replace')
+get_query('''
+SELECT *
+FROM tips
+WHERE time='Dinner'
+LIMIT 3;
+''')
+if connection is not None:
+    connection.close()
+pretty_print(html('<p>Pandas Queries</p>'))
+tips[tips['time']=='Dinner'].head(int(3))\
+    .style.set_table_styles(style_dict)
 </script></div><br/>
     <h1>If you want to use linked cells</h1>
 Python &#38; SageMathCell <br/>     
@@ -176,9 +217,6 @@ fig,ax=pl.subplots(figsize=(7,7)); ax.set_facecolor('ivory')
 col=[[np.append([1],np.random.random(2))] for i in range(16)]
 [pl.scatter(XT[i],YT[i],s=1,c=col[i]) for i in range(16)]
 pl.grid(c='silver',alpha=.4); pl.show()   
-</script></div><br/>
-<div class="linked"><script type="text/x-sage">
-
 </script></div><br/>
     <h1>_____</h1>
 R &#38; SageMathCell <br/>
