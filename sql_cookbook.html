@@ -20,6 +20,7 @@
   </style>  
   <body>
     <h1>&#x1F4D1; &nbsp;SQL Cookbook</h1>
+    <h2>&#x1F4D1; &nbsp;Create SQL Databases</h2>      
 <div class="link"><script type="text/x-sage">
 import sqlite3; import pandas as pd
 def connect_to_db(dbf):
@@ -31,7 +32,7 @@ def connect_to_db(dbf):
         print(err)
         if sqlconn is not None:
             sqlconn.close()
-connection=connect_to_db("my_dataset.db")
+connection=connect_to_db("example.db")
 if connection is not None:
     cursor=connection.cursor()
 def get_query(q):
@@ -39,8 +40,12 @@ def get_query(q):
     result=cursor.fetchall() 
     for r in result: print(r)
 </script></div><br/>
-    <h2>&#x1F4D1; &nbsp;SQL & Pandas</h1>
+    <h2>&#x1F4D1; &nbsp;Create SQL Tables</h2>      
 <div class="link"><script type="text/x-sage">
+
+</script></div><br/>      
+<div class="link"><script type="text/x-sage">
+# from pandas dataframes
 url='https://raw.github.com/pydata/pandas/'+\
     'master/pandas/tests/data/tips.csv'
 tips=pd.read_csv(url)
@@ -48,6 +53,7 @@ tips.head()
 tips.to_sql('tips',con=connection,
             if_exists='replace')
 </script></div><br/>
+    <h2>&#x1F4D1; &nbsp;SQL & Pandas Similarity</h2>
 <div class="link"><script type="text/x-sage">
 get_query('''
 SELECT total_bill,tip,smoker,time
@@ -56,6 +62,9 @@ LIMIT 7;
 ''')
 tips[['total_bill','tip',
       'smoker','time']].head(int(7))
+</script></div><br/>
+<div class="link"><script type="text/x-sage">
+
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
 
