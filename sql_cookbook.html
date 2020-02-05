@@ -127,7 +127,11 @@ for task in t:
     create_task(cursor,task)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
-
+# from pandas dataframes
+df1.to_sql('df1',con=connection,
+            if_exists='replace')
+df2.to_sql('df2',con=connection,
+            if_exists='replace')
 </script></div><br/>  
 <div class="link"><script type="text/x-sage">
 # from pandas dataframes
@@ -148,7 +152,15 @@ WHERE projects.id=tasks.project_id;
 ''')
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
-
+get_query('''
+SELECT *
+FROM df1
+INNER JOIN df2
+ON df1.key=df2.key;
+''')
+pretty_print(html('<p>Pandas Queries</p>'))
+pd.merge(df1,df2,on='key')\
+  .style.set_table_styles(style_dict)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
 
