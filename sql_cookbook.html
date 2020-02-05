@@ -52,6 +52,15 @@ tdp=[('font-size','14px'),('padding','5px 5px'),
 style_dict=[dict(selector="th",props=thp),
             dict(selector="td",props=tdp)]
 </script></div><br/>
+<div class="link"><script type="text/x-sage">
+df1=pd.DataFrame({'key':['A','B','C','D'],
+                  'value':np.random.randn(4)})
+df2=pd.DataFrame({'key':['B','D','D','E','F'],
+                  'value':np.random.randn(5)})
+for df in [df1,df2]:
+    display(df.style\
+              .set_table_styles(style_dict))
+</script></div><br/>      
     <h2>&#x1F4D1; &nbsp;Create SQL Tables</h2>      
 <div class="link"><script type="text/x-sage">
 # using the sqlite3 module
@@ -74,6 +83,8 @@ end_date text NOT NULL,
 FOREIGN KEY (project_id) REFERENCES projects (id)
 );
 ''')
+</script></div><br/>
+<div class="link"><script type="text/x-sage">
 def create_project(cursor,project):
     q='''INSERT INTO projects(name,begin_date,end_date)
          VALUES(?,?,?)'''
@@ -86,15 +97,34 @@ def create_task(cursor,task):
          ) VALUES(?,?,?,?,?,?)'''
     cursor.execute(q,task)
     return cursor.lastrowid
-project=('SQL CookBook with SageMathCell',
-         '2020-02-04','2015-02-18');
-project_id=create_project(cursor,project)
-task_1=('Page 1',int(1),int(1),
-        project_id,'2020-02-04','2020-02-12')
-task_2=('Page 2',int(1),int(1),
-        project_id,'2020-02-10','2020-02-18')
-create_task(cursor,task_1)
-create_task(cursor,task_2)
+project1=('SQL CookBook with SageMathCell',
+          '2020-02-04','2020-02-18')
+project2=('SQL Tests',
+          '2020-01-31','2020-02-14')
+project_id1=create_project(cursor,project1)
+project_id2=create_project(cursor,project2)
+t=[('Page 1',int(1),int(1),
+    project_id1,'2020-02-04','2020-02-12'),
+   ('Page 2',int(1),int(1),
+    project_id1,'2020-02-10','2020-02-18'),
+   ('Test 1',int(1),int(1),
+    project_id2,'2020-01-31','2020-02-01'),
+   ('Test 2',int(1),int(1),
+    project_id2,'2020-02-02','2020-02-03'),
+   ('Test 3',int(1),int(1),
+    project_id2,'2020-02-04','2020-02-05'),
+   ('Test 4',int(1),int(1),
+    project_id2,'2020-02-06','2020-02-07'),
+   ('Test 5',int(1),int(1),
+    project_id2,'2020-02-08','2020-02-09'),
+   ('Test 6',int(1),int(1),
+    project_id2,'2020-02-09','2020-02-10'),
+   ('Test 7',int(1),int(1),
+    project_id2,'2020-02-10','2020-02-11'),
+   ('Dublicate',int(1),int(1),
+    project_id2,'2020-02-11','2020-02-14')
+for task in t:        
+    create_task(cursor,task)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
 
