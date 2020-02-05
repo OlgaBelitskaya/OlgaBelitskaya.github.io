@@ -53,8 +53,28 @@ style_dict=[dict(selector="th",props=thp),
 </script></div><br/>
     <h2>&#x1F4D1; &nbsp;Create SQL Tables</h2>      
 <div class="link"><script type="text/x-sage">
-
-</script></div><br/>      
+# using the sqlite3 module
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS projects (
+id integer PRIMARY KEY,
+name text NOT NULL,
+begin_date text,
+end_date text);
+''')
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS tasks (
+id integer PRIMARY KEY,
+name text NOT NULL,
+priority integer,
+status_id integer NOT NULL,
+project_id integer NOT NULL,
+begin_date text NOT NULL,
+end_date text NOT NULL,
+FOREIGN KEY (project_id) REFERENCES projects (id)
+);
+''')
+</script></div><br/>
+      
 <div class="link"><script type="text/x-sage">
 # from pandas dataframes
 url='https://raw.github.com/pydata/pandas/'+\
