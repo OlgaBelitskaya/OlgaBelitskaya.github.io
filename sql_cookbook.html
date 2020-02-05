@@ -111,7 +111,15 @@ tips[tips['time']=='Dinner'].head(int(3))\
     .style.set_table_styles(style_dict)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
-
+get_query('''
+SELECT day,sex,AVG(tip),COUNT(*)
+FROM tips
+GROUP BY day,sex;
+''')
+pretty_print(html('<p>Pandas Queries</p>'))
+tips.groupby(['day','sex'])\
+    .agg({'tip':np.mean,'day':np.size})\
+    .style.set_table_styles(style_dict)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
 
