@@ -86,10 +86,15 @@ def create_task(cursor,task):
          ) VALUES(?,?,?,?,?,?)'''
     cursor.execute(q,task)
     return cursor.lastrowid
-project=('SQL CookBook with SageMathCell','2020-02-04','2015-02-18');
+project=('SQL CookBook with SageMathCell',
+         '2020-02-04','2015-02-18');
 project_id=create_project(cursor,project)
-task_1=('Page 1',1,1,project_id,'2020-02-04','2020-02-12')
-task_2=('Page 2',1,1,project_id,'2020-02-10','2020-02-18')
+task_1=('Page 1',int(1),int(1),
+        project_id,'2020-02-04','2020-02-12')
+task_2=('Page 2',int(1),int(1),
+        project_id,'2020-02-10','2020-02-18')
+create_task(cursor,task_1)
+create_task(cursor,task_2)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
 
@@ -108,7 +113,7 @@ tips.head(int(10)).style\
 <div class="link"><script type="text/x-sage">
 get_query('''
 SELECT *
-FROM projects;
+FROM projects,tasks;
 ''')
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
