@@ -60,8 +60,10 @@ style_dict=[dict(selector="th",props=thp),
 # from json 
 fpath='https://data.cityofnewyork.us/resource/'
 se=pd.read_json(fpath+'h7rb-945c.json')
-fl=['dbn','graduation_rate','city',
-    'total_students','council_district']
+fl=['dbn','total_students',
+    'graduation_rate','attendance_rate',
+    'latitude','longitude',
+    'city','council_district']
 se=se[fl].dropna().astype({'council_district':'int'})
 se.to_sql('schooledu',con=connection,if_exists='replace')
 se.head(int(10)).style\
