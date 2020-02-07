@@ -63,12 +63,21 @@ se=pd.read_json(fpath+'h7rb-945c.json')
 fl=['dbn','graduation_rate','city',
     'total_students','council_district']
 se=se[fl].dropna().astype({'council_district':'int'})
-se.to_sql('tips',con=connection,if_exists='replace')
+se.to_sql('schooledu',con=connection,if_exists='replace')
 se.head(int(10)).style\
   .set_table_styles(style_dict)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
-
+# from csv
+url='https://raw.githubusercontent.com/plotly/'+\
+    'datasets/master/2016-weather-data-seattle.csv'
+weather=pd.read_csv(url).dropna()
+weather=weather.astype({'Mean_TemperatureC':'int64',
+                        'Min_TemperatureC':'int64'})
+weather.to_sql('weather',con=connection,
+               if_exists='replace')
+weather.describe().style\
+       .set_table_styles(style_dict)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
 
