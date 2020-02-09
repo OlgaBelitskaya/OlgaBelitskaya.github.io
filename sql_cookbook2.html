@@ -99,7 +99,8 @@ customers.head(int(7)).style\
     <h2>&#x1F4D1; &nbsp;The Database Structure</h2>
 <div class="link"><script type="text/x-sage">
 pd.read_sql_query('''
-SELECT * from sqlite_master;
+SELECT * 
+FROM sqlite_master;
 ''',con=connection)\
 .style.set_table_styles(style_dict)
 </script></div><br/>
@@ -108,7 +109,13 @@ SELECT * from sqlite_master;
 </script></div><br/>
     <h2>&#x1F4D1; &nbsp;SQL Basic Queries</h2>
 <div class="link"><script type="text/x-sage">
-
+pd.read_sql_query('''
+SELECT dbn||" "||city AS dbncity,graduation_rate
+FROM schooledu
+WHERE city="Bronx" AND 
+graduation_rate>.9 AND graduation_rate<>"N/A";
+''',con=connection)\
+.style.set_table_styles(style_dict)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
 
