@@ -110,15 +110,23 @@ FROM sqlite_master;
     <h2>&#x1F4D1; &nbsp;SQL Basic Queries</h2>
 <div class="link"><script type="text/x-sage">
 pd.read_sql_query('''
-SELECT dbn||" "||city AS dbncity,graduation_rate
+SELECT "📑 "||dbn||" 🏙 "||city AS dbn_city,graduation_rate
 FROM schooledu
-WHERE city="Bronx" AND 
+WHERE city="Bronx" AND dbn LIKE "10%" AND
 graduation_rate>.9 AND graduation_rate<>"N/A";
 ''',con=connection)\
 .style.set_table_styles(style_dict)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
-
+pd.read_sql_query('''
+SELECT " 🏙 "||city||" 📑 "||dbn AS dbn_city,
+       graduation_rate+attendance_rate 
+       AS graduation_attendance_rate
+FROM schooledu
+WHERE graduation_attendance_rate<1.3 AND 
+graduation_rate<>"N/A" AND attendance_rate<>"N/A";
+''',con=connection)\
+.style.set_table_styles(style_dict)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
 
