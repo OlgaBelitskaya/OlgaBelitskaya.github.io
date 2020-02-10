@@ -96,8 +96,50 @@ customers.head(int(7)).style\
          .set_table_styles(style_dict)
 </script></div><br/>  
 <div class="link"><script type="text/x-sage">
-
+# from csv
+url='https://raw.githubusercontent.com/'+\
+    'OlgaBelitskaya/machine_learning_engineer_nd009/'+\
+    'master/Machine_Learning_Engineer_ND_P6/macro.csv'
+macro=pd.read_csv(url)
+fl=['timestamp','oil_urals','brent','cpi','ppi',
+    'usdrub','eurrub','salary','salary_growth',
+    'unemployment','employment','average_life_exp',
+    'pop_natural_increase','childbirth']
+macro=macro[fl].dropna()
+macro.to_sql('macro',con=connection,
+             if_exists='replace')
+macro.tail(int(7)).T.style\
+     .set_table_styles(style_dict)
 </script></div><br/>
+<div class="link"><script type="text/x-sage">
+# from csv
+url='https://raw.githubusercontent.com/'+\
+    'OlgaBelitskaya/machine_learning_engineer_nd009/'+\
+    'master/Machine_Learning_Engineer_ND_P6/train.csv'
+housing=pd.read_csv(url)
+fnum=['timestamp','full_sq','floor','max_floor','num_room',
+      'area_m','kremlin_km','big_road2_km','big_road1_km',
+      'workplaces_km','stadium_km','swim_pool_km','fitness_km',
+      'detention_facility_km','cemetery_km','radiation_km',
+      'oil_chemistry_km','theater_km','exhibition_km','museum_km',
+      'park_km','public_healthcare_km','metro_min_walk',
+      'metro_km_avto', 'bus_terminal_avto_km',
+      'public_transport_station_min_walk',
+      'railroad_station_walk_min','railroad_station_avto_km',
+      'kindergarten_km','school_km','preschool_km',
+      'university_km','additional_education_km',
+      'shopping_centers_km','big_market_km','ekder_all',
+      'work_all','young_all']
+fcat=['sub_area','ID_metro','office_raion',
+      'raion_popul','healthcare_centers_raion',
+      'school_education_centers_raion','sport_objects_raion',
+      'preschool_education_centers_raion']
+housing=housing[fnum+fcat].dropna()
+housing.to_sql('housing',con=connection,
+               if_exists='replace')
+housing.tail(int(7)).T.style\
+       .set_table_styles(style_dict)
+</script></div><br/>      
     <h2>&#x1F4D1; &nbsp;The Database Structure</h2>
 <div class="link"><script type="text/x-sage">
 %get_query \
