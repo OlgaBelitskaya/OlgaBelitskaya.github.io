@@ -32,7 +32,7 @@ def connect_to_db(dbf):
         print(err)
         if sqlconn is not None:
             sqlconn.close()
-connection=connect_to_db("example.db")
+connection=connect_to_db('example.db')
 if connection is not None:
     cursor=connection.cursor()
 os.listdir()
@@ -50,8 +50,8 @@ thp=[('font-size','15px'),('text-align','center'),
 tdp=[('font-size','14px'),('padding','5px 5px'),
      ('text-align','center'),('color','darkblue'),
      ('background-color','silver')]
-style_dict=[dict(selector="th",props=thp),
-            dict(selector="td",props=tdp)]
+style_dict=[dict(selector='th',props=thp),
+            dict(selector='td',props=tdp)]
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
 
@@ -136,7 +136,17 @@ graduation_rate<>"N/A" AND attendance_rate<>"N/A";
 </script></div><br/>
     <h2>&#x1F4D1; &nbsp;SQL & Pandas Comparing</h2>
 <div class="link"><script type="text/x-sage">
-
+q=pd.read_sql_query('''
+SELECT Fresh,Milk,Grocery,Frozen,
+       Detergents_Paper,Delicatessen
+FROM customers
+WHERE Fresh>50000
+ORDER BY Fresh DESC;
+''',con=connection)
+q.plot(kind='area',cmap=pl.cm.tab10,
+       alpha=.7,figsize=(6,3))
+pl.show()
+q.style.set_table_styles(style_dict)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
 
