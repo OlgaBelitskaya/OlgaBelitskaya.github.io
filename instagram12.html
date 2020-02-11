@@ -218,7 +218,7 @@ col=[[np.append([1],np.random.random(2))] for i in range(16)]
 [pl.scatter(XT[i],YT[i],s=1,c=col[i]) for i in range(16)]
 pl.grid(c='silver',alpha=.4); pl.show()   
 </script></div><br/>
-    <h1>_____</h1>
+    <h1>Random Plotting in R</h1>
 R &#38; SageMathCell <br/>
 <div class="sage_r"><script type="text/x-sage">
 %%r
@@ -226,18 +226,19 @@ svg(filename="Rplots.svg",width=7,height=7,
     onefile=T,family="sans",bg="white",pointsize=10,
     antialias=c("default","none","gray","subpixel"))
 T<-seq(from=0,to=2*pi,by=.005*pi)
-col<-function(i) {rgb(.002*i,0,1-.002*i)}
-curve<-function(t,j) {
-    f1<-(1/2+sin(3+4*t))*(1/2+cos(3+4*t))
-    f2<-(1/2-sin(3+4*t)^3)*(1/2-cos(3+4*t)^3)
+col<-function(j) {rgb(.1*j,0,1-.1*j)}
+curve<-function(t,j,a,b) {
+    f1<-(1/a+sin(b+4*t))*(1/a+cos(b+4*t))
+    f2<-(1/a-sin(b+4*t)^3)*(1/a-cos(b+4*t)^3)
     list(j*f1*f2*cos(t),j*f1*f2*sin(t))}
-for (j in 1:5) {
-    X<-sapply(T,curve,j=j)[1,]; 
-    Y<-sapply(T,curve,j=j)[2,] 
-    for (i in 1:400){
-        plot(X[i],Y[i],pch=2,cex=.5,
+for (j in 3:5) {
+    a<-sample(2:4,1); b<-sample(2:12,1)
+    X<-sapply(T,curve,j=j,a=a,b=b)[1,]; 
+    Y<-sapply(T,curve,j=j,a=a,b=b)[2,]
+    for (i in 1:400) {
+        plot(X[i],Y[i],pch=sample(1:12,1),cex=.7,
             xlim=c(-1.2,1.2),ylim=c(-1.2,1.2),
-            col=col(i),xlab='x',ylab='y')
+            col=col(j),xlab='x',ylab='y')
         par(new=TRUE)}}
 grid(); dev.off()
 </script></div><br/>
