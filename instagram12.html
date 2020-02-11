@@ -222,7 +222,24 @@ pl.grid(c='silver',alpha=.4); pl.show()
 R &#38; SageMathCell <br/>
 <div class="sage_r"><script type="text/x-sage">
 %%r
-
+svg(filename="Rplots.svg",width=7,height=7,
+    onefile=T,family="sans",bg="white",pointsize=10,
+    antialias=c("default","none","gray","subpixel"))
+T<-seq(from=0,to=2*pi,by=.005*pi)
+col<-function(i) {rgb(.001*i,0,1-.001*i)}
+curve<-function(t,j) {
+    f1<-(1/2+sin(3+4*t))*(1/2+cos(3+4*t))
+    f2<-(1/2-sin(3+4*t)^3)*(1/2-cos(3+4*t)^3)
+    list(j*f1*f2*cos(t),j*f1*f2*sin(t))}
+for (j in 1:3) {
+    X<-sapply(T,curve,j=j)[1,]; 
+    Y<-sapply(T,curve,j=j)[2,] 
+    for (i in 1:200){
+        plot(X[i],Y[i],pch=2,cex=.7,
+            xlim=c(-1.2,1.2),ylim=c(-1.2,1.2),
+            col=col(i),xlab='x',ylab='y')
+        par(new=TRUE)}}
+grid(); dev.off()
 </script></div><br/>
     <h1>Encode URI Components</h1>
 HTML &#38; JavaScript &#38; SageMathCell (Click “Run HTML” twice!)<br/>
