@@ -205,10 +205,31 @@ pl.show()
 q.style.set_table_styles(style_dict)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
-
+q=pd.read_sql_query('''
+SELECT SUBSTR(Date,-4,4) AS Years,
+       AVG(Min_TemperatureC),
+       AVG(Mean_TemperatureC),
+       AVG(Max_TemperatureC)
+FROM weather
+GROUP BY Years;
+''',con=connection).set_index('Years')
+q.plot(kind='area',figsize=(12,5),
+       alpha=.7,cmap=pl.cm.tab10)
+q.tail().style.set_table_styles(style_dict)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
-
+q=pd.read_sql_query('''
+SELECT ID_metro,
+       AVG(workplaces_km),
+       AVG(public_transport_station_min_walk),
+       AVG(school_km),
+       AVG(public_healthcare_km)
+FROM housing
+GROUP BY ID_metro;
+''',con=connection).set_index('ID_metro')
+q.iloc[:,1:].plot(kind='area',figsize=(12,5),
+       alpha=.7,cmap=pl.cm.tab10)
+q.tail().style.set_table_styles(style_dict)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
 
