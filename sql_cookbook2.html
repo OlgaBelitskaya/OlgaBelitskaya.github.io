@@ -57,10 +57,7 @@ tdp=[('font-size','14px'),('padding','5px 5px'),
      ('background-color','silver')]
 style_dict=[dict(selector='th',props=thp),
             dict(selector='td',props=tdp)]
-</script></div><br/>
-<div class="link"><script type="text/x-sage">
-
-</script></div><br/>      
+</script></div><br/>    
     <h2>&#x1F4D1; &nbsp;Create SQL Tables</h2>      
 <div class="link"><script type="text/x-sage">
 # from json 
@@ -193,6 +190,20 @@ graduation_rate<>"N/A" AND attendance_rate<>"N/A";
     <h2>&#x1F4D1; &nbsp;SQL & Pandas Comparing</h2>
 <div class="link"><script type="text/x-sage">
 q=pd.read_sql_query('''
+SELECT SUBSTR(Date,-4,4) AS Years,
+       AVG(Min_TemperatureC),
+       AVG(Mean_TemperatureC),
+       AVG(Max_TemperatureC)
+FROM weather
+GROUP BY Years;
+''',con=connection).set_index('Years')
+q.plot(kind='area',figsize=(6,3),
+       alpha=.7,cmap=pl.cm.tab10)
+pl.show()
+q.tail().style.set_table_styles(style_dict)
+</script></div><br/>   
+<div class="link"><script type="text/x-sage">
+q=pd.read_sql_query('''
 SELECT Fresh,Milk,Grocery,Frozen,
        Detergents_Paper,Delicatessen
 FROM customers
@@ -206,19 +217,6 @@ q.style.set_table_styles(style_dict)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
 q=pd.read_sql_query('''
-SELECT SUBSTR(Date,-4,4) AS Years,
-       AVG(Min_TemperatureC),
-       AVG(Mean_TemperatureC),
-       AVG(Max_TemperatureC)
-FROM weather
-GROUP BY Years;
-''',con=connection).set_index('Years')
-q.plot(kind='area',figsize=(12,5),
-       alpha=.7,cmap=pl.cm.tab10)
-q.tail().style.set_table_styles(style_dict)
-</script></div><br/>
-<div class="link"><script type="text/x-sage">
-q=pd.read_sql_query('''
 SELECT ID_metro,
        AVG(workplaces_km),
        AVG(public_transport_station_min_walk),
@@ -227,8 +225,9 @@ SELECT ID_metro,
 FROM housing
 GROUP BY ID_metro;
 ''',con=connection).set_index('ID_metro')
-q.iloc[:,1:].plot(kind='area',figsize=(12,5),
+q.iloc[:,int(1):].plot(kind='area',figsize=(9,3),
        alpha=.7,cmap=pl.cm.tab10)
+pl.show()
 q.tail().style.set_table_styles(style_dict)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
