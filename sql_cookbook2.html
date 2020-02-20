@@ -234,6 +234,12 @@ pl.show()
 q.style.set_table_styles(style_dict)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
+fl=['workplaces_km','public_transport_station_min_walk',
+    'school_km','public_healthcare_km']
+display(housing[fl]\
+        .groupby(housing['ID_metro'])\
+        .mean().tail().style\
+        .set_table_styles(style_dict))
 q=pd.read_sql_query('''
 SELECT ID_metro,
        AVG(workplaces_km),
@@ -243,7 +249,7 @@ SELECT ID_metro,
 FROM housing
 GROUP BY ID_metro;
 ''',con=connection).set_index('ID_metro')
-q.iloc[:,int(1):].plot(kind='area',figsize=(9,3),
+q.iloc[:,int(1):].plot(kind='area',figsize=(10,5),
        alpha=.7,cmap=pl.cm.tab10)
 pl.show()
 q.tail().style.set_table_styles(style_dict)
