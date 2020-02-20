@@ -216,6 +216,11 @@ pl.show()
 q.tail().style.set_table_styles(style_dict)
 </script></div><br/>   
 <div class="link"><script type="text/x-sage">
+fl=['Fresh','Milk','Grocery','Frozen',
+    'Detergents_Paper','Delicatessen']
+display(customers[fl].where(customers.Fresh>50000)\
+        .dropna().sort_values('Fresh',ascending=False)\
+        .astype('int64').style.set_table_styles(style_dict))
 q=pd.read_sql_query('''
 SELECT Fresh,Milk,Grocery,Frozen,
        Detergents_Paper,Delicatessen
