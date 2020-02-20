@@ -280,7 +280,16 @@ pl.show()
 q.tail().style.set_table_styles(style_dict)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
-
+q=pd.read_sql_query('''
+SELECT method,COUNT(*) AS number,
+       AVG(round) AS avg_round
+FROM mma
+GROUP BY method;
+''',con=connection).set_index('method')
+q.plot(secondary_y='avg_round',
+       figsize=(10,5),cmap=pl.cm.winter)
+pl.show()
+q.tail().style.set_table_styles(style_dict)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
 
