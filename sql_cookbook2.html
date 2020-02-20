@@ -197,11 +197,16 @@ graduation_rate<>"N/A" AND attendance_rate<>"N/A";
 </script></div><br/>
     <h2>&#x1F4D1; &nbsp;SQL & Pandas Comparing</h2>
 <div class="link"><script type="text/x-sage">
+display(weather\
+        .groupby(weather['Date']\
+                 .map(lambda x: x[-4:]))\
+        .mean().tail().style\
+        .set_table_styles(style_dict))
 q=pd.read_sql_query('''
 SELECT SUBSTR(Date,-4,4) AS Years,
-       AVG(Min_TemperatureC),
+       AVG(Max_TemperatureC),
        AVG(Mean_TemperatureC),
-       AVG(Max_TemperatureC)
+       AVG(Min_TemperatureC)
 FROM weather
 GROUP BY Years;
 ''',con=connection).set_index('Years')
