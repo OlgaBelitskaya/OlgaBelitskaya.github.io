@@ -281,7 +281,8 @@ q.tail().style.set_table_styles(style_dict)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
 q=pd.read_sql_query('''
-SELECT method,COUNT(*) AS number,
+SELECT method,
+       COUNT(*) AS number,
        AVG(round) AS avg_round
 FROM mma
 GROUP BY method;
@@ -292,7 +293,25 @@ pl.show()
 q.tail().style.set_table_styles(style_dict)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
-
+q=pd.read_sql_query('''
+SELECT method_d,
+       COUNT(*) AS number,
+       AVG(time) AS avg_time
+FROM mma
+GROUP BY method_d;
+''',con=connection)
+n,m=int(60),int(5)
+pl.rcParams['xtick.major.pad']='-7'
+qp=q.tail(n).plot(secondary_y='avg_time',
+          figsize=(10,5),cmap=pl.cm.winter)
+qp.set_xticks(q.tail(n).index)
+qp.set_xticklabels(q.method_d[:n],va='top',
+                   fontsize=8,rotation=90)
+lines=qp.get_lines()+qp.right_ax.get_lines()
+qp.legend(lines,[l.get_label() for l in lines],
+          bbox_to_anchor=(.9,.5))
+pl.show()
+q.tail(m).style.set_table_styles(style_dict)
 </script></div><br/>
     <h2>&#x1F4D1; &nbsp;Close the Connection and Delete This Database</h2>      
 <div class="link"><script type="text/x-sage">
