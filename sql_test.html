@@ -6,7 +6,7 @@
     <title>SQL_Tests1</title>
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
     <script>$(function (){
-    sagecell.makeSagecell({inputLocation:'div.check',template:sagecell.templates.minimal,
+    sagecell.makeSagecell({inputLocation:'#check',template:sagecell.templates.minimal,
                            evalButtonText:'Check Answers'});
     sagecell.makeSagecell({inputLocation:'div.linked',linked:true,
                            evalButtonText:'Run Linked Cells'});  
@@ -42,8 +42,29 @@ if connection is not None:
 os.listdir()
 </code></pre><br/>
 For Tests
-<div class="check"><script type="text/x-sage">
-
+<div id="check"><script type="text/x-sage">
+answers=['connect_to_db("example.db")=sql_connection',
+         'connection=connect_to_db("example.db")',
+         'sql_connection=connect_to_db("example.db")',
+         'connect_to_db("example.db")',
+         'connection="example.db"',
+         'connection=sql_connection("example.db")',
+         'connect_to_db("example.db")=connection']
+pretty_print('Possible variants:')
+for i in range(len(answers)):
+    pretty_print(html(str(i+1)+' <= '+answers[i]+'<br/><br/>'))
+@interact
+def _(variant=[0,1,2,3,4,5,6,7]):
+    if variant==0:
+        pretty_print('What variant looks like the right one?')
+    else:
+        row=answers[variant-1]
+        if row=='connection=connect_to_db("example.db")':
+            col='green'; row+='  <= EXACTLY!'
+        else:
+            col='red'; row+='  <= ... THINK AGAIN'
+        st='<p style="color:'+col+'">'+row+'</p>'
+        pretty_print(html(st))
 </script></div><br/>
 For Experiments     
 <div class="linked"><script type="text/x-sage">
@@ -63,6 +84,7 @@ if connection is not None:
 os.listdir()
 </script></div><br/>
     <h2>Question 2</h2>
+      
 For Tests
 <div class="check"><script type="text/x-sage">
 
