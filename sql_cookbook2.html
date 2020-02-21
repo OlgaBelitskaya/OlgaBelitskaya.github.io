@@ -300,13 +300,18 @@ SELECT method_d,
 FROM mma
 GROUP BY method_d;
 ''',con=connection)
-n,m=int(60),int(5)
-pl.rcParams['xtick.major.pad']='-7'
+n,m=int(70),int(7)
+pl.rcParams['xtick.major.pad']='-10'
+pl.rcParams['xtick.bottom']=\
+pl.rcParams['xtick.labelbottom']=False
+pl.rcParams['xtick.top']=\
+pl.rcParams['xtick.labeltop']=True
 qp=q.tail(n).plot(secondary_y='avg_time',
-          figsize=(10,5),cmap=pl.cm.winter)
+                  figsize=(10,5),alpha=.5,
+                  lw=3,cmap=pl.cm.winter)
 qp.set_xticks(q.tail(n).index)
 qp.set_xticklabels(q.method_d[:n],va='top',
-                   fontsize=8,rotation=90)
+                   fontsize=7,rotation=90)
 lines=qp.get_lines()+qp.right_ax.get_lines()
 qp.legend(lines,[l.get_label() for l in lines],
           bbox_to_anchor=(.9,.5))
