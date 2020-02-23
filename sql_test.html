@@ -25,8 +25,9 @@
   <body>
     <h1>&#x1F4D1; &nbsp;SQL Tests Part 1</h1>
     <h2>Question 1</h2>
+In the beginning, we will create a database file.
 What row is needed to add in this code for creating the database "example"<br/>
-and the connection to work with it?  
+and the connection to work with it?
 <pre><code class='python3'>  
 import sqlite3,os,pandas as pd,numpy as np
 def connect_to_db(db_file):
@@ -86,7 +87,8 @@ if connection is not None:
 os.listdir()
 </script></div><br/>
     <h2>Question 2</h2>
-      
+Let's define a function to represent the result of querying.
+What row is needed to add in this code for executing queries?   
 <pre><code class='python3'>  
 def get_query(q):
     pretty_print(html('<p>SQL Queries</p>'))
@@ -98,7 +100,28 @@ def get_query(q):
 </code></pre><br/>      
 For Tests
 <div id="check2"><script type="text/x-sage">
-
+answers=['connect_to_db.cursor.execute()',
+         'connection.execute(q)',
+         'sql_connection=connection.cursor.execute(q)',
+         'cursor.execute("example.db")',
+         'cursor.execute(q)',
+         'connection=cursor.execute(q)',
+         'example.cursor.execute(q)]
+pretty_print('Possible variants:')
+for i in range(len(answers)):
+    pretty_print(html(str(i+1)+' <= '+answers[i]+'<br/><br/>'))
+@interact
+def _(variant=[0,1,2,3,4,5,6,7]):
+    if variant==0:
+        pretty_print('What variant will you choose?')
+    else:
+        row=answers[variant-1]
+        if row=='cursor.execute(q)':
+            col='green'; row+='  <= 🙆 EXACTLY!'
+        else:
+            col='red'; row+='  <= 🙋 ... THINK AGAIN'
+        st='<p style="color:'+col+'">'+row+'</p>'
+        pretty_print(html(st))
 </script></div><br/>
 For Experiments     
 <div class="linked"><script type="text/x-sage">
