@@ -6,8 +6,8 @@
     <title>SQL_Tests1</title>
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
     <script>$(function (){
-    var loc=['#check','#check2','#check3'];
-    for (var i=0; i<3; i++){
+    var loc=['#check','#check2','#check3','#check4'];
+    for (var i=0; i<4; i++){
         sagecell.makeSagecell({inputLocation:loc[i],template:sagecell.templates.minimal,
                                evalButtonText:'Check Answers'});};
     sagecell.makeSagecell({inputLocation:'div.linked',linked:true,
@@ -146,7 +146,7 @@ def get_query(q):
 </script></div><br/>
     <h2>Remark 1</h2>     
 Before starting the usage SQL, we can create some stylish tricks for representing pandas DataFrames.<br/>
-For Additional Experiments with styling for pandas DataFrames<br/>
+<p>For Additional Experiments</p><br/>
 <a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/style.html">&#x1F300; &nbsp; Pandas Styling &nbsp; &nbsp;</a><br/>    
 <div class="linked"><script type="text/x-sage">
 thp=[('font-size','15px'),('text-align','center'),
@@ -166,17 +166,83 @@ for df in [df1,df2]:
               .set_table_styles(style_dict))            
 </script></div><br/>
     <h2>Question 3</h2>
+It's time to construct experimental tables connected by FOREIGN KEY.<br/>
+What SQL operator create tables only if they do not exist?<br/>
+<pre><code class='python3'>  
+cursor.execute('''
+... 
+projects (
+id integer PRIMARY KEY,
+name text NOT NULL,
+begin_date text,
+end_date text);
+''')
+cursor.execute('''
+...
+tasks (
+id integer PRIMARY KEY,
+name text NOT NULL,
+priority integer,
+status_id integer NOT NULL,
+project_id integer NOT NULL,
+begin_date text NOT NULL,
+end_date text NOT NULL,
+FOREIGN KEY (project_id) REFERENCES projects (id)
+);
+''')
+</code></pre><br/> 
 <p>For Tests</p>
 <div id="check3"><script type="text/x-sage">
-
+answers=['CREATE TABLE',
+         'CREATE VIEW IF NOT EXISTS',
+         'ALTER TABLE',
+         'CREATE TABLE IF NOT EXISTS',
+         'ALTER DATABASE',
+         'ALTER TABLE IF NOT EXISTS',
+         'CREATE DATABASE IF NOT EXISTS']
+pretty_print('Possible variants:')
+for i in range(len(answers)):
+    pretty_print(html(str(i+1)+' <= '+answers[i]+'<br/><br/>'))
+@interact
+def _(variant=[0,1,2,3,4,5,6,7]):
+    if variant==0:
+        pretty_print('What variant will you choose?')
+    else:
+        row=answers[variant-1]
+        if row=='CREATE TABLE IF NOT EXISTS':
+            col='green'; row+=' <= 🙆 ... EXACTLY!'
+        else:
+            col='red'; row+=' <= 🙋 ... THINK AGAIN'
+        st='<p style="color:'+col+'">'+row+'</p>'
+        pretty_print(html(st))
 </script></div><br/>
 <p>For Experiments</p>      
 <div class="linked"><script type="text/x-sage">
-
+cursor.execute('''
+#... insert the code row here
+projects (
+id integer PRIMARY KEY,
+name text NOT NULL,
+begin_date text,
+end_date text);
+''')
+cursor.execute('''
+#... insert the code row here
+tasks (
+id integer PRIMARY KEY,
+name text NOT NULL,
+priority integer,
+status_id integer NOT NULL,
+project_id integer NOT NULL,
+begin_date text NOT NULL,
+end_date text NOT NULL,
+FOREIGN KEY (project_id) REFERENCES projects (id)
+);
+''')
 </script></div><br/>
     <h2>Question 4</h2>
 <p>For Tests</p>
-<div id="check3"><script type="text/x-sage">
+<div id="check4"><script type="text/x-sage">
 
 </script></div><br/>
 <p>For Experiments</p>    
