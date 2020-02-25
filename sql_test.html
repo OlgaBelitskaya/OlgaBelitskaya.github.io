@@ -6,8 +6,8 @@
     <title>SQL_Tests1</title>
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
     <script>$(function (){
-    var loc=['#check','#check2','#check3','#check4'];
-    for (var i=0; i<4; i++){
+    var loc=['#check','#check2','#check3','#check4','#check5'];
+    for (var i=0; i<5; i++){
         sagecell.makeSagecell({inputLocation:loc[i],template:sagecell.templates.minimal,
                                evalButtonText:'Check Answers'});};
     sagecell.makeSagecell({inputLocation:'div.linked',linked:true,
@@ -89,7 +89,7 @@ def connect_to_db(db_file):
         print(err)
         if sql_connection is not None:
             sql_connection.close()
-#... insert the code row here
+# ... insert the code row here
 if connection is not None:
     cursor=connection.cursor()
 os.listdir()
@@ -139,7 +139,7 @@ def _(variant=[0,1,2,3,4,5,6,7]):
 def get_query(q):
     pretty_print(html('<p>SQL Queries</p>'))
     tr=[]
-    #... insert the code row here
+    # ... insert the code row here
     result=cursor.fetchall()
     for r in result: tr+=[r]
     display(table(tr))
@@ -171,7 +171,7 @@ What SQL operator create tables only if they do not exist?<br/>
 <pre><code class='python3'>  
 cursor.execute('''
 ... 
-projects (
+projects(
 id integer PRIMARY KEY,
 name text NOT NULL,
 begin_date text,
@@ -179,7 +179,7 @@ end_date text);
 ''')
 cursor.execute('''
 ...
-tasks (
+tasks(
 id integer PRIMARY KEY,
 name text NOT NULL,
 priority integer,
@@ -187,9 +187,20 @@ status_id integer NOT NULL,
 project_id integer NOT NULL,
 begin_date text NOT NULL,
 end_date text NOT NULL,
-FOREIGN KEY (project_id) REFERENCES projects (id)
-);
+FOREIGN KEY (project_id) REFERENCES projects (id));
 ''')
+def create_project(cursor,project):
+    q='''INSERT INTO projects(name,begin_date,end_date)
+         VALUES(?,?,?)'''
+    cursor.execute(q,project)
+    return cursor.lastrowid
+def create_task(cursor,task):
+    q='''INSERT INTO tasks(
+         name,priority,status_id,
+         project_id,begin_date,end_date) 
+         VALUES(?,?,?,?,?,?)'''
+    cursor.execute(q,task)
+    return cursor.lastrowid
 </code></pre><br/> 
 <p>For Tests</p>
 <div id="check3"><script type="text/x-sage">
@@ -219,16 +230,16 @@ def _(variant=[0,1,2,3,4,5,6,7]):
 <p>For Experiments</p>      
 <div class="linked"><script type="text/x-sage">
 cursor.execute('''
-#... insert the code row here
-projects (
+# ... insert the code row here
+projects(
 id integer PRIMARY KEY,
 name text NOT NULL,
 begin_date text,
 end_date text);
 ''')
 cursor.execute('''
-#... insert the code row here
-tasks (
+# ... insert the code row here
+tasks(
 id integer PRIMARY KEY,
 name text NOT NULL,
 priority integer,
@@ -239,10 +250,33 @@ end_date text NOT NULL,
 FOREIGN KEY (project_id) REFERENCES projects (id)
 );
 ''')
+def create_project(cursor,project):
+    q='''INSERT INTO projects(name,begin_date,end_date)
+         VALUES(?,?,?)'''
+    cursor.execute(q,project)
+    return cursor.lastrowid
+def create_task(cursor,task):
+    q='''INSERT INTO tasks(
+         name,priority,status_id,
+         project_id,begin_date,end_date) 
+         VALUES(?,?,?,?,?,?)'''
+    cursor.execute(q,task)
+    return cursor.lastrowid
 </script></div><br/>
     <h2>Question 4</h2>
+      
 <p>For Tests</p>
 <div id="check4"><script type="text/x-sage">
+
+</script></div><br/>
+<p>For Experiments</p>    
+<div class="linked"><script type="text/x-sage">
+
+</script></div><br/>
+    <h2>Question 5</h2>
+      
+<p>For Tests</p>
+<div id="check5"><script type="text/x-sage">
 
 </script></div><br/>
 <p>For Experiments</p>    
