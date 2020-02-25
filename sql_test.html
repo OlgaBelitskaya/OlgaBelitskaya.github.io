@@ -351,9 +351,9 @@ for task in t:
     # ... insert the code row here
 </script></div><br/>
     <h2>Question 5</h2>
-Modern python libraries are able to fill SQL tables automatically.<br/>
+Modern Python libraries are able to fill SQL tables automatically.<br/>
 Which row can help to fill the pandas DataFrame "tips" the from this CSV file and<br/>
-after that to insert the data into the SQL table "tips"?  
+after that to insert the data into the SQL table "tips"?<br/>  
 <pre><code class='python3'>  
 # from pandas DataFrames
 df1.to_sql('df1',con=connection,
@@ -371,7 +371,26 @@ tips.head(int(10)).style\
 </code></pre><br/>      
 <p>For Tests</p>
 <div id="check5"><script type="text/x-sage">
-
+answers=['tips=pd.read_csv(url)',
+         'pd.read_csv(url)',
+         'tips=pd.csv(url)',
+         'tips=pd.read_sql(url)',
+         'tips=pd.to_sql(url)']
+pretty_print('Possible variants:')
+for i in range(len(answers)):
+    pretty_print(html(str(i+1)+' <= '+answers[i]+'<br/><br/>'))
+@interact
+def _(variant=[0,1,2,3,4,5]):
+    if variant==0:
+        pretty_print('What variant will you choose?')
+    else:
+        row=answers[variant-1]
+        if row=='tips=pd.read_csv(url)':
+            col='green'; row+=' <= 🙆 ... EXACTLY!'
+        else:
+            col='red'; row+=' <= 🙋 ... THINK AGAIN'
+        st='<p style="color:'+col+'">'+row+'</p>'
+        pretty_print(html(st))
 </script></div><br/>
 <p>For Experiments</p>    
 <div class="linked"><script type="text/x-sage">
