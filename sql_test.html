@@ -614,7 +614,7 @@ FROM df2
 LEFT OUTER %s df1
 ON df1.key=df2.key;
 '''
-s='''JOIN'''
+...
 for q in [q1,q2,q3]:
     get_query(q%s)
 pretty_print(html('<p>Pandas Queries</p>'))
@@ -629,7 +629,26 @@ pd.merge(df1,df2,on='key',how='right')\
 </code></pre><br/>      
 <p>For Tests</p>
 <div id="check8"><script type="text/x-sage">
-
+answers=["s=JOIN",
+         "'''JOIN'''",
+         "s='''UNION'''",
+         "s='''MERGE'''",
+         "s='''JOIN'''"]
+pretty_print('Possible variants:')
+for i in range(len(answers)):
+    pretty_print(html(str(i+1)+" <= "+answers[i]+"<br/><br/>"))
+@interact
+def _(variant=[0,1,2,3,4,5]):
+    if variant==0:
+        pretty_print('What variant will you choose?')
+    else:
+        row=answers[variant-1]
+        if row=='JOIN':
+            col='green'; row+=' <= 🙆 ... EXACTLY!'
+        else:
+            col='red'; row+=' <= 🙋 ... THINK AGAIN'
+        st='<p style="color:'+col+'">'+row+'</p>'
+        pretty_print(html(st))
 </script></div><br/>
 <p>For Experiments</p>    
 <div class="linked"><script type="text/x-sage">
