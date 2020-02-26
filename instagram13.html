@@ -92,8 +92,10 @@ pd_df=pd.DataFrame(pd_dict)
 base=importr('base')
 with localconverter(ro.default_converter+pandas2ri.converter):
     df_summary=base.summary(pd_df)
-pd_df.plot(kind='line',x='str_values',y='real_values',
-           marker='*',lw=1,figsize=(7,4))
+ppd_df=pd_df.plot(kind='line',x='str_values',y='real_values',
+                  marker='*',lw=1,figsize=(7,4))
+ppd_df.set_xticks(list(range(10)))
+ppd_df.set_xticklabels(pd_df.str_values)
 print(df_summary); pl.show()
 r_df=ro.r('df<-data.frame(x=c(1:10),'+\
           'y=.1*sample(c(1:10),10),'+\
