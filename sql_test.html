@@ -670,7 +670,7 @@ FROM df2
 LEFT OUTER %s df1
 ON df1.key=df2.key;
 '''
-s='''JOIN'''
+# ... insert the code row here
 for q in [q1,q2,q3]:
     get_query(q%s)
 pretty_print(html('<p>Pandas Queries</p>'))
@@ -684,10 +684,22 @@ pd.merge(df1,df2,on='key',how='right')\
 .style.set_table_styles(style_dict)
 </script></div><br/>
     <h2>Question 9</h2>
-<br/>
-<br/>
+And now - the last exercises for this page.<br/>
+Let's try to combine tables in other direction.<br/>
+Which command can help to create one long table<br/> 
+from two fragments with the same columns?<br/>
 <pre><code class='python3'>  
-
+get_query('''
+SELECT key,value
+FROM df1
+...
+SELECT key,value
+FROM df2;
+''')
+pretty_print(html('&#60;p&#62;Pandas Queries&#60;/p&#62;'))
+pd.concat([df1,df2])\
+  .set_index(pd.Index(range(11)))\
+  .style.set_table_styles(style_dict)
 </code></pre><br/>      
 <p>For Tests</p>
 <div id="check9"><script type="text/x-sage">
@@ -695,7 +707,17 @@ pd.merge(df1,df2,on='key',how='right')\
 </script></div><br/>
 <p>For Experiments</p>    
 <div class="linked"><script type="text/x-sage">
-
+get_query('''
+SELECT key,value
+FROM df1
+# ... insert the code row here
+SELECT key,value
+FROM df2;
+''')
+pretty_print(html('<p>Pandas Queries</p>'))
+pd.concat([df1,df2])\
+  .set_index(pd.Index(range(11)))\
+  .style.set_table_styles(style_dict)
 </script></div><br/>
     <h2>Remark 2</h2>     
 Let's have a look at the database structure.<br/>
