@@ -7,7 +7,7 @@
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
     <script>$(function (){
     var loc=['#check','#check2','#check3','#check4',
-             '#check5','#check6','#check7','#check8'];
+             '#check5','#check6','#check7','#check8','#check9'];
     for (var i=0; i<8; i++){
         sagecell.makeSagecell({inputLocation:loc[i],template:sagecell.templates.minimal,
                                evalButtonText:'Check Answers'});};
@@ -596,10 +596,82 @@ tips.groupby(['day','sex'])\
 <br/>
 <br/>
 <pre><code class='python3'>  
-
+q1='''
+SELECT *
+FROM df1
+INNER %s df2
+ON df1.key=df2.key;
+'''
+q2='''
+SELECT *
+FROM df1
+LEFT OUTER %s df2
+ON df1.key=df2.key;
+'''
+q3='''
+SELECT *
+FROM df2
+LEFT OUTER %s df1
+ON df1.key=df2.key;
+'''
+s='''JOIN'''
+for q in [q1,q2,q3]:
+    get_query(q%s)
+pretty_print(html('<p>Pandas Queries</p>'))
+display(pd.merge(df1,df2,on='key')\
+.style.set_table_styles(style_dict))
+pretty_print(html('<p>Pandas Queries</p>'))
+display(pd.merge(df1,df2,on='key',how='left')\
+.style.set_table_styles(style_dict))
+pretty_print(html('<p>Pandas Queries</p>'))
+pd.merge(df1,df2,on='key',how='right')\
+.style.set_table_styles(style_dict)
 </code></pre><br/>      
 <p>For Tests</p>
 <div id="check8"><script type="text/x-sage">
+
+</script></div><br/>
+<p>For Experiments</p>    
+<div class="linked"><script type="text/x-sage">
+q1='''
+SELECT *
+FROM df1
+INNER %s df2
+ON df1.key=df2.key;
+'''
+q2='''
+SELECT *
+FROM df1
+LEFT OUTER %s df2
+ON df1.key=df2.key;
+'''
+q3='''
+SELECT *
+FROM df2
+LEFT OUTER %s df1
+ON df1.key=df2.key;
+'''
+s='''JOIN'''
+for q in [q1,q2,q3]:
+    get_query(q%s)
+pretty_print(html('<p>Pandas Queries</p>'))
+display(pd.merge(df1,df2,on='key')\
+.style.set_table_styles(style_dict))
+pretty_print(html('<p>Pandas Queries</p>'))
+display(pd.merge(df1,df2,on='key',how='left')\
+.style.set_table_styles(style_dict))
+pretty_print(html('<p>Pandas Queries</p>'))
+pd.merge(df1,df2,on='key',how='right')\
+.style.set_table_styles(style_dict)
+</script></div><br/>
+    <h2>Question 9</h2>
+<br/>
+<br/>
+<pre><code class='python3'>  
+
+</code></pre><br/>      
+<p>For Tests</p>
+<div id="check9"><script type="text/x-sage">
 
 </script></div><br/>
 <p>For Experiments</p>    
