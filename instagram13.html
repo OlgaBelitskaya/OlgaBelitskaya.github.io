@@ -72,28 +72,35 @@ Python &#38; SageMathCell <br/>
     <h1>If you want to link cells for plotting</h1>
 Python &#38; R &#38; SageMathCell <br/>     
 <div class="linked"><script type="text/x-sage">
-import rpy2.robjects as ro,pandas as pd
-from rpy2.robjects.packages import importr
-from rpy2.robjects.conversion import localconverter
-from rpy2.robjects import r,pandas2ri
-pandas2ri.activate()
-r_df=ro.r('df<- data.frame(x=c(1,2,3,4,5),'+\
-          'y=c("a","b","c","d","e"),'+\
-          'stringsAsFactors=F)')
-pd_df=pd.DataFrame({'int_values':[int(1),int(2),int(3)],
-                    'str_values':['abc','def','ghi']})
-base=importr('base')
-with localconverter(ro.default_converter+pandas2ri.converter):
-    df_summary=base.summary(pd_df)
-print(df_summary); r_df
+
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
   
 </script></div><br/>
-    <h1>_____________</h1>
-R &#38; SageMathCell <br/>
+    <h1>Exercises in R and Python at the same time</h1>
+Python &#38; R &#38; SageMathCell <br/>
 <div class="sage_r"><script type="text/x-sage">
-
+import rpy2.robjects as ro,pandas as pd,pylab as pl
+from rpy2.robjects.packages import importr
+from rpy2.robjects.conversion import localconverter
+from rpy2.robjects import r,pandas2ri
+pandas2ri.activate()
+r_df=ro.r('df<-data.frame(x=c(1:5),'+\
+          'y=.1*sample(c(1:10),5),'+\
+          'stringsAsFactors=F)')
+ro.r('svg(filename="Rplots.svg",width=7,height=4,'+\
+     'onefile=T,family="sans",bg="white",pointsize=10,'+\
+     'antialias=c("default","none","gray","subpixel")); '+\
+     'plot(df,type="o",ylim=c(0,1),pch=9,col="steelblue"); '+\
+     'dev.off()')
+pd_dict={'real_values':[random() for i in range(5)],
+         'str_values':['abc','def','ghi','jkl','mno']} 
+pd_df=pd.DataFrame(pd_dict)
+base=importr('base')
+with localconverter(ro.default_converter+pandas2ri.converter):
+    df_summary=base.summary(pd_df)
+pd_df.plot(kind='bar',x='str_values',figsize=(7,4))
+print(df_summary); pl.show()
 </script></div><br/>
     <h1>______________</h1>
 HTML &#38; JavaScript &#38; SageMathCell (Click “Run HTML” twice!)<br/>
