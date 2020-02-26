@@ -512,16 +512,26 @@ FROM tips
 WHERE time='Dinner'
 %s 3;
 '''
+q3='''
+SELECT day,sex,AVG(tip),COUNT(*)
+FROM tips
+GROUP BY day,sex
+%s 4;
+'''
 ...
-for q in [q1,q2]:
+for q in [q1,q2,q3]:
     get_query(q%s)   
 pretty_print(html('<p>Pandas Queries</p>'))
 display(tips[['total_bill','tip',
               'smoker','time']].head(int(7))\
 .style.set_table_styles(style_dict))
 pretty_print(html('<p>Pandas Queries</p>'))
-tips[tips['time']=='Dinner'].head(int(3))\
-    .style.set_table_styles(style_dict)
+display(tips[tips['time']=='Dinner'].head(int(3))\
+        .style.set_table_styles(style_dict))
+pretty_print(html('<p>Pandas Queries</p>'))
+tips.groupby(['day','sex'])\
+    .agg({'tip':np.mean,'day':np.size})\
+    .head(int(4)).style.set_table_styles(style_dict)
 </code></pre><br/>      
 <p>For Tests</p>
 <div id="check7"><script type="text/x-sage">
@@ -559,16 +569,26 @@ FROM tips
 WHERE time='Dinner'
 %s 3;
 '''
+q3='''
+SELECT day,sex,AVG(tip),COUNT(*)
+FROM tips
+GROUP BY day,sex
+%s 4;
+'''
 # ... insert the code row here
-for q in [q1,q2]:
+for q in [q1,q2,q3]:
     get_query(q%s)   
 pretty_print(html('<p>Pandas Queries</p>'))
 display(tips[['total_bill','tip',
               'smoker','time']].head(int(7))\
 .style.set_table_styles(style_dict))
 pretty_print(html('<p>Pandas Queries</p>'))
-tips[tips['time']=='Dinner'].head(int(3))\
-    .style.set_table_styles(style_dict)
+display(tips[tips['time']=='Dinner'].head(int(3))\
+        .style.set_table_styles(style_dict))
+pretty_print(html('<p>Pandas Queries</p>'))
+tips.groupby(['day','sex'])\
+    .agg({'tip':np.mean,'day':np.size})\
+    .head(int(4)).style.set_table_styles(style_dict)
 </script></div><br/>
     <h2>Question 8</h2>
 <br/>
