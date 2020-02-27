@@ -123,29 +123,32 @@ HTML &#38; JavaScript &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 <script src='https://d3js.org/d3.v4.min.js'/>
 <svg id='d303' style='background-color:ghostwhite;'/>
 <script>
-var n=640,m=50,d=.01,margin={top:m,right:m,bottom:m,left:m},
+var n=6400,m=7,d=.001,margin={top:m,right:m,bottom:m,left:m},
     width=600-margin.left-margin.right,
     height=600-margin.top-margin.bottom,
-    tr="translate("+margin.left+","+margin.top+")"; 
-function f(t){
-    return Math.exp(Math.pow(Math.cos(d*t),2)+
-                    Math.sin(d*t))-3*Math.cos(4*d*t);};
+    tr='translate('+margin.left+','+margin.top+')'; 
+function fx(t,a,b,k){
+    return Math.cos(d*t+k*Math.PI/6)+Math.cos(a*d*t)/2+
+           Math.sin((a+b)*d*t)/3};
+function fy(t,a,b,k){
+    return Math.sin(d*t+k*Math.PI/6)+Math.sin(a*d*t)/2+
+           Math.cos((a+b)*d*t)/3};
 function randi(xmin,xmax){
     return Math.floor(Math.random()*(xmax-xmin+1))+xmin;};
 function rcolor(i){
-    var r=randi(i,255),g=randi(i,255),b=randi(i,255);
-    return '#'+r.toString(16)+g.toString(16)+b.toString(16);} 
+    var r=randi(i,255),g=randi(i,50),b=randi(i,255);
+    return '#'+r.toString(16)+g.toString(16)+b.toString(16);}
+var a=randi(7,15),b=randi(10,48);
 function make_data(k){return d3.range(1,n).map(function(t){
-    return {'x':d*k*f(t)*Math.cos(d*t),
-            'y':d*k*f(t)*Math.sin(d*t)}});};    
+    return {'x':fx(t,a,b,k),'y':fy(t,a,b,k)}});};    
 var xScale=d3.scaleLinear()
-             .domain([-5*d*m,5*d*m]).range([0,width+2*m]),
+             .domain([-2,2]).range([0,width+10]),
     yScale=d3.scaleLinear()
-             .domain([-5*d*m,5*d*m]).range([height+2*m,0]); 
-var svg=d3.select("#d303")
-          .attr("width",width+margin.left+margin.right)
-          .attr("height",height+margin.top+margin.bottom)
-          .attr("transform",tr);
+             .domain([-2,2]).range([height+10,0]); 
+var svg=d3.select('#d303')
+          .attr('width',width+margin.left+margin.right)
+          .attr('height',height+margin.top+margin.bottom)
+          .attr('transform',tr);
 var line=d3.line().curve(d3.curveMonotoneX)
            .x(function(d){return xScale(d.x);})
            .y(function(d){return yScale(d.y);});
@@ -153,8 +156,11 @@ for (var i=1; i<m; i++) {var data=make_data(i),col=rcolor(i);
     svg.append('path').datum(data)
        .attr('class','line').attr('d',line)
        .attr('stroke',col).attr('fill','none');};
-</script>
-
+           .y(function(d){return yScale(d.y);});
+for (var i=1; i<m; i++) {var data=make_data(i),col=rcolor(i);
+    svg.append('path').datum(data)
+       .attr('class','line').attr('d',line)
+       .attr('stroke',col).attr('fill','none');};
 </script></div><br/>
 HTML &#38; JavaScript &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 <div class="sage_html"><script type="text/x-sage">
