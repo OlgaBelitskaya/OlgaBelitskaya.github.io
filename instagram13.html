@@ -128,19 +128,18 @@ var n=6400,m=7,d=.001,margin={top:m,right:m,bottom:m,left:m},
     height=600-margin.top-margin.bottom,
     tr='translate('+margin.left+','+margin.top+')'; 
 function fx(t,a,b,k){
-    return Math.cos(d*t+k*Math.PI/6)+Math.cos(a*d*t)/2+
-           Math.sin((a+b)*d*t)/3};
+    return Math.cos(d*t+k*Math.PI/6)+Math.cos(a*d*t)/2+Math.sin((a+b)*d*t)/3};
 function fy(t,a,b,k){
-    return Math.sin(d*t+k*Math.PI/6)+Math.sin(a*d*t)/2+
-           Math.cos((a+b)*d*t)/3};
+    return Math.sin(d*t+k*Math.PI/6)+Math.sin(a*d*t)/2+Math.cos((a+b)*d*t)/3};
 function randi(xmin,xmax){
     return Math.floor(Math.random()*(xmax-xmin+1))+xmin;};
 function rcolor(i){
-    var r=randi(i,255),g=randi(i,50),b=randi(i,255);
+    var r=randi(i,255),g=randi(i,255),b=randi(i,255);
     return '#'+r.toString(16)+g.toString(16)+b.toString(16);}
 var a=randi(7,15),b=randi(10,48);
 function make_data(k){return d3.range(1,n).map(function(t){
-    return {'x':fx(t,a,b,k),'y':fy(t,a,b,k)}});};    
+    return {'x':fx(t,a,b,k),
+            'y':fy(t,a,b,k)}});};    
 var xScale=d3.scaleLinear()
              .domain([-2,2]).range([0,width+10]),
     yScale=d3.scaleLinear()
@@ -151,11 +150,6 @@ var svg=d3.select('#d303')
           .attr('transform',tr);
 var line=d3.line().curve(d3.curveMonotoneX)
            .x(function(d){return xScale(d.x);})
-           .y(function(d){return yScale(d.y);});
-for (var i=1; i<m; i++) {var data=make_data(i),col=rcolor(i);
-    svg.append('path').datum(data)
-       .attr('class','line').attr('d',line)
-       .attr('stroke',col).attr('fill','none');};
            .y(function(d){return yScale(d.y);});
 for (var i=1; i<m; i++) {var data=make_data(i),col=rcolor(i);
     svg.append('path').datum(data)
