@@ -140,12 +140,34 @@ y_train.shape,y_test.shape,y_valid.shape]
 </script></div><br/>      
 <div class="linked"><script type="text/x-sage">
 st='<p>Label: '+names[np.argmax(y_train[n])]+'</p>'
-pretty_print(html(st)); pl.figure(figsize=(3,3))
+pretty_print(html(st)); pl.figure(figsize=(3,2))
 pl.imshow((x_train[n])); pl.show()
 </script></div><br/>
     <h2>✒️ &nbsp;Step 4. Create Models</h2>
 <div class="linked"><script type="text/x-sage">
-
+def model():
+    model=Sequential()
+    model.add(Conv2D(32,(5,5),padding='same', 
+                     input_shape=x_train.shape[1:]))
+    model.add(Activation('relu'))    
+    model.add(MaxPooling2D(pool_size=(2,2)))
+    model.add(Dropout(.25))
+    model.add(Conv2D(96,(5,5)))
+    model.add(Activation('relu'))    
+    model.add(MaxPooling2D(pool_size=(2,2)))
+    model.add(Dropout(.25))
+    model.add(GlobalMaxPooling2D())
+    
+    model.add(Dense(512, activation='tanh'))
+    model.add(Dropout(.25))     
+    model.add(Dense(128, activation='tanh'))
+    model.add(Dropout(.25)) 
+    model.add(Dense(10))
+    model.add(Activation('softmax'))
+    model.compile(loss='categorical_crossentropy', 
+                  optimizer='nadam',metrics=['accuracy'])    
+    return model
+model=model()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
