@@ -150,23 +150,27 @@ pl.imshow((x_train[n])); pl.show()
     <h2>✒️ &nbsp;Step 4. Create Models</h2>
 <div class="linked"><script type="text/x-sage">
 def model():
+    [a,b,c,d,e,f,g,h]=\
+    [int(1),int(2),int(5),int(10),
+     int(32),int(96),int(128),int(512)]
+    dr=float(.25)
     model=Sequential()
-    model.add(Conv2D(32,(5,5),padding='same', 
-                     input_shape=x_train.shape[1:]))
+    model.add(Conv2D(e,(c,c),padding='same', 
+                     input_shape=x_train.shape[a:]))
     model.add(Activation('relu'))    
-    model.add(MaxPooling2D(pool_size=(2,2)))
-    model.add(Dropout(.25))
-    model.add(Conv2D(96,(5,5)))
+    model.add(MaxPooling2D(pool_size=(b,b)))
+    model.add(Dropout(dr))
+    model.add(Conv2D(f,(c,c)))
     model.add(Activation('relu'))    
-    model.add(MaxPooling2D(pool_size=(2,2)))
-    model.add(Dropout(.25))
+    model.add(MaxPooling2D(pool_size=(b,b)))
+    model.add(Dropout(dr))
     model.add(GlobalMaxPooling2D())
     
-    model.add(Dense(512, activation='tanh'))
-    model.add(Dropout(.25))     
-    model.add(Dense(128, activation='tanh'))
-    model.add(Dropout(.25)) 
-    model.add(Dense(10))
+    model.add(Dense(h, activation='tanh'))
+    model.add(Dropout(dr))     
+    model.add(Dense(g, activation='tanh'))
+    model.add(Dropout(dr)) 
+    model.add(Dense(d))
     model.add(Activation('softmax'))
     model.compile(loss='categorical_crossentropy', 
                   optimizer='nadam',metrics=['accuracy'])    
@@ -174,8 +178,8 @@ def model():
 model=model()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-history=model.fit(x_train,y_train,batch_size=64,
-                  epochs=100,verbose=2,
+history=model.fit(x_train,y_train,batch_size=int(64),
+                  epochs=int(100),verbose=int(2),
                   validation_data=(x_valid,y_valid),
                   callbacks=[checkpointer])
 </script></div><br/>
