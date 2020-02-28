@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>DLPP0SMC</title>
+    <title>🏙DLPP0SMC</title>
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
     <script>$(function (){
     sagecell.makeSagecell({inputLocation:'div.linked',linked:true,
@@ -18,7 +18,7 @@
   body {margin:5px 5px 5px 15px;}
   </style>  
   <body>
-    <h1>📑 &nbsp;Deep Learning. P0: Image Classification</h1>
+    <h1>📑 &nbsp; Deep Learning. P0: Image Classification</h1>
 <a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp; &nbsp;</a> 
 <a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp; &nbsp;</a>     
 <a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a><br/>
@@ -180,13 +180,27 @@ model=model()
 <div class="linked"><script type="text/x-sage">
 checkpointer=ModelCheckpoint(filepath='weights.flower.hdf5', 
                              verbose=int(2),save_best_only=True)
-history=model.fit(x_train,y_train,batch_size=64,
-                  epochs=100,verbose=2,
+history=model.fit(x_train,y_train,batch_size=int(64),
+                  epochs=int(100),verbose=int(2),
                   validation_data=(x_valid,y_valid),
                   callbacks=[checkpointer])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+def history_plot(fit_history):
+    pl.figure(figsize=(10,6));pl.subplot(211)
+    pl.plot(fit_history.history['loss'],
+            color='slategray',label='train')
+    pl.plot(fit_history.history['val_loss'],
+            color='#4876ff',label='valid')
+    pl.xlabel("Epochs"); pl.ylabel("Loss")
+    pl.legend(); pl.title('Loss Function')      
+    pl.subplot(212)
+    pl.plot(fit_history.history['acc'],
+            color='slategray',label='train')
+    pl.plot(fit_history.history['val_acc'], 
+            color='#4876ff',label='valid')
+    pl.xlabel('Epochs'); pl.ylabel('Accuracy')    
+    pl.legend(); pl.title('Accuracy');
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
