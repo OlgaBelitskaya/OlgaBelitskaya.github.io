@@ -91,9 +91,9 @@ names=['phlox','rose','calendula','iris',
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 st1='<p>Images => array shape: %s</p>'
-st1='<p>Labels => array shape: %s</p>'
-pretty_print(html('<p>Images => array shape: %s</p>'%str(images.shape)))
-pretty_print(html('<p>Images => array shape: %s</p>'%str(labels.shape)))
+st2='<p>Labels => array shape: %s</p>'
+pretty_print(html(st1%str(images.shape)))
+pretty_print(html(st2%str(labels.shape)))
 fig=pl.figure(figsize=(6,4))
 n=randint(1,30)
 for i in range(n,n+6):
@@ -121,8 +121,21 @@ images=images.reshape(-1,128,128,3)/255
 labels=to_categorical(labels,10)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
-</script></div><br/> 
+x_train,x_test,y_train,y_test=\
+train_test_split(images,labels,test_size=.1,random_state=1)
+m=int(len(x_test)/2)
+x_valid,y_valid=x_test[:n],y_test[:n]
+x_test,y_test=x_test[n:],y_test[n:]
+del images,labels
+[x_train.shape,x_test.shape,x_valid.shape,
+y_train.shape,y_test.shape,y_valid.shape]
+</script></div><br/>
+    <h2>✒️ &nbsp;Step 4. Implement Preprocess Functions</h2>      
+<div class="linked"><script type="text/x-sage">
+st='<p>Label: '+names[np.argmax(y_train[n])]+'</p>'
+pretty_print(html(st)); pl.figure(figsize=(3,3))
+pl.imshow((x_train[n])); pl.show()
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
 </script></div><br/>
