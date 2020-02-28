@@ -72,6 +72,14 @@ from sklearn.model_selection import train_test_split
 from keras.utils import to_categorical
 from keras.preprocessing import image as ksimage
 </script></div><br/>
+<div class="linked"><script type="text/x-sage">
+from keras.preprocessing.image import ImageDataGenerator
+from keras.callbacks import ModelCheckpoint
+from keras.models import Sequential,load_model
+from keras.layers import Conv2D,Dense,Dropout
+from keras.layers import Activation,LeakyReLU
+from keras.layers import MaxPooling2D,GlobalMaxPooling2D
+</script></div><br/>      
     <h2>✒️ &nbsp;Step 1. Load and Explore the Data</h2> 
 <div class="linked"><script type="text/x-sage">
 path='https://olgabelitskaya.github.io/'
@@ -124,8 +132,8 @@ labels=to_categorical(labels,10)
 x_train,x_test,y_train,y_test=\
 train_test_split(images,labels,test_size=.1,random_state=1)
 m=int(len(x_test)/2)
-x_valid,y_valid=x_test[:n],y_test[:n]
-x_test,y_test=x_test[n:],y_test[n:]
+x_valid,y_valid=x_test[:m],y_test[:m]
+x_test,y_test=x_test[m:],y_test[m:]
 del images,labels
 [x_train.shape,x_test.shape,x_valid.shape,
 y_train.shape,y_test.shape,y_valid.shape]
