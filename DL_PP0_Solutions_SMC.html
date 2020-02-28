@@ -147,7 +147,7 @@ st='<p>Label: '+names[np.argmax(y_train[n])]+'</p>'
 pretty_print(html(st)); pl.figure(figsize=(3,2))
 pl.imshow((x_train[n])); pl.show()
 </script></div><br/>
-    <h2>✒️ &nbsp;Step 4. Create Models</h2>
+    <h2>✒️ &nbsp;Step 4. Define the Model</h2>
 <div class="linked"><script type="text/x-sage">
 def model():
     [a,b,c,d,e,f,g]=\
@@ -175,6 +175,7 @@ def model():
     return model
 model=model()
 </script></div><br/>
+    <h2>✒️ &nbsp;Step 5. Train the Model</h2>
 <div class="linked"><script type="text/x-sage">
 checkpointer=ModelCheckpoint(filepath='weights.flower.hdf5', 
                              verbose=int(2),save_best_only=True)
@@ -197,14 +198,18 @@ def history_plot(fit_history):
     pl.plot(fit_history.history['accuracy'],
             color='slategray',label='train')
     pl.plot(fit_history.history['val_accuracy'], 
-            color='#4876ff',label='valid')
+            color='#348ABD',label='valid')
     pl.xlabel('Epochs'); pl.ylabel('Accuracy')    
     pl.legend(); pl.title('Accuracy')
     pl.grid(); pl.show()
 history_plot(history) 
 </script></div><br/>
+    <h2>✒️ &nbsp;Step 6. Evaluate and Save the Model</h2>
 <div class="linked"><script type="text/x-sage">
-
+model.load_weights('weights.flower.hdf5')
+#model.save('model.h5')
+#model=load_model('model.h5')
+model.evaluate(x_test,y_test)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
