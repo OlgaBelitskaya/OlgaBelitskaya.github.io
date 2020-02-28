@@ -215,9 +215,16 @@ model.evaluate(x_test,y_test)
     <h2>✒️ &nbsp;Step 7. Display Predictions</h2>
 <div class="linked"><script type="text/x-sage">
 y_test_predict=model.predict_classes(x_test)
-fig=pl.figure(figsize=(6,6))
+fig=pl.figure(figsize=(8,5))
 randch=np.random.choice(x_test.shape[0],size=6,replace=False)
 for i,idx in enumerate(randch):
+    ax=fig.add_subplot(2,3,i+1,xticks=[],yticks=[])
+    ax.imshow(np.squeeze(x_test[idx]))
+    pred_idx=y_test_predict[idx]
+    true_idx=np.argmax(y_test[idx])
+    ax.set_title("{} ({})".format(names[pred_idx],names[true_idx]),
+                 color=("#4876ff" if pred_idx==true_idx else "darkred"))
+pl.show()
 </script></div><br/>
   </body>
 </html>
