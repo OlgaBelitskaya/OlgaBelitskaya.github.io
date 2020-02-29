@@ -81,7 +81,7 @@ Attribute Information:<br/>
 </script></div><br/>
 The Boston housing data was collected in 1978 and each of the <br/>
 506 entries represents aggregated data about 14 features for homes from various suburbs.
-    <h2>✒️ &nbsp;Step 0. Import Libraries</h2>      
+    <h2>✒️ &nbsp;Step 0. Import Libraries and Define Helpful Functions</h2>      
 <div class="linked"><script type="text/x-sage">
 #unlock to install modules
 #!python3 -m pip install keras --user
@@ -90,7 +90,7 @@ The Boston housing data was collected in 1978 and each of the <br/>
 <div class="linked"><script type="text/x-sage">
 spath='/home/sc_work/.sage/local/lib/python3.7/site-packages'
 import sys; sys.path.append(spath)
-import pandas as pd,numpy as np
+import pandas as pd,numpy as np,sqlite3
 import seaborn as sn,pylab as pl
 import keras as ks,tensorflow as tf
 import warnings; warnings.filterwarnings('ignore')
@@ -99,7 +99,6 @@ from sklearn.model_selection import train_test_split
 from sklearn import datasets
 from sklearn.metrics import r2_score
 from keras.datasets import boston_housing
-
 from keras.callbacks import ModelCheckpoint,EarlyStopping
 from keras.callbacks import ReduceLROnPlateau
 from keras.models import Sequential,load_model
@@ -107,6 +106,30 @@ from keras.layers import Dense,LSTM,GlobalAveragePooling1D
 from keras.layers import Activation,Flatten,Dropout,BatchNormalization
 from keras.layers import Conv1D,MaxPooling1D,GlobalMaxPooling1D
 from keras.layers.advanced_activations import PReLU,LeakyReLU
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+def connect_to_db(dbf):
+    sqlconn=None
+    try:
+        sqlconn=sqlite3.connect(dbf)
+        return sqlconn
+    except Error as err:
+        print(err)
+        if sqlconn is not None:
+            sqlconn.close()
+connection=connect_to_db('boston.db')
+if connection is not None:
+    cursor=connection.cursor()
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+thp=[('font-size','15px'),('text-align','center'),
+     ('font-weight','bold'),('padding','5px 5px'),
+     ('color','white'),('background-color','lightgray')]
+tdp=[('font-size','14px'),('padding','5px 5px'),
+     ('text-align','center'),('color','darkblue'),
+     ('background-color','ghostwhite')]
+style_dict=[dict(selector='th',props=thp),
+            dict(selector='td',props=tdp)]
 </script></div><br/>
     <h2>✒️ &nbsp;Step 1. Load and Explore the Data</h2> 
 <div class="linked"><script type="text/x-sage">
