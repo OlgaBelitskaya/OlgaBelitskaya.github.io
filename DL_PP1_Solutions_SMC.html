@@ -207,25 +207,29 @@ pl.show()
     <h2>✒️ &nbsp;Step 2. Build Neural Networks. PY</h2>
 <p>Multilayer Perceptron (MLP)</p><br/>
 <div class="linked"><script type="text/x-sage">
-i1024,i104,i13,i1=int(1024),int(104),int(13),int(1)
+i1,i10,i13,i64,i1024=int(1),int(10),int(13),int(64),int(1024)
 def mlp_model():
     model=Sequential() 
-    model.add(Dense(i1024,activation='relu',input_dim=i13))
-    model.add(Dense(i104,activation='relu'))        
-    model.add(Dense(i1,kernel_initializer='normal'))   
-    model.compile(loss='mse',optimizer='nadam',metrics=['mae'])
+    model.add(Dense(i1024,input_dim=i13))
+    model.add(LeakyReLU(alpha=float(.02)))   
+    model.add(Dense(i64))     
+    model.add(LeakyReLU(alpha=float(.02)))   
+    model.add(Dense(i1,kernel_initializer='normal'))    
+    model.compile(loss='mse',optimizer='adam',metrics=['mae'])
     return model
 mlp_model=mlp_model() 
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-epochs=int(300); batch_size=int(64)
+epochs=int(300); batch_size=int(128)
 fw='weights.boston.mlp.hdf5'
 mlp_checkpointer=ModelCheckpoint(filepath=fw,verbose=int(0),
                                  save_best_only=True)
+mlp_lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i10,
+                                   verbose=int(2),factor=float(.7))
 mlp_history=mlp_model.fit(x_train,y_train,batch_size=batch_size, 
                           validation_data=(x_valid,y_valid),
                           epochs=epochs,verbose=int(0), 
-                          callbacks=[mlp_checkpointer])
+                          callbacks=[mlp_checkpointer,mlp_lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 history_plot(mlp_history,int(2))
@@ -258,6 +262,9 @@ def cnn_model():
     return model
 cnn_model=cnn_model() 
 </script></div><br/>
+<div class="linked"><script type="text/x-sage">
+
+</script></div><br/>      
 <div class="linked"><script type="text/x-sage">
 history_plot(cnn_history,i2)
 cnn_model.load_weights(fw)
