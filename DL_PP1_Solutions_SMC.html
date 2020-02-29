@@ -248,10 +248,30 @@ def cnn_model():
 cnn_model=cnn_model() 
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+cnn_model.load_weights(fw)
+y_train_cnn=cnn_model.predict(x_train.reshape(-i1,i13,i1))
+y_valid_cnn=cnn_model.predict(x_valid.reshape(-i1,i13,i1))
+y_test_cnn=cnn_model.predict(x_test.reshape(-i1,i13,i1))
+score_train_cnn=r2_score(y_train,y_train_cnn)
+score_valid_cnn=r2_score(y_valid,y_valid_cnn)
+score_test_cnn=r2_score(y_test,y_test_cnn)
+pd.DataFrame([['Train R2 score:',score_train_cnn],
+              ['Valid R2 score:',score_valid_cnn],
+              ['Test R2 score:',score_test_cnn]])
 </script></div><br/>
+<p>Recurrent Neural Network (RNN)</p><br/>      
 <div class="linked"><script type="text/x-sage">
-
+def rnn_model():
+    i1,i13,i52=int(1),int(13),int(52)
+    model=Sequential()   
+    model.add(LSTM(i52,return_sequences=True,
+                   input_shape=(i1,i13)))
+    model.add(LSTM(i52,return_sequences=True))
+    model.add(LSTM(i52,return_sequences=False))   
+    model.add(Dense(i1))
+    model.compile(optimizer='rmsprop',loss='mse',
+                  metrics=['mae'])       
+    return model 
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
