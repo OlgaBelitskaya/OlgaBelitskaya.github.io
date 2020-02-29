@@ -81,7 +81,7 @@ Attribute Information:<br/>
 </script></div><br/>
 The Boston housing data was collected in 1978 and each of the <br/>
 506 entries represents aggregated data about 14 features for homes from various suburbs.
-    <h2>✒️ &nbsp;Step 0. Import Libraries and Define Helpful Functions</h2>      
+    <h2>✒️&nbsp;Step 0. Import Libraries and Define Helpful Functions</h2>      
 <div class="linked"><script type="text/x-sage">
 #unlock to install modules
 #!python3 -m pip install keras --user
@@ -151,7 +151,7 @@ def predpl(y1,y2,y3,ti):
     pl.ylabel("Predicted and Real Target Values")
     pl.legend(); pl.title(ti); pl.show()
 </script></div><br/>
-    <h2>✒️ &nbsp;Step 1. Load and Explore the Data</h2> 
+    <h2>✒️&nbsp;Step 1. Load and Explore the Data</h2> 
 <div class="linked"><script type="text/x-sage">
 boston_data=datasets.load_boston()
 columns=boston_data.feature_names
@@ -204,7 +204,7 @@ pl.ylabel("Distribution"); pl.xlabel("Logarithmic Prices")
 pl.suptitle('Boston Housing Data',fontsize=15)
 pl.show()
 </script></div><br/>
-    <h2>✒️ &nbsp;Step 2. Build Neural Networks. PY</h2>
+    <h2>✒️&nbsp;Step 2. Build Neural Networks. Keras Py</h2>
 <p>Multilayer Perceptron (MLP)</p><br/>
 <div class="linked"><script type="text/x-sage">
 i1,i10,i13,i64,i1024=int(1),int(10),int(13),int(64),int(1024)
@@ -246,24 +246,36 @@ pd.DataFrame([['Train R2 score:',score_train_mlp],
 </script></div><br/>
 <p>Convolutional Neural Network (CNN)</p><br/>
 <div class="linked"><script type="text/x-sage">
-1,2,3,13,16,256=int(1),int(2),int(3),int(13),int(16),int(256)
+i1,i2,i3,i10,i13,i16,i128=\
+int(1),int(2),int(3),int(10),int(13),int(16),int(128)
 def cnn_model():
     model=Sequential()       
-    model.add(Conv1D(i13,i3,padding='valid',activation='relu',
+    model.add(Conv1D(i13,i3,padding='valid',
                      input_shape=(i13,i1)))
-    model.add(MaxPooling1D(pool_size=i2))    
-    model.add(Conv1D(i256,i3,padding='valid',activation='relu'))
+    model.add(LeakyReLU(alpha=float(.02)))
+    model.add(MaxPooling1D(pool_size=i2))   
+    model.add(Conv1D(i128,i3,padding='valid'))
+    model.add(LeakyReLU(alpha=float(.02)))
     model.add(MaxPooling1D(pool_size=i2))   
     model.add(Flatten())      
-    model.add(Dense(i16,activation='relu',kernel_initializer='normal'))
-    model.add(Dropout(float(.1)))   
-    model.add(Dense(i1,kernel_initializer='normal')) 
-    model.compile(loss='mse',optimizer='nadam',metrics=['mae'])
+    model.add(Dense(i16,activation='relu',
+                    kernel_initializer='normal'))
+    model.add(Dropout(float(.1)))  
+    model.add(Dense(i1,kernel_initializer='normal'))  
+    model.compile(loss='mse',optimizer='adam',metrics=['mae'])
     return model
 cnn_model=cnn_model() 
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+epochs=int(300); batch_size=int(16)
+fw='weights.boston.cnn.hdf5'
+cnn_checkpointer=ModelCheckpoint(filepath=fw,verbose=int(0),save_best_only=True)
+cnn_lr_reduction=ReduceLROnPlateau(monitor='val_loss', 
+                                   patience=i10,verbose=i2,factor=float(.7))
+cnn_history=cnn_model.fit(x_train.reshape(-i1,i13,i1),y_train, 
+                          validation_data=(x_valid.reshape(-i1,i13,i1),y_valid),
+                          epochs=epochs,batch_size=batch_size,verbose=int(0), 
+                          callbacks=[cnn_checkpointer])
 </script></div><br/>      
 <div class="linked"><script type="text/x-sage">
 history_plot(cnn_history,i2)
@@ -316,7 +328,7 @@ pd.DataFrame([['Train R2 score:',score_train_rnn],
               ['Valid R2 score:',score_valid_rnn],
               ['Test R2 score:',score_test_rnn]])
 </script></div><br/>
-    <h2>✒️ &nbsp;Step 3. Compare Predictions. PY</h2>      
+    <h2>✒️&nbsp;Step 3. Compare Predictions. Keras Py</h2>      
 <div class="linked"><script type="text/x-sage">
 ti="Train Set; Neural Network Predictions vs Real Data"
 y1,y2,y3=y_train_mlp,y_train_cnn,y_train_rnn
@@ -332,9 +344,11 @@ ti="Test Set; Neural Network Predictions vs Real Data"
 y1,y2,y3=y_test_mlp,y_test_cnn,y_test_rnn
 predpl(y1,y2,y3,ti)
 </script></div><br/>
+    <h2>✒️&nbsp;Step 4. Sklearn Algorithms Py</h2>      
 <div class="linked"><script type="text/x-sage">
 
 </script></div><br/>
+    <h2>✒️&nbsp;Step 5. Combine R & Python</h2>      
 <div class="linked"><script type="text/x-sage">
 
 </script></div><br/>
