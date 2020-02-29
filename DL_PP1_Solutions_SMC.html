@@ -123,7 +123,7 @@ if connection is not None:
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def history_plot(fit_history,n):
-    pl.figure(figsize=(10,6))    
+    pl.figure(figsize=(12,10))    
     pl.subplot(211)
     pl.plot(fit_history.history['loss'][n:],
             color='slategray',label='train')
@@ -194,7 +194,7 @@ pd.DataFrame(t)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 pl.style.use('seaborn-whitegrid')
-pl.figure(1,figsize=(8,4))
+pl.figure(1,figsize=(12,4))
 pl.subplot(121)
 sn.distplot(y_train,color='#348ABD',bins=30)
 pl.ylabel("Distribution"); pl.xlabel("Prices")
@@ -220,12 +220,12 @@ def mlp_model():
 mlp_model=mlp_model() 
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-epochs=int(300); batch_size=int(128)
+epochs=int(200); batch_size=int(128)
 fw='weights.boston.mlp.hdf5'
 mlp_checkpointer=ModelCheckpoint(filepath=fw,verbose=int(0),
                                  save_best_only=True)
 mlp_lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i10,
-                                   verbose=int(2),factor=float(.7))
+                                   verbose=int(2),factor=float(.8))
 mlp_history=mlp_model.fit(x_train,y_train,batch_size=batch_size, 
                           validation_data=(x_valid,y_valid),
                           epochs=epochs,verbose=int(0), 
@@ -267,15 +267,16 @@ def cnn_model():
 cnn_model=cnn_model() 
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-epochs=int(300); batch_size=int(16)
+epochs=int(400); batch_size=int(16)
 fw='weights.boston.cnn.hdf5'
-cnn_checkpointer=ModelCheckpoint(filepath=fw,verbose=int(0),save_best_only=True)
+cnn_checkpointer=ModelCheckpoint(filepath=fw,verbose=int(0),
+                                 save_best_only=True)
 cnn_lr_reduction=ReduceLROnPlateau(monitor='val_loss', 
-                                   patience=i10,verbose=i2,factor=float(.7))
+                                   patience=i10,verbose=i2,factor=float(.8))
 cnn_history=cnn_model.fit(x_train.reshape(-i1,i13,i1),y_train, 
                           validation_data=(x_valid.reshape(-i1,i13,i1),y_valid),
                           epochs=epochs,batch_size=batch_size,verbose=int(0), 
-                          callbacks=[cnn_checkpointer])
+                          callbacks=[cnn_checkpointer,cnn_lr_reduction])
 </script></div><br/>      
 <div class="linked"><script type="text/x-sage">
 history_plot(cnn_history,i2)
@@ -300,20 +301,21 @@ def rnn_model():
     model.add(LSTM(i52,return_sequences=True))
     model.add(LSTM(i52,return_sequences=False))   
     model.add(Dense(i1))
-    model.compile(optimizer='rmsprop',loss='mse',
-                  metrics=['mae'])       
+    model.compile(optimizer='adam',loss='mse',metrics=['mae'])       
     return model
 rnn_model=rnn_model() 
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-epochs=int(100); batch_size=int(16)
+epochs=int(200); batch_size=int(16)
 fw='weights.boston.rnn.hdf5'
 rnn_checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,
                                  save_best_only=True)
-rnn_history=rnn_model.fit(x_train.reshape(-i1,i1,i13),y_train,
+rnn_lr_reduction=ReduceLROnPlateau(monitor='val_loss', 
+                                  patience=i10,verbose=i2,factor=float(.8))
+rnn_history=rnn_model.fit(x_train.reshape(-i1,i1,i13),y_train, 
                           validation_data=(x_valid.reshape(-i1,i1,i13),y_valid),
-                          epochs=epochs,batch_size=batch_size,verbose=int(0),
-                          callbacks=[rnn_checkpointer])
+                          epochs=epochs,batch_size=batch_size,verbose=int(0), 
+                          callbacks=[rnn_checkpointer,rnn_lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 history_plot(rnn_history,i2)
