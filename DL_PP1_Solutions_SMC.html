@@ -122,21 +122,15 @@ if connection is not None:
     cursor=connection.cursor()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-thp=[('font-size','15px'),('text-align','center'),
-     ('font-weight','bold'),('padding','5px 5px'),
-     ('color','white'),('background-color','lightgray')]
-tdp=[('font-size','14px'),('padding','5px 5px'),
-     ('text-align','center'),('color','darkblue'),
-     ('background-color','ghostwhite')]
-style_dict=[dict(selector='th',props=thp),
-            dict(selector='td',props=tdp)]
+
 </script></div><br/>
     <h2>✒️ &nbsp;Step 1. Load and Explore the Data</h2> 
 <div class="linked"><script type="text/x-sage">
-boston_data=datasets.load_boston();
+boston_data=datasets.load_boston()
 columns=boston_data.feature_names
 boston_df=pd.DataFrame(boston_data.data,columns=columns)
 boston_df['MEDV']=boston_data.target
+boston_df.to_sql('main',con=connection,if_exists='replace')
 boston_df.head()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
