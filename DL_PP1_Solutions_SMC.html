@@ -12,7 +12,7 @@
   </head>
   <style>
   @import url('https://fonts.googleapis.com/css?family=Akronim|Lobster');
-  h1,h2 {color:#348ABD; font-family:'Akronim'; font-size:120%; text-shadow:4px 4px 4px #aaa;}
+  h1,h2,th {color:#348ABD; font-family:'Akronim'; font-size:120%; text-shadow:4px 4px 4px #aaa;}
   p,a {color:slategray; font-family:'Lobster'; font-size:120%; text-shadow:4px 4px 4px #aaa;}
   .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
   body {margin:5px 5px 5px 15px;}
@@ -60,6 +60,12 @@ td {font-family:'Lobster'; font-size:150%;}
 <tr><td style="color:#00D8A0;"><center> DIS </center></td>
 <td style="color:#00D8A0;"><left>weighted distances to 
   five Boston employment centres</left></td></tr>   
+<tr><td style="color:#1CAC78;"><center> RAD </center></td>
+<td style="color:#1CAC78;"><left>index of accessibility 
+  to radial highways</left></td></tr>
+  <tr><td style="color:#004C71;"><center> TAX </center></td>
+<td style="color:#004C71;"><left>full-value property-tax rate 
+  per 10,000 USD</left></td></tr>  
 </table>
 </script></div><br/>
 The Boston housing data was collected in 1978 and each of the <br/>
@@ -98,6 +104,15 @@ columns=boston_data.feature_names
 boston_df=pd.DataFrame(boston_data.data,columns=columns)
 boston_df['MEDV']=boston_data.target
 boston_df.head()
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+pearson=boston_df.corr(method='pearson')
+corr_with_prices=pearson.iloc[-int(1)][:-int(1)]
+pd.DataFrame(corr_with_prices[abs(corr_with_prices)\
+             .argsort()[::-int(1)]]).T
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
