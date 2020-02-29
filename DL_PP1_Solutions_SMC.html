@@ -140,6 +140,17 @@ def history_plot(fit_history,n):
     pl.legend(); pl.title('Mean Absolute Error')
     pl.show()
 </script></div><br/>
+<div class="linked"><script type="text/x-sage">
+def predpl(y1,y2,y3,ti):
+    pl.figure(figsize=(12,6))
+    pl.plot(y_train[:n],color='black',label='Real Data')
+    pl.plot(y1[:n],label='MLP')
+    pl.plot(y2[:n],label='CNN')
+    pl.plot(y3[:n],label='RNN')
+    pl.xlabel("Data Points")
+    pl.ylabel("Predicted and Real Target Values")
+    pl.legend(); pl.title(ti); pl.show()
+</script></div><br/>
     <h2>✒️ &nbsp;Step 1. Load and Explore the Data</h2> 
 <div class="linked"><script type="text/x-sage">
 boston_data=datasets.load_boston()
@@ -297,6 +308,22 @@ score_test_rnn=r2_score(y_test,y_test_rnn)
 pd.DataFrame([['Train R2 score:',score_train_rnn],
               ['Valid R2 score:',score_valid_rnn],
               ['Test R2 score:',score_test_rnn]])
+</script></div><br/>
+    <h2>✒️ &nbsp;Step 2. Build Neural Networks. PY</h2>      
+<div class="linked"><script type="text/x-sage">
+ti="Train Set; Neural Network Predictions vs Real Data"
+y1,y2,y3=y_train_mlp,y_train_cnn,y_train_rnn
+predpl(y1,y2,y3,ti)
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+ti="Validation Set; Neural Network Predictions vs Real Data"
+y1,y2,y3=y_valid_mlp,y_valid_cnn,y_valid_rnn
+predpl(y1,y2,y3,ti)
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+ti="Test Set; Neural Network Predictions vs Real Data"
+y1,y2,y3=y_test_mlp,y_test_cnn,y_test_rnn
+predpl(y1,y2,y3,ti)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
