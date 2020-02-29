@@ -248,6 +248,7 @@ def cnn_model():
 cnn_model=cnn_model() 
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
+history_plot(cnn_history,i2)
 cnn_model.load_weights(fw)
 y_train_cnn=cnn_model.predict(x_train.reshape(-i1,i13,i1))
 y_valid_cnn=cnn_model.predict(x_valid.reshape(-i1,i13,i1))
@@ -261,8 +262,8 @@ pd.DataFrame([['Train R2 score:',score_train_cnn],
 </script></div><br/>
 <p>Recurrent Neural Network (RNN)</p><br/>      
 <div class="linked"><script type="text/x-sage">
+i1,i2,i13,i52=int(1),int(2),int(13),int(52)
 def rnn_model():
-    i1,i13,i52=int(1),int(13),int(52)
     model=Sequential()   
     model.add(LSTM(i52,return_sequences=True,
                    input_shape=(i1,i13)))
@@ -271,7 +272,31 @@ def rnn_model():
     model.add(Dense(i1))
     model.compile(optimizer='rmsprop',loss='mse',
                   metrics=['mae'])       
-    return model 
+    return model
+rnn_model=rnn_model() 
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+epochs=int(100); batch_size=int(16)
+fw='weights.boston.rnn.hdf5'
+rnn_checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,
+                                 save_best_only=True)
+rnn_history=rnn_model.fit(x_train.reshape(-i1,i1,i13),y_train,
+                          validation_data=(x_valid.reshape(-i1,i1,i13),y_valid),
+                          epochs=epochs,batch_size=batch_size,verbose=int(0),
+                          callbacks=[rnn_checkpointer])
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+history_plot(rnn_history,i2)
+rnn_model.load_weights(fw)
+y_train_rnn=rnn_model.predict(x_train.reshape(-i1,i1,i13))
+y_valid_rnn=rnn_model.predict(x_valid.reshape(-i1,i1,i13))
+y_test_rnn=rnn_model.predict(x_test.reshape(-i1,i1,i13))
+score_train_rnn=r2_score(y_train,y_train_rnn)
+score_valid_rnn=r2_score(y_valid,y_valid_rnn)
+score_test_rnn=r2_score(y_test,y_test_rnn)
+pd.DataFrame([['Train R2 score:',score_train_rnn],
+              ['Valid R2 score:',score_valid_rnn],
+              ['Test R2 score:',score_test_rnn]])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
