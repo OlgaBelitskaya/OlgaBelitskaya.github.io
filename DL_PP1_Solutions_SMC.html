@@ -30,8 +30,8 @@ Data Set Information: Concerns housing values in suburbs of Boston.<br/>
 Attribute Information:<br/>
 <div class="linked"><script type="text/x-sage">
 %%html
-<table style="width:50%; background-color:lightgray; 
-              font-family:'Lobster'; font-size:140%;">
+<table style="width:50%; background-color:slategray; 
+              font-family:'Lobster'; font-size:150%;">
 <tr><th> Attribute </th><th> Description </th></tr>
 <tr><td style="color:#F898C8;"><center> CRIM </center></td>
 <td style="color:#F898C8;"><left>per capita crime rate by town</left></td></tr>
@@ -41,8 +41,19 @@ Attribute Information:<br/>
 <tr><td style="color:#D62518;"><center> INDUS </center></td>
 <td style="color:#D62518;"><left>proportion of non-retail 
   business acres per town</left></td></tr>
+<tr><td style="color:#AD0000;"><center> CHAS </center></td>
+<td style="color:#AD0000;"><left>Charles River dummy variable 
+  (= 1 if tract bounds river; 0 otherwise)</left></td></tr>
+<tr><td style="color:#FA7A00;"><center> NOX </center></td>
+<td style="color:#FA7A00;"><left>nitric oxides concentration 
+  (parts per 10 million)</left></td></tr> 
+<tr><td style="color:#FED85D;"><center> RM </center></td>
+<td style="color:#FED85D;"><left>average number of rooms 
+  per dwelling</left></td></tr>   
 </table>
 </script></div><br/>
+The Boston housing data was collected in 1978 and each of the <br/>
+506 entries represents aggregated data about 14 features for homes from various suburbs.
     <h2>✒️ &nbsp;Step 0. Import Libraries</h2>      
 <div class="linked"><script type="text/x-sage">
 #unlock to install modules
@@ -70,8 +81,13 @@ from keras.layers import Activation,Flatten,Dropout,BatchNormalization
 from keras.layers import Conv1D,MaxPooling1D,GlobalMaxPooling1D
 from keras.layers.advanced_activations import PReLU,LeakyReLU
 </script></div><br/>
+    <h2>✒️ &nbsp;Step 1. Load and Explore the Data</h2> 
 <div class="linked"><script type="text/x-sage">
-
+boston_data=datasets.load_boston();
+columns=boston_data.feature_names
+boston_df=pd.DataFrame(boston_data.data,columns=columns)
+boston_df['MEDV']=boston_data.target
+boston_df.head()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
