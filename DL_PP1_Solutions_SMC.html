@@ -196,27 +196,28 @@ pl.show()
     <h2>✒️ &nbsp;Step 2. Build Neural Networks. PY</h2>
 <p>Multilayer Perceptron (MLP)</p><br/>
 <div class="linked"><script type="text/x-sage">
+i1024,i104,i13,i1=int(1024),int(104),int(13),int(1)
 def mlp_model():
     model=Sequential() 
-    model.add(Dense(1024,activation='relu',input_dim=13))
-    model.add(Dense(104,activation='relu'))        
-    model.add(Dense(1,kernel_initializer='normal'))   
+    model.add(Dense(i1024,activation='relu',input_dim=i13))
+    model.add(Dense(i104,activation='relu'))        
+    model.add(Dense(i1,kernel_initializer='normal'))   
     model.compile(loss='mse',optimizer='nadam',metrics=['mae'])
     return model
 mlp_model=mlp_model() 
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-epochs=300; batch_size=64
+epochs=int(300); batch_size=int(64)
 fw='weights.boston.mlp.hdf5'
-mlp_checkpointer=ModelCheckpoint(filepath=fw,verbose=0,
+mlp_checkpointer=ModelCheckpoint(filepath=fw,verbose=int(0),
                                  save_best_only=True)
 mlp_history=mlp_model.fit(x_train,y_train,batch_size=batch_size, 
                           validation_data=(x_valid,y_valid),
-                          epochs=epochs,verbose=0, 
+                          epochs=epochs,verbose=int(0), 
                           callbacks=[mlp_checkpointer])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-history_plot(mlp_history,2)
+history_plot(mlp_history,int(2))
 mlp_model.load_weights(fw)
 y_train_mlp=mlp_model.predict(x_train)
 y_valid_mlp=mlp_model.predict(x_valid)
@@ -230,7 +231,21 @@ pd.DataFrame([['Train R2 score:',score_train_mlp],
 </script></div><br/>
 <p>Convolutional Neural Network (CNN)</p><br/>
 <div class="linked"><script type="text/x-sage">
-
+1,2,3,13,16,256=int(1),int(2),int(3),int(13),int(16),int(256)
+def cnn_model():
+    model=Sequential()       
+    model.add(Conv1D(i13,i3,padding='valid',activation='relu',
+                     input_shape=(i13,i1)))
+    model.add(MaxPooling1D(pool_size=i2))    
+    model.add(Conv1D(i256,i3,padding='valid',activation='relu'))
+    model.add(MaxPooling1D(pool_size=i2))   
+    model.add(Flatten())      
+    model.add(Dense(i16,activation='relu',kernel_initializer='normal'))
+    model.add(Dropout(float(.1)))   
+    model.add(Dense(i1,kernel_initializer='normal')) 
+    model.compile(loss='mse',optimizer='nadam',metrics=['mae'])
+    return model
+cnn_model=cnn_model() 
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
