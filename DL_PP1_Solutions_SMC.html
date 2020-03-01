@@ -132,9 +132,9 @@ def history_plot(fit_history,n):
     pl.xlabel('Epochs'); pl.ylabel('Loss')
     pl.legend(); pl.title('Loss Function')      
     pl.subplot(212)
-    pl.plot(fit_history.history['mean_absolute_error'][n:],
+    pl.plot(fit_history.history['mae'][n:],
             color='slategray',label='train')
-    pl.plot(fit_history.history['val_mean_absolute_error'][n:],
+    pl.plot(fit_history.history['val_mae'][n:],
             color='#348ABD',label='valid')
     pl.xlabel('Epochs'); pl.ylabel('MAE')    
     pl.legend(); pl.title('Mean Absolute Error')
@@ -142,7 +142,7 @@ def history_plot(fit_history,n):
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def predpl(y1,y2,y3,ti):
-    pl.figure(figsize=(12,6))
+    pl.figure(figsize=(10,6))
     pl.plot(y_train[:n],color='black',label='Real Data')
     pl.plot(y1[:n],label='MLP')
     pl.plot(y2[:n],label='CNN')
@@ -194,7 +194,7 @@ pd.DataFrame(t)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 pl.style.use('seaborn-whitegrid')
-pl.figure(1,figsize=(12,4))
+pl.figure(1,figsize=(10,4))
 pl.subplot(121)
 sn.distplot(y_train,color='#348ABD',bins=30)
 pl.ylabel("Distribution"); pl.xlabel("Prices")
