@@ -147,7 +147,7 @@ pl.imshow((x_train[n])); pl.show()
     <h2>✒️ &nbsp;Step 4. Define the Model</h2>
 <div class="linked"><script type="text/x-sage">
 i1,i2,i3,i5,i8=int(1),int(2),int(3),int(5),int(8)
-i10,i32,i72,i256=int(10),int(32),int(72),int(256)
+i10,i12,i32,i72,i256=int(10),int(12),int(32),int(72),int(256)
 def model():
     dr=float(.25)
     model=Sequential()
@@ -175,7 +175,7 @@ model=model()
 checkpointer=ModelCheckpoint(filepath='weights.flower.hdf5', 
                              verbose=i2,save_best_only=True)
 history=model.fit(x_train,y_train,batch_size=i8,
-                  epochs=i10,verbose=i2,
+                  epochs=i12,verbose=i2,
                   validation_data=(x_valid,y_valid),
                   callbacks=[checkpointer])
 </script></div><br/>
@@ -209,7 +209,7 @@ model.evaluate(x_test,y_test)
     <h2>✒️ &nbsp;Step 7. Display Predictions</h2>
 <div class="linked"><script type="text/x-sage">
 y_test_predict=model.predict_classes(x_test)
-fig=pl.figure(figsize=(8,5))
+fig=pl.figure(figsize=(6,4))
 randch=np.random.choice(x_test.shape[0],size=6,replace=False)
 for i,idx in enumerate(randch):
     ax=fig.add_subplot(2,3,i+1,xticks=[],yticks=[])
