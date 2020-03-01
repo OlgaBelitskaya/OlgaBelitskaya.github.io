@@ -221,7 +221,7 @@ def mlp_model():
 mlp_model=mlp_model()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-epochs=int(400); batch_size=int(20)
+epochs=int(400); batch_size=int(24)
 fw='weights.boston.mlp.hdf5'
 mlp_checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,
                                  save_best_only=True)
@@ -293,28 +293,28 @@ pd.DataFrame([['Train R2 score:',score_train_cnn],
 </script></div><br/>
 <p>Recurrent Neural Network (RNN)</p><br/>      
 <div class="linked"><script type="text/x-sage">
-i1,i2,i13,i52=int(1),int(2),int(13),int(52)
+i1,i2,i13,i104=int(1),int(2),int(13),int(104)
 def rnn_model():
     model=Sequential()   
-    model.add(LSTM(i52,return_sequences=True,
+    model.add(LSTM(i104,return_sequences=True,
                    input_shape=(i1,i13)))
-    model.add(LSTM(i52,return_sequences=True))
-    model.add(LSTM(i52,return_sequences=False))   
+    model.add(LSTM(i104,return_sequences=True))
+    model.add(LSTM(i104,return_sequences=False))   
     model.add(Dense(i1))
-    model.compile(optimizer='adam',loss='mse',metrics=['mae'])       
+    model.compile(optimizer='rmsprop',loss='mse',metrics=['mae'])       
     return model
-rnn_model=rnn_model() 
+rnn_model=rnn_model()  
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-epochs=int(200); batch_size=int(16)
+epochs=int(150); batch_size=int(24)
 fw='weights.boston.rnn.hdf5'
-rnn_checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,
+rnn_checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,
                                  save_best_only=True)
 rnn_lr_reduction=ReduceLROnPlateau(monitor='val_loss', 
-                                  patience=i10,verbose=i2,factor=float(.8))
+                                  patience=i10,verbose=i2,factor=float(.75))
 rnn_history=rnn_model.fit(x_train.reshape(-i1,i1,i13),y_train, 
                           validation_data=(x_valid.reshape(-i1,i1,i13),y_valid),
-                          epochs=epochs,batch_size=batch_size,verbose=int(0), 
+                          epochs=epochs,batch_size=batch_size,verbose=i0, 
                           callbacks=[rnn_checkpointer,rnn_lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
