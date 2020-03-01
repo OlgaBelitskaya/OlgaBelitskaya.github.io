@@ -246,36 +246,35 @@ pd.DataFrame([['Train R2 score:',score_train_mlp],
 </script></div><br/>
 <p>Convolutional Neural Network (CNN)</p><br/>
 <div class="linked"><script type="text/x-sage">
-i1,i2,i3,i10,i13,i16,i128=\
-int(1),int(2),int(3),int(10),int(13),int(16),int(128)
+i1,i2,i5,i10,i13,i16,i128=\
+int(1),int(2),int(5),int(10),int(13),int(16),int(128)
 def cnn_model():
     model=Sequential()       
-    model.add(Conv1D(i13,i3,padding='valid',
+    model.add(Conv1D(i13,i5,padding='valid',
                      input_shape=(i13,i1)))
-    model.add(LeakyReLU(alpha=float(.02)))
+    model.add(LeakyReLU(alpha=float(.022)))
     model.add(MaxPooling1D(pool_size=i2))   
     model.add(Conv1D(i128,i3,padding='valid'))
-    model.add(LeakyReLU(alpha=float(.02)))
+    model.add(LeakyReLU(alpha=float(.022)))
     model.add(MaxPooling1D(pool_size=i2))   
     model.add(Flatten())      
     model.add(Dense(i16,activation='relu',
                     kernel_initializer='normal'))
     model.add(Dropout(float(.1)))  
     model.add(Dense(i1,kernel_initializer='normal'))  
-    model.compile(loss='mse',optimizer='adam',metrics=['mae'])
+    model.compile(loss='mse',optimizer='nadam',metrics=['mae'])
     return model
-cnn_model=cnn_model() 
+cnn_model=cnn_model()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-epochs=int(400); batch_size=int(16)
+epochs=int(400); batch_size=int(14)
 fw='weights.boston.cnn.hdf5'
-cnn_checkpointer=ModelCheckpoint(filepath=fw,verbose=int(0),
-                                 save_best_only=True)
+cnn_checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,save_best_only=True)
 cnn_lr_reduction=ReduceLROnPlateau(monitor='val_loss', 
-                                   patience=i10,verbose=i2,factor=float(.8))
+                                   patience=i10,verbose=i2,factor=float(.75))
 cnn_history=cnn_model.fit(x_train.reshape(-i1,i13,i1),y_train, 
                           validation_data=(x_valid.reshape(-i1,i13,i1),y_valid),
-                          epochs=epochs,batch_size=batch_size,verbose=int(0), 
+                          epochs=epochs,batch_size=batch_size,verbose=i0, 
                           callbacks=[cnn_checkpointer,cnn_lr_reduction])
 </script></div><br/>      
 <div class="linked"><script type="text/x-sage">
