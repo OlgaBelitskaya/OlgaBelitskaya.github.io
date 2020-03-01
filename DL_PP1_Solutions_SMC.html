@@ -207,28 +207,29 @@ pl.show()
     <h2>✒️&nbsp;Step 2. Build Neural Networks. Keras Py</h2>
 <p>Multilayer Perceptron (MLP)</p><br/>
 <div class="linked"><script type="text/x-sage">
-i1,i10,i13,i64,i1024=int(1),int(10),int(13),int(64),int(1024)
+i0,i1,i2,i10,i13,i104,i1024=\
+int(0),int(1),int(2),int(10),int(13),int(104),int(1024)
 def mlp_model():
     model=Sequential() 
     model.add(Dense(i1024,input_dim=i13))
-    model.add(LeakyReLU(alpha=float(.02)))   
-    model.add(Dense(i64))     
-    model.add(LeakyReLU(alpha=float(.02)))   
+    model.add(LeakyReLU(alpha=float(.025)))   
+    model.add(Dense(i104))     
+    model.add(LeakyReLU(alpha=float(.025)))   
     model.add(Dense(i1,kernel_initializer='normal'))    
-    model.compile(loss='mse',optimizer='adam',metrics=['mae'])
+    model.compile(loss='mse',optimizer='rmsprop',metrics=['mae'])
     return model
-mlp_model=mlp_model() 
+mlp_model=mlp_model()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-epochs=int(200); batch_size=int(128)
+epochs=int(400); batch_size=int(20)
 fw='weights.boston.mlp.hdf5'
-mlp_checkpointer=ModelCheckpoint(filepath=fw,verbose=int(0),
+mlp_checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,
                                  save_best_only=True)
 mlp_lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i10,
-                                   verbose=int(2),factor=float(.8))
+                                   verbose=i0,factor=float(.75))
 mlp_history=mlp_model.fit(x_train,y_train,batch_size=batch_size, 
                           validation_data=(x_valid,y_valid),
-                          epochs=epochs,verbose=int(0), 
+                          epochs=epochs,verbose=i0, 
                           callbacks=[mlp_checkpointer,mlp_lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
