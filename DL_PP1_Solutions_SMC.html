@@ -224,7 +224,7 @@ def mlp_model():
 mlp_model=mlp_model()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-epochs=int(200); batch_size=int(16)
+epochs=int(200); batch_size=int(24)
 fw='weights.boston.mlp.hdf5'
 mlp_checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,
                                  save_best_only=True)
@@ -271,7 +271,7 @@ def cnn_model():
 cnn_model=cnn_model()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-epochs=int(400); batch_size=int(12)
+epochs=int(350); batch_size=int(14)
 fw='weights.boston.cnn.hdf5'
 cnn_checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,save_best_only=True)
 cnn_lr_reduction=ReduceLROnPlateau(monitor='val_loss', 
@@ -314,7 +314,7 @@ fw='weights.boston.rnn.hdf5'
 rnn_checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,
                                  save_best_only=True)
 rnn_lr_reduction=ReduceLROnPlateau(monitor='val_loss', 
-                                  patience=i10,verbose=i2,factor=float(.75))
+                                  patience=i10,verbose=i0,factor=float(.75))
 rnn_history=rnn_model.fit(x_train.reshape(-i1,i1,i13),y_train, 
                           validation_data=(x_valid.reshape(-i1,i1,i13),y_valid),
                           epochs=epochs,batch_size=batch_size,verbose=i0, 
