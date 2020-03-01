@@ -453,7 +453,33 @@ pl.xlabel('Observations'); pl.ylabel('Targets')
 pl.title('Regressors. Test Results. Boston')
 pl.legend(loc=2,fontsize=10); pl.show()
 </script></div><br/>    
-    <h2>✒️&nbsp;Step 5. Combine R & Python</h2>      
+    <h2>✒️&nbsp;Step 5. Neural Networks R </h2>      
+<div class="linked"><script type="text/x-sage">
+%%r
+library('MASS'); library('nnet')
+data(Boston); n<-dim(Boston)[1];
+svg(filename="Rplots.svg",width=10,height=6,
+    pointsize=12,onefile=T,family="times",bg="white",
+    antialias=c("default","none","gray","subpixel"))
+model<-nnet(as.matrix(Boston[1:430,-14]),
+            as.matrix(Boston[1:430,14]),
+            size=52,trace=F,maxit=5*10^3,
+            linout=T,decay=.1^5)
+predictions<-predict(model,as.matrix(Boston[431:n,-14]),
+                     type="raw")
+plot(as.matrix(Boston[431:n,14]),col="black",type="o",
+     xlab='',ylab='',yaxt='n'); par(new=T)
+plot(predictions,col="#36ff36",type="o",
+     cex=1.3,ylab='Targets & Predictions')
+grid(); dev.off()
+</script></div><br/>
+   <h2>✒️&nbsp;Step 6. Combine R & Python</h2> 
+<div class="linked"><script type="text/x-sage">
+
+</script></div><br/>    
+<div class="linked"><script type="text/x-sage">
+
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
 </script></div><br/>
