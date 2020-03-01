@@ -13,7 +13,7 @@
   <style>
   @import url('https://fonts.googleapis.com/css?family=Akronim|Lobster');
   h1,h2,th {color:#348ABD; font-family:'Akronim'; font-size:120%; text-shadow:4px 4px 4px #aaa;}
-  p,a {color:slategray; font-family:'Lobster'; font-size:120%; text-shadow:4px 4px 4px #aaa;}
+  p,a,table {color:slategray; font-family:'Lobster'; font-size:120%; text-shadow:4px 4px 4px #aaa;}
   .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
   body {margin:5px 5px 5px 15px;}
   </style>  
@@ -79,7 +79,7 @@ from keras.preprocessing import image as ksimage
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 from keras.preprocessing.image import ImageDataGenerator
-from keras.callbacks import ModelCheckpoint
+from keras.callbacks import ModelCheckpoint,ReduceLROnPlateau
 from keras.models import Sequential,load_model
 from keras.layers import Conv2D,Dense,Dropout
 from keras.layers import Activation,LeakyReLU
@@ -150,26 +150,24 @@ pl.imshow((x_train[n])); pl.show()
 </script></div><br/>
     <h2>✒️ &nbsp;Step 4. Define the Model</h2>
 <div class="linked"><script type="text/x-sage">
+i1,i2,i3,i5,i8=int(1),int(2),int(3),int(5),int(8)
+i10,i32,i72,i256=int(10),int(32),int(72),int(256)
 def model():
-    [a,b,c,d,e,f,g]=\
-    [int(1),int(2),int(3),int(10),
-     int(32),int(72),int(256)]
     dr=float(.25)
     model=Sequential()
-    model.add(Conv2D(e,(c,c),padding='same', 
-                     input_shape=x_train.shape[a:]))
+    model.add(Conv2D(i32,(i3,i3),padding='same', 
+                     input_shape=x_train.shape[i1:]))
     model.add(Activation('relu'))    
-    model.add(MaxPooling2D(pool_size=(b,b)))
+    model.add(MaxPooling2D(pool_size=(i2,i2)))
     model.add(Dropout(dr))
-    model.add(Conv2D(f,(c,c)))
+    model.add(Conv2D(i72,(i3,i3)))
     model.add(Activation('relu'))    
-    model.add(MaxPooling2D(pool_size=(b,b)))
+    model.add(MaxPooling2D(pool_size=(i2,i2)))
     model.add(Dropout(dr))
-    model.add(GlobalMaxPooling2D())
-    
-    model.add(Dense(g,activation='tanh'))
+    model.add(GlobalMaxPooling2D())    
+    model.add(Dense(i256,activation='tanh'))
     model.add(Dropout(dr))      
-    model.add(Dense(d))
+    model.add(Dense(i10))
     model.add(Activation('softmax'))
     model.compile(loss='categorical_crossentropy', 
                   optimizer='nadam',metrics=['accuracy'])    
@@ -179,11 +177,13 @@ model=model()
     <h2>✒️ &nbsp;Step 5. Train the Model</h2>
 <div class="linked"><script type="text/x-sage">
 checkpointer=ModelCheckpoint(filepath='weights.flower.hdf5', 
-                             verbose=int(2),save_best_only=True)
-history=model.fit(x_train,y_train,batch_size=int(8),
-                  epochs=int(10),verbose=int(2),
+                             verbose=i2,save_best_only=True)
+lr_reduction=ReduceLROnPlateau(monitor='val_loss',verbose=i2,
+                               patience=i5,factor=float(.8))
+history=model.fit(x_train,y_train,batch_size=i8,
+                  epochs=i10,verbose=i2,
                   validation_data=(x_valid,y_valid),
-                  callbacks=[checkpointer])
+                  callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def history_plot(fit_history):
