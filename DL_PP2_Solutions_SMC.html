@@ -88,16 +88,20 @@ letters=u'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
 backgrounds=np.array(f[keys[0]])
 images=np.array(f[keys[1]])/255
 labels=np.array(f[keys[2]])
-pl.figure(figsize=(2,2.5))
+pl.figure(figsize=(2,3)); il=10**4
 pl.xticks([]); pl.yticks([])
-pl.title(letters[labels[10000]-1],fontsize=25)
-pl.imshow(images[10000]); pl.show()
+pl.title('Label: %s \n'%letters[labels[il]-1]+\
+         'Background: %s'%backgrounds[il],
+         fontsize=18)
+pl.imshow(images[il]); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 gray_images=np.dot(images[...,:3],[.299,.587,.114])
-pl.figure(figsize=(2,2.5))
-pl.title(letters[labels[10000]-1],fontsize=25)
-pl.imshow(gray_images[10000],cmap=pl.cm.bone)
+pl.figure(figsize=(2,3))
+pl.title('Label: %s \n'%letters[labels[il]-1]+\
+         'Background: %s'%backgrounds[il],
+         fontsize=18)
+pl.imshow(gray_images[il],cmap=pl.cm.bone)
 pl.xticks([]); pl.yticks([]); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
@@ -105,7 +109,8 @@ cbackgrounds,clabels=ohe(backgrounds),ohe(labels)
 pd.DataFrame([labels[97:103],clabels[97:103]]).T
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+ctargets=np.concatenate((clabels,cbackgrounds),axis=1)
+clabels.shape,cbackgrounds.shape,ctargets.shape
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
