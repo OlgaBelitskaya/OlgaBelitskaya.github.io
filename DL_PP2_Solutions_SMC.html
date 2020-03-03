@@ -167,10 +167,11 @@ y_test4_list=[y_test4[:,:33],y_test4[:,33:]]
       <h2>✒️ &nbsp; Step 2. One-Label Classification Models</h2>
 <div class="linked"><script type="text/x-sage">
 fw='weights.letter.hdf5'
-dr,fr,al=float(.25),float(.7),float(.02)
+dr,fr,al=float(.25),float(.2),float(.02)
 i0,i1,i2,i5=int(0),int(1),int(2),int(5)
 i32,i33,i64,i96=int(32),int(33),int(64),int(96)
-i100,i196,i200,i512=int(100),int(196),int(200),int(512)
+i100,i196,i200=int(100),int(196),int(200)
+i512,i1024=int(512),int(1024)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def model():
@@ -185,7 +186,7 @@ def model():
     model.add(MaxPooling2D(pool_size=(i2,i2)))
     model.add(Dropout(dr))    
     model.add(GlobalMaxPooling2D())     
-    model.add(Dense(i512,activation='relu'))
+    model.add(Dense(i1024,activation='relu'))
     model.add(Dropout(dr))    
     model.add(Dense(i33,activation='softmax'))   
     model.compile(loss='categorical_crossentropy', 
@@ -198,12 +199,14 @@ checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,
                              save_best_only=True)
 lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
                                verbose=i0,factor=fr)
-history=model.fit(x_train1,y_train1,epochs=i200,batch_size=i64,
+history=model.fit(x_train1,y_train1,epochs=i64,batch_size=i64,
                   verbose=i2,validation_data=(x_valid1,y_valid1),
                   callbacks=[checkpointer,lr_reduction])
 </script></div><br/>  
 <div class="linked"><script type="text/x-sage">
-
+history_plot(history)
+model.load_weights(fw)
+model.evaluate(x_test1,y_test1)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
