@@ -63,7 +63,14 @@ print('keras version:', __version__)
 print('tensorflow version:', tf.__version__)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+def ohe(x): 
+    return OneHotEncoder(categories='auto')\
+           .fit(x.reshape(-i1,i1))\
+           .transform(x.reshape(-i1,i1))\
+           .toarray().astype('int64')
+def tts(X,y): 
+    return train_test_split(X,y,test_size=float(.2),
+                            random_state=i1)
 </script></div><br/>      
     <h2>✒️&nbsp;Step 1. Load and Explore the Data</h2>       
 <div class="linked"><script type="text/x-sage">
@@ -87,7 +94,11 @@ pl.title(letters[labels[10000]-1],fontsize=25)
 pl.imshow(images[10000]); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+gray_images=np.dot(images[...,:3],[0.299,0.587,0.114])
+pl.figure(figsize=(2,2.5))
+pl.title(letters[labels[10000]-1],fontsize=25)
+pl.imshow(gray_images[10000],cmap=pl.cm.bone)
+pl.xticks([]); pl.yticks([]); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
