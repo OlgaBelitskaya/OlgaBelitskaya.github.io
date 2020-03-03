@@ -176,7 +176,7 @@ i196,i200,i512=int(196),int(200),int(512)
 def model():
     model=Sequential()
     model.add(Conv2D(32,(5,5),padding='same', 
-                     input_shape=x_train.shape[i1:]))
+                     input_shape=x_train1.shape[i1:]))
     model.add(Activation('relu'))    
     model.add(MaxPooling2D(pool_size=(i2,i2)))
     model.add(Dropout(dr))
@@ -187,7 +187,7 @@ def model():
     model.add(GlobalMaxPooling2D())     
     model.add(Dense(i512,activation='relu'))
     model.add(Dropout(dr))    
-    model.add(Dense(i33),activation('softmax'))   
+    model.add(Dense(i33,activation='softmax'))   
     model.compile(loss='categorical_crossentropy', 
                   optimizer='nadam',metrics=['accuracy'])   
     return model
@@ -198,8 +198,8 @@ checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,
                              save_best_only=True)
 lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
                                verbose=i2,factor=fr)
-history=model.fit(x_train,y_train,epochs=i200,batch_size=i64,
-                  verbose=i2,validation_data=(x_valid,y_valid),
+history=model.fit(x_train1,y_train1,epochs=i200,batch_size=i64,
+                  verbose=i2,validation_data=(x_valid1,y_valid1),
                   callbacks=[checkpointer,lr_reduction])
 </script></div><br/>  
 <div class="linked"><script type="text/x-sage">
