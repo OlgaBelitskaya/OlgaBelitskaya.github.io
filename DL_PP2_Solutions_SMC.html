@@ -167,10 +167,10 @@ y_test4_list=[y_test4[:,:33],y_test4[:,33:]]
       <h2>✒️ &nbsp; Step 2. One-Label Classification Models</h2>
 <div class="linked"><script type="text/x-sage">
 fw='weights.letter.hdf5'
-dr,al=float(.25),float(.02)
+dr,fr,al=float(.25),float(.7),float(.02)
 i0,i1,i2,i5=int(0),int(1),int(2),int(5)
-i32,i33,i96=int(32),int(33),int(96)
-i196,i512=int(196),int(512)
+i32,i33,i64,i96=int(32),int(33),int(64),int(96)
+i196,i200,i512=int(196),int(200),int(512)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def model():
@@ -194,7 +194,13 @@ def model():
 model=model()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,
+                             save_best_only=True)
+lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
+                               verbose=i2,factor=fr)
+history=model.fit(x_train,y_train,epochs=i200,batch_size=i64,
+                  verbose=i2,validation_data=(x_valid,y_valid),
+                  callbacks=[checkpointer,lr_reduction])
 </script></div><br/>  
 <div class="linked"><script type="text/x-sage">
 
@@ -202,5 +208,11 @@ model=model()
 <div class="linked"><script type="text/x-sage">
 
 </script></div><br/> 
+<div class="linked"><script type="text/x-sage">
+
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+
+</script></div><br/>
   </body>
 </html>      
