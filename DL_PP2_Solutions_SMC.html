@@ -65,7 +65,7 @@ i0,i1,i2=int(0),int(1),int(2)
 np.set_printoptions(precision=6)
 from keras import __version__
 print('keras version:', __version__)
-print('tensorflow version:', tf.__version__)
+print('tensorflow version:',tf.__version__)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def ohe(x): 
@@ -74,8 +74,13 @@ def ohe(x):
            .transform(x.reshape(-i1,i1))\
            .toarray().astype('int64')
 def tts(X,y): 
-    return train_test_split(X,y,test_size=float(.2),
-                            random_state=i1)
+    x_train,x_test,y_train,y_test=\
+    train_test_split(X,y,test_size=float(.2),
+                     random_state=i1)
+    n=int(len(x_test)/2)
+    x_valid,y_valid=x_test[:n],y_test[:n]
+    x_test,y_test=x_test[n:],y_test[n:]
+    return x_train,x_valid,x_test,y_train,y_valid,y_test
 </script></div><br/>      
     <h2>✒️&nbsp;Step 1. Load and Explore the Data</h2>       
 <div class="linked"><script type="text/x-sage">
@@ -118,7 +123,20 @@ ctargets=np.concatenate((clabels,cbackgrounds),axis=1)
 clabels.shape,cbackgrounds.shape,ctargets.shape
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+x_train1,x_valid1,x_test1,\
+y_train1,y_valid1,y_test1=tts(images,clabels)
+x_train2,x_valid2,x_test2,\
+y_train2,y_valid2,y_test2=tts(gray_images,clabels)
+x_train3,x_valid3,x_test3,\
+y_train3,y_valid3,y_test3=tts(images,ctargets)
+x_train4,x_valid4,x_test4,\
+y_train4,y_valid4,y_test4=tts(gray_images,ctargets)
+sh=[el.shape for el in \
+[x_train1,y_train1,x_valid1,y_valid1,x_test1,y_test1,
+ x_train2,y_train2,x_valid2,y_valid2,x_test2,y_test2,
+ x_train3,y_train3,x_valid3,y_valid3,x_test3,y_test3,
+ x_train4,y_train4,x_valid4,y_valid4,x_test4,y_test4]]
+pd.DataFrame(sh)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
@@ -126,5 +144,11 @@ clabels.shape,cbackgrounds.shape,ctargets.shape
 <div class="linked"><script type="text/x-sage">
 
 </script></div><br/>
+<div class="linked"><script type="text/x-sage">
+
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+
+</script></div><br/>  
   </body>
 </html>      
