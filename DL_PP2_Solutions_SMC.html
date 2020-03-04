@@ -19,7 +19,9 @@
   </style>  
   <body>
     <h1>📑 &nbsp; Deep Learning. P2: Multi-Label Classification. Letter Recognition</h1>
-<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp; &nbsp;</a>    
+<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp; &nbsp;</a> 
+<a href="https://drive.google.com/file/d/1Z9Fz0OOi6bpWvH-H2OhExC9CkGPWBYZz">
+&#x1F300; &nbsp; Google Colaboratory Variant &nbsp; &nbsp; &nbsp;</a>
 <a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp; &nbsp;</a>     
 <a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a><br/>
 For this project, I have created the dataset of <br/>
@@ -178,7 +180,7 @@ dr,fr,al=float(.2),float(.2),float(.02)
 i0,i1,i2,i5=int(0),int(1),int(2),int(5)
 i32,i33,i64,i96=int(32),int(33),int(64),int(96)
 i100,i128,i196,i200=int(100),int(128),int(196),int(200)
-i512,i1024=int(512),int(1024)
+i256,i512,i1024=int(256),int(512),int(1024)
 n1,n2=int(3000),int(500)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
@@ -220,10 +222,37 @@ model.evaluate(x_test1,y_test1)
 </script></div><br/>
 <p>Grayscale Images</p><br/>
 <div class="linked"><script type="text/x-sage">
-
+def gray_model():
+    model=Sequential()    
+    model.add(Conv2D(i32,(i5,i5),padding='same', 
+                     input_shape=x_train2.shape[i1:]))
+    model.add(Activation('relu'))    
+    model.add(MaxPooling2D(pool_size=(i2,i2)))
+    model.add(Dropout(dr))
+    model.add(Conv2D(i256, (i5,i5)))
+    model.add(Activation('relu'))    
+    model.add(MaxPooling2D(pool_size=(i2,i2)))
+    model.add(Dropout(dr))   
+    model.add(GlobalMaxPooling2D())    
+    model.add(Dense(i1024,activation='relu'))
+    model.add(Dropout(dr))     
+    model.add(Dense(i256,activation='relu'))
+    model.add(Dropout(dr))    
+    model.add(Dense(i33,activation='softmax'))   
+    model.compile(loss='categorical_crossentropy', 
+                  optimizer='rmsprop',metrics=['accuracy'])
+    return model
+gray_model=gray_model()  
 </script></div><br/> 
 <div class="linked"><script type="text/x-sage">
-
+checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,
+                             save_best_only=True)
+lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
+                               verbose=i0,factor=fr)
+history=gray_model.fit(x_train2,y_train2,epochs=i100,
+                       batch_size=i64,verbose=i2,
+                       validation_data=(x_valid2,y_valid2),
+                       callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
