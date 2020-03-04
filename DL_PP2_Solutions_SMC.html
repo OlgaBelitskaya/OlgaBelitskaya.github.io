@@ -191,12 +191,12 @@ def model():
     model.add(LeakyReLU(alpha=al))   
     model.add(MaxPooling2D(pool_size=(i2,i2)))
     model.add(Dropout(dr))
-    model.add(Conv2D(i196,(i5,i5)))
+    model.add(Conv2D(i96,(i5,i5)))
     model.add(LeakyReLU(alpha=al))  
     model.add(MaxPooling2D(pool_size=(i2,i2)))
     model.add(Dropout(dr))
     model.add(GlobalMaxPooling2D())  
-    model.add(Dense(i1024))
+    model.add(Dense(i512))
     model.add(LeakyReLU(alpha=al))
     model.add(Dropout(2*dr))     
     model.add(Dense(i33,activation='softmax'))
@@ -210,7 +210,7 @@ checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,
                              save_best_only=True)
 lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
                                verbose=i0,factor=fr)
-history=model.fit(x_train1[:n1],y_train1[:n1],epochs=i64,
+history=model.fit(x_train1[:n1],y_train1[:n1],epochs=i32,
                   batch_size=i64,verbose=i2,
                   validation_data=(x_valid1[:n2],y_valid1[:n2]),
                   callbacks=[checkpointer,lr_reduction])
