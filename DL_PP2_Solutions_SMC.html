@@ -63,7 +63,7 @@ from keras.layers import Activation,Dense,LSTM
 from keras.layers import Flatten,Dropout,BatchNormalization
 from keras.layers import Conv2D,MaxPooling2D,GlobalMaxPooling2D
 from keras.layers.advanced_activations import PReLU,LeakyReLU
-i0,i1,i2=int(0),int(1),int(2)
+i0,i1,i2,i3,i4,i5=int(0),int(1),int(2),int(3),int(4),int(5)
 np.set_printoptions(precision=6)
 from keras import __version__
 print('keras version:', __version__)
@@ -83,13 +83,13 @@ def tts(X,y):
     x_valid,y_valid=x_test[:n],y_test[:n]
     x_test,y_test=x_test[n:],y_test[n:]
     return x_train,x_valid,x_test,y_train,y_valid,y_test
-def resh2(x): 
-    return x.reshape(-int(1),int(32),int(32),int(1))
 def resh(x):
     from skimage.transform import resize
     y=[resize(el,(int(24),int(24),int(3)),
               anti_aliasing=True) for el in x]
     return np.array(y)
+def resh2(x): 
+    return x.reshape(-int(1),int(32),int(32),int(1))
 </script></div><br/> 
 <div class="linked"><script type="text/x-sage">
 def history_plot(fit_history):
@@ -180,14 +180,18 @@ y_test4_list=[y_test4[:,:33],y_test4[:,33:]]
 <div class="linked"><script type="text/x-sage">
 del images,gray_images,labels,backgrounds
 del clabels,cbackgrounds,ctargets
+x_train1,x_valid1,x_test1=\
+resh(x_train1),resh(x_valid1),resh(x_test1)
+x_train3,x_valid3,x_test3=\
+resh(x_train3),resh(x_valid3),resh(x_test3)
 </script></div><br/>
       <h2>✒️ &nbsp; Step 2. One-Label Classification Models</h2>
 <p>Color Images</p>
 <div class="linked"><script type="text/x-sage">
 fw='weights.letter.hdf5'
 dr,fr,al=float(.2),float(.2),float(.02)
-i0,i1,i2,i3,i4,i5,i10=int(0),int(1),int(2),int(3),int(4),int(5),int(10)
-i16,i32,i33,i48,i64,i96=int(16),int(32),int(33),int(48),int(64),int(96)
+i10i16,i32,i33=int(10),int(16),int(32),int(33)
+i48,i64,i96=int(48),int(64),int(96)
 i100,i128,i196,i200=int(100),int(128),int(196),int(200)
 i256,i512,i1024=int(256),int(512),int(1024)
 n1,n2=int(3000),int(500)
@@ -195,7 +199,7 @@ n1,n2=int(3000),int(500)
 <div class="linked"><script type="text/x-sage">
 def model():
     model=Sequential()
-    model.add(Conv2D(i32,(i3,i3),padding='same',
+    model.add(Conv2D(i16,(i3,i3),padding='same',
                      input_shape=x_train1.shape[i1:]))
     model.add(LeakyReLU(alpha=al))   
     model.add(MaxPooling2D(pool_size=(i2,i2)))
@@ -219,7 +223,7 @@ checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,
                              save_best_only=True)
 lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
                                verbose=i0,factor=fr)
-history=model.fit(x_train1[:n1],y_train1[:n1],epochs=i16,
+history=model.fit(x_train1[:n1],y_train1[:n1],epochs=i32,
                   batch_size=i64,verbose=i2,
                   validation_data=(x_valid1[:n2],y_valid1[:n2]),
                   callbacks=[checkpointer,lr_reduction])
