@@ -59,8 +59,8 @@ from sklearn.ensemble import RandomForestClassifier
 from keras.callbacks import ModelCheckpoint,EarlyStopping
 from keras.callbacks import ReduceLROnPlateau
 from keras.preprocessing.image import ImageDataGenerator
-from keras.models import Sequential,load_model
-from keras.layers import Activation,Dense,LSTM
+from keras.models import Sequential,load_model,Model
+from keras.layers import Input,Activation,Dense,LSTM
 from keras.layers import Flatten,Dropout,BatchNormalization
 from keras.layers import Conv2D,MaxPooling2D,GlobalMaxPooling2D
 from keras.layers.advanced_activations import PReLU,LeakyReLU
@@ -85,7 +85,7 @@ def tts(X,y):
     x_test,y_test=x_test[n:],y_test[n:]
     return x_train,x_valid,x_test,y_train,y_valid,y_test
 def resh(x):
-    y=[resize(el,(int(16),int(16),int(3)),
+    y=[resize(el,(int(8),int(8),int(3)),
               anti_aliasing=True) for el in x]
     return np.array(y)
 def resh2(x): 
@@ -262,7 +262,7 @@ checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,
                              save_best_only=True)
 lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
                                verbose=i0,factor=fr)
-history=gray_model.fit(x_train2[:n1],y_train2[:n1],epochs=i128,
+history=gray_model.fit(x_train2[:n1],y_train2[:n1],epochs=i200,
                        batch_size=i64,verbose=i2,
                        validation_data=(x_valid2[:n2],y_valid2[:n2]),
                        callbacks=[checkpointer,lr_reduction])
@@ -274,7 +274,32 @@ gray_model.evaluate(x_test2,y_test2)
 </script></div><br/>
       <h2>✒️ &nbsp; Step 3. Multi-Label Classification Models</h2>      
 <div class="linked"><script type="text/x-sage">
-
+def multi_model():    
+    model_input=Input(shape=(i32,i32,i3))
+    x=BatchNormalization()(model_input)
+    x=Conv2D(i32,(i3,i3),padding='same')(model_input)
+    x=LeakyReLU(alpha=al)(x)
+    x=MaxPooling2D(pool_size=(i2,i2))(x)    
+    x=Dropout(dr)(x)   
+    x=Conv2D(i128,(i3,i3),padding='same')(x)
+    x=LeakyReLU(alpha=al)(x)
+    x=MaxPooling2D(pool_size=(i2,i2))(x)    
+    x=Dropout(dr)(x)             
+    x=GlobalMaxPooling2D()(x)   
+    x=Dense(i1024)(x)
+    x=LeakyReLU(alpha=al)(x)
+    x=Dropout(dr)(x)   
+    x=Dense(i128)(x)  
+    x=LeakyReLU(alpha=al)(x)
+    x=Dropout(dr)(x)    
+    y1=Dense(i33,activation='softmax')(x)
+    y2=Dense(i4,activation='softmax')(x)    
+    model=Model(inputs=model_input,outputs=[y1,y2])
+    model.compile(loss='categorical_crossentropy',
+                  optimizer='nadam',metrics=['accuracy'])
+    return model
+multi_model=multi_model()
+multi_model.summary()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
