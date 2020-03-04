@@ -95,7 +95,7 @@ def resh2(x):
 </script></div><br/> 
 <div class="linked"><script type="text/x-sage">
 def history_plot(fit_history):
-    pl.figure(figsize=(12,10)); pl.subplot(211)
+    pl.figure(figsize=(10,10)); pl.subplot(211)
     pl.plot(fit_history.history['loss'],
             color='slategray',label='train')
     pl.plot(fit_history.history['val_loss'],
@@ -109,7 +109,7 @@ def history_plot(fit_history):
             color='#348ABD',label='valid')
     pl.xlabel("Epochs"); pl.ylabel("Accuracy")    
     pl.legend(); pl.title('Accuracy')
-    pl.show()
+    pl.grid; pl.show()
 </script></div><br/> 
     <h2>✒️&nbsp;Step 1. Loading and Preprocessing the Data</h2>       
 <div class="linked"><script type="text/x-sage">
@@ -262,7 +262,7 @@ checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,
                              save_best_only=True)
 lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
                                verbose=i0,factor=fr)
-history=gray_model.fit(x_train2[:n1],y_train2[:n1],epochs=i16,
+history=gray_model.fit(x_train2[:n1],y_train2[:n1],epochs=i128,
                        batch_size=i64,verbose=i2,
                        validation_data=(x_valid2[:n2],y_valid2[:n2]),
                        callbacks=[checkpointer,lr_reduction])
