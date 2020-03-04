@@ -64,7 +64,8 @@ from keras.layers import Input,Activation,Dense,LSTM
 from keras.layers import Flatten,Dropout,BatchNormalization
 from keras.layers import Conv2D,MaxPooling2D,GlobalMaxPooling2D
 from keras.layers.advanced_activations import PReLU,LeakyReLU
-i0,i1,i2,i3,i4,i5=int(0),int(1),int(2),int(3),int(4),int(5)
+i0,i1,i2,i3,i4,i5,i8=\
+int(0),int(1),int(2),int(3),int(4),int(5),int(8)
 np.set_printoptions(precision=6)
 from keras import __version__
 print('keras version:', __version__)
@@ -234,6 +235,8 @@ history=model.fit(x_train1[:n1],y_train1[:n1],epochs=i32,
 history_plot(history)
 model.load_weights(fw)
 model.evaluate(x_test1,y_test1)
+del x_train1,x_valid1,x_test1,\
+    y_train1,y_valid1,y_test1
 </script></div><br/>
 <p>Grayscale Images</p><br/>
 <div class="linked"><script type="text/x-sage">
@@ -271,11 +274,13 @@ history=gray_model.fit(x_train2[:n1],y_train2[:n1],epochs=i128,
 history_plot(history)
 gray_model.load_weights(fw)
 gray_model.evaluate(x_test2,y_test2)
+del x_train2,x_valid2,x_test2,\
+    y_train2,y_valid2,y_test2
 </script></div><br/>
       <h2>✒️ &nbsp; Step 3. Multi-Label Classification Models</h2>      
 <div class="linked"><script type="text/x-sage">
 def multi_model():    
-    model_input=Input(shape=(i32,i32,i3))
+    model_input=Input(shape=(i8,i8,i3))
     x=BatchNormalization()(model_input)
     x=Conv2D(i32,(i3,i3),padding='same')(model_input)
     x=LeakyReLU(alpha=al)(x)
@@ -306,10 +311,11 @@ checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,
                              save_best_only=True)
 lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
                                verbose=i0,factor=fr)
-history=model.fit(x_train3[:n1],y_train3[:n1],epochs=i32,
-                  batch_size=i64,verbose=i2,
-                  validation_data=(x_valid3[:n2],y_valid3[:n2]),
-                  callbacks=[checkpointer,lr_reduction])
+history=multi_model.fit(x_train3[:n1],y_train3_list[:n1],epochs=i32,
+                        batch_size=i64,verbose=i2,
+                        validation_data=(x_valid3[:n2],
+                                         y_valid3_list[:n2]),
+                        callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
