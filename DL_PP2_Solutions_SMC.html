@@ -177,8 +177,8 @@ y_test4_list=[y_test4[:,:33],y_test4[:,33:]]
 <div class="linked"><script type="text/x-sage">
 fw='weights.letter.hdf5'
 dr,fr,al=float(.2),float(.2),float(.02)
-i0,i1,i2,i5,i10=int(0),int(1),int(2),int(5),int(10)
-i32,i33,i48,i64,i96=int(32),int(33),int(48),int(64),int(96)
+i0,i1,i2,i3,i5,i10=int(0),int(1),int(2),int(3),int(5),int(10)
+i16,i32,i33,i48,i64,i96=int(16),int(32),int(33),int(48),int(64),int(96)
 i100,i128,i196,i200=int(100),int(128),int(196),int(200)
 i256,i512,i1024=int(256),int(512),int(1024)
 n1,n2=int(3000),int(500)
@@ -186,12 +186,12 @@ n1,n2=int(3000),int(500)
 <div class="linked"><script type="text/x-sage">
 def model():
     model=Sequential()
-    model.add(Conv2D(i32,(i5,i5),padding='same',
+    model.add(Conv2D(i32,(i3,i3),padding='same',
                      input_shape=x_train1.shape[i1:]))
     model.add(LeakyReLU(alpha=al))   
     model.add(MaxPooling2D(pool_size=(i2,i2)))
     model.add(Dropout(dr))
-    model.add(Conv2D(i48,(i5,i5)))
+    model.add(Conv2D(i48,(i3,i3)))
     model.add(LeakyReLU(alpha=al))  
     model.add(MaxPooling2D(pool_size=(i2,i2)))
     model.add(Dropout(dr))
@@ -210,7 +210,7 @@ checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,
                              save_best_only=True)
 lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
                                verbose=i0,factor=fr)
-history=model.fit(x_train1[:n1],y_train1[:n1],epochs=i10,
+history=model.fit(x_train1[:n1],y_train1[:n1],epochs=i16,
                   batch_size=i64,verbose=i2,
                   validation_data=(x_valid1[:n2],y_valid1[:n2]),
                   callbacks=[checkpointer,lr_reduction])
