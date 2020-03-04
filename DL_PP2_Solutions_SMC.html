@@ -165,32 +165,35 @@ y_valid4_list=[y_valid4[:,:33],y_valid4[:,33:]]
 y_test4_list=[y_test4[:,:33],y_test4[:,33:]]
 </script></div><br/>
       <h2>✒️ &nbsp; Step 2. One-Label Classification Models</h2>
+<p>Color Images</p>
 <div class="linked"><script type="text/x-sage">
 fw='weights.letter.hdf5'
-dr,fr,al=float(.25),float(.2),float(.02)
+dr,fr,al=float(.2),float(.2),float(.02)
 i0,i1,i2,i5=int(0),int(1),int(2),int(5)
 i32,i33,i64,i96=int(32),int(33),int(64),int(96)
-i100,i196,i200=int(100),int(196),int(200)
+i100,i128,i196,i200=int(100),int(128),int(196),int(200)
 i512,i1024=int(512),int(1024)
+n=int(7000)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def model():
     model=Sequential()
-    model.add(Conv2D(i32,(i5,i5),padding='same', 
+    model.add(Conv2D(i32,(i5,i5),padding='same',
                      input_shape=x_train1.shape[i1:]))
-    model.add(Activation('relu'))    
+    model.add(LeakyReLU(alpha=al))   
     model.add(MaxPooling2D(pool_size=(i2,i2)))
     model.add(Dropout(dr))
     model.add(Conv2D(i196,(i5,i5)))
-    model.add(Activation('relu'))    
+    model.add(LeakyReLU(alpha=al))  
     model.add(MaxPooling2D(pool_size=(i2,i2)))
-    model.add(Dropout(dr))    
-    model.add(GlobalMaxPooling2D())     
-    model.add(Dense(i1024,activation='relu'))
-    model.add(Dropout(dr))    
-    model.add(Dense(i33,activation='softmax'))   
-    model.compile(loss='categorical_crossentropy', 
-                  optimizer='nadam',metrics=['accuracy'])   
+    model.add(Dropout(dr))
+    model.add(GlobalMaxPooling2D())  
+    model.add(Dense(i1024))
+    model.add(LeakyReLU(alpha=al))
+    model.add(Dropout(2*dr))     
+    model.add(Dense(i33,activation='softmax'))
+    model.compile(loss='categorical_crossentropy',
+                  optimizer='adam',metrics=['accuracy'])   
     return model
 model=model()
 </script></div><br/>
@@ -199,8 +202,9 @@ checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,
                              save_best_only=True)
 lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
                                verbose=i0,factor=fr)
-history=model.fit(x_train1,y_train1,epochs=i64,batch_size=i64,
-                  verbose=i2,validation_data=(x_valid1,y_valid1),
+history=model.fit(x_train1[:n],y_train1[:n],epochs=i64,
+                  batch_size=i64,verbose=i2,
+                  validation_data=(x_valid1,y_valid1),
                   callbacks=[checkpointer,lr_reduction])
 </script></div><br/>  
 <div class="linked"><script type="text/x-sage">
@@ -208,6 +212,7 @@ history_plot(history)
 model.load_weights(fw)
 model.evaluate(x_test1,y_test1)
 </script></div><br/>
+<p>Grayscale Images</p><br/>
 <div class="linked"><script type="text/x-sage">
 
 </script></div><br/> 
