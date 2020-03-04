@@ -50,6 +50,7 @@ import sys; sys.path.append(spath)
 import h5py,urllib,zipfile
 import pandas as pd,numpy as np,pylab as pl
 import keras as ks,tensorflow as tf
+from skimage.transform import resize
 import warnings; warnings.filterwarnings('ignore')
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
@@ -84,12 +85,13 @@ def tts(X,y):
     x_test,y_test=x_test[n:],y_test[n:]
     return x_train,x_valid,x_test,y_train,y_valid,y_test
 def resh(x):
-    from skimage.transform import resize
-    y=[resize(el,(int(24),int(24),int(3)),
+    y=[resize(el,(int(16),int(16),int(3)),
               anti_aliasing=True) for el in x]
     return np.array(y)
 def resh2(x): 
-    return x.reshape(-int(1),int(32),int(32),int(1))
+    y=[resize(el,(int(16),int(16),int(1)),
+              anti_aliasing=True) for el in x]
+    return np.array(y)
 </script></div><br/> 
 <div class="linked"><script type="text/x-sage">
 def history_plot(fit_history):
