@@ -96,21 +96,23 @@ def resh2(x):
 </script></div><br/> 
 <div class="linked"><script type="text/x-sage">
 def history_plot(fit_history):
-    pl.figure(figsize=(10,10)); pl.subplot(211)
+    pl.figure(figsize=(10,10))
+    pl.subplot(211)
     pl.plot(fit_history.history['loss'],
             color='slategray',label='train')
     pl.plot(fit_history.history['val_loss'],
             color='#348ABD',label='valid')
     pl.xlabel("Epochs"); pl.ylabel("Loss")
-    pl.legend();pl.title('Loss Function')     
+    pl.legend(); pl.grid()
+    pl.title('Loss Function')     
     pl.subplot(212)
     pl.plot(fit_history.history['accuracy'],
             color='slategray',label='train')
     pl.plot(fit_history.history['val_accuracy'],
             color='#348ABD',label='valid')
     pl.xlabel("Epochs"); pl.ylabel("Accuracy")    
-    pl.legend(); pl.title('Accuracy')
-    pl.grid; pl.show()
+    pl.legend(); pl.grid()
+    pl.title('Accuracy'); pl.show()
 </script></div><br/> 
     <h2>✒️&nbsp;Step 1. Loading and Preprocessing the Data</h2>       
 <div class="linked"><script type="text/x-sage">
@@ -285,12 +287,12 @@ def multi_model():
     x=LeakyReLU(alpha=al)(x)
     x=MaxPooling2D(pool_size=(i2,i2))(x)    
     x=Dropout(dr)(x)   
-    x=Conv2D(i128,(i3,i3),padding='same')(x)
+    x=Conv2D(i96,(i3,i3),padding='same')(x)
     x=LeakyReLU(alpha=al)(x)
     x=MaxPooling2D(pool_size=(i2,i2))(x)    
     x=Dropout(dr)(x)             
     x=GlobalMaxPooling2D()(x)   
-    x=Dense(i1024)(x)
+    x=Dense(i512)(x)
     x=LeakyReLU(alpha=al)(x)
     x=Dropout(dr)(x)   
     x=Dense(i128)(x)  
@@ -310,10 +312,12 @@ checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,
                              save_best_only=True)
 lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
                                verbose=i0,factor=fr)
-history=multi_model.fit(x_train3[:n1],y_train3_list[:n1],epochs=i32,
-                        batch_size=i64,verbose=i2,
+history=multi_model.fit(x_train3[:n1],
+                        [y_train3[:n1,:i33],y_train3[:n1,i33:]],
+                        epochs=i32,batch_size=i64,verbose=i2,
                         validation_data=(x_valid3[:n2],
-                                         y_valid3_list[:n2]),
+                                         [y_train3[:n2,:i33],
+                                          y_train3[:n2,i33:]]),
                         callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
