@@ -83,8 +83,13 @@ def tts(X,y):
     x_valid,y_valid=x_test[:n],y_test[:n]
     x_test,y_test=x_test[n:],y_test[n:]
     return x_train,x_valid,x_test,y_train,y_valid,y_test
-def resh(x): 
+def resh2(x): 
     return x.reshape(-int(1),int(32),int(32),int(1))
+def resh(x):
+    from skimage.transform import resize
+    y=[resize(el,(int(24),int(24),int(3)),
+              anti_aliasing=True) for el in x]
+    return np.array(y)
 </script></div><br/> 
 <div class="linked"><script type="text/x-sage">
 def history_plot(fit_history):
@@ -177,7 +182,7 @@ y_test4_list=[y_test4[:,:33],y_test4[:,33:]]
 <div class="linked"><script type="text/x-sage">
 fw='weights.letter.hdf5'
 dr,fr,al=float(.2),float(.2),float(.02)
-i0,i1,i2,i3,i4,i5,i10=int(0),int(1),int(2),int(3),int(4)int(5),int(10)
+i0,i1,i2,i3,i4,i5,i10=int(0),int(1),int(2),int(3),int(4),int(5),int(10)
 i16,i32,i33,i48,i64,i96=int(16),int(32),int(33),int(48),int(64),int(96)
 i100,i128,i196,i200=int(100),int(128),int(196),int(200)
 i256,i512,i1024=int(256),int(512),int(1024)
