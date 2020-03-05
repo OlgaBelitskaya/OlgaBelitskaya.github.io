@@ -492,7 +492,22 @@ grid(); dev.off()
 </script></div><br/>
    <h2>✒️&nbsp;Step 6. Combine R & Python</h2> 
 <div class="linked"><script type="text/x-sage">
-
+import warnings as wr; wr.filterwarnings('ignore')
+from sklearn import datasets
+import rpy2.robjects as ro,pandas as pd
+from rpy2.robjects.packages import importr
+from rpy2.robjects.conversion import localconverter as lc
+from rpy2.robjects import r,pandas2ri
+pandas2ri.activate()
+base=importr('base')
+bd=datasets.load_boston()
+bd=pd.DataFrame(bd.data,columns=bd.feature_names)
+#the 1th method
+with lc(ro.default_converter+pandas2ri.converter):
+    print(base.summary(bd))
+#the 2nd method
+rbd=pandas2ri.py2ri(bd)
+print(base.summary(rbd))
 </script></div><br/>    
 <div class="linked"><script type="text/x-sage">
 
