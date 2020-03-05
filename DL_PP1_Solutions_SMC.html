@@ -96,10 +96,6 @@ import pandas as pd,numpy as np,sqlite3
 import seaborn as sn,pylab as pl
 import keras as ks,tensorflow as tf
 import warnings; warnings.filterwarnings('ignore')
-import rpy2.robjects as ro
-from rpy2.robjects.packages import importr
-from rpy2.robjects.conversion import localconverter
-from rpy2.robjects import r,pandas2ri
 from sklearn.model_selection import train_test_split
 from sklearn import datasets,linear_model,svm
 from sklearn.metrics import mean_squared_error,median_absolute_error,\
@@ -494,23 +490,29 @@ grid(); dev.off()
 <div class="linked"><script type="text/x-sage">
 import warnings as wr; wr.filterwarnings('ignore')
 from sklearn import datasets
-import rpy2.robjects as ro,pandas as pd
+from IPython import display
+import rpy2.robjects as ro,pylab as pl,pandas as pd
 from rpy2.robjects.packages import importr
 from rpy2.robjects.conversion import localconverter as lc
 from rpy2.robjects import r,pandas2ri
 pandas2ri.activate()
-base=importr('base')
+base=importr('base'); grdevices=importr('grDevices')
 bd=datasets.load_boston()
 bd=pd.DataFrame(bd.data,columns=bd.feature_names)
 #the 1th method
+bd[['PTRATIO','LSTAT','RAD']]\
+.plot(kind='line',figsize=(10,4)); pl.show()
 with lc(ro.default_converter+pandas2ri.converter):
     print(base.summary(bd))
-#the 2nd method
-rbd=pandas2ri.py2ri(bd)
-print(base.summary(rbd))
 </script></div><br/>    
 <div class="linked"><script type="text/x-sage">
-
+#the 2nd method
+rbd=pandas2ri.py2ri(bd)
+grdevices.png(file="Rpy2.png",width=700,height=400)
+#
+grdevices.dev_off()
+display.Image("/content/Rpy2.png")
+print(base.summary(rbd))
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
