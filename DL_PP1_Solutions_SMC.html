@@ -220,7 +220,7 @@ pl.ylabel("Distribution"); pl.xlabel("Logarithmic Prices")
 pl.suptitle('Boston Housing Data',fontsize=15)
 pl.show()
 </script></div><br/>
-    <h2>✒️&nbsp;Step 2. Build Neural Networks. Keras Py</h2>
+    <h2>✒️&nbsp;Step 2. Build Neural Networks with Keras Py</h2>
 <p>Multilayer Perceptron (MLP)</p><br/>
 <div class="linked"><script type="text/x-sage">
 i0,i1,i2,i10,i13,i104,i1024=\
@@ -346,7 +346,7 @@ pd.DataFrame([['Train R2 score:',score_train_rnn],
               ['Valid R2 score:',score_valid_rnn],
               ['Test R2 score:',score_test_rnn]])
 </script></div><br/>
-    <h2>✒️&nbsp;Step 3. Compare Predictions. Keras Py</h2>      
+    <h2>✒️&nbsp;Step 3. Display Predictions of Keras Algorithms Py</h2>      
 <div class="linked"><script type="text/x-sage">
 ti="Train Set; Neural Network Predictions vs Real Data"
 y1,y2,y3=y_train_mlp,y_train_cnn,y_train_rnn
@@ -362,7 +362,7 @@ ti="Test Set; Neural Network Predictions vs Real Data"
 y1,y2,y3=y_test_mlp,y_test_cnn,y_test_rnn
 predpl(y1,y2,y3,ti)
 </script></div><br/>
-    <h2>✒️&nbsp;Step 4. Sklearn Algorithms Py</h2>      
+    <h2>✒️&nbsp;Step 4. Compare with Sklearn Algorithms Py</h2>      
 <div class="linked"><script type="text/x-sage">
 def regressor_fit_score(regressor,regressor_name,dataset,
                         x_train,x_test,y_train,y_test,n=6):
@@ -466,7 +466,7 @@ pl.xlabel('Observations'); pl.ylabel('Targets')
 pl.title('Regressors. Test Results. Boston')
 pl.legend(loc=2,fontsize=10); pl.show()
 </script></div><br/>    
-    <h2>✒️&nbsp;Step 5. Neural Networks R</h2>      
+    <h2>✒️&nbsp;Step 5. Neural Networks in R</h2>      
 <div class="linked"><script type="text/x-sage">
 %%r
 library('MASS'); library('nnet')
@@ -486,7 +486,7 @@ plot(predictions,col="#36ff36",type="o",
      cex=1.3,ylab='Targets & Predictions')
 grid(); dev.off()
 </script></div><br/>
-   <h2>✒️&nbsp;Step 6. Combine R & Python</h2> 
+   <h2>✒️&nbsp;Addition. Combine R & Python</h2> 
 <div class="linked"><script type="text/x-sage">
 import warnings as wr; wr.filterwarnings('ignore')
 from sklearn import datasets
@@ -496,26 +496,30 @@ from rpy2.robjects.packages import importr
 from rpy2.robjects.conversion import localconverter as lc
 from rpy2.robjects import r,pandas2ri
 pandas2ri.activate()
-base=importr('base'); grdevices=importr('grDevices')
+base=importr('base')
 bd=datasets.load_boston()
 bd=pd.DataFrame(bd.data,columns=bd.feature_names)
 #the 1th method
 bd[['PTRATIO','LSTAT','RAD']]\
-.plot(kind='line',figsize=(10,4)); pl.show()
+.plot(kind='line',figsize=(6,4))
+pl.grid(); pl.show()
 with lc(ro.default_converter+pandas2ri.converter):
     print(base.summary(bd))
 </script></div><br/>    
 <div class="linked"><script type="text/x-sage">
 #the 2nd method
 rbd=pandas2ri.py2ri(bd)
-grdevices.png(file="Rpy2.png",width=700,height=400)
-#
-grdevices.dev_off()
-display.Image("/content/Rpy2.png")
+utils=importr('utils')
+utils.write_table(rbd,file='rbd.csv',
+                  sep=",",row_names=False)
+ro.r('library(grDevices)')
+ro.r('svg(filename="Rplots.svg",width=6,height=5,'+\
+     'pointsize=12,onefile=T,family="times",bg="white",'+\
+     'antialias=c("default","none","gray","subpixel"))')
+ro.r('rbd<-read.csv("rbd.csv")')
+ro.r('matplot(c(1:506),rbd[,c(9,11,13)],type="l")')
+ro.r('grid(); dev.off()')
 print(base.summary(rbd))
-</script></div><br/>
-<div class="linked"><script type="text/x-sage">
-
 </script></div><br/>
   </body>
 </html>
