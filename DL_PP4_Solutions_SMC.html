@@ -49,12 +49,40 @@ from skimage.transform import resize
 import warnings; warnings.filterwarnings('ignore')
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
-i0,i1,i2,i3,i4,i5,i8=\
-int(0),int(1),int(2),int(3),int(4),int(5),int(8)
 np.set_printoptions(precision=6)
 from keras import __version__
 print('keras version:', __version__)
 print('tensorflow version:',tf.__version__)
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+i0,i1,i2,i3,i4,i5,i8=\
+int(0),int(1),int(2),int(3),int(4),int(5),int(8)
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+def ohe(x): 
+    return OneHotEncoder(categories='auto')\
+           .fit(x.reshape(-i1,i1))\
+           .transform(x.reshape(-i1,i1))\
+           .toarray().astype('int64')
+def tts(X,y): 
+    x_train,x_test,y_train,y_test=\
+    train_test_split(X,y,test_size=float(.2),
+                     random_state=i1)
+    n=int(len(x_test)/2)
+    x_valid,y_valid=x_test[:n],y_test[:n]
+    x_test,y_test=x_test[n:],y_test[n:]
+    return x_train,x_valid,x_test,y_train,y_valid,y_test
+def resh(x):
+    y=[resize(el,(int(50),int(50),int(3)),
+              anti_aliasing=True) for el in x]
+    return np.array(y)
+def resh2(x): 
+    y=[resize(el,(int(125),int(125),int(1)),
+              anti_aliasing=True) for el in x]
+    return np.array(y)
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
