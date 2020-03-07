@@ -113,9 +113,9 @@ def resh(x):
               anti_aliasing=True) for el in x]
     return np.array(y)
 def gresh(x): 
-    y=[resize(el,(int(125),int(125),int(1)),
-              anti_aliasing=True) for el in x]
-    return np.array(y)
+    y=np.array([resize(el,(int(125),int(125),int(1)),
+                       anti_aliasing=True) for el in x])
+    return y.reshape(-int(1),int(125),int(125),int(1))
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def history_plot(fit_history):
@@ -197,6 +197,38 @@ images=resh(images); gray_images=gresh(gray_images)
 pd.DataFrame([images.shape,gray_images.shape,
               cbrands.shape,cproducts.shape,
               ctargets.shape])
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+# Color Images / Brand 
+x_train1,x_valid1,x_test1,\
+y_train1,y_valid1,y_test1=tts(images,cbrands)
+# Grayscaled Images / Brand 
+x_train2,x_valid2,x_test2,\
+y_train2,y_valid2,y_test2=tts(gray_images,cbrands)
+# Color Images / Product 
+x_train3,x_valid3,x_test3,\
+y_train3,y_valid3,y_test3=tts(images,cproducts)
+# Grayscaled Images / Product 
+x_train4,x_valid4,x_test4,\
+y_train4,y_valid4,y_test4=tts(gray_images,cproducts)
+# Color Images / Multi-Label Target
+x_train5,x_valid5,x_test5,\
+y_train5,y_valid5,y_test5=tts(images,ctargets)
+# Grayscaled Images / Multi-Label Target 
+x_train6,x_valid6,x_test6,\
+y_train6,y_valid6,y_test6=tts(gray_images,ctargets)
+sh=[el.shape for el in \
+[x_train1,y_train1,x_valid1,y_valid1,x_test1,y_test1,
+ x_train3,y_train3,x_valid3,y_valid3,x_test3,y_test3,
+ x_train5,y_train5,x_valid5,y_valid5,x_test5,y_test5]]
+sh2=[el.shape for el in \
+[x_train2,y_train2,x_valid2,y_valid2,x_test2,y_test2,
+ x_train4,y_train4,x_valid4,y_valid4,x_test4,y_test4,
+ x_train6,y_train6,x_valid6,y_valid6,x_test6,y_test6]]
+pd.DataFrame([sh,sh2]).T
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
