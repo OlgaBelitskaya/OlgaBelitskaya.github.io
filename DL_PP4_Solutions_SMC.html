@@ -104,7 +104,7 @@ i0,i1,i2,i3,i4,i5,i7,i8=\
 int(0),int(1),int(2),int(3),int(4),int(5),int(7),int(8)
 i10,i16,i32,i48,i96=\
 int(10),int(16),int(32),int(48),int(96)
-i100,i128,i196i256,i512=\
+i100,i128,i196,i256,i512=\
 int(100),int(128),int(196),int(256),int(512)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
@@ -251,8 +251,29 @@ del images,gray_images,brands,products
 del cbrands,cproducts,ctargets
 </script></div><br/>
       <h2>✒️&nbsp;Step 2. One-Label Classification Models</h2>
+Color Images / Brands
 <div class="linked"><script type="text/x-sage">
-
+def model():
+    model=Sequential()
+    model.add(Conv2D(i32,(i5,i5),padding='same', 
+                     input_shape=x_train1.shape[i1:]))
+    model.add(Activation('relu'))    
+    model.add(MaxPooling2D(pool_size=(i2,i2)))
+    model.add(Dropout(dr))
+    model.add(Conv2D(i196,(i5,i5)))
+    model.add(Activation('relu'))    
+    model.add(MaxPooling2D(pool_size=(i2,i2)))
+    model.add(Dropout(dr))   
+    model.add(GlobalMaxPooling2D())     
+    model.add(Dense(i512, activation='relu'))
+    model.add(Dropout(2*dr))    
+    model.add(Dense(i7))
+    model.add(Activation('softmax'))   
+    model.compile(loss='categorical_crossentropy', 
+                  optimizer='nadam', metrics=['accuracy'])   
+    return model
+model=model()
+model.summary()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
