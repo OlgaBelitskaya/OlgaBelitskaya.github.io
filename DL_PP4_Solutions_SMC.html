@@ -112,7 +112,7 @@ def resh(x):
     y=[resize(el,(int(50),int(50),int(3)),
               anti_aliasing=True) for el in x]
     return np.array(y)
-def resh2(x): 
+def gresh(x): 
     y=[resize(el,(int(125),int(125),int(1)),
               anti_aliasing=True) for el in x]
     return np.array(y)
@@ -170,7 +170,7 @@ pl.show()
 pl.figure(figsize=(10,8))
 sn.countplot(y='product_name',hue='brand_name', 
              data=styles,palette='hsv_r',alpha=.5)
-ti='Product Distribution Grouped by Brand'
+ti='Product Distribution Grouped by Brands'
 pl.title(ti,fontsize=20)
 pl.legend(loc=4); pl.show()
 </script></div><br/>
@@ -180,18 +180,23 @@ images=np.array(f[keys[1]])/255
 products=np.array(f[keys[2]])
 print('Product: ',styles['product_name'][i100])
 print('Brand: ',styles['brand_name'][i100])
-pl.figure(figsize=(i5,i5)); pl.imshow(images[i100])
-pl.show()
+pl.figure(figsize=(i3,i3))
+pl.imshow(images[i100]); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 gray_images=np.dot(images[...,:3],[.299,.587,.114])
 print('Product: ',styles['product_name'][i100])
 print('Brand: ',styles['brand_name'][i100])
-pl.figure(figsize=(i5,i5))
+pl.figure(figsize=(i3,i3))
 pl.imshow(gray_images[i100],cmap=pl.cm.bone); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+cbrands,cproducts=ohe(brands),ohe(products)
+ctargets=np.concatenate((cbrands,cproducts),axis=1)
+images=resh(images); gray_images=gresh(gray_images)
+pd.DataFrame([images.shape,gray_images.shape,
+              cbrands.shape,cproducts.shape,
+              ctargets.shape])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
