@@ -384,20 +384,20 @@ del x_train2,x_valid2,x_test2,\
 # Grayscaled Images / Products
 def gray_model():
     model=Sequential()   
-    model.add(Conv2D(i32,(i5,i5),padding='same', 
+    model.add(Conv2D(i16,(i3,i3),padding='same', 
                      input_shape=x_train4.shape[i1:]))
     model.add(LeakyReLU(alpha=al)) 
     model.add(MaxPooling2D(pool_size=(i2,i2)))
     model.add(Dropout(dr25))
-    model.add(Conv2D(i128,(i5,i5)))
+    model.add(Conv2D(i48,(i3,i3)))
     model.add(LeakyReLU(alpha=al))    
     model.add(MaxPooling2D(pool_size=(i2,i2)))
     model.add(Dropout(dr25))  
     model.add(GlobalMaxPooling2D())    
-    model.add(Dense(i1024))
+    model.add(Dense(i512))
     model.add(LeakyReLU(alpha=al))
     model.add(Dropout(dr25))    
-    model.add(Dense(i128))
+    model.add(Dense(i32))
     model.add(LeakyReLU(alpha=al))
     model.add(Dropout(dr25))    
     model.add(Dense(i10))
@@ -406,6 +406,25 @@ def gray_model():
                   optimizer='rmsprop',metrics=['accuracy'])
     return model
 gray_model=gray_model()
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,save_best_only=True)
+lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
+                               verbose=i2,factor=fr)
+estopping=EarlyStopping(monitor='val_loss',patience=i16,verbose=i2)
+history=gray_model.fit(x_train4,y_train4,epochs=i16,batch_size=i16,verbose=i2,
+                       validation_data=(x_valid4,y_valid4),
+                       callbacks=[checkpointer,lr_reduction,estopping])
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+history_plot(history)
+gray_model.load_weights(fw)
+pretty_print(gray_model.evaluate(x_test4,y_test4))
+del x_train4,x_valid4,x_test4,\
+    y_train4,y_valid4,y_test4
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
