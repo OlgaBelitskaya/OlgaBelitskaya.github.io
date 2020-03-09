@@ -127,13 +127,13 @@ def tts(X,y):
     x_test,y_test=x_test[n:],y_test[n:]
     return x_train,x_valid,x_test,y_train,y_valid,y_test
 def resh(x):
-    y=[resize(el,(int(48),int(48),int(3)),
+    y=[resize(el,(int(32),int(32),int(3)),
               anti_aliasing=True) for el in x]
     return np.array(y)
 def gresh(x): 
-    y=np.array([resize(el,(int(64),int(64),int(1)),
+    y=np.array([resize(el,(int(48),int(48),int(1)),
                        anti_aliasing=True) for el in x])
-    return y.reshape(-int(1),int(64),int(64),int(1))
+    return y.reshape(-int(1),int(48),int(48),int(1))
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def history_plot(fit_history):
@@ -424,7 +424,7 @@ del x_train4,x_valid4,x_test4,\
 <div class="linked"><script type="text/x-sage">
 # Color Images
 def mmodel():    
-    model_input=Input(shape=(i48,i48,i3))
+    model_input=Input(shape=(i32,i32,i3))
     x=BatchNormalization()(model_input)
     x=Conv2D(i32,(i5,i5),padding='same')(model_input)
     x=LeakyReLU(alpha=al)(x)
@@ -467,7 +467,7 @@ del x_train5,x_valid5,x_test5,\
 <div class="linked"><script type="text/x-sage">
 # Grayscaled Images
 def gray_mmodel():    
-    model_input=Input(shape=(i64,i64,i1))
+    model_input=Input(shape=(i48,i48,i1))
     x=BatchNormalization()(model_input)
     x=Conv2D(i16,(i3,i3),padding='same')(model_input)
     x=LeakyReLU(alpha=al)(x)
