@@ -133,7 +133,7 @@ def resh(x):
 def gresh(x): 
     y=np.array([resize(el,(int(125),int(125),int(1)),
                        anti_aliasing=True) for el in x])
-    return y.reshape(-int(1),int(125),int(125),int(1))
+    return y.reshape(-int(1),int(75),int(75),int(1))
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def history_plot(fit_history):
@@ -270,7 +270,7 @@ def model():
     model.add(MaxPooling2D(pool_size=(i2,i2)))
     model.add(Dropout(dr2))   
     model.add(GlobalMaxPooling2D())     
-    model.add(Dense(i512))
+    model.add(Dense(i256))
     model.add(LeakyReLU(alpha=al))
     model.add(Dropout(dr5))    
     model.add(Dense(i7))
@@ -286,7 +286,7 @@ checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,save_best_only=True)
 lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
                                verbose=i0,factor=fr)
 estopping=EarlyStopping(monitor='val_loss',patience=i16,verbose=i2)
-history=model.fit(x_train1,y_train1,epochs=i16,batch_size=i16,verbose=i2,
+history=model.fit(x_train1,y_train1,epochs=i10,batch_size=i16,verbose=i2,
                   validation_data=(x_valid1,y_valid1),
                   callbacks=[checkpointer,lr_reduction,estopping])
 </script></div><br/>
@@ -311,7 +311,7 @@ def model():
     model.add(MaxPooling2D(pool_size=(i2,i2)))
     model.add(Dropout(dr25))  
     model.add(GlobalMaxPooling2D())    
-    model.add(Dense(i512))
+    model.add(Dense(i256))
     model.add(LeakyReLU(alpha=al))
     model.add(Dropout(dr5))     
     model.add(Dense(i10))
@@ -326,7 +326,7 @@ checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,save_best_only=True)
 lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
                                verbose=i0,factor=fr)
 estopping=EarlyStopping(monitor='val_loss',patience=i16,verbose=i2)
-history=model.fit(x_train3,y_train3,epochs=i16,batch_size=i16,verbose=i2,
+history=model.fit(x_train3,y_train3,epochs=i10,batch_size=i16,verbose=i2,
                   validation_data=(x_valid3,y_valid3),
                   callbacks=[checkpointer,lr_reduction,estopping])
 </script></div><br/>
@@ -423,6 +423,7 @@ pretty_print(gray_model.evaluate(x_test4,y_test4))
 del x_train4,x_valid4,x_test4,\
     y_train4,y_valid4,y_test4
 </script></div><br/>
+    <h2>✒️&nbsp;Step 3. Multi-Label Classification Models</h2>
 <div class="linked"><script type="text/x-sage">
 
 </script></div><br/>
