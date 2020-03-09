@@ -466,7 +466,32 @@ print("The Brand Label. Accuracy: %.2f%%"%(scores[i3]*i100))
 print("The Product Label. Accuracy: %.2f%%"%(scores[i4]*i100))
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+# Grayscaled Images
+def gray_mmodel():    
+    model_input=Input(shape=(i75,i75,i1))
+    x=BatchNormalization()(model_input)
+    x=Conv2D(i16,(i3,i3),padding='same')(model_input)
+    x=LeakyReLU(alpha=al)(x)
+    x=MaxPooling2D(pool_size=(i2,i2))(x)    
+    x=Dropout(dr25)(x)    
+    x=Conv2D(i48,(i3,i3),padding='same')(x)
+    x=LeakyReLU(alpha=al)(x)       
+    x=MaxPooling2D(pool_size=(i2,i2))(x)    
+    x=Dropout(dr25)(x)             
+    x=GlobalMaxPooling2D()(x)    
+    x=Dense(i256)(x)
+    x=LeakyReLU(alpha=al)(x)   
+    x=Dropout(dr25)(x)   
+    x=Dense(i32)(x)
+    x=LeakyReLU(alpha=al)(x)    
+    x=Dropout(dr25)(x)    
+    y1=Dense(i7,activation='softmax')(x)
+    y2=Dense(i10,activation='softmax')(x)       
+    model=Model(inputs=model_input,outputs=[y1,y2])
+    model.compile(loss='categorical_crossentropy',
+                  optimizer='rmsprop',metrics=['accuracy'])   
+    return model
+gray_mmodel=gray_mmodel()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
