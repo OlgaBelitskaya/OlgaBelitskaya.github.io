@@ -20,6 +20,8 @@
   <body>
     <h1>📑 &nbsp; Deep Learning. P4: Style Recognition</h1>
 <a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp; &nbsp;</a> 
+<a href="https://colab.research.google.com/drive/1r5yRD-3tQwN6lSql_VRoVuwQ8DaY5zUt#scrollTo=9-j9O85kSqld">
+&#x1F300; &nbsp; Google Colaboratory Variant &nbsp; &nbsp; &nbsp;</a>
 <a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp; &nbsp;</a>     
 <a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a><br/>
 For this project, I have made the database of photos sorted by products and brands.<br/>
@@ -254,9 +256,8 @@ del images,gray_images,brands,products
 del cbrands,cproducts,ctargets
 </script></div><br/>
       <h2>✒️&nbsp;Step 2. One-Label Classification Models</h2>
-Color Images / Brands
 <div class="linked"><script type="text/x-sage">
-# Color Images / Brand
+# Color Images / Brands
 def model():
     model=Sequential()
     model.add(Conv2D(i16,(i3,i3),padding='same', 
@@ -297,7 +298,7 @@ del x_train1,x_valid1,x_test1,\
     y_train1,y_valid1,y_test1
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-# Color Images / Product
+# Color Images / Products
 def model():
     model=Sequential()
     model.add(Conv2D(i16,(i3,i3),padding='same', 
@@ -337,7 +338,7 @@ del x_train3,x_valid3,x_test3,\
     y_train3,y_vali3,y_test3
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-# Grayscaled Images / Brand 
+# Grayscaled Images / Brands 
 def gray_model():
     model=Sequential()   
     model.add(Conv2D(i16,(i3,i3),padding='same', 
@@ -380,7 +381,31 @@ del x_train2,x_valid2,x_test2,\
     y_train2,y_valid2,y_test2
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+# Grayscaled Images / Products
+def gray_model():
+    model=Sequential()   
+    model.add(Conv2D(i32,(i5,i5),padding='same', 
+                     input_shape=x_train4.shape[i1:]))
+    model.add(LeakyReLU(alpha=al)) 
+    model.add(MaxPooling2D(pool_size=(i2,i2)))
+    model.add(Dropout(dr25))
+    model.add(Conv2D(i128,(i5,i5)))
+    model.add(LeakyReLU(alpha=al))    
+    model.add(MaxPooling2D(pool_size=(i2,i2)))
+    model.add(Dropout(dr25))  
+    model.add(GlobalMaxPooling2D())    
+    model.add(Dense(i1024))
+    model.add(LeakyReLU(alpha=al))
+    model.add(Dropout(dr25))    
+    model.add(Dense(i128))
+    model.add(LeakyReLU(alpha=al))
+    model.add(Dropout(dr25))    
+    model.add(Dense(i10))
+    model.add(Activation('softmax'))    
+    model.compile(loss='categorical_crossentropy',
+                  optimizer='rmsprop',metrics=['accuracy'])
+    return model
+gray_model=gray_model()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
