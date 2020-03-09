@@ -337,13 +337,47 @@ del x_train3,x_valid3,x_test3,\
     y_train3,y_vali3,y_test3
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+# Grayscaled Images / Brand 
+def gray_model():
+    model=Sequential()   
+    model.add(Conv2D(i16,(i3,i3),padding='same', 
+                     input_shape=x_train2.shape[i1:]))
+    model.add(LeakyReLU(alpha=al))    
+    model.add(MaxPooling2D(pool_size=(i2,i2)))
+    model.add(Dropout(dr25))
+    model.add(Conv2D(i48,(i3,i3)))
+    model.add(LeakyReLU(alpha=al))   
+    model.add(MaxPooling2D(pool_size=(i2,i2)))
+    model.add(Dropout(dr25))  
+    model.add(GlobalMaxPooling2D())    
+    model.add(Dense(i512))
+    model.add(LeakyReLU(alpha=al))
+    model.add(Dropout(dr25))     
+    model.add(Dense(i32))
+    model.add(LeakyReLU(alpha=al))
+    model.add(Dropout(dr25))    
+    model.add(Dense(i7))
+    model.add(Activation('softmax'))   
+    model.compile(loss='categorical_crossentropy',
+                  optimizer='rmsprop',metrics=['accuracy'])
+    return model
+gray_model=gray_model()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,save_best_only=True)
+lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
+                               verbose=i2,factor=fr)
+estopping=EarlyStopping(monitor='val_loss',patience=i16,verbose=i2)
+history=gray_model.fit(x_train2,y_train2,epochs=i16,batch_size=i16,
+                       verbose=i2,validation_data=(x_valid2,y_valid2),
+                       callbacks=[checkpointer,lr_reduction,estopping])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+history_plot(history)
+gray_model.load_weights(fw)
+pretty_print(gray_model.evaluate(x_test2,y_test2))
+del x_train2,x_valid2,x_test2,\
+    y_train2,y_valid2,y_test2
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
