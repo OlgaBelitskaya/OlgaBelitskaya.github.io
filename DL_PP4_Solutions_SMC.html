@@ -368,10 +368,9 @@ gray_model=gray_model()
 checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,save_best_only=True)
 lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
                                verbose=i2,factor=fr)
-estopping=EarlyStopping(monitor='val_loss',patience=i16,verbose=i2)
-history=gray_model.fit(x_train2,y_train2,epochs=i16,batch_size=i16,
+history=gray_model.fit(x_train2,y_train2,epochs=i10,batch_size=i16,
                        verbose=i2,validation_data=(x_valid2,y_valid2),
-                       callbacks=[checkpointer,lr_reduction,estopping])
+                       callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 history_plot(history)
@@ -412,7 +411,8 @@ checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,save_best_only=True)
 lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
                                verbose=i2,factor=fr)
 estopping=EarlyStopping(monitor='val_loss',patience=i16,verbose=i2)
-history=gray_model.fit(x_train4,y_train4,epochs=i16,batch_size=i16,verbose=i2,
+history=gray_model.fit(x_train4,y_train4,epochs=i10,
+                       batch_size=i16,verbose=i2,
                        validation_data=(x_valid4,y_valid4),
                        callbacks=[checkpointer,lr_reduction,estopping])
 </script></div><br/>
@@ -442,7 +442,7 @@ def mmodel():
     x=Dropout(dr25)(x)    
     y1=Dense(i7,activation='softmax')(x)
     y2=Dense(i10,activation='softmax')(x)   
-    model=Model(inputs=model_input,outputs=[y1, y2])    
+    model=Model(inputs=model_input,outputs=[y1,y2])    
     model.compile(loss='categorical_crossentropy',
                   optimizer='nadam',metrics=['accuracy'])
     return model
@@ -452,11 +452,10 @@ mmodel=mmodel()
 checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,save_best_only=True)
 lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
                                verbose=i2,factor=fr)
-estopping=EarlyStopping(monitor='val_loss',patience=i16,verbose=i2)
 history=mmodel.fit(x_train5,y_train5_list, 
                    validation_data=(x_valid5,y_valid5_list), 
-                   epochs=i128,batch_size=i128,verbose=i2, 
-                   callbacks=[checkpointer,lr_reduction,estopping])
+                   epochs=i10,batch_size=i16,verbose=i2, 
+                   callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 mmodel.load_weights(fw)
@@ -464,6 +463,9 @@ scores=mmodel.evaluate(x_test5,y_test5_list)
 print("Scores: \n",(scores))
 print("The Brand Label. Accuracy: %.2f%%"%(scores[i3]*i100))
 print("The Product Label. Accuracy: %.2f%%"%(scores[i4]*i100))
+del x_train5,x_valid5,x_test5,\
+    y_train5,y_valid5,y_test5,\
+    y_train5_list,y_valid5_list,y_test5_list
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 # Grayscaled Images
@@ -494,10 +496,20 @@ def gray_mmodel():
 gray_mmodel=gray_mmodel()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,save_best_only=True)
+lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
+                               verbose=i2,factor=fr)
+history=gray_mmodel.fit(x_train6,y_train6_list, 
+                        validation_data=(x_valid6,y_valid6_list), 
+                        epochs=i10,batch_size=i16,verbose=i2, 
+                        callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+gray_mmodel.load_weights(fw)
+scores=gray_mmodel.evaluate(x_test6,y_test6_list)
+print("Scores: \n",(scores))
+print("The Brand Label. Accuracy: %.2f%%"%(scores[i3]*i100))
+print("The Product Label. Accuracy: %.2f%%"%(scores[i4]*i100))
 </script></div><br/>
   </body>
 </html> 
