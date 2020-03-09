@@ -106,8 +106,8 @@ float(.2),float(.25),float(.3),float(.5),float(.6)
 fr,al=float(.5),float(.02)
 i0,i1,i2,i3,i4,i5,i7,i8=\
 int(0),int(1),int(2),int(3),int(4),int(5),int(7),int(8)
-i10,i16,i32,i48,i64,i96=\
-int(10),int(16),int(32),int(48),int(64),int(96)
+i10,i16,i32,i48,i50,i64,i96=\
+int(10),int(16),int(32),int(48),int(50),int(64),int(96)
 i100,i128,i150,i196,i256=\
 int(100),int(128),int(150),int(196),int(256)
 i512,i1024=int(512),int(1024)
@@ -425,7 +425,28 @@ del x_train4,x_valid4,x_test4,\
 </script></div><br/>
     <h2>✒️&nbsp;Step 3. Multi-Label Classification Models</h2>
 <div class="linked"><script type="text/x-sage">
-
+# Color Images
+def mmodel():    
+    model_input=Input(shape=(i50,i50,i3))
+    x=BatchNormalization()(model_input)
+    x=Conv2D(i32,(i5,i5),padding='same')(model_input)
+    x=LeakyReLU(alpha=al)(x)
+    x=MaxPooling2D(pool_size=(i2,i2))(x)    
+    x=Dropout(dr25)(x)   
+    x=Conv2D(i128,(i5,i5),padding='same')(x)       
+    x=MaxPooling2D(pool_size=(i2,i2))(x)    
+    x=Dropout(dr25)(x)              
+    x=GlobalMaxPooling2D()(x)   
+    x=Dense(i512)(x)
+    x=LeakyReLU(alpha=al)(x)    
+    x=Dropout(dr25)(x)    
+    y1=Dense(i7,activation='softmax')(x)
+    y2=Dense(i10,activation='softmax')(x)   
+    model=Model(inputs=model_input,outputs=[y1, y2])    
+    model.compile(loss='categorical_crossentropy',
+                  optimizer='nadam',metrics=['accuracy'])
+    return model
+mmodel=mmodel()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
