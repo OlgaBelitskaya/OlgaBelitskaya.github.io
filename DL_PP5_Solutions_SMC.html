@@ -31,17 +31,25 @@
 <div class="linked"><script type="text/x-sage">
 spath='/home/sc_work/.sage/local/lib/python3.7/site-packages'
 import sys; sys.path.append(spath)
+import h5py,urllib,zipfile
 import pandas as pd,numpy as np,pylab as pl
-import keras as ks,tensorflow as tf
-import zipfile,h5py,urllib
+import seaborn as sn,keras as ks,tensorflow as tf
+from skimage.transform import resize
 import warnings; warnings.filterwarnings('ignore')
 from sklearn.model_selection import train_test_split
-from keras.utils import to_categorical
-from keras.callbacks import ModelCheckpoint
-from keras.models import Sequential,load_model
-from keras.layers import Conv2D,Dense,Dropout
-from keras.layers import Activation,LeakyReLU
-from keras.layers import MaxPooling2D,GlobalMaxPooling2D
+from sklearn.preprocessing import OneHotEncoder
+np.set_printoptions(precision=6)
+pl.style.use('seaborn-whitegrid')
+from keras.callbacks import ModelCheckpoint,EarlyStopping
+from keras.callbacks import ReduceLROnPlateau
+from keras.models import Sequential,load_model,Model
+from keras.layers import Input,Activation,Dense,LSTM
+from keras.layers import Flatten,Dropout,BatchNormalization
+from keras.layers import Conv2D,MaxPooling2D,GlobalMaxPooling2D
+from keras.layers.advanced_activations import PReLU,LeakyReLU
+from keras import __version__
+print('keras version:', __version__)
+print('tensorflow version:',tf.__version__)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 fw='weights.style.hdf5'
@@ -142,6 +150,22 @@ pl.imshow(images[n])
 pl.title(data['country'][n]+'; '+\
          data['decor'][n]+'; '+data['type'][n])
 pl.imshow(gray_images[n],cmap=pl.cm.bone); pl.show()
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+ccountries,cdecors,ctypes=\
+ohe(countries),ohe(decors),ohe(types)
+ctargets=np.concatenate((ccountries,cdecors),axis=1)
+ctargets=np.concatenate((ctargets,ctypes),axis=1)
+images=resh(images); gray_images=gresh(gray_images)
+pd.DataFrame([images.shape,gray_images.shape,
+              ccountries.shape,cdecors.shape,
+              ctypes.shape,ctargets.shape])
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
