@@ -44,6 +44,21 @@ from keras.layers import Activation,LeakyReLU
 from keras.layers import MaxPooling2D,GlobalMaxPooling2D
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
+fw='weights.style.hdf5'
+dr2,dr25,dr3,dr5=\
+float(.2),float(.25),float(.3),float(.5)
+fr,al=float(.5),float(.02)
+[i0,i1,i2,i3,i4,i5]=\
+[int(0),int(1),int(2),int(3),int(4),int(5)]
+[i7,i8,i10,i12,i16]=\
+[int(7),int(8),int(10),int(12),int(16)]
+[i20,i32,i48,i50,i64,i96]=\
+[int(20),int(32),int(48),int(50),int(64),int(96)]
+[i100,i128,i150,i196,i200]=\
+[int(100),int(128),int(150),int(196),int(200)]
+[i256,i512,i1024]=[int(256),int(512),int(1024)]
+</script></div><br/>  
+<div class="linked"><script type="text/x-sage">
 def ohe(x): 
     return OneHotEncoder(categories='auto')\
            .fit(x.reshape(-i1,i1))\
@@ -58,17 +73,17 @@ def tts(X,y):
     x_test,y_test=x_test[n:],y_test[n:]
     return x_train,x_valid,x_test,y_train,y_valid,y_test
 def resh(x,n):
-    y=[resize(el,(int(n),int(n),int(3)),
+    y=[resize(el,(int(n),int(n),i3),
               anti_aliasing=True) for el in x]
     return np.array(y)
 def resh2(x,n): 
-    y=[resize(el,(int(n),int(n),int(1)),
+    y=[resize(el,(int(n),int(n),i1),
               anti_aliasing=True) for el in x]
     return np.array(y)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def history_plot(fit_history):
-    pl.figure(figsize=(10,10))
+    pl.figure(figsize=(i10,i10))
     pl.subplot(211)
     pl.plot(fit_history.history['loss'],
             color='slategray',label='train')
@@ -120,7 +135,13 @@ for i,idx in enumerate(n):
 pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+gray_images=np.dot(images[...,:3],[.299,.587,.114])
+pl.figure(figsize=(3,3))
+n=np.random.choice(484,size=1,replace=False)[0]
+pl.imshow(images[n])
+pl.title(data['country'][n]+'; '+\
+         data['decor'][n]+'; '+data['type'][n])
+pl.imshow(gray_images[n],cmap=pl.cm.bone); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
