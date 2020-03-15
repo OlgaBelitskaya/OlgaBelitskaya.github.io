@@ -46,12 +46,15 @@ Interactive Report with SageMathCell &nbsp; [P0: Image Classification 🌀](http
 Colaboratory Notebooks &nbsp; [boston_regression.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1atPu92jNJ-qBsFpbOiMojHGXCu6gJWYW)<br/>
 Interactive Report with SageMathCell &nbsp; [P1: Neural Networks for Regression 🌀](https://olgabelitskaya.github.io/DL_PP1_Solutions_SMC.html)
 #### P2: Multi-Label Classification &nbsp; [Project &#x1F310;](https://olgabelitskaya.github.io/DL_PP2.html) &nbsp; [Solutions &#x1F310;](https://olgabelitskaya.github.io/DL_PP2_Solutions.html) &nbsp; [Solutions Variant 2 &#x1F310;](https://olgabelitskaya.github.io/DL_PP2_Solutions_V2.html) &nbsp; [Addition &#x1F310;](https://olgabelitskaya.github.io/DL_PP2_Additional.html)
-Colaboratory Notebooks  &nbsp; [letter_recognition.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1Z9Fz0OOi6bpWvH-H2OhExC9CkGPWBYZz) &nbsp; [letter_generator.ipynb &#x1F4D6; ](https://drive.google.com/open?id=19B40eERSKfVO5zsizehxPOLdhLs5YcUT)
+Colaboratory Notebooks  &nbsp; [letter_recognition.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1Z9Fz0OOi6bpWvH-H2OhExC9CkGPWBYZz) &nbsp; [letter_generator.ipynb &#x1F4D6; ](https://drive.google.com/open?id=19B40eERSKfVO5zsizehxPOLdhLs5YcUT)<br/>
+Interactive Report with SageMathCell &nbsp; [P2: Multi-Label Classification 🌀](https://olgabelitskaya.github.io/DL_PP2_Solutions_SMC.html)
 #### P3: Parts of Speech &nbsp; 
 #### P4: Style Recognition &nbsp; [Project &#x1F310;](https://olgabelitskaya.github.io/DL_PP4.html) &nbsp;  [Solutions &#x1F310;](https://olgabelitskaya.github.io/DL_PP4_Solutions.html)
-Colaboratory Notebooks  &nbsp; [style_recognition.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1r5yRD-3tQwN6lSql_VRoVuwQ8DaY5zUt)
+Colaboratory Notebooks  &nbsp; [style_recognition.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1r5yRD-3tQwN6lSql_VRoVuwQ8DaY5zUt)<br/>
+Interactive Report with SageMathCell &nbsp; [P4: Style Recognition 🌀](https://olgabelitskaya.github.io/DL_PP4_Solutions_SMC.html)
 #### P5: Decor Colorization &nbsp; [Solutions. Part 1 &#x1F310;](https://olgabelitskaya.github.io/DL_PP5_Solutions_Part1.html) &nbsp; [Solutions. Part 2 &#x1F310;](https://olgabelitskaya.github.io/DL_PP5_Solutions_Part2.html) &nbsp;  [Addition &#x1F310;](https://olgabelitskaya.github.io/DL_PP5_Additional.html) &nbsp; [Addition Variant 2 &#x1F310;](https://olgabelitskaya.github.io/DL_PP5_Additional_V2.html) 
-Colaboratory Notebooks &nbsp; [decor_classification.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1Tt3qZePsf2P6kNNao-hQ58DlG71Abj5a) &nbsp; [decor_colorization.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1Is0ll753U0dlR2RhQVwelaegRFhkvoxw) &nbsp; [style_transfer.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1svW40BBscfSLD7Je99TyctBeRWIOYHKa)
+Colaboratory Notebooks &nbsp; [decor_classification.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1Tt3qZePsf2P6kNNao-hQ58DlG71Abj5a) &nbsp; [decor_colorization.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1Is0ll753U0dlR2RhQVwelaegRFhkvoxw) &nbsp; [style_transfer.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1svW40BBscfSLD7Je99TyctBeRWIOYHKa)<br/>
+Interactive Report with SageMathCell &nbsp; [Decor Recognition & Colorization 🌀](https://olgabelitskaya.github.io/DL_PP5_Solutions_SMC.html)
 
 # &#x1F3D9; &nbsp;  Kaggle Activity
 ## &#x1F4D1; &nbsp;  Kernels
