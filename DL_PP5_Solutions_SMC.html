@@ -244,6 +244,38 @@ model.load_weights(fw)
 model.evaluate(x_test1,y_test1)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
+def model(leaky_alpha):
+    model=Sequential()
+    model.add(Conv2D(i32,(i5,i5),padding='same', 
+                     input_shape=x_train1.shape[i1:]))
+    model.add(LeakyReLU(alpha=leaky_alpha))    
+    model.add(MaxPooling2D(pool_size=(i2,i2)))
+    model.add(Dropout(dr25))
+    model.add(Conv2D(i96,(i5,i5)))
+    model.add(LeakyReLU(alpha=leaky_alpha))    
+    model.add(MaxPooling2D(pool_size=(i2,i2)))
+    model.add(Dropout(dr25))   
+    model.add(GlobalMaxPooling2D())     
+    model.add(Dense(i512))
+    model.add(LeakyReLU(alpha=leaky_alpha))
+    model.add(Dropout(dr25))     
+    model.add(Dense(i7))
+    model.add(Activation('softmax'))   
+    model.compile(loss='categorical_crossentropy',
+                  optimizer='nadam',metrics=['accuracy'])   
+    return model
+model=model(float(.005))   
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,save_best_only=True)
+lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
+                               verbose=i2,factor=fr)
+history=model.fit(x_train3,y_train3, 
+                  epochs=i48,batch_size=i16,verbose=i2,
+                  validation_data=(x_valid3,y_valid3),
+                  callbacks=[checkpointer,lr_reduction])
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
 
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
