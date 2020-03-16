@@ -63,8 +63,8 @@ fr,al=float(.5),float(.02)
 [int(0),int(1),int(2),int(3),int(4),int(5)]
 [i7,i8,i10,i11,i12,i16]=\
 [int(7),int(8),int(10),int(11),int(12),int(16)]
-[i20,i32,i48,i50,i64,i96]=\
-[int(20),int(32),int(48),int(50),int(64),int(96)]
+[i20,i24,i32,i48,i50,i64,i96]=\
+[int(20),int(24),int(32),int(48),int(50),int(64),int(96)]
 [i100,i128,i150,i196,i200]=\
 [int(100),int(128),int(150),int(196),int(200)]
 [i256,i512,i1024]=[int(256),int(512),int(1024)]
@@ -233,7 +233,7 @@ model=model()
 checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,save_best_only=True)
 lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
                                verbose=i2,factor=fr)
-history=model.fit(x_train1,y_train1,epochs=i32,
+history=model.fit(x_train1,y_train1,epochs=i24,
                   batch_size=i16,verbose=i2,
                   validation_data=(x_valid1,y_valid1),
                   callbacks=[checkpointer,lr_reduction])
@@ -242,6 +242,8 @@ history=model.fit(x_train1,y_train1,epochs=i32,
 history_plot(history)
 model.load_weights(fw)
 pretty_print(model.evaluate(x_test1,y_test1))
+del x_train1,x_valid1,x_test1,\
+    y_train1,y_valid1,y_test1
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 # Color Images / Decors
@@ -272,7 +274,7 @@ checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,save_best_only=True)
 lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
                                verbose=i2,factor=fr)
 history=model.fit(x_train3,y_train3, 
-                  epochs=i48,batch_size=i16,verbose=i2,
+                  epochs=i32,batch_size=i16,verbose=i2,
                   validation_data=(x_valid3,y_valid3),
                   callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
@@ -280,6 +282,8 @@ history=model.fit(x_train3,y_train3,
 history_plot(history)
 model.load_weights(fw)
 pretty_print(model.evaluate(x_test3,y_test3))
+del x_train3,x_valid3,x_test3,\
+    y_train3,y_valid3,y_test3
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
