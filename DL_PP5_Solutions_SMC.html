@@ -292,7 +292,7 @@ del x_train3,x_valid3,x_test3,\
 def gray_model():
     model=Sequential()
     model.add(Conv2D(i16,(i5,i5),padding='same', 
-                     input_shape=x_train2.shape[i1:]))
+                     input_shape=x_train2.shape[1:]))
     model.add(Activation('relu'))    
     model.add(MaxPooling2D(pool_size=(i2,i2)))
     model.add(Dropout(dr25))
@@ -301,14 +301,14 @@ def gray_model():
     model.add(MaxPooling2D(pool_size=(i2,i2)))
     model.add(Dropout(dr25))   
     model.add(GlobalMaxPooling2D())    
-    model.add(Dense(i1024, activation='relu'))
+    model.add(Dense(i512,activation='tanh'))
     model.add(Dropout(dr25))
     model.add(Dense(i4))
     model.add(Activation('softmax'))
     model.compile(loss='categorical_crossentropy',
                   optimizer='rmsprop',metrics=['accuracy'])
     return model
-gray_model=gray_model()   
+gray_model=gray_model()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,save_best_only=True)
@@ -325,7 +325,27 @@ gray_model.load_weights(fw)
 gray_model.evaluate(x_test2,y_test2)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+# Grayscaled Images / Decors
+def gray_model(leaky_alpha):
+    model=Sequential()
+    model.add(Conv2D(i16,(i5,i5),padding='same', 
+                     input_shape=x_train4.shape[i1:]))
+    model.add(LeakyReLU(alpha=leaky_alpha))    
+    model.add(MaxPooling2D(pool_size=(i2,i2)))
+    model.add(Dropout(dr25))
+    model.add(Conv2D(i128,(i5,i5)))
+    model.add(LeakyReLU(alpha=leaky_alpha))    
+    model.add(MaxPooling2D(pool_size=(i2,i2)))
+    model.add(Dropout(dr25))  
+    model.add(GlobalMaxPooling2D())    
+    model.add(Dense(i512, activation='tanh'))
+    model.add(Dropout(dr25))   
+    model.add(Dense(i7))
+    model.add(Activation('softmax'))
+    model.compile(loss='categorical_crossentropy',
+                  optimizer='rmsprop',metrics=['accuracy'])
+    return model
+gray_model=gray_model(float(.01))
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
