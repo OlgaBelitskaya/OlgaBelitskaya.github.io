@@ -7,7 +7,7 @@
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
     <script>$(function (){
     sagecell.makeSagecell({inputLocation:'div.linked',linked:true,
-                           evalButtonText:'Run Linked Cells'}); });
+                           evalButtonText:'Run Linked Cells'});});
     </script>
   </head>
   <style>
@@ -24,6 +24,8 @@
 &#x1F300; &nbsp; Google Colaboratory Variant &nbsp; &nbsp; &nbsp;</a>
 <a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp; &nbsp;</a>     
 <a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a><br/>
+For this project, I have created the dataset of color images (150x150x3) with traditional patterns.<br/>
+Let's have a look at some decor contours. 
 <div class="linked"><script type="text/x-sage">
 import pylab; from skimage import io,color,measure
 @interact
@@ -385,13 +387,46 @@ del x_train4,x_valid4,x_test4,\
 </script></div><br/>
     <h2>✒️&nbsp;Step 3. Multi-Label Classification Models</h2>      
 <div class="linked"><script type="text/x-sage">
-
+def multi_model(leaky_alpha):    
+    model_input=Input(shape=x_train5.shape[i1:])
+    x=BatchNormalization()(model_input)
+    x=Conv2D(i32,(i5,i5),padding='same')(model_input)
+    x=LeakyReLU(alpha=leaky_alpha)(x)
+    x=MaxPooling2D(pool_size=(i2,i2))(x)    
+    x=Dropout(dr25)(x)   
+    x=Conv2D(i128,(i5,i5),padding='same')(x)
+    x=LeakyReLU(alpha=leaky_alpha)(x)
+    x=MaxPooling2D(pool_size=(i2,i2))(x)    
+    x=Dropout(dr25)(x)            
+    x=GlobalMaxPooling2D()(x)  
+    x=Dense(i512)(x) 
+    x=LeakyReLU(alpha=leaky_alpha)(x)
+    x=Dropout(dr25)(x)    
+    y1=Dense(i4,activation='softmax')(x)
+    y2=Dense(i7,activation='softmax')(x)
+    y3=Dense(i2,activation='softmax')(x)   
+    model=Model(inputs=model_input,outputs=[y1,y2,y3])
+    model.compile(loss='categorical_crossentropy',
+                  optimizer='nadam',metrics=['accuracy'])   
+    return model
+multi_model=multi_model(float(.005))
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,save_best_only=True)
+lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
+                               verbose=i2,factor=fr)
+history=multi_model.fit(x_train5,y_train5_list, 
+                        epochs=i48,batch_size=i16,verbose=i2,
+                        validation_data=(x_valid5,y_valid5_list),
+                        callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+multi_model.load_weights(fw)
+multi_scores=multi_model.evaluate(x_test5,y_test5_list,verbose=0)
+print("Scores: \n" ,(multi_scores))
+print("Country label. Accuracy: %.2f%%"%(multi_scores[i4]*100))
+print("Decor label. Accuracy: %.2f%%"%(multi_scores[i5]*100))
+print("Type label. Accuracy: %.2f%%"%(multi_scores[i6]*100))
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
