@@ -207,6 +207,8 @@ y_valid6_list=[y_valid6[:,:i4],y_valid6[:,i4:i11], y_valid6[:,i11:]]
 del images,gray_images,countries,decors,types
 del ccountries,cdecors,ctypes,ctargets
 </script></div><br/>
+<p>Unfortunately, we can train with guarantee only one neural network at ones.</p>
+<p>Please restart the page and load the data again for training each of them.</p>
     <h2>✒️&nbsp;Step 2. One-Label Classification Models</h2>
 <div class="linked"><script type="text/x-sage">
 # Color Images / Countries
@@ -252,7 +254,7 @@ del x_train1,x_valid1,x_test1,\
 def model(leaky_alpha):
     model=Sequential()
     model.add(Conv2D(i32,(i5,i5),padding='same', 
-                     input_shape=x_train1.shape[i1:]))
+                     input_shape=x_train3.shape[i1:]))
     model.add(LeakyReLU(alpha=leaky_alpha))    
     model.add(MaxPooling2D(pool_size=(i2,i2)))
     model.add(Dropout(dr25))
@@ -322,7 +324,7 @@ history=gray_model.fit(x_train2,y_train2,
 <div class="linked"><script type="text/x-sage">
 history_plot(history)
 gray_model.load_weights(fw)
-gray_model.evaluate(x_test2,y_test2)
+pretty_print(gray_model.evaluate(x_test2,y_test2))
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 # Grayscaled Images / Decors
@@ -348,10 +350,18 @@ def gray_model(leaky_alpha):
 gray_model=gray_model(float(.01))
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,save_best_only=True)
+lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
+                               verbose=i2,factor=fr)
+history=gray_model.fit(x_train4,y_train4, 
+                       epochs=i64,batch_size=i16,verbose=i2,
+                       validation_data=(x_valid4,y_valid4),
+                       callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+history_plot(history)
+gray_model.load_weights(fw)
+pretty_print(gray_model.evaluate(x_test4,y_test4))
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
