@@ -25,7 +25,23 @@
 <a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp; &nbsp;</a>     
 <a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a><br/>
 <div class="linked"><script type="text/x-sage">
-
+import pylab; from skimage import io,color,measure
+@interact
+def _vector(file=[1,2,3,4],
+            cm=['ocean','cool','gnuplot2','terrain',
+                'winter','spring','summer','autumn'],
+            level=[round(.85-.01*i,2) for i in range(30)]):
+    path1='https://olgabelitskaya.github.io/'
+    path2='pattern0%s'%(file+3)+'.jpeg'
+    img=io.imread(path1+path2); level=level
+    gray_img=color.colorconv.rgb2grey(img) 
+    contours=measure.find_contours(gray_img,level)
+    n=len(contours); pylab.figure(figsize=(4,5))
+    pylab.gca().invert_yaxis()
+    [pylab.plot(contours[i][:,1],contours[i][:,0],lw=.5,
+                color=pylab.get_cmap(cm)(i/n)) 
+     for i in range(n)]
+    pylab.xticks([]); pylab.yticks([]); pylab.show()
 </script></div><br/> 
     <h2>✒️ &nbsp;Step 0. Import Libraries</h2>      
 <div class="linked"><script type="text/x-sage">
