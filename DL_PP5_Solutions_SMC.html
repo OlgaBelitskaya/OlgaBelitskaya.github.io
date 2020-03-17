@@ -32,7 +32,7 @@ import pylab; from skimage import io,color,measure
 def _vector(file=[1,2,3,4,5],
             cm=['ocean','cool','gnuplot2','terrain',
                 'winter','spring','summer','autumn'],
-            level=[round(.85-.01*i,2) for i in range(30)]):
+            level=[round(.9-.03*i,2) for i in range(15)]):
     path1='https://olgabelitskaya.github.io/images/'
     path2='01_01_1_00%s'%(file)+'.png'
     img=io.imread(path1+path2); level=level
@@ -40,7 +40,7 @@ def _vector(file=[1,2,3,4,5],
     contours=measure.find_contours(gray_img,level)
     n=len(contours); pylab.figure(figsize=(5,5))
     pylab.gca().invert_yaxis()
-    [pylab.plot(contours[i][:,1],contours[i][:,0],lw=.5,
+    [pylab.plot(contours[i][:,1],contours[i][:,0],lw=.7,
                 color=pylab.get_cmap(cm)(i/n)) 
      for i in range(n)]
     pylab.xticks([]); pylab.yticks([]); pylab.show()
@@ -429,7 +429,29 @@ print("Decor label. Accuracy: %.2f%%"%(multi_scores[i5]*100))
 print("Type label. Accuracy: %.2f%%"%(multi_scores[i6]*100))
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+def gray_multi_model(leaky_alpha):    
+    model_input=Input(shape=x_train6.shape[i1:])
+    x=BatchNormalization()(model_input)
+    x=Conv2D(i32,(i5,i5), padding='same')(model_input)
+    x=LeakyReLU(alpha=leaky_alpha)(x)
+    x=MaxPooling2D(pool_size=(i2,i2))(x)    
+    x=Dropout(dr25)(x)  
+    x=Conv2D(i256,(i5,i5),padding='same')(x)
+    x=LeakyReLU(alpha=leaky_alpha)(x)
+    x=MaxPooling2D(pool_size=(i2,i2))(x)    
+    x=Dropout(dr25)(x)             
+    x=GlobalMaxPooling2D()(x) 
+    x=Dense(i2048)(x) 
+    x=LeakyReLU(alpha=leaky_alpha)(x)
+    x=Dropout(dr25)(x)   
+    y1=Dense(i4,activation='softmax')(x)
+    y2=Dense(i7,activation='softmax')(x)
+    y3=Dense(i2,activation='softmax')(x) 
+    model=Model(inputs=model_input,outputs=[y1,y2,y3])   
+    model.compile(loss='categorical_crossentropy',
+                  optimizer='rmsprop',metrics=['accuracy'])  
+    return model
+gray_multi_model=gray_multi_model(float(.01))
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
