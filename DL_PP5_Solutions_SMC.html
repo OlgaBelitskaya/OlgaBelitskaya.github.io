@@ -454,10 +454,22 @@ def gray_multi_model(leaky_alpha):
 gray_multi_model=gray_multi_model(float(.01))
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,save_best_only=True)
+lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
+                               verbose=i2,factor=fr)
+history=gray_multi_model.fit(x_train6,y_train6_list,
+                             epochs=i48,batch_size=i16,verbose=i2,
+                             validation_data=(x_valid6,y_valid6_list),
+                             callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+gray_multi_model.load_weights(fw)
+gray_multi_scores=\
+gray_multi_model.evaluate(x_test6,y_test6_list,verbose=i0)
+print("Scores: \n" ,(gray_multi_scores))
+print("Country label. Accuracy: %.2f%%"%(gray_multi_scores[i4]*100))
+print("Decor label. Accuracy: %.2f%%"%(gray_multi_scores[i5]*100))
+print("Type label. Accuracy: %.2f%%"%(gray_multi_scores[i6]*100))
 </script></div><br/>
   </body>
 </html> 
