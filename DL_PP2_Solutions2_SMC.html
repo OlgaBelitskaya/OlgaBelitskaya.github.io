@@ -1,0 +1,214 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>🏙DLPP22SMC</title>
+    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <script>$(function (){
+    sagecell.makeSagecell({inputLocation:'div.linked',linked:true,
+                           evalButtonText:'Run Linked Cells'}); });
+    </script>
+  </head>
+  <style>
+  @import url('https://fonts.googleapis.com/css?family=Akronim|Lobster');
+  h1,h2,th {color:#348ABD; font-family:'Akronim'; font-size:120%; text-shadow:4px 4px 4px #aaa;}
+  p,a {color:slategray; font-family:'Lobster'; font-size:120%; text-shadow:4px 4px 4px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:30em;}
+  body {margin:5px 5px 5px 15px;}
+  </style>  
+  <body>
+    <h1>📑 &nbsp; Deep Learning. P2: Letter Recognition. Keras Applications</h1>
+<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp; &nbsp;</a> 
+<a href="https://drive.google.com/file/d/1Z9Fz0OOi6bpWvH-H2OhExC9CkGPWBYZz">
+&#x1F300; &nbsp; Google Colaboratory Variant &nbsp; &nbsp; &nbsp;</a>
+<a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp; &nbsp;</a>     
+<a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a><br/>
+For this project, I have created the dataset of <br/>
+14190 color images (32x32x3) with 33 handwritten Russian letters.<br/>
+There are four types of letter backgrounds here. <br/>
+They are labeled in this dataset as well.<br/>
+<div class="linked"><script type="text/x-sage">
+import urllib,os; from IPython import display
+fpath='https://olgabelitskaya.github.io/images/'
+lf=['03_16.jpeg','08_50.jpeg','11_216.jpeg','20_415.jpeg']
+for f in lf:
+    input_file=urllib.request.urlopen(fpath+f)
+    output_file=open(f,'wb')
+    output_file.write(input_file.read())
+    output_file.close(); input_file.close()
+fpath2='https://sagecell.sagemath.org/kernel/'
+fpath2+=os.getcwd()[14:]+'/files/'
+display.HTML("""
+<style>
+@import url('https://fonts.googleapis.com/css?family=Akronim|Ewert');
+</style>
+<table style='width:30%; background-color:ghostwhite; 
+              font-family:Ewert; font-size:200%;'>
+<tr style='font-family:Akronim;'><th><center>Background</center></th>
+<th><center>Image</center></th></tr>
+<tr><td><center>0</center></td><td><center>
+<img width='50' height='50' src="""+fpath2+lf[0]+""" alt='bg0'>
+</center></td></tr>
+<tr><td><center>1</center></td><td><center>
+<img width='50' height='50' src="""+fpath2+lf[1]+""" alt='bg1'>
+</center></td></tr>
+<tr><td><center>2</center></td><td><center>
+<img width='50' height='50' src="""+fpath2+lf[2]+""" alt='bg2'>
+</center></td></tr>
+<tr><td><center>3</center></td><td><center>
+<img width='50' height='50' src="""+fpath2+lf[3]+""" alt='bg3'>
+</center></td></tr>
+</table>""")
+</script></div><br/>
+    <h2>✒️&nbsp;Step 0. Importing Libraries and Defining Helpful Functions</h2>      
+<div class="linked"><script type="text/x-sage">
+#unlock to install modules
+#!python3 -m pip install keras --user
+#!python3 -m pip install --ignore-installed --upgrade tensorflow==1.14.0
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+spath='/home/sc_work/.sage/local/lib/python3.7/site-packages'
+import sys; sys.path.append(spath)
+import h5py,urllib,zipfile
+import pandas as pd,numpy as np,pylab as pl
+import keras as ks,tensorflow as tf
+from skimage.transform import resize
+import warnings; warnings.filterwarnings('ignore')
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.ensemble import RandomForestClassifier
+from keras.callbacks import ModelCheckpoint,EarlyStopping
+from keras.callbacks import ReduceLROnPlateau
+from keras.preprocessing.image import ImageDataGenerator
+from keras.models import Sequential,load_model,Model
+from keras.layers import Input,Activation,Dense,LSTM
+from keras.layers import Flatten,Dropout,BatchNormalization
+from keras.layers import Conv2D,MaxPooling2D,GlobalMaxPooling2D
+from keras.layers.advanced_activations import PReLU,LeakyReLU
+i0,i1,i2,i3,i4,i5,i8=\
+int(0),int(1),int(2),int(3),int(4),int(5),int(8)
+np.set_printoptions(precision=6)
+from keras import __version__
+print('keras version:', __version__)
+print('tensorflow version:',tf.__version__)
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+def ohe(x): 
+    return OneHotEncoder(categories='auto')\
+           .fit(x.reshape(-i1,i1))\
+           .transform(x.reshape(-i1,i1))\
+           .toarray().astype('int64')
+def tts(X,y): 
+    x_train,x_test,y_train,y_test=\
+    train_test_split(X,y,test_size=float(.2),
+                     random_state=i1)
+    n=int(len(x_test)/2)
+    x_valid,y_valid=x_test[:n],y_test[:n]
+    x_test,y_test=x_test[n:],y_test[n:]
+    return x_train,x_valid,x_test,y_train,y_valid,y_test
+def resh(x):
+    y=[resize(el,(int(16),int(16),int(3)),
+              anti_aliasing=True) for el in x]
+    return np.array(y)
+</script></div><br/> 
+<div class="linked"><script type="text/x-sage">
+def history_plot(fit_history):
+    pl.figure(figsize=(10,10))
+    pl.subplot(211)
+    pl.plot(fit_history.history['loss'],
+            color='slategray',label='train')
+    pl.plot(fit_history.history['val_loss'],
+            color='#348ABD',label='valid')
+    pl.xlabel("Epochs"); pl.ylabel("Loss")
+    pl.legend(); pl.grid()
+    pl.title('Loss Function')     
+    pl.subplot(212)
+    pl.plot(fit_history.history['accuracy'],
+            color='slategray',label='train')
+    pl.plot(fit_history.history['val_accuracy'],
+            color='#348ABD',label='valid')
+    pl.xlabel("Epochs"); pl.ylabel("Accuracy")    
+    pl.legend(); pl.grid()
+    pl.title('Accuracy'); pl.show()
+</script></div><br/> 
+    <h2>✒️&nbsp;Step 1. Loading and Preprocessing the Data</h2>       
+<div class="linked"><script type="text/x-sage">
+fpath='https://olgabelitskaya.github.io/'
+zf='LetterColorImages_123.h5.zip'
+input_file=urllib.request.urlopen(fpath+zf)
+output_file=open(zf,'wb')
+output_file.write(input_file.read())
+output_file.close(); input_file.close()
+zipf=zipfile.ZipFile(zf,'r')
+zipf.extractall(''); zipf.close()
+f=h5py.File(zf[:-4],'r')
+keys=list(f.keys())
+letters=u'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
+backgrounds=np.array(f[keys[0]])
+images=np.array(f[keys[1]])/255
+labels=np.array(f[keys[2]])
+pl.figure(figsize=(2,3)); il=10**4
+pl.title('Label: %s \n'%letters[labels[il]-1]+\
+         'Background: %s'%backgrounds[il],
+         fontsize=18)
+pl.imshow(images[il]); pl.show()
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+cbackgrounds,clabels=ohe(backgrounds),ohe(labels)
+pd.DataFrame([labels[97:103],clabels[97:103]]).T
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+ctargets=np.concatenate((clabels,cbackgrounds),axis=1)
+pd.DataFrame([clabels.shape,cbackgrounds.shape,ctargets.shape])
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+x_train1,x_valid1,x_test1,\
+y_train1,y_valid1,y_test1=tts(images,clabels)
+x_train2,x_valid2,x_test2,\
+y_train2,y_valid2,y_test2=tts(images,ctargets)
+x_train1,x_valid1,x_test1=\
+resh(x_train1),resh(x_valid1),resh(x_test1)
+x_train2,x_valid2,x_test2=\
+resh(x_train2),resh(x_valid2),resh(x_test2)
+sh=[el.shape for el in \
+[x_train1,y_train1,x_valid1,y_valid1,x_test1,y_test1,
+ x_train2,y_train2,x_valid2,y_valid2,x_test2,y_test2]]
+pd.DataFrame(sh)
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+del images,labels,backgrounds
+del clabels,cbackgrounds,ctargets
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+fw='weights.letter.hdf5'
+dr,fr,al=float(.2),float(.2),float(.02)
+i10,i16,i32,i33=int(10),int(16),int(32),int(33)
+i48,i64,i96=int(48),int(64),int(96)
+i100,i128,i196,i200=int(100),int(128),int(196),int(200)
+i256,i512,i1024=int(256),int(512),int(1024)
+n1,n2=int(3000),int(500)
+</script></div><br/>
+      <h2>✒️ &nbsp; Step 2. </h2>
+<div class="linked"><script type="text/x-sage">
+
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+
+</script></div><br/>  
+<div class="linked"><script type="text/x-sage">
+
+</script></div><br/>
+      <h2>✒️ &nbsp; Step 3. </h2>      
+<div class="linked"><script type="text/x-sage">
+
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+
+</script></div><br/>
+  </body>
+</html>      
