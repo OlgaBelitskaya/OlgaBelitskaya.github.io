@@ -160,23 +160,23 @@ x_train1,x_valid1,x_test1,\
 y_train1,y_valid1,y_test1=tts(images,clabels)
 sh=[el.shape for el in \
 [x_train1,y_train1,x_valid1,y_valid1,x_test1,y_test1]]
-del images,labels,backgrounds,clabels
+del f,keys,images,labels,backgrounds,clabels
 pd.DataFrame(sh)
 </script></div><br/>
       <h2>✒️ &nbsp; Step 2. </h2>
 <div class="linked"><script type="text/x-sage">
-from keras.applications.vgg19 import VGG19,preprocess_input as prei19
-vgg19bmodel=VGG19(weights='imagenet',include_top=False)
-pvx_train1=vgg19bmodel.predict(x_train1[:n1])
-pvx_valid1=vgg19bmodel.predict(x_valid1[:n2])
-pvx_test1=vgg19bmodel.predict(x_test1[:n2])
+from keras.applications.vgg16 import VGG16
+vgg16bmodel=VGG16(weights='imagenet',include_top=False)
+pvx_train1=vgg16bmodel.predict(x_train1[:n1])
+pvx_valid1=vgg16bmodel.predict(x_valid1[:n2])
+pvx_test1=vgg16bmodel.predict(x_test1[:n2])
 pvx_train1=pvx_train1.reshape(-1,1,1,pvx_train1.shape[3])
 pvx_valid1=pvx_valid1.reshape(-1,1,1,pvx_valid1.shape[3])
 pvx_test1=pvx_test1.reshape(-1,1,1,pvx_test1.shape[3])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 sh=pvx_train1.shape[1:]
-def vgg19model():
+def vgg16model():
     model=Sequential()  
     model.add(GlobalAveragePooling2D(input_shape=sh))   
     model.add(Dense(int(2048)))
@@ -192,21 +192,21 @@ def vgg19model():
     model.compile(loss='categorical_crossentropy',
                   optimizer='nadam',metrics=['accuracy'])
     return model
-vgg19model=vgg19model()
+vgg16model=vgg16model()
 </script></div><br/>  
 <div class="linked"><script type="text/x-sage">
 checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,save_best_only=True)
 lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
                                verbose=i2,factor=float(.8))
-history=vgg19model.fit(pvx_train1,y_train1[:n1], 
+history=vgg16model.fit(pvx_train1,y_train1[:n1], 
                        validation_data=(pvx_valid1,y_valid1[:n2]), 
                        epochs=int(10),batch_size=int(128),verbose=i2, 
                        callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 history_plot(history)
-vgg19model.load_weights(fw)
-vgg19model.evaluate(pvx_test1,y_test1[:n2])
+vgg16model.load_weights(fw)
+vgg16model.evaluate(pvx_test1,y_test1[:n2])
 </script></div><br/>      
       <h2>✒️ &nbsp; Step 3. </h2>      
 <div class="linked"><script type="text/x-sage">
