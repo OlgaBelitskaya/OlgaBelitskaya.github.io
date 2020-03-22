@@ -14,7 +14,7 @@
   @import url('https://fonts.googleapis.com/css?family=Akronim|Lobster');
   h1,h2,th {color:#348ABD; font-family:'Akronim'; font-size:120%; text-shadow:4px 4px 4px #aaa;}
   p,a {color:slategray; font-family:'Lobster'; font-size:120%; text-shadow:4px 4px 4px #aaa;}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:30em;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:38em;}
   body {margin:5px 5px 5px 15px;}
   </style>  
   <body>
@@ -91,7 +91,7 @@ from keras.layers.advanced_activations import PReLU,LeakyReLU
 i0,i1,i2,i3,i4,i5,i8=\
 int(0),int(1),int(2),int(3),int(4),int(5),int(8)
 fw='weights.letter.hdf5'
-n1,n2=int(1800),int(180)
+n1,n2=int(1500),int(150)
 np.set_printoptions(precision=6)
 from keras import __version__
 print('keras version:', __version__)
@@ -204,7 +204,7 @@ lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
                                verbose=i2,factor=float(.8))
 history=vgg16model.fit(pvx_train1,y_train1, 
                        validation_data=(pvx_valid1,y_valid1), 
-                       epochs=int(10),batch_size=int(128),verbose=i2, 
+                       epochs=int(16),batch_size=int(128),verbose=i2, 
                        callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
@@ -246,7 +246,7 @@ RNmodel=RNmodel()
 checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,save_best_only=True)
 history=RNmodel.fit(pvx_train1,y_train1, 
                     validation_data=(pvx_valid1,y_valid1), 
-                    epochs=i8,batch_size=int(128),verbose=i2, 
+                    epochs=int(16),batch_size=int(128),verbose=i2, 
                     callbacks=[checkpointer])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
