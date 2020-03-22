@@ -158,18 +158,23 @@ pl.imshow(images[il]); pl.show()
 <div class="linked"><script type="text/x-sage">
 x_train1,x_valid1,x_test1,\
 y_train1,y_valid1,y_test1=tts(images,clabels)
+x_train1,x_valid1,x_test1,\
+y_train1,y_valid1,y_test1=
+x_train1[:n1],x_valid1[:n2],x_test1[:n2],\
+y_train1[:n1],y_valid1[:n2],y_test1[:n2]
 sh=[el.shape for el in \
 [x_train1,y_train1,x_valid1,y_valid1,x_test1,y_test1]]
 del f,keys,images,labels,backgrounds,clabels
 pd.DataFrame(sh)
 </script></div><br/>
-      <h2>✒️ &nbsp; Step 2. </h2>
+      <h2>✒️ &nbsp; Step 2. Keras Applications</h2>
+<p>VGG16</p>
 <div class="linked"><script type="text/x-sage">
 from keras.applications.vgg16 import VGG16
 vgg16bmodel=VGG16(weights='imagenet',include_top=False)
-pvx_train1=vgg16bmodel.predict(x_train1[:n1])
-pvx_valid1=vgg16bmodel.predict(x_valid1[:n2])
-pvx_test1=vgg16bmodel.predict(x_test1[:n2])
+pvx_train1=vgg16bmodel.predict(x_train1)
+pvx_valid1=vgg16bmodel.predict(x_valid1)
+pvx_test1=vgg16bmodel.predict(x_test1)
 pvx_train1=pvx_train1.reshape(-1,1,1,pvx_train1.shape[3])
 pvx_valid1=pvx_valid1.reshape(-1,1,1,pvx_valid1.shape[3])
 pvx_test1=pvx_test1.reshape(-1,1,1,pvx_test1.shape[3])
@@ -198,17 +203,17 @@ vgg16model=vgg16model()
 checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,save_best_only=True)
 lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
                                verbose=i2,factor=float(.8))
-history=vgg16model.fit(pvx_train1,y_train1[:n1], 
-                       validation_data=(pvx_valid1,y_valid1[:n2]), 
+history=vgg16model.fit(pvx_train1,y_train1, 
+                       validation_data=(pvx_valid1,y_valid1), 
                        epochs=int(10),batch_size=int(128),verbose=i2, 
                        callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 history_plot(history)
 vgg16model.load_weights(fw)
-vgg16model.evaluate(pvx_test1,y_test1[:n2])
-</script></div><br/>      
-      <h2>✒️ &nbsp; Step 3. </h2>      
+vgg16model.evaluate(pvx_test1,y_test1)
+</script></div><br/> 
+<p>__</p>
 <div class="linked"><script type="text/x-sage">
 
 </script></div><br/>
