@@ -201,9 +201,14 @@ lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
                                verbose=i2,factor=float(.8))
 history=vgg19model.fit(pvx_train1,y_train1[:n1], 
                        validation_data=(pvx_valid1,y_valid1[:n2]), 
-                       epochs=int(32),batch_size=int(128),verbose=i2, 
+                       epochs=int(10),batch_size=int(128),verbose=i2, 
                        callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
+<div class="linked"><script type="text/x-sage">
+history_plot(history)
+vgg19model.load_weights(fw)
+vgg19model.evaluate(pvx_test1,y_test1[:n2])
+</script></div><br/>      
       <h2>✒️ &nbsp; Step 3. </h2>      
 <div class="linked"><script type="text/x-sage">
 
