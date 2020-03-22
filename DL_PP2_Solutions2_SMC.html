@@ -245,7 +245,13 @@ def RNmodel():
 RNmodel=RNmodel()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,save_best_only=True)
+lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
+                               verbose=i2,factor=float(.75))
+history=RNmodel.fit(pvx_train1,y_train1, 
+                    validation_data=(pvx_valid1,y_valid1), 
+                    epochs=i8,batch_size=int(128),verbose=i2, 
+                    callbacks=[checkpointer,lr_reduction,estopping])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
