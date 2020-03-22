@@ -111,10 +111,6 @@ def tts(X,y):
     x_valid,y_valid=x_test[:n],y_test[:n]
     x_test,y_test=x_test[n:],y_test[n:]
     return x_train,x_valid,x_test,y_train,y_valid,y_test
-def resh(x):
-    y=[resize(el,(int(16),int(16),int(3)),
-              anti_aliasing=True) for el in x]
-    return np.array(y)
 </script></div><br/> 
 <div class="linked"><script type="text/x-sage">
 def history_plot(fit_history):
@@ -152,6 +148,7 @@ letters=u'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
 backgrounds=np.array(f[keys[0]])
 images=np.array(f[keys[1]])/255
 labels=np.array(f[keys[2]])
+clabels=ohe(labels)
 pl.figure(figsize=(2,3)); il=10**4
 pl.title('Label: %s \n'%letters[labels[il]-1]+\
          'Background: %s'%backgrounds[il],
@@ -159,30 +156,13 @@ pl.title('Label: %s \n'%letters[labels[il]-1]+\
 pl.imshow(images[il]); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-cbackgrounds,clabels=ohe(backgrounds),ohe(labels)
-pd.DataFrame([labels[97:103],clabels[97:103]]).T
-</script></div><br/>
-<div class="linked"><script type="text/x-sage">
-ctargets=np.concatenate((clabels,cbackgrounds),axis=1)
-pd.DataFrame([clabels.shape,cbackgrounds.shape,ctargets.shape])
-</script></div><br/>
-<div class="linked"><script type="text/x-sage">
 x_train1,x_valid1,x_test1,\
 y_train1,y_valid1,y_test1=tts(images,clabels)
-x_train2,x_valid2,x_test2,\
-y_train2,y_valid2,y_test2=tts(images,ctargets)
-x_train1,x_valid1,x_test1=\
-resh(x_train1),resh(x_valid1),resh(x_test1)
-x_train2,x_valid2,x_test2=\
-resh(x_train2),resh(x_valid2),resh(x_test2)
 sh=[el.shape for el in \
-[x_train1,y_train1,x_valid1,y_valid1,x_test1,y_test1,
- x_train2,y_train2,x_valid2,y_valid2,x_test2,y_test2]]
-pd.DataFrame(sh)
-</script></div><br/>
-<div class="linked"><script type="text/x-sage">
+[x_train1,y_train1,x_valid1,y_valid1,x_test1,y_test1]]
 del images,labels,backgrounds
 del clabels,cbackgrounds,ctargets
+pd.DataFrame(sh)
 </script></div><br/>
       <h2>✒️ &nbsp; Step 2. </h2>
 <div class="linked"><script type="text/x-sage">
