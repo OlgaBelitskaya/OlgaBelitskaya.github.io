@@ -212,20 +212,20 @@ history_plot(history)
 vgg16model.load_weights(fw)
 vgg16model.evaluate(pvx_test1,y_test1)
 </script></div><br/> 
-<p>ResNet152V2</p>
+<p>VGG19</p>
 <div class="linked"><script type="text/x-sage">
-from keras.applications.resnet_v2 import ResNet152V2
-RNbmodel=ResNet152V2(weights='imagenet',include_top=False)
-pvx_train1=RNbmodel.predict(x_train1)
-pvx_valid1=RNbmodel.predict(x_valid1)
-pvx_test1=RNbmodel.predict(x_test1)
+from keras.applications.vgg16 import VGG19
+vgg19bmodel=VGG19(weights='imagenet',include_top=False)
+pvx_train1=vgg19bmodel.predict(x_train1)
+pvx_valid1=vgg19bmodel.predict(x_valid1)
+pvx_test1=vgg19bmodel.predict(x_test1)
 pvx_train1=pvx_train1.reshape(-1,1,1,pvx_train1.shape[3])
 pvx_valid1=pvx_valid1.reshape(-1,1,1,pvx_valid1.shape[3])
 pvx_test1=pvx_test1.reshape(-1,1,1,pvx_test1.shape[3])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 sh=pvx_train1.shape[1:]
-def RNmodel():
+def vgg19model():
     model=Sequential()  
     model.add(GlobalAveragePooling2D(input_shape=sh))   
     model.add(Dense(int(2048)))
@@ -238,21 +238,21 @@ def RNmodel():
     model.compile(loss='categorical_crossentropy',
                   optimizer='nadam',metrics=['accuracy'])
     return model
-RNmodel=RNmodel()
+vgg19model=vgg19model()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,save_best_only=True)
 lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
                                verbose=i2,factor=float(.75))
-history=RNmodel.fit(pvx_train1,y_train1, 
-                    validation_data=(pvx_valid1,y_valid1), 
-                    epochs=int(10),batch_size=int(128),verbose=i2, 
-                    callbacks=[checkpointer,lr_reduction])
+history=vgg19model.fit(pvx_train1,y_train1, 
+                       validation_data=(pvx_valid1,y_valid1), 
+                       epochs=int(10),batch_size=int(128),verbose=i2, 
+                       callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 history_plot(history)
-RNmodel.load_weights(fw)
-RNmodel.evaluate(pvx_test1,y_test1)
+vgg19model.load_weights(fw)
+vgg19model.evaluate(pvx_test1,y_test1)
 </script></div><br/>
   </body>
 </html>      
