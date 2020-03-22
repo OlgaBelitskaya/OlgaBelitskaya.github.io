@@ -225,6 +225,26 @@ pvx_valid1=pvx_valid1.reshape(-1,1,1,pvx_valid1.shape[3])
 pvx_test1=pvx_test1.reshape(-1,1,1,pvx_test1.shape[3])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
+sh=pvx_train1.shape[1:]
+def RNmodel():
+    model=Sequential()  
+    model.add(GlobalAveragePooling2D(input_shape=sh))   
+    model.add(Dense(int(2048)))
+    model.add(LeakyReLU(alpha=float(.02)))
+    model.add(Dropout(float(.25))) 
+    model.add(Dense(int(512)))
+    model.add(LeakyReLU(alpha=float(.02)))
+    model.add(Dropout(float(.25)))  
+    model.add(Dense(int(128)))
+    model.add(LeakyReLU(alpha=float(.02)))
+    model.add(Dropout(float(.25)))
+    model.add(Dense(int(33),activation='softmax'))    
+    model.compile(loss='categorical_crossentropy',
+                  optimizer='nadam',metrics=['accuracy'])
+    return model
+RNmodel=RNmodel()
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
 
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
