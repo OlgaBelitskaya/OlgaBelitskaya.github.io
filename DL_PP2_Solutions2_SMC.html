@@ -85,10 +85,13 @@ from keras.preprocessing.image import ImageDataGenerator
 from keras.models import Sequential,load_model,Model
 from keras.layers import Input,Activation,Dense,LSTM
 from keras.layers import Flatten,Dropout,BatchNormalization
-from keras.layers import Conv2D,MaxPooling2D,GlobalMaxPooling2D
+from keras.layers import Conv2D,MaxPooling2D
+from keras.layers import GlobalAveragePooling2D,GlobalMaxPooling2D
 from keras.layers.advanced_activations import PReLU,LeakyReLU
 i0,i1,i2,i3,i4,i5,i8=\
 int(0),int(1),int(2),int(3),int(4),int(5),int(8)
+fw='weights.letter.hdf5'
+n1,n2=int(3000),int(500)
 np.set_printoptions(precision=6)
 from keras import __version__
 print('keras version:', __version__)
@@ -181,21 +184,36 @@ pd.DataFrame(sh)
 del images,labels,backgrounds
 del clabels,cbackgrounds,ctargets
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-fw='weights.letter.hdf5'
-dr,fr,al=float(.2),float(.2),float(.02)
-i10,i16,i32,i33=int(10),int(16),int(32),int(33)
-i48,i64,i96=int(48),int(64),int(96)
-i100,i128,i196,i200=int(100),int(128),int(196),int(200)
-i256,i512,i1024=int(256),int(512),int(1024)
-n1,n2=int(3000),int(500)
-</script></div><br/>
       <h2>✒️ &nbsp; Step 2. </h2>
 <div class="linked"><script type="text/x-sage">
-
+from keras.applications.vgg19 import VGG19,preprocess_input as prei19
+vgg19bmodel=VGG19(weights='imagenet',include_top=False)
+pvx_train1=vgg19bmodel.predict(x_train1[:n1])
+pvx_valid1=vgg19bmodel.predict(x_valid1[:n2])
+pvx_test1=vgg19bmodel.predict(x_test1[:n2])
+pvx_train1=pvx_train1.reshape(-1,1,1,pvx_train1.shape[3])
+pvx_valid1=pvx_valid1.reshape(-1,1,1,pvx_valid1.shape[3])
+pvx_test1=pvx_test1.reshape(-1,1,1,pvx_test1.shape[3])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+sh=pvx_train1.shape[1:]
+def vgg19model():
+    model=Sequential()  
+    model.add(GlobalAveragePooling2D(input_shape=sh))   
+    model.add(Dense(int(2048)))
+    model.add(LeakyReLU(alpha=float(.02)))
+    model.add(Dropout(float(.25)))        
+    model.add(Dense(int(512)))
+    model.add(LeakyReLU(alpha=float(.02)))
+    model.add(Dropout(float(.25)))  
+    model.add(Dense(int(128)))
+    model.add(LeakyReLU(alpha=float(.02)))
+    model.add(Dropout(float(.25))) 
+    model.add(Dense(int(33),activation='softmax'))    
+    model.compile(loss='categorical_crossentropy',
+                  optimizer='nadam',metrics=['accuracy'])
+    return model
+vgg19model=vgg19model()
 </script></div><br/>  
 <div class="linked"><script type="text/x-sage">
 
