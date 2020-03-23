@@ -54,7 +54,7 @@ def display_images(original,style,fpath=fpath):
     output_file.close(); input_file.close()
     original_img=cv2.imread(original)
     style_img=cv2.imread(style)    
-    pl.figure(1,figsize=(12,4))
+    pl.figure(1,figsize=(8,4))
     pl.subplot(121)
     pl.title("Shape of the original image: %s"%str(original_img.shape))
     pl.imshow(cv2.cvtColor(original_img,cv2.COLOR_BGR2RGB))
@@ -72,7 +72,15 @@ picture02=cv2.resize(picture02,(pattern02.shape[1],pattern02.shape[0]))\
 picture02.shape,pattern02.shape
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+def preprocess(img):
+    img=img.copy(); img=np.expand_dims(img,axis=0) 
+    return ks.applications.vgg16.preprocess_input(img)
+def deprocess(img):
+    img=img.copy()[0]                        
+    img[:,:,0]+=103.939; img[:,:,1]+=116.779; img[:,:,2]+=123.68             
+    img=img[:,:,::-1]              
+    img=np.clip(img,0,255)         
+    return img.astype('uint8') 
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
