@@ -42,6 +42,7 @@ import warnings; warnings.filterwarnings('ignore')
 import urllib,cv2
 import numpy as np,tensorflow as tf,pylab as pl,keras as ks
 from tqdm import tqdm
+i0,i1,i2,i3=int(0),int(1),int(2),int(3)
 fpath='https://olgabelitskaya.github.io/'
 </script></div><br/>
     <h2>✒️ &nbsp; Displaying Images</h2> 
@@ -70,19 +71,22 @@ display_images('picture02.png','pattern02.png')
 <div class="linked"><script type="text/x-sage">
 picture02=cv2.imread('picture02.png').astype('float32')
 pattern02=cv2.imread('pattern02.png').astype('float32')
-picture02=cv2.resize(picture02,(pattern02.shape[1],pattern02.shape[0]))\
-.astype('float32')
+picture02=cv2.resize(picture02,
+                     (pattern02.shape[i1],pattern02.shape[i0]))
+picture02=picture02.astype('float32')
 picture02.shape,pattern02.shape
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def preprocess(img):
-    img=img.copy(); img=np.expand_dims(img,axis=0) 
+    img=img.copy(); img=np.expand_dims(img,axis=i0) 
     return ks.applications.vgg16.preprocess_input(img)
 def deprocess(img):
-    img=img.copy()[0]                        
-    img[:,:,0]+=103.939; img[:,:,1]+=116.779; img[:,:,2]+=123.68             
-    img=img[:,:,::-1]              
-    img=np.clip(img,0,255)         
+    img=img.copy()[i0]                        
+    img[:,:,i0]+=float(103.939)
+    img[:,:,i1]+=float(116.779)
+    img[:,:,i2]+=float(123.68 )            
+    img=img[:,:,::-i1]              
+    img=np.clip(img,i0,int(255))         
     return img.astype('uint8') 
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
@@ -94,7 +98,7 @@ def inputs(original_img,style_img):
 original_input2,style_input2,generated_input2=\
 inputs(picture02,pattern02)
 input_tensor2=tf.concat([original_input2,style_input2,
-                         generated_input2],axis=0)
+                         generated_input2],axis=i0)
 input_tensor2.shape
 </script></div><br/>
     <h2>✒️ &nbsp; VGG16 Usage</h2>    
