@@ -145,13 +145,34 @@ variation_loss2=calculate_variation_loss(generated_input2)
 </script></div><br/>
     <h2>✒️ &nbsp; Generated Images</h2>       
 <div class="linked"><script type="text/x-sage">
-
+loss2=.5*original_loss2+1.*style_loss2+.1*variation_loss2    
+gradients2=ks.backend.gradients(loss2,generated_input2)[0]
+calculate2=ks.backend.function([generated_input2],[loss2,gradients2])
+generated_data2=preprocess(picture02)
+for i in tqdm(range(10)):
+    _,gradients_value2=calculate2([generated_data2])
+    generated_data2-=gradients_value2*.001
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+loss2=.5*original_loss2+1.*style_loss2+.1*variation_loss2    
+gradients2=ks.backend.gradients(loss2,generated_input2)[0]
+calculate2=ks.backend.function([generated_input2],[loss2,gradients2])
+generated_data22=preprocess(picture02)
+for i in tqdm(range(100)):
+    _,gradients_value2=calculate2([generated_data22])
+    generated_data22-=gradients_value2*.001
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+generated_image01=deprocess(generated_data2)
+generated_image02=deprocess(generated_data22)
+pl.figure(1,figsize=(8,16))
+pl.subplot(211)
+pl.title("Loss function: 0.5*original_loss+1.0*style_loss+0.1*variation_loss; 10 steps")
+pl.imshow(cv2.cvtColor(generated_image01,cv2.COLOR_BGR2RGB))
+pl.subplot(212)
+pl.title("Loss function: 0.5*original_loss+1.0*style_loss+0.1*variation_loss; 100 steps")
+pl.imshow(cv2.cvtColor(generated_image02,cv2.COLOR_BGR2RGB))
+pl.show()
 </script></div><br/>
   </body>
 </html>
