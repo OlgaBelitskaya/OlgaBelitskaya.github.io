@@ -38,8 +38,26 @@ import numpy as np,tensorflow as tf,pylab as pl,keras as ks
 from tqdm import tqdm
 fpath='https://olgabelitskaya.github.io/'
 </script></div><br/>
+    <h2>✒️ &nbsp; Displaying Images</h2> 
 <div class="linked"><script type="text/x-sage">
-
+def display_images(original,style,fpath=fpath):
+    input_file=urllib.request.urlopen(fpath+original)
+    output_file=open(original,'wb'); 
+    output_file.write(input_file.read())
+    output_file.close(); input_file.close()
+    input_file=urllib.request.urlopen(fpath+style)
+    output_file=open(style,'wb'); 
+    output_file.write(input_file.read())
+    output_file.close(); input_file.close()
+    original_img=cv2.imread(original)
+    style_img=cv2.imread(style)    
+    pl.figure(1,figsize=(12,4))
+    pl.subplot(121)
+    pl.title("Shape of the original image: %s"%str(original_img.shape))
+    pl.imshow(cv2.cvtColor(original_img,cv2.COLOR_BGR2RGB))
+    pl.subplot(122)
+    pl.title("Shape of the style image: %s"%str(style_img.shape))
+    pl.imshow(cv2.cvtColor(style_img,cv2.COLOR_BGR2RGB)); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
