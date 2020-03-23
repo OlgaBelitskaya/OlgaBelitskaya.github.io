@@ -107,40 +107,42 @@ style_layers=['block1_conv1','block2_conv1','block3_conv1',
 vgg16_model.summary()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
+i0,i1,i2,i3=int(0),int(1),int(2),int(3)
 def calculate_original_loss(layer_dict,original_layer_names):
-    loss=0
+    loss=float(0)
     for name in original_layer_names:
         layer=layer_dict[name]
-        original_features=layer.output[0,:,:,:]  
-        generated_features=layer.output[2,:,:,:] 
+        original_features=layer.output[i0,:,:,:]  
+        generated_features=layer.output[i2,:,:,:] 
         loss+=ks.backend.sum(ks.backend.square(generated_features-original_features))
     return loss/len(original_layer_names)
 def gram_matrix(x):    
-    features=ks.backend.batch_flatten(ks.backend.permute_dimensions(x,(2,0,1))) 
+    features=ks.backend.batch_flatten(ks.backend.permute_dimensions(x,(i2,i0,i1))) 
     gram=ks.backend.dot(features,ks.backend.transpose(features))
     return gram
 def get_style_loss(style_features,generated_features,size):
     S=gram_matrix(style_features)
     G=gram_matrix(generated_features)
-    channels=3; size=pattern02.shape[0]*pattern02.shape[1]
-    return ks.backend.sum(ks.backend.square(S-G))/(4.*(channels**2)*(size**2))
+    channels=i3; size=pattern02.shape[i0]*pattern02.shape[i1]
+    return ks.backend.sum(ks.backend.square(S-G))/\
+          (float(4.)*(channels**i2)*(size**i2))
 def calculate_style_loss(layer_dict,style_layer_names,size):
-    loss=0
+    loss=float(0)
     for name in style_layer_names:
         layer=layer_dict[name]
-        style_features=layer.output[1,:,:,:] 
-        generated_features=layer.output[2,:,:,:] 
+        style_features=layer.output[i1,:,:,:] 
+        generated_features=layer.output[i2,:,:,:] 
         loss+=get_style_loss(style_features,generated_features,size) 
     return loss/len(style_layer_names)
 def calculate_variation_loss(x):
-    row_diff=ks.backend.square(x[:,:-1,:-1,:]-x[:,1:,:-1,:])
-    col_diff=ks.backend.square(x[:,:-1,:-1,:]-x[:,:-1,1:,:])
-    return ks.backend.sum(ks.backend.pow(row_diff+col_diff,1.25))
+    row_diff=ks.backend.square(x[:,:-i1,:-i1,:]-x[:,i1:,:-i1,:])
+    col_diff=ks.backend.square(x[:,:-i1,:-i1,:]-x[:,:-i1,i1:,:])
+    return ks.backend.sum(ks.backend.pow(row_diff+col_diff,float(1.25)))
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 original_loss2=calculate_original_loss(vgg16_layer_dict,['block5_conv2'])
 style_loss2=calculate_style_loss(vgg16_layer_dict,style_layers, 
-                                 pattern02.shape[0]*pattern02.shape[1])
+                                 pattern02.shape[i0]*pattern02.shape[i1])
 variation_loss2=calculate_variation_loss(generated_input2)
 </script></div><br/>
     <h2>✒️ &nbsp; Generated Images</h2>       
