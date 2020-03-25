@@ -65,6 +65,8 @@ def display_images(original,style,fpath=fpath):
     pl.subplot(122)
     pl.title("Shape of the style image: %s"%str(style_img.shape))
     pl.imshow(cv2.cvtColor(style_img,cv2.COLOR_BGR2RGB)); pl.show()
+</script></div><br/>    
+<div class="linked"><script type="text/x-sage">
 display_images('picture09.png','pattern09.png')
 </script></div><br/>
     <h2>✒️ &nbsp; Preprocessing</h2> 
@@ -89,13 +91,13 @@ def deprocess(img):
     img=img[:,:,::-i1]              
     img=np.clip(img,i0,int(255))         
     return img.astype('uint8')
-</script></div><br/>
-<div class="linked"><script type="text/x-sage">
 def inputs(original_img,style_img):
     original_input=tf.constant(preprocess(original_img))
     style_input=tf.constant(preprocess(style_img))
     generated_input=tf.placeholder(tf.float32,original_input.shape)
     return original_input,style_input,generated_input
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
 original_input2,style_input2,generated_input2=\
 inputs(picture02,pattern02)
 input_tensor2=tf.concat([original_input2,style_input2,
@@ -195,7 +197,21 @@ original_input,style_input,generated_input=\
 inputs(picture01,pattern01)
 input_tensor=tf.concat([original_input,style_input,
                         generated_input],axis=i0)
-input_tensor.shape
+vgg16_model=ks.applications.vgg16.\
+VGG16(input_tensor=input_tensor,include_top=False)
+vgg16_layer_dict={layer.name:layer for layer in vgg16_model.layers}
+original_loss=calculate_original_loss(vgg16_layer_dict,['block5_conv2'])
+style_loss=calculate_style_loss(vgg16_layer_dict,style_layers, 
+                                 pattern01.shape[i0]*pattern01.shape[i1])
+variation_loss=calculate_variation_loss(generated_input)
+ol,sl,vl,st=float(.5),float(1.),float(.1),i2
+loss=ol*original_loss+sl*style_loss+vl*variation_loss    
+gradients=ks.backend.gradients(loss,generated_input)[i0]
+calculate=ks.backend.function([generated_input],[loss,gradients])
+generated_data=preprocess(picture01)
+for i in tqdm(range(st)):
+    _,gradients_value=calculate([generated_data])
+    generated_data-=gradients_value*float(.001)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
