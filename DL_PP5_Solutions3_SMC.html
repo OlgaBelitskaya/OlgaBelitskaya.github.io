@@ -47,11 +47,35 @@ fpath='https://olgabelitskaya.github.io/'
 </script></div><br/>
     <h2>✒️ &nbsp; Displaying Images</h2> 
 <div class="linked"><script type="text/x-sage">
-
+def display_images(original,style,fpath=fpath):
+    input_file=urllib.request.urlopen(fpath+original)
+    output_file=open(original,'wb'); 
+    output_file.write(input_file.read())
+    output_file.close(); input_file.close()
+    input_file=urllib.request.urlopen(fpath+style)
+    output_file=open(style,'wb'); 
+    output_file.write(input_file.read())
+    output_file.close(); input_file.close()
+    original_img=cv2.imread(original)
+    style_img=cv2.imread(style)    
+    pl.figure(1,figsize=(8,4))
+    pl.subplot(121)
+    pl.title("Shape of the original image: %s"%str(original_img.shape))
+    pl.imshow(cv2.cvtColor(original_img,cv2.COLOR_BGR2RGB))
+    pl.subplot(122)
+    pl.title("Shape of the style image: %s"%str(style_img.shape))
+    pl.imshow(cv2.cvtColor(style_img,cv2.COLOR_BGR2RGB)); pl.show()
+display_images('picture09.png','pattern09.png')
 </script></div><br/>
     <h2>✒️ &nbsp; Preprocessing</h2> 
 <div class="linked"><script type="text/x-sage">
-
+picture02=cv2.imread('picture09.png').astype('float32')
+pattern02=cv2.imread('pattern09.png').astype('float32')
+picture02=cv2.resize(picture02,(int(300),int(300)))
+pattern02=cv2.resize(pattern02,(int(300),int(300)))
+picture02=picture02.astype('float32')
+pattern02=pattern02.astype('float32')
+picture02.shape,pattern02.shape
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
  
