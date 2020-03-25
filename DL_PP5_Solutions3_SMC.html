@@ -71,8 +71,8 @@ display_images('picture09.png','pattern09.png')
 <div class="linked"><script type="text/x-sage">
 picture02=cv2.imread('picture09.png').astype('float32')
 pattern02=cv2.imread('pattern09.png').astype('float32')
-picture02=cv2.resize(picture02,(int(300),int(300)))
-pattern02=cv2.resize(pattern02,(int(300),int(300)))
+picture02=cv2.resize(picture02,(int(360),int(330)))
+pattern02=cv2.resize(pattern02,(int(360),int(330)))
 picture02=picture02.astype('float32')
 pattern02=pattern02.astype('float32')
 picture02.shape,pattern02.shape
@@ -168,13 +168,33 @@ pl.show(); table(ti)
 </script></div><br/>
     <h2>✒️ &nbsp; Displaying Vertical Images</h2>       
 <div class="linked"><script type="text/x-sage">
+display_images('picture09.png','pattern09.png')
+</script></div><br/>
+    <h2>✒️ &nbsp; Preprocessing</h2> 
+<div class="linked"><script type="text/x-sage">
+def rr_img(image,angle,width,height):
+    [h,w]=image.shape[:i2]; x,y=int(w//2),int(h//2)
+    M=cv2.getRotationMatrix2D((x,y),-angle,float(1.))
+    cos,sin=np.abs(M[i0,i0]),np.abs(M[i0,i1])
+    nw,nh=int((h*sin)+(w*cos)),int((h*cos)+(w*sin))
+    M[i0,i2]+=(nw/2)-x; M[1,2]+=(nh/2)-y
+    img=cv2.warpAffine(image,M,(nw,nh))
+    return cv2.resize(img,(width,height)).astype('float32')
+</script></div><br/>  
+<div class="linked"><script type="text/x-sage">
+picture01=cv2.imread('picture01.png').astype('float32')
+pattern01=cv2.imread('pattern01.png').astype('float32')
+picture01=rr_img(picture01,int(90),int(400),int(300))
+pattern01=rr_img(pattern01,int(90),int(400),int(300))
+picture01=picture01.astype('float32')
+pattern01=pattern01.astype('float32')
+picture01.shape,pattern01.shape
+</script></div><br/>   
+<div class="linked"><script type="text/x-sage">
 
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
-</script></div><br/>  
-<div class="linked"><script type="text/x-sage">
-
-</script></div><br/>      
+</script></div><br/> 
   </body>
 </html>
