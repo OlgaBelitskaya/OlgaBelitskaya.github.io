@@ -45,7 +45,7 @@ from tqdm import tqdm
 i0,i1,i2,i3=int(0),int(1),int(2),int(3)
 fpath='https://olgabelitskaya.github.io/'
 </script></div><br/>
-    <h2>✒️ &nbsp; Displaying Images</h2> 
+    <h2>✒️ &nbsp; Displaying Horizontal Images</h2> 
 <div class="linked"><script type="text/x-sage">
 def display_images(original,style,fpath=fpath):
     input_file=urllib.request.urlopen(fpath+original)
@@ -78,20 +78,69 @@ pattern02=pattern02.astype('float32')
 picture02.shape,pattern02.shape
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
- 
+def preprocess(img):
+    img=img.copy(); img=np.expand_dims(img,axis=i0) 
+    return ks.applications.vgg16.preprocess_input(img)
+def deprocess(img):
+    img=img.copy()[i0]                        
+    img[:,:,i0]+=float(103.939)
+    img[:,:,i1]+=float(116.779)
+    img[:,:,i2]+=float(123.68 )            
+    img=img[:,:,::-i1]              
+    img=np.clip(img,i0,int(255))         
+    return img.astype('uint8')
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+def inputs(original_img,style_img):
+    original_input=tf.constant(preprocess(original_img))
+    style_input=tf.constant(preprocess(style_img))
+    generated_input=tf.placeholder(tf.float32,original_input.shape)
+    return original_input,style_input,generated_input
+original_input2,style_input2,generated_input2=\
+inputs(picture02,pattern02)
+input_tensor2=tf.concat([original_input2,style_input2,
+                         generated_input2],axis=i0)
+input_tensor2.shape
 </script></div><br/>
     <h2>✒️ &nbsp; VGG16 Usage</h2>    
 <div class="linked"><script type="text/x-sage">
-
+vgg16_model=ks.applications.vgg16.\
+VGG16(input_tensor=input_tensor2,include_top=False)
+vgg16_layer_dict={layer.name:layer for layer in vgg16_model.layers}
+style_layers=['block1_conv1','block2_conv1','block3_conv1',
+              'block4_conv1','block5_conv1']
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
-</script></div><br/>
-<div class="linked"><script type="text/x-sage">
-
+def calculate_original_loss(layer_dict,original_layer_names):
+    loss=float(0)
+    for name in original_layer_names:
+        layer=layer_dict[name]
+        original_features=layer.output[i0,:,:,:]  
+        generated_features=layer.output[i2,:,:,:] 
+        loss+=ks.backend.sum(ks.backend.square(generated_features-original_features))
+    return loss/len(original_layer_names)
+def gram_matrix(x):    
+    features=ks.backend.batch_flatten(ks.backend.permute_dimensions(x,(i2,i0,i1))) 
+    gram=ks.backend.dot(features,ks.backend.transpose(features))
+    return gram
+def get_style_loss(style_features,generated_features,size):
+    S=gram_matrix(style_features)
+    G=gram_matrix(generated_features)
+    channels=i3; size=pattern02.shape[i0]*pattern02.shape[i1]
+    return ks.backend.sum(ks.backend.square(S-G))/\
+          (float(4.)*(channels**i2)*(size**i2))
+def calculate_style_loss(layer_dict,style_layer_names,size):
+    loss=float(0)
+    for name in style_layer_names:
+        layer=layer_dict[name]
+        style_features=layer.output[i1,:,:,:] 
+        generated_features=layer.output[i2,:,:,:] 
+        loss+=get_style_loss(style_features,generated_features,size) 
+    return loss/len(style_layer_names)
+def calculate_variation_loss(x):
+    row_diff=ks.backend.square(x[:,:-i1,:-i1,:]-x[:,i1:,:-i1,:])
+    col_diff=ks.backend.square(x[:,:-i1,:-i1,:]-x[:,:-i1,i1:,:])
+    return ks.backend.sum(ks.backend.pow(row_diff+col_diff,float(1.25)))
 </script></div><br/>
     <h2>✒️ &nbsp; Generated Images</h2>       
 <div class="linked"><script type="text/x-sage">
@@ -100,6 +149,10 @@ picture02.shape,pattern02.shape
 <div class="linked"><script type="text/x-sage">
 
 </script></div><br/>
+<div class="linked"><script type="text/x-sage">
+
+</script></div><br/>
+    <h2>✒️ &nbsp; Displaying Horizontal Images</h2>       
 <div class="linked"><script type="text/x-sage">
 
 </script></div><br/>
