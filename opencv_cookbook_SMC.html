@@ -36,9 +36,22 @@ import urllib,cv2
 from skimage import io,transform
 import numpy as np,pylab as pl
 import seaborn as sb,scipy as sp
-fpath='https://olgabelitskaya.github.io/'
 pl.style.use('seaborn-whitegrid')
 pl.rcParams['figure.figsize']=(7,7)
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+fpath='https://olgabelitskaya.github.io/'
+def get_image(original,flag=cv2.COLOR_BGR2RGB,fpath=fpath):
+    input_file=urllib.request.urlopen(fpath+original)
+    output_file=open(original,'wb'); 
+    output_file.write(input_file.read())
+    output_file.close(); input_file.close()
+    img=cv2.imread(original)
+    return cv2.cvtColor(img,flag)
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+ColorFlags=[flag for flag in dir(cv2) if flag.startswith('COLOR')]
+print (np.array(ColorFlags[:30]))
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
