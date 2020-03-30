@@ -61,6 +61,32 @@ cat_img=get_image('cat.png')
 sport_img=get_image('sport.jpg')
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
+img=plist[2]
+st='Image parameters: size - %s; shape - %s; type - %s'
+pretty_print(st%(img.size,img.shape,img.dtype))
+pl.imshow(img); pl.show()
+</script></div><br/>
+    <h2>✒️ &nbsp; Simple Manipulations</h2>       
+<div class="linked"><script type="text/x-sage">
+pl.rcParams['figure.figsize']=(14,7)
+pl.figure(1); pl.subplot(121)
+img_inv=cv2.bitwise_not(img) # invert colors
+pl.imshow(img_inv)
+img_w2b=img.copy(); pl.subplot(122)
+# white to black
+img_w2b[np.where((img_w2b==[255,255,255]).all(axis=2))]=[0,0,0]
+pl.imshow(img_w2b); pl.show()
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+# gray scaled
+pl.figure(1); pl.subplot(121)
+img_gray1=cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
+pl.imshow(img_gray1)
+pl.subplot(122)
+img_gray2=cv2.cvtColor(img_w2b,cv2.COLOR_RGB2GRAY)
+pl.imshow(img_gray2); pl.show()
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
 
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
