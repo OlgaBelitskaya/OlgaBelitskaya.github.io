@@ -103,6 +103,7 @@ pl.imshow(img_cvgray_resized); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 # different effects with ColorFlags
+img0=plist[0]
 hsv_img=cv2.cvtColor(img0,cv2.COLOR_RGB2HSV_FULL)
 lab_img=cv2.cvtColor(img0,cv2.COLOR_RGB2LAB)
 pl.subplot(121); pl.imshow(hsv_img)
@@ -110,7 +111,7 @@ pl.subplot(122); pl.imshow(lab_img); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 # split color channels
-img0=plist[0]; b,g,r=cv2.split(img0)
+b,g,r=cv2.split(img0)
 # merge channels
 img_merged=cv2.merge([b,g,r])
 # display one of the channels
@@ -214,8 +215,21 @@ pl.gca().invert_yaxis()
  for i in range(n)]
 pl.xticks([]); pl.yticks([]); pl.show()
 </script></div><br/>
+    <h2>✒️ &nbsp; Key Points</h2>
 <div class="linked"><script type="text/x-sage">
-
+orb_img=flower_img.copy()
+orb=cv2.ORB_create()
+keypoints=orb.detect(orb_img,None)
+keypoints,descriptors=orb.compute(orb_img,keypoints)
+cv2.drawKeypoints(orb_img,keypoints,orb_img)
+match_img=np.zeros(flower_img.shape,np.uint8)
+center_img=flower_img[60:140,90:180] 
+match_img[60:140,100:180]=[0,0,0] 
+center_img=cv2.flip(center_img,0)
+match_img[100:100+center_img.shape[0],
+          150:150+center_img.shape[1]]=center_img
+pl.figure(1,figsize=10); pl.subplot(121); pl.imshow(orb_img)
+pl.subplot(122); pl.imshow(match_img); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
