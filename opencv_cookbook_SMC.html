@@ -243,9 +243,21 @@ draw_matches=cv2.drawMatches(orb_img,keypoints,
                              matches[:9],orb_img)
 pl.figure(); pl.imshow(draw_matches); pl.show()
 </script></div><br/>
-      
+    <h2>✒️ &nbsp; Objects' Detection</h2>      
 <div class="linked"><script type="text/x-sage">
-
+url='haarcascade_frontalcatface.xml'
+input_file=urllib.request.urlopen(fpath+url)
+output_file=open(url,'wb')
+output_file.write(input_file.read())
+output_file.close(); input_file.close()
+gray_cat_img=cv2.cvtColor(cat_img,cv2.COLOR_RGB2GRAY)
+catface_img=cat_img.copy()
+catface_cascade=cv2.CascadeClassifier(url)
+catfaces=catface_cascade.detectMultiScale(gray_cat_img,1.095,6)
+for (x,y,w,h) in catfaces:
+    cv2.rectangle(catface_img,(x,y),(x+w,y+h),(0,255,0),3)
+pl.figure(1,figsize=6); pl.subplot(121); pl.imshow(cat_img)
+pl.subplot(122); pl.imshow(catface_img); pl.show() 
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
