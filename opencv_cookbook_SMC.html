@@ -33,7 +33,7 @@ path='/home/sc_work/.sage/local/lib/python3.7/site-packages'
 import sys; sys.path.append(path)
 import warnings; warnings.filterwarnings('ignore')
 import urllib,cv2
-from skimage import io,transform
+from skimage import io,transform,color,measure
 import numpy as np,pylab as pl
 import seaborn as sb,scipy as sp
 pl.style.use('seaborn-whitegrid')
@@ -136,7 +136,7 @@ img_twice=img.copy()
 img_fragment=img_twice[15:60,15:60]
 img_twice[105:105+img_fragment.shape[0],105:105+\
           img_fragment.shape[1]]=img_fragment
-pl.imshow(img_twice); pl.show()
+pl.figure(); pl.imshow(img_twice); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 # perspective transformation
@@ -184,8 +184,15 @@ pl.title('Erosion for Inverted')
 pl.xticks([]),pl.yticks([]); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+# morphological gradient
+gradient=cv2.morphologyEx(img,cv2.MORPH_GRADIENT,kernel)
+pl.subplot(1,2,1),pl.imshow(img)
+pl.title('Original Gray'),pl.xticks([]),pl.yticks([])
+pl.subplot(1,2,2),pl.imshow(gradient,cmap=pl.cm.bone)
+pl.title('Morphological Gradient')
+pl.xticks([]),pl.yticks([]); pl.show()
 </script></div><br/>
+    <h2>✒️ &nbsp; Advanced Transformations</h2> 
 <div class="linked"><script type="text/x-sage">
 
 </script></div><br/>
