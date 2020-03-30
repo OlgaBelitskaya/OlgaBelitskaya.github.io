@@ -67,25 +67,25 @@ pl.imshow(img); pl.show()
 </script></div><br/>
     <h2>✒️ &nbsp; Simple Manipulations</h2>       
 <div class="linked"><script type="text/x-sage">
-pl.figure(1,figsize=8); pl.subplot(121)
+fig=pl.figure(figsize=(8,4)); ax=fig.add_subplot(121)
 img_inv=cv2.bitwise_not(img) # invert colors
-pl.imshow(img_inv)
-img_w2b=img.copy(); pl.subplot(122)
+ax.imshow(img_inv)
+img_w2b=img.copy(); ax=fig.add_subplot(122)
 # white to black
 img_w2b[np.where((img_w2b==[255,255,255]).all(axis=2))]=[0,0,0]
-pl.imshow(img_w2b); pl.show()
+ax.imshow(img_w2b); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 # gray scaled
-pl.subplot(121)
+fig=pl.figure(figsize=(8,4)); ax=fig.add_subplot(121)
 img_gray1=cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
-pl.imshow(img_gray1)
-pl.subplot(122)
+ax.imshow(img_gray1)
+ax=fig.add_subplot(122)
 img_gray2=cv2.cvtColor(img_w2b,cv2.COLOR_RGB2GRAY)
-pl.imshow(img_gray2); pl.show()
+ax.imshow(img_gray2); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-N=50
+fig=pl.figure(figsize=(8,8)); N=50
 # skimage & opencv - grayscale, resize, invert
 img_skgray=io.imread('pattern03.jpeg',as_gray=True)
 img_skgray_resized=transform.resize(img_skgray,(N,N))
@@ -93,13 +93,13 @@ img_skgray_resized2=cv2.bitwise_not(img_skgray_resized)
 img_cvgray_resized=cv2.resize(img_gray1,(N,N),
                               interpolation=cv2.INTER_CUBIC)
 img_cvgray_resized2=cv2.bitwise_not(img_cvgray_resized)
-pl.subplot(221)
-pl.imshow(img_skgray_resized,cmap=pl.cm.Greys)
-pl.subplot(222); pl.imshow(img_skgray_resized2)
-pl.subplot(223)
-pl.imshow(img_cvgray_resized,cmap=pl.cm.Greys)
-pl.subplot(224)
-pl.imshow(img_cvgray_resized); pl.show()
+ax=fig.add_subplot(221)
+ax.imshow(img_skgray_resized,cmap=pl.cm.Greys)
+ax=fig.add_.subplot(222); ax.imshow(img_skgray_resized2)
+ax=fig.add_subplot(223)
+ax.imshow(img_cvgray_resized,cmap=pl.cm.Greys)
+ax=fig.add_subplot(224)
+ax.imshow(img_cvgray_resized); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 # different effects with ColorFlags
