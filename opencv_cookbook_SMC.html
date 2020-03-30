@@ -68,7 +68,7 @@ pl.imshow(img); pl.show()
 </script></div><br/>
     <h2>✒️ &nbsp; Simple Manipulations</h2>       
 <div class="linked"><script type="text/x-sage">
-pl.rcParams['figure.figsize']=(14,7)
+pl.rcParams['figure.figsize']=(12,6)
 pl.figure(1); pl.subplot(121)
 img_inv=cv2.bitwise_not(img) # invert colors
 pl.imshow(img_inv)
@@ -104,7 +104,17 @@ pl.subplot(224)
 pl.imshow(img_cvgray_resized); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+pl.rcParams['figure.figsize']=(8,8)
+# split color channels
+img0=plist[0]; b,g,r=cv2.split(img0)
+# merge channels
+img_merged=cv2.merge([b,g,r])
+# display one of the channels
+pl.figure(1); pl.subplot(231); pl.imshow(r,cmap=pl.cm.Reds_r)
+pl.subplot(232); pl.imshow(g,cmap=pl.cm.Greens_r)
+pl.subplot(233); pl.imshow(b,cmap=pl.cm.Blues_r)
+# display merged image
+pl.subplot(234); pl.imshow(img_merged); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
