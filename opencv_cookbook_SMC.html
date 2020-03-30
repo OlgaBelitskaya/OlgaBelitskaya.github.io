@@ -232,10 +232,23 @@ pl.figure(1,figsize=10); pl.subplot(121); pl.imshow(orb_img)
 pl.subplot(122); pl.imshow(match_img); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
+match_keypoints=orb.detect(match_img,None)
+match_keypoints,match_descriptors=\
+orb.compute(match_img,match_keypoints)
+brute_force=cv2.BFMatcher(cv2.NORM_HAMMING,crossCheck=True)
+matches=brute_force.match(descriptors,match_descriptors)
+matches=sorted(matches,key=lambda x:x.distance) 
+draw_matches=cv2.drawMatches(orb_img,keypoints,
+                             match_img,match_keypoints, 
+                             matches[:9],orb_img)
+pl.figure(); pl.imshow(draw_matches); pl.show()
+</script></div><br/>
+      
+<div class="linked"><script type="text/x-sage">
 
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
-</script></div><br/> 
+</script></div><br/>
   </body>
 </html>      
