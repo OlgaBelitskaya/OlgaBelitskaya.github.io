@@ -67,7 +67,7 @@ pl.imshow(img); pl.show()
 </script></div><br/>
     <h2>✒️ &nbsp; Simple Manipulations</h2>       
 <div class="linked"><script type="text/x-sage">
-pl.figure(1,figsize=(8,4)); pl.subplot(121)
+pl.figure(1,figsize=8); pl.subplot(121)
 img_inv=cv2.bitwise_not(img) # invert colors
 pl.imshow(img_inv)
 img_w2b=img.copy(); pl.subplot(122)
@@ -77,7 +77,7 @@ pl.imshow(img_w2b); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 # gray scaled
-pl.figure(1,figsize=(8,4)); pl.subplot(121)
+pl.figure(1,figsize=8); pl.subplot(121)
 img_gray1=cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
 pl.imshow(img_gray1)
 pl.subplot(122)
@@ -93,7 +93,7 @@ img_skgray_resized2=cv2.bitwise_not(img_skgray_resized)
 img_cvgray_resized=cv2.resize(img_gray1,(N,N),
                               interpolation=cv2.INTER_CUBIC)
 img_cvgray_resized2=cv2.bitwise_not(img_cvgray_resized)
-pl.figure(1,figsize=(8,8)); pl.subplot(221)
+pl.figure(1,figsize=8); pl.subplot(221)
 pl.imshow(img_skgray_resized,cmap=pl.cm.Greys)
 pl.subplot(222); pl.imshow(img_skgray_resized2)
 pl.subplot(223)
@@ -107,18 +107,16 @@ img0=plist[0]; b,g,r=cv2.split(img0)
 # merge channels
 img_merged=cv2.merge([b,g,r])
 # display one of the channels
-pl.figure(1,figsize=(8,8)) 
 pl.subplot(231); pl.imshow(r,cmap=pl.cm.Reds_r)
 pl.subplot(232); pl.imshow(g,cmap=pl.cm.Greens_r)
 pl.subplot(233); pl.imshow(b,cmap=pl.cm.Blues_r)
 # display merged image
-pl.subplot(234); pl.imshow(img_merged); pl.show()
+pl.subplot(236); pl.imshow(img_merged); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 # different effects with ColorFlags
 hsv_img=cv2.cvtColor(img0,cv2.COLOR_RGB2HSV_FULL)
 lab_img=cv2.cvtColor(img0,cv2.COLOR_RGB2LAB)
-pl.figure(1,figsize=(8,4)) 
 pl.subplot(121); pl.imshow(hsv_img)
 pl.subplot(122); pl.imshow(lab_img); pl.show()
 </script></div><br/>
@@ -126,8 +124,7 @@ pl.subplot(122); pl.imshow(lab_img); pl.show()
 # flip images
 img_vertical_flipped=cv2.flip(img,0)
 img_horizontal_flipped=cv2.flip(img,1)
-img_transposed=cv2.transpose(img)
-pl.figure(1,figsize=(9,3)) 
+img_transposed=cv2.transpose(img) 
 pl.subplot(131); pl.imshow(img_vertical_flipped)
 pl.subplot(132); pl.imshow(img_horizontal_flipped)
 pl.subplot(133); pl.imshow(img_transposed); pl.show()
@@ -142,10 +139,33 @@ img_twice[105:105+img_fragment.shape[0],105:105+\
 pl.imshow(img_twice); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+# perspective transformation
+rows,cols,ch=img.shape
+pts1=np.float32([[10,10],[140,40],[10,140],[140,100]])
+pts2=np.float32([[0,0],[150,0],[0,150],[150,150]])
+m=cv2.getPerspectiveTransform(pts1,pts2)
+dst=cv2.warpPerspective(img,m,(150,150))
+pl.subplot(121),pl.imshow(img),pl.title('Input')
+pl.scatter(pts1[:,0],pts1[:,1],c='g')
+pl.subplot(122),pl.imshow(dst),pl.title('Output')
+pl.xlim(-5,155); pl.ylim(155,-5)
+pl.scatter(pts2[:,0],pts2[:,1],c='g'); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+# gradient filters
+img2=img0.copy()
+img2_gray=cv2.cvtColor(img2,cv2.COLOR_BGR2GRAY)
+laplacian=cv2.Laplacian(img2_gray,cv2.CV_64F,ksize=5)
+sobel=cv2.Sobel(img2_gray,cv2.CV_64F,1,0,ksize=3)
+scharr=cv2.Scharr(img2_gray,cv2.CV_64F,1,0)
+pl.subplot(1,4,1),pl.imshow(img2)
+pl.title('Original'),pl.xticks([]),pl.yticks([])
+pl.subplot(1,4,2),pl.imshow(laplacian,cmap=pl.cm.bone)
+pl.title('Laplacian'),pl.xticks([]),pl.yticks([])
+pl.subplot(1,4,3),pl.imshow(sobel,cmap=pl.cm.bone)
+pl.title('Sobel'),pl.xticks([]),pl.yticks([])
+pl.subplot(1,4,4),pl.imshow(scharr,cmap=pl.cm.bone)
+pl.title('Scharr'),pl.xticks([]),pl.yticks([]); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
