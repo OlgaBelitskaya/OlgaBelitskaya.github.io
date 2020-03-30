@@ -103,11 +103,11 @@ ax.imshow(img_cvgray_resized); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 # different effects with ColorFlags
-pl.figure(1,figsize=6); img0=plist[0]
+fig=pl.figure(figsize=(8,4)) img0=plist[0]
 hsv_img=cv2.cvtColor(img0,cv2.COLOR_RGB2HSV_FULL)
 lab_img=cv2.cvtColor(img0,cv2.COLOR_RGB2LAB)
-pl.subplot(121); pl.imshow(hsv_img)
-pl.subplot(122); pl.imshow(lab_img); pl.show()
+ax=fig.add_subplot(121); ax.imshow(hsv_img)
+ax=fig.add_subplot(122); ax.imshow(lab_img); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 # split color channels
@@ -115,20 +115,22 @@ b,g,r=cv2.split(img0)
 # merge channels
 img_merged=cv2.merge([b,g,r])
 # display one of the channels
-pl.subplot(231); pl.imshow(r,cmap=pl.cm.Reds_r)
-pl.subplot(232); pl.imshow(g,cmap=pl.cm.Greens_r)
-pl.subplot(233); pl.imshow(b,cmap=pl.cm.Blues_r)
+fig=pl.figure(figsize=(9,9))
+ax=fig.add_subplot(231); ax.imshow(r,cmap=pl.cm.Reds_r)
+ax=fig.add_subplot(232); ax.imshow(g,cmap=pl.cm.Greens_r)
+ax=fig.add_subplot(233); ax.imshow(b,cmap=pl.cm.Blues_r)
 # display merged image
-pl.subplot(236); pl.imshow(img_merged); pl.show()
+ax=fig.add_subplot(236); ax.imshow(img_merged); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 # flip images
 img_vertical_flipped=cv2.flip(img,0)
 img_horizontal_flipped=cv2.flip(img,1)
-img_transposed=cv2.transpose(img) 
-pl.subplot(131); pl.imshow(img_vertical_flipped)
-pl.subplot(132); pl.imshow(img_horizontal_flipped)
-pl.subplot(133); pl.imshow(img_transposed); pl.show()
+img_transposed=cv2.transpose(img)
+fig=pl.figure(figsize=(9,4))
+ax=fig.add_subplot(131); ax.imshow(img_vertical_flipped)
+ax=fig.add_subplot(132); ax.imshow(img_horizontal_flipped)
+ax=fig.add_subplot(133); ax.imshow(img_transposed); pl.show()
 </script></div><br/>
     <h2>✒️ &nbsp; Advanced Transformations</h2> 
 <div class="linked"><script type="text/x-sage">
