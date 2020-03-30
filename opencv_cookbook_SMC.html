@@ -37,7 +37,6 @@ from skimage import io,transform
 import numpy as np,pylab as pl
 import seaborn as sb,scipy as sp
 pl.style.use('seaborn-whitegrid')
-pl.rcParams['figure.figsize']=(7,7)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 fpath='https://olgabelitskaya.github.io/'
@@ -68,8 +67,7 @@ pl.imshow(img); pl.show()
 </script></div><br/>
     <h2>✒️ &nbsp; Simple Manipulations</h2>       
 <div class="linked"><script type="text/x-sage">
-pl.rcParams['figure.figsize']=(12,6)
-pl.figure(1); pl.subplot(121)
+pl.figure(1,figsize=(8,4)); pl.subplot(121)
 img_inv=cv2.bitwise_not(img) # invert colors
 pl.imshow(img_inv)
 img_w2b=img.copy(); pl.subplot(122)
@@ -79,7 +77,7 @@ pl.imshow(img_w2b); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 # gray scaled
-pl.figure(1); pl.subplot(121)
+pl.figure(1,figsize=(8,4)); pl.subplot(121)
 img_gray1=cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
 pl.imshow(img_gray1)
 pl.subplot(122)
@@ -87,7 +85,7 @@ img_gray2=cv2.cvtColor(img_w2b,cv2.COLOR_RGB2GRAY)
 pl.imshow(img_gray2); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-pl.rcParams['figure.figsize']=(8,8); N=50
+N=50
 # skimage & opencv - grayscale, resize, invert
 img_skgray=io.imread('pattern03.jpeg',as_gray=True)
 img_skgray_resized=transform.resize(img_skgray,(N,N))
@@ -95,7 +93,7 @@ img_skgray_resized2=cv2.bitwise_not(img_skgray_resized)
 img_cvgray_resized=cv2.resize(img_gray1,(N,N),
                               interpolation=cv2.INTER_CUBIC)
 img_cvgray_resized2=cv2.bitwise_not(img_cvgray_resized)
-pl.figure(1); pl.subplot(221)
+pl.figure(1,figsize=(8,8)); pl.subplot(221)
 pl.imshow(img_skgray_resized,cmap=pl.cm.Greys)
 pl.subplot(222); pl.imshow(img_skgray_resized2)
 pl.subplot(223)
@@ -104,17 +102,28 @@ pl.subplot(224)
 pl.imshow(img_cvgray_resized); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-pl.rcParams['figure.figsize']=(8,8)
 # split color channels
 img0=plist[0]; b,g,r=cv2.split(img0)
 # merge channels
 img_merged=cv2.merge([b,g,r])
 # display one of the channels
-pl.figure(1); pl.subplot(231); pl.imshow(r,cmap=pl.cm.Reds_r)
+pl.figure(1,figsize=(8,8)) 
+pl.subplot(231); pl.imshow(r,cmap=pl.cm.Reds_r)
 pl.subplot(232); pl.imshow(g,cmap=pl.cm.Greens_r)
 pl.subplot(233); pl.imshow(b,cmap=pl.cm.Blues_r)
 # display merged image
 pl.subplot(234); pl.imshow(img_merged); pl.show()
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+# different effects with ColorFlags
+hsv_img=cv2.cvtColor(img0,cv2.COLOR_RGB2HSV_FULL)
+lab_img=cv2.cvtColor(img0,cv2.COLOR_RGB2LAB)
+pl.figure(1,figsize=(8,4)) 
+pl.subplot(121); pl.imshow(hsv_img)
+pl.subplot(122); pl.imshow(lab_img); pl.show()
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
