@@ -237,8 +237,9 @@ match_img[60:140,100:180]=[0,0,0]
 center_img=cv2.flip(center_img,0)
 match_img[100:100+center_img.shape[0],
           150:150+center_img.shape[1]]=center_img
-pl.figure(1,figsize=10); pl.subplot(121); pl.imshow(orb_img)
-pl.subplot(122); pl.imshow(match_img); pl.show()
+fig=pl.figure(figsize=(9,4))
+ax=fig.add_subplot(121); ax.imshow(orb_img)
+ax=fig.add_subplot(122); ax.imshow(match_img); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 match_keypoints=orb.detect(match_img,None)
@@ -250,7 +251,8 @@ matches=sorted(matches,key=lambda x:x.distance)
 draw_matches=cv2.drawMatches(orb_img,keypoints,
                              match_img,match_keypoints, 
                              matches[:9],orb_img)
-pl.figure(); pl.imshow(draw_matches); pl.show()
+fig=pl.figure(figsize=(9,4)) 
+pl.imshow(draw_matches); pl.show()
 </script></div><br/>
     <h2>✒️ &nbsp; Objects' Detection</h2>      
 <div class="linked"><script type="text/x-sage">
