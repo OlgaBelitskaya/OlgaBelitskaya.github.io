@@ -51,7 +51,7 @@ def get_image(original,flag=cv2.COLOR_BGR2RGB,fpath=fpath):
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 ColorFlags=[flag for flag in dir(cv2) if flag.startswith('COLOR')]
-print (np.array(ColorFlags[:30]))
+pretty_print(np.array(ColorFlags[:30]))
 </script></div><br/>
     <h2>✒️ &nbsp; Data</h2> 
 <div class="linked"><script type="text/x-sage">
@@ -85,6 +85,26 @@ pl.imshow(img_gray1)
 pl.subplot(122)
 img_gray2=cv2.cvtColor(img_w2b,cv2.COLOR_RGB2GRAY)
 pl.imshow(img_gray2); pl.show()
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+pl.rcParams['figure.figsize']=(8,8); N=50
+# skimage & opencv - grayscale, resize, invert
+img_skgray=io.imread('pattern03.jpeg',as_gray=True)
+img_skgray_resized=transform.resize(img_skgray,(N,N))
+img_skgray_resized2=cv2.bitwise_not(img_skgray_resized)
+img_cvgray_resized=cv2.resize(img_gray1,(N,N),
+                              interpolation=cv2.INTER_CUBIC)
+img_cvgray_resized2=cv2.bitwise_not(img_cvgray_resized)
+pl.figure(1); pl.subplot(221)
+pl.imshow(img_skgray_resized,cmap=pl.cm.Greys)
+pl.subplot(222); pl.imshow(img_skgray_resized2)
+pl.subplot(223)
+pl.imshow(img_cvgray_resized,cmap=pl.cm.Greys)
+pl.subplot(224)
+pl.imshow(img_cvgray_resized); pl.show()
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
