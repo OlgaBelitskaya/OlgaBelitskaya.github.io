@@ -206,7 +206,25 @@ def simple_GAN(sample_size,
     return gan,generator,discriminator
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+sample_size    =i128     
+g_hidden_size  =i1024  # generator
+d_hidden_size  =i128   # discriminator
+leaky_alpha    =.01
+g_learning_rate=.00025 # generator
+d_learning_rate=.002   # discriminator
+epochs         =int(200)
+batch_size     =i128      
+valid_size     =i32     
+smooth         =.1
+def real_fake_labels(size):
+    return np.ones([size,i1]),np.zeros([size,i1])
+y_real5,y_fake5=real_fake_labels(5)
+print('Real\n',y_real5,'\nFake\n',y_fake5)
+y_train_real,y_train_fake=real_fake_labels(batch_size)
+y_valid_real,y_valid_fake=real_fake_labels(valid_size)
+gan,generator,discriminator=\
+simple_GAN(sample_size,g_hidden_size,d_hidden_size,
+           leaky_alpha,g_learning_rate,d_learning_rate)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
