@@ -69,7 +69,7 @@ from keras.layers.advanced_activations import PReLU,LeakyReLU
 i0,i1,i2,i3,i4,i5,i6,i7,i8=\
 int(0),int(1),int(2),int(3),int(4),int(5),int(6),int(7),int(8)
 i32,i128,i255,i1024=int(32),int(128),int(255),int(1024)
-np.set_printoptions(precision=8)
+np.set_printoptions(precision=8); il=10**2
 from keras import __version__
 print('keras version:', __version__)
 print('tensorflow version:', tf.__version__)
@@ -88,6 +88,16 @@ def latent_samples(n_samples,sample_size):
                             size=(n_samples,sample_size))
 latent_sample1024=latent_samples(i1,i1024)
 latent_sample128=latent_samples(i1,i128)
+def display_images(generated_images):
+    n_images=len(generated_images)
+    rows=i4; cols=n_images//rows    
+    pl.figure(figsize=(cols,rows))
+    for i in range(n_images):
+        img=deprocess(generated_images[i])
+        pl.subplot(rows,cols,i+i1)
+        pl.imshow(img,cmap=pl.cm.Greys)
+        pl.xticks([]); pl.yticks([])
+    pl.tight_layout(); pl.show()
 </script></div><br/> 
     <h2>✒️&nbsp;Step 1. Loading and Preprocessing the Data</h2>       
 <div class="linked"><script type="text/x-sage">
@@ -104,26 +114,34 @@ keys=list(f.keys())
 letters=u'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
 images=np.array(f[keys[1]])/255
 labels=np.array(f[keys[2]])
-pl.figure(figsize=(2,3)); il=10**2
+pl.figure(figsize=(2,3))
 pl.title('Label: %s \n'%letters[labels[il]-i1],
          fontsize=18)
 pl.imshow(images[il]); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 gray_images=np.dot(images[...,:3],[.299,.587,.114])
-N=10000; gray_images=gray_images[:N]
+N=int(10000); gray_images=gray_images[:N]
+gray_images=gray_images.reshape(-i1,i32*i32)
 pl.figure(figsize=(2,3))
-pl.title('Label: %s \n'%letters[labels[il]-i1],
-         fontsize=18)
-pl.imshow(gray_images[il],cmap=pl.cm.bone); pl.show()
-del images; gray_images.shape
+pl.title('Label: %s \n'%letters[labels[il]-i1],fontsize=18)
+img=np.array(gray_images[il].reshape(32,32))
+pl.imshow(img.astype(float),
+          cmap=pl.cm.Greys); pl.show()
+del images
+gray_images.shape,gray_images.dtype
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 pl.figure(figsize=(2,3))
 img=np.squeeze(latent_sample1024).reshape(i32,i32)
 pl.imshow(img,cmap=pl.cm.bone); pl.show()
 </script></div><br/>
-      <h2>✒️ &nbsp; </h2>
+<div class="linked"><script type="text/x-sage">
+
+</script></div><br/>
+      <h2>✒️ &nbsp; Keras GAN</h2>
+<a href="https://github.com/naokishibuya/deep-learning/blob/master/python/gan_mnist.ipynb">
+&#x1F300; &nbsp; "Using GAN for Generating Hand-written Digit Images" by Naoki Shibuya</a><br/>
 <div class="linked"><script type="text/x-sage">
 
 </script></div><br/>
