@@ -134,7 +134,7 @@ gray_images.shape,gray_images.dtype
 <div class="linked"><script type="text/x-sage">
 pl.figure(figsize=(2,3))
 img0=np.squeeze(latent_sample1024).reshape(i32,i32)
-pl.imshow(img,cmap=pl.cm.Greys); pl.show()
+pl.imshow(img0,cmap=pl.cm.Greys); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 X_train_real,X_test_real=\
@@ -163,6 +163,29 @@ ax.imshow(img.reshape(i32,i32),cmap=pl.cm.Greys)
 ax=fig.add_subplot(122)
 ax.set_title(discriminator.predict(img0.reshape(i1,i1024)))
 ax.imshow(img0,cmap=pl.cm.Greys); pl.show()
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+generator=Sequential([Dense(i1024,input_shape=(i128,)),
+                      LeakyReLU(alpha=.01),
+                      Dense(i1024),Activation('tanh')], 
+                     name='generator')
+generator.summary()
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+pl.figure(figsize=(2,3))
+generated_latent_sample=generator.predict(latent_sample128)
+pl.title(discriminator.predict(generated_latent_sample))
+pl.imshow(generated_latent_sample.reshape(i32,i32),
+           cmap=pl.cm.Greys); pl.show()
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
