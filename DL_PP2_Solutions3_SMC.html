@@ -133,8 +133,8 @@ gray_images.shape,gray_images.dtype
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 pl.figure(figsize=(2,3))
-img=np.squeeze(latent_sample1024).reshape(i32,i32)
-pl.imshow(img,cmap=pl.cm.bone); pl.show()
+img0=np.squeeze(latent_sample1024).reshape(i32,i32)
+pl.imshow(img,cmap=pl.cm.Greys); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 X_train_real,X_test_real=\
@@ -148,10 +148,21 @@ X_train_real.shape,X_test_real.shape
 <a href="https://github.com/naokishibuya/deep-learning/blob/master/python/gan_mnist.ipynb">
 &#x1F300; &nbsp; "Using GAN for Generating Hand-written Digit Images" by Naoki Shibuya</a><br/>
 <div class="linked"><script type="text/x-sage">
-
+discriminator=Sequential([Dense(i128,input_shape=(i1024,)),
+                          LeakyReLU(alpha=.01),
+                          Dense(i1),Activation('sigmoid')], 
+                         name='discriminator')
+discriminator.summary()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+fig=pl.figure(figsize=(4,3))
+ax=fig.add_subplot(121)
+img=X_train_real[il].reshape(i1,i1024)
+ax.set_title(discriminator.predict(img))
+ax.imshow(img.reshape(i32,i32),cmap=pl.cm.Greys)
+ax=fig.add_subplot(122)
+ax.set_title(discriminator.predict(img0.reshape(i1,i1024)))
+ax.imshow(img0,cmap=pl.cm.Greys); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
