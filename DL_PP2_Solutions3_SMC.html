@@ -68,13 +68,21 @@ from keras.layers import Conv2D,MaxPooling2D,GlobalMaxPooling2D
 from keras.layers.advanced_activations import PReLU,LeakyReLU
 i0,i1,i2,i3,i4,i5,i6,i7,i8=\
 int(0),int(1),int(2),int(3),int(4),int(5),int(6),int(7),int(8)
-i128,i1024=int(128),int(1024)
+i32,i128,i255,i1024=int(32),int(128),int(255),int(1024)
 np.set_printoptions(precision=8)
 from keras import __version__
 print('keras version:', __version__)
 print('tensorflow version:', tf.__version__)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
+def preprocess(x):    
+    x=(x-.25)*2
+    return np.clip(x,-i1,i1)
+def deprocess(x):
+    x=(x/2+.5)*255
+    x=np.clip(x,i0,i255)
+    x=np.uint8(x)
+    return x.reshape(i32,i32)
 def latent_samples(n_samples,sample_size):
     return np.random.normal(loc=i0,scale=i1,
                             size=(n_samples,sample_size))
@@ -94,23 +102,21 @@ zipf.extractall(''); zipf.close()
 f=h5py.File(zf[:-4],'r')
 keys=list(f.keys())
 letters=u'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
-backgrounds=np.array(f[keys[0]])
 images=np.array(f[keys[1]])/255
 labels=np.array(f[keys[2]])
-pl.figure(figsize=(2,3)); il=10**4
-pl.title('Label: %s \n'%letters[labels[il]-1]+\
-         'Background: %s'%backgrounds[il],
+pl.figure(figsize=(2,3)); il=10**2
+pl.title('Label: %s \n'%letters[labels[il]-i1],
          fontsize=18)
 pl.imshow(images[il]); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 gray_images=np.dot(images[...,:3],[.299,.587,.114])
+N=10000; gray_images=gray_images[:N]
 pl.figure(figsize=(2,3))
-pl.title('Label: %s \n'%letters[labels[il]-1]+\
-         'Background: %s'%backgrounds[il],
+pl.title('Label: %s \n'%letters[labels[il]-i1],
          fontsize=18)
-pl.imshow(gray_images[il],cmap=pl.cm.bone)
-pl.show()
+pl.imshow(gray_images[il],cmap=pl.cm.bone); pl.show()
+gray_images.shape
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
