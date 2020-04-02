@@ -262,7 +262,17 @@ generated_letters=generator.predict(latent_examples)
 display_images(generated_letters)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+def display_loss(losses,n):
+    indices=[i*n for i in range(len(losses)//n)]
+    n_losses=np.array(losses)[indices,:]    
+    pl.figure(figsize=(12,6))
+    pl.plot(n_losses.T[i0],'-o',c='#37c9e1',lw=i1,
+            label='Discriminator')
+    pl.plot(n_losses.T[1],'-o',c='#39d4be',lw=i1,
+            label='Generator')
+    pl.title("Training Loss Functions")
+    pl.legend(); pl.show()
+display_loss(losses,i4)
 </script></div><br/>
   </body>
 </html>      
