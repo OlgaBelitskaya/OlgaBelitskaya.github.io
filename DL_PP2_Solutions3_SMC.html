@@ -71,7 +71,7 @@ print('tensorflow version:',tf.__version__)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def preprocess(x):    
-    x=(x-.25)*2
+    x=(x-.5)*2
     return np.clip(x,-i1,i1)
 def deprocess(x):
     x=(x/2+.5)*255
@@ -212,7 +212,7 @@ d_hidden_size  =i128   # discriminator
 leaky_alpha    =.02
 g_learning_rate=.0002 # generator
 d_learning_rate=.001   # discriminator
-epochs         =int(600)
+epochs         =int(100)
 batch_size     =int(64)      
 valid_size     =int(16)     
 smooth         =.1
@@ -253,7 +253,7 @@ for e in range(epochs):
     losses.append((d_loss,g_loss))
     st="Epoch: %d/%d | Discriminator Loss: %.4f | "+\
        "Generator Loss: %.4f | DL > GL: %s"
-    if (e+i1)%int(50)==i0:
+    if (e+i1)%int(20)==i0:
         print(st%((e+i1,epochs,d_loss,g_loss,d_loss>g_loss)))
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
