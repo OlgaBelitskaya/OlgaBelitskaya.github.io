@@ -250,11 +250,11 @@ for e in range(epochs):
     d_loss=discriminator.test_on_batch(X_valid_real,y_valid_real)
     d_loss+=discriminator.test_on_batch(X_valid_fake,y_valid_fake)
     g_loss=gan.test_on_batch(valid_latent_samples,y_valid_real)     
-    losses.append((d_loss,g_loss))    
+    losses.append((d_loss,g_loss))
+    st="Epoch: %d/%d | Discriminator Loss: %.4f | "+\
+       "Generator Loss: %.4f | DL > GL: %s"
     if (e+i1)%int(50)==i0:
-        print("Epoch: {:>3}/{} | Discriminator Loss: {:>6.4f} | "+\
-              "Generator Loss: {:>6.4f} | DL > GL: {}"\
-              .format(e+i1,epochs,d_loss,g_loss,d_loss>g_loss))
+        print(st%((e+i1,epochs,d_loss,g_loss,d_loss>g_loss)))
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 latent_examples=latent_samples(i32,sample_size)
