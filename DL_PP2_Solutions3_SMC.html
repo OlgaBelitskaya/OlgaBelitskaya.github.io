@@ -47,32 +47,27 @@ fpath2+=os.getcwd()[14:]+'/files/'
 #!python3 -m pip install --ignore-installed --upgrade tensorflow==1.14.0
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-spath='/home/sc_work/.sage/local/lib/python3.7/site-packages'
-import sys; sys.path.append(spath)
 import h5py,urllib,zipfile
 import pandas as pd,numpy as np,pylab as pl
 import keras as ks,tensorflow as tf
-from skimage.transform import resize
 import warnings; warnings.filterwarnings('ignore')
+from skimage.transform import resize
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.ensemble import GradientBoostingClassifier
-from sklearn.ensemble import RandomForestClassifier
-from keras.callbacks import ModelCheckpoint,EarlyStopping
-from keras.callbacks import ReduceLROnPlateau
-from keras.preprocessing.image import ImageDataGenerator
+from keras.callbacks import ModelCheckpoint,ReduceLROnPlateau
+from keras.optimizers import Adam,Nadam
 from keras.models import Sequential,load_model,Model
 from keras.layers import Input,Activation,Dense,LSTM
 from keras.layers import Flatten,Dropout,BatchNormalization
 from keras.layers import Conv2D,MaxPooling2D,GlobalMaxPooling2D
+from keras.layers import GlobalAveragePooling2D
 from keras.layers.advanced_activations import PReLU,LeakyReLU
 i0,i1,i2,i3,i4,i5,i6,i7,i8=\
 int(0),int(1),int(2),int(3),int(4),int(5),int(6),int(7),int(8)
 i32,i128,i255,i1024=int(32),int(128),int(255),int(1024)
 np.set_printoptions(precision=8); il=10**2
 from keras import __version__
-print('keras version:', __version__)
-print('tensorflow version:', tf.__version__)
+print('keras version:',__version__)
+print('tensorflow version:',tf.__version__)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def preprocess(x):    
@@ -147,6 +142,7 @@ X_train_real.shape,X_test_real.shape
       <h2>✒️ &nbsp; Keras GAN</h2>
 <a href="https://github.com/naokishibuya/deep-learning/blob/master/python/gan_mnist.ipynb">
 &#x1F300; &nbsp; "Using GAN for Generating Hand-written Digit Images" by Naoki Shibuya</a><br/>
+A Simple Example<br/>
 <div class="linked"><script type="text/x-sage">
 discriminator=Sequential([Dense(i128,input_shape=(i1024,)),
                           LeakyReLU(alpha=.01),
@@ -179,10 +175,35 @@ pl.imshow(generated_latent_sample.reshape(i32,i32),
            cmap=pl.cm.Greys); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+gan=Sequential([generator,discriminator])
+gan.summary()
 </script></div><br/>
+Build a GAN Model<br/>
 <div class="linked"><script type="text/x-sage">
-
+def trainable(model,trainable):
+    for layer in model.layers:
+        layer.trainable=trainable
+def simple_GAN(sample_size, 
+               g_hidden_size, 
+               d_hidden_size, 
+               leaky_alpha, 
+               g_learning_rate,
+               d_learning_rate):    
+    ks.backend.clear_session()    
+    generator=Sequential([Dense(g_hidden_size,input_shape=(sample_size,)),
+                          LeakyReLU(alpha=leaky_alpha),
+                          Dense(i1024), Activation('tanh')], 
+                         name='generator')    
+    discriminator=Sequential([Dense(d_hidden_size,input_shape=(i1024,)),
+                              LeakyReLU(alpha=leaky_alpha),
+                              Dense(i1),Activation('sigmoid')], 
+                             name='discriminator')        
+    gan=Sequential([generator,discriminator])    
+    discriminator.compile(optimizer=Adam(lr=d_learning_rate), 
+                          loss='binary_crossentropy')
+    gan.compile(optimizer=Adam(lr=g_learning_rate), 
+                loss='binary_crossentropy')   
+    return gan,generator,discriminator
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
