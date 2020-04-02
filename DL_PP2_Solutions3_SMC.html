@@ -97,7 +97,7 @@ def display_images(generated_images):
     <h2>✒️&nbsp;Step 1. Loading and Preprocessing the Data</h2>       
 <div class="linked"><script type="text/x-sage">
 fpath='https://olgabelitskaya.github.io/'
-zf='LetterColorImages_123.h5.zip'
+zf='LetterColorImages2.h5.zip'
 input_file=urllib.request.urlopen(fpath+zf)
 output_file=open(zf,'wb')
 output_file.write(input_file.read())
@@ -116,7 +116,7 @@ pl.imshow(images[il]); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 gray_images=np.dot(images[...,:3],[.299,.587,.114])
-N=int(10000); gray_images=gray_images[:N]
+N=int(5000); gray_images=gray_images[:N]
 gray_images=gray_images.reshape(-i1,i32*i32)
 pl.figure(figsize=(2,3))
 pl.title('Label: %s \n'%letters[labels[il]-i1],fontsize=18)
@@ -209,12 +209,12 @@ def simple_GAN(sample_size,
 sample_size    =i128     
 g_hidden_size  =i1024  # generator
 d_hidden_size  =i128   # discriminator
-leaky_alpha    =.01
-g_learning_rate=.00025 # generator
-d_learning_rate=.002   # discriminator
-epochs         =int(200)
-batch_size     =i128      
-valid_size     =i32     
+leaky_alpha    =.02
+g_learning_rate=.0002 # generator
+d_learning_rate=.001   # discriminator
+epochs         =int(600)
+batch_size     =int(64)      
+valid_size     =int(16)     
 smooth         =.1
 def real_fake_labels(size):
     return np.ones([size,i1]),np.zeros([size,i1])
