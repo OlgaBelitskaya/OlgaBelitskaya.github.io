@@ -129,7 +129,7 @@ X_train_real,X_test_real=\
 train_test_split(gray_images,test_size=.1)
 X_train_real=preprocess(X_train_real)
 X_test_real=preprocess(X_test_real)
-display_images(X_train_real[:i32])
+display_images(X_train_real[:i24])
 del gray_images
 X_train_real.shape,X_test_real.shape
 </script></div><br/>
@@ -201,11 +201,11 @@ def simple_GAN(sample_size,
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 sample_size    =i128     
-g_hidden_size  =i1024  # generator
+g_hidden_size  =i576  # generator
 d_hidden_size  =i128   # discriminator
 leaky_alpha    =float(.02)
 g_learning_rate=float(.0001) # generator
-d_learning_rate=float(.001)  # discriminator
+d_learning_rate=float(.0005)  # discriminator
 epochs         =int(30)
 batch_size     =int(64)      
 valid_size     =int(16)     
@@ -251,7 +251,7 @@ for e in range(epochs):
         print(st%((e+i1,epochs,d_loss,g_loss,d_loss>g_loss)))
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-latent_examples=latent_samples(i32,sample_size)
+latent_examples=latent_samples(i24,sample_size)
 generated_letters=generator.predict(latent_examples)
 display_images(generated_letters)
 </script></div><br/>
