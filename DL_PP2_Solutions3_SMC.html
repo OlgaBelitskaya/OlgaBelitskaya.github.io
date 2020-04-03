@@ -199,13 +199,13 @@ def simple_GAN(sample_size,
 sample_size    =i128     
 g_hidden_size  =i1024  # generator
 d_hidden_size  =i128   # discriminator
-leaky_alpha    =.02
-g_learning_rate=.0002 # generator
-d_learning_rate=.001   # discriminator
-epochs         =int(100)
+leaky_alpha    =float(.02)
+g_learning_rate=float(.0001) # generator
+d_learning_rate=float(.001)  # discriminator
+epochs         =int(15)
 batch_size     =int(64)      
 valid_size     =int(16)     
-smooth         =.1
+smooth         =float(.1)
 def real_fake_labels(size):
     return np.ones([size,i1]),np.zeros([size,i1])
 y_real5,y_fake5=real_fake_labels(5)
@@ -243,7 +243,7 @@ for e in range(epochs):
     losses.append((d_loss,g_loss))
     st="Epoch: %d/%d | Discriminator Loss: %.4f | "+\
        "Generator Loss: %.4f | DL > GL: %s"
-    if (e+i1)%int(20)==i0:
+    if (e+i1)%int(5)==i0:
         print(st%((e+i1,epochs,d_loss,g_loss,d_loss>g_loss)))
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
@@ -262,7 +262,7 @@ def display_loss(losses,n):
             label='Generator')
     pl.title("Training Loss Functions")
     pl.legend(); pl.show()
-display_loss(losses,i4)
+display_loss(losses,i3)
 </script></div><br/>
   </body>
 </html>      
