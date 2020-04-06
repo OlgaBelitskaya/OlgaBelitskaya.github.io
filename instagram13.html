@@ -78,10 +78,52 @@ def _vector(file=[1,2,3,4],
      for i in range(n)]
     pylab.xticks([]); pylab.yticks([]); pylab.show()
 </script></div><br/>
-    <h1>______________</h1>
+    <h1>Key Points of Images</h1>
 SageMath &#38; SageMathCell 
 <div class="sage"><script type="text/x-sage">
-
+import numpy as np,pylab as pl
+from skimage.transform import resize
+def get_line(x1,y1,x2,y2):
+    steep=abs(y2-y1)>abs(x2-x1); rev=False
+    if steep: [x1,y1,x2,y2]=[y1,x1,y2,x2]
+    if x1>x2:
+        [x1,x2,y1,y2]=[x2,x1,y2,y1]; rev=True
+    dx=x2-x1; dy=abs(y2-y1); error=int(dx/2)
+    xy=[]; y=y1; ystep=None
+    if y1<y2: ystep=1
+    else: ystep=-1
+    for x in range(x1,x2+1):
+        if steep: xy.append([y,x])
+        else: xy.append([x,y])
+        error-=dy
+        if error<0: y+=ystep; error+=dx
+    if rev: xy.reverse()
+    return xy
+def get_image(data,I):
+    img=np.zeros((280,280))
+    for [x,y] in data:
+        for i in range(len(x)):
+            img[y[i]+20][x[i]+20]=1
+            if (i<len(x)-1):
+                x1,y1,x2,y2=x[i],y[i],x[i+1],y[i+1]
+            else:
+                x1,y1,x2,y2=x[i],y[i],x[0],y[0]
+            for [xl,yl] in get_line(x1,y1,x2,y2): img[yl+10][xl+10]=1                
+    return resize(img,(I,I))    
+kp=[[[150,133,114,91,76,66,59,58,62,75,97,120,147,169,177,171,152],
+     [33,22,23,32,43,54,69,88,103,117,123,119,105,84,65,46,36]], 
+    [[77,70,68,73,79,88,99,98,90,83,75],
+     [41,32,23,6,2,2,13,26,43,44,36]],
+    [[148,146,154,171,182,186,186,175],[29,23,8,0,2,8,18,51]],
+    [[116,117,129,129],[22,9,9,21]],[[204,242],[15,10]],
+    [[217,255],[58,64]],[[221,240],[94,109]],[[20,11,0],[35,34,39]],
+    [[21,4],[90,99]],[[20,7,3],[111,126,138]],[[87,94],[64,65]],
+    [[83,83],[116,116]],[[83,113],[117,67]],[[131,153],[114,129]],
+    [[112,130],[63,51]],[[113,113],[60,60]],[[114,113],[59,59]],
+    [[131,132,134,137],[52,51,59,63]],[[130,110,130],[52,84,93]],
+    [[133,124],[86,86]],[[135,118],[83,101]],[[194,194],[43,43]]]
+img=get_image(kp,100); pl.figure(figsize=(5,5))
+pl.imshow(img,cmap=pl.cm.Greys); pl.show()
 </script></div><br/>
     <h1>If you want to link cells for querying</h1>
 Python &#38; SageMathCell <br/>
