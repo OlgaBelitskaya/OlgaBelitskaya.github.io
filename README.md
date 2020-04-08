@@ -15,8 +15,8 @@
 #### [PP0](https://olgabelitskaya.github.io/MLE_ND_PP0.html) &nbsp; [PP1](https://olgabelitskaya.github.io/MLE_ND_PP1.html) &nbsp; [PP2](https://olgabelitskaya.github.io/MLE_ND_PP2.html) &nbsp; [PP3](https://olgabelitskaya.github.io/MLE_ND_PP3.html)
 #### PP4: [Part 1](https://olgabelitskaya.github.io/MLE_ND_PP4_1.html) &nbsp; [Part 2](https://olgabelitskaya.github.io/MLE_ND_PP4_2.html) &nbsp; [Part 3](https://olgabelitskaya.github.io/MLE_ND_PP4_3.html) &nbsp; [Part 4](https://olgabelitskaya.github.io/MLE_ND_PP4_4.html) &nbsp; [Part 5](https://olgabelitskaya.github.io/MLE_ND_PP4_5.html) &nbsp; [Part 6](https://olgabelitskaya.github.io/MLE_ND_PP4_6.html)
 ### Interactive Reports with SageMathCell
-#### [P0: Titanic Survival Exploration](https://olgabelitskaya.github.io/MLE_ND_P0_SMC.html) &nbsp;  [P1: Predicting Boston Housing Prices](https://olgabelitskaya.github.io/MLE_ND_P1_SMC.html) &nbsp;  [P2: Finding Donors for CharityML](https://olgabelitskaya.github.io/MLE_ND_P2_SMC.html)
-#### [P3: Creating Customer Segments](https://olgabelitskaya.github.io/MLE_ND_P3_SMC.html)
+#### [P0: Titanic Survival Exploration](https://olgabelitskaya.github.io/MLE_ND_P0_SMC.html) &nbsp;  [P1: Predicting Boston Housing Prices](https://olgabelitskaya.github.io/MLE_ND_P1_SMC.html) 
+#### [P2: Finding Donors for CharityML](https://olgabelitskaya.github.io/MLE_ND_P2_SMC.html) &nbsp; [P3: Creating Customer Segments](https://olgabelitskaya.github.io/MLE_ND_P3_SMC.html)
 #### [P7: Building a Student Intervention System](https://olgabelitskaya.github.io/MLE_ND_P7_SMC.html) &nbsp;  [P8: Analyzing the NYC Subway Dataset](https://olgabelitskaya.github.io/MLE_ND_P8_SMC.html)
 
 ## &#x1F4D1; &nbsp; Data Analyst Nanodegree 
@@ -41,11 +41,11 @@
 
 #### P0: Image Classification &nbsp; [Project &#x1F310;](https://olgabelitskaya.github.io/DL_PP0.html)  &nbsp; [Solutions &#x1F310;](https://olgabelitskaya.github.io/DL_PP0_Solutions.html)
 Colaboratory Notebooks &nbsp; [flower_classification.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1H2ArWH_1kYfkIoCbxleX-aHAozRVBAdB)<br/>
-Interactive Report with SageMathCell <br/>
+Interactive Reports with SageMathCell <br/>
 [P0: Image Classification 🌀](https://olgabelitskaya.github.io/DL_PP0_Solutions_SMC.html)
 #### P1: Neural Networks for Regression &nbsp; [Project &#x1F310;](https://olgabelitskaya.github.io/DL_PP1.html) &nbsp; [Solutions &#x1F310;](https://olgabelitskaya.github.io/DL_PP1_Solutions.html)
 Colaboratory Notebooks &nbsp; [boston_regression.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1atPu92jNJ-qBsFpbOiMojHGXCu6gJWYW)<br/>
-Interactive Report with SageMathCell <br/> 
+Interactive Reports with SageMathCell <br/> 
 [P1: Neural Networks for Regression 🌀](https://olgabelitskaya.github.io/DL_PP1_Solutions_SMC.html)
 #### P2: Multi-Label Classification &nbsp; [Project &#x1F310;](https://olgabelitskaya.github.io/DL_PP2.html) &nbsp; [Solutions &#x1F310;](https://olgabelitskaya.github.io/DL_PP2_Solutions.html) &nbsp; [Solutions Variant 2 &#x1F310;](https://olgabelitskaya.github.io/DL_PP2_Solutions_V2.html) &nbsp; [Addition &#x1F310;](https://olgabelitskaya.github.io/DL_PP2_Additional.html)
 Colaboratory Notebooks  &nbsp; [letter_recognition.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1Z9Fz0OOi6bpWvH-H2OhExC9CkGPWBYZz) &nbsp; [letter_generator.ipynb &#x1F4D6; ](https://drive.google.com/open?id=19B40eERSKfVO5zsizehxPOLdhLs5YcUT)<br/>
@@ -54,16 +54,18 @@ Interactive Reports with SageMathCell &nbsp; <br/>
 #### P3: Parts of Speech &nbsp; 
 #### P4: Style Recognition &nbsp; [Project &#x1F310;](https://olgabelitskaya.github.io/DL_PP4.html) &nbsp;  [Solutions &#x1F310;](https://olgabelitskaya.github.io/DL_PP4_Solutions.html)
 Colaboratory Notebooks  &nbsp; [style_recognition.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1r5yRD-3tQwN6lSql_VRoVuwQ8DaY5zUt)<br/>
-Interactive Report with SageMathCell <br/>
+Interactive Reports with SageMathCell <br/>
 [P4: Style Recognition 🌀](https://olgabelitskaya.github.io/DL_PP4_Solutions_SMC.html)
 #### P5: Decor Colorization &nbsp; [Solutions. Part 1 &#x1F310;](https://olgabelitskaya.github.io/DL_PP5_Solutions_Part1.html) &nbsp; [Solutions. Part 2 &#x1F310;](https://olgabelitskaya.github.io/DL_PP5_Solutions_Part2.html) &nbsp;  [Addition &#x1F310;](https://olgabelitskaya.github.io/DL_PP5_Additional.html) &nbsp; [Addition Variant 2 &#x1F310;](https://olgabelitskaya.github.io/DL_PP5_Additional_V2.html) 
 Colaboratory Notebooks &nbsp; [decor_classification.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1Tt3qZePsf2P6kNNao-hQ58DlG71Abj5a) &nbsp; [style_transfer.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1svW40BBscfSLD7Je99TyctBeRWIOYHKa) &nbsp; [style_transfer_2.ipynb &#x1F4D6; ](https://colab.research.google.com/drive/1IS_6BqJDLVbJJsuTuWTr3OfGP5uEu2eV)<br/>
-Interactive Report with SageMathCell <br/>
+Interactive Reports with SageMathCell <br/>
 [P5: Decor Recognition & Colorization 🌀](https://olgabelitskaya.github.io/DL_PP5_Solutions_SMC.html) &nbsp;  [P5: Style Transfer 🌀](https://olgabelitskaya.github.io/DL_PP5_Solutions2_SMC.html) &nbsp;  [P5: Style Transfer 2 🌀](https://olgabelitskaya.github.io/DL_PP5_Solutions3_SMC.html)
 
 # &#x1F3D9; &nbsp;  Kaggle Activity
-## &#x1F4D1; &nbsp;  Kernels
-- Digit Recognition Models &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/digit-recognition-models-2) &nbsp; [Web Page &#x1F310;](https://olgabelitskaya.github.io/kaggle_digits.html)
+## &#x1F4D1; &nbsp;  [Notebooks](https://www.kaggle.com/olgabelitskaya/notebooks)
+- Digit Recognition Models #1 &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/digit-recognition-models-1) &nbsp; [Web Page &#x1F310;](https://olgabelitskaya.github.io/kaggle_digits.html)
+
+- Digit Recognition Models #2 &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/digit-recognition-models-2) &nbsp; [Web Page &#x1F310;](https://olgabelitskaya.github.io/kaggle_digits.html)
  
 - Titanic Survival Exploration &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/titanic-survival-exploration) &nbsp; [Web Page &#x1F310;](https://olgabelitskaya.github.io/kaggle_titanic.html)
 
@@ -86,11 +88,11 @@ Interactive Report with SageMathCell <br/>
 
 - Classification of Handwritten Letters &nbsp; [Kaggle Dataset &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/classification-of-handwritten-letters)
 
-- Handwritten Letters 2 &nbsp; [Kaggle Dataset &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/handwritten-letters-2)
-
 - Style Color Images &nbsp; [Kaggle Dataset &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/style-color-images)
 
 - Traditional Decor Patterns &nbsp; [Kaggle Dataset &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/traditional-decor-patterns)
+
+- OSM Russia. Central District &nbsp; [Kaggle Dataset &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/osm-russia-central-district)
 
 # &#x1F3D9; &nbsp; Online Training Courses & Exercises
 
