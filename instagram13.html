@@ -126,14 +126,42 @@ pl.imshow(img,cmap=pl.cm.Pastel1); pl.show()
     <h1>If you want to link cells for querying</h1>
 Python &#38; SageMathCell <br/>
 <div class="linked"><script type="text/x-sage">
-
+import sqlite3; import pandas as pd
+from IPython.core.display import display
+from IPython.core.magic import register_line_magic
+@register_line_magic
+def get_query(q):
+    connection=sqlite3.connect('db.db')
+    cursor=connection.cursor()
+    url='https://raw.githubusercontent.com/noahgift/'+\
+    'mma/master/data/ufc_fights_all.csv'
+    mma=pd.read_csv(url).dropna()
+    mma.to_sql('mma',con=connection,
+           if_exists='replace')
+    pretty_print(html('<p>SQL Queries => UFC Fights</p>'))
+    q=pd.read_sql_query(q,con=connection)
+    thp=[('font-size','15px'),('text-align','center'),
+         ('font-weight','bold'),('padding','5px 5px'),
+         ('color','white'),('background-color','slategray')]
+    tdp=[('font-size','14px'),('padding','5px 5px'),
+         ('text-align','center'),('color','darkblue'),
+         ('background-color','silver')]
+    style_dict=[dict(selector='th',props=thp),
+                dict(selector='td',props=tdp)]
+    display(q.style.set_table_styles(style_dict))
+    if connection is not None:
+        connection.close()
+    if os.path.exists('db.db'):
+        os.remove('db.db')
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
-</script></div><br/>
-<div class="linked"><script type="text/x-sage">    
-
-</script></div><br/>    
+%get_query \
+SELECT method, \
+       COUNT(*) AS number, \
+       AVG(round) AS avg_round \
+FROM mma \
+GROUP BY method;
+</script></div><br/>   
     <h1>If you want to link cells for plotting</h1>
 Python &#38; R &#38; SageMathCell <br/>     
 <div class="linked"><script type="text/x-sage">
