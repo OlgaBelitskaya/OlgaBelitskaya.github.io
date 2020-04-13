@@ -178,7 +178,7 @@ def hex_to_rgb(chex):
 samples=pandas.DataFrame(data.loc[indices],
                          columns=data.keys()).reset_index(drop=True)
 samples.index=['C0','C1','C2']; samples.loc['Mean']=samples.mean()
-print ("Chosen samples of wholesale customers dataset:"); samples
+print ("Chosen samples of the wholesale customers' dataset:"); samples
 cols=['#1b2c45','#5a8bbd','#008b8b','#ff5a8b']
 samples.T.plot(figsize=(11,5),color=[hex_to_rgb(el) for el in cols])
 pylab.grid(); pylab.show()
@@ -192,7 +192,7 @@ I have built a plot for comparing the feature values with the means and a heatma
 <div class="sage"><script type="text/x-sage">
 %%html
 <script src="https://code.highcharts.com/highcharts.js"/>
-<div id="test_highcharts" style="width:1200px;height:500px;"/><script>
+<div id="test_highcharts" style="width:1100px;height:500px;"/><script>
 Highcharts.chart('test_highcharts',{
     xAxis:{categories:['Fresh','Milk','Grocery','Frozen',
                        'Detergents_Paper','Delicatessen']},
@@ -209,12 +209,14 @@ Highcharts.chart('test_highcharts',{
                     box=text.getBBox();});
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-pylab.figure(figsize=(12,5))
+pylab.figure(figsize=(11,5))
 p_samples=samples.iloc[:].T.apply(lambda x:100.0*x/x.sum())
 seaborn.heatmap(p_samples,cmap=cmap,annot=True,
                 annot_kws={"color":"White","size":20},fmt='.1f')
-pylab.title("Product categories in percentages for the sample customers",fontsize=15)
-pylab.xticks(ha='center',fontsize=12); pylab.yticks(fontsize=10); pylab.show()
+ti="Product categories in percentages for the sample customers"
+pylab.title(ti,fontsize=15)
+pylab.xticks(ha='center',fontsize=12)
+pylab.yticks(fontsize=10); pylab.show()
 </script></div><br/>
 <b>Customer C0</b> - food-oriented supermarket:<br/>
 - the wide range of products with big values; <br/>
@@ -243,45 +245,59 @@ Use <i>sklearn.model_selection.train_test_split</i> to split the dataset into tr
 Report the prediction score of the testing set using the regressor's score function.<br/>
     <h4>Experiment with <i>Delicatessen</i></h4>
 <div class="linked"><script type="text/x-sage">
-new_data=data.drop('Delicatessen',axis=int(1)); target=data['Delicatessen']
+new_data=data.drop('Delicatessen',axis=int(1))
+target=data['Delicatessen']
 new_data_target=pandas.concat([new_data,target],axis=int(1))
 print ("The correlation table for the choosen feature 'Delicatessen'")
-pearson=new_data_target.corr(method='pearson'); corr_with_delicatessen=pearson.iloc[int(-1)][:-int(1)]
-pandas.DataFrame(corr_with_delicatessen[abs(corr_with_delicatessen).argsort()[::-int(1)]]);
-</script></div>
-    <p></p> 
+pearson=new_data_target.corr(method='pearson')
+corr_with_delicatessen=pearson.iloc[int(-1)][:-int(1)]
+pandas.DataFrame(corr_with_delicatessen[abs(corr_with_delicatessen)\
+                                        .argsort()[::-int(1)]]);
+</script></div><br/> 
 <div class="linked"><script type="text/x-sage">
-pylab.figure(figsize=(12,5)); seaborn.distplot(target,color='#1b2c45',bins=200,hist_kws={'color':'SlateGrey'})
-pylab.xlabel("Delicatessen",fontsize=15); pylab.title("Customers' Annual Spending",fontsize=12); pylab.grid(); pylab.show()
-</script></div>
-    <p></p>
+pylab.figure(figsize=(11,5))
+seaborn.distplot(target,color='#1b2c45',bins=200,
+                 hist_kws={'color':'SlateGrey'})
+pylab.xlabel("Delicatessen",fontsize=15)
+pylab.title("Customers' Annual Spending",fontsize=12)
+pylab.grid(); pylab.show()
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def split_fit():
-    X_train,X_test,y_train,y_test=train_test_split(new_data,target,test_size=0.25,random_state=1)
-    print ("Training and testing split was successful.")
-    regressor1=DecisionTreeRegressor(random_state=1); regressor1.fit(X_train,y_train)
-    regressor2=RandomForestRegressor(random_state=1); regressor2.fit(X_train,y_train)
-    score1=regressor1.score(X_test,y_test); score2=regressor2.score(X_test,y_test)
-    print("Decision Tree Regressor. The score of the prediction using the testing set is {}.".format(score1))
-    print("Random Forest Regressor. The score of the prediction using the testing set is {}.".format(score2))
+    X_train,X_test,y_train,y_test=\
+    train_test_split(new_data,target,test_size=0.25,random_state=1)
+    print ("Training and testing splitting was successful.")
+    regressor1=DecisionTreeRegressor(random_state=1)
+    regressor1.fit(X_train,y_train)
+    regressor2=RandomForestRegressor(random_state=1)
+    regressor2.fit(X_train,y_train)
+    score1=regressor1.score(X_test,y_test)
+    score2=regressor2.score(X_test,y_test)
+    st1="Decision Tree Regressor. "
+    st2="Random Forest Regressor. "
+    st3="The score of the prediction using the testing set is {}."
+    print(st1+st3.format(score1)); print(st2+st3.format(score2))
     return regressor1,regressor2
 def plot_feature_importance(f,regressor1,regressor2):
-    D1=dict(zip(new_data,regressor1.feature_importances_)); D2=dict(zip(new_data,regressor2.feature_importances_))
-    pylab.figure(figsize=(12,5)); 
+    D1=dict(zip(new_data,regressor1.feature_importances_))
+    D2=dict(zip(new_data,regressor2.feature_importances_))
+    pylab.figure(figsize=(11,5)); 
     pylab.subplot(121); pylab.grid()
-    pylab.bar(range(len(D1)),D1.values(),alpha=.5,color='slategrey',align='center')
+    pylab.bar(range(len(D1)),D1.values(),alpha=.5,
+              color='slategrey',align='center')
     pylab.xticks(range(len(D1)),D1.keys(),fontsize=7)
-    pylab.title('Experiment with "%s": Feature Importances, \nDecision Tree Regressor'%f)
+    st='Experiment with "%s": Feature Importances, \n'
+    pylab.title(st%f+'Decision Tree Regressor')
     pylab.subplot(122); pylab.grid()
-    pylab.bar(range(len(D2)),D2.values(),alpha=.5,color='slategrey',align='center')
+    pylab.bar(range(len(D2)),D2.values(),alpha=.5,
+              color='slategrey',align='center')
     pylab.xticks(range(len(D2)),D2.keys(),fontsize=7)
-    pylab.title('Experiment with "%s": Feature Importances, \nRandom Forest Regressor'%f); pylab.show()
-</script></div>
-    <p></p>
+    pylab.title(st%f+'Random Forest Regressor'); pylab.show()
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
-regressor1,regressor2=split_fit(); plot_feature_importance('Delicatessen',regressor1,regressor2)
-</script></div>
-    <p></p>
+regressor1,regressor2=split_fit()
+plot_feature_importance('Delicatessen',regressor1,regressor2)
+</script></div><br/>
     <h4>Experiment with <i>Grocery</i></h4>      
 <div class="linked"><script type="text/x-sage">
 new_data=data.drop('Grocery',axis=int(1)); target=data['Grocery']
