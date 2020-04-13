@@ -303,19 +303,23 @@ plot_feature_importance('Delicatessen',regressor1,regressor2)
 new_data=data.drop('Grocery',axis=int(1)); target=data['Grocery']
 new_data_target=pandas.concat([new_data,target],axis=int(1))
 print ("The correlation table for the choosen feature 'Grocery'")
-pearson=new_data_target.corr(method='pearson'); corr_with_grocery=pearson.iloc[int(-1)][:-int(1)]
-pandas.DataFrame(corr_with_grocery[abs(corr_with_grocery).argsort()[::-int(1)]]);
-</script></div>
-    <p></p>
+pearson=new_data_target.corr(method='pearson')
+corr_with_grocery=pearson.iloc[int(-1)][:-int(1)]
+pandas.DataFrame(corr_with_grocery[abs(corr_with_grocery)\
+                                   .argsort()[::-int(1)]]);
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
-pylab.figure(figsize=(12,5)); seaborn.distplot(target,color='#1b2c45',bins=200,hist_kws={'color':'SlateGrey'})
-pylab.xlabel("Grocery",fontsize=15); pylab.title("Customers' Annual Spending",fontsize=12); pylab.grid(); pylab.show()
-</script></div>
-    <p></p> 
+pylab.figure(figsize=(11,5))
+seaborn.distplot(target,color='#1b2c45',bins=200,
+                 hist_kws={'color':'SlateGrey'})
+pylab.xlabel("Grocery",fontsize=15)
+pylab.title("Customers' Annual Spending",fontsize=12)
+pylab.grid(); pylab.show()
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
-regressor1,regressor2=split_fit(); plot_feature_importance('Grocery',regressor1,regressor2)
-</script></div>
-    <p></p> 
+regressor1,regressor2=split_fit()
+plot_feature_importance('Grocery',regressor1,regressor2)
+</script></div><br/>
     <h3>Question 2</h3>
 <i>Which feature did you attempt to predict? What was the reported prediction score? Is this feature is necessary for identifying customers' spending habits?</i>
     <h3>Answer 2</h3>
