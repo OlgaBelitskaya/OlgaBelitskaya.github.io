@@ -666,25 +666,25 @@ print ("K-Means True Centers"); true_centers
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 true_centers=true_centers.append(data.describe().loc['mean'])
-true_centers.plot(kind='bar',figsize=(12,5))
+true_centers.plot(kind='bar',figsize=(11,5))
 pylab.title('Comparing K-Means Centers with Data Means',fontsize=15)
 pylab.xticks(rotation=0,fontsize=10); pylab.grid(); pylab.show()
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
-log_centers2=pca.inverse_transform(centers2); true_centers2=numpy.exp(log_centers2)
+log_centers2=pca.inverse_transform(centers2)
+true_centers2=numpy.exp(log_centers2)
 segments2=['Segment {}'.format(i) for i in range(0,len(centers2))]
-true_centers2=pandas.DataFrame(numpy.round(true_centers2),columns=data.keys(),index=segments2)
+true_centers2=pandas.DataFrame(numpy.round(true_centers2),
+                               columns=data.keys(),index=segments2)
 print ("Gaussian Mixture Model True Centers"); true_centers2
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 true_centers2=true_centers2.append(data.describe().loc['mean'])
-true_centers2.plot(kind='bar',figsize =(12,5))
-pylab.title('Comparing Gaussian Mixture Model Centers with Data Means',fontsize=15)
+true_centers2.plot(kind='bar',figsize=(11,5))
+st='Comparing Gaussian Mixture Model Centers with Data Means'
+pylab.title(st,fontsize=15)
 pylab.xticks(rotation=0,fontsize=10); pylab.grid(); pylab.show()
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>Question 8</h3>
 <i>Consider the total purchase cost of each product category for the representative data points above,<br/>
 and reference the statistical description of the dataset at the beginning of this project.<br/>
@@ -703,8 +703,7 @@ if true_centers2['Fresh']['Segment 0']>true_centers2['Fresh']['Segment 1']:
     clusters['Gaussian Mixture']['Segment 0']='HoReCa'; clusters['Gaussian Mixture']['Segment 1']='Retail'
 else: clusters['Gaussian Mixture']['Segment 0']='Retail'; clusters['Gaussian Mixture']['Segment 1']='HoReCa'
 clusters
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>Question 9</h3>
 <i>For each sample point, which customer segment from Question 8 best represents it?<br/> 
 Are the predictions for each sample point consistent with this?</i>
