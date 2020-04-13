@@ -387,7 +387,7 @@ Now we will do the following steps:<br/>
 <div class="linked"><script type="text/x-sage">
 log_data=numpy.log(data); log_samples=numpy.log(samples)
 corr=data.corr().values
-axes=pandas.plotting.scatter_matrix(log_data,alpha=.3,figsize=(11,10),
+axes=pandas.plotting.scatter_matrix(log_data,alpha=.3,figsize=(9,8),
                                     diagonal='hist',c='#1b2c45',
                                     hist_kwds={'color':'SlateGrey','bins':100})
 for i,j in zip(*numpy.triu_indices_from(axes,k=1)):
@@ -439,11 +439,12 @@ When we apply k-means the results can be distorted by outliers: clusters are con
 If we do not remove outliers from the dataset, they can form additional artificial clusters for the outliers which can get some data points from the real clusters.
 <div class="linked"><script type="text/x-sage">
 out_percentiles=data.rank(pct=True).iloc[outliers]
-pylab.figure(figsize=(12,5)); pylab.xticks(fontsize=10); pylab.yticks(fontsize=10)
-seaborn.heatmap(out_percentiles,annot=True,cmap=cmap,annot_kws={'color':'White','size':'20'})
+pylab.figure(figsize=(11,5))
+pylab.xticks(fontsize=10); pylab.yticks(fontsize=10)
+seaborn.heatmap(out_percentiles,annot=True,cmap=cmap,
+                annot_kws={'color':'White','size':'20'})
 pylab.title('Multiple Outliers Heatmap',fontsize=15); pylab.show()
-</script></div>
-    <p></p>
+</script></div><br/>
     <h2>Feature Transformation</h2>
 In this section we will use principal component analysis (PCA) to draw conclusions about the underlying structure of the wholesale customer data.<br/> 
 Since using PCA on a dataset calculates the dimensions which best maximize variance, we will find which compound combinations of features best describe customers.
@@ -459,14 +460,16 @@ Apply a PCA transformation of <i>log_samples</i> using <i>pca.transform</i>, and
 pca=PCA(n_components=len(good_data.keys())).fit(good_data)
 pca_samples=pca.transform(log_samples) 
 pca_result=pca_results(good_data,pca); pca_result
-</script></div>
-    <p></p>      
+</script></div><br/>     
 <div class="linked"><script type="text/x-sage">
-pylab.figure(figsize=(12,4)); pylab.xlabel('Dimension',fontsize=10)
-pylab.plot(numpy.arange(1,7),numpy.cumsum(pca.explained_variance_ratio_),'-o',c='#1b2c45')
-pylab.title('Explained Variance Ratio',fontsize=15); pylab.grid(); pylab.show()
-</script></div>
-    <p></p>
+pylab.figure(figsize=(12,4))
+pylab.xlabel('Dimension',fontsize=10)
+pylab.plot(numpy.arange(1,7),
+           numpy.cumsum(pca.explained_variance_ratio_),
+           '-o',c='#1b2c45')
+pylab.title('Explained Variance Ratio',fontsize=15)
+pylab.grid(); pylab.show()
+</script></div><br/>
     <h3>Question 5</h3>
 <i>How much variance in the data is explained in total by the first and second principal component? What about the first four principal components?<br/>
 Using the visualization provided above, discuss what the first four dimensions best represent in terms of customer spending.</i>
@@ -479,18 +482,18 @@ We noted in the previous section that these three features are highly correlated
 so it can be a spending for restaurants and cafes with a special spectrum of the menu (fast food, for example).<br/>
 The first four dimensions represent enough well in terms of customer spending because they have explained the main part of the spending variance.
 <div class="linked"><script type="text/x-sage">
-print ("The first and second principal components explained {}%".format(sum(pca_result['Explained Variance'][:int(2)])*100.0))
-print ("The first four principal components explained {}%".format(sum(pca_result['Explained Variance'][:int(4)])*100.0))
-</script></div>
-    <p></p>
+print ("The first and second principal components explained {}%"\
+.format(sum(pca_result['Explained Variance'][:int(2)])*100.0))
+print ("The first four principal components explained {}%"\
+.format(sum(pca_result['Explained Variance'][:int(4)])*100.0))
+</script></div><br/>
     <h3>PCA Observation</h3>
 Let us have a look how the log-transformed sample data has changed after having a PCA transformation applied to it in six dimensions.<br/>
 Observe the numerical value for the first four dimensions of the sample points.<br/>
 Consider if this is consistent with our initial interpretation of the sample points.
 <div class="linked"><script type="text/x-sage">
 pandas.DataFrame(numpy.round(pca_samples,4),columns=pca_result.index.values,index=['C0','C1','C2','Mean'])
-</script></div>
-    <p></p> 
+</script></div><br/> 
     <h3>Implementation: Dimensionality Reduction</h3>
 When using principal component analysis, one of the main goals is to reduce the dimensionality of the data — in effect, reducing the complexity of the problem.<br/> 
 Dimensionality reduction comes at a cost: Fewer dimensions used implies less of the total variance in the data is being explained.<br/>
@@ -501,17 +504,19 @@ Assign the results of fitting PCA in two dimensions with <i>good_data</i> to pca
 Apply a PCA transformation of <i>good_data</i> using <i>pca.transform</i>, and assign the results to <i>reduced_data</i>.<br/>
 Apply a PCA transformation of <i>log_samples</i> using <i>pca.transform</i>, and assign the results to <i>pca_samples</i>.
 <div class="linked"><script type="text/x-sage">
-pca=PCA(n_components=2).fit(good_data); pca_samples=pca.transform(log_samples)
-reduced_data=pandas.DataFrame(pca.transform(good_data),columns=['Dimension 1','Dimension 2'])
-</script></div>
-    <p></p> 
+pca=PCA(n_components=2).fit(good_data)
+pca_samples=pca.transform(log_samples)
+reduced_data=pandas.DataFrame(pca.transform(good_data),
+                              columns=['Dimension 1','Dimension 2'])
+</script></div><br/> 
     <h3>Dimensionality Reduction Observation</h3>
 Let's see how the log-transformed sample data has changed after having a PCA transformation applied to it using only two dimensions.<br/>
 Observe how the values for the first two dimensions remains unchanged when compared to a PCA transformation in six dimensions. 
 <div class="linked"><script type="text/x-sage">
-pandas.DataFrame(numpy.round(pca_samples,4),columns=['Dimension 1','Dimension 2'],index=['C0','C1','C2','Mean'])
-</script></div>
-    <p></p> 
+pandas.DataFrame(numpy.round(pca_samples,4),
+                 columns=['Dimension 1','Dimension 2'],
+                 index=['C0','C1','C2','Mean'])
+</script></div><br/>
     <h3>Visualizing a Biplot</h3>
 A biplot is a scatterplot where each data point is represented by its scores along the principal components.<br/>
 The axes are the principal components (in this case <i>Dimension 1</i> and  <i>Dimension 2</i>).<br/>
@@ -519,8 +524,7 @@ In addition, the biplot shows the projection of the original features along the 
 A biplot can help us interpret the reduced dimensions of the data, and discover relationships between the principal components and original features.
 <div class="linked"><script type="text/x-sage">
 biplot(good_data,reduced_data,pca)
-</script></div>
-    <p></p> 
+</script></div><br/>
     <h3>Biplot Observation</h3>
 Once we have the original feature projections (in red), it is easier to interpret the relative position of each data point in the scatterplot.<br/>
 For instance, a point the lower right corner of the figure will likely correspond to a customer that spends a lot on <i>Milk</i>, <i>Grocery</i> and <i>Detergents_Paper</i>,<br/>but not so much on the other product categories.<br/>
