@@ -67,7 +67,7 @@ def pca_results(good_data,pca):
     variance_ratios=pandas.DataFrame(numpy.round(ratios,4),
                                      columns=['Explained Variance'])
     variance_ratios.index=dimensions 
-    fig,ax=pylab.subplots(figsize=(12,5))
+    fig,ax=pylab.subplots(figsize=(11,5))
     components.plot(ax=ax,kind='bar');
     ax.set_ylabel("Feature Weights",fontsize=12)
     ax.set_xticklabels(dimensions,rotation=0)
@@ -81,7 +81,7 @@ def pca_results(good_data,pca):
 def cluster_results(reduced_data,preds,centers,pca_samples,alg):
     predictions=pandas.DataFrame(preds,columns=['Cluster'])
     plot_data=pandas.concat([predictions,reduced_data],axis=int(1))
-    fig,ax=pylab.subplots(figsize=(12,7))
+    fig,ax=pylab.subplots(figsize=(11,7))
     for i,cluster in plot_data.groupby('Cluster'):   
         cluster.plot(ax=ax,kind='scatter',
                      x='Dimension 1',y='Dimension 2',
@@ -102,7 +102,7 @@ def cluster_results(reduced_data,preds,centers,pca_samples,alg):
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def biplot(good_data,reduced_data,pca):
-    fig,ax=pylab.subplots(figsize=(12,5))
+    fig,ax=pylab.subplots(figsize=(11,5))
     x=reduced_data.loc[:,'Dimension 1']
     y=reduced_data.loc[:,'Dimension 2']
     ax.scatter(x=x,y=y,facecolors='slategray',
@@ -130,7 +130,7 @@ def channel_results(reduced_data,outliers,pca_samples):
     channel=pandas.DataFrame(full_data['Channel'],columns=['Channel'])
     channel=channel.drop(channel.index[outliers]).reset_index(drop=True)
     labeled=pandas.concat([reduced_data,channel],axis=int(1))
-    fig,ax=pylab.subplots(figsize=(12,5))
+    fig,ax=pylab.subplots(figsize=(11,5))
     labels=['Hotel/Restaurant/Cafe','Retailer']
     grouped=labeled.groupby('Channel')
     for i,channel in grouped:   
@@ -462,7 +462,7 @@ pca_samples=pca.transform(log_samples)
 pca_result=pca_results(good_data,pca); pca_result
 </script></div><br/>     
 <div class="linked"><script type="text/x-sage">
-pylab.figure(figsize=(12,4))
+pylab.figure(figsize=(11,4))
 pylab.xlabel('Dimension',fontsize=10)
 pylab.plot(numpy.arange(1,7),
            numpy.cumsum(pca.explained_variance_ratio_),
@@ -571,59 +571,78 @@ We can see the highest scores in case of 2 clusters for both algorithms. So it s
 <div class="linked"><script type="text/x-sage">
 for n in list(range(2,12)):
     clusterer=KMeans(n_clusters=n).fit(reduced_data)
-    preds=clusterer.predict(reduced_data); centers=clusterer.cluster_centers_
-    sample_preds=clusterer.predict(pca_samples); score=silhouette_score(reduced_data,preds)
-    print ("For number of clusters = {}, the silhouette_score is : {}".format(n,score))
-</script></div>
-    <p></p> 
+    preds=clusterer.predict(reduced_data)
+    centers=clusterer.cluster_centers_
+    sample_preds=clusterer.predict(pca_samples)
+    score=silhouette_score(reduced_data,preds)
+    st="For number of clusters = {}, the silhouette_score is : {}"
+    print(st.format(n,score))
+</script></div><br/> 
 <div class="linked"><script type="text/x-sage">
 for n in list(range(2,12)):
-    clusterer2=GaussianMixture(n_components=n,covariance_type='full').fit(reduced_data)
+    clusterer2=GaussianMixture(n_components=n,
+                               covariance_type='full').fit(reduced_data)
     preds2=clusterer2.predict(reduced_data); centers2=clusterer2.means_
-    sample_preds2=clusterer2.predict(pca_samples); score2=silhouette_score(reduced_data,preds2,metric='mahalanobis')
-    print ("For number of clusters = {}, the silhouette_score is : {}".format(n,score2))
-</script></div>
-    <p></p>
+    sample_preds2=clusterer2.predict(pca_samples)
+    score2=silhouette_score(reduced_data,preds2,metric='mahalanobis')
+    print("For number of clusters = {}, the silhouette_score is : {}"\
+          .format(n,score2))
+</script></div><br/>
 We also can run the speed comparison for the K-Means clustering and the Gaussian Mixture Model.
 <div class="linked"><script type="text/x-sage">
 n,k=300,6; kmeans_train_times=[]; gmm_train_times=[]
 for k in range(2,k+1):
     cum_time=0.
     for i in range(n):
-        start=time.time(); KMeans(n_clusters=k).fit(reduced_data); cum_time+=(time.time()-start)
+        start=time.time()
+        KMeans(n_clusters=k).fit(reduced_data)
+        cum_time+=(time.time()-start)
     kmeans_train_times.append([k,cum_time/n])
-km_df=pandas.DataFrame(kmeans_train_times,columns=['KM_Clusters','KM_Time'])
+km_df=pandas.DataFrame(kmeans_train_times,
+                       columns=['KM_Clusters','KM_Time'])
 for k in range(2,k+1):
     cum_time=0.
     for i in range(n):
-        start=time.time(); GaussianMixture(n_components=k).fit(reduced_data); cum_time+=(time.time()-start)
+        start=time.time()
+        GaussianMixture(n_components=k).fit(reduced_data)
+        cum_time+=(time.time()-start)
     gmm_train_times.append([k,cum_time/n])
-gmm_df=pandas.DataFrame(gmm_train_times,columns=['GMM_Components','GMM_Time']); times_df=km_df.join(gmm_df)
+gmm_df=pandas.DataFrame(gmm_train_times,
+                        columns=['GMM_Components','GMM_Time'])
+times_df=km_df.join(gmm_df)
 pylab.figure(figsize=(12,4))
-pylab.plot(times_df.GMM_Components,times_df.GMM_Time*1000.,'-o',c='#5a8bbd',label='GMM Train Time')
-pylab.plot(times_df.GMM_Components,times_df.KM_Time*1000.,'-o',c='#008b8b',label='Kmeans Train Time')
-pylab.ylabel('Train time (in millisec.)',fontsize=10); pylab.xlabel('Cluster/Components Used in Training',fontsize=10)
-pylab.title('Training Time for Different Cluster/Component Sizes\nAveraged Over {} Runs Per Size'.format(n),fontsize=15)
+pylab.plot(times_df.GMM_Components,times_df.GMM_Time*1000.,
+           '-o',c='#5a8bbd',label='GMM Train Time')
+pylab.plot(times_df.GMM_Components,times_df.KM_Time*1000.,
+           '-o',c='#008b8b',label='Kmeans Train Time')
+pylab.ylabel('Train time (in millisec.)',fontsize=10)
+pylab.xlabel('Cluster/Components Used in Training',fontsize=10)
+st='Training Time for Different Cluster/Component Sizes\n'+\
+   'Averaged Over {} Runs Per Size'
+pylab.title(st.format(n),fontsize=15)
 pylab.legend(loc='best'); pylab.grid(); pylab.show()
-</script></div>
-    <p></p> 
+</script></div><br/> 
     <h3>Cluster Visualization</h3>
 Once we've chosen the optimal number of clusters for the clustering algorithm using the scoring metric above, we can now visualize the results.<br/>
 Note that, for experimentation purposes, it's useful to adjust the number of clusters for the clustering algorithm to see various visualizations.<br/> 
 The final visualization provided should, however, correspond with the optimal number of clusters.
 <div class="linked"><script type="text/x-sage">
-clusterer=KMeans(n_clusters=2).fit(reduced_data); sample_preds=clusterer.predict(pca_samples)
-preds=clusterer.predict(reduced_data); centers=clusterer.cluster_centers_; score=silhouette_score(reduced_data,preds)
+clusterer=KMeans(n_clusters=2).fit(reduced_data)
+sample_preds=clusterer.predict(pca_samples)
+preds=clusterer.predict(reduced_data)
+centers=clusterer.cluster_centers_
+score=silhouette_score(reduced_data,preds)
 cluster_results(reduced_data,preds,centers,pca_samples,'K-Means')
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
-clusterer2=GaussianMixture(n_components=2,covariance_type='full').fit(reduced_data)
-sample_preds2=clusterer2.predict(pca_samples); preds2=clusterer2.predict(reduced_data)
+clusterer2=GaussianMixture(n_components=2,
+                           covariance_type='full').fit(reduced_data)
+sample_preds2=clusterer2.predict(pca_samples)
+preds2=clusterer2.predict(reduced_data)
 centers2=clusterer2.means_; score2=silhouette_score(reduced_data,preds2)
-cluster_results(reduced_data,preds2,centers2,pca_samples,'Gaussian Mixture Model')
-</script></div>
-    <p></p>
+cluster_results(reduced_data,preds2,centers2,
+                pca_samples,'Gaussian Mixture Model')
+</script></div><br/>
     <h3>Implementation: Data Recovery</h3>
 Each cluster present in the visualization above has a central point.<br/> 
 These centers (or means) are not specifically data points from the data, but rather the averages of all the data points predicted in the respective clusters.<br/> 
@@ -634,16 +653,17 @@ It's time for the next steps:<br/>
 Apply the inverse transform to <i>centers</i> using <i>pca.inverse_transform</i> and assign the new centers to <i>log_centers</i>.<br/>
 Apply the inverse function of <i>numpy.log</i> to <i>log_centers</i> using <i>numpy.exp</i> and assign the true centers to <i>true_centers</i>.
 <div class="linked"><script type="text/x-sage">
-print ("Data Means"); pandas.DataFrame(numpy.mean(data)).T
-</script></div>
-    <p></p>
+print ("Data Means")
+pandas.DataFrame(numpy.mean(data)).T
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
-log_centers=pca.inverse_transform(centers); true_centers=numpy.exp(log_centers)
+log_centers=pca.inverse_transform(centers)
+true_centers=numpy.exp(log_centers)
 segments=['Segment {}'.format(i) for i in range(0,len(centers))]
-true_centers=pandas.DataFrame(numpy.round(true_centers),columns=data.keys(),index=segments)
+true_centers=pandas.DataFrame(numpy.round(true_centers),
+                              columns=data.keys(),index=segments)
 print ("K-Means True Centers"); true_centers
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 true_centers=true_centers.append(data.describe().loc['mean'])
 true_centers.plot(kind='bar',figsize=(12,5))
