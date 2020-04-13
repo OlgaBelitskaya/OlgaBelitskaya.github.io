@@ -696,8 +696,7 @@ for el in ['K-Means','Gaussian Mixture']:
     if clusters[el].values[0]=='Retail': clusters2[el]=['Segment 0','Segment 0','Segment 1']
     else: clusters2[el]=['Segment 1','Segment 1','Segment 0']
 clusters2
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 print ("K-Means")
 for i,pred in enumerate(sample_preds):
@@ -709,8 +708,7 @@ for i,pred in enumerate(sample_preds2):
     print ("Sample point {} predicted to be in Cluster {}".format(i,pred))
     print ('The distance between sample point {} and center of Cluster {}:'.format(i,pred))
     print (samples.iloc[i]-true_centers2.iloc[pred])
-</script></div>
-    <p></p>
+</script></div><br/>
     <h2>Conclusion</h2>
 In this final section, we will investigate ways that we can make use of the clustered data.<br/> 
 First, we will consider how the different groups of customers, the customer segments, may be affected differently by a specific delivery scheme.<br/>
@@ -751,8 +749,7 @@ Let's see how each data point is labeled either <i>HoReCa</i> (Hotel/Restaurant/
 In addition, we will find the sample points are circled in the plot, which will identify their labeling.
 <div class="linked"><script type="text/x-sage">
 channel_results(reduced_data,outliers,pca_samples[:3])
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>Question 12</h3>
 <i>How well does the clustering algorithm and number of clusters you've chosen compare to this underlying distribution of Hotel/Restaurant/Cafe customers to Retailer customers?<br/> 
 Are there customer segments that would be classified as purely <i>Retailers</i> or <i>Hotels/Restaurants/Cafes</i> by this distribution?<br/> 
@@ -766,24 +763,28 @@ We should note that for both algorithms borders of clusters are more clearly det
 Differences between actual and algorithmic classification may indicate a lack of the number of clusters for this market.<br/> Perhaps it needs a greater number to detect spending habits.
 <div class="linked"><script type="text/x-sage">
 channel_data=pandas.read_csv(path+'customers.csv')
-channel_data=channel_data.drop(channel_data.index[outliers]).reset_index(drop=True)
+channel_data=channel_data.drop(channel_data.index[outliers])\
+                         .reset_index(drop=True)
 # Might need to switch around the 0 and 1, based on the cluster seed
-df1,df2=numpy.where(channel_data['Channel']==2,0,1),numpy.where(channel_data['Channel']==2,1,0)
-percentage_kmeans=max(sum(df1==preds)/float(len(preds)),sum(df2==preds)/float(len(preds)))
-percentage_gaussian_mixture=max(sum(df1==preds)/float(len(preds2)),sum(df2==preds2)/float(len(preds2)))
+[df1,df2]=[numpy.where(channel_data['Channel']==2,0,1),
+           numpy.where(channel_data['Channel']==2,1,0)]
+percentage_kmeans=max(sum(df1==preds)/float(len(preds)),
+                      sum(df2==preds)/float(len(preds)))
+percentage_gaussian_mixture=max(sum(df1==preds)/float(len(preds2)),
+                                sum(df2==preds2)/float(len(preds2)))
 print ("K-Means")
-print ("Percentage of correctly classified customers: {:.2%}".format(percentage_kmeans))
+print ("Percentage of correctly classified customers: {:.2%}"\
+.format(percentage_kmeans))
 print ("\nGaussian Mixture Model")
-print ("Percentage of correctly classified customers: {:.2%}".format(percentage_gaussian_mixture))
-</script></div>
-    <p></p>
+print ("Percentage of correctly classified customers: {:.2%}"\
+.format(percentage_gaussian_mixture))
+</script></div><br/>
     <h3>Reflections</h3>
 It would be interesting to repeat the steps of this project in R and compare the results.<br/>
 Or try animation for clustering algorithms to compare the borders of clusters with real data labels during the learning process.
     <h3>Additional Code Cell</h3>
 <div class="linked"><script type="text/x-sage">
 
-</script></div>
-    <p></p> 
+</script></div><br/>
   </body>
 </html>
