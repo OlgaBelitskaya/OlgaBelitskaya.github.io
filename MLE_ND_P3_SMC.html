@@ -103,32 +103,48 @@ def cluster_results(reduced_data,preds,centers,pca_samples,alg):
 <div class="linked"><script type="text/x-sage">
 def biplot(good_data,reduced_data,pca):
     fig,ax=pylab.subplots(figsize=(12,5))
-    x=reduced_data.loc[:,'Dimension 1']; y=reduced_data.loc[:,'Dimension 2']
-    ax.scatter(x=x,y=y,facecolors='slategray',edgecolors=cmap((x*y)**2),s=70,alpha=0.4)
-    feature_vectors=pca.components_.T; arrow_size,text_pos=7.0,5.0
+    x=reduced_data.loc[:,'Dimension 1']
+    y=reduced_data.loc[:,'Dimension 2']
+    ax.scatter(x=x,y=y,facecolors='slategray',
+               edgecolors=cmap((x*y)**2),s=70,alpha=.4)
+    feature_vectors=pca.components_.T
+    arrow_size,text_pos=7.,5.
     for i,v in enumerate(feature_vectors):
-        ax.arrow(0,0,arrow_size*v[0],arrow_size*v[1],head_width=0.2,head_length=0.2,linewidth=2,color='#ff5a8b')
-        ax.text(v[0]*text_pos,v[1]*text_pos,good_data.columns[i],color='black',ha='center',va='center',fontsize=12)
-    ax.set_xlabel("Dimension 1",fontsize=10); ax.set_ylabel("Dimension 2",fontsize=10)
-    ax.set_title("PC plane with original feature projections.",fontsize=15); pylab.show()
+        ax.arrow(0,0,arrow_size*v[0],arrow_size*v[1],
+                 head_width=.2,head_length=.2,
+                 linewidth=2,color='#ff5a8b')
+        ax.text(v[0]*text_pos,v[1]*text_pos,
+                good_data.columns[i],color='black',
+                ha='center',va='center',fontsize=12)
+    ax.set_xlabel("Dimension 1",fontsize=10)
+    ax.set_ylabel("Dimension 2",fontsize=10)
+    ax.set_title("PC plane with original feature projections.",
+                 fontsize=15); pylab.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def channel_results(reduced_data,outliers,pca_samples):
     path='https://raw.githubusercontent.com/OlgaBelitskaya/'+\
-         'machine_learning_engineer_nd009/master/Machine_Learning_Engineer_ND_P3/'
+         'machine_learning_engineer_nd009/master/'+\
+         'Machine_Learning_Engineer_ND_P3/'
     full_data=pandas.read_csv(path+'customers.csv')
     channel=pandas.DataFrame(full_data['Channel'],columns=['Channel'])
     channel=channel.drop(channel.index[outliers]).reset_index(drop=True)
     labeled=pandas.concat([reduced_data,channel],axis=int(1))
     fig,ax=pylab.subplots(figsize=(12,5))
-    labels=['Hotel/Restaurant/Cafe','Retailer']; grouped=labeled.groupby('Channel')
+    labels=['Hotel/Restaurant/Cafe','Retailer']
+    grouped=labeled.groupby('Channel')
     for i,channel in grouped:   
-        channel.plot(ax=ax,kind='scatter',x='Dimension 1',y='Dimension 2',color=cmap((i-1)*1.0/2),label=labels[i-1],s=30)  
+        channel.plot(ax=ax,kind='scatter',
+                     x='Dimension 1',y='Dimension 2',
+                     color=cmap((i-1)*1.0/2),label=labels[i-1],s=30)  
     for i,sample in enumerate(pca_samples):
-        ax.scatter(x=sample[0],y=sample[1],s=230,linewidth=3,color='black',marker='o',facecolors='none');
-        ax.scatter(x=sample[0]+0.25,y=sample[1]+0.3,marker='$%d$'%(i),alpha=1,s=200,color='black')
-    ax.set_title("PCA-Reduced Data Labeled by 'Channel'\nTransformed Sample Data Circled",fontsize=15)
-    pylab.show()
+        ax.scatter(x=sample[0],y=sample[1],s=230,linewidth=3,
+                   color='black',marker='o',facecolors='none');
+        ax.scatter(x=sample[0]+0.25,y=sample[1]+0.3,
+                   marker='$%d$'%(i),alpha=1,s=200,color='black')
+    ti="PCA-Reduced Data Labeled by 'Channel'\n"+\
+       "Transformed Sample Data Circled"
+    ax.set_title(ti,fontsize=15); pylab.show()
 </script></div><br/>
     <h2>Data Exploration</h2>
 In this section, we will begin exploring the data through visualizations and code to understand how each feature is related to the others.<br/>
@@ -137,29 +153,36 @@ The dataset is composed of six important product categories: <i>Fresh, Milk, Gro
 Consider what each category represents in terms of products we could purchase.
     <h3>Data Loading</h3>    
 <div class="linked"><script type="text/x-sage">
-path='https://raw.githubusercontent.com/OlgaBelitskaya/machine_learning_engineer_nd009/master/Machine_Learning_Engineer_ND_P3/'
-data=pandas.read_csv(path+'customers.csv'); data.drop(['Region','Channel'],axis=1,inplace=True)
-print ("Wholesale customers dataset has {} samples with {} features each.".format(*data.shape))
-data.describe()
-</script></div>
-    <p></p>
+path='https://raw.githubusercontent.com/OlgaBelitskaya/'+\
+         'machine_learning_engineer_nd009/master/'+\
+         'Machine_Learning_Engineer_ND_P3/'
+data=pandas.read_csv(path+'customers.csv')
+data.drop(['Region','Channel'],axis=1,inplace=True)
+ti="The dataset has {} samples with {} features each."
+print(ti.format(*data.shape)); data.describe()
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
-data.plot.area(stacked=False,figsize=(12,5)); pylab.grid(); pylab.show()
-</script></div>
-    <p></p>
+data.plot.area(stacked=False,figsize=(11,5))
+pylab.grid(); pylab.show()
+</script></div><br/>
     <h3>Implementation: Selecting Samples</h3>
 To get a better understanding of the customers and how their data will transform through the analysis,<br/>
 it would be best to select a few sample data points and explore them in more detail.<br/>
 In the code block below, add three indices of your choice to the indices list which will represent the customers to track.<br/>
 It is suggested to try different sets of samples until you obtain customers that vary significantly from one another.
 <div class="linked"><script type="text/x-sage">
-indices=[23,25,27]; samples=pandas.DataFrame(data.loc[indices],columns=data.keys()).reset_index(drop=True)
+indices=[23,25,27]
+def hex_to_rgb(chex):
+        chex=chex.lstrip('#'); n=len(chex)
+        return tuple(int(chex[i:i+n//3],16)/255. for i in range(0,n,n//3))
+samples=pandas.DataFrame(data.loc[indices],
+                         columns=data.keys()).reset_index(drop=True)
 samples.index=['C0','C1','C2']; samples.loc['Mean']=samples.mean()
 print ("Chosen samples of wholesale customers dataset:"); samples
-#samples.T.plot(figsize=(12,5),colors=['#1b2c45','#5a8bbd','#008b8b','#ff5a8b'])
-#pylab.grid(); pylab.show()
-</script></div>
-    <p></p>
+cols=['#1b2c45','#5a8bbd','#008b8b','#ff5a8b']
+samples.T.plot(figsize=(11,5),color=[hex_to_rgb(el) for el in cols])
+pylab.grid(); pylab.show()
+</script></div><br/>
     <h3>Question 1</h3>
 <i>Consider the total purchase cost of each product category and the statistical description of the dataset above for your sample customers.<br/>
 What kind of establishment (customer) could each of the three samples you've chosen represent?</i>
@@ -168,23 +191,31 @@ I have built a plot for comparing the feature values with the means and a heatma
     <p>Click “Run” twice. Use in HTML documents with &#60;/script&#62; in the end.</p>
 <div class="sage"><script type="text/x-sage">
 %%html
-<script src="https://code.highcharts.com/highcharts.js"/><div id="test_highcharts" style="width:1200px;height:500px;"/><script>
+<script src="https://code.highcharts.com/highcharts.js"/>
+<div id="test_highcharts" style="width:1200px;height:500px;"/><script>
 Highcharts.chart('test_highcharts',{
-    xAxis:{categories:['Fresh','Milk','Grocery','Frozen','Detergents_Paper','Delicatessen']},yAxis:{title:{text:'Value'}},
-    title:{style:{'color':'#5a8bbd','fontSize':'24px'},text:"Chosen samples of the wholesale customers' dataset"},
-    series:[{name:'C0',color:'#1b2c45',data:[26373,36423,22019,5154,4337,16523]},{name:'C1',color:'#5a8bbd',data:[16165,4230,7595,201,4003,57]},
-            {name:'C2',color:'#008b8b',data:[14276,803,3045,485,100,518]},{name:'Mean',color:'#ff5a8b',data:[18938,13819,10886,1947,2813,5699]}]
-},function(chart){var point=chart.series.data,
-                  text=chart.renderer.text(point.plotX+chart.plotLeft+10,point.plotY+chart.plotTop-10).add(),box=text.getBBox();});
-</script></div>
-    <p></p>
+    xAxis:{categories:['Fresh','Milk','Grocery','Frozen',
+                       'Detergents_Paper','Delicatessen']},
+    yAxis:{title:{text:'Value'}},
+    title:{style:{'color':'#5a8bbd','fontSize':'24px'},
+           text:"Chosen samples of the wholesale customers' dataset"},
+    series:[{name:'C0',color:'#1b2c45',data:[26373,36423,22019,5154,4337,16523]},
+            {name:'C1',color:'#5a8bbd',data:[16165,4230,7595,201,4003,57]},
+            {name:'C2',color:'#008b8b',data:[14276,803,3045,485,100,518]},
+            {name:'Mean',color:'#ff5a8b',data:[18938,13819,10886,1947,2813,5699]}] },
+    function(chart){var point=chart.series.data,
+                    text=chart.renderer.text(point.plotX+chart.plotLeft+10,
+                                             point.plotY+chart.plotTop-10).add(),
+                    box=text.getBBox();});
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
-pylab.figure(figsize=(12,5)); p_samples=samples.iloc[:].T.apply(lambda x:100.0*x/x.sum())
-seaborn.heatmap(p_samples,cmap=cmap,annot=True,annot_kws={"color":"White","size":20},fmt='.1f')
+pylab.figure(figsize=(12,5))
+p_samples=samples.iloc[:].T.apply(lambda x:100.0*x/x.sum())
+seaborn.heatmap(p_samples,cmap=cmap,annot=True,
+                annot_kws={"color":"White","size":20},fmt='.1f')
 pylab.title("Product categories in percentages for the sample customers",fontsize=15)
 pylab.xticks(ha='center',fontsize=12); pylab.yticks(fontsize=10); pylab.show()
-</script></div>
-    <p></p>
+</script></div><br/>
 <b>Customer C0</b> - food-oriented supermarket:<br/>
 - the wide range of products with big values; <br/>
 - the significant excess of the purchasing volumes of categories <i>Fresh, Milk</i> over others;<br/>
