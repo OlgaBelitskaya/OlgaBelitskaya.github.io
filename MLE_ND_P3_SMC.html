@@ -73,7 +73,7 @@ def cluster_results(reduced_data,preds,centers,pca_samples,alg):
     fig,ax=pylab.subplots(figsize=(12,7))
     for i,cluster in plot_data.groupby('Cluster'):   
         cluster.plot(ax=ax,kind='scatter',x='Dimension 1',y='Dimension 2',alpha=0.8,edgecolors='slategray',
-                     colors=cmap((i)*1.0/(len(centers)-1)),label='Cluster %i'%(i),s=30);
+                     c=cmap((i)*1.0/(len(centers)-1)),label='Cluster %i'%(i),s=30);
     for i,c in enumerate(centers):
         ax.scatter(x=c[0],y=c[1],color='white',edgecolors='black',alpha=1,linewidth=2,marker='o',s=250);
         ax.scatter(x=c[0],y=c[1],marker='$%d$'%(i),alpha=1,s=120,color='black');
@@ -155,7 +155,7 @@ I have built a plot for comparing the feature values with the means and a heatma
 <script src="https://code.highcharts.com/highcharts.js"/><div id="test_highcharts" style="width:1200px;height:500px;"/><script>
 Highcharts.chart('test_highcharts',{
     xAxis:{categories:['Fresh','Milk','Grocery','Frozen','Detergents_Paper','Delicatessen']},yAxis:{title:{text:'Value'}},
-    title:{style:{'color':'#5a8bbd','fontSize':'24px'},text:'Chosen samples of wholesale customers dataset'},
+    title:{style:{'color':'#5a8bbd','fontSize':'24px'},text:"Chosen samples of the wholesale customers' dataset"},
     series:[{name:'C0',color:'#1b2c45',data:[26373,36423,22019,5154,4337,16523]},{name:'C1',color:'#5a8bbd',data:[16165,4230,7595,201,4003,57]},
             {name:'C2',color:'#008b8b',data:[14276,803,3045,485,100,518]},{name:'Mean',color:'#ff5a8b',data:[18938,13819,10886,1947,2813,5699]}]
 },function(chart){var point=chart.series.data,
@@ -222,11 +222,11 @@ def plot_feature_importance(f,regressor1,regressor2):
     D1=dict(zip(new_data,regressor1.feature_importances_)); D2=dict(zip(new_data,regressor2.feature_importances_))
     pylab.figure(figsize=(12,5)); 
     pylab.subplot(121); pylab.grid()
-    pylab.bar(range(len(D1)),D1.values(),alpha=0.5,color='slategrey',align='center')
+    pylab.bar(range(len(D1)),D1.values(),alpha=.5,color='slategrey',align='center')
     pylab.xticks(range(len(D1)),D1.keys(),fontsize=7)
     pylab.title('Experiment with "%s": Feature Importances, \nDecision Tree Regressor'%f)
     pylab.subplot(122); pylab.grid()
-    pylab.bar(range(len(D2)),D2.values(),alpha=0.5,color='slategrey',align='center')
+    pylab.bar(range(len(D2)),D2.values(),alpha=.5,color='slategrey',align='center')
     pylab.xticks(range(len(D2)),D2.keys(),fontsize=7)
     pylab.title('Experiment with "%s": Feature Importances, \nRandom Forest Regressor'%f); pylab.show()
 </script></div>
@@ -270,7 +270,7 @@ Conversely, if we believe that feature is not relevant for identifying a specifi
 the scatter matrix might show a correlation between that feature and another feature in the data.
 <div class="linked"><script type="text/x-sage">
 axes=pandas.plotting.scatter_matrix(data,alpha=0.3,figsize=(12,10),diagonal='hist',c='#1b2c45',hist_kwds={'color':'SlateGrey','bins':100})
-corr=data.corr().as_matrix()
+corr=data.corr().values
 for i,j in zip(*numpy.triu_indices_from(axes,k=1)):
     axes[i,j].annotate("%.3f" %corr[i,j],(.8,.8),fontsize=12,xycoords='axes fraction',ha='center',va='center')
 pylab.grid(); pylab.show()
@@ -312,7 +312,7 @@ Now we will do the following steps:<br/>
 &nbsp;&nbsp;Assign a copy of the data to <i>log_data</i> after applying logarithmic scaling. Use the <i>numpy.log</i> function for this.<br/>
 &nbsp;&nbsp;Assign a copy of the sample data to <i>log_samples</i> after applying logarithmic scaling. Again, use <i>numpy.log</i>.
 <div class="linked"><script type="text/x-sage">
-log_data=numpy.log(data); log_samples=numpy.log(samples); corr=data.corr().as_matrix()
+log_data=numpy.log(data); log_samples=numpy.log(samples); corr=data.corr().values
 axes=pandas.plotting.scatter_matrix(log_data,alpha=0.3,figsize=(12,10),diagonal='hist',c='#1b2c45',hist_kwds={'color':'SlateGrey','bins':100})
 for i,j in zip(*numpy.triu_indices_from(axes,k=1)):
     axes[i,j].annotate("%.3f" %corr[i,j],(.2,.2),fontsize=12,xycoords='axes fraction',ha='center',va='center')
