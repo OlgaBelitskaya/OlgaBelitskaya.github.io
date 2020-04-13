@@ -2,22 +2,21 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=0.9*device-width">
+    <meta name="viewport" content="width=device-width">
     <title>MLE_ND_P3_SMC</title>
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
     <script>$(function () {
     sagecell.makeSagecell({inputLocation:'div.linked',linked:true,evalButtonText:'Run Linked Cells'});  
-    sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run'});
-    });
+    sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run'}); });
     </script>
   </head>
   <style>
   @import url('https://fonts.googleapis.com/css?family=Orbitron|Roboto');
-  body {background-color:ghostwhite;}; a, p {color:#5a8bbd; font-family:'Roboto';} 
+  body {background-color:ghostwhite;}; a,p {color:#5a8bbd; font-family:'Roboto';} 
   h1 {color:#1b2c45; font-family:'Orbitron'; text-shadow:4px 4px 4px #ccc;} 
-  h2, h3 {color:slategray; font-family:'Orbitron'; text-shadow:4px 4px 4px #ccc;}
+  h2,h3 {color:slategray; font-family:'Orbitron'; text-shadow:4px 4px 4px #ccc;}
   h4 {color:#1b2c45; font-family:'Roboto';}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:48em;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
   .sagecell table.table_form tr.row-a {background-color:lightgray;} 
   .sagecell table.table_form tr.row-b {background-color:ghostwhite;}
   .sagecell table.table_form td {padding:5px 15px; color:#5a8bbd; font-family:'Roboto';}
@@ -32,7 +31,8 @@
 In this project, we will analyze a dataset containing data on various customers' annual spending amounts (reported in monetary units) of diverse product categories for internal structure.<br/>
 One goal of this project is to best describe the variation in the different types of customers that a wholesale distributor interacts with.<br/>
 Doing so would equip the distributor with insight into how to best structure their delivery service to meet the needs of each customer.<br/>
-The dataset for this project can be found on the <a href="https://archive.ics.uci.edu/ml/datasets/Wholesale+customers">&#x1F578;UCI Machine Learning Repository</a>.<br/> 
+The dataset for this project can be found on the 
+<a href="https://archive.ics.uci.edu/ml/datasets/Wholesale+customers">&#x1F578;UCI Machine Learning Repository.</a><br/> 
 For the purposes of this project, the features <i>Channel</i> and <i>Region</i> will be excluded in the analysis — with focus instead on the six product categories recorded for customers.      
     <h3>Resources</h3>
 <a href="http://archive.ics.uci.edu/ml/datasets.php">&#x1F578;UCI Machine Learning Repository&nbsp;</a>
@@ -40,16 +40,20 @@ For the purposes of this project, the features <i>Channel</i> and <i>Region</i> 
 <a href="http://seaborn.pydata.org/index.html">&#x1F578;seaborn: statistical data visualization&nbsp;</a><br/>
     <h3>Code Library</h3> 
 <div class="linked"><script type="text/x-sage">
-import numpy,pandas,pylab,seaborn,time; pylab.style.use('seaborn-pastel')
-import warnings; from sklearn.exceptions import DataConversionWarning
+import warnings; warnings.filterwarnings("ignore")
+from sklearn.exceptions import DataConversionWarning
+warnings.filterwarnings("ignore",category=DataConversionWarning)
+import numpy,pandas,pylab,seaborn,time
+pylab.style.use('seaborn-pastel')
 cmap=seaborn.cubehelix_palette(2,start=.1,rot=-.25,as_cmap=True)
-for el in [FutureWarning,UserWarning,DataConversionWarning]: warnings.filterwarnings("ignore",category=el)
 from sklearn.model_selection import train_test_split,cross_val_score
-from sklearn.tree import DecisionTreeRegressor; from sklearn.ensemble import RandomForestRegressor
-from sklearn.decomposition import PCA; from sklearn.cluster import KMeans
-from sklearn.mixture import GaussianMixture; from sklearn.metrics import silhouette_score
-</script></div>
-    <p></p>      
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.decomposition import PCA
+from sklearn.cluster import KMeans
+from sklearn.mixture import GaussianMixture
+from sklearn.metrics import silhouette_score
+</script></div><br/>     
 <div class="linked"><script type="text/x-sage">
 # https://github.com/udacity/machine-learning/blob/master/projects/customer_segments/visuals.py
 def pca_results(good_data,pca):
