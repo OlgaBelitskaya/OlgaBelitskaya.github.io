@@ -492,7 +492,9 @@ Let us have a look how the log-transformed sample data has changed after having 
 Observe the numerical value for the first four dimensions of the sample points.<br/>
 Consider if this is consistent with our initial interpretation of the sample points.
 <div class="linked"><script type="text/x-sage">
-pandas.DataFrame(numpy.round(pca_samples,4),columns=pca_result.index.values,index=['C0','C1','C2','Mean'])
+pandas.DataFrame(numpy.round(pca_samples,4),
+                 columns=pca_result.index.values,
+                 index=['C0','C1','C2','Mean'])
 </script></div><br/> 
     <h3>Implementation: Dimensionality Reduction</h3>
 When using principal component analysis, one of the main goals is to reduce the dimensionality of the data — in effect, reducing the complexity of the problem.<br/> 
@@ -610,7 +612,7 @@ for k in range(2,k+1):
 gmm_df=pandas.DataFrame(gmm_train_times,
                         columns=['GMM_Components','GMM_Time'])
 times_df=km_df.join(gmm_df)
-pylab.figure(figsize=(12,4))
+pylab.figure(figsize=(11,4))
 pylab.plot(times_df.GMM_Components,times_df.GMM_Time*1000.,
            '-o',c='#5a8bbd',label='GMM Train Time')
 pylab.plot(times_df.GMM_Components,times_df.KM_Time*1000.,
@@ -695,13 +697,21 @@ The values in categories are perfect indicators:<br/>
 <i>Fresh</i> has the highest level among others for <b>HoReCa</b> than for <b>Retail</b>.<br/>
 <i>Detergents_Paper</i> has an extremely small level for <b>HoReCa</b>.
 <div class="linked"><script type="text/x-sage">
-clusters=pandas.DataFrame(2*[['','']],columns=['K-Means','Gaussian Mixture'],index=['Segment 0','Segment 1'])
+clusters=pandas.DataFrame(2*[['','']],
+                          columns=['K-Means','Gaussian Mixture'],
+                          index=['Segment 0','Segment 1'])
 if true_centers['Fresh']['Segment 0']>true_centers['Fresh']['Segment 1']:
-    clusters['K-Means']['Segment 0']='HoReCa'; clusters['K-Means']['Segment 1']='Retail'
-else: clusters['K-Means']['Segment 0']='Retail'; clusters['K-Means']['Segment 1']='HoReCa'
+    clusters['K-Means']['Segment 0']='HoReCa'
+    clusters['K-Means']['Segment 1']='Retail'
+else: 
+    clusters['K-Means']['Segment 0']='Retail'
+    clusters['K-Means']['Segment 1']='HoReCa'
 if true_centers2['Fresh']['Segment 0']>true_centers2['Fresh']['Segment 1']:
-    clusters['Gaussian Mixture']['Segment 0']='HoReCa'; clusters['Gaussian Mixture']['Segment 1']='Retail'
-else: clusters['Gaussian Mixture']['Segment 0']='Retail'; clusters['Gaussian Mixture']['Segment 1']='HoReCa'
+    clusters['Gaussian Mixture']['Segment 0']='HoReCa'
+    clusters['Gaussian Mixture']['Segment 1']='Retail'
+else: 
+    clusters['Gaussian Mixture']['Segment 0']='Retail'
+    clusters['Gaussian Mixture']['Segment 1']='HoReCa'
 clusters
 </script></div><br/>
     <h3>Question 9</h3>
@@ -709,23 +719,29 @@ clusters
 Are the predictions for each sample point consistent with this?</i>
     <h3>Answer 9</h3>
 <div class="linked"><script type="text/x-sage">
-clusters2=pandas.DataFrame(3*[['','']],columns=['K-Means','Gaussian Mixture'],index=['C0','C1','C2'])
+clusters2=pandas.DataFrame(3*[['','']],
+                           columns=['K-Means','Gaussian Mixture'],
+                           index=['C0','C1','C2'])
 clusters2['Cluster']=['Retail','Retail','HoReCa']
 for el in ['K-Means','Gaussian Mixture']:
-    if clusters[el].values[0]=='Retail': clusters2[el]=['Segment 0','Segment 0','Segment 1']
-    else: clusters2[el]=['Segment 1','Segment 1','Segment 0']
+    if clusters[el].values[0]=='Retail': 
+        clusters2[el]=['Segment 0','Segment 0','Segment 1']
+    else: 
+        clusters2[el]=['Segment 1','Segment 1','Segment 0']
 clusters2
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
+st1="Sample point {} predicted to be in Cluster {}"
+st2="The distance between sample point {} and center of Cluster {}:"
 print ("K-Means")
 for i,pred in enumerate(sample_preds):
-    print ("Sample point {} predicted to be in Cluster {}".format(i,pred))
-    print ('The distance between sample point {} and center of Cluster {}:'.format(i,pred))
+    print (st1.format(i,pred))
+    print (st2.format(i,pred))
     print (samples.iloc[i]-true_centers.iloc[pred])
 print ("\n\nGaussian Mixture Model")
 for i,pred in enumerate(sample_preds2):
-    print ("Sample point {} predicted to be in Cluster {}".format(i,pred))
-    print ('The distance between sample point {} and center of Cluster {}:'.format(i,pred))
+    print (st1.format(i,pred))
+    print (st2.format(i,pred))
     print (samples.iloc[i]-true_centers2.iloc[pred])
 </script></div><br/>
     <h2>Conclusion</h2>
