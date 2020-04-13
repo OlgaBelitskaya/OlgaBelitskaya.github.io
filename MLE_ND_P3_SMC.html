@@ -336,17 +336,19 @@ then the scatter matrix below may not show any correlation between that feature 
 Conversely, if we believe that feature is not relevant for identifying a specific customer,<br/>
 the scatter matrix might show a correlation between that feature and another feature in the data.
 <div class="linked"><script type="text/x-sage">
-axes=pandas.plotting.scatter_matrix(data,alpha=0.3,figsize=(12,10),diagonal='hist',c='#1b2c45',hist_kwds={'color':'SlateGrey','bins':100})
+axes=pandas.plotting.scatter_matrix(data,alpha=.3,figsize=(11,10),
+                                    diagonal='hist',c='#1b2c45',
+                                    hist_kwds={'color':'SlateGrey','bins':100})
 corr=data.corr().values
 for i,j in zip(*numpy.triu_indices_from(axes,k=1)):
-    axes[i,j].annotate("%.3f" %corr[i,j],(.8,.8),fontsize=12,xycoords='axes fraction',ha='center',va='center')
+    axes[i,j].annotate("%.3f" %corr[i,j],(.8,.8),fontsize=12,
+                       xycoords='axes fraction',ha='center',va='center')
 pylab.grid(); pylab.show()
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
-print ("Pearson correlation coefficients"); data.corr(method='pearson')
-</script></div>
-    <p></p>
+print ("Pearson correlation coefficients")
+data.corr(method='pearson')
+</script></div><br/>
     <h3>Question 3</h3>
 <i>Are there any pairs of features which exhibit some degree of correlation?<br/> 
 Does this confirm or deny your suspicions about the relevance of the feature you attempted to predict?<br/>
@@ -358,14 +360,18 @@ These facts confirm the thoughts about the relevance of the feature we attempted
 We should also note that the features is not normally distributed. But the log-normal distribution looks very similar with our features.<br/>
 I have created the random example of the log-normal distribution for visual comparing.      
 <div class="linked"><script type="text/x-sage">
-pylab.figure(figsize=(12,5)); mu,sigma=3.,1.; s=numpy.random.lognormal(mu,sigma,1000)
-count,bins,ignored=pylab.hist(s,200,normed=True,align='mid',alpha=0.5,color='slategrey')
+pylab.figure(figsize=(11,5)); mu,sigma=3.,1.
+s=numpy.random.lognormal(mu,sigma,1000)
+count,bins,ignored=pylab.hist(s,200,normed=True,align='mid',
+                              alpha=.5,color='slategrey')
 x=numpy.linspace(min(bins),max(bins),10000)
-pdf=(numpy.exp(-(numpy.log(x)-mu)**2/(2*sigma**2))/(x*sigma*numpy.sqrt(2*numpy.pi)))
-pylab.plot(x,pdf,linewidth=2,color='#1b2c45'); pylab.axis('tight'); pylab.grid()
-pylab.title('Example of a Random Log-Normal Distribution',fontsize=15); pylab.show()
-</script></div>
-    <p></p>
+pdf=(numpy.exp(-(numpy.log(x)-mu)**2/(2*sigma**2))\
+     /(x*sigma*numpy.sqrt(2*numpy.pi)))
+pylab.plot(x,pdf,linewidth=2,color='#1b2c45')
+pylab.axis('tight'); pylab.grid()
+pylab.title('Example of a Random Log-Normal Distribution',
+            fontsize=15); pylab.show()
+</script></div><br/>
     <h2>Data Preprocessing</h2>
 In this section, we will preprocessing the data to create a better representation of customers by performing a scaling on the data and detecting (and optionally removing) outliers.<br/>
 Preprocessing data is often times a critical step in assuring that results you obtain from your analysis are significant and meaningful.
@@ -379,24 +385,26 @@ Now we will do the following steps:<br/>
 &nbsp;&nbsp;Assign a copy of the data to <i>log_data</i> after applying logarithmic scaling. Use the <i>numpy.log</i> function for this.<br/>
 &nbsp;&nbsp;Assign a copy of the sample data to <i>log_samples</i> after applying logarithmic scaling. Again, use <i>numpy.log</i>.
 <div class="linked"><script type="text/x-sage">
-log_data=numpy.log(data); log_samples=numpy.log(samples); corr=data.corr().values
-axes=pandas.plotting.scatter_matrix(log_data,alpha=0.3,figsize=(12,10),diagonal='hist',c='#1b2c45',hist_kwds={'color':'SlateGrey','bins':100})
+log_data=numpy.log(data); log_samples=numpy.log(samples)
+corr=data.corr().values
+axes=pandas.plotting.scatter_matrix(log_data,alpha=.3,figsize=(11,10),
+                                    diagonal='hist',c='#1b2c45',
+                                    hist_kwds={'color':'SlateGrey','bins':100})
 for i,j in zip(*numpy.triu_indices_from(axes,k=1)):
-    axes[i,j].annotate("%.3f" %corr[i,j],(.2,.2),fontsize=12,xycoords='axes fraction',ha='center',va='center')
+    axes[i,j].annotate("%.3f" %corr[i,j],(.2,.2),fontsize=12,
+                       xycoords='axes fraction',ha='center',va='center')
 pylab.grid(); pylab.show()
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>Observation</h3>
 After applying a natural logarithm scaling to the data, the distribution of each feature should appear much more normal.<br/> 
 For any pairs of features we may have identified earlier as being correlated, observe here whether that correlation is still present (and whether it is now stronger or weaker than before).
 <div class="linked"><script type="text/x-sage">
 log_samples
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
-print ("Pearson correlation coefficients"); log_data.corr(method='pearson')
-</script></div>
-    <p></p>
+print ("Pearson correlation coefficients")
+log_data.corr(method='pearson')
+</script></div><br/>
     <h3>Implementation: Outlier Detection</h3>
 Detecting outliers in the data is extremely important in the data preprocessing step of any analysis.<br/> 
 The presence of outliers can often skew results which take into consideration these data points.<br/> 
