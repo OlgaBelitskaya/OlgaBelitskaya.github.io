@@ -34,8 +34,7 @@ In this introductory project, we will explore a subset of the RMS Titanic passen
     <h3>Code Tools</h3>
 <div class="linked"><script type="text/x-sage">
 import numpy,pandas,pylab; pylab.style.use('ggplot')
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 # https://github.com/udacity/machine-learning/blob/master/projects/titanic_survival_exploration/visuals.py
 def filter_data(data,condition):
@@ -53,20 +52,25 @@ def filter_data(data,condition):
            "Only >, <, >=, <=, ==, != allowed."
         raise Exception(st)
     return data[exp].reset_index(drop=True)    
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def survival_stats(data,outcomes,key,filters=[]):
     if (key not in data.columns.values):
-        print ("'{}' is not a feature of the Titanic data. Did you spell something wrong?".format(key)); return False
+        st1="'{}' is not a feature of the Titanic data. "+\
+            "Did you spell something wrong?"
+        print(st1.format(key)); return False
     if (key=='Cabin' or key=='PassengerId' or key=='Ticket'):
-        print ("'{}' has too many unique categories to display! Try a different feature.".format(key)); return False
+        st2="'{}' has too many unique categories to display! "+\
+            "Try a different feature."
+        print(st2.format(key)); return False
     all_data=data.T.append(outcomes).T
     for condition in filters: all_data=filter_data(all_data,condition)
-    all_data=all_data[[key,'Survived']]; pylab.figure(figsize=(12,5))
+    all_data=all_data[[key,'Survived']]
+    pylab.figure(figsize=(11,5))
     if (key=='Age' or key=='Fare'):
         all_data=all_data[~pandas.isnull(all_data[key])]
-        min_value=all_data[key].min(); max_value=all_data[key].max(); value_range=max_value-min_value
+        min_value=all_data[key].min(); max_value=all_data[key].max()
+        value_range=max_value-min_value
         if(key=='Fare'): bins=numpy.arange(0,all_data['Fare'].max()+20,20)
         if(key=='Age'): bins=numpy.arange(0,all_data['Age'].max()+10,10)
         nonsurv_vals=all_data[all_data['Survived']==0][key].reset_index(drop=True).astype('float')
@@ -95,20 +99,16 @@ def survival_stats(data,outcomes,key,filters=[]):
         nan_outcomes=all_data[pandas.isnull(all_data[key])]['Survived']
         print ("Passengers with missing '{}' values: {} ({} survived, {} did not survive)"\
                .format(key,len(nan_outcomes),sum(nan_outcomes==1),sum(nan_outcomes==0)))
-</script></div>
-    <p></p>
-To begin working with the RMS Titanic passenger data, we'll first need to import the functionality we need, and load our data into a pandas DataFrame.
-<br/>
+</script></div><br/>
+To begin working with the RMS Titanic passenger data, we'll first need to import the functionality we need, and load our data into a pandas DataFrame.<br/>
 Run the code cell below to load our data and display the first few entries (passengers) for examination using the .head() function.
 <div class="linked"><script type="text/x-sage">
 path='https://raw.githubusercontent.com/OlgaBelitskaya/machine_learning_engineer_nd009/master/Machine_Learning_Engineer_ND_P0/'
 full_data=pandas.read_csv(path+'titanic_data.csv'); full_data.head()
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 full_data.info();
-</script></div>
-    <p></p>
+</script></div><br/>
 From a sample of the RMS Titanic data, we can see the various features present for each passenger on the ship:<br/>
 <b>Survived:</b> Outcome of survival (0 = No; 1 = Yes)<br/>
 <b>Pclass:</b> Socio-economic class (1 = Upper class; 2 = Middle class; 3 = Lower class)<br/>
@@ -168,8 +168,7 @@ The first two parameters passed to the function are the RMS Titanic data and pas
 The third parameter indicates which feature we want to plot survival statistics across.  
 <div class="linked"><script type="text/x-sage">
 survival_stats(data,outcomes,'Sex')
-</script></div>
-    <p></p>
+</script></div><br/>
 Examining the survival statistics, a large majority of males did not survive the ship sinking.<br/>
 However, a majority of females did survive the ship sinking.<br/> 
 Let's build on our previous prediction: if a passenger was female, then we will predict that they survived.<br/>
@@ -182,15 +181,13 @@ def predictions_1(data):
         else: predictions.append(0)
     return pandas.Series(predictions).astype('int')
 predictions=predictions_1(data)
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>Question 2</h3>
 How accurate would a prediction be that all female passengers survived and the remaining passengers did not survive (<i>prediction_1()</i>)?
     <h3>Answer 2</h3>     
 <div class="linked"><script type="text/x-sage">
 accuracy_score(outcomes,predictions)
-</script></div>
-    <p></p> 
+</script></div><br/>
 Using just the <b>Sex</b> feature for each passenger, we are able to increase the accuracy of our predictions by a significant margin.<br/>
 Now, let's consider using an additional feature to see if we can further improve our predictions.<br/>
 For example, consider all of the male passengers aboard the RMS Titanic: can we find a subset of those passengers that had a higher rate of survival?<br/>
@@ -198,8 +195,7 @@ Let's start by looking at the <b>Age</b> of each male, by again using the <i>sur
 This time, we'll use the fourth parameter to filter out the data so that only passengers with the <b>Sex</b> 'male' will be included.     
 <div class="linked"><script type="text/x-sage">
 survival_stats(data,outcomes,'Age',["Sex == 'male'"])
-</script></div>
-    <p></p>
+</script></div><br/>
 Examining the survival statistics, the majority of males younger than 10 survived the ship sinking, whereas most males age 10 or older did not survive the ship sinking.<br/>
 Let's continue to build on our previous prediction: if a passenger was female, then we will predict they survive.<br/> 
 If a passenger was male and younger than 10, then we will also predict they survive. Otherwise, we will predict they do not survive.      
