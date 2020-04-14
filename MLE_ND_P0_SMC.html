@@ -56,13 +56,13 @@ def filter_data(data,condition):
 <div class="linked"><script type="text/x-sage">
 def survival_stats(data,outcomes,key,filters=[]):
     if (key not in data.columns.values):
-        st1="'{}' is not a feature of the Titanic data. "+\
-            "Did you spell something wrong?"
-        print(st1.format(key)); return False
+        st11="'{}' is not a feature of the Titanic data. "
+        st12="Did you spell something wrong?"
+        print(st11.format(key)+st12); return False
     if (key=='Cabin' or key=='PassengerId' or key=='Ticket'):
-        st2="'{}' has too many unique categories to display! "+\
-            "Try a different feature."
-        print(st2.format(key)); return False
+        st21="'{}' has too many unique categories to display! "
+        st22="Try a different feature."
+        print(st21.format(key)+st22); return False
     all_data=data.T.append(outcomes).T
     for condition in filters: all_data=filter_data(all_data,condition)
     all_data=all_data[[key,'Survived']]
@@ -71,39 +71,54 @@ def survival_stats(data,outcomes,key,filters=[]):
         all_data=all_data[~pandas.isnull(all_data[key])]
         min_value=all_data[key].min(); max_value=all_data[key].max()
         value_range=max_value-min_value
-        if(key=='Fare'): bins=numpy.arange(0,all_data['Fare'].max()+20,20)
-        if(key=='Age'): bins=numpy.arange(0,all_data['Age'].max()+10,10)
-        nonsurv_vals=all_data[all_data['Survived']==0][key].reset_index(drop=True).astype('float')
-        surv_vals=all_data[all_data['Survived']==1][key].reset_index(drop=True).astype('float')
-        pylab.hist(nonsurv_vals,bins=bins,alpha=0.8,color='#FF7F50',label='Did not survive')
-        pylab.hist(surv_vals,bins=bins,alpha=0.8,color='#338DD4',label='Survived')
-        pylab.xlim(0,bins.max()); pylab.legend(framealpha=0.8)
+        if(key=='Fare'): 
+            bins=numpy.arange(0,all_data['Fare'].max()+20,20)
+        if(key=='Age'): 
+            bins=numpy.arange(0,all_data['Age'].max()+10,10)
+        nonsurv_vals=all_data[all_data['Survived']==0][key]\
+        .reset_index(drop=True).astype('float')
+        surv_vals=all_data[all_data['Survived']==1][key]\
+        .reset_index(drop=True).astype('float')
+        pylab.hist(nonsurv_vals,bins=bins,alpha=.8,
+                   color='#FF7F50',label='Did not survive')
+        pylab.hist(surv_vals,bins=bins,alpha=.8,
+                   color='#338DD4',label='Survived')
+        pylab.xlim(0,bins.max()); pylab.legend(framealpha=.8)
     else:
         if (key=='Pclass'): values=numpy.arange(1,4)
-        if (key=='Parch' or key=='SibSp'): values=numpy.arange(0,numpy.max(data[key])+1)
+        if (key=='Parch' or key=='SibSp'): 
+            values=numpy.arange(0,numpy.max(data[key])+1)
         if (key=='Embarked'): values=['C','Q','S']
         if (key=='Sex'): values=['male','female']
-        frame=pandas.DataFrame(index=numpy.arange(len(values)),columns=(key,'Survived','NSurvived'))
+        frame=pandas.DataFrame(index=numpy.arange(len(values)),
+                               columns=(key,'Survived','NSurvived'))
         for i,value in enumerate(values):
-            frame.loc[i]=[value,len(all_data[(all_data['Survived']==1) & (all_data[key]==value)]),
-                          len(all_data[(all_data['Survived']==0) & (all_data[key]==value)])]
-        bar_width=0.4
+            frame.loc[i]=[value,
+                          len(all_data[(all_data['Survived']==1)&(all_data[key]==value)]),
+                          len(all_data[(all_data['Survived']==0)&(all_data[key]==value)])]
+        bar_width=.4
         for i in numpy.arange(len(frame)):
-            nonsurv_bar =pylab.bar(i-bar_width,frame.loc[i]['NSurvived'],width=bar_width,color='#FF7F50')
-            surv_bar=pylab.bar(i,frame.loc[i]['Survived'],width=bar_width,color='#338DD4')
+            nonsurv_bar=pylab.bar(i-bar_width,frame.loc[i]['NSurvived'],
+                                  width=bar_width,color='#FF7F50')
+            surv_bar=pylab.bar(i,frame.loc[i]['Survived'],
+                               width=bar_width,color='#338DD4')
             pylab.xticks(numpy.arange(len(frame)),values)
-            pylab.legend((nonsurv_bar[0],surv_bar[0]),('Did not survive','Survived'),framealpha=0.8)
+            pylab.legend((nonsurv_bar[0],surv_bar[0]),
+                         ('Did not survive','Survived'),framealpha=.8)
     pylab.xlabel(key); pylab.ylabel('Number of Passengers')
-    pylab.title('Passenger Survival Statistics With the \'%s\' Feature'%(key)); pylab.show()
+    ti='Passenger Survival Statistics With the \"%s\" Feature'
+    pylab.title(ti%(key)); pylab.show()
     if sum(pandas.isnull(all_data[key])):
         nan_outcomes=all_data[pandas.isnull(all_data[key])]['Survived']
-        print ("Passengers with missing '{}' values: {} ({} survived, {} did not survive)"\
-               .format(key,len(nan_outcomes),sum(nan_outcomes==1),sum(nan_outcomes==0)))
+        ms="Passengers with missing '{}' values: {} ({} survived, {} did not survive)"
+        print (ms.format(key,len(nan_outcomes),
+                         sum(nan_outcomes==1),sum(nan_outcomes==0)))
 </script></div><br/>
 To begin working with the RMS Titanic passenger data, we'll first need to import the functionality we need, and load our data into a pandas DataFrame.<br/>
 Run the code cell below to load our data and display the first few entries (passengers) for examination using the .head() function.
 <div class="linked"><script type="text/x-sage">
-path='https://raw.githubusercontent.com/OlgaBelitskaya/machine_learning_engineer_nd009/master/Machine_Learning_Engineer_ND_P0/'
+path='https://raw.githubusercontent.com/OlgaBelitskaya/'+\
+     'machine_learning_engineer_nd009/master/Machine_Learning_Engineer_ND_P0/'
 full_data=pandas.read_csv(path+'titanic_data.csv'); full_data.head()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
@@ -125,9 +140,9 @@ Since we're interested in the outcome of survival for each passenger or crew mem
 we can remove the <b>Survived</b> feature from this dataset and store it as its own separate variable outcomes.<br/> 
 We will use these outcomes as our prediction targets.      
 <div class="linked"><script type="text/x-sage">
-outcomes=full_data['Survived']; data=full_data.drop('Survived',axis=1); data.head()
-</script></div>
-    <p></p>
+outcomes=full_data['Survived']
+data=full_data.drop('Survived',axis=1); data.head()
+</script></div><br/>
 The very same sample of the RMS Titanic data now shows the <b>Survived</b> feature removed from the DataFrame.<br/>
 Note that the passenger data and the outcomes of survival are now paired. That means for any passenger <i>data.loc[i]</i>, they have the survival <i>outcomes[i]</i>.<br/>
 To measure the performance of our predictions, we need a metric to score our predictions against the true outcomes of survival - the function <i>accuracy_score()</i>.<br/>
@@ -136,12 +151,13 @@ Since we are interested in how accurate our predictions are, we will calculate t
 <div class="linked"><script type="text/x-sage">
 def accuracy_score(truth, pred):
     if len(truth)==len(pred): 
-        return "Predictions have an accuracy of {:.2f}%.".format((truth==pred).mean()*100)    
+        return "Predictions have an accuracy of {:.2f}%."\
+        .format((truth==pred).mean()*100)    
     else:
         return "Number of predictions does not match number of outcomes!"
-predictions=pandas.Series(numpy.ones(5,dtype=int)).astype('int'); accuracy_score(outcomes[:5,],predictions)
-</script></div>
-    <p></p>
+predictions=pandas.Series(numpy.ones(5,dtype=int)).astype('int')
+accuracy_score(outcomes[:5,],predictions)
+</script></div><br/>
       <h2>Making Predictions</h2>
 If we were asked to make a prediction about any passenger aboard the RMS Titanic whom we knew nothing about,<br/> 
 then the best prediction we could make would be that they did not survive.<br/>
@@ -153,15 +169,13 @@ def predictions_0(data):
     for _,passenger in data.iterrows(): predictions.append(0)
     return pandas.Series(predictions).astype('int')
 predictions=predictions_0(data)
-</script></div>
-    <p></p>
+</script></div><br/>
       <h3>Question 1</h3>
 Using the RMS Titanic data, how accurate would a prediction be that none of the passengers survived?
       <h3>Answer 1</h3>     
 <div class="linked"><script type="text/x-sage">
 accuracy_score(outcomes,predictions)
-</script></div>
-    <p></p>
+</script></div><br/>
 Let's take a look at whether the feature <b>Sex</b> has any indication of survival rates among passengers using the <i>survival_stats()</i> function.<br/>
 This function is defined in the <i>visualizations.py</i>. Python script included with this project.<br/> 
 The first two parameters passed to the function are the RMS Titanic data and passenger survival outcomes, respectively.<br/> 
@@ -194,7 +208,7 @@ For example, consider all of the male passengers aboard the RMS Titanic: can we 
 Let's start by looking at the <b>Age</b> of each male, by again using the <i>survival_stats()</i> function.<br/> 
 This time, we'll use the fourth parameter to filter out the data so that only passengers with the <b>Sex</b> 'male' will be included.     
 <div class="linked"><script type="text/x-sage">
-survival_stats(data,outcomes,'Age',["Sex == 'male'"])
+survival_stats(data,outcomes,'Age',["Sex=='male'"])
 </script></div><br/>
 Examining the survival statistics, the majority of males younger than 10 survived the ship sinking, whereas most males age 10 or older did not survive the ship sinking.<br/>
 Let's continue to build on our previous prediction: if a passenger was female, then we will predict they survive.<br/> 
@@ -203,20 +217,21 @@ If a passenger was male and younger than 10, then we will also predict they surv
 def predictions_2(data):
     predictions=[]
     for _,passenger in data.iterrows():
-        if passenger['Sex']=='female': predictions.append(1)
-        elif passenger['Sex']=='male' and passenger['Age']<10: predictions.append(1)
-        else: predictions.append(0)
+        if passenger['Sex']=='female': 
+            predictions.append(1)
+        elif passenger['Sex']=='male' and passenger['Age']<10: 
+            predictions.append(1)
+        else: 
+            predictions.append(0)
     return pandas.Series(predictions).astype('int')
 predictions=predictions_2(data)
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>Question 3</h3>
 How accurate would a prediction be that all female passengers and all male passengers younger than 10 survived (<i>prediction_2()</i>)?
     <h3>Answer 3</h3>     
 <div class="linked"><script type="text/x-sage">
 accuracy_score(outcomes,predictions)
-</script></div>
-    <p></p>
+</script></div><br/>
 Adding the feature <b>Age</b> as a condition in conjunction with <b>Sex</b> improves the accuracy by a small margin more than with simply using the feature <b>Sex</b> alone.<br/>
 Now we can try to find a series of features and conditions to split the data on to obtain an outcome prediction accuracy of at least 80%.<br/>
 This may require multiple features and multiple levels of conditional statements to succeed.<br/>
@@ -240,8 +255,7 @@ def predictions_final(data):
         else: predictions.append(0)
     return pandas.Series(predictions).astype('int') 
 predictions=predictions_final(data)
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>Question 4</h3>
 Describe the steps you took to implement the final prediction model so that it got an accuracy of at least 80%.<br/>
 What features did you look at? Were certain features more informative than others?<br/>
@@ -285,7 +299,6 @@ Overvaluation of meaning and application of machine learning is unlikely to succ
     <h3>Additional Code Cell</h3>
 <div class="linked"><script type="text/x-sage">
 
-</script></div>
-    <p></p>
+</script></div><br/>
   </body>
 </html>
