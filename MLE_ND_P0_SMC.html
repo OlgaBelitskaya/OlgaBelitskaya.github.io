@@ -208,7 +208,7 @@ For example, consider all of the male passengers aboard the RMS Titanic: can we 
 Let's start by looking at the <b>Age</b> of each male, by again using the <i>survival_stats()</i> function.<br/> 
 This time, we'll use the fourth parameter to filter out the data so that only passengers with the <b>Sex</b> 'male' will be included.     
 <div class="linked"><script type="text/x-sage">
-survival_stats(data,outcomes,'Age',["Sex=='male'"])
+survival_stats(data,outcomes,'Age',["Sex == 'male'"])
 </script></div><br/>
 Examining the survival statistics, the majority of males younger than 10 survived the ship sinking, whereas most males age 10 or older did not survive the ship sinking.<br/>
 Let's continue to build on our previous prediction: if a passenger was female, then we will predict they survive.<br/> 
@@ -239,18 +239,17 @@ We can use the same feature multiple times with different conditions.<br/>
 There are some experiments and the function <i>prediction_final()</i> as a result:
 <div class="linked"><script type="text/x-sage">
 survival_stats(data,outcomes,'SibSp',["Sex == 'male'","Age < 15"])
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 survival_stats(data,outcomes,'Pclass',["Sex == 'male'","Age < 15"])
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def predictions_final(data):   
     predictions=[]
     for _,passenger in data.iterrows():
         if (passenger['Sex']=='female'): predictions.append(1)                
-        elif passenger['Pclass'] in [1,2] and (passenger['Age']<16 or passenger['Age']>75): predictions.append(1)            
+        elif passenger['Pclass'] in [1,2] and \
+            (passenger['Age']<16 or passenger['Age']>75): predictions.append(1)            
         elif passenger['Age']<15 and passenger['SibSp']<3: predictions.append(1)            
         else: predictions.append(0)
     return pandas.Series(predictions).astype('int') 
@@ -268,17 +267,19 @@ And the latest clarification, which overcomes the border of 80% in prediction ac
 if a family has more than three children, absolutely all the family may not be survived in catastrophic situations and in an atmosphere of panic.     
 <div class="linked"><script type="text/x-sage">
 accuracy_score(outcomes,predictions)
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>Scikit-learn Metrics</h3>
 There is a set of metrics in the <b>scikit-learn</b> package for evaluation the quality of predictions.
 <div class="linked"><script type="text/x-sage">
-from sklearn.metrics import recall_score,accuracy_score,precision_score
-print ("Predictions have an accuracy of {:.2f}%.".format(accuracy_score(outcomes, predictions)*100))
-print ("Predictions have a recall score equal to {:.2f}%.".format(recall_score(outcomes, predictions)*100))
-print ("Predictions have a precision score equal to {:.2f}%.".format(precision_score(outcomes,predictions)*100))
-</script></div>
-    <p></p>
+from sklearn.metrics import recall_score,\
+accuracy_score,precision_score
+print ("Predictions have an accuracy of {:.2f}%."\
+.format(accuracy_score(outcomes, predictions)*100))
+print ("Predictions have a recall score equal to {:.2f}%."\
+.format(recall_score(outcomes, predictions)*100))
+print ("Predictions have a precision score equal to {:.2f}%."\
+.format(precision_score(outcomes,predictions)*100))
+</script></div><br/>
 The evaluation terminology:
 <p>$accuracy \ = \ \frac{number \ of \ people \ that \ are \ correctly \ predicted \ as \ survived \ or \ non−survived}{number \ of \ all \ people \ in \ the \ dataset}$</p>
 <p>$recall \ = \ \frac{number \ of \ people \ that \ are \ predicted \ as \ survived \ and \ they \ are \ actually \ survived}{number \ of \ people \ that \ are \ actually \ survived}$</p>
