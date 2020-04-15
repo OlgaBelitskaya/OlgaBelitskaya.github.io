@@ -2,22 +2,22 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=0.9*device-width">
+    <meta name="viewport" content="width=device-width">
     <title>MLE_ND_P1_SMC</title>
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
     <script>$(function () {
     sagecell.makeSagecell({inputLocation:'div.linked',linked:true,evalButtonText:'Run Linked Cells'});  
-    sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run'});
-    });
+    sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run'}); });
     </script>
   </head>
   <style>
   @import url('https://fonts.googleapis.com/css?family=Orbitron|Roboto');
-  body {background-color:aliceblue;}; a {color:#4876ff; font-family:'Roboto';} 
+  body {margin:5px 5px 5px 15px; background-color:aliceblue;}; 
+  a {color:#4876ff; font-family:'Roboto';} 
   h1 {color:#348ABD; font-family:'Orbitron'; text-shadow:4px 4px 4px #ccc;} 
   h2,h3 {color:slategray; font-family:'Orbitron'; text-shadow:4px 4px 4px #ccc;}
   h4 {color:#348ABD; font-family:'Roboto';}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:48em;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
   </style>  
   <body>
     <h1>Machine Learning Engineer Nanodegree</h1>
@@ -57,38 +57,50 @@ The feature 'MEDV' has been multiplicatively scaled to account for 35 years of m
 <a href="http://seaborn.pydata.org/index.html">&#x1F578;seaborn: statistical data visualization&nbsp;</a>
       <h3>Code Library</h3>      
 <div class="linked"><script type="text/x-sage">
-import numpy,pandas,pylab,seaborn; pylab.style.use('seaborn-whitegrid')
-import warnings; warnings.filterwarnings("ignore",category=FutureWarning)
-from sklearn.model_selection import train_test_split,ShuffleSplit,GridSearchCV
+import warnings; warnings.filterwarnings("ignore")
+import numpy,pandas,pylab,seaborn
+pylab.style.use('seaborn-whitegrid')
+from sklearn.model_selection import train_test_split
+from sklearn.model_selection import ShuffleSplit,GridSearchCV
 from sklearn.metrics import mean_squared_error,r2_score,make_scorer
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.model_selection import learning_curve,validation_curve
 from sklearn import datasets
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 # https://github.com/udacity/machine-learning/blob/master/projects/boston_housing/visuals.py
-def ModelLearning(X, y):
+def ModelLearning(X,y):
     cv=ShuffleSplit(n_splits=10,test_size=0.2,random_state=1)
     train_sizes=numpy.rint(numpy.linspace(1,X.shape[0]*0.8-1,9)).astype(int)
     fig=pylab.figure(figsize=(12,8))
     for k,depth in enumerate([1,3,6,10]):
         regressor=DecisionTreeRegressor(max_depth=depth)
-        sizes,train_scores,test_scores=learning_curve(regressor,X,y,cv=cv,train_sizes=train_sizes,scoring='r2')
-        train_std=numpy.std(train_scores,axis=1); train_mean=numpy.mean(train_scores,axis=1)
-        test_std=numpy.std(test_scores,axis=1); test_mean=numpy.mean(test_scores,axis=1)
+        sizes,train_scores,test_scores=\
+        learning_curve(regressor,X,y,cv=cv,
+                       train_sizes=train_sizes,scoring='r2')
+        train_std=numpy.std(train_scores,axis=1)
+        train_mean=numpy.mean(train_scores,axis=1)
+        test_std=numpy.std(test_scores,axis=1)
+        test_mean=numpy.mean(test_scores,axis=1)
         ax=fig.add_subplot(2,2,k+1)
-        ax.plot(sizes,train_mean,'o-',color='#E24A33',label='Training Score')
-        ax.plot(sizes,test_mean,'o-',color='#348ABD',label='Testing Score')
-        ax.fill_between(sizes,train_mean-train_std,train_mean+train_std,alpha=0.15,color='#E24A33')
-        ax.fill_between(sizes,test_mean-test_std,test_mean+test_std,alpha=0.15,color = '#348ABD')
-        ax.set_title('max_depth=%s'%(depth)); ax.set_xlabel('Number of Training Points')
-        ax.set_ylabel('Score'); ax.set_xlim([0,X.shape[0]*0.8]); ax.set_ylim([-0.05,1.05])
-    ax.legend(bbox_to_anchor=(1.05,1.05),loc='lower left',borderaxespad=0.)
-    fig.suptitle('Decision Tree Regressor Learning Performances',fontsize=16,y=1.03)
+        ax.plot(sizes,train_mean,'o-',
+                color='#E24A33',label='Training Score')
+        ax.plot(sizes,test_mean,'o-',
+                color='#348ABD',label='Testing Score')
+        ax.fill_between(sizes,train_mean-train_std,
+                        train_mean+train_std,alpha=.15,color='#E24A33')
+        ax.fill_between(sizes,test_mean-test_std,
+                        test_mean+test_std,alpha=.15,color='#348ABD')
+        ax.set_title('max_depth=%s'%(depth))
+        ax.set_xlabel('Number of Training Points')
+        ax.set_ylabel('Score')
+        ax.set_xlim([0,X.shape[0]*0.8]); ax.set_ylim([-0.05,1.05])
+    ax.legend(bbox_to_anchor=(1.05,1.05),
+              loc='lower left',borderaxespad=0.)
+    st='Decision Tree Regressor Learning Performances'
+    fig.suptitle(st,fontsize=16,y=1.03)
     fig.tight_layout(); pylab.show()
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def ModelComplexity(X, y):
     cv=ShuffleSplit(n_splits=10,test_size=0.2,random_state=0); max_depth=numpy.arange(1,11)
