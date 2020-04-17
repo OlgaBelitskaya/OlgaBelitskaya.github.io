@@ -197,9 +197,10 @@ Algorithms can be sensitive to such distributions of values and can underperform
 With the census dataset two features fit this description: <i>capital-gain</i> and <i>capital-loss</i>.<br/>
 Let's plot a histogram of these two features and have a look on the range of the values present and how they are distributed.
 <div class="linked"><script type="text/x-sage">
-income_raw=data['income']; features_raw=data.drop('income',axis=1); distribution(data)
-</script></div>
-    <p></p>
+income_raw=data['income']
+features_raw=data.drop('income',axis=1)
+distribution(data)
+</script></div><br/>
 For highly-skewed feature distributions such as <i>capital-gain</i> and <i>capital-loss</i>, it is common practice to apply a <a href="https://en.wikipedia.org/wiki/Data_transformation_(statistics)">&#x1F578;logarithmic transformation</a> on the data <br/>
 so that the very large and very small values do not negatively affect the performance of a learning algorithm.<br/>
 Using a logarithmic transformation significantly reduces the range of values caused by outliers.<br/> 
@@ -299,14 +300,15 @@ This score can range from 0 to 1, with 1 being the best possible F1 score (we ta
     <h3>Answer 1</h3>
 The code cell below displays both indicators in the output.
 <div class="linked"><script type="text/x-sage">
-beta=.5; accuracy0=accuracy_score(income,numpy.array([1]*len(income)))
+accuracy0=accuracy_score(income,numpy.array([1]*len(income)))
 recall=1 # ==numpy.sum(income)/(numpy.sum(income)+0) 
-precision=numpy.sum(income)/len(income)
+beta=.5; precision=numpy.sum(income)/len(income)
 fscore0=(1 + beta**2)*(precision*recall)/((beta**2*precision)+recall)
-fscore0=fbeta_score(income,numpy.array([1]*len(income)),beta=0.5) # alternative method 
-print ("Naive Predictor: accuracy score - {:.4f}, F-score - {:.4f}".format(accuracy0,fscore0))
-</script></div>
-    <p></p>
+# alternative method 
+fscore0=fbeta_score(income,numpy.array([1]*len(income)),beta=.5) 
+print ("Naive Predictor: accuracy score - {:.4f}, F-score - {:.4f}"\
+.format(accuracy0,fscore0))
+</script></div><br/>
     <h3>Supervised Learning Models</h3>
 The following supervised learning models are currently available in scikit-learn that you may choose from:<br/>
 - Gaussian Naive Bayes (GaussianNB)<br/>
@@ -366,19 +368,22 @@ We will do the following points:<br/>
 &nbsp;&nbsp;- Make sure that you set the <i>beta</i> parameter!    
 <div class="linked"><script type="text/x-sage">
 def train_predict(learner,sample_size,X_train,y_train,X_test,y_test):   
-    results={}; n=int(300)
-    start=time.time(); learner.fit(X_train[:sample_size],y_train[:sample_size]) 
-    end=time.time(); results['train_time']=end-start
-    start=time.time(); predictions_test=learner.predict(X_test); predictions_train=learner.predict(X_train[:n])
+    results={}; n=int(300); start=time.time()
+    learner.fit(X_train[:sample_size],y_train[:sample_size]) 
+    end=time.time(); results['train_time']=end-start; start=time.time()
+    predictions_test=learner.predict(X_test)
+    predictions_train=learner.predict(X_train[:n])
     end=time.time(); results['pred_time']=end-start
     results['acc_train']=accuracy_score(y_train[:n],predictions_train)
     results['acc_test']=accuracy_score(y_test,predictions_test)
-    results['f_train']=fbeta_score(y_train[:n],predictions_train,average='macro',beta=0.5)
-    results['f_test']=fbeta_score(y_test,predictions_test,average='macro',beta=0.5)
-    print ("{} trained on {} samples.".format(learner.__class__.__name__,sample_size))
+    results['f_train']=fbeta_score(y_train[:n],predictions_train,
+                                   average='macro',beta=.5)
+    results['f_test']=fbeta_score(y_test,predictions_test,
+                                  average='macro',beta=.5)
+    print ("{} trained on {} samples."\
+    .format(learner.__class__.__name__,sample_size))
     return results
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>Implementation: Initial Model Evaluation</h3>
 Next steps are the following:<br/>
 Import the three supervised learning models you've discussed in the previous section.<br/>
@@ -388,16 +393,20 @@ Note: Use the default settings for each model — you will tune one specific mod
 Calculate the number of records equal to 1%, 10%, and 100% of the training data.<br/>
 Store those values in <i>samples_1</i>, <i>samples_10</i>, and <i>samples_100</i> respectively.
 <div class="linked"><script type="text/x-sage">
-clf_A=GradientBoostingClassifier(random_state=10); clf_B=RandomForestClassifier(); clf_C=AdaBoostClassifier()
-samples_1=int(len(X_train)/100); samples_10=int(len(X_train)/10); samples_100=len(X_train)
+clf_A=GradientBoostingClassifier(random_state=10)
+clf_B=RandomForestClassifier()
+clf_C=AdaBoostClassifier()
+samples_1=int(len(X_train)/100)
+samples_10=int(len(X_train)/10)
+samples_100=len(X_train)
 results={}
 for clf in [clf_A,clf_B,clf_C]:
     clf_name=clf.__class__.__name__; results[clf_name]={}
     for i,samples in enumerate([samples_1,samples_10,samples_100]):
-        results[clf_name][i]=train_predict(clf,samples,X_train,y_train,X_test,y_test)
+        results[clf_name][i]=\
+        train_predict(clf,samples,X_train,y_train,X_test,y_test)
 evaluate(results,accuracy0,fscore0)
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>Improving Results</h3>
 In this final section, we will choose from the three supervised learning models the best model to use on the student data.<br/> 
 We will then perform a grid search optimization for the model over the entire training set (<i>X_train</i> and <i>y_train</i>)<br/> by tuning at least one parameter to improve upon the untuned model's F-score.
