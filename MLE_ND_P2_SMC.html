@@ -86,7 +86,7 @@ def distribution(data,transformed=False):
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def evaluate(results,accuracy,f1):
-    fig,ax=pylab.subplots(2,3,figsize=(12,8))
+    fig,ax=pylab.subplots(2,3,figsize=(11,8))
     ti="Performance Metrics for Three Supervised Learning Models"
     bar_width=0.3; colors=['#A00000','#00A0A0','#00A000']
     for k,learner in enumerate(results.keys()):
@@ -129,24 +129,32 @@ def evaluate(results,accuracy,f1):
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def feature_plot(importances,X_train,y_train):
-    indices=numpy.argsort(importances)[::-1]; columns=X_train.columns.values[indices[:5]]
-    values=importances[indices][:5]; fig=pylab.figure(figsize=(12,5))
-    pylab.title("Normalized Weights for First Five Most Predictive Features",fontsize=16)
-    pylab.bar(numpy.arange(5),values,width=0.6,align="center",color='#00A000',label="Feature Weight")
-    pylab.bar(numpy.arange(5)-0.3,numpy.cumsum(values),width=0.2,align="center",color='#00A0A0',label="Cumulative Feature Weight")
-    pylab.xticks(numpy.arange(5),columns); pylab.xlim((-0.5,4.5))
-    pylab.ylabel("Weight",fontsize=12); pylab.xlabel("Feature",fontsize=12)   
-    pylab.legend(loc='upper center'); pylab.tight_layout(); pylab.show()  
+    ti="Normalized Weights for First Five Most Predictive Features"
+    indices=numpy.argsort(importances)[::-1]
+    columns=X_train.columns.values[indices[:5]]
+    values=importances[indices][:5]
+    fig=pylab.figure(figsize=(11,5))
+    pylab.title(ti,fontsize=16)
+    pylab.bar(numpy.arange(5),values,width=.6,align="center",
+              color='#00A000',label="Feature Weight")
+    pylab.bar(numpy.arange(5)-0.3,numpy.cumsum(values),width=.2,
+              align="center",color='#00A0A0',label="Cumulative Feature Weight")
+    pylab.xticks(numpy.arange(5),columns); pylab.xlim((-.5,4.5))
+    pylab.ylabel("Weight",fontsize=12)
+    pylab.xlabel("Feature",fontsize=12)   
+    pylab.legend(loc='upper center')
+    pylab.tight_layout(); pylab.show()  
 </script></div><br/>
     <h2>Exploring the Data</h2>
 Let's load the census data.<br/>
 Note that the last column from this dataset, <i>income</i>, will be our <b>target</b> label (whether an individual makes more than, or at most, $50,000 annually).<br/> 
 All other columns are <b>features</b> about each individual in the census database.
 <div class="linked"><script type="text/x-sage">
-path='https://raw.githubusercontent.com/OlgaBelitskaya/machine_learning_engineer_nd009/master/Machine_Learning_Engineer_ND_P2/'
-data=pandas.read_csv(path+'census.csv'); display(data.head().T); data.describe()
-</script></div>
-    <p></p>
+path='https://raw.githubusercontent.com/OlgaBelitskaya/'+\
+     'machine_learning_engineer_nd009/master/Machine_Learning_Engineer_ND_P2/'
+data=pandas.read_csv(path+'census.csv')
+display(data.head().T); data.describe()
+</script></div><br/>
     <h3>Implementation: Data Exploration</h3>
 A cursory investigation of the dataset will determine how many individuals fit into either group, and will tell us about the percentage of these individuals making more than 50,000 USD.<br/> 
 We need to compute the following:<br/>
@@ -155,14 +163,16 @@ We need to compute the following:<br/>
 - The number of individuals making at most 50,000 USD annually, <i>n_at_most_50k</i>.<br/>
 - The percentage of individuals making more than 50,000 USD annually, <i>greater_percent</i>.<br/>
 <div class="linked"><script type="text/x-sage">
-n_greater_50k=len(data[data['income']=='>50K']); n_at_most_50k=len(data[data['income']=='<=50K'])
-n_records=len(data); greater_percent=float(n_greater_50k*100.0/n_records)
+n_greater_50k=len(data[data['income']=='>50K'])
+n_at_most_50k=len(data[data['income']=='<=50K'])
+n_records=len(data)
+greater_percent=float(n_greater_50k*100.0/n_records)
 print ("Total number of records: {}".format(n_records))
 print ("Individuals making more than $50,000: {}".format(n_greater_50k))
 print ("Individuals making at most $50,000: {}".format(n_at_most_50k))
-print ("Percentage of individuals making more than $50,000: {:.2f}%".format(greater_percent))
-</script></div>
-    <p></p>
+print ("Percentage of individuals making more than $50,000: {:.2f}%"\
+.format(greater_percent))
+</script></div><br/>
     <h3>Features' Description</h3>
 <b>age</b>: continuous.<br/>
 <b>workclass</b>: Private, Self-emp-not-inc, Self-emp-inc, Federal-gov, Local-gov, State-gov, Without-pay, Never-worked.<br/>
@@ -196,20 +206,22 @@ Using a logarithmic transformation significantly reduces the range of values cau
 Care must be taken when applying this transformation, however: the logarithm of 0 is undefined,<br/>
 so we must translate the values by a small amount above 0 to apply the logarithm successfully.
 <div class="linked"><script type="text/x-sage">
-skewed=['capital-gain','capital-loss']; features_raw[skewed]=data[skewed].apply(lambda x:numpy.log(x+1))
+skewed=['capital-gain','capital-loss']
+features_raw[skewed]=data[skewed].apply(lambda x:numpy.log(x+1))
 distribution(features_raw,transformed=True)
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>Normalizing Numerical Features</h3>
 In addition to performing transformations on features that are highly skewed, it is often good practice to perform some type of scaling on numerical features.<br/>
 Applying a scaling to the data does not change the shape of each feature's distribution (such as <i>capital-gain</i> or <i>capital-loss</i> above);<br/>
 however, normalization ensures that each feature is treated equally when applying supervised learners.<br/> 
 Note that once scaling is applied, observing the data in its raw form will no longer have the same original meaning.     
 <div class="linked"><script type="text/x-sage">
-scaler=MinMaxScaler(); numerical=['age','education-num','capital-gain','capital-loss','hours-per-week']
-features_raw[numerical]=scaler.fit_transform(data[numerical]); features_raw.head().T
-</script></div>
-    <p></p>
+scaler=MinMaxScaler()
+numerical=['age','education-num','capital-gain',
+           'capital-loss','hours-per-week']
+features_raw[numerical]=scaler.fit_transform(data[numerical])
+features_raw.head().T
+</script></div><br/>
     <h3>Implementation: Data Preprocessing</h3>
 From the table in <b>Exploring the Data</b> above, we can see there are several features for each record that are non-numeric.<br/> Typically, learning algorithms expect input to be numeric, which requires that non-numeric features (called <b>categorical variables</b>) be converted.<br/>
 One popular way to convert categorical variables is by using the <b>one-hot encoding</b> scheme.<br/>
