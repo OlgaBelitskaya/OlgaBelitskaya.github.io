@@ -2,22 +2,22 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=0.9*device-width">
+    <meta name="viewport" content="width=device-width">
     <title>MLE_ND_P2_SMC</title>
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
     <script>$(function () {
     sagecell.makeSagecell({inputLocation:'div.linked',linked:true,evalButtonText:'Run Linked Cells'});  
-    sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run'});
-    });
+    sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run'}); });
     </script>
   </head>
   <style>
   @import url('https://fonts.googleapis.com/css?family=Orbitron|Roboto');
-  body {background-color:mintcream;}; a, p {color:#00a050; font-family:'Roboto';} 
+  body {margin:5px 5px 5px 15px; background-color:mintcream;}; 
+  a,p {color:#00a050; font-family:'Roboto';} 
   h1 {color:#00a0a0; font-family:'Orbitron'; text-shadow:4px 4px 4px #ccc;} 
   h2, h3 {color:slategray; font-family:'Orbitron'; text-shadow:4px 4px 4px #ccc;}
   h4 {color:#00a0a0; font-family:'Roboto';}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:48em;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
   .sagecell table.table_form tr.row-a {background-color:lightgray;} 
   .sagecell table.table_form tr.row-b {background-color:mintcream;}
   .sagecell table.table_form td {padding:5px 15px; color:#00a050; font-family:'Roboto';}
@@ -40,25 +40,30 @@ The datset was donated by Ron Kohavi and Barry Becker, after being published in 
 You can find the article by Ron Kohavi <a href="https://www.aaai.org/Papers/KDD/1996/KDD96-033.pdf">&#x1F578;online.</a><br/>
 The data we investigate here consists of small changes to the original dataset, such as removing the <i>fnlwgt</i> feature and records with missing or ill-formatted entries.
       <h3>Resources</h3>
-<a href="http://archive.ics.uci.edu/ml/datasets.php">&#x1F578;UCI Machine Learning Repository&nbsp;</a>
+<a href="http://archive.ics.uci.edu/ml/datasets.php">&#x1F578;UCI Machine Learning Repository&nbsp;</a><br/>
 <a href="https://scikit-learn.org/stable/index.html">&#x1F578;scikit-learn. Machine Learning in Python&nbsp;</a>
 <a href="http://seaborn.pydata.org/index.html">&#x1F578;seaborn: statistical data visualization&nbsp;</a><br/>
-<a href="https://machinelearningmastery.com/gentle-introduction-gradient-boosting-algorithm-machine-learning/">&#x1F578;A Gentle Introduction to the Gradient Boosting Algorithm for Machine Learning</a>
+<a href="https://machinelearningmastery.com/gentle-introduction-gradient-boosting-algorithm-machine-learning/">&#x1F578;A Gentle Introduction to the Gradient Boosting Algorithm for Machine Learning</a><br/>
 <a href="https://www.youtube.com/watch?v=9wn1f-30_ZY">&#x1F578;Gradient Boosting Method and Random Forest</a>
 <a href="https://www.is.uni-freiburg.de/ressourcen/business-analytics/10_ensemblelearning.pdf">&#x1F578;Data Mining: Ensemble Learning</a>
       <h3>Code Library</h3> 
 <div class="linked"><script type="text/x-sage">
-import numpy,pandas,pylab,seaborn,time; pylab.style.use('seaborn-whitegrid')
-import matplotlib.patches as mpatches; from sklearn.base import clone
-import warnings; from sklearn.exceptions import DataConversionWarning
-for el in [FutureWarning,UserWarning,DataConversionWarning]: warnings.filterwarnings("ignore",category=el)
+import warnings; warnings.filterwarnings("ignore")
+from sklearn.exceptions import DataConversionWarning
+warnings.filterwarnings("ignore",category=DataConversionWarning)
+import numpy,pandas,pylab,seaborn,time
+pylab.style.use('seaborn-whitegrid')
+import matplotlib.patches as mpatches
+from sklearn.base import clone
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split,GridSearchCV
-from sklearn.metrics import f1_score,accuracy_score,fbeta_score,confusion_matrix,make_scorer
-from sklearn.ensemble import AdaBoostClassifier,GradientBoostingClassifier,RandomForestClassifier
-from sklearn.svm import LinearSVC; from sklearn.linear_model import SGDClassifier
-</script></div>
-    <p></p>
+from sklearn.metrics import f1_score,accuracy_score,fbeta_score
+from sklearn.metrics import confusion_matrix,make_scorer
+from sklearn.ensemble import \
+AdaBoostClassifier,GradientBoostingClassifier,RandomForestClassifier
+from sklearn.svm import LinearSVC
+from sklearn.linear_model import SGDClassifier
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 # https://github.com/udacity/machine-learning/blob/master/projects/finding_donors/visuals.py
 def distribution(data,transformed=False):
@@ -73,8 +78,7 @@ def distribution(data,transformed=False):
     else:
         fig.suptitle("Skewed Distributions of Continuous Census Data Features",fontsize=12,y=.03)
     fig.tight_layout(); pylab.show()
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def evaluate(results,accuracy,f1):
     fig,ax=pylab.subplots(2,3,figsize=(12,8))
