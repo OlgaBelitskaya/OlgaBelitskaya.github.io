@@ -229,10 +229,12 @@ One-hot encoding creates a <b>"dummy"</b> variable for each possible category of
 For example, assume someFeature has three possible entries: A, B, or C.<br/>
 We then encode this feature into <i>someFeature_A</i>, <i>someFeature_B</i> and <i>someFeature_C</i>.
 <div class="linked"><script type="text/x-sage">
-display(table([[' ','someFeature',' ','someFeature_A','someFeature_B','someFeature_C'],
-               ['0','B',' ','0','1','0'],['1','C','=> one-hot encode =>','0','0','1'],['2','A',' ','1','0','0']]))
-</script></div>
-    <p></p>
+display(table([[' ','someFeature',' ','someFeature_A',
+                'someFeature_B','someFeature_C'],
+               ['0','B',' ','0','1','0'],
+               ['1','C','=> one-hot encode =>','0','0','1'],
+               ['2','A',' ','1','0','0']]))
+</script></div><br/>
 Additionally, as with the non-numeric features, we need to convert the non-numeric target label, <i>income</i> to numerical values for the learning algorithm to work.<br/>
       Since there are only two possible categories for this label (<i>&#8924;50K</i> and <i>&#62;50K</i>),<br/>
 we can avoid using one-hot encoding and simply encode these two categories as 0 and 1, respectively.<br/>
@@ -241,23 +243,26 @@ Use <i>pandas.get_dummies()</i> to perform one-hot encoding on the <i>features_r
 Convert the target label <i>income_raw</i> to numerical entries.<br/>
 Set records with <i>&#8924;50K</i> to 0 and records with <i>&#62;50K</i> to 1.
 <div class="linked"><script type="text/x-sage">
-categorical=['workclass','education_level','marital-status','occupation','relationship','race','sex','native-country']
-features=pandas.DataFrame(features_raw); income=income_raw.replace(['<=50K','>50K'],[0,1]) 
-for element in categorical: features[element]=pandas.get_dummies(features_raw[element])
+categorical=['workclass','education_level','marital-status',
+             'occupation','relationship','race','sex','native-country']
+features=pandas.DataFrame(features_raw)
+income=income_raw.replace(['<=50K','>50K'],[0,1]) 
+for element in categorical: 
+    features[element]=pandas.get_dummies(features_raw[element])
 encoded=list(features[categorical].columns) 
-print ("{} total features after one-hot encoding.".format(len(encoded))); print (encoded)
-</script></div>
-    <p></p>
+print ("{} total features after one-hot encoding."\
+.format(len(encoded))); print (encoded)
+</script></div><br/>
     <h3>Shuffle and Split Data</h3>
 Now all <b>categorical</b> variables have been converted into <b>numerical</b> features, and all numerical features have been normalized.<br/> 
 As always, we will now split the data (both features and their labels) into training and test sets.<br/> 
 80% of the data will be used for training and 20% for testing.<br/>
 <div class="linked"><script type="text/x-sage">
-X_train,X_test,y_train,y_test=train_test_split(features,income,test_size=.2,random_state=0)
+X_train,X_test,y_train,y_test=\
+train_test_split(features,income,test_size=.2,random_state=0)
 print ("Training set has {} samples.".format(X_train.shape[0])) 
 print ("Testing set has {} samples.".format(X_test.shape[0]))
-</script></div>
-    <p></p>
+</script></div><br/>
     <h2>Evaluating Model Performance</h2>
 In this section, we will investigate four different algorithms, and determine which is best at modeling the data.<br/>
 Three of these algorithms will be supervised learners of your choice, and the fourth algorithm is known as a naive predictor.<br/>
@@ -530,17 +535,16 @@ print ("F-score on testing data: {:.4f}".format(metrics[1]))
 print ("\nFinal Model trained on reduced data\n------")
 print ("Accuracy on testing data: {:.4f}".format(metrics[2]))
 print ("F-score on testing data: {:.4f}".format(metrics[3]))
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>Question 8 - Effects of Feature Selection</h3>
 <i>How does the final model's F-score and accuracy score on the reduced data using only five features compare to those same scores when all features are used?<br/>
 If training time was a factor, would you consider using the reduced data as your training set?</i>
     <h3>Answer 8</h3>
 The final model's F-score and accuracy score on the reduced data does not decrease a lot. 
 <div class="linked"><script type="text/x-sage">
-print ("They become [{:.4f},{:.4f}] instead of [{:.4f},{:.4f}]".format(metrics[2],metrics[3],metrics[0],metrics[1]))
-</script></div>
-    <p></p>  
+print ("They become [{:.4f},{:.4f}] instead of [{:.4f},{:.4f}]"\
+.format(metrics[2],metrics[3],metrics[0],metrics[1]))
+</script></div><br/> 
 This means we can confirm the use of the reduced data with a high level of confidence if training time is an important factor.
     <h2>Conclusion</h2>
 In this project, models of classifiers and their application to predict categorical variables were discussed in detail.<br/>
@@ -548,7 +552,6 @@ We studied the methods of data preparing and model optimizing as well.
     <h3>Additional Code Cell</h3>
 <div class="linked"><script type="text/x-sage">
 
-</script></div>
-    <p></p> 
+</script></div><br/>
   </body>
 </html>
