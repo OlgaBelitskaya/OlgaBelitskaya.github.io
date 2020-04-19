@@ -465,10 +465,12 @@ Fit the grid search object to the training data (<i>X_train, y_train</i>), and s
 <div class="linked"><script type="text/x-sage">
 clf=GradientBoostingClassifier(random_state=10)
 parameters={'n_estimators':[104,208],'learning_rate':[0.2,0.3],'max_depth':[2,3]}
-scorer=make_scorer(fbeta_score,beta=0.5)
+scorer=make_scorer(fbeta_score,beta=.5)
 grid_obj=GridSearchCV(estimator=clf,param_grid=parameters,scoring=scorer)
-grid_fit=grid_obj.fit(X_train,y_train); best_clf=grid_fit.best_estimator_
-predictions=(clf.fit(X_train,y_train)).predict(X_test); best_predictions=best_clf.predict(X_test)
+grid_fit=grid_obj.fit(X_train,y_train)
+best_clf=grid_fit.best_estimator_
+predictions=(clf.fit(X_train,y_train)).predict(X_test)
+best_predictions=best_clf.predict(X_test)
 print ("Unoptimized model\n------")
 print ("Accuracy score on testing data: {:.4f}".format(accuracy_score(y_test,predictions)))
 print ("F-score on testing data: {:.4f}".format(fbeta_score(y_test,predictions,beta=0.5)))
@@ -477,8 +479,7 @@ print ("Final accuracy score on the testing data: {:.4f}".format(accuracy_score(
 print ("Final F-score on the testing data: {:.4f}".format(fbeta_score(y_test,best_predictions,beta=0.5)))
 print ("\nOptimized Model Parameters\n------")
 best_clf.get_params()
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>Question 5 - Final Model Evaluation</h3>
 <i>What is your optimized model's accuracy and F-score on the testing data? Are these scores better or worse than the unoptimized model?<br/>
 How do the results from your optimized model compare to the naive predictor benchmarks you found earlier in Question 1?</i>
@@ -486,8 +487,7 @@ How do the results from your optimized model compare to the naive predictor benc
 table([['Metric','Benchmark Predictor','Unoptimized Model','Optimized Model'],
        ['Accuracy Score',accuracy0,accuracy_score(y_test,predictions),accuracy_score(y_test,best_predictions)],
        ['F-score',fscore0,fbeta_score(y_test,predictions,beta=0.5),fbeta_score(y_test,best_predictions,beta=0.5)]])
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>Answer 5</h3>
 Final accuracy score and F-score on the testing data are represented in the last column.<br/>
 These indicators are better than for the non-optimized model and they are 4-5 times greater than the initial prediction indicators for the naive predictor benchmarks.
@@ -514,8 +514,10 @@ Import a supervised learning model from sklearn if it is different from the thre
 Train the supervised model on the entire training set.<br/>
 Extract the feature importances using <i>.feature_importances_</i>. 
 <div class="linked"><script type="text/x-sage">
-model=GradientBoostingClassifier(n_estimators=208,learning_rate=0.3,max_depth=2,random_state=10).fit(X_train,y_train)
-importances=model.feature_importances_; feature_plot(importances,X_train,y_train)
+model=GradientBoostingClassifier(n_estimators=208,learning_rate=.3,
+                                 max_depth=2,random_state=10).fit(X_train,y_train)
+importances=model.feature_importances_
+feature_plot(importances,X_train,y_train)
 </script></div><br/>
     <h3>Question 7 - Extracting Feature Importance</h3>
 <i>Observe the visualization created above which displays the five most relevant features for predicting if an individual makes at most or above 50,000 USD.<br/>
