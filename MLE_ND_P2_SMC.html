@@ -516,8 +516,7 @@ Extract the feature importances using <i>.feature_importances_</i>.
 <div class="linked"><script type="text/x-sage">
 model=GradientBoostingClassifier(n_estimators=208,learning_rate=0.3,max_depth=2,random_state=10).fit(X_train,y_train)
 importances=model.feature_importances_; feature_plot(importances,X_train,y_train)
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>Question 7 - Extracting Feature Importance</h3>
 <i>Observe the visualization created above which displays the five most relevant features for predicting if an individual makes at most or above 50,000 USD.<br/>
 How do these five features compare to the five features you discussed in Question 6? If you were close to the same answer, how does this visualization confirm your thoughts?<br/>
@@ -533,11 +532,16 @@ From the visualization above, we see that the top five most important features c
 This hints that we can attempt to <b>reduce the feature space</b> and simplify the information required for the model to learn.<br/>
 The code cell below will use the same optimized model we found earlier, and train it on the same training set with only the <b>top five important</b> features.
 <div class="linked"><script type="text/x-sage">
-X_train_reduced=X_train[X_train.columns.values[(numpy.argsort(importances)[::-1])[:5]]]
-X_test_reduced=X_test[X_test.columns.values[(numpy.argsort(importances)[::-1])[:5]]]
-clf=(clone(best_clf)).fit(X_train_reduced,y_train); reduced_predictions=clf.predict(X_test_reduced)
-metrics=[accuracy_score(y_test,best_predictions),fbeta_score(y_test,best_predictions,beta=0.5),
-         accuracy_score(y_test,reduced_predictions),fbeta_score(y_test,reduced_predictions,beta=0.5)]
+X_train_reduced=X_train[X_train.columns\
+.values[(numpy.argsort(importances)[::-1])[:5]]]
+X_test_reduced=X_test[X_test.columns\
+.values[(numpy.argsort(importances)[::-1])[:5]]]
+clf=(clone(best_clf)).fit(X_train_reduced,y_train)
+reduced_predictions=clf.predict(X_test_reduced)
+metrics=[accuracy_score(y_test,best_predictions),
+         fbeta_score(y_test,best_predictions,beta=.5),
+         accuracy_score(y_test,reduced_predictions),
+         fbeta_score(y_test,reduced_predictions,beta=.5)]
 print ("Final Model trained on full data\n------")
 print ("Accuracy on testing data: {:.4f}".format(metrics[0]))
 print ("F-score on testing data: {:.4f}".format(metrics[1]))
