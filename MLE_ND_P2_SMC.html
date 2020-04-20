@@ -417,12 +417,14 @@ I think that for this case, we need to choose the <i>GradientBoostingClassifier<
 The algorithm is proved to be very time-consuming in the training process, but it can be ignored since the amount of data is not very big.<br/>
 The <b>confusion matrix</b> can be used to evaluate the quality of the output for the chosen classifier.
 <div class="linked"><script type="text/x-sage">
-model=clf_A; cm=confusion_matrix(y_test.values,model.predict(X_test)); pylab.figure(figsize=(12,5))
-seaborn.heatmap(cm,annot=True,cmap='BuGn',xticklabels=['no','yes'],yticklabels=['no','yes'])
+model=clf_A; pylab.figure(figsize=(11,5))
+cm=confusion_matrix(y_test.values,model.predict(X_test))
+seaborn.heatmap(cm,annot=True,cmap='BuGn',
+                xticklabels=['no','yes'],yticklabels=['no','yes'])
 pylab.ylabel('True label'); pylab.xlabel('Predicted label')
-pylab.title('Confusion matrix for:\n{}'.format(model.__class__.__name__)); pylab.show()
-</script></div>
-    <p></p>
+pylab.title('Confusion matrix for:\n{}'\
+.format(model.__class__.__name__)); pylab.show()
+</script></div><br/>
     <h3>Question 4 - Describing the Model in Layman's Terms</h3>
 <i>In one to two paragraphs, explain to CharityML, in layman's terms, how the final model chosen is supposed to work.<br/>
 Be sure that you are describing the major qualities of the model, such as how the model is trained and how the model makes a prediction.<br/> 
