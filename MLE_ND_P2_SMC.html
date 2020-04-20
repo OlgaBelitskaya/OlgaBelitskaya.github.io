@@ -492,9 +492,14 @@ best_clf.get_params()
 <i>What is your optimized model's accuracy and F-score on the testing data? Are these scores better or worse than the unoptimized model?<br/>
 How do the results from your optimized model compare to the naive predictor benchmarks you found earlier in Question 1?</i>
 <div class="linked"><script type="text/x-sage">
-table([['Metric','Benchmark Predictor','Unoptimized Model','Optimized Model'],
-       ['Accuracy Score',accuracy0,accuracy_score(y_test,predictions),accuracy_score(y_test,best_predictions)],
-       ['F-score',fscore0,fbeta_score(y_test,predictions,beta=0.5),fbeta_score(y_test,best_predictions,beta=0.5)]])
+table([['Metric','Benchmark Predictor',
+        'Unoptimized Model','Optimized Model'],
+       ['Accuracy Score',accuracy0,
+        accuracy_score(y_test,predictions),
+        accuracy_score(y_test,best_predictions)],
+       ['F-score',fscore0,
+        fbeta_score(y_test,predictions,beta=.5),
+        fbeta_score(y_test,best_predictions,beta=.5)]])
 </script></div><br/>
     <h3>Answer 5</h3>
 Final accuracy score and F-score on the testing data are represented in the last column.<br/>
@@ -523,7 +528,8 @@ Train the supervised model on the entire training set.<br/>
 Extract the feature importances using <i>.feature_importances_</i>. 
 <div class="linked"><script type="text/x-sage">
 model=GradientBoostingClassifier(n_estimators=208,learning_rate=.3,
-                                 max_depth=2,random_state=10).fit(X_train,y_train)
+                                 max_depth=2,random_state=10)\
+.fit(X_train,y_train)
 importances=model.feature_importances_
 feature_plot(importances,X_train,y_train)
 </script></div><br/>
