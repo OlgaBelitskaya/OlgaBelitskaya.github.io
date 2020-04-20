@@ -466,19 +466,25 @@ Perform grid search on the classifier <i>clf</i> using <i>scorer</i>, and store 
 Fit the grid search object to the training data (<i>X_train, y_train</i>), and store it in <i>grid_fit</i>.<br/>
 <div class="linked"><script type="text/x-sage">
 clf=GradientBoostingClassifier(random_state=10)
-parameters={'n_estimators':[104,208],'learning_rate':[0.2,0.3],'max_depth':[2,3]}
+parameters={'n_estimators':[104,208],
+            'learning_rate':[.2,.3],'max_depth':[2,3]}
 scorer=make_scorer(fbeta_score,beta=.5)
-grid_obj=GridSearchCV(estimator=clf,param_grid=parameters,scoring=scorer)
+grid_obj=GridSearchCV(estimator=clf,
+                      param_grid=parameters,scoring=scorer)
 grid_fit=grid_obj.fit(X_train,y_train)
 best_clf=grid_fit.best_estimator_
 predictions=(clf.fit(X_train,y_train)).predict(X_test)
 best_predictions=best_clf.predict(X_test)
 print ("Unoptimized model\n------")
-print ("Accuracy score on testing data: {:.4f}".format(accuracy_score(y_test,predictions)))
-print ("F-score on testing data: {:.4f}".format(fbeta_score(y_test,predictions,beta=0.5)))
+print ("Accuracy score on testing data: {:.4f}"\
+.format(accuracy_score(y_test,predictions)))
+print ("F-score on testing data: {:.4f}"\
+.format(fbeta_score(y_test,predictions,beta=.5)))
 print ("\nOptimized Model\n------")
-print ("Final accuracy score on the testing data: {:.4f}".format(accuracy_score(y_test,best_predictions)))
-print ("Final F-score on the testing data: {:.4f}".format(fbeta_score(y_test,best_predictions,beta=0.5)))
+print ("Final accuracy score on the testing data: {:.4f}"\
+.format(accuracy_score(y_test,best_predictions)))
+print ("Final F-score on the testing data: {:.4f}"\
+.format(fbeta_score(y_test,best_predictions,beta=.5)))
 print ("\nOptimized Model Parameters\n------")
 best_clf.get_params()
 </script></div><br/>
