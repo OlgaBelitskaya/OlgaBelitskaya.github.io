@@ -167,8 +167,7 @@ print('F1 scores:')
 for c in clf:
     c.fit(X_train,y_train); y_test_pred=c.predict(X_test)
     print(c.__class__.__name__+' - '+str(f1_score(y_test,y_test_pred,pos_label='yes')))
-</script></div>
-    <p></p>
+</script></div><br/>
 I have chosen the following models: <i>LogisticRegressionCV, svm.SVC, RadiusNeighborsClassifier</i>.<br/>
 In the experiments, they usually have a higher result than others.<br/>
 Let's have a look at their applications and characteristics:<br/>
@@ -250,8 +249,7 @@ def train_predict(clf,t_fit,t_pred,f1_scores,X_train,y_train,X_test,y_test):
     f1_test=predict_labels(clf,t_pred,X_test,y_test); f1_scores.append(f1_test)    
     print ("F1 score for training set: {:.4f}.".format(f1_train))
     print ("F1 score for test set: {:.4f}.".format(f1_test))
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>Model Performance Metrics</h3>
 With the predefined functions above, we will now import the three supervised learning models of our choice and run the <i>train_predict</i> function for each one.<br/>
 We will need to train and predict on each classifier for three different training set sizes: 100, 200, and 300.<br/>
@@ -273,32 +271,31 @@ X_train_200,y_train_200=X_train[:int(200)],y_train[:int(200)]
 X_train_300,y_train_300=X_train,y_train
 t_fit,t_pred,f1_scores=[],[],[]
 for clf in [clf_A,clf_B,clf_C]:
-    for (X,y) in [(X_train_100,y_train_100),(X_train_200,y_train_200),(X_train_300, y_train_300)]:
-        train_predict(clf,t_fit,t_pred,f1_scores,X,y,X_test,y_test)
-</script></div>
-    <p></p>
+    for (X,y) in [(X_train_100,y_train_100),
+                  (X_train_200,y_train_200),
+                  (X_train_300, y_train_300)]:
+        train_predict(clf,t_fit,t_pred,f1_scores,
+                      X,y,X_test,y_test)
+</script></div><br/>
     <h3>Tabular Results</h3>
 <div class="linked"><script type="text/x-sage">
 print(clf_A.__class__.__name__)
 table([['Training Set Size','Training Time','Prediction Time (test)','F1 Score (train)','F1 Score (test)'],
        [100,t_fit[0],t_pred[1],f1_scores[0],f1_scores[1]],[200,t_fit[1],t_pred[3],f1_scores[2],f1_scores[3]],
        [300,t_fit[2],t_pred[5],f1_scores[4],f1_scores[5]]])
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 print(clf_B.__class__.__name__)
 table([['Training Set Size','Training Time','Prediction Time (test)','F1 Score (train)','F1 Score (test)'],
        [100,t_fit[3],t_pred[7],f1_scores[6],f1_scores[7]],[200,t_fit[4],t_pred[9],f1_scores[8],f1_scores[9]],
        [300,t_fit[5],t_pred[11],f1_scores[10],f1_scores[11]]])
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 print(clf_C.__class__.__name__)
 table([['Training Set Size','Training Time','Prediction Time (test)','F1 Score (train)','F1 Score (test)'],
        [100,t_fit[6],t_pred[13],f1_scores[12],f1_scores[13]],[200,t_fit[7],t_pred[15],f1_scores[14],f1_scores[15]],
        [300,t_fit[8],t_pred[17],f1_scores[16],f1_scores[17]]])
-</script></div>
-    <p></p>
+</script></div><br/>
     <h2>Choosing the Best Model</h2>
 In this final section, we will choose from the three supervised learning models the best model to use on the student data.<br/>
 We will then perform a grid search optimization for the model over the entire training set (<i>X_train</i> and <i>y_train</i>)<br/> 
@@ -340,17 +337,17 @@ grid_fit=grid_obj.fit(X_train,y_train); best_clf=grid_fit.best_estimator_
 print ("Tuned model has a training F1 score of {:.4f}.".format(predict_labels(best_clf,t_pred,X_train,y_train)))
 print ("Tuned model has a testing F1 score of {:.4f}.".format(predict_labels(best_clf,t_pred,X_test,y_test)))
 print ("Tuned model has the parameters: \n"); best_clf.get_params()
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>Question 5 - Final F1 Score</h3>
 <i>What is the final model's F1 score for training and testing? How does that score compare to the untuned model?</i>
     <h3>Answer 5</h3>
 The final model's F-score was improved significantly for the test data.
 <div class="linked"><script type="text/x-sage">
-table([['Model','F1 Score (train)','F1 Score (test)'],['Untuned',f1_scores[10],f1_scores[11]],
-       ['Tuned',predict_labels(best_clf,t_pred,X_train,y_train),predict_labels(best_clf,t_pred,X_test,y_test)]])
-</script></div>
-    <p></p>
+table([['Model','F1 Score (train)','F1 Score (test)'],
+       ['Untuned',f1_scores[10],f1_scores[11]],
+       ['Tuned',predict_labels(best_clf,t_pred,X_train,y_train),
+        predict_labels(best_clf,t_pred,X_test,y_test)]])
+</script></div><br/>
 It means we escape the overfitting problem. This result confirms the effectiveness of the algorithm GridSearchCV for tuning.
     <h2>Conclusion</h2>
 In this project, some classifiers and their application to predict categorical variables were discussed in detail.<br/> 
@@ -359,7 +356,6 @@ The final model has an enough high result for such a small data set.
     <h3>Additional Code Cell</h3>
 <div class="linked"><script type="text/x-sage">
 
-</script></div>
-    <p></p> 
+</script></div><br/>
   </body>
 </html>
