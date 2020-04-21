@@ -33,15 +33,19 @@
 <a href="http://scipy-lectures.org/">&#x1F578;Scipy Lecture Notes&nbsp;</a><br/>
     <h3>Code Library</h3> 
 <div class="linked"><script type="text/x-sage">
-import numpy,pandas,time,pylab; pylab.style.use('seaborn-whitegrid')
-import warnings; from sklearn.exceptions import DataConversionWarning
-for el in [FutureWarning,UserWarning,RuntimeWarning,DataConversionWarning]: warnings.filterwarnings("ignore",category=el)
+import warnings; warnings.filterwarnings("ignore")
+from sklearn.exceptions import DataConversionWarning
+warnings.filterwarnings("ignore",category=DataConversionWarning)
+import numpy,pandas,time,pylab
+pylab.style.use('seaborn-whitegrid')
 from sklearn import linear_model,svm
-from sklearn.model_selection import train_test_split,GridSearchCV,ShuffleSplit
+from sklearn.model_selection import train_test_split
+from sklearn.model_selection import GridSearchCV,ShuffleSplit
 from sklearn.neural_network import MLPClassifier
 from sklearn.tree import DecisionTreeClassifier,ExtraTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier,RadiusNeighborsClassifier
-from sklearn.ensemble import BaggingClassifier,AdaBoostClassifier,GradientBoostingClassifier,RandomForestClassifier
+from sklearn.ensemble import BaggingClassifier,AdaBoostClassifier
+from sklearn.ensemble import GradientBoostingClassifier,RandomForestClassifier
 from sklearn.metrics import f1_score,make_scorer
 </script></div><br/>
     <h3>Question 1 - Classification vs. Regression</h3>
@@ -57,11 +61,12 @@ We will start from loading the student data.<br/>
 Note that the last column from this dataset <i>passed</i> will be our target label (whether the student graduated or didn't graduate).<br/>
 All other columns are features about each student.<br/>
 <div class="linked"><script type="text/x-sage">
-path='https://raw.githubusercontent.com/OlgaBelitskaya/machine_learning_engineer_nd009/master/Machine_Learning_Engineer_ND_P7/'
+path='https://raw.githubusercontent.com/OlgaBelitskaya/'+\
+     'machine_learning_engineer_nd009/master/'+\
+     'Machine_Learning_Engineer_ND_P7/'
 data=pandas.read_csv(path+'student-data.csv')
-print ('Data were read successfully!'); data.describe().T
-</script></div>
-    <p></p> 
+print('Data were read successfully!'); data.describe().T
+</script></div><br/>
 Let's begin by investigating the dataset to determine how many students we have information on, and learn about the graduation rate among these students. <br/>
 We will need to compute the following:<br/>
 - The total number of students, <i>n_students</i>.<br/>
