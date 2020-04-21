@@ -76,29 +76,30 @@ We will need to compute the following:<br/>
 - The graduation rate of the class, <i>grad_rate</i>, in percent (%).
 <div class="linked"><script type="text/x-sage">
 n_students,n_features=len(data),len(list(data.T.index))
-n_passed=len(data[data['passed']=='yes']); n_failed=len(data[data['passed']=='no'])
+n_passed=len(data[data['passed']=='yes'])
+n_failed=len(data[data['passed']=='no'])
 grad_rate=n_passed*100.0/n_students
 print ("Total number of students: {}".format(n_students))
 print ("Number of features: {}".format(n_features))
 print ("Number of students who passed: {}".format(n_passed))
 print ("Number of students who failed: {}".format(n_failed))
-print ("Graduation rate of the class: {:.2f}%".format(float(grad_rate)))
-</script></div>
-    <p></p>
+print ("Graduation rate of the class: {:.2f}%"\
+.format(float(grad_rate)))
+</script></div><br/>
     <h2>Preparing the Data</h2>
 In this section, we will prepare the data for modeling, training and testing.
     <h3>Identify feature and target columns</h3>
 It is often the case that the data you obtain contains non-numeric features. 
 This can be a problem because most machine learning algorithms expect numeric data to perform computations with.
 <div class="linked"><script type="text/x-sage">
-feature_cols=list(data.columns[:-1]); target_col=data.columns[-1] 
+feature_cols=list(data.columns[:-1])
+target_col=data.columns[-1] 
 print ("Feature columns:")
 for i in range(4): print(feature_cols[i*8:(i+1)*8])
 print ("\nTarget column: {}".format(target_col))
 X_all,y_all=data[feature_cols],data[target_col]
 print ("Feature values:"); X_all.head().T
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>Preprocess Feature Columns</h3>
 As we can see, there are several non-numeric columns that need to be converted! <br/>
 Many of them are simply <b>yes/no</b>, e.g. <i>internet</i>. These can be reasonably converted into <b>1/0</b> (binary) values.<br/>
@@ -116,10 +117,10 @@ def preprocess_features(X):
         output=output.join(col_data)    
     return output
 X_all=preprocess_features(X_all)
-print ("Processed feature columns (%d total features):"%len(X_all.columns))
+print("Processed feature columns (%d total features):"\
+     %len(X_all.columns))
 for i in range(6): print(list(X_all.columns)[i*8:(i+1)*8])
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>Training and Testing Data Split</h3>
 So far, we have converted all categorical features into numeric values.<br/>
 Next, we will randomly shuffle and split the data <i>(X_all, y_all)</i> into training and testing subsets by the following steps:<br/>
