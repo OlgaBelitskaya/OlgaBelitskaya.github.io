@@ -239,18 +239,23 @@ The functions are as follows:<br/>
 &nbsp;&nbsp;- This function will report the F1 score for both the training and testing data separately.
 <div class="linked"><script type="text/x-sage">
 def train_classifier(clf,t_fit,X_train,y_train):
-    start=time.time(); clf.fit(X_train,y_train); end=time.time(); t_fit.append(end-start)
+    start=time.time(); clf.fit(X_train,y_train)
+    end=time.time(); t_fit.append(end-start)
     print ("Trained model in {:.4f} seconds".format(end-start)) 
 def predict_labels(clf,t_pred,features,target):
-    start=time.time(); y_pred=clf.predict(features); end=time.time(); t_pred.append(end-start)
+    start=time.time(); y_pred=clf.predict(features)
+    end=time.time(); t_pred.append(end-start)
     print ("Made predictions in {:.4f} seconds.".format(end-start))    
     return f1_score(target.values,y_pred,pos_label='yes')
-def train_predict(clf,t_fit,t_pred,f1_scores,X_train,y_train,X_test,y_test):
+def train_predict(clf,t_fit,t_pred,f1_scores,
+                  X_train,y_train,X_test,y_test):
     print ("Training a {} using a training set size of {}. . .".\
            format(clf.__class__.__name__,len(X_train)))
     train_classifier(clf,t_fit,X_train,y_train)
-    f1_train=predict_labels(clf,t_pred,X_train,y_train); f1_scores.append(f1_train)
-    f1_test=predict_labels(clf,t_pred,X_test,y_test); f1_scores.append(f1_test)    
+    f1_train=predict_labels(clf,t_pred,X_train,y_train)
+    f1_scores.append(f1_train)
+    f1_test=predict_labels(clf,t_pred,X_test,y_test)
+    f1_scores.append(f1_test)    
     print ("F1 score for training set: {:.4f}.".format(f1_train))
     print ("F1 score for test set: {:.4f}.".format(f1_test))
 </script></div><br/>
