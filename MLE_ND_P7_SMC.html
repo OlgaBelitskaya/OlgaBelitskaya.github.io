@@ -129,11 +129,11 @@ Next, we will randomly shuffle and split the data <i>(X_all, y_all)</i> into tra
 - Store the results in <i>X_train, X_test, y_train, y_test</i>.
 <div class="linked"><script type="text/x-sage">
 num_train=300; num_test=X_all.shape[0]-num_train
-X_train,X_test,y_train,y_test=train_test_split(X_all,y_all,test_size=1.0*num_test/len(X_all),random_state=1)
+X_train,X_test,y_train,y_test=\
+train_test_split(X_all,y_all,test_size=1.*num_test/len(X_all),random_state=1)
 print ("Training set has {} samples.".format(X_train.shape[0]))
 print ("Testing set has {} samples.".format(X_test.shape[0]))
-</script></div>
-    <p></p>
+</script></div><br/>
     <h2>Training and Evaluating Models</h2>
 In this section, you will choose 3 <b>supervised learning</b> models that are appropriate for this problem and available in <i>scikit-learn</i>.<br/>
 You will first discuss the reasoning behind choosing these three models by considering what you know about the data and each model's strengths and weaknesses. <br/>
@@ -160,13 +160,17 @@ Let's make quick checking F1 scores of the mentioned models:
 clf=[linear_model.LogisticRegression(solver='liblinear',multi_class='ovr'),
      linear_model.LogisticRegressionCV(solver='liblinear',multi_class='ovr'),
      linear_model.SGDClassifier(max_iter=1000,tol=0.00001),
-     svm.LinearSVC(),svm.SVC(gamma='scale',C=1.0,kernel='poly'),svm.NuSVC(gamma='scale',kernel='poly'),
-     KNeighborsClassifier(),RadiusNeighborsClassifier(radius=10),DecisionTreeClassifier(),ExtraTreeClassifier(),
-     BaggingClassifier(),RandomForestClassifier(n_estimators=100),AdaBoostClassifier(),GradientBoostingClassifier()]
+     svm.LinearSVC(),svm.SVC(gamma='scale',C=1.0,kernel='poly'),
+     svm.NuSVC(gamma='scale',kernel='poly'),
+     KNeighborsClassifier(),RadiusNeighborsClassifier(radius=10),
+     DecisionTreeClassifier(),ExtraTreeClassifier(),
+     BaggingClassifier(),RandomForestClassifier(n_estimators=100),
+     AdaBoostClassifier(),GradientBoostingClassifier()]
 print('F1 scores:')
 for c in clf:
     c.fit(X_train,y_train); y_test_pred=c.predict(X_test)
-    print(c.__class__.__name__+' - '+str(f1_score(y_test,y_test_pred,pos_label='yes')))
+    print(c.__class__.__name__+' - '+\
+          str(f1_score(y_test,y_test_pred,pos_label='yes')))
 </script></div><br/>
 I have chosen the following models: <i>LogisticRegressionCV, svm.SVC, RadiusNeighborsClassifier</i>.<br/>
 In the experiments, they usually have a higher result than others.<br/>
