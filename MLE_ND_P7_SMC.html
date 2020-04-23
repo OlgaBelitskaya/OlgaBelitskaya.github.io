@@ -345,12 +345,17 @@ Our steps in the tuning:<br/>
 - Perform grid search on the classifier <i>clf</i> using <i>f1_scorer</i> as the scoring method, and store it in <i>grid_obj</i>.<br/>
 - Fit the grid search object to the training data (<i>X_train, y_train</i>), and store it in <i>grid_obj</i>.    
 <div class="linked"><script type="text/x-sage">
-t_pred=[]; parameters={'C':[1,2,3,4,5,6,7,8,9,10],'degree':[2,3,4],'gamma':[.001,.002,.003]}
-clf=svm.SVC(kernel='poly'); f1_scorer=make_scorer(f1_score,pos_label='yes')
+t_pred=[]; parameters={'C':[1,2,3,4,5,6,7,8,9,10],
+                       'degree':[2,3,4],'gamma':[.001,.002,.003]}
+clf=svm.SVC(kernel='poly')
+f1_scorer=make_scorer(f1_score,pos_label='yes')
 grid_obj=GridSearchCV(estimator=clf,param_grid=parameters,scoring=f1_scorer)
-grid_fit=grid_obj.fit(X_train,y_train); best_clf=grid_fit.best_estimator_
-print ("Tuned model has a training F1 score of {:.4f}.".format(predict_labels(best_clf,t_pred,X_train,y_train)))
-print ("Tuned model has a testing F1 score of {:.4f}.".format(predict_labels(best_clf,t_pred,X_test,y_test)))
+grid_fit=grid_obj.fit(X_train,y_train)
+best_clf=grid_fit.best_estimator_
+print ("Tuned model has a training F1 score of {:.4f}."\
+       .format(predict_labels(best_clf,t_pred,X_train,y_train)))
+print ("Tuned model has a testing F1 score of {:.4f}."\
+       .format(predict_labels(best_clf,t_pred,X_test,y_test)))
 print ("Tuned model has the parameters: \n"); best_clf.get_params()
 </script></div><br/>
     <h3>Question 5 - Final F1 Score</h3>
