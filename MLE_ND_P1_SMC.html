@@ -102,8 +102,8 @@ def ModelLearning(X,y):
     fig.tight_layout(); pylab.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-def ModelComplexity(X, y):
-    cv=ShuffleSplit(n_splits=10,test_size=0.2,random_state=0)
+def ModelComplexity(X,y):
+    cv=ShuffleSplit(n_splits=10,test_size=.2,random_state=0)
     max_depth=numpy.arange(1,11)
     train_scores,test_scores=\
     validation_curve(DecisionTreeRegressor(),X,y,
@@ -300,8 +300,7 @@ The shaded region of a learning curve denotes the uncertainty of that curve (mea
 The model is scored on both the training and testing sets using <i>$R^2$</i>, the coefficient of determination.
 <div class="linked"><script type="text/x-sage">
 ModelLearning(features,prices)
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>Question 4 - Learning the Data</h3>
 <i>Choose one of the graphs above and state the maximum depth for the model. What happens to the score of the training curve as more training points are added?</i><br/>
 <i>What about the testing curve? Would having more training points benefit the model?</i>
@@ -319,8 +318,7 @@ Similar to the learning curves, the shaded regions of both the complexity curves
 and the model is scored on both the training and validation sets using the <i>performance_metric()</i> function.
 <div class="linked"><script type="text/x-sage">
 ModelComplexity(X_train,y_train)
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>Question 5 - Bias-Variance Tradeoff</h3>
 <i>When the model is trained with a maximum depth of 1, does the model suffer from high bias or from high variance?</i><br/>
 <i>How about when the model is trained with a maximum depth of 10? What visual cues in the graph justify your conclusions?</i>
@@ -374,14 +372,15 @@ For the <i>fit_model</i> function in the code cell below, you will need to imple
 - Pass the variables <i>regressor</i>, <i>params</i>, <i>scoring_fnc</i>, and <i>cv_sets</i> as parameters to the object.<br/>
 - Assign the <i>GridSearchCV</i> object to the <i>grid</i> variable.
 <div class="linked"><script type="text/x-sage">
-def fit_model(X, y):
-    cv_sets=ShuffleSplit(n_splits=12,test_size=0.2,random_state=0)
-    regressor=DecisionTreeRegressor(); parameters={'max_depth':[1,2,3,4,5,6,7,8,9,10]}
+def fit_model(X,y):
+    cv_sets=ShuffleSplit(n_splits=12,test_size=.2,random_state=0)
+    regressor=DecisionTreeRegressor()
+    parameters={'max_depth':[1,2,3,4,5,6,7,8,9,10]}
     scoring_function=make_scorer(performance_metric)
-    grid=GridSearchCV(estimator=regressor,param_grid=parameters,scoring=scoring_function,cv=cv_sets)
+    grid=GridSearchCV(estimator=regressor,param_grid=parameters,
+                      scoring=scoring_function,cv=cv_sets)
     return grid.fit(X,y)
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>Making Predictions</h3>
 Once a model has been trained on a given set of data, it can now be used to make predictions on new sets of input data.<br/>
 In the case of a <b>decision tree regressor</b>, the model has learned what the best questions to ask about the input data are, and can respond with a prediction for the <b>target</b> variable.<br/>
@@ -394,8 +393,7 @@ The result corresponds to the expressed in the Answer 6 assumptions based on vis
 fit=fit_model(X_train,y_train); reg=fit.best_estimator_; results=pandas.DataFrame(fit.cv_results_)
 print("Grid Search Process Results"); display(results.T)
 print ("\nParameter 'max_depth' is {} for the optimal model.".format(reg.get_params()['max_depth']))
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>Question 10 - Predicting Selling Prices</h3>
 Imagine that you were a real estate agent in the Boston area looking to use this model to help price homes owned by your clients that they wish to sell.<br/>
 You have collected the following information from three of your clients:
