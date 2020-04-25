@@ -22,7 +22,15 @@
   <body>
     <h1>SageMathCell for Your Experiments</h1>
 <div class="sage"><script type="text/x-sage">
-
+X=[x for x in srange(-2,2,.25)]
+Y=[exp(-x^2)*sin(pi*x^3) for x in X] 
+Y1,Y2=[exp(-x^2) for x in X],[-exp(-x^2) for x in X]
+m,M='◎','☕'
+c=[colormaps.cool(80*i)[:3] for i in [0,1,2]]
+t=sum([text(m,(x,y),fontsize=10,rgbcolor=c[i],gridlines=True) 
+       for i in [0..2] for (x,y) in list(zip(X,[Y1,Y2,Y][i]))])
+animate([t+text(M,(x,y),fontsize=30,rgbcolor=c[2]) 
+         for (x,y) in list(zip(X,Y))])
 </script></div><br/>
 <div class="sage_r"><script type="text/x-sage">
 %r
