@@ -390,9 +390,11 @@ We can use these predictions to gain information about data where the value of t
     <h3>Answer 9</h3>
 The result corresponds to the expressed in the Answer 6 assumptions based on visualization of the model complexity.      
 <div class="linked"><script type="text/x-sage">
-fit=fit_model(X_train,y_train); reg=fit.best_estimator_; results=pandas.DataFrame(fit.cv_results_)
+fit=fit_model(X_train,y_train); reg=fit.best_estimator_
+results=pandas.DataFrame(fit.cv_results_)
 print("Grid Search Process Results"); display(results.T)
-print ("\nParameter 'max_depth' is {} for the optimal model.".format(reg.get_params()['max_depth']))
+print ("\nParameter 'max_depth' is {} for the optimal model."\
+       .format(reg.get_params()['max_depth']))
 </script></div><br/>
     <h3>Question 10 - Predicting Selling Prices</h3>
 Imagine that you were a real estate agent in the Boston area looking to use this model to help price homes owned by your clients that they wish to sell.<br/>
@@ -406,12 +408,15 @@ You have collected the following information from three of your clients:
 <i>What price would you recommend each client sell his/her home at? Do these prices seem reasonable given the values for the respective features?</i>
 <div class="linked"><script type="text/x-sage">
 display(table([['Feature','Client 1','Client 2','Client 3'],
-               ['Total number of rooms in home','5 rooms','4 rooms','8 rooms'],
+               ['Total number of rooms in home',
+                '5 rooms','4 rooms','8 rooms'],
                ['Neighborhood poverty level (as %)','17%','32%','3%'],
-               ['Student-teacher ratio of nearby schools','15-to-1','22-to-1','12-to-1']]))
+               ['Student-teacher ratio of nearby schools',
+                '15-to-1','22-to-1','12-to-1']]))
 client_data=[[5,17,15],[4,32,22],[8,3,12]]
 for i,price in enumerate(reg.predict(client_data)):
-    print ("Predicted selling price for Client {}'s home: ${:,.2f}".format(i+1,price))    
+    print("Predicted selling price for Client {}'s home: ${:,.2f}"\
+          .format(i+1,price))   
 </script></div><br/>
 We can compare them to the real prices for the housing of the considered database, extracting items with roughly the same indicators. 
 <div class="linked"><script type="text/x-sage">
