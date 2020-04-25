@@ -242,9 +242,9 @@ For the <i>performance_metric()</i> function, we will need to implement the foll
 - use <i>r2_score</i> from <i>sklearn.metrics</i> to perform a performance calculation between <i>y_true</i> and <i>y_predict</i>;<br/>
 - assign the performance score to the score variable.
 <div class="linked"><script type="text/x-sage">
-def performance_metric(y_true, y_predict): return r2_score(y_true,y_predict)
-</script></div>
-    <p></p>
+def performance_metric(y_true,y_predict): 
+    return r2_score(y_true,y_predict)
+</script></div><br/>
     <h3>Question 2 - Goodness of Fit</h3>
 Assume that a dataset contains five data points and a model made the following predictions for the target variable:
 <table class="table_form"><tbody>
@@ -257,11 +257,14 @@ Assume that a dataset contains five data points and a model made the following p
 </tbody></table>
 <i>Would you consider this model to have successfully captured the variation of the target variable? Why or why not?</i>
 <div class="linked"><script type="text/x-sage">
-display(table([['True Value','Prediction'],[3.0,2.5],[-0.5,0.0],[2.0,2.1],[7.0,7.8],[4.2,5.3]]))
-score=performance_metric([3,-0.5,2,7,4.2],[2.5,0.0,2.1,7.8,5.3])
-print ("Model has a coefficient of determination, R^2, of {:.3f}.".format(score))
-</script></div>
-<p></p>
+display(table([['True Value','Prediction'],
+               [3.0,2.5],[-0.5,0.0],
+               [2.0,2.1],[7.0,7.8],[4.2,5.3]]))
+score=performance_metric([3,-0.5,2,7,4.2],
+                         [2.5,0.0,2.1,7.8,5.3])
+st="Model has a coefficient of determination, R^2, of {:.3f}."
+print(st.format(score))
+</script></div><br/>
     <h3>Answer 2</h3>
 <i>$R^2$</i> indicates the performance of the model between the predicted and observed values of the target variable very well (especially for linear regression).<br/>
 It is close to 1 and seems that the model predicts quite accurately. But we must be extremely careful with the conclusions in the case of a small amount of data.<br/>
