@@ -70,8 +70,8 @@ from sklearn import datasets
 <div class="linked"><script type="text/x-sage">
 # https://github.com/udacity/machine-learning/blob/master/projects/boston_housing/visuals.py
 def ModelLearning(X,y):
-    cv=ShuffleSplit(n_splits=10,test_size=0.2,random_state=1)
-    train_sizes=numpy.rint(numpy.linspace(1,X.shape[0]*0.8-1,9)).astype(int)
+    cv=ShuffleSplit(n_splits=10,test_size=.2,random_state=1)
+    train_sizes=numpy.rint(numpy.linspace(1,X.shape[0]*.8-1,9)).astype(int)
     fig=pylab.figure(figsize=(11,8))
     for k,depth in enumerate([1,3,6,10]):
         regressor=DecisionTreeRegressor(max_depth=depth)
@@ -94,9 +94,9 @@ def ModelLearning(X,y):
         ax.set_title('max_depth=%s'%(depth))
         ax.set_xlabel('Number of Training Points')
         ax.set_ylabel('Score')
-        ax.set_xlim([0,X.shape[0]*0.8]); ax.set_ylim([-0.05,1.05])
+        ax.set_xlim([0,X.shape[0]*.8]); ax.set_ylim([-.05,1.05])
     ax.legend(bbox_to_anchor=(1.05,1.05),
-              loc='lower left',borderaxespad=0.)
+              loc='lower left',borderaxespad=.1)
     st='Decision Tree Regressor Learning Performances'
     fig.suptitle(st,fontsize=16,y=1.03)
     fig.tight_layout(); pylab.show()
@@ -125,7 +125,7 @@ def ModelComplexity(X, y):
                        test_mean+test_std,alpha=.15,color='#348ABD')
     pylab.legend(loc='lower right')
     pylab.xlabel('Maximum Depth'); pylab.ylabel('Score')
-    pylab.ylim([-0.05,1.05]); pylab.show()
+    pylab.ylim([-.05,1.05]); pylab.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def PredictTrials(X,y,fitter,data):
@@ -137,7 +137,8 @@ def PredictTrials(X,y,fitter,data):
         pred=reg.predict([data[0]])[0]
         prices.append(pred)
         print ("Trial {}: ${:,.2f}".format(k+1,pred))
-    print("\nRange in prices: ${:,.2f}".format(max(prices)-min(prices)))
+    print("\nRange in prices: ${:,.2f}"\
+    .format(max(prices)-min(prices)))
 </script></div><br/>
       <h2>Data Exploration</h2>
 In this first section of this project, we will make a cursory investigation about the Boston housing data and provide the observations.<br/>
@@ -273,10 +274,10 @@ Therefore, it can be stated only that a reasonably accurate prediction is possib
     <h3>Implementation: Shuffle and Split Data</h3>
 The next implementation requires that we take the Boston housing dataset and split the data into training and testing subsets.<br/>Typically, the data is splitted and shuffled into a random order when creating the training and testing subsets to remove any bias in the ordering of the dataset.
 <div class="linked"><script type="text/x-sage">
-X_train,X_test,y_train,y_test=train_test_split(features,prices,test_size=0.2,random_state=1)
+X_train,X_test,y_train,y_test=\
+train_test_split(features,prices,test_size=.2,random_state=1)
 print ("Training and testing split was successful.")
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>Question 3 - Training and Testing</h3>
 <i>What is the benefit to splitting a dataset into some ratio of training and testing subsets for a learning algorithm?</i>
     <h3>Answer 3</h3>
