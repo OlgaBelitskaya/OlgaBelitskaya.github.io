@@ -51,10 +51,11 @@ from sklearn.preprocessing import normalize
 def normalize_features(data):
     mu,sigma=data.mean(),data.std()    
     if (sigma==0).any():
-        raise Exception("One of the features had the same value "+\
-                        "for all samples and could not be normalized."+\ 
-                        "Do not include features with "+\
-                        "only a single value in the model.")        
+        st=["One of the features had the same value ",
+            "for all samples and could not be normalized. ", 
+            "Do not include features with ",
+            "only a single value in the model."]       
+        raise Exception("".join(st))        
     return (data-mu)/sigma,mu,sigma
 def compute_cost(features,values,theta):    
     sum_of_square_errors=\
@@ -100,8 +101,11 @@ def sgd_predictions(data,feature_list):
     <h2>Statistical Test</h2> 
     <h3>Data Extraction and Description</h3>
 <div class="linked"><script type="text/x-sage">
-path='https://raw.githubusercontent.com/OlgaBelitskaya/machine_learning_engineer_nd009/master/Machine_Learning_Engineer_ND_P8/'
-data=pandas.read_csv(path+'turnstile_data_master_with_weather.csv').drop('index',int(1))
+path='https://raw.githubusercontent.com/OlgaBelitskaya/'+\
+     'machine_learning_engineer_nd009/'+\
+     'master/Machine_Learning_Engineer_ND_P8/'
+data=pandas.read_csv(path+'turnstile_data_master_with_weather.csv')\
+.drop('index',int(1))
 data.describe().T
 </script></div><br/>  
 <div class="linked"><script type="text/x-sage">
@@ -137,14 +141,12 @@ At first, I will describe two samples, then I will run the test and display the 
 pretty_print("ENTRIESn_hourly in rainy days")
 rainy_entries_hourly=data['ENTRIESn_hourly'][data['rain']==1]
 pandas.DataFrame(rainy_entries_hourly.describe())
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 pretty_print("ENTRIESn_hourly in non-rainy days")
 non_rainy_entries_hourly=data['ENTRIESn_hourly'][data['rain']==0]
 pandas.DataFrame(non_rainy_entries_hourly.describe())
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 with_rain_median=numpy.median(rainy_entries_hourly)
 without_rain_median=numpy.median(non_rainy_entries_hourly)
