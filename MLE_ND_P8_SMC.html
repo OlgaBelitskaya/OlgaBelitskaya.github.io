@@ -2,18 +2,18 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=0.9*device-width">
+    <meta name="viewport" content="width=device-width">
     <title>MLE_ND_P8_SMC</title>
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
     <script>$(function () {
     sagecell.makeSagecell({inputLocation:'div.linked',linked:true,evalButtonText:'Run Linked Cells'});  
-    sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run'});
-    });
+    sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run'});});
     </script>
   </head>
   <style>
   @import url('https://fonts.googleapis.com/css?family=Orbitron|Roboto');
-  body {background-color:aliceblue;}; a, p {color:darkblue; font-family:'Roboto';} 
+  body {margin:5px 5px 5px 15px; background-color:aliceblue;}
+  a, p {color:darkblue; font-family:'Roboto';} 
   h1 {color:#4169E1; font-family:'Orbitron'; text-shadow:4px 4px 4px #ccc;} 
   h2, h3 {color:slategray; font-family:'Orbitron'; text-shadow:4px 4px 4px #ccc;}
   h4 {color:#4169E1; font-family:'Roboto';}
@@ -43,8 +43,7 @@ from scipy.stats import mannwhitneyu,linregress
 from sklearn import linear_model
 from sklearn.metrics import r2_score
 from sklearn.preprocessing import normalize
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>Set of Functions</h3>
 <div class="linked"><script type="text/x-sage">
 def normalize_features(data):
@@ -84,21 +83,18 @@ def sgd_predictions(data,feature_list):
     X=data[feature_list].join(dummy_units); X,mu,sigma=normalize_features(X)
     reg=linear_model.SGDRegressor(); reg.fit(X,y)
     return reg.predict(X),reg.coef_,reg.score(X,y)
-</script></div>
-    <p></p>
+</script></div><br/>
     <h2>Statistical Test</h2> 
     <h3>Data Extraction and Description</h3>
 <div class="linked"><script type="text/x-sage">
 path='https://raw.githubusercontent.com/OlgaBelitskaya/machine_learning_engineer_nd009/master/Machine_Learning_Engineer_ND_P8/'
 data=pandas.read_csv(path+'turnstile_data_master_with_weather.csv').drop('index',int(1))
 data.describe().T
-</script></div>
-    <p></p>   
+</script></div><br/>  
 <div class="linked"><script type="text/x-sage">
 pretty_print('Data Medians')
 pandas.DataFrame(data.median(),columns=['median'])
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>Test Selection</h3>
     <h4>Question 1.1</h4>
 <i>Which statistical test did you use to analyze the NYC subway data? Did you use a one-tail or a two-tail P value?<br/>
