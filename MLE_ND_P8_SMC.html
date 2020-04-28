@@ -51,38 +51,49 @@ from sklearn.preprocessing import normalize
 def normalize_features(data):
     mu,sigma=data.mean(),data.std()    
     if (sigma==0).any():
-        raise Exception("One of the features had the same value for all samples and could not be normalized." +  
-                        "Do not include features with only a single value in the model.")        
+        raise Exception("One of the features had the same value "+\
+                        "for all samples and could not be normalized."+\ 
+                        "Do not include features with "+\
+                        "only a single value in the model.")        
     return (data-mu)/sigma,mu,sigma
 def compute_cost(features,values,theta):    
-    sum_of_square_errors=numpy.square(numpy.dot(features,theta)-values).sum()
+    sum_of_square_errors=\
+    numpy.square(numpy.dot(features,theta)-values).sum()
     return sum_of_square_errors/(2*len(values))
 def gradient_descent(features,values,theta,alpha,num_iterations):
     cost_history=[]
     for i in range(num_iterations):
-        delta=(numpy.dot((values-numpy.dot(features,theta)),features))/len(values)
+        delta=(numpy.dot((values-numpy.dot(features,theta)),
+                         features))/len(values)
         theta=theta+alpha*delta
         cost_history.append(compute_cost(features,values,theta))
     return theta,pandas.Series(cost_history)
-def predictions(dataframe,numeric,target,alpha=0.1,num_iterations=50):
+def predictions(dataframe,numeric,target,alpha=.1,num_iterations=50):
     features=dataframe[numeric]; values=dataframe[target]
     dummy_units=pandas.get_dummies(dataframe['UNIT'],prefix='unit')
     features=features.join(dummy_units)
-    features,mu,sigma=normalize_features(features); features['ones']=numpy.ones(len(values))
-    features_array=numpy.array(features); values_array=numpy.array(values)
+    features,mu,sigma=normalize_features(features)
+    features['ones']=numpy.ones(len(values))
+    features_array=numpy.array(features)
+    values_array=numpy.array(values)
     theta_gradient_descent=numpy.zeros(len(features.columns))
     theta_gradient_descent,cost_history=\
-    gradient_descent(features_array,values_array,theta_gradient_descent,alpha,num_iterations)    
+    gradient_descent(features_array,values_array,
+                     theta_gradient_descent,alpha,num_iterations)    
     predictions=numpy.dot(features_array,theta_gradient_descent)
     return predictions,theta_gradient_descent
 def ols_predictions(data,feature_list):
-    y=data['ENTRIESn_hourly']; dummy_units=pandas.get_dummies(data['UNIT'],prefix='unit')
-    X=data[feature_list].join(dummy_units); X,mu,sigma=normalize_features(X); Xsm=sm.add_constant(X)
+    y=data['ENTRIESn_hourly']
+    dummy_units=pandas.get_dummies(data['UNIT'],prefix='unit')
+    X=data[feature_list].join(dummy_units)
+    X,mu,sigma=normalize_features(X); Xsm=sm.add_constant(X)
     model=sm.OLS(y,Xsm); results=model.fit()
     return results.predict(Xsm),results.params,results.rsquared
 def sgd_predictions(data,feature_list):
-    y=data['ENTRIESn_hourly']; dummy_units=pandas.get_dummies(data['UNIT'],prefix='unit')
-    X=data[feature_list].join(dummy_units); X,mu,sigma=normalize_features(X)
+    y=data['ENTRIESn_hourly']
+    dummy_units=pandas.get_dummies(data['UNIT'],prefix='unit')
+    X=data[feature_list].join(dummy_units)
+    X,mu,sigma=normalize_features(X)
     reg=linear_model.SGDRegressor(); reg.fit(X,y)
     return reg.predict(X),reg.coef_,reg.score(X,y)
 </script></div><br/>
