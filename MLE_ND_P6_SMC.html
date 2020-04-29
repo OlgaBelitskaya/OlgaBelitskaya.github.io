@@ -33,7 +33,8 @@
 <a href="http://scipy-lectures.org/">&#x1F578;Scipy Lecture Notes&nbsp;</a><br/>
     <h3>Code Library</h3> 
 <div class="linked"><script type="text/x-sage">
-import numpy,pandas,pylab,seaborn,sympy; pylab.style.use('seaborn-whitegrid')
+import numpy,pandas,pylab,seaborn,sympy
+pylab.style.use('seaborn-whitegrid')
 import warnings; from sklearn.exceptions import DataConversionWarning
 for el in [FutureWarning,UserWarning,RuntimeWarning,DataConversionWarning]: warnings.filterwarnings("ignore",category=el)
 from sklearn.model_selection import train_test_split,GridSearchCV
@@ -51,18 +52,21 @@ from sklearn.preprocessing import OneHotEncoder,StandardScaler,RobustScaler,MinM
     <h3>Set of Functions</h3>
 <div class="linked"><script type="text/x-sage">
 def display_cat(df,feature):
-    print ('\n'+'<_>'*30); print ('\n'+feature+': '+str(len(set(df[feature]))))
+    print ('\n'+'<_>'*30)
+    print ('\n'+feature+': '+str(len(set(df[feature]))))
     sympy.pprint(set(df[feature]))
 def robust_scaler(Xtrain,ytrain,Xtest,ytest):
     scale_X=RobustScaler(); scale_y=RobustScaler()
-    Xtrain=scale_X.fit_transform(Xtrain); Xtest=scale_X.transform(Xtest)
-    ytrain=scale_y.fit_transform(ytrain.reshape(-1,1)); ytest=scale_y.transform(ytest.reshape(-1,1))
+    Xtrain=scale_X.fit_transform(Xtrain)
+    Xtest=scale_X.transform(Xtest)
+    ytrain=scale_y.fit_transform(ytrain.reshape(-1,1))
+    ytest=scale_y.transform(ytest.reshape(-1,1))
     return Xtrain,ytrain,Xtest,ytest
 def regression(regressor,X_train,X_test,y_train):
     regressor.fit(X_train,y_train)
     return regressor.predict(X_train),regressor.predict(X_test)
 def scores(title,y_train,y_test,y_train_reg,y_test_reg):
-    separator='-_-'*10; pretty_print(title); print('<_>'*38)
+    separator='-_-'*10; pretty_print(title); print('<_>'*20)
     print("EV score. Train: "+str(explained_variance_score(y_train,y_train_reg)))
     print("EV score. Test: "+str(explained_variance_score(y_test,y_test_reg)))
     print(separator)
