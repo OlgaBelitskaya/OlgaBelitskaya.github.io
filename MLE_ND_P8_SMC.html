@@ -214,7 +214,7 @@ pylab.figure(figsize=(11,5))
 ti="Histogram of Residuals 'ENTRIESn_hourly', Theta Gradient Descent"
 pylab.title(ti,fontsize=15)
 (data2['ENTRIESn_hourly']-predictions2[0])\
-.hist(bins=200,color='#4169E1',edgecolor='black',alpha=0.5)
+.hist(bins=200,color='#4169E1',edgecolor='black',alpha=.5)
 pylab.show()
 </script></div><br/>
     <h4>Predictions by the OLS Model</h4>
@@ -226,11 +226,11 @@ pandas.DataFrame(predictions2_ols,columns=['predictions']).head()
 </script></div><br/>
     <h4>Predictions by the SGDRegressor</h4>
 <div class="linked"><script type="text/x-sage">
-predictions2_reg,coefficients2_reg,r2_reg2=sgd_predictions(data2,numeric2)
+predictions2_reg,coefficients2_reg,r2_reg2=\
+sgd_predictions(data2,numeric2)
 pretty_print ("Predictions for 'ENTRIESn_hourly'")
 pandas.DataFrame(predictions2_reg,columns=['predictions']).head()
-</script></div>
-    <p></p>
+</script></div><br/>
     <h4>Question 2.2</h4>
 <i>What features (input variables) did you use in your model? Did you use any dummy variables as part of your features?</i>
     <h4>Answer 2.2</h4>
@@ -249,31 +249,32 @@ The ridership also depends on the time of day and stations, then the variables '
     <h4>Answer 2.4</h4>
 Coefficients by the Set of Built Functions
 <div class="linked"><script type="text/x-sage">
-pandas.DataFrame(predictions2[1][:int(4)],columns=['coefficients'],index=numeric2)
-</script></div>
-    <p></p>
+pandas.DataFrame(predictions2[1][:int(4)],
+                 columns=['coefficients'],index=numeric2)
+</script></div><br/>
 Coefficients by the OLS Model
 <div class="linked"><script type="text/x-sage">
-pandas.DataFrame(coefficients2_ols[int(1):int(5)],columns=['coefficients'])
-</script></div>
-    <p></p>
+pandas.DataFrame(coefficients2_ols[int(1):int(5)],
+                 columns=['coefficients'])
+</script></div><br/>
 Coefficients by the SGDRegressor
 <div class="linked"><script type="text/x-sage">
-pandas.DataFrame(coefficients2_reg[:int(4)],columns=['coefficients'])
-</script></div>
-    <p></p>
+pandas.DataFrame(coefficients2_reg[:int(4)],
+                 columns=['coefficients'])
+</script></div><br/>
     <h4>Question 2.5</h4> 
 <i>What is your model’s R2 (coefficients of determination) value?</i>
     <h4>Answer 2.5</h4>
 There are lots of statistic code libraries for the coefficient of determination R2. Let's try some of them in this project.
 <div class="linked"><script type="text/x-sage">
-print ("Set of Built Functions (sklearn.metrics): {}".format(r2_score(data2['ENTRIESn_hourly'],predictions2[0])))
-slope2,intercept2,r_value2,p_value2,std_err2=linregress(data2['ENTRIESn_hourly'],predictions2[0])
+print ("Set of Built Functions (sklearn.metrics): {}"\
+.format(r2_score(data2['ENTRIESn_hourly'],predictions2[0])))
+slope2,intercept2,r_value2,p_value2,std_err2=\
+linregress(data2['ENTRIESn_hourly'],predictions2[0])
 print ("Set of Built Functions (scipy.stats): {}".format(r_value2**2))
 print ("OLS model: {}".format(r2_ols2))
 print ("SGDRegressor: {}".format(r2_reg2))
-</script></div>
-    <p></p>
+</script></div><br/>
     <h4>Question 2.6</h4> 
 <i>What does this R2 value mean for the goodness of fit for your regression model?<br/>
 Do you think this linear model to predict ridership is appropriate for this dataset, given this R2 value?</i>
