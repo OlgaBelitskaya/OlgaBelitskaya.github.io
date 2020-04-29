@@ -301,27 +301,37 @@ The default bin width is not sufficient to capture the variability in the two sa
     <h4>Answer 3.1</h4> 
 Let's plot the distribution of <i>ENTRIESn_hourly</i>. The x-axis and y-axis ranges are limited for better visualization.
 <div class="linked"><script type="text/x-sage">
-pylab.figure(figsize=(11,5)); pylab.title("Histogram of 'ENTRIESn_hourly': Rainy vs Non-Rainy",fontsize=15)
-non_rainy_entries_hourly.hist(bins=300,color='steelblue',edgecolor='slategray',alpha=0.7)
-rainy_entries_hourly.hist(bins=300,color='#4169E1',edgecolor='black',alpha=0.5)
-pylab.xlabel("ENTRIESn_hourly",fontsize=12); pylab.ylabel("Frequency",fontsize=12)
-pylab.tick_params(axis='both',labelsize=12); pylab.axis((-100,6100,0,36000))
+pylab.figure(figsize=(11,5))
+ti="Histogram of 'ENTRIESn_hourly': Rainy vs Non-Rainy"
+pylab.title(ti,fontsize=15)
+non_rainy_entries_hourly\
+.hist(bins=300,color='steelblue',edgecolor='slategray',alpha=.7)
+rainy_entries_hourly\
+.hist(bins=300,color='#4169E1',edgecolor='black',alpha=.5)
+pylab.xlabel("ENTRIESn_hourly",fontsize=12)
+pylab.ylabel("Frequency",fontsize=12)
+pylab.tick_params(axis='both',labelsize=12)
+pylab.axis((-100,6100,0,36000))
 pylab.legend(['Non-Rainy','Rainy'],fontsize=15); pylab.show()
-</script></div>
-    <p></p>
+</script></div><br/>
 As readers can see, two distributions have the very similar shapes but with different levels of <i>ENTRIESn_hourly</i> and the data is not normally distributed.<br/>
 I should note that the mean and the median vary significantly (indicating a large skew).<br/> 
 Also, it's easy to see that the sample sizes has a huge difference.<br/>
 If I apply a non-linear logarithmic scaling to the normalized histogram we can observe very similar shapes, and it looks closer to the normal distributions.
 <div class="linked"><script type="text/x-sage">
-pylab.figure(figsize=(11,5)); pylab.title("Histogram of 'ENTRIESn_hourly': Rainy vs Non-Rainy. Logarithmic Scale",fontsize=15)
-numpy.log(non_rainy_entries_hourly+1).hist(bins=200,color='steelblue',edgecolor='slategray',alpha=0.7,normed=1)
-numpy.log(rainy_entries_hourly+1).hist(bins=200,color='#4169E1',edgecolor='black',alpha=0.5,normed=1)
-pylab.xlabel("ENTRIESn_hourly",fontsize=12); pylab.ylabel("Frequency",fontsize=12)
-pylab.tick_params(axis='both',labelsize=12); pylab.axis((0.5,11.5,0,0.21))
+pylab.figure(figsize=(11,5))
+ti="Histogram of 'ENTRIESn_hourly': Rainy vs Non-Rainy. Logarithmic Scale"
+pylab.title(ti,fontsize=15)
+numpy.log(non_rainy_entries_hourly+1)\
+.hist(bins=200,color='steelblue',edgecolor='slategray',alpha=.7,normed=1)
+numpy.log(rainy_entries_hourly+1)\
+.hist(bins=200,color='#4169E1',edgecolor='black',alpha=.5,normed=1)
+pylab.xlabel("ENTRIESn_hourly",fontsize=12)
+pylab.ylabel("Frequency",fontsize=12)
+pylab.tick_params(axis='both',labelsize=12)
+pylab.axis((.5,11.5,0,.21))
 pylab.legend(['Non-Rainy','Rainy'],fontsize=15); pylab.show()
-</script></div>
-    <p></p>
+</script></div><br/>
     <h4>Question 3.2</h4>
 One visualization can be more freeform. <br/>
 You should feel free to implement something that we discussed in class (e.g., scatter plots, line plots) or attempt to implement something more advanced if you'd like. <br/>
