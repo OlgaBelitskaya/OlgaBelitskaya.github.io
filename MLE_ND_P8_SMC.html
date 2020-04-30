@@ -345,10 +345,11 @@ data_ee=data[['Hour','ENTRIES_EXITS']].groupby('Hour',as_index=False).sum()
 pylab.figure(figsize=(11,7)); pylab.title('Entries - Exits By Hour',fontsize=15)
 pylab.plot(data_ee['Hour'],data_ee['ENTRIES_EXITS'],'--',lw=2,color='#4169E1')
 psize=list(700*data_ee['ENTRIES_EXITS'].abs()/data_ee['ENTRIES_EXITS'].abs().mean())
-pylab.scatter(data_ee['Hour'],data_ee['ENTRIES_EXITS'],s=psize,marker='8',facecolors='none',edgecolors='steelblue',linewidth=2)
-pylab.xlabel('Hour',fontsize=12); pylab.ylabel('Entries - Exits',fontsize=12); pylab.show()
-</script></div>
-    <p></p>
+pylab.scatter(data_ee['Hour'],data_ee['ENTRIES_EXITS'],s=psize,marker='8',
+              facecolors='none',edgecolors='steelblue',linewidth=2)
+pylab.xlabel('Hour',fontsize=12)
+pylab.ylabel('Entries - Exits',fontsize=12); pylab.show()
+</script></div><br/>
 This graph shows the difference between the number of passengers' enters and exits for each hour and <br/>
 therefore helps to determine the number of passengers in the underground at certain hours.
     <h2>Conclusion</h2>
@@ -372,26 +373,24 @@ There are some reasons why it needs to detect more clear tendencies in the rider
 <div class="linked"><script type="text/x-sage">
 # Means' Difference
 100.0*(with_rain_mean-without_rain_mean)/with_rain_mean
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 # Medians' Difference
 100.0*(with_rain_median-without_rain_median)/with_rain_median
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 numeric=['hour','weekday','meantempi']
 predictions=predictions(data2,numeric,'ENTRIESn_hourly')
-slope,intercept,r_value,p_value,std_err=linregress(data2['ENTRIESn_hourly'],predictions[0])
+slope,intercept,r_value,p_value,std_err=\
+linregress(data2['ENTRIESn_hourly'],predictions[0])
 predictions_ols,coefficients_ols,r2_ols=ols_predictions(data2,numeric)
 predictions_reg,coefficients_reg,r2_reg=sgd_predictions(data2,numeric)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 table([['Features','R2 Built Functions','R2 OLS Model','R2 SGDRegressor'],
-       ["with 'rain'",r_value2**2,r2_ols2,r2_reg2],["without 'rain'",r_value**2,r2_ols,r2_reg]])
-</script></div>
-    <p></p>     
+       ["with 'rain'",r_value2**2,r2_ols2,r2_reg2],
+       ["without 'rain'",r_value**2,r2_ols,r2_reg]])
+</script></div><br/>    
     <h2>Reflections</h2>
 Please address the following questions in detail. Your answers should be 1-2 paragraphs long.
     <h4>Question 5.1</h4> 
