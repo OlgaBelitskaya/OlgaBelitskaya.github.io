@@ -240,25 +240,27 @@ print("Standard deviation of house prices =","%.2f"%np.std(target_train))
 </script></div><br/>
     <h3>Fill in Missing Values</h3>
 <div class="linked"><script type="text/x-sage">
-pandas.DataFrame(train[X_list_num].isnull().sum()[train[X_list_num].isnull().sum()!=0],columns=['nan'])
+pd.DataFrame(train[X_list_num].isnull()\
+.sum()[train[X_list_num].isnull().sum()!=0],columns=['nan'])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-pandas.DataFrame(test[X_list_num].isnull().sum()[test[X_list_num].isnull().sum()!=0],columns=['nan'])
+pd.DataFrame(test[X_list_num].isnull()\
+.sum()[test[X_list_num].isnull().sum()!=0],columns=['nan'])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-df_train=pandas.DataFrame(train,columns=X_list_num)
-df_train_cat=pandas.DataFrame(train,columns=X_list_num+X_list_cat)
-df_test=pandas.DataFrame(test,columns=X_list_num)
-df_test_cat=pandas.DataFrame(test,columns=X_list_num+X_list_cat)
-df_train['prices']=target_train; df_train_cat['prices']=target_train
+df_train=pd.DataFrame(train,columns=X_list_num)
+df_train_cat=pd.DataFrame(train,columns=X_list_num+X_list_cat)
+df_test=pd.DataFrame(test,columns=X_list_num)
+df_test_cat=pd.DataFrame(test,columns=X_list_num+X_list_cat)
+df_train['prices']=target_train
+df_train_cat['prices']=target_train
 df_train=df_train.dropna(subset=['num_room'])
 df_train_cat=df_train_cat.dropna(subset=['num_room'])
 for el in ['metro_min_walk','railroad_station_walk_min','floor']:
     for df in [df_train,df_train_cat,df_test,df_test_cat]:
         df[el]=df[el].interpolate(method='linear')
 len(df_train),len(df_test)
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>Categorical and Macro Features</h3>
 <h4>Add One Macro Feature</h4>
 <div class="linked"><script type="text/x-sage">
