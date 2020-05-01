@@ -31,23 +31,38 @@
     <h3>Resources</h3>
 <a href="https://scikit-learn.org/stable/index.html">&#x1F578;scikit-learn. Machine Learning in Python&nbsp;</a>
 <a href="http://scipy-lectures.org/">&#x1F578;Scipy Lecture Notes&nbsp;</a><br/>
-    <h3>Code Library</h3> 
+    <h3>Code Library</h3>
 <div class="linked"><script type="text/x-sage">
-import numpy,pandas,pylab,seaborn,sympy
-pylab.style.use('seaborn-whitegrid')
-import warnings; from sklearn.exceptions import DataConversionWarning
-for el in [FutureWarning,UserWarning,RuntimeWarning,DataConversionWarning]: warnings.filterwarnings("ignore",category=el)
+#unlock to install modules
+#!python3 -m pip install keras --user
+#!python3 -m pip install --ignore-installed --upgrade tensorflow==1.14.0
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+import warnings; warnings.filterwarnings("ignore")
+from sklearn.exceptions import DataConversionWarning
+warnings.filterwarnings("ignore",category=DataConversionWarning)
+import os,zipfile,numpy as np,pandas as pd,scipy as sc
+import pylab as pl,seaborn as sn,sympy as sp,keras as ks
+pl.style.use('seaborn-whitegrid')
+fw='weights.sberbank.hdf5'
 from sklearn.model_selection import train_test_split,GridSearchCV
 from sklearn.feature_selection import SelectKBest,chi2,RFE
 from sklearn.decomposition import PCA
-from sklearn.metrics import mean_squared_error,median_absolute_error,mean_absolute_error,r2_score,explained_variance_score
-from sklearn.ensemble import GradientBoostingRegressor,RandomForestRegressor
-from sklearn.ensemble import BaggingRegressor,AdaBoostRegressor,ExtraTreesRegressor
+from sklearn.metrics import mean_squared_error,median_absolute_error,\
+mean_absolute_error,r2_score,explained_variance_score
+from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.ensemble import BaggingRegressor,AdaBoostRegressor
+from sklearn.ensemble import ExtraTreesRegressor,RandomForestRegressor
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.neural_network import MLPRegressor
-from sklearn.linear_model import LinearRegression,SGDRegressor,Ridge,RidgeCV,BayesianRidge
-from sklearn.linear_model import HuberRegressor,TheilSenRegressor,RANSACRegressor
-from sklearn.preprocessing import OneHotEncoder,StandardScaler,RobustScaler,MinMaxScaler
+from sklearn.linear_model import LinearRegression,SGDRegressor,Ridge,\
+RidgeCV,BayesianRidge,HuberRegressor,TheilSenRegressor,RANSACRegressor
+from sklearn.preprocessing import OneHotEncoder,RobustScaler
+from keras.models import Sequential,Model
+from keras.layers import Conv1D,Conv2D,MaxPooling1D,MaxPooling2D
+from keras.layers import GlobalAveragePooling2D,GlobalMaxPooling2D
+from keras.layers.advanced_activations import PReLU,LeakyReLU
+from keras.layers import Input,Dense,LSTM,Activation,Flatten,Dropout
 </script></div><br/>
     <h3>Set of Functions</h3>
 <div class="linked"><script type="text/x-sage">
