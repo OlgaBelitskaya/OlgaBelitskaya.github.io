@@ -196,37 +196,46 @@ train[n1:n2].T[n3:n4]
     <h3>Selection of Features</h3>
     <p>Create lists of the features</p>
 <div class="linked"><script type="text/x-sage">
-X_list_num=['timestamp','full_sq','floor','max_floor','num_room','area_m','kremlin_km','big_road2_km','big_road1_km','workplaces_km',
-            'stadium_km','swim_pool_km','fitness_km','detention_facility_km','cemetery_km','radiation_km','oil_chemistry_km',
-            'theater_km','exhibition_km','museum_km','park_km','public_healthcare_km','metro_min_walk','metro_km_avto', 
-            'bus_terminal_avto_km','public_transport_station_min_walk','railroad_station_walk_min','railroad_station_avto_km',
-            'kindergarten_km','school_km','preschool_km','university_km','additional_education_km','shopping_centers_km',
+X_list_num=['timestamp','full_sq','floor','max_floor','num_room','area_m',
+            'kremlin_km','big_road2_km','big_road1_km','workplaces_km',
+            'stadium_km','swim_pool_km','fitness_km','detention_facility_km',
+            'cemetery_km','radiation_km','oil_chemistry_km',
+            'theater_km','exhibition_km','museum_km','park_km',
+            'public_healthcare_km','metro_min_walk','metro_km_avto', 
+            'bus_terminal_avto_km','public_transport_station_min_walk',
+            'railroad_station_walk_min','railroad_station_avto_km',
+            'kindergarten_km','school_km','preschool_km','university_km',
+            'additional_education_km','shopping_centers_km',
             'big_market_km','ekder_all','work_all','young_all']
-X_list_cat=['sub_area','ID_metro','office_raion','sport_objects_raion','raion_popul','healthcare_centers_raion',
-            'school_education_centers_raion','preschool_education_centers_raion']
+X_list_cat=['sub_area','ID_metro','office_raion','sport_objects_raion',
+            'raion_popul','healthcare_centers_raion',
+            'school_education_centers_raion',
+            'preschool_education_centers_raion']
+features_train=train[X_list_num]
+features_test=test[X_list_num]
 target_train=train['price_doc']
-</script></div>
+</script></div><br/>
     <p>Create the distribution plot for the target</p>
 <div class="linked"><script type="text/x-sage">
-f,(ax1,ax2)=pylab.subplots(ncols=2,figsize=(11,5))
-seaborn.distplot(target_train,bins=200,color='#228B22',ax=ax1)
+f,(ax1,ax2)=pl.subplots(ncols=2,figsize=(11,5))
+sn.distplot(target_train,bins=200,color='#31c831',ax=ax1)
 ax1.set_xlabel("Prices"); ax1.set_ylabel("Distribution")
-seaborn.distplot(numpy.log(target_train),bins=200,color='#228B22',ax=ax2)
-ax2.set_xlabel("Logarithm of the variable 'Prices'"); ax2.set_ylabel("Distribution")
-pylab.suptitle('Sberbank Russian Housing Data'); pylab.show()
-</script></div>
+sn.distplot(np.log(target_train),bins=200,color='#31c831',ax=ax2)
+ax2.set_xlabel("Log(Prices)")
+ax2.set_ylabel("Distribution")
+pl.suptitle('Sberbank Russian Housing Data'); pl.show()
+</script></div><br/>
     <p>Create the table of descriptive statistics</p>
 <div class="linked"><script type="text/x-sage">
-print ("Sberbank Russian Housing Dataset Statistics: \n")
-print ("Number of houses = "+str(len(target_train)))
-print ("Number of features = "+str(len(list(train[X_list_num+X_list_cat].keys()))))
-print ("Minimum house price = "+str(numpy.min(target_train)))
-print ("Maximum house price = "+str(numpy.max(target_train)))
-print ("Mean house price = %.4f"%numpy.mean(target_train))
-print ("Median house price = %.4f" %numpy.median(target_train))
-print ("Standard deviation of house prices = %.4f"%numpy.std(target_train))
-</script></div>
-    <p></p>
+print("Sberbank Russian Housing Dataset Statistics: \n")
+print("Number of houses = ",len(target_train))
+print("Number of features = ",len(list(features_train.keys())))
+print("Minimum house price = ",np.min(target_train))
+print("Maximum house price = ",np.max(target_train))
+print("Mean house price = ", "%.2f"%np.mean(target_train))
+print("Median house price = ", "%.2f"%np.median(target_train))
+print("Standard deviation of house prices =","%.2f"%np.std(target_train))
+</script></div><br/>
     <h3>Fill in Missing Values</h3>
 <div class="linked"><script type="text/x-sage">
 pandas.DataFrame(train[X_list_num].isnull().sum()[train[X_list_num].isnull().sum()!=0],columns=['nan'])
