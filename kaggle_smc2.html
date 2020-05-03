@@ -19,7 +19,14 @@
   <body>
     <h1>SageMathCell for Your Experiments</h1>
 <div class="sage"><script type="text/x-sage">
-
+var('t,k'); f=exp(-(-t+k)^2)*sin(2*pi*(t+k))
+cm=sample(['hsv','bwr','cool','jet'],1)[0]
+c=[colormaps[cm](25*i)[:3] for i in range(10)]
+fragments=[plot(f(t=t,k=k),(t,-3,3),fill='axis',
+                figsize=(4.5,4),fillcolor=c[k]) 
+           for k in range(7)]
+animate(fragments,title=cm,gridlines=True,
+        xmin=-3,xmax=3,ymin=-1,ymax=1)
 </script></div><br/>
 <div class="sage_r"><script type="text/x-sage">
 %%r
