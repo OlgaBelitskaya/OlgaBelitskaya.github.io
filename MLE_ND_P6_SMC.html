@@ -278,38 +278,36 @@ for feature in X_list_cat:
 <div class="linked"><script type="text/x-sage">
 for feature in X_list_cat:
     display_cat(df_test_cat,feature)
-</script></div>
+</script></div><br/>
     <p>Find the missing category in the testing set</p>
 <div class="linked"><script type="text/x-sage">
 for feature in X_list_cat:
     for element in list(set(df_test_cat[feature])):
         if element not in list(set(df_train_cat[feature])): 
             print (feature,element)
-</script></div>
-    <p>Replace categorical values of 'ID_metro' by discrete numbers</p>
+</script></div><br/>
+    <p>Replace values of 'ID_metro' and other categorical features by discrete numbers</p>
 <div class="linked"><script type="text/x-sage">
-ID_metro_cat=pandas.factorize(df_train_cat['ID_metro'])
-ID_metro_pairs=dict(zip(list(ID_metro_cat[1]),list(set(ID_metro_cat[0])))); ID_metro_pairs[224]=219
-df_train_cat['ID_metro']=ID_metro_cat[0]; df_test_cat['ID_metro'].replace(ID_metro_pairs,inplace=True)
-</script></div>
-    <p>Replace values of other categorical features by discrete numbers</p>
-<div class="linked"><script type="text/x-sage">
+ID_metro_cat=pd.factorize(df_train_cat['ID_metro'])
+ID_metro_pairs=dict(zip(list(ID_metro_cat[1]),list(set(ID_metro_cat[0]))))
+ID_metro_pairs[224]=219
+df_train_cat['ID_metro']=ID_metro_cat[0]
+df_test_cat['ID_metro'].replace(ID_metro_pairs,inplace=True)
 for feature in X_list_cat:
     if feature!='ID_metro':
-        feature_cat=pandas.factorize(df_train_cat[feature])
+        feature_cat=pd.factorize(df_train_cat[feature])
         feature_pairs=dict(zip(list(feature_cat[1]),list(set(feature_cat[0]))))
-        df_train_cat[feature]=feature_cat[0]; df_test_cat[feature].replace(feature_pairs,inplace=True)
-</script></div>
-    <p></p>
+        df_train_cat[feature]=feature_cat[0]
+        df_test_cat[feature].replace(feature_pairs,inplace=True)
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 for feature in X_list_cat:
     display_cat(df_train_cat,feature)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 for feature in X_list_cat:
     display_cat(df_test_cat,feature)
-</script></div> 
+</script></div><br/>
     <p>Apply one hot encoding for the training set</p>
 <div class="linked"><script type="text/x-sage">
 encode=OneHotEncoder(sparse=False); df_train_cat1=df_train_cat.copy()
