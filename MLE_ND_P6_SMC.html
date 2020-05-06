@@ -370,7 +370,7 @@ features_list=corr_with_prices[abs(corr_with_prices)\
 print('The most correlated with prices:\n'); features_list
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-pl.figure(figsize=(12,12)); cols=df_train.corr().columns.values
+pl.figure(figsize=(11,11)); cols=df_train.corr().columns.values
 sn.heatmap(df_train.corr(),cmap=pl.cm.Greens,
            xticklabels=cols,yticklabels=cols)
 pl.title("Correlation Matrix",fontsize=15)
@@ -448,17 +448,17 @@ scores('GradientBoostingRegressor. Numeric and Encoded Categorical Features',
 </script></div><br/>
 <h4>Regressors with Dimensionality Reduction</h4>
 <div class="linked"><script type="text/x-sage">
-pca=PCA(n_components=11).fit(X_train); X_train_pca=pca.transform(X_train); X_test_pca=pca.transform(X_test)
+pca=PCA(n_components=11).fit(X_train)
+X_train_pca=pca.transform(X_train)
+X_test_pca=pca.transform(X_test)
+reg_pca=GradientBoostingRegressor(max_depth=4,n_estimators=38*8)
 y_train_gbr_pca,y_test_gbr_pca=\
-regression(GradientBoostingRegressor(max_depth=4,n_estimators=38*8),X_train_pca,X_test_pca,y_train)
-scores('GradientBoostingRegressor. Numeric Features (PCA)',y_train,y_test,y_train_gbr_pca,y_test_gbr_pca)
-</script></div>
-    <p></p>
-<div class="linked"><script type="text/x-sage">
-display_importance(GradientBoostingRegressor(max_depth=4,n_estimators=38*8),X_train_pca,y_train,
-                   "Importance of Numeric Features (PCA). Gradient Boosting Regressor",11)
-</script></div>
-    <p></p>
+regression(reg_pca,X_train_pca,X_test_pca,y_train)
+scores('GradientBoostingRegressor. Numeric Features (PCA)',
+       y_train,y_test,y_train_gbr_pca,y_test_gbr_pca)
+ti="Importance of Numeric Features (PCA). Gradient Boosting Regressor"
+display_importance(reg_pca,X_train_pca,y_train,ti,11)
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 pca_cat=PCA(n_components=13).fit(X_train_cat)
 X_train_cat_pca=pca_cat.transform(X_train_cat); X_test_cat_pca=pca_cat.transform(X_test_cat)
