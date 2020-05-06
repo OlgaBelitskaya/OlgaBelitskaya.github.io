@@ -360,21 +360,22 @@ print('Shape of the test data frame:'+str(df_test_cat1.shape))
 </script></div><br/>
     <h3>Display Correlation</h3>
 <div class="linked"><script type="text/x-sage">
-corr_with_prices=df_train.corr(method='pearson').iloc[-int(1)][:-int(1)]
-pandas.DataFrame(corr_with_prices[abs(corr_with_prices).argsort()[::-int(1)]])
-</script></div>
-    <p></p>
+corr_with_prices=df_train.corr(method='pearson')\
+.iloc[-int(1)][:-int(1)]
+pd.DataFrame(corr_with_prices[abs(corr_with_prices).argsort()[::-int(1)]])
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
-features_list=corr_with_prices[abs(corr_with_prices).argsort()[::-int(1)]][:int(10)].index.values.tolist()
-print('The most correlated with prices:\n'+str(features_list))
-</script></div>
-    <p></p>
+features_list=corr_with_prices[abs(corr_with_prices)\
+.argsort()[::-int(1)]][:int(10)].index.values.tolist()
+print('The most correlated with prices:\n'); features_list
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
-pylab.figure(figsize=(12,12)); cols=df_train.corr().columns.values
-seaborn.heatmap(df_train.corr(),cmap=pylab.cm.Greens,xticklabels=cols,yticklabels=cols)
-pylab.title("Correlation Matrix",fontsize=15); pylab.xticks(fontsize=5); pylab.yticks(fontsize=6); pylab.show()
-</script></div>
-    <p></p>
+pl.figure(figsize=(12,12)); cols=df_train.corr().columns.values
+sn.heatmap(df_train.corr(),cmap=pl.cm.Greens,
+           xticklabels=cols,yticklabels=cols)
+pl.title("Correlation Matrix",fontsize=15)
+pl.xticks(fontsize=5); pl.yticks(fontsize=6); pl.show()
+</script></div><br/>
     <h3>Scale, Shuffle and Split the Data</h3>
 <div class="linked"><script type="text/x-sage">
 target_train,features_train=df_train['prices'].as_matrix(),df_train.drop('prices',int(1)).as_matrix()
