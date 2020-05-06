@@ -461,32 +461,24 @@ display_importance(reg_pca,X_train_pca,y_train,ti,11)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 pca_cat=PCA(n_components=13).fit(X_train_cat)
-X_train_cat_pca=pca_cat.transform(X_train_cat); X_test_cat_pca=pca_cat.transform(X_test_cat)
+X_train_cat_pca=pca_cat.transform(X_train_cat)
+X_test_cat_pca=pca_cat.transform(X_test_cat)
+reg_pca_cat=GradientBoostingRegressor(max_depth=4,n_estimators=39*8)
 y_train_cat_gbr_pca,y_test_cat_gbr_pca=\
-regression(GradientBoostingRegressor(max_depth=4,n_estimators=32*8),X_train_cat_pca,X_test_cat_pca,y_train_cat)
+regression(reg_pca_cat,X_train_cat_pca,X_test_cat_pca,y_train_cat)
 scores('GradientBoostingRegressor. Numeric and Categorical Features (PCA)',
        y_train_cat,y_test_cat,y_train_cat_gbr_pca,y_test_cat_gbr_pca)
-</script></div>
-    <p></p>
-<div class="linked"><script type="text/x-sage">
-display_importance(GradientBoostingRegressor(max_depth=4,n_estimators=32*8),X_train_cat_pca,y_train_cat,
-                   "Importance of Numeric and Categorical Features (PCA). Gradient Boosting Regressor",13)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 pca_cat_enc=PCA(n_components=18).fit(X_train_cat_enc)
-X_train_cat_enc_pca=pca_cat_enc.transform(X_train_cat_enc); X_test_cat_enc_pca=pca_cat_enc.transform(X_test_cat_enc)
+X_train_cat_enc_pca=pca_cat_enc.transform(X_train_cat_enc)
+X_test_cat_enc_pca=pca_cat_enc.transform(X_test_cat_enc)
+reg_pca_cat_enc=GradientBoostingRegressor(max_depth=4,n_estimators=32*8)
 y_train_cat_enc_gbr_pca,y_test_cat_enc_gbr_pca=\
-regression(GradientBoostingRegressor(max_depth=4,n_estimators=32*8),X_train_cat_enc_pca,X_test_cat_enc_pca,y_train_cat_enc)
+regression(reg_pca_cat_enc,X_train_cat_enc_pca,X_test_cat_enc_pca,y_train_cat_enc)
 scores('GradientBoostingRegressor. Numeric and Encoded Categorical Features (PCA)',
        y_train_cat_enc,y_test_cat_enc,y_train_cat_enc_gbr_pca,y_test_cat_enc_gbr_pca)
-</script></div>
-    <p></p>
-<div class="linked"><script type="text/x-sage">
-display_importance(GradientBoostingRegressor(max_depth=4,n_estimators=32*8),X_train_cat_enc_pca,y_train_cat_enc,
-                   "Importance of Numeric and Encoded Categorical Features. Gradient Boosting Regressor(PCA)",18)
-</script></div>
-    <p></p>
+</script></div><br/>
     <h3>MLP Regressors. Scikit-Learn</h3>
 <h4>Fit Regressors</h4>      
 <div class="linked"><script type="text/x-sage">
