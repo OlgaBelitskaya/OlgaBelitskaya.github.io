@@ -378,60 +378,56 @@ pl.xticks(fontsize=5); pl.yticks(fontsize=6); pl.show()
 </script></div><br/>
     <h3>Scale, Shuffle and Split the Data</h3>
 <div class="linked"><script type="text/x-sage">
-target_train,features_train=df_train['prices'].as_matrix(),df_train.drop('prices',int(1)).as_matrix()
+target_train,features_train=\
+df_train['prices'].values,df_train.drop('prices',1).values
 features_train_cat,features_train_cat_enc=\
-df_train_cat.drop('prices',int(1)).as_matrix(),df_train_cat1.drop('prices',int(1)).as_matrix()
-features_test,features_test_cat,features_test_cat_enc=df_test.as_matrix(),df_test_cat.as_matrix(),df_test_cat1.as_matrix()
-</script></div>
-    <p></p>
-<div class="linked"><script type="text/x-sage">
-pretty_print('Numeric Features')
-X_train,X_test,y_train,y_test=train_test_split(features_train,target_train,test_size=0.2,random_state=1)
+df_train_cat.drop('prices',1).values,\
+df_train_cat1.drop('prices',1).values
+features_test,features_test_cat,features_test_cat_enc=\
+df_test.values,df_test_cat.values,df_test_cat1.values
+sp.pprint('Numeric Features')
+X_train,X_test,y_train,y_test=\
+train_test_split(features_train,target_train,test_size=.2,random_state=1)
 X_train.shape,X_test.shape,y_train.shape,y_test.shape
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
-pretty_print('Numeric and Categorical Features')
-X_train_cat,X_test_cat,y_train_cat,y_test_cat=train_test_split(features_train_cat,target_train,test_size=0.2,random_state=1)
+sp.pprint('Numeric and Categorical Features')
+X_train_cat,X_test_cat,y_train_cat,y_test_cat=\
+train_test_split(features_train_cat,target_train,test_size=.2,random_state=1)
 X_train_cat.shape,X_test_cat.shape,y_train_cat.shape,y_test_cat.shape
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
-pretty_print('Numeric and Encoded Categorical Features')
+sp.pprint('Numeric and Encoded Categorical Features')
 X_train_cat_enc,X_test_cat_enc,y_train_cat_enc,y_test_cat_enc=\
-train_test_split(features_train_cat_enc,target_train,test_size=0.2,random_state=1)
-X_train_cat_enc.shape,X_test_cat_enc.shape,y_train_cat_enc.shape,y_test_cat_enc.shape
-</script></div>
-    <p></p>
+train_test_split(features_train_cat_enc,target_train,test_size=.2,random_state=1)
+X_train_cat_enc.shape,X_test_cat_enc.shape,\
+y_train_cat_enc.shape,y_test_cat_enc.shape
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
-for [Xtrain,ytrain,Xtest,ytest] in [[X_train,y_train,X_test,y_test],[X_train_cat,y_train_cat,X_test_cat,y_test_cat],
-                                    [X_train_cat_enc,y_train_cat_enc,X_test_cat_enc,y_test_cat_enc]]:
-    Xtrain,ytrain,Xtest,ytest=robust_scaler(Xtrain,ytrain,Xtest,ytest)
-del macro,train,test,df_train,df_train_cat,df_train_cat1,df_test,df_test_cat,df_test_cat1
-del target_train,features_train,features_train_cat,features_train_cat_enc,features_test,features_test_cat,features_test_cat_enc
-</script></div>
-    <p></p>
+#for [Xtrain,ytrain,Xtest,ytest] in \
+#[[X_train,y_train,X_test,y_test],
+# [X_train_cat,y_train_cat,X_test_cat,y_test_cat],
+# [X_train_cat_enc,y_train_cat_enc,X_test_cat_enc,y_test_cat_enc]]:
+#      Xtrain,ytrain,Xtest,ytest=robust_scaler(Xtrain,ytrain,Xtest,ytest)
+del macro,train,test,df_train,df_train_cat,df_train_cat1
+del df_test,df_test_cat,df_test_cat1
+del target_train,features_train,features_train_cat,features_train_cat_enc
+del features_test,features_test_cat,features_test_cat_enc
+</script></div><br/>
     <h2>Benchmark Models</h2>
 To compare the prediction quality, I chose the most effective (for financial indicators) regression ensemble algorithms and neural networks (for example, multilayer perceptrons).<br/>
 In addition, I was wondering what the highest accuracy rate will be achieved by each of the presented algorithms 
 and whether the predicted trends of price change for all used types of techniques will coincide.
-    <h3>Ensemble Regressors. Scikit-Learn</h3>
-<h4>Tuning Parameters</h4>
-<p>Choose One of the Variants (Numeric Features, Numeric and Categorical Features, Numeric and Encoded Categorical Features)</p>
+    <h3>Regressors. Scikit-Learn</h3>
 <div class="linked"><script type="text/x-sage">
-pretty_print('Numeric Features. Unlock for experiments')
-#param_gbr={'max_depth':[3,4],'n_estimators':[250,380]}
-#gridsearch_gbr=GridSearchCV(GradientBoostingRegressor(),param_gbr).fit(X_train,y_train)
-#gridsearch_gbr.best_params_
-</script></div>
-    <p></p>
-<div class="linked"><script type="text/x-sage">
-pretty_print('Numeric and Categorical Features. Unlock for experiments')
-#param_gbr_cat={'max_depth':[3,4],'n_estimators':[230,460]}
-#gridsearch_gbr_cat=GridSearchCV(GradientBoostingRegressor(),param_gbr_cat).fit(X_train_cat,y_train_cat)
-#gridsearch_gbr_cat.best_params_
-</script></div>
-    <p></p>
+reg=GradientBoostingRegressor(max_depth=4,n_estimators=342)
+y_train_gbr,y_test_gbr=\
+regression(reg,X_train,X_test,y_train)
+scores('GradientBoostingRegressor. Numeric Features',
+       y_train,y_test,y_train_gbr,y_test_gbr)
+ti="Importance of Numeric Features. Gradient Boosting Regressor"
+display_importance(reg,X_train,y_train,ti,38)
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 pretty_print('Numeric Features and Encoded Categorical Features. Unlock for experiments')
 #param_gbr_cat_enc={'max_depth':[3,4],'n_estimators':[16,24]}
