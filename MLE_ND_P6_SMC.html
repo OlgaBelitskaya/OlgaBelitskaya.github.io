@@ -434,9 +434,6 @@ y_train_cat_gbr,y_test_cat_gbr=\
 regression(reg_cat,X_train_cat,X_test_cat,y_train_cat)
 ti='GradientBoostingRegressor. Numeric and Categorical Features'
 scores(ti,y_train_cat,y_test_cat,y_train_cat_gbr,y_test_cat_gbr)
-ti="Importance of Numeric and Categorical Features."+\
-   " Gradient Boosting Regressor"
-display_importance(reg_cat,X_train_cat,y_train_cat,ti,46)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 reg_cat_enc=GradientBoostingRegressor(max_depth=3,n_estimators=16)
@@ -534,7 +531,9 @@ scores('MLP Regressor. Numeric and Categorical Features (PCA)',
        y_train_cat,y_test_cat,y_train_cat_mlpr_pca,y_test_cat_mlpr_pca)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-mlpr_cat_enc_pca=MLPRegressor(hidden_layer_sizes=(32*8,),max_iter=60,solver='adam',batch_size=12,learning_rate='adaptive',verbose='True')
+mlpr_cat_enc_pca=MLPRegressor(hidden_layer_sizes=(32*8,),max_iter=60,
+                              solver='adam',batch_size=12,
+                              learning_rate='adaptive',verbose='True')
 mlpr_cat_enc_pca.fit(X_train_cat_enc_pca,y_train_cat_enc) 
 </script></div><br/> 
 <div class="linked"><script type="text/x-sage">
@@ -545,9 +544,12 @@ scores('MLP Regressor. Numeric and Encoded Categorical Features (PCA)',
 </script></div><br/>
     <h3>Display Predictions</h3>
 <div class="linked"><script type="text/x-sage">
-n=int(50); pylab.figure(figsize=(12,5)); pylab.plot(y_test[1:n],color='black',label='Real Data')
-pylab.plot(y_test_gbr[1:n],label='Gradient Boosting'); pylab.plot(y_test_mlpr[1:n],label='MLP Regressor')
-pylab.legend(); pylab.title("Numeric Features; Regressor Predictions vs Real Data"); pylab.show()
+n=int(50); pl.figure(figsize=(11,5))
+pl.plot(y_test[1:n],color='black',label='Real Data')
+pl.plot(y_test_gbr[1:n],label='Gradient Boosting')
+pl.plot(y_test_mlpr[1:n],label='MLP Regressor')
+ti="Numeric Features; Regressor Predictions vs Real Data"
+pl.legend(); pl.title(ti); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 n=int(50); pylab.figure(figsize=(12,5)); pylab.plot(y_test_cat[1:n],color='black',label='Real Data')
