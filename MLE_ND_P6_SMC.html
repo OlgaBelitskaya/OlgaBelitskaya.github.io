@@ -308,38 +308,32 @@ for feature in X_list_cat:
 for feature in X_list_cat:
     display_cat(df_test_cat,feature)
 </script></div><br/>
-    <p>Apply one hot encoding for the training set</p>
+    <p>Apply one hot encoding</p>
 <div class="linked"><script type="text/x-sage">
-encode=OneHotEncoder(sparse=False); df_train_cat1=df_train_cat.copy()
+encode=OneHotEncoder(sparse=False)
+df_train_cat1=df_train_cat.copy()
 for column in X_list_cat:
     encode.fit(df_train_cat[[column]])
     transform=encode.transform(df_train_cat[[column]])    
-    transform=pandas.DataFrame(transform,columns=[(column+"_"+str(i)) for i in df_train_cat[column].value_counts().index])
+    transform=pd.DataFrame(transform,columns=[(column+"_"+str(i)) 
+    for i in df_train_cat[column].value_counts().index])
     transform=transform.set_index(df_train_cat.index.values)    
-    df_train_cat1=pandas.concat([df_train_cat1,transform],axis=int(1))
+    df_train_cat1=pd.concat([df_train_cat1,transform],axis=int(1))
     df_train_cat1=df_train_cat1.drop(column,1)
-</script></div>
-    <p>Apply one hot encoding for the testing set</p>
-<div class="linked"><script type="text/x-sage">
 encode=OneHotEncoder(sparse=False); df_test_cat1=df_test_cat.copy()
 for column in X_list_cat:
     encode.fit(df_test_cat[[column]])
     transform=encode.transform(df_test_cat[[column]])    
-    transform=pandas.DataFrame(transform,columns=[(column+"_"+str(i)) for i in df_test_cat[column].value_counts().index])
+    transform=pd.DataFrame(transform,columns=[(column+"_"+str(i)) 
+    for i in df_test_cat[column].value_counts().index])
     transform=transform.set_index(df_test_cat.index.values)    
-    df_test_cat1=pandas.concat([df_test_cat1,transform],axis=int(1))
-    df_test_cat1=df_test_cat1.drop(column,1)
-</script></div>
-    <p>Check encoding</p>
-<div class="linked"><script type="text/x-sage">
-n1,n2,n3=int(625),int(638),int(3)
-df_train_cat1.iloc[:,n1:n2][:n3].as_matrix()
-</script></div>
-    <p>Check these values without one hot encoding</p>
-<div class="linked"><script type="text/x-sage">
+    df_test_cat1=pd.concat([df_test_cat1,transform],axis=int(1))
+    df_test_cat1=df_test_cat1.drop(column,1)   
+# checking
+n1,n2,n3=625,638,3
+df_train_cat1.iloc[:,n1:n2][:n3].values,\
 df_train_cat['preschool_education_centers_raion'][:n3]
-</script></div>
-    <p></p>
+</script></div><br/>
 <h4>Add Missing Columns with Zero Values</h4>
 <div class="linked"><script type="text/x-sage">
 print('Shape of the train data frame:'+str(df_train_cat1.shape))
