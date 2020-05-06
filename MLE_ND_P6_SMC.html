@@ -429,50 +429,24 @@ ti="Importance of Numeric Features. Gradient Boosting Regressor"
 display_importance(reg,X_train,y_train,ti,38)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-pretty_print('Numeric Features and Encoded Categorical Features. Unlock for experiments')
-#param_gbr_cat_enc={'max_depth':[3,4],'n_estimators':[16,24]}
-#gridsearch_gbr_cat_enc=GridSearchCV(GradientBoostingRegressor(),param_gbr_cat_enc).fit(X_train_cat_enc,y_train_cat_enc)
-#gridsearch_gbr_cat_enc.best_params_
-</script></div>
-    <p></p>
-<h4>Fit Regressors</h4>
+reg_cat=GradientBoostingRegressor(max_depth=4,n_estimators=308)
+y_train_cat_gbr,y_test_cat_gbr=\
+regression(reg_cat,X_train_cat,X_test_cat,y_train_cat)
+ti='GradientBoostingRegressor. Numeric and Categorical Features'
+scores(ti,y_train_cat,y_test_cat,y_train_cat_gbr,y_test_cat_gbr)
+ti="Importance of Numeric and Categorical Features."+\
+   " Gradient Boosting Regressor"
+display_importance(reg_cat,X_train_cat,y_train_cat,ti,46)
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
-y_train_gbr,y_test_gbr=regression(GradientBoostingRegressor(max_depth=4,n_estimators=38*8),X_train,X_test,y_train)
-scores('GradientBoostingRegressor. Numeric Features',y_train,y_test,y_train_gbr,y_test_gbr)
-</script></div>
-    <p></p>
-<div class="linked"><script type="text/x-sage">
-sympy.pprint(GradientBoostingRegressor(max_depth=4,n_estimators=38*8).get_params(deep=True))
-</script></div>
-    <p></p>
-<div class="linked"><script type="text/x-sage">
-display_importance(GradientBoostingRegressor(max_depth=4,n_estimators=38*8),X_train,y_train,
-                   "Importance of Numeric Features. Gradient Boosting Regressor",38)
-</script></div>
-    <p></p>
-<div class="linked"><script type="text/x-sage">
-y_train_cat_gbr,y_test_cat_gbr=regression(GradientBoostingRegressor(max_depth=4,n_estimators=276),X_train_cat,X_test_cat,y_train_cat)
-scores('GradientBoostingRegressor. Numeric and Categorical Features',y_train_cat,y_test_cat,y_train_cat_gbr,y_test_cat_gbr)
-</script></div>
-    <p></p>
-<div class="linked"><script type="text/x-sage">
-display_importance(GradientBoostingRegressor(max_depth=4,n_estimators=276),X_train_cat,y_train_cat,
-                   "Importance of Numeric and Categorical Features. Gradient Boosting Regressor",46)
-</script></div>
-    <p></p>
-<div class="linked"><script type="text/x-sage">
+reg_cat_enc=GradientBoostingRegressor(max_depth=3,n_estimators=159)
 y_train_cat_enc_gbr,y_test_cat_enc_gbr=\
-regression(GradientBoostingRegressor(max_depth=4,n_estimators=16),X_train_cat_enc,X_test_cat_enc,y_train_cat_enc)
+regression(reg_cat_enc,X_train_cat_enc,X_test_cat_enc,y_train_cat_enc)
 scores('GradientBoostingRegressor. Numeric and Encoded Categorical Features',
-       y_train_cat_enc,y_test_cat_enc,y_train_cat_enc_gbr,y_test_cat_enc_gbr)
-</script></div>
-    <p></p>
-<div class="linked"><script type="text/x-sage">
-display_importance(GradientBoostingRegressor(max_depth=4,n_estimators=16),X_train_cat_enc,y_train_cat_enc,
-                   "Importance of Numeric and Encoded Categorical Features. Gradient Boosting Regressor",30)
-</script></div>
-    <p></p>
-<h4>Fit Regressors with Dimensionality Reduction</h4>
+       y_train_cat_enc,y_test_cat_enc,
+       y_train_cat_enc_gbr,y_test_cat_enc_gbr)
+</script></div><br/>
+<h4>Regressors with Dimensionality Reduction</h4>
 <div class="linked"><script type="text/x-sage">
 pca=PCA(n_components=11).fit(X_train); X_train_pca=pca.transform(X_train); X_test_pca=pca.transform(X_test)
 y_train_gbr_pca,y_test_gbr_pca=\
