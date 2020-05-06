@@ -451,7 +451,7 @@ scores('GradientBoostingRegressor. Numeric and Encoded Categorical Features',
 pca=PCA(n_components=11).fit(X_train)
 X_train_pca=pca.transform(X_train)
 X_test_pca=pca.transform(X_test)
-reg_pca=GradientBoostingRegressor(max_depth=4,n_estimators=38*8)
+reg_pca=GradientBoostingRegressor(max_depth=4,n_estimators=38*4)
 y_train_gbr_pca,y_test_gbr_pca=\
 regression(reg_pca,X_train_pca,X_test_pca,y_train)
 scores('GradientBoostingRegressor. Numeric Features (PCA)',
@@ -463,7 +463,7 @@ display_importance(reg_pca,X_train_pca,y_train,ti,11)
 pca_cat=PCA(n_components=13).fit(X_train_cat)
 X_train_cat_pca=pca_cat.transform(X_train_cat)
 X_test_cat_pca=pca_cat.transform(X_test_cat)
-reg_pca_cat=GradientBoostingRegressor(max_depth=4,n_estimators=39*8)
+reg_pca_cat=GradientBoostingRegressor(max_depth=4,n_estimators=39*4)
 y_train_cat_gbr_pca,y_test_cat_gbr_pca=\
 regression(reg_pca_cat,X_train_cat_pca,X_test_cat_pca,y_train_cat)
 scores('GradientBoostingRegressor. Numeric and Categorical Features (PCA)',
@@ -473,7 +473,7 @@ scores('GradientBoostingRegressor. Numeric and Categorical Features (PCA)',
 pca_cat_enc=PCA(n_components=18).fit(X_train_cat_enc)
 X_train_cat_enc_pca=pca_cat_enc.transform(X_train_cat_enc)
 X_test_cat_enc_pca=pca_cat_enc.transform(X_test_cat_enc)
-reg_pca_cat_enc=GradientBoostingRegressor(max_depth=4,n_estimators=32*8)
+reg_pca_cat_enc=GradientBoostingRegressor(max_depth=4,n_estimators=32*4)
 y_train_cat_enc_gbr_pca,y_test_cat_enc_gbr_pca=\
 regression(reg_pca_cat_enc,X_train_cat_enc_pca,X_test_cat_enc_pca,y_train_cat_enc)
 scores('GradientBoostingRegressor. Numeric and Encoded Categorical Features (PCA)',
@@ -510,10 +510,11 @@ scores('MLP Regressor. Numeric and Categorical Features',
 </script></div><br/>
 <h4>Regressors with Dimensionality Reduction</h4>
 <div class="linked"><script type="text/x-sage">
-mlpr_pca=MLPRegressor(hidden_layer_sizes=(32*8,),max_iter=60,solver='adam',batch_size=12,learning_rate='adaptive',verbose='True')
+mlpr_pca=MLPRegressor(hidden_layer_sizes=(32*8,),max_iter=60,
+                      solver='adam',batch_size=12,
+                      learning_rate='adaptive',verbose='True')
 mlpr_pca.fit(X_train_pca,y_train)
-</script></div>
-    <p></p>
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">      
 y_train_mlpr_pca=mlpr_pca.predict(X_train_pca); y_test_mlpr_pca=mlpr_pca.predict(X_test_pca)
 scores('MLP Regressor. Numeric Features (PCA)',y_train,y_test,y_train_mlpr_pca,y_test_mlpr_pca)
