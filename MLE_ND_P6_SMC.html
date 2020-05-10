@@ -547,18 +547,22 @@ scores('MLP Regressor. Numeric Features (PCA)',
 <div class="linked"><script type="text/x-sage">
 def mlp_model():
     model=Sequential()
-    model.add(Dense(32*32,activation='relu',input_dim=38))
-    model.add(Dense(32*4,activation='relu'))
-    model.add(Dense(32,activation='relu'))
-    model.add(Dense(1,kernel_initializer='normal'))    
+    model.add(Dense(int(32*32),activation='relu',
+                    input_dim=int(38)))
+    model.add(Dense(int(32*4),activation='relu'))
+    model.add(Dense(int(32),activation='relu'))
+    model.add(Dense(int(1),kernel_initializer='normal'))    
     model.compile(loss='mse',optimizer='nadam',metrics=['mae'])
     return model
 mlp_model=mlp_model()
-checkpointer=ks.callbacks.ModelCheckpoint(filepath=fw,save_best_only=True)
-lr_reduction=ks.callbacks.ReduceLROnPlateau(monitor='val_loss',verbose=2,
-                                            patience=5,factor=.95)
-history=mlp_model.fit(X_train,y_train,validation_data=(X_test,y_test),
-                      nb_epoch=100,batch_size=12,verbose=2,
+checkpointer=ks.callbacks\
+.ModelCheckpoint(filepath=fw,save_best_only=True)
+lr_reduction=ks.callbacks\
+.ReduceLROnPlateau(monitor='val_loss',verbose=int(2),
+                   patience=int(5),factor=.95)
+history=mlp_model.fit(X_train,y_train,verbose=int(2),
+                      validation_data=(X_test,y_test),
+                      nb_epoch=int(100),batch_size=int(12),
                       callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
@@ -570,7 +574,24 @@ scores('MLP Initial Model. Numeric Features',
        y_train,y_test,y_train_mlp,y_test_mlp)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+ef mlp_cat_model():
+    model = Sequential()    
+    model.add(Dense(int(32*32),activation='relu',
+              input_dim=int(46)))
+    model.add(Dense(int(32*4),activation='relu'))   
+    model.add(Dense(int(1),kernel_initializer='normal'))    
+    model.compile(loss='mse',optimizer='nadam',metrics=['mae'])
+    return model
+mlp_cat_model=mlp_cat_model()
+checkpointer=ks.callbacks\
+.ModelCheckpoint(filepath=fw,save_best_only=True)
+lr_reduction=ks.callbacks\
+.ReduceLROnPlateau(monitor='val_loss',verbose=int(2),
+                   patience=int(5),factor=.95)
+history=mlp_cat_model.fit(X_train_cat,y_train_cat,verbose=int(2),
+                          validation_data=(X_test_cat,y_test_cat),
+                          nb_epoch=int(100),batch_size=int(12),
+                          callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
