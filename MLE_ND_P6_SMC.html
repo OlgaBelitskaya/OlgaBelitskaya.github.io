@@ -545,10 +545,29 @@ scores('MLP Regressor. Numeric Features (PCA)',
 </script></div><br/>
     <h3>Neural Networks. Keras</h3>
 <div class="linked"><script type="text/x-sage">
-
+def mlp_model():
+    model=Sequential()
+    model.add(Dense(32*32,activation='relu',input_dim=38))
+    model.add(Dense(32*4,activation='relu'))
+    model.add(Dense(32,activation='relu'))
+    model.add(Dense(1,kernel_initializer='normal'))    
+    model.compile(loss='mse',optimizer='nadam',metrics=['mae'])
+    return model
+mlp_model=mlp_model()
+checkpointer=ks.callbacks.ModelCheckpoint(filepath=fw,save_best_only=True)
+lr_reduction=ks.callbacks.ReduceLROnPlateau(monitor='val_loss',verbose=2,
+                                            patience=5,factor=.95)
+history=mlp_model.fit(X_train,y_train,validation_data=(X_test,y_test),
+                      nb_epoch=100,batch_size=12,verbose=2,
+                      callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+history_plot(history)
+mlp_model.load_weights(fw)
+y_train_mlp=mlp_model.predict(X_train)
+y_test_mlp=mlp_model.predict(X_test)
+scores('MLP Initial Model. Numeric Features',
+       y_train,y_test,y_train_mlp,y_test_mlp)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
@@ -561,7 +580,7 @@ scores('MLP Regressor. Numeric Features (PCA)',
 n=int(50); pl.figure(figsize=(11,5))
 pl.plot(y_test[1:n],color='black',label='Real Data')
 pl.plot(y_test_gbr[1:n],label='Gradient Boosting')
-#pl.plot(y_test_mlp[1:n],label='MLPr')
+#pl.plot(y_test_mlp[1:n],label='MLP')
 ti="Numeric Features; Regressor Predictions vs Real Data"
 pl.legend(); pl.title(ti); pl.show()
 </script></div><br/>
