@@ -574,7 +574,7 @@ scores('MLP Initial Model. Numeric Features',
        y_train,y_test,y_train_mlp,y_test_mlp)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-ef mlp_cat_model():
+def mlp_cat_model():
     model = Sequential()    
     model.add(Dense(int(32*32),activation='relu',
               input_dim=int(46)))
@@ -594,7 +594,12 @@ history=mlp_cat_model.fit(X_train_cat,y_train_cat,verbose=int(2),
                           callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+history_plot(history)
+mlp_cat_model.load_weights(fw)
+y_train_cat_mlp=mlp_cat_model.predict(X_train_cat)
+y_test_cat_mlp=mlp_cat_model.predict(X_test_cat)
+scores('MLP Initial Model. Numeric and Categorical Features',
+       y_train_cat,y_test_cat,y_train_cat_mlp,y_test_cat_mlp)
 </script></div><br/>
     <h3>Display Predictions</h3>
 <div class="linked"><script type="text/x-sage">
