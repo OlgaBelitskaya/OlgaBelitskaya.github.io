@@ -421,32 +421,7 @@ del features_test,features_test_cat,features_test_cat_enc
 To compare the prediction quality, I chose the most effective (for financial indicators) regression ensemble algorithms and neural networks (for example, multilayer perceptrons).<br/>
 In addition, I was wondering what the highest accuracy rate will be achieved by each of the presented algorithms 
 and whether the predicted trends of price change for all used types of techniques will coincide.
-    <h3>Regressors. Scikit-Learn</h3>
-<div class="linked"><script type="text/x-sage">
-reg=GradientBoostingRegressor(max_depth=4,n_estimators=38*4)
-y_train_gbr,y_test_gbr=\
-regression(reg,X_train,X_test,y_train)
-scores('GradientBoostingRegressor. Numeric Features',
-       y_train,y_test,y_train_gbr,y_test_gbr)
-ti="Importance of Numeric Features. Gradient Boosting Regressor"
-display_importance(reg,X_train,y_train,ti,38)
-</script></div><br/>
-<div class="linked"><script type="text/x-sage">
-reg_cat=GradientBoostingRegressor(max_depth=4,n_estimators=46)
-y_train_cat_gbr,y_test_cat_gbr=\
-regression(reg_cat,X_train_cat,X_test_cat,y_train_cat)
-ti='GradientBoostingRegressor. Numeric and Categorical Features'
-scores(ti,y_train_cat,y_test_cat,y_train_cat_gbr,y_test_cat_gbr)
-</script></div><br/>
-<div class="linked"><script type="text/x-sage">
-reg_cat_enc=GradientBoostingRegressor(max_depth=3,n_estimators=16)
-y_train_cat_enc_gbr,y_test_cat_enc_gbr=\
-regression(reg_cat_enc,X_train_cat_enc,X_test_cat_enc,y_train_cat_enc)
-scores('GradientBoostingRegressor. Numeric and Encoded Categorical Features',
-       y_train_cat_enc,y_test_cat_enc,
-       y_train_cat_enc_gbr,y_test_cat_enc_gbr)
-</script></div><br/>
-<h4>Regressors with Dimensionality Reduction</h4>
+    <h3>Regressors with Dimensionality Reduction. Sklearn</h3>
 <div class="linked"><script type="text/x-sage">
 pca=PCA(n_components=11).fit(X_train)
 X_train_pca=pca.transform(X_train)
@@ -479,40 +454,7 @@ regression(reg_pca_cat_enc,X_train_cat_enc_pca,X_test_cat_enc_pca,y_train_cat_en
 scores('GradientBoostingRegressor. Numeric and Encoded Categorical Features (PCA)',
        y_train_cat_enc,y_test_cat_enc,y_train_cat_enc_gbr_pca,y_test_cat_enc_gbr_pca)
 </script></div><br/>
-    <h3>MLP Regressors. Scikit-Learn</h3>
-<h4>Regressors</h4>      
-<div class="linked"><script type="text/x-sage">
-mlpr=MLPRegressor(hidden_layer_sizes=(32*8,),max_iter=15,
-                  solver='adam',batch_size=14,
-                  learning_rate='adaptive',verbose='True')
-mlpr.fit(X_train,y_train)
-</script></div><br/>
-<div class="linked"><script type="text/x-sage">      
-y_train_mlpr=mlpr.predict(X_train)
-y_test_mlpr=mlpr.predict(X_test)
-scores('MLP Regressor. Numeric Features',
-       y_train,y_test,y_train_mlpr,y_test_mlpr)
-</script></div><br/>
-<div class="linked"><script type="text/x-sage">
-#mlpr_cat=MLPRegressor(hidden_layer_size=(32*8,),max_iter=10,
-#                      solver='adam',batch_size=14,
-#                      learning_rate='adaptive',verbose='True')
-#mlpr_cat.fit(X_train_cat,y_train_cat) 
-#y_train_cat_mlpr=mlpr_cat.predict(X_train_cat)
-#y_test_cat_mlpr=mlpr_cat.predict(X_test_cat)
-#scores('MLP Regressor. Numeric and Categorical Features',
-#       y_train_cat,y_test_cat,y_train_cat_mlpr,y_test_cat_mlpr)
-#mlpr_cat_enc=MLPRegressor(hidden_layer_sizes=(32*8,),max_iter=10,
-#                          solver='adam',batch_size=14,
-#                          learning_rate='adaptive',verbose='True')
-#mlpr_cat_enc.fit(X_train_cat_enc,y_train_cat_enc)
-#y_train_cat_enc_mlpr=mlpr_cat_enc.predict(X_train_cat_enc)
-#y_test_cat_enc_mlpr=mlpr_cat_enc.predict(X_test_cat_enc)
-#scores('MLP Regressor. Numeric and Categorical Encoded Features',
-#       y_train_cat_enc,y_test_cat_enc,
-#       y_train_cat_enc_mlpr,y_test_cat_enc_mlpr)
-</script></div><br/>
-<h4>Regressors with Dimensionality Reduction</h4>
+<h3>MLP Regressors with Dimensionality Reduction. Sklearn</h3>
 <div class="linked"><script type="text/x-sage">
 mlpr_pca=MLPRegressor(hidden_layer_sizes=(32*8,),max_iter=20,
                       solver='adam',batch_size=14,
