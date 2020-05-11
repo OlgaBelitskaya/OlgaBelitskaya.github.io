@@ -1,0 +1,506 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>MLE_ND_P6_SMC2</title>
+    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <script>$(function () {
+    sagecell.makeSagecell({inputLocation:'div.linked',linked:true,evalButtonText:'Run Linked Cells'});  
+    sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run'});});
+    </script>
+  </head>
+  <style>
+  @import url('https://fonts.googleapis.com/css?family=Orbitron|Roboto');
+  body {margin:5px 5px 5px 15px; background-color:honeydew;}
+  a,p {color:forestgreen; font-family:'Roboto';} 
+  h1 {color:#31c831; font-family:'Orbitron'; text-shadow:4px 4px 4px #ccc;} 
+  h2,h3 {color:slategray; font-family:'Orbitron'; text-shadow:4px 4px 4px #ccc;}
+  h4 {color:#31c831; font-family:'Roboto';}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:30em;}
+  .sagecell table.table_form tr.row-a {background-color:lightgray;} 
+  .sagecell table.table_form tr.row-b {background-color:honeydew;}
+  .sagecell table.table_form td {padding:5px 15px; color:forestgreen; font-family:'Roboto';}
+  .sagecell_sessionOutput, .sagecell_sessionOutput pre {color:forestgreen; font-family:'Roboto';}
+  </style>  
+  <body>
+    <h1>Machine Learning Engineer Nanodegree</h1>
+    <h2>Capstone Project</h2>
+    <h1>&#x1F4D1; &nbsp;P6: Sberbank Russian Housing Market. Part 2</h1>
+    <h2>Links and Code Library</h2>     
+    <h3>Resources</h3>
+<a href="https://scikit-learn.org/stable/index.html">&#x1F578;scikit-learn. Machine Learning in Python&nbsp;</a>
+<a href="http://scipy-lectures.org/">&#x1F578;Scipy Lecture Notes&nbsp;</a><br/>
+    <h3>Versions</h3>
+<a href="https://colab.research.google.com/drive/13YVEPwrMQC2TO2GGPvV95Bysh4dhd8we">&#x1F578;Colaboratory Version&nbsp;</a>
+<a href="https://www.kaggle.com/olgabelitskaya/sberbank-russian-housing-market">&#x1F578;Kaggle Version&nbsp;</a><br/>
+    <h3>Code Library</h3>
+<div class="linked"><script type="text/x-sage">
+#unlock to install modules
+#!python3 -m pip install keras --user
+#!python3 -m pip install --ignore-installed --upgrade tensorflow==1.14.0
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+spath='/home/sc_work/.sage/local/lib/python3.7/site-packages'
+import sys; sys.path.append(spath)
+import warnings; warnings.filterwarnings("ignore")
+from sklearn.exceptions import DataConversionWarning
+warnings.filterwarnings("ignore",category=DataConversionWarning)
+import os,zipfile,numpy as np,pandas as pd,scipy as sc
+import pylab as pl,seaborn as sn,sympy as sp,keras as ks
+pl.style.use('seaborn-whitegrid')
+fw='weights.sberbank.hdf5'
+from sklearn.model_selection import train_test_split,GridSearchCV
+from sklearn.feature_selection import SelectKBest,chi2,RFE
+from sklearn.decomposition import PCA
+from sklearn.metrics import mean_squared_error,median_absolute_error,\
+mean_absolute_error,r2_score,explained_variance_score
+from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.ensemble import BaggingRegressor,AdaBoostRegressor
+from sklearn.ensemble import ExtraTreesRegressor,RandomForestRegressor
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.neural_network import MLPRegressor
+from sklearn.linear_model import LinearRegression,SGDRegressor,Ridge,\
+RidgeCV,BayesianRidge,HuberRegressor,TheilSenRegressor,RANSACRegressor
+from sklearn.preprocessing import OneHotEncoder,RobustScaler
+from keras.models import Sequential,Model
+from keras.layers import Conv1D,Conv2D,MaxPooling1D,MaxPooling2D
+from keras.layers import GlobalAveragePooling2D,GlobalMaxPooling2D
+from keras.layers.advanced_activations import PReLU,LeakyReLU
+from keras.layers import Input,Dense,LSTM,Activation,Flatten,Dropout
+</script></div><br/>
+    <h3>Set of Functions</h3>
+<div class="linked"><script type="text/x-sage">
+def display_cat(df,feature):
+    print ('\n'+'<_>'*20);
+    print ('\n'+feature+': '+str(len(set(df[feature]))))
+    sp.pprint(set(df[feature]))
+def robust_scaler(Xtrain,ytrain,Xtest,ytest):
+    scale_X=RobustScaler(); scale_y=RobustScaler()
+    Xtrain=scale_X.fit_transform(Xtrain)
+    Xtest=scale_X.transform(Xtest)
+    ytrain=scale_y.fit_transform(ytrain.reshape(-1,1))
+    ytest=scale_y.transform(ytest.reshape(-1,1))
+    return Xtrain,ytrain,Xtest,ytest
+def regression(regressor,X_train,X_test,y_train):
+    regressor.fit(X_train,y_train)
+    return regressor.predict(X_train),regressor.predict(X_test)
+def scores(title,y_train,y_test,y_train_reg,y_test_reg):
+    separator='-_-'*10; sp.pprint(title); print('<_>'*20)
+    print("EV score. Train: "+\
+          str(explained_variance_score(y_train,y_train_reg)))
+    print("EV score. Test: "+\
+          str(explained_variance_score(y_test,y_test_reg)))
+    print(separator)
+    print("R2 score. Train: "+\
+          str(r2_score(y_train,y_train_reg)))
+    print("R2 score. Test: "+\
+          str(r2_score(y_test,y_test_reg)))
+    print(separator)
+    print("MSE score. Train: "+\
+          str(mean_squared_error(y_train,y_train_reg)))
+    print("MSE score. Test: "+\
+          str(mean_squared_error(y_test,y_test_reg)))
+    print(separator)
+    print("MAE score. Train: "+\
+          str(mean_absolute_error(y_train,y_train_reg)))
+    print("MAE score. Test: "+\
+          str(mean_absolute_error(y_test,y_test_reg)))
+    print(separator)
+    print("MdAE score. Train: "+\
+          str(median_absolute_error(y_train,y_train_reg)))
+    print("MdAE score. Test: "+\
+          str(median_absolute_error(y_test,y_test_reg)))
+def display_importance(regressor,X,y,title,n):
+    importances=regressor.fit(X,y).feature_importances_
+    indices=np.argsort(importances)[::-int(1)][:int(n)]
+    pl.figure(figsize=(11,4))
+    pl.xlabel("Feature Index"); pl.ylabel("Feature Importance")
+    pl.bar(range(n),importances[indices],
+           color="forestgreen",align="center",alpha=.5)
+    pl.xticks(range(n),indices); pl.title(title); pl.show()
+def history_plot(fit_history):
+    keys=list(fit_history.history.keys())[0:4]
+    pl.figure(figsize=(11,9)); pl.subplot(211)
+    pl.plot(fit_history.history[keys[0]],
+            color='#31c831',label='train')
+    pl.plot(fit_history.history[keys[2]],
+            color='forestgreen',label='test')
+    pl.xlabel("Epochs"); pl.ylabel("Loss")
+    pl.legend(); pl.title('Loss Function'); pl.subplot(212)
+    pl.plot(fit_history.history[keys[1]],
+            color='#31c831',label='train')
+    pl.plot(fit_history.history[keys[3]],
+            color='forestgreen',label='test')
+    pl.xlabel("Epochs"); pl.ylabel("MAE"); pl.legend()
+    pl.title('Mean Absolute Error'); pl.show() 
+</script></div><br/>
+    <h2>Capstone Proposal Overview</h2>
+In this capstone project proposal, the goals are stated to leverage what we've learned throughout the Nanodegree Program for solving a problem of our choice by applying machine learning techniques.<br/> 
+A project proposal encompasses seven key points.<br/>
+<b>project's domain background</b>: the field of research where the project is derived;<br/>
+<b>problem statement</b>: a problem being investigated for which a solution will be defined;<br/>
+<b>datasets and inputs</b>: data or inputs being used for the problem;<br/>
+<b>solution statement</b>: the solution proposed for the problem given;<br/>
+<b>benchmark model</b>: some simple or historical model or result to compare the defined solution to;<br/>
+<b>set of evaluation metrics</b>: functional representations for how the solution can be measured;<br/>
+<b>outline of the project design</b>: how the solution will be developed and results obtained.<br/>
+The full project report about results will be completed and published as well.
+    <h2>Domain Background</h2>
+Housing costs demand a significant investment from both consumers and developers. <br/>
+And when it comes to planning a budget—whether personal or corporate—the last thing anyone needs is uncertainty about one of their budgets expenses. <br/>
+Sberbank, Russia’s oldest and largest bank, helps their customers by making predictions about reality prices so renters, developers, <br/>and lenders are more confident when they sign a lease or purchase a building.<br/>
+Although the housing market is relatively stable in Russia, the country’s volatile economy makes forecasting prices as a function of apartment characteristics a unique challenge. <br/>
+Complex interactions between housing features such as a number of bedrooms and location are enough to make pricing predictions complicated. <br/>
+Adding an unstable economy to the mix means Sberbank and their customers need more than simple regression models in their arsenal.
+    <h2>Problem Statement</h2>
+Sberbank is challenging programmers to develop algorithms which use a broad spectrum of features to predict real prices. <br/>Algorithm applications rely on a rich dataset that includes housing data and macroeconomic patterns.<br/> 
+An accurate forecasting model will allow Sberbank to provide more certainty to their customers in an uncertain economy.<br/>
+My choice of the solution in this situation is to select the most correlated indicators with the target variable and <br/>
+apply ensemble algorithms that have repeatedly shown successful results in the study of price trends in real estate. <br/>
+Boosting and bagging methods combine several models at once in order to improve the prediction accuracy on learning problems with a numerical target variable.<br/>
+Then I'm going to explore different types of neural networks for regression predictions and try to achieve the same with ensemble methods level of model perfomance.
+    <h2>Datasets and Inputs</h2>
+The basis for the investigation is a large number of economic indicators for pricing and prices themselves (<i>train.csv</i> and <i>test.csv</i>).<br/>
+Macroeconomic variables are collected in a separate file for transaction dates (<i>macro.csv</i>). <br/>
+In addition, the detailed description of variables is provided (<i>data_dictionary.txt</i>).<br/>
+For practical reasons, I have not analyzed all the data and have chosen the following independent variables:<br/>
+- the dollar rate, which traditionally affects the Russian real estate market;<br/>
+- the distance in km from the Kremlin (the closer to the center of the city, the more expensive);<br/>
+- indicators characterizing the availability of urban infrastructure nearby (schools, medical and sports centers, supermarkets, etc.);<br/>
+- indicators of a particular living space (number of rooms, floor, etc.);<br/>
+- proximity to transport nodes (for example, to the metro);<br/>
+- indicators of population density and employment in the region of housing accommodation.<br/>
+All these economic indicators have a strong influence on price formation and can be used as a basic set for regression analysis.<br/> 
+Examples of <b>numerical</b> variables: the distance to the metro, the distance to the school, the dollar rate at the transaction moment, the area of the living space. <br/>
+Examples of <b>categorical</b> variables: neighborhoods, the nearest metro station, the number of rooms.<br/>
+The goal of the project is to predict the price of housing using the chosen set of numerical and categorical variables.<br/> 
+The predicted target isn't discrete, for the training set all the values of this dependent variable are given, and therefore it's necessary to apply regression algorithms of supervised learning.
+    <h3>Data Description</h3>
+<div class="sage"><script type="text/x-sage">
+%%html
+<div id="data">
+<iframe src="data_dictionary.txt" height="200" width="98%">
+</iframe></div>
+</script></div><br/>
+    <h3>Load and Display the Data</h3>      
+<div class="linked"><script type="text/x-sage">
+path='https://raw.githubusercontent.com/OlgaBelitskaya/'+\
+     'machine_learning_engineer_nd009/'+\
+     'master/Machine_Learning_Engineer_ND_P6/'
+macro=pd.read_csv(path+'macro.csv')
+train=pd.read_csv(path+'train.csv')
+test=pd.read_csv(path+'test.csv')
+n1,n2,n3,n4=int(100),int(110),int(1),int(15)
+macro[n1:n2].T[n3:n4]
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+train[n1:n2].T[n3:n4]
+</script></div><br/>
+    <h2>Solution Statement</h2>
+    <h3>Selection of Features</h3>
+    <p>Create lists of the features</p>
+<div class="linked"><script type="text/x-sage">
+X_list_num=['timestamp','full_sq','floor','max_floor','num_room','area_m',
+            'kremlin_km','big_road2_km','big_road1_km','workplaces_km',
+            'stadium_km','swim_pool_km','fitness_km','detention_facility_km',
+            'cemetery_km','radiation_km','oil_chemistry_km',
+            'theater_km','exhibition_km','museum_km','park_km',
+            'public_healthcare_km','metro_min_walk','metro_km_avto', 
+            'bus_terminal_avto_km','public_transport_station_min_walk',
+            'railroad_station_walk_min','railroad_station_avto_km',
+            'kindergarten_km','school_km','preschool_km','university_km',
+            'additional_education_km','shopping_centers_km',
+            'big_market_km','ekder_all','work_all','young_all']
+X_list_cat=['sub_area','ID_metro','office_raion','sport_objects_raion',
+            'raion_popul','healthcare_centers_raion',
+            'school_education_centers_raion',
+            'preschool_education_centers_raion']
+features_train=train[X_list_num]
+features_test=test[X_list_num]
+target_train=train['price_doc']
+</script></div><br/>
+    <p>Create the distribution plot for the target</p>
+<div class="linked"><script type="text/x-sage">
+f,(ax1,ax2)=pl.subplots(ncols=2,figsize=(11,5))
+sn.distplot(target_train,bins=200,color='#31c831',ax=ax1)
+ax1.set_xlabel("Prices"); ax1.set_ylabel("Distribution")
+sn.distplot(np.log(target_train),bins=200,color='#31c831',ax=ax2)
+ax2.set_xlabel("Log(Prices)")
+ax2.set_ylabel("Distribution")
+pl.suptitle('Sberbank Russian Housing Data'); pl.show()
+</script></div><br/>
+    <p>Create the table of descriptive statistics</p>
+<div class="linked"><script type="text/x-sage">
+print("Sberbank Russian Housing Dataset Statistics: \n")
+print("Number of houses = ",len(target_train))
+print("Number of features = ",len(list(features_train.keys())))
+print("Minimum house price = ",np.min(target_train))
+print("Maximum house price = ",np.max(target_train))
+print("Mean house price = ", "%.2f"%np.mean(target_train))
+print("Median house price = ", "%.2f"%np.median(target_train))
+print("Standard deviation of house prices =","%.2f"%np.std(target_train))
+</script></div><br/>
+    <h3>Fill in Missing Values</h3>
+<div class="linked"><script type="text/x-sage">
+pd.DataFrame(train[X_list_num].isnull()\
+.sum()[train[X_list_num].isnull().sum()!=0],columns=['nan'])
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+pd.DataFrame(test[X_list_num].isnull()\
+.sum()[test[X_list_num].isnull().sum()!=0],columns=['nan'])
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+df_train=pd.DataFrame(train,columns=X_list_num)
+df_train_cat=pd.DataFrame(train,columns=X_list_num+X_list_cat)
+df_test=pd.DataFrame(test,columns=X_list_num)
+df_test_cat=pd.DataFrame(test,columns=X_list_num+X_list_cat)
+df_train['prices']=target_train
+df_train_cat['prices']=target_train
+df_train=df_train.dropna(subset=['num_room'])
+df_train_cat=df_train_cat.dropna(subset=['num_room'])
+for el in ['metro_min_walk','railroad_station_walk_min','floor']:
+    for df in [df_train,df_train_cat,df_test,df_test_cat]:
+        df[el]=df[el].interpolate(method='linear')
+len(df_train),len(df_test)
+</script></div><br/>
+    <h3>Categorical and Macro Features</h3>
+<h4>Add One Macro Feature</h4>
+<div class="linked"><script type="text/x-sage">
+usdrub_pairs=dict(zip(list(macro['timestamp']),list(macro['usdrub'])))
+# salary_pairs=dict(zip(list(macro['timestamp']),list(macro['salary'])))
+for df in [df_train,df_train_cat,df_test,df_test_cat]:
+    df['timestamp'].replace(usdrub_pairs,inplace=True)
+    df.rename(columns={'timestamp':'usdrub'},inplace=True)
+</script></div><br/>
+<h4>Explore numbers of categories and values for categorical features</h4>
+<div class="linked"><script type="text/x-sage">
+for feature in X_list_cat:
+    display_cat(df_train_cat,feature)
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+for feature in X_list_cat:
+    display_cat(df_test_cat,feature)
+</script></div><br/>
+    <p>Find the missing category in the testing set</p>
+<div class="linked"><script type="text/x-sage">
+for feature in X_list_cat:
+    for element in list(set(df_test_cat[feature])):
+        if element not in list(set(df_train_cat[feature])): 
+            print (feature,element)
+</script></div><br/>
+    <p>Replace values of 'ID_metro' and other categorical features by discrete numbers</p>
+<div class="linked"><script type="text/x-sage">
+ID_metro_cat=pd.factorize(df_train_cat['ID_metro'])
+ID_metro_pairs=dict(zip(list(ID_metro_cat[1]),list(set(ID_metro_cat[0]))))
+ID_metro_pairs[224]=219
+df_train_cat['ID_metro']=ID_metro_cat[0]
+df_test_cat['ID_metro'].replace(ID_metro_pairs,inplace=True)
+for feature in X_list_cat:
+    if feature!='ID_metro':
+        feature_cat=pd.factorize(df_train_cat[feature])
+        feature_pairs=dict(zip(list(feature_cat[1]),list(set(feature_cat[0]))))
+        df_train_cat[feature]=feature_cat[0]
+        df_test_cat[feature].replace(feature_pairs,inplace=True)
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+for feature in X_list_cat:
+    display_cat(df_train_cat,feature)
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+for feature in X_list_cat:
+    display_cat(df_test_cat,feature)
+</script></div><br/>
+    <p>Apply one hot encoding</p>
+<div class="linked"><script type="text/x-sage">
+encode=OneHotEncoder(sparse=False)
+df_train_cat1=df_train_cat.copy()
+for column in X_list_cat:
+    encode.fit(df_train_cat[[column]])
+    transform=encode.transform(df_train_cat[[column]])    
+    transform=pd.DataFrame(transform,columns=[(column+"_"+str(i)) 
+    for i in df_train_cat[column].value_counts().index])
+    transform=transform.set_index(df_train_cat.index.values)    
+    df_train_cat1=pd.concat([df_train_cat1,transform],axis=int(1))
+    df_train_cat1=df_train_cat1.drop(column,1)
+encode=OneHotEncoder(sparse=False); df_test_cat1=df_test_cat.copy()
+for column in X_list_cat:
+    encode.fit(df_test_cat[[column]])
+    transform=encode.transform(df_test_cat[[column]])    
+    transform=pd.DataFrame(transform,columns=[(column+"_"+str(i)) 
+    for i in df_test_cat[column].value_counts().index])
+    transform=transform.set_index(df_test_cat.index.values)    
+    df_test_cat1=pd.concat([df_test_cat1,transform],axis=int(1))
+    df_test_cat1=df_test_cat1.drop(column,1)   
+# checking
+n1,n2,n3=int(625),int(638),int(3)
+df_train_cat1.iloc[:,n1:n2][:n3].values,\
+df_train_cat['preschool_education_centers_raion'][:n3]
+</script></div><br/>
+<h4>Add Missing Columns with Zero Values</h4>
+<div class="linked"><script type="text/x-sage">
+print('Shape of the train data frame:'+str(df_train_cat1.shape))
+print('Shape of the test data frame:'+str(df_test_cat1.shape))
+print("Features in the train data, but not in the test data:")
+for element in list(df_train_cat1):
+    if element not in list(df_test_cat1):
+        print(element)
+print("Features in the test data, but not in the train data:")
+for element in list(df_test_cat1):
+    if element not in list(df_train_cat1):
+        print(element)
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+for column in ['sub_area_136','ID_metro_188','ID_metro_205',
+               'ID_metro_216','ID_metro_214',
+               'ID_metro_183','ID_metro_179','ID_metro_153',
+               'ID_metro_217','raion_popul_136']:
+    df_test_cat1[column]=0    
+df_train_cat1['ID_metro_219']=0
+print('Columns with zero values were added.\n')
+print('Shape of the train data frame:'+str(df_train_cat1.shape))
+print('Shape of the test data frame:'+str(df_test_cat1.shape))
+</script></div><br/>
+    <h3>Display Correlation</h3>
+<div class="linked"><script type="text/x-sage">
+corr_with_prices=df_train.corr(method='pearson')\
+.iloc[-int(1)][:-int(1)]
+pd.DataFrame(corr_with_prices[abs(corr_with_prices).argsort()[::-int(1)]])
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+features_list=corr_with_prices[abs(corr_with_prices)\
+.argsort()[::-int(1)]][:int(10)].index.values.tolist()
+print('The most correlated with prices:\n'); features_list
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+pl.figure(figsize=(11,11)); cols=df_train.corr().columns.values
+sn.heatmap(df_train.corr(),cmap=pl.cm.Greens,
+           xticklabels=cols,yticklabels=cols)
+pl.title("Correlation Matrix",fontsize=15)
+pl.xticks(fontsize=5); pl.yticks(fontsize=6); pl.show()
+</script></div><br/>
+    <h3>Scale, Shuffle and Split the Data</h3>
+<div class="linked"><script type="text/x-sage">
+target_train,features_train=\
+df_train['prices'].values,df_train.drop('prices',1).values
+features_train_cat,features_train_cat_enc=\
+df_train_cat.drop('prices',1).values,\
+df_train_cat1.drop('prices',1).values
+features_test,features_test_cat,features_test_cat_enc=\
+df_test.values,df_test_cat.values,df_test_cat1.values
+sp.pprint('Numeric Features')
+X_train,X_test,y_train,y_test=\
+train_test_split(features_train,target_train,test_size=.2,random_state=1)
+X_train.shape,X_test.shape,y_train.shape,y_test.shape
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+sp.pprint('Numeric and Categorical Features')
+X_train_cat,X_test_cat,y_train_cat,y_test_cat=\
+train_test_split(features_train_cat,target_train,test_size=.2,random_state=1)
+X_train_cat.shape,X_test_cat.shape,y_train_cat.shape,y_test_cat.shape
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+sp.pprint('Numeric and Encoded Categorical Features')
+X_train_cat_enc,X_test_cat_enc,y_train_cat_enc,y_test_cat_enc=\
+train_test_split(features_train_cat_enc,target_train,test_size=.2,random_state=1)
+X_train_cat_enc.shape,X_test_cat_enc.shape,\
+y_train_cat_enc.shape,y_test_cat_enc.shape
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+#for [Xtrain,ytrain,Xtest,ytest] in \
+#[[X_train,y_train,X_test,y_test],
+# [X_train_cat,y_train_cat,X_test_cat,y_test_cat],
+# [X_train_cat_enc,y_train_cat_enc,X_test_cat_enc,y_test_cat_enc]]:
+#      Xtrain,ytrain,Xtest,ytest=robust_scaler(Xtrain,ytrain,Xtest,ytest)
+del macro,train,test,df_train,df_train_cat,df_train_cat1
+del df_test,df_test_cat,df_test_cat1
+del target_train,features_train,features_train_cat,features_train_cat_enc
+del features_test,features_test_cat,features_test_cat_enc
+</script></div><br/>
+    <h2>Benchmark Models</h2>
+To compare the prediction quality, I chose the most effective (for financial indicators) regression ensemble algorithms and neural networks (for example, multilayer perceptrons).<br/>
+In addition, I was wondering what the highest accuracy rate will be achieved by each of the presented algorithms 
+and whether the predicted trends of price change for all used types of techniques will coincide.
+    <h3>Regressors. Scikit-Learn</h3>
+<div class="linked"><script type="text/x-sage">
+reg=GradientBoostingRegressor(max_depth=4,n_estimators=38*4)
+y_train_gbr,y_test_gbr=\
+regression(reg,X_train,X_test,y_train)
+scores('GradientBoostingRegressor. Numeric Features',
+       y_train,y_test,y_train_gbr,y_test_gbr)
+ti="Importance of Numeric Features. Gradient Boosting Regressor"
+display_importance(reg,X_train,y_train,ti,38)
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+reg_cat=GradientBoostingRegressor(max_depth=4,n_estimators=46)
+y_train_cat_gbr,y_test_cat_gbr=\
+regression(reg_cat,X_train_cat,X_test_cat,y_train_cat)
+ti='GradientBoostingRegressor. Numeric and Categorical Features'
+scores(ti,y_train_cat,y_test_cat,y_train_cat_gbr,y_test_cat_gbr)
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+reg_cat_enc=GradientBoostingRegressor(max_depth=3,n_estimators=16)
+y_train_cat_enc_gbr,y_test_cat_enc_gbr=\
+regression(reg_cat_enc,X_train_cat_enc,X_test_cat_enc,y_train_cat_enc)
+scores('GradientBoostingRegressor. Numeric and Encoded Categorical Features',
+       y_train_cat_enc,y_test_cat_enc,
+       y_train_cat_enc_gbr,y_test_cat_enc_gbr)
+</script></div><br/>
+    <h3>MLP Regressors. Scikit-Learn</h3>
+<h4>Regressors</h4>      
+<div class="linked"><script type="text/x-sage">
+mlpr=MLPRegressor(hidden_layer_sizes=(32*8,),max_iter=15,
+                  solver='adam',batch_size=14,
+                  learning_rate='adaptive',verbose='True')
+mlpr.fit(X_train,y_train)
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">      
+y_train_mlpr=mlpr.predict(X_train)
+y_test_mlpr=mlpr.predict(X_test)
+scores('MLP Regressor. Numeric Features',
+       y_train,y_test,y_train_mlpr,y_test_mlpr)
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+mlpr_cat=MLPRegressor(hidden_layer_size=(32*8,),max_iter=10,
+                      solver='adam',batch_size=14,
+                      learning_rate='adaptive',verbose='True')
+mlpr_cat.fit(X_train_cat,y_train_cat) 
+y_train_cat_mlpr=mlpr_cat.predict(X_train_cat)
+y_test_cat_mlpr=mlpr_cat.predict(X_test_cat)
+scores('MLP Regressor. Numeric and Categorical Features',
+       y_train_cat,y_test_cat,y_train_cat_mlpr,y_test_cat_mlpr)
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+#mlpr_cat_enc=MLPRegressor(hidden_layer_sizes=(32*8,),max_iter=10,
+#                          solver='adam',batch_size=14,
+#                          learning_rate='adaptive',verbose='True')
+#mlpr_cat_enc.fit(X_train_cat_enc,y_train_cat_enc)
+#y_train_cat_enc_mlpr=mlpr_cat_enc.predict(X_train_cat_enc)
+#y_test_cat_enc_mlpr=mlpr_cat_enc.predict(X_test_cat_enc)
+#scores('MLP Regressor. Numeric and Categorical Encoded Features',
+#       y_train_cat_enc,y_test_cat_enc,
+#       y_train_cat_enc_mlpr,y_test_cat_enc_mlpr)
+</script></div><br/>
+    <h3>Display Predictions</h3>
+<div class="linked"><script type="text/x-sage">
+n=int(50); pl.figure(figsize=(11,5))
+pl.plot(y_test[1:n],color='black',label='Real Data')
+pl.plot(y_test_gbr[1:n],label='Gradient Boosting')
+pl.plot(y_test_mlpr[1:n],label='MLP')
+ti="PCA. Numeric Features. Regressor Predictions vs Real Data"
+pl.legend(); pl.title(ti); pl.show()
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+n=int(50); pl.figure(figsize=(11,5))
+pl.plot(y_test_cat[1:n],color='black',label='Real Data')
+pl.plot(y_test_cat_gbr[1:n],label='Gradient Boosting')
+pl.plot(y_test_cat_mlpr[1:n],label='MLP')
+ti="PCA. Numeric and Categorical Features. Regressor Predictions vs Real Data"
+pl.legend(); pl.title(ti); pl.show()
+</script></div><br/>
+    <h3>Additional Code Cell</h3>
+<div class="linked"><script type="text/x-sage">
+
+</script></div><br/> 
+  </body>
+</html>
