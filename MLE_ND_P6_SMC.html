@@ -548,7 +548,7 @@ scores('MLP Regressor. Numeric Features (PCA)',
 def mlp_model():
     model=Sequential()
     model.add(Dense(int(32*16),activation='relu',
-                    input_dim=int(38)))
+                    input_dim=int(11)))
     model.add(Dense(int(32*4),activation='relu'))
     model.add(Dense(int(32),activation='relu'))
     model.add(Dense(int(1),kernel_initializer='normal'))    
@@ -560,24 +560,24 @@ checkpointer=ks.callbacks\
 lr_reduction=ks.callbacks\
 .ReduceLROnPlateau(monitor='val_loss',verbose=int(2),
                    patience=int(5),factor=.95)
-history=mlp_model.fit(X_train,y_train,verbose=int(2),
-                      validation_data=(X_test,y_test),
+history=mlp_model.fit(X_train_pca,y_train,verbose=int(2),
+                      validation_data=(X_test_pca,y_test),
                       nb_epoch=int(100),batch_size=int(12),
                       callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 history_plot(history)
 mlp_model.load_weights(fw)
-y_train_mlp=mlp_model.predict(X_train)
-y_test_mlp=mlp_model.predict(X_test)
-scores('MLP Initial Model. Numeric Features',
-       y_train,y_test,y_train_mlp,y_test_mlp)
+y_train_mlp_pca=mlp_model.predict(X_train_pca)
+y_test_mlp_pca=mlp_model.predict(X_test_pca)
+scores('PCA. MLP Initial Model. Numeric Features',
+       y_train,y_test,y_train_mlp_pca,y_test_mlp_pca)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def mlp_cat_model():
-    model = Sequential()    
+    model=Sequential()    
     model.add(Dense(int(32*16),activation='relu',
-              input_dim=int(46)))
+              input_dim=int(13)))
     model.add(Dense(int(32*4),activation='relu'))   
     model.add(Dense(int(1),kernel_initializer='normal'))    
     model.compile(loss='mse',optimizer='nadam',metrics=['mae'])
@@ -588,34 +588,35 @@ checkpointer=ks.callbacks\
 lr_reduction=ks.callbacks\
 .ReduceLROnPlateau(monitor='val_loss',verbose=int(2),
                    patience=int(5),factor=.95)
-history=mlp_cat_model.fit(X_train_cat,y_train_cat,verbose=int(2),
-                          validation_data=(X_test_cat,y_test_cat),
+history=mlp_cat_model.fit(X_train_cat_pca,y_train_cat,verbose=int(2),
+                          validation_data=(X_test_cat_pca,y_test_cat),
                           nb_epoch=int(100),batch_size=int(12),
                           callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 history_plot(history)
 mlp_cat_model.load_weights(fw)
-y_train_cat_mlp=mlp_cat_model.predict(X_train_cat)
-y_test_cat_mlp=mlp_cat_model.predict(X_test_cat)
-scores('MLP Initial Model. Numeric and Categorical Features',
-       y_train_cat,y_test_cat,y_train_cat_mlp,y_test_cat_mlp)
+y_train_cat_mlp_pca=mlp_cat_model.predict(X_train_cat_pca)
+y_test_cat_mlp_pca=mlp_cat_model.predict(X_test_cat_pca)
+scores('PCA. MLP Initial Model. Numeric and Categorical Features',
+       y_train_cat,y_test_cat,
+       y_train_cat_mlp_pca,y_test_cat_mlp_pca)
 </script></div><br/>
     <h3>Display Predictions</h3>
 <div class="linked"><script type="text/x-sage">
 n=int(50); pl.figure(figsize=(11,5))
 pl.plot(y_test[1:n],color='black',label='Real Data')
-pl.plot(y_test_gbr[1:n],label='Gradient Boosting')
-pl.plot(y_test_mlp[1:n],label='MLP')
-ti="Numeric Features; Regressor Predictions vs Real Data"
+pl.plot(y_test_gbr_pca[1:n],label='Gradient Boosting')
+pl.plot(y_test_mlp_pca[1:n],label='MLP')
+ti="PCA. Numeric Features. Regressor Predictions vs Real Data"
 pl.legend(); pl.title(ti); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 n=int(50); pl.figure(figsize=(11,5))
 pl.plot(y_test_cat[1:n],color='black',label='Real Data')
-pl.plot(y_test_cat_gbr[1:n],label='Gradient Boosting')
-pl.plot(y_test_cat_mlp[1:n],label='MLP')
-ti="Numeric and Categorical Features; Regressor Predictions vs Real Data"
+pl.plot(y_test_cat_gbr_pca[1:n],label='Gradient Boosting')
+pl.plot(y_test_cat_mlp_pca[1:n],label='MLP')
+ti="PCA. Numeric and Categorical Features. Regressor Predictions vs Real Data"
 pl.legend(); pl.title(ti); pl.show()
 </script></div><br/>
     <h3>Additional Code Cell</h3>
