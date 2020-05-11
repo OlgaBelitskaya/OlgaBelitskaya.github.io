@@ -489,9 +489,9 @@ scores('MLP Regressor. Numeric Features (PCA)',
 <div class="linked"><script type="text/x-sage">
 def mlp_model():
     model=Sequential()
-    model.add(Dense(int(32*16),activation='relu',
+    model.add(Dense(int(32*4),activation='relu',
                     input_dim=int(11)))
-    model.add(Dense(int(32*4),activation='relu'))
+    model.add(Dense(int(32*2),activation='relu'))
     model.add(Dense(int(32),activation='relu'))
     model.add(Dense(int(1),kernel_initializer='normal'))    
     model.compile(loss='mse',optimizer='nadam',metrics=['mae'])
@@ -504,7 +504,7 @@ lr_reduction=ks.callbacks\
                    patience=int(5),factor=.95)
 history=mlp_model.fit(X_train_pca,y_train,verbose=int(2),
                       validation_data=(X_test_pca,y_test),
-                      nb_epoch=int(100),batch_size=int(12),
+                      nb_epoch=int(20),batch_size=int(12),
                       callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
@@ -518,9 +518,9 @@ scores('PCA. MLP Initial Model. Numeric Features',
 <div class="linked"><script type="text/x-sage">
 def mlp_cat_model():
     model=Sequential()    
-    model.add(Dense(int(32*16),activation='relu',
+    model.add(Dense(int(32*4),activation='relu',
               input_dim=int(13)))
-    model.add(Dense(int(32*4),activation='relu'))   
+    model.add(Dense(int(32*2),activation='relu'))   
     model.add(Dense(int(1),kernel_initializer='normal'))    
     model.compile(loss='mse',optimizer='nadam',metrics=['mae'])
     return model
@@ -532,7 +532,7 @@ lr_reduction=ks.callbacks\
                    patience=int(5),factor=.95)
 history=mlp_cat_model.fit(X_train_cat_pca,y_train_cat,verbose=int(2),
                           validation_data=(X_test_cat_pca,y_test_cat),
-                          nb_epoch=int(100),batch_size=int(12),
+                          nb_epoch=int(20),batch_size=int(12),
                           callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
