@@ -166,10 +166,49 @@ GROUP BY method;
     <h1>If you want to link cells for plotting</h1>
 Python &#38; R &#38; SageMathCell <br/>     
 <div class="linked"><script type="text/x-sage">
-
+%%r
+X3<-Z3<-X4<-Z4<-Y5<-Z5<-seq(from=-5,to=5,by=0.1)
+cylinder1<-function(p,q,X,Z){
+    for (x in X){for (z in Z){
+        y<-q*(1-x^2/p^2)^0.5; v<-c(x,y,z,x,-y,z)
+        if (sum(is.na(v))==0){
+            write.table(matrix(v,nrow=2,ncol=3,byrow=T),
+                        file ="cylinder1.csv",append=T,
+                        quote=F,col.names=F,row.names=F)}}}}
+cylinder2<-function(p,q,X,Z){
+    for (x in X){for (z in Z){
+        y<-q*(x^2/p^2-1)^0.5; v<-c(x,y,z,x,-y,z)
+        if (sum(is.na(v))==0){
+            write.table(matrix(v,nrow=2,ncol=3,byrow=T),
+                        file="cylinder2.csv",append=T,
+                        quote=F,col.names=F,row.names=F)}}}}
+cylinder3<-function(p,Y,Z){
+    for (y in Y){for (z in Z){
+        x<-y^2/2/p; v<-c(x,y,z)
+        write.table(matrix(v,nrow=1,ncol=3,byrow=T),
+                    file ="cylinder3.csv",append=T,
+                    quote=F,col.names=F,row.names=F)}}}
+cylinder1(3,4,X3,Z3); cylinder2(2,3,X4,Z4); cylinder3(2,Y5,Z5)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-  
+import pylab,numpy
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib.lines import Line2D
+files=['cylinder1.csv','cylinder2.csv',
+       'cylinder3.csv']
+colors=['#36ff36','#36ffff','#ff36ff']
+labels=['$x^2/3^2+y^2/4^2=1$',
+        '$x^2/2^2-y^2/3^2=1$',
+        '$y^2=2*2*x$']
+XYZ=[numpy.array(numpy.loadtxt(files[i],\
+     delimiter=' ',unpack=True)) for i in range(3)]
+fig=pylab.figure(figsize=(7,7))
+ax=fig.add_subplot(111,projection='3d')
+[ax.scatter(XYZ[i][0],XYZ[i][1],XYZ[i][2],s=1,\
+ c=colors[i],marker='1') for i in range(3)]
+fake2Dlines=[Line2D([0],[0],linestyle="none",\
+             c=c,marker='1') for c in colors]
+ax.legend(fake2Dlines,labels,loc=9); pylab.show()
 </script></div><br/>
     <h1>Exercises in R and Python at the same time</h1>
 Python &#38; R &#38; SageMathCell <br/>
