@@ -38,12 +38,12 @@ import sys; sys.path.append(spath)
 <div class="linked"><script type="text/x-sage">
 import os,requests,urllib
 from bs4 import BeautifulSoup
-site='https://en.wikipedia.org/wiki/Hamdan_bin_Mohammed_Al_Maktoum'
+site='https://en.wikivoyage.org/wiki/Main_Page'
 response=requests.get(site)
 soup=BeautifulSoup(response.text,'html.parser')
 img_tags=soup.find_all('img')
-urls=[img['src'] for img in img_tags]
-url='https:'+urls[0]; f='01.jpeg'
+urls=['https:'+img['src'] for img in img_tags]
+url=urls[0]; f='01.jpeg'
 input_file=urllib.request.urlopen(url)
 output_file=open(f,'wb')
 output_file.write(input_file.read())
@@ -51,7 +51,7 @@ output_file.close(); input_file.close()
 fpath='https://sagecell.sagemath.org/kernel/'
 fpath+=os.getcwd()[14:]+'/files/01.jpeg'
 s1='<div id="data"><iframe src="'
-s2='" height="300" width="280"></iframe></div>'
+s2='" height="350" width="1150"></iframe></div>'
 html(s1+fpath+s2)
 </script></div><br/>
     <h1>Pattern Contours</h1>
