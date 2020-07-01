@@ -72,8 +72,9 @@ def _vector(file=[1,2,3,4],
             level=[round(.85-.01*i,2) for i in range(30)]):
     path1='https://olgabelitskaya.github.io/'
     path2='pattern0%s'%(file+3)+'.jpeg'
-    img=io.imread(path1+path2); level=level
-    gray_img=color.colorconv.rgb2grey(img) 
+    img=color.colorconv.rgba2rgb(io.imread(path1+path2))
+    level=level
+    gray_img=color.colorconv.rgb2gray(img)
     contours=measure.find_contours(gray_img,level)
     n=len(contours); pylab.figure(figsize=(4,5))
     pylab.gca().invert_yaxis()
