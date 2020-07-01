@@ -353,7 +353,36 @@ var chart=new Highcharts.Chart({
 HTML &#38; JavaScript &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 <div class="sage_html"><script type="text/x-sage">
 %%html
-
+<script src='https://d3js.org/d3.v4.min.js'/>
+<svg id='chsvg01' style='background-color:slategray;'/></svg><script>
+const url='https://olgabelitskaya.github.io/beethoven.csv'
+d3.csv(url,function(data) {
+var n=data.length,m=35,margin={top:m,right:m,bottom:m,left:m},
+    width=500-margin.left-margin.right,
+    height=750-margin.top-margin.bottom; 
+var xScale=d3.scaleLinear().domain([-4,4]).range([0,width]); 
+var yScale=d3.scaleLinear().domain([-6,6]).range([height,0]);
+function make_x_gridlines() {return d3.axisBottom(xScale).ticks(11)}; 
+function make_y_gridlines() {return d3.axisLeft(yScale).ticks(11)};
+var pointColor=d3.scaleSequential().domain([0,n])
+                 .interpolator(d3.interpolateCool);       
+var svg=d3.select('#chsvg01').attr('width',width+margin.left+margin.right)
+          .attr('height',height+margin.top+margin.bottom)
+          .append('g').attr('transform',
+                            'translate('+margin.left+','+margin.top+')');
+svg.append('g').attr('class','xaxis1').call(d3.axisBottom(xScale).tickSize(.5))
+               .attr('transform','translate(0,'+height+')'); 
+svg.append('g').attr('class','yaxis1').call(d3.axisLeft(yScale).tickSize(.5));    
+svg.append('g').attr('class','grid1').attr('transform','translate(0,'+height+')')
+               .call(make_x_gridlines().tickSize(-height).tickFormat(''));
+svg.append('g').attr('class','grid1').call(make_y_gridlines()
+               .tickSize(-width).tickFormat(''));
+svg.selectAll('.point').data(data).enter()
+   .append('circle').attr('class','point')
+   .attr('fill',function(d,i){return pointColor(i)}).attr('r',2)
+   .attr('stroke','#ffffff').attr('stroke-width','.3')
+   .attr('cx',function(d) {return xScale(d.y)})
+   .attr('cy',function(d) {return yScale(d.z)}); });
 </script></div><br/>
   </body>
 </html>
