@@ -77,26 +77,33 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import warnings; warnings.filterwarnings('ignore')
 from skimage import io
-import numpy as np
+import numpy as np,urllib
 fpath='https://olgabelitskaya.github.io/new/'
 fig=make_subplots(int(1),int(5)); steps=[]
 for step in np.arange(1,6,1):
-    img=io.imread(fpath+'%s.png'%str(step))[:,:,:int(3)]
-    fig.add_trace(go.Image(z=img),int(1),int(step))
-    fig.data[step-1].visible=False
-fig.data[0].visible=True
-st="Flower Images' Data"
-for i in range(len(fig.data)):
-    step=dict(method="update",
-              args=[{"visible":[False]*len(fig.data)}])
-    step["args"][0]["visible"][i]=True
-    steps.append(step)
-sliders=[dict(active=0,pad={"t":5},steps=steps)]
-fig.update_layout(width=500,height=300,sliders=sliders,
-                  template='plotly_dark',title_text=st,
-                  title_font=dict(size=15))
-fig.update_xaxes(showticklabels=False).update_yaxes(showticklabels=False)
-fig.show()
+    zf='%s.png'%str(step)
+    input_file=urllib.request.urlopen(fpath+zf)
+    output_file=open(zf,'wb'); 
+    output_file.write(input_file.read())
+    output_file.close(); input_file.close()
+#for step in np.arange(1,6,1):  
+#    zf='%s.png'%str(step)
+#    img=io.imread(zf)[:,:,:int(3)]
+#    fig.add_trace(go.Image(z=img),int(1),int(step))
+#    fig.data[step-1].visible=False
+#fig.data[0].visible=True
+#st="Digit Images' Data"
+#for i in range(len(fig.data)):
+#    step=dict(method="update",
+#              args=[{"visible":[False]*len(fig.data)}])
+#    step["args"][0]["visible"][i]=True
+#    steps.append(step)
+#sliders=[dict(active=0,pad={"t":5},steps=steps)]
+#fig.update_layout(width=500,height=300,sliders=sliders,
+#                  template='plotly_dark',title_text=st,
+#                  title_font=dict(size=15))
+#fig.update_xaxes(showticklabels=False).update_yaxes(showticklabels=False)
+#fig.show()
 </script></div><br/>
       <h1>____</h1>
 SageMath &#38; Python <br/>
