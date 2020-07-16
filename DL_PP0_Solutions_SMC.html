@@ -72,16 +72,16 @@ At the end, we'll get to see the neural network's predictions on the sample imag
 spath='/home/sc_work/.sage/local/lib/python3.7/site-packages'
 import sys; sys.path.append(spath)
 import pandas as pd,numpy as np,pylab as pl
-import keras as ks,tensorflow as tf
+import tensorflow as tf
 import zipfile,h5py,urllib
 import warnings; warnings.filterwarnings('ignore')
 from sklearn.model_selection import train_test_split
-from keras.utils import to_categorical
-from keras.callbacks import ModelCheckpoint
-from keras.models import Sequential,load_model
-from keras.layers import Conv2D,Dense,Dropout
-from keras.layers import Activation,LeakyReLU
-from keras.layers import MaxPooling2D,GlobalMaxPooling2D
+from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.callbacks import ModelCheckpoint
+from tensorflow.keras.models import Sequential,load_model
+from tensorflow.keras.layers import Conv2D,Dense,Dropout
+from tensorflow.keras.layers import Activation,LeakyReLU
+from tensorflow.keras.layers import MaxPooling2D,GlobalMaxPooling2D
 </script></div><br/>      
     <h2>✒️ &nbsp;Step 1. Load and Explore the Data</h2> 
 <div class="linked"><script type="text/x-sage">
@@ -149,7 +149,7 @@ pl.imshow((x_train[n])); pl.show()
     <h2>✒️ &nbsp;Step 4. Define the Model</h2>
 <div class="linked"><script type="text/x-sage">
 i1,i2,i3,i5,i8=int(1),int(2),int(3),int(5),int(8)
-i10,i18,i32,i256=int(10),int(18),int(32),int(256)
+i10,i12,i32,i256=int(10),int(12),int(32),int(256)
 def model():
     dr=float(.25)
     model=Sequential()
@@ -173,7 +173,7 @@ model=model()
 checkpointer=ModelCheckpoint(filepath='weights.flower.hdf5', 
                              verbose=i2,save_best_only=True)
 history=model.fit(x_train,y_train,batch_size=i8,
-                  epochs=i18,verbose=i2,
+                  epochs=i12,verbose=i2,
                   validation_data=(x_valid,y_valid),
                   callbacks=[checkpointer])
 </script></div><br/>
