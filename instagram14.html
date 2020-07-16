@@ -30,11 +30,73 @@
     <h1>____</h1>
 SageMath &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
-
+import numpy as np,pylab as pl
+# functions for neuron construction
+def sigmoid(x): return 1.0/(1+np.exp(-x))
+def sigmoid_derivation(x): return x*(1.0-x)
+# artificial data for the experiment
+X=np.array([[.11,.05,.95],[.09,.03,.08],[.01,.09,.91],
+            [.04,.92,.07],[.05,.02,.04],[.07,.97,.05],
+            [.06,.02,.98],[.02,.06,.03],[.01,.09,.03],
+            [.02,.94,.01],[.06,.03,.95],[.04,.91,.09]])
+Y=np.array([[1,0,1,2,0,2,1,0,1,2,1,2]]).T
+pl.imshow(X.T,cmap=pl.cm.cool); pl.xticks([])
+pl.text(-.3,1,str(Y.T)[2:-2],c='white',fontsize=29)
+pl.title('Real Labels with One Error');
+# the start point for iterations
+synapse0=np.random.randn(3,1); layer0=X
+# the steps of iteration
+for iter in range(100):
+    layer1=sigmoid(np.dot(layer0,synapse0))
+    # finding errors and directions for correction
+    layer1_error=layer1-Y
+    layer1_delta=layer1_error*sigmoid_derivation(layer1)
+    # correction values & coefficients
+    synapse0_derivative=np.dot(layer0.T,layer1_delta)
+    synapse0-=synapse0_derivative
+pl.scatter(list(range(12)),layer1,c=Y,cmap=pl.cm.cool);
+# comparing predictions and real data
+# the error in the start labeling (the 9th image) had been corrected
+def labeling(x):
+    if (x<.7): return 0
+    if (x>.7) and (x<.99): return 1
+    else: return 2
+predict_Y=np.array([[labeling(layer1[i,0]) for i in range(12)]]).T
+pl.imshow(X.T,cmap=pl.cm.cool); pl.xticks([])
+pl.text(-.3,1,str(predict_Y.T)[2:-2],c='white',fontsize=29)
+pl.title('Predicted Labels')
+print(np.hstack((np.hstack((X,Y)),
+                (layer1.round(3)),(predict_Y))))
 </script></div><br/>
 SageMath &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
-
+!python3 -m pip install plotly --user
+spath='/home/sc_work/.sage/local/lib/python3.7/site-packages'
+import sys; sys.path.append(spath)
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import warnings; warnings.filterwarnings('ignore')
+from skimage import io
+import numpy as np
+fpath='https://olgabelitskaya.github.io/new/'
+fig=make_subplots(int(1),int(5)); steps=[]
+for step in np.arange(1,6,1):
+    img=io.imread(fpath+'%s.png'%str(step))[:,:,:int(3)]
+    fig.add_trace(go.Image(z=img),int(1),int(step))
+    fig.data[step-1].visible=False
+fig.data[0].visible=True
+st="Flower Images' Data"
+for i in range(len(fig.data)):
+    step=dict(method="update",
+              args=[{"visible":[False]*len(fig.data)}])
+    step["args"][0]["visible"][i]=True
+    steps.append(step)
+sliders=[dict(active=0,pad={"t":5},steps=steps)]
+fig.update_layout(width=500,height=300,sliders=sliders,
+                  template='plotly_dark',title_text=st,
+                  title_font=dict(size=15))
+fig.update_xaxes(showticklabels=False).update_yaxes(showticklabels=False)
+fig.show()
 </script></div><br/>
       <h1>____</h1>
 SageMath &#38; Python <br/>
