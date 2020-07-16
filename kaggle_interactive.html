@@ -17,16 +17,34 @@
   </style>  
   <body>
     <h1 class='font-effect-3d' 
-        style='font-family:Smokum; color:#ff55ee; font-size:35px;'>
-    SageMathCell for Your Experiments</h1>
+        style='font-family:Smokum; color:slategray; font-size:35px;'>
+    Installation of Additional Packages</h1>
 <div class="linked"><script type="text/x-sage">
-
+!python3 -m pip install --upgrade pip --user
+!python3 -m pip install geopandas --user
+path='/home/sc_work/.sage/local/lib/python3.7/site-packages'
+import sys; sys.path.append(path)
 </script></div><br/>
     <h1 class='font-effect-3d' 
-        style='font-family:Smokum; color:#ff55ee; font-size:35px;'>
-    SageMathCell for Your Experiments</h1>
+        style='font-family:Smokum; color:slategray; font-size:35px;'>
+    Code Lines for Your Experiments</h1>
 <div class="linked"><script type="text/x-sage">
-
+import pandas,geopandas,pylab
+pylab.style.use('seaborn-pastel')
+fpath='https://olgabelitskaya.github.io/map.geojson'
+df=geopandas.GeoDataFrame.from_file(fpath)
+ax=df.boundary.plot(figsize=(9,5),markersize=0,
+                    linewidth=.1,edgecolor='gray')
+footways=df['geometry'][df['highway']=='footway'].loc[2176:]
+geopandas.plotting\
+.plot_linestring_collection(ax,footways,linewidth=.8,
+                            color='steelblue',label='footways')
+df[df['highway']=='street_lamp']\
+.plot(ax=ax,edgecolor='g',markersize=10,label='lamps')
+df[df['highway']=='traffic_signals']\
+.plot(ax=ax,edgecolor='r',markersize=20,label='traffic signals')
+pylab.legend(); pylab.xlim(37.613,37.636)
+pylab.ylim(55.752,55.762); pylab.show()
 </script></div><br/>
   </body>
 </html>
