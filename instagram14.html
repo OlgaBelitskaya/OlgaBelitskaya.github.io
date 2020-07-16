@@ -40,9 +40,9 @@ X=np.array([[.11,.05,.95],[.09,.03,.08],[.01,.09,.91],
             [.06,.02,.98],[.02,.06,.03],[.01,.09,.03],
             [.02,.94,.01],[.06,.03,.95],[.04,.91,.09]])
 Y=np.array([[1,0,1,2,0,2,1,0,1,2,1,2]]).T
-pl.imshow(X.T,cmap=pl.cm.cool); pl.xticks([])
-pl.text(-.3,1,str(Y.T)[2:-2],c='white',fontsize=29)
-pl.title('Real Labels with One Error');
+pl.figure(); pl.imshow(X.T,cmap=pl.cm.cool); pl.xticks([])
+pl.text(-.3,1,str(Y.T)[2:-2],color='white',fontsize=31)
+pl.title('Real Labels with One Error'); pl.show()
 # the start point for iterations
 synapse0=np.random.randn(3,1); layer0=X
 # the steps of iteration
@@ -54,7 +54,6 @@ for iter in range(100):
     # correction values & coefficients
     synapse0_derivative=np.dot(layer0.T,layer1_delta)
     synapse0-=synapse0_derivative
-pl.scatter(list(range(12)),layer1,c=Y,cmap=pl.cm.cool);
 # comparing predictions and real data
 # the error in the start labeling (the 9th image) had been corrected
 def labeling(x):
@@ -62,11 +61,11 @@ def labeling(x):
     if (x>.7) and (x<.99): return 1
     else: return 2
 predict_Y=np.array([[labeling(layer1[i,0]) for i in range(12)]]).T
-pl.imshow(X.T,cmap=pl.cm.cool); pl.xticks([])
-pl.text(-.3,1,str(predict_Y.T)[2:-2],c='white',fontsize=29)
-pl.title('Predicted Labels')
+pl.figure(); pl.imshow(X.T,cmap=pl.cm.cool); pl.xticks([])
+pl.text(-.3,1,str(predict_Y.T)[2:-2],color='white',fontsize=31)
+pl.title('Predicted Labels'); pl.show()
 print(np.hstack((np.hstack((X,Y)),
-                (layer1.round(3)),(predict_Y))))
+                (layer1.round(3)),(predict_Y)))))
 </script></div><br/>
 SageMath &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
