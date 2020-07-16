@@ -166,16 +166,18 @@ for f in ['10.png','24.png']:
     output_file.write(input_file.read())
     output_file.close(); input_file.close() 
 edge=cv2.imread('10.png'); edge2=cv2.imread('24.png');
-edge=cv2.GaussianBlur(edge,(2*3+1,2*3+1),-1)[3:-3,3:-3]
-edge2=cv2.GaussianBlur(edge2,(2*5+1,2*5+1),-1)[5:-5,5:-5]
+edge=cv2.GaussianBlur(edge,(int(2*3+1),int(2*3+1)),-int(1))[3:-3,3:-3]
+edge2=cv2.GaussianBlur(edge2,(int(2*5+1),int(2*5+1)),-int(1))[5:-5,5:-5]
 s1='size: %s, shape: %s, type: %s'%\
 (edge.size,edge.shape,edge.dtype)
 s2='size: %s, shape: %s, type: %s'%\
 (edge2.size,edge2.shape,edge2.dtype)
 gray_edge=cv2.cvtColor(edge,cv2.COLOR_BGR2GRAY)
 gray_edge2=cv2.cvtColor(edge2,cv2.COLOR_BGR2GRAY)
-edges=cv2.Canny(gray_edge,60,230); edge[edges!=0]=(0,0,255)
-edges2=cv2.Canny(gray_edge2,50,120); edge2[edges2!=0]=(0,0,255)
+edges=cv2.Canny(gray_edge,int(60),int(230))
+edge[edges!=int(0)]=(0,0,255)
+edges2=cv2.Canny(gray_edge2,int(50),int(120))
+edge2[edges2!=int(0)]=(0,0,255)
 pylab.figure(figsize=(9,5))
 pylab.subplot(121); pylab.title(s1,fontsize=10,loc='left')
 pylab.imshow(cv2.cvtColor(edge,cv2.COLOR_BGR2RGB))
