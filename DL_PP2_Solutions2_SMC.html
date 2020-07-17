@@ -206,28 +206,28 @@ history_plot(history)
 vgg16model.load_weights(fw)
 vgg16model.evaluate(pvx_test1,y_test1)
 </script></div><br/> 
-<p>ResNet50</p>
+<p>VGG19</p>
 <div class="linked"><script type="text/x-sage">
-from tensorflow.keras.applications.resnet50 import ResNet50
+from tensorflow.keras.applications.vgg19 import VGG19
+vgg19bmodel=VGG19(weights='imagenet',include_top=False)
 n1,n2=1100,110
 x_train1,x_valid1,x_test1,\
 y_train1,y_valid1,y_test1=\
 x_train1[:n1],x_valid1[:n2],x_test1[:n2],\
 y_train1[:n1],y_valid1[:n2],y_test1[:n2]
-RNbmodel=ResNet50(weights='imagenet',include_top=False)
-pvx_train1=RNbmodel.predict(x_train1)
-pvx_valid1=RNbmodel.predict(x_valid1)
-pvx_test1=RNbmodel.predict(x_test1)
+pvx_train1=vgg19bmodel.predict(x_train1)
+pvx_valid1=vgg19bmodel.predict(x_valid1)
+pvx_test1=vgg19bmodel.predict(x_test1)
 pvx_train1=pvx_train1.reshape(-1,1,1,pvx_train1.shape[3])
 pvx_valid1=pvx_valid1.reshape(-1,1,1,pvx_valid1.shape[3])
 pvx_test1=pvx_test1.reshape(-1,1,1,pvx_test1.shape[3])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 sh=pvx_train1.shape[1:]
-def RNmodel():
+def vgg19model():
     model=Sequential()  
     model.add(GlobalAveragePooling2D(input_shape=sh))   
-    model.add(Dense(int(2048)))
+    model.add(Dense(int(1024)))
     model.add(LeakyReLU(alpha=float(.02)))
     model.add(Dropout(float(.25))) 
     model.add(Dense(int(256)))
@@ -235,21 +235,21 @@ def RNmodel():
     model.add(Dropout(float(.25)))
     model.add(Dense(int(33),activation='softmax'))    
     model.compile(loss='categorical_crossentropy',
-                  optimizer='nadam',metrics=['accuracy'])
+                  optimizer='adam',metrics=['accuracy'])
     return model
-RNmodel=RNmodel()
+vgg19model=vgg19model()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,save_best_only=True)
-history=RNmodel.fit(pvx_train1,y_train1, 
-                    validation_data=(pvx_valid1,y_valid1), 
-                    epochs=int(16),batch_size=int(128),verbose=i2, 
-                    callbacks=[checkpointer])
+history=vgg19model.fit(pvx_train1,y_train1, 
+                       validation_data=(pvx_valid1,y_valid1), 
+                       epochs=int(16),batch_size=int(128),verbose=i2, 
+                       callbacks=[checkpointer])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 history_plot(history)
-RNmodel.load_weights(fw)
-RNmodel.evaluate(pvx_test1,y_test1)
+vgg19model.load_weights(fw)
+vgg19model.evaluate(pvx_test1,y_test1)
 </script></div><br/>
   </body>
 </html>      
