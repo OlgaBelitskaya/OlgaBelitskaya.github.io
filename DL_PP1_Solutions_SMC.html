@@ -86,16 +86,14 @@ The Boston housing data was collected in 1978 and each of the <br/>
     <h2>✒️&nbsp;Step 0. Import Libraries and Define Helpful Functions</h2>      
 <div class="linked"><script type="text/x-sage">
 #unlock to install modules
-#!python3 -m pip install keras --user
 #!python3 -m pip install --ignore-installed --upgrade tensorflow==1.14.0
-</script></div><br/>
-<div class="linked"><script type="text/x-sage">
 spath='/home/sc_work/.sage/local/lib/python3.7/site-packages'
 import sys; sys.path.append(spath)
-import pandas as pd,numpy as np,sqlite3
-import seaborn as sn,pylab as pl
-import keras as ks,tensorflow as tf
 import warnings; warnings.filterwarnings('ignore')
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+import pandas as pd,numpy as np,sqlite3
+import seaborn as sn,pylab as pl,tensorflow as tf
 from sklearn.model_selection import train_test_split
 from sklearn import datasets,linear_model,svm
 from sklearn.metrics import mean_squared_error,median_absolute_error,\
@@ -113,14 +111,14 @@ from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.gaussian_process.kernels import WhiteKernel,RationalQuadratic,RBF
 from sklearn.semi_supervised import LabelPropagation,LabelSpreading
 from sklearn.isotonic import IsotonicRegression
-from keras.datasets import boston_housing
-from keras.callbacks import ModelCheckpoint,EarlyStopping
-from keras.callbacks import ReduceLROnPlateau
-from keras.models import Sequential,load_model
-from keras.layers import Dense,LSTM,GlobalAveragePooling1D
-from keras.layers import Activation,Flatten,Dropout,BatchNormalization
-from keras.layers import Conv1D,MaxPooling1D,GlobalMaxPooling1D
-from keras.layers.advanced_activations import PReLU,LeakyReLU
+from tensorflow.keras.datasets import boston_housing
+from tensorflow.keras.callbacks import ModelCheckpoint,EarlyStopping
+from tensorflow.keras.callbacks import ReduceLROnPlateau
+from tensorflow.keras.models import Sequential,load_model
+from tensorflow.keras.layers import \
+Dense,LSTM,GlobalAveragePooling1D,\
+Activation,Flatten,Dropout,BatchNormalization,\
+Conv1D,MaxPooling1D,GlobalMaxPooling1D,PReLU,LeakyReLU
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def connect_to_db(dbf):
