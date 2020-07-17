@@ -71,42 +71,77 @@ print(np.hstack((np.hstack((X,Y)),(layer1.round(3)),(predict_Y))))
 </script></div><br/>
 SageMath &#38; SageMathCell <br/>
 <div class="linked"><script type="text/x-sage">
-!python3 -m pip install plotly --user
+!python3 -m pip install torch --user
 spath='/home/sc_work/.sage/local/lib/python3.7/site-packages'
 import sys; sys.path.append(spath)
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
-import warnings; warnings.filterwarnings('ignore')
-from skimage import io
-import numpy as np,urllib
-fpath='https://olgabelitskaya.github.io/new/'
+import numpy as np,pandas as pd,pylab as pl,torch
+from sklearn.datasets import make_classification
+dev=torch.device("cuda:0" \
+if torch.cuda.is_available() else "cpu")
+class Perceptron():
+    def __init__(self,num_features):
+        self.num_features=num_features
+        self.weights=torch.zeros(num_features,int(1), 
+                                 dtype=torch.float32,device=dev)
+        self.bias=torch.zeros(1,dtype=torch.float32,device=dev)
+    def forward(self,x):
+        values=torch.add(torch.mm(x,self.weights),self.bias)
+        a=torch.ones(values.size()[0],int(1))
+        b=torch.zeros(values.size()[0],int(1))
+        predictions=torch.where(values>float(0.),a,b).float()
+        return predictions        
+    def backward(self,x,y):  
+        predictions=self.forward(x)
+        errors=y-predictions
+        return errors        
+    def train(self,x,y,epochs):
+        for e in range(epochs):            
+            for i in range(y.size()[0]):
+                errors=self.backward(x[i].view(int(1),self.num_features),
+                                     y[i]).view(-int(1))
+                self.weights+=(errors*x[i]).view(self.num_features,int(1))
+                self.bias+=errors                
+    def acc(self,x,y):
+        predictions=self.forward(x).view(-int(1))
+        accuracy=torch.sum(predictions==y).float()/y.size()[0]
+        return accuracy
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-fig=make_subplots(int(1),int(5)); steps=[]
-for step in np.arange(1,6,1):
-    zf='%s.png'%str(step)
-    input_file=urllib.request.urlopen(fpath+zf)
-    output_file=open(zf,'wb'); 
-    output_file.write(input_file.read())
-    output_file.close(); input_file.close()
-#for step in np.arange(1,6,1):  
-#    zf='%s.png'%str(step)
-#    img=io.imread(zf)[:,:,:int(3)]
-#    fig.add_trace(go.Image(z=img),int(1),int(step))
-#    fig.data[step-1].visible=False
-#fig.data[0].visible=True
-#st="Digit Images' Data"
-#for i in range(len(fig.data)):
-#    step=dict(method="update",
-#              args=[{"visible":[False]*len(fig.data)}])
-#    step["args"][0]["visible"][i]=True
-#    steps.append(step)
-#sliders=[dict(active=0,pad={"t":5},steps=steps)]
-#fig.update_layout(width=500,height=300,sliders=sliders,
-#                  template='plotly_dark',title_text=st,
-#                  title_font=dict(size=15))
-#fig.update_xaxes(showticklabels=False).update_yaxes(showticklabels=False)
-#fig.show()
+N=500; n=int(.2*N)
+X,y=make_classification(n_samples=N,n_features=2,
+                        n_redundant=0,n_informative=2)
+mu,std=np.mean(X,axis=0),np.std(X,axis=0)
+X=(X-mu)/std
+X,y=X.astype('float32'),y.astype('int32')
+shuffle_ids=np.arange(N)
+np.random.RandomState(23).shuffle(shuffle_ids)
+X,y=X[shuffle_ids],y[shuffle_ids]
+X_test,X_train=X[:n],X[n:]
+y_test,y_train=y[:n],y[n:]
+model=Perceptron(num_features=2)
+tX_train=torch.tensor(X_train,dtype=torch.float32,
+                      device=dev)
+ty_train=torch.tensor(y_train,dtype=torch.float32,
+                      device=dev)
+model.train(tX_train,ty_train,epochs=int(5))
+tX_test=torch.tensor(X_test,dtype=torch.float32,
+                     device=dev)
+ty_test=torch.tensor(y_test,dtype=torch.float32,
+                     device=dev)
+acc_test=model.acc(tX_test,ty_test)
+print('Test accuracy: %.2f%%'%(acc_test*int(100)))
+W,b=model.weights,model.bias
+x_min=-int(2); x_max=int(2)
+y_min=((-(W[int(0)]*x_min)-b[int(0)])/W[int(1)])
+y_max=((-(W[int(0)]*x_max)-b[int(0)])/W[int(1)])
+fig,ax=pl.subplots(1,2,sharex=True,figsize=(9,3))
+ax[0].plot([x_min,x_max],[y_min,y_max],c='red')
+ax[1].plot([x_min,x_max],[y_min,y_max],c='red')
+ax[0].scatter(X_train[:,0],X_train[:,1],
+              c=y_train,s=10,cmap=pl.cm.cool)
+ax[1].scatter(X_test[:,0], X_test[:,1],
+              c=y_test,s=10,cmap=pl.cm.cool)
+ax[0].grid(); ax[1].grid(); pl.show()
 </script></div><br/>
       <h1>____</h1>
 SageMath &#38; Python <br/>
