@@ -27,6 +27,7 @@
 For this project, I have created the dataset of color images (150x150x3) with traditional patterns.<br/>
 Let's have a look at some decor contours. 
 <div class="linked"><script type="text/x-sage">
+import warnings; warnings.filterwarnings('ignore')
 import pylab; from skimage import io,color,measure
 @interact
 def _vector(file=[1,2,3,4,5],
@@ -35,13 +36,13 @@ def _vector(file=[1,2,3,4,5],
             level=[round(.9-.03*i,2) for i in range(15)]):
     path1='https://olgabelitskaya.github.io/images/'
     path2='01_01_1_00%s'%(file)+'.png'
-    img=io.imread(path1+path2); level=level
-    gray_img=color.colorconv.rgb2grey(img) 
+    img=io.imread(path1+path2); level=float(level)
+    gray_img=color.colorconv.rgb2gray(img) 
     contours=measure.find_contours(gray_img,level)
     n=len(contours); pylab.figure(figsize=(5,5))
     pylab.gca().invert_yaxis()
-    [pylab.plot(contours[i][:,1],contours[i][:,0],lw=.7,
-                color=pylab.get_cmap(cm)(i/n)) 
+    [pylab.plot(contours[i][:,1],contours[i][:,0],
+                lw=.7,color=pylab.get_cmap(cm)(i/n)) 
      for i in range(n)]
     pylab.xticks([]); pylab.yticks([]); pylab.show()
 </script></div><br/> 
@@ -51,7 +52,6 @@ def _vector(file=[1,2,3,4,5],
 #!python3 -m pip install --ignore-installed --upgrade tensorflow==1.14.0
 spath='/home/sc_work/.sage/local/lib/python3.7/site-packages'
 import sys; sys.path.append(spath)
-import warnings; warnings.filterwarnings('ignore')
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 import h5py,urllib,zipfile
