@@ -217,8 +217,8 @@ style_loss=calculate_style_loss(vgg16_layer_dict,style_layers,
 variation_loss=calculate_variation_loss(generated_input)
 ol,sl,vl,st=float(.5),float(1.),float(.1),i2
 loss=ol*original_loss+sl*style_loss+vl*variation_loss    
-gradients=ks.backend.gradients(loss,generated_input)[i0]
-calculate=ks.backend.function([generated_input],[loss,gradients])
+gradients=tkb.gradients(loss,generated_input)[i0]
+calculate=tkb.function([generated_input],[loss,gradients])
 generated_data=preprocess(picture01)
 for i in tqdm(range(st)):
     _,gradients_value=calculate([generated_data])
