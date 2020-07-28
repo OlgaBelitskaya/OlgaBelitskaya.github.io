@@ -40,6 +40,7 @@ import warnings; warnings.filterwarnings('ignore')
 <div class="linked"><script type="text/x-sage">
 import urllib,cv2
 import numpy as np,tensorflow as tf,pylab as pl
+import tensorflow.keras.backend as tkb
 from tqdm import tqdm
 i0,i1,i2,i3=int(0),int(1),int(2),int(3)
 fpath='https://olgabelitskaya.github.io/'
@@ -119,11 +120,11 @@ def calculate_original_loss(layer_dict,original_layer_names):
         layer=layer_dict[name]
         original_features=layer.output[i0,:,:,:]  
         generated_features=layer.output[i2,:,:,:] 
-        loss+=ks.backend.sum(ks.backend.square(generated_features-original_features))
+        loss+=tkb.sum(tkb.square(generated_features-original_features))
     return loss/len(original_layer_names)
 def gram_matrix(x):    
-    features=ks.backend.batch_flatten(ks.backend.permute_dimensions(x,(i2,i0,i1))) 
-    gram=ks.backend.dot(features,ks.backend.transpose(features))
+    features=tkb.batch_flatten(tkb.permute_dimensions(x,(i2,i0,i1))) 
+    gram=tkb.dot(features,tkb.transpose(features))
     return gram
 def get_style_loss(style_features,generated_features,size):
     S=gram_matrix(style_features)
