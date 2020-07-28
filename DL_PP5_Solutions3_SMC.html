@@ -108,12 +108,12 @@ input_tensor2.shape
 </script></div><br/>
     <h2>✒️ &nbsp; VGG16 Usage</h2>    
 <div class="linked"><script type="text/x-sage">
-vgg16_model=ks.applications.vgg16.\
+vgg16_model=tf.keras.applications.vgg16.\
 VGG16(input_tensor=input_tensor2,include_top=False)
 vgg16_layer_dict={layer.name:layer for layer in vgg16_model.layers}
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-style_layers=['block1_conv1','block2_conv1','block3_conv1',
+tyle_layers=['block1_conv1','block2_conv1','block3_conv1',
               'block4_conv1','block5_conv1']
 def calculate_original_loss(layer_dict,original_layer_names):
     loss=float(0)
@@ -121,17 +121,17 @@ def calculate_original_loss(layer_dict,original_layer_names):
         layer=layer_dict[name]
         original_features=layer.output[i0,:,:,:]  
         generated_features=layer.output[i2,:,:,:] 
-        loss+=ks.backend.sum(ks.backend.square(generated_features-original_features))
+        loss+=tkb.sum(tkb.square(generated_features-original_features))
     return loss/len(original_layer_names)
 def gram_matrix(x):    
-    features=ks.backend.batch_flatten(ks.backend.permute_dimensions(x,(i2,i0,i1))) 
-    gram=ks.backend.dot(features,ks.backend.transpose(features))
+    features=tkb.batch_flatten(tkb.permute_dimensions(x,(i2,i0,i1))) 
+    gram=tkb.dot(features,tkb.transpose(features))
     return gram
 def get_style_loss(style_features,generated_features,size):
     S=gram_matrix(style_features)
     G=gram_matrix(generated_features)
     channels=i3
-    return ks.backend.sum(ks.backend.square(S-G))/\
+    return tkb.sum(tkb.square(S-G))/\
           (float(4.)*(channels**i2)*(size**i2))
 def calculate_style_loss(layer_dict,style_layer_names,size):
     loss=float(0)
@@ -142,9 +142,9 @@ def calculate_style_loss(layer_dict,style_layer_names,size):
         loss+=get_style_loss(style_features,generated_features,size) 
     return loss/len(style_layer_names)
 def calculate_variation_loss(x):
-    row_diff=ks.backend.square(x[:,:-i1,:-i1,:]-x[:,i1:,:-i1,:])
-    col_diff=ks.backend.square(x[:,:-i1,:-i1,:]-x[:,:-i1,i1:,:])
-    return ks.backend.sum(ks.backend.pow(row_diff+col_diff,float(1.25)))
+    row_diff=tkb.square(x[:,:-i1,:-i1,:]-x[:,i1:,:-i1,:])
+    col_diff=tkb.square(x[:,:-i1,:-i1,:]-x[:,:-i1,i1:,:])
+    return tkb.sum(tkb.pow(row_diff+col_diff,float(1.25)))
 </script></div><br/>
     <h2>✒️ &nbsp; Generated Images</h2>       
 <div class="linked"><script type="text/x-sage">
@@ -154,8 +154,8 @@ style_loss2=calculate_style_loss(vgg16_layer_dict,style_layers,
 variation_loss2=calculate_variation_loss(generated_input2)
 ol,sl,vl,st=float(.5),float(1.),float(.1),i2
 loss2=ol*original_loss2+sl*style_loss2+vl*variation_loss2    
-gradients2=ks.backend.gradients(loss2,generated_input2)[i0]
-calculate2=ks.backend.function([generated_input2],[loss2,gradients2])
+gradients2=tkb.gradients(loss2,generated_input2)[i0]
+calculate2=tkb.function([generated_input2],[loss2,gradients2])
 generated_data2=preprocess(picture02)
 for i in tqdm(range(st)):
     _,gradients_value2=calculate2([generated_data2])
@@ -207,7 +207,7 @@ original_input,style_input,generated_input=\
 inputs(picture01,pattern01)
 input_tensor=tf.concat([original_input,style_input,
                         generated_input],axis=i0)
-vgg16_model=ks.applications.vgg16.\
+vgg16_model=tf.keras.applications.vgg16.\
 VGG16(input_tensor=input_tensor,include_top=False)
 vgg16_layer_dict={layer.name:layer for layer in vgg16_model.layers}
 
