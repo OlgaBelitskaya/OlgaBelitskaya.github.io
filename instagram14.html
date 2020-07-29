@@ -144,13 +144,27 @@ ax[1].scatter(X_test[:,0], X_test[:,1],
               c=y_test,s=10,cmap=pl.cm.cool)
 ax[0].grid(); ax[1].grid(); pl.show()
 </script></div><br/>
-      <h1>____</h1>
+      <h1>_If you want to process h5 image files</h1>
 SageMath &#38; Python <br/>
-<div class="linked"><script type="text/x-sage">
-
+<div class="sage"><script type="text/x-sage">
+import pandas as pd,numpy as np,pylab as pl
+import zipfile,h5py,urllib
+path='https://olgabelitskaya.github.io/'
+zf='HrseBreedImages.h5.zip'
+input_file=urllib.request.urlopen(path+zf)
+output_file=open(zf,'wb'); 
+output_file.write(input_file.read())
+output_file.close(); input_file.close()
+zipf=zipfile.ZipFile(zf,'r')
+zipf.extractall(''); zipf.close()
+f=h5py.File(zf[:-4],'r'); keys=list(f.keys())
+images=np.array(f[keys[0]])
+labels=np.array(f[keys[1]])
+names=['Akhal-Teke','Appaloosa','Orlov Trotter',
+       'Vladimir Heavy Draft','Percheron']
 </script></div><br/>
 SageMath &#38; Python <br/>
-<div class="linked"><script type="text/x-sage">
+<div class="sage"><script type="text/x-sage">
 
 </script></div><br/>
       <h1>____</h1>
