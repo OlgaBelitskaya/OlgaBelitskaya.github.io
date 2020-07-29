@@ -147,8 +147,7 @@ ax[0].grid(); ax[1].grid(); pl.show()
       <h1>If you want to process h5 image files</h1>
 SageMath &#38; Python <br/>
 <div class="sage"><script type="text/x-sage">
-import pandas as pd,numpy as np,pylab as pl
-import zipfile,h5py,urllib
+import numpy as np,pylab as pl,zipfile,h5py,urllib
 path='https://olgabelitskaya.github.io/'
 zf='HorseBreedImages.h5.zip'
 input_file=urllib.request.urlopen(path+zf)
@@ -162,6 +161,17 @@ images=np.array(f[keys[0]])
 labels=np.array(f[keys[1]])
 names=['Akhal-Teke','Appaloosa','Orlov Trotter',
        'Vladimir Heavy Draft','Percheron']
+st1='<p>Images => array shape: %s</p>'
+st2='<p>Labels => array shape: %s</p>'
+pretty_print(html(st1%str(images.shape)))
+pretty_print(html(st2%str(labels.shape)))
+fig=pl.figure(figsize=(10,4))
+n=randint(0,labels.shape[0]-8)
+for i in range(n,n+8):
+    ax=fig.add_subplot(2,4,i-n+1,\
+    xticks=[],yticks=[],title=names[labels[i]])
+    ax.imshow((images[i]))
+pl.show()
 </script></div><br/>
 SageMath &#38; Python <br/>
 <div class="sage"><script type="text/x-sage">
