@@ -169,7 +169,7 @@ pretty_print(html(st2%str(labels.shape)))
 fig=pl.figure(figsize=(10,4))
 n=randint(0,labels.shape[0]-8)
 for i in range(n,n+8):
-    ax=fig.add_subplot(2,4,i-n+1,\
+from torch.utils.data import Dataset as tds1,\
     xticks=[],yticks=[],title=names[labels[i]])
     ax.imshow((images[i]))
 pl.show()
@@ -180,6 +180,7 @@ SageMath &#38; Python <br/>
 #!python3 -m pip install torch --user
 spath='/home/sc_work/.sage/local/lib/python3.7/site-packages'
 import sys; sys.path.append(spath); import torch
+from torch.utils.data import Dataset as tds
 class TData(tds):
     def __init__(self,x,y):   
         self.x=torch.tensor(x,dtype=torch.float32)
@@ -212,7 +213,7 @@ names=['Kumato','Beefsteak','Tigerella',
        'German Orange Strawberry','Supersweet 100']
 num_classes=len(names)
 x_test=np.array(f[keys[0]])
-y_test=np.array(f[keys[1]],dtype=np.float32)
+y_test=np.array(f[keys[1]],dtype=np.int32)
 </script></div><br/>
 SageMath &#38; R <br/>
 <div class="sage_r"><script type="text/x-sage">
