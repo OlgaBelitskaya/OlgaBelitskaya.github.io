@@ -174,13 +174,37 @@ for i in range(n,n+8):
     ax.imshow((images[i]))
 pl.show()
 </script></div><br/>
+    <h1>If you want to build datasets with PyTorch</h1>
 SageMath &#38; Python <br/>
-<div class="sage"><script type="text/x-sage">
+<div class="linked"><script type="text/x-sage">
+#!python3 -m pip install torch --user
+spath='/home/sc_work/.sage/local/lib/python3.7/site-packages'
+import sys; sys.path.append(spath)
 
 </script></div><br/>
 SageMath &#38; Python <br/>
-<div class="sage"><script type="text/x-sage">
-
+<div class="linked"><script type="text/x-sage">
+import numpy as np,pylab as pl,zipfile,h5py,urllib,pytorch
+path='https://olgabelitskaya.github.io/'
+zf='TomatoCultivarImages.h5.zip'
+input_file=urllib.request.urlopen(path+zf)
+output_file=open(zf,'wb'); 
+output_file.write(input_file.read())
+output_file.close(); input_file.close()
+zipf=zipfile.ZipFile(zf,'r')
+zipf.extractall(''); zipf.close()
+f=h5py.File(zf[:-4],'r'); keys=list(f.keys())
+images=np.array(f[keys[0]])
+labels=np.array(f[keys[1]])
+names=['Kumato','Beefsteak','Tigerella',
+       'Roma','Japanese Black Trifele',
+       'Yellow Pear','Sun Gold','Green Zebra',
+       'Cherokee Purple','Oxheart','Blue Berries',
+       'San Marzano','Banana Legs',
+       'German Orange Strawberry','Supersweet 100']
+num_classes=len(names)
+x_test=np.array(f[keys[0]])
+y_test=np.array(f[keys[1]],dtype=np.float32)
 </script></div><br/>
 SageMath &#38; R <br/>
 <div class="sage_r"><script type="text/x-sage">
