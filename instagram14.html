@@ -183,8 +183,6 @@ import sys; sys.path.append(spath); import torch
 from torch.utils.data import Dataset as tds
 from torch.utils.data import DataLoader as tdl
 import numpy as np,pylab as pl,zipfile,h5py,urllib
-dev=torch.device("cuda:0" \
-if torch.cuda.is_available() else "cpu")
 from IPython.core.magic import register_line_magic
 class TData(tds):
     def __init__(self,x,y):   
@@ -206,7 +204,7 @@ def display_examples(data):
             ax=fig.add_subplot(1,5,i-n+1,\
             xticks=[],yticks=[],title=names[labels[i].item()])
             ax.imshow(np.transpose(images[i],(1,2,0)))
-        break
+        pl.show(); break
 </script></div><br/>
 SageMath &#38; Python <br/>
 <div class="linked"><script type="text/x-sage">
@@ -232,7 +230,7 @@ x_test=np.transpose(x_test,(0,3,1,2))
 print(x_test.mean(),x_test.std())
 test=TData(x_test,y_test)
 dataloaders={'test':tdl(dataset=test,shuffle=True, 
-                        batch_size=batch_size)
+                        batch_size=batch_size)}
 %display_examples test
 </script></div><br/>
 SageMath &#38; R <br/>
