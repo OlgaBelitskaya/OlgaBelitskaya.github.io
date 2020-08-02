@@ -182,6 +182,9 @@ spath='/home/sc_work/.sage/local/lib/python3.7/site-packages'
 import sys; sys.path.append(spath); import torch
 from torch.utils.data import Dataset as tds
 import numpy as np,pylab as pl,zipfile,h5py,urllib
+dev=torch.device("cuda:0" \
+if torch.cuda.is_available() else "cpu")
+from IPython.core.magic import register_line_magic
 class TData(tds):
     def __init__(self,x,y):   
         self.x=torch.tensor(x,dtype=torch.float32)
@@ -191,6 +194,18 @@ class TData(tds):
         return img,lbl
     def __len__(self):
         return self.y.shape[0]
+@register_line_magic
+def display_examples(data):
+    for images,labels in dataloaders[data]:  
+        print('Image dimensions: %s'%str(images.shape))
+        print('Label dimensions: %s'%str(labels.shape))
+        n=np.random.randint(1,3)
+        fig=pl.figure(figsize=(10,4))
+        for i in range(n,n+5):
+            ax=fig.add_subplot(1,5,i-n+1,\
+            xticks=[],yticks=[],title=names[labels[i].item()])
+            ax.imshow(np.transpose(images[i],(1,2,0)))
+        break
 </script></div><br/>
 SageMath &#38; Python <br/>
 <div class="linked"><script type="text/x-sage">
@@ -217,6 +232,7 @@ print(x_test.mean(),x_test.std())
 test=TData(x_test,y_test)
 dataloaders={'test':tdl(dataset=test,shuffle=True, 
                         batch_size=batch_size)
+%display_examples test
 </script></div><br/>
 SageMath &#38; R <br/>
 <div class="sage_r"><script type="text/x-sage">
