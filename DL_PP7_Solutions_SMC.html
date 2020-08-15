@@ -299,8 +299,8 @@ def train_run(epochs):
 <div class="linked"><script type="text/x-sage">
 num_classes=int(10)
 tmodel.classifier[6]=tnn.Sequential(
-    tnn.Linear(int(4096),int(256)),tnn.ReLU(),
-    tnn.Dropout(float(.5)),tnn.Linear(int(256),num_classes))
+    tnn.Linear(int(4096),int(128)),tnn.ReLU(),
+    tnn.Dropout(float(.5)),tnn.Linear(int(128),num_classes))
 tmodel=tmodel.to(dev)
 optimizer=torch.optim.Adam(tmodel.parameters())
 %train_run 1
@@ -316,7 +316,23 @@ with torch.set_grad_enabled(False):
     print('test acc: %.2f%%'\
           %model_acc(tmodel,dataloaders['test']))
 </script></div><br/>
-    <h2>✒️ &nbsp; Step 6. </h2>
+    <h2>✒️ &nbsp; Step 6. Models' Predictions</h2>
+<div class="linked"><script type="text/x-sage">
+y_test_predict=kmodel.predict_classes(x_test)
+fig=pl.figure(figsize=(6,2))
+randch=np.random.choice(x_test.shape[0],
+                        size=6,replace=False)
+for i,idx in enumerate(randch):
+    ax=fig.add_subplot(2,3,i+1,xticks=[],yticks=[])
+    ax.imshow(np.squeeze(x_test[idx]))
+    pred_idx=y_test_predict[idx]
+    true_idx=np.argmax(y_test[idx])
+    ax.set_title("{} ({})".format(names[pred_idx],
+                                  names[true_idx]),
+                 color=("#aa33ff" if pred_idx==true_idx 
+                        else "darkred"))
+pl.show()
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
 </script></div><br/>
