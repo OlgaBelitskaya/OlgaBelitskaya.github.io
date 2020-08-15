@@ -111,8 +111,11 @@ for i in range(n,n+5):
     title=names[y_train[i]])
     ax.imshow((x_train[i]))
 pl.show()
-img_size=x_train.shape[2]
-n=int(len(x_test)/2)
+img_size=int(64); n=int(len(x_test)/2)
+x_train=timage.resize(x_train,[img_size,img_size])
+x_train=x_train.eval(session=tf.compat.v1.Session())
+x_test=timage.resize(x_test,[img_size,img_size])
+x_test=x_test.eval(session=tf.compat.v1.Session())
 x_valid,y_valid=x_test[:n],y_test[:n]
 x_test,y_test=x_test[n:],y_test[n:]
 df=pd.DataFrame([[x_train.shape,x_valid.shape,x_test.shape],
@@ -135,19 +138,13 @@ class TData(tds):
     def __len__(self):
         return self.y.shape[0]
 batch_size2=int(8); img_size2=int(64)
-x_train2=timage.resize(x_train,[img_size2,img_size2])
-x_train2=x_train2.eval(session=tf.compat.v1.Session())
-n_train=batch_size2*(x_train2.shape[0]//batch_size2)
-x_train2=np.transpose(x_train2,(0,3,1,2))[:n_train]
+n_train=batch_size2*(x_train.shape[0]//batch_size2)
+x_train2=np.transpose(x_train,(0,3,1,2))[:n_train]
 print(x_train2.mean(),x_train2.std())
-x_valid2=timage.resize(x_valid,[img_size2,img_size2])
-x_valid2=x_valid2.eval(session=tf.compat.v1.Session())
-n_valid=batch_size2*(x_valid2.shape[0]//batch_size2)
-x_valid2=np.transpose(x_valid2,(0,3,1,2))[:n_valid]
-x_test2=timage.resize(x_test,[img_size2,img_size2])
-x_test2=x_test2.eval(session=tf.compat.v1.Session())
-n_test=batch_size2*(x_test2.shape[0]//batch_size2)
-x_test2=np.transpose(x_test2,(0,3,1,2))[:n_test]
+n_valid=batch_size2*(x_valid.shape[0]//batch_size2)
+x_valid2=np.transpose(x_valid,(0,3,1,2))[:n_valid]
+n_test=batch_size2*(x_test.shape[0]//batch_size2)
+x_test2=np.transpose(x_test,(0,3,1,2))[:n_test]
 random_seed=23
 train2=TData(x_train2,y_train[:n_train])
 valid2=TData(x_valid2,y_valid[:n_valid])
@@ -221,7 +218,19 @@ def history_plot(fit_history):
     pl.title('Accuracy'); pl.show()
 </script></div><br/>      
 <div class="linked"><script type="text/x-sage">
-
+fw='weights.best.hdf5'
+early_stopping=tkc.EarlyStopping(monitor='val_loss',
+                                 patience=int(20),verbose=int(2))
+checkpointer=tkc.ModelCheckpoint(filepath=fw,verbose=int(2),
+                                 save_best_only=True)
+lr_reduction=tkc.ReduceLROnPlateau(monitor='val_loss',verbose=int(2),
+                                   patience=int(5),factor=float(.8))
+history=model.fit(x_train,y_train,epochs=int(7),
+                  batch_size=int(16),verbose=int(2),
+                  validation_data=(x_valid,y_valid),
+                  callbacks=[checkpointer,
+                             early_stopping,
+                             lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
@@ -302,9 +311,8 @@ optimizer=torch.optim.Adam(tmodel.parameters())
 <div class="linked"><script type="text/x-sage">
 tmodel.eval()
 with torch.set_grad_enabled(False):
-    print('train acc: %.2f%% || test acc: %.2f%%'%\
-          (model_acc(tmodel,dataloaders['train']),
-           model_acc(tmodel,dataloaders['test'])))
+    print('test acc: %.2f%%'\
+          %model_acc(tmodel,dataloaders['test']))
 </script></div><br/>
     <h2>✒️ &nbsp; Step 6. </h2>
 <div class="linked"><script type="text/x-sage">
