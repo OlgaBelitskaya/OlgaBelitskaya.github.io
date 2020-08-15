@@ -58,14 +58,24 @@ At the end, we'll get to see neural network's predictions on the sample images.<
 <div class="linked"><script type="text/x-sage">
 #unlock to install additional modules
 #!python3 -m pip install --ignore-installed --upgrade tensorflow==1.14.0
+#!python3 -m pip install torch 
 spath='/home/sc_work/.sage/local/lib/python3.7/site-packages'
 import sys; sys.path.append(spath)
 import warnings; warnings.filterwarnings('ignore')
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-import pandas as pd,numpy as np,pylab as pl
-import tensorflow as tf
-import zipfile,h5py,urllib
+import h5py,urllib,torch,zipfile
+import tensorflow as tf,pylab as pl
+import pandas as pd,numpy as np
+import tensorflow.image as timage
+from torch.utils.data import DataLoader as tdl
+from torch.utils.data import Dataset as tds
+from torchvision import transforms,utils,models
+import torch.nn.functional as tnnf
+import torch.nn as tnn
+dev=torch.device("cuda:0" \
+if torch.cuda.is_available() else "cpu")
+from IPython.core.magic import register_line_magic
 </script></div><br/>      
     <h2>✒️ &nbsp; Step 1. Load and Explore the Data</h2> 
 <div class="linked"><script type="text/x-sage">
@@ -80,6 +90,7 @@ zipf.extractall(''); zipf.close()
 f=h5py.File(zf[:-4],'r')
 keys=list(f.keys()); print(keys)
 </script></div><br/>
+    <h2>✒️ &nbsp; Step 2. Data Processing</h2>  
 <div class="linked"><script type="text/x-sage">
 x_test=np.array(f[keys[0]])
 y_test=np.array(f[keys[1]])
@@ -88,7 +99,7 @@ y_train=np.array(f[keys[3]])
 names=['Akhal-Teke','Appaloosa','Orlov Trotter',
        'Vladimir Heavy Draft','Percheron',
        'Arabian','Friesian']
-fig=pl.figure(figsize=(10,3))
+fig=pl.figure(figsize=(10,2))
 n=randint(0,y_train.shape[0]-5)
 for i in range(n,n+5):
     ax=fig.add_subplot(1,5,i-n+1,\
@@ -109,7 +120,35 @@ df=pd.DataFrame([[x_train.shape,x_valid.shape,x_test.shape],
                         "labels' shape",'label type'])
 df
 </script></div><br/>
-    <h2>✒️ &nbsp; Step 2. </h2>      
+<div class="linked"><script type="text/x-sage">      
+class TData(tds):
+    def __init__(self,x,y):   
+        self.x=torch.tensor(x,dtype=torch.float32)
+        self.y=torch.tensor(y,dtype=torch.int32)
+    def __getitem__(self,index):
+        img,lbl=self.x[index],self.y[index]
+        return img,lbl
+    def __len__(self):
+        return self.y.shape[0]
+batch_size2=16; img_size2=64
+x_train2=timage.resize(x_train,[img_size2,img_size2])
+x_train2=np.transpose(x_train2.numpy(),(0,3,1,2))
+print(x_train2.mean(),x_train2.std())
+x_valid2=timage.resize(x_valid,[img_size2,img_size2])
+x_valid2=np.transpose(x_valid2.numpy(),(0,3,1,2))
+x_test2=timage.resize(x_test,[img_size2,img_size2])
+x_test2=np.transpose(x_test2.numpy(),(0,3,1,2))
+random_seed=23
+train2=TData(x_train2,y_train)
+valid2=TData(x_valid2,y_valid)
+test2=TData(x_test2,y_test)
+dataloaders={'train':tdl(dataset=train2,shuffle=True, 
+                         batch_size=batch_size2), 
+             'valid':tdl(dataset=valid2,shuffle=True, 
+                         batch_size=batch_size2),
+             'test':tdl(dataset=test2,shuffle=True, 
+                        batch_size=batch_size2)}
+</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
 </script></div><br/>
