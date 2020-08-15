@@ -96,11 +96,11 @@ def kmeans_clusters(c):
 %kmeans_clusters 7
 </script></div><br/> 
 <div class="linked"><script type="text/x-sage">
-pl.figure(figsize=(6,3))
+pl.figure(figsize=(6,4))
 for i in range(n_clusters):
     color=pl.cm.hsv(float(i)/n_clusters)
     pl.scatter(X[y_km==i,0],X[y_km==i,1],
-               s=30,color=color,marker='v',
+               s=10,color=color,marker='v',
                edgecolor='#aa33ff',
                label='cluster %d'%i)
 pl.scatter(km.cluster_centers_[:,0],
@@ -126,7 +126,7 @@ def silhouette_plots(n):
     svalues=sme.\
     silhouette_samples(X,y_km,metric='euclidean')
     y_ax_lower,y_ax_upper=0,0; yticks=[]
-    pl.figure(figsize=(6,3))
+    pl.figure(figsize=(6,4))
     for i,c in enumerate(labels):
         c_svalues=svalues[y_km==c]
         c_svalues.sort()
@@ -222,12 +222,13 @@ for c in range(5):
         color=pl.cm.cool(.4*(i+1))
         ax[c].scatter(X3[py3[c]==i,0],
                       X3[py3[c]==i,1],
-               s=30,color=color,marker='v',
+               s=10,color=color,marker='v',
                edgecolor='#aa33ff',
                label='cluster %d'%i)
     ax[c].legend(scatterpoints=1)
     ax[c].set_xticks([]); ax[c].set_yticks([])
-    ax[c].set_title(cl[c]); 
+    ax[c].set_title(cl[c])
+pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 dhtml('TSNE & Clustering</br>')
@@ -236,7 +237,7 @@ X4_emb=sma.TSNE(n_components=2,learning_rate=700.)\
 .fit_transform(X4)
 x_min,x_max=np.min(X4_emb,0),np.max(X4_emb,0)
 X4_emb=(X4_emb-x_min)/(x_max-x_min)
-f,ax=pl.subplots(1,figsize=(7,7))
+f,ax=pl.subplots(1,figsize=(6,6))
 pl.axis("off")
 for i in range(X4_emb.shape[0]):
     pl.text(X4_emb[i,0],X4_emb[i,1],str(y4[i]),
