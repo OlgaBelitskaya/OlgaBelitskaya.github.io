@@ -81,25 +81,33 @@ f=h5py.File(zf[:-4],'r')
 keys=list(f.keys()); print(keys)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-test_images=np.array(f[keys[0]])
-test_labels=np.array(f[keys[1]])
-train_images=np.array(f[keys[2]])
-train_labels=np.array(f[keys[3]])
+x_test=np.array(f[keys[0]])
+y_test=np.array(f[keys[1]])
+x_train=np.array(f[keys[2]])
+y_train=np.array(f[keys[3]])
 names=['Akhal-Teke','Appaloosa','Orlov Trotter',
        'Vladimir Heavy Draft','Percheron',
        'Arabian','Friesian']
-st1='<p>Train images => array shape: %s</p>'
-st2='<p>Train labels => array shape: %s</p>'
-pretty_print(html(st1%str(train_images.shape)))
-pretty_print(html(st2%str(train_labels.shape)))
 fig=pl.figure(figsize=(10,3))
-n=randint(0,train_labels.shape[0]-5)
+n=randint(0,y_train.shape[0]-5)
 for i in range(n,n+5):
     ax=fig.add_subplot(1,5,i-n+1,\
     xticks=[],yticks=[],\
-    title=names[train_labels[i]])
-    ax.imshow((train_images[i]))
+    title=names[y_train[i]])
+    ax.imshow((x_train[i]))
 pl.show()
+img_size=x_train.shape[2]
+n=int(len(x_test)/2)
+x_valid,y_valid=x_test[:n],y_test[:n]
+x_test,y_test=x_test[n:],y_test[n:]
+df=pd.DataFrame([[x_train.shape,x_valid.shape,x_test.shape],
+                 [x_train.dtype,x_valid.dtype,x_test.dtype],
+                 [y_train.shape,y_valid.shape,y_test.shape],
+                 [y_train.dtype,y_valid.dtype,y_test.dtype]],
+                 columns=['train','valid','test'],
+                 index=["images' shape",'image type',
+                        "labels' shape",'label type'])
+df
 </script></div><br/>
     <h2>✒️ &nbsp; Step 2. </h2>      
 <div class="linked"><script type="text/x-sage">
