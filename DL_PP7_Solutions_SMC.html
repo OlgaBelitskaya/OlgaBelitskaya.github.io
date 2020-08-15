@@ -26,7 +26,7 @@
 <a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a><br/>
 In this project, we'll classify images from the dataset
 <a href="https://www.kaggle.com/olgabelitskaya/horse-breeds">Horse Breeds</a>.<br/>
-The content is about 500 images (256x256x3) with 7 horse breeds <br/>
+The content is about 500 images (160x160x3) with 7 horse breeds <br/>
 stored in the file <i>HorseBreedImages.h5.zip</i>.<br/>
 In the original dataset, photo files are in the .png format and they are labeled by file prefixes.<br/>
 <div class="linked"><script type="text/x-sage">
@@ -81,7 +81,25 @@ f=h5py.File(zf[:-4],'r')
 keys=list(f.keys()); print(keys)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+test_images=np.array(f[keys[0]])
+test_labels=np.array(f[keys[1]])
+train_images=np.array(f[keys[2]])
+train_labels=np.array(f[keys[3]])
+names=['Akhal-Teke','Appaloosa','Orlov Trotter',
+       'Vladimir Heavy Draft','Percheron',
+       'Arabian','Friesian']
+st1='<p>Train images => array shape: %s</p>'
+st2='<p>Train labels => array shape: %s</p>'
+pretty_print(html(st1%str(train_images.shape)))
+pretty_print(html(st2%str(train_labels.shape)))
+fig=pl.figure(figsize=(10,3))
+n=randint(0,train_labels.shape[0]-5)
+for i in range(n,n+5):
+    ax=fig.add_subplot(1,5,i-n+1,\
+    xticks=[],yticks=[],\
+    title=names[train_labels[i]])
+    ax.imshow((train_images[i]))
+pl.show()
 </script></div><br/>
     <h2>✒️ &nbsp; Step 2. </h2>      
 <div class="linked"><script type="text/x-sage">
