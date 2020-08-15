@@ -47,27 +47,24 @@ N=1000; n_clusters=7
 X,y=sds.make_blobs(n_samples=N,n_features=2, 
                    centers=n_clusters,cluster_std=.7, 
                    shuffle=True,random_state=0)
-pl.figure(figsize=(5,5))
+pl.figure(figsize=(2,2))
 pl.scatter(X[:,0],X[:,1],
            c='white',marker='v',
-           edgecolor='#aa33ff',s=30)
-pl.grid(); pl.tight_layout()
-pl.title('Artificial Data'); pl.show()
+           edgecolor='#aa33ff',s=10)
+pl.grid(); pl.title('Artificial Data'); pl.show()
 variables=['a','b','c']
 labels=['id'+str(i) for i in range(1,10)]
 X2=np.random.random_sample([9,3])*10
 df=pd.DataFrame(X2,columns=variables,index=labels)
-pl.figure(figsize=(5,5))
-df.plot(kind='barh',cmap='cool')
-pl.title('Artificial Data2'); pl.show()
+df.plot(kind='barh',cmap='cool',figsize=(2,2))
+pl.title('Artificial Data 2'); pl.show()
 X3,y3=sds.make_moons(n_samples=500,noise=.1,
                      random_state=0)
-pl.figure(figsize=(5,5))
+pl.figure(figsize=(2,2))
 pl.scatter(X3[:,0],X3[:,1],
            c='white',marker='v',
-           edgecolor='#aa33ff',s=30)
-pl.tight_layout(); pl.grid()
-pl.title('Artificial Data3'); pl.show()
+           edgecolor='#aa33ff',s=10)
+pl.grid(); pl.title('Artificial Data 3'); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 digits=sds.load_digits()
@@ -85,8 +82,18 @@ pl.title('8x8 pixel images of digits')
 pl.xticks([]); pl.yticks([]); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
-
+dhtml('Clustering')
+km,y_km=[],[]
+@register_line_magic
+def kmeans_clusters(c):
+    n_clusters=int(c)
+    global km,y_km
+    km=scl.KMeans(n_clusters=n_clusters,
+                  init='k-means++',n_init=10,
+                  max_iter=500,tol=1e-04,
+                  random_state=0)
+    y_km=km.fit_predict(X)
+%kmeans_clusters 7
 </script></div><br/> 
 <div class="linked"><script type="text/x-sage">
 
