@@ -100,7 +100,7 @@ pl.figure(figsize=(6,4))
 for i in range(n_clusters):
     color=pl.cm.hsv(float(i)/n_clusters)
     pl.scatter(X[y_km==i,0],X[y_km==i,1],
-               s=10,color=color,marker='v',
+               s=15,color=color,marker='v',
                edgecolor='#aa33ff',
                label='cluster %d'%i)
 pl.scatter(km.cluster_centers_[:,0],
@@ -108,7 +108,7 @@ pl.scatter(km.cluster_centers_[:,0],
            s=100, marker='*',c='black',
            edgecolor='#aa33ff',label='centroids')
 pl.legend(scatterpoints=1); pl.show()
-iner=[]; pl.figure(figsize=(6,3))
+iner=[]; pl.figure(figsize=(6,4))
 for i in range(1,12):
     km=scl.KMeans(n_clusters=i,init='k-means++',
                   n_init=10,max_iter=500, 
@@ -216,18 +216,19 @@ cl=['KMeans','Agglomerative','Spectral',
 py3=[y3_km,y3_ac,y3_sp,y3_db,y3_op]
 </script></div><br/> 
 <div class="linked"><script type="text/x-sage">
-f,ax=pl.subplots(5,1,figsize=(3,9))
-for c in range(5):
-    for i in np.unique(py3[c]):
-        color=pl.cm.cool(.4*(i+1))
-        ax[c].scatter(X3[py3[c]==i,0],
-                      X3[py3[c]==i,1],
-               s=10,color=color,marker='v',
-               edgecolor='#aa33ff',
-               label='cluster %d'%i)
-    ax[c].legend(scatterpoints=1)
-    ax[c].set_xticks([]); ax[c].set_yticks([])
-    ax[c].set_title(cl[c])
+f,ax=pl.subplots(3,2,figsize=(6,6))
+for c in range(6):
+    if c!=5:
+        for i in np.unique(py3[c]):
+            color=pl.cm.cool(.4*(i+1))
+            ax[c//2,c%2].scatter(X3[py3[c]==i,0],
+                                 X3[py3[c]==i,1],
+            s=15,color=color,marker='v',
+            edgecolor='#aa33ff',label='cluster %d'%i)
+        ax[c//2,c%2].legend(scatterpoints=1)
+        ax[c//2,c%2].set_title(cl[c])
+    ax[c//2,c%2].set_xticks([])
+    ax[c//2,c%2].set_yticks([])
 pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
