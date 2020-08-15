@@ -12,16 +12,46 @@
     </script>
   </head>
   <style>
-  @import url('https://fonts.googleapis.com/css?family=Smokum');
-  h1{color:#ee6611; font-family:'Smokum'; text-shadow:4px 4px 4px #aaa;}
+  @import url('https://fonts.googleapis.com/css?family=Akronim');
+  h1{color:#aa33ff; font-family:'Akronim'; text-shadow:4px 4px 4px #aaa;}
   .sagecell .CodeMirror-scroll {min-height:3em; max-height:30em;}
   body {margin:5px 5px 5px 15px;}
   </style>  
   <body>
     <h1>SageMathCell for Your Experiments</h1>
 <div class="linked"><script type="text/x-sage">
-
-
+from IPython.display import display,HTML
+def dhtml(str):
+    display(HTML("""<style>
+    @import 'https://fonts.googleapis.com/css?family=Akronim&effect=3d';      
+    </style><h1 class='font-effect-3d' 
+    style='font-family:Akronim; color:#aa33ff; font-size:35px;'>
+    %s</h1>"""%str))
+dhtml('Code Modules & Settings')
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+import warnings,time
+warnings.filterwarnings('ignore')
+import sklearn.datasets as sds
+import sklearn.cluster as scl
+import sklearn.metrics as sme
+import sklearn.manifold as sma
+import numpy as np,pandas as pd,pylab as pl
+from IPython.core.magic import register_line_magic
+from scipy.spatial.distance import pdist,squareform
+from scipy.cluster.hierarchy import linkage,dendrogram
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+dhtml('Data</br>')
+N=1000; n_clusters=7
+X,y=sds.make_blobs(n_samples=N,n_features=2, 
+                   centers=n_clusters,cluster_std=.7, 
+                   shuffle=True,random_state=0)
+pl.scatter(X[:,0],X[:,1],
+           c='white',marker='v',
+           edgecolor='#aa33ff',s=30)
+pl.grid(); pl.tight_layout()
+pl.title('Artificial Data'); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
@@ -30,7 +60,7 @@
 <div class="linked"><script type="text/x-sage">
 
 
-</script></div><br/>
+</script></div><br/> 
 <div class="linked"><script type="text/x-sage">
 
 
