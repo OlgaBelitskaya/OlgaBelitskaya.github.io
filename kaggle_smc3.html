@@ -246,12 +246,30 @@ pl.title("t-SNE embedding %f s"%(time.time()-t0))
 pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
-
-</script></div><br/>
-<div class="linked"><script type="text/x-sage">
-
-
+n_clusters=10
+km=scl.KMeans(n_clusters=n_clusters,
+              init='k-means++',n_init=10,
+              max_iter=500,tol=1e-05,
+              random_state=0)
+y4_km=km.fit_predict(X4_emb)
+labs=[int(np.median(y4[np.where([y4_km==i])[1]]))
+      for i in range(10)]
+rd=dict(zip(list(range(10)),labs))
+cl=np.array([rd.get(x,x) for x in y4_km],
+                dtype='int8')
+f,ax=pl.subplots(1,figsize=(6,6))
+for i in range(n_clusters):
+    color=pl.cm.hsv(float(i)/n_clusters)
+    pl.scatter(X4_emb[cl==i,0],
+               X4_emb[cl==i,1],
+               s=10,color=color,
+               marker='$%d$'%i,
+               label='cluster %d'%i)
+pl.scatter(km.cluster_centers_[:,0],
+           km.cluster_centers_[:,1],
+           s=100, marker='*',c='black',
+           edgecolor='#aa33ff',label='centroids')
+pl.legend(scatterpoints=1); pl.show()
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
 
