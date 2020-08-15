@@ -177,7 +177,28 @@ def display_examples(data):
 </script></div><br/>
     <h2>✒️ &nbsp; Step 3. Keras</h2>
 <div class="linked"><script type="text/x-sage">
-
+def model(leaky_alpha):
+    model=Sequential()
+    model.add(tkl.Conv2D(int(32),(int(5),int(5)),
+                         padding='same', 
+                         input_shape=x_train.shape[int(1):]))
+    model.add(tkl.LeakyReLU(alpha=leaky_alpha))    
+    model.add(tkl.MaxPooling2D(pool_size=(int(2),int(2))))
+    model.add(tkl.Dropout(float(.25)))
+    model.add(tkl.Conv2D(int(96),(int(5),int(5))))
+    model.add(tkl.LeakyReLU(alpha=leaky_alpha))    
+    model.add(tkl.MaxPooling2D(pool_size=(int(2),int(2))))
+    model.add(tkl.Dropout(float(.25)))   
+    model.add(tkl.GlobalMaxPooling2D())     
+    model.add(tkl.Dense(int(512)))
+    model.add(tkl.LeakyReLU(alpha=leaky_alpha))
+    model.add(tkl.Dropout(float(.25)))     
+    model.add(tkl.Dense(int(7)))
+    model.add(Activation('softmax'))   
+    model.compile(loss='sparse_categorical_crossentropy',
+                  optimizer='nadam',metrics=['accuracy'])   
+    return model
+model=model(float(.005))
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
