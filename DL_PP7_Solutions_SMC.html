@@ -174,7 +174,7 @@ def display_examples(data):
 </script></div><br/>
     <h2>✒️ &nbsp; Step 3. Keras</h2>
 <div class="linked"><script type="text/x-sage">
-def model(leaky_alpha):
+def kmodel(leaky_alpha):
     model=Sequential()
     model.add(tkl.Conv2D(int(32),(int(5),int(5)),
                          padding='same', 
@@ -195,7 +195,7 @@ def model(leaky_alpha):
     model.compile(loss='sparse_categorical_crossentropy',
                   optimizer='nadam',metrics=['accuracy'])   
     return model
-model=model(float(.005))
+kmodel=kmodel(float(.005))
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def history_plot(fit_history):
@@ -225,15 +225,15 @@ checkpointer=tkc.ModelCheckpoint(filepath=fw,verbose=int(2),
                                  save_best_only=True)
 lr_reduction=tkc.ReduceLROnPlateau(monitor='val_loss',verbose=int(2),
                                    patience=int(5),factor=float(.8))
-history=model.fit(x_train,y_train,epochs=int(7),
-                  batch_size=int(16),verbose=int(2),
-                  validation_data=(x_valid,y_valid),
-                  callbacks=[checkpointer,
-                             early_stopping,
-                             lr_reduction])
+history=kmodel.fit(x_train,y_train,epochs=int(7),
+                   batch_size=int(16),verbose=int(2),
+                   validation_data=(x_valid,y_valid),
+                   callbacks=[checkpointer,
+                              early_stopping,
+                              lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+history_plot(history)
 </script></div><br/>
     <h2>✒️ &nbsp; Step 4. PyTorch</h2>
 <div class="linked"><script type="text/x-sage">
@@ -298,15 +298,16 @@ def train_run(epochs):
 <div class="linked"><script type="text/x-sage">
 num_classes=int(10)
 tmodel.classifier[6]=tnn.Sequential(
-    tnn.Linear(int(4096),int(512)),tnn.ReLU(),
-    tnn.Dropout(float(.5)),tnn.Linear(int(512),num_classes))
+    tnn.Linear(int(4096),int(256)),tnn.ReLU(),
+    tnn.Dropout(float(.5)),tnn.Linear(int(256),num_classes))
 tmodel=tmodel.to(dev)
 optimizer=torch.optim.Adam(tmodel.parameters())
 %train_run 1
 </script></div><br/>
     <h2>✒️ &nbsp; Step 5. Models' Evaluation</h2>
 <div class="linked"><script type="text/x-sage">
-
+kmodel.load_weights(fw)
+kmodel.evaluate(x_test,y_test)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 tmodel.eval()
