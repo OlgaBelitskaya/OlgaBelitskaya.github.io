@@ -134,14 +134,17 @@ class TData(tds):
 batch_size2=int(16); img_size2=int(64)
 x_train2=timage.resize(x_train,[img_size2,img_size2])
 x_train2=x_train2.eval(session=tf.compat.v1.Session())
-x_train2=np.transpose(x_train2,(0,3,1,2))
+n_train=batch_size2*(x_train2.shape[0]//batch_size2)
+x_train2=np.transpose(x_train2,(0,3,1,2))[:n_train]
 print(x_train2.mean(),x_train2.std())
 x_valid2=timage.resize(x_valid,[img_size2,img_size2])
 x_valid2=x_valid2.eval(session=tf.compat.v1.Session())
-x_valid2=np.transpose(x_valid2,(0,3,1,2))
+n_valid=batch_size2*(x_valid2.shape[0]//batch_size2)
+x_valid2=np.transpose(x_valid2,(0,3,1,2))[:n_valid]
 x_test2=timage.resize(x_test,[img_size2,img_size2])
 x_test2=x_test2.eval(session=tf.compat.v1.Session())
-x_test2=np.transpose(x_test2,(0,3,1,2))
+n_test=batch_size2*(x_test2.shape[0]//batch_size2)
+x_test2=np.transpose(x_test2,(0,3,1,2)[:n_test]
 random_seed=23
 train2=TData(x_train2,y_train)
 valid2=TData(x_valid2,y_valid)
