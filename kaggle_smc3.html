@@ -230,8 +230,19 @@ for c in range(5):
     ax[c].set_title(cl[c]); 
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
-
+dhtml('TSNE & Clustering</br>')
+t0=time.time()
+X4_emb=sma.TSNE(n_components=2,learning_rate=700.)\
+.fit_transform(X4)
+x_min,x_max=np.min(X4_emb,0),np.max(X4_emb,0)
+X4_emb=(X4_emb-x_min)/(x_max-x_min)
+f,ax=pl.subplots(1,figsize=(7,7))
+pl.axis("off")
+for i in range(X4_emb.shape[0]):
+    pl.text(X4_emb[i,0],X4_emb[i,1],str(y4[i]),
+            color=pl.cm.hsv(y4[i]/10.))
+pl.title("t-SNE embedding %f s"%(time.time()-t0))
+pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
