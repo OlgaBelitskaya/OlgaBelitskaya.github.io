@@ -119,14 +119,13 @@ x_test=timage.resize(x_test,[img_size,img_size])
 x_test=x_test.eval(session=tf.compat.v1.Session())
 x_valid,y_valid=x_test[:n],y_test[:n]
 x_test,y_test=x_test[n:],y_test[n:]
-df=pd.DataFrame([[x_train.shape,x_valid.shape,x_test.shape],
-                 [x_train.dtype,x_valid.dtype,x_test.dtype],
-                 [y_train.shape,y_valid.shape,y_test.shape],
-                 [y_train.dtype,y_valid.dtype,y_test.dtype]],
-                 columns=['train','valid','test'],
-                 index=["images' shape",'image type',
-                        "labels' shape",'label type'])
-df
+pd.DataFrame([[x_train.shape,x_valid.shape,x_test.shape],
+              [x_train.dtype,x_valid.dtype,x_test.dtype],
+              [y_train.shape,y_valid.shape,y_test.shape],
+              [y_train.dtype,y_valid.dtype,y_test.dtype]],
+             columns=['train','valid','test'],
+             index=["images' shape",'image type',
+                    "labels' shape",'label type'])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">      
 class TData(tds):
@@ -156,6 +155,7 @@ dataloaders={'train':tdl(dataset=train2,shuffle=True,
                          batch_size=batch_size2),
              'test':tdl(dataset=test2,shuffle=True, 
                         batch_size=batch_size2)}
+del train2,valid2,test2
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 @register_line_magic
@@ -235,6 +235,7 @@ history=kmodel.fit(x_train,y_train,epochs=int(7),
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 history_plot(history)
+del history
 </script></div><br/>
     <h2>✒️ &nbsp; Step 4. PyTorch</h2>
 <div class="linked"><script type="text/x-sage">
