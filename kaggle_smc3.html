@@ -196,8 +196,24 @@ def dist_clusters(method):
 %dist_clusters True
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
-
+dhtml('DBSCAN, OPTICS, & Others</br>')
+n_clusters=2
+km=scl.KMeans(n_clusters=n_clusters,random_state=0)
+y3_km=km.fit_predict(X3)
+ac=scl.AgglomerativeClustering(n_clusters=n_clusters,
+                               affinity='euclidean',
+                               linkage='complete')
+y3_ac=ac.fit_predict(X3)
+sp=scl.SpectralClustering(n_clusters=n_clusters)
+y3_sp=sp.fit_predict(X3)
+db=scl.DBSCAN(eps=.2,min_samples=15,
+              metric='euclidean')
+y3_db=db.fit_predict(X3)
+op=scl.OPTICS(eps=.2,min_samples=30)
+y3_op=op.fit_predict(X3)
+cl=['KMeans','Agglomerative','Spectral',
+    'DBSCAN','OPTICS']
+py3=[y3_km,y3_ac,y3_sp,y3_db,y3_op]
 </script></div><br/> 
 <div class="linked"><script type="text/x-sage">
 
