@@ -213,7 +213,40 @@ def epoch_loss(model,data_loader):
         return curr_loss/num_examples
 </script></div><br/>      
 <div class="linked"><script type="text/x-sage">
-
+@register_line_magic
+def train_run(epochs):
+    epochs=int(epochs)
+    for epoch in range(epochs):
+        tmodel.train()
+        for batch_ids,(features,targets) \
+        in enumerate(dataloaders['train']):        
+            features=features.to(dev)
+            targets=targets.to(dev).long()
+            logits=tmodel(features)
+            cost=tnnf.cross_entropy(logits,targets)
+            optimizer.zero_grad(); cost.backward()
+            optimizer.step()
+            if not batch_ids%10:
+                print ('Epoch: %03d/%03d | Batch: %03d/%03d | Cost: %.4f' 
+                       %(epoch+1,epochs,batch_ids,
+                         len(dataloaders['train']),cost))
+        tmodel.eval()
+        with torch.set_grad_enabled(False):
+            print('Epoch: %03d/%03d'%(epoch+1,epochs))
+            print('train acc/loss: %.2f%%/%.2f valid acc/loss: %.2f%%/%.2f'%\
+                  (model_acc(tmodel,dataloaders['train']),
+                   epoch_loss(tmodel,dataloaders['train']),
+                   model_acc(tmodel,dataloaders['valid']),
+                   epoch_loss(tmodel,dataloaders['valid'])))
+</script></div><br/>
+<div class="linked"><script type="text/x-sage">
+num_classes=int(10)
+tmodel.classifier[6]=tnn.Sequential(
+    tnn.Linear(int(4096),int(512)),tnn.ReLU(),
+    tnn.Dropout(float(.5)),tnn.Linear(int(512),num_classes))
+tmodel=tmodel.to(dev)
+optimizer=torch.optim.Adam(tmodel.parameters())
+%train_run 15
 </script></div><br/>
     <h2>✒️ &nbsp; Step 5. </h2>
 <div class="linked"><script type="text/x-sage">
