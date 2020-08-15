@@ -131,14 +131,17 @@ class TData(tds):
         return img,lbl
     def __len__(self):
         return self.y.shape[0]
-batch_size2=16; img_size2=64
+batch_size2=int(16); img_size2=int(64)
 x_train2=timage.resize(x_train,[img_size2,img_size2])
-x_train2=np.transpose(x_train2.numpy(),(0,3,1,2))
+x_train2=x_train2.eval(session=tf.compat.v1.Session())
+x_train2=np.transpose(x_train2,(0,3,1,2))
 print(x_train2.mean(),x_train2.std())
 x_valid2=timage.resize(x_valid,[img_size2,img_size2])
-x_valid2=np.transpose(x_valid2.numpy(),(0,3,1,2))
+x_valid2=x_valid2.eval(session=tf.compat.v1.Session())
+x_valid2=np.transpose(x_valid2,(0,3,1,2))
 x_test2=timage.resize(x_test,[img_size2,img_size2])
-x_test2=np.transpose(x_test2.numpy(),(0,3,1,2))
+x_test2=x_test2.eval(session=tf.compat.v1.Session())
+x_test2=np.transpose(x_test2,(0,3,1,2))
 random_seed=23
 train2=TData(x_train2,y_train)
 valid2=TData(x_valid2,y_valid)
@@ -157,11 +160,12 @@ def display_examples(data):
         print('Image dimensions: %s'%str(images.shape))
         print('Label dimensions: %s'%str(labels.shape))
         n=np.random.randint(1,3)
-        fig=pl.figure(figsize=(10,4))
+        fig=pl.figure(figsize=(10,2))
         for i in range(n,n+5):
             ax=fig.add_subplot(1,5,i-n+1,\
             xticks=[],yticks=[],title=names[labels[i].item()])
             ax.imshow(np.transpose(images[i],(1,2,0)))
+        pl.show()
         break
 %display_examples valid
 </script></div><br/>
