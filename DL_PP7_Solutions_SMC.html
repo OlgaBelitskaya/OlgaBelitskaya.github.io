@@ -188,7 +188,29 @@ tmodel.classifier[3].requires_grad=True
 print('\n\n',tmodel)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+def model_acc(model,data_loader):
+    correct_preds,num_examples=0,0    
+    for features,targets in data_loader:
+        features=features.to(dev)
+        targets=targets.to(dev).long()
+        logits=model(features)
+        _,pred_labels=torch.max(logits,1)
+        num_examples+=targets.size(0)
+        correct_preds+=(pred_labels==targets).sum()        
+    return correct_preds.float()/num_examples*100
+def epoch_loss(model,data_loader):
+    model.eval()
+    curr_loss,num_examples=0.,0
+    with torch.no_grad():
+        for features,targets in data_loader:
+            features=features.to(dev)
+            targets=targets.to(dev).long()
+            logits=model(features)
+            loss=tnnf.cross_entropy(logits,targets,
+                                    reduction='sum')
+            num_examples+=targets.size(0)
+            curr_loss+=loss
+        return curr_loss/num_examples
 </script></div><br/>      
 <div class="linked"><script type="text/x-sage">
 
