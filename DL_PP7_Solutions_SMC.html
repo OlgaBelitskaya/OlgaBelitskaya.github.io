@@ -251,12 +251,16 @@ tmodel=tmodel.to(dev)
 optimizer=torch.optim.Adam(tmodel.parameters())
 %train_run 15
 </script></div><br/>
-    <h2>✒️ &nbsp; Step 5. </h2>
+    <h2>✒️ &nbsp; Step 5. Models' Evaluation</h2>
 <div class="linked"><script type="text/x-sage">
 
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
+tmodel.eval()
+with torch.set_grad_enabled(False):
+    print('train acc: %.2f%% || test acc: %.2f%%'%\
+          (model_acc(tmodel,dataloaders['train']),
+           model_acc(tmodel,dataloaders['test'])))
 </script></div><br/>
     <h2>✒️ &nbsp; Step 6. </h2>
 <div class="linked"><script type="text/x-sage">
