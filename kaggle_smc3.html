@@ -108,10 +108,46 @@ pl.scatter(km.cluster_centers_[:,0],
            s=100, marker='*',c='black',
            edgecolor='#aa33ff',label='centroids')
 pl.legend(scatterpoints=1); pl.show()
+iner=[]; pl.figure(figsize=(6,3))
+for i in range(1,12):
+    km=scl.KMeans(n_clusters=i,init='k-means++',
+                  n_init=10,max_iter=500, 
+                  random_state=0)
+    km.fit(X);iner.append(km.inertia_)
+pl.plot(range(1,12),iner,marker='v',c='#aa33ff')
+pl.xlabel('number of clusters')
+pl.axvline(7,color='purple',linestyle=':')
+pl.ylabel('inertia'); pl.grid(); pl.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-
-
+@register_line_magic
+def silhouette_plots(n):
+    n_clusters=int(n); labels=np.unique(y_km)
+    svalues=sme.\
+    silhouette_samples(X,y_km,metric='euclidean')
+    y_ax_lower,y_ax_upper=0,0; yticks=[]
+    pl.figure(figsize=(6,3))
+    for i,c in enumerate(labels):
+        c_svalues=svalues[y_km==c]
+        c_svalues.sort()
+        y_ax_upper+=len(c_svalues)
+        color=pl.cm.cool(float(i)/n_clusters)
+        pl.barh(range(y_ax_lower,y_ax_upper),
+                c_svalues,height=1., 
+                edgecolor='none',color=color)
+        yticks.append((y_ax_lower+y_ax_upper)/2.)
+        y_ax_lower+=len(c_svalues)
+    savg=np.mean(svalues)
+    pl.axvline(savg, color="red",linestyle="--") 
+    pl.yticks(yticks,labels+1)
+    pl.ylabel('clusters')
+    pl.xlabel('silhouette coefficients'); pl.show()
+#well-fitted cluster amount
+%kmeans_clusters 7
+%silhouette_plots 7
+#bad-fitted cluster amount
+%kmeans_clusters 4
+%silhouette_plots 4
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 
