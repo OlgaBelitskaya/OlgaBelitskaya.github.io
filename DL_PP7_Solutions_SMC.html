@@ -239,6 +239,12 @@ history=kmodel.fit(x_train,y_train,epochs=int(7),
 history_plot(history)
 del history
 </script></div><br/>
+<div class="linked"><script type="text/x-sage">
+kmodel.load_weights(fw)
+kmodel.evaluate(x_test,y_test)
+y_test_predict=kmodel.predict_classes(x_test)
+os.remove(fw)
+</script></div><br/>
     <h2>✒️ &nbsp; Step 4. PyTorch</h2>
 <div class="linked"><script type="text/x-sage">
 for param in tmodel.parameters():
@@ -307,20 +313,14 @@ tmodel=tmodel.to(dev)
 optimizer=torch.optim.Adam(tmodel.parameters())
 %train_run 1
 </script></div><br/>
-    <h2>✒️ &nbsp; Step 5. Models' Evaluation</h2>
-<div class="linked"><script type="text/x-sage">
-kmodel.load_weights(fw)
-kmodel.evaluate(x_test,y_test)
-</script></div><br/>
 <div class="linked"><script type="text/x-sage">
 tmodel.eval()
 with torch.set_grad_enabled(False):
     print('test acc: %.2f%%'\
           %model_acc(tmodel,dataloaders['test']))
 </script></div><br/>
-    <h2>✒️ &nbsp; Step 6. Models' Predictions</h2>
+    <h2>✒️ &nbsp; Step 5. Models' Predictions</h2>
 <div class="linked"><script type="text/x-sage">
-y_test_predict=kmodel.predict_classes(x_test)
 fig=pl.figure(figsize=(6,2))
 randch=np.random.choice(x_test.shape[0],
                         size=6,replace=False)
@@ -335,10 +335,6 @@ for i,idx in enumerate(randch):
                         else "darkred"))
 pl.show()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-
-</script></div><br/>
-    <h2>✒️ &nbsp; Step 7. </h2>
 <div class="linked"><script type="text/x-sage">
 
 </script></div><br/>
