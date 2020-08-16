@@ -242,7 +242,7 @@ del history
 <div class="linked"><script type="text/x-sage">
 kmodel.load_weights(fw)
 kmodel.evaluate(x_test,y_test)
-y_test_predict=kmodel.predict_classes(x_test)
+y_test_predict=np.argmax(kmodel.predict(x_test),axis=-1)
 os.remove(fw)
 </script></div><br/>
     <h2>✒️ &nbsp; Step 4. PyTorch</h2>
@@ -326,7 +326,7 @@ for i,idx in enumerate(randch):
     ax=fig.add_subplot(2,3,i+1,xticks=[],yticks=[])
     ax.imshow(np.squeeze(x_test[idx]))
     pred_idx=y_test_predict[idx]
-    true_idx=np.argmax(y_test[idx])
+    true_idx=y_test[idx]
     ax.set_title("{} ({})".format(names[pred_idx],
                                   names[true_idx]),
                  color=("#aa33ff" if pred_idx==true_idx 
