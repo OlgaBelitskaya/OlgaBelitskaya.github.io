@@ -333,5 +333,26 @@ for i,idx in enumerate(randch):
                         else "darkred"))
 pl.show()
 </script></div><br/>
+<div class="linked"><script type="text/x-sage">      
+def show_image(img):
+    npimg=img.numpy()/2.+.5; tr=(1,2,0)
+    pl.figure(figsize=(10,2))
+    pl.imshow(np.transpose(npimg,tr))
+    pl.xticks([]); pl.show()
+with torch.no_grad():
+    for i,(images,labels) in enumerate(dataloaders['test']):
+        show_image(utils.make_grid(images[:3]))
+        print('\ntrue labels: ',
+              ''.join('%20s'%names[labels[j]] 
+                       for j in range(3)))
+        images=images.to(dev)
+        labels=labels.to(dev)
+        outputs=tmodel(images)
+        _,preds=torch.max(outputs,int(1))
+        print('\npredictions: ',
+             ''.join('%20s'%names[preds[j]]
+                      for j in range(3)))
+        if i==1: break
+</script></div><br/>
   </body>
 </html>
