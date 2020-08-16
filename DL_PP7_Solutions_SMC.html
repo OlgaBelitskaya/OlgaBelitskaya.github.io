@@ -80,6 +80,7 @@ import torch.nn.functional as tnnf
 import torch.nn as tnn
 dev=torch.device("cuda:0" \
 if torch.cuda.is_available() else "cpu")
+tmodel=models.vgg16(pretrained=True,progress=False)
 from IPython.core.magic import register_line_magic
 </script></div><br/>      
     <h2>✒️ &nbsp; Step 1. Data Loading</h2> 
@@ -240,7 +241,6 @@ del history
 </script></div><br/>
     <h2>✒️ &nbsp; Step 4. PyTorch</h2>
 <div class="linked"><script type="text/x-sage">
-tmodel=models.vgg16(pretrained=True)
 for param in tmodel.parameters():
     param.requires_grad=False
 tmodel.classifier[3].requires_grad=True
