@@ -233,10 +233,60 @@ dataloaders={'test':tdl(dataset=test,shuffle=True,
                         batch_size=batch_size)}
 %display_examples test
 </script></div><br/>
-      <h1>____</h1>
+      <h1>Building Clusters as Hierarchical Trees</h1>
 <div class="sage"><script type="text/x-sage">
-
-
+import sklearn.datasets as sds
+import sklearn.cluster as scl
+import sklearn.metrics as sme
+import numpy as np,pandas as pd,pylab as pl
+from IPython.core.magic import register_line_magic
+from scipy.spatial.distance import pdist,squareform
+from scipy.cluster.hierarchy import linkage,dendrogram
+variables=['a','b','c']
+labels=['id'+str(i) for i in range(1,10)]
+X=np.random.random_sample([9,3])*10
+df=pd.DataFrame(X,columns=variables,index=labels)
+ac=scl.AgglomerativeClustering(n_clusters=3, 
+                               affinity='euclidean', 
+                               linkage='complete')
+ac_labels=ac.fit_predict(X)
+print('Cluster labels: %s'%ac_labels)
+@register_line_magic
+def dist_clusters(method):
+    row_dist=pdist(df,metric='euclidean')
+    if method=='False':
+        row_dist=squareform(row_dist)
+    row_clusters=linkage(row_dist,
+                         method='complete',
+                         metric='euclidean')
+    c=row_clusters.shape[0]
+    rc=pd.DataFrame(row_clusters,
+                    columns=['row label 1','row label 2',
+                             'distance','n_items'],
+                    index=['cl%d'%(i+1) 
+                           for i in range(c)])
+    display(rc)
+    fig=pl.figure(figsize=(8,8))
+    axd=fig.add_axes([.1,.1,.31,.6])
+    d=dendrogram(row_clusters,orientation='left',
+                 labels=labels)
+    df_cl=df.iloc[d['leaves'][::-1]]
+    axd.set_xticks([]); axd.set_yticks([])
+    for i in axd.spines.values():
+        i.set_visible(False)
+    axm=fig.add_axes([.2,.1,.6,.6])
+    cax=axm.matshow(df_cl,interpolation='nearest',
+                    cmap='cool')
+    fig.colorbar(cax)
+    ac=[str(ac_labels[int(el[2])-1])+'-'+el 
+        for el in list(df_cl.index)]
+    axm.set_xticklabels(['']+list(df_cl.columns))
+    axm.set_yticklabels(['']+ac)
+    if method=='False': pl.title('incorrect')
+    else: pl.title('correct')
+    pl.show()
+%dist_clusters False
+%dist_clusters True
 </script></div><br/>
       <h1>Reading & Plotting CSV in R</h1>
 SageMath &#38; R <br/>
