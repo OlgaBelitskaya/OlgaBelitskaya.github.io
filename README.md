@@ -2,15 +2,16 @@
 # &#x1F3D9; &nbsp;  Certificated Projects
 
 ## &#x1F4D1; &nbsp; Machine Learning Engineer Nanodegree
-### [Built with Udacity](https://www.udacity.com) &nbsp; [Certificate](https://olgabelitskaya.github.io/certificate_nd009.pdf)
-### &#x1F310; &nbsp; [click to view the github repository](https://github.com/OlgaBelitskaya/machine_learning_engineer_nd009)
-### Program Projects
+### &#x1F310; &nbsp; [Github Repository](https://github.com/OlgaBelitskaya/machine_learning_engineer_nd009) &nbsp; [Built with Udacity](https://www.udacity.com) &nbsp; [Certificate](https://olgabelitskaya.github.io/certificate_nd009.pdf)
+### Program Projects 
 #### [P0: Titanic Survival Exploration](https://olgabelitskaya.github.io/MLE_ND_P0_V0.html) &nbsp;  [P1: Predicting Boston Housing Prices](https://olgabelitskaya.github.io/MLE_ND_P1_V0.html)  
 #### [P2: Finding Donors for CharityML](https://olgabelitskaya.github.io/MLE_ND_P2_V0.html) &nbsp; [P3: Creating Customer Segments](https://olgabelitskaya.github.io/MLE_ND_P3_V0.html)
-#### P4: Train a Smartcab to Drive &nbsp; [Version 0](https://olgabelitskaya.github.io/MLE_ND_P4_V0.html) &nbsp; [Version 1](https://olgabelitskaya.github.io/MLE_ND_P4_V1.html)  &nbsp;  P5: Build a Digit Recognition Program &nbsp; [Step 1](https://olgabelitskaya.github.io/MLE_ND_P5_V0_S1.html) &nbsp; [Step 2](https://olgabelitskaya.github.io/MLE_ND_P5_V0_S2.html) &nbsp; [Step 3](https://olgabelitskaya.github.io/MLE_ND_P5_V0_S3.html)
+#### P4: Train a Smartcab to Drive &nbsp; [Version 0](https://olgabelitskaya.github.io/MLE_ND_P4_V0.html) &nbsp; [Version 1](https://olgabelitskaya.github.io/MLE_ND_P4_V1.html)  
+#### P5: Build a Digit Recognition Program &nbsp; [Step 1](https://olgabelitskaya.github.io/MLE_ND_P5_V0_S1.html) &nbsp; [Step 2](https://olgabelitskaya.github.io/MLE_ND_P5_V0_S2.html) &nbsp; [Step 3](https://olgabelitskaya.github.io/MLE_ND_P5_V0_S3.html)
 #### P6: Capstone Project &nbsp; [Version 0](https://olgabelitskaya.github.io/MLE_ND_P6_V0.html) &nbsp; [Version 1](https://olgabelitskaya.github.io/MLE_ND_P6_V1.html) &nbsp; [Proposal](https://olgabelitskaya.github.io/MLE_ND_P6_PP.pdf) &nbsp; [Report](https://olgabelitskaya.github.io/MLE_ND_P6_PR.pdf) 
 #### [P7: Building a Student Intervention System](https://olgabelitskaya.github.io/MLE_ND_P7_V0.html) &nbsp; [P8: Analyzing the NYC Subway Dataset](https://olgabelitskaya.github.io/MLE_ND_P8_V0.html)
-#### P9: Image Classification &nbsp; [Version 0](https://olgabelitskaya.github.io/MLE_ND_P9_V0.html) &nbsp; [Version 3](https://olgabelitskaya.github.io/MLE_ND_P9_V3.html)  &nbsp;  [P10: Write an Algorithm for a Dog Identification App](https://olgabelitskaya.github.io/MLE_ND_P10_V0.html)
+#### P9: Image Classification &nbsp; [Version 0](https://olgabelitskaya.github.io/MLE_ND_P9_V0.html) &nbsp; [Version 3](https://olgabelitskaya.github.io/MLE_ND_P9_V3.html)  
+#### [P10: Write an Algorithm for a Dog Identification App](https://olgabelitskaya.github.io/MLE_ND_P10_V0.html)
 ### Practice Projects
 #### [PP0](https://olgabelitskaya.github.io/MLE_ND_PP0.html) &nbsp; [PP1](https://olgabelitskaya.github.io/MLE_ND_PP1.html) &nbsp; [PP2](https://olgabelitskaya.github.io/MLE_ND_PP2.html) &nbsp; [PP3](https://olgabelitskaya.github.io/MLE_ND_PP3.html)
 #### PP4: [Part 1](https://olgabelitskaya.github.io/MLE_ND_PP4_1.html) &nbsp; [Part 2](https://olgabelitskaya.github.io/MLE_ND_PP4_2.html) &nbsp; [Part 3](https://olgabelitskaya.github.io/MLE_ND_PP4_3.html) &nbsp; [Part 4](https://olgabelitskaya.github.io/MLE_ND_PP4_4.html) &nbsp; [Part 5](https://olgabelitskaya.github.io/MLE_ND_PP4_5.html) &nbsp; [Part 6](https://olgabelitskaya.github.io/MLE_ND_PP4_6.html)
@@ -20,10 +21,7 @@
 #### [P7: Building a Student Intervention System](https://olgabelitskaya.github.io/MLE_ND_P7_SMC.html) &nbsp;  [P8: Analyzing the NYC Subway Dataset](https://olgabelitskaya.github.io/MLE_ND_P8_SMC.html)
 
 ## &#x1F4D1; &nbsp; Data Analyst Nanodegree 
-### [Built with Udacity](https://www.udacity.com) &nbsp; [Certificate](https://olgabelitskaya.github.io/certificate.pdf)
-
-### &#x1F310; &nbsp; [click to view the github repository](https://github.com/OlgaBelitskaya/data-analyst-nd002)
-
+### &#x1F310; &nbsp; [Github Repository](https://github.com/OlgaBelitskaya/data-analyst-nd002) &nbsp; [Built with Udacity](https://www.udacity.com) &nbsp; [Certificate](https://olgabelitskaya.github.io/certificate.pdf)
 #### [P0: Chopsticks!](https://olgabelitskaya.github.io/Data_Analyst_ND_Project0.html) &nbsp;  [P1: The Stroop Effect](https://olgabelitskaya.github.io/Data_Analyst_ND_Project1.html) &nbsp;  [P2: Titanic](https://olgabelitskaya.github.io/Data_Analyst_ND_Project2.html)  
 ####  [P3: Extraction MongoDB](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_Dubai-AbuDhabi_Extraction_MongoDB.html) &nbsp;  [P3: MongoDB](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_Dubai-AbuDhabi_MongoDB.html) &nbsp; [P3: Postcodes](https://olgabelitskaya.github.io/P3_postcodes.html) 
 #### [P3: Additional SQL](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_Dubai-AbuDhabi_SQL.html) &nbsp;  [P3: Additional R SQL MongoDB](https://olgabelitskaya.github.io/P3_R_SQL_MongoDB.html) &nbsp; [P3: Additional Moscow Region](https://olgabelitskaya.github.io/Data_Analyst_ND_Project3_MoscowRegion.html) 
@@ -36,73 +34,43 @@
 # &#x1F3D9; &nbsp;  My Own Experimental Projects
 
 ## &#x1F4D1; &nbsp; Deep Learning Practice
-
-### &#x1F310; &nbsp; [click to view the github repository](https://github.com/OlgaBelitskaya/deep_learning_projects)
-
+### &#x1F310; &nbsp; [Github Repository](https://github.com/OlgaBelitskaya/deep_learning_projects)
 #### P0: Image Classification &nbsp; [Project &#x1F310;](https://olgabelitskaya.github.io/DL_PP0.html)  &nbsp; [Solutions &#x1F310;](https://olgabelitskaya.github.io/DL_PP0_Solutions.html)
-Colaboratory Notebooks &nbsp; [flower_classification.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1H2ArWH_1kYfkIoCbxleX-aHAozRVBAdB)<br/>
+Colaboratory Notebooks <br/> 
+[flower_classification.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1H2ArWH_1kYfkIoCbxleX-aHAozRVBAdB)<br/>
 Interactive Reports with SageMathCell <br/>
 [P0: Image Classification 🌀](https://olgabelitskaya.github.io/DL_PP0_Solutions_SMC.html)
 #### P1: Neural Networks for Regression &nbsp; [Project &#x1F310;](https://olgabelitskaya.github.io/DL_PP1.html) &nbsp; [Solutions &#x1F310;](https://olgabelitskaya.github.io/DL_PP1_Solutions.html)
-Colaboratory Notebooks &nbsp; [boston_regression.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1atPu92jNJ-qBsFpbOiMojHGXCu6gJWYW)<br/>
+Colaboratory Notebooks <br/>
+[boston_regression.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1atPu92jNJ-qBsFpbOiMojHGXCu6gJWYW)<br/>
 Interactive Reports with SageMathCell <br/> 
 [P1: Neural Networks for Regression 🌀](https://olgabelitskaya.github.io/DL_PP1_Solutions_SMC.html)
 #### P2: Multi-Label Classification &nbsp; [Project &#x1F310;](https://olgabelitskaya.github.io/DL_PP2.html) &nbsp; [Solutions &#x1F310;](https://olgabelitskaya.github.io/DL_PP2_Solutions.html) &nbsp; [Solutions Variant 2 &#x1F310;](https://olgabelitskaya.github.io/DL_PP2_Solutions_V2.html) &nbsp; [Addition &#x1F310;](https://olgabelitskaya.github.io/DL_PP2_Additional.html)
-Colaboratory Notebooks  &nbsp; [letter_recognition.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1Z9Fz0OOi6bpWvH-H2OhExC9CkGPWBYZz) &nbsp; [letter_generator.ipynb &#x1F4D6; ](https://drive.google.com/open?id=19B40eERSKfVO5zsizehxPOLdhLs5YcUT)<br/>
+Colaboratory Notebooks <br/> 
+[letter_recognition.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1Z9Fz0OOi6bpWvH-H2OhExC9CkGPWBYZz) &nbsp; [letter_generator.ipynb &#x1F4D6; ](https://drive.google.com/open?id=19B40eERSKfVO5zsizehxPOLdhLs5YcUT)<br/>
 Interactive Reports with SageMathCell &nbsp; <br/>
 [P2: Multi-Label Classification 🌀](https://olgabelitskaya.github.io/DL_PP2_Solutions_SMC.html) &nbsp; [P2: Letter Recognition. Keras Applications 🌀](https://olgabelitskaya.github.io/DL_PP2_Solutions2_SMC.html) &nbsp; [P2: Letter Generation 🌀](https://olgabelitskaya.github.io/DL_PP2_Solutions3_SMC.html)
 #### P3: Parts of Speech &nbsp; 
 #### P4: Style Recognition &nbsp; [Project &#x1F310;](https://olgabelitskaya.github.io/DL_PP4.html) &nbsp;  [Solutions &#x1F310;](https://olgabelitskaya.github.io/DL_PP4_Solutions.html)
-Colaboratory Notebooks  &nbsp; [style_recognition.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1r5yRD-3tQwN6lSql_VRoVuwQ8DaY5zUt)<br/>
+Colaboratory Notebooks <br/> 
+[style_recognition.ipynb &#x1F4D6;](https://drive.google.com/open?id=1r5yRD-3tQwN6lSql_VRoVuwQ8DaY5zUt)<br/>
 Interactive Reports with SageMathCell <br/>
 [P4: Style Recognition 🌀](https://olgabelitskaya.github.io/DL_PP4_Solutions_SMC.html)
 #### P5: Decor Colorization &nbsp; [Solutions. Part 1 &#x1F310;](https://olgabelitskaya.github.io/DL_PP5_Solutions_Part1.html) &nbsp; [Solutions. Part 2 &#x1F310;](https://olgabelitskaya.github.io/DL_PP5_Solutions_Part2.html) &nbsp;  [Addition &#x1F310;](https://olgabelitskaya.github.io/DL_PP5_Additional.html) &nbsp; [Addition Variant 2 &#x1F310;](https://olgabelitskaya.github.io/DL_PP5_Additional_V2.html) 
-Colaboratory Notebooks &nbsp; [decor_classification.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1Tt3qZePsf2P6kNNao-hQ58DlG71Abj5a) &nbsp; [style_transfer.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1svW40BBscfSLD7Je99TyctBeRWIOYHKa) &nbsp; [style_transfer_2.ipynb &#x1F4D6; ](https://colab.research.google.com/drive/1IS_6BqJDLVbJJsuTuWTr3OfGP5uEu2eV)<br/>
+Colaboratory Notebooks <br/>
+[decor_classification.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1Tt3qZePsf2P6kNNao-hQ58DlG71Abj5a) &nbsp; [style_transfer.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1svW40BBscfSLD7Je99TyctBeRWIOYHKa) &nbsp; [style_transfer_2.ipynb &#x1F4D6; ](https://colab.research.google.com/drive/1IS_6BqJDLVbJJsuTuWTr3OfGP5uEu2eV)<br/>
 Interactive Reports with SageMathCell <br/>
 [P5: Decor Recognition & Colorization 🌀](https://olgabelitskaya.github.io/DL_PP5_Solutions_SMC.html) &nbsp;  [P5: Style Transfer 🌀](https://olgabelitskaya.github.io/DL_PP5_Solutions2_SMC.html) &nbsp;  [P5: Style Transfer 2 🌀](https://olgabelitskaya.github.io/DL_PP5_Solutions3_SMC.html)
-
-# &#x1F3D9; &nbsp;  Kaggle Activity
-## &#x1F4D1; &nbsp;  [Notebooks](https://www.kaggle.com/olgabelitskaya/notebooks)
-- Digit Recognition Models #1 &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/digit-recognition-models-1) &nbsp; [Web Page &#x1F310;](https://olgabelitskaya.github.io/kaggle_digits.html)
-
-- Digit Recognition Models #2 &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/digit-recognition-models-2) &nbsp; [Web Page &#x1F310;](https://olgabelitskaya.github.io/kaggle_digits.html)
- 
-- Titanic Survival Exploration &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/titanic-survival-exploration) &nbsp; [Web Page &#x1F310;](https://olgabelitskaya.github.io/kaggle_titanic.html)
-
-- Sberbank Russian Housing Market &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/sberbank-russian-housing-market) &nbsp; [Web Page &#x1F310;](https://olgabelitskaya.github.io/kaggle_sberbank.html)
-  
-- House Prices: Advanced Regression Techniques &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/regressors) &nbsp; [Web Page &#x1F310;](https://olgabelitskaya.github.io/kaggle_house.html)
-
-- The Dataset of Flower Images &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/the-dataset-of-flower-images) &nbsp; [Web Page &#x1F310;](https://olgabelitskaya.github.io/kaggle_flowers.html)
-
-- Handwritten Letters &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/handwritten-letters) &nbsp; [Web Page &#x1F310;](https://olgabelitskaya.github.io/kaggle_letters.html)
-
-- SVHN Digit Recognition &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/svhn-digit-recognition)
-
-- Mixed Styles &nbsp; [Kaggle Jupyter Notebook &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/mixed-styles)
-
-## &#x1F4D1; &nbsp; Created Datasets
-- Flower Color Images &nbsp; [Kaggle Dataset &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/flower-color-images)
-
-- SVHN Preprocessed Fragments &nbsp; [Kaggle Dataset &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/svhn-preproccessed-fragments)
-
-- Classification of Handwritten Letters &nbsp; [Kaggle Dataset &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/classification-of-handwritten-letters)
-
-- Style Color Images &nbsp; [Kaggle Dataset &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/style-color-images)
-
-- Traditional Decor Patterns &nbsp; [Kaggle Dataset &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/traditional-decor-patterns)
-
-- OSM Russia. Central District &nbsp; [Kaggle Dataset &#x1F4D6;](https://www.kaggle.com/olgabelitskaya/osm-russia-central-district)
 
 # &#x1F3D9; &nbsp; Online Training Courses & Exercises
 
 ## &#x1F4D1; &nbsp; My Own Practice Programs [&#x1F310;](https://olgabelitskaya.github.io/README_PRACTICE.html)
 
+## &#x1F4D1; &nbsp; Kaggle & Google Colaboratory Practice Programs [&#x1F310;](https://olgabelitskaya.github.io/README_ColabKaggle.html)
+
 ## &#x1F4D1; &nbsp; Various Exam Exercises [&#x1F310;](https://olgabelitskaya.github.io/README_EXERCISES.html)
 
 ## &#x1F4D1; &nbsp; Reflections for Courses and Programs [&#x1F310;](https://olgabelitskaya.github.io/reflections/README.html)
-
-## &#x1F4D1; &nbsp; Notebooks and Data Files [&#x1F310;](https://olgabelitskaya.github.io/notebooks/README.html)
 
 # &#x1F3D9; &nbsp;  Under Construction Projects
 ## &#x1F4D1; &nbsp; Deep Learning Nanodegree 
