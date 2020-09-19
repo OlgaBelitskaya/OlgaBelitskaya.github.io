@@ -15,7 +15,7 @@
 #### [P8: Analyzing the NYC Subway Dataset](https://olgabelitskaya.github.io/MLE_ND_P8_V0.html)
 #### P9: Image Classification &nbsp; [Version 0](https://olgabelitskaya.github.io/MLE_ND_P9_V0.html) &nbsp;  [Version 3](https://olgabelitskaya.github.io/MLE_ND_P9_V3.html)  
 #### [P10: Write an Algorithm for a Dog Identification App](https://olgabelitskaya.github.io/MLE_ND_P10_V0.html)
-<br/><details>
+<br/></details>
 
 <br/><details><summary>Practice Projects</summary>
 
@@ -24,7 +24,7 @@
 #### [PP2](https://olgabelitskaya.github.io/MLE_ND_PP2.html) 
 #### [PP3](https://olgabelitskaya.github.io/MLE_ND_PP3.html)
 #### PP4: [Part 1](https://olgabelitskaya.github.io/MLE_ND_PP4_1.html) &nbsp; [Part 2](https://olgabelitskaya.github.io/MLE_ND_PP4_2.html) &nbsp; [Part 3](https://olgabelitskaya.github.io/MLE_ND_PP4_3.html) &nbsp; [Part 4](https://olgabelitskaya.github.io/MLE_ND_PP4_4.html) &nbsp; [Part 5](https://olgabelitskaya.github.io/MLE_ND_PP4_5.html) &nbsp; [Part 6](https://olgabelitskaya.github.io/MLE_ND_PP4_6.html)
-<br/><details>
+<br/></details>
 
 <br/><details><summary>Interactive Reports with SageMathCell</summary>
 
@@ -35,7 +35,7 @@
 #### [P6: Capstone Project](https://olgabelitskaya.github.io/MLE_ND_P6_SMC.html)
 #### [P7: Building a Student Intervention System](https://olgabelitskaya.github.io/MLE_ND_P7_SMC.html) 
 #### [P8: Analyzing the NYC Subway Dataset](https://olgabelitskaya.github.io/MLE_ND_P8_SMC.html)
-<br/><details>
+<br/></details>
 
 ## &#x1F4D1; &nbsp; Data Analyst Nanodegree 
 ### &#x1F310; &nbsp; [Github Repository](https://github.com/OlgaBelitskaya/data-analyst-nd002) &nbsp; [Built with Udacity](https://www.udacity.com) &nbsp; [Certificate](https://olgabelitskaya.github.io/certificate.pdf)
@@ -54,7 +54,7 @@
 #### [P5: Identify Fraud from Enron Email. Response Questions](https://olgabelitskaya.github.io/P5_Enron_Submission_Free_Response_Questions.txt)
 #### [P6: Make Effective Data Visualization. Review](https://olgabelitskaya.github.io/P6_Readme.html) &nbsp;  [P6: Make Effective Data Visualization](https://olgabelitskaya.github.io/P6_index_final.html)
 #### [P7: Design an A/B Test](https://olgabelitskaya.github.io/P7_Design_an_A_B_Test_Overview.html) &nbsp;  [P7: Design an A/B Test. Extraction](https://olgabelitskaya.github.io/P7_Design_an_A_B_Test_Extraction.pdf)
-<br/><details>
+<br/></details>
 
 # &#x1F3D9; &nbsp;  My Own Experimental Projects
 
@@ -67,7 +67,7 @@
 [flower_classification.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1H2ArWH_1kYfkIoCbxleX-aHAozRVBAdB)<br/>
 #### Interactive Reports with SageMathCell
 [P0: Image Classification 🌀](https://olgabelitskaya.github.io/DL_PP0_Solutions_SMC.html)
-<br/><details>
+<br/></details>
 
 <br/><details><summary>P1: Neural Networks for Regression</summary>
 
@@ -76,7 +76,7 @@
 [boston_regression.ipynb &#x1F4D6; ](https://drive.google.com/open?id=1atPu92jNJ-qBsFpbOiMojHGXCu6gJWYW)<br/>
 #### Interactive Reports with SageMathCell
 [P1: Neural Networks for Regression 🌀](https://olgabelitskaya.github.io/DL_PP1_Solutions_SMC.html)
-<br/><details>
+<br/></details>
     
 <br/><details><summary>P2: Multi-Label Classification</summary>
     
@@ -88,11 +88,11 @@
 [P2: Multi-Label Classification 🌀](https://olgabelitskaya.github.io/DL_PP2_Solutions_SMC.html)<br/>
 [P2: Letter Recognition. Keras Applications 🌀](https://olgabelitskaya.github.io/DL_PP2_Solutions2_SMC.html)<br/>
 [P2: Letter Generation 🌀](https://olgabelitskaya.github.io/DL_PP2_Solutions3_SMC.html)
-<br/><details>
+<br/></details>
 
 <br/><details><summary>P3: Parts of Speech</summary>
 In Progress
-<br/><details>
+<br/></details>
 
 <br/><details><summary>P4: Style Recognition</summary>
     
@@ -101,7 +101,7 @@ In Progress
 [style_recognition.ipynb &#x1F4D6;](https://drive.google.com/open?id=1r5yRD-3tQwN6lSql_VRoVuwQ8DaY5zUt)
 #### Interactive Reports with SageMathCell
 [P4: Style Recognition 🌀](https://olgabelitskaya.github.io/DL_PP4_Solutions_SMC.html)
-<br/><details>
+<br/></details>
 
 <br/><details><summary>P5: Decor Recognition & Colorization</summary>
     
@@ -112,7 +112,7 @@ In Progress
 #### Interactive Reports with SageMathCell
 [P5: Decor Recognition & Colorization 🌀](https://olgabelitskaya.github.io/DL_PP5_Solutions_SMC.html)<br/> 
 [P5: Style Transfer 🌀](https://olgabelitskaya.github.io/DL_PP5_Solutions2_SMC.html) &nbsp;  [P5: Style Transfer 2 🌀](https://olgabelitskaya.github.io/DL_PP5_Solutions3_SMC.html)
-<br/><details>
+<br/></details>
     
 # &#x1F3D9; &nbsp; Online Training Courses & Exercises
 
@@ -141,7 +141,7 @@ In Progress
 #### [P3  Generate TV scripts](https://olgabelitskaya.github.io/DL_ND_P3_V0.html) 
 #### [P4:  Translate a Language](https://olgabelitskaya.github.io/DL_ND_P4_V0.html) 
 #### [P5: Generate Faces ](https://olgabelitskaya.github.io/DL_ND_P5_V0.html)
-<br/><details>
+<br/></details>
 
 ## &#x1F4D1; &nbsp; Interview and Technical Interview Practice.
 
@@ -150,7 +150,7 @@ In Progress
 #### Udacity_Interview_Practice.ipynb &nbsp; [&#x1F310;](https://gist.github.com/OlgaBelitskaya/1ddb287592832cf581fc122d6bc2732e)
 #### Udacity_Technical_Interview_Practice_Lessons.ipynb &nbsp; [&#x1F310;](https://gist.github.com/OlgaBelitskaya/a6cb19e1f3a041e6f6a56ccf58b4701c)
 #### Udacity_Technical_Interview_Practice_Project.ipynb &nbsp; [&#x1F310;](https://gist.github.com/OlgaBelitskaya/849e983dd6e90943d5760be4c4986501)
-<br/><details>
+<br/></details>
 
 # &#x1F3D9; &nbsp;  Useful Web Links for Online Training
 ## &#x1F4D1; &nbsp; Blocks [&#x1F310;](http://bl.ocks.org)
