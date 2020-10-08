@@ -131,7 +131,7 @@ def silhouette_plots(n):
     svalues=sme.\
     silhouette_samples(X,y_km,metric='euclidean')
     y_ax_lower,y_ax_upper=0,0; yticks=[]
-    pl.figure(figsize=(6,4))
+    pl.figure(figsize=(4,4))
     for i,c in enumerate(labels):
         c_svalues=svalues[y_km==c]
         c_svalues.sort()
@@ -178,7 +178,7 @@ def dist_clusters(method):
                     index=['cl%d'%(i+1) 
                            for i in range(c)])
     display(rc)
-    fig=pl.figure(figsize=(6,6))
+    fig=pl.figure(figsize=(4,4))
     axd=fig.add_axes([.1,.1,.31,.6])
     d=dendrogram(row_clusters,orientation='left',
                  labels=labels)
@@ -221,7 +221,7 @@ cl=['KMeans','Agglomerative','Spectral',
 py3=[y3_km,y3_ac,y3_sp,y3_db,y3_op]
 </script></div><br/> 
 <div class="linked"><script type="text/x-sage">
-f,ax=pl.subplots(3,2,figsize=(6,6))
+f,ax=pl.subplots(3,2,figsize=(4,4))
 for c in range(6):
     if c!=5:
         for i in np.unique(py3[c]):
@@ -243,7 +243,7 @@ X4_emb=sma.TSNE(n_components=2,learning_rate=700.)\
 .fit_transform(X4)
 x_min,x_max=np.min(X4_emb,0),np.max(X4_emb,0)
 X4_emb=(X4_emb-x_min)/(x_max-x_min)
-f,ax=pl.subplots(1,figsize=(6,6))
+f,ax=pl.subplots(1,figsize=(4,4))
 pl.axis("off")
 for i in range(X4_emb.shape[0]):
     pl.text(X4_emb[i,0],X4_emb[i,1],str(y4[i]),
@@ -263,7 +263,7 @@ labs=[int(np.median(y4[np.where([y4_km==i])[1]]))
 rd=dict(zip(list(range(10)),labs))
 cl=np.array([rd.get(x,x) for x in y4_km],
                 dtype='int8')
-f,ax=pl.subplots(1,figsize=(6,6))
+f,ax=pl.subplots(1,figsize=(4,4))
 for i in range(n_clusters):
     color=pl.cm.hsv(float(i)/n_clusters)
     pl.scatter(X4_emb[cl==i,0],
