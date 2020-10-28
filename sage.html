@@ -1,116 +1,140 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>SageMath_Part1</title>
-    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width'>
+    <title>✒️SageMath_Part1</title>
+    <script src='https://sagecell.sagemath.org/static/embedded_sagecell.js'></script>
     <script>$(function () {
-    // Make the div with id 'examplecell' a Sage cell
-    sagecell.makeSagecell({inputLocation:'#examplecell',template:sagecell.templates.minimal,evalButtonText:'Activate'});
-    // Make *any* div with class 'compute' a Sage cell
-    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Evaluate'});});
+    sagecell.makeSagecell({inputLocation:'#cell1',evalButtonText:'activate',
+                           template:sagecell.templates.minimal});
+    sagecell.makeSagecell({inputLocation:'#cell2',evalButtonText:'activate again',
+                           autoeval:true});
+    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'evaluate'}); });
     </script>
-    <script data-ad-client="ca-pub-9200929962680356" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   </head>
   <style>
-  @import url('https://fonts.googleapis.com/css?family=Orbitron');
-  h1,h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
-  p,a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
+  @import url('https://fonts.googleapis.com/css?family=Akronim');
+  h1,h2 {color:#3636ff; font-family:'Akronim'; text-shadow:3px 3px 3px #aaa;}
+  .preactive {padding-left:2px; border:2px double slategray; 
+       font-size:110%; text-shadow:2px 2px 2px #aaa} 
+  p,a {color:darkblue; font-size:110%; text-shadow:3px 3px 3px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em; font-size:110%;}
   body (margin:5px 5px5px 25px}
   </style>  
   <body>
   <h1>&#x1F4D1; &nbsp;SageMath Online Mini Campus. Part 1</h1>
-<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
-<a href="https://olgabelitskaya.github.io/sage2.html">&#x1F300; &nbsp; Next &nbsp; &nbsp;</a><br/>
-<a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
-<a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a>
+<a href='https://olgabelitskaya.github.io/README.html'>&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
+<a href='https://olgabelitskaya.github.io/sage2.html'>&#x1F300; &nbsp; Next &nbsp; &nbsp;</a><br/>
+<a href='https://www.instagram.com/olga.belitskaya/'>&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
+<a href='https://www.pinterest.ru/olga_belitskaya/code-style/'>&#x1F300; &nbsp; Pinterest Posts</a>
     <p>The set of interactive pages with the following structure:</p>
-    <p>Example of Computations $\implies$ Your Field for Experiments $\implies$ Try Python Modules $\implies$ Try Other Languages</p>
+    <p>Example of Computations $\mathbb{\implies}$ Your Experiments $\mathbb{\implies}$ 
+       Python Modules $\mathbb{\implies}$ Other Languages</p>
   <h2>Example of Computations</h2>
-    <p>Click the “Activate” button below to display an interactive example.</p>      
-<div id="examplecell"><script type="text/x-sage">
+    <p>Click the $\mathbb{activate}$ button below to display an interactive example.</p>
+<pre class='preactive'><code>
 @interact
 def f(n=(1,5,1)):
     pretty_print(n,'-element Subsets of the 5-element Set')
-    S = Combinations(["🦅","🦁","🦀","🦋","🐋"],n).list()
+    S=Combinations(['🦅','🦁','🦀','🦋','🐋'],n).list()
+    for i in range(len(S)):
+        print([ascii_art(S[i][j]) for j in range(n)])
+
+</code></pre><br/>
+<div id='cell1'><script type='text/x-sage'>
+@interact
+def f(n=(1,5,1)):
+    pretty_print(n,'-element Subsets of the 5-element Set')
+    S=Combinations(['🦅','🦁','🦀','🦋','🐋'],n).list()
     for i in range(len(S)):
         print([ascii_art(S[i][j]) for j in range(n)])
 </script></div>
-  <h2>Your Field for Experiments</h2>
-    <p>Type your own SageMath code lines below and click “Evaluate”.</p>     
-<div class="compute"><script type="text/x-sage">
-var('u'); R,r,n=12,6,24; x=r*cos(u); y=r*sin(u); 
-p1=sum([parametric_plot((x-R*cos(2*i*pi/n),y-R*sin(4*i*pi/n)),
-                        (u,0,2*pi),color='#3636ff') for i in [0..n]])
-p2=sum([parametric_plot((y-R*sin(4*i*pi/n),x-R*cos(2*i*pi/n)),
-                        (u,0,2*pi),fill=True,fillalpha=0.1,
-                        fillcolor=colormaps['bwr_r'](cos(25.12*i/n)^2)[:3],
-                        color='#3636ff',plot_points=30) 
-        for i in [0..n]])
-p3=sum([parametric_plot((1.5*x-R*cos(2*i*pi/n),1.5*y-R*sin(2*i*pi/n)),
-                        (u,0,2*pi),color='darkblue') for i in [0..n]])
+  <h2>Your Experiments</h2>
+    <p>Type your own SageMath code lines below and click the $\mathbb{evaluate}$ button.</p>
+<div class='compute'><script type='text/x-sage'>
+var('u'); R,r,n=12,6,24; x=r*cos(u); y=r*sin(u)
+p1=sum([parametric_plot(
+    (x-R*cos(2*i*pi/n),y-R*sin(4*i*pi/n)),
+    (u,0,2*pi),color='#3636ff') for i in [0..n]])
+p2=sum([parametric_plot(
+    (y-R*sin(4*i*pi/n),x-R*cos(2*i*pi/n)),
+    (u,0,2*pi),fill=True,fillalpha=.1,
+    fillcolor=colormaps['cool'](cos(25.12*i/n)^2)[:3],
+    color='#3636ff',plot_points=30) for i in [0..n]])
+p3=sum([parametric_plot(
+    (1.5*x-R*cos(2*i*pi/n),1.5*y-R*sin(2*i*pi/n)),
+    (u,0,2*pi),color='slategray') for i in [0..n]])
 (p1+p2+p3).show(figsize=(5,5),axes=False)
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+  <p>This code cell was evaluated automatically.</p>
+<div id='cell2'><script type='text/x-sage'>
 @interact
-def _(N=(10,50,1)):
-    P=Poset(([1..N],lambda x,y:y%x==0))
-    P.show(color_by_label=True,figsize=[10,5],edge_style='dashed',
+def _(N=(10,30,1)):
+    p=Poset(([1..N],lambda x,y:y%x==0))
+    p.show(color_by_label=True,figsize=[7,5],
+           edge_style='dashed',
            cover_labels=lambda a,b:b/a,vertex_shape='H',
-           vertex_color='lightgrey',vertex_size=800)
+           vertex_color='silver',vertex_size=800)
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
-var('t'); d = {2*i+1:[2*i+2] for i in [0..6]}
+<div class='compute'><script type='text/x-sage'>
+var('t'); d={2*i+1:[2*i+2] for i in [0..6]}
 c=[colormaps.ocean(24*k)[:3] for k in [0..10]]
 p=polar_plot([(t+k/5)*log(t/5) for k in [0..10]],
              0,2*pi,color=c,fill=d,fillcolor=c)
-p.show(title=r'$f=(t+k/5) \cdot \log(t/5), k \in \{0,1,...,10\}$',
-       fontsize=15,figsize=(10,5))
+ti=r'$f=(t+k/5) \cdot \log(t/5), k \in \{0,1,...,10\}$'
+p.show(title=ti,fontsize=12,figsize=(7,5))
 </script></div><br/>
-  <h2>Try Python Modules</h2>
-<div class="compute"><script type="text/x-sage">
-%matplotlib inline
-import pandas, pylab; pylab.style.use('dark_background')
-pylab.figure(figsize=(7,7))
-from sklearn import datasets; wine=datasets.load_wine()
-from sklearn.ensemble import AdaBoostClassifier,GradientBoostingClassifier
+  <h2>Python Modules</h2>
+<div class='compute'><script type='text/x-sage'>
+import pandas as pd,pylab as pl
+pl.style.use('dark_background')
+pl.figure(figsize=(7,5))
+from sklearn import datasets
+wine=datasets.load_wine()
+from sklearn.ensemble import \
+AdaBoostClassifier,GradientBoostingClassifier
 classifiers=[AdaBoostClassifier,GradientBoostingClassifier]
 X,y=wine.data,wine.target
-df_importance=pandas.DataFrame(columns=range(13))
+df_importance=pd.DataFrame(columns=range(13))
 for i in range(2):
-    df_importance.loc[i]=classifiers[i]().fit(X,y).feature_importances_
-    pylab.plot(df_importance.loc[i],'-v',label=str(classifiers[i]()),
-               markersize=7,markerfacecolor="None",markeredgewidth=2)
-pylab.grid(color='gray')
-pylab.legend(loc=10,bbox_to_anchor=(1.9,0.5),fontsize=15)
+    df_importance.loc[i]=\
+    classifiers[i]().fit(X,y).feature_importances_
+    pl.plot(df_importance.loc[i],'-v',
+            label=str(classifiers[i]()),
+            markersize=7,markerfacecolor='None',
+            markeredgewidth=2)
+pl.legend(loc=9,bbox_to_anchor=(.5,1.17),fontsize=12)
+pl.grid(color='slategray'); pl.show()
 </script></div><br/>    
-  <h2>Try Other Languages (R, HTML, ...)</h2>
-<div class="compute"><script type="text/x-sage">
+  <h2>Other Languages (R, Javascript, HTML, ...)</h2>
+<div class='compute'><script type='text/x-sage'>
 %%r
 model.lm<-lm(dist~speed,data=cars) 
-cor.test(cars$speed, model.lm$residuals)
+cor.test(cars$speed,model.lm$residuals)
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+<div class='compute'><script type='text/x-sage'>
 %%html
 <style>
 @import url('https://fonts.googleapis.com/css?family=Ewert&effect=3d');
+text {fill:#fff; font-family:Ewert; font-size:35px}
 </style>
-<svg width="400" height="80">
-<linearGradient id="b" x2="0" y2="100%">
-<stop offset="0" stop-color="#aaa" stop-opacity=".1"/>
-<stop offset="1" stop-opacity=".5"/>
+<svg width='400' height='80' class='font-effect-3d'>
+<linearGradient id='b' x2='0' y2='100%'>
+<stop offset='0' stop-color='slategray' stop-opacity='.1'/>
+<stop offset='1' stop-opacity='.5'/>
 </linearGradient>
-<clipPath id="a"><rect width="400" height="80" rx="20"/></clipPath>
-<g clip-path="url(#a)">
-<path fill="#ff3636" d="M0 0h280v80H0z"/>
-<path fill="#3636ff" d="M280 0h120v80H280z"/>
-<path fill="url(#b)" d="M0 0h280v80H0z"/>
+<clipPath id='a'>
+<rect width='400' height='80' rx='20'/>
+</clipPath>
+<g clip-path='url(#a)'>
+<path fill='#ff3636' d='M0 0h280v80H0z'/>
+<path fill='#3636ff' d='M290 0h120v80H290z'/>
+<path fill='url(#b)' d='M0 0h290v80H0z'/>
+<path fill='url(#b)' d='M290 0h120v80H290z'/>
 </g>
-<g style="fill:#fff; font-family:Ewert; font-size:35" class="font-effect-3d">
-<text x="10" y="45">in progress</text><text x="320" y="45">%</text>
-</g>
+<text x='10' y='45'>in progress</text>
+<text x='325' y='45'>%</text>
 </svg>
 </script></div>
   </body>
