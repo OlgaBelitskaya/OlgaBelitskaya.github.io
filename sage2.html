@@ -1,111 +1,161 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>SageMath_Part2</title>
-    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
-    <script>$(function (){
-    sagecell.makeSagecell({inputLocation:'#examplecell',template:sagecell.templates.minimal,evalButtonText:'Activate'});
-    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Evaluate'});});
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width'>
+    <title>✒️SageMath_Part2</title>
+    <script src='https://sagecell.sagemath.org/static/embedded_sagecell.js'></script>
+    <script>$(function () {
+    sagecell.makeSagecell({inputLocation:'#cell1',evalButtonText:'activate',
+                           template:sagecell.templates.minimal});
+    sagecell.makeSagecell({inputLocation:'#cell2',evalButtonText:'activate again',
+                           autoeval:true});
+    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'evaluate'}); });
     </script>
-    <script data-ad-client="ca-pub-9200929962680356" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   </head>
   <style>
-  @import url('https://fonts.googleapis.com/css?family=Orbitron');
-  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
-  p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
+  @import url('https://fonts.googleapis.com/css?family=Akronim');
+  h1,h2 {color:#3636ff; font-family:'Akronim'; text-shadow:3px 3px 3px #aaa;}
+  .preactive {padding-left:2px; border:2px double slategray; 
+       font-size:110%; text-shadow:2px 2px 2px #aaa} 
+  p,a {color:darkblue; font-size:110%; text-shadow:3px 3px 3px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em; font-size:110%;}
+  body (margin:5px 5px5px 25px}
   </style>  
   <body>
   <h1>&#x1F4D1; &nbsp;SageMath Online Mini Campus. Part 2</h1>
-<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
-<a href="https://olgabelitskaya.github.io/sage.html">&#x1F300; &nbsp; Previous &nbsp; &nbsp;</a>
-<a href="https://olgabelitskaya.github.io/sage3.html">&#x1F300; &nbsp; Next &nbsp; &nbsp;</a><br/>
-<a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
-<a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a>
+<a href='https://olgabelitskaya.github.io/README.html'>&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
+<a href='https://olgabelitskaya.github.io/sage2.html'>&#x1F300; &nbsp; Next &nbsp; &nbsp;</a><br/>
+<a href='https://www.instagram.com/olga.belitskaya/'>&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
+<a href='https://www.pinterest.ru/olga_belitskaya/code-style/'>&#x1F300; &nbsp; Pinterest Posts</a>
     <p>The set of interactive pages with the following structure:</p>
-    <p>Example of Computations $\implies$ Your Field for Experiments $\implies$ Try Python Modules $\implies$ Try Other Languages</p> 
+    <p>Example of Computations $\mathbb{\implies}$ Your Experiments $\mathbb{\implies}$ 
+       Python Modules $\mathbb{\implies}$ Other Languages</p>
   <h2>Example of Computations</h2>
-    <p>Click the “Activate” button below to display an interactive example.</p>      
-<div id="examplecell"><script type="text/x-sage">
+    <p>Click the $\mathbb{activate}$ button below to display an interactive example.</p>
+<pre class='preactive'><code>
 @interact
 def _(N=(24,1,-1)):
     var('x'); f=sin(x)*exp(1)^(-x)
-    p=plot(f,-1,6,thickness=5,color='#3636ff',alpha=0.5)+\
+    p=plot(f,-1,6,thickness=5,color='#3636ff',alpha=.5)+\
     sum([plot(f.taylor(x,0,i),-1,6,hue=cos(i/24),thickness=1,
               legend_label=str(i)) for i in [1..N]])
-    p.show(ymin=-.5,ymax=0.5,figsize=(7,5),gridlines=True,
-           title=r'$Taylor \ Series \ f=sin \ x \cdot e^{-x}$',fontsize=12)
+    ti=r'$Taylor \ Series \ f=sin \ x \cdot e^{-x}$'
+    p.show(ymin=-.5,ymax=.5,figsize=(7,5),
+           gridlines=True,title=ti,fontsize=12)
+
+</code></pre><br/>
+<div id='cell1'><script type='text/x-sage'>
+@interact
+def _(N=(24,1,-1)):
+    var('x'); f=sin(x)*exp(1)^(-x)
+    p=plot(f,-1,6,thickness=5,color='#3636ff',alpha=.5)+\
+    sum([plot(f.taylor(x,0,i),-1,6,hue=cos(i/24),thickness=1,
+              legend_label=str(i)) for i in [1..N]])
+    ti=r'$Taylor \ Series \ f=sin \ x \cdot e^{-x}$'
+    p.show(ymin=-.5,ymax=.5,figsize=(7,5),
+           gridlines=True,title=ti,fontsize=12)
 </script></div>
-  <h2>Your Field for Experiments</h2>
-    <p>Type your own SageMath code lines below and click “Evaluate”.</p>
-<div class="compute"><script type="text/x-sage">
-Md=Manifold(2,'Md'); U=Md.open_subset('U'); V=Md.open_subset('V')
-XU.<x,y>=U.chart(); XV.<xp,yp>=V.chart("xp:x’ yp:y’"); Md.declare_union(U,V)
-XU_to_XV=XU.transition_map(XV,(2*x/(x^2+y^2),2*y/(x^2+y^2)),intersection_name='W',
-                           restrictions1=x^2+y^2!=0,restrictions2=xp^2+yp^2!=0)
-R3=Manifold(3,'R^3',r'\mathbb{R}^3'); XR3.<X,Y,Z>=R3.chart()
-Delta1=Md.diff_map(R3,{(XU,XR3):[2*x/(1+x^2+y^2),2*y/(1+x^2+y^2),(x^2+y^2-1)/(1+x^2+y^2)],
-                       (XV,XR3):[4*xp/(1+xp^2+yp^2),4*yp/(1+xp^2+yp^2),(1-xp^2-yp^2)/(1+xp^2+yp^2)]},
+  <h2>Your Experiments</h2>
+    <p>Type your own SageMath code lines below and click the $\mathbb{evaluate}$ button.</p>
+<div class='compute'><script type='text/x-sage'>
+Md=Manifold(2,'Md')
+U=Md.open_subset('U'); V=Md.open_subset('V')
+XU.<x,y>=U.chart(); XV.<xp,yp>=V.chart('xp:x’ yp:y’')
+Md.declare_union(U,V)
+XU_to_XV=XU.transition_map(
+    XV,(2*x/(x^2+y^2),2*y/(x^2+y^2)),
+    intersection_name='W',
+    restrictions1=x^2+y^2!=0,
+    restrictions2=xp^2+yp^2!=0)
+R3=Manifold(3,'R^3',r'\mathbb{R}^3')
+XR3.<X,Y,Z>=R3.chart()
+Delta1=Md.diff_map(
+    R3,{(XU,XR3):[2*x/(1+x^2+y^2),2*y/(1+x^2+y^2),
+                  (x^2+y^2-1)/(1+x^2+y^2)],
+        (XV,XR3):[3*xp/(1+xp^2+yp^2),3*yp/(1+xp^2+yp^2),
+                  (1-xp^2-yp^2)/(1+xp^2+yp^2)]},
                    name='Delta1',latex_name=r'\Delta_1')
-Delta2=Md.diff_map(R3,{(XU, XR3):[x/(1+x^2+y^2),y/(1+x^2+y^2),(x^2+y^2-1)/(1+x^2+y^2)],
-                       (XV, XR3):[8*xp/(1+xp^2+yp^2),8*yp/(1+xp^2+yp^2),(1-xp^2-yp^2)/(1+xp^2+yp^2)]},
+Delta2=Md.diff_map(
+    R3,{(XU, XR3):[x/(1+x^2+y^2),y/(1+x^2+y^2),
+                   (x^2+y^2-1)/(1+x^2+y^2)],
+        (XV, XR3):[4*xp/(1+xp^2+yp^2),4*yp/(1+xp^2+yp^2),
+                   (1-xp^2-yp^2)/(1+xp^2+yp^2)]},
                    name='Delta2',latex_name=r'\Delta_2')
-XU.plot(chart=XR3,mapping=Delta1,number_values=30,color='darkblue',label_axes=False)+\
-XV.plot(chart=XR3,mapping=Delta1,number_values=30,color='#ff3636',label_axes=False)+\
-XU.plot(chart=XR3,mapping=Delta2,number_values=30,color='darkred',label_axes=False)+\
-XV.plot(chart=XR3,mapping=Delta2,number_values=30,color='#3636ff',label_axes=False)
+cols=['darkblue','#ff3636','darkred','#3636ff']
+elements=[(XU,Delta1),(XV,Delta1),(XU,Delta2),(XV,Delta2)]
+p=sum([elements[i][0].plot(
+           chart=XR3,mapping=elements[i][1],
+           number_values=50,color=cols[i],label_axes=False)
+       for i in range(4)])
+p.show(frame=False)
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+  <p>This code cell was evaluated automatically.</p>
+<div id='cell2'><script type='text/x-sage'>
 @interact
 def _(a=(2,4,1),b=(4,8,1),c=(4,8,1),n=(2,8,1),m=(2,8,1)):
-    var('t'); r=cos(a*t)^n+sin(b*t)^m+1/c
-    pretty_print(html('<center><font color="#3636ff">$r = %s$</font></center>'%latex(r)))
-    p=parametric_plot((sin(t)*r,cos(t)*r),(0,2*pi),color='#3636ff',fill=True,fillcolor='#3636ff')
-    p+=plot(r,(0,2*pi),linestyle='--',color='#3636ff',gridlines=True)
-    show(p,figsize=(7,7),xmin=-2.2-1/c,xmax=6.3+1/c,ymin=-2-1/c,ymax=2+1/c)
+    var('t'); r=cos(a*t)^n+sin(b*t)^m+1/c; col='#3636ff'
+    string='<center><font color=%s>$r = %s$</font></center>'
+    pretty_print(html(string%(col,latex(r))))
+    p=parametric_plot((sin(t)*r,cos(t)*r),(0,2*pi),
+                      color=col,fill=True,fillcolor=col)
+    p+=plot(r,(0,2*pi),linestyle='--',color=col,gridlines=True)
+    show(p,figsize=(7,7),
+         xmin=-2.2-1/c,xmax=6.4+1/c,ymin=-2-1/c,ymax=2+1/c)
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+<div class='compute'><script type='text/x-sage'>
 g=Graphics()
-f1(x,y)=x^2+x*y+y^2+2*x+6*y+3; f2(x,y)=x^2+x*y-y^2+2*x+6*y+3;
-g+=implicit_plot(f1,(-8,8),(-8,8),color='#3636ff')
-g+=text('$x^2+xy+y^2+2x+6y+3=0$',(1,-7),color='#3636ff',fontsize=12)
-g+=implicit_plot(f2,(-8,8),(-8,8),color='#ff36ff')
-g+=text('$x^2+xy-y^2+2x+6y+3=0$',(1,3),color='#ff36ff',fontsize=12)
+f1(x,y)=x^2+x*y+y^2+2*x+6*y+3
+f2(x,y)=x^2+x*y-y^2+2*x+6*y+3
+g+=implicit_plot(f1,(-8,8),(-8,8),color='#3636ff',
+                 linewidth=2,linestyle='-.')
+g+=text('$x^2+xy+y^2+2x+6y+3=0$',
+        (1,-7),color='#3636ff',fontsize=14)
+g+=implicit_plot(f2,(-8,8),(-8,8),color='#ff36ff',
+                 linewidth=4,linestyle=':')
+g+=text('$x^2+xy-y^2+2x+6y+3=0$',
+        (1,3),color='#ff36ff',fontsize=14)
 g.show(figsize=[7,7],gridlines=True)
 </script></div>       
-  <h2>Try Python Modules</h2>
-<div class="compute"><script type="text/x-sage">
-%matplotlib inline
-import numpy,pylab,matplotlib.colors; from mpl_toolkits.mplot3d import Axes3D
-x,y,z=numpy.indices((13,13,13)); link=(x-6)**2+(y-5)**2+(z-6)**2==45
-f=pylab.figure(figsize=(14,14)); ax=f.gca(projection='3d')
-ax.voxels(link,facecolors=pylab.cm.bwr((x+y+x)*8),edgecolor='darkslategray')
-pylab.title('$(x-6)^2+(y-5)^2+(z-6)^2=45$'); pylab.axis(c='darkslategray')
+  <h2>Python Modules</h2>
+<div class='compute'><script type='text/x-sage'>
+import numpy as np,pylab as pl 
+from mpl_toolkits.mplot3d import Axes3D
+x,y,z=np.indices((13,13,13))
+link=(x-6)**2+(y-5)**2+(z-6)**2==45
+f=pl.figure(figsize=(7,7))
+ax=f.gca(projection='3d')
+ax.voxels(link,facecolors=pl.cm.bwr((x+y+x)*8),
+          edgecolor='darkslategray')
+ti='$(x-6)^2+(y-5)^2+(z-6)^2=45}$'
+pl.title(ti,fontsize=14,color='#3636ff')
+pl.tight_layout(); pl.show()
 </script></div> 
-  <h2>Try Other Languages (R, HTML, ...)</h2>
-<div class="compute"><script type="text/x-sage">
+  <h2>Other Languages (R, HTML, ...)</h2>
+<div class='compute'><script type='text/x-sage'>
 %%html
-<p id="js_output"></p>
+<p>Calculation the number of symbols in strings:</p>
+<p id='script_output'>evaluate the next code cell</p>
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+<div class='compute'><script type='text/x-sage'>
 %%javascript
-function getInteger(min,max) {return Math.floor(Math.random()*(max-min+1))+min;};
-var string='@@@***морозИсолнцеДЕНЬчудестный***@@@'+getInteger(1,Math.pow(10,5));
-document.getElementById("js_output").innerHTML=string+' - '+string.length+' symbols';
+function getInteger(min,max) {
+    return Math.floor(Math.random()*(max-min+1))+min;};
+var string='@@@***морозИсолнцеДЕНЬчудестный***@@@'
+           +getInteger(1,19);
+document.getElementById('script_output')
+        .innerHTML=string+' - '+string.length+' symbols';
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+<div class='compute'><script type='text/x-sage'>
 %%html
-<p style="color:darkred; font-size:250%; text-shadow:5px 5px 5px #aaa;">
-&#x1F4D5; &nbsp; $\mathfrak {Choose \ your \ style!}$
-</p>
-<p style="color:darkslategray; font-size:250%; text-shadow:5px 5px 5px #bbb;">
-&#x1F4D3; &nbsp; $\mathbb {Choose \ your \ style!}$
-</p>                                                                           
-<p style="color:steelblue; font-size:250%; text-shadow:5px 5px 5px #ccc;">
-&#x1F4D8; &nbsp; $\mathscr {Choose \ your \ style!}$
-</p>
+<style>
+.text1 {color:darkred; font-size:200%; text-shadow:3px 3px 3px #aaa;}
+.text2 {color:darkslategray; font-size:200%; text-shadow:3px 3px 3px #bbb;}
+.text3 {color:steelblue; font-size:200%; text-shadow:3px 3px 3px #ccc;}
+</style>
+<p class='text1'>&#x1F4D5; &nbsp; $\mathfrak {Choose \ your \ style!}$</p>
+<p class='text2'>&#x1F4D3; &nbsp; $\mathbb {Choose \ your \ style!}$</p>
+<p class='text3'>&#x1F4D8; &nbsp; $\mathscr {Choose \ your \ style!}$</p>
 </script></div> 
   </body>
 </html>
