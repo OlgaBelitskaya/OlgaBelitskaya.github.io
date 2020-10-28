@@ -1,46 +1,64 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>SageMath_Part6</title>
-    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
-    <script>$(function (){
-    sagecell.makeSagecell({inputLocation:'#examplecell',template:sagecell.templates.minimal,evalButtonText:'Activate'});
-    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Evaluate'});});
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width'>
+    <title>✒️SageMath_Part6</title>
+    <script src='https://sagecell.sagemath.org/static/embedded_sagecell.js'></script>
+    <script>$(function () {
+    sagecell.makeSagecell({inputLocation:'#cell1',evalButtonText:'activate',
+                           template:sagecell.templates.minimal});
+    sagecell.makeSagecell({inputLocation:'#cell2',evalButtonText:'activate again',
+                           autoeval:true});
+    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'evaluate'}); });
     </script>
-    <script data-ad-client="ca-pub-9200929962680356" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   </head>
   <style>
-  @import url('https://fonts.googleapis.com/css?family=Orbitron');
-  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
-  p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:26em;}
+  @import url('https://fonts.googleapis.com/css?family=Akronim');
+  h1,h2 {color:#3636ff; font-family:'Akronim'; text-shadow:3px 3px 3px #aaa;}
+  .preactive {padding-left:2px; border:2px double slategray; 
+       font-size:110%; text-shadow:2px 2px 2px #aaa} 
+  p,a {color:darkblue; font-size:110%; text-shadow:3px 3px 3px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em; font-size:110%;}
+  body (margin:5px 5px5px 25px}
   </style>  
   <body>
   <h1>&#x1F4D1; &nbsp;SageMath Online Mini Campus. Part 6</h1>
-<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
-<a href="https://olgabelitskaya.github.io/sage5.html">&#x1F300; &nbsp; Previous &nbsp; &nbsp;</a>
-<a href="https://olgabelitskaya.github.io/sage7.html">&#x1F300; &nbsp; Next &nbsp; &nbsp;</a><br/>
-<a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
-<a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a>
+<a href='https://olgabelitskaya.github.io/README.html'>&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
+<a href='https://olgabelitskaya.github.io/sage2.html'>&#x1F300; &nbsp; Next &nbsp; &nbsp;</a><br/>
+<a href='https://www.instagram.com/olga.belitskaya/'>&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
+<a href='https://www.pinterest.ru/olga_belitskaya/code-style/'>&#x1F300; &nbsp; Pinterest Posts</a>
     <p>The set of interactive pages with the following structure:</p>
-    <p>Example of Computations $\implies$ Your Field for Experiments $\implies$ Try Python Modules $\implies$ Try Other Languages</p>
+    <p>Example of Computations $\mathbb{\implies}$ Your Experiments $\mathbb{\implies}$ 
+       Python Modules $\mathbb{\implies}$ Other Languages</p>
   <h2>Example of Computations</h2>
-    <p>Click the “Activate” button below to display an interactive example.</p>      
-<div id="examplecell"><script type="text/x-sage">
+    <p>Click the $\mathbb{activate}$ button below to display an interactive example.</p>
+<pre class='preactive'><code>
 @interact
 def _(x=(1,5,1),y=(1,5,1),z=(1,5,1)):
-    av=vector(SR,[x,y,z]); bv=vector(SR,[x,y,-z]); cv=av.cross_product(bv)
-    a=arrow3d((0,0,0),av,color='#ff3636',width=(x+y+z)/1.5)+text3d('a',av*1.1)
-    b=arrow3d((0,0,0),bv,color='#3636ff',width=(x+y+z)/1.5)+text3d('b',bv*1.1)    
-    c=arrow3d((0,0,0),cv,color='#ff36ff',width=(x+y+z)/1.5)+text3d('axb',cv*1.1)
+    ov=(0,0,0); av=vector(SR,[x,y,z])
+    bv=vector(SR,[x,y,-z]); cv=av.cross_product(bv)
+    a=arrow3d(ov,av,color='#ff3636',width=(x+y+z)/1.5)+text3d('a',av*1.1)
+    b=arrow3d(ov,bv,color='#3636ff',width=(x+y+z)/1.5)+text3d('b',bv*1.1)    
+    c=arrow3d(ov,cv,color='#ff36ff',width=(x+y+z)/1.5)+text3d('axb',cv*1.1)
+    pretty_print('a={x,y,z}; b={x,y,-z}')
+    (a+b+c).show()
+
+</code></pre><br/>
+<div id='cell1'><script type='text/x-sage'>
+@interact
+def _(x=(1,5,1),y=(1,5,1),z=(1,5,1)):
+    ov=(0,0,0); av=vector(SR,[x,y,z])
+    bv=vector(SR,[x,y,-z]); cv=av.cross_product(bv)
+    a=arrow3d(ov,av,color='#ff3636',width=(x+y+z)/1.5)+text3d('a',av*1.1)
+    b=arrow3d(ov,bv,color='#3636ff',width=(x+y+z)/1.5)+text3d('b',bv*1.1)    
+    c=arrow3d(ov,cv,color='#ff36ff',width=(x+y+z)/1.5)+text3d('axb',cv*1.1)
     pretty_print('a={x,y,z}; b={x,y,-z}')
     (a+b+c).show()
 </script></div>
-  <h2>Your Field for Experiments</h2>
-    <p>Type your own SageMath code lines below and click “Evaluate”.</p>     
-<div class="compute"><script type="text/x-sage">
+  <h2>Your Experiments</h2>
+    <p>Type your own SageMath code lines below and click the $\mathbb{evaluate}$ button.</p>
+<div class='compute'><script type='text/x-sage'>
 var('x,y,z'); f=x^2+y^2-z^2
 p=sum([implicit_plot3d(f,(x,-t,t),(y,-t,t),(z,-t,0),
                        contour=0,frame=False,plot_points=20,
@@ -48,58 +66,72 @@ p=sum([implicit_plot3d(f,(x,-t,t),(y,-t,t),(z,-t,0),
                        color='#3636ff') for t in [3,6]])
 p.show()
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+  <p>This code cell was evaluated automatically.</p>
+<div id='cell2'><script type='text/x-sage'>
 from sage.plot.plot3d.shapes import Box
-var('t'); tr(t)=(sin(t/20)*cos(t/20),cos(t/30),sin(t/20)*sin(t/20))
+var('t')
+tr(t)=(2*sin(t/20)*cos(t/20),cos(t/30),2*sin(t/20)**2)
 @interact
 def _(N=(210,0,-30)):
-    sum([Box([0.1,0.1,0.001],color=(0.1*i,0.2*i,1))\
-    .translate(tr(i)) for i in [0..N]]).show()
+    p=sum([Box([.1,.1,.001],color=(.3*i,.1*i,1))\
+           .translate(tr(i)) for i in [0..N]])
+    p.show(frame=False)
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+<div class='compute'><script type='text/x-sage'>
 var('x,y,z'); 
-p1=implicit_plot3d(x^2/1^2-y^2/2^2,(x,-3,3),(y,-3,3),(z,-3,3),
-                   contour=0,color=(cos(x+y)*sin(z),colormaps.bwr))
-p2=implicit_plot3d(y^2-1^2,(x,-3,3),(y,-3,3),(z,-3,3),
-                   contour=0,opacity=0.7,color='#3636ff',frame=False)
-(p1+p2).show()
+p1=implicit_plot3d(
+    x^2/1^2-y^2/2^2,(x,-3,3),(y,-3,3),(z,-3,3),
+    contour=0,color=(cos(x+y)*sin(z),colormaps.bwr))
+p2=implicit_plot3d(
+    y^2-1^2,(x,-3,3),(y,-3,3),(z,-3,3),
+    contour=0,opacity=.7,color='#3636ff')
+(p1+p2).show(frame=False)
 </script></div>       
-  <h2>Try Python Modules</h2>
-<div class="compute"><script type="text/x-sage">
-import pylab,numpy; from mpl_toolkits.mplot3d import Axes3D
+  <h2>Python Modules</h2>
+<div class='compute'><script type='text/x-sage'>
+import pylab,numpy
+from mpl_toolkits.mplot3d import Axes3D
 pylab.rcParams['grid.color']='steelblue'
 pylab.rcParams['grid.linestyle']='--'
-f=pylab.figure(figsize=(8,8)); ax=f.add_subplot(111,projection='3d')
+f=pylab.figure(figsize=(7,7))
+ax=f.add_subplot(111,projection='3d')
 X=numpy.linspace(-7,7,128); X,Y=numpy.meshgrid(X,X)
 Z1=1/2*X**2+1/8*Y**2; Z1[Z1>6]=numpy.nan;
-Z2=1/8*X**2-1/18*Y**2; Z2[Z2<-6]=numpy.nan; Z2[Z2>6]=numpy.nan;
-ax.plot_wireframe(X,Y,Z1,alpha=0.7,colors='#ff3636')
-ax.plot_wireframe(X,Y,Z2,alpha=0.4,colors='#3636ff')
-ax.text(2,7,7,r'$x^2/1^2+y^2/2^2=2 \cdot z$',color='#ff3636',fontsize=15)
-ax.text(-12,-7,-7,r'$x^2/2^2-y^2/3^2=2 \cdot z$',color='#3636ff',fontsize=15)
-ax.xaxis.pane.fill,ax.yaxis.pane.fill,ax.zaxis.pane.fill=False,False,False
-ax.set_xlim(-7,7); ax.set_ylim(-7,7); ax.set_zlim(-7,7); pylab.show()
+Z2=1/8*X**2-1/18*Y**2
+Z2[Z2<-6]=numpy.nan; Z2[Z2>6]=numpy.nan;
+ax.plot_wireframe(X,Y,Z1,alpha=.7,colors='#ff3636')
+ax.plot_wireframe(X,Y,Z2,alpha=.4,colors='#3636ff')
+l1=r'$\frac{x^2}{1^2}+\frac{y^2}{2^2}=2 \cdot z$'
+l2=r'$\frac{x^2}{2^2}-\frac{y^2}{3^2}=2 \cdot z$'
+ax.text(2,7,7,l1,color='#ff3636',fontsize=15)
+ax.text(-12,-7,-7,l2,color='#3636ff',fontsize=15)
+ax.xaxis.pane.fill,ax.yaxis.pane.fill,ax.zaxis.pane.fill=\
+False,False,False
+ax.set_xlim(-7,7); ax.set_ylim(-7,7); ax.set_zlim(-7,7)
+pylab.show()
 </script></div> 
-  <h2>Try Other Languages (R, HTML, ...)</h2>
-<div class="compute"><script type="text/x-sage">
+  <h2>Other Languages (R, HTML, ...)</h2>
+<div class='compute'><script type='text/x-sage'>
 %%r
 c<-c(2,0,-2); d<-c(1,2,1)
 vector_product3d<-function(x,y){
     c(x[2]*y[3]-x[3]*y[2],
       -x[1]*y[3]+x[3]*y[1],
       x[1]*y[2]-x[2]*y[1])}
-cat('c+d; c*d; cxd =>')
+cat('c+d; c*d; cxd =>=>=>')
 c(c+d,c%*%d,vector_product3d(c,d))
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+<div class='compute'><script type='text/x-sage'>
 %%html
 <style>
-@import url('https://fonts.googleapis.com/css?family=Ewert&effect=fire-animation');
+@import 
+url('https://fonts.googleapis.com/css?family=Ewert&effect=fire-animation');
+h3 {font-family:Ewert; font-size:200%;}
+.orange {color:#ff6600;} .green {color:#66ff00;}
 </style>
-<h2 style="color:#ffaa36; font-family:Ewert; font-size:200%;" 
-    class="font-effect-fire-animation">
-Ewert Font and Fire Animation Effect
-</h2>
+<h3 class='font-effect-fire-animation'>
+<text class='orange'>Ewert Font</text> & 
+<text class='green'>Fire Animation Effect</text></h3>
 </script></div> 
   </body>
 </html>
