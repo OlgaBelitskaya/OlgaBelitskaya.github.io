@@ -1,34 +1,54 @@
 <!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>SageMath_Part9</title>
-    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
-    <script>$(function (){
-    sagecell.makeSagecell({inputLocation:'#examplecell',template:sagecell.templates.minimal,evalButtonText:'Activate'});
-    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Evaluate'});});
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width'>
+    <title>✒️SageMath_Part9</title>
+    <script src='https://sagecell.sagemath.org/static/embedded_sagecell.js'></script>
+    <script>$(function () {
+    sagecell.makeSagecell({inputLocation:'#cell1',evalButtonText:'activate',
+                           template:sagecell.templates.minimal});
+    sagecell.makeSagecell({inputLocation:'#cell2',evalButtonText:'activate again',
+                           autoeval:true});
+    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'evaluate'}); });
     </script>
-    <script data-ad-client="ca-pub-9200929962680356" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   </head>
   <style>
-  @import url('https://fonts.googleapis.com/css?family=Orbitron');
-  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
-  p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:50em;}
+  @import url('https://fonts.googleapis.com/css?family=Akronim');
+  h1,h2 {color:#3636ff; font-family:'Akronim'; text-shadow:3px 3px 3px #aaa;}
+  .preactive {padding-left:2px; border:2px double slategray; 
+              font-size:110%; text-shadow:2px 2px 2px #aaa} 
+  p,a {color:darkblue; font-size:110%; text-shadow:3px 3px 3px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em; font-size:110%;}
+  body (margin:5px 5px5px 25px}
   </style>  
   <body>
   <h1>&#x1F4D1; &nbsp;SageMath Online Mini Campus. Part 9</h1>
-<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
-<a href="https://olgabelitskaya.github.io/sage8.html">&#x1F300; &nbsp; Previous &nbsp; &nbsp;</a>
-<a href="https://olgabelitskaya.github.io/sage10.html">&#x1F300; &nbsp; Next &nbsp; &nbsp;</a><br/>
-<a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
-<a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a>
+<a href='https://olgabelitskaya.github.io/README.html'>&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
+<a href='https://olgabelitskaya.github.io/sage2.html'>&#x1F300; &nbsp; Next &nbsp; &nbsp;</a><br/>
+<a href='https://www.instagram.com/olga.belitskaya/'>&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
+<a href='https://www.pinterest.ru/olga_belitskaya/code-style/'>&#x1F300; &nbsp; Pinterest Posts</a>
     <p>The set of interactive pages with the following structure:</p>
-    <p>Example of Computations $\implies$ Your Field for Experiments $\implies$ Try Python Modules $\implies$ Try Other Languages</p>   
+    <p>Example of Computations $\mathbb{\implies}$ Your Experiments $\mathbb{\implies}$ 
+       Python Modules $\mathbb{\implies}$ Other Languages</p>
   <h2>Example of Computations</h2>
-    <p>Click the “Activate” button below to display an interactive example.</p>      
-<div id="examplecell"><script type="text/x-sage">
+    <p>Click the $\mathbb{activate}$ button below to display an interactive example.</p>
+<pre class='preactive'><code>
+@interact
+def _(n=[95,90,..,5]):
+    g=graphs.CubeGraph(4); edge_colors={}; 
+    c=[colormaps.hsv_r(n*i)[:3] for i in [0..3]]
+    for i in [0..3]: edge_colors[c[i]]=[]
+    for u,v,l in g.edges():
+        [edge_colors[c[i]].append((u,v,l)) 
+         for i in [0..3] if u[i]!=v[i]] 
+    g=g.graphplot(edge_colors=edge_colors,edge_thickness=2.5,
+                  vertex_labels=False,vertex_size=0)
+    g.show(figsize=(5,5))
+
+</code></pre><br/>
+<div id='cell1'><script type='text/x-sage'>
 @interact
 def _(n=[95,90,..,5]):
     g=graphs.CubeGraph(4); edge_colors={}; 
@@ -41,23 +61,24 @@ def _(n=[95,90,..,5]):
                   vertex_labels=False,vertex_size=0)
     g.show(figsize=(5,5))
 </script></div>
-  <h2>Your Field for Experiments</h2>
-    <p>Type your own SageMath code lines below and click “Evaluate”.</p>      
-<div class="compute"><script type="text/x-sage">
+   <h2>Your Experiments</h2>
+    <p>Type your own SageMath code lines below and click the $\mathbb{evaluate}$ button.</p>
+<div class='compute'><script type='text/x-sage'>
 @interact
 def _(n=[4..7]):
     var('z'); cf=z^n+1/z^n; d=2
     p=complex_plot(cf,(-d,d),(-d,d))
     p.show(figsize=(5,5))
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+  <p>This code cell was evaluated automatically.</p>
+<div id='cell2'><script type='text/x-sage'>
 @interact
 def _(N=[1,2,4,5,10,20]):
     D=graphs.DodecahedralGraph()
     p=[[i..i+N-1] for i in [0,N,..,20-N]]
     D.show(partition=p,figsize=(5,5))
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+<div class='compute'><script type='text/x-sage'>
 @interact
 def _(n=[4..8],b=[.25,.3,..,.75]):
     var('x,y'); f=cos(x^n+y^n); t=3.
@@ -65,46 +86,57 @@ def _(n=[4..8],b=[.25,.3,..,.75]):
                   incol='#3636ff',plot_points=220)
     p.show(figsize=(5,5))
 </script></div>   
-  <h2>Try Python Modules</h2>
-<div class="compute"><script type="text/x-sage">
+  <h2>Python Modules</h2>
+<div class='compute'><script type='text/x-sage'>
 import pylab; from skimage import io,color,measure
 from IPython.core.magic import register_line_magic
 @register_line_magic
 def vector(file):
-    img=io.imread("https://olgabelitskaya.github.io/"+file)
-    level=.855; gray_img=color.colorconv.rgb2grey(img) 
+    file_path='https://olgabelitskaya.github.io/'
+    img=io.imread(file_path+file)
+    level=.853; img=color.colorconv.rgba2rgb(img) 
+    gray_img=color.colorconv.rgb2gray(img) 
     contours=measure.find_contours(gray_img,level)
-    pylab.figure(figsize=(5,5)); pylab.gca().invert_yaxis()
+    pylab.figure(figsize=(5,5))
+    pylab.gca().invert_yaxis()
+    pylab.imshow(img,alpha=.1)
     [pylab.plot(c[:,1],c[:,0],lw=1) for c in contours]
     pylab.xticks([]); pylab.yticks([]); pylab.show()
 %vector pattern03.jpeg
 </script></div>      
-  <h2>Try Other Languages (R, HTML, ...)</h2>
-<div class="compute"><script type="text/x-sage">
+  <h2>Other Languages (R, HTML, ...)</h2>
+<div class='compute'><script type='text/x-sage'>
 %%r
 replace_function<-function(w) {
-    while (grepl("7777",w) | grepl("8888",w)) { 
+    while (grepl('7777',w) | grepl('8888',w)) { 
         print(w)
-        if (grepl("7777",w)) { w<-sub('7777','8',w) } 
+        if (grepl('7777',w)) { w<-sub('7777','8',w) } 
         else { w<-sub('8888','7',w) } }   
     return(w) }
-string<-paste(replicate(70,"7"),collapse="")
+string<-paste(replicate(70,'7'),collapse='')
 replace_function(string)
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+<div class='compute'><script type='text/x-sage'>
 %%html
 <style>
 text {font-size:500%;}
-emoji {margin:0; color:transparent; text-shadow:0 0 7px #3636ff; 
-       font-size:500%; position:relative;}
-emoji::before {content:attr(title); position:absolute; 
-               text-shadow:0 0 0 #fff;}     
+.trans,.comb {margin:0; color:transparent;
+              text-shadow:0 0 5px #3636ff; 
+              font-size:500%; position:relative;}
+.trans::before {content:attr(title); position:absolute; 
+                text-shadow:0 0 0 white;}   
+.comb::before {content:attr(title); position:absolute; 
+               text-shadow:0 0 0 slategray;}
 </style>
-<emoji title="&#x1F985">&#x1F310</emoji> <text>&nbsp; &#x1F985</text> 
-<br></br> 
-<emoji title="&#x1F3A1">&#x1F3A1</emoji> <text>&nbsp; &#x1F3A1</text>
-<br></br> 
-<emoji title="&#x1F3A0">&#x1F3A1</emoji> <text>&nbsp; &#x1F3A0</text> 
+<emoji class='trans' title='&#x1F985'>&#x1F985</emoji>
+&nbsp;<emoji class='comb' title='&#x1F985'>&#x1F3A1</emoji>
+&nbsp;<text>&#x1F985</text><br></br> 
+<emoji class='trans' title="&#x1F3A1">&#x1F3A1</emoji>
+&nbsp;<emoji class='comb' title='&#x1F3A1'>&#x1F3A1</emoji>
+&nbsp;<text>&#x1F3A1</text><br></br> 
+<emoji class='trans' title="&#x1F3A0">&#x1F3A0</emoji>
+&nbsp;<emoji class='comb' title='&#x1F3A0'>&#x1F3A1</emoji>
+<text>&#x1F3A0</text>
 </script></div>
   </body>
 </html>
