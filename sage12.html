@@ -1,34 +1,39 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>SageMath_Part12</title>
-    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
-    <script>$(function (){
-    sagecell.makeSagecell({inputLocation:'#examplecell',template:sagecell.templates.minimal,evalButtonText:'Activate'});
-    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Evaluate'});});
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width'>
+    <title>✒️SageMath_Part12</title>
+    <script src='https://sagecell.sagemath.org/static/embedded_sagecell.js'></script>
+    <script>$(function () {
+    sagecell.makeSagecell({inputLocation:'#cell1',evalButtonText:'activate',
+                           template:sagecell.templates.minimal});
+    sagecell.makeSagecell({inputLocation:'#cell2',evalButtonText:'activate again',
+                           autoeval:true});
+    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'evaluate'}); });
     </script>
-    <script data-ad-client="ca-pub-9200929962680356" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   </head>
   <style>
-  @import url('https://fonts.googleapis.com/css?family=Orbitron');
-  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
-  p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
+  @import url('https://fonts.googleapis.com/css?family=Akronim');
+  h1,h2 {color:#3636ff; font-family:'Akronim'; text-shadow:3px 3px 3px #aaa;}
+  .preactive {padding-left:2px; border:2px double slategray; 
+              font-size:110%; text-shadow:2px 2px 2px #aaa} 
+  p,a {color:darkblue; font-size:110%; text-shadow:3px 3px 3px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em; font-size:110%;}
+  body (margin:5px 5px5px 25px}
   </style>  
   <body>
   <h1>&#x1F4D1; &nbsp;SageMath Online Mini Campus. Part 12</h1>
-<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
-<a href="https://olgabelitskaya.github.io/sage11.html">&#x1F300; &nbsp; Previous &nbsp; &nbsp;</a>
-<a href="https://olgabelitskaya.github.io/sage13.html">&#x1F300; &nbsp; Next &nbsp; &nbsp;</a><br/>
-<a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
-<a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a>
+<a href='https://olgabelitskaya.github.io/README.html'>&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
+<a href='https://olgabelitskaya.github.io/sage2.html'>&#x1F300; &nbsp; Next &nbsp; &nbsp;</a><br/>
+<a href='https://www.instagram.com/olga.belitskaya/'>&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
+<a href='https://www.pinterest.ru/olga_belitskaya/code-style/'>&#x1F300; &nbsp; Pinterest Posts</a>
     <p>The set of interactive pages with the following structure:</p>
-    <p>Example of Computations $\implies$ Your Field for Experiments $\implies$ Try Python Modules $\implies$ Try Other Languages</p>
+    <p>Example of Computations $\mathbb{\implies}$ Your Experiments $\mathbb{\implies}$ 
+       Python Modules $\mathbb{\implies}$ Other Languages</p>
   <h2>Example of Computations</h2>
-    <p>Click the “Activate” button below to display an interactive example.</p>      
-<div id="examplecell"><script type="text/x-sage">
+    <p>Click the $\mathbb{activate}$ button below to display an interactive example.</p>
+<pre class='preactive'><code>
 @interact
 def _(Graph=['Petersen','Moebius Kantor','Dodecahedral',
              'Icosahedral','Kittell','Flower Snark']):
@@ -38,21 +43,42 @@ def _(Graph=['Petersen','Moebius Kantor','Dodecahedral',
                 'Icosahedral':graphs.IcosahedralGraph(),
                 'Kittell':graphs.KittellGraph(),
                 'Petersen':graphs.PetersenGraph()}
-    g=graph_dict[Graph]; [g.set_edge_label(u,v,u) for u,v,l in g.edges()]
-    gp=g.graphplot(vertex_labels=False,vertex_size=0,color_by_label=True)
+    g=graph_dict[Graph]; [g.set_edge_label(u,v,u) 
+                          for u,v,l in g.edges()]
+    gp=g.graphplot(vertex_labels=False,vertex_size=0,
+                   color_by_label=True)
+    gp.show(figsize=(5,5))
+
+</code></pre><br/>
+<div id='cell1'><script type='text/x-sage'>
+@interact
+def _(Graph=['Petersen','Moebius Kantor','Dodecahedral',
+             'Icosahedral','Kittell','Flower Snark']):
+    graph_dict={'Moebius Kantor':graphs.MoebiusKantorGraph(),
+                'Flower Snark':graphs.FlowerSnark(),
+                'Dodecahedral':graphs.DodecahedralGraph(),
+                'Icosahedral':graphs.IcosahedralGraph(),
+                'Kittell':graphs.KittellGraph(),
+                'Petersen':graphs.PetersenGraph()}
+    g=graph_dict[Graph]; [g.set_edge_label(u,v,u) 
+                          for u,v,l in g.edges()]
+    gp=g.graphplot(vertex_labels=False,vertex_size=0,
+                   color_by_label=True)
     gp.show(figsize=(5,5))
 </script></div>
-  <h2>Your Field for Experiments</h2>
-    <p>Type your own SageMath code lines below and click “Evaluate”.</p>     
-<div class="compute"><script type="text/x-sage">
+   <h2>Your Experiments</h2>
+    <p>Type your own SageMath code lines below and click the $\mathbb{evaluate}$ button.</p>
+<div class='compute'><script type='text/x-sage'>
 i=CDF.gen(); N=500 
 z=[zeta(0.1*(5+n*i)) for n in range(N)]
 sum([line([(z[n].real(),z[n].imag()),
-           (z[n+1].real(),z[n+1].imag())],gridlines=True,
+           (z[n+1].real(),z[n+1].imag())],
+          gridlines=True,
           color=colormaps.hsv(abs(255-n))[:3]) 
      for n in range(N-1)]).show(figsize=(7,5))
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+  <p>This code cell was evaluated automatically.</p>
+<div id='cell2'><script type='text/x-sage'>
 pretty_print('Probability of an Edge in Percentage')
 @interact
 def _(p=(100,0,-10)):
@@ -61,7 +87,7 @@ def _(p=(100,0,-10)):
     vc={Color('#3636ff'):list(g)}
     g.show3d(edge_colors=ec,vertex_colors=vc)
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+<div class='compute'><script type='text/x-sage'>
 @interact
 def _(cmap=['cool','prism','jet','flag',
             'gnuplot','tab10','tab20']):
@@ -73,8 +99,8 @@ def _(cmap=['cool','prism','jet','flag',
                     label_fmt=ld,label_colors='black')
     cp.show(figsize=(7,7))
 </script></div>      
-  <h2>Try Python Modules</h2>
-<div class="compute"><script type="text/x-sage">
+  <h2>Python Modules</h2>
+<div class='compute'><script type='text/x-sage'>
 import sympy; sympy.init_printing(use_unicode=True)
 A=sympy.Matrix([[-3,-3,-6],[-4,-7,8]])
 B=sympy.Matrix([[2,8,7],[-5,-6,-2],[-8,4,-8],[7,4,-6]])
@@ -83,23 +109,23 @@ D=sympy.Matrix([[-2,-3,-1,3],[-2,-9,8,9]])
 alpha,beta=2,-5 
 alpha*A*B.transpose()+beta*C.transpose()*D
 </script></div>      
-  <h2>Try Other Languages (R, HTML, ...)</h2>
-<div class="compute"><script type="text/x-sage">
+  <h2>Other Languages (R, HTML, ...)</h2>
+<div class='compute'><script type='text/x-sage'>
 %%r
 ip<-as.data.frame(installed.packages()[,c(1,3)])
 rownames(ip)<-NULL; ip
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+<div class='compute'><script type='text/x-sage'>
 %%html
 <style>
-@import url('https://fonts.googleapis.com/css?family=Ewert');
+@import 'https://fonts.googleapis.com/css?family=Ewert&effect=3d';
 </style>
-<button style="background-color:#3636ff; color:#fff; 
-               font-family:Ewert; font-size:160%;" 
-type="button" 
-onclick="document.getElementById('demo').innerHTML=Date()">
+<button style='background-color:#3636ff; color:#fff; 
+               font-family:Ewert; font-size:160%;' 
+type='button' 
+onclick='document.getElementById("demo").innerHTML=Date()'>
 Click to Display Date and Time</button>
-<p id="demo"></p>
+<p id='demo' class='font-effect-3d' style='color:#3636ff;'></p>
 </script></div>
   </body>
 </html>
