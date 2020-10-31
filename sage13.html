@@ -1,68 +1,90 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>SageMath_Part13</title>
-    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
-    <script>$(function (){
-    sagecell.makeSagecell({inputLocation: '#examplecell',template:sagecell.templates.minimal,evalButtonText:'Activate'});
-    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Evaluate'});});
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width'>
+    <title>✒️SageMath_Part13</title>
+    <script src='https://sagecell.sagemath.org/static/embedded_sagecell.js'></script>
+    <script>$(function () {
+    sagecell.makeSagecell({inputLocation:'#cell1',evalButtonText:'activate',
+                           template:sagecell.templates.minimal});
+    sagecell.makeSagecell({inputLocation:'#cell2',evalButtonText:'activate again',
+                           autoeval:true});
+    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'evaluate'}); });
     </script>
-    <script data-ad-client="ca-pub-9200929962680356" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   </head>
   <style>
-  @import url('https://fonts.googleapis.com/css?family=Orbitron');
-  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
-  p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
+  @import url('https://fonts.googleapis.com/css?family=Akronim');
+  h1,h2 {color:#3636ff; font-family:'Akronim'; text-shadow:3px 3px 3px #aaa;}
+  .preactive {padding-left:2px; border:2px double slategray; 
+              font-size:110%; text-shadow:2px 2px 2px #aaa} 
+  p,a {color:darkblue; font-size:110%; text-shadow:3px 3px 3px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em; font-size:110%;}
+  body (margin:5px 5px5px 25px}
   </style>  
   <body>
   <h1>&#x1F4D1; &nbsp;SageMath Online Mini Campus. Part 13</h1>
-<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
-<a href="https://olgabelitskaya.github.io/sage12.html">&#x1F300; &nbsp; Previous &nbsp; &nbsp;</a>
-<a href="https://olgabelitskaya.github.io/sage14.html">&#x1F300; &nbsp; Next &nbsp; &nbsp;</a><br/>
-<a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
-<a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a>
+<a href='https://olgabelitskaya.github.io/README.html'>&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
+<a href='https://olgabelitskaya.github.io/sage2.html'>&#x1F300; &nbsp; Next &nbsp; &nbsp;</a><br/>
+<a href='https://www.instagram.com/olga.belitskaya/'>&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
+<a href='https://www.pinterest.ru/olga_belitskaya/code-style/'>&#x1F300; &nbsp; Pinterest Posts</a>
     <p>The set of interactive pages with the following structure:</p>
-    <p>Example of Computations $\implies$ Your Field for Experiments $\implies$ Try Python Modules $\implies$ Try Other Languages</p>   
+    <p>Example of Computations $\mathbb{\implies}$ Your Experiments $\mathbb{\implies}$ 
+       Python Modules $\mathbb{\implies}$ Other Languages</p>
   <h2>Example of Computations</h2>
-    <p>Click the “Activate” button below to display an interactive example.</p>      
-<div id="examplecell"><script type="text/x-sage">
+    <p>Click the $\mathbb{activate}$ button below to display an interactive example.</p>
+<pre class='preactive'><code>
 @interact
 def _(N=[12,11,..,3]):
     def P(i): return [(cos(t),sin(t)) 
                       for t in srange(0,2*pi,2*pi/i)]
     def col(i): return colormaps.hsv(22*(i-3))[:3]
     p=sum([polygon2d(P(n),alpha=n/12,
-                     color=col(n)).plot3d(z=-n) 
+                     color=col(n)).plot3d(z=-.15*n) 
+           for n in [3..N]])
+    p.show(frame=False)
+
+</code></pre><br/>
+<div id='cell1'><script type='text/x-sage'>
+@interact
+def _(N=[12,11,..,3]):
+    def P(i): return [(cos(t),sin(t)) 
+                      for t in srange(0,2*pi,2*pi/i)]
+    def col(i): return colormaps.hsv(22*(i-3))[:3]
+    p=sum([polygon2d(P(n),alpha=n/12,
+                     color=col(n)).plot3d(z=-.15*n) 
            for n in [3..N]])
     p.show(frame=False)
 </script></div>
-  <h2>Your Field for Experiments</h2>
-    <p>Type your own SageMath code lines below and click “Evaluate”.</p>      
-<div class="compute"><script type="text/x-sage">
+   <h2>Your Experiments</h2>
+    <p>Type your own SageMath code lines below and click the $\mathbb{evaluate}$ button.</p>
+<div class='compute'><script type='text/x-sage'>
 @interact
 def _(n=[2,3,4,5]):
-    L1=[[0,0]]+[[0.5+0.004*i,.9+.3*sin(n*0.01*i)] 
+    L1=[[0,0]]+[[.5+.004*i,.9+.3*sin(n*.01*i)] 
                 for i in range(200)]+[[2,0]]
-    L2=[[0,0]]+[[0.5,1.5]]+[[1.5,1.5]]+[[2,0]]
-    p=polygon2d(L1,color="#3636ff",edgecolor="darkgrey",
+    L2=[[0,0]]+[[.5,1.5]]+[[1.5,1.5]]+[[2,0]]
+    p=polygon2d(L1,color='#3636ff',edgecolor='darkgrey',
                 thickness=3,axes=False)
-    p+=polygon2d(L2,color="silver",edgecolor="darkgrey",
-                 alpha=0.3,thickness=3)
+    p+=polygon2d(L2,color='silver',edgecolor='darkgrey',
+                 alpha=.3,thickness=3)
     p.show()
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+   <h2>Your Experiments</h2>
+    <p>Type your own SageMath code lines below and click the $\mathbb{evaluate}$ button.</p>
+<div class='compute'><script type='text/x-sage'>
 @interact
-def _(n=[24,22,..,2],h=[21,19,..,3],k=[60,120,..,360]):
-    def L(i): return [n*cos(2*pi*i/k)+h*cos((n/2)*2*pi*i/k),
-                      n*sin(2*pi*i/k)-h*sin((n/2)*2*pi*i/k)]
+def _(n=[24,22,..,2],h=[21,19,..,3],
+      k=[60,120,..,360]):
+    def L(i): return [n*cos(2*pi*i/k)+\
+                      h*cos((n/2)*2*pi*i/k),
+                      n*sin(2*pi*i/k)-\
+                      h*sin((n/2)*2*pi*i/k)]
     l=sum([line([L(j),L(j+1)],color=hue(j/k)) 
            for j in range(k)])
     l.show(figsize=(5,5))
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+<div class='compute'><script type='text/x-sage'>
 g=graphs.SzekeresSnarkGraph()
 [g.set_edge_label(u,v,u) for u,v,l in g.edges()]
 gp=g.graphplot(vertex_shape='H',
@@ -71,39 +93,41 @@ gp=g.graphplot(vertex_shape='H',
                color_by_label=True)
 gp.show(figsize=(5,5))
 </script></div>
-  <h2>Try Python Modules</h2>
-<div class="compute"><script type="text/x-sage">
+  <h2>Python Modules</h2>
+<div class='compute'><script type='text/x-sage'>
 import sympy; sympy.init_printing(use_unicode=True)
 x,y,z,t,u,v,w=sympy.symbols('x,y,z,t,u,v,w')
-A=sympy.Array([[[x*sympy.cos(u)*z^2-y,x^3*u*v^6-sympy.sin(w*t)],
-                [t*sympy.tan(u*w),sympy.exp(y)*z*u-w]],
+A=sympy.Array([[[x*sympy.cos(u)*z^2-y,
+                 x^3*u*v^6-sympy.sin(w*t)],
+                [t*sympy.tan(u*w),
+                 sympy.exp(y)*z*u-w]],
                [[y^3*v^5-t,x*sympy.log(w)*z^4],
                 [x-sympy.exp(z)*w^7,y*t^8*u*v]]])
 for el in [x,y,z,t,u,v,w]:
     display(A.diff(el),70*'-')
 </script></div>     
-  <h2>Try Other Languages (R, HTML, ...)</h2>
-<div class="compute"><script type="text/x-sage">
+  <h2>Other Languages (R, HTML, ...)</h2>
+<div class='compute'><script type='text/x-sage'>
 %%r
 library(datasets); library(nnet); data(longley)
 features<-longley[,1:6]; targets<-longley[,7]
 model<-nnet(Employed~.,longley,size=18,
-            maxit=400,linout=T,decay=0.01)
-predictions<-predict(model,features,type="raw")
+            maxit=400,linout=T,decay=.01)
+predictions<-predict(model,features,type='raw')
 mean((targets-predictions)^2)
 </script></div>
-    <p>Click “Evaluate” twice. Use in HTML documents with &#60;/script&#62; in the end.</p>
-<div class="compute"><script type="text/x-sage">
+    <p>Click $\mathbb{evaluate}$ twice. Use in HTML documents with &#60;/script&#62; in the end.</p>
+<div class='compute'><script type='text/x-sage'>
 %%html
 <style>
-@import url('https://fonts.googleapis.com/css?family=Ewert');
+@import 'https://fonts.googleapis.com/css?family=Ewert';
 </style>    
-<h4>Apply D3.js & Google Fonts for Text Styling</h4>
+<h4>Apply D3 & Google Fonts for Text Styling</h4>
 <script src='https://d3js.org/d3.v4.min.js'/><script>
 var h4=d3.select('h4');
 h4.style('color','#3636ff').style('font-size','120%')
-    .style('font-family','Ewert')
-    .style('text-shadow','3px 3px 3px slategray');
+  .style('font-family','Ewert')
+  .style('text-shadow','3px 3px 3px slategray');
 </script></div>    
   </body>
 </html>
