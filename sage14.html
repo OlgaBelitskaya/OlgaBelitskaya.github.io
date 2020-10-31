@@ -1,57 +1,77 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>SageMath_Part14</title>
-    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
-    <script>$(function (){
-    sagecell.makeSagecell({inputLocation:'#examplecell',template:sagecell.templates.minimal,evalButtonText:'Activate'});
-    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Evaluate'});});
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width'>
+    <title>✒️SageMath_Part14</title>
+    <script src='https://sagecell.sagemath.org/static/embedded_sagecell.js'></script>
+    <script>$(function () {
+    sagecell.makeSagecell({inputLocation:'#cell1',evalButtonText:'activate',
+                           template:sagecell.templates.minimal});
+    sagecell.makeSagecell({inputLocation:'#cell2',evalButtonText:'activate again',
+                           autoeval:true});
+    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'evaluate'}); });
     </script>
-    <script data-ad-client="ca-pub-9200929962680356" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   </head>
   <style>
-  @import url('https://fonts.googleapis.com/css?family=Orbitron');
-  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
-  p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
+  @import url('https://fonts.googleapis.com/css?family=Akronim');
+  h1,h2 {color:#3636ff; font-family:'Akronim'; text-shadow:3px 3px 3px #aaa;}
+  .preactive {padding-left:2px; border:2px double slategray; 
+              font-size:110%; text-shadow:2px 2px 2px #aaa} 
+  p,a {color:darkblue; font-size:110%; text-shadow:3px 3px 3px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em; font-size:110%;}
+  body (margin:5px 5px5px 25px}
   </style>  
   <body>
   <h1>&#x1F4D1; &nbsp;SageMath Online Mini Campus. Part 14</h1>
-<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
-<a href="https://olgabelitskaya.github.io/sage13.html">&#x1F300; &nbsp; Previous &nbsp; &nbsp;</a>
-<a href="https://olgabelitskaya.github.io/sage15.html">&#x1F300; &nbsp; Next &nbsp; &nbsp;</a><br/>
-<a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
-<a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a>
+<a href='https://olgabelitskaya.github.io/README.html'>&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
+<a href='https://olgabelitskaya.github.io/sage2.html'>&#x1F300; &nbsp; Next &nbsp; &nbsp;</a><br/>
+<a href='https://www.instagram.com/olga.belitskaya/'>&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
+<a href='https://www.pinterest.ru/olga_belitskaya/code-style/'>&#x1F300; &nbsp; Pinterest Posts</a>
     <p>The set of interactive pages with the following structure:</p>
-    <p>Example of Computations $\implies$ Your Field for Experiments $\implies$ Try Python Modules $\implies$ Try Other Languages</p>
+    <p>Example of Computations $\mathbb{\implies}$ Your Experiments $\mathbb{\implies}$ 
+       Python Modules $\mathbb{\implies}$ Other Languages</p>
   <h2>Example of Computations</h2>
-    <p>Click the “Activate” button below to display an interactive example.</p>      
-<div id="examplecell"><script type="text/x-sage">
+    <p>Click the $\mathbb{activate}$ button below to display an interactive example.</p>
+<pre class='preactive'><code>
 @interact
 def _(x=[1..10],y=[1..10],z=[1..10]):
     from sage.plot.plot3d.plot3d import axes
-    var('u'); f=(0.75*cos(u),0.75*sin(u))
+    var('u'); f=(.75*cos(u),.75*sin(u))
     c=colormaps.jet(8*(x+y+z))[:3]; a=axes(11,.5); 
     r=revolution_plot3d(f,(u,0,2*pi),color=c,mesh=True,
-                        plot_points=10,opacity=0.2)
-    t=text3d("(%.1f,%.1f,%.1f)"%(x,y,z),
+                        plot_points=10,opacity=.2)
+    t=text3d('(%.1f,%.1f,%.1f)'%(x,y,z),
+             (x,y,z+2),color=c)
+    (a+r.translate(x,y,z)+t).show()
+
+</code></pre><br/>
+<div id='cell1'><script type='text/x-sage'>
+@interact
+def _(x=[1..10],y=[1..10],z=[1..10]):
+    from sage.plot.plot3d.plot3d import axes
+    var('u'); f=(.75*cos(u),.75*sin(u))
+    c=colormaps.jet(8*(x+y+z))[:3]; a=axes(11,.5); 
+    r=revolution_plot3d(f,(u,0,2*pi),color=c,mesh=True,
+                        plot_points=10,opacity=.2)
+    t=text3d('(%.1f,%.1f,%.1f)'%(x,y,z),
              (x,y,z+2),color=c)
     (a+r.translate(x,y,z)+t).show()
 </script></div>
-  <h2>Your Field for Experiments</h2>
-    <p>Type your own SageMath code lines below and click “Evaluate”.</p>      
-<div class="compute"><script type="text/x-sage">
+   <h2>Your Experiments</h2>
+    <p>Type your own SageMath code lines below and click the $\mathbb{evaluate}$ button.</p>
+<div class='compute'><script type='text/x-sage'>
 @interact
 def _(N=[20,25,..,40],M=[20,40,..,100]):
-    f(l,k)=[l*sin(pi*k/M)+sin(2*pi*k/M),-l*(1+cos(pi*k/M)+cos(2*pi*k/M))]
+    f(l,k)=[l*sin(pi*k/M)+sin(2*pi*k/M),\
+            -l*(1+cos(pi*k/M)+cos(2*pi*k/M))]
     L1=[f(j,i) for j in [1..N] for i in range(-2*M,2*M+1)]
     L2=[f(j,i) for i in range(-2*M,2*M+1) for j in [1..N]]
     l1=line(L1,color='#3636ff'); l2=line(L2,color='#ff3636')
     graphics_array(([l1],[l2])).show(figsize=7)
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+  <p>This code cell was evaluated automatically.</p>
+<div id='cell2'><script type='text/x-sage'>
 from sage.symbolic.integration.integral import indefinite_integral
 @interact
 def _(N=[1,2,..,10]):
@@ -64,7 +84,7 @@ def _(N=[1,2,..,10]):
     f=F[N]; int_latex=latex(indefinite_integral(f,x).simplify())    
     pretty_print(html(s%(latex(f),int_latex)))
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+<div class='compute'><script type='text/x-sage'>
 @interact
 def _(style=[':','-.','--','-'],thick=[2..5]):
     g=graphs.SousselierGraph()
@@ -73,8 +93,8 @@ def _(style=[':','-.','--','-'],thick=[2..5]):
                    color_by_label=True,edge_thickness=thick,
                    edge_style=style).show(figsize=(5,5))
 </script></div>    
-  <h2>Try Python Modules</h2>
-<div class="compute"><script type="text/x-sage">
+  <h2>Python Modules</h2>
+<div class='compute'><script type='text/x-sage'>
 import numpy
 A=numpy.array(range(1,9)).reshape(2,2,2)
 B=['♔','♕','♖','♗']
@@ -90,8 +110,8 @@ def result(X):
     print(X.shape)
 result(AB1); result(AB01); result(AB10)
 </script></div>   
-  <h2>Try Other Languages (R, HTML, ...)</h2>
-<div class="compute"><script type="text/x-sage">
+  <h2>Other Languages (R, HTML, ...)</h2>
+<div class='compute'><script type='text/x-sage'>
 %%r
 a<-c(-4,-3,-5,5,4,5,-7,-7,-6)
 A<-matrix(a,3,3,byrow=T)
@@ -99,21 +119,21 @@ print(A); cat('\n')
 print(eigen(A)$values); cat('\n')
 round(eigen(A)$vectors)
 </script></div>
-    <p>Click “Evaluate” twice. Use in HTML documents with &#60;/script&#62; in the end.</p>
-<div class="compute"><script type="text/x-sage">
+    <p>Click $\mathbb{evaluate}$ twice. Use in HTML documents with &#60;/script&#62; in the end.</p>
+<div class='compute'><script type='text/x-sage'>
 %%html
-<script src="https://d3js.org/d3.v4.min.js"/>
-<svg width=100px height=100px/><script>
-var c1="#ff3636",c2="#3636ff"; var n=10000;
-var svg=d3.select("svg");
-d3.select("svg").transition().duration(n)
-  .styleTween("background-color",
+<script src='https://d3js.org/d3.v4.min.js'/>
+<svg id='svg1' width=150px height=150px/><script>
+var c1='#ff3636',c2='#3636ff'; var n=10000;
+var svg=d3.select('#svg1');
+d3.select('#svg1').transition().duration(n)
+  .styleTween('background-color',
               function(){return d3.interpolate(c1,c2)});
-d3.select("svg").append("circle")
-  .attr("cx",50).attr("cy",50).attr("r",35)
+d3.select('#svg1').append('circle')
+  .attr('cx','50%').attr('cy','50%').attr('r',35)
   .transition().duration(n)
-  .styleTween("fill",
-              function(){return d3.interpolate(c2,c1)});          
+  .styleTween('fill',
+              function(){return d3.interpolate(c2,c1)});         
 </script></div>
   </body>
 </html>
