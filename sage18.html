@@ -1,34 +1,53 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>SageMath_Part18</title>
-    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
-    <script>$(function (){
-    sagecell.makeSagecell({inputLocation:'#examplecell',template:sagecell.templates.minimal,evalButtonText:'Activate'});
-    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Evaluate'});});
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width'>
+    <title>✒️SageMath_Part18</title>
+    <script src='https://sagecell.sagemath.org/static/embedded_sagecell.js'></script>
+    <script>$(function () {
+    sagecell.makeSagecell({inputLocation:'#cell1',evalButtonText:'activate',
+                           template:sagecell.templates.minimal});
+    sagecell.makeSagecell({inputLocation:'#cell2',evalButtonText:'activate again',
+                           autoeval:true});
+    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'evaluate'}); });
     </script>
-    <script data-ad-client="ca-pub-9200929962680356" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   </head>
   <style>
-  @import url('https://fonts.googleapis.com/css?family=Orbitron');
-  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
-  p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
+  @import url('https://fonts.googleapis.com/css?family=Akronim');
+  h1,h2 {color:#3636ff; font-family:'Akronim'; text-shadow:3px 3px 3px #aaa;}
+  .preactive {padding-left:2px; border:2px double slategray; 
+              font-size:110%; text-shadow:2px 2px 2px #aaa} 
+  p,a {color:darkblue; font-size:110%; text-shadow:3px 3px 3px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em; font-size:110%;}
+  body (margin:5px 5px5px 25px}
   </style>  
   <body>
   <h1>&#x1F4D1; &nbsp;SageMath Online Mini Campus. Part 18</h1>
-<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
-<a href="https://olgabelitskaya.github.io/sage17.html">&#x1F300; &nbsp; Previous &nbsp; &nbsp;</a>
-<a href="https://olgabelitskaya.github.io/sage19.html">&#x1F300; &nbsp; Next &nbsp; &nbsp;</a><br/>
-<a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
-<a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a>
+<a href='https://olgabelitskaya.github.io/README.html'>&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
+<a href='https://olgabelitskaya.github.io/sage2.html'>&#x1F300; &nbsp; Next &nbsp; &nbsp;</a><br/>
+<a href='https://www.instagram.com/olga.belitskaya/'>&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
+<a href='https://www.pinterest.ru/olga_belitskaya/code-style/'>&#x1F300; &nbsp; Pinterest Posts</a>
     <p>The set of interactive pages with the following structure:</p>
-    <p>Example of Computations $\implies$ Your Field for Experiments $\implies$ Try Python Modules $\implies$ Try Other Languages</p> 
+    <p>Example of Computations $\mathbb{\implies}$ Your Experiments $\mathbb{\implies}$ 
+       Python Modules $\mathbb{\implies}$ Other Languages</p>
   <h2>Example of Computations</h2>
-    <p>Click the “Activate” button below to display an interactive example.</p>      
-<div id="examplecell"><script type="text/x-sage">
+    <p>Click the $\mathbb{activate}$ button below to display an interactive example.</p>
+<pre class='preactive'><code>
+@interact
+def _(N=[2,3,4]):
+    bd=digraphs.ButterflyGraph(N)
+    nvl=[u+'$\\to$'+str(v) 
+         for u,v in bd.vertices()]
+    bd.relabel(dict(zip(bd.vertices(),nvl)))
+    [bd.set_edge_label(u,v,v) 
+     for u,v,l in bd.edges()]
+    bd.show(figsize=7,vertex_size=3,
+            layout='circular',
+            color_by_label=True)
+
+</code></pre><br/>
+<div id='cell1'><script type='text/x-sage'>
 @interact
 def _(N=[2,3,4]):
     bd=digraphs.ButterflyGraph(N)
@@ -41,9 +60,9 @@ def _(N=[2,3,4]):
             layout='circular',
             color_by_label=True)
 </script></div>
-  <h2>Your Field for Experiments</h2>
-    <p>Type your own SageMath code lines below and click “Evaluate”.</p>
-<div class="compute"><script type="text/x-sage">
+   <h2>Your Experiments</h2>
+    <p>Type your own SageMath code lines below and click the $\mathbb{evaluate}$ button.</p>
+<div class='compute'><script type='text/x-sage'>
 import pandas
 fp='https://olgabelitskaya.github.io/c_bank.csv'
 df=pandas.read_csv(fp)['silver'].values
@@ -58,7 +77,8 @@ sp2=scatter_plot(silver_mav,edgecolor='#36ff36',
                  facecolor='none',markersize=5)
 (sp1+sp2).show(title=t,figsize=7,gridlines=True)
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+  <p>This code cell was evaluated automatically.</p>
+<div id='cell2'><script type='text/x-sage'>
 @interact
 def _(a=[2,4,6,8],b=[4,8,12,16],
       cm=['cool','jet','bwr','hsv']):
@@ -70,7 +90,7 @@ def _(a=[2,4,6,8],b=[4,8,12,16],
                         color=(cf,colormaps[cm]))
     p.show(frame=False)
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+<div class='compute'><script type='text/x-sage'>
 v=[(1/cos(-pi/2+pi*i/100),tan(-pi/2+pi*i/100)) 
    for i in [1,3,..,99]+[101,103,..,199]]
 L=[(a/(a^2+b^2),b/(a^2+b^2)) for a,b in v]
@@ -80,8 +100,8 @@ p=sum([text(chr(i+160),L[i],
        for i in [0..99]])
 p.show(figsize=(8,5),gridlines=True)
 </script></div> 
-  <h2>Try Python Modules</h2>
-<div class="compute"><script type="text/x-sage">
+  <h2>Python Modules</h2>
+<div class='compute'><script type='text/x-sage'>
 import pandas
 path='https://data.cityofnewyork.us/resource/'
 se=pandas.read_json(path+'h7rb-945c.json')
@@ -96,47 +116,49 @@ sesum=se.isna().sum()[se.isna().sum()!=0]
 print(sesum.to_frame()); print('\n')
 se=se.dropna(); se.head().loc[:2].T
 </script></div>
-  <h2>Try Other Languages (R, HTML, ...)</h2>
-<div class="compute"><script type="text/x-sage">
-a1=r([[2.9,3.0,2.5,2.6,3.2],
-      [3.8,2.7,4.0,2.4],
-      [2.8,3.4,3.7,2.2,2.0]])
+  <h2>Other Languages (R, HTML, ...)</h2>
+<div class='compute'><script type='text/x-sage'>
+a1=r([[2.9,3.,2.5,2.6,3.2],
+      [3.8,2.7,4.,2.4],
+      [2.8,3.4,3.7,2.2,2.]])
 a2=r.factor([5*[1]+4*[2]+5*[3]])
 A=r.matrix([a1,a2],nrow=14,ncol=2); r.t(A)
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+<div class='compute'><script type='text/x-sage'>
 %%html
-<table style="width:50%;background-color:slategray; font-size:140%;">
-    <tr><th>Crayola Fluorescent Colors</th><th>Hex</th></tr>
-    <tr><td style="background-color:#FF355E;">Radical Red</td>
-    <td style="color:#FF355E;"><center>&#35;FF355E</center></td></tr>
-    <tr><td style="background-color:#FD5B78;">Wild Watermelon</td>
-    <td style="color:#FD5B78;"><center>&#35;FD5B78</center></td></tr>
-    <tr><td style="background-color:#FF6037;">Outrageous Orange</td>
-    <td style="color:#FF6037;"><center>&#35;FF6037</center></td></tr>
-    <tr><td style="background-color:#FF9966;">Atomic Tangerine</td>
-    <td style="color:#FF9966;"><center>&#35;FF9966</center></td></tr>
-    <tr><td style="background-color:#FF9933;">Neon Carrot</td>
-    <td style="color:#FF9933;"><center>&#35;FF9933</center></td></tr>
-    <tr><td style="background-color:#FFCC33;">Sunglow</td>
-    <td style="color:#FFCC33;"><center>&#35;FFCC33</center></td></tr>    
-    <tr><td style="background-color:#FFFF66;">Laser Lemon</td>
-    <td style="color:#FFFF66;"><center>&#35;FFFF66</center></td></tr>
-    <tr><td style="background-color:#CCFF00;">Electric Lime</td>
-    <td style="color:#CCFF00;"><center>&#35;CCFF00</center></td></tr>
-    <tr><td style="background-color:#66FF66;">Screamin&#39; Green</td>
-    <td style="color:#66FF66;"><center>&#35;66FF66</center></td></tr>
-    <tr><td style="background-color:#AAF0D1;">Magic Mint</td>
-    <td style="color:#AAF0D1;"><center>&#35;AAF0D1</center></td></tr>
-    <tr><td style="background-color:#50BFE6;">Blizzard Blue</td>
-    <td style="color:#50BFE6;"><center>&#35;50BFE6</center></td></tr>
-    <tr><td style="background-color:#FF6EFF;">Shocking Pink</td>
-    <td style="color:#FF6EFF;"><center>&#35;FF6EFF</center></td></tr>
-    <tr><td style="background-color:#EE34D2;">Razzle Dazzle Rose</td>
-    <td style="color:#EE34D2;"><center>&#35;EE34D2</center></td></tr>
-    <tr><td style="background-color:#FF00CC;">Hot Magenta</td>
-    <td style="color:#FF00CC;"><center>&#35;FF00CC</center></td></tr>
-</table>
+  <table style='width:100%; background-color:slategray; color:white; 
+                text-shadow:2px 2px 2px ghostwhite; 
+                font-size:150%; padding-left:20px;'>
+      <tr><th>Crayola Fluorescent Colors</th><th>Hex</th></tr>
+      <tr><td style='background-color:#FF355E;'>=>Radical Red</td>
+      <td style='color:#FF355E;'><center>&#35;FF355E</center></td></tr>
+      <tr><td style='background-color:#FD5B78;'>=>Wild Watermelon</td>
+      <td style='color:#FD5B78;'><center>&#35;FD5B78</center></td></tr>
+      <tr><td style='background-color:#FF6037;'>=>Outrageous Orange</td>
+      <td style='color:#FF6037;'><center>&#35;FF6037</center></td></tr>
+      <tr><td style='background-color:#FF9966;'>=>Atomic Tangerine</td>
+      <td style='color:#FF9966;'><center>&#35;FF9966</center></td></tr>
+      <tr><td style='background-color:#FF9933;'>=>Neon Carrot</td>
+      <td style='color:#FF9933;'><center>&#35;FF9933</center></td></tr>
+      <tr><td style='background-color:#FFCC33;'>=>Sunglow</td>
+      <td style='color:#FFCC33;'><center>&#35;FFCC33</center></td></tr>    
+      <tr><td style='background-color:#FFFF66;'>=>Laser Lemon</td>
+      <td style='color:#FFFF66;'><center>&#35;FFFF66</center></td></tr>
+      <tr><td style='background-color:#CCFF00;'>=>Electric Lime</td>
+      <td style='color:#CCFF00;'><center>&#35;CCFF00</center></td></tr>
+      <tr><td style='background-color:#66FF66;'>=>Screamin&#39; Green</td>
+      <td style='color:#66FF66;'><center>&#35;66FF66</center></td></tr>
+      <tr><td style='background-color:#AAF0D1;'>=>Magic Mint</td>
+      <td style='color:#AAF0D1;'><center>&#35;AAF0D1</center></td></tr>
+      <tr><td style='background-color:#50BFE6;'>=>Blizzard Blue</td>
+      <td style='color:#50BFE6;'><center>&#35;50BFE6</center></td></tr>
+      <tr><td style='background-color:#FF6EFF;'>=>Shocking Pink</td>
+      <td style='color:#FF6EFF;'><center>&#35;FF6EFF</center></td></tr>
+      <tr><td style='background-color:#EE34D2;'>=>Razzle Dazzle Rose</td>
+      <td style='color:#EE34D2;'><center>&#35;EE34D2</center></td></tr>
+      <tr><td style='background-color:#FF00CC;'>=>Hot Magenta</td>
+      <td style='color:#FF00CC;'><center>&#35;FF00CC</center></td></tr>
+  </table>
 </script></div>    
   </body>
 </html>
