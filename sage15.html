@@ -1,36 +1,52 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>SageMath_Part15</title>
-    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
-    <script>$(function (){
-    sagecell.makeSagecell({inputLocation:'#examplecell',template:sagecell.templates.minimal,evalButtonText:'Activate'});
-    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Evaluate'});});
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width'>
+    <title>✒️SageMath_Part15</title>
+    <script src='https://sagecell.sagemath.org/static/embedded_sagecell.js'></script>
+    <script>$(function () {
+    sagecell.makeSagecell({inputLocation:'#cell1',evalButtonText:'activate',
+                           template:sagecell.templates.minimal});
+    sagecell.makeSagecell({inputLocation:'#cell2',evalButtonText:'activate again',
+                           autoeval:true});
+    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'evaluate'}); });
     </script>
-    <script data-ad-client="ca-pub-9200929962680356" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   </head>
   <style>
-  @import url('https://fonts.googleapis.com/css?family=Orbitron');
-  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
-  p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
+  @import url('https://fonts.googleapis.com/css?family=Akronim');
+  h1,h2 {color:#3636ff; font-family:'Akronim'; text-shadow:3px 3px 3px #aaa;}
+  .preactive {padding-left:2px; border:2px double slategray; 
+              font-size:110%; text-shadow:2px 2px 2px #aaa} 
+  p,a {color:darkblue; font-size:110%; text-shadow:3px 3px 3px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em; font-size:110%;}
+  body (margin:5px 5px5px 25px}
   </style>  
   <body>
   <h1>&#x1F4D1; &nbsp;SageMath Online Mini Campus. Part 15</h1>
-<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
-<a href="https://olgabelitskaya.github.io/sage14.html">&#x1F300; &nbsp; Previous &nbsp; &nbsp;</a>
-<a href="https://olgabelitskaya.github.io/sage16.html">&#x1F300; &nbsp; Next &nbsp; &nbsp;</a><br/>
-<a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
-<a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a>
+<a href='https://olgabelitskaya.github.io/README.html'>&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
+<a href='https://olgabelitskaya.github.io/sage2.html'>&#x1F300; &nbsp; Next &nbsp; &nbsp;</a><br/>
+<a href='https://www.instagram.com/olga.belitskaya/'>&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
+<a href='https://www.pinterest.ru/olga_belitskaya/code-style/'>&#x1F300; &nbsp; Pinterest Posts</a>
     <p>The set of interactive pages with the following structure:</p>
-    <p>Example of Computations $\implies$ Your Field for Experiments $\implies$ Try Python Modules $\implies$ Try Other Languages</p>    
+    <p>Example of Computations $\mathbb{\implies}$ Your Experiments $\mathbb{\implies}$ 
+       Python Modules $\mathbb{\implies}$ Other Languages</p>
   <h2>Example of Computations</h2>
-    <p>Click the “Activate” button below to display an interactive example.</p>      
-<div id="examplecell"><script type="text/x-sage">
+    <p>Click the $\mathbb{activate}$ button below to display an interactive example.</p>
+<pre class='preactive'><code>
 c=list(colors.keys())
-f(x,t)=sin(5*x)^2+0.02*t
+f(x,t)=sin(5*x)^2+.02*t
+@interact
+def _(n=[20,28,..,len(c)]):
+    p=sum([polar_plot(f(x,i),(x,0,2*pi),plot_points=30,
+                      thickness=1,color=c[i-1]) 
+           for i in [1..n]])
+    p.show(figsize=(5,5),gridlines=True)
+
+</code></pre><br/>
+<div id='cell1'><script type='text/x-sage'>
+c=list(colors.keys())
+f(x,t)=sin(5*x)^2+.02*t
 @interact
 def _(n=[20,28,..,len(c)]):
     p=sum([polar_plot(f(x,i),(x,0,2*pi),plot_points=30,
@@ -38,18 +54,19 @@ def _(n=[20,28,..,len(c)]):
            for i in [1..n]])
     p.show(figsize=(5,5),gridlines=True)
 </script></div>
-  <h2>Your Field for Experiments</h2>
-    <p>Type your own SageMath code lines below and click “Evaluate”.</p> 
-<div class="compute"><script type="text/x-sage">
+   <h2>Your Experiments</h2>
+    <p>Type your own SageMath code lines below and click the $\mathbb{evaluate}$ button.</p>
+<div class='compute'><script type='text/x-sage'>
 @interact
 def _(colormap=['bwr','cool','prism','jet','terrain',
-                'flag','ocean','hsv','bone']):
+                'flag','ocean','hsv','bone','winter']):
     def c(cm): 
         return [colormaps[cm](12*i)[:3] for i in [1..20]]
     g=icosahedron().stickers(c(colormap),.05,.05)
     g.show(frame=False)
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+  <p>This code cell was evaluated automatically.</p>
+<div id='cell2'><script type='text/x-sage'>
 marker_list=['☕','⚖','☘','⚜','⚙']
 @interact
 def _(marker=marker_list):
@@ -58,28 +75,31 @@ def _(marker=marker_list):
     Y=[sin(t)^3 for t in srange(0,2*pi,.1)]
     p=sum([text(m,(x,y),fontsize=20,rgbcolor=mc) 
          for (x,y) in list(zip(X,Y))])
-    p.show(figsize=(8,5),ymin=-1.1,ymax=1.1)
+    p.show(figsize=(7,5),ymin=-1.1,ymax=1.1)
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+<div class='compute'><script type='text/x-sage'>
 from sage.symbolic.integration.integral import definite_integral
 var('x,y'); f1,f2=2^x,2*x-x^2; x1,x2=0,2; y1,y2=0,4; d=1 
 s=definite_integral(f1-f2,x,x1,x2)
-l=[[0,0]]+[[0.01*i,f1(x=0.01*i)] for i in range(200)]+\
-  [[2,0]]+[[0.01*i,f2(x=0.01*i)] for i in range(200,0,-1)]
+l=[[0,0]]+[[.01*i,f1(x=.01*i)] for i in range(200)]+\
+  [[2,0]]+[[.01*i,f2(x=.01*i)] for i in range(200,0,-1)]
 st=r'<left><font>$\displaystyle{S = %s = %s}$</font></left>'
 pretty_print(html(st%(str(s),str(s.n()))))
 p1=plot([f1,f2],(x,x1,x2),fill={0:[1]},thickness=3,
         fillcolor='#3636ff',color='silver')
 p2=region_plot([y-f1<0,y-f2>0],(x,x1,x2),(y,y1,y2),
-               alpha=0.5,incol='#3636ff',borderwidth=3,bordercol='silver')
-p3=polygon2d(l,color='#3636ff',edgecolor='silver',thickness=5,alpha=0.5)
+               alpha=.5,incol='#3636ff',
+               borderwidth=3,bordercol='silver')
+p3=polygon2d(l,color='#3636ff',edgecolor='silver',
+             thickness=5,alpha=.5)
 g=graphics_array((p1,p2,p3))
-g.show(xmin=x1-d,xmax=x2+d,ymin=y1-d,ymax=y2+d,figsize=7,aspect_ratio=1)
+g.show(xmin=x1-d,xmax=x2+d,ymin=y1-d,ymax=y2+d,
+       figsize=7,aspect_ratio=1)
 definite_integral(f1-f2,x,x1,x2).n()==\
 (definite_integral(f1,x,x1,x2)-definite_integral(f2,x,x1,x2)).n()
 </script></div>       
-  <h2>Try Python Modules</h2>
-<div class="compute"><script type="text/x-sage">
+  <h2>Python Modules</h2>
+<div class='compute'><script type='text/x-sage'>
 global_station_temperature=\
 [{'year':2017,'month':'Jan','temperature':113},
  {'year':2017,'month':'Feb','temperature':141},
@@ -110,39 +130,42 @@ DV=DictVectorizer()
 temp_features=DV.fit_transform(global_station_temperature)
 temp_features=temp_features.toarray().astype('int16')
 print(temp_features[:3]) 
-print(DV.get_feature_names()[:7]); print(DV.get_feature_names()[7:])
+print(DV.get_feature_names()[:7])
+print(DV.get_feature_names()[7:])
 </script></div>   
-  <h2>Try Other Languages (R, HTML, ...)</h2>
-<div class="compute"><script type="text/x-sage">
+  <h2>Other Languages (R, HTML, ...)</h2>
+<div class='compute'><script type='text/x-sage'>
 %%r
 y<-structure(c(a=1,b=2,c=3,d=4,e=5,f=6,g=7,h=8),
-             dtype="vector",shape=8)
+             dtype='vector',shape=8)
 attributes(y)
 </script></div>
-    <p>Click “Evaluate” twice. Use in HTML documents with &#60;/script&#62; in the end.</p>
-<div class="compute"><script type="text/x-sage">
+    <p>Click $\mathbb{evaluate}$ twice. Use in HTML documents with &#60;/script&#62; in the end.</p>
+<div class='compute'><script type='text/x-sage'>
 %%html
 <style>
-svg {background-color:cornflowerblue;}
+#svg1 {background-color:darkblue;}
 .land {fill:#3636ff; stroke:silver;}
 .countries {fill:none; stroke:silver;}
 </style>
-<script src="https://d3js.org/d3.v3.min.js"/>
-<script src="https://d3js.org/topojson.v0.min.js"/>
-<svg width=900 height=470/>
-<script type="text/javascript">
+<script src='https://d3js.org/d3.v3.min.js'/>
+<script src='https://d3js.org/topojson.v0.min.js'/>
+<svg id='svg1' width=900 height=470/>
+<script type='text/javascript'>
 var projection=d3.geo.equirectangular().translate([430,250]);
-var svg=d3.select("svg"),g=svg.append("g");
+var svg=d3.select('#svg1'),g=svg.append('g');
 var path=d3.geo.path().projection(projection);
-var url="https://raw.githubusercontent.com/n1n9-jp/CSIS_map_140514/master/data/"
-d3.json(url.concat("world-50m.json"),
+var url1='https://raw.githubusercontent.com/n1n9-jp/',
+    url2='CSIS_map_140514/master/data/',
+    file='world-50m.json';
+d3.json(url1.concat(url2).concat(file),
         function(world) {
-            g.attr("class","land").selectAll("land")
+            g.attr('class','land').selectAll('land')
              .data([topojson.object(world,world.objects.land)])
-             .enter().append("path").attr("d",path);
-            svg.attr("class","countries").selectAll("countries")
+             .enter().append('path').attr('d',path);
+            svg.attr('class','countries').selectAll('countries')
                .data([topojson.object(world,world.objects.countries)])
-               .enter().append("path").attr("d",path);});      
+               .enter().append('path').attr('d',path);});    
 </script></div>
   </body>
 </html>
