@@ -1,51 +1,72 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>SageMath_Part20</title>
-    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
-    <script>$(function (){
-    sagecell.makeSagecell({inputLocation:'#examplecell',template:sagecell.templates.minimal,evalButtonText:'Activate'});
-    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Evaluate'});});
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width'>
+    <title>✒️SageMath_Part20</title>
+    <script src='https://sagecell.sagemath.org/static/embedded_sagecell.js'></script>
+    <script>$(function () {
+    sagecell.makeSagecell({inputLocation:'#cell1',evalButtonText:'activate',
+                           template:sagecell.templates.minimal});
+    sagecell.makeSagecell({inputLocation:'#cell2',evalButtonText:'activate again',
+                           autoeval:true});
+    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'evaluate'}); });
     </script>
-    <script data-ad-client="ca-pub-9200929962680356" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   </head>
   <style>
-  @import url('https://fonts.googleapis.com/css?family=Orbitron');
-  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
-  p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
+  @import url('https://fonts.googleapis.com/css?family=Akronim');
+  h1,h2 {color:#3636ff; font-family:'Akronim'; text-shadow:3px 3px 3px #aaa;}
+  .preactive {padding-left:2px; border:2px double slategray; 
+              font-size:110%; text-shadow:2px 2px 2px #aaa} 
+  p,a {color:darkblue; font-size:110%; text-shadow:3px 3px 3px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:30em; font-size:110%;}
+  body (margin:5px 5px5px 25px}
   </style>  
   <body>
   <h1>&#x1F4D1; &nbsp;SageMath Online Mini Campus. Part 20</h1>
-<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
-<a href="https://olgabelitskaya.github.io/sage19.html">&#x1F300; &nbsp; Previous &nbsp; &nbsp;</a>
-<a href="https://olgabelitskaya.github.io/sage21.html">&#x1F300; &nbsp; Next &nbsp; &nbsp;</a><br/>
-<a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
-<a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a>
+<a href='https://olgabelitskaya.github.io/README.html'>&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
+<a href='https://olgabelitskaya.github.io/sage2.html'>&#x1F300; &nbsp; Next &nbsp; &nbsp;</a><br/>
+<a href='https://www.instagram.com/olga.belitskaya/'>&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
+<a href='https://www.pinterest.ru/olga_belitskaya/code-style/'>&#x1F300; &nbsp; Pinterest Posts</a>
     <p>The set of interactive pages with the following structure:</p>
-    <p>Example of Computations $\implies$ Your Field for Experiments $\implies$ Try Python Modules $\implies$ Try Other Languages</p>     
+    <p>Example of Computations $\mathbb{\implies}$ Your Experiments $\mathbb{\implies}$ 
+       Python Modules $\mathbb{\implies}$ Other Languages</p>
   <h2>Example of Computations</h2>
-    <p>Click the “Activate” button below to display an interactive example.</p>      
-<div id="examplecell"><script type="text/x-sage">
+    <p>Click the $\mathbb{activate}$ button below to display an interactive example.</p>
+<pre class='preactive'><code>
 @interact
 def _(a=[2,3,4],b=[3,4,5],c=[1,2,3]):
     A=([a,1],[1,a+1]); B=(b,b+1); C=(c,c+4)
     s='Interactive Linear Programming Problem'
-    P=InteractiveLPProblem(A,B,C,["x","y"],
-                           problem_type="max",
-                           constraint_type="<=",
-                           variable_type=">=")
+    P=InteractiveLPProblem(A,B,C,['x','y'],
+                           problem_type='max',
+                           constraint_type='<=',
+                           variable_type='>=')
+    pretty_print(s,fontsize=15)
+    pretty_print((P.standard_form(),
+                      P.optimal_solution()),
+                 fontsize=15)
+    P.plot().show(figsize=7,legend_font_size=12)
+
+</code></pre><br/>
+<div id='cell1'><script type='text/x-sage'>
+@interact
+def _(a=[2,3,4],b=[3,4,5],c=[1,2,3]):
+    A=([a,1],[1,a+1]); B=(b,b+1); C=(c,c+4)
+    s='Interactive Linear Programming Problem'
+    P=InteractiveLPProblem(A,B,C,['x','y'],
+                           problem_type='max',
+                           constraint_type='<=',
+                           variable_type='>=')
     pretty_print(s,fontsize=15)
     pretty_print((P.standard_form(),
                       P.optimal_solution()),
                  fontsize=15)
     P.plot().show(figsize=7,legend_font_size=12)
 </script></div>
-  <h2>Your Field for Experiments</h2>
-    <p>Type your own SageMath code lines below and click “Evaluate”.</p>
-<div class="compute"><script type="text/x-sage">
+   <h2>Your Experiments</h2>
+    <p>Type your own SageMath code lines below and click the $\mathbb{evaluate}$ button.</p>
+<div class='compute'><script type='text/x-sage'>
 def v(k): 
     v=[[[k,k,k],[k,k,k-1],[k-1,k,k],[k,k-1,k]],
       [[k-1,k-1,k],[k-1,k-1,k-1],[k-1,k,k],[k,k-1,k]],
@@ -55,10 +76,12 @@ def v(k):
 def col(i,cm): return colormaps[cm](55*i)[:3]
 p=sum([Polyhedron(vertices=v(1)[i]).render_solid(opacity=.5,
        color=col(i,'hsv')) for i in [0..3]])
-c=cube((.5,.5,0),.5,opacity=.5,color=col(4,'hsv'))
-(p+c).show(frame=False)
+c1=cube((.5,.5,0),.5,opacity=.5,color=col(4,'hsv'))
+c2=cube((.5,.5,0),2,opacity=.1,color=col(2,'hsv'))
+(p+c1+c2).show(frame=False)
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+  <p>This code cell was evaluated automatically.</p>
+<div id='cell2'><script type='text/x-sage'>
 @interact
 def _(a=[7,9,11],b=[10,14,18],m=[48,36,24,16]):
     x(t)=cos(t)+cos(a*t)/2+sin((a+b)*t)/3
@@ -70,14 +93,14 @@ def _(a=[7,9,11],b=[10,14,18],m=[48,36,24,16]):
           for i in [1..m]])
     p.show(aspect_ratio=1,figsize=7,gridlines=True)
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+<div class='compute'><script type='text/x-sage'>
 @interact
 def _(n=[4,7,10,13]):
     var('z'); cf=2*exp((log(z^n)+1)/(z^n-1)); d=1.3
     complex_plot(cf,(-d,d),(-d,d)).show(figsize=(5,5))
 </script></div>       
-  <h2>Try Python Modules</h2>
-<div class="compute"><script type="text/x-sage">
+  <h2>Python Modules</h2>
+<div class='compute'><script type='text/x-sage'>
 import pandas,numpy; g=Graphics() 
 filepath='https://data.cityofnewyork.us/resource/'
 sd=pandas.read_json(filepath+'cuae-wd7h.json')
@@ -96,15 +119,15 @@ for i in range(sd.shape[0]):
 g.show(title='NYC School Districts',
        figsize=8,gridlines=True)
 </script></div>    
-  <h2>Try Other Languages (R, HTML, ...)</h2>
-<div class="compute"><script type="text/x-sage">
+  <h2>Other Languages (R, HTML, ...)</h2>
+<div class='compute'><script type='text/x-sage'>
 %%r
 library(stats) # f1=2^x, f2=4*x-x^2, x1=0, x2=4
 f<-function(x) {2^x-(4*x-x^2)}
 print(integrate(f,lower=0,upper=4))
-svg(filename="Rplots.svg",width=7,height=7,pointsize=12,
-    onefile=T,family="sans",bg="white",
-    antialias=c("default","none","gray","subpixel"))
+svg(filename='Rplots.svg',width=7,height=7,pointsize=12,
+    onefile=T,family='times',bg='white',
+    antialias=c('default','none','gray','subpixel'))
 n<-100; x<-seq(0,4,len=n)
 xy1<-data.frame(x=x,y=2^x)
 xy2<-data.frame(x=x,y=4*x-x^2)
@@ -118,18 +141,18 @@ polygon(c(xy1$x,rev(xy1$x)),c(max_xy$y,rev(min_xy$y)),
         col=rgb(.9,0,.9,.3))
 grid(col='gray'); dev.off()
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+<div class='compute'><script type='text/x-sage'>
 %%html
 <style>
-@import url('https://fonts.googleapis.com/css?family=Ewert');
+@import 'https://fonts.googleapis.com/css?family=Ewert';
 </style>
-<button style="background-color:silver; color:#3636ff; 
-               font-family:Ewert; font-size:120%;" 
-type="button" 
-onclick="document.getElementById('demo').innerHTML=Math.random()">
+<button style='background-color:silver; color:#3636ff; 
+               font-family:Ewert; font-size:120%;'
+type='button' 
+onclick='document.getElementById("demo").innerHTML=Math.random()'>
 Click to Display a Random Number in the Interval [0;1]</button>
-<p id="demo"style="color:#3636ff; 
-                   font-family:Ewert; font-size:200%;"></p>
+<p id='demo' style='color:#3636ff; 
+                   font-family:Ewert; font-size:200%;'></p>
 </script></div>
   </body>
 </html>
