@@ -1,57 +1,92 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>SageMath_Part21</title>
-    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
-    <script>$(function (){
-    sagecell.makeSagecell({inputLocation:'#examplecell',template:sagecell.templates.minimal,evalButtonText:'Activate'});
-    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Evaluate'});});
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width'>
+    <title>✒️SageMath_Part21</title>
+    <script src='https://sagecell.sagemath.org/static/embedded_sagecell.js'></script>
+    <script>$(function () {
+    sagecell.makeSagecell({inputLocation:'#cell1',evalButtonText:'activate',
+                           template:sagecell.templates.minimal});
+    sagecell.makeSagecell({inputLocation:'#cell2',evalButtonText:'activate again',
+                           autoeval:true});
+    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'evaluate'}); });
     </script>
-    <script data-ad-client="ca-pub-9200929962680356" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   </head>
   <style>
-  @import url('https://fonts.googleapis.com/css?family=Orbitron');
-  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
-  p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}      
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
+  @import url('https://fonts.googleapis.com/css?family=Akronim');
+  h1,h2 {color:#3636ff; font-family:'Akronim'; text-shadow:3px 3px 3px #aaa;}
+  .preactive {padding-left:2px; border:2px double slategray; 
+              font-size:110%; text-shadow:2px 2px 2px #aaa} 
+  p,a {color:darkblue; font-size:110%; text-shadow:3px 3px 3px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:45em; font-size:110%;}
+  body (margin:5px 5px5px 25px}
   </style>  
   <body>
   <h1>&#x1F4D1; &nbsp;SageMath Online Mini Campus. Part 21</h1>
-<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
-<a href="https://olgabelitskaya.github.io/sage20.html">&#x1F300; &nbsp; Previous &nbsp; &nbsp;</a>
-<a href="https://olgabelitskaya.github.io/sage22.html">&#x1F300; &nbsp; Next &nbsp; &nbsp;</a><br/>
-<a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
-<a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a>
+<a href='https://olgabelitskaya.github.io/README.html'>&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
+<a href='https://olgabelitskaya.github.io/sage2.html'>&#x1F300; &nbsp; Next &nbsp; &nbsp;</a><br/>
+<a href='https://www.instagram.com/olga.belitskaya/'>&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
+<a href='https://www.pinterest.ru/olga_belitskaya/code-style/'>&#x1F300; &nbsp; Pinterest Posts</a>
     <p>The set of interactive pages with the following structure:</p>
-    <p>Example of Computations $\implies$ Your Field for Experiments $\implies$ Try Python Modules $\implies$ Try Other Languages</p>
+    <p>Example of Computations $\mathbb{\implies}$ Your Experiments $\mathbb{\implies}$ 
+       Python Modules $\mathbb{\implies}$ Other Languages</p>
   <h2>Example of Computations</h2>
-    <p>Click the “Activate” button below to display an interactive example.</p>      
-<div id="examplecell"><script type="text/x-sage">
+    <p>Click the $\mathbb{activate}$ button below to display an interactive example.</p>
+<pre class='preactive'><code>
 @interact
-def _(A='a,3,2,c,1,ф,⎈,D',
-      B='ф,7,a,⎈,2,1,B,θ',
-      C='8,N,a,θ,4,P,⎈,r'):
+def _(A='a,3,2,c,1,ф,⎈,D,p',
+      B='ф,7,a,⎈,2,1,B,θ,S',
+      C='8,N,a,θ,4,P,⎈,r,p'):
     S=[sorted(list(el.split(','))) 
        for el in [A,B,C]]
-    s=r'<left style="color:%s; font-size:20px;">'
-    s1=r'$A \cap B = %s$</left>'
-    s2=r'$A \cap C = %s$</left>'
-    s3=r'$B \cap C = %s$</left>'
-    s4=r'$A \cap B \cap C = %s$</left>'
+    st=r'&#60;left style=%s>'%'color:%s'
+    s1=r'$\large{A \cap B = %s}$'
+    s2=r'$\large{A \cap C = %s}$'
+    s3=r'$\large{B \cap C = %s}$'
+    s4=r'$\large{A \cap B \cap C = %s}$'
     AB=list(set(S[0])&set(S[1]))
     AC=list(set(S[0])&set(S[2]))
     BC=list(set(S[1])&set(S[2])) 
     ABC=list(set(AB)&set(S[2]))
-    pretty_print(html(s%'#ff3636'+s1%('{'+','.join(AB)+'}')))
-    pretty_print(html(s%'#36ff36'+s2%('{'+','.join(AC)+'}')))
-    pretty_print(html(s%'#3636ff'+s3%('{'+','.join(BC)+'}')))
-    pretty_print(html(s%'#ff36ff'+s4%('{'+','.join(ABC)+'}')))
+    pretty_print(html(st%'#ff3636'+\
+                      s1%('{'+','.join(AB)+'}')))
+    pretty_print(html(st%'#36ff36'+\
+                      s2%('{'+','.join(AC)+'}')))
+    pretty_print(html(st%'#3636ff'+\
+                      s3%('{'+','.join(BC)+'}')))
+    pretty_print(html(st%'#ff36ff'+\
+                      s4%('{'+','.join(ABC)+'}')))
+
+</code></pre><br/>
+<div id='cell1'><script type='text/x-sage'>
+@interact
+def _(A='a,3,2,c,1,ф,⎈,D,p',
+      B='ф,7,a,⎈,2,1,B,θ,S',
+      C='8,N,a,θ,4,P,⎈,r,p'):
+    S=[sorted(list(el.split(','))) 
+       for el in [A,B,C]]
+    st=r'<left style=%s>'%'color:%s'
+    s1=r'$\large{A \cap B = %s}$'
+    s2=r'$\large{A \cap C = %s}$'
+    s3=r'$\large{B \cap C = %s}$'
+    s4=r'$\large{A \cap B \cap C = %s}$'
+    AB=list(set(S[0])&set(S[1]))
+    AC=list(set(S[0])&set(S[2]))
+    BC=list(set(S[1])&set(S[2])) 
+    ABC=list(set(AB)&set(S[2]))
+    pretty_print(html(st%'#ff3636'+\
+                      s1%('{'+','.join(AB)+'}')))
+    pretty_print(html(st%'#36ff36'+\
+                      s2%('{'+','.join(AC)+'}')))
+    pretty_print(html(st%'#3636ff'+\
+                      s3%('{'+','.join(BC)+'}')))
+    pretty_print(html(st%'#ff36ff'+\
+                      s4%('{'+','.join(ABC)+'}')))
 </script></div>
-  <h2>Your Field for Experiments</h2>
-    <p>Type your own SageMath code lines below and click “Evaluate”.</p>     
-<div class="compute"><script type="text/x-sage">
+   <h2>Your Experiments</h2>
+    <p>Type your own SageMath code lines below and click the $\mathbb{evaluate}$ button.</p>
+<div class='compute'><script type='text/x-sage'>
 var('t,k'); f=exp(-(-t+k)^2)*sin(2*pi*(t+k))
 cm=sample(['hsv','bwr','cool','jet'],1)[0]
 c=[colormaps[cm](25*i)[:3] for i in range(10)]
@@ -60,15 +95,19 @@ fragments=[plot(f(t=t,k=k),(t,-3,3),fill='axis',
 animate(fragments,title=cm,gridlines=True,
         xmin=-3,xmax=3,ymin=-1,ymax=1)
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+  <p>This code cell was evaluated automatically.</p>
+<div id='cell2'><script type='text/x-sage'>
+def sefs(string,symbol='t'):
+    var(symbol)
+    return sage.calculus.calculus\
+           .symbolic_expression_from_string(string)
 @interact
 def _(function=['(2t, t^2)','(7sin(t), 4cos(t)+6)',
                 '(2t cos(t)^2, t^2 cos(t)^2)']):
-    n=10; var('t'); c=['#3636ff','#ff3636']; 
-    if function=='(2t, t^2)': f=(2*t,t^2)
-    elif function=='(7sin(t), 4cos(t)+6)':
-        f=(7*sin(t),4*cos(t)+6)
-    else: f=(2*t*cos(t)^2,t^2*cos(t)^2)
+    n=10; var('t'); c=['#3636ff','#ff3636']
+    function=function.replace('(','')\
+    .replace(')','').split(',')
+    f=(sefs(function[0]),sefs(function[1]))
     df=(f[0].diff(),f[1].diff()) 
     d2f=(df[0].diff(),df[1].diff())
     def norm(g): return sqrt(sum(el^2 for el in g))
@@ -84,10 +123,10 @@ def _(function=['(2t, t^2)','(7sin(t), 4cos(t)+6)',
     p+=sum(line2d([(f[0](t=i),f[1](t=i)),
                    (centers[0](t=i),centers[1](t=i))], 
            thickness=1,rgbcolor=Color('silver').rgb()) 
-           for i in sxrange(-n,n,0.1))
+           for i in sxrange(-n,n,.1))
     p.show(xmin=-8,xmax=8,ymin=-2,ymax=14,figsize=7)
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+<div class='compute'><script type='text/x-sage'>
 f=[lambda x,y:(abs(cos((x+I*y)^2))-1),
    lambda x,y:(abs(sin((x+I*y)^4))-1)]
 d=1.8; seg=(-d,d)
@@ -95,8 +134,8 @@ p=sum([implicit_plot(f[i],seg,seg,plot_points=400)
        for i in [0,1]])
 p.show(figsize=7,aspect_ratio=1)
 </script></div>      
-  <h2>Try Python Modules</h2>
-<div class="compute"><script type="text/x-sage">
+  <h2>Python Modules</h2>
+<div class='compute'><script type='text/x-sage'>
 import pandas,pylab
 fp='https://data.cityofnewyork.us/resource/'
 se=pandas.read_json(fp+'h7rb-945c.json')
@@ -104,16 +143,16 @@ fl=['graduation_rate','city','council_district']
 se=se[fl].dropna()
 se['graduation_rate_range']=se.shape[0]*['0']
 se['graduation_rate']=se['graduation_rate']\
-.astype('str').str.replace("N/A","0").astype('float')
+.astype('str').str.replace('N/A','0').astype('float')
 se['council_district']=se['council_district']\
 .astype('int').astype('str')
-se.loc[se['graduation_rate']<=0.5,
+se.loc[se['graduation_rate']<=.5,
        'graduation_rate_range']='gr <= 0.5'
-se.loc[(se['graduation_rate']>0.5)&(se['graduation_rate']<=0.75),
+se.loc[(se['graduation_rate']>.5)&(se['graduation_rate']<=.75),
        'graduation_rate_range']='0.5 < gr <= 0.75'
-se.loc[(se['graduation_rate']>0.75)&(se['graduation_rate']<=0.9),
+se.loc[(se['graduation_rate']>.75)&(se['graduation_rate']<=.9),
        'graduation_rate_range'] = '0.75 < gr <= 0.9'
-se.loc[se['graduation_rate']>0.90,
+se.loc[se['graduation_rate']>.9,
        'graduation_rate_range']='gr > 0.9'
 gr_list=['gr <= 0.5','0.5 < gr <= 0.75',
          '0.75 < gr <= 0.9','gr > 0.9']
@@ -131,31 +170,42 @@ pandas.crosstab(data['city'],
 .plot.barh(ax=ax[1],cmap=pylab.cm.bwr)
 pylab.suptitle(s); pylab.show()
 </script></div>      
-  <h2>Try Other Languages (R, HTML, ...)</h2>
-<div class="compute"><script type="text/x-sage">
+  <h2>Other Languages (R, HTML, ...)</h2>
+<div class='compute'><script type='text/x-sage'>
 %%r
-svg(filename="Rplots.svg",widt=5,height=5,pointsize=12,
-    onefile=TRUE,family="times",bg="ghostwhite",
-    antialias=c("default","none","gray","subpixel"))
+svg(filename='Rplots.svg',widt=5,height=5,pointsize=12,
+    onefile=TRUE,family='times',bg='ghostwhite',
+    antialias=c('default','none','gray','subpixel'))
 model<-lm(weight~height,data=women)
-plot(women$height,women$weight,col="violet",pch=10)
-abline(model,col="purple"); grid(); dev.off()
+plot(women$height,women$weight,col='violet',pch=10)
+abline(model,col='purple'); grid(); dev.off()
 </script></div><br/>    
-<div class="compute"><script type="text/x-sage">
+<div class='compute'><script type='text/x-sage'>
 %%html
 <style>
-@import url('https://fonts.googleapis.com/css?family=Miss Fajardose');
+@import 'https://fonts.googleapis.com/css?family=Miss Fajardose';
 </style>
-<button style="background-color:white; color:#3636ff; 
-font-family:Miss Fajardose; font-size:300%;" type="button">
-Evaluate the code for converting the Fahrenheit temperature 86 &ordm; to Celsius
-</button>
-<p id="t" style="color:#3636ff; font-family:Miss Fajardose; font-size:200%;"></p>
+<input type='number' id='inputtemp' value='86' width=200
+       style='font-family:Miss Fajardose; font-size:200%; 
+              background-color:silver; color:#3636ff; 
+              text-align:center; width:200px; border:double #ff3636;'>
+</input>
+<p style='background-color:white; color:#3636ff; text-align:left; 
+          font-family:Miss Fajardose; font-size:300%;'
+   id='texttemp'>
+Evaluate the next code cell for converting 
+a Fahrenheit temperature to Celsius</p>
+<p style='color:#3636ff; background-color:silver; 
+          text-align:center; width:200px; border:double #36ff36;
+          font-family:Miss Fajardose; font-size:200%;'
+   id='outtemp'>Click `evaluate` below</p>
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+<div class='compute'><script type='text/x-sage'>
 %%javascript
-function f2c(f) {return (5/9)*(f-32)};
-document.getElementById('t').innerHTML=f2c(86);
+function f2c() {
+    var f=document.getElementById('inputtemp').value;
+    return Math.round((5/9)*(f-32)) };
+document.getElementById('outtemp').innerHTML=f2c();
 </script></div>     
   </body>
 </html>
