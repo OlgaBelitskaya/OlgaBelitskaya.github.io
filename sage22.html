@@ -1,34 +1,39 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>SageMath_Part22</title>
-    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
-    <script>$(function (){
-    sagecell.makeSagecell({inputLocation:'#examplecell',template:sagecell.templates.minimal,evalButtonText:'Activate'});
-    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Evaluate'});});
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width'>
+    <title>✒️SageMath_Part22</title>
+    <script src='https://sagecell.sagemath.org/static/embedded_sagecell.js'></script>
+    <script>$(function () {
+    sagecell.makeSagecell({inputLocation:'#cell1',evalButtonText:'activate',
+                           template:sagecell.templates.minimal});
+    sagecell.makeSagecell({inputLocation:'#cell2',evalButtonText:'activate again',
+                           autoeval:true});
+    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'evaluate'}); });
     </script>
-    <script data-ad-client="ca-pub-9200929962680356" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   </head>
   <style>
-  @import url('https://fonts.googleapis.com/css?family=Orbitron');
-  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
-  p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
+  @import url('https://fonts.googleapis.com/css?family=Akronim');
+  h1,h2 {color:#3636ff; font-family:'Akronim'; text-shadow:3px 3px 3px #aaa;}
+  .preactive {padding-left:2px; border:2px double slategray; 
+              font-size:110%; text-shadow:2px 2px 2px #aaa} 
+  p,a {color:darkblue; font-size:110%; text-shadow:3px 3px 3px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:45em; font-size:110%;}
+  body (margin:5px 5px5px 25px}
   </style>  
   <body>
   <h1>&#x1F4D1; &nbsp;SageMath Online Mini Campus. Part 22</h1>
-<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
-<a href="https://olgabelitskaya.github.io/sage21.html">&#x1F300; &nbsp; Previous &nbsp; &nbsp;</a>
-<a href="https://olgabelitskaya.github.io/sage23.html">&#x1F300; &nbsp; Next &nbsp; &nbsp;</a><br/>
-<a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
-<a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a>
+<a href='https://olgabelitskaya.github.io/README.html'>&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
+<a href='https://olgabelitskaya.github.io/sage2.html'>&#x1F300; &nbsp; Next &nbsp; &nbsp;</a><br/>
+<a href='https://www.instagram.com/olga.belitskaya/'>&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
+<a href='https://www.pinterest.ru/olga_belitskaya/code-style/'>&#x1F300; &nbsp; Pinterest Posts</a>
     <p>The set of interactive pages with the following structure:</p>
-    <p>Example of Computations $\implies$ Your Field for Experiments $\implies$ Try Python Modules $\implies$ Try Other Languages</p>    
+    <p>Example of Computations $\mathbb{\implies}$ Your Experiments $\mathbb{\implies}$ 
+       Python Modules $\mathbb{\implies}$ Other Languages</p>
   <h2>Example of Computations</h2>
-    <p>Click the “Activate” button below to display an interactive example.</p>      
-<div id="examplecell"><script type="text/x-sage">
+    <p>Click the $\mathbb{activate}$ button below to display an interactive example.</p>
+<pre class='preactive'><code>
 sx='$x=-%.1f*cos(%.1f*t)-%.1f*cos(%.1f*t)+%.1f*sin(%.1f*t)$'
 sy='$y=-%.1f*cos(%.1f*t)+%.1f*sin(%.1f*t)-%.1f*sin(%.1f*t)$'
 sz='$z=%.1f*cos(%.1f*t)$'
@@ -37,7 +42,29 @@ def L(i): return (-a*cos(d*i)-b*cos(e*i)+c*sin(f*i),
                   a*cos(g*i))
 @interact
 def _(a=[10,15,20],b=[2,4,6],c=[15,10,5]):
-    d=0.1; e=0.4; f=0.2; g=0.3; var('t')
+    d=.1; e=.4; f=.2; g=.3; var('t')
+    pretty_print(html(sx%(a,d,b,e,c,f)))
+    pretty_print(html(sy%(c,f,a,d,b,e)))
+    pretty_print(html(sz%(a,g)))
+    def L(i): return (-a*cos(d*i)-b*cos(e*i)+c*sin(f*i),
+                      -c*cos(f*i)+a*sin(d*i)-b*sin(e*i),
+                      a*cos(g*i))
+    p=sum([line3d([L(i),L(i+1)],radius=.5,
+                  color=colormaps.winter(4*i)[:3]) 
+           for i in [0..64]])
+    p.show(frame=False)
+
+</code></pre><br/>
+<div id='cell1'><script type='text/x-sage'>
+sx='$x=-%.1f*cos(%.1f*t)-%.1f*cos(%.1f*t)+%.1f*sin(%.1f*t)$'
+sy='$y=-%.1f*cos(%.1f*t)+%.1f*sin(%.1f*t)-%.1f*sin(%.1f*t)$'
+sz='$z=%.1f*cos(%.1f*t)$'
+def L(i): return (-a*cos(d*i)-b*cos(e*i)+c*sin(f*i),
+                  -c*cos(f*i)+a*sin(d*i)-b*sin(e*i),
+                  a*cos(g*i))
+@interact
+def _(a=[10,15,20],b=[2,4,6],c=[15,10,5]):
+    d=.1; e=.4; f=.2; g=.3; var('t')
     pretty_print(html(sx%(a,d,b,e,c,f)))
     pretty_print(html(sy%(c,f,a,d,b,e)))
     pretty_print(html(sz%(a,g)))
@@ -49,31 +76,32 @@ def _(a=[10,15,20],b=[2,4,6],c=[15,10,5]):
            for i in [0..64]])
     p.show(frame=False)
 </script></div>
-  <h2>Your Field for Experiments</h2>
-    <p>Type your own SageMath code lines below and click “Evaluate”.</p>
-<div class="compute"><script type="text/x-sage">
+   <h2>Your Experiments</h2>
+    <p>Type your own SageMath code lines below and click the $\mathbb{evaluate}$ button.</p>
+<div class='compute'><script type='text/x-sage'>
 @interact
 def _(N=[2*10^3,5*10^3,10^4]): 
     L=[CC(0,0)]
     c=[colormaps.cool((N^(-1)).n()*i)[:3] 
        for i in [1..N]]
-    z=lambda n:exp(I*pi*n*ln(n/4)*2^0.5).n() 
+    z=lambda n:exp(I*pi*n*ln(n/4)*2^.5).n() 
     for n in [1..N]: L.append(L[n-1]+CC(z(n))) 
     p=sum([line([L[i],L[i+1]],color=c[i]) 
            for i in [200..N-1]])
     p.show(figsize=(5,5))
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+  <p>This code cell was evaluated automatically.</p>
+<div id='cell2'><script type='text/x-sage'>
 @interact
 def _(n=[1..11]):
     var('x')
     f=[exp(-x^2)*sin(pi*x^n),
        exp(-x^2),-exp(-x^2)]
-    p=sum([plot(f[i],(-2,2),color=hue(0.3*i)) 
+    p=sum([plot(f[i],(-2,2),color=hue(.3*i)) 
          for i in [0..2]])
     p.show(figsize=(7,5),gridlines=True)
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+<div class='compute'><script type='text/x-sage'>
 from sage.plot.plot3d.shapes import Sphere
 var('x,y,z'); c='#3030ff'; n=12
 s1=Sphere(8,color=c,opacity=.05).translate(0,0,0)
@@ -83,12 +111,14 @@ sn=[s1+s2+Sphere(1,color=(.2*i,0,.3*i))\
     for i in [0..2*n]]
 animate(sn,frame=False)
 </script></div> 
-  <h2>Try Python Modules</h2>
-<div class="compute"><script type="text/x-sage">
-import pandas,pylab; from sklearn import linear_model as lm
+  <h2>Python Modules</h2>
+<div class='compute'><script type='text/x-sage'>
+import pandas,pylab
+from sklearn import linear_model as lm
 from sklearn import datasets,feature_selection
-from sklearn.ensemble import GradientBoostingClassifier as GBC
-from sklearn.ensemble import AdaBoostClassifier as ABC
+from sklearn.ensemble import \
+GradientBoostingClassifier as GBC,\
+AdaBoostClassifier as ABC
 wine=datasets.load_wine(); X,y=wine.data,wine.target
 selected_features=pandas.DataFrame(columns=range(13))
 selected_features.loc['Gradient Boosting']=\
@@ -97,20 +127,22 @@ selected_features.loc['Ada Boost']=\
 ABC().fit(X,y).feature_importances_
 kbest=feature_selection\
 .SelectKBest(score_func=feature_selection.chi2,k=3)
-selected_features.loc['Select KBest']=kbest.fit(X,y).pvalues_
-lmlr=lm.LogisticRegression(solver='liblinear',multi_class='ovr')
-rfe=feature_selection.RFE(lmlr,3)
+selected_features.loc['Select KBest']=\
+kbest.fit(X,y).pvalues_
+lmlr=lm.LogisticRegression(solver='liblinear',
+                           multi_class='ovr')
+rfe=feature_selection.RFE(lmlr,n_features_to_select=3)
 selected_features.loc['RFE']=1/rfe.fit(X,y).ranking_
-f,ax = pylab.subplots(1,figsize=(8,5))
+f,ax = pylab.subplots(1,figsize=(7,5))
 selected_features.T.plot(ax=ax)
 pylab.grid(); pylab.show()
 </script></div>
-  <h2>Try Other Languages (R, HTML, ...)</h2>
-<div class="compute"><script type="text/x-sage">
+  <h2>Other Languages (R, HTML, ...)</h2>
+<div class='compute'><script type='text/x-sage'>
 %%r
-svg(filename="Rplots.svg",width=8,height=5,
-    pointsize=12,onefile=T,family="sans",bg="white",
-    antialias=c("default","none","gray","subpixel"))
+svg(filename='Rplots.svg',width=7,height=5,
+    pointsize=12,onefile=T,family='times',bg='white',
+    antialias=c('default','none','gray','subpixel'))
 T<-seq(from=0,to=2*pi,by=.01*pi)
 col<-function(i) {rgb(.005*i,0,1-.005*i)}
 curve<-function(t) {list(sin(2*t),sin(5*t))}
@@ -122,24 +154,27 @@ for(i in 1:200){
     par(new=TRUE)}
 grid(); dev.off()
 </script></div>
-    <p>Click “Evaluate” and then explore onclick events in the output</p>
-<div class="compute"><script type="text/x-sage">
+    <p>Click $\mathbb{evaluate}$ and then explore onclick events in the output</p>
+<div class='compute'><script type='text/x-sage'>
 %%html
 <style>
-@import url('https://fonts.googleapis.com/css?family=Ewert&effect=3d');
+@import 'https://fonts.googleapis.com/css?family=Ewert&effect=3d';
 </style>
-<p id="changefont" class="font-effect-3d" onclick="setFont()">
+<p id='change_font' class='font-effect-3d' onclick='setFont()'>
 Click to change the font</p>
-<p id="changecolor" class="font-effect-3d" 
-   onclick="setColor(this,'darkgreen')">
+<input type='color' id='set_color' value='#36ff36' 
+       style='padding-left:20px'>
+<p id='change_color' class='font-effect-3d' 
+   onclick='setColor()'>
 Click to change the color</p>
 <script>
 function setFont()
-    {doc=document.getElementById("changefont");
-     doc.style="font-family:Ewert; font-size:200%";}
-function setColor(element,c)
-    {doc=document.getElementById("changecolor")
-     doc.style="font-size:300%"; doc.style.color=c;}
+    {doc=document.getElementById('change_font');
+     doc.style='font-family:Ewert; font-size:210%';}
+function setColor()
+    {var c=document.getElementById('set_color').value;
+     doc=document.getElementById('change_color')
+     doc.style='font-size:300%'; doc.style.color=c;}
 </script></div>
   </body>
 </html>
