@@ -1,37 +1,61 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>SageMath_Part24</title>
-    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
-    <script>$(function (){
-    sagecell.makeSagecell({inputLocation:'#examplecell',template:sagecell.templates.minimal,evalButtonText:'Activate'});
-    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'Evaluate'});});
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width'>
+    <title>✒️SageMath_Part24</title>
+    <script src='https://sagecell.sagemath.org/static/embedded_sagecell.js'></script>
+    <script>$(function () {
+    sagecell.makeSagecell({inputLocation:'#cell1',evalButtonText:'activate',
+                           template:sagecell.templates.minimal});
+    sagecell.makeSagecell({inputLocation:'#cell2',evalButtonText:'activate again',
+                           autoeval:true});
+    sagecell.makeSagecell({inputLocation:'div.compute',evalButtonText:'evaluate'}); });
     </script>
-    <script data-ad-client="ca-pub-9200929962680356" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   </head>
   <style>
-  @import url('https://fonts.googleapis.com/css?family=Orbitron');
-  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
-  p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
+  @import url('https://fonts.googleapis.com/css?family=Akronim');
+  h1,h2 {color:#3636ff; font-family:'Akronim'; text-shadow:3px 3px 3px #aaa;}
+  .preactive {padding-left:2px; border:2px double slategray; 
+              font-size:110%; text-shadow:2px 2px 2px #aaa} 
+  p,a {color:darkblue; font-size:110%; text-shadow:3px 3px 3px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:50em; font-size:110%;}
+  body (margin:5px 5px5px 25px}
   </style>  
   <body>
   <h1>&#x1F4D1; &nbsp;SageMath Online Mini Campus. Part 24</h1>
-<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
-<a href="https://olgabelitskaya.github.io/sage23.html">&#x1F300; &nbsp; Previous &nbsp; &nbsp;</a><br/>
-<a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
-<a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a>
+<a href='https://olgabelitskaya.github.io/README.html'>&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
+<a href='https://olgabelitskaya.github.io/sage2.html'>&#x1F300; &nbsp; Next &nbsp; &nbsp;</a><br/>
+<a href='https://www.instagram.com/olga.belitskaya/'>&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
+<a href='https://www.pinterest.ru/olga_belitskaya/code-style/'>&#x1F300; &nbsp; Pinterest Posts</a>
     <p>The set of interactive pages with the following structure:</p>
-    <p>Example of Computations $\implies$ Your Field for Experiments $\implies$ Try Python Modules $\implies$ Try Other Languages</p> 
+    <p>Example of Computations $\mathbb{\implies}$ Your Experiments $\mathbb{\implies}$ 
+       Python Modules $\mathbb{\implies}$ Other Languages</p>
   <h2>Example of Computations</h2>
-    <p>Click the “Activate” button below to display an interactive example.</p>      
-<div id="examplecell"><script type="text/x-sage">
+    <p>Click the $\mathbb{activate}$ button below to display an interactive example.</p>
+<pre class='preactive'><code>
 @interact
 def _(a=[3,2,1],b=[3,2,1],c=[3,2,1]):
-    s='x(t)=sin(%s*t)^2; y(t)=cos(%s*t)^3; z(t)=sin(%s*t)*ln(t+1)'
-    pretty_print(html('<p style="font-size:140%;">'+s%(a,b,c)+'</p>'))
+    s='$x(t)=sin(%s*t)^2; y(t)=cos(%s*t)^3; '+\
+      'z(t)=sin(%s*t)*ln(t+1)$'
+    pretty_print(html('&#60;p style=%s>'%'font-size:140%;'+\
+                      s%(a,b,c)+'&#60;/p>'))
+    f=lambda p:(sin(a*p)^2,cos(b*p)^3,sin(c*p)*ln(p+1))
+    t=Tachyon(xres=700,yres=700,camera_center=(-4,-6,1))
+    t.texture('t1',color=(0,0,.3),opacity=.5)
+    t.texture('t2',color=(.9,.9,.9),texfunc=2)
+    t.parametric_plot(f,0,6*pi,'t1',r=.03)
+    t.plane((7,7,-7),(0,-1,1),'t2')
+    t.light((-8,-6,4),1,(1,1,1)); t.show()
+
+</code></pre><br/>
+<div id='cell1'><script type='text/x-sage'>
+@interact
+def _(a=[3,2,1],b=[3,2,1],c=[3,2,1]):
+    s='$x(t)=sin(%s*t)^2; y(t)=cos(%s*t)^3; '+\
+      'z(t)=sin(%s*t)*ln(t+1)$'
+    pretty_print(html('<p style=%s>'%'font-size:140%;'+\
+                      s%(a,b,c)+'</p>'))
     f=lambda p:(sin(a*p)^2,cos(b*p)^3,sin(c*p)*ln(p+1))
     t=Tachyon(xres=700,yres=700,camera_center=(-4,-6,1))
     t.texture('t1',color=(0,0,.3),opacity=.5)
@@ -40,9 +64,9 @@ def _(a=[3,2,1],b=[3,2,1],c=[3,2,1]):
     t.plane((7,7,-7),(0,-1,1),'t2')
     t.light((-8,-6,4),1,(1,1,1)); t.show()
 </script></div>
-  <h2>Your Field for Experiments</h2>
-    <p>Type your own SageMath code lines below and click “Evaluate”.</p>     
-<div class="compute"><script type="text/x-sage">
+   <h2>Your Experiments</h2>
+    <p>Type your own SageMath code lines below and click the $\mathbb{evaluate}$ button.</p>
+<div class='compute'><script type='text/x-sage'>
 t=Tachyon(camera_center=(2,6,2.5),look_at=(2,0,0),raydepth=10)
 t.texture('mirror',ambient=.01,diffuse=.01,
           specular=.9,opacity=.9,color=(.3,.3,.3))
@@ -53,7 +77,8 @@ t.sphere((4,-1,1),1,'mirror'); t.sphere((0,-1,1),1,'mirror')
 t.sphere((2,-1,1),.5,'mirror'); t.sphere((2,2,1),.5,'mirror')
 t.light((7,7,1),1,(2,2,1)); show(t)
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+  <p>This code cell was evaluated automatically.</p>
+<div id='cell2'><script type='text/x-sage'>
 @interact
 def _(proj=['perspective','fisheye','perspective_dof'],
       cm=['hsv','jet','cool','hot','prism']):
@@ -68,7 +93,7 @@ def _(proj=['perspective','fisheye','perspective_dof'],
         t=Tachyon(xres=500,yres=500,projection=proj,
                   camera_center=(-3.5,0.,0.),
                   antialiasing=3,raydepth=5,
-                  focallength='2.0',aperture='.003')
+                  focallength='2.',aperture='.003')
     else: t=Tachyon(xres=500,yres=500,projection=proj,
                     camera_center=(-3.5,0.,0.))
     for i in [0..13]:
@@ -77,7 +102,7 @@ def _(proj=['perspective','fisheye','perspective_dof'],
         t.fcylinder(e[i][0],e[i][1],.06,'t%s'%str(i)) 
     t.light((-5,-5,5),.1,(1,1,1)); t.show()
 </script></div><br/>
-<div class="compute"><script type="text/x-sage">
+<div class='compute'><script type='text/x-sage'>
 y(k,x)=x^2*k^2-12*x^2+k^2*x-3*sqrt(3)*k*x+6*x+k^2-sqrt(3)*k-6
 pretty_print(html('<p>$y=%s$</p>'%latex(y(k,x))))
 n=31; k=[.12*i for i in [0..n]]
@@ -85,14 +110,14 @@ c=[colormaps.hsv(.03*i)[:3] for i in [0..n]]
 p=sum([plot(y(k[i],x),(x,-2,2),color=c[i],
             legend_label='%.2f'%k[i]) for i in [0..n]])
 p.set_legend_options(loc=(1.1,-.1))
-p.show(ymin=-8,ymax=2,figsize=(8,5),gridlines=True)
+p.show(ymin=-8,ymax=2,figsize=(7,5),gridlines=True)
 </script></div>       
-  <h2>Try Python Modules</h2>
-<div class="compute"><script type="text/x-sage">
+  <h2>Python Modules</h2>
+<div class='compute'><script type='text/x-sage'>
 import numpy,pylab,time
 from sklearn import manifold,datasets
 X,y=datasets.load_digits(return_X_y=True)
-tsne=manifold.TSNE(n_components=2,learning_rate=700.0)
+tsne=manifold.TSNE(n_components=2,learning_rate=700.)
 t0=time.time(); X_emb=tsne.fit_transform(X)
 t=time.time()-t0
 x_min,x_max=numpy.min(X_emb,0),numpy.max(X_emb,0)
@@ -101,35 +126,36 @@ f,ax=pylab.subplots(1,figsize=(7,7))
 for i in range(X_emb.shape[0]):
     pylab.text(X_emb[i,0],X_emb[i,1],str(y[i]),
                color=pylab.cm.hsv(.1*y[i]))
-pylab.title("t-SNE embedding %f s"%t)
-pylab.axis("off"); pylab.show()
+pylab.title('t-SNE embedding %f s'%t)
+pylab.axis('off'); pylab.show()
 </script></div>      
-  <h2>Try Other Languages (R, HTML, ...)</h2>
-<div class="compute"><script type="text/x-sage">
+  <h2>Other Languages (R, HTML, ...)</h2>
+<div class='compute'><script type='text/x-sage'>
 %%r
 library('MASS'); library('nnet'); data(Boston); n<-dim(Boston)[1];
-svg(filename="Rplots.svg",width=8,height=5,pointsize=12,
-    onefile=T,family="courier",bg="white",
-    antialias=c("default","none","gray","subpixel"))
+svg(filename='Rplots.svg',width=7,height=4,pointsize=12,
+    onefile=T,family='courier',bg='white',
+    antialias=c('default','none','gray','subpixel'))
 model<-nnet(as.matrix(Boston[1:430,-14]),as.matrix(Boston[1:430,14]),
             size=42,trace=F,maxit=1.5*10^3,linout=T,decay=5*.1^4)
-predictions<-predict(model,as.matrix(Boston[431:n,-14]),type="raw")
-plot(as.matrix(Boston[431:n,14]),col="#3636ff",type="o",
+predictions<-predict(model,as.matrix(Boston[431:n,-14]),type='raw')
+plot(as.matrix(Boston[431:n,14]),col='#3636ff',type='o',
      xlab='',ylab='',yaxt='n'); par(new=T)
-plot(predictions,col="#ff3636",type="o",
+plot(predictions,col='#ff3636',type='o',
      cex=1.3,ylab='Targets & Predictions'); dev.off()
 </script></div>
-    <p>Click “Evaluate” twice. Use in HTML documents with &#60;/script&#62; in the end.</p>
-<div class="compute"><script type="text/x-sage">
+    <p>Click $\mathbb{evaluate}$ twice. Use in HTML documents with &#60;/script&#62; in the end.</p>
+<div class='compute'><script type='text/x-sage'>
 %%html
 <style>
-svg {background-color:silver;} 
+#svg1 {background-color:silver;} 
 text {fill:#fff; font-size:135%;} 
 .line {fill:none; stroke:#3636ff; stroke-width:2;}             
-.grid line,.grid path {stroke:#fff; stroke-opacity:0.9; 
+.grid line,.grid path {stroke:#fff; stroke-opacity:.9; 
                        shape-rendering:crispEdges;}       
 </style>
-<script src="https://d3js.org/d3.v4.min.js"/><svg/><script>
+<script src='https://d3js.org/d3.v4.min.js'/>
+<svg id='svg1'/><script>
 var n=630,m=35,margin={top:m,right:m,bottom:m,left:m},
     width=500-margin.left-margin.right,
     height=500-margin.top-margin.bottom; 
@@ -138,28 +164,29 @@ var xScale=d3.scaleLinear().domain([-2,2]).range([0,width]),
 function make_x_gridlines() {return d3.axisBottom(xScale).ticks(11)};
 function make_y_gridlines() {return d3.axisLeft(yScale).ticks(11)};            
 var data=d3.range(0,n).map(function(i){return {
-    "x":Math.cos(0.01*i)+Math.cos(0.11*i)/2+Math.sin(0.3*i)/3,
-    "y":Math.sin(0.01*i)+Math.sin(0.11*i)/2+Math.cos(0.3*i)/3}});
-var tt1="translate("+margin.left+","+margin.top+")",
-    tt2="translate(0,"+height+")";
+    'x':Math.cos(.01*i)+Math.cos(.11*i)/2+Math.sin(.3*i)/3,
+    'y':Math.sin(.01*i)+Math.sin(.11*i)/2+Math.cos(.3*i)/3}});
+var tt1='translate('+margin.left+','+margin.top+')',
+    tt2='translate(0,'+height+')';
 var lineColor=d3.scaleSequential().domain([0,n])
                 .interpolator(d3.interpolateCool);                       
-var svg=d3.select("svg").attr("width",width+margin.left+margin.right)
-                        .attr("height",height+margin.top+margin.bottom)
-                        .append("g").attr("transform",tt1);
-svg.append("g").attr("class","x axis")
-               .call(d3.axisBottom(xScale).tickSize(0.5)).attr(tt2); 
-svg.append("g").attr("class","y axis")
-               .call(d3.axisLeft(yScale).tickSize(0.5));    
-svg.append("g").attr("class","grid").attr("transform",tt2)
+var svg=d3.select('#svg1')
+          .attr('width',width+margin.left+margin.right)
+          .attr('height',height+margin.top+margin.bottom)
+          .append('g').attr('transform',tt1);
+svg.append('g').attr('class','x axis')
+   .call(d3.axisBottom(xScale).tickSize(.5)).attr(tt2); 
+svg.append('g').attr('class','y axis')
+   .call(d3.axisLeft(yScale).tickSize(.5));    
+svg.append('g').attr('class','grid').attr('transform',tt2)
                .call(make_x_gridlines()
-               .tickSize(-height).tickFormat(""));
-svg.append("g").attr("class","grid").call(make_y_gridlines()
-               .tickSize(-width).tickFormat(""));
+               .tickSize(-height).tickFormat(''));
+svg.append('g').attr('class','grid').call(make_y_gridlines()
+               .tickSize(-width).tickFormat(''));
 var line=d3.line().curve(d3.curveMonotoneX)
                   .x(function(d) {return xScale(d.x);})
                   .y(function(d) {return yScale(d.y);});
-svg.append("path").datum(data).attr("class","line").attr("d",line);
+svg.append('path').datum(data).attr('class','line').attr('d',line);
 </script></div>
   </body>
 </html>
