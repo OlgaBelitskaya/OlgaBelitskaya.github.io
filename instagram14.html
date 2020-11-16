@@ -321,7 +321,52 @@ dev.off()
 HTML &#38; JavaScript &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 <div class="sage_html"><script type="text/x-sage">
 %%html
-
+<style>
+@import 'https://fonts.googleapis.com/css?family=Orbitron|Akronim';
+#d3ch1 {background:whitesmoke;}
+#d3ch1 text {fill:#3636ff; font-size:110%; font-family:Orbitron} 
+.grid line,.grid path {stroke:#3636ff; stroke-opacity:.5; 
+                       shape-rendering:crispEdges;}
+</style>
+<script src='https://d3js.org/d3.v6.min.js'/>
+<svg id='d3ch1'/><script>
+var m=30,x1=0,x2=4,y1=-100,y2=100;
+var margin={top:m,right:m,bottom:m,left:m},
+    width=600-margin.left-margin.right,
+    height=600-margin.top-margin.bottom; 
+function make_x_gridlines(){
+    return d3.axisBottom(xScale).ticks(11).tickFormat('')};
+function make_y_gridlines(){
+    return d3.axisLeft(yScale).ticks(10).tickFormat('')}; 
+var xScale=d3.scaleLinear().domain([x1,x2]).range([0,width]),
+    yScale=d3.scaleLinear().domain([y1,y2]).range([height,0]);
+var ttr1='translate('+margin.left+','+margin.top+')',
+    ttr2='translate(0,'+height+')';
+var svg=d3.select('#d3ch1')
+          .attr('width',width+margin.left+margin.right)
+          .attr('height',height+margin.top+margin.bottom)
+          .append('g').attr('transform',ttr1);
+svg.append('g').attr('class','x axis')
+               .call(d3.axisBottom(xScale).tickSize(.5))
+               .attr('transform',ttr2); 
+svg.append('g').attr('class','y axis')
+               .call(d3.axisLeft(yScale).tickSize(.15));    
+svg.append('g').attr('class','grid').attr('transform',ttr2)
+               .call(make_x_gridlines().tickSize(-height));
+svg.append('g').attr('class','grid')
+               .call(make_y_gridlines().tickSize(-width));
+function sumfunction(n,x) {
+  var funsum=0;
+  for (var i=1; i<n+1; i++) {
+      funsum+=Math.sqrt(Math.pow(Math.E,-i*x)+
+           Math.pow(x,i-1))/(Math.cos(i*x)+Math.sin(i*x));};
+  return funsum*Math.log(n*x-1)};
+var xy=Array(400).fill(50).map((r,x)=>
+       ({'x':.0075*(x+r),'y':sumfunction(3,.0075*(x+r))}));
+svg.selectAll('circle').data(xy).enter()
+    .append('circle').attr('r',3)
+    .attr('cx',d=>xScale(d.x)).attr('cy',d=>yScale(d.y))
+    .attr('fill','#3636ff').attr('stroke','#fff');
 </script></div><br/>
 HTML &#38; JavaScript &#38; SageMathCell (Click “Run HTML” twice!)<br/>
 <div class="sage_html"><script type="text/x-sage">
