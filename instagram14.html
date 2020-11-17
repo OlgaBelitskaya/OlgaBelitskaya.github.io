@@ -387,10 +387,15 @@ HTML &#38; JavaScript &#38; SageMathCell (Click 'Run HTML' twice!)<br/>
 </style>
 <script src='https://d3js.org/d3.v6.min.js'/>
 <svg id='d3ch2'/><script>
-var m=30,x1=-4,x2=4,y1=-4,y2=4;
+var m=30,x1=-7,x2=7,y1=-7,y2=7;
 var margin={top:m,right:m,bottom:m,left:m},
     width=600-margin.left-margin.right,
-    height=600-margin.top-margin.bottom; 
+    height=600-margin.top-margin.bottom;
+function randi(min,max) {
+    return Math.floor(Math.random()*(max-min+1))+min;};
+function randcolR(i) {
+    var r=randi(i,255),gb=randi(i,255);
+    return '#'+r.toString(16)+gb.toString(16)+gb.toString(16);};   
 function make_x_gridlines(){
     return d3.axisBottom(xScale).ticks(11).tickFormat('')};
 function make_y_gridlines(){
@@ -404,14 +409,15 @@ var svg=d3.select('#d3ch2')
           .attr('height',height+margin.top+margin.bottom)
           .append('g').attr('transform',ttr1);
 svg.append('g').attr('class','x axis')
-               .call(d3.axisBottom(xScale).tickSize(.5))
-               .attr('transform',ttr2); 
+   .call(d3.axisBottom(xScale).tickSize(.5))
+   .attr('transform',ttr2); 
 svg.append('g').attr('class','y axis')
-               .call(d3.axisLeft(yScale).tickSize(.5));    
-svg.append('g').attr('class','grid2').attr('transform',ttr2)
-               .call(make_x_gridlines().tickSize(-height));
+   .call(d3.axisLeft(yScale).tickSize(.5));    
 svg.append('g').attr('class','grid2')
-               .call(make_y_gridlines().tickSize(-width));
+   .attr('transform',ttr2)
+   .call(make_x_gridlines().tickSize(-height));
+svg.append('g').attr('class','grid2')
+   .call(make_y_gridlines().tickSize(-width));
 
 </script></div><br/>
   </body>
