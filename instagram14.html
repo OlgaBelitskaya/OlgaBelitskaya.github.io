@@ -382,8 +382,9 @@ HTML &#38; JavaScript &#38; SageMathCell (Click 'Run HTML' twice!)<br/>
 @import 'https://fonts.googleapis.com/css?family=Ewert';
 #d3ch2 {background:ivory;}
 #d3ch2 text {fill:#ff3636; font-size:130%; font-family:Ewert} 
-.grid2 line,.grid2 path {stroke:#ff3636; stroke-opacity:.5; 
-                         shape-rendering:crispEdges;}
+.grid2 line,.grid2 path {
+    stroke:#ff3636; stroke-opacity:.5; stroke-width:.3; 
+    stroke-opacity:.5shape-rendering:crispEdges;}
 </style>
 <script src='https://d3js.org/d3.v6.min.js'/>
 <svg id='d3ch2'/><script>
@@ -394,7 +395,7 @@ var margin={top:m,right:m,bottom:m,left:m},
 function randi(min,max) {
     return Math.floor(Math.random()*(max-min+1))+min;};
 function randcolR(i) {
-    var r=randi(i,255),gb=randi(i,255);
+    var r=randi(100+i,255),gb=randi(10+i,100);
     return '#'+r.toString(16)+gb.toString(16)+gb.toString(16);};   
 function make_x_gridlines(){
     return d3.axisBottom(xScale).ticks(11).tickFormat('')};
@@ -438,6 +439,19 @@ function make_data(a,b,c,d,e,q,n,k) {
     return d3.range(0,2*n+1).map(function(t) {
       return {'x':fx(a,b,c,d,e,q,n,t,k),
               'y':fy(a,b,c,d,e,q,n,t,k)}; }) }
+var a=randi(5,9),b=randi(10,14),c=randi(15,19),
+    d=randi(20,36),e=randi(37,81),
+    q=randi(3,12),n=randi(3,15);
+var line=d3.line().curve(d3.curveMonotoneX)
+           .x(function(d){return xScale(d.x);})
+           .y(function(d){return yScale(d.y);});
+for (var i=1; i<2*(q+n+1); i++) {
+    var data=make_data(a,b,c,d,e,q,n,i),
+        col=randcolR(i);
+    svg.append('path').datum(data)
+       .attr('class','line').attr('d',line)
+       .attr('stroke',col).attr('stroke-width',.3)
+       .attr('fill','none');};
 </script></div><br/>
   </body>
 </html>
