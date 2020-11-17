@@ -18,7 +18,7 @@
   @import 'https://fonts.googleapis.com/css?family=Orbitron';
   h1,h2 {color:#3636ff; font-family:Orbitron; text-shadow:5px 5px 5px #aaa;}
   p,a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:30em;}
   body {margin:5px 5px 5px 15px;}
   </style>  
   <body>
@@ -418,7 +418,26 @@ svg.append('g').attr('class','grid2')
    .call(make_x_gridlines().tickSize(-height));
 svg.append('g').attr('class','grid2')
    .call(make_y_gridlines().tickSize(-width));
-
+function fx(a,b,c,d,e,q,n,t,k) {
+    var x1=Math.cos(Math.PI*t/n+k*Math.PI/q)+
+           Math.cos(a*Math.PI*t/n+k*Math.PI/q),
+        x2=Math.cos(b*Math.PI*t/n+k*Math.PI/q)+
+           Math.cos(c*Math.PI*t/n+k*Math.PI/q),
+        x3=Math.cos(d*Math.PI*t/n+k*Math.PI/q)+
+           Math.cos(e*Math.PI*t/n+k*Math.PI/q);
+    return x1+x2+x3}
+function fy(a,b,c,d,e,q,n,t,k) {
+    var y1=Math.sin(Math.PI*t/n+k*Math.PI/q)+
+           Math.sin(a*Math.PI*t/n+k*Math.PI/q),
+        y2=Math.sin(b*Math.PI*t/n+k*Math.PI/q)+
+           Math.sin(c*Math.PI*t/n+k*Math.PI/q),
+        y3=Math.sin(d*Math.PI*t/n+k*Math.PI/q)+
+           Math.sin(e*Math.PI*t/n+k*Math.PI/q);
+    return y1+y2+y3}
+function make_data(a,b,c,d,e,q,n,k) {
+    return d3.range(0,2*n+1).map(function(t) {
+      return {'x':fx(a,b,c,d,e,q,n,t,k),
+              'y':fy(a,b,c,d,e,q,n,t,k)}; }) }
 </script></div><br/>
   </body>
 </html>
