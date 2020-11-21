@@ -63,8 +63,12 @@ data[data<5000].boxplot(by='Channel',figsize=(10,8))
 pl.show()
 </script></div><br/>
 <div class='linked'><script type='text/x-sage'>
-data.iloc[:,int(1):].area(stacked=False,figsize=(10,8))
-pl.show()
+fig=pl.figure(figsize=(10,4))
+ax=fig.add_subplot('111')
+data.iloc[:,int(1):].plot.area(stacked=False,ax=ax)
+data_mean=pd.DataFrame(data.iloc[:,int(1):].mean()).T
+pd.plotting.table(ax,data_mean,loc='top')
+pl.grid(); pl.show()
 </script></div><br/>
     <h1>___</h1>
 Python <br/>
