@@ -74,6 +74,7 @@ fig=pl.figure(figsize=(10,4))
 ax=fig.add_subplot('111')
 data.iloc[:,int(1):].plot.area(stacked=False,ax=ax)
 data_mean=pd.DataFrame(data.iloc[:,int(1):].mean()).T
+data_mean.index=['mean']
 pd.plotting.table(ax,data_mean,loc='top')
 pl.grid(); pl.show()
 </script></div><br/>
@@ -144,10 +145,8 @@ function RandomPlot(data,coef,col) {
        .text('[a,b,c,d,e,f]='+coef)
        .attr('x',width/2).attr('y',40)
        .attr('fill',col);};
-var xScale=d3.scaleLinear().domain([-3,3])
-             .range([0,width]);
-var yScale=d3.scaleLinear().domain([-3,3])
-                  .range([height,0]);
+xScale=d3.scaleLinear().domain([-3,3]).range([0,width]);
+yScale=d3.scaleLinear().domain([-3,3]).range([height,0]);
 var svg=d3.select('#d301')
           .attr('width',width+margin.left+margin.right)
           .attr('height',height+margin.top+margin.bottom)
