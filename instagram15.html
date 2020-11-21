@@ -74,7 +74,34 @@ R <br/>
 HTML &#38; JavaScript (Click 'Run HTML' twice!)<br/>
 <div class='sage_html'><script type='text/x-sage'>
 %%html
-
+<script src='https://d3js.org/d3.v6.min.js'/>
+<svg id='d301' style='background-color:silver;'/>
+<script>
+var m=20,margin={top:m,right:m,bottom:m,left:m},
+    width=600-margin.left-margin.right,
+    height=600-margin.top-margin.bottom;
+function randi(min,max) {
+    return Math.floor(Math.random()*(max-min+1))+min;};
+function randcol() {
+    var g=randi(50,200),b=randi(50,200);
+    return '#00'+g.toString(16)+b.toString(16);}
+function fx(a,b,c,d,e,f,t) {
+    var x1=Math.sin(t/d),
+        x2=(-1)**f*a*Math.sin(b*t)*Math.cos(t),
+        x3=(-1)**f*c*Math.sin(e*b*t);
+    return x1+x2+x3};
+function fy(a,b,c,d,e,f,t) {
+     var y1=Math.cos(t/d),
+         y2=(-1)**f*a*Math.sin(b*t)*Math.sin(t),
+         y3=(-1)**f*c*Math.cos(e*b*t);
+     return y1+y2+y3};
+function make_data() {
+    const a=randi(5,15)/10,b=randi(6,12),c=randi(1,100)/10**3,
+          d=randi(5,7),e=randi(14,18),f=randi(1,2);
+    var data=d3.range(1,10**3+1).map(function(k) {
+        return {'x':fx(a,b,c,d,e,f,k*b*e*Math.PI/10**3),
+                'y':fy(a,b,c,d,e,f,k*b*e*Math.PI/10**3)}; });
+    return [data,[a,b,c,d,e,f]]};
 </script></div><br/>
       <h1>____</h1>
 HTML &#38; JavaScript (Click 'Run HTML' twice!)<br/>
