@@ -102,6 +102,39 @@ function make_data() {
         return {'x':fx(a,b,c,d,e,f,k*b*e*Math.PI/10**3),
                 'y':fy(a,b,c,d,e,f,k*b*e*Math.PI/10**3)}; });
     return [data,[a,b,c,d,e,f]]};
+function RandomPlot(data,coef,col) {
+    var line=d3.line().curve(d3.curveMonotoneX)
+               .x(function(d){return xScale(d.x);})
+               .y(function(d){return yScale(d.y);});
+    svg.append('path').datum(data)
+       .transition().duration(10000)
+       .attr('class','line').attr('d',line)
+       .attr('stroke',col).attr('stroke-width',.5)
+       .attr('fill',col).attr('fill-opacity',.1);
+    svg.append('text').attr('id','plot_text')
+       .text('[a,b,c,d,e,f]='+coef)
+       .attr('x',width/2).attr('y',40)
+       .attr('fill',col);};
+var xScale=d3.scaleLinear().domain([-3,3])
+             .range([0,width]);
+var yScale=d3.scaleLinear().domain([-3,3])
+                  .range([height,0]);
+var svg=d3.select('#d301')
+          .attr('width',width+margin.left+margin.right)
+          .attr('height',height+margin.top+margin.bottom)
+          .attr('transform','translate('+margin.left+','+margin.top+')');
+svg.append('text').text('<<< add a random line')
+   .attr('x',60).attr('y',40).attr('fill','#36ffff')
+   .attr('style','font-family:Akronim; font-size:120%'); 
+svg.append('circle')
+   .attr('cx',40).attr('cy',40)
+   .attr('r',20).attr('fill','#36ffff')
+   .attr('stroke','silver').attr('stroke-width',5)
+   .on('click',function() {
+        d3.selectAll('#plot_text').transition().duration(3000).remove();
+        d3.selectAll('path').transition().duration(3000).remove();
+        var array=make_data(),col=randcol();
+        RandomPlot(array[0],array[1],col);});
 </script></div><br/>
       <h1>____</h1>
 HTML &#38; JavaScript (Click 'Run HTML' twice!)<br/>
