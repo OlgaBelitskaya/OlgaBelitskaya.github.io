@@ -48,7 +48,7 @@ user='https://raw.githubusercontent.com/OlgaBelitskaya/'
 path='machine_learning_engineer_nd009/'+\
      'master/Machine_Learning_Engineer_ND_P3/'
 data=pd.read_csv(user+path+'customers.csv')
-fig=pl.figure(figsize=(10,8))
+fig=pl.figure(figsize=(8,8))
 ax1=fig.add_subplot('211')
 params={'frame':data,'class_column':'Channel',
         'lw':.5,'color':colors}
@@ -58,13 +58,15 @@ pd.plotting.parallel_coordinates(**params,ax=ax2)
 pl.show()
 </script></div><br/>
 <div class='linked'><script type='text/x-sage'>
-pl.figure(figsize=(10,8))
+pl.figure(figsize=(8,8))
 pd.plotting.radviz(**params,s=3)
 pl.xticks([]); pl.yticks([]); pl.show()
 </script></div><br/>
 <div class='linked'><script type='text/x-sage'>
-pl.figure(figsize=(8,8))
-data[data<5000].boxplot(by='Channel')
+data[data<5000].drop('Region',axis=1)\
+.boxplot(by='Channel',figsize=(8,8),
+         boxprops={'color':colors[0]},
+         flierprops={'markerfacecolor':colors[1]});
 pl.show()
 </script></div><br/>
 <div class='linked'><script type='text/x-sage'>
