@@ -60,7 +60,7 @@ pd.plotting.parallel_coordinates(**params,ax=ax2)
 pl.show()
 </script></div><br/>
 <div class='linked'><script type='text/x-sage'>
-pl.figure(figsize=(8,8))
+pl.figure(figsize=(10,4))
 pd.plotting.radviz(**params,s=3)
 pl.xticks([]); pl.yticks([]); pl.show()
 </script></div><br/>
@@ -72,7 +72,7 @@ data[data<5000].drop('Region',axis=1)\
 pl.show()
 </script></div><br/>
 <div class='linked'><script type='text/x-sage'>
-fig=pl.figure(figsize=(8,4))
+fig=pl.figure(figsize=(10,4))
 ax=fig.add_subplot('111')
 data.iloc[:,int(1):].plot.area(
     stacked=False,ax=ax,cmap='Spectral')
@@ -81,6 +81,12 @@ data_mean=pd.DataFrame(
 data_mean.index=['mean']
 pd.plotting.table(ax,data_mean,loc='top')
 pl.grid(); pl.show()
+</script></div><br/>
+<div class='linked'><script type='text/x-sage'>
+data.drop('Region',axis=1).groupby('Channel').sum().T\
+.plot.pie(subplots=True,figsize=(10,4),
+          legend=False,cmap='bwr')
+pl.show()
 </script></div><br/>
 <div class='linked'><script type='text/x-sage'>
 
