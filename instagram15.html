@@ -33,7 +33,17 @@ style='--header-bg-color:#3636ff; font-family:Orbitron;'></codersrank-widget>
     <h1>___</h1>
 SageMath <br/>
 <div class='sage'><script type='text/x-sage'>
-
+from sage.plot.animate import Animation
+class MyAnimation(Animation):
+    def make_image(self,frame,filename,**kwds):
+        G = frame.plot()
+        G.set_axes_range(floor(G.xmin()),ceil(G.xmax()),
+                         floor(G.ymin()),ceil(G.ymax()))
+        G.save_image(filename, **kwds)
+B = MyAnimation([graphs.CompleteGraph(n) for n in range(7,11)], figsize=5)
+d = B.png()
+v = os.listdir(d); v.sort(); v
+B
 </script></div><br/>
     <h1>___</h1>
 SageMath <br/>
