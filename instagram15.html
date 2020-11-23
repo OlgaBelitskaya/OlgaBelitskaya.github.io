@@ -30,20 +30,39 @@ style='--header-bg-color:#3636ff; font-family:Orbitron;'></codersrank-widget>
 <a href='https://olgabelitskaya.github.io/instagram13.html'>&#x1F300; &nbsp; Previous &nbsp; &nbsp;</a><br/>
 <a href='https://www.instagram.com/olga.belitskaya/'>&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
 <a href='https://www.pinterest.ru/olga_belitskaya/code-style/'>&#x1F300; &nbsp; Pinterest Posts</a>
-    <h1>___</h1>
+    <h1>Animated Graphs</h1>
 SageMath <br/>
 <div class='sage'><script type='text/x-sage'>
 from sage.plot.animate import Animation
 class MyAnimation(Animation):
     def make_image(self,frame,filename,**kwds):
-        G = frame.plot()
+        G=frame.plot()
         G.set_axes_range(floor(G.xmin()),ceil(G.xmax()),
                          floor(G.ymin()),ceil(G.ymax()))
-        G.save_image(filename, **kwds)
-B = MyAnimation([graphs.CompleteGraph(n) for n in range(7,11)], figsize=5)
-d = B.png()
-v = os.listdir(d); v.sort(); v
-B
+        G.save_image(filename,**kwds)
+def rotate_line(a,l): 
+    return [[(cos(a)*x-sin(a)*y).n(),
+             (sin(a)*x+cos(a)*y).n()] 
+            for [x,y] in l]
+def linegraph(g):
+    vg=g.get_pos(); eg=g.edges(); ne=len(eg)
+    return [[list(vg[eg[i][0]]),
+             list(vg[eg[i][1]])] 
+            for i in range(ne)]    
+def rotate_bezier_path_cubegraph(m,k):
+    g=graphs.CubeGraph(m) 
+    lg=linegraph(g); LG=Graphics()
+    rlg=[[rotate_line(j*pi/k,lg[i]) 
+          for i in range(len(lg))] 
+         for j in range(2*k)] 
+    for i in range(2*k): 
+        col=(.3+random()/3,0,.3+random()/3)
+        LG+=bezier_path(rlg[i],color=col,
+                        thickness=.3)
+    return LG
+MyAnimation([rotate_bezier_path_cubegraph(3,k) 
+             for k in range(2,6)],
+            figsize=(5,5),axes=False)
 </script></div><br/>
     <h1>___</h1>
 SageMath <br/>
