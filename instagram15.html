@@ -165,10 +165,23 @@ pl.show()
 exchange_rates.to_hdf('exchange_rates.h5',key='spot',mode='w')
 pd.read_hdf('exchange_rates.h5','spot').head(int(8)).T
 </script></div><br/>
-    <h1>___</h1>
+    <h1>HTML =>>> Pandas =>>> JSON</h1>
 Python <br/>
 <div class='sage'><script type='text/x-sage'>
-
+import json,pandas as pd
+url='https://www.ecb.europa.eu/'+\
+    'stats/policy_and_exchange_rates/'+\
+    'euro_reference_exchange_rates/html/index.en.html'
+exchange_rates=pd.read_html(url)[0]\
+.drop('Chart',axis=1)
+exchange_rates_json=\
+exchange_rates.to_json(orient='table')
+exchange_rates_string=\
+json.loads(exchange_rates_json)
+n=json.dumps(exchange_rates_string).find('data')
+for el in json.dumps(exchange_rates_string)[n+7:-1]\
+.replace('[{','').replace('}]','').split('}, {'):
+    print(el)
 </script></div><br/>
       <h1>DataFrame Plotting</h1>
 R <br/>
