@@ -311,11 +311,29 @@ yAxis=g=>g.attr('transform',
     .call(g=>g.select('.tick:last-of-type text')
               .append('tspan').text(db_data.name));    
 svg.append('g').append('text').attr('text-anchor','middle')
-   .attr('x',width/2+margin.left).attr('y',height+margin.bottom)
+   .attr('x',width/2+margin.left)
+   .attr('y',height+margin.bottom+margin.top)
    .style('font-size','20px')
    .text('Median & Mean Values');
 svg.append('g').call(xAxis).style('font-size','12px');
-svg.append('g').call(yAxis).style('font-size','12px');    
+svg.append('g').call(yAxis).style('font-size','12px');
+var lines=svg.append('g').attr('class','lines')
+             .attr('transform',`translate(0,${margin.top})`)
+             .selectAll('line').data(db_data).join('line')
+             .attr('stroke','#363636').attr('stroke-width',4)
+             .attr('opacity','.7')
+             .attr('x1',d=>x(d.median_mean[0]))
+             .attr('x2',d=>x(d.median_mean[1]))
+             .attr('y1',d=>y(d.name)).attr('y2',d=>y(d.name));
+var dots=svg.append('g').attr('class','dots')
+            .attr('transform',`translate(0,${margin.top})`)
+            .selectAll('circle').data(db_data).join('circle')
+            .attr('fill',col1).attr('r',8)
+            .attr('cx',d=>x(d.median_mean[0]))
+            .attr('cy',d=>y(d.name))
+            .clone(true)
+            .attr('cx',d=>x(d.median_mean[1]))
+            .attr('fill',col2);    
 </script></div><br/>
       <h1>An Example of Danfo DataFrames</h1>
 HTML &#38; JavaScript (Click 'Run HTML' twice!)<br/>
