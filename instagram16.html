@@ -142,9 +142,33 @@ background:silver; width:200px; height:25px'>
   <option value='Delicatessen'>Delicatessen</option>
 </select><br/><br/>
 <button style='background:silver; width:200px; height:25px'
-id='run_button'>RUN</button><br/><br/>
+onclick='draw_chart();' id='run_button'>RUN</button><br/><br/>
 <svg id='d302' style='background-color:silver;'/>
-<script> 
+<script>
+margin={top:20,right:20,bottom:20,left:60};
+width=600,heigth=250;
+url='https://raw.githubusercontent.com/OlgaBelitskaya/'
+    .concat('machine_learning_engineer_nd009/master/')
+    .concat('Machine_Learning_Engineer_ND_P3/customers.csv')
+customers=d3.csv(url,d3.autoType);
+tr_customers=Object.assign(...Object.keys(customers[0])
+                   .map(key=>({[key]:customers.map(o=>o[key])})));
+reveal=path=>
+path.transition().duration(7000).ease(d3.easeLinear)
+    .attrTween('stroke-dasharray',function() {
+      const length=this.getTotalLength();
+      return d3.interpolate(`0,${length}`,`${length},${length}`);});
+function draw_chart() {
+  var input_1=document.getElementById('product').value;
+  var line=d3.line().x(function(d,i) {return x(i);})
+                    .y(function(d) {return y(d[`${input_1}`]);});
+  var x=d3.scaleLinear()
+          .domain([0,customers.length])
+          .range([margin.left,width-margin.right]);
+  var svg=d3.select('#d302')
+            .attr('width',width).attr('height',height);
+
+}; 
 </script></div><br/>
       <h1>_____</h1>
 HTML &#38; JavaScript (Click 'Run HTML' twice!)<br/>
