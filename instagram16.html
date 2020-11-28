@@ -59,7 +59,30 @@ Linked Cells & Python<br/>
     <h1>_____</h1>
 Python <br/>
 <div class='sage'><script type='text/x-sage'>
-
+from IPython.display import display,HTML
+import random
+def idhtml(string,fontcolor='darkslategray',
+           font='Ewert',fontsize=24):
+    randi=random.randint(1,999999999)
+    style_str="""<style>@import """+\
+    """'https://fonts.googleapis.com/css?family="""+font+\
+    """'; #colored_font"""+str(randi)+\
+    """ {color:"""+fontcolor+\
+    """; font-family:"""+font+\
+    """; font-size:"""+str(fontsize)+"""px;}</style>"""
+    h_str="""<h1 id='colored_font"""+str(randi)+\
+    """'>"""+string+"""</h1>"""
+    script_str="""<script>"""+\
+    """var idc=setInterval(function() {"""+\
+    """var iddoc=document.getElementById("""+\
+    """'colored_font"""+str(randi)+"""'); """+\
+    """var now=new Date().getTime(); """+\
+    """var sec=Math.floor((now%(1000*60))/1000); """+\
+    """var col='rgb('+(5+Math.abs(245-8*sec))+',0,'"""+\
+    """+(250-Math.abs(245-8*sec))+')'; """+\
+    """iddoc.style.color=col;},1000);</script>"""
+    display(HTML(style_str+h_str+script_str))
+idhtml('Styling in Printing')
 </script></div><br/>
     <h1>____</h1>
 Python <br/>
