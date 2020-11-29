@@ -1,24 +1,24 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width'>
     <title>Kaggle_Page2</title>
-    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <script src='https://sagecell.sagemath.org/static/embedded_sagecell.js'></script>
     <script>$(function () {
     sagecell.makeSagecell({inputLocation:'div.sage_r',evalButtonText:'Run R'});  
     sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run SageMath'});});
     </script>
   </head>
   <style>
-  @import url('https://fonts.googleapis.com/css?family=Orbitron');
+  @import 'https://fonts.googleapis.com/css?family=Orbitron';
   h1{color:#ff355e; font-family:'Orbitron'; text-shadow:4px 4px 4px #aaa;}
   .sagecell .CodeMirror-scroll {min-height:3em; max-height:30em;}
   body {margin:5px 5px 5px 15px;}
   </style>  
   <body>
     <h1>SageMathCell for Your Experiments</h1>
-<div class="sage"><script type="text/x-sage">
+<div class='sage'><script type='text/x-sage'>
 var('t,k'); f=exp(-(-t+k)^2)*sin(2*pi*(t+k))
 cm=sample(['hsv','bwr','cool','jet'],1)[0]
 c=[colormaps[cm](25*i)[:3] for i in range(10)]
@@ -28,21 +28,21 @@ fragments=[plot(f(t=t,k=k),(t,-3,3),fill='axis',
 animate(fragments,title=cm,gridlines=True,
         xmin=-3,xmax=3,ymin=-1,ymax=1)
 </script></div><br/>
-<div class="sage_r"><script type="text/x-sage">
+<div class='sage_r'><script type='text/x-sage'>
 %%r
 T<-seq(from=0,to=2*pi,by=.01*pi)
 col<-function(i) {rgb(.005*i,0,1-.005*i)}
 curve<-function(t) {list(sin(2*t),sin(5*t))}
 X<-sapply(T,curve)[1,]; Y<-sapply(T,curve)[2,] 
-svg(filename="Rplots.svg",width=5,height=5,
-    pointsize=12,onefile=T,family="sans",bg="black",
-    antialias=c("default","none","gray","subpixel"))
+svg(filename='Rplots.svg',width=5,height=5,onefile=TRUE,
+    pointsize=12,family='times',bg='black',
+    antialias=c('default','none','gray','subpixel'))
 c0<-'slategray'
 for(i in 1:200){
     plot(X[i],Y[i],pch=13,cex=.9,
          xlim=c(-1.2,1.2),ylim=c(-1.2,1.2),
          col=col(i),xlab='x',ylab='y',
-        fg=c0,col.axis=c0,col.lab=c0)
+         fg=c0,col.axis=c0,col.lab=c0)
     par(new=TRUE)}
 grid(col=c0)
 dev.off()
