@@ -5,7 +5,7 @@
     <meta name='viewport' content='width=device-width'>
     <title>Instagram_Posts15</title>
     <script src='https://sagecell.sagemath.org/static/embedded_sagecell.js'></script>
-    <script>$(function (){
+    <script>$(function () {
     sagecell.makeSagecell({inputLocation:'div.linked',linked:true,
                            evalButtonText:'Run Linked Cells'});
     sagecell.makeSagecell({inputLocation:'div.sage_html',evalButtonText:'Run HTML'});  
@@ -213,70 +213,12 @@ legend('topright',colnames(customers[,c(3,4,5,6,7,8)]),
        col=seq_len(6),pch=13,cex=.8)
 grid(); dev.off(); summary(customers)
 </script></div><br/>
-      <h1>D3 Random Curves</h1>
+      <h1>D3 </h1>
 <p>&#60;script src='https://d3js.org/d3.v6.min.js'>&#60;/script> 
     was added in the page head.</p>
 <div class='sage_html'><script type='text/x-sage'>
 %%html
-<style>@import 'https://fonts.googleapis.com/css?family=Akronim';</style>
-<svg id='d301' style='background-color:silver;'/>
-<script>
-m=20,margin={top:m,right:m,bottom:m,left:m},
-width=600-margin.left-margin.right,
-height=600-margin.top-margin.bottom;
-function randi(min,max) {
-    return Math.floor(Math.random()*(max-min+1))+min;};
-function randcol() {
-    var g=randi(50,200),b=randi(50,200);
-    return '#00'+g.toString(16)+b.toString(16);}
-function fx(a,b,c,d,e,f,t) {
-    var x1=Math.sin(t/d),
-        x2=(-1)**f*a*Math.sin(b*t)*Math.cos(t),
-        x3=(-1)**f*c*Math.sin(e*b*t);
-    return x1+x2+x3};
-function fy(a,b,c,d,e,f,t) {
-     var y1=Math.cos(t/d),
-         y2=(-1)**f*a*Math.sin(b*t)*Math.sin(t),
-         y3=(-1)**f*c*Math.cos(e*b*t);
-     return y1+y2+y3};
-function make_data() {
-    const a=randi(5,15)/10,b=randi(6,12),c=randi(1,100)/10**3,
-          d=randi(5,7),e=randi(14,18),f=randi(1,2);
-    var data=d3.range(1,10**3+1).map(function(k) {
-        return {'x':fx(a,b,c,d,e,f,k*b*e*Math.PI/10**3),
-                'y':fy(a,b,c,d,e,f,k*b*e*Math.PI/10**3)}; });
-    return [data,[a,b,c,d,e,f]]};
-function RandomPlot(data,coef,col) {
-    var line=d3.line().curve(d3.curveMonotoneX)
-               .x(function(d){return xScale(d.x);})
-               .y(function(d){return yScale(d.y);});
-    svg.append('path').datum(data)
-       .transition().duration(10000)
-       .attr('class','line').attr('d',line)
-       .attr('stroke',col).attr('stroke-width',.5)
-       .attr('fill',col).attr('fill-opacity',.1);
-    svg.append('text').attr('id','plot_text')
-       .text('[a,b,c,d,e,f]='+coef)
-       .attr('x',width/2).attr('y',40)
-       .attr('fill',col);};
-xScale=d3.scaleLinear().domain([-3,3]).range([0,width]);
-yScale=d3.scaleLinear().domain([-3,3]).range([height,0]);
-svg=d3.select('#d301')
-      .attr('width',width+margin.left+margin.right)
-      .attr('height',height+margin.top+margin.bottom)
-      .attr('transform','translate('+margin.left+','+margin.top+')');
-svg.append('text').text('<<< add a random line')
-   .attr('x',60).attr('y',40).attr('fill','#36ffff')
-   .attr('style','font-family:Akronim; font-size:120%'); 
-svg.append('circle')
-   .attr('cx',40).attr('cy',40)
-   .attr('r',20).attr('fill','#36ffff')
-   .attr('stroke','silver').attr('stroke-width',5)
-   .on('click',function() {
-        d3.selectAll('#plot_text').transition().duration(3000).remove();
-        d3.selectAll('path').transition().duration(3000).remove();
-        var array=make_data(),col=randcol();
-        RandomPlot(array[0],array[1],col);});
+
 </script></div><br/>
       <h1>D3 Dumbbell Chart</h1>
 <p>&#60;script src='https://d3js.org/d3.v6.min.js'>&#60;/script> 
@@ -362,7 +304,7 @@ dfd.read_csv(url)
    .then(df=>{df.plot('div015_2').line(
     {columns:['Fresh','Milk','Grocery','Frozen',
               'Detergents_Paper','Delicatessen']})})
-   .catch(err=>{console.log(err);})
+   .catch(err=>{console.log(err);});
 </script></div><br/>
   </body>
 </html>
