@@ -218,24 +218,39 @@ grid(); dev.off(); summary(customers)
 <script src='https://d3js.org/d3.v6.min.js'/>
 
 </script></div><br/>
-      <h1>D3 </h1>
+      <h1>D3 Color Interpolation</h1>
 <p>HTML &#38; JavaScript &#38; SageMathCell (Click 'Run HTML' twice!)</p>
 <div class='sage_html'><script type='text/x-sage'>
 %%html
 <script src='https://d3js.org/d3.v6.min.js'/>
 <style>
 @import 'https://fonts.googleapis.com/css?family=Akronim';
-.gakronim {font-family:Akronim; color:white; text-align:center; width:50%;}
+.gakronim,#canvas001 {font-family:Akronim; color:white; 
+                      text-align:center; width:50%;}
 </style>
 <h1 id='colorized1' class='gakronim'>Color Interpolation in Text Displaying</h1>
 <h1 id='colorized2' class='gakronim'>Background Interpolation in Text Displaying</h1>
+<h1 id='colorized3' class='gakronim' style='height:200;'>
+Canvas Drawing in Headers
+<canvas id='canvas001'></canvas></h1><br/><br/>
 <script>
 var tc=setInterval(function() {
     var now=new Date().getTime();
     var iddoc1=document.getElementById('colorized1');
     var iddoc2=document.getElementById('colorized2');
+    var iddoc3=document.getElementById('colorized3');
     iddoc1.style.color=d3.interpolateSinebow(now/1000);
-    iddoc2.style.background=d3.interpolateRainbow(now/60000);},1)
+    iddoc2.style.background=d3.interpolateRainbow(now/60000);
+    var r=10,k=8; 
+    var c=document.getElementById('canvas001'); 
+    var context=c.getContext('2d');
+    for (var i=1; i<k-1; i++) {
+    context.beginPath();
+    for (var j=0; j<k-1; j++) {
+        context.arc(50*j,r*k,i*r,0,3*Math.PI);};
+    context.strokeStyle=d3.interpolateSinebow(now/1000);
+    context.stroke();
+    iddoc3.style.background=d3.interpolateRainbow(now/60000);};},1)
 </script></div><br/>
       <h1>An Example of Danfo DataFrames</h1>
 <p>HTML &#38; JavaScript &#38; SageMathCell (Click 'Run HTML' twice!)</p>
