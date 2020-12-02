@@ -211,7 +211,7 @@ legend('topright',colnames(customers[,c(3,4,5,6,7,8)]),
        col=seq_len(6),pch=13,cex=.8)
 grid(); dev.off(); summary(customers)
 </script></div><br/>
-      <h1>D3 </h1>
+      <h1>D3 Dumbbell Highcharts</h1>
 <p>HTML &#38; JavaScript &#38; SageMathCell (Click 'Run HTML' twice!)</p>
 <div class='sage_html'><script type='text/x-sage'>
 %%html
@@ -246,11 +246,16 @@ d3.csv(url,d3.autoType).then((data)=>{
     .map(key=>({[key]:data.map(o=>o[key])})));
   var db_data=Object.entries(tr_data).slice(2,8).map(
     el=>({'name':el[0],'low':d3.median(el[1]),'high':d3.mean(el[1])}))
-        
-});
+  Highcharts.chart('d3highcharts_db2', {
+    chart:{type:'dumbbell',inverted:true},
+    legend:{enabled:false},
+    title:{text:'Median & Mean Values'},
+    tooltip:{shared:true},
+    xAxis:{type:'category'},
+    yAxis:{title:{text:'Values'}},
+    series:[{name:'median - mean',data:db_data}] }); });
 </script></div><br/>
-
-      <h1>D3 </h1>
+      <h1>D3 Scatter Plotting of 2D Projections</h1>
 <p>HTML &#38; JavaScript &#38; SageMathCell (Click 'Run HTML' twice!)</p>
 <div class='sage_html'><script type='text/x-sage'>
 %%html
