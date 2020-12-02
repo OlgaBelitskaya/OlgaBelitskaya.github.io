@@ -242,6 +242,53 @@ var url='https://raw.githubusercontent.com/OlgaBelitskaya/'
         .concat('Machine_Learning_Engineer_ND_P3/customers.csv');
 var customers=d3.csv(url,d3.autoType);
 </script></div><br/>
+
+      <h1>D3 </h1>
+<p>HTML &#38; JavaScript &#38; SageMathCell (Click 'Run HTML' twice!)</p>
+<div class='sage_html'><script type='text/x-sage'>
+%%html
+<script src='https://d3js.org/d3.v4.min.js'/>
+<style>.grid1 line,.grid1 path {stroke:slategray;stroke-opacity:.5;}</style>
+<svg id='d301svg04' style='background-color:black'/><script>
+var url='https://olgabelitskaya.github.io/beethoven.csv';
+d3.csv(url,function(data) {
+    var xmin=d3.min(data,function(d) {return parseFloat(d.y);}),
+        xmax=d3.max(data,function(d) {return parseFloat(d.y);}); 
+    var ymin=d3.min(data,function(d) {return parseFloat(d.z);}),
+        ymax=d3.max(data,function(d) {return parseFloat(d.z);}); 
+    var n=data.length,m=20,
+        margin={top:m,right:m,bottom:m,left:m},
+        width=500-margin.left-margin.right,
+        height=700-margin.top-margin.bottom; 
+    var xScale=d3.scaleLinear().domain([1.1*xmin,1.1*xmax]).range([0,width]); 
+    var yScale=d3.scaleLinear().domain([1.1*ymin,1.1*ymax]).range([height,0]); 
+    function make_x_gridlines() {return d3.axisBottom(xScale).ticks(11)}; 
+    function make_y_gridlines() {return d3.axisLeft(yScale).ticks(11)}; 
+    var pointColor=d3.scaleSequential().domain([0,n])
+                     .interpolator(d3.interpolateRainbow); 
+    var tr='translate('+margin.left+','+margin.top+')'; 
+    var svg=d3.select('#d301svg04')
+              .attr('width',width+margin.left+margin.right)
+              .attr('height',height+margin.top+margin.bottom)
+              .append('g').attr('transform',tr); 
+    svg.append('g').attr('class','xaxis1')
+       .call(d3.axisBottom(xScale).tickSize(.5))
+       .attr('transform','translate(0,'+height+')'); 
+    svg.append('g').attr('class','yaxis1')
+       .call(d3.axisLeft(yScale).tickSize(.5)); 
+    svg.append('g').attr('class','grid1')
+       .attr('transform','translate(0,'+height+')')
+       .call(make_x_gridlines().tickSize(-height).tickFormat('')); 
+    svg.append('g').attr('class','grid1')
+       .call(make_y_gridlines().tickSize(-width).tickFormat(''))
+       .attr('stroke','#fff');
+    svg.selectAll('.point').data(data).enter()
+       .append('circle').attr('class','point')
+       .attr('fill',function(d,i){return pointColor(i)}).attr('r',.7)
+       .attr('stroke','#fff').attr('stroke-width',.07)
+       .attr('cx',function(d) {return xScale(parseFloat(d.y))})
+       .attr('cy',function(d) {return yScale(parseFloat(d.z))}); });
+</script></div><br/>
       <h1>D3 Color Interpolation</h1>
 <p>HTML &#38; JavaScript &#38; SageMathCell (Click 'Run HTML' twice!)</p>
 <div class='sage_html'><script type='text/x-sage'>
