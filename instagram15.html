@@ -242,7 +242,11 @@ var url='https://raw.githubusercontent.com/OlgaBelitskaya/'
         .concat('machine_learning_engineer_nd009/master/')
         .concat('Machine_Learning_Engineer_ND_P3/customers.csv');
 d3.csv(url,d3.autoType).then((data)=>{
-
+  var tr_data=Object.assign(...Object.keys(data[0])
+    .map(key=>({[key]:data.map(o=>o[key])})));
+  var db_data=Object.entries(tr_data).slice(2,8).map(
+    el=>({'name':el[0],'low':d3.median(el[1]),'high':d3.mean(el[1])}))
+        
 });
 </script></div><br/>
 
