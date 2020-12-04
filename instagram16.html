@@ -84,10 +84,52 @@ def idhtml(string,fontcolor='darkslategray',
     display(HTML(style_str+h_str+script_str))
 idhtml('Styling in Printing')
 </script></div><br/>
-    <h1>____</h1>
+    <h1>Styling in Printing</h1>
 Python <br/>
 <div class='sage'><script type='text/x-sage'>
-
+from IPython.display import display,HTML
+import random
+def whtml(string,background_color='slategray',
+          padding=2,font_family='Akronim',
+          font_size_px=int(24),font_view_height='1.1',
+          deg=int(120),font_width=int(900),
+          colors=['magenta','orange','cyan','purple'],
+          percent=[0,33,67,100]):
+    randi=random.randint(1,999999999)
+    html_str="""<style>@import """+\
+    """'https://fonts.googleapis.com/css?family="""+\
+    font_family+"""';</style>"""+\
+    """<div id='colored_div"""+str(randi)+\
+    """' style='background:"""+background_color+\
+    """; padding:"""+str(padding)+"""vw;'>"""+\
+    """<div style='background:linear-gradient("""+\
+    str(deg)+"""deg, """+\
+    colors[0]+""" """+str(percent[0])+"""%,"""+\
+    colors[1]+""" """+str(percent[1])+"""%,"""+\
+    colors[2]+""" """+str(percent[2])+"""%,"""+\
+    colors[3]+""" """+str(percent[3])+"""%"""+\
+    """); font:"""+str(font_width)+""" """+\
+    str(font_size_px)+"""px/1.1; """+\
+    """font-family:"""+font_family+"""; """+\
+    """-webkit-background-clip:text; color:transparent;'> """+\
+    string+"""</div></div>"""   
+    display(HTML(html_str))
+corpus=['Have you already set your goals for the New Year?', 
+        'Do you want to lose ten kilos, '+\
+        'run a marathon or speak fluent English?', 
+        'Some experts believe that you need systems, not goals.', 
+        'A system is something you do on a regular basis. ',
+        'This means focusing on what you can control '+\
+        '(your actions) rather than what you can’t.',
+        'For example, do not focus on losing ten kilos.',
+        'Focus on shopping for healthy food and '+\
+        'cooking something light every day.',
+        'Do not focus on the marathon.',
+        'Focus on the training schedule.',
+        'Invent a system to improve your English, one step at a time.',
+        'Good luck!']
+corpus_str=' '.join(corpus)
+whtml(corpus_str)
 </script></div><br/>
       <h1>Aggregate CSV</h1>
 R <br/>
