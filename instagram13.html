@@ -42,8 +42,6 @@ SageMath &#38; SageMathCell <br/>
 --user --quiet --no-warn-script-location
 spath='/home/sc_work/.sage/local/lib/python3.8/site-packages'
 import sys; sys.path.append(spath)
-</script></div><br/>
-<div class='linked'><script type='text/x-sage'>
 import os,requests,urllib
 from bs4 import BeautifulSoup
 site='https://en.wikivoyage.org/wiki/Main_Page'
@@ -68,7 +66,7 @@ html(s1+fpath+s2)
 <a href="https://www.doverpublications.com/zb/samples/797910/sample6b.html">&#x1F300; &nbsp; Pattern 3 &nbsp; &nbsp;</a>
 <a href="https://www.doverpublications.com/zb/samples/797910/sample6d.html">&#x1F300; &nbsp; Pattern 4 &nbsp; &nbsp;</a><br/>
 SageMath &#38; SageMathCell <br/>
-<div class="sage"><script type="text/x-sage">
+<div class='sage'><script type='text/x-sage'>
 import pylab; from skimage import io,color,measure
 @interact
 def _vector(file=[1,2,3,4],
@@ -90,7 +88,7 @@ def _vector(file=[1,2,3,4],
 </script></div><br/>
     <h1>Key Points of Sketch Images</h1>
 SageMath &#38; SageMathCell 
-<div class="sage"><script type="text/x-sage">
+<div class='sage'><script type='text/x-sage'>
 import numpy as np,pylab as pl
 from skimage.transform import resize
 def get_line(x1,y1,x2,y2):
@@ -135,7 +133,7 @@ pl.imshow(img,cmap=pl.cm.Pastel1); pl.show()
 </script></div><br/>
     <h1>If you want to link cells for querying</h1>
 Python &#38; SageMathCell <br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 import sqlite3; import pandas as pd
 from IPython.core.display import display
 from IPython.core.magic import register_line_magic
@@ -164,7 +162,7 @@ def get_query(q):
     if os.path.exists('db.db'):
         os.remove('db.db')
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 %get_query \
 SELECT method, \
        COUNT(*) AS number, \
@@ -174,32 +172,35 @@ GROUP BY method;
 </script></div><br/>   
     <h1>If you want to link cells for plotting</h1>
 Python &#38; R &#38; SageMathCell <br/>     
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 %%r
-X3<-Z3<-X4<-Z4<-Y5<-Z5<-seq(from=-5,to=5,by=0.1)
+X3<-Z3<-X4<-Z4<-Y5<-Z5<-seq(from=-5,to=5,by=.1)
 cylinder1<-function(p,q,X,Z){
     for (x in X){for (z in Z){
         y<-q*(1-x^2/p^2)^0.5; v<-c(x,y,z,x,-y,z)
         if (sum(is.na(v))==0){
-            write.table(matrix(v,nrow=2,ncol=3,byrow=T),
-                        file ="cylinder1.csv",append=T,
-                        quote=F,col.names=F,row.names=F)}}}}
+            write.table(matrix(v,nrow=2,ncol=3,byrow=TRUE),
+                        file ='cylinder1.csv',
+                        append=TRUE,quote=FALSE,
+                        col.names=FALSE,row.names=FALSE)}}}}
 cylinder2<-function(p,q,X,Z){
     for (x in X){for (z in Z){
         y<-q*(x^2/p^2-1)^0.5; v<-c(x,y,z,x,-y,z)
         if (sum(is.na(v))==0){
-            write.table(matrix(v,nrow=2,ncol=3,byrow=T),
-                        file="cylinder2.csv",append=T,
-                        quote=F,col.names=F,row.names=F)}}}}
+            write.table(matrix(v,nrow=2,ncol=3,byrow=TRUE),
+                        file='cylinder2.csv',
+                        append=TRUE,quote=FALSE,
+                        col.names=FALSE,row.names=FALSE)}}}}
 cylinder3<-function(p,Y,Z){
     for (y in Y){for (z in Z){
         x<-y^2/2/p; v<-c(x,y,z)
-        write.table(matrix(v,nrow=1,ncol=3,byrow=T),
-                    file ="cylinder3.csv",append=T,
-                    quote=F,col.names=F,row.names=F)}}}
+        write.table(matrix(v,nrow=1,ncol=3,byrow=TRUE),
+                    file ='cylinder3.csv',
+                    append=TRUE,quote=FALSE,
+                    col.names=FALSE,row.names=FALSE)}}}
 cylinder1(3,4,X3,Z3); cylinder2(2,3,X4,Z4); cylinder3(2,Y5,Z5)
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 import pylab,numpy
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.lines import Line2D
