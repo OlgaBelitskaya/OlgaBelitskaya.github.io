@@ -135,40 +135,42 @@ from sklearn.ensemble import RandomForestClassifier
 digits=datasets.load_digits(); X,y=digits.data,digits.target
 clfs=[KNeighborsClassifier(n_neighbors=int(5)),
       RandomForestClassifier(random_state=1),GaussianNB()]
-sclf1=StackingClassifier(classifiers=clfs,
-                         meta_classifier=SGDClassifier(tol=0.001))
-sclf2=StackingClassifier(classifiers=clfs,
-                         meta_classifier=LogisticRegression())
-sclf3=StackingClassifier(classifiers=clfs,
-                         meta_classifier=\
-                         svm.SVC(gamma='scale',C=10.0,kernel='poly'))
+sclf1=StackingClassifier(
+    classifiers=clfs,meta_classifier=SGDClassifier(tol=0.001))
+sclf2=StackingClassifier(
+    classifiers=clfs,meta_classifier=LogisticRegression())
+sclf3=StackingClassifier(
+    classifiers=clfs,meta_classifier=\
+    svm.SVC(gamma='scale',C=10.0,kernel='poly'))
 labels=['KNN','Random Forest','Naive Bayes',
         'StackingClassifier - SGD','StackingClassifier - LR',
         'StackingClassifier - SVM']
 for clf,label in zip(clfs+[sclf1,sclf2,sclf3],labels):
     scores=model_selection\
     .cross_val_score(clf,X,y,cv=3,scoring='accuracy')
-    print("Accuracy: %0.2f (+/- %0.2f) [%s]"\
+    print('Accuracy: %0.2f (+/- %0.2f) [%s]'\
           %(scores.mean(),scores.std(),label))
 </script></div>
     <h1>Do you want to apply </h1>
     <h1>stacking regressors in Mlxtend?</h1>
 Python Modules &#38; SageMathCell<br/>       
-<div class="sage"><script type="text/x-sage">
-#unlock to install mlxtend
-#!python3 -m pip install --upgrade pip --user
-#!python3 -m pip install mlxtend --user
+<div class='sage'><script type='text/x-sage'>
+!python3 -m pip install --upgrade pip \
+--user --quiet --no-warn-script-location
+!python3 -m pip install mlxtend \
+--user --quiet --no-warn-script-location
 path='/home/sc_work/.sage/local/lib/python3.8/site-packages'
 import sys; sys.path.append(path)
 import numpy,warnings; warnings.simplefilter('ignore')
 from sklearn import datasets,model_selection
 from sklearn import svm,linear_model 
 from mlxtend.regressor import StackingRegressor
-from sklearn.neighbors import KNeighborsRegressor,\
-                              RadiusNeighborsRegressor
-from sklearn.ensemble import GradientBoostingRegressor,\
-                             RandomForestRegressor
-boston=datasets.load_boston(); X,y=boston.data,boston.target
+from sklearn.neighbors import \
+KNeighborsRegressor,RadiusNeighborsRegressor
+from sklearn.ensemble import \
+GradientBoostingRegressor,RandomForestRegressor
+boston=datasets.load_boston()
+X,y=boston.data,boston.target
 regs=[GradientBoostingRegressor(),
       KNeighborsRegressor(),svm.SVR(kernel='linear')]
 sreg1=StackingRegressor(regressors=regs,\
@@ -177,14 +179,14 @@ sreg2=StackingRegressor(regressors=regs,\
       meta_regressor=linear_model.Ridge(random_state=1))
 sreg3=StackingRegressor(regressors=regs,\
       meta_regressor=linear_model.\
-      PassiveAggressiveRegressor(max_iter=1000,tol=0.001))
+      PassiveAggressiveRegressor(max_iter=1000,tol=.001))
 labels=['GradientBoosting','KNeighbors','SVM',
         'StackingRegressor - RandomForest',
         'StackingRegressor - Ridge',
         'StackingRegressor - PassiveAggressive']
 for reg,label in zip(regs+[sreg1,sreg2,sreg3],labels):    
     print(label); reg.fit(X,y)
-    print("Mean Squared Error: %.4f"\
+    print('Mean Squared Error: %.4f'\
           %numpy.mean((reg.predict(X)-y)**2))
     print('Variance Score: %.4f'%reg.score(X,y))
 </script></div>
