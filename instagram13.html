@@ -216,13 +216,14 @@ fig=pylab.figure(figsize=(7,7))
 ax=fig.add_subplot(111,projection='3d')
 [ax.scatter(XYZ[i][0],XYZ[i][1],XYZ[i][2],s=1,\
  c=colors[i],marker='1') for i in range(3)]
-fake2Dlines=[Line2D([0],[0],linestyle="none",\
+fake2Dlines=[Line2D([0],[0],linestyle='none',\
              c=c,marker='1') for c in colors]
-ax.legend(fake2Dlines,labels,loc=9); pylab.show()
+ax.legend(fake2Dlines,labels,loc=9) 
+pylab.tight_layout(); pylab.show()
 </script></div><br/>
     <h1>Exercises in R and Python at the same time</h1>
 Python &#38; R &#38; SageMathCell <br/>
-<div class="sage"><script type="text/x-sage">
+<div class='sage'><script type='text/x-sage'>
 import rpy2.robjects as ro,pandas as pd,pylab as pl
 import warnings as wr; wr.filterwarnings('ignore')
 from rpy2.robjects.packages import importr
@@ -230,8 +231,8 @@ from rpy2.robjects.conversion import localconverter
 from rpy2.robjects import r,pandas2ri
 pandas2ri.activate()
 pd_dict={'real_values':[random() for i in range(10)],
-         'str_values':["😀","😁","😂","😃","😄",
-                       "😉","😊","😋","😌","😍"]} 
+         'str_values':['😀','😁','😂','😃','😄',
+                       '😉','😊','😋','😌','😍']} 
 pd_df=pd.DataFrame(pd_dict)
 base=importr('base')
 with localconverter(ro.default_converter+pandas2ri.converter):
