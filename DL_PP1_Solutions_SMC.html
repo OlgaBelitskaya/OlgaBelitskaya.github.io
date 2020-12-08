@@ -509,17 +509,17 @@ with lc(ro.default_converter+pandas2ri.converter):
 </script></div><br/>    
 <div class="linked"><script type="text/x-sage">
 #the 2nd method
-rbd=pandas2ri.py2ri(bd)
+rbd=ro.conversion.py2rpy(bd)
 utils=importr('utils')
 utils.write_table(rbd,file='rbd.csv',
                   sep=",",row_names=False)
+ro.r('print(summary(rbd))')
+ro.r('rbd<-read.csv("rbd.csv")')
 ro.r('svg(filename="Rplots.svg",width=6,height=5,'+\
      'pointsize=12,onefile=T,family="times",bg="white",'+\
      'antialias=c("default","none","gray","subpixel"))')
-ro.r('rbd<-read.csv("rbd.csv")')
 ro.r('matplot(c(1:506),rbd[,c(9,11,13)],type="l")')
 ro.r('grid(); dev.off()')
-print(base.summary(rbd))
 </script></div><br/>
   </body>
 </html>
