@@ -13,10 +13,7 @@
     sagecell.makeSagecell({inputLocation:'div.sage_r',evalButtonText:'Run R'});  
     sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run SageMath'}); });
     </script>
-    <script src='https://d3js.org/d3.v6.min.js'></script>
-    <script src='https://code.highcharts.com/highcharts.js'></script>
-    <script src='https://code.highcharts.com/highcharts-more.js'></script>
-    <script src='https://code.highcharts.com/modules/dumbbell.js'></script>
+    <script src='https://profile.codersrank.io/widget/widget.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/danfojs@0.1.1/dist/index.min.js'></script>
   </head>
   <style>
@@ -27,7 +24,6 @@
   body {margin:5px 5px 5px 15px;}
   </style>  
   <body>
-<script src='https://profile.codersrank.io/widget/widget.js'></script>
 <codersrank-widget username='olgabelitskaya' layout='vertical'
 style='--header-bg-color:#3636ff; font-family:Orbitron;'></codersrank-widget>
     <h1>&#x1F4D1; &nbsp;Instagram Posts. Part 15</h1>
@@ -215,87 +211,6 @@ matplot(c(1:440),customers[,c(3,4,5,6,7,8)],type='l')
 legend('topright',colnames(customers[,c(3,4,5,6,7,8)]),
        col=seq_len(6),pch=13,cex=.8)
 grid(); dev.off(); summary(customers)
-</script></div><br/>
-      <h1>D3 Scatter Plotting of 2D Projections</h1>
-<p>&#60;script src='https://d3js.org/d3.v6.min.js'>&#60;/script> 
-<br/>was added in the page head.</p>
-HTML &#38; JavaScript &#38; SageMathCell
-<div class='sage_html'><script type='text/x-sage'>
-%%html
-<style>.grid1 line,.grid1 path {stroke:slategray;stroke-opacity:.5;}</style>
-<svg id='d301svg04' style='background-color:black'/><script>
-var url2='https://olgabelitskaya.github.io/beethoven.csv';
-d3.csv(url2,d3.autoType).then((data)=>{
-    var xmin=d3.min(data,function(d) {return parseFloat(d.y);}),
-        xmax=d3.max(data,function(d) {return parseFloat(d.y);}); 
-    var ymin=d3.min(data,function(d) {return parseFloat(d.z);}),
-        ymax=d3.max(data,function(d) {return parseFloat(d.z);}); 
-    var n=data.length,m=20,
-        margin={top:m,right:m,bottom:m,left:m},
-        width=500-margin.left-margin.right,
-        height=700-margin.top-margin.bottom; 
-    var xScale=d3.scaleLinear().domain([1.1*xmin,1.1*xmax]).range([0,width]); 
-    var yScale=d3.scaleLinear().domain([1.1*ymin,1.1*ymax]).range([height,0]); 
-    function make_x_gridlines() {return d3.axisBottom(xScale).ticks(11)}; 
-    function make_y_gridlines() {return d3.axisLeft(yScale).ticks(11)}; 
-    var pointColor=d3.scaleSequential().domain([0,n])
-                     .interpolator(d3.interpolateRainbow); 
-    var tr='translate('+margin.left+','+margin.top+')'; 
-    var svg=d3.select('#d301svg04')
-              .attr('width',width+margin.left+margin.right)
-              .attr('height',height+margin.top+margin.bottom)
-              .append('g').attr('transform',tr); 
-    svg.append('g').attr('class','xaxis1')
-       .call(d3.axisBottom(xScale).tickSize(.5))
-       .attr('transform','translate(0,'+height+')'); 
-    svg.append('g').attr('class','yaxis1')
-       .call(d3.axisLeft(yScale).tickSize(.5)); 
-    svg.append('g').attr('class','grid1')
-       .attr('transform','translate(0,'+height+')')
-       .call(make_x_gridlines().tickSize(-height).tickFormat('')); 
-    svg.append('g').attr('class','grid1')
-       .call(make_y_gridlines().tickSize(-width).tickFormat(''))
-       .attr('stroke','#fff');
-    svg.selectAll('.point').data(data).enter()
-       .append('circle').attr('class','point')
-       .attr('fill',function(d,i){return pointColor(i)}).attr('r',.7)
-       .attr('stroke','#fff').attr('stroke-width',.07)
-       .attr('cx',function(d) {return xScale(parseFloat(d.y))})
-       .attr('cy',function(d) {return yScale(parseFloat(d.z))}); });
-</script></div><br/>
-      <h1>D3 Color Interpolation</h1>
-<p>&#60;script src='https://d3js.org/d3.v6.min.js'>&#60;/script> 
-<br/>was added in the page head.</p>
-HTML &#38; JavaScript &#38; SageMathCell
-<div class='sage_html'><script type='text/x-sage'>
-%%html
-<style>
-@import 'https://fonts.googleapis.com/css?family=Akronim';
-.gakronim {font-family:Akronim; color:white; text-align:center; width:50%;}
-#canvas001 {width:25%;}
-</style>
-<h1 id='colorized1' class='gakronim'>Color Interpolation in Text Displaying</h1>
-<h1 id='colorized2' class='gakronim'>Background Interpolation in Text Displaying</h1>
-<h1 id='colorized3' class='gakronim'>
-<canvas id='canvas001'></canvas> Canvas Drawing in Headers</h1><br/>
-<script>
-var tc=setInterval(function() {
-    var now=new Date().getTime();
-    var iddoc1=document.getElementById('colorized1');
-    var iddoc2=document.getElementById('colorized2');
-    var iddoc3=document.getElementById('colorized3');
-    iddoc1.style.color=d3.interpolateSinebow(now/1000);
-    iddoc2.style.background=d3.interpolateRainbow(now/60000);
-    var r=5,k=8; 
-    var c=document.getElementById('canvas001'); 
-    var context=c.getContext('2d');
-    for (var i=1; i<k-1; i++) {
-    context.beginPath();
-    for (var j=0; j<k-1; j++) {
-        context.arc(60*j,3*r*k,i*r,0,2*Math.PI);};
-    context.strokeStyle=d3.interpolateSinebow(now/1000);
-    context.stroke();
-    iddoc3.style.background=d3.interpolateRainbow(now/60000);};},1)
 </script></div><br/>
       <h1>An Example of Danfo DataFrames</h1>
 <p>&#60;script src='https://cdn.jsdelivr.net/npm/danfojs@0.1.1/dist/index.min.js'>
