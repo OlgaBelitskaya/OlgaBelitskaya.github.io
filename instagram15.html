@@ -155,13 +155,13 @@ pl.show()
 Python <br/>
 <div class='sage'><script type='text/x-sage'>
 import json,pandas as pd,pylab as pl
+import warnings; warnings.filterwarnings('ignore')
 url='https://www.ecb.europa.eu/stats/policy_and_exchange_rates/'+\
     'euro_reference_exchange_rates/html/index.en.html'
 exchange_rates=pd.read_html(url)[0]\
 .drop('Chart',axis=1)
 exchange_rates[exchange_rates['Spot']<200]\
-.set_index('Currency').plot.bar(
-    figsize=(10,4),color='#3636ff')
+.set_index('Currency').plot.bar(figsize=(10,4),color='#3636ff')
 pl.show()
 exchange_rates.to_hdf('exchange_rates.h5',key='spot',mode='w')
 pd.read_hdf('exchange_rates.h5','spot').head(int(8)).T
