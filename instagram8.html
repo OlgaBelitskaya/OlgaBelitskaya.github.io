@@ -12,6 +12,7 @@
     sagecell.makeSagecell({inputLocation:'div.sage_r',evalButtonText:'Run R'});  
     sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run SageMath'});});
     </script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
   </head>
   <style>
   @import url('https://fonts.googleapis.com/css?family=Orbitron');
@@ -57,14 +58,12 @@ parametric_plot3d([fx,fy,fz],
 SageMath &#38; SageMathCell <br/>
 <div class="sage"><script type="text/x-sage">
 var('t,i,a,b,c,d'); tmin,tmax,n=-pi,pi,4
-f(t,i,a,b,c,d)=\
-(a+.9*cos(b*t+pi*i/n))*(1+.1*cos(c*t+pi*i/n))*\
-(1+.05*cos(d*t+pi*i/n))*(1+sin(t+pi*i/n))
+f1(t,i,a,b,c,d)=(a+.9*cos(b*t+pi*i/n))*(1+.1*cos(c*t+pi*i/n))
+f2(t,i,a,b,c,d)=(1+.05*cos(d*t+pi*i/n))*(1+sin(t+pi*i/n))
 [a,b,c,d]=[randint(8,11),randint(12,24),
            randint(25,81),randint(216,256)]
-sum([polar_plot(f(t,i,a,b,c,d),(tmin,tmax),
-                thickness=.3,axes=False,
-                color=hue(i/(3*n))) 
+sum([polar_plot(f1(t,i,a,b,c,d)*f2(t,i,a,b,c,d),(tmin,tmax),
+                thickness=.3,axes=False,color=hue(i/(3*n))) 
      for i in [1..6*n]])
 </script></div><br/>
 <div class="sage"><script type="text/x-sage">
@@ -283,7 +282,6 @@ grid(col='slategray'); dev.off()
 HTML &#38; JavaScript &#38; SageMathCell <br/>
 <div class="sage_html"><script type="text/x-sage">
 %%html
-<script src="https://code.highcharts.com/highcharts.js"/>
 <div id="container1" style="height:600px; width:600px; margin:0 auto">
 the javascript cell is launching here...</div>
 </script></div><br/>
@@ -310,10 +308,9 @@ Highcharts.chart('container1', {
 </script></div><br/>
    <h1>Random Plotting and Functions</h1>
    <h1>in JavaScript inside HTML Cells</h1>
-HTML &#38; SageMathCell (Click “Run HTML” twice!)<br/>
+HTML &#38; SageMathCell<br/>
 <div class="sage_html"><script type="text/x-sage">
 %%html
-<script src="https://code.highcharts.com/highcharts.js"/>
 <div id="container2" style="height:600px; width:600px; margin:0 auto"></div>
 <script>
 function getinteger(min,max) {return Math.floor(Math.random()*(max-min+1))+min;};
