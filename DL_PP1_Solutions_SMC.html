@@ -241,7 +241,7 @@ pd.DataFrame([['Train R2 score:',score_train_mlp],
               ['Test R2 score:',score_test_mlp]])
 </script></div><br/>
 <p>Convolutional Neural Network (CNN)</p><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 i0,i1,i2,i3,i5,i10,i13,i16,i128=\
 int(0),int(1),int(2),int(3),int(5),int(10),int(13),int(16),int(128)
 def cnn_model():
@@ -262,19 +262,22 @@ def cnn_model():
     return model
 cnn_model=cnn_model()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 epochs=int(200); batch_size=int(14)
-cnn_checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,save_best_only=True)
-cnn_lr_reduction=ReduceLROnPlateau(monitor='val_loss', 
-                                   patience=i10,verbose=i0,factor=float(.75))
-cnn_history=cnn_model.fit(x_train.reshape(-i1,i13,i1),y_train, 
-                          validation_data=(x_valid.reshape(-i1,i13,i1),y_valid),
-                          epochs=epochs,batch_size=batch_size,verbose=i0, 
-                          callbacks=[cnn_checkpointer,cnn_lr_reduction])
+cnn_checkpointer=ModelCheckpoint(
+    filepath='/tmp/checkpoint',verbose=i0,save_weights_only=True,
+    monitor='val_loss',mode='max',save_best_only=True)
+cnn_lr_reduction=ReduceLROnPlateau(
+    monitor='val_loss',patience=i10,verbose=i0,factor=float(.75))
+cnn_history=cnn_model.fit(
+    x_train.reshape(-i1,i13,i1),y_train, 
+    validation_data=(x_valid.reshape(-i1,i13,i1),y_valid),
+    epochs=epochs,batch_size=batch_size,verbose=i0, 
+    callbacks=[cnn_checkpointer,cnn_lr_reduction])
 </script></div><br/>      
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 history_plot(cnn_history)
-cnn_model.load_weights(fw)
+cnn_model.load_weights('/tmp/checkpoint')
 y_train_cnn=cnn_model.predict(x_train.reshape(-i1,i13,i1))
 y_valid_cnn=cnn_model.predict(x_valid.reshape(-i1,i13,i1))
 y_test_cnn=cnn_model.predict(x_test.reshape(-i1,i13,i1))
