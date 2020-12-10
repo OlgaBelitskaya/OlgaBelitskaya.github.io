@@ -1,34 +1,33 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width'>
     <title>🏙DLPP2SMC</title>
-    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
-    <script>$(function (){
-    sagecell.makeSagecell({inputLocation:'div.linked',linked:true,
-                           evalButtonText:'Run Linked Cells'}); });
+    <script src='https://sagecell.sagemath.org/static/embedded_sagecell.js'></script>
+    <script>$(function (){sagecell.makeSagecell(
+      {inputLocation:'div.linked',linked:true,evalButtonText:'Run Linked Cells'}); });
     </script>
   </head>
   <style>
-  @import url('https://fonts.googleapis.com/css?family=Akronim|Lobster');
-  h1,h2,th {color:#348ABD; font-family:'Akronim'; font-size:120%; text-shadow:4px 4px 4px #aaa;}
-  p,a {color:slategray; font-family:'Lobster'; font-size:120%; text-shadow:4px 4px 4px #aaa;}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:30em;}
-  body {margin:5px 5px 5px 15px;}
+    @import 'https://fonts.googleapis.com/css?family=Akronim|Lobster';
+    h1,h2,th {color:#348ABD; font-family:'Akronim'; font-size:120%; text-shadow:4px 4px 4px #aaa;}
+    p,a {color:slategray; font-family:'Lobster'; font-size:120%; text-shadow:4px 4px 4px #aaa;}
+    .sagecell .CodeMirror-scroll {min-height:3em; max-height:30em;}
+    body {margin:5px 5px 5px 15px;}
   </style>  
   <body>
     <h1>📑 &nbsp; Deep Learning. P2: Multi-Label Classification. Letter Recognition</h1>
-<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp; &nbsp;</a> 
-<a href="https://drive.google.com/file/d/1Z9Fz0OOi6bpWvH-H2OhExC9CkGPWBYZz">
+<a href='https://olgabelitskaya.github.io/README.html'>&#x1F300; &nbsp; Home Page &nbsp; &nbsp; &nbsp;</a> 
+<a href='https://drive.google.com/file/d/1Z9Fz0OOi6bpWvH-H2OhExC9CkGPWBYZz'>
 &#x1F300; &nbsp; Google Colaboratory Variant &nbsp; &nbsp; &nbsp;</a>
-<a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp; &nbsp;</a>     
-<a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a><br/>
+<a href='https://www.instagram.com/olga.belitskaya/'>&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp; &nbsp;</a>     
+<a href='https://www.pinterest.ru/olga_belitskaya/code-style/'>&#x1F300; &nbsp; Pinterest Posts</a><br/>
 For this project, I have created the dataset of <br/>
 14190 color images (32x32x3) with 33 handwritten Russian letters.<br/>
 There are four types of letter backgrounds here. <br/>
 They are labeled in this dataset as well.<br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 import urllib,os; from IPython import display
 fpath='https://olgabelitskaya.github.io/images/'
 lf=['03_16.jpeg','08_50.jpeg','11_216.jpeg','20_415.jpeg']
@@ -39,37 +38,34 @@ for f in lf:
     output_file.close(); input_file.close()
 fpath2='https://sagecell.sagemath.org/kernel/'
 fpath2+=os.getcwd()[14:]+'/files/'
-display.HTML("""
-<style>
-@import url('https://fonts.googleapis.com/css?family=Akronim|Ewert');
-</style>
-<table style='width:30%; background-color:ghostwhite; 
-              font-family:Ewert; font-size:200%;'>
+display.HTML("""<style>
+@import 'https://fonts.googleapis.com/css?family=Akronim|Ewert';</style>
+<table style='width:30%; background-color:ghostwhite; font-family:Ewert; font-size:200%;'>
 <tr style='font-family:Akronim;'><th><center>Background</center></th>
 <th><center>Image</center></th></tr>
 <tr><td><center>0</center></td><td><center>
-<img width='50' height='50' src="""+fpath2+lf[0]+""" alt='bg0'>
-</center></td></tr>
+<img width='50' height='50' src="""+fpath2+lf[0]+""" alt='bg0'></center></td></tr>
 <tr><td><center>1</center></td><td><center>
-<img width='50' height='50' src="""+fpath2+lf[1]+""" alt='bg1'>
-</center></td></tr>
+<img width='50' height='50' src="""+fpath2+lf[1]+""" alt='bg1'></center></td></tr>
 <tr><td><center>2</center></td><td><center>
-<img width='50' height='50' src="""+fpath2+lf[2]+""" alt='bg2'>
-</center></td></tr>
+<img width='50' height='50' src="""+fpath2+lf[2]+""" alt='bg2'></center></td></tr>
 <tr><td><center>3</center></td><td><center>
 <img width='50' height='50' src="""+fpath2+lf[3]+""" alt='bg3'>
-</center></td></tr>
-</table>""")
+</center></td></tr></table>""")
 </script></div><br/>
-    <h2>✒️&nbsp;Step 0. Importing Libraries and Defining Helpful Functions</h2>      
-<div class="linked"><script type="text/x-sage">
-#unlock to install modules
-#!python3 -m pip install --ignore-installed --upgrade tensorflow==1.14.0
-spath='/home/sc_work/.sage/local/lib/python3.7/site-packages'
-import sys; sys.path.append(spath)
+    <h2>✒️&nbsp;Step 0. Importing Libraries and Defining Helpful Functions</h2>
+<div class='linked'><script type='text/x-sage'>
+!python3 -m pip install --upgrade pip \
+--user --quiet --no-warn-script-location
+!python3 -m pip install argon2-cffi \
+--user --quiet --no-warn-script-location
+!python3 -m pip install --ignore-installed --upgrade tensorflow==2.3.0 \
+--user --quiet --no-warn-script-location
+!python3 -m pip install h5py==2.10.0 \
+--user --quiet --no-warn-script-location
+path='/home/sc_work/.sage/local/lib/python3.8/site-packages'
+import sys; sys.path.append(path)
 import warnings; warnings.filterwarnings('ignore')
-</script></div><br/>
-<div class="linked"><script type="text/x-sage">
 import h5py,urllib,zipfile,tensorflow as tf
 import pandas as pd,numpy as np,pylab as pl
 from skimage.transform import resize
