@@ -152,35 +152,24 @@ ctargets=np.concatenate((clabels,cbackgrounds),axis=1)
 pd.DataFrame([clabels.shape,cbackgrounds.shape,ctargets.shape])
 </script></div><br/>
 <div class='linked'><script type='text/x-sage'>
-x_train1,x_valid1,x_test1,\
-y_train1,y_valid1,y_test1=tts(images,clabels)
-x_train2,x_valid2,x_test2,\
-y_train2,y_valid2,y_test2=tts(gray_images,clabels)
-x_train3,x_valid3,x_test3,\
-y_train3,y_valid3,y_test3=tts(images,ctargets)
-x_train4,x_valid4,x_test4,\
-y_train4,y_valid4,y_test4=tts(gray_images,ctargets)
-x_train1,x_valid1,x_test1=\
-resh(x_train1),resh(x_valid1),resh(x_test1)
-x_train3,x_valid3,x_test3=\
-resh(x_train3),resh(x_valid3),resh(x_test3)
-x_train2,x_valid2,x_test2=\
-resh2(x_train2),resh2(x_valid2),resh2(x_test2)
-x_train4,x_valid4,x_test4=\
-resh2(x_train4),resh2(x_valid4),resh2(x_test4)
+x_train1,x_valid1,x_test1,y_train1,y_valid1,y_test1=tts(images,clabels)
+x_train2,x_valid2,x_test2,y_train2,y_valid2,y_test2=tts(gray_images,clabels)
+x_train3,x_valid3,x_test3,y_train3,y_valid3,y_test3=tts(images,ctargets)
+x_train4,x_valid4,x_test4,y_train4,y_valid4,y_test4=tts(gray_images,ctargets)
+x_train1,x_valid1,x_test1=resh(x_train1),resh(x_valid1),resh(x_test1)
+x_train3,x_valid3,x_test3=resh(x_train3),resh(x_valid3),resh(x_test3)
+x_train2,x_valid2,x_test2=resh2(x_train2),resh2(x_valid2),resh2(x_test2)
+x_train4,x_valid4,x_test4=resh2(x_train4),resh2(x_valid4),resh2(x_test4)
 sh=[el.shape for el in \
 [x_train1,y_train1,x_valid1,y_valid1,x_test1,y_test1,
  x_train2,y_train2,x_valid2,y_valid2,x_test2,y_test2,
  x_train3,y_train3,x_valid3,y_valid3,x_test3,y_test3,
  x_train4,y_train4,x_valid4,y_valid4,x_test4,y_test4]]
-pd.DataFrame(sh)
+pd.DataFrame(sh).T
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 del images,gray_images,labels,backgrounds
 del clabels,cbackgrounds,ctargets
-</script></div><br/>
-<div class="linked"><script type="text/x-sage">
-fw='weights.letter.hdf5'
 dr,fr,al=float(.2),float(.2),float(.02)
 i10,i16,i32,i33=int(10),int(16),int(32),int(33)
 i48,i64,i96=int(48),int(64),int(96)
