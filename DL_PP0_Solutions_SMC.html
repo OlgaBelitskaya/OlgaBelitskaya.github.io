@@ -171,8 +171,9 @@ model=model()
 </script></div><br/>
     <h2>✒️ &nbsp;Step 5. Train the Model</h2>
 <div class="linked"><script type="text/x-sage">
-checkpointer=ModelCheckpoint(filepath='weights.hdf5', 
-                             verbose=i2,save_best_only=True)
+checkpointer=ModelCheckpoint(
+    filepath='weights.hdf5',verbose=i2,save_weights_only=True,
+    monitor='val_accuracy',mode='max',save_best_only=True)
 history=model.fit(x_train,y_train,batch_size=i8,
                   epochs=i16,verbose=i2,
                   validation_data=(x_valid,y_valid),
