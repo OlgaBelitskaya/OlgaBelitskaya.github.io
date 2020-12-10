@@ -1,84 +1,68 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width'>
     <title>🏙DLPP1SMC</title>
-    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
-    <script>$(function (){
-    sagecell.makeSagecell({inputLocation:'div.linked',linked:true,
-                           evalButtonText:'Run Linked Cells'}); });
+    <script src='https://sagecell.sagemath.org/static/embedded_sagecell.js'></script>
+    <script>$(function (){sagecell.makeSagecell(
+      {inputLocation:'div.linked',linked:true,evalButtonText:'Run Linked Cells'}); });
     </script>
   </head>
   <style>
-  @import url('https://fonts.googleapis.com/css?family=Akronim|Lobster');
-  h1,h2,th {color:#348ABD; font-family:'Akronim'; font-size:120%; text-shadow:4px 4px 4px #aaa;}
-  p,a {color:slategray; font-family:'Lobster'; font-size:120%; text-shadow:4px 4px 4px #aaa;}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:30em;}
-  body {margin:5px 5px 5px 15px;}
+    @import 'https://fonts.googleapis.com/css?family=Akronim|Lobster';
+    h1,h2,th {color:#348ABD; font-family:'Akronim'; font-size:120%; text-shadow:4px 4px 4px #aaa;}
+    p,a {color:slategray; font-family:'Lobster'; font-size:120%; text-shadow:4px 4px 4px #aaa;}
+    .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
+    body {margin:5px 5px 5px 15px;}
   </style>  
   <body>
     <h1>📑 &nbsp; Deep Learning. P1: Neural Networks for Regression</h1>
-<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp; &nbsp;</a>
-<a href="https://colab.research.google.com/drive/1atPu92jNJ-qBsFpbOiMojHGXCu6gJWYW#scrollTo=91HMnhFil3AH">
+<a href='https://olgabelitskaya.github.io/README.html'>&#x1F300; &nbsp; Home Page &nbsp; &nbsp; &nbsp;</a>
+<a href='https://colab.research.google.com/drive/1atPu92jNJ-qBsFpbOiMojHGXCu6gJWYW#scrollTo=91HMnhFil3AH'>
 &#x1F300; &nbsp; Google Colaboratory Variant &nbsp; &nbsp; &nbsp;</a>    
-<a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp; &nbsp;</a>     
-<a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a><br/>
+<a href='https://www.instagram.com/olga.belitskaya/'>&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp; &nbsp;</a>     
+<a href='https://www.pinterest.ru/olga_belitskaya/code-style/'>&#x1F300; &nbsp; Pinterest Posts</a><br/>
 In this project, we'll evaluate the performance and predictive power of neural networks in the sphere of regression tasks.<br/>
 Models will be trained and tested on data collected from homes in suburbs of Boston, Massachusetts.<br/>
 Origin: This dataset was taken from the StatLib library which is maintained at Carnegie Mellon University.<br/>
 Creators: Harrison, D. and Rubinfeld, D.L.<br/>
 Data Set Information: Concerns housing values in suburbs of Boston.<br/>
 Attribute Information:<br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 %%html
-<style>
-@import url('https://fonts.googleapis.com/css?family=Akronim|Ruthie');
-</style>
-<table style="width:80%; background-color:black; 
-              font-family:Ruthie; font-size:200%;">
-<tr style="font-family:Akronim;">
-  <th style="color:white;"> Attribute </th>
-  <th style="color:white;"> Description </th></tr>
-<tr><td style="color:#F898C8;"><center> CRIM </center></td>
-<td style="color:#F898C8;"><left>per capita crime rate by town</left></td></tr>
-<tr><td style="color:#E91E63;"><center> ZN </center></td>
-<td style="color:#E91E63;"><left>proportion of residential 
-  land zoned for lots over 25,000 sq.ft.</left></td></tr>
-<tr><td style="color:#D62518;"><center> INDUS </center></td>
-<td style="color:#D62518;"><left>proportion of non-retail 
-  business acres per town</left></td></tr>
-<tr><td style="color:#AD0000;"><center> CHAS </center></td>
-<td style="color:#AD0000;"><left>Charles River dummy variable 
-  (= 1 if tract bounds river; 0 otherwise)</left></td></tr>
-<tr><td style="color:#FA7A00;"><center> NOX </center></td>
-<td style="color:#FA7A00;"><left>nitric oxides concentration 
-  (parts per 10 million)</left></td></tr> 
-<tr><td style="color:#FED85D;"><center> RM </center></td>
-<td style="color:#FED85D;"><left>average number of rooms 
-  per dwelling</left></td></tr> 
-  <tr><td style="color:#91E351;"><center> AGE </center></td>
-<td style="color:#91E351;"><left>proportion of 
-  owner-occupied units built prior to 1940</left></td></tr> 
-<tr><td style="color:#00D8A0;"><center> DIS </center></td>
-<td style="color:#00D8A0;"><left>weighted distances to 
-  five Boston employment centres</left></td></tr> 
-<tr><td style="color:#1CAC78;"><center> RAD </center></td>
-<td style="color:#1CAC78;"><left>index of accessibility 
-  to radial highways</left></td></tr>
-  <tr><td style="color:#004C71;"><center> TAX </center></td>
-<td style="color:#004C71;"><left>full-value property-tax rate 
-  per 10,000 USD</left></td></tr>
-<tr><td style="color:#1AADE0;"><center> PTRATIO </center></td>
-<td style="color:#1AADE0;"><left>pupil-teacher ratio by town</left></td></tr>
-<tr><td style="color:#0069BD;"><center> B </center></td>
-<td style="color:#0069BD;"><left>1000(Bk - 0.63)^2 where Bk 
-  is the proportion of blacks by town</left></td></tr>
-<tr><td style="color:#333399;"><center> LSTAT </center></td>
-<td style="color:#333399;"><left>% lower status of the population</left></td></tr> 
-<tr><td style="color:#7851A9;"><center> MEDV </center></td>
-<td style="color:#7851A9;"><left>Median value of owner-occupied homes 
-  in 1000 USD</left></td></tr>
+<style>@import 'https://fonts.googleapis.com/css?family=Akronim|Ruthie';</style>
+<table style='width:100%; background-color:#333; font-family:Ruthie; font-size:200%;'>
+  <tr style='font-family:Akronim;'><th style='color:whitesmoke;'>Attribute</th>
+    <th style='color:whitesmoke;'>Description</th></tr>
+  <tr><td style='color:#F898C8;'><center>CRIM</center></td><td style='color:#F898C8;'>
+    <left>per capita crime rate by town</left></td></tr>
+  <tr><td style='color:#E91E63;'><center> ZN </center></td><td style='color:#E91E63;'>
+    <left>proportion of residential land zoned for lots over 25,000 sq.ft.</left></td></tr>
+  <tr><td style='color:#D62518;'><center> INDUS </center></td><td style='color:#D62518;'>
+    <left>proportion of non-retail business acres per town</left></td></tr>
+  <tr><td style='color:#AD0000;'><center> CHAS </center></td><td style='color:#AD0000;'>
+    <left>Charles River dummy variable (= 1 if tract bounds river; 0 otherwise)</left></td></tr>
+  <tr><td style='color:#FA7A00;'><center> NOX </center></td><td style='color:#FA7A00;'>
+    <left>nitric oxides concentration (parts per 10 million)</left></td></tr> 
+  <tr><td style='color:#FED85D;'><center> RM </center></td><td style='color:#FED85D;'>
+    <left>average number of rooms per dwelling</left></td></tr> 
+  <tr><td style='color:#91E351;'><center> AGE </center></td><td style='color:#91E351;'>
+    <left>proportion of owner-occupied units built prior to 1940</left></td></tr> 
+  <tr><td style='color:#00D8A0;'><center> DIS </center></td><td style='color:#00D8A0;'>
+    <left>weighted distances to five Boston employment centres</left></td></tr> 
+  <tr><td style='color:#1CAC78;'><center> RAD </center></td><td style='color:#1CAC78;'>
+    <left>index of accessibility to radial highways</left></td></tr>
+  <tr><td style='color:#009C91;'><center> TAX </center></td><td style='color:#009C91;'>
+    <left>full-value property-tax rate per 10,000 USD</left></td></tr>
+  <tr><td style='color:#1AADE0;'><center> PTRATIO </center></td><td style='color:#1AADE0;'>
+    <left>pupil-teacher ratio by town</left></td></tr>
+  <tr><td style='color:#0079DD;'><center> B </center></td><td style='color:#0079DD;'>
+    <left>1000(Bk - 0.63)^2 where Bk is the proportion of blacks by town</left></td></tr>
+  <tr><td style='color:#3355FF;'><center> LSTAT </center></td><td style="color:#3355FF;">
+    <left>% lower status of the population</left></td></tr> 
+  <tr><td style='color:#7855EE;'><center> MEDV </center></td><td style='color:#7855EE;'>
+    <left>Median value of owner-occupied homes in 1000 USD</left></td></tr>
 </table>
 </script></div><br/>
 The Boston housing data was collected in 1978 and each of the <br/>
