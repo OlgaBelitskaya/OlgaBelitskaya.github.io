@@ -289,7 +289,7 @@ pd.DataFrame([['Train R2 score:',score_train_cnn],
               ['Test R2 score:',score_test_cnn]])
 </script></div><br/>
 <p>Recurrent Neural Network (RNN)</p><br/>      
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 i0,i1,i2,i13,i104=int(0),int(1),int(2),int(13),int(104)
 def rnn_model():
     model=Sequential()   
@@ -302,20 +302,22 @@ def rnn_model():
     return model
 rnn_model=rnn_model()  
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 epochs=int(100); batch_size=int(14)
-rnn_checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,
-                                 save_best_only=True)
-rnn_lr_reduction=ReduceLROnPlateau(monitor='val_loss', 
-                                  patience=i10,verbose=i0,factor=float(.75))
-rnn_history=rnn_model.fit(x_train.reshape(-i1,i1,i13),y_train, 
-                          validation_data=(x_valid.reshape(-i1,i1,i13),y_valid),
-                          epochs=epochs,batch_size=batch_size,verbose=i0, 
-                          callbacks=[rnn_checkpointer,rnn_lr_reduction])
+rnn_checkpointer=ModelCheckpoint(
+    filepath='/tmp/checkpoint',verbose=i0,save_weights_only=True,
+    monitor='val_loss',mode='max',save_best_only=True)
+rnn_lr_reduction=ReduceLROnPlateau(
+    monitor='val_loss',patience=i10,verbose=i0,factor=float(.75))
+rnn_history=rnn_model.fit(
+    x_train.reshape(-i1,i1,i13),y_train, 
+    validation_data=(x_valid.reshape(-i1,i1,i13),y_valid),
+    epochs=epochs,batch_size=batch_size,verbose=i0, 
+    callbacks=[rnn_checkpointer,rnn_lr_reduction])
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 history_plot(rnn_history)
-rnn_model.load_weights(fw)
+rnn_model.load_weights('/tmp/checkpoint')
 y_train_rnn=rnn_model.predict(x_train.reshape(-i1,i1,i13))
 y_valid_rnn=rnn_model.predict(x_valid.reshape(-i1,i1,i13))
 y_test_rnn=rnn_model.predict(x_test.reshape(-i1,i1,i13))
