@@ -124,7 +124,7 @@ def history_plot(fit_history):
             color='slategray',label='Train')
     pl.plot(fit_history.history[keys[3]],
             color='#348ABD',label='Valid')
-    pl.xlabel'Epochs'); pl.ylabel('MAE')    
+    pl.xlabel('Epochs'); pl.ylabel('MAE')    
     pl.legend(); pl.grid(); pl.title('Mean Absolute Error')
     pl.tight_layout(); pl.show()
 def predict_plot(y1,y2,y3,ti):
@@ -156,13 +156,13 @@ boston_df['MEDV']=boston_data.target
 boston_df.to_sql('main',con=connection,if_exists='replace')
 boston_df.head()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 pearson=boston_df.corr(method='pearson')
 corr_with_prices=pearson.iloc[-int(1)][:-int(1)]
 pd.DataFrame(corr_with_prices[abs(corr_with_prices)\
              .argsort()[::-int(1)]]).T
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 pd.read_sql_query('''
 SELECT ZN,
        AVG(LSTAT),
@@ -175,29 +175,29 @@ GROUP BY ZN;
 ''',con=connection)\
 .set_index('ZN').head(int(7))
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 n=int(51)
 (x_train,y_train),(x_test,y_test)=boston_housing.load_data()
 x_valid,y_valid=x_test[:n],y_test[:n]
 x_test,y_test=x_test[n:],y_test[n:]
-t=[["Training feature's shape:",x_train.shape],
-   ["Training target's shape",y_train.shape],
-   ["Validating feature's shape:",x_valid.shape],
-   ["Validating target's shape",y_valid.shape],
-   ["Testing feature's shape:",x_test.shape],
-   ["Testing target's shape",y_test.shape]]
+t=[['Training feature`s shape:',x_train.shape],
+   ['Training target`s shape:',y_train.shape],
+   ['Validating feature`s shape:',x_valid.shape],
+   ['Validating target`s shape:',y_valid.shape],
+   ['Testing feature`s shape:',x_test.shape],
+   ['Testing target`s shape:',y_test.shape]]
 pd.DataFrame(t)
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 pl.figure(1,figsize=(10,4))
 pl.subplot(121)
-sn.distplot(y_train,color='#348ABD',bins=30)
-pl.ylabel("Distribution"); pl.xlabel("Prices")
+sn.histplot(y_train,color='#348ABD',bins=30,kde=True)
+pl.ylabel('Distribution'); pl.xlabel('Prices')
 pl.subplot(122)
-sn.distplot(np.log(y_train),color='#348ABD',bins=30)
-pl.ylabel("Distribution"); pl.xlabel("Logarithmic Prices")
+sn.histplot(np.log(y_train),color='#348ABD',bins=30,kde=True)
+pl.ylabel('Distribution'); pl.xlabel('Logarithmic Prices')
 pl.suptitle('Boston Housing Data',fontsize=15)
-pl.show()
+pl.tight_layout(); pl.show()
 </script></div><br/>
     <h2>✒️&nbsp;Step 2. Build Neural Networks with Keras Py</h2>
 <p>Multilayer Perceptron (MLP)</p><br/>
