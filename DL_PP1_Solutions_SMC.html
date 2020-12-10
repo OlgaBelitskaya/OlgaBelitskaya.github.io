@@ -144,8 +144,7 @@ def connect_to_db(dbf):
         print(err)
         if sqlconn is not None: sqlconn.close()
 connection=connect_to_db('boston.db')
-if connection is not None:
-    cursor=connection.cursor()
+if connection is not None: cursor=connection.cursor()
 </script></div><br/>
     <h2>✒️&nbsp;Step 1. Load and Explore the Data</h2> 
 <div class='linked'><script type='text/x-sage'>
@@ -188,7 +187,7 @@ t=[['Training feature`s shape:',x_train.shape],
    ['Testing target`s shape:',y_test.shape]]
 pd.DataFrame(t)
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 pl.figure(1,figsize=(10,4))
 pl.subplot(121)
 sn.histplot(y_train,color='#348ABD',bins=30,kde=True)
@@ -201,8 +200,7 @@ pl.tight_layout(); pl.show()
 </script></div><br/>
     <h2>✒️&nbsp;Step 2. Build Neural Networks with Keras Py</h2>
 <p>Multilayer Perceptron (MLP)</p><br/>
-<div class="linked"><script type="text/x-sage">
-fw='weights.boston.hdf5'
+<div class='linked'><script type='text/x-sage'>
 i0,i1,i2,i10,i13,i104,i1024=\
 int(0),int(1),int(2),int(10),int(13),int(104),int(1024)
 def mlp_model():
@@ -216,20 +214,22 @@ def mlp_model():
     return model
 mlp_model=mlp_model()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 epochs=int(125); batch_size=int(24)
-mlp_checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,
-                                 save_best_only=True)
-mlp_lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i10,
-                                   verbose=i0,factor=float(.75))
-mlp_history=mlp_model.fit(x_train,y_train,batch_size=batch_size, 
-                          validation_data=(x_valid,y_valid),
-                          epochs=epochs,verbose=i0, 
-                          callbacks=[mlp_checkpointer,mlp_lr_reduction])
+mlp_checkpointer=ModelCheckpoint(
+    filepath='/tmp/checkpoint',verbose=i0,save_weights_only=True,
+    monitor='val_loss',mode='max',save_best_only=True)
+mlp_lr_reduction=ReduceLROnPlateau(
+    monitor='val_loss',patience=i10,verbose=i0,factor=float(.75))
+mlp_history=mlp_model.fit(
+    x_train,y_train,batch_size=batch_size,
+    validation_data=(x_valid,y_valid),
+    epochs=epochs,verbose=i0, 
+    callbacks=[mlp_checkpointer,mlp_lr_reduction])
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 history_plot(mlp_history)
-mlp_model.load_weights(fw)
+mlp_model.load_weights('/tmp/checkpoint')
 y_train_mlp=mlp_model.predict(x_train)
 y_valid_mlp=mlp_model.predict(x_valid)
 y_test_mlp=mlp_model.predict(x_test)
