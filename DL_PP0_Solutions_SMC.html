@@ -97,8 +97,8 @@ output_file.close(); input_file.close()
 zipf=zipfile.ZipFile(zf,'r')
 zipf.extractall(''); zipf.close()
 f=h5py.File(zf[:-4],'r'); keys=list(f.keys())
-images=np.array(f[keys[0]])
-labels=np.array(f[keys[1]])
+images=np.array(f[keys[0]],dtype=np.int16)
+labels=np.array(f[keys[1]],dtype=np.int16)
 names=['phlox','rose','calendula','iris',
        'max chrysanthemum','bellflower','viola',
        'rudbeckia laciniata','peony','aquilegia']
@@ -111,20 +111,20 @@ pretty_print(html(st2%str(labels.shape)))
 fig=pl.figure(figsize=(6,4))
 n=randint(1,30)
 for i in range(n,n+6):
-    ax=fig.add_subplot(2,3,i-n+1,\
-    xticks=[],yticks=[],title=names[labels[i]])
+    ax=fig.add_subplot(2,3,i-n+1,xticks=[],yticks=[])
+    ax.set_title(names[labels[i]],color='#348ABD')
     ax.imshow((images[i]/255))
-pl.show()
+pl.tight_layout(); pl.show()
 </script></div><br/>
     <h2>✒️ &nbsp;Step 2. Save and Load the Data</h2>      
 <div class="linked"><script type="text/x-sage">
 images_csv=images.reshape(210,128*128*3)
-np.savetxt("flower_images.csv",images_csv,
-           fmt='%i',delimiter=",")
-np.savetxt("flower_labels.csv",labels,
-           fmt='%i',delimiter=",")
-images=pd.read_csv("flower_images.csv",header=None)
-labels=pd.read_csv("flower_labels.csv",header=None)
+np.savetxt('flower_images.csv',images_csv,
+           fmt='%i',delimiter=',')
+np.savetxt('flower_labels.csv',labels,
+           fmt='%i',delimiter=',')
+images=pd.read_csv('flower_images.csv',header=None)
+labels=pd.read_csv('flower_labels.csv',header=None)
 display(images.iloc[:int(10),:int(10)])
 display(labels.iloc[:int(20)].T)
 images=images.values; labels=labels.values
@@ -133,8 +133,6 @@ images=images.values; labels=labels.values
 <div class="linked"><script type="text/x-sage">
 images=images.reshape(-1,128,128,3)/255
 labels=to_categorical(labels,10)
-</script></div><br/>
-<div class="linked"><script type="text/x-sage">
 x_train,x_test,y_train,y_test=\
 train_test_split(images,labels,test_size=.1,random_state=1)
 m=int(len(x_test)/2)
