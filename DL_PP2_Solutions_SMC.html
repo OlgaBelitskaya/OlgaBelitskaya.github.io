@@ -165,7 +165,7 @@ sh=[el.shape for el in \
  x_train2,y_train2,x_valid2,y_valid2,x_test2,y_test2,
  x_train3,y_train3,x_valid3,y_valid3,x_test3,y_test3,
  x_train4,y_train4,x_valid4,y_valid4,x_test4,y_test4]]
-pd.DataFrame(sh).T
+pd.DataFrame(sh)
 </script></div><br/>
 <div class='linked'><script type='text/x-sage'>
 del images,gray_images,labels,backgrounds
@@ -179,7 +179,7 @@ n1,n2=int(3000),int(500)
 </script></div><br/>
       <h2>✒️ &nbsp; Step 2. One-Label Classification Models</h2>
 <p>Color Images</p>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 def model():
     model=Sequential()
     model.add(Conv2D(i16,(i3,i3),padding='same',
@@ -201,25 +201,25 @@ def model():
     return model
 model=model()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,
-                             save_best_only=True)
-lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
-                               verbose=i0,factor=fr)
-history=model.fit(x_train1[:n1],y_train1[:n1],epochs=i16,
-                  batch_size=i64,verbose=i2,
-                  validation_data=(x_valid1[:n2],y_valid1[:n2]),
-                  callbacks=[checkpointer,lr_reduction])
+<div class='linked'><script type='text/x-sage'>
+checkpointer=ModelCheckpoint(
+    filepath='/tmp/checkpoint',verbose=i0,save_weights_only=True,
+    monitor='val_accuracy',mode='max',save_best_only=True)
+lr_reduction=ReduceLROnPlateau(
+    monitor='val_loss',patience=i5,verbose=i0,factor=fr)
+history=model.fit(
+    x_train1[:n1],y_train1[:n1],epochs=i16,batch_size=i64,
+    verbose=i2,validation_data=(x_valid1[:n2],y_valid1[:n2]),
+    callbacks=[checkpointer,lr_reduction])
 </script></div><br/>  
 <div class="linked"><script type="text/x-sage">
-history_plot(history)
-model.load_weights(fw)
+keras_history_plot(history,7,'#348ABD')
+model.load_weights('/tmp/checkpoint')
 print(model.evaluate(x_test1[:n2],y_test1[:n2]))
-del x_train1,x_valid1,x_test1,\
-    y_train1,y_valid1,y_test1
+del x_train1,x_valid1,x_test1,y_train1,y_valid1,y_test1
 </script></div><br/>
 <p>Grayscale Images</p><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 def gray_model():
     model=Sequential()    
     model.add(Conv2D(i16,(i3,i3),padding='same', 
@@ -240,25 +240,26 @@ def gray_model():
     return model
 gray_model=gray_model() 
 </script></div><br/> 
-<div class="linked"><script type="text/x-sage">
-checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,
-                             save_best_only=True)
-lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
-                               verbose=i0,factor=fr)
-history=gray_model.fit(x_train2[:n1],y_train2[:n1],epochs=i16,
-                       batch_size=i64,verbose=i2,
-                       validation_data=(x_valid2[:n2],y_valid2[:n2]),
-                       callbacks=[checkpointer,lr_reduction])
+<div class='linked'><script type='text/x-sage'>
+checkpointer=ModelCheckpoint(
+    filepath='/tmp/checkpoint',verbose=i0,save_weights_only=True,
+    monitor='val_accuracy',mode='max',save_best_only=True)
+lr_reduction=ReduceLROnPlateau(
+    monitor='val_loss',patience=i5,verbose=i0,factor=fr)
+history=gray_model.fit(
+    x_train2[:n1],y_train2[:n1],epochs=i16,
+    batch_size=i64,verbose=i2,
+    validation_data=(x_valid2[:n2],y_valid2[:n2]),
+    callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-history_plot(history)
-gray_model.load_weights(fw)
+<div class='linked'><script type='text/x-sage'>
+keras_history_plot(history,7,'#348ABD')
+gray_model.load_weights('/tmp/checkpoint')
 print(gray_model.evaluate(x_test2[:n2],y_test2[:n2]))
-del x_train2,x_valid2,x_test2,\
-    y_train2,y_valid2,y_test2
+del x_train2,x_valid2,x_test2,y_train2,y_valid2,y_test2
 </script></div><br/>
       <h2>✒️ &nbsp; Step 3. Multi-Label Classification Models</h2>      
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 def multi_model():    
     model_input=Input(shape=(i8,i8,i3))
     x=BatchNormalization()(model_input)
@@ -291,13 +292,12 @@ checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,
                              save_best_only=True)
 lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
                                verbose=i0,factor=fr)
-history=multi_model.fit(x_train3[:n1],
-                        [y_train3[:n1,:i33],y_train3[:n1,i33:]],
-                        epochs=i16,batch_size=i64,verbose=i2,
-                        validation_data=(x_valid3[:n2],
-                                         [y_valid3[:n2,:i33],
-                                          y_valid3[:n2,i33:]]),
-                        callbacks=[checkpointer,lr_reduction])
+history=multi_model.fit(
+    x_train3[:n1],[y_train3[:n1,:i33],y_train3[:n1,i33:]],
+    epochs=i16,batch_size=i64,verbose=i2,
+    validation_data=(x_valid3[:n2],
+                     [y_valid3[:n2,:i33],y_valid3[:n2,i33:]]),
+    callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 print(multi_model.evaluate(x_test3[:n2],\
