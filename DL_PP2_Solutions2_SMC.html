@@ -188,12 +188,11 @@ vgg16model.load_weights(fw)
 vgg16model.evaluate(pvx_test1,y_test1)
 </script></div><br/> 
 <p>VGG19</p>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 from tensorflow.keras.applications.vgg19 import VGG19
 vgg19bmodel=VGG19(weights='imagenet',include_top=False)
 n1,n2=1100,110
-x_train1,x_valid1,x_test1,\
-y_train1,y_valid1,y_test1=\
+x_train1,x_valid1,x_test1,y_train1,y_valid1,y_test1=\
 x_train1[:n1],x_valid1[:n2],x_test1[:n2],\
 y_train1[:n1],y_valid1[:n2],y_test1[:n2]
 pvx_train1=vgg19bmodel.predict(x_train1)
@@ -203,7 +202,7 @@ pvx_train1=pvx_train1.reshape(-1,1,1,pvx_train1.shape[3])
 pvx_valid1=pvx_valid1.reshape(-1,1,1,pvx_valid1.shape[3])
 pvx_test1=pvx_test1.reshape(-1,1,1,pvx_test1.shape[3])
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 sh=pvx_train1.shape[1:]
 def vgg19model():
     model=Sequential()  
@@ -220,15 +219,17 @@ def vgg19model():
     return model
 vgg19model=vgg19model()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,save_best_only=True)
-history=vgg19model.fit(pvx_train1,y_train1, 
-                       validation_data=(pvx_valid1,y_valid1), 
-                       epochs=int(16),batch_size=int(128),verbose=i2, 
-                       callbacks=[checkpointer])
+<div class='linked'><script type='text/x-sage'>
+checkpointer=ModelCheckpoint(
+    filepath=fw,verbose=i2,save_weights_only=True,
+    monitor='val_accuracy',mode='max',save_best_only=True)
+history=vgg19model.fit(
+    pvx_train1,y_train1,validation_data=(pvx_valid1,y_valid1), 
+    epochs=int(16),batch_size=int(128),verbose=i2, 
+    callbacks=[checkpointer])
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-history_plot(history)
+<div class='linked'><script type='text/x-sage'>
+keras_history_plot(history,7,'#348ABD')
 vgg19model.load_weights(fw)
 vgg19model.evaluate(pvx_test1,y_test1)
 </script></div><br/>
