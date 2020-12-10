@@ -329,23 +329,23 @@ pd.DataFrame([['Train R2 score:',score_train_rnn],
               ['Test R2 score:',score_test_rnn]])
 </script></div><br/>
     <h2>✒️&nbsp;Step 3. Display Predictions of Keras Algorithms Py</h2>      
-<div class="linked"><script type="text/x-sage">
-ti="Train Set; Neural Network Predictions vs Real Data"
+<div class='linked'><script type='text/x-sage'>
+ti='Train Set; Neural Network Predictions vs Real Data'
 y1,y2,y3=y_train_mlp,y_train_cnn,y_train_rnn
-predpl(y1,y2,y3,ti)
+predict_plot(y1,y2,y3,ti)
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-ti="Validation Set; Neural Network Predictions vs Real Data"
+<div class='linked'><script type='text/x-sage'>
+ti='Validation Set; Neural Network Predictions vs Real Data'
 y1,y2,y3=y_valid_mlp,y_valid_cnn,y_valid_rnn
-predpl(y1,y2,y3,ti)
+predict_plot(y1,y2,y3,ti)
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-ti="Test Set; Neural Network Predictions vs Real Data"
+<div class='linked'><script type='text/x-sage'>
+ti='Test Set; Neural Network Predictions vs Real Data'
 y1,y2,y3=y_test_mlp,y_test_cnn,y_test_rnn
-predpl(y1,y2,y3,ti)
+predict_plot(y1,y2,y3,ti)
 </script></div><br/>
     <h2>✒️&nbsp;Step 4. Compare with Sklearn Algorithms Py</h2>      
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 def regressor_fit_score(regressor,regressor_name,dataset,
                         x_train,x_test,y_train,y_test,n=6):
     regressor_list.append(str(regressor))
@@ -388,7 +388,7 @@ def get_regressor_results():
                          'mae_train':mae_train,'mae_test':mae_test,
                          'mdae_train':mdae_train,'mdae_test':mdae_test})
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 (x_train,y_train),(x_test,y_test)=boston_housing.load_data()
 regressor_list,regressor_names,reg_datasets=[],[],[]
 r2_train,r2_test,ev_train, ev_test,mse_train,mse_test,mae_train,\
@@ -405,13 +405,13 @@ reg=[linear_model.LinearRegression(),
      PLSRegression(),DecisionTreeRegressor(),ExtraTreeRegressor(),
      BaggingRegressor(),AdaBoostRegressor(),
      GradientBoostingRegressor(),RandomForestRegressor(),
-     linear_model.PassiveAggressiveRegressor(max_iter=1000,tol=0.001),
+     linear_model.PassiveAggressiveRegressor(max_iter=1000,tol=.001),
      linear_model.ElasticNet(),
-     linear_model.SGDRegressor(max_iter=1000,tol=0.001),
+     linear_model.SGDRegressor(max_iter=1000,tol=.001),
      svm.SVR(),KNeighborsRegressor(),
      RadiusNeighborsRegressor(radius=1.5),GaussianProcessRegressor()]
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 listreg=['LinearRegression','Ridge','RidgeCV',
          'Lasso','LassoLarsCV','RANSACRegressor',
          'BayesianRidge','ARDRegression','HuberRegressor',
@@ -430,12 +430,12 @@ for i in range(len(listreg)):
  [y_train113,y_test113],[y_train114,y_test114],[y_train115,y_test115],
  [y_train116,y_test116],[y_train117,y_test117]]=yreg
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 df_regressor_results=get_regressor_results()
 df_regressor_results.to_csv('regressor_results.csv')
 df_regressor_results[df_list].sort_values('r2_test',ascending=False)
 </script></div><br/> 
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 pl.figure(figsize=(10,6)); n=30; x=range(n)
 pl.scatter(x,y_test[:n],marker='*',s=100,
            color='black',label='Real data')
@@ -446,7 +446,7 @@ pl.plot(x,y_test115[:n],lw=2,label='Ada Boost')
 pl.plot(x,y_test113[:n],lw=2,label='ExtraTree')
 pl.xlabel('Observations'); pl.ylabel('Targets')
 pl.title('Regressors. Test Results. Boston')
-pl.legend(loc=2,fontsize=10); pl.show()
+pl.legend(loc=2,fontsize=10); pl.tight_layout(); pl.show()
 </script></div><br/>    
     <h2>✒️&nbsp;Step 5. Neural Networks in R</h2>      
 <div class="linked"><script type="text/x-sage">
