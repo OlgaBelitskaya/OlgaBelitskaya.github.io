@@ -171,7 +171,7 @@ pd.DataFrame(sh)
 del images,gray_images,labels,backgrounds
 del clabels,cbackgrounds,ctargets
 dr,fr,al=float(.2),float(.2),float(.02)
-i10,i16,i32,i33=int(10),int(16),int(32),int(33)
+i10,i12,i16,i32,i33=int(10),int(12),int(16),int(32),int(33)
 i48,i64,i96=int(48),int(64),int(96)
 i100,i128,i196,i200=int(100),int(128),int(196),int(200)
 i256,i512,i1024=int(256),int(512),int(1024)
@@ -212,7 +212,7 @@ history=model.fit(
     verbose=i2,validation_data=(x_valid1[:n2],y_valid1[:n2]),
     callbacks=[checkpointer,lr_reduction])
 </script></div><br/>  
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 keras_history_plot(history,7,'#348ABD')
 model.load_weights('/tmp/checkpoint')
 print(model.evaluate(x_test1[:n2],y_test1[:n2]))
@@ -247,7 +247,7 @@ checkpointer=ModelCheckpoint(
 lr_reduction=ReduceLROnPlateau(
     monitor='val_loss',patience=i5,verbose=i0,factor=fr)
 history=gray_model.fit(
-    x_train2[:n1],y_train2[:n1],epochs=i16,
+    x_train2[:n1],y_train2[:n1],epochs=i32,
     batch_size=i64,verbose=i2,
     validation_data=(x_valid2[:n2],y_valid2[:n2]),
     callbacks=[checkpointer,lr_reduction])
@@ -287,23 +287,23 @@ def multi_model():
 multi_model=multi_model()
 multi_model.summary()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,
-                             save_best_only=True)
-lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
-                               verbose=i0,factor=fr)
+<div class='linked'><script type='text/x-sage'>
+checkpointer=ModelCheckpoint(
+    filepath='/tmp/checkpoint',verbose=i0,save_weights_only=True,
+    monitor='val_accuracy',mode='max',save_best_only=True)
+lr_reduction=ReduceLROnPlateau(
+    monitor='val_loss',patience=i5,verbose=i0,factor=fr)
 history=multi_model.fit(
     x_train3[:n1],[y_train3[:n1,:i33],y_train3[:n1,i33:]],
-    epochs=i16,batch_size=i64,verbose=i2,
+    epochs=i12,batch_size=i64,verbose=i2,
     validation_data=(x_valid3[:n2],
                      [y_valid3[:n2,:i33],y_valid3[:n2,i33:]]),
     callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 print(multi_model.evaluate(x_test3[:n2],\
 [y_test3[:n2,:i33],y_test3[:n2,i33:]]))
-del x_train3,x_valid3,x_test3,\
-    y_train3,y_valid3,y_test3
+del x_train3,x_valid3,x_test3,y_train3,y_valid3,y_test3
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def gray_multi_model():    
