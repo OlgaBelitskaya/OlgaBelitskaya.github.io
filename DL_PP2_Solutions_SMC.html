@@ -13,7 +13,7 @@
     @import 'https://fonts.googleapis.com/css?family=Akronim|Lobster';
     h1,h2,th {color:#348ABD; font-family:'Akronim'; font-size:120%; text-shadow:4px 4px 4px #aaa;}
     p,a {color:slategray; font-family:'Lobster'; font-size:120%; text-shadow:4px 4px 4px #aaa;}
-    .sagecell .CodeMirror-scroll {min-height:3em; max-height:30em;}
+    .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
     body {margin:5px 5px 5px 15px;}
   </style>  
   <body>
@@ -118,7 +118,7 @@ def keras_history_plot(fit_history,fig_size,color):
     pl.grid(); pl.show()
 </script></div><br/> 
     <h2>✒️&nbsp;Step 1. Loading and Preprocessing the Data</h2>       
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 fpath='https://olgabelitskaya.github.io/'
 zf='LetterColorImages_123.h5.zip'
 input_file=urllib.request.urlopen(fpath+zf)
@@ -127,36 +127,31 @@ output_file.write(input_file.read())
 output_file.close(); input_file.close()
 zipf=zipfile.ZipFile(zf,'r')
 zipf.extractall(''); zipf.close()
-f=h5py.File(zf[:-4],'r')
-keys=list(f.keys())
+f=h5py.File(zf[:-4],'r'); keys=list(f.keys())
 letters=u'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
 backgrounds=np.array(f[keys[0]])
-images=np.array(f[keys[1]])/255
-labels=np.array(f[keys[2]])
+images=np.array(f[keys[1]])/255; labels=np.array(f[keys[2]])
 pl.figure(figsize=(2,3)); il=10**4
 pl.title('Label: %s \n'%letters[labels[il]-1]+\
-         'Background: %s'%backgrounds[il],
-         fontsize=18)
+         'Background: %s'%backgrounds[il],fontsize=18)
 pl.imshow(images[il]); pl.show()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 gray_images=np.dot(images[...,:3],[.299,.587,.114])
 pl.figure(figsize=(2,3))
 pl.title('Label: %s \n'%letters[labels[il]-1]+\
-         'Background: %s'%backgrounds[il],
-         fontsize=18)
-pl.imshow(gray_images[il],cmap=pl.cm.bone)
-pl.show()
+         'Background: %s'%backgrounds[il],fontsize=18)
+pl.imshow(gray_images[il],cmap=pl.cm.bone); pl.show()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 cbackgrounds,clabels=ohe(backgrounds),ohe(labels)
 pd.DataFrame([labels[97:103],clabels[97:103]]).T
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 ctargets=np.concatenate((clabels,cbackgrounds),axis=1)
 pd.DataFrame([clabels.shape,cbackgrounds.shape,ctargets.shape])
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 x_train1,x_valid1,x_test1,\
 y_train1,y_valid1,y_test1=tts(images,clabels)
 x_train2,x_valid2,x_test2,\
