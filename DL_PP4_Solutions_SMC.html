@@ -406,7 +406,7 @@ pretty_print(gray_model.evaluate(x_test4,y_test4,verbose=i0))
 del x_train4,x_valid4,x_test4,y_train4,y_valid4,y_test4
 </script></div><br/>
     <h2>✒️&nbsp;Step 3. Multi-Label Classification Models</h2>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 # Color Images
 def mmodel():    
     model_input=Input(shape=(i32,i32,i3))
@@ -430,26 +430,27 @@ def mmodel():
     return model
 mmodel=mmodel()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,save_best_only=True)
-lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
-                               verbose=i2,factor=fr)
-history=mmodel.fit(x_train5,y_train5_list, 
-                   validation_data=(x_valid5,y_valid5_list), 
-                   epochs=i12,batch_size=i16,verbose=i2, 
-                   callbacks=[checkpointer,lr_reduction])
+<div class='linked'><script type='text/x-sage'>
+checkpointer=ModelCheckpoint(
+    filepath=fw,verbose=i0,save_weights_only=True,
+    monitor='val_accuracy',mode='max',save_best_only=True)
+lr_reduction=ReduceLROnPlateau(
+    monitor='val_loss',patience=i5,verbose=i2,factor=fr)
+history=mmodel.fit(
+    x_train5,y_train5_list,epochs=i12,batch_size=i16,verbose=i2,
+    validation_data=(x_valid5,y_valid5_list),
+    callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 mmodel.load_weights(fw)
-scores=mmodel.evaluate(x_test5,y_test5_list)
-print("Scores: \n",(scores))
-print("The Brand Label. Accuracy: %.2f%%"%(scores[i3]*i100))
-print("The Product Label. Accuracy: %.2f%%"%(scores[i4]*i100))
-del x_train5,x_valid5,x_test5,\
-    y_train5,y_valid5,y_test5,\
+scores=mmodel.evaluate(x_test5,y_test5_list,verbose=i0)
+print('Scores: \n',(scores))
+print('The Brand Label. Accuracy: %.2f%%'%(scores[i3]*i100))
+print('The Product Label. Accuracy: %.2f%%'%(scores[i4]*i100))
+del x_train5,x_valid5,x_test5,y_train5,y_valid5,y_test5,\
     y_train5_list,y_valid5_list,y_test5_list
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 # Grayscaled Images
 def gray_mmodel():    
     model_input=Input(shape=(i48,i48,i1))
@@ -477,21 +478,23 @@ def gray_mmodel():
     return model
 gray_mmodel=gray_mmodel()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,save_best_only=True)
-lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
-                               verbose=i2,factor=fr)
-history=gray_mmodel.fit(x_train6,y_train6_list, 
-                        validation_data=(x_valid6,y_valid6_list), 
-                        epochs=i12,batch_size=i16,verbose=i2, 
-                        callbacks=[checkpointer,lr_reduction])
+<div class='linked'><script type='text/x-sage'>
+checkpointer=ModelCheckpoint(
+    filepath=fw,verbose=i0,save_weights_only=True,
+    monitor='val_accuracy',mode='max',save_best_only=True)
+lr_reduction=ReduceLROnPlateau(
+    monitor='val_loss',patience=i5,verbose=i2,factor=fr)
+history=gray_mmodel.fit(
+    x_train6,y_train6_list,epochs=i12,batch_size=i16,verbose=i2,
+    validation_data=(x_valid6,y_valid6_list),
+    callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 gray_mmodel.load_weights(fw)
-scores=gray_mmodel.evaluate(x_test6,y_test6_list)
-print("Scores: \n",(scores))
-print("The Brand Label. Accuracy: %.2f%%"%(scores[i3]*i100))
-print("The Product Label. Accuracy: %.2f%%"%(scores[i4]*i100))
+scores=gray_mmodel.evaluate(x_test6,y_test6_list,verbose=i0)
+print('Scores: \n',(scores))
+print('The Brand Label. Accuracy: %.2f%%'%(scores[i3]*i100))
+print('The Product Label. Accuracy: %.2f%%'%(scores[i4]*i100))
 </script></div><br/>
   </body>
 </html> 
