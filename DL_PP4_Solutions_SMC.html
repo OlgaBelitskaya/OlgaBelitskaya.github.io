@@ -155,23 +155,23 @@ fpath2='https://raw.githubusercontent.com/OlgaBelitskaya/'+\
 styles=pd.read_csv(fpath2+'data/style.csv')
 styles.tail()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-pl.figure(figsize=(10,5))
+<div class='linked'><script type='text/x-sage'>
+pl.figure(figsize=(9,4))
 sn.countplot(x='product_name',data=styles,
              facecolor='none',linewidth=3,linestyle='-.',
              edgecolor=sn.color_palette('hsv',10))
 pl.title('Product Distribution',fontsize=20)
-pl.show()
+pl.tight_layout(); pl.show()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-pl.figure(figsize=(10,8))
-sn.countplot(y='product_name',hue='brand_name', 
-             data=styles,palette='hsv_r',alpha=.5)
+<div class='linked'><script type='text/x-sage'>
+pl.figure(figsize=(9,4))
+sn.countplot(x='product_name',hue='brand_name', 
+             data=styles,palette='hsv_r',alpha=.7)
 ti='Product Distribution Grouped by Brands'
-pl.title(ti,fontsize=20)
-pl.legend(loc=4); pl.show()
+pl.title(ti,fontsize=20); pl.tight_layout()
+pl.legend(loc=9); pl.show()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 brands=np.array(f[keys[0]])
 images=np.array(f[keys[1]])/255
 products=np.array(f[keys[2]])
@@ -180,22 +180,21 @@ print('Brand: ',styles['brand_name'][i100])
 pl.figure(figsize=(i3,i3))
 pl.imshow(images[i100]); pl.show()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 gray_images=np.dot(images[...,:3],[.299,.587,.114])
 print('Product: ',styles['product_name'][i100])
 print('Brand: ',styles['brand_name'][i100])
 pl.figure(figsize=(i3,i3))
 pl.imshow(gray_images[i100],cmap=pl.cm.bone); pl.show()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 cbrands,cproducts=ohe(brands),ohe(products)
 ctargets=np.concatenate((cbrands,cproducts),axis=1)
 images=resh(images); gray_images=gresh(gray_images)
 pd.DataFrame([images.shape,gray_images.shape,
-              cbrands.shape,cproducts.shape,
-              ctargets.shape])
+              cbrands.shape,cproducts.shape,ctargets.shape])
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 # Color Images / Brands 
 x_train1,x_valid1,x_test1,\
 y_train1,y_valid1,y_test1=tts(images,cbrands)
@@ -224,20 +223,19 @@ sh2=[el.shape for el in \
  x_train6,y_train6,x_valid6,y_valid6,x_test6,y_test6]]
 pd.DataFrame([sh,sh2]).T
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 y_train5_list=[y_train5[:,:i7],y_train5[:,i7:]]
 y_test5_list=[y_test5[:,:i7],y_test5[:,i7:]]
 y_valid5_list=[y_valid5[:,:i7],y_valid5[:,i7:]]
 y_train6_list=[y_train6[:,:i7],y_train6[:,i7:]]
 y_test6_list=[y_test6[:,:i7],y_test6[:,i7:]]
 y_valid6_list=[y_valid6[:,:i7],y_valid6[:,i7:]]
-del images,gray_images,brands,products
-del cbrands,cproducts,ctargets,styles
+del images,gray_images,brands,products,cbrands,cproducts,ctargets,styles
 </script></div><br/>
 <p>Unfortunately, we can train with guarantee only one neural network at ones.</p>
 <p>Please restart the page and load the data again for training each of them.</p>
       <h2>✒️&nbsp;Step 2. One-Label Classification Models</h2>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 # Color Images / Brands
 def model():
     model=Sequential()
@@ -259,25 +257,26 @@ def model():
     model.compile(loss='categorical_crossentropy', 
                   optimizer='nadam',metrics=['accuracy'])   
     return model
-model=model()
-model.summary()
+model=model(); model.summary()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,save_best_only=True)
-lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
-                               verbose=i0,factor=fr)
-history=model.fit(x_train1,y_train1,epochs=i20,batch_size=i16,verbose=i2,
-                  validation_data=(x_valid1,y_valid1),
-                  callbacks=[checkpointer,lr_reduction])
+<div class='linked'><script type='text/x-sage'>
+checkpointer=ModelCheckpoint(
+    filepath=fw,verbose=i0,save_weights_only=True,
+    monitor='val_accuracy',mode='max',save_best_only=True)
+lr_reduction=ReduceLROnPlateau(
+    monitor='val_loss',patience=i5,verbose=i0,factor=fr)
+history=model.fit(
+    x_train1,y_train1,epochs=i20,batch_size=i16,verbose=i2,
+    validation_data=(x_valid1,y_valid1),
+    callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-history_plot(history)
+<div class='linked'><script type='text/x-sage'>
+keras_history_plot(history,7,'#348ABD')
 model.load_weights(fw)
 pretty_print(model.evaluate(x_test1,y_test1))
-del x_train1,x_valid1,x_test1,\
-    y_train1,y_valid1,y_test1
+del x_train1,x_valid1,x_test1,y_train1,y_valid1,y_test1
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 # Color Images / Products
 def model():
     model=Sequential()
@@ -301,21 +300,22 @@ def model():
     return model
 model=model()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-checkpointer=ModelCheckpoint(filepath=fw,verbose=i0,save_best_only=True)
-lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
-                               verbose=i0,factor=fr)
-history=model.fit(x_train3,y_train3,
-                  epochs=i20,batch_size=i16,verbose=i2,
-                  validation_data=(x_valid3,y_valid3),
-                  callbacks=[checkpointer,lr_reduction])
+<div class='linked'><script type='text/x-sage'>
+checkpointer=ModelCheckpoint(
+    filepath=fw,verbose=i0,save_weights_only=True,
+    monitor='val_accuracy',mode='max',save_best_only=True)
+lr_reduction=ReduceLROnPlateau(
+    monitor='val_loss',patience=i5,verbose=i0,factor=fr)
+history=model.fit(
+    x_train3,y_train3,epochs=i20,batch_size=i16,verbose=i2,
+    validation_data=(x_valid3,y_valid3),
+    callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-history_plot(history)
+<div class='linked'><script type='text/x-sage'>
+keras_history_plot(history,7,'#348ABD')
 model.load_weights(fw)
 pretty_print(model.evaluate(x_test3,y_test3))
-del x_train3,x_valid3,x_test3,\
-    y_train3,y_valid3,y_test3
+del x_train3,x_valid3,x_test3,y_train3,y_valid3,y_test3
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 # Grayscaled Images / Brands 
