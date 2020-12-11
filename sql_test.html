@@ -427,26 +427,24 @@ ORDER BY tasks.id DESC;
 '''
 for q in [q1,q2]:
     display(pd.read_sql_query(q,con=connection)\
-    .set_axis(['key1','value1',
-               'key2','value2'],axis=1)\
+    .set_axis(['key1','value1','key2','value2'],axis=1)\
     .style.set_table_styles(style_dict))
-for q in [q3,q4]:
-    get_query(q)
+for q in [q3,q4]: get_query(q)
 </code></pre><br/>      
 <p>For Tests</p>
-<div id="check6"><script type="text/x-sage">
+<div id='check6'><script type='text/x-sage'>
 answers=['CREATE TABLE',
          'SELECT NOT NULL',
          'CREATE VIEW',
          'SELECT DISTINCT',
          'SELECT *']
-pretty_print('Possible variants:')
+pretty_print('The possible variants:')
 for i in range(len(answers)):
     pretty_print(html(str(i+1)+' <= '+answers[i]+'<br/><br/>'))
 @interact
 def _(variant=[0,1,2,3,4,5]):
     if variant==0:
-        pretty_print('What variant will you choose?')
+        pretty_print('Which variant will you choose?')
     else:
         row=answers[variant-1]
         if row=='SELECT *':
@@ -457,7 +455,7 @@ def _(variant=[0,1,2,3,4,5]):
         pretty_print(html(st))
 </script></div><br/>
 <p>For Experiments</p>    
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 q1='''
 # ... insert the code row here
 FROM df1,df2;
@@ -481,11 +479,9 @@ ORDER BY tasks.id DESC;
 '''
 for q in [q1,q2]:
     display(pd.read_sql_query(q,con=connection)\
-    .set_axis(['key1','value1',
-               'key2','value2'],axis=1)\
+    .set_axis(['key1','value1','key2','value2'],axis=1)\
     .style.set_table_styles(style_dict))
-for q in [q3,q4]:
-    get_query(q)
+for q in [q3,q4]: get_query(q)
 </script></div><br/>
     <h2>Question 7</h2>
 For the next simplest SQL querying it looks useful to compare it with pandas querying.<br/>
@@ -511,34 +507,31 @@ GROUP BY day,sex
 %s 4;
 '''
 ...
-for q in [q1,q2,q3]:
-    get_query(q%s)   
+for q in [q1,q2,q3]: get_query(q%s)   
 pretty_print(html('&#60;p&#62;Pandas Queries&#60;/p&#62;'))
-display(tips[['total_bill','tip',
-              'smoker','time']].head(int(7))\
+display(tips[['total_bill','tip','smoker','time']].head(int(7))\
 .style.set_table_styles(style_dict))
 pretty_print(html('&#60;p&#62;Pandas Queries&#60;/p&#62;'))
 display(tips[tips['time']=='Dinner'].head(int(3))\
         .style.set_table_styles(style_dict))
 pretty_print(html('&#60;p&#62;Pandas Queries&#60;/p&#62;'))
-tips.groupby(['day','sex'])\
-    .agg({'tip':np.mean,'day':np.size})\
-    .head(int(4)).style.set_table_styles(style_dict)
+tips.groupby(['day','sex']).agg({'tip':np.mean,'day':np.size})\
+.head(int(4)).style.set_table_styles(style_dict)
 </code></pre><br/>      
 <p>For Tests</p>
-<div id="check7"><script type="text/x-sage">
+<div id='check7'><script type='text/x-sage'>
 answers=["s=LIMIT",
          "s='HAVING'",
          "s='''LIMIT'''",
          "s='''ORDER BY'''",
          "'''LIMIT'''"]
-pretty_print('Possible variants:')
+pretty_print('The possible variants:')
 for i in range(len(answers)):
     pretty_print(html(str(i+1)+" <= "+answers[i]+"<br/><br/>"))
 @interact
 def _(variant=[0,1,2,3,4,5]):
     if variant==0:
-        pretty_print('What variant will you choose?')
+        pretty_print('Which variant will you choose?')
     else:
         row=answers[variant-1]
         if row=="s='''LIMIT'''":
@@ -549,7 +542,7 @@ def _(variant=[0,1,2,3,4,5]):
         pretty_print(html(st))
 </script></div><br/>
 <p>For Experiments</p>    
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 q1='''
 SELECT total_bill,tip,smoker,time
 FROM tips 
@@ -568,18 +561,15 @@ GROUP BY day,sex
 %s 4;
 '''
 # ... insert the code row here
-for q in [q1,q2,q3]:
-    get_query(q%s)   
+for q in [q1,q2,q3]: get_query(q%s)   
 pretty_print(html('<p>Pandas Queries</p>'))
-display(tips[['total_bill','tip',
-              'smoker','time']].head(int(7))\
+display(tips[['total_bill','tip','smoker','time']].head(int(7))\
 .style.set_table_styles(style_dict))
 pretty_print(html('<p>Pandas Queries</p>'))
 display(tips[tips['time']=='Dinner'].head(int(3))\
         .style.set_table_styles(style_dict))
 pretty_print(html('<p>Pandas Queries</p>'))
-tips.groupby(['day','sex'])\
-    .agg({'tip':np.mean,'day':np.size})\
+tips.groupby(['day','sex']).agg({'tip':np.mean,'day':np.size})\
     .head(int(4)).style.set_table_styles(style_dict)
 </script></div><br/>
     <h2>Question 8</h2>
@@ -612,8 +602,7 @@ LEFT OUTER %s df1
 ON df1.key=df2.key;
 '''
 ...
-for q in [q1,q2,q3]:
-    get_query(q%s)
+for q in [q1,q2,q3]: get_query(q%s)
 pretty_print(html('&#60;p&#62;Pandas Queries&#60;/p&#62;'))
 display(pd.merge(df1,df2,on='key')\
 .style.set_table_styles(style_dict))
@@ -625,19 +614,19 @@ pd.merge(df1,df2,on='key',how='right')\
 .style.set_table_styles(style_dict)
 </code></pre><br/>      
 <p>For Tests</p>
-<div id="check8"><script type="text/x-sage">
+<div id='check8'><script type='text/x-sage'>
 answers=["s=JOIN",
          "'''JOIN'''",
          "s='''UNION'''",
          "s='''MERGE'''",
          "s='''JOIN'''"]
-pretty_print('Possible variants:')
+pretty_print('The possible variants:')
 for i in range(len(answers)):
     pretty_print(html(str(i+1)+" <= "+answers[i]+"<br/><br/>"))
 @interact
 def _(variant=[0,1,2,3,4,5]):
     if variant==0:
-        pretty_print('What variant will you choose?')
+        pretty_print('Which variant will you choose?')
     else:
         row=answers[variant-1]
         if row=="s='''JOIN'''":
@@ -648,7 +637,7 @@ def _(variant=[0,1,2,3,4,5]):
         pretty_print(html(st))
 </script></div><br/>
 <p>For Experiments</p>    
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 q1='''
 SELECT *
 FROM df1
@@ -668,8 +657,7 @@ LEFT OUTER %s df1
 ON df1.key=df2.key;
 '''
 # ... insert the code row here
-for q in [q1,q2,q3]:
-    get_query(q%s)
+for q in [q1,q2,q3]: get_query(q%s)
 pretty_print(html('<p>Pandas Queries</p>'))
 display(pd.merge(df1,df2,on='key')\
 .style.set_table_styles(style_dict))
@@ -694,24 +682,23 @@ SELECT key,value
 FROM df2;
 ''')
 pretty_print(html('&#60;p&#62;Pandas Queries&#60;/p&#62;'))
-pd.concat([df1,df2])\
-  .set_index(pd.Index(range(11)))\
+pd.concat([df1,df2]).set_index(pd.Index(range(11)))\
   .style.set_table_styles(style_dict)
 </code></pre><br/>      
 <p>For Tests</p>
-<div id="check9"><script type="text/x-sage">
+<div id='check9'><script type='text/x-sage'>
 answers=['UNION NOT NULL',
          'JOIN ALL',
          'UNION ALL',
          'FULL OUTER JOIN',
          'UNION DISTINCT']
-pretty_print('Possible variants:')
+pretty_print('The possible variants:')
 for i in range(len(answers)):
     pretty_print(html(str(i+1)+" <= "+answers[i]+"<br/><br/>"))
 @interact
 def _(variant=[0,1,2,3,4,5]):
     if variant==0:
-        pretty_print('What variant will you choose?')
+        pretty_print('Which variant will you choose?')
     else:
         row=answers[variant-1]
         if row=='UNION ALL':
@@ -722,7 +709,7 @@ def _(variant=[0,1,2,3,4,5]):
         pretty_print(html(st))
 </script></div><br/>
 <p>For Experiments</p>    
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 get_query('''
 SELECT key,value
 FROM df1
@@ -731,29 +718,24 @@ SELECT key,value
 FROM df2;
 ''')
 pretty_print(html('<p>Pandas Queries</p>'))
-pd.concat([df1,df2])\
-  .set_index(pd.Index(range(11)))\
+pd.concat([df1,df2]).set_index(pd.Index(range(11)))\
   .style.set_table_styles(style_dict)
 </script></div><br/>
     <h2>Remark 2</h2>     
 Let's have a look at the database structure.<br/>
 Cool for the first work out. Isn't it?<br/>
 <p>For Experiments</p><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 pd.read_sql_query('''
 SELECT * from sqlite_master;
-''',con=connection)\
-.style.set_table_styles(style_dict)
+''',con=connection).style.set_table_styles(style_dict)
 </script></div><br/>
 Then we can delete the experimental dataset and close the connection.<br/>
 <p>For Experiments</p><br/>
-<div class="linked"><script type="text/x-sage">
-if connection is not None:
-    connection.close()
-if os.path.exists("example.db"):
-    os.remove("example.db")
-else:
-    print("The file does not exist")
+<div class='linked'><script type='text/x-sage'>
+if connection is not None: connection.close()
+if os.path.exists('example.db'): os.remove('example.db')
+else: print('The file does not exist')
 os.listdir()
 </script></div><br/>
   </body>
