@@ -273,7 +273,7 @@ history=model.fit(
 <div class='linked'><script type='text/x-sage'>
 keras_history_plot(history,7,'#348ABD')
 model.load_weights(fw)
-pretty_print(model.evaluate(x_test1,y_test1))
+pretty_print(model.evaluate(x_test1,y_test1,verbose=i0))
 del x_train1,x_valid1,x_test1,y_train1,y_valid1,y_test1
 </script></div><br/>
 <div class='linked'><script type='text/x-sage'>
@@ -314,10 +314,10 @@ history=model.fit(
 <div class='linked'><script type='text/x-sage'>
 keras_history_plot(history,7,'#348ABD')
 model.load_weights(fw)
-pretty_print(model.evaluate(x_test3,y_test3))
+pretty_print(model.evaluate(x_test3,y_test3,verbose=i0))
 del x_train3,x_valid3,x_test3,y_train3,y_valid3,y_test3
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 # Grayscaled Images / Brands 
 def gray_model():
     model=Sequential()   
@@ -344,20 +344,22 @@ def gray_model():
     return model
 gray_model=gray_model()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,save_best_only=True)
-lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
-                               verbose=i2,factor=fr)
-history=gray_model.fit(x_train2,y_train2,epochs=i12,batch_size=i16,
-                       verbose=i2,validation_data=(x_valid2,y_valid2),
-                       callbacks=[checkpointer,lr_reduction])
+<div class='linked'><script type='text/x-sage'>
+checkpointer=ModelCheckpoint(
+    filepath=fw,verbose=i0,save_weights_only=True,
+    monitor='val_accuracy',mode='max',save_best_only=True)
+lr_reduction=ReduceLROnPlateau(
+    monitor='val_loss',patience=i5,verbose=i2,factor=fr)
+history=gray_model.fit(
+    x_train2,y_train2,epochs=i12,batch_size=i16,
+    verbose=i2,validation_data=(x_valid2,y_valid2),
+    callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-history_plot(history)
+<div class='linked'><script type='text/x-sage'>
+keras_history_plot(history,7,'#348ABD')
 gray_model.load_weights(fw)
-pretty_print(gray_model.evaluate(x_test2,y_test2))
-del x_train2,x_valid2,x_test2,\
-    y_train2,y_valid2,y_test2
+pretty_print(gray_model.evaluate(x_test2,y_test2,verbose=i0))
+del x_train2,x_valid2,x_test2,y_train2,y_valid2,y_test2
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 # Grayscaled Images / Products
@@ -387,7 +389,9 @@ def gray_model():
 gray_model=gray_model()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
-checkpointer=ModelCheckpoint(filepath=fw,verbose=i2,save_best_only=True)
+checkpointer=ModelCheckpoint(
+    filepath=fw,verbose=i0,save_weights_only=True,
+    monitor='val_accuracy',mode='max',save_best_only=True)
 lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
                                verbose=i2,factor=fr)
 history=gray_model.fit(x_train4,y_train4,epochs=i12,
