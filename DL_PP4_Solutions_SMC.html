@@ -129,11 +129,11 @@ def keras_history_plot(fit_history,fig_size,color):
     fig=pl.figure(figsize=(fig_size,fig_size))
     ax1=fig.add_subplot(2,1,1)
     dfkeys.iloc[:,[int(0),int(2)]].plot(
-        ax=ax1,color=['slategray',color])
-    pl.grid(); ax2=fig.add_subplot(2,1,2)
+        ax=ax1,color=['slategray',color],grid=True)
+    ax2=fig.add_subplot(2,1,2)
     dfkeys.iloc[:,[int(1),int(3)]].plot(
-        ax=ax2,color=['slategray',color])
-    pl.grid(); pl.show()
+        ax=ax2,color=['slategray',color],grid=True)
+    pl.tight_layout(); pl.show()
 </script></div><br/>
     <h2>✒️&nbsp;Step 1. Loading and Preprocessing the Data</h2>       
 <div class='linked'><script type='text/x-sage'>
@@ -361,7 +361,7 @@ gray_model.load_weights(fw)
 pretty_print(gray_model.evaluate(x_test2,y_test2,verbose=i0))
 del x_train2,x_valid2,x_test2,y_train2,y_valid2,y_test2
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 # Grayscaled Images / Products
 def gray_model():
     model=Sequential()   
@@ -388,23 +388,22 @@ def gray_model():
     return model
 gray_model=gray_model()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 checkpointer=ModelCheckpoint(
     filepath=fw,verbose=i0,save_weights_only=True,
     monitor='val_accuracy',mode='max',save_best_only=True)
-lr_reduction=ReduceLROnPlateau(monitor='val_loss',patience=i5,
-                               verbose=i2,factor=fr)
-history=gray_model.fit(x_train4,y_train4,epochs=i12,
-                       batch_size=i16,verbose=i2,
-                       validation_data=(x_valid4,y_valid4),
-                       callbacks=[checkpointer,lr_reduction])
+lr_reduction=ReduceLROnPlateau(
+    monitor='val_loss',patience=i5,verbose=i2,factor=fr)
+history=gray_model.fit(
+    x_train4,y_train4,epochs=i12,batch_size=i16,verbose=i2,
+    validation_data=(x_valid4,y_valid4),
+    callbacks=[checkpointer,lr_reduction])
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-history_plot(history)
+<div class='linked'><script type='text/x-sage'>
+keras_history_plot(history,7,'#348ABD')
 gray_model.load_weights(fw)
-pretty_print(gray_model.evaluate(x_test4,y_test4))
-del x_train4,x_valid4,x_test4,\
-    y_train4,y_valid4,y_test4
+pretty_print(gray_model.evaluate(x_test4,y_test4,verbose=i0))
+del x_train4,x_valid4,x_test4,y_train4,y_valid4,y_test4
 </script></div><br/>
     <h2>✒️&nbsp;Step 3. Multi-Label Classification Models</h2>
 <div class="linked"><script type="text/x-sage">
