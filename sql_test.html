@@ -61,7 +61,7 @@ answers=['connect_to_db("example.db")=sql_connection',
          'connection="example.db"',
          'connection=sql_connection("example.db")',
          'connect_to_db("example.db")=connection']
-pretty_print('Possible variants:')
+pretty_print('The possible variants:')
 for i in range(len(answers)):
     pretty_print(html(str(i+1)+' <= '+answers[i]+'<br/><br/>'))
 @interact
@@ -78,25 +78,21 @@ def _(variant=[0,1,2,3,4,5,6,7]):
         pretty_print(html(st))
 </script></div><br/>
 <p>For Experiments</p>    
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 import sqlite3,os,pandas as pd,numpy as np
 def connect_to_db(db_file):
     sql_connection=None
-    try:
-        sql_connection=sqlite3.connect(db_file)
-        return sql_connection
+    try: sql_connection=sqlite3.connect(db_file); return sql_connection
     except Error as err:
         print(err)
-        if sql_connection is not None:
-            sql_connection.close()
+        if sql_connection is not None: sql_connection.close()
 # ... insert the code row here
-if connection is not None:
-    cursor=connection.cursor()
+if connection is not None: cursor=connection.cursor()
 os.listdir()
 </script></div><br/>
     <h2>Question 2</h2>
 Let's define a function to represent the result of querying.<br/>
-What row is needed to add in this code for executing queries?<br/>   
+Which row is needed to add in this code for executing queries?<br/>   
 <pre><code class='python3'>  
 def get_query(q):
     pretty_print(html('SQL Queries'))
@@ -110,7 +106,7 @@ def get_query(q):
     display(table(tr))
 </code></pre><br/>      
 <p>For Tests</p>
-<div id="check2"><script type="text/x-sage">
+<div id='check2'><script type='text/x-sage'>
 answers=['connect_to_db.cursor.execute()',
          'connection.execute(q)',
          'sql_connection=connection.cursor.execute(q)',
@@ -118,7 +114,7 @@ answers=['connect_to_db.cursor.execute()',
          'cursor.execute(q)',
          'connection=cursor.execute(q)',
          'example.cursor.execute(q)']
-pretty_print('Possible variants:')
+pretty_print('The possible variants:')
 for i in range(len(answers)):
     pretty_print(html(str(i+1)+' <= '+answers[i]+'<br/><br/>'))
 @interact
@@ -135,7 +131,7 @@ def _(variant=[0,1,2,3,4,5,6,7]):
         pretty_print(html(st))
 </script></div><br/>
 <p>For Experiments</p>       
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 def get_query(q):
     pretty_print(html('<p>SQL Queries</p>'))
     tr=[]
