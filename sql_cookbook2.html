@@ -28,30 +28,6 @@ import sqlite3,os; import pandas as pd
 import numpy as np,sympy as sp,pylab as pl
 from IPython.core.display import display, HTML
 from IPython.core.magic import register_line_magic
-@register_line_magic
-def get_query(q):
-    sp.pprint(r'SQL Queries')
-    tr=[]; cursor.execute(q)
-    result=cursor.fetchall()
-    for r in result: 
-        tr+=[r]
-    display(pd.DataFrame.from_records(tr)\
-              .style.set_table_styles(style_dict))
-def connect_to_db(dbf):
-    sqlconn=None
-    try:
-        sqlconn=sqlite3.connect(dbf)
-        return sqlconn
-    except Error as err:
-        print(err)
-        if sqlconn is not None:
-            sqlconn.close()
-connection=connect_to_db('example.db')
-if connection is not None:
-    cursor=connection.cursor()
-os.listdir()
-</script></div><br/>
-<div class="link"><script type="text/x-sage">
 thp=[('font-size','15px'),('text-align','center'),
      ('font-weight','bold'),('padding','5px 5px'),
      ('color','white'),('background-color','slategray')]
@@ -60,22 +36,36 @@ tdp=[('font-size','14px'),('padding','5px 5px'),
      ('background-color','silver')]
 style_dict=[dict(selector='th',props=thp),
             dict(selector='td',props=tdp)]
-</script></div><br/>    
+@register_line_magic
+def get_query(q):
+    sp.pprint(r'SQL Queries')
+    tr=[]; cursor.execute(q)
+    result=cursor.fetchall()
+    for r in result: tr+=[r]
+    display(pd.DataFrame.from_records(tr)\
+            .style.set_table_styles(style_dict))
+def connect_to_db(dbf):
+    sqlconn=None
+    try: sqlconn=sqlite3.connect(dbf); return sqlconn
+    except Error as err:
+        print(err)
+        if sqlconn is not None: sqlconn.close()
+connection=connect_to_db('example.db')
+if connection is not None: cursor=connection.cursor()
+os.listdir()
+</script></div><br/> 
     <h2>&#x1F4D1; &nbsp;Create SQL Tables</h2>      
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 # from json 
 fpath='https://data.cityofnewyork.us/resource/'
 se=pd.read_json(fpath+'h7rb-945c.json')
-fl=['dbn','total_students',
-    'graduation_rate','attendance_rate',
-    'latitude','longitude',
-    'city','council_district']
+fl=['dbn','total_students','graduation_rate','attendance_rate',
+    'latitude','longitude','city','council_district']
 se=se[fl].dropna().astype({'council_district':'int'})
 se.to_sql('schooledu',con=connection,if_exists='replace')
-se.head(int(10)).style\
-  .set_table_styles(style_dict)
+se.head(int(10)).style.set_table_styles(style_dict)
 </script></div><br/>
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 # from csv
 url='https://raw.githubusercontent.com/plotly/'+\
     'datasets/master/2016-weather-data-seattle.csv'
@@ -84,8 +74,7 @@ weather=weather.astype({'Mean_TemperatureC':'int64',
                         'Min_TemperatureC':'int64'})
 weather.to_sql('weather',con=connection,
                if_exists='replace')
-weather.describe().style\
-       .set_table_styles(style_dict)
+weather.describe().style.set_table_styles(style_dict)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
 # from csv
