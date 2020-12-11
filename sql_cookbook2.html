@@ -181,29 +181,25 @@ SELECT salary,average_life_exp,
 FROM macro;
 ''',con=connection)
 q.plot(kind='kde',figsize=(5,8),cmap=pl.cm.winter,
-       subplots=True,sharex=False)
-pl.show()
+       subplots=True,sharex=False,grid=True)
+pl.tight_layout(); pl.show()
 </script></div><br/>
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 q=pd.read_sql_query('''
 SELECT usdrub,eurrub,oil_urals,brent
 FROM macro;
 ''',con=connection)
 fl=['usdrub','eurrub','oil_urals','brent']
-qp=q.plot(kind='line',figsize=(10,5),
-       secondary_y=fl[2:],cmap=pl.cm.winter)
+qp=q.plot(kind='line',figsize=(10,5),secondary_y=fl[2:],
+          cmap=pl.cm.winter,grid=True)
 lines=qp.get_lines()+qp.right_ax.get_lines()
-qp.legend(lines,[l.get_label() for l in lines],
-          bbox_to_anchor=(.2,.6))
-pl.grid(); pl.show()
+qp.legend(lines,[l.get_label() for l in lines],bbox_to_anchor=(.2,.6))
+pl.tight_layout(); pl.show()
 </script></div><br/>
     <h2>&#x1F4D1; &nbsp;SQL & Pandas Comparing</h2>
-<div class="link"><script type="text/x-sage">
-display(weather\
-        .groupby(weather['Date']\
-                 .map(lambda x: x[-4:]))\
-        .mean().tail().style\
-        .set_table_styles(style_dict))
+<div class='link'><script type='text/x-sage'>
+display(weather.groupby(weather['Date'].map(lambda x: x[-4:]))\
+        .mean().tail().style.set_table_styles(style_dict))
 q=pd.read_sql_query('''
 SELECT SUBSTR(Date,-4,4) AS Years,
        AVG(Max_TemperatureC),
@@ -212,9 +208,8 @@ SELECT SUBSTR(Date,-4,4) AS Years,
 FROM weather
 GROUP BY Years;
 ''',con=connection).set_index('Years')
-q.plot(kind='area',figsize=(6,3),
-       alpha=.7,cmap=pl.cm.tab10)
-pl.show()
+q.plot(kind='area',figsize=(6.4,3),alpha=.7,cmap=pl.cm.tab10)
+pl.tight_layout(); pl.show()
 q.tail().style.set_table_styles(style_dict)
 </script></div><br/>   
 <div class="link"><script type="text/x-sage">
