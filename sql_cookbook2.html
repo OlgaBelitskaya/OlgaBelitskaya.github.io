@@ -135,37 +135,36 @@ mma.to_sql('mma',con=connection,if_exists='replace')
 mma.tail(int(2)).T.style.set_table_styles(style_dict)
 </script></div><br/>      
     <h2>&#x1F4D1; &nbsp;The Database Structure</h2>
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 %get_query \
 SELECT * \
 FROM sqlite_master;
 </script></div><br/>            
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 %get_query \
-PRAGMA table_info("macro")
+PRAGMA table_info('macro')
 </script></div><br/>
     <h2>&#x1F4D1; &nbsp;SQL Basic Queries</h2>
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 %get_query \
 SELECT CURRENT_TIMESTAMP;
 </script></div><br/> 
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 %get_query \
 SELECT DISTINCT * \
 FROM (VALUES ('x'),('y'),('z'),\
              ('X'),('Y'),('Z'),\
              ('x'),('y'),('z'))
 </script></div><br/>
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 pd.read_sql_query('''
 SELECT "📑 "||dbn||" 🏙 "||city AS dbn_city,graduation_rate
 FROM schooledu
 WHERE city="Bronx" AND dbn LIKE "10%" AND
 graduation_rate>.9 AND graduation_rate<>"N/A";
-''',con=connection)\
-.style.set_table_styles(style_dict)
+''',con=connection).style.set_table_styles(style_dict)
 </script></div><br/>
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 pd.read_sql_query('''
 SELECT " 🏙 "||city||" 📑 "||dbn AS dbn_city,
        graduation_rate+attendance_rate 
@@ -173,17 +172,15 @@ SELECT " 🏙 "||city||" 📑 "||dbn AS dbn_city,
 FROM schooledu
 WHERE graduation_attendance_rate<1.3 AND 
 graduation_rate<>"N/A" AND attendance_rate<>"N/A";
-''',con=connection)\
-.style.set_table_styles(style_dict)
+''',con=connection).style.set_table_styles(style_dict)
 </script></div><br/>
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 q=pd.read_sql_query('''
 SELECT salary,average_life_exp,
        employment,unemployment
 FROM macro;
 ''',con=connection)
-q.plot(kind='kde',figsize=(5,8),
-       cmap=pl.cm.winter,
+q.plot(kind='kde',figsize=(5,8),cmap=pl.cm.winter,
        subplots=True,sharex=False)
 pl.show()
 </script></div><br/>
