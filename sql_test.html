@@ -1,37 +1,40 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>SQL_Tests1</title>
-    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
-    <script>$(function (){
-    var loc=['#check','#check2','#check3','#check4',
-             '#check5','#check6','#check7','#check8','#check9'];
-    for (var i=0; i<9; i++){
-        sagecell.makeSagecell({inputLocation:loc[i],template:sagecell.templates.minimal,
-                               evalButtonText:'Check Answers'});};
-    sagecell.makeSagecell({inputLocation:'div.linked',linked:true,
-                           evalButtonText:'Run Linked Cells'});  
-    sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run SageMath'}); });
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width'>
+    <title>📑SQL_Tests</title>
+    <script src='https://sagecell.sagemath.org/static/embedded_sagecell.js'></script>
+    <script>$(function() {
+      var loc=['#check','#check2','#check3','#check4',
+               '#check5','#check6','#check7','#check8','#check9'];
+      for (var i=0; i<9; i++){
+        sagecell.makeSagecell(
+          {inputLocation:loc[i],template:sagecell.templates.minimal,
+           evalButtonText:'Check Answers'});};
+        sagecell.makeSagecell(
+            {inputLocation:'div.linked',linked:true,
+             evalButtonText:'Run Linked Cells'});  
+        sagecell.makeSagecell(
+            {inputLocation:'div.sage',evalButtonText:'Run SageMath'});});
     </script>
   </head>
   <style>
-  @import url('https://fonts.googleapis.com/css?family=Orbitron');
-  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
-  p, a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
-  body {margin:5px 5px 5px 15px;}
+    @import 'https://fonts.googleapis.com/css?family=Orbitron';
+    h1,h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
+    p,a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
+    .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
+    body {margin:5px 5px 5px 15px; background:whitesmoke;}
   </style>  
   <body>
-    <h1>&#x1F4D1; &nbsp;SQL Tests Part 1</h1>
-<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
-<a href="https://olgabelitskaya.github.io/sql_cookbook.html">&#x1F300; &nbsp; SQL Cookbook. Part 1 &nbsp; &nbsp;</a><br/>
-<a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
-<a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a>
+    <h1>&#x1F4D1; &nbsp;SQL Tests</h1>
+<a href='https://olgabelitskaya.github.io/README.html'>&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
+<a href='https://olgabelitskaya.github.io/sql_cookbook.html'>&#x1F300; &nbsp; SQL Cookbook. Part 1 &nbsp; &nbsp;</a><br/>
+<a href='https://www.instagram.com/olga.belitskaya/'>&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
+<a href='https://www.pinterest.ru/olga_belitskaya/code-style/'>&#x1F300; &nbsp; Pinterest Posts</a>
     <h2>Question 1</h2>
 In the beginning, we will create a database file.<br/>
-What row is needed to add in this code for creating the database "example"<br/>
+Which row is needed to add in this code for creating the database "example"<br/>
 and the connection to work with it?<br/>
 <pre><code class='python3'> 
 # import python libraries
@@ -39,22 +42,18 @@ import sqlite3,os,pandas as pd,numpy as np
 # define a function for creating experimental databases
 def connect_to_db(db_file):
     sql_connection=None
-    try:
-        sql_connection=sqlite3.connect(db_file)
-        return sql_connection
+    try: sql_connection=sqlite3.connect(db_file); return sql_connection
     except Error as err:
         print(err)
-        if sql_connection is not None:
-            sql_connection.close()
+        if sql_connection is not None: sql_connection.close()
 # apply this function 
 #...
 # prepare to SQL query executings
-if connection is not None:
-    cursor=connection.cursor()
+if connection is not None: cursor=connection.cursor()
 os.listdir()
 </code></pre><br/>
 <p>For Tests</p>
-<div id="check"><script type="text/x-sage">
+<div id='check'><script type='text/x-sage'>
 answers=['connect_to_db("example.db")=sql_connection',
          'connection=connect_to_db("example.db")',
          'sql_connection=connect_to_db("example.db")',
@@ -68,7 +67,7 @@ for i in range(len(answers)):
 @interact
 def _(variant=[0,1,2,3,4,5,6,7]):
     if variant==0:
-        pretty_print('What variant looks like the right one?')
+        pretty_print('Which variant looks like the right one?')
     else:
         row=answers[variant-1]
         if row=='connection=connect_to_db("example.db")':
