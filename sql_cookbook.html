@@ -142,7 +142,7 @@ ORDER BY key DESC;
 .set_axis(['key1','value1','key2','value2'],axis=1)\
 .style.set_table_styles(style_dict)
 </script></div><br/>
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 get_query('''
 SELECT *
 FROM projects,tasks
@@ -150,18 +150,17 @@ WHERE projects.id=tasks.project_id;
 ''')
 </script></div><br/>
     <h2>&#x1F4D1; &nbsp;SQL & Pandas Similarity</h2>
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 get_query('''
 SELECT total_bill,tip,smoker,time
 FROM tips
 LIMIT 7;
 ''')
 pretty_print(html('<p>Pandas Queries</p>'))
-tips[['total_bill','tip',
-      'smoker','time']].head(int(7))\
-    .style.set_table_styles(style_dict)
+tips[['total_bill','tip','smoker','time']].head(int(7))\
+.style.set_table_styles(style_dict)
 </script></div><br/>
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 get_query('''
 SELECT *
 FROM tips
@@ -170,20 +169,19 @@ LIMIT 3;
 ''')
 pretty_print(html('<p>Pandas Queries</p>'))
 tips[tips['time']=='Dinner'].head(int(3))\
-    .style.set_table_styles(style_dict)
+.style.set_table_styles(style_dict)
 </script></div><br/>
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 get_query('''
 SELECT day,sex,AVG(tip),COUNT(*)
 FROM tips
 GROUP BY day,sex;
 ''')
 pretty_print(html('<p>Pandas Queries</p>'))
-tips.groupby(['day','sex'])\
-    .agg({'tip':np.mean,'day':np.size})\
-    .style.set_table_styles(style_dict)
+tips.groupby(['day','sex']).agg({'tip':np.mean,'day':np.size})\
+.style.set_table_styles(style_dict)
 </script></div><br/>
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 get_query('''
 SELECT *
 FROM df1
@@ -191,10 +189,9 @@ INNER JOIN df2
 ON df1.key=df2.key;
 ''')
 pretty_print(html('<p>Pandas Queries</p>'))
-pd.merge(df1,df2,on='key')\
-  .style.set_table_styles(style_dict)
+pd.merge(df1,df2,on='key').style.set_table_styles(style_dict)
 </script></div><br/>
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 get_query('''
 SELECT *
 FROM df1
@@ -203,9 +200,9 @@ ON df1.key=df2.key;
 ''')
 pretty_print(html('<p>Pandas Queries</p>'))
 pd.merge(df1,df2,on='key',how='left')\
-  .style.set_table_styles(style_dict)
+.style.set_table_styles(style_dict)
 </script></div><br/>
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 get_query('''
 SELECT *
 FROM df2
@@ -214,9 +211,9 @@ ON df1.key=df2.key;
 ''')
 pretty_print(html('<p>Pandas Queries</p>'))
 pd.merge(df1,df2,on='key',how='right')\
-  .style.set_table_styles(style_dict)
+.style.set_table_styles(style_dict)
 </script></div><br/>
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 get_query('''
 SELECT key,value
 FROM df1
@@ -225,26 +222,19 @@ SELECT key,value
 FROM df2;
 ''')
 pretty_print(html('<p>Pandas Queries</p>'))
-pd.concat([df1,df2])\
-  .set_index(pd.Index(range(11)))\
-  .style.set_table_styles(style_dict)
-</script></div><br/>
-    <h2>&#x1F4D1; &nbsp;Close the Connection and Delete This Database</h2>      
-<div class="link"><script type="text/x-sage">
-pd.read_sql_query('''
-SELECT * from sqlite_master;
-''',con=connection)\
+pd.concat([df1,df2]).set_index(pd.Index(range(11)))\
 .style.set_table_styles(style_dict)
 </script></div><br/>
-<div class="link"><script type="text/x-sage">
-if connection is not None:
-    connection.close()
-</script></div><br/>     
-<div class="link"><script type="text/x-sage">
-if os.path.exists("example.db"):
-    os.remove("example.db")
-else:
-    print("The file does not exist")
+    <h2>&#x1F4D1; &nbsp;Close the Connection and Delete This Database</h2>      
+<div class='link'><script type='text/x-sage'>
+pd.read_sql_query('''
+SELECT * from sqlite_master;
+''',con=connection).style.set_table_styles(style_dict)
+</script></div><br/>
+<div class='link'><script type='text/x-sage'>
+if connection is not None: connection.close()
+if os.path.exists('example.db'): os.remove('example.db')
+else: print('The file does not exist')
 os.listdir()
 </script></div><br/>
   </body>
