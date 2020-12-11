@@ -1,51 +1,45 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>SQL_CookBook1</title>
-    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
-    <script>$(function (){
-        sagecell.makeSagecell({inputLocation:'div.link',linked:true,
-                               evalButtonText:'Run Linked Cells'});});
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width'>
+    <title>📑SQL_CookBook1</title>
+    <script src='https://sagecell.sagemath.org/static/embedded_sagecell.js'></script>
+    <script>$(function (){sagecell.makeSagecell(
+      {inputLocation:'div.link',linked:true,evalButtonText:'Run Linked Cells'});});
     </script>
   </head>
   <style>
-  @import url('https://fonts.googleapis.com/css?family=Orbitron');
-  h1,h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
-  p,a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
-  body {margin:5px 5px 5px 25px;}
+    @import url('https://fonts.googleapis.com/css?family=Orbitron');
+    h1,h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
+    p,a {color:darkblue; font-size:120%; text-shadow:5px 5px 5px #aaa;}
+    .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
+    body {margin:5px 5px 5px 25px; background:whitesmoke;}
   </style>  
   <body>
     <h1>&#x1F4D1; &nbsp;SQL Cookbook. Page 1</h1>
-<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
-<a href="https://olgabelitskaya.github.io/sql_cookbook2.html">&#x1F300; &nbsp; Next &nbsp; &nbsp;</a><br/>
-<a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
-<a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a>
+<a href='https://olgabelitskaya.github.io/README.html'>&#x1F300; &nbsp; Home Page &nbsp; &nbsp;</a> 
+<a href='https://olgabelitskaya.github.io/sql_cookbook2.html'>&#x1F300; &nbsp; Next &nbsp; &nbsp;</a><br/>
+<a href='https://www.instagram.com/olga.belitskaya/'>&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp;</a>     
+<a href='https://www.pinterest.ru/olga_belitskaya/code-style/'>&#x1F300; &nbsp; Pinterest Posts</a>
     <h2>&#x1F4D1; &nbsp;Create SQL Databases</h2>      
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 import sqlite3,os
 import pandas as pd, numpy as np
 def connect_to_db(dbf):
     sqlconn=None
-    try:
-        sqlconn=sqlite3.connect(dbf)
-        return sqlconn
+    try: sqlconn=sqlite3.connect(dbf); return sqlconn
     except Error as err:
         print(err)
-        if sqlconn is not None:
-            sqlconn.close()
-connection=connect_to_db("example.db")
-if connection is not None:
-    cursor=connection.cursor()
+        if sqlconn is not None: sqlconn.close()
+connection=connect_to_db('example.db')
+if connection is not None: cursor=connection.cursor()
 os.listdir()
 </script></div><br/>
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 def get_query(q):
     pretty_print(html('<p>SQL Queries</p>'))
-    tr=[]; cursor.execute(q)
-    result=cursor.fetchall()
+    tr=[]; cursor.execute(q); result=cursor.fetchall()
     for r in result: tr+=[r]
     display(table(tr))
 thp=[('font-size','15px'),('text-align','center'),
@@ -54,20 +48,19 @@ thp=[('font-size','15px'),('text-align','center'),
 tdp=[('font-size','14px'),('padding','5px 5px'),
      ('text-align','center'),('color','darkblue'),
      ('background-color','silver')]
-style_dict=[dict(selector="th",props=thp),
-            dict(selector="td",props=tdp)]
+style_dict=[dict(selector='th',props=thp),
+            dict(selector='td',props=tdp)]
 </script></div><br/>
-<div class="link"><script type="text/x-sage">
-df1=pd.DataFrame({'key':['A','B','C','D','F','F'],
-                  'value':np.random.randn(6)})
-df2=pd.DataFrame({'key':['B','D','D','E','F'],
-                  'value':np.random.randn(5)})
+<div class='link'><script type='text/x-sage'>
+df1=pd.DataFrame(
+    {'key':['A','B','C','D','F','F'],'value':np.random.randn(6)})
+df2=pd.DataFrame(
+    {'key':['B','D','D','E','F'],'value':np.random.randn(5)})
 for df in [df1,df2]:
-    display(df.style\
-              .set_table_styles(style_dict))
+    display(df.style.set_table_styles(style_dict))
 </script></div><br/>      
     <h2>&#x1F4D1; &nbsp;Create SQL Tables</h2>      
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 # using the sqlite3 module
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS projects (
@@ -89,7 +82,7 @@ FOREIGN KEY (project_id) REFERENCES projects (id)
 );
 ''')
 </script></div><br/>
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 def create_project(cursor,project):
     q='''INSERT INTO projects(name,begin_date,end_date)
          VALUES(?,?,?)'''
@@ -97,76 +90,56 @@ def create_project(cursor,project):
     return cursor.lastrowid
 def create_task(cursor,task):
     q='''INSERT INTO tasks(
-         name,priority,status_id,
-         project_id,begin_date,end_date
+         name,priority,status_id,project_id,begin_date,end_date
          ) VALUES(?,?,?,?,?,?)'''
     cursor.execute(q,task)
     return cursor.lastrowid
-project1=('SQL CookBook with SageMathCell',
-          '2020-02-04','2020-02-18')
-project2=('SQL Tests',
-          '2020-01-31','2020-02-14')
+project1=('SQL CookBook with SageMathCell','2020-02-04','2020-02-18')
+project2=('SQL Tests','2020-01-31','2020-02-14')
 project_id1=create_project(cursor,project1)
 project_id2=create_project(cursor,project2)
-t=[('Page 1',int(1),int(1),
-    project_id1,'2020-02-04','2020-02-12'),
-   ('Page 2',int(1),int(1),
-    project_id1,'2020-02-10','2020-02-18'),
-   ('Test 1',int(1),int(1),
-    project_id2,'2020-01-31','2020-02-01'),
-   ('Test 2',int(1),int(1),
-    project_id2,'2020-02-02','2020-02-03'),
-   ('Test 3',int(1),int(1),
-    project_id2,'2020-02-04','2020-02-05'),
-   ('Test 4',int(1),int(1),
-    project_id2,'2020-02-06','2020-02-07'),
-   ('Test 5',int(1),int(1),
-    project_id2,'2020-02-08','2020-02-09'),
-   ('Test 6',int(1),int(1),
-    project_id2,'2020-02-09','2020-02-10'),
-   ('Test 7',int(1),int(1),
-    project_id2,'2020-02-10','2020-02-11'),
-   ('Dublicate',int(1),int(1),
-    project_id2,'2020-02-11','2020-02-14')]
-for task in t:        
-    create_task(cursor,task)
+t=[('Page 1',int(1),int(1),project_id1,'2020-02-04','2020-02-12'),
+   ('Page 2',int(1),int(1),project_id1,'2020-02-10','2020-02-18'),
+   ('Test 1',int(1),int(1),project_id2,'2020-01-31','2020-02-01'),
+   ('Test 2',int(1),int(1),project_id2,'2020-02-02','2020-02-03'),
+   ('Test 3',int(1),int(1),project_id2,'2020-02-04','2020-02-05'),
+   ('Test 4',int(1),int(1),project_id2,'2020-02-06','2020-02-07'),
+   ('Test 5',int(1),int(1),project_id2,'2020-02-08','2020-02-09'),
+   ('Test 6',int(1),int(1),project_id2,'2020-02-09','2020-02-10'),
+   ('Test 7',int(1),int(1),project_id2,'2020-02-10','2020-02-11'),
+   ('Dublicate',int(1),int(1),project_id2,'2020-02-11','2020-02-14')]
+for task in t: create_task(cursor,task)
 </script></div><br/>
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 # from pandas dataframes
-df1.to_sql('df1',con=connection,
-            index=False,if_exists='replace')
-df2.to_sql('df2',con=connection,
-            index=False,if_exists='replace')
+df1.to_sql('df1',con=connection,index=False,if_exists='replace')
+df2.to_sql('df2',con=connection,index=False,if_exists='replace')
 </script></div><br/>  
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 # from pandas dataframes and csv files
-url='https://raw.github.com/pydata/pandas/'+\
-    'master/pandas/tests/data/tips.csv'
+url='https://raw.githubusercontent.com/pandas-dev/'+\
+    'pandas/master/doc/data/tips.csv'
 tips=pd.read_csv(url)
-tips.to_sql('tips',con=connection,
-            if_exists='replace')
-tips.head(int(10)).style\
-    .set_table_styles(style_dict)
+tips.to_sql('tips',con=connection,if_exists='replace')
+tips.head(int(10)).style.set_table_styles(style_dict)
 </script></div><br/>
     <h2>&#x1F4D1; &nbsp;SQL Basic Queries</h2>
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 pd.read_sql_query('''
 SELECT *
 FROM df1,df2;
 ''',con=connection)\
-.set_axis(['key1','value1',
-           'key2','value2'],axis=1)\
+.set_axis(['key1','value1','key2','value2'],axis=1)\
 .style.set_table_styles(style_dict)
 </script></div><br/>
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 pd.read_sql_query('''
 SELECT *
 FROM df1,df2
 WHERE df1.key=df2.key AND df1.value>0
 ORDER BY key DESC;
 ''',con=connection)\
-.set_axis(['key1','value1',
-           'key2','value2'],axis=1)\
+.set_axis(['key1','value1','key2','value2'],axis=1)\
 .style.set_table_styles(style_dict)
 </script></div><br/>
 <div class="link"><script type="text/x-sage">
