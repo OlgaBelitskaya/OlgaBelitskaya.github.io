@@ -212,7 +212,7 @@ q.plot(kind='area',figsize=(6.4,3),alpha=.7,cmap=pl.cm.tab10)
 pl.tight_layout(); pl.show()
 q.tail().style.set_table_styles(style_dict)
 </script></div><br/>   
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 fl=['Fresh','Milk','Grocery','Frozen',
     'Detergents_Paper','Delicatessen']
 display(customers[fl].where(customers.Fresh>50000)\
@@ -225,18 +225,15 @@ FROM customers
 WHERE Fresh>50000
 ORDER BY Fresh DESC;
 ''',con=connection)
-q.plot(kind='area',cmap=pl.cm.tab10,
-       alpha=.7,figsize=(6,3))
-pl.show()
+q.plot(kind='area',cmap=pl.cm.tab10,alpha=.7,figsize=(6.4,3))
+pl.tight_layout(); pl.show()
 q.style.set_table_styles(style_dict)
 </script></div><br/>
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 fl=['workplaces_km','public_transport_station_min_walk',
     'school_km','public_healthcare_km']
-display(housing[fl]\
-        .groupby(housing['ID_metro'])\
-        .mean().tail().style\
-        .set_table_styles(style_dict))
+display(housing[fl].groupby(housing['ID_metro'])\
+        .mean().tail().style.set_table_styles(style_dict))
 q=pd.read_sql_query('''
 SELECT ID_metro,
        AVG(workplaces_km),
@@ -246,12 +243,12 @@ SELECT ID_metro,
 FROM housing
 GROUP BY ID_metro;
 ''',con=connection).set_index('ID_metro')
-q.iloc[:,int(1):].plot(kind='area',figsize=(10,5),
-       alpha=.7,cmap=pl.cm.tab10)
-pl.show()
+q.iloc[:,int(1):].plot(
+    kind='area',figsize=(6.4,3),alpha=.7,cmap=pl.cm.tab10)
+pl.tight_layout(); pl.show()
 q.tail().style.set_table_styles(style_dict)
 </script></div><br/>
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 q=pd.read_sql_query('''
 SELECT method,
        COUNT(*) AS number,
@@ -259,12 +256,12 @@ SELECT method,
 FROM mma
 GROUP BY method;
 ''',con=connection).set_index('method')
-q.plot(secondary_y='avg_round',
-       figsize=(10,5),cmap=pl.cm.winter)
-pl.show()
+q.plot(secondary_y='avg_round',figsize=(6.4,3),
+       cmap=pl.cm.winter,alpha=.7,grid=True)
+pl.tight_layout(); pl.show()
 q.tail().style.set_table_styles(style_dict)
 </script></div><br/>
-<div class="link"><script type="text/x-sage">
+<div class='link'><script type='text/x-sage'>
 q=pd.read_sql_query('''
 SELECT method_d,
        COUNT(*) AS number,
@@ -274,30 +271,23 @@ GROUP BY method_d;
 ''',con=connection)
 n,m=int(70),int(7)
 pl.rcParams['xtick.major.pad']='-10'
-pl.rcParams['xtick.bottom']=\
-pl.rcParams['xtick.labelbottom']=False
-pl.rcParams['xtick.top']=\
-pl.rcParams['xtick.labeltop']=True
-qp=q.tail(n).plot(secondary_y='avg_time',
-                  figsize=(10,5),alpha=.5,
-                  lw=3,cmap=pl.cm.winter)
+pl.rcParams['xtick.bottom']=pl.rcParams['xtick.labelbottom']=False
+pl.rcParams['xtick.top']=pl.rcParams['xtick.labeltop']=True
+qp=q.tail(n).plot(
+    secondary_y='avg_time',figsize=(9,4),alpha=.7,
+    lw=1,cmap=pl.cm.winter,)
 qp.set_xticks(q.tail(n).index)
-qp.set_xticklabels(q.method_d[:n],va='top',
-                   fontsize=7,rotation=90)
+qp.set_xticklabels(q.method_d[:n],va='top',fontsize=7,rotation=90)
 lines=qp.get_lines()+qp.right_ax.get_lines()
-qp.legend(lines,[l.get_label() for l in lines],
-          bbox_to_anchor=(.9,.5))
-pl.show()
+qp.legend(lines,[l.get_label() for l in lines],bbox_to_anchor=(.9,.6))
+pl.tight_layout(); pl.show()
 q.tail(m).style.set_table_styles(style_dict)
 </script></div><br/>
     <h2>&#x1F4D1; &nbsp;Close the Connection and Delete This Database</h2>      
-<div class="link"><script type="text/x-sage">
-if connection is not None:
-    connection.close()
-if os.path.exists('example.db'):
-    os.remove('example.db')
-else:
-    print('The file does not exist')
+<div class='link'><script type='text/x-sage'>
+if connection is not None: connection.close()
+if os.path.exists('example.db'): os.remove('example.db')
+else: print('The file does not exist')
 os.listdir()
 </script></div><br/>
   </body>
