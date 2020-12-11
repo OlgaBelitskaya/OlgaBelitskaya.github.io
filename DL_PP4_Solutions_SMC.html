@@ -42,21 +42,24 @@ display.HTML("""<style>
 .table1 {width:45%; background-color:silver; color:#FF355E; 
 border:double slategray; font-family:Monsieur La Doulaise; font-size:250%;}
 td,th {border:double slategray; content-align:middle; text-align:center;}
-img {width:70px; height:70px; vertical-align:middle;}
+.img1 {width:70px; height:70px; vertical-align:middle;}
 </style><table class='table1'>
 <tr style='font-family:Akronim; font-size:80%;'>
 <th>Brand</th><th>Image</th></tr>
 <tr><td>Christian Louboutin</td><td>
-<img src="""+fpath2+lf[0]+""" alt='brand0'></td></tr>
-<tr><td>Chanel</td><td><img src="""+fpath2+lf[1]+""" alt='brand1'></td></tr>
+<img class='img1' src="""+fpath2+lf[0]+""" alt='brand0'></td></tr>
+<tr><td>Chanel</td><td>
+<img class='img1' src="""+fpath2+lf[1]+""" alt='brand1'></td></tr>
 <tr><td>Dolce & Gabbana</td><td>
-<img src="""+fpath2+lf[2]+""" alt='brand2'></td></tr>
-<tr><td>Gucci</td><td><img src="""+fpath2+lf[3]+""" alt='brand3'></td></tr>
+<img class='img1'src="""+fpath2+lf[2]+""" alt='brand2'></td></tr>
+<tr><td>Gucci</td><td>
+<img class='img1' src="""+fpath2+lf[3]+""" alt='brand3'></td></tr>
 <tr><td>Christian Dior</td><td>
-<img src="""+fpath2+lf[4]+""" alt='brand4'></td></tr>
-<tr><td>Versace</td><td><img src="""+fpath2+lf[5]+""" alt='brand5'></td></tr>
+<img class='img1' src="""+fpath2+lf[4]+""" alt='brand4'></td></tr>
+<tr><td>Versace</td><td>
+<img class='img1' src="""+fpath2+lf[5]+""" alt='brand5'></td></tr>
 <tr><td>Yves Saint Laurent</td><td>
-<img src="""+fpath2+lf[6]+""" alt='brand6'></td></tr>
+<img class='img1' src="""+fpath2+lf[6]+""" alt='brand6'></td></tr>
 </table>""")
 </script></div><br/>
     <h2>✒️&nbsp;Step 0. Importing Libraries and Defining Helpful Functions</h2>      
@@ -88,7 +91,7 @@ Conv2D,MaxPooling2D,GlobalMaxPooling2D,PReLU,LeakyReLU
 pl.style.use('seaborn-whitegrid')
 </script></div><br/>
 <div class='linked'><script type='text/x-sage'>
-fw=''/tmp/checkpoint'
+fw='/tmp/checkpoint'
 dr2,dr25,dr3,dr5,dr6=\
 float(.2),float(.25),float(.3),float(.5),float(.6)
 fr,al=float(.5),float(.02)
@@ -133,7 +136,7 @@ def keras_history_plot(fit_history,fig_size,color):
     pl.grid(); pl.show()
 </script></div><br/>
     <h2>✒️&nbsp;Step 1. Loading and Preprocessing the Data</h2>       
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 fpath='https://olgabelitskaya.github.io/'
 zf='StyleColorImages.h5.zip'
 input_file=urllib.request.urlopen(fpath+zf)
@@ -142,8 +145,7 @@ output_file.write(input_file.read())
 output_file.close(); input_file.close()
 zipf=zipfile.ZipFile(zf,'r')
 zipf.extractall(''); zipf.close()
-f=h5py.File(zf[:-4],'r')
-keys=list(f.keys())
+f=h5py.File(zf[:-4],'r'); keys=list(f.keys())
 bnames=['Christian Louboutin','Chanel','Dolce & Gabbana','Gucci',
         'Christian Dior','Versace','Yves Saint Laurent']
 pnames=['shoes','lipstick','handbag','nail polish','necklace',
