@@ -1,32 +1,31 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width'>
     <title>🏙DLPP5SMC</title>
-    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
-    <script>$(function (){
-    sagecell.makeSagecell({inputLocation:'div.linked',linked:true,
-                           evalButtonText:'Run Linked Cells'});});
+    <script src='https://sagecell.sagemath.org/static/embedded_sagecell.js'></script>
+    <script>$(function(){sagecell.makeSagecell(
+      {inputLocation:'div.linked',linked:true,evalButtonText:'Run Linked Cells'});});
     </script>
   </head>
   <style>
-  @import url('https://fonts.googleapis.com/css?family=Akronim|Lobster');
-  h1,h2,th {color:#348ABD; font-family:'Akronim'; font-size:120%; text-shadow:4px 4px 4px #aaa;}
-  p,a {color:slategray; font-family:'Lobster'; font-size:120%; text-shadow:4px 4px 4px #aaa;}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:30em;}
-  body {margin:5px 5px 5px 15px;}
+    @import 'https://fonts.googleapis.com/css?family=Akronim|Lobster';
+    h1,h2,th {color:#348ABD; font-family:'Akronim'; font-size:120%; text-shadow:4px 4px 4px #aaa;}
+    p,a {color:slategray; font-family:'Lobster'; font-size:120%; text-shadow:4px 4px 4px #aaa;}
+    .sagecell .CodeMirror-scroll {min-height:3em; max-height:30em;}
+    body {margin:5px 5px 5px 15px;}
   </style>
   <body>
     <h1>📑 &nbsp; Deep Learning. P5: Decor Recognition & Colorization</h1>
-<a href="https://olgabelitskaya.github.io/README.html">&#x1F300; &nbsp; Home Page &nbsp; &nbsp; &nbsp;</a>
-<a href="https://colab.research.google.com/drive/1Tt3qZePsf2P6kNNao-hQ58DlG71Abj5a">
+<a href='https://olgabelitskaya.github.io/README.html'>&#x1F300; &nbsp; Home Page &nbsp; &nbsp; &nbsp;</a>
+<a href='https://colab.research.google.com/drive/1Tt3qZePsf2P6kNNao-hQ58DlG71Abj5a'>
 &#x1F300; &nbsp; Google Colaboratory Variant &nbsp; &nbsp; &nbsp;</a>
-<a href="https://www.instagram.com/olga.belitskaya/">&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp; &nbsp;</a>     
-<a href="https://www.pinterest.ru/olga_belitskaya/code-style/">&#x1F300; &nbsp; Pinterest Posts</a><br/>
+<a href='https://www.instagram.com/olga.belitskaya/'>&#x1F300; &nbsp; Instagram Posts &nbsp; &nbsp; &nbsp;</a>     
+<a href='https://www.pinterest.ru/olga_belitskaya/code-style/'>&#x1F300; &nbsp; Pinterest Posts</a><br/>
 For this project, I have created the dataset of color images (150x150x3) with traditional patterns.<br/>
 Let's have a look at some decor contours. 
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 import warnings; warnings.filterwarnings('ignore')
 import pylab; from skimage import io,color,measure
 @interact
@@ -47,13 +46,18 @@ def _vector(file=[1,2,3,4,5],
     pylab.xticks([]); pylab.yticks([]); pylab.show()
 </script></div><br/> 
     <h2>✒️ &nbsp;Step 0. Import Libraries</h2>      
-<div class="linked"><script type="text/x-sage">
-#unlock to install modules
-#!python3 -m pip install --ignore-installed --upgrade tensorflow==1.14.0
-spath='/home/sc_work/.sage/local/lib/python3.7/site-packages'
-import sys; sys.path.append(spath)
-</script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
+!python3 -m pip install --upgrade pip \
+--user --quiet --no-warn-script-location
+!python3 -m pip install argon2-cffi \
+--user --quiet --no-warn-script-location
+!python3 -m pip install --ignore-installed --upgrade tensorflow==2.3.0 \
+--user --quiet --no-warn-script-location
+!python3 -m pip install h5py==2.10.0 \
+--user --quiet --no-warn-script-location
+path='/home/sc_work/.sage/local/lib/python3.8/site-packages'
+import sys; sys.path.append(path)
+import warnings; warnings.filterwarnings('ignore')
 import h5py,urllib,zipfile
 import pandas as pd,numpy as np,pylab as pl
 import seaborn as sn,tensorflow as tf
