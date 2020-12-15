@@ -100,13 +100,14 @@ def tts(X,y):
     x_valid,y_valid=x_test[:n],y_test[:n]
     x_test,y_test=x_test[n:],y_test[n:]
     return x_train,x_valid,x_test,y_train,y_valid,y_test
-def resh(x):
-    y=[resize(el,(int(32),int(32),int(3)),anti_aliasing=True) for el in x]
+def resh(x,img_size):
+    y=[resize(el,(img_size,img_size,i3),
+              anti_aliasing=True) for el in x]
     return np.array(y)
-def gresh(x): 
-    y=np.array([resize(el,(int(48),int(48),int(1)),anti_aliasing=True) 
-                for el in x])
-    return y.reshape(-int(1),int(48),int(48),int(1))
+def gresh(x,img_size): 
+    y=np.array([resize(el,(img_size,img_size,int(1)),
+                       anti_aliasing=True) for el in x])
+    return y.reshape(-int(1),img_size,img_size,int(1))
 def keras_history_plot(fit_history,fig_size,color):
     keys=list(fit_history.history.keys())
     list_history=[fit_history.history[keys[i]] 
@@ -147,12 +148,13 @@ data.loc[n]
 </script></div><br/>
 <div class='linked'><script type='text/x-sage'>
 images=images/255
-fig=pl.figure(figsize=(12,5))
+fig=pl.figure(figsize=(8,4))
 for i,idx in enumerate(n):
     ax=fig.add_subplot(2,3,i+1,xticks=[],yticks=[])
     ax.imshow(images[idx])
-    ax.set_title(data['country'][idx]+'; '+\
-                 data['decor'][idx]+'; '+data['type'][idx])
+    ax.set_title(
+        data['country'][idx]+'; '+data['decor'][idx]+\
+        '; '+data['type'][idx])
 pl.tight_layout(); pl.show()
 </script></div><br/>
 <div class='linked'><script type='text/x-sage'>
@@ -165,7 +167,7 @@ pl.title(data['country'][n]+'; '+\
 pl.imshow(gray_images[n],cmap=pl.cm.bone)
 pl.tight_layout(); pl.show()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 ccountries,cdecors,ctypes=\
 ohe(countries),ohe(decors),ohe(types)
 ctargets=np.concatenate((ccountries,cdecors),axis=1)
