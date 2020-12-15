@@ -26,7 +26,6 @@
 For this project, I have created the dataset of color images (150x150x3) with traditional patterns.<br/>
 Let's have a look at some decor contours. 
 <div class='linked'><script type='text/x-sage'>
-import warnings; warnings.filterwarnings('ignore')
 import pylab; from skimage import io,color,measure
 @interact
 def _vector(file=[1,2,3,4,5],
@@ -36,7 +35,8 @@ def _vector(file=[1,2,3,4,5],
     path1='https://olgabelitskaya.github.io/images/'
     path2='01_01_1_00%s'%(file)+'.png'
     img=io.imread(path1+path2); level=float(level)
-    gray_img=color.colorconv.rgb2gray(img) 
+    gray_img=color.colorconv.rgb2gray(
+        color.colorconv.rgba2rgb(img)) 
     contours=measure.find_contours(gray_img,level)
     n=len(contours); pylab.figure(figsize=(5,5))
     pylab.gca().invert_yaxis()
@@ -74,8 +74,8 @@ Input,Activation,Dense,LSTM,PReLU,LeakyReLU,\
 Flatten,Dropout,BatchNormalization,\
 Conv2D,MaxPooling2D,GlobalMaxPooling2D
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-fw='weights.style.hdf5'
+<div class='linked'><script type='text/x-sage'>
+fw='/tmp/checkpoint'
 dr2,dr25,dr3,dr5=\
 float(.2),float(.25),float(.3),float(.5)
 fr,al=float(.5),float(.02)
@@ -89,51 +89,41 @@ fr,al=float(.5),float(.02)
 [int(100),int(128),int(150),int(196),int(200)]
 [i256,i512,i1024]=[int(256),int(512),int(1024)]
 </script></div><br/>  
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 def ohe(x): 
-    return OneHotEncoder(categories='auto')\
-           .fit(x.reshape(-i1,i1))\
-           .transform(x.reshape(-i1,i1))\
-           .toarray().astype('int64')
+    return OneHotEncoder(categories='auto').fit(x.reshape(-i1,i1))\
+           .transform(x.reshape(-i1,i1)).toarray().astype('int64')
 def tts(X,y): 
     x_train,x_test,y_train,y_test=\
-    train_test_split(X,y,test_size=float(.2),
-                     random_state=i1)
+    train_test_split(X,y,test_size=float(.2),random_state=i1)
     n=int(len(x_test)/2)
     x_valid,y_valid=x_test[:n],y_test[:n]
     x_test,y_test=x_test[n:],y_test[n:]
     return x_train,x_valid,x_test,y_train,y_valid,y_test
-def resh(x,n):
-    y=[resize(el,(n,n,i3),
-              anti_aliasing=True) for el in x]
+def resh(x):
+    y=[resize(el,(int(32),int(32),int(3)),anti_aliasing=True) for el in x]
     return np.array(y)
-def gresh(x,n): 
-    y=np.array([resize(el,(n,n,i1),
-                       anti_aliasing=True) for el in x])
-    return y.reshape(-i1,n,n,i1)
-</script></div><br/>
-<div class="linked"><script type="text/x-sage">
-def history_plot(fit_history):
-    pl.figure(figsize=(i10,i10))
-    pl.subplot(211)
-    pl.plot(fit_history.history['loss'],
-            color='slategray',label='train')
-    pl.plot(fit_history.history['val_loss'],
-            color='#348ABD',label='valid')
-    pl.xlabel("Epochs"); pl.ylabel("Loss")
-    pl.legend(); pl.grid()
-    pl.title('Loss Function')     
-    pl.subplot(212)
-    pl.plot(fit_history.history['acc'],
-            color='slategray',label='train')
-    pl.plot(fit_history.history['val_acc'],
-            color='#348ABD',label='valid')
-    pl.xlabel("Epochs"); pl.ylabel("Accuracy")    
-    pl.legend(); pl.grid()
-    pl.title('Accuracy'); pl.show()
+def gresh(x): 
+    y=np.array([resize(el,(int(48),int(48),int(1)),anti_aliasing=True) 
+                for el in x])
+    return y.reshape(-int(1),int(48),int(48),int(1))
+def keras_history_plot(fit_history,fig_size,color):
+    keys=list(fit_history.history.keys())
+    list_history=[fit_history.history[keys[i]] 
+                  for i in range(len(keys))]
+    dfkeys=pd.DataFrame(list_history).T
+    dfkeys.columns=keys
+    fig=pl.figure(figsize=(fig_size,fig_size))
+    ax1=fig.add_subplot(2,1,1)
+    dfkeys.iloc[:,[int(0),int(2)]].plot(
+        ax=ax1,color=['slategray',color],grid=True)
+    ax2=fig.add_subplot(2,1,2)
+    dfkeys.iloc[:,[int(1),int(3)]].plot(
+        ax=ax2,color=['slategray',color],grid=True)
+    pl.tight_layout(); pl.show()
 </script></div><br/>
     <h2>✒️ &nbsp;Step 1. Load and Explore the Data</h2>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 fpath='https://olgabelitskaya.github.io/'
 zf='DecorColorImages.h5.zip'
 input_file=urllib.request.urlopen(fpath+zf)
