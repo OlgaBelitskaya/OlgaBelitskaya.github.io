@@ -139,14 +139,14 @@ def calculate_variation_loss(x):
 <div class='linked'><script type='text/x-sage'>
 style_layers=['block1_conv1','block2_conv1','block3_conv1',
               'block4_conv1','block5_conv1']
-generated_data=[]
+generated_data=[]; epochs,ol,sl,vl=i0,0.,0.,0.
 @register_line_magic
 def train_run(pars):
     pars=pars.split()
     epochs=int(pars[0]); ol=float(pars[1])
     sl=float(pars[2]); vl=float(pars[3])
     sh=pattern01.shape[0]*pattern01.shape[1]
-    global generated_data
+    global generated_data,epochs,ol,sl,vl
     with tf.Graph().as_default():
         original_input,style_input,generated_input=\
         inputs(picture01,pattern01)
@@ -176,12 +176,12 @@ def train_run(pars):
 <div class='linked'><script type='text/x-sage'>
 %train_run 3 .7 .7 .7
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-generated_image01=deprocess(generated_data2)
+<div class='linked'><script type='text/x-sage'>
+generated_image01=deprocess(generated_data)
 pl.figure(figsize=(6,4))
 ti=[['coefficients','loss functions & steps'],
     [ol,'original_loss'],[sl,'style_loss'],
-    [vl,'variation_loss'],[st,'steps']]
+    [vl,'variation_loss'],[epochs,'epochs']]
 pl.imshow(cv2.cvtColor(generated_image01,cv2.COLOR_BGR2RGB))
 pl.show(); table(ti)
 </script></div><br/>
