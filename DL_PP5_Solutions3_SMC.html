@@ -79,8 +79,8 @@ display_images('picture09.png','pattern09.png')
 <div class='linked'><script type='text/x-sage'>
 picture01=cv2.imread('picture09.png').astype('float32')
 pattern01=cv2.imread('pattern09.png').astype('float32')
-picture01=cv2.resize(picture01,(int(360),int(330)))
-pattern01=cv2.resize(pattern01,(int(360),int(330)))
+picture01=cv2.resize(picture01,(int(350),int(350)))
+pattern01=cv2.resize(pattern01,(int(350),int(350)))
 picture01=picture01.astype('float32')
 pattern01=pattern01.astype('float32')
 picture01.shape,pattern01.shape
@@ -135,44 +135,42 @@ def calculate_variation_loss(x):
     return tfkb.sum(tfkb.pow(row_diff+col_diff,float(1.25)))
 </script></div><br/>
     <h2>✒️ &nbsp; VGG16 Usage</h2>    
-<div class="linked"><script type="text/x-sage">
-vgg16_model=tf.keras.applications.vgg16.\
-VGG16(input_tensor=input_tensor2,include_top=False)
-vgg16_layer_dict={layer.name:layer for layer in vgg16_model.layers}
-</script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 style_layers=['block1_conv1','block2_conv1','block3_conv1',
               'block4_conv1','block5_conv1']
-def calculate_original_loss(layer_dict,original_layer_names):
-    loss=float(0)
-    for name in original_layer_names:
-        layer=layer_dict[name]
-        original_features=layer.output[i0,:,:,:]  
-        generated_features=layer.output[i2,:,:,:] 
-        loss+=tkb.sum(tkb.square(generated_features-original_features))
-    return loss/len(original_layer_names)
-def gram_matrix(x):    
-    features=tkb.batch_flatten(tkb.permute_dimensions(x,(i2,i0,i1))) 
-    gram=tkb.dot(features,tkb.transpose(features))
-    return gram
-def get_style_loss(style_features,generated_features,size):
-    S=gram_matrix(style_features)
-    G=gram_matrix(generated_features)
-    channels=i3
-    return tkb.sum(tkb.square(S-G))/\
-          (float(4.)*(channels**i2)*(size**i2))
-def calculate_style_loss(layer_dict,style_layer_names,size):
-    loss=float(0)
-    for name in style_layer_names:
-        layer=layer_dict[name]
-        style_features=layer.output[i1,:,:,:] 
-        generated_features=layer.output[i2,:,:,:] 
-        loss+=get_style_loss(style_features,generated_features,size) 
-    return loss/len(style_layer_names)
-def calculate_variation_loss(x):
-    row_diff=tkb.square(x[:,:-i1,:-i1,:]-x[:,i1:,:-i1,:])
-    col_diff=tkb.square(x[:,:-i1,:-i1,:]-x[:,:-i1,i1:,:])
-    return tkb.sum(tkb.pow(row_diff+col_diff,float(1.25)))
+generated_data=[]; epochs,ol,sl,vl=i0,0.,0.,0.
+@register_line_magic
+def train_run(pars):
+    global generated_data,epochs,ol,sl,vl
+    pars=pars.split()
+    epochs=int(pars[0]); ol=float(pars[1])
+    sl=float(pars[2]); vl=float(pars[3])
+    sh=pattern01.shape[0]*pattern01.shape[1]
+    with tf.Graph().as_default():
+        original_input,style_input,generated_input=\
+        inputs(picture01,pattern01)
+        input_tensor=tf.concat([original_input,style_input,
+                                generated_input],axis=0)
+        print(input_tensor.shape)
+        vgg16_model=tf.keras.applications.vgg16.\
+        VGG16(input_tensor=input_tensor,include_top=False)
+        vgg16_layer_dict={layer.name:layer 
+                          for layer in vgg16_model.layers}
+        original_loss=\
+        calculate_original_loss(vgg16_layer_dict,
+                                ['block5_conv2'])
+        style_loss=\
+        calculate_style_loss(vgg16_layer_dict,style_layers,sh)
+        variation_loss=\
+        calculate_variation_loss(generated_input)
+        loss=ol*original_loss+sl*style_loss+vl*variation_loss       
+        gradients=tfkb.gradients(loss,generated_input)[0]
+        calculate=tfkb.function([generated_input],
+                                [loss,gradients])
+        generated_data=preprocess(picture01)
+        for i in tqdm(range(epochs)):
+            _,gradients_value=calculate([generated_data])
+            generated_data-=gradients_value*.001
 </script></div><br/>
     <h2>✒️ &nbsp; Generated Images</h2>       
 <div class="linked"><script type="text/x-sage">
