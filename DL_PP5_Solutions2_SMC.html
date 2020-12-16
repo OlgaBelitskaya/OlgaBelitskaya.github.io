@@ -48,27 +48,25 @@ i0,i1,i2,i3=int(0),int(1),int(2),int(3)
 files_path='https://olgabelitskaya.github.io/'
 </script></div><br/>
     <h2>✒️ &nbsp; Displaying Images</h2> 
-<div class="linked"><script type="text/x-sage">
-def display_images(original,style,fpath=fpath):
-    input_file=urllib.request.urlopen(fpath+original)
-    output_file=open(original,'wb'); 
-    output_file.write(input_file.read())
-    output_file.close(); input_file.close()
-    input_file=urllib.request.urlopen(fpath+style)
-    output_file=open(style,'wb'); 
-    output_file.write(input_file.read())
-    output_file.close(); input_file.close()
+<div class='linked'><script type='text/x-sage'>
+def display_images(original,style,files_path=files_path):
+    for f in [original,style]:
+        input_file=urllib.request.urlopen(files_path+f)
+        output_file=open(f,'wb'); 
+        output_file.write(input_file.read())
+        output_file.close(); input_file.close()
     original_img=cv2.imread(original)
     style_img=cv2.imread(style)    
     fig=pl.figure(figsize=(8,4))
     ax=fig.add_subplot(121)
-    pl.title("Shape of the original image: %s"%str(original_img.shape),
-             fontsize=int(8))
+    str1='Shape of the original image: %s'
+    pl.title(str1%str(original_img.shape),fontsize=int(8))
     ax.imshow(cv2.cvtColor(original_img,cv2.COLOR_BGR2RGB))
     ax=fig.add_subplot(122)
-    pl.title("Shape of the style image: %s"%str(style_img.shape),
-             fontsize=int(8))
-    ax.imshow(cv2.cvtColor(style_img,cv2.COLOR_BGR2RGB)); pl.show()
+    str2='Shape of the style image: %s'
+    pl.title(str2%str(style_img.shape),fontsize=int(8))
+    ax.imshow(cv2.cvtColor(style_img,cv2.COLOR_BGR2RGB))
+    pl.tight_layout(); pl.show()
 display_images('picture02.png','pattern02.png')
 </script></div><br/>
     <h2>✒️ &nbsp; Preprocessing</h2> 
