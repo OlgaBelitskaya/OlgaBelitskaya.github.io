@@ -43,7 +43,9 @@ import sys; sys.path.append(path)
 import warnings; warnings.filterwarnings('ignore')
 import os,urllib,cv2
 import numpy as np,tensorflow as tf,pylab as pl
-import tensorflow.keras.backend as tkb
+import tensorflow.keras.backend as tfkb
+from IPython.core.magic import register_line_magic
+from tqdm import tqdm
 i0,i1,i2,i3=int(0),int(1),int(2),int(3)
 files_path='https://olgabelitskaya.github.io/'
 </script></div><br/>
@@ -69,17 +71,17 @@ def display_images(original,style,files_path=files_path):
     pl.tight_layout(); pl.show()
 display_images('picture02.png','pattern02.png')
 </script></div><br/>
-    <h2>✒️ &nbsp; Preprocessing</h2> 
-<div class="linked"><script type="text/x-sage">
+    <h2>✒️ &nbsp; Functions</h2> 
+<div class='linked'><script type='text/x-sage'>
 picture02=cv2.imread('picture02.png').astype('float32')
 pattern02=cv2.imread('pattern02.png').astype('float32')
-picture02=cv2.resize(picture02,(int(410),int(380)))
-pattern02=cv2.resize(pattern02,(int(410),int(380)))
+picture02=cv2.resize(picture02,(int(410),int(410)))
+pattern02=cv2.resize(pattern02,(int(410),int(410)))
 picture02=picture02.astype('float32')
 pattern02=pattern02.astype('float32')
 picture02.shape,pattern02.shape
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 def preprocess(img):
     img=img.copy(); img=np.expand_dims(img,axis=i0) 
     return tf.keras.applications.vgg16.preprocess_input(img)
@@ -94,46 +96,32 @@ def deprocess(img):
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def inputs(original_img,style_img):
+    original_img=original_img.astype('float32')
+    style_img=style_img.astype('float32')
     original_input=tf.constant(preprocess(original_img))
     style_input=tf.constant(preprocess(style_img))
-    generated_input=tf.placeholder(tf.float32,original_input.shape)
+    generated_input=tf.compat.v1\
+    .placeholder(tf.float32,original_input.shape)
     return original_input,style_input,generated_input
-original_input2,style_input2,generated_input2=\
-inputs(picture02,pattern02)
-input_tensor2=tf.concat([original_input2,style_input2,
-                         generated_input2],axis=i0)
-input_tensor2.shape
-</script></div><br/>
-    <h2>✒️ &nbsp; VGG16 Usage</h2>    
-<div class="linked"><script type="text/x-sage">
-vgg16_model=tf.keras.applications.vgg16.\
-VGG16(input_tensor=input_tensor2,include_top=False)
-vgg16_layer_dict={layer.name:layer for layer in vgg16_model.layers}
-style_layers=['block1_conv1','block2_conv1','block3_conv1',
-              'block4_conv1','block5_conv1']
-vgg16_model.summary()
-</script></div><br/>
-<div class="linked"><script type="text/x-sage">
 def calculate_original_loss(layer_dict,original_layer_names):
-    loss=float(0)
+    loss=0
     for name in original_layer_names:
         layer=layer_dict[name]
         original_features=layer.output[i0,:,:,:]  
         generated_features=layer.output[i2,:,:,:] 
-        loss+=tkb.sum(tkb.square(generated_features-original_features))
+        loss+=tfkb.sum(tfkb.square(generated_features-original_features))
     return loss/len(original_layer_names)
 def gram_matrix(x):    
-    features=tkb.batch_flatten(tkb.permute_dimensions(x,(i2,i0,i1))) 
-    gram=tkb.dot(features,tkb.transpose(features))
+    features=tfkb.batch_flatten(tfkb.permute_dimensions(x,(i2,i0,i1))) 
+    gram=tfkb.dot(features,tfkb.transpose(features))
     return gram
 def get_style_loss(style_features,generated_features,size):
     S=gram_matrix(style_features)
     G=gram_matrix(generated_features)
-    channels=i3
-    return tkb.sum(tkb.square(S-G))/\
-          (float(4.)*(channels**i2)*(size**i2))
+    channels=3
+    return tfkb.sum(tfkb.square(S-G))/(float(4.)*(channels**i2)*(size**i2))
 def calculate_style_loss(layer_dict,style_layer_names,size):
-    loss=float(0)
+    loss=0
     for name in style_layer_names:
         layer=layer_dict[name]
         style_features=layer.output[i1,:,:,:] 
@@ -141,10 +129,11 @@ def calculate_style_loss(layer_dict,style_layer_names,size):
         loss+=get_style_loss(style_features,generated_features,size) 
     return loss/len(style_layer_names)
 def calculate_variation_loss(x):
-    row_diff=tkb.square(x[:,:-i1,:-i1,:]-x[:,i1:,:-i1,:])
-    col_diff=tkb.square(x[:,:-i1,:-i1,:]-x[:,:-i1,i1:,:])
-    return tkb.sum(tkb.pow(row_diff+col_diff,float(1.25)))
+    row_diff=tfkb.square(x[:,:-i1,:-i1,:]-x[:,i1:,:-i1,:])
+    col_diff=tfkb.square(x[:,:-i1,:-i1,:]-x[:,:-i1,i1:,:])
+    return tfkb.sum(tfkb.pow(row_diff+col_diff,float(1.25)))
 </script></div><br/>
+    <h2>✒️ &nbsp; VGG16 Usage</h2>
 <div class="linked"><script type="text/x-sage">
 original_loss2=calculate_original_loss(vgg16_layer_dict,['block5_conv2'])
 style_loss2=calculate_style_loss(vgg16_layer_dict,style_layers, 
