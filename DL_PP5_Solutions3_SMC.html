@@ -51,7 +51,7 @@ from tqdm import tqdm
 i0,i1,i2,i3=int(0),int(1),int(2),int(3)
 files_path='https://olgabelitskaya.github.io/'
 </script></div><br/>
-    <h2>✒️ &nbsp; Displaying Horizontal Images</h2> 
+    <h2>✒️ &nbsp; Displaying Images</h2> 
 <div class='linked'><script type='text/x-sage'>
 def display_images(original,style,files_path=files_path):
     for f in [original,style]:
@@ -72,19 +72,7 @@ def display_images(original,style,files_path=files_path):
     ax.imshow(cv2.cvtColor(style_img,cv2.COLOR_BGR2RGB))
     pl.tight_layout(); pl.show()
 </script></div><br/>
-<div class='linked'><script type='text/x-sage'>
-display_images('picture09.png','pattern09.png')
-</script></div><br/>
-    <h2>✒️ &nbsp; Preprocessing</h2> 
-<div class='linked'><script type='text/x-sage'>
-picture01=cv2.imread('picture09.png').astype('float32')
-pattern01=cv2.imread('pattern09.png').astype('float32')
-picture01=cv2.resize(picture01,(int(350),int(330)))
-pattern01=cv2.resize(pattern01,(int(350),int(330)))
-picture01=picture01.astype('float32')
-pattern01=pattern01.astype('float32')
-picture01.shape,pattern01.shape
-</script></div><br/>
+    <h2>✒️ &nbsp; Preprocessing & Calculating</h2> 
 <div class='linked'><script type='text/x-sage'>
 def preprocess(img):
     img=img.copy(); img=np.expand_dims(img,axis=i0) 
@@ -173,7 +161,19 @@ def train_run(pars):
             _,gradients_value=calculate([generated_data])
             generated_data-=gradients_value*.001
 </script></div><br/>
-    <h2>✒️ &nbsp; Generated Images</h2>       
+    <h2>✒️ &nbsp; Generated Images</h2>
+<div class='linked'><script type='text/x-sage'>
+display_images('picture09.png','pattern09.png')
+</script></div><br/>
+<div class='linked'><script type='text/x-sage'>
+picture01=cv2.imread('picture09.png').astype('float32')
+pattern01=cv2.imread('pattern09.png').astype('float32')
+picture01=cv2.resize(picture01,(int(350),int(330)))
+pattern01=cv2.resize(pattern01,(int(350),int(330)))
+picture01=picture01.astype('float32')
+pattern01=pattern01.astype('float32')
+picture01.shape,pattern01.shape
+</script></div><br/>
 <div class='linked'><script type='text/x-sage'>
 %train_run 3 .7 .7 .7
 </script></div><br/>
@@ -186,7 +186,7 @@ ti=[['coefficients','loss functions & steps'],
 pl.imshow(cv2.cvtColor(generated_image01,cv2.COLOR_BGR2RGB))
 pl.tight_layout(); pl.show(); table(ti)
 </script></div><br/>
-    <h2>✒️ &nbsp; Displaying Vertical Images</h2> 
+    <h2>✒️ &nbsp; Vertical Images</h2> 
 <div class='linked'><script type='text/x-sage'>
 display_images('picture01.png','pattern01.png')
 </script></div><br/>
