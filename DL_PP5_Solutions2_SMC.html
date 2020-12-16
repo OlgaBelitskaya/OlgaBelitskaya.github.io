@@ -142,11 +142,11 @@ style_layers=['block1_conv1','block2_conv1','block3_conv1',
 generated_data=[]; epochs,ol,sl,vl=i0,0.,0.,0.
 @register_line_magic
 def train_run(pars):
+    global generated_data,epochs,ol,sl,vl
     pars=pars.split()
     epochs=int(pars[0]); ol=float(pars[1])
     sl=float(pars[2]); vl=float(pars[3])
     sh=pattern01.shape[0]*pattern01.shape[1]
-    global generated_data,epochs,ol,sl,vl
     with tf.Graph().as_default():
         original_input,style_input,generated_input=\
         inputs(picture01,pattern01)
