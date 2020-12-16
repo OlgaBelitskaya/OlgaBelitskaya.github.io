@@ -136,22 +136,45 @@ def calculate_variation_loss(x):
     return tfkb.sum(tfkb.pow(row_diff+col_diff,float(1.25)))
 </script></div><br/>
     <h2>✒️ &nbsp; VGG16 Usage</h2>
-<div class="linked"><script type="text/x-sage">
-original_loss2=calculate_original_loss(vgg16_layer_dict,['block5_conv2'])
-style_loss2=calculate_style_loss(vgg16_layer_dict,style_layers, 
-                                 pattern02.shape[i0]*pattern02.shape[i1])
-variation_loss2=calculate_variation_loss(generated_input2)
+<div class='linked'><script type='text/x-sage'>
+style_layers=['block1_conv1','block2_conv1','block3_conv1',
+              'block4_conv1','block5_conv1']
+generated_data=[]
+@register_line_magic
+def train_run(pars):
+    pars=pars.split()
+    epochs=int(pars[0]); ol=float(pars[1])
+    sl=float(pars[2]); vl=float(pars[3])
+    sh=pattern01.shape[0]*pattern01.shape[1]
+    global generated_data
+    with tf.Graph().as_default():
+        original_input,style_input,generated_input=\
+        inputs(picture01,pattern01)
+        input_tensor=tf.concat([original_input,style_input,
+                                generated_input],axis=0)
+        print(input_tensor.shape)
+        vgg16_model=tf.keras.applications.vgg16.\
+        VGG16(input_tensor=input_tensor,include_top=False)
+        vgg16_layer_dict={layer.name:layer 
+                          for layer in vgg16_model.layers}
+        original_loss=\
+        calculate_original_loss(vgg16_layer_dict,
+                                ['block5_conv2'])
+        style_loss=\
+        calculate_style_loss(vgg16_layer_dict,style_layers,sh)
+        variation_loss=\
+        calculate_variation_loss(generated_input)
+        loss=ol*original_loss+sl*style_loss+vl*variation_loss       
+        gradients=tfkb.gradients(loss,generated_input)[0]
+        calculate=tfkb.function([generated_input],
+                                [loss,gradients])
+        generated_data=preprocess(picture01)
+        for i in tqdm(range(epochs)):
+            _,gradients_value=calculate([generated_data])
+            generated_data-=gradients_value*.001
 </script></div><br/>
-    <h2>✒️ &nbsp; Generated Images</h2>       
-<div class="linked"><script type="text/x-sage">
-ol,sl,vl,st=float(.5),float(1.),float(.1),i2
-loss2=ol*original_loss2+sl*style_loss2+vl*variation_loss2    
-gradients2=tkb.gradients(loss2,generated_input2)[i0]
-calculate2=tkb.function([generated_input2],[loss2,gradients2])
-generated_data2=preprocess(picture02)
-for i in tqdm(range(st)):
-    _,gradients_value2=calculate2([generated_data2])
-    generated_data2-=gradients_value2*float(.001)
+<div class='linked'><script type='text/x-sage'>
+%train_run 3 .7 .7 .7
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 generated_image01=deprocess(generated_data2)
