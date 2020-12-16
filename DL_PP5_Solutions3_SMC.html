@@ -30,6 +30,8 @@ Perfect and complete explanation =>
 <div class='linked'><script type='text/x-sage'>
 !python3 -m pip install --upgrade pip \
 --user --quiet --no-warn-script-location
+!python3 -m pip install tqdm \
+--user --quiet --no-warn-script-location
 !python3 -m pip install opencv-python \
 --user --quiet --no-warn-script-location
 !python3 -m pip install argon2-cffi \
@@ -41,48 +43,47 @@ Perfect and complete explanation =>
 path='/home/sc_work/.sage/local/lib/python3.8/site-packages'
 import sys; sys.path.append(path)
 import warnings; warnings.filterwarnings('ignore')
-import urllib,cv2
+import os,urllib,cv2
 import numpy as np,tensorflow as tf,pylab as pl
-import tensorflow.keras.backend as tkb
+import tensorflow.keras.backend as tfkb
+from IPython.core.magic import register_line_magic
 from tqdm import tqdm
 i0,i1,i2,i3=int(0),int(1),int(2),int(3)
-fpath='https://olgabelitskaya.github.io/'
+files_path='https://olgabelitskaya.github.io/'
 </script></div><br/>
     <h2>✒️ &nbsp; Displaying Horizontal Images</h2> 
-<div class="linked"><script type="text/x-sage">
-def display_images(original,style,fpath=fpath):
-    input_file=urllib.request.urlopen(fpath+original)
-    output_file=open(original,'wb'); 
-    output_file.write(input_file.read())
-    output_file.close(); input_file.close()
-    input_file=urllib.request.urlopen(fpath+style)
-    output_file=open(style,'wb'); 
-    output_file.write(input_file.read())
-    output_file.close(); input_file.close()
+<div class='linked'><script type='text/x-sage'>
+def display_images(original,style,files_path=files_path):
+    for f in [original,style]:
+        input_file=urllib.request.urlopen(files_path+f)
+        output_file=open(f,'wb'); 
+        output_file.write(input_file.read())
+        output_file.close(); input_file.close()
     original_img=cv2.imread(original)
     style_img=cv2.imread(style)    
-    fig=pl.figure(figsize=(6,3))
+    fig=pl.figure(figsize=(8,4))
     ax=fig.add_subplot(121)
-    pl.title("Shape of the original image: %s"%str(original_img.shape),
-             fontsize=int(8))
+    str1='Shape of the original image: %s'
+    pl.title(str1%str(original_img.shape),fontsize=int(8))
     ax.imshow(cv2.cvtColor(original_img,cv2.COLOR_BGR2RGB))
     ax=fig.add_subplot(122)
-    pl.title("Shape of the style image: %s"%str(style_img.shape),
-             fontsize=int(8))
-    ax.imshow(cv2.cvtColor(style_img,cv2.COLOR_BGR2RGB)); pl.show()
-</script></div><br/>    
-<div class="linked"><script type="text/x-sage">
+    str2='Shape of the style image: %s'
+    pl.title(str2%str(style_img.shape),fontsize=int(8))
+    ax.imshow(cv2.cvtColor(style_img,cv2.COLOR_BGR2RGB))
+    pl.tight_layout(); pl.show()
+</script></div><br/>
+<div class='linked'><script type='text/x-sage'>
 display_images('picture09.png','pattern09.png')
 </script></div><br/>
     <h2>✒️ &nbsp; Preprocessing</h2> 
-<div class="linked"><script type="text/x-sage">
-picture02=cv2.imread('picture09.png').astype('float32')
-pattern02=cv2.imread('pattern09.png').astype('float32')
-picture02=cv2.resize(picture02,(int(360),int(330)))
-pattern02=cv2.resize(pattern02,(int(360),int(330)))
-picture02=picture02.astype('float32')
-pattern02=pattern02.astype('float32')
-picture02.shape,pattern02.shape
+<div class='linked'><script type='text/x-sage'>
+picture01=cv2.imread('picture09.png').astype('float32')
+pattern01=cv2.imread('pattern09.png').astype('float32')
+picture01=cv2.resize(picture01,(int(360),int(330)))
+pattern01=cv2.resize(pattern01,(int(360),int(330)))
+picture01=picture01.astype('float32')
+pattern01=pattern01.astype('float32')
+picture01.shape,pattern01.shape
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def preprocess(img):
