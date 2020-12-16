@@ -161,7 +161,9 @@ def train_run(pars):
             _,gradients_value=calculate([generated_data])
             generated_data-=gradients_value*.001
 </script></div><br/>
-    <h2>✒️ &nbsp; Generated Images</h2>
+<p>Unfortunately, we can train with guarantee only one neural network at ones.</p>
+<p>Please restart the page and load the data again for training each of them.</p>
+    <h2>✒️ &nbsp; Horizontal Images</h2> 
 <div class='linked'><script type='text/x-sage'>
 display_images('picture09.png','pattern09.png')
 </script></div><br/>
@@ -174,6 +176,7 @@ picture01=picture01.astype('float32')
 pattern01=pattern01.astype('float32')
 picture01.shape,pattern01.shape
 </script></div><br/>
+    <h2>✒️ &nbsp; Generated Images</h2>
 <div class='linked'><script type='text/x-sage'>
 %train_run 3 .7 .7 .7
 </script></div><br/>
@@ -190,7 +193,6 @@ pl.tight_layout(); pl.show(); table(ti)
 <div class='linked'><script type='text/x-sage'>
 display_images('picture01.png','pattern01.png')
 </script></div><br/>
-    <h2>✒️ &nbsp; Preprocessing</h2> 
 <div class='linked'><script type='text/x-sage'>
 def rr_img(image,angle,width,height):
     [h,w]=image.shape[:i2]; x,y=int(w//2),int(h//2)
@@ -218,11 +220,11 @@ picture01.shape,pattern01.shape
 generated_image01=deprocess(generated_data)
 generated_image01=rr_img(generated_image01,int(270),int(400),int(600))/255
 pl.figure(figsize=(6,4))
-ti=[['coefficients','loss functions & steps'],
-    [ol,'original_loss'],[sl,'style_loss'],
-    [vl,'variation_loss'],[st,'steps']]
+tti=[['coefficients','loss functions & steps'],
+    [round(ol,2),'original_loss'],[round(sl,2),'style_loss'],
+    [round(vl,2),'variation_loss'],[epochs,'epochs']]
 pl.imshow(cv2.cvtColor(generated_image01,cv2.COLOR_BGR2RGB))
-pl.show(); table(ti)
+pl.tight_layout(); pl.show(); table(ti)
 </script></div><br/>  
   </body>
 </html>
