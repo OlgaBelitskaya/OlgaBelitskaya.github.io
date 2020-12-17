@@ -173,10 +173,12 @@ table([('Boston Housing Dataset Statistics: \n',''),
        ('Standard deviation of house prices = ',numpy.std(prices))])
 </script></div><br/>
 <div class='linked'><script type='text/x-sage'>
-pylab.figure(figsize=(11,5))
-seaborn.distplot(prices,color='#348ABD')
+pylab.figure(figsize=(10,5))
+seaborn.histplot(
+    prices,color='#348ABD',edgecolor='slategray',bins=30,kde=True)
 pylab.title('Boston Housing Data')
-pylab.xlabel('Prices'); pylab.show()
+pylab.xlabel('Prices')
+pylab.tight_layout(); pylab.show()
 </script></div><br/>
     <h3>Question 1 - Feature Observation</h3>
 As a reminder, we are using three features from the Boston housing dataset: 'RM', 'LSTAT', and 'PTRATIO'.<br/>
@@ -216,7 +218,7 @@ def lstsq_plot(feature):
     pylab.title('Boston Housing Data'); pylab.legend(); pylab.show()
 seaborn.jointplot(features['RM'],prices,kind='hex',
                   joint_kws={'alpha':.8},height=5,color='#348ABD')
-pylab.show(); lstsq_plot('RM')
+pylab.tight_layout(); pylab.show(); lstsq_plot('RM')
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 seaborn.jointplot(features['PTRATIO'],prices,kind='hex',
