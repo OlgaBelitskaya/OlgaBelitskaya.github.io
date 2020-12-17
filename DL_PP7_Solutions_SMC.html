@@ -30,23 +30,23 @@ stored in the file <i>HorseBreedImages.h5.zip</i>.<br/>
 In the original dataset, photo files are in the .png format and they are labeled by file prefixes.<br/>
 <div class='linked'><script type='text/x-sage'>
 %%html
-<table style="width:30%; background-color:silver; 
-              font-family:'Lobster'; font-size:150%;">
+<table style='width:30%; background-color:silver; 
+              font-family:Lobster; font-size:150%;'>
 <tr><th>Label </th><th> Breeds </th></tr>
-<tr><td style="color:#FF355E;"><center> 0 </center></td>
-<td style="color:#FF355E;"><left> => Akhal-Teke </left></td></tr>
-<tr><td style="color:#FF6037;"><center> 1 </center></td>
-<td style="color:#FF6037;"><left> => Appaloosa </left></td></tr>
-<tr><td style="color:#FF9966;"><center> 2 </center></td>
-<td style="color:#FF9966;"><left> => Orlov Trotter </left></td></tr>
-<tr><td style="color:#FFCC33;"><center> 3 </center></td>
-<td style="color:#FFCC33;"><left> => Vladimir Heavy Draft </left></td></tr> 
-<tr><td style="color:#FFFF66;"><center> 4 </center></td>
-<td style="color:#FFFF66;"><left> => Percheron </left></td></tr>
-<tr><td style="color:#CCFF00;"><center> 5 </center></td>
-<td style="color:#CCFF00;"><left> => Arabian </left></td></tr>
-<tr><td style="color:#66FF66;"><center> 6 </center></td>
-<td style="color:#66FF66;"><left> => Friesian </left></td></tr>
+<tr><td style='color:#FF355E;'><center> 0 </center></td>
+<td style='color:#FF355E;'><left> => Akhal-Teke </left></td></tr>
+<tr><td style='color:#FF6037;'><center> 1 </center></td>
+<td style='color:#FF6037;'><left> => Appaloosa </left></td></tr>
+<tr><td style='color:#FF9966;'><center> 2 </center></td>
+<td style='color:#FF9966;'><left> => Orlov Trotter </left></td></tr>
+<tr><td style='color:#FFCC33;'><center> 3 </center></td>
+<td style='color:#FFCC33;'><left> => Vladimir Heavy Draft </left></td></tr> 
+<tr><td style='color:#FFFF66;'><center> 4 </center></td>
+<td style='color:#FFFF66;'><left> => Percheron </left></td></tr>
+<tr><td style='color:#CCFF00;'><center> 5 </center></td>
+<td style='color:#CCFF00;'><left> => Arabian </left></td></tr>
+<tr><td style='color:#66FF66;'><center> 6 </center></td>
+<td style='color:#66FF66;'><left> => Friesian </left></td></tr>
 </table>
 </script></div><br/>
 We'll preprocess the images, then train neural networks.<br/> 
@@ -89,7 +89,7 @@ tmodel=models.vgg16(pretrained=True,progress=False)
 from IPython.core.magic import register_line_magic
 </script></div><br/>      
     <h2>✒️ &nbsp; Step 1. Data Loading</h2> 
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 path='https://olgabelitskaya.github.io/'
 zf='HorseBreedImages.h5.zip'
 input_file=urllib.request.urlopen(path+zf)
@@ -102,28 +102,24 @@ f=h5py.File(zf[:-4],'r')
 keys=list(f.keys()); print(keys)
 </script></div><br/>
     <h2>✒️ &nbsp; Step 2. Data Processing</h2>  
-<div class="linked"><script type="text/x-sage">
-x_test=np.array(f[keys[0]])
-y_test=np.array(f[keys[1]])
-x_train=np.array(f[keys[2]])
-y_train=np.array(f[keys[3]])
+<div class='linked'><script type='text/x-sage'>
+x_test,y_test=np.array(f[keys[0]]),np.array(f[keys[1]])
+x_train,y_train=np.array(f[keys[2]]),np.array(f[keys[3]])
 os.remove(zf); os.remove(zf[:-4])
 names=['Akhal-Teke','Appaloosa','Orlov Trotter',
-       'Vladimir Heavy Draft','Percheron',
-       'Arabian','Friesian']
-fig=pl.figure(figsize=(10,2))
+       'Vladimir Heavy Draft','Percheron','Arabian','Friesian']
+fig=pl.figure(figsize=(8,2))
 n=randint(0,y_train.shape[0]-5)
 for i in range(n,n+5):
-    ax=fig.add_subplot(1,5,i-n+1,\
-    xticks=[],yticks=[],\
-    title=names[y_train[i]])
+    ax=fig.add_subplot(1,5,i-n+1,xticks=[],yticks=[])
+    ax.set_title(names[y_train[i]])
     ax.imshow((x_train[i]))
-pl.show()
+pl.tight_layout(); pl.show()
 img_size=int(64); n=int(len(x_test)/2)
 x_train=timage.resize(x_train,[img_size,img_size])
-x_train=x_train.eval(session=tf.compat.v1.Session())
+x_train=x_train.numpy()
 x_test=timage.resize(x_test,[img_size,img_size])
-x_test=x_test.eval(session=tf.compat.v1.Session())
+x_test=x_test.numpy()
 x_valid,y_valid=x_test[:n],y_test[:n]
 x_test,y_test=x_test[n:],y_test[n:]
 pd.DataFrame([[x_train.shape,x_valid.shape,x_test.shape],
@@ -131,8 +127,8 @@ pd.DataFrame([[x_train.shape,x_valid.shape,x_test.shape],
               [y_train.shape,y_valid.shape,y_test.shape],
               [y_train.dtype,y_valid.dtype,y_test.dtype]],
              columns=['train','valid','test'],
-             index=["images' shape",'image type',
-                    "labels' shape",'label type'])
+             index=['images` shape','image type',
+                    'labels` shape','label type'])
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">      
 class TData(tds):
