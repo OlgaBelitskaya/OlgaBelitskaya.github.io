@@ -184,14 +184,14 @@ Let's take a look at whether the feature <b>Sex</b> has any indication of surviv
 This function is defined in the <i>visualizations.py</i>. Python script included with this project.<br/> 
 The first two parameters passed to the function are the RMS Titanic data and passenger survival outcomes, respectively.<br/> 
 The third parameter indicates which feature we want to plot survival statistics across.  
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 survival_stats(data,outcomes,'Sex')
 </script></div><br/>
 Examining the survival statistics, a large majority of males did not survive the ship sinking.<br/>
 However, a majority of females did survive the ship sinking.<br/> 
 Let's build on our previous prediction: if a passenger was female, then we will predict that they survived.<br/>
 Otherwise, we will predict the passenger did not survive.
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 def predictions_1(data):
     predictions=[]
     for _,passenger in data.iterrows():
@@ -203,7 +203,7 @@ predictions=predictions_1(data)
     <h3>Question 2</h3>
 How accurate would a prediction be that all female passengers survived and the remaining passengers did not survive (<i>prediction_1()</i>)?
     <h3>Answer 2</h3>     
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 accuracy_score(outcomes,predictions)
 </script></div><br/>
 Using just the <b>Sex</b> feature for each passenger, we are able to increase the accuracy of our predictions by a significant margin.<br/>
@@ -211,13 +211,13 @@ Now, let's consider using an additional feature to see if we can further improve
 For example, consider all of the male passengers aboard the RMS Titanic: can we find a subset of those passengers that had a higher rate of survival?<br/>
 Let's start by looking at the <b>Age</b> of each male, by again using the <i>survival_stats()</i> function.<br/> 
 This time, we'll use the fourth parameter to filter out the data so that only passengers with the <b>Sex</b> 'male' will be included.     
-<div class="linked"><script type="text/x-sage">
-survival_stats(data,outcomes,'Age',["Sex == 'male'"])
+<div class='linked'><script type='text/x-sage'>
+survival_stats(data,outcomes,'Age',["Sex=='male'"])
 </script></div><br/>
 Examining the survival statistics, the majority of males younger than 10 survived the ship sinking, whereas most males age 10 or older did not survive the ship sinking.<br/>
 Let's continue to build on our previous prediction: if a passenger was female, then we will predict they survive.<br/> 
 If a passenger was male and younger than 10, then we will also predict they survive. Otherwise, we will predict they do not survive.      
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 def predictions_2(data):
     predictions=[]
     for _,passenger in data.iterrows():
@@ -233,7 +233,7 @@ predictions=predictions_2(data)
     <h3>Question 3</h3>
 How accurate would a prediction be that all female passengers and all male passengers younger than 10 survived (<i>prediction_2()</i>)?
     <h3>Answer 3</h3>     
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 accuracy_score(outcomes,predictions)
 </script></div><br/>
 Adding the feature <b>Age</b> as a condition in conjunction with <b>Sex</b> improves the accuracy by a small margin more than with simply using the feature <b>Sex</b> alone.<br/>
@@ -241,13 +241,13 @@ Now we can try to find a series of features and conditions to split the data on 
 This may require multiple features and multiple levels of conditional statements to succeed.<br/>
 We can use the same feature multiple times with different conditions.<br/>
 There are some experiments and the function <i>prediction_final()</i> as a result:
-<div class="linked"><script type="text/x-sage">
-survival_stats(data,outcomes,'SibSp',["Sex == 'male'","Age < 15"])
+<div class='linked'><script type='text/x-sage'>
+survival_stats(data,outcomes,'SibSp',["Sex=='male'","Age<15"])
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-survival_stats(data,outcomes,'Pclass',["Sex == 'male'","Age < 15"])
+<div class='linked'><script type='text/x-sage'>
+survival_stats(data,outcomes,'Pclass',["Sex=='male'","Age<15"])
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 def predictions_final(data):   
     predictions=[]
     for _,passenger in data.iterrows():
@@ -269,12 +269,12 @@ As we noted the percentage of survivors of passengers is much higher among women
 Next, I proceed from the assumption that because of humanitarian reasons people rescue children and elders at first.<br/> Unfortunately, this was only valid for the passengers of the first and second classes in this dataset.<br/>
 And the latest clarification, which overcomes the border of 80% in prediction accuracy:<br/>
 if a family has more than three children, absolutely all the family may not be survived in catastrophic situations and in an atmosphere of panic.     
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 accuracy_score(outcomes,predictions)
 </script></div><br/>
     <h3>Scikit-learn Metrics</h3>
 There is a set of metrics in the <b>scikit-learn</b> package for evaluation the quality of predictions.
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 from sklearn.metrics import recall_score,\
 accuracy_score,precision_score
 print ("Predictions have an accuracy of {:.2f}%."\
@@ -301,8 +301,8 @@ In this project, we use a manual implementation of a simple machine learning mod
 the <b>decision tree</b> splits a set of data into smaller and smaller groups (called nodes), by one feature at a time.<br/> Our predictions become more accurate if each of the resulting subsets is more homogeneous (contain similar labels) than before.<br/><br/>
 The decision tree algorithm is just one of many models that come from <b>supervised learning</b>,<br/>i.e. learning a model from labeled training data to make predictions about unseen or future data in a set of samples the desired outputs are already known.<br/><br/>
 Overvaluation of meaning and application of machine learning is unlikely to succeed. And the particular supervised method has a special importance<br/>because of the possibility of a permanent correlation of the predictions with the result of real actions.
-    <h3>Additional Code Cell</h3>
-<div class="linked"><script type="text/x-sage">
+    <h3>For Additional Code Experiments</h3>
+<div class='linked'><script type='text/x-sage'>
 
 </script></div><br/>
   </body>
