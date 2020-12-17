@@ -17,7 +17,7 @@
     h1 {color:#348ABD; font-family:Orbitron; text-shadow:4px 4px 4px #ccc;} 
     h2,h3 {color:slategray; font-family:Orbitron; text-shadow:4px 4px 4px #ccc;}
     h4 {color:#348ABD; font-family:Roboto;}
-    .sagecell .CodeMirror-scroll {min-height:3em; max-height:70em; font-family:times;}
+    .sagecell .CodeMirror-scroll {min-height:3em; max-height:70em; font-family:courier;}
   </style>  
   <body>
     <h1>Machine Learning Engineer Nanodegree</h1>
@@ -101,7 +101,7 @@ def ModelLearning(X,y):
     fig.suptitle(st,fontsize=16,y=1.03)
     fig.tight_layout(); pylab.show()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 def ModelComplexity(X,y):
     cv=ShuffleSplit(n_splits=10,test_size=.2,random_state=0)
     max_depth=numpy.arange(1,11)
@@ -127,7 +127,7 @@ def ModelComplexity(X,y):
     pylab.xlabel('Maximum Depth'); pylab.ylabel('Score')
     pylab.ylim([-.05,1.05]); pylab.show()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 def PredictTrials(X,y,fitter,data):
     prices=[]
     for k in range(10):
@@ -257,7 +257,7 @@ Assume that a dataset contains five data points and a model made the following p
 <tr class="row-b"><td><script type="math/tex">4.2</script></td><td><script type="math/tex">5.3</script></td></tr>
 </tbody></table>
 <i>Would you consider this model to have successfully captured the variation of the target variable? Why or why not?</i>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 display(table([['True Value','Prediction'],
                [3.0,2.5],[-0.5,0.0],
                [2.0,2.1],[7.0,7.8],[4.2,5.3]]))
@@ -273,7 +273,7 @@ In addition, it is unknown whether it is a linear model and how many variables w
 Therefore, it can be stated only that a reasonably accurate prediction is possible to build in this case, but it is desirable to have more data.
     <h3>Implementation: Shuffle and Split Data</h3>
 The next implementation requires that we take the Boston housing dataset and split the data into training and testing subsets.<br/>Typically, the data is splitted and shuffled into a random order when creating the training and testing subsets to remove any bias in the ordering of the dataset.
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 X_train,X_test,y_train,y_test=\
 train_test_split(features,prices,test_size=.2,random_state=1)
 print ("Training and testing split was successful.")
@@ -298,7 +298,7 @@ The following code cell produces four graphs for a decision tree model with diff
 Each graph visualizes the <b>learning curves</b> of the model for both training and testing as the size of the training set is increased.<br/>
 The shaded region of a learning curve denotes the uncertainty of that curve (measured as the standard deviation).<br/> 
 The model is scored on both the training and testing sets using <i>$R^2$</i>, the coefficient of determination.
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 ModelLearning(features,prices)
 </script></div><br/>
     <h3>Question 4 - Learning the Data</h3>
@@ -316,7 +316,7 @@ Now we produces a graph for a decision tree model that has been trained and vali
 The graph shows two <b>complexity curves</b> — one for training and one for validation.<br/>
 Similar to the learning curves, the shaded regions of both the complexity curves denote the uncertainty in those curves,<br/> 
 and the model is scored on both the training and validation sets using the <i>performance_metric()</i> function.
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 ModelComplexity(X_train,y_train)
 </script></div><br/>
     <h3>Question 5 - Bias-Variance Tradeoff</h3>
@@ -371,7 +371,7 @@ For the <i>fit_model</i> function in the code cell below, you will need to imple
 - Use <i>GridSearchCV</i> from <i>sklearn.model_selection</i> to create a grid search object.<br/>
 - Pass the variables <i>regressor</i>, <i>params</i>, <i>scoring_fnc</i>, and <i>cv_sets</i> as parameters to the object.<br/>
 - Assign the <i>GridSearchCV</i> object to the <i>grid</i> variable.
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 def fit_model(X,y):
     cv_sets=ShuffleSplit(n_splits=12,test_size=.2,random_state=0)
     regressor=DecisionTreeRegressor()
@@ -389,7 +389,7 @@ We can use these predictions to gain information about data where the value of t
 <i>What maximum depth does the optimal model have? How does this result compare to your guess in Question 6?</i>
     <h3>Answer 9</h3>
 The result corresponds to the expressed in the Answer 6 assumptions based on visualization of the model complexity.      
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 fit=fit_model(X_train,y_train); reg=fit.best_estimator_
 results=pandas.DataFrame(fit.cv_results_)
 print("Grid Search Process Results"); display(results.T)
@@ -399,14 +399,14 @@ print ("\nParameter 'max_depth' is {} for the optimal model."\
     <h3>Question 10 - Predicting Selling Prices</h3>
 Imagine that you were a real estate agent in the Boston area looking to use this model to help price homes owned by your clients that they wish to sell.<br/>
 You have collected the following information from three of your clients:
-<table  class="table_form"><tbody>
-<tr class="row-a"><td>Feature</td><td>Client 1</td><td>Client 2</td><td>Client 3</td></tr>
-<tr class="row-b"><td>Total number of rooms in home</td><td>5 rooms</td><td>4 rooms</td><td>8 rooms</td></tr>
-<tr class="row-a"><td>Neighborhood poverty level (as %)</td><td>17%</td><td>32%</td><td>3%</td></tr>
-<tr class="row-b"><td>Student-teacher ratio of nearby schools</td><td>15-to-1</td><td>22-to-1</td><td>12-to-1</td></tr>
+<table  class='table_form'><tbody>
+<tr class='row-a'><td>Feature</td><td>Client 1</td><td>Client 2</td><td>Client 3</td></tr>
+<tr class='row-b'><td>Total number of rooms in home</td><td>5 rooms</td><td>4 rooms</td><td>8 rooms</td></tr>
+<tr class='row-a'><td>Neighborhood poverty level (as %)</td><td>17%</td><td>32%</td><td>3%</td></tr>
+<tr class='row-b'><td>Student-teacher ratio of nearby schools</td><td>15-to-1</td><td>22-to-1</td><td>12-to-1</td></tr>
 </tbody></table>
 <i>What price would you recommend each client sell his/her home at? Do these prices seem reasonable given the values for the respective features?</i>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 display(table([['Feature','Client 1','Client 2','Client 3'],
                ['Total number of rooms in home',
                 '5 rooms','4 rooms','8 rooms'],
@@ -419,7 +419,7 @@ for i,price in enumerate(reg.predict(client_data)):
           .format(i+1,price))   
 </script></div><br/>
 We can compare them to the real prices for the housing of the considered database, extracting items with roughly the same indicators. 
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 print(data[(data['RM']>=5)&(data['RM']<5.1)&\
 (data['LSTAT']>=10)&(data['LSTAT']<=20)])
 print(data[(data['RM']>=4)&(data['RM']<4.2)&\
@@ -435,7 +435,7 @@ An optimal model is not necessarily a robust model. Sometimes, a model is either
 Sometimes, a model could use a learning algorithm that is not appropriate for the structure of the data given.<br/> 
 Other times, the data itself could be too noisy or contain too few samples to allow a model to adequately capture the target variable — i.e., the model is underfitted.<br/>
 We can run the <i>fit_model()</i> function ten times with different training and testing sets to see how the prediction for a specific client changes with the data it's trained on.
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 PredictTrials(features,prices,fit_model,client_data)
 </script></div><br/>
     <h3>Question 11 - Applicability</h3>
@@ -457,13 +457,13 @@ For practical application of the model the user has to perform several specific 
 The goal of this report was to describe the built model that determined the best result in house pricing.<br/>
 Here various statistical and machine learning techniques were applied to predictions and observations.<br/> 
 The reader can see the parameters of the final model below.      
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 reg
 </script></div><br/>
 Of course, the model is a little bit outdated. In the modern version, the project can be implemented in the form of an interactive map<br/>
 of recommended prices with the basic indices of living comfort, which can serve as a guide for buyers and sellers.      
-    <h3>Additional Code Cell</h3>
-<div class="linked"><script type="text/x-sage">
+    <h3>For Additional Code Experiments</h3>
+<div class='linked'><script type='text/x-sage'>
 
 </script></div><br/> 
   </body>
