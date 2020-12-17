@@ -230,20 +230,19 @@ history=kmodel.fit(
 <div class='linked'><script type='text/x-sage'>
 keras_history_plot(history); del history
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 kmodel.load_weights(fw)
-kmodel.evaluate(x_test,y_test)
+kmodel.evaluate(x_test,y_test,verbose=int(0))
 y_test_predict=np.argmax(kmodel.predict(x_test),axis=-1)
 os.remove(fw)
 </script></div><br/>
     <h2>✒️ &nbsp; Step 4. PyTorch</h2>
-<div class="linked"><script type="text/x-sage">
-for param in tmodel.parameters():
-    param.requires_grad=False
+<div class='linked'><script type='text/x-sage'>
+for param in tmodel.parameters(): param.requires_grad=False
 tmodel.classifier[3].requires_grad=True
 print('\n\n',tmodel)
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 def model_acc(model,data_loader):
     correct_preds,num_examples=int(0),int(0)
     for features,targets in data_loader:
@@ -268,7 +267,7 @@ def epoch_loss(model,data_loader):
             curr_loss+=loss
         return curr_loss/num_examples
 </script></div><br/>      
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 @register_line_magic
 def train_run(epochs):
     epochs=int(epochs)
@@ -293,7 +292,7 @@ def train_run(epochs):
                   (model_acc(tmodel,dataloaders['valid']),
                    epoch_loss(tmodel,dataloaders['valid'])))
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 num_classes=int(10)
 tmodel.classifier[6]=tnn.Sequential(
     tnn.Linear(int(4096),int(256)),tnn.ReLU(),
@@ -302,11 +301,10 @@ tmodel=tmodel.to(dev)
 optimizer=torch.optim.Adam(tmodel.parameters())
 %train_run 1
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 tmodel.eval()
 with torch.set_grad_enabled(False):
-    print('test acc: %.2f%%'\
-          %model_acc(tmodel,dataloaders['test']))
+    print('test acc: %.2f%%'%model_acc(tmodel,dataloaders['test']))
 </script></div><br/>
     <h2>✒️ &nbsp; Step 5. Models' Predictions</h2>
 <div class="linked"><script type="text/x-sage">
