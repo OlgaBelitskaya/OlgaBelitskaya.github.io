@@ -167,11 +167,10 @@ n_greater_50k=len(data[data['income']=='>50K'])
 n_at_most_50k=len(data[data['income']=='<=50K'])
 n_records=len(data)
 greater_percent=float(n_greater_50k*100.0/n_records)
-print ('Total number of records: {}'.format(n_records))
-print ('Individuals making more than $50,000: {}'.format(n_greater_50k))
-print ('Individuals making at most $50,000: {}'.format(n_at_most_50k))
-print ('Percentage of individuals making more than $50,000: {:.2f}%'\
-.format(greater_percent))
+table([('Total number of records: ',n_records),
+       ('Individuals making more than $50,000: ',n_greater_50k),
+       ('Individuals making at most $50,000: ',(n_at_most_50k)),
+       ('Percentage of individuals making more than $50,000: ',greater_percent)])
 </script></div><br/>
     <h3>Features' Description</h3>
 <b>age</b>: continuous.<br/>
@@ -196,30 +195,31 @@ A dataset may sometimes contain at least one feature whose values tend to lie ne
 Algorithms can be sensitive to such distributions of values and can underperform if the range is not properly normalized.<br/>
 With the census dataset two features fit this description: <i>capital-gain</i> and <i>capital-loss</i>.<br/>
 Let's plot a histogram of these two features and have a look on the range of the values present and how they are distributed.
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 income_raw=data['income']
 features_raw=data.drop('income',axis=1)
 distribution(data)
 </script></div><br/>
-For highly-skewed feature distributions such as <i>capital-gain</i> and <i>capital-loss</i>, it is common practice to apply a <a href="https://en.wikipedia.org/wiki/Data_transformation_(statistics)">&#x1F578;logarithmic transformation</a> on the data <br/>
+For highly-skewed feature distributions such as <i>capital-gain</i> and <i>capital-loss</i>, it is common practice to apply a <a href='https://en.wikipedia.org/wiki/Data_transformation_(statistics)'>&#x1F578;logarithmic transformation</a> on the data <br/>
 so that the very large and very small values do not negatively affect the performance of a learning algorithm.<br/>
 Using a logarithmic transformation significantly reduces the range of values caused by outliers.<br/> 
 Care must be taken when applying this transformation, however: the logarithm of 0 is undefined,<br/>
 so we must translate the values by a small amount above 0 to apply the logarithm successfully.
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 skewed=['capital-gain','capital-loss']
 features_raw[skewed]=data[skewed].apply(lambda x:numpy.log(x+1))
 distribution(features_raw,transformed=True)
 </script></div><br/>
     <h3>Normalizing Numerical Features</h3>
-In addition to performing transformations on features that are highly skewed, it is often good practice to perform some type of scaling on numerical features.<br/>
-Applying a scaling to the data does not change the shape of each feature's distribution (such as <i>capital-gain</i> or <i>capital-loss</i> above);<br/>
+In addition to performing transformations on features that are highly skewed, 
+it is often good practice to perform some type of scaling on numerical features.<br/>
+Applying a scaling to the data does not change the shape of each feature's distribution (such as <i>capital-gain</i> or 
+<i>capital-loss</i> above);<br/>
 however, normalization ensures that each feature is treated equally when applying supervised learners.<br/> 
 Note that once scaling is applied, observing the data in its raw form will no longer have the same original meaning.     
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 scaler=MinMaxScaler()
-numerical=['age','education-num','capital-gain',
-           'capital-loss','hours-per-week']
+numerical=['age','education-num','capital-gain','capital-loss','hours-per-week']
 features_raw[numerical]=scaler.fit_transform(data[numerical])
 features_raw.head().T
 </script></div><br/>
@@ -229,12 +229,11 @@ One popular way to convert categorical variables is by using the <b>one-hot enco
 One-hot encoding creates a <b>"dummy"</b> variable for each possible category of each non-numeric feature.<br/>
 For example, assume someFeature has three possible entries: A, B, or C.<br/>
 We then encode this feature into <i>someFeature_A</i>, <i>someFeature_B</i> and <i>someFeature_C</i>.
-<div class="linked"><script type="text/x-sage">
-display(table([[' ','someFeature',' ','someFeature_A',
-                'someFeature_B','someFeature_C'],
-               ['0','B',' ','0','1','0'],
-               ['1','C','=> one-hot encode =>','0','0','1'],
-               ['2','A',' ','1','0','0']]))
+<div class='linked'><script type='text/x-sage'>
+table([[' ','someFeature',' ','someFeature_A','someFeature_B','someFeature_C'],
+        ['0','B',' ','0','1','0'],
+        ['1','C','=> one-hot encode =>','0','0','1'],
+        ['2','A',' ','1','0','0']])
 </script></div><br/>
 Additionally, as with the non-numeric features, we need to convert the non-numeric target label, <i>income</i> to numerical values for the learning algorithm to work.<br/>
       Since there are only two possible categories for this label (<i>&#8924;50K</i> and <i>&#62;50K</i>),<br/>
