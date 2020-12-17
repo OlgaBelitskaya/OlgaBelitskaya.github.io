@@ -17,7 +17,7 @@
     h1 {color:#ff603b; font-family:Orbitron; text-shadow:4px 4px 4px #ccc;} 
     h2,h3 {color:slategray; font-family:Orbitron; text-shadow:4px 4px 4px #ccc;}
     h4 {color:#ff603b; font-family:Roboto;}
-    .sagecell .CodeMirror-scroll {min-height:3em; max-height:70em; font-family:Roboto;}
+    .sagecell .CodeMirror-scroll {min-height:3em; max-height:70em; font-family:courier;}
   </style>  
   <body>
     <h1>Machine Learning Engineer Nanodegree</h1>
@@ -140,16 +140,19 @@ From a sample of the RMS Titanic data, we can see the various features present f
 Since we're interested in the outcome of survival for each passenger or crew member,<br/>
 we can remove the <b>Survived</b> feature from this dataset and store it as its own separate variable outcomes.<br/> 
 We will use these outcomes as our prediction targets.      
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 outcomes=full_data['Survived']
 data=full_data.drop('Survived',axis=1); data.head()
 </script></div><br/>
 The very same sample of the RMS Titanic data now shows the <b>Survived</b> feature removed from the DataFrame.<br/>
-Note that the passenger data and the outcomes of survival are now paired. That means for any passenger <i>data.loc[i]</i>, they have the survival <i>outcomes[i]</i>.<br/>
+Note that the passenger data and the outcomes of survival are now paired. That means for any passenger <i>data.loc[i]</i>, 
+they have the survival <i>outcomes[i]</i>.<br/>
 To measure the performance of our predictions, we need a metric to score our predictions against the true outcomes of survival - the function <i>accuracy_score()</i>.<br/>
-Since we are interested in how accurate our predictions are, we will calculate the proportion of passengers where our prediction of their survival is correct.<br/>
-<b>Think:</b> Out of the first five passengers, if we predict that all of them survived, what would you expect the accuracy of our predictions to be?      
-<div class="linked"><script type="text/x-sage">
+Since we are interested in how accurate our predictions are, we will calculate the proportion of passengers 
+where our prediction of their survival is correct.<br/>
+<b>Think:</b> Out of the first five passengers, if we predict that all of them survived, 
+what would you expect the accuracy of our predictions to be?      
+<div class='linked'><script type='text/x-sage'>
 def accuracy_score(truth, pred):
     if len(truth)==len(pred): 
         return "Predictions have an accuracy of {:.2f}%."\
@@ -164,7 +167,7 @@ If we were asked to make a prediction about any passenger aboard the RMS Titanic
 then the best prediction we could make would be that they did not survive.<br/>
 This is because we can assume that a majority of the passengers (more than 50%) did not survive the ship sinking.<br/>
 The <i>predictions_0()</i> function below will always predict that a passenger did not survive.
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 def predictions_0(data):
     predictions=[]
     for _,passenger in data.iterrows(): predictions.append(0)
@@ -174,7 +177,7 @@ predictions=predictions_0(data)
       <h3>Question 1</h3>
 Using the RMS Titanic data, how accurate would a prediction be that none of the passengers survived?
       <h3>Answer 1</h3>     
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 accuracy_score(outcomes,predictions)
 </script></div><br/>
 Let's take a look at whether the feature <b>Sex</b> has any indication of survival rates among passengers using the <i>survival_stats()</i> function.<br/>
