@@ -112,7 +112,7 @@ fig=pl.figure(figsize=(8,2))
 n=randint(0,y_train.shape[0]-5)
 for i in range(n,n+5):
     ax=fig.add_subplot(1,5,i-n+1,xticks=[],yticks=[])
-    ax.set_title(names[labels[i].item()],fontsize=10,color='#aa33ff')
+    ax.set_title(names[y_train[i]],fontsize=10,color='#aa33ff')
     ax.imshow((x_train[i]))
 pl.tight_layout(); pl.show()
 img_size=int(64); n=int(len(x_test)/2)
@@ -174,7 +174,7 @@ def display_examples(data):
 %display_examples valid
 </script></div><br/>
     <h2>✒️ &nbsp; Step 3. Keras</h2>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 def kmodel(leaky_alpha):
     model=Sequential()
     model.add(tkl.Conv2D(int(32),(int(5),int(5)),padding='same', 
@@ -197,25 +197,21 @@ def kmodel(leaky_alpha):
     return model
 kmodel=kmodel(float(.005))
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-def history_plot(fit_history):
-    pl.figure(figsize=(10,10)); pl.subplot(211)
-    keys=list(fit_history.history.keys())[0:4]
-    pl.plot(fit_history.history[keys[0]],
-            color='slategray',label='train')
-    pl.plot(fit_history.history[keys[2]],
-            color='#aa33ff',label='valid')
-    pl.xlabel("Epochs"); pl.ylabel("Loss")
-    pl.legend(); pl.grid()
-    pl.title('Loss Function')     
-    pl.subplot(212)
-    pl.plot(fit_history.history[keys[1]],
-            color='slategray',label='train')
-    pl.plot(fit_history.history[keys[3]],
-            color='#aa33ff',label='valid')
-    pl.xlabel("Epochs"); pl.ylabel("Accuracy")    
-    pl.legend(); pl.grid()
-    pl.title('Accuracy'); pl.show()
+<div class='linked'><script type='text/x-sage'>
+def keras_history_plot(fit_history,fig_size=8,color='#aa33ff'):
+    keys=list(fit_history.history.keys())
+    list_history=[fit_history.history[keys[i]] 
+                  for i in range(len(keys))]
+    dfkeys=pd.DataFrame(list_history).T
+    dfkeys.columns=keys
+    fig=pl.figure(figsize=(fig_size,fig_size))
+    ax1=fig.add_subplot(2,1,1)
+    dfkeys.iloc[:,[int(0),int(2)]].plot(
+        ax=ax1,color=['slategray',color],grid=True)
+    ax2=fig.add_subplot(2,1,2)
+    dfkeys.iloc[:,[int(1),int(3)]].plot(
+        ax=ax2,color=['slategray',color],grid=True)
+    pl.tight_layout(); pl.show()
 </script></div><br/>      
 <div class="linked"><script type="text/x-sage">
 fw='weights.best.hdf5'
