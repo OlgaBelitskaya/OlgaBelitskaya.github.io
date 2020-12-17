@@ -123,7 +123,7 @@ def ModelComplexity(X,y):
                        test_mean+test_std,alpha=.15,color='#348ABD')
     pylab.legend(loc='lower right')
     pylab.xlabel('Maximum Depth'); pylab.ylabel('Score')
-    pylab.ylim([-.05,1.05]); pylab.show()
+    pylab.ylim([-.05,1.05]); pylab.tight_layout(); pylab.show()
 </script></div><br/>
 <div class='linked'><script type='text/x-sage'>
 def PredictTrials(X,y,fitter,data):
@@ -251,22 +251,20 @@ def performance_metric(y_true,y_predict):
 </script></div><br/>
     <h3>Question 2 - Goodness of Fit</h3>
 Assume that a dataset contains five data points and a model made the following predictions for the target variable:
-<table class="table_form"><tbody>
-<tr class="row-a"><td>True Value</td><td>Prediction</td></tr>
-<tr class="row-b"><td><script type="math/tex">3.0</script></td><td><script type="math/tex">2.5</script></td></tr>
-<tr class="row-a"><td><script type="math/tex">-0.5</script></td><td><script type="math/tex">0.0</script></td></tr>
-<tr class="row-b"><td><script type="math/tex">2.0</script></td><td><script type="math/tex">2.1</script></td></tr>
-<tr class="row-a"><td><script type="math/tex">7.0</script></td><td><script type="math/tex">7.8</script></td></tr>
-<tr class="row-b"><td><script type="math/tex">4.2</script></td><td><script type="math/tex">5.3</script></td></tr>
+<table class='table_form'><tbody>
+<tr class='row-a'><td>True Value</td><td>Prediction</td></tr>
+<tr class='row-b'><td><script type='math/tex'>3.0</script></td><td><script type='math/tex'>2.5</script></td></tr>
+<tr class='row-a'><td><script type='math/tex'>-0.5</script></td><td><script type='math/tex'>0.0</script></td></tr>
+<tr class='row-b'><td><script type='math/tex'>2.0</script></td><td><script type='math/tex'>2.1</script></td></tr>
+<tr class='row-a'><td><script type='math/tex'>7.0</script></td><td><script type='math/tex'>7.8</script></td></tr>
+<tr class='row-b'><td><script type='math/tex'>4.2</script></td><td><script type='math/tex'>5.3</script></td></tr>
 </tbody></table>
 <i>Would you consider this model to have successfully captured the variation of the target variable? Why or why not?</i>
 <div class='linked'><script type='text/x-sage'>
 display(table([['True Value','Prediction'],
-               [3.0,2.5],[-0.5,0.0],
-               [2.0,2.1],[7.0,7.8],[4.2,5.3]]))
-score=performance_metric([3,-0.5,2,7,4.2],
-                         [2.5,0.0,2.1,7.8,5.3])
-st="Model has a coefficient of determination, R^2, of {:.3f}."
+               [3.0,2.5],[-0.5,0.0],[2.0,2.1],[7.0,7.8],[4.2,5.3]]))
+score=performance_metric([3,-0.5,2,7,4.2],[2.5,0.0,2.1,7.8,5.3])
+st='Model has a coefficient of determination, R^2, of {:.3f}.'
 print(st.format(score))
 </script></div><br/>
     <h3>Answer 2</h3>
@@ -279,7 +277,7 @@ The next implementation requires that we take the Boston housing dataset and spl
 <div class='linked'><script type='text/x-sage'>
 X_train,X_test,y_train,y_test=\
 train_test_split(features,prices,test_size=.2,random_state=1)
-print ("Training and testing split was successful.")
+print ('Training and testing split was successful.')
 </script></div><br/>
     <h3>Question 3 - Training and Testing</h3>
 <i>What is the benefit to splitting a dataset into some ratio of training and testing subsets for a learning algorithm?</i>
