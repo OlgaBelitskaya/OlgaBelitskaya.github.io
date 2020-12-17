@@ -83,10 +83,8 @@ def ModelLearning(X,y):
         test_std=numpy.std(test_scores,axis=1)
         test_mean=numpy.mean(test_scores,axis=1)
         ax=fig.add_subplot(2,2,k+1)
-        ax.plot(sizes,train_mean,'o-',
-                color='#E24A33',label='Training Score')
-        ax.plot(sizes,test_mean,'o-',
-                color='#348ABD',label='Testing Score')
+        ax.plot(sizes,train_mean,'o-',color='#E24A33',label='Training Score')
+        ax.plot(sizes,test_mean,'o-',color='#348ABD',label='Testing Score')
         ax.fill_between(sizes,train_mean-train_std,
                         train_mean+train_std,alpha=.15,color='#E24A33')
         ax.fill_between(sizes,test_mean-test_std,
@@ -136,8 +134,8 @@ def PredictTrials(X,y,fitter,data):
         reg=fitter(X_train,y_train).best_estimator_
         pred=reg.predict([data[0]])[0]
         prices.append(pred)
-        print ("Trial {}: ${:,.2f}".format(k+1,pred))
-    print("\nRange in prices: ${:,.2f}"\
+        print ('Trial {}: ${:,.2f}'.format(k+1,pred))
+    print('\nRange in prices: ${:,.2f}'\
     .format(max(prices)-min(prices)))
 </script></div><br/>
       <h2>Data Exploration</h2>
@@ -153,8 +151,8 @@ path='https://raw.githubusercontent.com/OlgaBelitskaya/'+\
 'machine_learning_engineer_nd009/master/Machine_Learning_Engineer_ND_P1/'
 data=pandas.read_csv(path+'housing.csv')
 prices=data['MEDV']; features=data.drop('MEDV',axis=1)
-print ("Boston housing dataset has "+\
-       "{} data points with {} variables each.".format(*data.shape))
+print ('Boston housing dataset has '+\
+       '{} data points with {} variables each.'.format(*data.shape))
 data.describe().T
 </script></div><br/>
     <h3>Implementation: Calculate Statistics</h3>
@@ -165,20 +163,20 @@ In the code cell below, we will need to implement the following:<br/>
 Calculate the minimum, maximum, mean, median, and standard deviation of 'MEDV', which is stored in prices.<br/>
 Store each calculation in their respective variable.<br/>
 <div class='linked'><script type='text/x-sage'>
-print ("Boston Housing Dataset Statistics: \n")
-print ("Number of houses = ",len(prices))
-print ("Number of features = ",len(list(features.keys())))
-print ("Minimum house price = ",numpy.min(prices))
-print ("Maximum house price = ",numpy.max(prices))
-print ("Mean house price = %.2f"%numpy.mean(prices))
-print ("Median house price = %.2f"%numpy.median(prices))
-print ("Standard deviation of house prices = %.2f"%numpy.std(prices))
+table([('Boston Housing Dataset Statistics: \n',''),
+       ('Number of houses = ',len(prices)),
+       ('Number of features = ',len(list(features.keys()))),
+       ('Minimum house price = ',numpy.min(prices)),
+       ('Maximum house price = ',numpy.max(prices)),
+       ('Mean house price = ',numpy.mean(prices)),
+       ('Median house price = ',numpy.median(prices)),
+       ('Standard deviation of house prices = ',numpy.std(prices))])
 </script></div><br/>
 <div class='linked'><script type='text/x-sage'>
 pylab.figure(figsize=(11,5))
 seaborn.distplot(prices,color='#348ABD')
 pylab.title('Boston Housing Data')
-pylab.xlabel("Prices"); pylab.show()
+pylab.xlabel('Prices'); pylab.show()
 </script></div><br/>
     <h3>Question 1 - Feature Observation</h3>
 As a reminder, we are using three features from the Boston housing dataset: 'RM', 'LSTAT', and 'PTRATIO'.<br/>
