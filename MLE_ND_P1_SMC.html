@@ -72,7 +72,7 @@ from sklearn import datasets
 def ModelLearning(X,y):
     cv=ShuffleSplit(n_splits=10,test_size=.2,random_state=1)
     train_sizes=numpy.rint(numpy.linspace(1,X.shape[0]*.8-1,9)).astype(int)
-    fig=pylab.figure(figsize=(11,8))
+    fig=pylab.figure(figsize=(10,8))
     for k,depth in enumerate([1,3,6,10]):
         regressor=DecisionTreeRegressor(max_depth=depth)
         sizes,train_scores,test_scores=\
@@ -111,7 +111,7 @@ def ModelComplexity(X,y):
     train_std=numpy.std(train_scores,axis=1)
     test_mean=numpy.mean(test_scores,axis=1)
     test_std=numpy.std(test_scores,axis=1)
-    pylab.figure(figsize=(11,5))
+    pylab.figure(figsize=(10,5))
     pylab.title('Decision Tree Regressor Complexity Performance')
     pylab.plot(max_depth, train_mean,'o-',
                color='#E24A33',label='Training Score')
@@ -204,7 +204,7 @@ corr_with_prices[abs(corr_with_prices).sort_values(ascending=False).index]
 </script></div><br/>
 <div class='linked'><script type='text/x-sage'>
 def lstsq_plot(feature):
-    pylab.figure(figsize=(11,5))
+    pylab.figure(figsize=(10,5))
     x,y=features[feature],prices
     x1=numpy.array([[v,1] for v in x])
     y1=numpy.array([[v,1] for v in y])
@@ -393,8 +393,8 @@ The result corresponds to the expressed in the Answer 6 assumptions based on vis
 <div class='linked'><script type='text/x-sage'>
 fit=fit_model(X_train,y_train); reg=fit.best_estimator_
 results=pandas.DataFrame(fit.cv_results_)
-print("Grid Search Process Results"); display(results.T)
-print ("\nParameter 'max_depth' is {} for the optimal model."\
+print('Grid Search Process Results'); display(results.T)
+print ('\nParameter `max_depth` is {} for the optimal model.'\
        .format(reg.get_params()['max_depth']))
 </script></div><br/>
     <h3>Question 10 - Predicting Selling Prices</h3>
@@ -409,14 +409,13 @@ You have collected the following information from three of your clients:
 <i>What price would you recommend each client sell his/her home at? Do these prices seem reasonable given the values for the respective features?</i>
 <div class='linked'><script type='text/x-sage'>
 display(table([['Feature','Client 1','Client 2','Client 3'],
-               ['Total number of rooms in home',
-                '5 rooms','4 rooms','8 rooms'],
+               ['Total number of rooms in home','5 rooms','4 rooms','8 rooms'],
                ['Neighborhood poverty level (as %)','17%','32%','3%'],
                ['Student-teacher ratio of nearby schools',
                 '15-to-1','22-to-1','12-to-1']]))
 client_data=[[5,17,15],[4,32,22],[8,3,12]]
 for i,price in enumerate(reg.predict(client_data)):
-    print("Predicted selling price for Client {}'s home: ${:,.2f}"\
+    print('Predicted selling price for Client {}`s home: ${:,.2f}'\
           .format(i+1,price))   
 </script></div><br/>
 We can compare them to the real prices for the housing of the considered database, extracting items with roughly the same indicators. 
