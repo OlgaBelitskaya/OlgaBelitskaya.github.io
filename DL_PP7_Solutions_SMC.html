@@ -112,7 +112,7 @@ fig=pl.figure(figsize=(8,2))
 n=randint(0,y_train.shape[0]-5)
 for i in range(n,n+5):
     ax=fig.add_subplot(1,5,i-n+1,xticks=[],yticks=[])
-    ax.set_title(names[y_train[i]])
+    ax.set_title(names[labels[i].item()],fontsize=10,color='#aa33ff')
     ax.imshow((x_train[i]))
 pl.tight_layout(); pl.show()
 img_size=int(64); n=int(len(x_test)/2)
@@ -152,27 +152,24 @@ random_seed=23
 train2=TData(x_train2,y_train[:n_train])
 valid2=TData(x_valid2,y_valid[:n_valid])
 test2=TData(x_test2,y_test[:n_test])
-dataloaders={'train':tdl(dataset=train2,shuffle=True, 
-                         batch_size=batch_size2), 
-             'valid':tdl(dataset=valid2,shuffle=True, 
-                         batch_size=batch_size2),
-             'test':tdl(dataset=test2,shuffle=True, 
-                        batch_size=batch_size2)}
+dataloaders={'train':tdl(dataset=train2,shuffle=True,batch_size=batch_size2), 
+             'valid':tdl(dataset=valid2,shuffle=True,batch_size=batch_size2),
+             'test':tdl(dataset=test2,shuffle=True,batch_size=batch_size2)}
 del train2,valid2,test2
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 @register_line_magic
 def display_examples(data):
     for images,labels in dataloaders[data]:  
         print('Image dimensions: %s'%str(images.shape))
         print('Label dimensions: %s'%str(labels.shape))
         n=np.random.randint(1,3)
-        fig=pl.figure(figsize=(10,2))
+        fig=pl.figure(figsize=(8,2))
         for i in range(n,n+5):
-            ax=fig.add_subplot(1,5,i-n+1,\
-            xticks=[],yticks=[],title=names[labels[i].item()])
+            ax=fig.add_subplot(1,5,i-n+1,xticks=[],yticks=[])
+            ax.set_title(names[labels[i].item()],fontsize=10,color='#aa33ff')
             ax.imshow(np.transpose(images[i],(1,2,0)))
-        pl.show()
+        pl.tight_layout(); pl.show()
         break
 %display_examples valid
 </script></div><br/>
@@ -180,8 +177,7 @@ def display_examples(data):
 <div class="linked"><script type="text/x-sage">
 def kmodel(leaky_alpha):
     model=Sequential()
-    model.add(tkl.Conv2D(int(32),(int(5),int(5)),
-                         padding='same', 
+    model.add(tkl.Conv2D(int(32),(int(5),int(5)),padding='same', 
                          input_shape=x_train.shape[int(1):]))
     model.add(tkl.LeakyReLU(alpha=leaky_alpha))    
     model.add(tkl.MaxPooling2D(pool_size=(int(2),int(2))))
