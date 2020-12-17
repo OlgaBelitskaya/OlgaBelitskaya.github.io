@@ -155,10 +155,10 @@ what would you expect the accuracy of our predictions to be?
 <div class='linked'><script type='text/x-sage'>
 def accuracy_score(truth, pred):
     if len(truth)==len(pred): 
-        return "Predictions have an accuracy of {:.2f}%."\
+        return 'Predictions have an accuracy of {:.2f}%.'\
         .format((truth==pred).mean()*100)    
     else:
-        return "Number of predictions does not match number of outcomes!"
+        return 'Number of predictions does not match number of outcomes!'
 predictions=pandas.Series(numpy.ones(5,dtype=int)).astype('int')
 accuracy_score(outcomes[:int(5),],predictions)
 </script></div><br/>
@@ -212,7 +212,7 @@ For example, consider all of the male passengers aboard the RMS Titanic: can we 
 Let's start by looking at the <b>Age</b> of each male, by again using the <i>survival_stats()</i> function.<br/> 
 This time, we'll use the fourth parameter to filter out the data so that only passengers with the <b>Sex</b> 'male' will be included.     
 <div class='linked'><script type='text/x-sage'>
-survival_stats(data,outcomes,'Age',["Sex=='male'"])
+survival_stats(data,outcomes,'Age',['Sex == "male"'])
 </script></div><br/>
 Examining the survival statistics, the majority of males younger than 10 survived the ship sinking, whereas most males age 10 or older did not survive the ship sinking.<br/>
 Let's continue to build on our previous prediction: if a passenger was female, then we will predict they survive.<br/> 
@@ -242,10 +242,10 @@ This may require multiple features and multiple levels of conditional statements
 We can use the same feature multiple times with different conditions.<br/>
 There are some experiments and the function <i>prediction_final()</i> as a result:
 <div class='linked'><script type='text/x-sage'>
-survival_stats(data,outcomes,'SibSp',["Sex=='male'","Age<15"])
+survival_stats(data,outcomes,'SibSp',['Sex == "male"','Age < 15'])
 </script></div><br/>
 <div class='linked'><script type='text/x-sage'>
-survival_stats(data,outcomes,'Pclass',["Sex=='male'","Age<15"])
+survival_stats(data,outcomes,'Pclass',['Sex == "male"','Age < 15'])
 </script></div><br/>
 <div class='linked'><script type='text/x-sage'>
 def predictions_final(data):   
