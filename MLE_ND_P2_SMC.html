@@ -231,9 +231,9 @@ For example, assume someFeature has three possible entries: A, B, or C.<br/>
 We then encode this feature into <i>someFeature_A</i>, <i>someFeature_B</i> and <i>someFeature_C</i>.
 <div class='linked'><script type='text/x-sage'>
 table([[' ','someFeature',' ','someFeature_A','someFeature_B','someFeature_C'],
-        ['0','B',' ','0','1','0'],
-        ['1','C','=> one-hot encode =>','0','0','1'],
-        ['2','A',' ','1','0','0']])
+       ['0','B',' ','0','1','0'],
+       ['1','C','=> one-hot encode =>','0','0','1'],
+       ['2','A',' ','1','0','0']])
 </script></div><br/>
 Additionally, as with the non-numeric features, we need to convert the non-numeric target label, <i>income</i> to numerical values for the learning algorithm to work.<br/>
       Since there are only two possible categories for this label (<i>&#8924;50K</i> and <i>&#62;50K</i>),<br/>
@@ -242,7 +242,7 @@ In code cell below, we will need to implement the following:<br/>
 Use <i>pandas.get_dummies()</i> to perform one-hot encoding on the <i>features_raw</i> data.<br/>
 Convert the target label <i>income_raw</i> to numerical entries.<br/>
 Set records with <i>&#8924;50K</i> to 0 and records with <i>&#62;50K</i> to 1.
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 categorical=['workclass','education_level','marital-status',
              'occupation','relationship','race','sex','native-country']
 features=pandas.DataFrame(features_raw)
@@ -250,18 +250,18 @@ income=income_raw.replace(['<=50K','>50K'],[0,1])
 for element in categorical: 
     features[element]=pandas.get_dummies(features_raw[element])
 encoded=list(features[categorical].columns) 
-print ("{} total features after one-hot encoding."\
+print ('{} total features after one-hot encoding.'\
 .format(len(encoded))); print (encoded)
 </script></div><br/>
     <h3>Shuffle and Split Data</h3>
 Now all <b>categorical</b> variables have been converted into <b>numerical</b> features, and all numerical features have been normalized.<br/> 
 As always, we will now split the data (both features and their labels) into training and test sets.<br/> 
 80% of the data will be used for training and 20% for testing.<br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 X_train,X_test,y_train,y_test=\
 train_test_split(features,income,test_size=.2,random_state=0)
-print ("Training set has {} samples.".format(X_train.shape[0])) 
-print ("Testing set has {} samples.".format(X_test.shape[0]))
+print ('Training set has {} samples.'.format(X_train.shape[0])) 
+print ('Testing set has {} samples.'.format(X_test.shape[0]))
 </script></div><br/>
     <h2>Evaluating Model Performance</h2>
 In this section, we will investigate four different algorithms, and determine which is best at modeling the data.<br/>
@@ -298,14 +298,14 @@ This score can range from 0 to 1, with 1 being the best possible F1 score (we ta
 <i>If we chose a model that always predicted an individual made more than 50,000 USD, what would that model's accuracy and F-score be on this dataset?</i>
     <h3>Answer 1</h3>
 The code cell below displays both indicators in the output.
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 accuracy0=accuracy_score(income,numpy.array([1]*len(income)))
 recall=1 # ==numpy.sum(income)/(numpy.sum(income)+0) 
 beta=.5; precision=numpy.sum(income)/len(income)
 fscore0=(1 + beta**2)*(precision*recall)/((beta**2*precision)+recall)
 # alternative method 
 fscore0=fbeta_score(income,numpy.array([1]*len(income)),beta=.5) 
-print ("Naive Predictor: accuracy score - {:.4f}, F-score - {:.4f}"\
+print ('Naive Predictor: accuracy score - {:.4f}, F-score - {:.4f}'\
 .format(accuracy0,fscore0))
 </script></div><br/>
     <h3>Supervised Learning Models</h3>
@@ -329,22 +329,22 @@ All of them are <b>ensemble</b> methods and combine the predictions of several b
 Let's have a look at their applications and characteristics:<br/>
 1) <i>GradientBoostingClassifier</i>.<br/>
 <b>Applications</b>: in the field of learning to rank (for example, web-seach), in ecology, etc.<br/>
-<a href="http://proceedings.mlr.press/v14/mohan11a/mohan11a.pdf">&#x1F578;Web-Search Ranking with Initialized Gradient Boosted Regression Trees</a><br/>
-<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3885826/">&#x1F578;Gradient boosting machines, a tutorial</a><br/>
+<a href='http://proceedings.mlr.press/v14/mohan11a/mohan11a.pdf'>&#x1F578;Web-Search Ranking with Initialized Gradient Boosted Regression Trees</a><br/>
+<a href='https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3885826/'>&#x1F578;Gradient boosting machines, a tutorial</a><br/>
 The advantages and the disadvantages (Gradient Tree Boosting).<br/>
 <b>Strengths</b>: natural handling of data of mixed type (= heterogeneous features), predictive power, robustness to outliers in output space (via robust loss functions).<br/>
 <b>Weaknesses</b>: scalability, due to the sequential nature of boosting it can hardly be parallelized.<br/>
 2) <i>RandomForestClassifier</i>.<br/>
 <b>Applications</b>: in ecology, bioinformatics, etc.<br/>
-<a href="https://esajournals.onlinelibrary.wiley.com/doi/abs/10.1890/07-0539.1">&#x1F578;Random Forests for Classification in Ecology</a><br/>
-<a href="http://www.cs.cmu.edu/~qyj/papersA08/11-rfbook.pdf">&#x1F578;Random Forest for Bioinformatics</a><br/>
+<a href='https://esajournals.onlinelibrary.wiley.com/doi/abs/10.1890/07-0539.1'>&#x1F578;Random Forests for Classification in Ecology</a><br/>
+<a href='http://www.cs.cmu.edu/~qyj/papersA08/11-rfbook.pdf'>&#x1F578;Random Forest for Bioinformatics</a><br/>
 The advantages and the disadvantages (Random Forests).<br/>
 <b>Strengths</b>: runs efficiently on large data bases; gives estimates of what variables are important in the classification;<br/> maintains accuracy when a large proportion of the data are missing; high prediction accuracy.<br/>
 <b>Weaknesses</b>: difficult to interpret, can be slow to evaluate.<br/>
 3) <i>AdaBoostClassifier</i>.<br/>
 <b>Applications</b>: the problem of face detection, text classification, etc.<br/>
-<a href="https://www.sciencedirect.com/science/article/pii/S1077314210000871">&#x1F578;AdaBoost-based face detection for embedded systems</a><br/>
-<a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.443.8019&rep=rep1&type=pdf">&#x1F578;Text Classification by Boosting Weak Learners based on Terms and Concepts</a><br/>
+<a href='https://www.sciencedirect.com/science/article/pii/S1077314210000871'>&#x1F578;AdaBoost-based face detection for embedded systems</a><br/>
+<a href='http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.443.8019&rep=rep1&type=pdf'>&#x1F578;Text Classification by Boosting Weak Learners based on Terms and Concepts</a><br/>
 The advantages and the disadvantages (Ada Boost).<br/>
 <b>Strengths</b>: can be used with data that is textual, numeric, discrete, etc.; can be combined with any other learning algorithm, not prone to overfitting; simple to implement.<br/>
 <b>Weaknesses</b>: can be sensitive to noisy data and outliers; the performance depends on data and weak learner (can fail if weak classifiers too complex).<br/>
@@ -365,7 +365,7 @@ We will do the following points:<br/>
 - Calculate the accuracy score for both the training subset and testing set.<br/>
 - Calculate the F-score for both the training subset and testing set.<br/>
 &nbsp;&nbsp;- Make sure that you set the <i>beta</i> parameter!    
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 def train_predict(learner,sample_size,X_train,y_train,X_test,y_test):   
     results={}; n=int(300); start=time.time()
     learner.fit(X_train[:sample_size],y_train[:sample_size]) 
@@ -379,7 +379,7 @@ def train_predict(learner,sample_size,X_train,y_train,X_test,y_test):
                                    average='macro',beta=.5)
     results['f_test']=fbeta_score(y_test,predictions_test,
                                   average='macro',beta=.5)
-    print ("{} trained on {} samples."\
+    print ('{} trained on {} samples.'\
     .format(learner.__class__.__name__,sample_size))
     return results
 </script></div><br/>
@@ -391,7 +391,7 @@ Use the <i>random_state</i> parameter for each model you use, if provided.<br/>
 Note: Use the default settings for each model — you will tune one specific model in a later section.<br/>
 Calculate the number of records equal to 1%, 10%, and 100% of the training data.<br/>
 Store those values in <i>samples_1</i>, <i>samples_10</i>, and <i>samples_100</i> respectively.
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 clf_A=GradientBoostingClassifier(random_state=10)
 clf_B=RandomForestClassifier()
 clf_C=AdaBoostClassifier()
@@ -415,8 +415,8 @@ We will then perform a grid search optimization for the model over the entire tr
 I think that for this case, we need to choose the <i>GradientBoostingClassifier</i> algorithm as it showed the highest accuracy and F-score for the testing set and escaped overfitting.<br/>
 The algorithm is proved to be very time-consuming in the training process, but it can be ignored since the amount of data is not very big.<br/>
 The <b>confusion matrix</b> can be used to evaluate the quality of the output for the chosen classifier.
-<div class="linked"><script type="text/x-sage">
-model=clf_A; pylab.figure(figsize=(11,5))
+<div class='linked'><script type='text/x-sage'>
+model=clf_A; pylab.figure(figsize=(10,5))
 cm=confusion_matrix(y_test.values,model.predict(X_test))
 seaborn.heatmap(cm,annot=True,cmap='BuGn',
                 xticklabels=['no','yes'],yticklabels=['no','yes'])
