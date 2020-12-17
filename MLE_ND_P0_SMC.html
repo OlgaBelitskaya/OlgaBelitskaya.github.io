@@ -56,17 +56,17 @@ def filter_data(data,condition):
 <div class='linked'><script type='text/x-sage'>
 def survival_stats(data,outcomes,key,filters=[]):
     if (key not in data.columns.values):
-        st11="'{}' is not a feature of the Titanic data. "
-        st12="Did you spell something wrong?"
+        st11='`{}` is not a feature of the Titanic data. '
+        st12='Did you spell something wrong?'
         print(st11.format(key)+st12); return False
     if (key=='Cabin' or key=='PassengerId' or key=='Ticket'):
-        st21="'{}' has too many unique categories to display! "
-        st22="Try a different feature."
+        st21='`{}` has too many unique categories to display! '
+        st22='Try a different feature.'
         print(st21.format(key)+st22); return False
     all_data=data.T.append(outcomes).T
     for condition in filters: all_data=filter_data(all_data,condition)
     all_data=all_data[[key,'Survived']]
-    pylab.figure(figsize=(11,5))
+    pylab.figure(figsize=(10,5))
     if (key=='Age' or key=='Fare'):
         all_data=all_data[~pandas.isnull(all_data[key])]
         min_value=all_data[key].min(); max_value=all_data[key].max()
@@ -110,7 +110,7 @@ def survival_stats(data,outcomes,key,filters=[]):
     pylab.title(ti%(key)); pylab.show()
     if sum(pandas.isnull(all_data[key])):
         nan_outcomes=all_data[pandas.isnull(all_data[key])]['Survived']
-        ms="Passengers with missing '{}' values: {} ({} survived, {} did not survive)"
+        ms='Passengers with missing `{}` values: {} ({} survived, {} did not survive)'
         print (ms.format(key,len(nan_outcomes),
                          sum(nan_outcomes==1),sum(nan_outcomes==0)))
 </script></div><br/>
