@@ -174,7 +174,7 @@ print ("Mean house price = %.2f"%numpy.mean(prices))
 print ("Median house price = %.2f"%numpy.median(prices))
 print ("Standard deviation of house prices = %.2f"%numpy.std(prices))
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 pylab.figure(figsize=(11,5))
 seaborn.distplot(prices,color='#348ABD')
 pylab.title('Boston Housing Data')
@@ -186,22 +186,23 @@ For each data point (neighborhood):<br/>
 'RM' is the average number of rooms among homes in the neighborhood.<br/>
 'LSTAT' is the percentage of homeowners in the neighborhood considered "lower class" (working poor).<br/>
 'PTRATIO' is the ratio of students to teachers in primary and secondary schools in the neighborhood.<br/>
-<i>Using your intuition, for each of the three features above, do you think that an increase in the value of that feature</i> 
-      <br/><i>would lead to an <b>increase</b> in the value of 'MEDV' or a <b>decrease</b> in the value of 'MEDV'? Justify your answer for each.</i>
+<i>Using your intuition, for each of the three features above, do you think that an increase in the value of that feature</i> <br/>
+<i>would lead to an <b>increase</b> in the value of 'MEDV' or a <b>decrease</b> in the value of 'MEDV'? Justify your answer for each.<br/>
     <h3>Answer 1</h3>
 My assumptions could be:<br/>
 'RM': shows the level of home comfort, its increase would lead to the increase in the value of 'MEDV';<br/>
 'PTRATIO': shows the level of educational resources, its increase would lead to the decrease in the value of 'MEDV';<br/>
 'LSTAT': indicates the level of social environment comfort, its increase would lead to the decrease in the value of 'MEDV'.<br/>
-I have made the correlation list for all features in the original dataset to confirm the assumptions and created plots for the transformed features<br/>with the least squares regression fitted line and the hexagon-aggregated 2D histograms as an example to illustrate the trends.
-<div class="linked"><script type="text/x-sage">
+I have made the correlation list for all features in the original dataset to confirm the assumptions and 
+created plots for the transformed features<br/>with the least squares regression fitted line and the hexagon-aggregated 2D histograms as an example to illustrate the trends.
+<div class='linked'><script type='text/x-sage'>
 boston_data=datasets.load_boston()
 boston_df=pandas.DataFrame(boston_data.data,columns=boston_data.feature_names)
 boston_df['MEDV']=boston_data.target; pearson=boston_df.corr(method='pearson')
 corr_with_prices=pearson['MEDV'].loc[:'LSTAT'] 
 corr_with_prices[abs(corr_with_prices).sort_values(ascending=False).index]
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 def lstsq_plot(feature):
     pylab.figure(figsize=(11,5))
     x,y=features[feature],prices
