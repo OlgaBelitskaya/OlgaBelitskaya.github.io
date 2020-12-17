@@ -217,19 +217,18 @@ def keras_history_plot(fit_history,fig_size=8,color='#aa33ff'):
 fw='/tmp/checkpoint'
 early_stopping=tkc.EarlyStopping(
     monitor='val_loss',patience=int(20),verbose=int(2))
-checkpointer=ModelCheckpoint(
+checkpointer=tkc.ModelCheckpoint(
     filepath=fw,verbose=int(0),save_weights_only=True,
     monitor='val_accuracy',mode='max',save_best_only=True)
-lr_reduction=ReduceLROnPlateau(
-    monitor='val_loss',patience=int(5),verbose=int(0),factor=fr)
+lr_reduction=tkc.ReduceLROnPlateau(
+    monitor='val_loss',patience=int(5),verbose=int(0),factor=float(.8))
 history=kmodel.fit(
     x_train,y_train,epochs=int(5),batch_size=int(16),verbose=int(2),
     validation_data=(x_valid,y_valid),
     callbacks=[checkpointer,early_stopping,lr_reduction])
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-history_plot(history)
-del history
+<div class='linked'><script type='text/x-sage'>
+keras_history_plot(history); del history
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 kmodel.load_weights(fw)
