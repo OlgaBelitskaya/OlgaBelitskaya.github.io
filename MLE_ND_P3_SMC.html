@@ -1,30 +1,31 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width'>
     <title>MLE_ND_P3_SMC</title>
-    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
-    <script>$(function () {
-    sagecell.makeSagecell({inputLocation:'div.linked',linked:true,evalButtonText:'Run Linked Cells'});  
-    sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run'}); });
+    <script src='https://sagecell.sagemath.org/static/embedded_sagecell.js'></script>
+    <script>$(function(){
+      sagecell.makeSagecell({inputLocation:'div.linked',linked:true,evalButtonText:'Run Linked Cells'});  
+      sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run'});});
     </script>
   </head>
   <style>
-  @import url('https://fonts.googleapis.com/css?family=Orbitron|Roboto');
-  body {margin:5px 5px 5px 15px; background-color:ghostwhite;}
-  a,p {color:#5a8bbd; font-family:'Roboto';} 
-  h1 {color:#1b2c45; font-family:'Orbitron'; text-shadow:4px 4px 4px #ccc;} 
-  h2,h3 {color:slategray; font-family:'Orbitron'; text-shadow:4px 4px 4px #ccc;}
-  h4 {color:#1b2c45; font-family:'Roboto';}
-  .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
-  .sagecell table.table_form tr.row-a {background-color:lightgray;} 
-  .sagecell table.table_form tr.row-b {background-color:ghostwhite;}
-  .sagecell table.table_form td {padding:5px 15px; color:#5a8bbd; font-family:'Roboto';}
-  .sagecell_sessionOutput, .sagecell_sessionOutput pre {color:#5a8bbd; font-family:'Roboto';}
+    @import 'https://fonts.googleapis.com/css?family=Orbitron|Roboto';
+    body {margin:5px 5px 5px 15px; background-color:ghostwhite;}
+    a,p {color:#5a8bbd; font-family:'Roboto';} 
+    h1 {color:#1b2c45; font-family:'Orbitron'; text-shadow:4px 4px 4px #ccc;} 
+    h2,h3 {color:slategray; font-family:'Orbitron'; text-shadow:4px 4px 4px #ccc;}
+    h4 {color:#1b2c45; font-family:'Roboto';}
+    .sagecell .CodeMirror-scroll {min-height:3em; max-height:60em;}
+    .sagecell table.table_form tr.row-a {background-color:lightgray;} 
+    .sagecell table.table_form tr.row-b {background-color:ghostwhite;}
+    .sagecell table.table_form td {padding:5px 15px; color:#5a8bbd; font-family:'Roboto';}
+    .sagecell_sessionOutput, .sagecell_sessionOutput pre {color:#5a8bbd; font-family:'Roboto';}
   </style>  
   <body>
-    <h1>Machine Learning Engineer Nanodegree</h1>
+    <h1>🏙 Machine Learning Engineer Nanodegree &nbsp;
+      <a href='https://olgabelitskaya.github.io/README.html'>&#x1F300; &nbsp; Home Page &nbsp; &nbsp; &nbsp;</a></h1>
     <h2>Unsupervised Learning</h2>
     <h1>&#x1F4D1; &nbsp;P3: Creating Customer Segments</h1>
     <h2>Getting Started</h2>
@@ -33,17 +34,17 @@ In this project, we will analyze a dataset containing data on various customers'
 One goal of this project is to best describe the variation in the different types of customers that a wholesale distributor interacts with.<br/>
 Doing so would equip the distributor with insight into how to best structure their delivery service to meet the needs of each customer.<br/>
 The dataset for this project can be found on the 
-<a href="https://archive.ics.uci.edu/ml/datasets/Wholesale+customers">&#x1F578;UCI Machine Learning Repository.</a><br/> 
+<a href='https://archive.ics.uci.edu/ml/datasets/Wholesale+customers'>&#x1F578;UCI Machine Learning Repository.</a><br/> 
 For the purposes of this project, the features <i>Channel</i> and <i>Region</i> will be excluded in the analysis — with focus instead on the six product categories recorded for customers.      
     <h3>Resources</h3>
-<a href="http://archive.ics.uci.edu/ml/datasets.php">&#x1F578;UCI Machine Learning Repository&nbsp;</a>
-<a href="https://scikit-learn.org/stable/index.html">&#x1F578;scikit-learn. Machine Learning in Python&nbsp;</a>
-<a href="http://seaborn.pydata.org/index.html">&#x1F578;seaborn: statistical data visualization&nbsp;</a><br/>
+<a href='http://archive.ics.uci.edu/ml/datasets.php'>&#x1F578;UCI Machine Learning Repository&nbsp;</a>
+<a href='https://scikit-learn.org/stable/index.html'>&#x1F578;scikit-learn. Machine Learning in Python&nbsp;</a>
+<a href='http://seaborn.pydata.org/index.html'>&#x1F578;seaborn: statistical data visualization&nbsp;</a><br/>
     <h3>Code Library</h3> 
-<div class="linked"><script type="text/x-sage">
-import warnings; warnings.filterwarnings("ignore")
+<div class='linked'><script type='text/x-sage'>
+import warnings; warnings.filterwarnings('ignore')
 from sklearn.exceptions import DataConversionWarning
-warnings.filterwarnings("ignore",category=DataConversionWarning)
+warnings.filterwarnings('ignore',category=DataConversionWarning)
 import numpy,pandas,pylab,seaborn,time
 pylab.style.use('seaborn-pastel')
 cmap=seaborn.cubehelix_palette(2,start=.1,rot=-.25,as_cmap=True)
@@ -55,26 +56,26 @@ from sklearn.cluster import KMeans
 from sklearn.mixture import GaussianMixture
 from sklearn.metrics import silhouette_score
 </script></div><br/>     
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 # https://github.com/udacity/machine-learning/blob/master/projects/customer_segments/visuals.py
 def pca_results(good_data,pca):
     dimensions=['Dimension {}'.format(i) 
                 for i in range(1,len(pca.components_)+1)]
-    components=pandas.DataFrame(numpy.round(pca.components_,4),
-                                columns=good_data.keys())
+    components=pandas.DataFrame(
+        numpy.round(pca.components_,4),columns=good_data.keys())
     components.index=dimensions
     ratios=pca.explained_variance_ratio_.reshape(len(pca.components_),1)
-    variance_ratios=pandas.DataFrame(numpy.round(ratios,4),
-                                     columns=['Explained Variance'])
+    variance_ratios=pandas.DataFrame(
+        numpy.round(ratios,4),columns=['Explained Variance'])
     variance_ratios.index=dimensions 
-    fig,ax=pylab.subplots(figsize=(11,5))
+    fig,ax=pylab.subplots(figsize=(10,5))
     components.plot(ax=ax,kind='bar');
-    ax.set_ylabel("Feature Weights",fontsize=12)
+    ax.set_ylabel('Feature Weights',fontsize=12)
     ax.set_xticklabels(dimensions,rotation=0)
     for i,ev in enumerate(pca.explained_variance_ratio_):
-        ax.text(i-0.40,ax.get_ylim()[1]+0.05,
-                "Explained Variance \n %.4f"%(ev))
-    pylab.grid(); pylab.show()
+        ax.text(i-.40,ax.get_ylim()[1]+.05,
+                'Explained Variance \n %.4f'%(ev))
+    pylab.grid(); pylab.tight_layout(); pylab.show()
     return pandas.concat([variance_ratios,components],axis=int(1))
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
