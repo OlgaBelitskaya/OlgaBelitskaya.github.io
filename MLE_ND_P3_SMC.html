@@ -30,12 +30,14 @@
     <h1>&#x1F4D1; &nbsp;P3: Creating Customer Segments</h1>
     <h2>Getting Started</h2>
     <h3>Dataset</h3>
-In this project, we will analyze a dataset containing data on various customers' annual spending amounts (reported in monetary units) of diverse product categories for internal structure.<br/>
+In this project, we will analyze a dataset containing data on various customers' annual spending amounts<br/>
+(reported in monetary units) of diverse product categories for internal structure.<br/>
 One goal of this project is to best describe the variation in the different types of customers that a wholesale distributor interacts with.<br/>
 Doing so would equip the distributor with insight into how to best structure their delivery service to meet the needs of each customer.<br/>
 The dataset for this project can be found on the 
 <a href='https://archive.ics.uci.edu/ml/datasets/Wholesale+customers'>&#x1F578;UCI Machine Learning Repository.</a><br/> 
-For the purposes of this project, the features <i>Channel</i> and <i>Region</i> will be excluded in the analysis — with focus instead on the six product categories recorded for customers.      
+For the purposes of this project, the features <i>Channel</i> and <i>Region</i> will be excluded in the analysis — <br/>
+with focus instead on the six product categories recorded for customers.      
     <h3>Resources</h3>
 <a href='http://archive.ics.uci.edu/ml/datasets.php'>&#x1F578;UCI Machine Learning Repository&nbsp;</a>
 <a href='https://scikit-learn.org/stable/index.html'>&#x1F578;scikit-learn. Machine Learning in Python&nbsp;</a>
@@ -78,17 +80,16 @@ def pca_results(good_data,pca):
     pylab.grid(); pylab.tight_layout(); pylab.show()
     return pandas.concat([variance_ratios,components],axis=int(1))
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 def cluster_results(reduced_data,preds,centers,pca_samples,alg):
     predictions=pandas.DataFrame(preds,columns=['Cluster'])
     plot_data=pandas.concat([predictions,reduced_data],axis=int(1))
-    fig,ax=pylab.subplots(figsize=(11,7))
+    fig,ax=pylab.subplots(figsize=(10,7))
     for i,cluster in plot_data.groupby('Cluster'):   
-        cluster.plot(ax=ax,kind='scatter',
-                     x='Dimension 1',y='Dimension 2',
-                     alpha=0.8,edgecolors='slategray',
-                     c=cmap((i)*1.0/(len(centers)-1)),
-                     label='Cluster %i'%(i),s=30);
+        cluster.plot(
+            ax=ax,kind='scatter',x='Dimension 1',y='Dimension 2',
+            alpha=.8,edgecolors='slategray',s=30,
+            c=cmap((i)*1./(len(centers)-1)),label='Cluster %i'%(i));
     for i,c in enumerate(centers):
         ax.scatter(x=c[0],y=c[1],color='white',edgecolors='black',
                    alpha=1,linewidth=2,marker='o',s=250);
@@ -96,10 +97,11 @@ def cluster_results(reduced_data,preds,centers,pca_samples,alg):
                    alpha=1,s=120,color='black');
         ax.scatter(x=pca_samples[:,0],y=pca_samples[:,1],s=150,
                    linewidth=4,color='#ff5a8b',marker='x');
-    ti="%s Cluster Learning on PCA-Reduced Data\n"+\
-       "Centroids Marked by Numbers\n"+\
-       "Transformed Sample Data Marked by Red Crosses"
-    ax.set_title(ti%alg,fontsize=15); pylab.show()
+    ti='%s Cluster Learning on PCA-Reduced Data\n'+\
+       'Centroids Marked by Numbers\n'+\
+       'Transformed Sample Data Marked by Red Crosses'
+    ax.set_title(ti%alg,fontsize=15)
+    pylab_tight_layout(); pylab.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 def biplot(good_data,reduced_data,pca):
