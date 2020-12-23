@@ -299,12 +299,12 @@ def plot_feature_importance(f,regressor1,regressor2):
               color='slategrey',align='center')
     pylab.xticks(range(len(D1)),D1.keys(),fontsize=7)
     st='Experiment with `%s`: Feature Importances, \n'
-    pylab.title(st%f+'Decision Tree Regressor',fontsize=15,color='#5a8bbd')
+    pylab.title(st%f+'Decision Tree Regressor',fontsize=12,color='#5a8bbd')
     pylab.subplot(122); pylab.grid()
     pylab.bar(range(len(D2)),D2.values(),alpha=.5,
               color='slategrey',align='center')
     pylab.xticks(range(len(D2)),D2.keys(),fontsize=7)
-    pylab.title(st%f+'Random Forest Regressor',fontsize=15,color='#5a8bbd')
+    pylab.title(st%f+'Random Forest Regressor',fontsize=12,color='#5a8bbd')
     pylab.tight_layout(); pylab.show()
 </script></div><br/>
 <div class='linked'><script type='text/x-sage'>
@@ -315,7 +315,7 @@ plot_feature_importance('Delicatessen',regressor1,regressor2)
 <div class='linked'><script type='text/x-sage'>
 new_data=data.drop('Grocery',axis=int(1)); target=data['Grocery']
 new_data_target=pandas.concat([new_data,target],axis=int(1))
-print ("The correlation table for the choosen feature 'Grocery'")
+print ('The correlation table for the choosen feature `Grocery`')
 pearson=new_data_target.corr(method='pearson')
 corr_with_grocery=pearson.iloc[int(-1)][:-int(1)]
 pandas.DataFrame(
@@ -471,19 +471,18 @@ Note that a component (dimension) from PCA can be considered a new "feature" of 
 The next steps are the following:<br/> 
 Import <i>sklearn.decomposition.PCA</i> and assign the results of fitting PCA in six dimensions with <i>good_data</i> to pca.<br/> 
 Apply a PCA transformation of <i>log_samples</i> using <i>pca.transform</i>, and assign the results to <i>pca_samples</i>.
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 pca=PCA(n_components=len(good_data.keys())).fit(good_data)
 pca_samples=pca.transform(log_samples) 
 pca_result=pca_results(good_data,pca); pca_result
 </script></div><br/>     
-<div class="linked"><script type="text/x-sage">
-pylab.figure(figsize=(11,4))
+<div class='linked'><script type='text/x-sage'>
+pylab.figure(figsize=(10,4))
 pylab.xlabel('Dimension',fontsize=10)
 pylab.plot(numpy.arange(1,7),
-           numpy.cumsum(pca.explained_variance_ratio_),
-           '-o',c='#1b2c45')
-pylab.title('Explained Variance Ratio',fontsize=15)
-pylab.grid(); pylab.show()
+           numpy.cumsum(pca.explained_variance_ratio_),'-o',c='#1b2c45')
+pylab.title('Explained Variance Ratio',fontsize=15,color='#5a8bbd')
+pylab.grid(); pylab.tight_layout(); pylab.show()
 </script></div><br/>
     <h3>Question 5</h3>
 <i>How much variance in the data is explained in total by the first and second principal component? What about the first four principal components?<br/>
