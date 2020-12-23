@@ -219,13 +219,13 @@ Highcharts.chart('test_highcharts',{
                                              point.plotY+chart.plotTop-10).add(),
                     box=text.getBBox();});
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 pylab.figure(figsize=(10,5))
 p_samples=samples.iloc[:].T.apply(lambda x:100.0*x/x.sum())
 seaborn.heatmap(p_samples,cmap=cmap,annot=True,
-                annot_kws={"color":"White","size":20},fmt='.1f')
-ti="Product categories in percentages for the sample customers"
-pylab.title(ti,fontsize=15)
+                annot_kws={'color':'White','size':20},fmt='.1f')
+ti='Product categories in percentages for the sample customers'
+pylab.title(ti,fontsize=15,color='#5a8bbd')
 pylab.xticks(ha='center',fontsize=12)
 pylab.yticks(fontsize=10); pylab.show()
 </script></div><br/>
@@ -255,77 +255,80 @@ Use <i>sklearn.model_selection.train_test_split</i> to split the dataset into tr
       Import the <i>Decision Tree Regressor</i>, set the <i>random_state</i> parameter, and fit the learner to the training data.<br/>
 Report the prediction score of the testing set using the regressor's score function.<br/>
     <h4>Experiment with <i>Delicatessen</i></h4>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 new_data=data.drop('Delicatessen',axis=int(1))
 target=data['Delicatessen']
 new_data_target=pandas.concat([new_data,target],axis=int(1))
-print ("The correlation table for the choosen feature 'Delicatessen'")
+print ('The correlation table for the choosen feature `Delicatessen`')
 pearson=new_data_target.corr(method='pearson')
 corr_with_delicatessen=pearson.iloc[int(-1)][:-int(1)]
-pandas.DataFrame(corr_with_delicatessen[abs(corr_with_delicatessen)\
-                                        .argsort()[::-int(1)]]);
+pandas.DataFrame(
+    corr_with_delicatessen[abs(corr_with_delicatessen)\
+    .argsort()[::-int(1)]]);
 </script></div><br/> 
-<div class="linked"><script type="text/x-sage">
-pylab.figure(figsize=(11,5))
+<div class='linked'script type='text/x-sage'>
+pylab.figure(figsize=(10,5))
 seaborn.distplot(target,color='#1b2c45',bins=200,
                  hist_kws={'color':'SlateGrey'})
-pylab.xlabel("Delicatessen",fontsize=15)
-pylab.title("Customers' Annual Spending",fontsize=12)
-pylab.grid(); pylab.show()
+pylab.xlabel('Delicatessen',fontsize=15)
+pylab.title('Customers` Annual Spending',fontsize=15,color='#5a8bbd')
+pylab.grid(); pylab.tight_layout(); pylab.show()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 def split_fit():
     X_train,X_test,y_train,y_test=\
-    train_test_split(new_data,target,test_size=0.25,random_state=1)
-    print ("Training and testing splitting was successful.")
+    train_test_split(new_data,target,test_size=.25,random_state=1)
+    print ('Training and testing splitting was successful.')
     regressor1=DecisionTreeRegressor(random_state=1)
     regressor1.fit(X_train,y_train)
     regressor2=RandomForestRegressor(random_state=1)
     regressor2.fit(X_train,y_train)
     score1=regressor1.score(X_test,y_test)
     score2=regressor2.score(X_test,y_test)
-    st1="Decision Tree Regressor. "
-    st2="Random Forest Regressor. "
-    st3="The score of the prediction using the testing set is {}."
+    st1='Decision Tree Regressor. '
+    st2='Random Forest Regressor. '
+    st3='The score of the prediction using the testing set is {}.'
     print(st1+st3.format(score1)); print(st2+st3.format(score2))
     return regressor1,regressor2
 def plot_feature_importance(f,regressor1,regressor2):
     D1=dict(zip(new_data,regressor1.feature_importances_))
     D2=dict(zip(new_data,regressor2.feature_importances_))
-    pylab.figure(figsize=(11,5)); 
+    pylab.figure(figsize=(10,5)); 
     pylab.subplot(121); pylab.grid()
     pylab.bar(range(len(D1)),D1.values(),alpha=.5,
               color='slategrey',align='center')
     pylab.xticks(range(len(D1)),D1.keys(),fontsize=7)
-    st='Experiment with "%s": Feature Importances, \n'
-    pylab.title(st%f+'Decision Tree Regressor')
+    st='Experiment with `%s`: Feature Importances, \n'
+    pylab.title(st%f+'Decision Tree Regressor',fontsize=15,color='#5a8bbd')
     pylab.subplot(122); pylab.grid()
     pylab.bar(range(len(D2)),D2.values(),alpha=.5,
               color='slategrey',align='center')
     pylab.xticks(range(len(D2)),D2.keys(),fontsize=7)
-    pylab.title(st%f+'Random Forest Regressor'); pylab.show()
+    pylab.title(st%f+'Random Forest Regressor',fontsize=15,color='#5a8bbd')
+    pylab.tight_layout(); pylab.show()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 regressor1,regressor2=split_fit()
 plot_feature_importance('Delicatessen',regressor1,regressor2)
 </script></div><br/>
     <h4>Experiment with <i>Grocery</i></h4>      
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 new_data=data.drop('Grocery',axis=int(1)); target=data['Grocery']
 new_data_target=pandas.concat([new_data,target],axis=int(1))
 print ("The correlation table for the choosen feature 'Grocery'")
 pearson=new_data_target.corr(method='pearson')
 corr_with_grocery=pearson.iloc[int(-1)][:-int(1)]
-pandas.DataFrame(corr_with_grocery[abs(corr_with_grocery)\
-                                   .argsort()[::-int(1)]]);
+pandas.DataFrame(
+    corr_with_grocery[abs(corr_with_grocery)\
+    .argsort()[::-int(1)]]);
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 pylab.figure(figsize=(11,5))
 seaborn.distplot(target,color='#1b2c45',bins=200,
                  hist_kws={'color':'SlateGrey'})
-pylab.xlabel("Grocery",fontsize=15)
-pylab.title("Customers' Annual Spending",fontsize=12)
-pylab.grid(); pylab.show()
+pylab.xlabel('Grocery',fontsize=15)
+pylab.title('Customers` Annual Spending',fontsize=15,color='#5a8bbd')
+pylab.grid(); pylab.tight_layout(); pylab.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 regressor1,regressor2=split_fit()
@@ -356,8 +359,8 @@ for i,j in zip(*numpy.triu_indices_from(axes,k=1)):
                        xycoords='axes fraction',ha='center',va='center')
 pylab.grid(); pylab.show()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-print ("Pearson correlation coefficients")
+<div class='linked'><script type='text/x-sage'>
+print ('Pearson correlation coefficients')
 data.corr(method='pearson')
 </script></div><br/>
     <h3>Question 3</h3>
@@ -370,13 +373,13 @@ There are some pairs else with a well-detectable correlation: <i>Milk-Grocery</i
 These facts confirm the thoughts about the relevance of the feature we attempted to predict.<br/>
 We should also note that the features is not normally distributed. But the log-normal distribution looks very similar with our features.<br/>
 I have created the random example of the log-normal distribution for visual comparing.      
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 pylab.figure(figsize=(10,5)); mu,sigma=3.,1.
-s=numpy.random.lognormal(mu,sigma,1000)
+s=numpy.random.lognormal(mu,sigma,2000)
 count,bins,ignored=pylab.hist(
     s,200,align='mid',alpha=.5,color='slategrey')
-x=numpy.linspace(min(bins),max(bins),10000)
-pdf=(numpy.exp(-(numpy.log(x)-mu)**2/(2*sigma**2))\
+x=numpy.linspace(min(bins),max(bins),2000)
+pdf=(2000*numpy.exp(-(numpy.log(x)-mu)**2/(2*sigma**2))\
      /(x*sigma*numpy.sqrt(2*numpy.pi)))
 pylab.plot(x,pdf,linewidth=2,color='#1b2c45')
 pylab.axis('tight'); pylab.grid()
