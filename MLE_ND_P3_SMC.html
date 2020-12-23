@@ -330,7 +330,7 @@ pylab.xlabel('Grocery',fontsize=15)
 pylab.title('Customers` Annual Spending',fontsize=15,color='#5a8bbd')
 pylab.grid(); pylab.tight_layout(); pylab.show()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 regressor1,regressor2=split_fit()
 plot_feature_importance('Grocery',regressor1,regressor2)
 </script></div><br/>
@@ -349,15 +349,15 @@ If we found that the feature we attempted to predict above is relevant for ident
 then the scatter matrix below may not show any correlation between that feature and the others.<br/> 
 Conversely, if we believe that feature is not relevant for identifying a specific customer,<br/>
 the scatter matrix might show a correlation between that feature and another feature in the data.
-<div class="linked"><script type="text/x-sage">
-axes=pandas.plotting.scatter_matrix(data,alpha=.3,figsize=(11,10),
-                                    diagonal='hist',c='#1b2c45',
-                                    hist_kwds={'color':'SlateGrey','bins':100})
+<div class='linked'><script type='text/x-sage'>
+axes=pandas.plotting.scatter_matrix(
+    data,alpha=.3,figsize=(10,9),diagonal='hist',c='#1b2c45',
+    hist_kwds={'color':'SlateGrey','bins':100})
 corr=data.corr().values
 for i,j in zip(*numpy.triu_indices_from(axes,k=1)):
-    axes[i,j].annotate("%.3f" %corr[i,j],(.8,.8),fontsize=12,
+    axes[i,j].annotate('%.3f'%corr[i,j],(.8,.8),fontsize=12,
                        xycoords='axes fraction',ha='center',va='center')
-pylab.grid(); pylab.show()
+pylab.grid(); pylab.tight_layout(); pylab.show()
 </script></div><br/>
 <div class='linked'><script type='text/x-sage'>
 print ('Pearson correlation coefficients')
@@ -398,48 +398,48 @@ A simpler approach which can work in most cases would be applying the natural lo
 Now we will do the following steps:<br/>
 &nbsp;&nbsp;Assign a copy of the data to <i>log_data</i> after applying logarithmic scaling. Use the <i>numpy.log</i> function for this.<br/>
 &nbsp;&nbsp;Assign a copy of the sample data to <i>log_samples</i> after applying logarithmic scaling. Again, use <i>numpy.log</i>.
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 log_data=numpy.log(data); log_samples=numpy.log(samples)
 corr=data.corr().values
-axes=pandas.plotting.scatter_matrix(log_data,alpha=.3,figsize=(9,8),
-                                    diagonal='hist',c='#1b2c45',
-                                    hist_kwds={'color':'SlateGrey','bins':100})
+axes=pandas.plotting.scatter_matrix(
+    log_data,alpha=.3,figsize=(10,9),diagonal='hist',c='#1b2c45',
+    hist_kwds={'color':'SlateGrey','bins':100})
 for i,j in zip(*numpy.triu_indices_from(axes,k=1)):
-    axes[i,j].annotate("%.3f" %corr[i,j],(.2,.2),fontsize=12,
+    axes[i,j].annotate('%.3f'%corr[i,j],(.2,.2),fontsize=12,
                        xycoords='axes fraction',ha='center',va='center')
-pylab.grid(); pylab.show()
+pylab.grid(); pylab.tight_layout(); pylab.show()
 </script></div><br/>
     <h3>Observation</h3>
 After applying a natural logarithm scaling to the data, the distribution of each feature should appear much more normal.<br/> 
 For any pairs of features we may have identified earlier as being correlated, observe here whether that correlation is still present (and whether it is now stronger or weaker than before).
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 log_samples
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-print ("Pearson correlation coefficients")
+<div class='linked'><script type='text/x-sage'>
+print ('Pearson correlation coefficients')
 log_data.corr(method='pearson')
 </script></div><br/>
     <h3>Implementation: Outlier Detection</h3>
 Detecting outliers in the data is extremely important in the data preprocessing step of any analysis.<br/> 
 The presence of outliers can often skew results which take into consideration these data points.<br/> 
 There are many "rules of thumb" for what constitutes an outlier in a dataset.<br/>
-Here, we will use the <a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc471.htm">&#x1F578;Tukey's Method</a> for identfying outliers: an <b>outlier step</b> is calculated as 1.5 times the interquartile range (IQR).<br/>
+Here, we will use the <a href='https://www.itl.nist.gov/div898/handbook/prc/section4/prc471.htm'>&#x1F578;Tukey's Method</a> for identfying outliers: an <b>outlier step</b> is calculated as 1.5 times the interquartile range (IQR).<br/>
 A data point with a feature that is beyond an outlier step outside of the IQR for that feature is considered abnormal.<br/>
 So the next steps are the following:<br/>
 Assign the value of the 25th percentile for the given feature to Q1. Use numpy.percentile for this.<br/>
 Assign the value of the 75th percentile for the given feature to Q3. Again, use numpy.percentile.<br/>
 Assign the calculation of an outlier step for the given feature to step.<br/>
 Optionally remove data points from the dataset by adding indices to the outliers list.
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 for feature in log_data.keys():
     Q1,Q3=numpy.percentile(log_data[feature],25),\
           numpy.percentile(log_data[feature],75)
     step=(Q3-Q1)*1.5
-    st="Data points considered outliers for the feature '{}':"
+    st='Data points considered outliers for the feature `{}`:'
     print(st.format(feature))
     display(log_data[~((log_data[feature]>=Q1-step)&(log_data[feature]<=Q3+step))])
 outliers=[65,66,75,128,154]
-print("Data outliers: '{}'".format(outliers))
+print('Data outliers: `{}`'.format(outliers))
 good_data=log_data.drop(log_data.index[outliers]).reset_index(drop=True)
 </script></div><br/>
     <h3>Question 4</h3>
@@ -451,13 +451,14 @@ Five data points [65, 66, 75, 128, 154] can be detected as outliers for more tha
 It's confirmed by another method with a heatmap in the original data. I think it needs to remove them from the data.<br/> 
 When we apply k-means the results can be distorted by outliers: clusters are constructed with calculations of cluster-centers<br/>as the averages of all data points from this cluster, so outliers can have a great influence.<br/> 
 If we do not remove outliers from the dataset, they can form additional artificial clusters for the outliers which can get some data points from the real clusters.
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 out_percentiles=data.rank(pct=True).iloc[outliers]
-pylab.figure(figsize=(11,5))
+pylab.figure(figsize=(10,5))
 pylab.xticks(fontsize=10); pylab.yticks(fontsize=10)
 seaborn.heatmap(out_percentiles,annot=True,cmap=cmap,
                 annot_kws={'color':'White','size':'20'})
-pylab.title('Multiple Outliers Heatmap',fontsize=15); pylab.show()
+pylab.title('Multiple Outliers Heatmap',fontsize=15,color='#5a8bbd')
+pylab.tight_layout(); pylab.show()
 </script></div><br/>
     <h2>Feature Transformation</h2>
 In this section we will use principal component analysis (PCA) to draw conclusions about the underlying structure of the wholesale customer data.<br/> 
