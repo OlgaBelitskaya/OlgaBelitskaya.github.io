@@ -21,7 +21,7 @@
     .sagecell table.table_form tr.row-a {background-color:lightgray;} 
     .sagecell table.table_form tr.row-b {background-color:ghostwhite;}
     .sagecell table.table_form td {padding:5px 15px; color:#5a8bbd; font-family:'Roboto';}
-    .sagecell_sessionOutput, .sagecell_sessionOutput pre {color:#5a8bbd; font-family:'Roboto';}
+    .sagecell_sessionOutput,.sagecell_sessionOutput pre {color:#5a8bbd; font-family:'Roboto';}
   </style>  
   <body>
     <h1>🏙 Machine Learning Engineer Nanodegree &nbsp;
@@ -100,12 +100,12 @@ def cluster_results(reduced_data,preds,centers,pca_samples,alg):
     ti='%s Cluster Learning on PCA-Reduced Data\n'+\
        'Centroids Marked by Numbers\n'+\
        'Transformed Sample Data Marked by Red Crosses'
-    ax.set_title(ti%alg,fontsize=15)
+    ax.set_title(ti%alg,fontsize=15,color='#5a8bbd')
     pylab_tight_layout(); pylab.show()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 def biplot(good_data,reduced_data,pca):
-    fig,ax=pylab.subplots(figsize=(11,5))
+    fig,ax=pylab.subplots(figsize=(10,5))
     x=reduced_data.loc[:,'Dimension 1']
     y=reduced_data.loc[:,'Dimension 2']
     ax.scatter(x=x,y=y,facecolors='slategray',
@@ -119,12 +119,13 @@ def biplot(good_data,reduced_data,pca):
         ax.text(v[0]*text_pos,v[1]*text_pos,
                 good_data.columns[i],color='black',
                 ha='center',va='center',fontsize=12)
-    ax.set_xlabel("Dimension 1",fontsize=10)
-    ax.set_ylabel("Dimension 2",fontsize=10)
-    ax.set_title("PC plane with original feature projections.",
-                 fontsize=15); pylab.show()
+    ax.set_xlabel('Dimension 1',fontsize=10)
+    ax.set_ylabel('Dimension 2',fontsize=10)
+    ti='PC plane with original feature projections.'
+    ax.set_title(ti,fontsize=15,color='#5a8bbd')
+    pylab.tight_layout(); pylab.show()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 def channel_results(reduced_data,outliers,pca_samples):
     path='https://raw.githubusercontent.com/OlgaBelitskaya/'+\
          'machine_learning_engineer_nd009/master/'+\
@@ -133,40 +134,44 @@ def channel_results(reduced_data,outliers,pca_samples):
     channel=pandas.DataFrame(full_data['Channel'],columns=['Channel'])
     channel=channel.drop(channel.index[outliers]).reset_index(drop=True)
     labeled=pandas.concat([reduced_data,channel],axis=int(1))
-    fig,ax=pylab.subplots(figsize=(11,5))
+    fig,ax=pylab.subplots(figsize=(10,5))
     labels=['Hotel/Restaurant/Cafe','Retailer']
     grouped=labeled.groupby('Channel')
     for i,channel in grouped:   
         channel.plot(ax=ax,kind='scatter',
                      x='Dimension 1',y='Dimension 2',
-                     color=cmap((i-1)*1.0/2),label=labels[i-1],s=30)  
+                     color=cmap((i-1)*1./2),label=labels[i-1],s=30)  
     for i,sample in enumerate(pca_samples):
         ax.scatter(x=sample[0],y=sample[1],s=230,linewidth=3,
                    color='black',marker='o',facecolors='none');
-        ax.scatter(x=sample[0]+0.25,y=sample[1]+0.3,
+        ax.scatter(x=sample[0]+.25,y=sample[1]+.3,
                    marker='$%d$'%(i),alpha=1,s=200,color='black')
-    ti="PCA-Reduced Data Labeled by 'Channel'\n"+\
-       "Transformed Sample Data Circled"
-    ax.set_title(ti,fontsize=15); pylab.show()
+    ti='PCA-Reduced Data Labeled by `Channel`\n'+\
+       'Transformed Sample Data Circled'
+    ax.set_title(ti,fontsize=15,color='#5a8bbd')
+    pylab.tight_layout(); pylab.show()
 </script></div><br/>
     <h2>Data Exploration</h2>
-In this section, we will begin exploring the data through visualizations and code to understand how each feature is related to the others.<br/>
-We will observe a statistical description of the dataset, consider the relevance of each feature, and select a few sample data points from the dataset<br/>which you will track through the course of this project.<br/>
-The dataset is composed of six important product categories: <i>Fresh, Milk, Grocery, Frozen, Detergents_Paper</i>, and <i>Delicatessen</i>.<br/> 
+In this section, we will begin exploring the data through visualizations and code to understand 
+how each feature is related to the others.<br/>
+We will observe a statistical description of the dataset, consider the relevance of each feature, <br/>
+and select a few sample data points from the dataset which you will track through the course of this project.<br/>
+The dataset is composed of six important product categories: 
+<i>Fresh, Milk, Grocery, Frozen, Detergents_Paper</i>, and <i>Delicatessen</i>.<br/> 
 Consider what each category represents in terms of products we could purchase.
     <h3>Data Loading</h3>    
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 path='https://raw.githubusercontent.com/OlgaBelitskaya/'+\
          'machine_learning_engineer_nd009/master/'+\
          'Machine_Learning_Engineer_ND_P3/'
 data=pandas.read_csv(path+'customers.csv')
 data.drop(['Region','Channel'],axis=1,inplace=True)
-ti="The dataset has {} samples with {} features each."
+ti='The dataset has {} samples with {} features each.'
 print(ti.format(*data.shape)); data.describe()
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-data.plot.area(stacked=False,figsize=(11,5))
-pylab.grid(); pylab.show()
+<div class='linked'><script type='text/x-sage'>
+data.plot.area(stacked=False,figsize=(10,5))
+pylab.grid(); pylab.tight_layout(); pylab.show()
 </script></div><br/>
     <h3>Implementation: Selecting Samples</h3>
 To get a better understanding of the customers and how their data will transform through the analysis,<br/>
