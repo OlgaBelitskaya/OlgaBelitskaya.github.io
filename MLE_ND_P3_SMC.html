@@ -9,6 +9,7 @@
       sagecell.makeSagecell({inputLocation:'div.linked',linked:true,evalButtonText:'Run Linked Cells'});  
       sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run'});});
     </script>
+    <script src='https://code.highcharts.com/highcharts.js'></script>
   </head>
   <style>
     @import 'https://fonts.googleapis.com/css?family=Orbitron|Roboto';
@@ -178,7 +179,7 @@ To get a better understanding of the customers and how their data will transform
 it would be best to select a few sample data points and explore them in more detail.<br/>
 In the code block below, add three indices of your choice to the indices list which will represent the customers to track.<br/>
 It is suggested to try different sets of samples until you obtain customers that vary significantly from one another.
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 indices=[23,25,27]
 def hex_to_rgb(chex):
         chex=chex.lstrip('#'); n=len(chex)
@@ -186,27 +187,28 @@ def hex_to_rgb(chex):
 samples=pandas.DataFrame(data.loc[indices],
                          columns=data.keys()).reset_index(drop=True)
 samples.index=['C0','C1','C2']; samples.loc['Mean']=samples.mean()
-print ("Chosen samples of the wholesale customers' dataset:"); samples
+print ('Chosen samples of the Wholesale Customers` dataset:',samples)
 cols=['#1b2c45','#5a8bbd','#008b8b','#ff5a8b']
-samples.T.plot(figsize=(11,5),color=[hex_to_rgb(el) for el in cols])
-pylab.grid(); pylab.show()
+samples.T.plot(figsize=(10,5),color=[hex_to_rgb(el) for el in cols])
+pylab.grid(); pylab.tight_layout(); pylab.show()
 </script></div><br/>
     <h3>Question 1</h3>
-<i>Consider the total purchase cost of each product category and the statistical description of the dataset above for your sample customers.<br/>
+<i>Consider the total purchase cost of each product category and the statistical description 
+  of the dataset above for your sample customers.<br/>
 What kind of establishment (customer) could each of the three samples you've chosen represent?</i>
     <h3>Answer 1</h3>
-I have built a plot for comparing the feature values with the means and a heatmap to visualize for each customer the spending amount per feature in percentages.
-    <p>Click “Run” twice. Use in HTML documents with &#60;/script&#62; in the end.</p>
-<div class="sage"><script type="text/x-sage">
+I have built a plot for comparing the feature values with the means and a heatmap to visualize 
+for each customer the spending amount per feature in percentages.
+    <p></p>
+<div class='sage'><script type='text/x-sage'>
 %%html
-<script src="https://code.highcharts.com/highcharts.js"/>
-<div id="test_highcharts" style="width:1100px;height:500px;"/><script>
+<div id='test_highcharts' style='width:1000px; height:500px;'/><script>
 Highcharts.chart('test_highcharts',{
     xAxis:{categories:['Fresh','Milk','Grocery','Frozen',
                        'Detergents_Paper','Delicatessen']},
     yAxis:{title:{text:'Value'}},
     title:{style:{'color':'#5a8bbd','fontSize':'24px'},
-           text:"Chosen samples of the wholesale customers' dataset"},
+           text:'Chosen samples of the wholesale customers` dataset'},
     series:[{name:'C0',color:'#1b2c45',data:[26373,36423,22019,5154,4337,16523]},
             {name:'C1',color:'#5a8bbd',data:[16165,4230,7595,201,4003,57]},
             {name:'C2',color:'#008b8b',data:[14276,803,3045,485,100,518]},
