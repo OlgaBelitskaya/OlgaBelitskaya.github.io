@@ -821,16 +821,16 @@ We should note that for both algorithms borders of clusters are more clearly det
 Differences between actual and algorithmic classification may indicate a lack of the number of clusters for this market.<br/> Perhaps it needs a greater number to detect spending habits.
 <div class='linked'><script type='text/x-sage'>
 channel_data=pandas.read_csv(path+'customers.csv')
-channel_data=channel_data.drop(channel_data.index[outliers])\
-                         .reset_index(drop=True)
-# Might need to switch around the 0 and 1, based on the cluster seed
-[df1,df2]=[numpy.where(channel_data['Channel']==2,0,1),
-           numpy.where(channel_data['Channel']==2,1,0)]
-percentage_kmeans=max(sum(df1==preds)/float(len(preds)),
-                      sum(df2==preds)/float(len(preds)))
-percentage_gaussian_mixture=max(
-    sum(df1==preds)/float(len(preds2)),
-    sum(df2==preds2)/float(len(preds2)))
+channel_data=channel_data.drop(
+    channel_data.index[outliers]).reset_index(drop=True)
+if clusters2['K-Means'].values[0]=='Segment 0': v11,v12=0,1
+else: v11,v12=1,0
+if clusters2['Gaussian Mixture'].values[0]=='Segment 0': v21,v22=0,1
+else: v21,v22=1,0
+df=numpy.where(channel_data['Channel']==2,v11,v12)
+percentage_kmeans=sum(df==preds)/float(len(preds))
+df2=numpy.where(channel_data['Channel']==2,v21,v22)
+percentage_gaussian_mixture=sum(df2==preds2)/float(len(preds2))
 print ('K-Means')
 print ('Percentage of correctly classified customers: {:.2%}'\
 .format(percentage_kmeans))
