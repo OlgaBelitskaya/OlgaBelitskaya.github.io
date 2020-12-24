@@ -610,7 +610,7 @@ for n in list(range(2,12)):
 </script></div><br/>
 We also can run the speed comparison for the K-Means clustering and the Gaussian Mixture Model.
 <div class='linked'><script type='text/x-sage'>
-n,k=300,6; kmeans_train_times=[]; gmm_train_times=[]
+n,k=100,6; kmeans_train_times=[]; gmm_train_times=[]
 for k in range(2,k+1):
     cum_time=0.
     for i in range(n):
@@ -674,23 +674,25 @@ It's time for the next steps:<br/>
 Apply the inverse transform to <i>centers</i> using <i>pca.inverse_transform</i> and assign the new centers to <i>log_centers</i>.<br/>
 Apply the inverse function of <i>numpy.log</i> to <i>log_centers</i> using <i>numpy.exp</i> 
 and assign the true centers to <i>true_centers</i>.
-<div class="linked"><script type="text/x-sage">
-print ("Data Means")
+<div class='linked'><script type='text/x-sage'>
+print ('Data Means')
 pandas.DataFrame(numpy.mean(data)).T
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 log_centers=pca.inverse_transform(centers)
 true_centers=numpy.exp(log_centers)
 segments=['Segment {}'.format(i) for i in range(0,len(centers))]
-true_centers=pandas.DataFrame(numpy.round(true_centers),
-                              columns=data.keys(),index=segments)
-print ("K-Means True Centers"); true_centers
+true_centers=pandas.DataFrame(
+    numpy.round(true_centers),columns=data.keys(),index=segments)
+print ('K-Means True Centers'); true_centers
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 true_centers=true_centers.append(data.describe().loc['mean'])
-true_centers.plot(kind='bar',figsize=(11,5))
-pylab.title('Comparing K-Means Centers with Data Means',fontsize=15)
-pylab.xticks(rotation=0,fontsize=10); pylab.grid(); pylab.show()
+true_centers.plot(kind='bar',figsize=(10,5))
+pylab.title('Comparing K-Means Centers with Data Means',
+            fontsize=15,color='#5a8bbd')
+pylab.xticks(rotation=0,fontsize=10); pylab.grid() 
+pylab.tight_layout(); pylab.show()
 </script></div><br/>
 <div class="linked"><script type="text/x-sage">
 log_centers2=pca.inverse_transform(centers2)
