@@ -324,7 +324,7 @@ pandas.DataFrame(
     .argsort()[::-int(1)]]);
 </script></div><br/>
 <div class='linked'><script type='text/x-sage'>
-pylab.figure(figsize=(11,5))
+pylab.figure(figsize=(10,5))
 seaborn.distplot(target,color='#1b2c45',bins=200,
                  hist_kws={'color':'SlateGrey'})
 pylab.xlabel('Grocery',fontsize=15)
@@ -383,9 +383,9 @@ x=numpy.linspace(min(bins),max(bins),2000)
 pdf=(2000*numpy.exp(-(numpy.log(x)-mu)**2/(2*sigma**2))\
      /(x*sigma*numpy.sqrt(2*numpy.pi)))
 pylab.plot(x,pdf,linewidth=2,color='#1b2c45')
-pylab.axis('tight'); pylab.grid()
 pylab.title('Example of a Random Log-Normal Distribution',
-            fontsize=15); pylab.show()
+            fontsize=15,color='#5a8bbd')
+pylab.tight_layout(); pylab.grid(); pylab.show()
 </script></div><br/>
     <h2>Data Preprocessing</h2>
 In this section, we will preprocessing the data to create a better representation of customers by performing a scaling on the data and detecting (and optionally removing) outliers.<br/>
@@ -595,21 +595,21 @@ for n in list(range(2,12)):
     centers=clusterer.cluster_centers_
     sample_preds=clusterer.predict(pca_samples)
     score=silhouette_score(reduced_data,preds)
-    st='For number of clusters = {}, the silhouette_score is : {}''
+    st='For number of clusters = {}, the silhouette_score is : {}'
     print(st.format(n,score))
 </script></div><br/> 
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 for n in list(range(2,12)):
     clusterer2=GaussianMixture(n_components=n,
                                covariance_type='full').fit(reduced_data)
     preds2=clusterer2.predict(reduced_data); centers2=clusterer2.means_
     sample_preds2=clusterer2.predict(pca_samples)
     score2=silhouette_score(reduced_data,preds2,metric='mahalanobis')
-    print("For number of clusters = {}, the silhouette_score is : {}"\
+    print('For number of clusters = {}, the silhouette_score is : {}'\
           .format(n,score2))
 </script></div><br/>
 We also can run the speed comparison for the K-Means clustering and the Gaussian Mixture Model.
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 n,k=300,6; kmeans_train_times=[]; gmm_train_times=[]
 for k in range(2,k+1):
     cum_time=0.
@@ -618,8 +618,8 @@ for k in range(2,k+1):
         KMeans(n_clusters=k).fit(reduced_data)
         cum_time+=(time.time()-start)
     kmeans_train_times.append([k,cum_time/n])
-km_df=pandas.DataFrame(kmeans_train_times,
-                       columns=['KM_Clusters','KM_Time'])
+km_df=pandas.DataFrame(
+    kmeans_train_times,columns=['KM_Clusters','KM_Time'])
 for k in range(2,k+1):
     cum_time=0.
     for i in range(n):
@@ -627,10 +627,10 @@ for k in range(2,k+1):
         GaussianMixture(n_components=k).fit(reduced_data)
         cum_time+=(time.time()-start)
     gmm_train_times.append([k,cum_time/n])
-gmm_df=pandas.DataFrame(gmm_train_times,
-                        columns=['GMM_Components','GMM_Time'])
+gmm_df=pandas.DataFrame(
+    gmm_train_times,columns=['GMM_Components','GMM_Time'])
 times_df=km_df.join(gmm_df)
-pylab.figure(figsize=(11,4))
+pylab.figure(figsize=(10,4))
 pylab.plot(times_df.GMM_Components,times_df.GMM_Time*1000.,
            '-o',c='#5a8bbd',label='GMM Train Time')
 pylab.plot(times_df.GMM_Components,times_df.KM_Time*1000.,
@@ -639,8 +639,9 @@ pylab.ylabel('Train time (in millisec.)',fontsize=10)
 pylab.xlabel('Cluster/Components Used in Training',fontsize=10)
 st='Training Time for Different Cluster/Component Sizes\n'+\
    'Averaged Over {} Runs Per Size'
-pylab.title(st.format(n),fontsize=15)
-pylab.legend(loc='best'); pylab.grid(); pylab.show()
+pylab.title(st.format(n),fontsize=15,color='#5a8bbd')
+pylab.legend(loc='best'); pylab.grid()
+pylab.tight_layout(); pylab.show()
 </script></div><br/> 
     <h3>Cluster Visualization</h3>
 Once we've chosen the optimal number of clusters for the clustering algorithm using the scoring metric above, we can now visualize the results.<br/>
