@@ -647,7 +647,7 @@ pylab.tight_layout(); pylab.show()
 Once we've chosen the optimal number of clusters for the clustering algorithm using the scoring metric above, we can now visualize the results.<br/>
 Note that, for experimentation purposes, it's useful to adjust the number of clusters for the clustering algorithm to see various visualizations.<br/> 
 The final visualization provided should, however, correspond with the optimal number of clusters.
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 clusterer=KMeans(n_clusters=2).fit(reduced_data)
 sample_preds=clusterer.predict(pca_samples)
 preds=clusterer.predict(reduced_data)
@@ -655,9 +655,9 @@ centers=clusterer.cluster_centers_
 score=silhouette_score(reduced_data,preds)
 cluster_results(reduced_data,preds,centers,pca_samples,'K-Means')
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-clusterer2=GaussianMixture(n_components=2,
-                           covariance_type='full').fit(reduced_data)
+<div class='linked'><script type='text/x-sage'>
+clusterer2=GaussianMixture(
+    n_components=2,covariance_type='full').fit(reduced_data)
 sample_preds2=clusterer2.predict(pca_samples)
 preds2=clusterer2.predict(reduced_data)
 centers2=clusterer2.means_; score2=silhouette_score(reduced_data,preds2)
@@ -672,7 +672,8 @@ Since the data is currently reduced in dimension and scaled by a logarithm,<br/>
 we can recover the representative customer spending from these data points by applying the inverse transformations.<br/>
 It's time for the next steps:<br/>
 Apply the inverse transform to <i>centers</i> using <i>pca.inverse_transform</i> and assign the new centers to <i>log_centers</i>.<br/>
-Apply the inverse function of <i>numpy.log</i> to <i>log_centers</i> using <i>numpy.exp</i> and assign the true centers to <i>true_centers</i>.
+Apply the inverse function of <i>numpy.log</i> to <i>log_centers</i> using <i>numpy.exp</i> 
+and assign the true centers to <i>true_centers</i>.
 <div class="linked"><script type="text/x-sage">
 print ("Data Means")
 pandas.DataFrame(numpy.mean(data)).T
@@ -715,10 +716,10 @@ The values in categories are perfect indicators:<br/>
 <i>Detergents_Paper, Grocery, Milk, Delicatessen</i> are higher than the mean for <b>Retail</b> and less than the mean for <b>HoReCa</b> (Hotel/Restaurant/Cafe).<br/>
 <i>Fresh</i> has the highest level among others for <b>HoReCa</b> than for <b>Retail</b>.<br/>
 <i>Detergents_Paper</i> has an extremely small level for <b>HoReCa</b>.
-<div class="linked"><script type="text/x-sage">
-clusters=pandas.DataFrame(2*[['','']],
-                          columns=['K-Means','Gaussian Mixture'],
-                          index=['Segment 0','Segment 1'])
+<div class='linked'><script type='text/x-sage'>
+clusters=pandas.DataFrame(
+    2*[['','']],columns=['K-Means','Gaussian Mixture'],
+    index=['Segment 0','Segment 1'])
 if true_centers['Fresh']['Segment 0']>true_centers['Fresh']['Segment 1']:
     clusters['K-Means']['Segment 0']='HoReCa'
     clusters['K-Means']['Segment 1']='Retail'
@@ -737,10 +738,10 @@ clusters
 <i>For each sample point, which customer segment from Question 8 best represents it?<br/> 
 Are the predictions for each sample point consistent with this?</i>
     <h3>Answer 9</h3>
-<div class="linked"><script type="text/x-sage">
-clusters2=pandas.DataFrame(3*[['','']],
-                           columns=['K-Means','Gaussian Mixture'],
-                           index=['C0','C1','C2'])
+<div class='linked'><script type='text/x-sage'>
+clusters2=pandas.DataFrame(
+    3*[['','']],columns=['K-Means','Gaussian Mixture'],
+    index=['C0','C1','C2'])
 clusters2['Cluster']=['Retail','Retail','HoReCa']
 for el in ['K-Means','Gaussian Mixture']:
     if clusters[el].values[0]=='Retail': 
@@ -749,15 +750,15 @@ for el in ['K-Means','Gaussian Mixture']:
         clusters2[el]=['Segment 1','Segment 1','Segment 0']
 clusters2
 </script></div><br/>
-<div class="linked"><script type="text/x-sage">
-st1="Sample point {} predicted to be in Cluster {}"
-st2="The distance between sample point {} and center of Cluster {}:"
-print ("K-Means")
+<div class='linked'><script type='text/x-sage'>
+st1='Sample point {} predicted to be in Cluster {}'
+st2='The distance between sample point {} and center of Cluster {}:'
+print ('K-Means')
 for i,pred in enumerate(sample_preds):
     print (st1.format(i,pred))
     print (st2.format(i,pred))
     print (samples.iloc[i]-true_centers.iloc[pred])
-print ("\n\nGaussian Mixture Model")
+print ('\n\nGaussian Mixture Model')
 for i,pred in enumerate(sample_preds2):
     print (st1.format(i,pred))
     print (st2.format(i,pred))
@@ -801,7 +802,7 @@ At the beginning of this project, it was discussed that the <i>Channel</i> and '
 By reintroducing the <i>Channel</i> feature to the dataset, an interesting structure emerges when considering<br/>the same PCA dimensionality reduction applied earlier to the original dataset.<br/>
 Let's see how each data point is labeled either <i>HoReCa</i> (Hotel/Restaurant/Cafe) or <i>Retail</i> the reduced space.<br/>
 In addition, we will find the sample points are circled in the plot, which will identify their labeling.
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 channel_results(reduced_data,outliers,pca_samples[:3])
 </script></div><br/>
     <h3>Question 12</h3>
@@ -815,7 +816,7 @@ The customer segments classified as purely <i>Retailers</i> or <i>Hotels/Restaur
 The algorithmic classification in the majority of cases is in line with the real results.<br/>
 We should note that for both algorithms borders of clusters are more clearly detectable.<br/>
 Differences between actual and algorithmic classification may indicate a lack of the number of clusters for this market.<br/> Perhaps it needs a greater number to detect spending habits.
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 channel_data=pandas.read_csv(path+'customers.csv')
 channel_data=channel_data.drop(channel_data.index[outliers])\
                          .reset_index(drop=True)
@@ -824,20 +825,21 @@ channel_data=channel_data.drop(channel_data.index[outliers])\
            numpy.where(channel_data['Channel']==2,1,0)]
 percentage_kmeans=max(sum(df1==preds)/float(len(preds)),
                       sum(df2==preds)/float(len(preds)))
-percentage_gaussian_mixture=max(sum(df1==preds)/float(len(preds2)),
-                                sum(df2==preds2)/float(len(preds2)))
-print ("K-Means")
-print ("Percentage of correctly classified customers: {:.2%}"\
+percentage_gaussian_mixture=max(
+    sum(df1==preds)/float(len(preds2)),
+    sum(df2==preds2)/float(len(preds2)))
+print ('K-Means')
+print ('Percentage of correctly classified customers: {:.2%}'\
 .format(percentage_kmeans))
-print ("\nGaussian Mixture Model")
-print ("Percentage of correctly classified customers: {:.2%}"\
+print ('\nGaussian Mixture Model')
+print ('Percentage of correctly classified customers: {:.2%}'\
 .format(percentage_gaussian_mixture))
 </script></div><br/>
     <h3>Reflections</h3>
 It would be interesting to repeat the steps of this project in R and compare the results.<br/>
 Or try animation for clustering algorithms to compare the borders of clusters with real data labels during the learning process.
     <h3>Additional Code Cell</h3>
-<div class="linked"><script type="text/x-sage">
+<div class='linked'><script type='text/x-sage'>
 
 </script></div><br/>
   </body>
