@@ -7,29 +7,25 @@
     <script data-ad-client="ca-pub-9200929962680356" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   </head>
   <style>
-@import url('https://fonts.googleapis.com/css?family=Orbitron');
-body {margin:7px 7px 0px; width:99%; height:100%;}
+@import 'https://fonts.googleapis.com/css?family=Orbitron&effect=3d';
+body {margin:7px 7px 7px; width:99%; height:100%;}
 link {color:white;} vlink {color:white;} alink {color:white;}
-button {background-color:slategray; color:white; width:99%;
-        font-family:Orbitron; font-size:200%; text-shadow:4px 4px 4px #aaa;
-        position:absolute; bottom:80px; left:6px;}
-p {color:white; text-shadow:4px 4px 4px #aaa;
-   font-family:Orbitron; font-size:200%;
-   position:absolute; bottom:0px; left:30px;}
-h1 {color:white; position:absolute;
-    font-family:'Orbitron'; font-size:250%; text-shadow:4px 4px 4px #aaa; 
-    top:100px; left:100px;}
-h2 {font-family:'Orbitron'; font-size:250%; text-shadow:4px 4px 4px #aaa;
-    top:300px; left:180px; position:absolute;}
-div {width:4px; height:4px; margin:1px 0px 0px 1px; float:left; 
-     background:#F0F8FF; display:inline-block;}
+h1 {color:white; position:absolute; top:20%; left:50%; transform:translate(-50%,-20%);
+    font-family:'Orbitron'; font-size:180%; }
+h2 {color:white; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    font-family:'Orbitron'; font-size:130%; }
+div1 {width:4px; height:4px; margin:1px 0px 0px 1px; float:left; 
+      background:#F0F8FF; display:inline-block;}
   </style>
   <body>
-<script src="https://d3js.org/d3.v4.min.js"></script><script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
 d3.select("body").transition().duration(30000)
   .styleTween("background-color",function(){
     return d3.interpolate("steelblue","slategray")}); 
-var n=27000,m=1000;
+var nwidth=Math.round(Math.min(window.screen.width, window.innerWidth)-14)/5;
+var nheight=Math.round(Math.min(window.screen.height, window.innerHeight)-17)/5;
+var n=nwidth*nheight,m=1000;
 var ice_red=d3.interpolateRgb("#E0FFFF","#FF0000"),
     red_orange=d3.interpolateRgb("#FF0000","#FF8C00"),
     orange_yellow=d3.interpolateRgb("#FF8C00","#FFFF00"),
@@ -38,7 +34,7 @@ var ice_red=d3.interpolateRgb("#E0FFFF","#FF0000"),
     lblue_blue=d3.interpolateRgb("#1E90FF","#0000CD"),
     blue_violet=d3.interpolateRgb("#0000CD","#9400D3"),
     violet_ice=d3.interpolateRgb("#9400D3","#E0FFFF");
-d3.select("body").selectAll("div").data(d3.range(n)).enter().append("div")
+d3.select("body").selectAll("div1").data(d3.range(n)).enter().append("div1")
                  .transition().delay(function(d,i){return i+Math.random()*n/4;})
                  .ease(d3.easeLinear)
   .on("start",function repeat(){
@@ -60,13 +56,10 @@ d3.select("body").selectAll("div").data(d3.range(n)).enter().append("div")
         .styleTween("background-color",function(){return violet_ice;})
         .transition().delay(n)
         .on("start",repeat);});
-d3.select("body").append("h1")
-  .text("Welcome to my first page on github.io");
-d3.select("body").append("h2")
+d3.select("body").append("h1").attr('class','font-effect-3d')
+  .text("welcome to my first page on github.io");
+d3.select("body").append("h2").attr('class','font-effect-3d')
   .html("<a href='https://olgabelitskaya.github.io/README.html'>Click to view projects, notebooks, and data files</a>");
 </script>
-<button id="bdemo" type="button" onclick="document.getElementById('demo').innerHTML=Date()">
-Click to Display Current Date and Time</button>
-<p id="demo"></p>
   </body>
 </html>
