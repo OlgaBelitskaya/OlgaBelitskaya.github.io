@@ -8,14 +8,14 @@
   </head>
   <style>
 @import 'https://fonts.googleapis.com/css?family=Orbitron&effect=3d';
-body {margin:10px 10px 10px; width:99%; height:100%;}
+body {padding-top:2.5%; padding-left:2.5%; width:95%; height:95%;}
 a {color:white;} link {color:white;}
-h1 {color:white; position:absolute; top:20%; left:50%; transform:translate(-50%,-20%);
+h1 {color:slategray; position:absolute; top:20%; left:50%; transform:translate(-50%,-20%);
     font-family:'Orbitron'; font-size:120%; }
-h2 {color:white; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+h2 {position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
     font-family:'Orbitron'; font-size:90%; }
-div1 {width:4px; height:4px; margin:1px 0px 0px 1px; float:left; 
-      background:#F0F8FF; display:inline-block;}
+div1 {width:4px; height:4px; float:left; 
+      background:slategray; display:inline-block;}
   </style>
   <body>
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -26,23 +26,23 @@ d3.select("body").transition().duration(30000)
 d3.select("body").transition().delay(30000).duration(30000)
   .styleTween("background-color",function(){
     return d3.interpolate("slategray","steelblue")});
-var nwidth=Math.floor((Math.min(window.screen.width, window.innerWidth)-20)/5);
-var nheight=Math.floor((Math.min(window.screen.height, window.innerHeight)-30)/5);
-var n=nwidth*5,m=1000;
-var ice_red=d3.interpolateRgb("#E0FFFF","#FF0000"),
+var nwidth=Math.floor(0.95*Math.min(window.screen.width, window.innerWidth)/4);
+var nheight=Math.floor(0.9*Math.min(window.screen.height, window.innerHeight)/4);
+var n=nwidth*nheight,m=1000;
+var gray_red=d3.interpolateRgb("slategray","#FF0000"),
     red_orange=d3.interpolateRgb("#FF0000","#FF8C00"),
     orange_yellow=d3.interpolateRgb("#FF8C00","#FFFF00"),
     yellow_green=d3.interpolateRgb("#FFFF00","#32CD32"),
     green_lblue=d3.interpolateRgb("#32CD32","#1E90FF"),
     lblue_blue=d3.interpolateRgb("#1E90FF","#0000CD"),
     blue_violet=d3.interpolateRgb("#0000CD","#9400D3"),
-    violet_ice=d3.interpolateRgb("#9400D3","#E0FFFF");
+    violet_gray=d3.interpolateRgb("#9400D3","slategray");
 d3.select("body").selectAll("div1").data(d3.range(n)).enter().append("div1")
                  .transition().delay(function(d,i){return i+Math.random()*n/4;})
                  .ease(d3.easeLinear)
   .on("start",function repeat(){
     d3.active(this)
-        .styleTween("background-color",function(){return ice_red;})
+        .styleTween("background-color",function(){return gray_red;})
         .transition().delay(m)
         .styleTween("background-color",function(){return red_orange;})
         .transition().delay(m)
@@ -56,7 +56,7 @@ d3.select("body").selectAll("div1").data(d3.range(n)).enter().append("div1")
         .transition().delay(m)
         .styleTween("background-color",function(){return blue_violet;})
         .transition().delay(m)
-        .styleTween("background-color",function(){return violet_ice;})
+        .styleTween("background-color",function(){return violet_gray;})
         .transition().delay(n)
         .on("start",repeat);});
 d3.select("body").append("h1").attr('class','font-effect-3d')
