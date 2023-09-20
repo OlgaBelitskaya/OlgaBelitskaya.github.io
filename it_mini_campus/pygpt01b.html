@@ -1,0 +1,729 @@
+!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>GPTPy01b</title>
+    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <script>$(function () {
+    sagecell.makeSagecell({inputLocation:'div.linked_sage',linked:true,evalButtonText:'Run Linked Sage Cells'});
+    sagecell.makeSagecell({inputLocation:'div.linked_python',linked:true,evalButtonText:'Run Linked Python Cells'});
+    sagecell.makeSagecell({inputLocation:'div.linked_r',linked:true,evalButtonText:'Run Linked R Cells'});
+    sagecell.makeSagecell({inputLocation:'div.sage',evalButtonText:'Run'});
+    sagecell.makeSagecell({inputLocation:'div.sage_html',evalButtonText:'Run HTML'});});
+    </script>
+  </head>
+  <style>
+  @import url('https://fonts.googleapis.com/css?family=Orbitron');
+  h1, h2 {color:#3636ff; font-family:'Orbitron'; text-shadow:5px 5px 5px #aaa;}
+  p, a {color:darkblue; font-size:110%; text-shadow:5px 5px 5px #aaa;}
+  .sagecell .CodeMirror-scroll {min-height:3em; max-height:30em;}
+  body {margin:5px 5px 5px 25px;}
+  </style>  
+  <body>
+        <h1>&#x1F4D1; &nbsp; GPT Python Notes 01b</h1>
+    <h1>More about Python Types || Más sobre los tipos de Python</h1>
+<p>Iterators, including generators</p>
+<ul>
+<li>for element-by-element exploration of containers</li>
+<li>implemented as classes</li>
+<li>can be defined in custom classes</li>
+<li><code>container.__iter__()</code> - the iterator of the given container<ul>
+<li>there can be multiple types for one container</li>
+</ul>
+</li>
+<li><code>iterator.__iter__()</code> - iterator object<ul>
+<li>container and iterator must support <code>for</code> and <code>in</code> actions</li>
+</ul>
+</li>
+<li><code>iterator.__next__()</code> - rule for getting the next element of the container</li>
+</ul>
+<p>generator - the most convenient iterator formulation</p>
+<p>Iteradores, incluidos generadores</p>
+<ul>
+<li>para la exploración elemento por elemento de contenedores</li>
+<li>implementado como clases</li>
+<li>se puede definir en clases personalizadas</li>
+<li><code>container.__iter__()</code> - el iterador del contenedor dado<ul>
+<li>puede haber varios tipos para un contenedor</li>
+</ul>
+</li>
+<li><code>iterator.__iter__()</code> - el objeto iterador<ul>
+<li>el contenedor y el iterador deben ser compatibles con <code>for</code> y <code>in</code> acciones</li>
+</ul>
+</li>
+<li><code>iterator.__next__()</code> - la regla para obtener el siguiente elemento del contenedor</li>
+</ul>
+<p>generador: la formulación de iterador más conveniente</p><br/>
+<div class="linked_sage"><script type="text/x-sage">
+n_iter = iter([1, 2, 3])
+[next(n_iter) for i in range(3)], list(n_iter)
+</script></div><br/><br/><br/> 
+<div class="linked_sage"><script type="text/x-sage">
+# the interval iterator / el iterador de intervalo
+class Range:
+    def __init__(self, start, end, step):
+        self.start = start
+        self.end = end
+        self.step = step
+    def __iter__(self):
+        return self
+    def __next__(self):
+        if self.start < self.end:
+            i = self.start
+            self.start += self.step
+            return i
+        else:
+            raise StopIteration()
+r = Range(-1,3,.5)
+tuple(r), list(r)
+</script></div><br/><br/><br/> 
+<div class="linked_sage"><script type="text/x-sage">
+# the iterator and the iterable object are the same
+# el iterador y el objeto iterable son iguales
+class RangeI:
+    def __init__(self, start, end, step):
+        self.start = start
+        self.end = end
+        self.step = step
+    def __iter__(self):
+        return RangeIter(self.start, self.end, self.step)
+class RangeIter:
+    def __init__(self, start, end, step):
+        self.start = start
+        self.end = end
+        self.step = step
+    def __iter__(self):
+        return self
+    def __next__(self):
+        if self.start < self.end:
+            i = self.start
+            self.start += self.step
+            return i
+        else:
+            raise StopIteration()
+ri = RangeI(-1,3,.5)
+tuple(ri), list(ri)
+</script></div><br/><br/><br/> 
+<div class="linked_sage"><script type="text/x-sage">
+with open('data.txt', 'w+', encoding="utf-8") as f:
+    data = '1,2,3\n4,5,6' + '\n'
+    f.write(data)
+    f.seek(0)
+    print(f.read())
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+# create an iterator that reads the file line by line, 
+# allowing you to process the data without loading the whole file into memory
+# cree un iterador que lea el archivo línea por línea, lo que 
+# le permitirá procesar los datos sin cargar todo el archivo en la memoria
+class FileReader:
+    def __init__(self, filename):
+        self.filename = filename
+    def __iter__(self):
+        with open(self.filename, 'r') as file:
+            for line in file:
+                yield line.rstrip('\n') # generator
+file_iterator = FileReader('data.txt')
+for line in file_iterator:
+    print(line)
+</script></div><br/><br/><br/> 
+<div class="linked_sage"><script type="text/x-sage">
+from random import randint
+def rroll(): return randint(0,9)
+# an iterator that stops when a certain value is reached
+# un iterador que se detiene cuando se alcanza un cierto valor
+for r in iter(rroll, 0):
+    print(r, end=' ')
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+# a generator-function - an iterator that produces sequential values
+# una función generadora: un iterador que produce valores secuenciales
+def gen_range(start, end, step):
+    i = start
+    while i < end:
+        yield i
+        i += step
+g = gen_range(-1,3,.5)
+print(tuple(g), list(g)) ; print()
+# generator expression / expresión generadora
+gen = (x*x for x in range(10))
+print(tuple(gen), list(gen)); print()
+# acceptable syntax / sintaxis aceptable
+sum(x*x for x in range(10))
+</script></div><br/><br/><br/> 
+<div class="linked_sage"><script type="text/x-sage">
+# an infinite Fibonacci sequence is generated 
+# as needed without worrying about memory limitations
+# se genera una secuencia infinita de Fibonacci
+# según sea necesario sin preocuparse por las limitaciones de memoria
+def fibonacci():
+    a, b = 0, 1
+    while True:
+        yield a
+        a, b = b, a + b
+fib_gen = fibonacci()
+for _ in range(10):
+    print(next(fib_gen), end=' ')
+</script></div><br/><br/><br/>
+<p>Callable Types</p>
+<ul>
+<li>concept - code reuse</li>
+<li>built-in and custom<ul>
+<li>Classes and Class Instances</li>
+<li>Functions</li>
+<li>Methods</li>
+</ul>
+</li>
+</ul>
+<p>Tipos invocables</p>
+<ul>
+<li>concepto - reutilización de código</li>
+<li>incorporado y personalizado<ul>
+<li>Clases e Instancias de Clase</li>
+<li>Funciones</li>
+<li>Métodos</li>
+</ul>
+</li>
+</ul><br/>
+<div class="linked_sage"><script type="text/x-sage">
+# create custom data types (classes)
+# and objects (class instances) with properties and behavior
+# crear tipos de datos personalizados (clases)
+# y objetos (instancias de clase) con propiedades y comportamiento
+class Student: # data type / tipo de datos
+    grade = 'A'
+    number = 12
+    name='Tom'
+s = Student() # object / objeto
+s.grade, s.number, s.name
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+# class methods define object response 
+# los métodos de clase definen la respuesta del objeto
+class Person:
+    def __init__(self, grade, number, name):
+        self.grade = grade
+        self.number = number
+        self.name = name
+    def __repr__(self):
+        return f'Person(name={self.name}, grade={self.grade}, number={self.number})'
+    def __lt__(self, other):
+        return self.number < other.number
+data = [{'name':'John', 'grade':'A', 'number':10},
+        {'name':'Anne', 'grade':'A', 'number':8},
+        {'name':'Mary', 'grade':'B', 'number':2}]
+[J, A, M]=[Person(**row) for row in data]
+print(J, A, M, sep='\n')
+print(J.number > A.number)
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+# more examples / más ejemplos
+class FibonacciSeries:
+    def __init__(self):
+        self.cache = {}
+    def __call__(self, n):
+        if n not in self.cache:
+            if n in [0, 1]:
+                self.cache[n] = n
+            else:
+                self.cache[n] = self.__call__(n - 1) + self.__call__(n - 2)
+        return self.cache[n]
+fs = FibonacciSeries()
+print([fs(i) for i in range(8)])
+fs.cache[7]
+</script></div><br/><br/><br/>
+<p>Functions</p>
+<ul>
+<li>first class objects<ul>
+<li>for any languages<ul>
+<li>could bepassed as a parameter</li>
+<li>could be returned by the function</li>
+<li>could be assigned to a variable</li>
+</ul>
+</li>
+<li>for python<ul>
+<li>dynamically created</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>complex &quot;nested&quot; functions<ul>
+<li>argument or result is another function</li>
+</ul>
+</li>
+<li>multiple use<ul>
+<li>Don&#39;t Repeat Yourself (DRY)</li>
+</ul>
+</li>
+<li>programming decomposition<ul>
+<li>splitting a task into subtasks</li>
+</ul>
+</li>
+</ul>
+<p>Funciones</p>
+<ul>
+<li>objetos de primera clase<ul>
+<li>para cualquier idioma<ul>
+<li>podría pasarse como parámetro</li>
+<li>podría ser devuelto por la función</li>
+<li>podría asignarse a una variable</li>
+</ul>
+</li>
+<li>para pitón<ul>
+<li>creado dinámicamente</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>funciones complejas &quot;anidadas&quot;<ul>
+<li>el argumento o resultado es otra función</li>
+</ul>
+</li>
+<li>uso múltiple<ul>
+<li>No te repitas (SECO)</li>
+</ul>
+</li>
+<li>descomposición de programación<ul>
+<li>dividir una tarea en subtareas</li>
+</ul>
+</li>
+</ul><br/>
+<div class="linked_sage"><script type="text/x-sage">
+# built-in / incorporado
+seasons = enumerate(['зима','весна','лето','осень'])
+print(type(seasons), list(seasons))
+numbers = zip(*([1,2,3],[4,5,6],[7,8,9]))
+print(type(numbers), set(numbers))
+# different run methods / diferentes métodos de ejecución
+code_string = 'x=%d \ny=%d \np=x**y \nprint("pow_xy =",p)'
+code_obejct = compile(
+    code_string%(5,3), 'codestring', 'exec')
+exec(code_obejct)
+f = lambda n: [i if (i%3 == 0 or i%5 == 0) else 0 for i in range(1,n+1)]
+f(15)
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+# custom functions / funciones personalizadas
+def sum_square(x, y):
+    return (x*x + 2*x*y + y*y)
+sum_square(2, 3)
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+# recursive functions / unciones recursivas
+def countdown(n):
+    return 0 if n == 0 else ' '.join([str(n), str(countdown(n-1))])
+countdown(9)
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+# anonymous functions / funciones anónimas
+fibonacci = lambda n: n if n <= 1 else fibonacci(n-1) + fibonacci(n-2)
+print(fibonacci(10))
+# for sorting / para ordenar
+students = [
+    {'name': 'Alice', 'age': 21, 'grade': 'A'},
+    {'name': 'Bob', 'age': 19, 'grade': 'B'},
+    {'name': 'Charlie', 'age': 20, 'grade': 'B+'},
+    {'name': 'David', 'age': 22, 'grade': 'A+'}
+]
+students.sort(key=lambda x: x['age'])
+print(*students, sep='\n')
+# for filtering / para filtrar
+evens = lambda n: list(filter(lambda x: x % 2 == 0, range(n+1)))
+print(evens(16))
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+# complex nested functions / funciones anidadas complejas 
+def base(x):
+    def pow_y(y):
+        return x ** y
+    return pow_y
+x,y = 2,10
+x,y,base(x)(y)
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+# the generator function: a final sequence
+# la función generadora: una secuencia final
+def gen_factorial1(n):
+    a=1; yield a
+    for i in range(1,n+1):
+        a*=i
+        yield a
+def gen_factorial2(start=0,end=10):
+    if start==0:
+        start+=1; yield start
+    for i in range(start,end+1):
+        start*=i
+        yield start
+fgen1 = gen_factorial1(7)
+fgen2 = gen_factorial2(end=7)
+print(list(fgen1), list(fgen2))
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+# the generator function: an infinite sequence
+# la función generadora: una secuencia infinita
+def inf_factorial(n,k):
+    yield (n-1,k)
+    yield from inf_factorial(n+1,n*k)
+inf_gen = inf_factorial(1,1)
+print([next(inf_gen) for i in range(8)])
+</script></div><br/><br/><br/>
+<p>Methods</p><br/>
+<div class="linked_sage"><script type="text/x-sage">
+# magic (internal) class methods
+# are not meant to be called by the user
+# métodos de clase mágica (interna)
+# no están destinados a ser llamados por el usuario
+def mmethods(cls):
+    return [m for m in dir(cls) if '__' in m]
+mmethods(tuple)
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+# built-in class methods / métodos de clase incorporados
+def bmethods(cls):
+    return [m for m in dir(cls) if '__' not in m]
+print(bmethods(tuple))
+# is called by user / se llamado por el usuario
+(3,2,1,3,5,4,2,1).count(3)
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+# custom class magic methods
+# class declaration
+# with object equality definition
+# and the format of their string representation
+# métodos mágicos de clase personalizados
+# declaración de clase
+# con definición de igualdad de objetos
+# y el formato de su representación de cadena
+class Sphere:
+    def __init__(self, x, y, z, r):
+        self.x = x
+        self.y = y
+        self.z = z
+        self.r = r
+    def __eq__(self, other):
+        return self.r == other.r
+    def __str__(self):
+        return f"the sphere centered at {self.x,self.y,self.z} "+\
+               f"and with the radius {self.r}"
+s1 = Sphere(0, 0, 0, 1)
+s2 = Sphere(5, 5, 5, 1)
+print(s1, s2, s1==s2, sep='\n')
+s1, s2, str(s1), str(s2)
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+# custom class methods
+# class declaration with definition of object methods
+# métodos de clase personalizados
+# declaración de clase con definición de métodos de objeto
+class Circle():
+    def __init__(self, center, radius):
+        self.x = center[0]
+        self.y = center[1]
+        self.radius = radius
+    def area(self):
+        return self.radius ** 2 * 3.14
+    def perimeter(self):
+        return 2 * self.radius * 3.14
+cl = Circle([0, 0], 3)
+print(cl.area(), cl.perimeter())
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+# object interaction methods
+# métodos de interacción de objetos
+class Object:
+    examples: dict = dict()
+    def __init__(self, id: int, coins: int):
+        self.id = id
+        self.coins = coins
+        Object.examples[id] = self 
+    def pass_coin(self, to_id: int, number: int):
+        Object.examples[to_id].coins += number
+        self.coins -= number
+Object(1, 10); Object(2, 15)
+print(Object.examples[1].coins, Object.examples[2].coins)
+Object.examples[1].pass_coin(to_id=2, number=3)
+print(Object.examples[1].coins, Object.examples[2].coins)
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+# object destruction methods
+# métodos de destrucción de objetos
+class Point:
+    def __init__( self, x=0, y=0):
+        self.x = x
+        self.y = y
+    def __del__(self):
+        print(f"the object '{self.__class__.__name__}' is destroyed")
+pt1 = Point(1, 2)
+pt2 = pt1
+del pt1
+print(globals()['Point'], (pt2.x, pt2.y))
+del pt2
+</script></div><br/><br/><br/>
+<p>Modules</p>
+<ul>
+<li>organized code snippets</li>
+<li>.py files</li>
+</ul>
+<p>Classification</p>
+<ul>
+<li>built-in (Python Standard library)</li>
+<li>user-installed</li>
+<li>user-created</li>
+</ul>
+<p>Módulos</p>
+<ul>
+<li>fragmentos de código organizados</li>
+<li>archivos .py</li>
+</ul>
+<p>Clasificación</p>
+<ul>
+<li>incorporado (biblioteca estándar de Python)</li>
+<li>instalado por el usuario</li>
+<li>creado por el usuario</li>
+</ul><br/>
+<div class="linked_sage"><script type="text/x-sage">
+# calling a standard module / llamar a un módulo estándar
+import math
+math.pi, math.cos(2 * math.pi)
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+# calling an installed module with renaming
+# llamar a un módulo instalado con cambio de nombre
+import numpy as np
+np.log([1, 2, 3])
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+# use functions from the module
+# usar funciones del módulo
+from IPython.display import display
+from sympy import symbols
+x,y = symbols('x,y')
+f = x ** 2 + x * y + y ** 3
+display(f.diff(x), f.diff(y))
+</script></div><br/><br/><br/>
+<p>Created Data Types / Tipos de datos creados</p><br/>
+<div class="linked_sage"><script type="text/x-sage">
+# create an object with a series of parameters
+# crear un objeto con una serie de parámetros
+class X(object): pass
+x_obj = X()
+[setattr(x_obj, f"x{i}", 2**i) for i in range(5)]
+print(x_obj.x0, x_obj.x2, x_obj.x4)
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+from enum import Enum
+class rgbColor(Enum):
+    red = 155
+    green = 25
+    blue = 155
+print(rgbColor.red, rgbColor.red.value)
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+from itertools import product
+product_data = product('@$', repeat=3)
+for item in product_data:
+    print(*item, end=' | ')
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+from itertools import groupby
+# grouping with custom function
+# agrupación con función personalizada
+def smaller3(x): return x < 4
+group_obj1 = groupby(range(10),key=smaller3)
+for key,group in group_obj1:
+    print(key,list(group))
+# grouping with anonymous function
+# agrupación con función anónima
+group_obj2 = groupby(
+    ["hi","nice","hello","my","i"],key=lambda x: "i" in x)
+for key, group in group_obj2:
+    print(key,list(group))
+# grouping with pre-sorting
+# agrupación con clasificación previa
+persons = {'1':{'name':'Tom','age':25},'2':{'name':'Dan','age':27}, 
+           '3':{'name':'Lisa','age':27},'4':{'name':'Anna','age':25},
+           '5':{'name':'Mary','age':26},'6':{'name':'Tim','age':28}}
+# the list of dictionaries sorted by 'age' field
+# la lista de diccionarios ordenados por campo 'edad'
+persons = sorted(persons.values(),key=lambda value: value['age'])
+group_obj3 = groupby(persons,key=lambda x: x['age'])
+for key, group in group_obj3:
+    print(key,list(group))
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+from dataclasses import dataclass
+@dataclass
+class Point:
+    x: int
+    y: int
+    color: str = "red" 
+point1 = Point(2, 4)
+point2 = Point(3, 6, "blue")
+print (point1, point2, sep='\n')
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+class Rectangle:
+    def __init__(self, width: float, height: float):
+        self.width = width
+        self.height = height
+    def area(self):
+        return self.width * self.height
+@dataclass
+class Square(Rectangle):
+    side_length: float
+    def __post_init__(self):
+        super().__init__(self.side_length, self.side_length)
+rectangle = Rectangle(3., 4.)
+square = Square(5.)
+print(rectangle.area(), square.area())
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+from dataclasses import dataclass, field
+@dataclass(order=True)
+class Student:
+    sort_index: int = field(init=False)
+    name: str
+    age: int
+    subject: str
+    grade: float = field(repr=True)
+    average_grade: float = field(default=0.0)
+    def __post_init__(self):
+        self.sort_index = self.average_grade
+tuple_list = [("Alice", 17, "Math", 93.7, 84.5),
+              ("Bob", 16, "Science", 82.6, 78.4),
+              ("Charlie", 18, "English", 71.2, 77.5),
+              ("Diana", 17, "History", 88.7, 83.5),
+              ("Eva", 16, "Geography", 92.1)]
+obj_list = [Student(*el) for el in tuple_list]
+obj_list.sort()
+print(*obj_list, sep='\n')
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+from collections import Counter
+counter_data = Counter([1, 1, 2, 2, 2, 3, 3, 4])
+print(counter_data, counter_data.most_common(1))
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+from collections import namedtuple
+Person = namedtuple('person', ['name', 'age'])
+p = Person('John', 25)
+print(p, type(p), (p.name, p.age), sep='\n')
+sphere = namedtuple('circle','r x y z')
+s = sphere(1, 0, -4, 2)
+print(s, type(s), s._fields,
+     (s.r, s.x, s.y, s.z), sep='\n')
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+# deque internally uses a doubly-linked list
+# deque utiliza internamente una lista doblemente enlazada
+from collections import deque
+ddata = deque([1, 2, 3, 4])
+ddata.append(5)
+ddata.appendleft([-1, 0])
+print(ddata)
+ddata.extend([7,8])
+ddata.extendleft([-2,-1])
+print(ddata)
+ddata.rotate(2); print(ddata)
+ddata.rotate(-2); print(ddata)
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+def max_k_window(nums, k):
+    max_values = []
+    window = deque()
+    for i, num in enumerate(nums):
+        while window and window[0] <= i - k:
+            window.popleft()
+        while window and nums[window[-1]] < num:
+            window.pop()
+        window.append(i)
+        if i >= k - 1:
+            max_values.append(nums[window[0]])
+    return max_values
+k, numbers = 5, [1, 4, 0, -3, -1, 3, -2, 5, 2, 6, -4, 7]
+print(max_k_window(numbers, k))
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+from collections import defaultdict
+default_dict_data = defaultdict(int)
+default_dict_data['key1'] += 1
+default_dict_data['key2'] = 1
+print(default_dict_data['key3'])
+print(default_dict_data)
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+from collections import OrderedDict
+ordered_dict = OrderedDict(list(enumerate('abcdefgh')))
+print(ordered_dict)
+ordered_dict.update([(4, 'i')])
+ordered_dict.move_to_end(2, last=False)
+print(ordered_dict)
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+from collections import ChainMap
+dict1 = {'a': 1, 'b': {'x': 2, 'y': 3}}
+dict2 = {'b': {'x': 4, 'y': 5}, 'c': 6}
+chain_data = ChainMap(dict1, dict2)
+print(chain_data)
+for el in chain_data:
+    print(el, '=>', chain_data[el])
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+# sequence of dictionaries / secuencia de diccionarios
+toys = {'lego':100, 'monopoly':10}
+computers = {'MacBook':20, 'Chromebook':20, 'Classbook':50}
+clothes = {'jeans':30, 'T-shirts':60}
+chain = ChainMap(toys, computers, clothes)
+for el in chain.items(): print(el)
+toys.update({'drone':10, 'ball':10})
+print(list(chain))
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+# compact representation of a data array
+# strictly one type 
+# representación compacta de una matriz de datos
+# estrictamente un tipo
+import array  
+arr1 = array.array("f",[31,60,19,12])  
+print(arr1,arr1[0],type(arr1))
+f = open("array.csv","wb")
+arr1.reverse()
+arr1.tofile(f); f.close()
+arr2 = array.array("f")
+f = open("array.csv","rb")
+arr2.fromfile(f,4)
+print(arr2,arr2[0],type(arr2))
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+from abc import ABC, abstractmethod
+class Shape(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+class Rectangle(Shape):
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+    def area(self):
+        return self.width * self.height
+rectangle1 = Rectangle(5, 3)
+print(rectangle1.area())
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+# date and exact time
+# día y hora exacta
+import datetime, pytz
+today = datetime.date.today()
+now = datetime.datetime.now()
+now_tz = datetime.datetime.now(pytz.timezone('Europe/Moscow'))
+today, str(today), now, str(now), now_tz, str(now_tz)
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+
+</script></div><br/><br/><br/>
+<div class="linked_sage"><script type="text/x-sage">
+
+</script></div><br/><br/><br/>
+  </body>
+</html>
